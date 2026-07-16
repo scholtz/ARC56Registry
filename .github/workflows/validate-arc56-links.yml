@@ -1,0 +1,26 @@
+name: Validate ARC-56 links CSV
+
+on:
+  pull_request:
+    paths:
+      - "arc56.links.csv"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate arc56.links.csv
+        run: python scripts/validate_arc56_links.py --base-sha "${{ github.event.pull_request.base.sha }}"

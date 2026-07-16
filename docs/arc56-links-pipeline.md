@@ -161,3 +161,50 @@ successfully:
   than a fixed commit, the content behind a URL in `arc56.links.csv` can
   change (or disappear) if the source repository's default branch is
   rewritten, renamed, or the file is deleted/moved.
+
+## Pull request validation
+
+Any pull request that touches `arc56.links.csv` (including manual edits, not
+just ones made by the update pipeline) is checked by
+[`validate-arc56-links.yml`](../.github/workflows/validate-arc56-links.yml),
+which runs [`scripts/validate_arc56_links.py`](../scripts/validate_arc56_links.py).
+It requires no secrets — it only reads the repository's own git history — and
+needs `permissions: contents: read`.
+
+It compares the PR's version of the file against the base branch's version
+and enforces:
+
+1. **Schema**: the header must be exactly `ARC56URL,ActiveFrom,ActiveUntil`.
+2. **URL suffix**: every `ARC56URL` must end with `.arc56.json`.
+3. **No duplicate URLs**.
+4. **Valid dates**: `ActiveFrom` must be a `YYYY-MM-DD` date; `ActiveUntil`
+   must be empty or a `YYYY-MM-DD` date.
+5. **Alphabetical order**: the `ARC56URL` column must be sorted
+   alphabetically, case-insensitive.
+6. **No removed records**: every `ARC56URL` present on the base branch must
+   still be present in the PR (rows are deactivated, never deleted — see
+   [CSV format and Active columns](#csv-format-and-active-columns)).
+7. **Per-record change rules**, comparing each existing row to its base-branch
+   version:
+   - **New record** (URL not on the base branch): `ActiveFrom` must equal
+     today's date and `ActiveUntil` must be empty.
+   - **Updated record** (existing URL, `ActiveUntil` left/made empty): treated
+     as a reactivation — `ActiveFrom` must equal today's date.
+   - **Deleted/deactivated record** (existing URL, `ActiveUntil` set to
+     today's date): `ActiveFrom` must be unchanged from the base branch.
+   - Any other combination of changes to an existing record (e.g. `ActiveUntil`
+     set to a date other than today, or `ActiveFrom` changed without
+     `ActiveUntil` becoming empty) is rejected.
+   - Rows that are byte-for-byte identical to the base branch are always
+     allowed, regardless of the rules above.
+
+"Today's date" is evaluated using the date the workflow runs (UTC, since
+GitHub-hosted runners default to UTC) — not the date the PR was opened. If a
+PR sits open across a day boundary, re-run the check (or push a new commit)
+after updating the date.
+
+### Requiring this check before merge
+
+To actually block merges on failure, add `Validate ARC-56 links CSV / validate`
+as a required status check under **Settings → Branches → Branch protection
+rules** for the default branch.
