@@ -47,8 +47,25 @@ def fetch_page(page: int, token: str, retries: int = 5) -> dict:
         try:
             with urllib.request.urlopen(req) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
-                print(f"Response for page {page}: total_count={data.get('total_count')}, "
-                      f"items_returned={len(data.get('items', []))}", file=sys.stderr)
+                total_count = data.get("total_count", 0)
+                items = data.get("items", [])
+                print(f"Response for page {page}: total_count={total_count}, "
+                      f"items_returned={len(items)}", file=sys.stderr)
+
+                expected_remaining = total_count - (page - 1) * PER_PAGE
+                if not items and expected_remaining > 0:
+                    if attempt < retries:
+                        wait = 5 * attempt
+                        print(f"Page {page} returned 0 items but {expected_remaining} were "
+                              f"expected (total_count={total_count}); treating as a transient "
+                              f"GitHub search glitch, retrying in {wait}s "
+                              f"(attempt {attempt}/{retries})", file=sys.stderr)
+                        time.sleep(wait)
+                        continue
+                    raise RuntimeError(
+                        f"Page {page} returned 0 items but {expected_remaining} were expected "
+                        f"(total_count={total_count}) after {retries} attempts"
+                    )
                 return data
         except urllib.error.HTTPError as exc:
             if exc.code in (403, 429) and attempt < retries:
@@ -88,7 +105,17 @@ def main() -> int:
         print("Warning: no GH_SEARCH_TOKEN/GITHUB_TOKEN set; unauthenticated search "
               "rate limits are very low and this will likely fail.", file=sys.stderr)
 
-    urls = collect_urls(token)
+    try:
+        urls = collect_urls(token)
+    except Exception as exc:  # noqa: BLE001 - any failure must abort without touching the file
+        print(f"Aborting without writing {OUTPUT_PATH}: {exc}", file=sys.stderr)
+        return 1
+
+    if not urls:
+        print(f"Aborting without writing {OUTPUT_PATH}: search returned 0 results, "
+              f"which looks wrong for this query.", file=sys.stderr)
+        return 1
+
     sorted_urls = sorted(urls, key=str.lower)
 
     with open(OUTPUT_PATH, "w", encoding="utf-8", newline="\n") as f:

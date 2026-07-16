@@ -99,6 +99,21 @@ request reviews), the push step will fail — in that case, either:
 - change the workflow to open a pull request instead of pushing directly
   (e.g. using `peter-evans/create-pull-request`).
 
+## Failure handling
+
+The script never overwrites `arc56.links.csv` unless the search completed
+successfully:
+
+- If any page fails after retries (HTTP errors, or GitHub's search backend
+  returning 0 items for a page where results were expected — a known
+  transient glitch), the script exits with a non-zero status **before**
+  opening the output file, leaving the existing CSV untouched.
+- If the search completes but returns zero results overall (which would
+  otherwise wipe out the file), the script also aborts without writing.
+- A non-zero exit from the script fails the workflow step, so the subsequent
+  "Commit and push if changed" step never runs and no partial/empty file is
+  ever committed.
+
 ## Known limitations
 
 - **1,000-result cap**: the GitHub code search API returns at most 1,000
