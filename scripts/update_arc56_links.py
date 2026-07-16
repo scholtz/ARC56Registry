@@ -40,9 +40,10 @@ API_URL = "https://api.github.com/search/code"
 PER_PAGE = 100
 MAX_PAGES = 10  # GitHub code search caps results at 1000 (10 x 100) *per query*.
 MAX_RESULTS_PER_QUERY = 1000
-# GitHub code search doesn't index files above ~384 KB, so this comfortably covers
-# every possible file size; shards are only split as deep as actually needed.
-MAX_FILE_SIZE_BYTES = 1_000_000
+# GitHub code search doesn't index files above 384 KiB, so no match can be larger
+# than that; starting the shard range there (instead of some arbitrary larger bound)
+# avoids wasting splits on a byte range that's provably empty.
+MAX_FILE_SIZE_BYTES = 384 * 1024
 MAX_SHARD_DEPTH = 25  # safety net against pathological size distributions
 REQUEST_DELAY_SECONDS = 7  # code search is limited to 10 requests/minute, so stay safely under that.
 OUTPUT_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "arc56.links.csv")
@@ -116,38 +117,38 @@ def add_matching_items(items: list[dict], urls: set[str]) -> None:
             urls.add(f"https://raw.githubusercontent.com/{item['repository']['full_name']}/HEAD/{path}")
 
 
-def collect_remaining_pages(query: str, token: str, urls: set[str], first_page_items: list[dict]) -> None:
-    add_matching_items(first_page_items, urls)
-    if len(first_page_items) < PER_PAGE:
-        return
-    for page in range(2, MAX_PAGES + 1):
+def partition_and_collect(lo: int, hi: int, token: str, urls: set[str], depth: int = 0) -> None:
+    # Deciding whether to split based on the API's reported total_count doesn't work:
+    # GitHub explicitly documents total_count as only an approximation once a query
+    # has more than 1,000 matches, and in practice it fluctuates wildly (e.g. a narrow
+    # size range can report a higher total_count than its parent range). Instead, we
+    # paginate for real and only split when we actually observe MAX_PAGES consecutive
+    # full pages - the one signal from this API that's trustworthy - since exhausting
+    # every page before that point is real, correct proof there's nothing more to find.
+    query = f"{SEARCH_QUERY} {size_qualifier(lo, hi)}"
+    items_collected: list[dict] = []
+    hit_pagination_cap = True
+    for page in range(1, MAX_PAGES + 1):
         items = fetch_page(query, page, token).get("items", [])
         if not items:
+            hit_pagination_cap = False
             break
-        add_matching_items(items, urls)
+        items_collected.extend(items)
         if len(items) < PER_PAGE:
+            hit_pagination_cap = False
             break
 
+    if hit_pagination_cap:
+        if lo < hi and depth < MAX_SHARD_DEPTH:
+            mid = (lo + hi) // 2
+            partition_and_collect(lo, mid, token, urls, depth + 1)
+            partition_and_collect(mid + 1, hi, token, urls, depth + 1)
+            return
+        print(f"WARNING: size range {lo}..{hi} still hits the {MAX_RESULTS_PER_QUERY}-result "
+              f"pagination cap at max shard depth or cannot be split further; some results in "
+              f"this range may be missing", file=sys.stderr)
 
-def partition_and_collect(lo: int, hi: int, token: str, urls: set[str], depth: int = 0) -> None:
-    query = f"{SEARCH_QUERY} {size_qualifier(lo, hi)}"
-    data = fetch_page(query, 1, token)
-    total = data.get("total_count", 0)
-
-    if total == 0:
-        return
-
-    if total <= MAX_RESULTS_PER_QUERY or lo >= hi or depth >= MAX_SHARD_DEPTH:
-        if total > MAX_RESULTS_PER_QUERY:
-            print(f"WARNING: size range {lo}..{hi} still has {total} results (>"
-                  f"{MAX_RESULTS_PER_QUERY}) at max shard depth; some results in this "
-                  f"range will be missed", file=sys.stderr)
-        collect_remaining_pages(query, token, urls, data.get("items", []))
-        return
-
-    mid = (lo + hi) // 2
-    partition_and_collect(lo, mid, token, urls, depth + 1)
-    partition_and_collect(mid + 1, hi, token, urls, depth + 1)
+    add_matching_items(items_collected, urls)
 
 
 def collect_urls(token: str) -> set[str]:

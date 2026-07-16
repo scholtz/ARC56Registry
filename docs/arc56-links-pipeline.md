@@ -21,10 +21,21 @@ list of every `*.arc56.json` file found on public GitHub, via the
    single query, no matter how many total matches exist (`total_count` can
    read e.g. 1464 while only the first 1,000 are actually paginable). To get
    past that, the script recursively **shards the query by file `size:`
-   range** — e.g. `arc56.json in:path size:0..500000` — splitting each range
-   in half whenever its own `total_count` is still over 1,000, until every
-   shard is small enough to paginate fully, then unions the results. See
-   `partition_and_collect()` in the script for the implementation.
+   range** — e.g. `arc56.json in:path size:0..196608` — splitting each range
+   in half until every shard is small enough to paginate fully, then unions
+   the results. See `partition_and_collect()` in the script for the
+   implementation.
+
+   Splitting decisions are **not** based on the API's `total_count` field —
+   GitHub documents that field as only an approximation once a query has more
+   than 1,000 matches, and in practice it's noisy enough that a narrower size
+   range can report a *higher* `total_count` than its own parent range. Using
+   it to decide when to stop splitting caused the search to over-split and
+   run far longer than necessary. Instead, the script pages through a shard
+   for real and only splits it when pagination actually fills all 10 pages
+   (1,000 items) with no early short page — the one signal from this API
+   that's trustworthy, since exhausting fewer than 10 pages is concrete proof
+   there's nothing left to find in that range.
 4. **Filter**: matches are restricted to paths whose filename actually ends
    in `.arc56.json`, since `in:path` is a substring match and could otherwise
    match unrelated paths that merely contain that text.
