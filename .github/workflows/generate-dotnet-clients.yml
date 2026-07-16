@@ -1,0 +1,86 @@
+name: Generate .NET ARC-56 clients
+
+on:
+  schedule:
+    - cron: "0 5 * * *" # daily at 05:00 UTC, after the ARC-56 links update (03:00 UTC)
+  workflow_dispatch:
+    inputs:
+      only_repo:
+        description: "Optional: only process owner/repo (can be a comma-separated list), for testing"
+        required: false
+        type: string
+  push:
+    paths:
+      - "clients/dotnet/_template/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-dotnet-clients
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    # A full run downloads and generates a client for every active ARC-56 URL, at least
+    # 7s apart per download; with thousands of URLs this can take many hours. See
+    # docs/dotnet-client-pipeline.md for why, and how incremental runs stay fast.
+    timeout-minutes: 350
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Generate/update .NET clients
+        id: generate
+        run: |
+          ARGS=()
+          if [ -n "${{ inputs.only_repo }}" ]; then
+            IFS=',' read -ra REPOS <<< "${{ inputs.only_repo }}"
+            for r in "${REPOS[@]}"; do
+              ARGS+=(--only-repo "$r")
+            done
+          fi
+          python scripts/generate_dotnet_clients.py "${ARGS[@]}"
+
+      - name: Pack changed projects
+        run: |
+          set -e
+          for csproj in $(git status --porcelain clients/dotnet | awk '{print $2}' | grep -E '\.csproj$' || true); do
+            echo "Packing $csproj"
+            dotnet pack "$csproj" --configuration Release --output artifacts/nupkgs
+          done
+
+      - name: Upload packed NuGet packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: nupkgs
+          path: artifacts/nupkgs/*.nupkg
+          if-no-files-found: ignore
+
+      - name: Commit and push generated clients
+        run: |
+          if git diff --quiet -- clients/dotnet && git diff --quiet --cached -- clients/dotnet; then
+            echo "No changes under clients/dotnet"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add clients/dotnet
+          git commit -m "chore: regenerate .NET ARC-56 clients"
+          git push
+
+      # Publishing to nuget.org is intentionally left as a manual/separate step until
+      # a NUGET_API_KEY secret is configured - see docs/dotnet-client-pipeline.md.
+      # - name: Push to NuGet.org
+      #   run: dotnet nuget push "artifacts/nupkgs/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate

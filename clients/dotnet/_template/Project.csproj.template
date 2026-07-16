@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+
+    <PackageId>{{PACKAGE_ID}}</PackageId>
+    <Version>{{VERSION}}</Version>
+    <!-- AssemblyVersion/FileVersion each component must fit in 16 bits (max 65535), which
+         our yyyyMMddHH-based package Version does not; pin them separately and keep the
+         full, precise version only in the NuGet package Version and InformationalVersion. -->
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>{{VERSION}}</InformationalVersion>
+    <Authors>{{OWNER}}</Authors>
+    <Description>{{DESCRIPTION}}</Description>
+    <PackageProjectUrl>{{REGISTRY_REPO_URL}}</PackageProjectUrl>
+    <RepositoryUrl>{{REGISTRY_REPO_URL}}</RepositoryUrl>
+    <PackageTags>algorand;arc56;avm;smart-contract;generated-client;{{OWNER}};{{REPO}}</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Algorand4" Version="4.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../_template/icon.png" Pack="true" PackagePath="" />
+    <None Include="README.md" Pack="true" PackagePath="" />
+    <None Include="arc56/**/*.json" Pack="true" PackagePath="contentFiles/any/any/arc56/" />
+  </ItemGroup>
+
+  <!-- Contracts whose generated code fails to compile in this aggregate project (a known
+       limitation of the upstream generator for some ABI type shapes) are excluded here
+       rather than blocking every other contract in this package - see state.json and
+       docs/dotnet-client-pipeline.md. -->
+  <ItemGroup>
+{{EXCLUDED_COMPILE_ITEMS}}
+  </ItemGroup>
+
+</Project>
