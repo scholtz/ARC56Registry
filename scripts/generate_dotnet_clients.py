@@ -122,12 +122,20 @@ def download_with_rate_limit(url: str) -> bytes:
 
 
 def get_generator_image_digest() -> str:
-    subprocess.run(["docker", "pull", GENERATOR_IMAGE], check=True)
-    result = subprocess.run(
-        ["docker", "image", "inspect", GENERATOR_IMAGE, "--format", "{{index .RepoDigests 0}}"],
-        capture_output=True, text=True, check=True,
-    )
-    return result.stdout.strip()
+    """Always contacts the registry for GENERATOR_IMAGE's current digest (a real `docker
+    pull`, not a cached/local answer), so a fresh image push is picked up on the very
+    next run. The digest is parsed directly from `docker pull`'s own output rather than
+    `docker image inspect --format '{{index .RepoDigests 0}}'`, since RepoDigests can
+    list multiple entries if the same image ID was ever pulled/tagged under another
+    reference - index 0 isn't guaranteed to be the digest for *this* tag."""
+    result = subprocess.run(["docker", "pull", GENERATOR_IMAGE], capture_output=True, text=True, check=True)
+    match = re.search(r"Digest:\s*(sha256:[0-9a-f]+)", result.stdout)
+    if not match:
+        raise RuntimeError(
+            f"Could not parse a digest out of 'docker pull {GENERATOR_IMAGE}' output:\n{result.stdout}"
+        )
+    repo_name = GENERATOR_IMAGE.split(":", 1)[0]
+    return f"{repo_name}@{match.group(1)}"
 
 
 def load_global_state() -> dict:
