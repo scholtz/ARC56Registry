@@ -433,7 +433,14 @@ def process_project(
 
     state = load_project_state(state_path)
     contracts_state: dict = state.setdefault("contracts", {})
-    project_dirty = False
+    package_id = f"Arc56.Generated.{owner_slug}.{repo_slug}"
+    # state_dirty: something in state.json changed (including failure records) and must
+    # be persisted. code_changed: the actual generated code changed, which is the only
+    # thing that should bump the package version / trigger a rebuild+repack - a download
+    # or generator failure alone doesn't touch any .cs file, so it shouldn't produce a
+    # new NuGet version.
+    state_dirty = False
+    code_changed = False
 
     for row in rows:
         url = row["ARC56URL"]
@@ -472,8 +479,8 @@ def process_project(
             write_incident_report(
                 owner, repo, url, contract_id, namespace, "download_error", str(exc), generator_digest
             )
-            project_dirty = True  # persist the failure so it isn't silently lost/retried every run
-            continue
+            state_dirty = True  # persist the failure so it isn't silently lost/retried every run;
+            continue           # no .cs file changed, so this alone must not bump the package version
 
         content_hash = sha256_hex(content)
         needs_regen = (
@@ -499,7 +506,7 @@ def process_project(
                 owner, repo, url, contract_id, namespace, "download_error",
                 f"failed to write local copy: {exc}", generator_digest,
             )
-            project_dirty = True
+            state_dirty = True
             continue
 
         if not needs_regen:
@@ -531,7 +538,9 @@ def process_project(
             write_incident_report(
                 owner, repo, url, contract_id, namespace, "generator_error", str(exc), generator_digest
             )
-            project_dirty = True  # persist the failure so it isn't silently lost/retried every run
+            # No .cs file was produced/changed here (the old one, if any, is left as-is),
+            # so this alone must not bump the package version - just persist the failure.
+            state_dirty = True
             continue
 
         contracts_state[url] = {
@@ -542,9 +551,18 @@ def process_project(
             "class_name": class_name,
             "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         }
-        project_dirty = True
+        code_changed = True
 
-    if not project_dirty:
+    if not (state_dirty or code_changed):
+        return False
+
+    if not code_changed:
+        # Only failure state changed (download/generator errors) - no .cs file was
+        # actually added or modified, so don't bump the version or rebuild/repack.
+        state["generator_image_digest"] = generator_digest
+        save_project_state(state_path, state)
+        print(f"Project {package_id}: recorded failure state only, no generated-code "
+              f"changes - version not bumped", file=sys.stderr)
         return False
 
     increment = state.get("increment", 0) + 1
@@ -553,7 +571,6 @@ def process_project(
     state["version"] = version
     state["generator_image_digest"] = generator_digest
 
-    package_id = f"Arc56.Generated.{owner_slug}.{repo_slug}"
     excluded_contract_ids = {
         contract_id_for(c) for c in contracts_state.values()
         if "file_slug" in c and "compile_error" in c
