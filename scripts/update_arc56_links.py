@@ -20,11 +20,12 @@ SEARCH_QUERY = "path:**/*.arc56.json"
 API_URL = "https://api.github.com/search/code"
 PER_PAGE = 100
 MAX_PAGES = 10  # GitHub code search caps results at 1000 (10 x 100).
+REQUEST_DELAY_SECONDS = 2  # fixed delay before every API call, to stay under the search rate limit.
 OUTPUT_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "arc56.links.csv")
 CSV_HEADER = "ARC56URL"
 
 
-def build_request(page: int, token: str) -> urllib.request.Request:
+def build_request(page: int, token: str) -> tuple[urllib.request.Request, str]:
     url = f"{API_URL}?q={urllib.parse.quote(SEARCH_QUERY)}&per_page={PER_PAGE}&page={page}"
     req = urllib.request.Request(url)
     req.add_header("Accept", "application/vnd.github+json")
@@ -32,12 +33,14 @@ def build_request(page: int, token: str) -> urllib.request.Request:
     req.add_header("User-Agent", "arc56-links-updater")
     if token:
         req.add_header("Authorization", f"Bearer {token}")
-    return req
+    return req, url
 
 
 def fetch_page(page: int, token: str, retries: int = 5) -> dict:
     for attempt in range(1, retries + 1):
-        req = build_request(page, token)
+        req, url = build_request(page, token)
+        print(f"Calling GitHub API: GET {url} (attempt {attempt}/{retries})", file=sys.stderr)
+        time.sleep(REQUEST_DELAY_SECONDS)
         try:
             with urllib.request.urlopen(req) as resp:
                 return json.loads(resp.read().decode("utf-8"))
@@ -68,7 +71,6 @@ def collect_urls(token: str) -> set[str]:
             urls.add(f"https://raw.githubusercontent.com/{repo_full_name}/HEAD/{path}")
         if len(items) < PER_PAGE:
             break
-        time.sleep(2)  # stay comfortably under the search API's secondary rate limit
     return urls
 
 
