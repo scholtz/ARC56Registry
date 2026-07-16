@@ -26,10 +26,10 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated._0xYuvi.TrustAnchor.IdentityRegistry_8b7065c3;
+using Arc56.Generated.Owner.Repo.Contract_hash;
 
 var algod = new DefaultApi(httpClient); // configure with your algod endpoint
-var client = new IdentityRegistryProxy(algod, appId: 123456789);
+var client = new ContractProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -39,9 +39,9 @@ var client = new IdentityRegistryProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| `Arc56.Generated._0xYuvi.TrustAnchor.IdentityRegistry_8b7065c3` | `IdentityRegistryProxy` | [https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/identity_registry/IdentityRegistry.arc56.json](https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/identity_registry/IdentityRegistry.arc56.json) |
-| `Arc56.Generated._0xYuvi.TrustAnchor.TrustAnchor_3ac8ef3e` | `TrustAnchorProxy` | [https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/trust_anchor/TrustAnchor.arc56.json](https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/trust_anchor/TrustAnchor.arc56.json) |
-| `Arc56.Generated._0xYuvi.TrustAnchor.TruthRegistry_36fbeecc` | _(generation failed - see state.json)_ | [https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/truth_registry/TruthRegistry.arc56.json](https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/truth_registry/TruthRegistry.arc56.json) |
+| `Arc56.Generated._0xYuvi.TrustAnchor.IdentityRegistry_8b7065c3` | _(fails to compile - excluded, see state.json)_ | [https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/identity_registry/IdentityRegistry.arc56.json](https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/identity_registry/IdentityRegistry.arc56.json) |
+| `Arc56.Generated._0xYuvi.TrustAnchor.TrustAnchor_3ac8ef3e` | _(fails to compile - excluded, see state.json)_ | [https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/trust_anchor/TrustAnchor.arc56.json](https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/trust_anchor/TrustAnchor.arc56.json) |
+| `Arc56.Generated._0xYuvi.TrustAnchor.TruthRegistry_36fbeecc` | _(fails to compile - excluded, see state.json)_ | [https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/truth_registry/TruthRegistry.arc56.json](https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/truth_registry/TruthRegistry.arc56.json) |
 
 ## Versioning
 

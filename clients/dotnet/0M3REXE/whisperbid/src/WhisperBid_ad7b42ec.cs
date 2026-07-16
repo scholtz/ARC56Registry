@@ -115,7 +115,7 @@ namespace Arc56.Generated._0M3REXE.whisperbid.WhisperBid_ad7b42ec
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 72, 59, 52, 162 };
-            var commitmentHashAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); commitmentHashAbi.From(commitmentHash);
+            var commitmentHashAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); commitmentHashAbi.From(commitmentHash);
 
             var result = await base.CallApp(new List<object> { abiHandle, commitmentHashAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -129,7 +129,7 @@ namespace Arc56.Generated._0M3REXE.whisperbid.WhisperBid_ad7b42ec
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 72, 59, 52, 162 };
-            var commitmentHashAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); commitmentHashAbi.From(commitmentHash);
+            var commitmentHashAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); commitmentHashAbi.From(commitmentHash);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, commitmentHashAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -149,7 +149,7 @@ namespace Arc56.Generated._0M3REXE.whisperbid.WhisperBid_ad7b42ec
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 6, 151, 100, 130 };
             var bidAmountAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); bidAmountAbi.From(bidAmount);
-            var saltAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); saltAbi.From(salt);
+            var saltAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); saltAbi.From(salt);
 
             var result = await base.CallApp(new List<object> { abiHandle, bidAmountAbi, saltAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -164,7 +164,7 @@ namespace Arc56.Generated._0M3REXE.whisperbid.WhisperBid_ad7b42ec
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 6, 151, 100, 130 };
             var bidAmountAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); bidAmountAbi.From(bidAmount);
-            var saltAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); saltAbi.From(salt);
+            var saltAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); saltAbi.From(salt);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, bidAmountAbi, saltAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 

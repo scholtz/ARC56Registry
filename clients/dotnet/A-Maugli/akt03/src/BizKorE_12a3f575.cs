@@ -116,7 +116,7 @@ namespace Arc56.Generated.A_Maugli.akt03.BizKorE_12a3f575
             var lastLogBytes = result.Last();
             if (lastLogBytes.Length < 4 || lastLogBytes[0] != 21 || lastLogBytes[1] != 31 || lastLogBytes[2] != 124 || lastLogBytes[3] != 117) throw new Exception("Invalid ABI handle");
             var lastLogReturnData = lastLogBytes.Skip(4).ToArray();
-            var returnValueObj = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>();
+            var returnValueObj = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte");
             returnValueObj.Decode(lastLogReturnData);
             return returnValueObj.ToByteArray();
 

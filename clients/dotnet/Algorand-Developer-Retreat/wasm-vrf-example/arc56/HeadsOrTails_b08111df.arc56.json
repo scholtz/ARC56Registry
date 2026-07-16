@@ -1,0 +1,2031 @@
+{
+  "name": "HeadsOrTails",
+  "desc": "",
+  "methods": [
+    {
+      "name": "createGame",
+      "desc": "Create a new HeadsOrTails game",
+      "args": [
+        {
+          "name": "boxFeeTxn",
+          "type": "pay",
+          "desc": "PayTxn covering the mbr increase"
+        },
+        {
+          "name": "pk",
+          "type": "byte[32]",
+          "desc": "public key of the generated vrf keypair"
+        },
+        {
+          "name": "heads",
+          "type": "bool",
+          "desc": "does user think the user will be heads?"
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "uint64 the commitmentRound when participant can complete the game"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "completeGame",
+      "desc": "Completes a game and refunds the user their box storage fees",
+      "args": [
+        {
+          "name": "proof",
+          "type": "byte[80]",
+          "desc": "the VRF proof signed by the participant's private key (using the block seed at commitmentRound)"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "desc": "boolean if the user won or not"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "cancelGame",
+      "desc": "Cancels a game and refunds the user their box storage fees",
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "createApplication",
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [
+          "NoOp"
+        ],
+        "call": []
+      }
+    }
+  ],
+  "arcs": [
+    4,
+    56
+  ],
+  "structs": {
+    "HeadsOrTailsGame": [
+      {
+        "name": "pk",
+        "type": "byte[32]"
+      },
+      {
+        "name": "heads",
+        "type": "bool"
+      },
+      {
+        "name": "commitmentRound",
+        "type": "uint64"
+      }
+    ]
+  },
+  "state": {
+    "schema": {
+      "global": {
+        "bytes": 0,
+        "ints": 0
+      },
+      "local": {
+        "bytes": 0,
+        "ints": 0
+      }
+    },
+    "keys": {
+      "global": {},
+      "local": {},
+      "box": {}
+    },
+    "maps": {
+      "global": {},
+      "local": {},
+      "box": {
+        "game": {
+          "keyType": "address",
+          "valueType": "HeadsOrTailsGame"
+        }
+      }
+    }
+  },
+  "bareActions": {
+    "create": [],
+    "call": []
+  },
+  "sourceInfo": {
+    "approval": {
+      "sourceInfo": [
+        {
+          "teal": 1,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            0
+          ]
+        },
+        {
+          "teal": 2,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        {
+          "teal": 3,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48
+          ]
+        },
+        {
+          "teal": 15,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            49,
+            50
+          ]
+        },
+        {
+          "teal": 16,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            51
+          ]
+        },
+        {
+          "teal": 17,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            52,
+            53
+          ]
+        },
+        {
+          "teal": 18,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            54
+          ]
+        },
+        {
+          "teal": 19,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            55,
+            56
+          ]
+        },
+        {
+          "teal": 20,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            57
+          ]
+        },
+        {
+          "teal": 21,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83
+          ]
+        },
+        {
+          "teal": 25,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?",
+          "pc": [
+            84
+          ]
+        },
+        {
+          "teal": 30,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            85
+          ]
+        },
+        {
+          "teal": 33,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            86,
+            87,
+            88
+          ]
+        },
+        {
+          "teal": 34,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            89
+          ]
+        },
+        {
+          "teal": 35,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            90
+          ]
+        },
+        {
+          "teal": 36,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            91
+          ]
+        },
+        {
+          "teal": 37,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            92
+          ]
+        },
+        {
+          "teal": 40,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "errorMessage": "argument 0 (heads) for createGame must be a bool",
+          "pc": [
+            93
+          ]
+        },
+        {
+          "teal": 41,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            94
+          ]
+        },
+        {
+          "teal": 42,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            95
+          ]
+        },
+        {
+          "teal": 45,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            96,
+            97,
+            98
+          ]
+        },
+        {
+          "teal": 46,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            99
+          ]
+        },
+        {
+          "teal": 47,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            100
+          ]
+        },
+        {
+          "teal": 48,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            101,
+            102
+          ]
+        },
+        {
+          "teal": 49,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            103
+          ]
+        },
+        {
+          "teal": 52,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "errorMessage": "argument 1 (pk) for createGame must be a byte[32]",
+          "pc": [
+            104
+          ]
+        },
+        {
+          "teal": 55,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            105,
+            106
+          ]
+        },
+        {
+          "teal": 56,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            107
+          ]
+        },
+        {
+          "teal": 57,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            108
+          ]
+        },
+        {
+          "teal": 58,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            109
+          ]
+        },
+        {
+          "teal": 59,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            110,
+            111
+          ]
+        },
+        {
+          "teal": 60,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            112
+          ]
+        },
+        {
+          "teal": 61,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            113
+          ]
+        },
+        {
+          "teal": 64,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "errorMessage": "argument 2 (boxFeeTxn) for createGame must be a pay transaction",
+          "pc": [
+            114
+          ]
+        },
+        {
+          "teal": 67,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            115,
+            116,
+            117
+          ]
+        },
+        {
+          "teal": 68,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            118
+          ]
+        },
+        {
+          "teal": 69,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            119
+          ]
+        },
+        {
+          "teal": 70,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            120
+          ]
+        },
+        {
+          "teal": 71,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            121
+          ]
+        },
+        {
+          "teal": 72,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            122
+          ]
+        },
+        {
+          "teal": 83,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            123,
+            124,
+            125
+          ]
+        },
+        {
+          "teal": 86,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            126
+          ]
+        },
+        {
+          "teal": 90,
+          "source": "contracts/HeadsOrTails.algo.ts:28",
+          "pc": [
+            127,
+            128
+          ]
+        },
+        {
+          "teal": 91,
+          "source": "contracts/HeadsOrTails.algo.ts:28",
+          "pc": [
+            129
+          ]
+        },
+        {
+          "teal": 92,
+          "source": "contracts/HeadsOrTails.algo.ts:28",
+          "pc": [
+            130
+          ]
+        },
+        {
+          "teal": 93,
+          "source": "contracts/HeadsOrTails.algo.ts:28",
+          "pc": [
+            131
+          ]
+        },
+        {
+          "teal": 94,
+          "source": "contracts/HeadsOrTails.algo.ts:28",
+          "pc": [
+            132
+          ]
+        },
+        {
+          "teal": 97,
+          "source": "contracts/HeadsOrTails.algo.ts:28",
+          "errorMessage": "must not have a game in progress",
+          "pc": [
+            133
+          ]
+        },
+        {
+          "teal": 107,
+          "source": "contracts/HeadsOrTails.algo.ts:31",
+          "pc": [
+            134,
+            135
+          ]
+        },
+        {
+          "teal": 108,
+          "source": "contracts/HeadsOrTails.algo.ts:32",
+          "pc": [
+            136,
+            137
+          ]
+        },
+        {
+          "teal": 109,
+          "source": "contracts/HeadsOrTails.algo.ts:32",
+          "pc": [
+            138,
+            139
+          ]
+        },
+        {
+          "teal": 110,
+          "source": "contracts/HeadsOrTails.algo.ts:32",
+          "pc": [
+            140
+          ]
+        },
+        {
+          "teal": 113,
+          "source": "contracts/HeadsOrTails.algo.ts:32",
+          "errorMessage": "transaction verification failed: {\"txn\":\"boxFeeTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}",
+          "pc": [
+            141
+          ]
+        },
+        {
+          "teal": 116,
+          "source": "contracts/HeadsOrTails.algo.ts:31",
+          "pc": [
+            142,
+            143
+          ]
+        },
+        {
+          "teal": 117,
+          "source": "contracts/HeadsOrTails.algo.ts:33",
+          "pc": [
+            144,
+            145
+          ]
+        },
+        {
+          "teal": 118,
+          "source": "contracts/HeadsOrTails.algo.ts:4",
+          "pc": [
+            146
+          ]
+        },
+        {
+          "teal": 119,
+          "source": "contracts/HeadsOrTails.algo.ts:34",
+          "pc": [
+            147
+          ]
+        },
+        {
+          "teal": 122,
+          "source": "contracts/HeadsOrTails.algo.ts:34",
+          "errorMessage": "transaction verification failed: {\"txn\":\"boxFeeTxn\",\"field\":\"amount\",\"condition\":\"greaterThanEqualTo\",\"expected\":\">=BOX_STORAGE_COST\"}",
+          "pc": [
+            148
+          ]
+        },
+        {
+          "teal": 126,
+          "source": "contracts/HeadsOrTails.algo.ts:38",
+          "pc": [
+            149,
+            150
+          ]
+        },
+        {
+          "teal": 127,
+          "source": "contracts/HeadsOrTails.algo.ts:6",
+          "pc": [
+            151,
+            152
+          ]
+        },
+        {
+          "teal": 128,
+          "source": "contracts/HeadsOrTails.algo.ts:38",
+          "pc": [
+            153
+          ]
+        },
+        {
+          "teal": 129,
+          "source": "contracts/HeadsOrTails.algo.ts:38",
+          "pc": [
+            154,
+            155
+          ]
+        },
+        {
+          "teal": 137,
+          "source": "contracts/HeadsOrTails.algo.ts:40",
+          "pc": [
+            156,
+            157
+          ]
+        },
+        {
+          "teal": 138,
+          "source": "contracts/HeadsOrTails.algo.ts:41",
+          "pc": [
+            158,
+            159
+          ]
+        },
+        {
+          "teal": 139,
+          "source": "contracts/HeadsOrTails.algo.ts:42",
+          "pc": [
+            160,
+            161
+          ]
+        },
+        {
+          "teal": 140,
+          "source": "contracts/HeadsOrTails.algo.ts:42",
+          "pc": [
+            162
+          ]
+        },
+        {
+          "teal": 141,
+          "source": "contracts/HeadsOrTails.algo.ts:42",
+          "pc": [
+            163,
+            164
+          ]
+        },
+        {
+          "teal": 142,
+          "source": "contracts/HeadsOrTails.algo.ts:42",
+          "pc": [
+            165
+          ]
+        },
+        {
+          "teal": 143,
+          "source": "contracts/HeadsOrTails.algo.ts:43",
+          "pc": [
+            166
+          ]
+        },
+        {
+          "teal": 144,
+          "source": "contracts/HeadsOrTails.algo.ts:43",
+          "pc": [
+            167,
+            168
+          ]
+        },
+        {
+          "teal": 145,
+          "source": "contracts/HeadsOrTails.algo.ts:43",
+          "pc": [
+            169
+          ]
+        },
+        {
+          "teal": 146,
+          "source": "contracts/HeadsOrTails.algo.ts:43",
+          "pc": [
+            170
+          ]
+        },
+        {
+          "teal": 147,
+          "source": "contracts/HeadsOrTails.algo.ts:40",
+          "pc": [
+            171
+          ]
+        },
+        {
+          "teal": 151,
+          "source": "contracts/HeadsOrTails.algo.ts:46",
+          "pc": [
+            172,
+            173
+          ]
+        },
+        {
+          "teal": 154,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            174,
+            175
+          ]
+        },
+        {
+          "teal": 155,
+          "source": "contracts/HeadsOrTails.algo.ts:27",
+          "pc": [
+            176
+          ]
+        },
+        {
+          "teal": 160,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            177
+          ]
+        },
+        {
+          "teal": 163,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            178,
+            179,
+            180
+          ]
+        },
+        {
+          "teal": 164,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            181
+          ]
+        },
+        {
+          "teal": 165,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            182
+          ]
+        },
+        {
+          "teal": 166,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            183,
+            184
+          ]
+        },
+        {
+          "teal": 167,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            185
+          ]
+        },
+        {
+          "teal": 170,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "errorMessage": "argument 0 (proof) for completeGame must be a byte[80]",
+          "pc": [
+            186
+          ]
+        },
+        {
+          "teal": 173,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            187,
+            188,
+            189
+          ]
+        },
+        {
+          "teal": 174,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            190,
+            191
+          ]
+        },
+        {
+          "teal": 175,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            192
+          ]
+        },
+        {
+          "teal": 176,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            193,
+            194
+          ]
+        },
+        {
+          "teal": 177,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            195
+          ]
+        },
+        {
+          "teal": 178,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            196
+          ]
+        },
+        {
+          "teal": 179,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            197
+          ]
+        },
+        {
+          "teal": 180,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            198
+          ]
+        },
+        {
+          "teal": 181,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            199
+          ]
+        },
+        {
+          "teal": 190,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            200,
+            201,
+            202
+          ]
+        },
+        {
+          "teal": 193,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            203
+          ]
+        },
+        {
+          "teal": 194,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            204,
+            205
+          ]
+        },
+        {
+          "teal": 198,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "pc": [
+            206,
+            207
+          ]
+        },
+        {
+          "teal": 199,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "pc": [
+            208,
+            209
+          ]
+        },
+        {
+          "teal": 203,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "pc": [
+            210,
+            211
+          ]
+        },
+        {
+          "teal": 204,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "pc": [
+            212
+          ]
+        },
+        {
+          "teal": 207,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "errorMessage": "box value does not exist: this.game(this.txn.sender).value",
+          "pc": [
+            213
+          ]
+        },
+        {
+          "teal": 208,
+          "source": "contracts/HeadsOrTails.algo.ts:60",
+          "pc": [
+            214,
+            215
+          ]
+        },
+        {
+          "teal": 209,
+          "source": "contracts/HeadsOrTails.algo.ts:60",
+          "pc": [
+            216,
+            217
+          ]
+        },
+        {
+          "teal": 210,
+          "source": "contracts/HeadsOrTails.algo.ts:60",
+          "pc": [
+            218,
+            219,
+            220
+          ]
+        },
+        {
+          "teal": 211,
+          "source": "contracts/HeadsOrTails.algo.ts:60",
+          "pc": [
+            221
+          ]
+        },
+        {
+          "teal": 212,
+          "source": "contracts/HeadsOrTails.algo.ts:60",
+          "pc": [
+            222,
+            223
+          ]
+        },
+        {
+          "teal": 213,
+          "source": "contracts/HeadsOrTails.algo.ts:60",
+          "pc": [
+            224,
+            225
+          ]
+        },
+        {
+          "teal": 220,
+          "source": "contracts/HeadsOrTails.algo.ts:63",
+          "pc": [
+            226,
+            227
+          ]
+        },
+        {
+          "teal": 221,
+          "source": "contracts/HeadsOrTails.algo.ts:63",
+          "pc": [
+            228,
+            229,
+            230
+          ]
+        },
+        {
+          "teal": 222,
+          "source": "contracts/HeadsOrTails.algo.ts:63",
+          "pc": [
+            231
+          ]
+        },
+        {
+          "teal": 223,
+          "source": "contracts/HeadsOrTails.algo.ts:63",
+          "pc": [
+            232,
+            233,
+            234
+          ]
+        },
+        {
+          "teal": 227,
+          "source": "contracts/HeadsOrTails.algo.ts:64",
+          "pc": [
+            235
+          ]
+        },
+        {
+          "teal": 228,
+          "source": "contracts/HeadsOrTails.algo.ts:64",
+          "pc": [
+            236,
+            237
+          ]
+        },
+        {
+          "teal": 229,
+          "source": "contracts/HeadsOrTails.algo.ts:64",
+          "pc": [
+            238,
+            239
+          ]
+        },
+        {
+          "teal": 230,
+          "source": "contracts/HeadsOrTails.algo.ts:64",
+          "pc": [
+            240
+          ]
+        },
+        {
+          "teal": 231,
+          "source": "contracts/HeadsOrTails.algo.ts:64",
+          "pc": [
+            241,
+            242
+          ]
+        },
+        {
+          "teal": 232,
+          "source": "contracts/HeadsOrTails.algo.ts:64",
+          "pc": [
+            243
+          ]
+        },
+        {
+          "teal": 233,
+          "source": "contracts/HeadsOrTails.algo.ts:64",
+          "pc": [
+            244
+          ]
+        },
+        {
+          "teal": 234,
+          "source": "contracts/HeadsOrTails.algo.ts:64",
+          "pc": [
+            245,
+            246
+          ]
+        },
+        {
+          "teal": 235,
+          "source": "contracts/HeadsOrTails.algo.ts:64",
+          "pc": [
+            247,
+            248
+          ]
+        },
+        {
+          "teal": 236,
+          "source": "contracts/HeadsOrTails.algo.ts:64",
+          "pc": [
+            249,
+            250
+          ]
+        },
+        {
+          "teal": 237,
+          "source": "contracts/HeadsOrTails.algo.ts:64",
+          "pc": [
+            251,
+            252
+          ]
+        },
+        {
+          "teal": 238,
+          "source": "contracts/HeadsOrTails.algo.ts:64",
+          "pc": [
+            253
+          ]
+        },
+        {
+          "teal": 239,
+          "source": "contracts/HeadsOrTails.algo.ts:63",
+          "pc": [
+            254,
+            255,
+            256
+          ]
+        },
+        {
+          "teal": 244,
+          "source": "contracts/HeadsOrTails.algo.ts:67",
+          "pc": [
+            257,
+            258
+          ]
+        },
+        {
+          "teal": 245,
+          "source": "contracts/HeadsOrTails.algo.ts:67",
+          "pc": [
+            259,
+            260
+          ]
+        },
+        {
+          "teal": 246,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "pc": [
+            261,
+            262
+          ]
+        },
+        {
+          "teal": 247,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "pc": [
+            263
+          ]
+        },
+        {
+          "teal": 250,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "errorMessage": "box value does not exist: this.game(this.txn.sender).value",
+          "pc": [
+            264
+          ]
+        },
+        {
+          "teal": 251,
+          "source": "contracts/HeadsOrTails.algo.ts:67",
+          "pc": [
+            265,
+            266
+          ]
+        },
+        {
+          "teal": 252,
+          "source": "contracts/HeadsOrTails.algo.ts:67",
+          "pc": [
+            267,
+            268
+          ]
+        },
+        {
+          "teal": 253,
+          "source": "contracts/HeadsOrTails.algo.ts:67",
+          "pc": [
+            269,
+            270,
+            271
+          ]
+        },
+        {
+          "teal": 254,
+          "source": "contracts/HeadsOrTails.algo.ts:67",
+          "pc": [
+            272,
+            273
+          ]
+        },
+        {
+          "teal": 255,
+          "source": "contracts/HeadsOrTails.algo.ts:67",
+          "pc": [
+            274,
+            275
+          ]
+        },
+        {
+          "teal": 256,
+          "source": "contracts/HeadsOrTails.algo.ts:67",
+          "pc": [
+            276,
+            277
+          ]
+        },
+        {
+          "teal": 260,
+          "source": "contracts/HeadsOrTails.algo.ts:69",
+          "pc": [
+            278,
+            279
+          ]
+        },
+        {
+          "teal": 263,
+          "source": "contracts/HeadsOrTails.algo.ts:69",
+          "errorMessage": "the vrf must be verified",
+          "pc": [
+            280
+          ]
+        },
+        {
+          "teal": 267,
+          "source": "contracts/HeadsOrTails.algo.ts:72",
+          "pc": [
+            281,
+            282
+          ]
+        },
+        {
+          "teal": 268,
+          "source": "contracts/HeadsOrTails.algo.ts:72",
+          "pc": [
+            283
+          ]
+        },
+        {
+          "teal": 269,
+          "source": "contracts/HeadsOrTails.algo.ts:72",
+          "pc": [
+            284
+          ]
+        },
+        {
+          "teal": 270,
+          "source": "contracts/HeadsOrTails.algo.ts:72",
+          "pc": [
+            285,
+            286
+          ]
+        },
+        {
+          "teal": 274,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            287,
+            288
+          ]
+        },
+        {
+          "teal": 275,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            289
+          ]
+        },
+        {
+          "teal": 276,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            290,
+            291,
+            292
+          ]
+        },
+        {
+          "teal": 277,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "pc": [
+            293,
+            294
+          ]
+        },
+        {
+          "teal": 278,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "pc": [
+            295
+          ]
+        },
+        {
+          "teal": 281,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "errorMessage": "box value does not exist: this.game(this.txn.sender).value",
+          "pc": [
+            296
+          ]
+        },
+        {
+          "teal": 282,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            297,
+            298
+          ]
+        },
+        {
+          "teal": 283,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            299,
+            300
+          ]
+        },
+        {
+          "teal": 284,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            301
+          ]
+        },
+        {
+          "teal": 285,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            302
+          ]
+        },
+        {
+          "teal": 286,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            303
+          ]
+        },
+        {
+          "teal": 289,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            304
+          ]
+        },
+        {
+          "teal": 290,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            305,
+            306,
+            307
+          ]
+        },
+        {
+          "teal": 291,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            308,
+            309
+          ]
+        },
+        {
+          "teal": 292,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            310
+          ]
+        },
+        {
+          "teal": 293,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            311
+          ]
+        },
+        {
+          "teal": 294,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            312,
+            313,
+            314
+          ]
+        },
+        {
+          "teal": 295,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "pc": [
+            315,
+            316
+          ]
+        },
+        {
+          "teal": 296,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "pc": [
+            317
+          ]
+        },
+        {
+          "teal": 299,
+          "source": "contracts/HeadsOrTails.algo.ts:57",
+          "errorMessage": "box value does not exist: this.game(this.txn.sender).value",
+          "pc": [
+            318
+          ]
+        },
+        {
+          "teal": 300,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            319,
+            320
+          ]
+        },
+        {
+          "teal": 301,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            321,
+            322
+          ]
+        },
+        {
+          "teal": 302,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            323
+          ]
+        },
+        {
+          "teal": 303,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            324
+          ]
+        },
+        {
+          "teal": 304,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            325
+          ]
+        },
+        {
+          "teal": 305,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            326
+          ]
+        },
+        {
+          "teal": 308,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            327
+          ]
+        },
+        {
+          "teal": 311,
+          "source": "contracts/HeadsOrTails.algo.ts:74",
+          "pc": [
+            328,
+            329
+          ]
+        },
+        {
+          "teal": 320,
+          "source": "contracts/HeadsOrTails.algo.ts:77",
+          "pc": [
+            330
+          ]
+        },
+        {
+          "teal": 321,
+          "source": "contracts/HeadsOrTails.algo.ts:77",
+          "pc": [
+            331
+          ]
+        },
+        {
+          "teal": 322,
+          "source": "contracts/HeadsOrTails.algo.ts:77",
+          "pc": [
+            332,
+            333
+          ]
+        },
+        {
+          "teal": 326,
+          "source": "contracts/HeadsOrTails.algo.ts:78",
+          "pc": [
+            334,
+            335
+          ]
+        },
+        {
+          "teal": 327,
+          "source": "contracts/HeadsOrTails.algo.ts:78",
+          "pc": [
+            336,
+            337
+          ]
+        },
+        {
+          "teal": 331,
+          "source": "contracts/HeadsOrTails.algo.ts:4",
+          "pc": [
+            338
+          ]
+        },
+        {
+          "teal": 332,
+          "source": "contracts/HeadsOrTails.algo.ts:79",
+          "pc": [
+            339,
+            340
+          ]
+        },
+        {
+          "teal": 336,
+          "source": "contracts/HeadsOrTails.algo.ts:80",
+          "pc": [
+            341
+          ]
+        },
+        {
+          "teal": 337,
+          "source": "contracts/HeadsOrTails.algo.ts:80",
+          "pc": [
+            342,
+            343
+          ]
+        },
+        {
+          "teal": 341,
+          "source": "contracts/HeadsOrTails.algo.ts:81",
+          "pc": [
+            344
+          ]
+        },
+        {
+          "teal": 342,
+          "source": "contracts/HeadsOrTails.algo.ts:81",
+          "pc": [
+            345,
+            346
+          ]
+        },
+        {
+          "teal": 345,
+          "source": "contracts/HeadsOrTails.algo.ts:77",
+          "pc": [
+            347
+          ]
+        },
+        {
+          "teal": 349,
+          "source": "contracts/HeadsOrTails.algo.ts:85",
+          "pc": [
+            348,
+            349
+          ]
+        },
+        {
+          "teal": 350,
+          "source": "contracts/HeadsOrTails.algo.ts:85",
+          "pc": [
+            350
+          ]
+        },
+        {
+          "teal": 354,
+          "source": "contracts/HeadsOrTails.algo.ts:87",
+          "pc": [
+            351,
+            352
+          ]
+        },
+        {
+          "teal": 357,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            353,
+            354
+          ]
+        },
+        {
+          "teal": 360,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            355,
+            356
+          ]
+        },
+        {
+          "teal": 361,
+          "source": "contracts/HeadsOrTails.algo.ts:56",
+          "pc": [
+            357
+          ]
+        },
+        {
+          "teal": 366,
+          "source": "contracts/HeadsOrTails.algo.ts:95",
+          "pc": [
+            358,
+            359,
+            360
+          ]
+        },
+        {
+          "teal": 367,
+          "source": "contracts/HeadsOrTails.algo.ts:95",
+          "pc": [
+            361
+          ]
+        },
+        {
+          "teal": 368,
+          "source": "contracts/HeadsOrTails.algo.ts:95",
+          "pc": [
+            362
+          ]
+        },
+        {
+          "teal": 375,
+          "source": "contracts/HeadsOrTails.algo.ts:95",
+          "pc": [
+            363,
+            364,
+            365
+          ]
+        },
+        {
+          "teal": 378,
+          "source": "contracts/HeadsOrTails.algo.ts:95",
+          "pc": [
+            366
+          ]
+        },
+        {
+          "teal": 382,
+          "source": "contracts/HeadsOrTails.algo.ts:96",
+          "pc": [
+            367,
+            368
+          ]
+        },
+        {
+          "teal": 383,
+          "source": "contracts/HeadsOrTails.algo.ts:96",
+          "pc": [
+            369,
+            370
+          ]
+        },
+        {
+          "teal": 387,
+          "source": "contracts/HeadsOrTails.algo.ts:96",
+          "pc": [
+            371,
+            372
+          ]
+        },
+        {
+          "teal": 388,
+          "source": "contracts/HeadsOrTails.algo.ts:96",
+          "pc": [
+            373
+          ]
+        },
+        {
+          "teal": 391,
+          "source": "contracts/HeadsOrTails.algo.ts:96",
+          "errorMessage": "box value does not exist: this.game(this.txn.sender).value",
+          "pc": [
+            374
+          ]
+        },
+        {
+          "teal": 392,
+          "source": "contracts/HeadsOrTails.algo.ts:98",
+          "pc": [
+            375,
+            376
+          ]
+        },
+        {
+          "teal": 393,
+          "source": "contracts/HeadsOrTails.algo.ts:98",
+          "pc": [
+            377,
+            378
+          ]
+        },
+        {
+          "teal": 394,
+          "source": "contracts/HeadsOrTails.algo.ts:98",
+          "pc": [
+            379,
+            380,
+            381
+          ]
+        },
+        {
+          "teal": 395,
+          "source": "contracts/HeadsOrTails.algo.ts:98",
+          "pc": [
+            382
+          ]
+        },
+        {
+          "teal": 396,
+          "source": "contracts/HeadsOrTails.algo.ts:98",
+          "pc": [
+            383,
+            384
+          ]
+        },
+        {
+          "teal": 397,
+          "source": "contracts/HeadsOrTails.algo.ts:98",
+          "pc": [
+            385,
+            386,
+            387
+          ]
+        },
+        {
+          "teal": 398,
+          "source": "contracts/HeadsOrTails.algo.ts:98",
+          "pc": [
+            388
+          ]
+        },
+        {
+          "teal": 399,
+          "source": "contracts/HeadsOrTails.algo.ts:98",
+          "pc": [
+            389
+          ]
+        },
+        {
+          "teal": 400,
+          "source": "contracts/HeadsOrTails.algo.ts:98",
+          "pc": [
+            390
+          ]
+        },
+        {
+          "teal": 409,
+          "source": "contracts/HeadsOrTails.algo.ts:101",
+          "pc": [
+            391
+          ]
+        },
+        {
+          "teal": 410,
+          "source": "contracts/HeadsOrTails.algo.ts:101",
+          "pc": [
+            392
+          ]
+        },
+        {
+          "teal": 411,
+          "source": "contracts/HeadsOrTails.algo.ts:101",
+          "pc": [
+            393,
+            394
+          ]
+        },
+        {
+          "teal": 415,
+          "source": "contracts/HeadsOrTails.algo.ts:102",
+          "pc": [
+            395,
+            396
+          ]
+        },
+        {
+          "teal": 416,
+          "source": "contracts/HeadsOrTails.algo.ts:102",
+          "pc": [
+            397,
+            398
+          ]
+        },
+        {
+          "teal": 420,
+          "source": "contracts/HeadsOrTails.algo.ts:4",
+          "pc": [
+            399
+          ]
+        },
+        {
+          "teal": 421,
+          "source": "contracts/HeadsOrTails.algo.ts:103",
+          "pc": [
+            400,
+            401
+          ]
+        },
+        {
+          "teal": 425,
+          "source": "contracts/HeadsOrTails.algo.ts:104",
+          "pc": [
+            402
+          ]
+        },
+        {
+          "teal": 426,
+          "source": "contracts/HeadsOrTails.algo.ts:104",
+          "pc": [
+            403,
+            404
+          ]
+        },
+        {
+          "teal": 430,
+          "source": "contracts/HeadsOrTails.algo.ts:105",
+          "pc": [
+            405
+          ]
+        },
+        {
+          "teal": 431,
+          "source": "contracts/HeadsOrTails.algo.ts:105",
+          "pc": [
+            406,
+            407
+          ]
+        },
+        {
+          "teal": 434,
+          "source": "contracts/HeadsOrTails.algo.ts:101",
+          "pc": [
+            408
+          ]
+        },
+        {
+          "teal": 438,
+          "source": "contracts/HeadsOrTails.algo.ts:109",
+          "pc": [
+            409,
+            410
+          ]
+        },
+        {
+          "teal": 439,
+          "source": "contracts/HeadsOrTails.algo.ts:109",
+          "pc": [
+            411
+          ]
+        },
+        {
+          "teal": 440,
+          "source": "contracts/HeadsOrTails.algo.ts:95",
+          "pc": [
+            412
+          ]
+        },
+        {
+          "teal": 443,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            413
+          ]
+        },
+        {
+          "teal": 444,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            414
+          ]
+        },
+        {
+          "teal": 447,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            415,
+            416,
+            417,
+            418,
+            419,
+            420
+          ]
+        },
+        {
+          "teal": 448,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            421,
+            422,
+            423
+          ]
+        },
+        {
+          "teal": 449,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            424,
+            425,
+            426,
+            427
+          ]
+        },
+        {
+          "teal": 452,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "errorMessage": "this contract does not implement the given ABI method for create NoOp",
+          "pc": [
+            428
+          ]
+        },
+        {
+          "teal": 455,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            429,
+            430,
+            431,
+            432,
+            433,
+            434
+          ]
+        },
+        {
+          "teal": 456,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            435,
+            436,
+            437,
+            438,
+            439,
+            440
+          ]
+        },
+        {
+          "teal": 457,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            441,
+            442,
+            443,
+            444,
+            445,
+            446
+          ]
+        },
+        {
+          "teal": 458,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            447,
+            448,
+            449
+          ]
+        },
+        {
+          "teal": 459,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "pc": [
+            450,
+            451,
+            452,
+            453,
+            454,
+            455,
+            456,
+            457
+          ]
+        },
+        {
+          "teal": 462,
+          "source": "contracts/HeadsOrTails.algo.ts:14",
+          "errorMessage": "this contract does not implement the given ABI method for call NoOp",
+          "pc": [
+            458
+          ]
+        }
+      ],
+      "pcOffsetMethod": "none"
+    },
+    "clear": {
+      "sourceInfo": [],
+      "pcOffsetMethod": "none"
+    }
+  },
+  "source": {
+    "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDAgMzE3MDAgMjU2IDYKYnl0ZWNibG9jayAweCAweDYyNmY3ODIwNzM3NDZmNzI2MTY3NjUyMDYzNmY3Mzc0MjA3MjY1NjY3NTZlNjQgMHgxNTFmN2M3NSAweDBhODEwMSAweDAwCgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwNi4yCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIHRlbiBsaW5lcyBvZiBURUFMIGhhbmRsZSBpbml0aWFsIHByb2dyYW0gZmxvdwovLyBUaGlzIHBhdHRlcm4gaXMgdXNlZCB0byBtYWtlIGl0IGVhc3kgZm9yIGFueW9uZSB0byBwYXJzZSB0aGUgc3RhcnQgb2YgdGhlIHByb2dyYW0gYW5kIGRldGVybWluZSBpZiBhIHNwZWNpZmljIGFjdGlvbiBpcyBhbGxvd2VkCi8vIEhlcmUsIGFjdGlvbiByZWZlcnMgdG8gdGhlIE9uQ29tcGxldGUgaW4gY29tYmluYXRpb24gd2l0aCB3aGV0aGVyIHRoZSBhcHAgaXMgYmVpbmcgY3JlYXRlZCBvciBjYWxsZWQKLy8gRXZlcnkgcG9zc2libGUgYWN0aW9uIGZvciB0aGlzIGNvbnRyYWN0IGlzIHJlcHJlc2VudGVkIGluIHRoZSBzd2l0Y2ggc3RhdGVtZW50Ci8vIElmIHRoZSBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoZSBjb250cmFjdCwgaXRzIHJlc3BlY3RpdmUgYnJhbmNoIHdpbGwgYmUgIipOT1RfSU1QTEVNRU5URUQiIHdoaWNoIGp1c3QgY29udGFpbnMgImVyciIKdHhuIEFwcGxpY2F0aW9uSUQKIQppbnRjIDQgLy8gNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKmNyZWF0ZV9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRAoKKk5PVF9JTVBMRU1FTlRFRDoKCS8vIFRoZSByZXF1ZXN0ZWQgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGlzIGNvbnRyYWN0LiBBcmUgeW91IHVzaW5nIHRoZSBjb3JyZWN0IE9uQ29tcGxldGU/IERpZCB5b3Ugc2V0IHlvdXIgYXBwIElEPwoJZXJyCgovLyBjcmVhdGVHYW1lKHBheSxieXRlWzMyXSxib29sKXVpbnQ2NAoqYWJpX3JvdXRlX2NyZWF0ZUdhbWU6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDIgLy8gMHgxNTFmN2M3NQoKCS8vIGhlYWRzOiBib29sCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglkdXAKCWxlbgoJaW50YyAwIC8vIDEKCT09CgoJLy8gYXJndW1lbnQgMCAoaGVhZHMpIGZvciBjcmVhdGVHYW1lIG11c3QgYmUgYSBib29sCglhc3NlcnQKCWludGMgMSAvLyAwCglnZXRiaXQKCgkvLyBwazogYnl0ZVszMl0KCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglwdXNoaW50IDMyCgk9PQoKCS8vIGFyZ3VtZW50IDEgKHBrKSBmb3IgY3JlYXRlR2FtZSBtdXN0IGJlIGEgYnl0ZVszMl0KCWFzc2VydAoKCS8vIGJveEZlZVR4bjogcGF5Cgl0eG4gR3JvdXBJbmRleAoJaW50YyAwIC8vIDEKCS0KCWR1cAoJZ3R4bnMgVHlwZUVudW0KCWludGMgMCAvLyAgcGF5Cgk9PQoKCS8vIGFyZ3VtZW50IDIgKGJveEZlZVR4bikgZm9yIGNyZWF0ZUdhbWUgbXVzdCBiZSBhIHBheSB0cmFuc2FjdGlvbgoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBjcmVhdGVHYW1lKHBheSxieXRlWzMyXSxib29sKXVpbnQ2NAoJY2FsbHN1YiBjcmVhdGVHYW1lCglpdG9iCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gY3JlYXRlR2FtZShib3hGZWVUeG46IFBheVR4biwgcGs6IGJ5dGVzMzIsIGhlYWRzOiBib29sZWFuKTogdWludDY0Ci8vCi8vCi8vIENyZWF0ZSBhIG5ldyBIZWFkc09yVGFpbHMgZ2FtZQovLyBAcGFyYW0gYm94RmVlVHhuIFBheVR4biBjb3ZlcmluZyB0aGUgbWJyIGluY3JlYXNlCi8vIEBwYXJhbSBwayBwdWJsaWMga2V5IG9mIHRoZSBnZW5lcmF0ZWQgdnJmIGtleXBhaXIKLy8gQHBhcmFtIGhlYWRzIGRvZXMgdXNlciB0aGluayB0aGUgdXNlciB3aWxsIGJlIGhlYWRzPwovLyBAcmV0dXJucyB1aW50NjQgdGhlIGNvbW1pdG1lbnRSb3VuZCB3aGVuIHBhcnRpY2lwYW50IGNhbiBjb21wbGV0ZSB0aGUgZ2FtZQpjcmVhdGVHYW1lOgoJcHJvdG8gMyAxCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCgkvLyBjb250cmFjdHMvSGVhZHNPclRhaWxzLmFsZ28udHM6MjgKCS8vIGFzc2VydCghdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikuZXhpc3RzLCAnbXVzdCBub3QgaGF2ZSBhIGdhbWUgaW4gcHJvZ3Jlc3MnKQoJdHhuIFNlbmRlcgoJYm94X2xlbgoJc3dhcAoJcG9wCgkhCgoJLy8gbXVzdCBub3QgaGF2ZSBhIGdhbWUgaW4gcHJvZ3Jlc3MKCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czozMQoJLy8gdmVyaWZ5UGF5VHhuKGJveEZlZVR4biwgewoJLy8gICAgICAgcmVjZWl2ZXI6IHRoaXMuYXBwLmFkZHJlc3MsCgkvLyAgICAgICBhbW91bnQ6IHsKCS8vICAgICAgICAgZ3JlYXRlclRoYW5FcXVhbFRvOiBCT1hfU1RPUkFHRV9DT1NULCAvLyBtdXN0IGF0IGxlYXN0IGNvdmVyIHRoZSBtYnIgaW5jcmVhc2UKCS8vICAgICAgIH0sCgkvLyAgICAgfSkKCS8vIHZlcmlmeSByZWNlaXZlcgoJZnJhbWVfZGlnIC0xIC8vIGJveEZlZVR4bjogUGF5VHhuCglndHhucyBSZWNlaXZlcgoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJib3hGZWVUeG4iLCJmaWVsZCI6InJlY2VpdmVyIiwiZXhwZWN0ZWQiOiJ0aGlzLmFwcC5hZGRyZXNzIn0KCWFzc2VydAoKCS8vIHZlcmlmeSBhbW91bnQKCWZyYW1lX2RpZyAtMSAvLyBib3hGZWVUeG46IFBheVR4bgoJZ3R4bnMgQW1vdW50CglpbnRjIDIgLy8gMzE3MDAKCT49CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJib3hGZWVUeG4iLCJmaWVsZCI6ImFtb3VudCIsImNvbmRpdGlvbiI6ImdyZWF0ZXJUaGFuRXF1YWxUbyIsImV4cGVjdGVkIjoiPj1CT1hfU1RPUkFHRV9DT1NUIn0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czozOAoJLy8gY29tbWl0bWVudFJvdW5kOiB1aW50NjQgPSBnbG9iYWxzLnJvdW5kICsgTUlOX1JPVU5EX0dBUAoJZ2xvYmFsIFJvdW5kCglwdXNoaW50IDgKCSsKCWZyYW1lX2J1cnkgMCAvLyBjb21taXRtZW50Um91bmQ6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo0MAoJLy8gdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUgPSB7CgkvLyAgICAgICBwazogcGssCgkvLyAgICAgICBoZWFkczogaGVhZHMsCgkvLyAgICAgICBjb21taXRtZW50Um91bmQ6IGNvbW1pdG1lbnRSb3VuZCwKCS8vICAgICB9Cgl0eG4gU2VuZGVyCglmcmFtZV9kaWcgLTIgLy8gcGs6IGJ5dGVzMzIKCWJ5dGVjIDQgLy8gMHgwMAoJaW50YyAxIC8vIDAKCWZyYW1lX2RpZyAtMyAvLyBoZWFkczogYm9vbGVhbgoJc2V0Yml0Cgljb25jYXQgLy8gMgoJZnJhbWVfZGlnIDAgLy8gY29tbWl0bWVudFJvdW5kOiB1aW50NjQKCWl0b2IKCWNvbmNhdAoJYm94X3B1dAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo0NgoJLy8gcmV0dXJuIGNvbW1pdG1lbnRSb3VuZDsKCWZyYW1lX2RpZyAwIC8vIGNvbW1pdG1lbnRSb3VuZDogdWludDY0CgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCglyZXRzdWIKCi8vIGNvbXBsZXRlR2FtZShieXRlWzgwXSlib29sCiphYmlfcm91dGVfY29tcGxldGVHYW1lOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAyIC8vIDB4MTUxZjdjNzUKCgkvLyBwcm9vZjogYnl0ZVs4MF0KCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglwdXNoaW50IDgwCgk9PQoKCS8vIGFyZ3VtZW50IDAgKHByb29mKSBmb3IgY29tcGxldGVHYW1lIG11c3QgYmUgYSBieXRlWzgwXQoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBjb21wbGV0ZUdhbWUoYnl0ZVs4MF0pYm9vbAoJY2FsbHN1YiBjb21wbGV0ZUdhbWUKCWJ5dGVjIDQgLy8gMHgwMAoJaW50YyAxIC8vIDAKCXVuY292ZXIgMgoJc2V0Yml0Cgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gY29tcGxldGVHYW1lKHByb29mOiBieXRlczw4MD4pOiBib29sZWFuCi8vCi8vCi8vIENvbXBsZXRlcyBhIGdhbWUgYW5kIHJlZnVuZHMgdGhlIHVzZXIgdGhlaXIgYm94IHN0b3JhZ2UgZmVlcwovLyBAcGFyYW0gcHJvb2YgdGhlIFZSRiBwcm9vZiBzaWduZWQgYnkgdGhlIHBhcnRpY2lwYW50J3MgcHJpdmF0ZSBrZXkgKHVzaW5nIHRoZSBibG9jayBzZWVkIGF0IGNvbW1pdG1lbnRSb3VuZCkKLy8gQHJldHVybnMgYm9vbGVhbiBpZiB0aGUgdXNlciB3b24gb3Igbm90CmNvbXBsZXRlR2FtZToKCXByb3RvIDEgMQoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAwIC8vIDB4CglkdXBuIDUKCgkvLyBjb250cmFjdHMvSGVhZHNPclRhaWxzLmFsZ28udHM6NTcKCS8vIGdhbWU6IEhlYWRzT3JUYWlsc0dhbWUgPSB0aGlzLmdhbWUodGhpcy50eG4uc2VuZGVyKS52YWx1ZQoJdHhuIFNlbmRlcgoJZnJhbWVfYnVyeSAwIC8vIHN0b3JhZ2Uga2V5Ly9nYW1lCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjYwCgkvLyBzZWVkID0gYmxvY2tzW2dhbWUuY29tbWl0bWVudFJvdW5kXS5zZWVkCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vZ2FtZQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWV4dHJhY3QgMzMgOAoJYnRvaQoJYmxvY2sgQmxrU2VlZAoJZnJhbWVfYnVyeSAxIC8vIHNlZWQ6IGJ5dGVbXQoKKndoaWxlXzA6Cgoqd2hpbGVfMF9jb250aW51ZToKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo2MwoJLy8gZ2xvYmFscy5vcGNvZGVCdWRnZXQgPCA1NzAwCglnbG9iYWwgT3Bjb2RlQnVkZ2V0CglwdXNoaW50IDU3MDAKCTwKCWJ6ICp3aGlsZV8wX2VuZAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo2NAoJLy8gaW5jcmVhc2VPcGNvZGVCdWRnZXQoKQoJaXR4bl9iZWdpbgoJaW50YyA0IC8vICBhcHBsCglpdHhuX2ZpZWxkIFR5cGVFbnVtCglpbnRjIDEgLy8gMAoJaXR4bl9maWVsZCBGZWUKCWJ5dGVjIDMgLy8gICNwcmFnbWEgdmVyc2lvbiAxMDsgaW50IDEKCWR1cAoJaXR4bl9maWVsZCBBcHByb3ZhbFByb2dyYW0KCWl0eG5fZmllbGQgQ2xlYXJTdGF0ZVByb2dyYW0KCXB1c2hpbnQgNSAvLyBEZWxldGVBcHBsaWNhdGlvbgoJaXR4bl9maWVsZCBPbkNvbXBsZXRpb24KCWl0eG5fc3VibWl0CgliICp3aGlsZV8wCgoqd2hpbGVfMF9lbmQ6CgkvLyBjb250cmFjdHMvSGVhZHNPclRhaWxzLmFsZ28udHM6NjcKCS8vIHIgPSB2cmZWZWZpcnkoJ1ZyZkFsZ29yYW5kJywgc2VlZCwgcHJvb2YsIGdhbWUucGspCglmcmFtZV9kaWcgMSAvLyBzZWVkOiBieXRlW10KCWZyYW1lX2RpZyAtMSAvLyBwcm9vZjogYnl0ZXM8ODA+CglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vZ2FtZQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWV4dHJhY3QgMCAzMgoJdnJmX3ZlcmlmeSBWcmZBbGdvcmFuZAoJZnJhbWVfYnVyeSAyIC8vIHIgdmVyaWZpZWQ6IGJvb2wKCWZyYW1lX2J1cnkgMyAvLyByIG91dHB1dDogYnl0ZVtdCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjY5CgkvLyBhc3NlcnQoci52ZXJpZmllZCwgJ3RoZSB2cmYgbXVzdCBiZSB2ZXJpZmllZCcpCglmcmFtZV9kaWcgMiAvLyByIHZlcmlmaWVkOiBib29sCgoJLy8gdGhlIHZyZiBtdXN0IGJlIHZlcmlmaWVkCglhc3NlcnQKCgkvLyBjb250cmFjdHMvSGVhZHNPclRhaWxzLmFsZ28udHM6NzIKCS8vIHJlc3VsdElzSGVhZHMgPSBnZXRiaXQoci5vdXRwdXQsIDApCglmcmFtZV9kaWcgMyAvLyByIG91dHB1dDogYnl0ZVtdCglpbnRjIDEgLy8gMAoJZ2V0Yml0CglmcmFtZV9idXJ5IDQgLy8gcmVzdWx0SXNIZWFkczogdWludDY0CgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjc0CgkvLyB3b246IGJvb2xlYW4gPSAoKHJlc3VsdElzSGVhZHMgJiYgZ2FtZS5oZWFkcykgYXMgYm9vbGVhbikgfHwgKCghcmVzdWx0SXNIZWFkcyAmJiAhZ2FtZS5oZWFkcykgYXMgYm9vbGVhbikKCWZyYW1lX2RpZyA0IC8vIHJlc3VsdElzSGVhZHM6IHVpbnQ2NAoJZHVwCglieiAqc2tpcF9hbmQwCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vZ2FtZQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWludGMgMyAvLyAyNTYKCWdldGJpdAoJJiYKCipza2lwX2FuZDA6CglkdXAKCWJueiAqc2tpcF9vcjAKCWZyYW1lX2RpZyA0IC8vIHJlc3VsdElzSGVhZHM6IHVpbnQ2NAoJIQoJZHVwCglieiAqc2tpcF9hbmQxCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vZ2FtZQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWludGMgMyAvLyAyNTYKCWdldGJpdAoJIQoJJiYKCipza2lwX2FuZDE6Cgl8fAoKKnNraXBfb3IwOgoJZnJhbWVfYnVyeSA1IC8vIHdvbjogYm9vbGVhbgoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo3NwoJLy8gc2VuZFBheW1lbnQoewoJLy8gICAgICAgcmVjZWl2ZXI6IHRoaXMudHhuLnNlbmRlciwKCS8vICAgICAgIGFtb3VudDogQk9YX1NUT1JBR0VfQ09TVCwKCS8vICAgICAgIGZlZTogMCwKCS8vICAgICAgIG5vdGU6ICdib3ggc3RvcmFnZSBjb3N0IHJlZnVuZCcsCgkvLyAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjc4CgkvLyByZWNlaXZlcjogdGhpcy50eG4uc2VuZGVyCgl0eG4gU2VuZGVyCglpdHhuX2ZpZWxkIFJlY2VpdmVyCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjc5CgkvLyBhbW91bnQ6IEJPWF9TVE9SQUdFX0NPU1QKCWludGMgMiAvLyAzMTcwMAoJaXR4bl9maWVsZCBBbW91bnQKCgkvLyBjb250cmFjdHMvSGVhZHNPclRhaWxzLmFsZ28udHM6ODAKCS8vIGZlZTogMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjgxCgkvLyBub3RlOiAnYm94IHN0b3JhZ2UgY29zdCByZWZ1bmQnCglieXRlYyAxIC8vICAiYm94IHN0b3JhZ2UgY29zdCByZWZ1bmQiCglpdHhuX2ZpZWxkIE5vdGUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjg1CgkvLyB0aGlzLmdhbWUodGhpcy50eG4uc2VuZGVyKS5kZWxldGUoKQoJdHhuIFNlbmRlcgoJYm94X2RlbAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo4NwoJLy8gcmV0dXJuIHdvbjsKCWZyYW1lX2RpZyA1IC8vIHdvbjogYm9vbGVhbgoKCS8vIHNldCB0aGUgc3Vicm91dGluZSByZXR1cm4gdmFsdWUKCWZyYW1lX2J1cnkgMAoKCS8vIHBvcCBhbGwgbG9jYWwgdmFyaWFibGVzIGZyb20gdGhlIHN0YWNrCglwb3BuIDUKCXJldHN1YgoKLy8gY2FuY2VsR2FtZSgpdm9pZAoqYWJpX3JvdXRlX2NhbmNlbEdhbWU6CgkvLyBleGVjdXRlIGNhbmNlbEdhbWUoKXZvaWQKCWNhbGxzdWIgY2FuY2VsR2FtZQoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gY2FuY2VsR2FtZSgpOiB2b2lkCi8vCi8vCi8vIENhbmNlbHMgYSBnYW1lIGFuZCByZWZ1bmRzIHRoZSB1c2VyIHRoZWlyIGJveCBzdG9yYWdlIGZlZXMKY2FuY2VsR2FtZToKCXByb3RvIDAgMAoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAwIC8vIDB4CgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjk2CgkvLyBnYW1lID0gdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUKCXR4biBTZW5kZXIKCWZyYW1lX2J1cnkgMCAvLyBzdG9yYWdlIGtleS8vZ2FtZQoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo5OAoJLy8gYXNzZXJ0KGdhbWUuY29tbWl0bWVudFJvdW5kIDw9IHRoaXMudHhuLmxhc3RWYWxpZCAtIDEwMDIpCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vZ2FtZQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWV4dHJhY3QgMzMgOAoJYnRvaQoJdHhuIExhc3RWYWxpZAoJcHVzaGludCAxMDAyCgktCgk8PQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjEwMQoJLy8gc2VuZFBheW1lbnQoewoJLy8gICAgICAgcmVjZWl2ZXI6IHRoaXMudHhuLnNlbmRlciwKCS8vICAgICAgIGFtb3VudDogQk9YX1NUT1JBR0VfQ09TVCwKCS8vICAgICAgIGZlZTogMCwKCS8vICAgICAgIG5vdGU6ICdib3ggc3RvcmFnZSBjb3N0IHJlZnVuZCcsCgkvLyAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjEwMgoJLy8gcmVjZWl2ZXI6IHRoaXMudHhuLnNlbmRlcgoJdHhuIFNlbmRlcgoJaXR4bl9maWVsZCBSZWNlaXZlcgoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czoxMDMKCS8vIGFtb3VudDogQk9YX1NUT1JBR0VfQ09TVAoJaW50YyAyIC8vIDMxNzAwCglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czoxMDQKCS8vIGZlZTogMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjEwNQoJLy8gbm90ZTogJ2JveCBzdG9yYWdlIGNvc3QgcmVmdW5kJwoJYnl0ZWMgMSAvLyAgImJveCBzdG9yYWdlIGNvc3QgcmVmdW5kIgoJaXR4bl9maWVsZCBOb3RlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czoxMDkKCS8vIHRoaXMuZ2FtZSh0aGlzLnR4bi5zZW5kZXIpLmRlbGV0ZSgpCgl0eG4gU2VuZGVyCglib3hfZGVsCglyZXRzdWIKCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CglpbnRjIDAgLy8gMQoJcmV0dXJuCgoqY3JlYXRlX05vT3A6CglwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjcmVhdGUgTm9PcAoJZXJyCgoqY2FsbF9Ob09wOgoJcHVzaGJ5dGVzIDB4MzJmMzc2MWEgLy8gbWV0aG9kICJjcmVhdGVHYW1lKHBheSxieXRlWzMyXSxib29sKXVpbnQ2NCIKCXB1c2hieXRlcyAweDZiYjE5M2I0IC8vIG1ldGhvZCAiY29tcGxldGVHYW1lKGJ5dGVbODBdKWJvb2wiCglwdXNoYnl0ZXMgMHg3ZDczZTNhNiAvLyBtZXRob2QgImNhbmNlbEdhbWUoKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2NyZWF0ZUdhbWUgKmFiaV9yb3V0ZV9jb21wbGV0ZUdhbWUgKmFiaV9yb3V0ZV9jYW5jZWxHYW1lCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgTm9PcAoJZXJy",
+    "clear": "I3ByYWdtYSB2ZXJzaW9uIDEw"
+  },
+  "byteCode": {
+    "approval": "CiAFAQDU9wGAAgYmBQAXYm94IHN0b3JhZ2UgY29zdCByZWZ1bmQEFR98dQMKgQEBADEYFCEECzEZCI0MAVkAAAAAAAAAAAAAAUsAAAAAAAAAAAAAACo2GgJJFSISRCNTNhoBSRWBIBJEMRYiCUk4ECISRIgABRZQsCJDigMBKDEAvUxIFESL/zgHMgoSRIv/OAgkD0QyBoEICIwAMQCL/icEI4v9VFCLABZQv4sAjACJKjYaAUkVgVASRIgACicEI08CVFCwIkOKAQEoRwUxAIwAiwC+RDX/NP9XIQgX0QCMATIMgcQsDEEAFrEhBLIQI7IBK0myHrIfgQWyGbNC/+GLAYv/iwC+RDX/NP9XACDQAIwCjAOLAkSLAyNTjASLBElBAAuLAL5ENf80/yVTEElAABSLBBRJQQAMiwC+RDX/NP8lUxQQEYwFsSKyEDEAsgcksggjsgEpsgWzMQC8iwWMAEYFiYgAAiJDigAAKDEAjACLAL5ENf80/1chCBcxBIHqBwkORLEishAxALIHJLIII7IBKbIFszEAvIkiQ4AEuER7NjYaAI4B//EAgAQy83YagARrsZO0gAR9c+OmNhoAjgP+i/7n/5wA",
+    "clear": "Cg=="
+  },
+  "compilerInfo": {
+    "compiler": "algod",
+    "compilerVersion": {
+      "major": 4,
+      "minor": 0,
+      "patch": 1,
+      "commitHash": "63d271cf"
+    }
+  }
+}

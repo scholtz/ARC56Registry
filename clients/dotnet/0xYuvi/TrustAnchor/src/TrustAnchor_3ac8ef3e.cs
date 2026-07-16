@@ -43,8 +43,8 @@ namespace Arc56.Generated._0xYuvi.TrustAnchor.TrustAnchor_3ac8ef3e
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 81, 231, 198, 187 };
-            var trait_idAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); trait_idAbi.From(trait_id);
-            var commitmentAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); commitmentAbi.From(commitment);
+            var trait_idAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); trait_idAbi.From(trait_id);
+            var commitmentAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); commitmentAbi.From(commitment);
 
             var result = await base.CallApp(new List<object> { abiHandle, trait_idAbi, commitmentAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
             var lastLogBytes = result.Last();
@@ -64,8 +64,8 @@ namespace Arc56.Generated._0xYuvi.TrustAnchor.TrustAnchor_3ac8ef3e
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 81, 231, 198, 187 };
-            var trait_idAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); trait_idAbi.From(trait_id);
-            var commitmentAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); commitmentAbi.From(commitment);
+            var trait_idAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); trait_idAbi.From(trait_id);
+            var commitmentAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); commitmentAbi.From(commitment);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, trait_idAbi, commitmentAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -83,13 +83,13 @@ namespace Arc56.Generated._0xYuvi.TrustAnchor.TrustAnchor_3ac8ef3e
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 4, 76, 33, 170 };
-            var user_addressAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); user_addressAbi.From(user_address);
+            var user_addressAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); user_addressAbi.From(user_address);
 
             var result = await base.CallApp(new List<object> { abiHandle, user_addressAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
             var lastLogBytes = result.Last();
             if (lastLogBytes.Length < 4 || lastLogBytes[0] != 21 || lastLogBytes[1] != 31 || lastLogBytes[2] != 124 || lastLogBytes[3] != 117) throw new Exception("Invalid ABI handle");
             var lastLogReturnData = lastLogBytes.Skip(4).ToArray();
-            var returnValueObj = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>();
+            var returnValueObj = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte");
             returnValueObj.Decode(lastLogReturnData);
             return returnValueObj.ToByteArray();
 
@@ -103,7 +103,7 @@ namespace Arc56.Generated._0xYuvi.TrustAnchor.TrustAnchor_3ac8ef3e
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 4, 76, 33, 170 };
-            var user_addressAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); user_addressAbi.From(user_address);
+            var user_addressAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); user_addressAbi.From(user_address);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, user_addressAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -123,7 +123,7 @@ namespace Arc56.Generated._0xYuvi.TrustAnchor.TrustAnchor_3ac8ef3e
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 247, 39, 34, 175 };
             var thresholdAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); thresholdAbi.From(threshold);
-            var proof_dataAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); proof_dataAbi.From(proof_data);
+            var proof_dataAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); proof_dataAbi.From(proof_data);
 
             var result = await base.CallApp(new List<object> { abiHandle, thresholdAbi, proof_dataAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
             var lastLogBytes = result.Last();
@@ -144,7 +144,7 @@ namespace Arc56.Generated._0xYuvi.TrustAnchor.TrustAnchor_3ac8ef3e
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 247, 39, 34, 175 };
             var thresholdAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); thresholdAbi.From(threshold);
-            var proof_dataAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); proof_dataAbi.From(proof_data);
+            var proof_dataAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); proof_dataAbi.From(proof_data);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, thresholdAbi, proof_dataAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 

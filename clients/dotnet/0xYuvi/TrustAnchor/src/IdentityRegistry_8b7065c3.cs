@@ -182,7 +182,7 @@ namespace Arc56.Generated._0xYuvi.TrustAnchor.IdentityRegistry_8b7065c3
             var addrAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Address(); addrAbi.From(addr);
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
             var didAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); didAbi.From(did);
-            var public_keyAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); public_keyAbi.From(public_key);
+            var public_keyAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); public_keyAbi.From(public_key);
 
             var result = await base.CallApp(new List<object> { abiHandle, addrAbi, nameAbi, didAbi, public_keyAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -199,7 +199,7 @@ namespace Arc56.Generated._0xYuvi.TrustAnchor.IdentityRegistry_8b7065c3
             var addrAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Address(); addrAbi.From(addr);
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
             var didAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); didAbi.From(did);
-            var public_keyAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); public_keyAbi.From(public_key);
+            var public_keyAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); public_keyAbi.From(public_key);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, addrAbi, nameAbi, didAbi, public_keyAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
