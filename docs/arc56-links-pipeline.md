@@ -12,12 +12,19 @@ list of every `*.arc56.json` file found on public GitHub, via the
 3. **Search**: runs [`scripts/update_arc56_links.py`](../scripts/update_arc56_links.py),
    which queries the GitHub code search API
    (`GET https://api.github.com/search/code`) with the query
-   `arc56.json in:path`, paginating through up to 1,000 results (the maximum
-   the search API returns for any single query). Note: the newer glob syntax
-   `path:**/*.arc56.json` (used by the github.com/search web UI) is **not**
-   supported by the legacy REST `search/code` endpoint and silently returns
-   zero results, which is why the query is phrased as a plain substring match
-   instead.
+   `arc56.json in:path`. Note: the newer glob syntax `path:**/*.arc56.json`
+   (used by the github.com/search web UI) is **not** supported by the legacy
+   REST `search/code` endpoint and silently returns zero results, which is why
+   the query is phrased as a plain substring match instead.
+
+   GitHub's code search API never returns more than 1,000 results for a
+   single query, no matter how many total matches exist (`total_count` can
+   read e.g. 1464 while only the first 1,000 are actually paginable). To get
+   past that, the script recursively **shards the query by file `size:`
+   range** — e.g. `arc56.json in:path size:0..500000` — splitting each range
+   in half whenever its own `total_count` is still over 1,000, until every
+   shard is small enough to paginate fully, then unions the results. See
+   `partition_and_collect()` in the script for the implementation.
 4. **Filter**: matches are restricted to paths whose filename actually ends
    in `.arc56.json`, since `in:path` is a substring match and could otherwise
    match unrelated paths that merely contain that text.
@@ -143,20 +150,28 @@ successfully:
 
 ## Known limitations
 
-- **1,000-result cap**: the GitHub code search API returns at most 1,000
-  results per query (10 pages of 100). If the number of `*.arc56.json` files
-  on GitHub grows beyond that, some files may not be (re)discovered in a
-  given run. This only affects *new* files being added late — since existing
-  rows are never removed, files already in the CSV stay there regardless of
-  whether a later search run happens to surface them again.
+- **1,000-result cap, mostly worked around**: the GitHub code search API
+  returns at most 1,000 results for any single query. The script shards by
+  file `size:` range to get past this (see above), so it can recover results
+  well beyond 1,000 total matches. It can still miss files in the rare case
+  where a single size shard alone has more than 1,000 files of the *exact
+  same size* — `MAX_SHARD_DEPTH` (25 halvings) caps how far it will keep
+  splitting a range before giving up and logging a warning. Even then,
+  nothing is lost permanently: since existing rows are never removed, any
+  file already in the CSV stays there regardless of whether a later run
+  happens to rediscover it, and the sharding means most previously
+  unreachable files should get picked up on a subsequent run.
 - **Search index freshness**: GitHub's code search index is not always
   instantaneous — very recently pushed files may not appear until the index
   catches up.
-- **Rate limiting**: the code search endpoint specifically is limited to
-  about 10 requests/minute (stricter than the 30/minute limit for other
-  search types), even when authenticated. The script waits 7 seconds before
-  every call to stay under this limit; if you still see HTTP 403/429 errors
-  in the workflow logs, it will retry with exponential backoff.
+- **Rate limiting and run time**: the code search endpoint specifically is
+  limited to about 10 requests/minute (stricter than the 30/minute limit for
+  other search types), even when authenticated. The script waits 7 seconds
+  before every call to stay under this limit; if you still see HTTP 403/429
+  errors in the workflow logs, it will retry with exponential backoff. Since
+  sharding by size issues multiple queries instead of one, a full run now
+  takes noticeably longer (several minutes) than a single 1,000-result
+  search would.
 - **`HEAD` links can change silently**: because links point at `HEAD` rather
   than a fixed commit, the content behind a URL in `arc56.links.csv` can
   change (or disappear) if the source repository's default branch is

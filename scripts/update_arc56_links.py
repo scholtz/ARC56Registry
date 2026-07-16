@@ -7,6 +7,12 @@ syntax), filters results to paths actually ending in ".arc56.json", and
 converts each match into a raw.githubusercontent.com URL pinned to the HEAD
 of the file's default branch.
 
+GitHub's code search never returns more than 1,000 results for a single
+query (10 pages x 100/page), no matter how many total matches actually exist.
+To get past that, the search is recursively sharded by file `size:` ranges
+(a supported qualifier) until every shard's total_count is <= 1000, and the
+results are unioned - see partition_and_collect().
+
 The CSV has three columns: ARC56URL, ActiveFrom, ActiveUntil. ActiveUntil
 being empty means the record is active indefinitely; a maintainer can set it
 to deactivate a record manually. This script never removes or overwrites an
@@ -32,7 +38,12 @@ SEARCH_QUERY = "arc56.json in:path"
 FILENAME_SUFFIX = ".arc56.json"
 API_URL = "https://api.github.com/search/code"
 PER_PAGE = 100
-MAX_PAGES = 10  # GitHub code search caps results at 1000 (10 x 100).
+MAX_PAGES = 10  # GitHub code search caps results at 1000 (10 x 100) *per query*.
+MAX_RESULTS_PER_QUERY = 1000
+# GitHub code search doesn't index files above ~384 KB, so this comfortably covers
+# every possible file size; shards are only split as deep as actually needed.
+MAX_FILE_SIZE_BYTES = 1_000_000
+MAX_SHARD_DEPTH = 25  # safety net against pathological size distributions
 REQUEST_DELAY_SECONDS = 7  # code search is limited to 10 requests/minute, so stay safely under that.
 OUTPUT_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "arc56.links.csv")
 URL_COLUMN = "ARC56URL"
@@ -41,8 +52,8 @@ ACTIVE_UNTIL_COLUMN = "ActiveUntil"
 FIELDNAMES = [URL_COLUMN, ACTIVE_FROM_COLUMN, ACTIVE_UNTIL_COLUMN]
 
 
-def build_request(page: int, token: str) -> tuple[urllib.request.Request, str]:
-    url = f"{API_URL}?q={urllib.parse.quote(SEARCH_QUERY)}&per_page={PER_PAGE}&page={page}"
+def build_request(query: str, page: int, token: str) -> tuple[urllib.request.Request, str]:
+    url = f"{API_URL}?q={urllib.parse.quote(query)}&per_page={PER_PAGE}&page={page}"
     req = urllib.request.Request(url)
     req.add_header("Accept", "application/vnd.github+json")
     req.add_header("X-GitHub-Api-Version", "2022-11-28")
@@ -52,9 +63,9 @@ def build_request(page: int, token: str) -> tuple[urllib.request.Request, str]:
     return req, url
 
 
-def fetch_page(page: int, token: str, retries: int = 5) -> dict:
+def fetch_page(query: str, page: int, token: str, retries: int = 5) -> dict:
     for attempt in range(1, retries + 1):
-        req, url = build_request(page, token)
+        req, url = build_request(query, page, token)
         print(f"Calling GitHub API: GET {url} (attempt {attempt}/{retries})", file=sys.stderr)
         time.sleep(REQUEST_DELAY_SECONDS)
         try:
@@ -94,21 +105,54 @@ def fetch_page(page: int, token: str, retries: int = 5) -> dict:
     raise RuntimeError(f"Failed to fetch page {page} after {retries} attempts")
 
 
-def collect_urls(token: str) -> set[str]:
-    urls: set[str] = set()
-    for page in range(1, MAX_PAGES + 1):
-        data = fetch_page(page, token)
-        items = data.get("items", [])
+def size_qualifier(lo: int, hi: int) -> str:
+    return f"size:{lo}..{hi}"
+
+
+def add_matching_items(items: list[dict], urls: set[str]) -> None:
+    for item in items:
+        path = item["path"]
+        if path.endswith(FILENAME_SUFFIX):
+            urls.add(f"https://raw.githubusercontent.com/{item['repository']['full_name']}/HEAD/{path}")
+
+
+def collect_remaining_pages(query: str, token: str, urls: set[str], first_page_items: list[dict]) -> None:
+    add_matching_items(first_page_items, urls)
+    if len(first_page_items) < PER_PAGE:
+        return
+    for page in range(2, MAX_PAGES + 1):
+        items = fetch_page(query, page, token).get("items", [])
         if not items:
             break
-        for item in items:
-            path = item["path"]
-            if not path.endswith(FILENAME_SUFFIX):
-                continue
-            repo_full_name = item["repository"]["full_name"]
-            urls.add(f"https://raw.githubusercontent.com/{repo_full_name}/HEAD/{path}")
+        add_matching_items(items, urls)
         if len(items) < PER_PAGE:
             break
+
+
+def partition_and_collect(lo: int, hi: int, token: str, urls: set[str], depth: int = 0) -> None:
+    query = f"{SEARCH_QUERY} {size_qualifier(lo, hi)}"
+    data = fetch_page(query, 1, token)
+    total = data.get("total_count", 0)
+
+    if total == 0:
+        return
+
+    if total <= MAX_RESULTS_PER_QUERY or lo >= hi or depth >= MAX_SHARD_DEPTH:
+        if total > MAX_RESULTS_PER_QUERY:
+            print(f"WARNING: size range {lo}..{hi} still has {total} results (>"
+                  f"{MAX_RESULTS_PER_QUERY}) at max shard depth; some results in this "
+                  f"range will be missed", file=sys.stderr)
+        collect_remaining_pages(query, token, urls, data.get("items", []))
+        return
+
+    mid = (lo + hi) // 2
+    partition_and_collect(lo, mid, token, urls, depth + 1)
+    partition_and_collect(mid + 1, hi, token, urls, depth + 1)
+
+
+def collect_urls(token: str) -> set[str]:
+    urls: set[str] = set()
+    partition_and_collect(0, MAX_FILE_SIZE_BYTES, token, urls)
     return urls
 
 
