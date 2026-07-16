@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Regenerate arc56.links.csv from a GitHub code search for ARC-56 files.
 
-Queries the GitHub code search API for `path:**/*.arc56.json`, converts each
-match into a raw.githubusercontent.com URL pinned to the HEAD of the file's
-default branch, de-duplicates, sorts alphabetically, and writes the result to
-arc56.links.csv with a single "ARC56URL" header line.
+Queries the GitHub code search API (`arc56.json in:path`, since the legacy
+REST search/code endpoint does not support the newer `path:**/*.ext` glob
+syntax), filters results to paths actually ending in ".arc56.json", converts
+each match into a raw.githubusercontent.com URL pinned to the HEAD of the
+file's default branch, de-duplicates, sorts alphabetically, and writes the
+result to arc56.links.csv with a single "ARC56URL" header line.
 """
 from __future__ import annotations
 
@@ -16,7 +18,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-SEARCH_QUERY = "path:**/*.arc56.json"
+SEARCH_QUERY = "arc56.json in:path"
+FILENAME_SUFFIX = ".arc56.json"
 API_URL = "https://api.github.com/search/code"
 PER_PAGE = 100
 MAX_PAGES = 10  # GitHub code search caps results at 1000 (10 x 100).
@@ -43,7 +46,10 @@ def fetch_page(page: int, token: str, retries: int = 5) -> dict:
         time.sleep(REQUEST_DELAY_SECONDS)
         try:
             with urllib.request.urlopen(req) as resp:
-                return json.loads(resp.read().decode("utf-8"))
+                data = json.loads(resp.read().decode("utf-8"))
+                print(f"Response for page {page}: total_count={data.get('total_count')}, "
+                      f"items_returned={len(data.get('items', []))}", file=sys.stderr)
+                return data
         except urllib.error.HTTPError as exc:
             if exc.code in (403, 429) and attempt < retries:
                 retry_after = exc.headers.get("Retry-After")
@@ -66,8 +72,10 @@ def collect_urls(token: str) -> set[str]:
         if not items:
             break
         for item in items:
-            repo_full_name = item["repository"]["full_name"]
             path = item["path"]
+            if not path.endswith(FILENAME_SUFFIX):
+                continue
+            repo_full_name = item["repository"]["full_name"]
             urls.add(f"https://raw.githubusercontent.com/{repo_full_name}/HEAD/{path}")
         if len(items) < PER_PAGE:
             break

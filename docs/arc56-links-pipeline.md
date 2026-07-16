@@ -12,9 +12,16 @@ list of every `*.arc56.json` file found on public GitHub, via the
 3. **Search**: runs [`scripts/update_arc56_links.py`](../scripts/update_arc56_links.py),
    which queries the GitHub code search API
    (`GET https://api.github.com/search/code`) with the query
-   `path:**/*.arc56.json`, paginating through up to 1,000 results (the maximum
-   the search API returns for any single query).
-4. **Transform**: for every match, the script builds a stable raw-content URL
+   `arc56.json in:path`, paginating through up to 1,000 results (the maximum
+   the search API returns for any single query). Note: the newer glob syntax
+   `path:**/*.arc56.json` (used by the github.com/search web UI) is **not**
+   supported by the legacy REST `search/code` endpoint and silently returns
+   zero results, which is why the query is phrased as a plain substring match
+   instead.
+4. **Filter**: matches are restricted to paths whose filename actually ends
+   in `.arc56.json`, since `in:path` is a substring match and could otherwise
+   match unrelated paths that merely contain that text.
+5. **Transform**: for every match, the script builds a stable raw-content URL
    of the form:
 
    ```
@@ -24,11 +31,11 @@ list of every `*.arc56.json` file found on public GitHub, via the
    `HEAD` is used instead of a pinned commit SHA so the link always resolves
    to whatever is currently on the repository's default branch, instead of
    going stale or 404ing if the original commit is garbage-collected.
-5. **Dedupe & sort**: the resulting URLs are de-duplicated and sorted
+6. **Dedupe & sort**: the resulting URLs are de-duplicated and sorted
    alphabetically (case-insensitive).
-6. **Write**: `arc56.links.csv` is rewritten with a single header line
+7. **Write**: `arc56.links.csv` is rewritten with a single header line
    (`ARC56URL`) followed by one URL per line.
-7. **Commit**: if the file changed, the workflow commits and pushes it back to
+8. **Commit**: if the file changed, the workflow commits and pushes it back to
    the default branch as `github-actions[bot]`. If nothing changed, the run
    exits without creating a commit.
 
