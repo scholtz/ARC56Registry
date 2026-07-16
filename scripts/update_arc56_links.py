@@ -23,7 +23,7 @@ FILENAME_SUFFIX = ".arc56.json"
 API_URL = "https://api.github.com/search/code"
 PER_PAGE = 100
 MAX_PAGES = 10  # GitHub code search caps results at 1000 (10 x 100).
-REQUEST_DELAY_SECONDS = 2  # fixed delay before every API call, to stay under the search rate limit.
+REQUEST_DELAY_SECONDS = 7  # code search is limited to 10 requests/minute, so stay safely under that.
 OUTPUT_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "arc56.links.csv")
 CSV_HEADER = "ARC56URL"
 

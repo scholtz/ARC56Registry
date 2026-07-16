@@ -108,10 +108,11 @@ request reviews), the push step will fail — in that case, either:
 - **Search index freshness**: GitHub's code search index is not always
   instantaneous — very recently pushed files may not appear until the index
   catches up.
-- **Rate limiting**: authenticated code search requests are limited to about
-  30 requests/minute. The script pauses between pages to stay under this
-  limit; if you see HTTP 403/429 errors in the workflow logs, GitHub's search
-  rate limit was hit and the script will retry with backoff.
+- **Rate limiting**: the code search endpoint specifically is limited to
+  about 10 requests/minute (stricter than the 30/minute limit for other
+  search types), even when authenticated. The script waits 7 seconds before
+  every call to stay under this limit; if you still see HTTP 403/429 errors
+  in the workflow logs, it will retry with exponential backoff.
 - **`HEAD` links can change silently**: because links point at `HEAD` rather
   than a fixed commit, the content behind a URL in `arc56.links.csv` can
   change (or disappear) if the source repository's default branch is
