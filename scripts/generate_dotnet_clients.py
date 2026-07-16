@@ -33,7 +33,6 @@ import re
 import subprocess
 import sys
 import time
-import urllib.parse
 import urllib.request
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,13 +43,8 @@ GLOBAL_STATE_PATH = os.path.join(CLIENTS_DOTNET_DIR, "generator-image-state.json
 INCIDENTS_DIR = os.path.join(CLIENTS_DOTNET_DIR, "_incidents")
 
 REGISTRY_REPO_URL = "https://github.com/scholtz/Arc56Registry"
-GENERATOR_REPO_URL = "https://github.com/scholtz/dotnet-algorand-sdk"
 GENERATOR_IMAGE = "scholtz2/dotnet-avm-generated-client:latest"
 DOWNLOAD_DELAY_SECONDS = 7
-# GitHub's prefilled "new issue" URL silently truncates/rejects very long query strings,
-# so we cap how much of the error text goes into the link (the full text is always in
-# the incident report file itself).
-MAX_ISSUE_BODY_ERROR_CHARS = 1500
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -197,16 +191,19 @@ def extract_class_name(cs_path: str) -> str:
     return m.group(1) if m else "(unknown)"
 
 
-def new_generator_issue_url(title: str, body: str) -> str:
-    query = urllib.parse.urlencode({"title": title, "body": body})
-    return f"{GENERATOR_REPO_URL}/issues/new?{query}"
-
-
 FAILURE_LABELS = {
     "download_error": "Download failed",
     "generator_error": "Generator crash",
     "compile_error": "Generated code fails to compile",
 }
+
+
+def repro_command(namespace: str, url: str) -> str:
+    return (
+        'docker run --rm -v "$(pwd):/app/out" scholtz2/dotnet-avm-generated-client:latest \\\n'
+        f'  dotnet client-generator.dll --namespace "{namespace}" \\\n'
+        f'  --url {url}'
+    )
 
 
 def write_incident_report(
@@ -219,11 +216,9 @@ def write_incident_report(
     error_text: str,
     generator_digest: str,
 ) -> str:
-    """Writes a standalone incident report for a download/generator/compile failure.
-    For generator and compile failures, includes everything needed to file an issue
-    against the generator repo (repro command, source URL, full error text). Download
-    failures aren't the generator's fault (bad/renamed source URL, network issue, etc.)
-    so no generator issue link is offered for those."""
+    """Writes a standalone incident report for a download/generator/compile failure,
+    with the source URL, a repro command, and the full error/stack trace. Does not
+    file or link to filing a GitHub issue - that's left for a human to do manually."""
     incident_dir = os.path.join(INCIDENTS_DIR, sanitize_path_segment(owner), sanitize_path_segment(repo))
     os.makedirs(incident_dir, exist_ok=True)
     report_path = os.path.join(incident_dir, f"{contract_id}.md")
@@ -239,10 +234,10 @@ def write_incident_report(
 - **Detected**: {detected_at}
 
 This is a fetch/network problem (invalid URL, renamed/deleted file, unreachable host,
-etc.), not a bug in the generator - there is nothing to file upstream. Check whether the
-URL above is still correct (the source repo may have moved, renamed, or deleted the
-file); [arc56.links.csv]({REGISTRY_REPO_URL}/blob/main/arc56.links.csv) can be corrected
-if the file has permanently moved.
+etc.), not a bug in the generator. Check whether the URL above is still correct (the
+source repo may have moved, renamed, or deleted the file);
+[arc56.links.csv]({REGISTRY_REPO_URL}/blob/main/arc56.links.csv) can be corrected if the
+file has permanently moved.
 
 ## Error
 
@@ -254,24 +249,7 @@ if the file has permanently moved.
             f.write(report)
         return report_path
 
-    repro_cmd = (
-        'docker run --rm -v "$(pwd):/app/out" scholtz2/dotnet-avm-generated-client:latest \\\n'
-        f'  dotnet client-generator.dll --namespace "{namespace}" \\\n'
-        f'  --url {url}'
-    )
-
-    issue_title = f"[{owner}/{repo}] {kind_label} for {contract_id}"
-    issue_body_error = error_text if len(error_text) <= MAX_ISSUE_BODY_ERROR_CHARS else (
-        error_text[:MAX_ISSUE_BODY_ERROR_CHARS] + "\n... (truncated, see full report in Arc56Registry)"
-    )
-    issue_body = (
-        f"Found via [Arc56Registry]({REGISTRY_REPO_URL})'s automated client generation pipeline.\n\n"
-        f"**Source ARC-56 spec**: {url}\n\n"
-        f"**Repro**:\n```bash\n{repro_cmd}\n```\n\n"
-        f"**Error**:\n```\n{issue_body_error}\n```\n\n"
-        f"Generator image: `{generator_digest}`"
-    )
-    issue_url = new_generator_issue_url(issue_title, issue_body)
+    repro_cmd = repro_command(namespace, url)
 
     report = f"""# {kind_label}: {contract_id}
 
@@ -280,7 +258,6 @@ if the file has permanently moved.
 - **Namespace used**: `{namespace}`
 - **Detected**: {detected_at}
 - **Generator image**: `{generator_digest}`
-- **File an issue**: [{GENERATOR_REPO_URL}/issues/new]({issue_url})
 
 ## Reproduce
 
@@ -301,8 +278,7 @@ if the file has permanently moved.
 
 def rebuild_incidents_index() -> None:
     """Rebuilds clients/dotnet/_incidents/README.md from every project's state.json,
-    so there's always one place to see every open generator/compile failure and its
-    ready-to-file GitHub issue link."""
+    so there's always one place to see every open generator/compile/download failure."""
     rows = []
     for root, _dirs, files in os.walk(CLIENTS_DOTNET_DIR):
         if "state.json" not in files:
@@ -321,24 +297,26 @@ def rebuild_incidents_index() -> None:
                 continue
             contract_id = contract_id_for(c)
             report_rel = f"{sanitize_path_segment(owner)}/{sanitize_path_segment(repo)}/{contract_id}.md"
-            rows.append((owner, repo, contract_id, failure_type, url, report_rel))
+            rows.append((owner, repo, contract_id, failure_type, report_rel))
 
     rows.sort(key=lambda r: (r[0].lower(), r[1].lower(), r[2].lower()))
 
     lines = [
         "# Open ARC-56 client generation incidents",
         "",
-        f"Rebuilt automatically by `scripts/generate_dotnet_clients.py` on every run. Each row "
-        f"links to a report with a ready-to-use repro command and a prefilled "
-        f"[{GENERATOR_REPO_URL}]({GENERATOR_REPO_URL}) issue link.",
+        "Rebuilt automatically by `scripts/generate_dotnet_clients.py` on every run. Each row "
+        "links to a report with the source URL, a repro command, and the full error/stack trace.",
         "",
         "| Repo | Contract | Failure | Report |",
         "| --- | --- | --- | --- |",
     ]
     if rows:
-        for owner, repo, contract_id, failure_type, url, report_rel in rows:
+        for owner, repo, contract_id, failure_type, report_rel in rows:
             label = FAILURE_LABELS.get(failure_type, failure_type)
-            lines.append(f"| [{owner}/{repo}](https://github.com/{owner}/{repo}) | `{contract_id}` | {label} | [{report_rel}]({report_rel}) |")
+            lines.append(
+                f"| [{owner}/{repo}](https://github.com/{owner}/{repo}) | `{contract_id}` | "
+                f"{label} | [{report_rel}]({report_rel}) |"
+            )
     else:
         lines.append("| _(none currently)_ | | | |")
 
