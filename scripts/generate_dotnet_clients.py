@@ -202,6 +202,13 @@ def new_generator_issue_url(title: str, body: str) -> str:
     return f"{GENERATOR_REPO_URL}/issues/new?{query}"
 
 
+FAILURE_LABELS = {
+    "download_error": "Download failed",
+    "generator_error": "Generator crash",
+    "compile_error": "Generated code fails to compile",
+}
+
+
 def write_incident_report(
     owner: str,
     repo: str,
@@ -212,20 +219,46 @@ def write_incident_report(
     error_text: str,
     generator_digest: str,
 ) -> str:
-    """Writes a standalone incident report for a generator crash or compile failure,
-    with everything needed to file an issue against the generator repo: the exact
-    repro command, the source URL, and the full error/stack trace."""
+    """Writes a standalone incident report for a download/generator/compile failure.
+    For generator and compile failures, includes everything needed to file an issue
+    against the generator repo (repro command, source URL, full error text). Download
+    failures aren't the generator's fault (bad/renamed source URL, network issue, etc.)
+    so no generator issue link is offered for those."""
     incident_dir = os.path.join(INCIDENTS_DIR, sanitize_path_segment(owner), sanitize_path_segment(repo))
     os.makedirs(incident_dir, exist_ok=True)
     report_path = os.path.join(incident_dir, f"{contract_id}.md")
 
-    kind_label = "Generator crash" if failure_type == "generator_error" else "Generated code fails to compile"
+    kind_label = FAILURE_LABELS.get(failure_type, failure_type)
+    detected_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+    if failure_type == "download_error":
+        report = f"""# {kind_label}: {contract_id}
+
+- **Repo**: [{owner}/{repo}](https://github.com/{owner}/{repo})
+- **Source ARC-56 spec URL**: {url}
+- **Detected**: {detected_at}
+
+This is a fetch/network problem (invalid URL, renamed/deleted file, unreachable host,
+etc.), not a bug in the generator - there is nothing to file upstream. Check whether the
+URL above is still correct (the source repo may have moved, renamed, or deleted the
+file); [arc56.links.csv]({REGISTRY_REPO_URL}/blob/main/arc56.links.csv) can be corrected
+if the file has permanently moved.
+
+## Error
+
+```
+{error_text}
+```
+"""
+        with open(report_path, "w", encoding="utf-8", newline="\n") as f:
+            f.write(report)
+        return report_path
+
     repro_cmd = (
         'docker run --rm -v "$(pwd):/app/out" scholtz2/dotnet-avm-generated-client:latest \\\n'
         f'  dotnet client-generator.dll --namespace "{namespace}" \\\n'
         f'  --url {url}'
     )
-    detected_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     issue_title = f"[{owner}/{repo}] {kind_label} for {contract_id}"
     issue_body_error = error_text if len(error_text) <= MAX_ISSUE_BODY_ERROR_CHARS else (
@@ -283,7 +316,7 @@ def rebuild_incidents_index() -> None:
         owner, repo = parts
         state = load_project_state(os.path.join(root, "state.json"))
         for url, c in state.get("contracts", {}).items():
-            failure_type = "generator_error" if "generator_error" in c else ("compile_error" if "compile_error" in c else None)
+            failure_type = next((ft for ft in FAILURE_LABELS if ft in c), None)
             if failure_type is None or "file_slug" not in c:
                 continue
             contract_id = contract_id_for(c)
@@ -304,7 +337,7 @@ def rebuild_incidents_index() -> None:
     ]
     if rows:
         for owner, repo, contract_id, failure_type, url, report_rel in rows:
-            label = "Generator crash" if failure_type == "generator_error" else "Compile failure"
+            label = FAILURE_LABELS.get(failure_type, failure_type)
             lines.append(f"| [{owner}/{repo}](https://github.com/{owner}/{repo}) | `{contract_id}` | {label} | [{report_rel}]({report_rel}) |")
     else:
         lines.append("| _(none currently)_ | | | |")
@@ -418,7 +451,11 @@ def process_project(
 
     for row in rows:
         url = row["ARC56URL"]
-        _, _, path = parse_raw_url(url)
+        try:
+            _, _, path = parse_raw_url(url)
+        except ValueError as exc:
+            print(f"WARNING: skipping unparseable URL {url}: {exc}", file=sys.stderr)
+            continue
         filename = path.rsplit("/", 1)[-1]
         if not filename.endswith(FILENAME_SUFFIX):
             print(f"WARNING: skipping non-ARC56 URL {url}", file=sys.stderr)
@@ -426,25 +463,62 @@ def process_project(
         file_slug = sanitize_identifier(filename[: -len(FILENAME_SUFFIX)])
         hash8 = url_hash8(url)
         contract_id = f"{file_slug}_{hash8}"
-
-        content = download_with_rate_limit(url)
-        content_hash = sha256_hex(content)
-
+        namespace = f"Arc56.Generated.{sanitize_identifier(owner)}.{sanitize_identifier(repo)}.{contract_id}"
         existing = contracts_state.get(url)
+
+        # A URL that's already known to be unfetchable (bad path encoding, 404, etc.)
+        # isn't worth retrying every single run - only recheck it when the generator
+        # image changes, since that's our only "maybe something changed" signal here.
+        if existing is not None and "download_error" in existing and not global_force_regen:
+            continue
+
+        try:
+            content = download_with_rate_limit(url)
+        except Exception as exc:  # noqa: BLE001 - a single bad row must never abort the whole run
+            print(f"WARNING: download failed for {url}: {exc}", file=sys.stderr)
+            contracts_state[url] = {
+                **{k: v for k, v in (existing or {}).items() if k != "content_sha256"},
+                "file_slug": file_slug,
+                "hash8": hash8,
+                "namespace": namespace,
+                "download_error": str(exc),
+            }
+            write_incident_report(
+                owner, repo, url, contract_id, namespace, "download_error", str(exc), generator_digest
+            )
+            project_dirty = True  # persist the failure so it isn't silently lost/retried every run
+            continue
+
+        content_hash = sha256_hex(content)
         needs_regen = (
             global_force_regen
             or existing is None
             or existing.get("content_sha256") != content_hash
         )
 
-        arc56_path = os.path.join(arc56_dir, f"{contract_id}.arc56.json")
-        with open(arc56_path, "wb") as f:
-            f.write(content)
+        try:
+            arc56_path = os.path.join(arc56_dir, f"{contract_id}.arc56.json")
+            with open(arc56_path, "wb") as f:
+                f.write(content)
+        except OSError as exc:
+            print(f"WARNING: could not write {arc56_path}: {exc}", file=sys.stderr)
+            contracts_state[url] = {
+                **{k: v for k, v in (existing or {}).items() if k != "content_sha256"},
+                "file_slug": file_slug,
+                "hash8": hash8,
+                "namespace": namespace,
+                "download_error": f"failed to write local copy: {exc}",
+            }
+            write_incident_report(
+                owner, repo, url, contract_id, namespace, "download_error",
+                f"failed to write local copy: {exc}", generator_digest,
+            )
+            project_dirty = True
+            continue
 
         if not needs_regen:
             continue
 
-        namespace = f"Arc56.Generated.{sanitize_identifier(owner)}.{sanitize_identifier(repo)}.{contract_id}"
         print(f"Generating client for {url} -> namespace {namespace}", file=sys.stderr)
         try:
             generated_path = run_generator(arc56_dir, src_dir, f"{contract_id}.arc56.json", namespace)
@@ -452,7 +526,7 @@ def process_project(
             if generated_path != final_path:
                 os.replace(generated_path, final_path)
             class_name = extract_class_name(final_path)
-        except (subprocess.CalledProcessError, RuntimeError) as exc:
+        except Exception as exc:  # noqa: BLE001 - a single bad contract must never abort the whole run
             # The generator tool itself can crash on certain ARC-56 specs (observed:
             # NullReferenceException in ABITypeToCSType for some struct shapes). Don't
             # let one broken contract abort the whole project/run - record the failure
@@ -543,7 +617,9 @@ def write_project_files(
     table_rows = []
     for url in sorted_urls:
         c = contracts_state[url]
-        if "generator_error" in c:
+        if "download_error" in c:
+            table_rows.append(f"| _(unfetchable)_ | _(download failed - see state.json)_ | [{url}]({url}) |")
+        elif "generator_error" in c:
             table_rows.append(f"| `{c['namespace']}` | _(generation failed - see state.json)_ | [{url}]({url}) |")
         elif "compile_error" in c:
             table_rows.append(f"| `{c['namespace']}` | _(fails to compile - excluded, see state.json)_ | [{url}]({url}) |")

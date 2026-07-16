@@ -114,7 +114,13 @@ def add_matching_items(items: list[dict], urls: set[str]) -> None:
     for item in items:
         path = item["path"]
         if path.endswith(FILENAME_SUFFIX):
-            urls.add(f"https://raw.githubusercontent.com/{item['repository']['full_name']}/HEAD/{path}")
+            # GitHub paths can contain spaces and other reserved characters (seen in
+            # practice: "PICT 2.0/farmer-pay-contract/..."). Percent-encode each path
+            # segment (but not the "/" separators) so the URL is actually valid and
+            # fetchable - an unencoded space here isn't just wrong, it makes Python's
+            # http.client outright refuse the request with InvalidURL.
+            encoded_path = urllib.parse.quote(path, safe="/")
+            urls.add(f"https://raw.githubusercontent.com/{item['repository']['full_name']}/HEAD/{encoded_path}")
 
 
 def partition_and_collect(lo: int, hi: int, token: str, urls: set[str], depth: int = 0) -> None:
