@@ -1,15 +1,25 @@
 #!/usr/bin/env python3
-"""Regenerate arc56.links.csv from a GitHub code search for ARC-56 files.
+"""Update arc56.links.csv from a GitHub code search for ARC-56 files.
 
 Queries the GitHub code search API (`arc56.json in:path`, since the legacy
 REST search/code endpoint does not support the newer `path:**/*.ext` glob
-syntax), filters results to paths actually ending in ".arc56.json", converts
-each match into a raw.githubusercontent.com URL pinned to the HEAD of the
-file's default branch, de-duplicates, sorts alphabetically, and writes the
-result to arc56.links.csv with a single "ARC56URL" header line.
+syntax), filters results to paths actually ending in ".arc56.json", and
+converts each match into a raw.githubusercontent.com URL pinned to the HEAD
+of the file's default branch.
+
+The CSV has three columns: ARC56URL, ActiveFrom, ActiveUntil. ActiveUntil
+being empty means the record is active indefinitely; a maintainer can set it
+to deactivate a record manually. This script never removes or overwrites an
+existing row (so manually-set ActiveUntil values are preserved even if a
+later search run doesn't happen to find that URL again) - it only ever adds
+newly discovered URLs, with ActiveFrom set to today and ActiveUntil left
+empty. The file is written with the `csv` module using RFC 4180 quoting so it
+renders correctly as a table on GitHub.
 """
 from __future__ import annotations
 
+import csv
+import datetime
 import json
 import os
 import sys
@@ -25,7 +35,10 @@ PER_PAGE = 100
 MAX_PAGES = 10  # GitHub code search caps results at 1000 (10 x 100).
 REQUEST_DELAY_SECONDS = 7  # code search is limited to 10 requests/minute, so stay safely under that.
 OUTPUT_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "arc56.links.csv")
-CSV_HEADER = "ARC56URL"
+URL_COLUMN = "ARC56URL"
+ACTIVE_FROM_COLUMN = "ActiveFrom"
+ACTIVE_UNTIL_COLUMN = "ActiveUntil"
+FIELDNAMES = [URL_COLUMN, ACTIVE_FROM_COLUMN, ACTIVE_UNTIL_COLUMN]
 
 
 def build_request(page: int, token: str) -> tuple[urllib.request.Request, str]:
@@ -99,6 +112,23 @@ def collect_urls(token: str) -> set[str]:
     return urls
 
 
+def read_existing_rows(path: str) -> dict[str, dict[str, str]]:
+    if not os.path.exists(path):
+        return {}
+    rows: dict[str, dict[str, str]] = {}
+    with open(path, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            url = row.get(URL_COLUMN, "")
+            if not url:
+                continue
+            rows[url] = {
+                ACTIVE_FROM_COLUMN: row.get(ACTIVE_FROM_COLUMN) or "",
+                ACTIVE_UNTIL_COLUMN: row.get(ACTIVE_UNTIL_COLUMN) or "",
+            }
+    return rows
+
+
 def main() -> int:
     token = os.environ.get("GH_SEARCH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
     if not token:
@@ -106,24 +136,40 @@ def main() -> int:
               "rate limits are very low and this will likely fail.", file=sys.stderr)
 
     try:
-        urls = collect_urls(token)
+        found_urls = collect_urls(token)
     except Exception as exc:  # noqa: BLE001 - any failure must abort without touching the file
         print(f"Aborting without writing {OUTPUT_PATH}: {exc}", file=sys.stderr)
         return 1
 
-    if not urls:
+    if not found_urls:
         print(f"Aborting without writing {OUTPUT_PATH}: search returned 0 results, "
               f"which looks wrong for this query.", file=sys.stderr)
         return 1
 
-    sorted_urls = sorted(urls, key=str.lower)
+    existing_rows = read_existing_rows(OUTPUT_PATH)
+    today = datetime.date.today().isoformat()
 
-    with open(OUTPUT_PATH, "w", encoding="utf-8", newline="\n") as f:
-        f.write(CSV_HEADER + "\n")
+    added = 0
+    for url in found_urls:
+        if url not in existing_rows:
+            existing_rows[url] = {ACTIVE_FROM_COLUMN: today, ACTIVE_UNTIL_COLUMN: ""}
+            added += 1
+
+    sorted_urls = sorted(existing_rows.keys(), key=str.lower)
+
+    with open(OUTPUT_PATH, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDNAMES, lineterminator="\n")
+        writer.writeheader()
         for url in sorted_urls:
-            f.write(url + "\n")
+            row = existing_rows[url]
+            writer.writerow({
+                URL_COLUMN: url,
+                ACTIVE_FROM_COLUMN: row[ACTIVE_FROM_COLUMN],
+                ACTIVE_UNTIL_COLUMN: row[ACTIVE_UNTIL_COLUMN],
+            })
 
-    print(f"Wrote {len(sorted_urls)} ARC-56 links to {OUTPUT_PATH}")
+    print(f"Wrote {len(sorted_urls)} rows to {OUTPUT_PATH} "
+          f"({added} newly added, {len(sorted_urls) - added} preserved unchanged)")
     return 0
 
 

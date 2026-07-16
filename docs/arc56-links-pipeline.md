@@ -31,13 +31,38 @@ list of every `*.arc56.json` file found on public GitHub, via the
    `HEAD` is used instead of a pinned commit SHA so the link always resolves
    to whatever is currently on the repository's default branch, instead of
    going stale or 404ing if the original commit is garbage-collected.
-6. **Dedupe & sort**: the resulting URLs are de-duplicated and sorted
-   alphabetically (case-insensitive).
-7. **Write**: `arc56.links.csv` is rewritten with a single header line
-   (`ARC56URL`) followed by one URL per line.
+6. **Merge with the existing CSV**: the script reads the current
+   `arc56.links.csv` and merges the newly found URLs into it — see
+   [CSV format and Active columns](#csv-format-and-active-columns) below.
+   Existing rows are **never removed or modified**, even if a URL isn't found
+   by the current search run; only genuinely new URLs are appended, with
+   `ActiveFrom` set to today's date and `ActiveUntil` left empty.
+7. **Write**: the merged, alphabetically-sorted (case-insensitive) result is
+   written back to `arc56.links.csv` using Python's `csv` module with RFC
+   4180 quoting, so the file renders correctly as a table on GitHub (see
+   [GitHub's docs on rendering CSV/TSV files](https://docs.github.com/en/repositories/working-with-files/using-files/working-with-non-code-files)).
 8. **Commit**: if the file changed, the workflow commits and pushes it back to
    the default branch as `github-actions[bot]`. If nothing changed, the run
    exits without creating a commit.
+
+## CSV format and Active columns
+
+`arc56.links.csv` has three columns:
+
+| Column        | Meaning                                                                                       |
+| ------------- | ----------------------------------------------------------------------------------------------- |
+| `ARC56URL`    | The raw-content URL of the `*.arc56.json` file.                                                |
+| `ActiveFrom`  | The date (`YYYY-MM-DD`) from which this record is considered active. Set automatically to the date the row was first added. |
+| `ActiveUntil` | The date this record stops being active, or **empty** if it's active indefinitely.             |
+
+A record is active as long as today falls on or after `ActiveFrom` and
+`ActiveUntil` is either empty or in the future. New rows added by the
+pipeline always get `ActiveFrom` = today and `ActiveUntil` = empty (i.e.
+active by default).
+
+To manually deactivate a record, edit its `ActiveUntil` cell to a past or
+current date and commit that change directly — the pipeline will never
+overwrite or remove that row, so the manual edit sticks across future runs.
 
 ## Required GitHub secrets
 
@@ -108,8 +133,10 @@ successfully:
   returning 0 items for a page where results were expected — a known
   transient glitch), the script exits with a non-zero status **before**
   opening the output file, leaving the existing CSV untouched.
-- If the search completes but returns zero results overall (which would
-  otherwise wipe out the file), the script also aborts without writing.
+- If the search completes but returns zero results overall, the script also
+  aborts without writing (mostly a defense-in-depth check now, since existing
+  rows are merged rather than replaced — but it still guards against writing
+  a file with no new rows added when a run is clearly broken).
 - A non-zero exit from the script fails the workflow step, so the subsequent
   "Commit and push if changed" step never runs and no partial/empty file is
   ever committed.
@@ -118,8 +145,10 @@ successfully:
 
 - **1,000-result cap**: the GitHub code search API returns at most 1,000
   results per query (10 pages of 100). If the number of `*.arc56.json` files
-  on GitHub grows beyond that, some files may not appear in the CSV. There is
-  no pagination workaround for this GitHub API limit.
+  on GitHub grows beyond that, some files may not be (re)discovered in a
+  given run. This only affects *new* files being added late — since existing
+  rows are never removed, files already in the CSV stay there regardless of
+  whether a later search run happens to surface them again.
 - **Search index freshness**: GitHub's code search index is not always
   instantaneous — very recently pushed files may not appear until the index
   catches up.
