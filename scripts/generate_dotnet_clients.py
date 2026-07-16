@@ -33,6 +33,7 @@ import re
 import subprocess
 import sys
 import time
+import urllib.parse
 import urllib.request
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,10 +41,16 @@ CSV_PATH = os.path.join(REPO_ROOT, "arc56.links.csv")
 CLIENTS_DOTNET_DIR = os.path.join(REPO_ROOT, "clients", "dotnet")
 TEMPLATE_DIR = os.path.join(CLIENTS_DOTNET_DIR, "_template")
 GLOBAL_STATE_PATH = os.path.join(CLIENTS_DOTNET_DIR, "generator-image-state.json")
+INCIDENTS_DIR = os.path.join(CLIENTS_DOTNET_DIR, "_incidents")
 
 REGISTRY_REPO_URL = "https://github.com/scholtz/Arc56Registry"
+GENERATOR_REPO_URL = "https://github.com/scholtz/dotnet-algorand-sdk"
 GENERATOR_IMAGE = "scholtz2/dotnet-avm-generated-client:latest"
 DOWNLOAD_DELAY_SECONDS = 7
+# GitHub's prefilled "new issue" URL silently truncates/rejects very long query strings,
+# so we cap how much of the error text goes into the link (the full text is always in
+# the incident report file itself).
+MAX_ISSUE_BODY_ERROR_CHARS = 1500
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -159,18 +166,21 @@ def run_generator(arc56_dir: str, src_dir: str, arc56_filename: str, namespace: 
     """Runs the docker generator and returns the path to the generated .cs file."""
     before = set(os.listdir(src_dir)) if os.path.isdir(src_dir) else set()
     os.makedirs(src_dir, exist_ok=True)
-    subprocess.run(
-        [
-            "docker", "run", "--rm",
-            "-v", f"{arc56_dir}:/app/artifacts",
-            "-v", f"{src_dir}:/app/out",
-            GENERATOR_IMAGE,
-            "dotnet", "client-generator.dll",
-            "--namespace", namespace,
-            "--file", f"artifacts/{arc56_filename}",
-        ],
-        check=True,
-    )
+    cmd = [
+        "docker", "run", "--rm",
+        "-v", f"{arc56_dir}:/app/artifacts",
+        "-v", f"{src_dir}:/app/out",
+        GENERATOR_IMAGE,
+        "dotnet", "client-generator.dll",
+        "--namespace", namespace,
+        "--file", f"artifacts/{arc56_filename}",
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"docker generator exited with code {result.returncode}\n"
+            f"--- stdout ---\n{result.stdout}\n--- stderr ---\n{result.stderr}"
+        )
     after = set(os.listdir(src_dir))
     new_files = [f for f in (after - before) if f.endswith(".cs")]
     if len(new_files) != 1:
@@ -185,6 +195,123 @@ def extract_class_name(cs_path: str) -> str:
         text = f.read()
     m = CLASS_NAME_RE.search(text)
     return m.group(1) if m else "(unknown)"
+
+
+def new_generator_issue_url(title: str, body: str) -> str:
+    query = urllib.parse.urlencode({"title": title, "body": body})
+    return f"{GENERATOR_REPO_URL}/issues/new?{query}"
+
+
+def write_incident_report(
+    owner: str,
+    repo: str,
+    url: str,
+    contract_id: str,
+    namespace: str,
+    failure_type: str,
+    error_text: str,
+    generator_digest: str,
+) -> str:
+    """Writes a standalone incident report for a generator crash or compile failure,
+    with everything needed to file an issue against the generator repo: the exact
+    repro command, the source URL, and the full error/stack trace."""
+    incident_dir = os.path.join(INCIDENTS_DIR, sanitize_path_segment(owner), sanitize_path_segment(repo))
+    os.makedirs(incident_dir, exist_ok=True)
+    report_path = os.path.join(incident_dir, f"{contract_id}.md")
+
+    kind_label = "Generator crash" if failure_type == "generator_error" else "Generated code fails to compile"
+    repro_cmd = (
+        'docker run --rm -v "$(pwd):/app/out" scholtz2/dotnet-avm-generated-client:latest \\\n'
+        f'  dotnet client-generator.dll --namespace "{namespace}" \\\n'
+        f'  --url {url}'
+    )
+    detected_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+    issue_title = f"[{owner}/{repo}] {kind_label} for {contract_id}"
+    issue_body_error = error_text if len(error_text) <= MAX_ISSUE_BODY_ERROR_CHARS else (
+        error_text[:MAX_ISSUE_BODY_ERROR_CHARS] + "\n... (truncated, see full report in Arc56Registry)"
+    )
+    issue_body = (
+        f"Found via [Arc56Registry]({REGISTRY_REPO_URL})'s automated client generation pipeline.\n\n"
+        f"**Source ARC-56 spec**: {url}\n\n"
+        f"**Repro**:\n```bash\n{repro_cmd}\n```\n\n"
+        f"**Error**:\n```\n{issue_body_error}\n```\n\n"
+        f"Generator image: `{generator_digest}`"
+    )
+    issue_url = new_generator_issue_url(issue_title, issue_body)
+
+    report = f"""# {kind_label}: {contract_id}
+
+- **Repo**: [{owner}/{repo}](https://github.com/{owner}/{repo})
+- **Source ARC-56 spec**: [{url}]({url})
+- **Namespace used**: `{namespace}`
+- **Detected**: {detected_at}
+- **Generator image**: `{generator_digest}`
+- **File an issue**: [{GENERATOR_REPO_URL}/issues/new]({issue_url})
+
+## Reproduce
+
+```bash
+{repro_cmd}
+```
+
+## Error
+
+```
+{error_text}
+```
+"""
+    with open(report_path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(report)
+    return report_path
+
+
+def rebuild_incidents_index() -> None:
+    """Rebuilds clients/dotnet/_incidents/README.md from every project's state.json,
+    so there's always one place to see every open generator/compile failure and its
+    ready-to-file GitHub issue link."""
+    rows = []
+    for root, _dirs, files in os.walk(CLIENTS_DOTNET_DIR):
+        if "state.json" not in files:
+            continue
+        if os.path.commonpath([root, INCIDENTS_DIR]) == INCIDENTS_DIR or os.path.commonpath([root, TEMPLATE_DIR]) == TEMPLATE_DIR:
+            continue
+        rel = os.path.relpath(root, CLIENTS_DOTNET_DIR)
+        parts = rel.split(os.sep)
+        if len(parts) != 2:
+            continue
+        owner, repo = parts
+        state = load_project_state(os.path.join(root, "state.json"))
+        for url, c in state.get("contracts", {}).items():
+            failure_type = "generator_error" if "generator_error" in c else ("compile_error" if "compile_error" in c else None)
+            if failure_type is None or "file_slug" not in c:
+                continue
+            contract_id = contract_id_for(c)
+            report_rel = f"{sanitize_path_segment(owner)}/{sanitize_path_segment(repo)}/{contract_id}.md"
+            rows.append((owner, repo, contract_id, failure_type, url, report_rel))
+
+    rows.sort(key=lambda r: (r[0].lower(), r[1].lower(), r[2].lower()))
+
+    lines = [
+        "# Open ARC-56 client generation incidents",
+        "",
+        f"Rebuilt automatically by `scripts/generate_dotnet_clients.py` on every run. Each row "
+        f"links to a report with a ready-to-use repro command and a prefilled "
+        f"[{GENERATOR_REPO_URL}]({GENERATOR_REPO_URL}) issue link.",
+        "",
+        "| Repo | Contract | Failure | Report |",
+        "| --- | --- | --- | --- |",
+    ]
+    if rows:
+        for owner, repo, contract_id, failure_type, url, report_rel in rows:
+            label = "Generator crash" if failure_type == "generator_error" else "Compile failure"
+            lines.append(f"| [{owner}/{repo}](https://github.com/{owner}/{repo}) | `{contract_id}` | {label} | [{report_rel}]({report_rel}) |")
+    else:
+        lines.append("| _(none currently)_ | | | |")
+
+    os.makedirs(INCIDENTS_DIR, exist_ok=True)
+    with open(os.path.join(INCIDENTS_DIR, "README.md"), "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(lines) + "\n")
 
 
 def contract_id_for(contract: dict) -> str:
@@ -202,6 +329,23 @@ def find_broken_contract_ids(build_output: str) -> set[str]:
     return {m.group("contract_id") for m in COMPILE_ERROR_FILE_RE.finditer(build_output)}
 
 
+def extract_error_lines_for(contract_id: str, combined_output: str) -> str:
+    # Only actual "): error" lines - a broken file's build output is otherwise dominated
+    # by unrelated "): warning" noise (e.g. hundreds of CS8632 nullable-annotation
+    # warnings) that would drown out the one line that actually matters.
+    marker = f"{contract_id}.cs("
+    lines = [
+        line for line in combined_output.splitlines()
+        if marker in line and re.search(r"\):\s*error\b", line)
+    ]
+    if lines:
+        return "\n".join(lines)
+    # Fall back to any mention of the file if no "error" line matched, so we still
+    # surface something rather than an empty report.
+    lines = [line for line in combined_output.splitlines() if marker in line]
+    return "\n".join(lines) if lines else combined_output[-2000:]
+
+
 def build_and_quarantine(
     project_dir: str,
     owner: str,
@@ -210,6 +354,7 @@ def build_and_quarantine(
     version: str,
     contracts_state: dict,
     excluded_contract_ids: set[str],
+    generator_digest: str,
 ) -> set[str]:
     """Builds the aggregate project; if it fails, attributes the failure to specific
     generated files (a known upstream generator limitation for some ABI type shapes,
@@ -224,7 +369,8 @@ def build_and_quarantine(
         if result.returncode == 0:
             return excluded_contract_ids
 
-        broken = find_broken_contract_ids(result.stdout + result.stderr) - excluded_contract_ids
+        combined_output = result.stdout + result.stderr
+        broken = find_broken_contract_ids(combined_output) - excluded_contract_ids
         if not broken:
             raise RuntimeError(
                 f"dotnet build failed for {csproj_path} and no (new) broken contract file "
@@ -232,10 +378,15 @@ def build_and_quarantine(
             )
         for contract_id in broken:
             url = contract_id_to_url.get(contract_id)
+            error_text = extract_error_lines_for(contract_id, combined_output)
             if url is not None:
                 contracts_state[url]["compile_error"] = (
                     "generated code fails to compile in the aggregate project "
                     "(known upstream generator limitation for some ABI type shapes)"
+                )
+                write_incident_report(
+                    owner, repo, url, contract_id, contracts_state[url]["namespace"],
+                    "compile_error", error_text, generator_digest,
                 )
             print(f"WARNING: quarantining {contract_id} - fails to compile", file=sys.stderr)
         excluded_contract_ids |= broken
@@ -317,6 +468,10 @@ def process_project(
                 "namespace": namespace,
                 "generator_error": str(exc),
             }
+            write_incident_report(
+                owner, repo, url, contract_id, namespace, "generator_error", str(exc), generator_digest
+            )
+            project_dirty = True  # persist the failure so it isn't silently lost/retried every run
             continue
 
         contracts_state[url] = {
@@ -345,7 +500,7 @@ def process_project(
     }
     write_project_files(project_dir, owner, repo, package_id, version, contracts_state, excluded_contract_ids)
     excluded_contract_ids = build_and_quarantine(
-        project_dir, owner, repo, package_id, version, contracts_state, excluded_contract_ids
+        project_dir, owner, repo, package_id, version, contracts_state, excluded_contract_ids, generator_digest
     )
     save_project_state(state_path, state)
 
@@ -460,6 +615,8 @@ def main() -> int:
     for (owner, repo), project_rows in selected:
         if process_project(owner, repo, project_rows, global_force_regen, generator_digest):
             changed_projects += 1
+
+    rebuild_incidents_index()
 
     if is_partial_run:
         print("Partial run (--only-repo/--limit-projects used): not updating the global "
