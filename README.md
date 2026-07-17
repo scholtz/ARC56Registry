@@ -2,11 +2,11 @@
 
 An automatically maintained registry of every public [ARC-56](https://github.com/algorandfoundation/ARCs/blob/main/ARCs/arc-0056.md)
 smart-contract spec on GitHub, and a pipeline that turns each one into a typed,
-ready-to-use client library - in C#/.NET today, with TypeScript and Python planned.
+ready-to-use client library - in C#/.NET and TypeScript today, with Python planned.
 
 No one has to submit anything here manually: if your public repo has an
-`*.arc56.json` file anywhere in it, this project finds it, and (for .NET so far)
-publishes a NuGet package with a typed client for it.
+`*.arc56.json` file anywhere in it, this project finds it, and publishes a NuGet
+package and an npm package with a typed client for it.
 
 ## What's in this repo
 
@@ -15,8 +15,10 @@ publishes a NuGet package with a typed client for it.
 | [arc56.links.csv](arc56.links.csv) | The registry itself: every discovered `*.arc56.json` URL, with `ActiveFrom`/`ActiveUntil` columns controlling whether it's currently included. |
 | [scripts/update_arc56_links.py](scripts/update_arc56_links.py) | Finds ARC-56 files on GitHub and updates the CSV. Never removes a row. |
 | [scripts/validate_arc56_links.py](scripts/validate_arc56_links.py) | Pull-request check enforcing the CSV's schema and edit rules. |
-| [scripts/generate_dotnet_clients.py](scripts/generate_dotnet_clients.py) | Generates the C# clients and NuGet packages described below. |
-| [clients/](clients/) | One folder per GitHub repo (`clients/<owner>/<repo>/`), each holding one subfolder per ecosystem's generated client package - `dotnet/` today, with `npm/`/`python/` planned so all of a repo's packages live together. |
+| [scripts/download_arc56_specs.py](scripts/download_arc56_specs.py) | Downloads every active ARC-56 spec into `clients/<owner>/<repo>/arc56/` - shared by both client-generation pipelines below. |
+| [scripts/generate_dotnet_clients.py](scripts/generate_dotnet_clients.py), [scripts/publish_dotnet_packages.py](scripts/publish_dotnet_packages.py) | Generate the C# clients, and separately publish the NuGet packages described below. |
+| [scripts/generate_typescript_clients.py](scripts/generate_typescript_clients.py), [scripts/publish_npm_packages.py](scripts/publish_npm_packages.py) | Generate the TypeScript clients, and separately publish the npm packages described below. |
+| [clients/](clients/) | One folder per GitHub repo (`clients/<owner>/<repo>/`), holding the shared downloaded `arc56/` specs plus one subfolder per ecosystem's generated client package - `dotnet/` and `npm/` today, with `python/` planned. |
 | [scripts/generate_hash_registry.py](scripts/generate_hash_registry.py) | Builds `approval-programs/`, `clear-programs/` (compiled-program SHA-256 hash to ARC-56 spec URL) and `abi-signatures/` (ARC-4 method selector to ABI method signature), described below. |
 | [approval-programs/](approval-programs/), [clear-programs/](clear-programs/) | The program hash registry: `<program>-programs/<hash[:3]>/<hash>.txt`, one file per distinct program hash. |
 | [abi-signatures/](abi-signatures/) | The ABI method-signature registry: `abi-signatures/<selector[:2]>/<selector>.txt`, one file per distinct ARC-4 method selector. |
@@ -42,27 +44,48 @@ Rows are never deleted - a contract that should no longer be tracked is deactiva
 setting `ActiveUntil` to a date, not by removing its row. This matters because the
 client-generation pipeline below keys everything off this file.
 
-### 2. Generating typed .NET clients
+### 2. Generating typed clients (.NET and TypeScript)
 
-[`generate-dotnet-clients.yml`](.github/workflows/generate-dotnet-clients.yml) reads
-every *active* row in the CSV, downloads the spec (rate-limited to one download per 7+
-seconds), and runs it through the ARC-56 client generator from
-[scholtz/dotnet-algorand-sdk](https://github.com/scholtz/dotnet-algorand-sdk) (the
-[`scholtz2/dotnet-avm-generated-client`](https://hub.docker.com/r/scholtz2/dotnet-avm-generated-client)
-Docker image) to produce a C# client class.
+Both client-generation pipelines share the same **download -> generate -> publish**
+shape, split into three separate scripts/workflows so the slow, rate-limited download
+step never blocks fast local generation, and publishing is a simple "list what's
+already out, push what isn't" job with no coupling to generation at all:
 
-**One NuGet package per GitHub repository** (currently 505 repos, 4,284 contracts and
-growing) bundles every contract found in that repo, e.g. `Arc56.Generated.akita-protocol.akita-sc`.
-Within a package, each contract gets its own namespace incorporating both its filename
-and a hash of its source URL, so identically-named specs in different parts of the same
-repo never collide. Every package carries a shared icon so people can visually recognize
-an Arc56Registry-generated package, and links back to this repo.
+1. [`download-arc56-specs.yml`](.github/workflows/download-arc56-specs.yml) reads every
+   *active* row in the CSV and downloads each spec (rate-limited to one download per
+   7+ seconds) into `clients/<owner>/<repo>/arc56/` - **once**, shared by both
+   ecosystems below.
+2. [`generate-dotnet-clients.yml`](.github/workflows/generate-dotnet-clients.yml) /
+   [`generate-typescript-clients.yml`](.github/workflows/generate-typescript-clients.yml)
+   read those local specs (no network, no delay) and run them through the ARC-56
+   client generators - [scholtz/dotnet-algorand-sdk](https://github.com/scholtz/dotnet-algorand-sdk)'s
+   [`scholtz2/dotnet-avm-generated-client`](https://hub.docker.com/r/scholtz2/dotnet-avm-generated-client)
+   Docker image for C#, and
+   [algorandfoundation/algokit-client-generator-ts](https://github.com/algorandfoundation/algokit-client-generator-ts)
+   (via `npx`) for TypeScript.
+3. [`publish-dotnet-packages.yml`](.github/workflows/publish-dotnet-packages.yml) /
+   [`publish-npm-packages.yml`](.github/workflows/publish-npm-packages.yml) list every
+   version **already published** straight from nuget.org / the npm registry itself,
+   and pack+push (or build+publish) only what's missing - rate-limited to one push
+   per 5+ seconds.
 
-Versions follow `1.0.<increment>.<yyyyMMddHH>` - a new version is published whenever a
-repo's ARC-56 content changes, or whenever the generator Docker image itself is updated
-(which forces every package to regenerate).
+**One package per GitHub repository** (currently 505+ repos and growing) bundles every
+contract found in that repo - `Arc56.Generated.<owner>.<repo>` on nuget.org,
+`arc56-generated-<owner>-<repo>` on npm. Within a package, each contract gets its own
+namespace/export incorporating both its filename and a hash of its source URL, so
+identically-named specs in different parts of the same repo never collide.
 
-Full details, naming rules, and failure handling: **[docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md)**.
+.NET versions follow `1.0.<increment>.<yyyyMMddHH>`; TypeScript versions follow
+`1.<increment>.<yyyyMMddHH>` (npm requires strict 3-part semver, unlike NuGet). A new
+version is published whenever a repo's ARC-56 content changes, or whenever the
+relevant generator itself is updated (which forces every package in that ecosystem to
+regenerate).
+
+Full details, naming rules, and failure handling:
+**[docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md)** and
+**[docs/typescript-client-pipeline.md](docs/typescript-client-pipeline.md)**. npm
+publishing needs a one-time secret setup - see
+**[docs/npm-publishing-setup.md](docs/npm-publishing-setup.md)**.
 
 ### 3. Program hash registry
 
@@ -95,14 +118,16 @@ resolved first.
 ## Status
 
 - ✅ Registry discovery + validation (arc56.links.csv)
-- ✅ .NET/C# client generation pipeline
+- ✅ .NET/C# client generation pipeline (download -> generate -> publish)
+- ✅ TypeScript client generation pipeline (download -> generate -> publish)
 - ✅ Program hash registry (approval-programs/, clear-programs/) + GitHub Pages site
 - ✅ ABI method-signature registry (abi-signatures/) + GitHub Pages site
-- ⏳ TypeScript client generation - not started
 - ⏳ Python client generation - not started
-- ⏳ Automated `dotnet nuget push` to nuget.org - packages are built and uploaded as a
-  workflow artifact, but publishing requires a `NUGET_API_KEY` secret to be provisioned
-  first (see [docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md#publishing-to-nugetorg))
+- ⏳ Automated `dotnet nuget push` to nuget.org - wired up via Trusted Publishing (OIDC),
+  but needs a one-time `NUGET_USER` repo secret + nuget.org policy before it actually
+  publishes (see [docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md#publishing-to-nugetorg))
+- ⏳ Automated `npm publish` - wired up, but needs a one-time `NPM_TOKEN` repo secret
+  before it actually publishes (see [docs/npm-publishing-setup.md](docs/npm-publishing-setup.md))
 
 ## Contributing
 
@@ -112,3 +137,6 @@ resolved first.
 - To change how .NET clients are generated or packaged, see
   [docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md) and
   `clients/_template/`.
+- To change how TypeScript clients are generated or packaged, see
+  [docs/typescript-client-pipeline.md](docs/typescript-client-pipeline.md) and
+  `clients/_template_npm/`.

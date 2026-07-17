@@ -1,0 +1,106 @@
+name: Publish .NET NuGet packages
+
+# Third stage of the .NET pipeline (download -> generate -> publish; see
+# download-arc56-specs.yml and generate-dotnet-clients.yml). Only packs and pushes
+# already-generated, already-committed projects - it never downloads a spec or
+# regenerates any C# code. See docs/dotnet-client-pipeline.md.
+
+on:
+  workflow_run:
+    workflows: ["Generate .NET ARC-56 clients"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      only_repo:
+        description: "Optional: only consider owner/repo, exact match (can be a comma-separated list)"
+        required: false
+        type: string
+      filter:
+        description: "Optional: only consider owner/repo pairs containing this keyword, case-insensitive
+          (e.g. 'scholtz' or 'scholtz/Biatec'; can be a comma-separated list of keywords, OR'd together)"
+        required: false
+        type: string
+  schedule:
+    - cron: "0 8 * * *" # daily fallback at 08:00 UTC, in case the workflow_run trigger is ever missed
+
+permissions:
+  contents: write
+  id-token: write # required for NuGet.org Trusted Publishing (OIDC token exchange)
+
+concurrency:
+  group: publish-dotnet-packages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      # `secrets` can't be referenced directly in a step's `if:` - route it through a
+      # job-level env var instead.
+      NUGET_USER: ${{ secrets.NUGET_USER }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      # See docs/dotnet-client-pipeline.md#publishing-to-nugetorg - the nuget.org
+      # Trusted Publishing policy for this repo must name *this* workflow file
+      # (publish-dotnet-packages.yml), not generate-dotnet-clients.yml.
+      - name: NuGet login (OIDC -> short-lived API key)
+        if: ${{ env.NUGET_USER != '' }}
+        uses: NuGet/login@v1
+        id: nuget_login
+        with:
+          user: ${{ env.NUGET_USER }}
+
+      - name: List published versions and publish anything missing
+        env:
+          NUGET_API_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
+        run: |
+          ARGS=()
+          if [ -n "${{ inputs.only_repo }}" ]; then
+            IFS=',' read -ra REPOS <<< "${{ inputs.only_repo }}"
+            for r in "${REPOS[@]}"; do
+              ARGS+=(--only-repo "$r")
+            done
+          fi
+          if [ -n "${{ inputs.filter }}" ]; then
+            IFS=',' read -ra KEYWORDS <<< "${{ inputs.filter }}"
+            for k in "${KEYWORDS[@]}"; do
+              ARGS+=(--filter "$k")
+            done
+          fi
+          python scripts/publish_dotnet_packages.py "${ARGS[@]}"
+
+      - name: Upload packed NuGet packages
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nupkgs
+          path: artifacts/nupkgs/*.nupkg
+          if-no-files-found: ignore
+
+      # publish_dotnet_packages.py records published_version in each project's
+      # dotnet/state.json right after a successful push - commit that bookkeeping so
+      # the next run's nuget.org query and this local record agree.
+      - name: Commit published_version bookkeeping and push
+        if: always()
+        run: |
+          if ! git diff --quiet -- clients/*/*/dotnet/state.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add clients/*/*/dotnet/state.json
+            git commit -m "chore: record published .NET package versions"
+            git push
+          fi

@@ -1,9 +1,27 @@
 # .NET (C#) ARC-56 client generation pipeline
 
 This pipeline turns every active row in [arc56.links.csv](../arc56.links.csv) into a
-typed C# client, packaged as one NuGet package per GitHub repository, via
-[`generate-dotnet-clients.yml`](../.github/workflows/generate-dotnet-clients.yml) and
-[`scripts/generate_dotnet_clients.py`](../scripts/generate_dotnet_clients.py).
+typed C# client, packaged as one NuGet package per GitHub repository. It's split into
+three separate stages - **download**, **generate**, **publish** - each its own script
+and its own GitHub Actions workflow, chained together with `workflow_run` triggers:
+
+| Stage | Script | Workflow | What it does | Network use |
+| --- | --- | --- | --- | --- |
+| 1. Download | [`scripts/download_arc56_specs.py`](../scripts/download_arc56_specs.py) | [`download-arc56-specs.yml`](../.github/workflows/download-arc56-specs.yml) | Fetches every active ARC-56 spec into `clients/<owner>/<repo>/arc56/` | Rate-limited, 7s+ between downloads |
+| 2. Generate | [`scripts/generate_dotnet_clients.py`](../scripts/generate_dotnet_clients.py) | [`generate-dotnet-clients.yml`](../.github/workflows/generate-dotnet-clients.yml) | Regenerates C# source + bumps versions from the locally-downloaded specs | None - reads local files only |
+| 3. Publish | [`scripts/publish_dotnet_packages.py`](../scripts/publish_dotnet_packages.py) | [`publish-dotnet-packages.yml`](../.github/workflows/publish-dotnet-packages.yml) | Packs and pushes to nuget.org whatever nuget.org doesn't already have | Rate-limited, 5s+ between pushes |
+
+**Why split it up:** the previous single script/workflow did all three in one pass, so
+a project's `dotnet build` (fast, no network) was gated behind the same 7-second-per-URL
+download throttle that only the *first* stage actually needs, and a partially-failed
+run mixed up "did the code regenerate" with "did nuget.org get the new version" in one
+state. Splitting means generation is no longer slowed down by anything network-related,
+and publishing has a single, simple job: compare what's committed against what
+nuget.org actually has, and push the difference - see "Publishing to NuGet.org" below.
+
+The **arc56/ download step is shared with the [TypeScript pipeline](typescript-client-pipeline.md)**
+- a spec is downloaded once regardless of how many client languages get generated from
+it. Only stages 2-3 are ecosystem-specific.
 
 It uses the ARC-56 client generator from
 [scholtz/dotnet-algorand-sdk](https://github.com/scholtz/dotnet-algorand-sdk), shipped as
@@ -28,18 +46,20 @@ consumers add one package reference per source repo, not one per contract.
   `HelloWorldProxy`) comes from the contract's own `name` field in the ARC-56 spec, not
   from our naming - only the namespace is ours to control.
 - **On-disk layout**: each source GitHub repo gets one directory under `clients/`,
-  shared across every ecosystem's generated client for that repo (.NET today, npm and
-  Python planned - see [README.md](../README.md)). The downloaded ARC-56 specs live at
-  the repo level (`arc56/`), shared across ecosystems since they're the same source
-  files regardless of which client language is generated from them; the .NET package
-  lives in its own `dotnet/` subfolder:
+  shared across every ecosystem's generated client for that repo. The downloaded ARC-56
+  specs live at the repo level (`arc56/`), shared across ecosystems (.NET and
+  TypeScript today) since they're the same source files regardless of which client
+  language is generated from them; the .NET package lives in its own `dotnet/`
+  subfolder:
   ```
   clients/<owner>/<repo>/
-    arc56/<file_slug>_<hash8>.arc56.json   # copy of the source spec, shared across ecosystems
+    arc56/
+      <file_slug>_<hash8>.arc56.json   # copy of the source spec, shared across ecosystems
+      state.json                       # download bookkeeping: content hash / download error per URL
     dotnet/
       <PackageId>.csproj
       README.md              # per-project usage doc, includes a table of every contract
-      state.json             # generation state: version, increment, per-contract content hashes
+      state.json              # generation state: version, increment, per-contract content/code hashes
       src/<file_slug>_<hash8>.cs             # generated client
   ```
   The `.csproj` bundles `../arc56/**/*.json` into the nupkg's `contentFiles/`.
@@ -61,29 +81,28 @@ the generated `.cs` file's bytes, not merely "we attempted regeneration". Two th
 trigger an attempt at regeneration without necessarily changing anything:
 
 - a contract's ARC-56 content actually changed (compared by SHA-256 of the raw spec
-  bytes), or
+  bytes, recorded by the **download** stage), or
 - the generator Docker image's digest changed since *this project* last recorded one
-  (each project's `state.json` stores the digest it was last processed with - there is
-  no single shared "last seen" file, so a large run's progress isn't all-or-nothing: a
-  project already processed under the current image won't be reprocessed just because
-  other projects haven't gotten to it yet, e.g. after an interrupted run).
+  (each project's `dotnet/state.json` stores the digest it was last processed with -
+  there is no single shared "last seen" file, so a large run's progress isn't
+  all-or-nothing).
 
 Either of those can cause a rerun of the generator, but if the resulting `.cs` content is
 byte-identical to what's already there (common: the same generator version reproduces
 the same output for unchanged input), the version is **not** bumped - only the
-bookkeeping (content hash, recorded generator digest) is updated, so the next run knows
-not to bother rechecking. Download and generator-crash failures are recorded in
-`state.json` for the same reason (so they aren't silently lost or retried every run) but
-never bump the version either, since no `.cs` file changed.
+bookkeeping (content hash, recorded generator digest) is updated. Generator-crash
+failures are recorded in `state.json` (so they aren't silently lost or retried every
+run) but never bump the version either, since no `.cs` file changed. Download failures
+are tracked separately, in `arc56/state.json` (see "Rate limiting" below) - the generate
+stage simply skips a contract whose spec hasn't been downloaded yet.
 
 A project's version is also bumped - even with zero contract/code changes - when the
 shared templates under `clients/_template/` (`Project.csproj.template`,
 `README.md.template`) change. Each project's `state.json` stores a `template_hash`
 (SHA-256 over both template files); a mismatch is treated the same as a code change, so
-that project's README/csproj get re-rendered from the new templates, its version is
-bumped, and it gets re-packed/republished. Because every project shares the same two
-template files, editing a template bumps and republishes **every** package on the next
-run, not just one.
+that project's README/csproj get re-rendered from the new templates and its version is
+bumped. Because every project shares the same two template files, editing a template
+bumps **every** package on the next generate run, not just one.
 
 `increment` is a per-project counter stored in that project's `state.json`, incremented
 by 1 when the generated code actually changes, or when the shared templates change.
@@ -94,11 +113,15 @@ generated files and state entries are never removed, only added to or updated in
 
 ## Rate limiting
 
-Each ARC-56 spec is downloaded directly by this pipeline's script (not by the generator
-container) with **at least 7 seconds between downloads**, to avoid tripping GitHub's
-anonymous rate limits on raw.githubusercontent.com. The already-downloaded file is then
-handed to the generator via its `--file` flag (mounted into the container), so the
-generator itself makes no additional network request for the spec.
+Every ARC-56 spec is downloaded by the **download** stage
+(`scripts/download_arc56_specs.py`), with **at least 7 seconds between downloads**, to
+avoid tripping GitHub's anonymous rate limits on raw.githubusercontent.com. The
+**generate** stage makes no network request for the spec at all - it reads the local
+copy the download stage already wrote and hands it to the generator via its `--file`
+flag (mounted into the container). A URL that fails to download is recorded in that
+repo's `clients/<owner>/<repo>/arc56/state.json` (a `download_error` field) and is not
+retried every run - only when `--retry-failed` is passed to the download script (the
+workflow's `retry_failed` dispatch input).
 
 ## Generator failures
 
@@ -106,7 +129,7 @@ The generator is an external tool and can crash on some ARC-56 specs (observed: 
 `NullReferenceException` in `ABITypeToCSType` for certain struct shapes). A crash for one
 contract does not abort the run:
 
-- the failure is logged and recorded in that project's `state.json` (with a
+- the failure is logged and recorded in that project's `dotnet/state.json` (with a
   `generator_error` field on the contract entry) instead of the usual `class_name`/
   `generated_at`,
 - the project's README lists it as "generation failed - see state.json" rather than a
@@ -126,9 +149,7 @@ Windows, where `os.getuid()` doesn't exist) so it writes into the bind-mounted
 a container-default user that differs from the host's (common on GitHub Actions
 runners) can hit `UnauthorizedAccessException: Access to the path '/app/out/<file>.cs'
 is denied` for some contracts - an ownership mismatch, not a bug in the ARC-56 spec
-itself. Like the other generator failures above, this was already non-fatal (recorded
-as a `generator_error`, run continues) even before the `--user` fix; the fix just
-avoids hitting that failure in the first place.
+itself.
 
 ## Compile failures (quarantining)
 
@@ -140,9 +161,9 @@ used as `VariableArray<T>`'s type parameter without the public parameterless con
 that requires - `error CS0310`. That's a limitation in the upstream generator's output,
 not something fixable by changing our namespace/file naming.
 
-After (re)generating a project's contracts, the pipeline runs `dotnet build` on the
-aggregate project. If it fails, it parses the compiler output for the specific file(s) at
-fault (`src/<contract_id>.cs(line,col): error ...`), and for each one:
+After (re)generating a project's contracts, the **generate** stage runs `dotnet build`
+on the aggregate project. If it fails, it parses the compiler output for the specific
+file(s) at fault (`src/<contract_id>.cs(line,col): error ...`), and for each one:
 
 - adds `<Compile Remove="src/<contract_id>.cs" />` to that project's `.csproj`, excluding
   just that file from compilation (the `.cs` and its `arc56/*.json` copy stay on disk and
@@ -159,54 +180,65 @@ content or the generator image changes.
 ## Running it locally
 
 Requires Docker and the .NET SDK. To avoid a multi-hour run across thousands of URLs while
-testing, use the scoping flags:
+testing, use the scoping flags (identical across all three scripts):
 
 ```bash
+python scripts/download_arc56_specs.py --only-repo algorandfoundation/arc55-encryption
 python scripts/generate_dotnet_clients.py --only-repo algorandfoundation/arc55-encryption
-python scripts/generate_dotnet_clients.py --limit-projects 3
-python scripts/generate_dotnet_clients.py --filter scholtz
-python scripts/generate_dotnet_clients.py --filter scholtz/Biatec
+python scripts/publish_dotnet_packages.py --only-repo algorandfoundation/arc55-encryption --dry-run
+```
+
+```bash
+--limit-projects 3
+--filter scholtz
+--filter scholtz/Biatec
 ```
 
 `--only-repo` matches `owner/repo` exactly; `--filter` matches any `owner/repo` pair
-whose (case-insensitive) string *contains* the given keyword - `--filter scholtz`
-matches every repo under the `scholtz` owner (and any repo with `scholtz` in its own
-name), while `--filter scholtz/Biatec` narrows further to just that owner's repos
-starting with `Biatec`. Both flags can be passed multiple times (repeat the flag; in
-the GitHub Actions `workflow_dispatch` inputs, use a comma-separated list instead -
-`inputs.only_repo` / `inputs.filter`) - multiple values for the same flag are OR'd
-together, but if both `--only-repo` and `--filter` are given, a project must satisfy
-both.
+whose (case-insensitive) string *contains* the given keyword. Both flags can be passed
+multiple times (repeat the flag; in the GitHub Actions `workflow_dispatch` inputs, use a
+comma-separated list instead) - multiple values for the same flag are OR'd together, but
+if both `--only-repo` and `--filter` are given, a project must satisfy both.
 
-Full, unscoped runs are meant for CI. Since the generator-image digest is tracked
-per-project rather than in one shared file, `--only-repo`/`--filter`/`--limit-projects`
-runs don't affect anything outside the projects they touch - a later full run will
-still correctly detect and act on a pending generator image change for every other
-project.
+Full, unscoped runs are meant for CI. Since state is tracked per-project rather than in
+one shared file, `--only-repo`/`--filter`/`--limit-projects` runs don't affect anything
+outside the projects they touch.
 
-The script packs a project itself (see "Publishing to NuGet.org" below) as soon as
-that project's version is bumped - you don't need to run `dotnet pack` separately
-unless you want to. To do it manually anyway:
+`generate_dotnet_clients.py` doesn't pack a project itself anymore - that's
+`publish_dotnet_packages.py`'s job (see below). To pack manually:
 
 ```bash
 dotnet pack clients/<owner>/<repo>/dotnet/<PackageId>.csproj --configuration Release --output artifacts/nupkgs
 ```
 
-`--publish` and `--commit` (both used by CI - see below) are **off by default** for
-local runs, specifically so trying the script out locally never pushes a package to
-nuget.org or creates a commit in your working copy unless you pass those flags
-yourself.
+`--commit` (used by CI - see below) is **off by default** for local runs of the
+download/generate scripts, specifically so trying them out locally never creates a
+commit in your working copy unless you pass it yourself. `publish_dotnet_packages.py`
+has no `--commit` flag at all - see "Publishing to NuGet.org".
 
 ## Publishing to NuGet.org
 
-Publishing is **per-project and immediate, not batched**: the script processes
-`owner/repo` projects one at a time (see `process_project`/`main` in
-`scripts/generate_dotnet_clients.py`), and the moment a project's version is bumped it
-is packed and (with `--publish`) pushed to nuget.org right there, before the script
-moves on to the next project. A full run touching many repos therefore shows packages
-landing on nuget.org steadily as the run progresses, not all at once in a final step
-after every repo has been generated - useful given a full run can take hours (see
-"Known limitations").
+Publishing is its own script and workflow
+(`scripts/publish_dotnet_packages.py` / `publish-dotnet-packages.yml`), decoupled from
+generation - it never regenerates any code and never downloads any spec. For every
+generated `clients/<owner>/<repo>/dotnet/*.csproj` project, it:
+
+1. Reads the version that project's `state.json` says it should be at (set by
+   `generate_dotnet_clients.py` when that project's code last changed).
+2. **Lists every version of that package ID already published**, straight from
+   nuget.org's own package-content index (`GET
+   https://api.nuget.org/v3-flatcontainer/<id-lower>/index.json`) - not a locally
+   cached "published_version" flag. This is the "list all published library versions
+   and publish only what needs publishing" behavior: nuget.org itself is the single
+   source of truth for what's live, so a partially-failed previous publish run, or a
+   manual push done outside this pipeline, is always detected correctly.
+3. If the project's current version isn't in that list, packs it (`dotnet pack`) and
+   pushes it (`dotnet nuget push --skip-duplicate`), waiting at least 5 seconds between
+   pushes so nuget.org isn't hammered on a run that has many packages to catch up on.
+
+`state.json`'s `published_version` field is still written after a successful push, but
+only as an informational cache for humans reading the file - it is never read back to
+decide whether to publish; step 2 above is what actually decides that, every run.
 
 Pushing uses **Trusted Publishing** - short-lived, OIDC-issued API keys, not a
 long-lived secret stored in the repo. This is the same mechanism as PyPI's Trusted
@@ -220,12 +252,13 @@ about an hour.
    - Log into [nuget.org](https://www.nuget.org) with an account that owns (or is a
      member of the org that owns) the `Arc56.Generated.*` packages.
    - Click your username -> **Trusted Publishing** -> add a new policy.
-   - Fill in, for this repo (`https://github.com/scholtz/ARC56Registry`, workflow at
-     `.github/workflows/generate-dotnet-clients.yml`):
+   - Fill in, for this repo (`https://github.com/scholtz/ARC56Registry`):
      - **Repository Owner**: `scholtz`
      - **Repository**: `ARC56Registry`
-     - **Workflow File**: `generate-dotnet-clients.yml` (file name only - do **not**
-       include the `.github/workflows/` path)
+     - **Workflow File**: `publish-dotnet-packages.yml` (file name only - do **not**
+       include the `.github/workflows/` path, and note this is the *publish* workflow,
+       not `generate-dotnet-clients.yml` - the split pipeline means only the publish
+       stage's job ever requests an OIDC token or pushes to nuget.org)
      - **Environment**: leave empty (this workflow doesn't use a GitHub Actions
        `environment:`)
    - Choose the policy **owner** (your user, or the org, whichever owns the packages) -
@@ -257,108 +290,72 @@ about an hour.
    job's GitHub OIDC token for a short-lived nuget.org API key
    (`steps.nuget_login.outputs.NUGET_API_KEY`), passed to the script as the
    `NUGET_API_KEY` env var. If `NUGET_USER` isn't set yet, this step (and therefore
-   every push below) is skipped - the script still runs and packs normally.
-2. `python scripts/generate_dotnet_clients.py --publish --commit ...` does the actual
-   per-project pack+push+commit, described above and below - see `pack_project`,
-   `push_to_nuget`, `ensure_published`, and `commit_project_changes` in the script for
-   the exact mechanics.
-3. `git push` at the very end pushes whatever local commits the run made - see
-   "Committing" below for why commits happen inside the script rather than here.
+   every push below) is skipped - `publish_dotnet_packages.py` then exits nonzero
+   (unless `--dry-run` is passed) rather than silently doing nothing, so a missing
+   secret is visible in the workflow's status rather than a quiet no-op.
+2. `python scripts/publish_dotnet_packages.py` does the list-then-publish logic
+   described above.
+3. Any `published_version` bookkeeping the script wrote to `state.json` files is
+   committed and pushed in a final step.
 
 Within the script, `dotnet nuget push ... --skip-duplicate` is used for every push,
 making it safe to retry: pushing a version that's already on nuget.org is a no-op
 instead of a failure.
 
-### Committing
-
-Like publishing, committing is **per-project, not batched**: with `--commit`,
-`commit_project_changes()` runs right after each project is processed (successfully or
-not - a download/generator failure alone still touches `state.json` and an incident
-report, which is worth its own commit) and stages+commits only that project's own
-`clients/<owner>/<repo>/` directory plus the shared `clients/_incidents/` index -
-nothing else. It's a no-op (`git diff --cached --quiet` short-circuits it) when nothing
-actually changed for that project. This mirrors the pack/publish reasoning: a run
-touching many repos produces one commit per changed repo as it goes, not one giant
-commit for the whole run at the end - useful for `git bisect`/history and for the same
-"see it progress instead of waiting for everything" reason as incremental publishing.
-
-`--commit` also pushes - throttled, not once per commit and not only at the very end.
-`push_commits()` runs after every `commit_project_changes()` call but is a no-op unless
-at least `PUSH_INTERVAL_SECONDS` (60s) have passed since the last push, plus one
-unconditional final flush after the whole loop finishes. This bounds how much
-already-finished work (commits, and the nuget.org publishes that go with them) can be
-stranded on the runner if the job dies before its own final step runs - see "Recovering
-from a failed run" below, which is the actual point of pushing periodically rather than
-only at the end.
-
-CI's own final step ("Commit any remaining changes and push" in
-`generate-dotnet-clients.yml`) still exists on top of this, as a defensive fallback: it
-commits anything that somehow wasn't captured per-project (shouldn't normally find
-anything with `--commit` passed) and then unconditionally runs `git push` once more, to
-flush whatever's left since the script's last periodic push.
-
-`--commit` is opt-in (see "Running it locally" above) precisely so it can configure a
-repo-local git identity (`github-actions[bot]`, via `git config` with no `--global`)
-and create real commits - safe for CI, but not something a plain local test run should
-do without asking for it.
-
 ### Retrying a failed publish
 
-Each project's `state.json` records a `published_version` field alongside the existing
-`version`. A push can fail without aborting the run (network blip, or - see "Known
-limitations" below - the OIDC API key expiring mid-run on a very long run); when that
-happens `published_version` is simply left behind `version`. The **next** run - even
-one that finds no new code changes for that project - notices the mismatch and retries
-the pack+push before doing anything else for that project, so a failed publish always
-self-heals on the next scheduled/dispatched run rather than being silently dropped.
+Because step 2 above (list what's actually published) is re-derived from nuget.org on
+every run rather than trusted from a local flag, a push that fails partway through a
+run (network blip, or - on a very large catch-up run - the OIDC API key expiring after
+about an hour) simply leaves that version out of nuget.org's own index. The **next**
+run's listing call sees that and retries the pack+push before doing anything else for
+that project - no separate "retry" logic or flag needed; it falls out of always
+comparing against the live source of truth.
 
-### Recovering from a failed run (fast catch-up)
+### Committing
 
-A run touching thousands of URLs, 7+ seconds apart, is exactly the kind of long-running
-process where *something* eventually goes wrong partway through - a docker/dotnet/git
-permissions error, a transient network failure, a runner hiccup. The pipeline is built
-so that when that happens, the **next** run picks up close to where the failed one left
-off instead of redoing everything from scratch:
+Unlike the download and generate stages, the publish stage's only source-tree changes
+are the `published_version` bookkeeping field in each project's `state.json` (informational
+only, per above) - there's no per-project commit-as-you-go here, just one final commit
+of whatever bookkeeping changed, at the end of the run.
 
-1. **One unexpected project failure doesn't abort the run.** `process_project` already
-   turns the failure modes seen in practice (download errors, generator crashes,
-   compile errors) into recorded, non-fatal state. `main()`'s per-project loop wraps the
-   whole iteration (`process_project` + incidents rebuild + commit + push) in a
-   try/except as a last line of defense: an exception for one project is logged and
-   that project is skipped, but the loop continues on to every other project rather
-   than dying. The script still exits nonzero if *any* project hit this path (so CI
-   shows red and a human notices), but only after everything else has already been
-   packed, published, committed, and pushed.
-2. **Completed work is pushed as it happens, not stranded on the runner.** Because
-   `--commit` pushes periodically (see above) rather than only at the very end, a run
-   that dies loses at most the last `PUSH_INTERVAL_SECONDS` worth of commits - not
-   hours of prior progress. The workflow's tail steps (`Upload packed NuGet packages`,
-   `Commit any remaining changes and push`) run with `if: always()`, so even a hard
-   script crash still gets whatever's left flushed and pushed.
-3. **The next run only has real work to do for what's actually missing.** Since
-   everything up to the failure point is already committed to `main` and already
-   published (`published_version` matches `version` in `state.json`), the next run's
-   `needs_regen`/`ensure_published` checks see no work needed for those projects -
-   `git status`/content-hash comparisons make that fast, not "download and regenerate
-   everything from the beginning to confirm nothing changed." Only the project that was
-   genuinely mid-flight (or never reached at all) when the run stopped ends up doing
-   real work, which is what makes catch-up fast rather than a full-cost rerun.
+## Recovering from a failed run (fast catch-up)
+
+Each stage is independently resumable:
+
+1. **Download**: a URL that fails is recorded (`download_error`) and skipped on
+   subsequent runs unless `--retry-failed` is passed - so a network blip only costs
+   that one URL, not the whole run.
+2. **Generate**: content-hash comparisons make "did this contract's spec change since
+   we last generated it" fast to check, so a run that stops partway through only has
+   real work left to do for what's actually missing or changed.
+3. **Publish**: since the list of published versions comes from nuget.org itself, a run
+   that dies mid-push just leaves that project's version out of the list - the next
+   run's listing call notices and retries it, with no separate bookkeeping to get out
+   of sync.
+
+Each script's per-project loop wraps processing in a try/except so one unexpected
+project failure (a permissions error, a transient network failure, a runner hiccup)
+doesn't abort the whole run - it's logged and the loop continues to the next project.
+The script still exits nonzero if anything hit that path, so CI shows red and a human
+notices, but only after everything else has already been processed.
 
 ## Known limitations
 
-- **Run time**: a full first-time run downloads and generates a client for every active
-  URL in `arc56.links.csv` (thousands, and growing), 7+ seconds apart, plus generation and (for changed
-  projects) `dotnet pack` time. This can take hours. The workflow's `timeout-minutes` is
-  set high (350) to accommodate this; subsequent runs are much faster since only changed
-  content triggers regeneration.
-- **OIDC API key expiry on very long runs**: the Trusted Publishing API key obtained at
-  job start is valid for about an hour. On a run so large that generation is still
-  going after that (realistically only an initial full run across thousands of URLs,
-  not a routine incremental one), later pushes in that same run will fail once the key
-  expires. This is not silently lost - see "Retrying a failed publish" above - but it
-  does mean publishing for those later projects lags by one more scheduled run.
+- **Run time**: a full first-time download run fetches every active URL in
+  `arc56.links.csv` (thousands, and growing), 7+ seconds apart - this alone can take
+  hours. The generate and publish stages are much faster once the specs are local,
+  since only changed content triggers regeneration/republishing. Workflow
+  `timeout-minutes` values are set high to accommodate a cold-start full run.
+- **OIDC API key expiry on very long publish runs**: the Trusted Publishing API key
+  obtained at job start is valid for about an hour. On a run so large that publishing
+  is still going after that (realistically only a large initial catch-up, not a routine
+  incremental one), later pushes in that same run will fail once the key expires. This
+  is not silently lost - see "Retrying a failed publish" above - but it does mean
+  publishing for those later projects lags by one more scheduled run.
 - **`HEAD`-pinned sources**: like the links CSV itself, ARC-56 URLs point at `HEAD`, so a
-  source repo rewriting its default branch could change what the next run downloads.
+  source repo rewriting its default branch could change what the next download run
+  fetches.
 - **No license metadata**: generated packages don't set `PackageLicenseExpression` since
   this repository doesn't currently have a LICENSE file. Add one and update
   `clients/_template/Project.csproj.template` accordingly.

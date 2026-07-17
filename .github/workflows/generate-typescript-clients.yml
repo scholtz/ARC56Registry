@@ -1,10 +1,11 @@
-name: Generate .NET ARC-56 clients
+name: Generate TypeScript ARC-56 clients
 
-# Second stage of the .NET pipeline (download -> generate -> publish; see
-# download-arc56-specs.yml and publish-dotnet-packages.yml). Only reads ARC-56 specs
-# already downloaded by that first stage and regenerates/commits C# client source - it
-# never touches the network for a spec and never publishes to nuget.org. See
-# docs/dotnet-client-pipeline.md.
+# Second stage of the TypeScript pipeline (download -> generate -> publish; see
+# download-arc56-specs.yml and publish-npm-packages.yml). Only reads ARC-56 specs
+# already downloaded by that first stage and regenerates/commits TypeScript client
+# source - it never touches the network for a spec (npx fetching the generator
+# package itself is a one-time, small metadata request, not per-contract) and never
+# publishes to npm. See docs/typescript-client-pipeline.md.
 
 on:
   workflow_run:
@@ -23,7 +24,7 @@ on:
         type: string
   push:
     paths:
-      - "clients/_template/**"
+      - "clients/_template_npm/**"
   schedule:
     - cron: "0 6 * * *" # daily fallback at 06:00 UTC, in case the workflow_run trigger is ever missed
 
@@ -31,16 +32,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: generate-dotnet-clients
+  group: generate-typescript-clients
   cancel-in-progress: false
 
 jobs:
   generate:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    # No download delay in this stage (only generation/build), but a full first-time
-    # run still regenerates a client for every active URL and packs nothing small - see
-    # docs/dotnet-client-pipeline.md for why this can still take a while.
     timeout-minutes: 350
     steps:
       - name: Checkout
@@ -51,12 +49,12 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          dotnet-version: "8.0.x"
+          node-version: "20.x"
 
-      - name: Generate/update .NET clients (commits each project as it's ready)
+      - name: Generate/update TypeScript clients (commits each project as it's ready)
         run: |
           ARGS=()
           if [ -n "${{ inputs.only_repo }}" ]; then
@@ -71,16 +69,16 @@ jobs:
               ARGS+=(--filter "$k")
             done
           fi
-          python scripts/generate_dotnet_clients.py --commit "${ARGS[@]}"
+          python scripts/generate_typescript_clients.py --commit "${ARGS[@]}"
 
       - name: Commit any remaining changes and push
         if: always()
         run: |
-          CLIENT_PATHS=(clients/*/*/dotnet clients/_template clients/_incidents)
+          CLIENT_PATHS=(clients/*/*/npm clients/_template_npm clients/_incidents)
           if ! git diff --quiet -- "${CLIENT_PATHS[@]}" || ! git diff --quiet --cached -- "${CLIENT_PATHS[@]}"; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add "${CLIENT_PATHS[@]}"
-            git commit -m "chore: regenerate .NET ARC-56 clients"
+            git commit -m "chore: regenerate TypeScript ARC-56 clients"
           fi
           git push

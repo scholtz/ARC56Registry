@@ -1,26 +1,38 @@
 #!/usr/bin/env python3
-"""Generate/update the per-repository .NET NuGet packages of ARC-56 clients.
+"""Generate/update the per-repository .NET client source for ARC-56 specs.
 
-For every *active* row in arc56.links.csv, this script:
+This is the second of three stages in the client-generation pipeline (download ->
+generate -> publish; see scripts/download_arc56_specs.py and
+scripts/publish_dotnet_packages.py). It makes no network requests of its own and
+applies no rate-limiting delay - it only reads ARC-56 spec files already downloaded
+by scripts/download_arc56_specs.py into clients/<owner>/<repo>/arc56/, and does not
+publish anything to nuget.org (that's scripts/publish_dotnet_packages.py's job).
 
-  1. Downloads the ARC-56 JSON spec (rate-limited: at least DOWNLOAD_DELAY_SECONDS
-     between downloads, so we don't hammer raw.githubusercontent.com).
-  2. Copies it into clients/<owner>/<repo>/arc56/<file_slug>_<hash8>.arc56.json - at the
-     repo level, not under dotnet/, since it's shared across every ecosystem's generated
-     client for that repo (.NET today, npm/Python planned).
-  3. If its content changed (or the generator docker image changed, or it's new),
+For every *active* row in arc56.links.csv whose spec has already been downloaded,
+this script:
+
+  1. Reads the local copy of the ARC-56 JSON spec from
+     clients/<owner>/<repo>/arc56/<file_slug>_<hash8>.arc56.json (written by
+     scripts/download_arc56_specs.py). A row whose spec hasn't been downloaded yet is
+     skipped for this run - it'll be picked up automatically once the download
+     pipeline reaches it.
+  2. If its content changed (or the generator docker image changed, or it's new),
      regenerates the C# client via the scholtz2/dotnet-avm-generated-client docker
      image into clients/<owner>/<repo>/dotnet/src/<file_slug>_<hash8>.cs, in a
      namespace unique to that contract (Arc56.Generated.<Owner>.<Repo>.<file_slug>_<hash8>).
+  3. Builds the aggregate project (`dotnet build`) to catch and quarantine any
+     contract whose generated code fails to compile, so one broken contract doesn't
+     block every other contract in the same package.
 
 One NuGet package is produced per GitHub repository (owner/repo), bundling every
-ARC-56 client found in that repo. A repo's package version is only bumped, and only
-`dotnet pack` re-run, when at least one of its contracts actually changed content, the
-generator image changed (which forces every package to regenerate), or the
-README/csproj templates under clients/_template/ changed (which forces every package
-to re-render its docs/metadata and republish, even with no contract changes). Version
-format: 1.0.<increment>.<yyyyMMddHH> (matches the legacy 4-part scheme already used by
-the Algorand4 package this depends on).
+ARC-56 client found in that repo. A repo's package version is only bumped when at
+least one of its contracts actually changed content, the generator image changed
+(which forces every package to regenerate), or the README/csproj templates under
+clients/_template/ changed (which forces every package to re-render its docs/metadata
+and bump, even with no contract changes). Version format: 1.0.<increment>.<yyyyMMddHH>
+(matches the legacy 4-part scheme already used by the Algorand4 package this depends
+on). Packing (`dotnet pack`) and publishing to nuget.org are handled entirely by
+scripts/publish_dotnet_packages.py, run as its own separate pipeline stage.
 
 Existing rows/files are never deleted, matching the rest of this repo's "never remove,
 only deactivate" convention (see docs/arc56-links-pipeline.md).
@@ -37,7 +49,6 @@ import re
 import subprocess
 import sys
 import time
-import urllib.request
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CSV_PATH = os.path.join(REPO_ROOT, "arc56.links.csv")
@@ -47,13 +58,9 @@ INCIDENTS_DIR = os.path.join(CLIENTS_DIR, "_incidents")
 
 REGISTRY_REPO_URL = "https://github.com/scholtz/Arc56Registry"
 GENERATOR_IMAGE = "scholtz2/dotnet-avm-generated-client:latest"
-DOWNLOAD_DELAY_SECONDS = 7
-NUPKG_OUTPUT_DIR = os.path.join(REPO_ROOT, "artifacts", "nupkgs")
-NUGET_SOURCE = "https://api.nuget.org/v3/index.json"
 # How often --commit pushes local commits to the remote while the run is still going,
-# rather than only once at the very end. Bounds how much already-finished work (commits,
-# and the nuget.org publishes that go with them) could be stranded on the runner and
-# lost if the job later dies (crash, runner timeout, etc.) - see push_commits().
+# rather than only once at the very end. Bounds how much already-finished work could
+# be stranded on the runner and lost if the job later dies - see push_commits().
 PUSH_INTERVAL_SECONDS = 60
 
 RAW_URL_RE = re.compile(
@@ -65,8 +72,6 @@ FILENAME_SUFFIX = ".arc56.json"
 # ...\src\Multisig_0579f8cd.cs(835,86): error CS0310: ...
 COMPILE_ERROR_FILE_RE = re.compile(r"[\\/](?P<contract_id>[A-Za-z0-9_]+)\.cs\(\d+,\d+\):\s*error")
 MAX_BUILD_QUARANTINE_ATTEMPTS = 10
-
-_last_download_at: float | None = None
 
 
 def sanitize_path_segment(name: str) -> str:
@@ -116,21 +121,6 @@ def render_template(text: str, mapping: dict[str, str]) -> str:
     return text
 
 
-def download_with_rate_limit(url: str) -> bytes:
-    global _last_download_at
-    if _last_download_at is not None:
-        elapsed = time.monotonic() - _last_download_at
-        wait = DOWNLOAD_DELAY_SECONDS - elapsed
-        if wait > 0:
-            time.sleep(wait)
-    print(f"Downloading {url}", file=sys.stderr)
-    req = urllib.request.Request(url, headers={"User-Agent": "arc56-dotnet-client-generator"})
-    with urllib.request.urlopen(req) as resp:
-        data = resp.read()
-    _last_download_at = time.monotonic()
-    return data
-
-
 def get_generator_image_digest() -> str:
     """Always contacts the registry for GENERATOR_IMAGE's current digest (a real `docker
     pull`, not a cached/local answer), so a fresh image push is picked up on the very
@@ -153,7 +143,7 @@ def get_template_hash() -> str:
     README.md/csproj (but NOT the generated .cs code). Compared against each project's
     stored state["template_hash"] so a documentation/template-only edit - which never
     touches any contract's content_sha256/cs_sha256 - still bumps that project's version
-    and gets republished, instead of silently sitting stale forever."""
+    and gets marked for republish, instead of silently sitting stale forever."""
     parts = []
     for name in ("Project.csproj.template", "README.md.template"):
         with open(os.path.join(TEMPLATE_DIR, name), "rb") as f:
@@ -224,7 +214,6 @@ def extract_class_name(cs_path: str) -> str:
 
 
 FAILURE_LABELS = {
-    "download_error": "Download failed",
     "generator_error": "Generator crash",
     "compile_error": "Generated code fails to compile",
 }
@@ -248,39 +237,15 @@ def write_incident_report(
     error_text: str,
     generator_digest: str,
 ) -> str:
-    """Writes a standalone incident report for a download/generator/compile failure,
-    with the source URL, a repro command, and the full error/stack trace. Does not
-    file or link to filing a GitHub issue - that's left for a human to do manually."""
+    """Writes a standalone incident report for a generator/compile failure, with the
+    source URL, a repro command, and the full error/stack trace. Does not file or link
+    to filing a GitHub issue - that's left for a human to do manually."""
     incident_dir = os.path.join(INCIDENTS_DIR, sanitize_path_segment(owner), sanitize_path_segment(repo))
     os.makedirs(incident_dir, exist_ok=True)
     report_path = os.path.join(incident_dir, f"{contract_id}.md")
 
     kind_label = FAILURE_LABELS.get(failure_type, failure_type)
     detected_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
-
-    if failure_type == "download_error":
-        report = f"""# {kind_label}: {contract_id}
-
-- **Repo**: [{owner}/{repo}](https://github.com/{owner}/{repo})
-- **Source ARC-56 spec URL**: {url}
-- **Detected**: {detected_at}
-
-This is a fetch/network problem (invalid URL, renamed/deleted file, unreachable host,
-etc.), not a bug in the generator. Check whether the URL above is still correct (the
-source repo may have moved, renamed, or deleted the file);
-[arc56.links.csv]({REGISTRY_REPO_URL}/blob/main/arc56.links.csv) can be corrected if the
-file has permanently moved.
-
-## Error
-
-```
-{error_text}
-```
-"""
-        with open(report_path, "w", encoding="utf-8", newline="\n") as f:
-            f.write(report)
-        return report_path
-
     repro_cmd = repro_command(namespace, url)
 
     report = f"""# {kind_label}: {contract_id}
@@ -310,7 +275,9 @@ file has permanently moved.
 
 def rebuild_incidents_index() -> None:
     """Rebuilds clients/_incidents/README.md from every project's state.json,
-    so there's always one place to see every open generator/compile/download failure."""
+    so there's always one place to see every open generator/compile failure. Download
+    failures live in each repo's clients/<owner>/<repo>/arc56/state.json instead (see
+    scripts/download_arc56_specs.py) and are not part of this index."""
     rows = []
     for root, _dirs, files in os.walk(CLIENTS_DIR):
         if "state.json" not in files:
@@ -334,10 +301,12 @@ def rebuild_incidents_index() -> None:
     rows.sort(key=lambda r: (r[0].lower(), r[1].lower(), r[2].lower()))
 
     lines = [
-        "# Open ARC-56 client generation incidents",
+        "# Open ARC-56 .NET client generation incidents",
         "",
         "Rebuilt automatically by `scripts/generate_dotnet_clients.py` on every run. Each row "
-        "links to a report with the source URL, a repro command, and the full error/stack trace.",
+        "links to a report with the source URL, a repro command, and the full error/stack trace. "
+        "Download failures are tracked separately in each repo's "
+        "`clients/<owner>/<repo>/arc56/state.json` (see scripts/download_arc56_specs.py).",
         "",
         "| Repo | Contract | Failure | Report |",
         "| --- | --- | --- | --- |",
@@ -373,9 +342,6 @@ def find_broken_contract_ids(build_output: str) -> set[str]:
 
 
 def extract_error_lines_for(contract_id: str, combined_output: str) -> str:
-    # Only actual "): error" lines - a broken file's build output is otherwise dominated
-    # by unrelated "): warning" noise (e.g. hundreds of CS8632 nullable-annotation
-    # warnings) that would drown out the one line that actually matters.
     marker = f"{contract_id}.cs("
     lines = [
         line for line in combined_output.splitlines()
@@ -383,8 +349,6 @@ def extract_error_lines_for(contract_id: str, combined_output: str) -> str:
     ]
     if lines:
         return "\n".join(lines)
-    # Fall back to any mention of the file if no "error" line matched, so we still
-    # surface something rather than an empty report.
     lines = [line for line in combined_output.splitlines() if marker in line]
     return "\n".join(lines) if lines else combined_output[-2000:]
 
@@ -439,87 +403,12 @@ def build_and_quarantine(
                         f"{MAX_BUILD_QUARANTINE_ATTEMPTS} quarantine attempts")
 
 
-def pack_project(project_dir: str, package_id: str, version: str) -> str:
-    """Packs a single project's .csproj right away (not batched with every other
-    project) and returns the resulting .nupkg path, so a package can be pushed to
-    nuget.org as soon as its own version is ready instead of waiting for the whole
-    run to finish."""
-    csproj_path = os.path.join(project_dir, f"{package_id}.csproj")
-    os.makedirs(NUPKG_OUTPUT_DIR, exist_ok=True)
-    print(f"Packing {package_id} {version}", file=sys.stderr)
-    result = subprocess.run(
-        ["dotnet", "pack", csproj_path, "--configuration", "Release", "--output", NUPKG_OUTPUT_DIR],
-        capture_output=True, text=True,
-    )
-    if result.returncode != 0:
-        raise RuntimeError(
-            f"dotnet pack failed for {csproj_path}\n--- stdout ---\n{result.stdout}\n--- stderr ---\n{result.stderr}"
-        )
-    return os.path.join(NUPKG_OUTPUT_DIR, f"{package_id}.{version}.nupkg")
-
-
-def push_to_nuget(nupkg_path: str) -> bool:
-    """Pushes one already-packed .nupkg to nuget.org using the short-lived API key the
-    workflow obtained via Trusted Publishing (NUGET_API_KEY env var - see
-    docs/dotnet-client-pipeline.md). Returns False (never raises) on any failure, since
-    a push failure for one project must not abort generation of the rest, and
-    ensure_published() below leaves the version unmarked so it's retried on the next
-    run rather than silently lost."""
-    api_key = os.environ.get("NUGET_API_KEY")
-    if not api_key:
-        print(f"NUGET_API_KEY not set - skipping nuget push for {os.path.basename(nupkg_path)}", file=sys.stderr)
-        return False
-    result = subprocess.run(
-        ["dotnet", "nuget", "push", nupkg_path, "--api-key", api_key,
-         "--source", NUGET_SOURCE, "--skip-duplicate"],
-        capture_output=True, text=True,
-    )
-    if result.returncode != 0:
-        print(
-            f"WARNING: nuget push failed for {nupkg_path} (will retry next run):\n"
-            f"{result.stdout}\n{result.stderr}",
-            file=sys.stderr,
-        )
-        return False
-    return True
-
-
-def ensure_published(
-    project_dir: str, package_id: str, state: dict, state_path: str, publish: bool
-) -> bool:
-    """Packs and (if --publish) pushes package_id's current state["version"] the
-    moment it's known to need it - whether that's because this run just bumped it, or
-    because an earlier run bumped it but never got it published (e.g. a nuget push
-    failed, or that earlier run wasn't a --publish run at all). Idempotent: a no-op
-    once state["published_version"] already matches state["version"]."""
-    version = state.get("version")
-    if not version or state.get("published_version") == version:
-        return False
-    csproj_path = os.path.join(project_dir, f"{package_id}.csproj")
-    if not os.path.exists(csproj_path):
-        return False
-    try:
-        nupkg_path = pack_project(project_dir, package_id, version)
-    except Exception as exc:  # noqa: BLE001 - a pack failure must never abort the whole run
-        print(f"WARNING: pack failed for {package_id} {version}: {exc}", file=sys.stderr)
-        return False
-    if not publish:
-        return False
-    if push_to_nuget(nupkg_path):
-        state["published_version"] = version
-        save_project_state(state_path, state)
-        print(f"Published {package_id} {version} to nuget.org", file=sys.stderr)
-        return True
-    return False
-
-
 def process_project(
     owner: str,
     repo: str,
     rows: list[dict[str, str]],
     generator_digest: str,
     template_hash: str,
-    publish: bool,
 ) -> bool:
     owner_slug = sanitize_path_segment(owner)
     repo_slug = sanitize_path_segment(repo)
@@ -528,7 +417,6 @@ def process_project(
     arc56_dir = os.path.join(repo_dir, "arc56")
     src_dir = os.path.join(project_dir, "src")
     state_path = os.path.join(project_dir, "state.json")
-    os.makedirs(arc56_dir, exist_ok=True)
     os.makedirs(src_dir, exist_ok=True)
 
     state = load_project_state(state_path)
@@ -536,15 +424,8 @@ def process_project(
     package_id = f"Arc56.Generated.{owner_slug}.{repo_slug}"
     # Recheck everything in *this* project if the generator image has changed since the
     # last time *this* project recorded a digest - tracked per-project (not a single
-    # shared file) so a large run's progress survives being interrupted: a project that
-    # already completed under the current image is not reprocessed just because other
-    # projects haven't gotten to it yet.
+    # shared file) so a large run's progress survives being interrupted.
     force_regen = state.get("generator_image_digest") != generator_digest
-    # state_dirty: something in state.json changed (including failure records) and must
-    # be persisted. code_changed: the actual generated code changed, which is the only
-    # thing that should bump the package version / trigger a rebuild+repack - a download
-    # or generator failure alone doesn't touch any .cs file, so it shouldn't produce a
-    # new NuGet version, and neither does regenerating byte-identical code.
     state_dirty = False
     code_changed = False
 
@@ -565,55 +446,21 @@ def process_project(
         namespace = f"Arc56.Generated.{sanitize_identifier(owner)}.{sanitize_identifier(repo)}.{contract_id}"
         existing = contracts_state.get(url)
 
-        # A URL that's already known to be unfetchable (bad path encoding, 404, etc.)
-        # isn't worth retrying every single run - only recheck it when the generator
-        # image changes, since that's our only "maybe something changed" signal here.
-        if existing is not None and "download_error" in existing and not force_regen:
+        arc56_path = os.path.join(arc56_dir, f"{contract_id}.arc56.json")
+        if not os.path.isfile(arc56_path):
+            # Not downloaded yet (or the download failed and is tracked in
+            # arc56/state.json) - scripts/download_arc56_specs.py will produce it on a
+            # later run; nothing for this stage to do yet.
             continue
 
-        try:
-            content = download_with_rate_limit(url)
-        except Exception as exc:  # noqa: BLE001 - a single bad row must never abort the whole run
-            print(f"WARNING: download failed for {url}: {exc}", file=sys.stderr)
-            contracts_state[url] = {
-                **{k: v for k, v in (existing or {}).items() if k != "content_sha256"},
-                "file_slug": file_slug,
-                "hash8": hash8,
-                "namespace": namespace,
-                "download_error": str(exc),
-            }
-            write_incident_report(
-                owner, repo, url, contract_id, namespace, "download_error", str(exc), generator_digest
-            )
-            state_dirty = True  # persist the failure so it isn't silently lost/retried every run;
-            continue           # no .cs file changed, so this alone must not bump the package version
-
+        with open(arc56_path, "rb") as f:
+            content = f.read()
         content_hash = sha256_hex(content)
         needs_regen = (
             force_regen
             or existing is None
             or existing.get("content_sha256") != content_hash
         )
-
-        try:
-            arc56_path = os.path.join(arc56_dir, f"{contract_id}.arc56.json")
-            with open(arc56_path, "wb") as f:
-                f.write(content)
-        except OSError as exc:
-            print(f"WARNING: could not write {arc56_path}: {exc}", file=sys.stderr)
-            contracts_state[url] = {
-                **{k: v for k, v in (existing or {}).items() if k != "content_sha256"},
-                "file_slug": file_slug,
-                "hash8": hash8,
-                "namespace": namespace,
-                "download_error": f"failed to write local copy: {exc}",
-            }
-            write_incident_report(
-                owner, repo, url, contract_id, namespace, "download_error",
-                f"failed to write local copy: {exc}", generator_digest,
-            )
-            state_dirty = True
-            continue
 
         if not needs_regen:
             continue
@@ -631,9 +478,7 @@ def process_project(
             # The generator tool itself can crash on certain ARC-56 specs (observed:
             # NullReferenceException in ABITypeToCSType for some struct shapes). Don't
             # let one broken contract abort the whole project/run - record the failure
-            # so we don't retry every run until the content or generator image changes,
-            # and note that any previously generated .cs for this contract may now be
-            # stale relative to the spec copy we just wrote to arc56_path above.
+            # so we don't retry every run until the content or generator image changes.
             print(f"WARNING: generator failed for {url}: {exc}", file=sys.stderr)
             contracts_state[url] = {
                 **{k: v for k, v in (existing or {}).items() if k != "content_sha256"},
@@ -646,8 +491,6 @@ def process_project(
             write_incident_report(
                 owner, repo, url, contract_id, namespace, "generator_error", str(exc), generator_digest
             )
-            # No .cs file was produced/changed here (the old one, if any, is left as-is),
-            # so this alone must not bump the package version - just persist the failure.
             state_dirty = True
             continue
 
@@ -660,7 +503,7 @@ def process_project(
         if previous_cs_hash is not None and previous_cs_hash == cs_hash:
             contracts_state[url] = {
                 **{k: v for k, v in (existing or {}).items()
-                   if k not in ("generator_error", "download_error", "content_sha256", "cs_sha256")},
+                   if k not in ("generator_error", "content_sha256", "cs_sha256")},
                 "content_sha256": content_hash,
                 "cs_sha256": cs_hash,
                 "file_slug": file_slug,
@@ -684,27 +527,22 @@ def process_project(
 
     # A template-only edit (e.g. README.md.template) never touches any contract's
     # content_sha256/cs_sha256, so it must be treated as its own trigger for a version
-    # bump + republish - otherwise every already-generated package keeps stale docs
-    # forever, since nothing else about this project ever changes again.
+    # bump - otherwise every already-generated package keeps stale docs forever, since
+    # nothing else about this project ever changes again.
     template_changed = state.get("template_hash") != template_hash
     needs_version_bump = code_changed or template_changed
 
     if not (state_dirty or needs_version_bump):
-        # Nothing changed this run, but an earlier run may have bumped the version
-        # without successfully publishing it (failed push, or a non-publish run) -
-        # retry that now rather than waiting for the next code change.
-        ensure_published(project_dir, package_id, state, state_path, publish)
         return False
 
     if not needs_version_bump:
-        # Only failure state changed (download/generator errors) - no .cs file was
-        # actually added or modified, so don't bump the version or rebuild/repack.
+        # Only failure state changed (a generator crash) - no .cs file was actually
+        # added or modified, so don't bump the version or rebuild.
         state["generator_image_digest"] = generator_digest
         state["template_hash"] = template_hash
         save_project_state(state_path, state)
         print(f"Project {package_id}: recorded failure state only, no generated-code "
               f"changes - version not bumped", file=sys.stderr)
-        ensure_published(project_dir, package_id, state, state_path, publish)
         return False
 
     increment = state.get("increment", 0) + 1
@@ -726,10 +564,6 @@ def process_project(
 
     print(f"Project {package_id} -> version {version} ({len(contracts_state)} contract(s), "
           f"{len(excluded_contract_ids)} quarantined)", file=sys.stderr)
-    # Pack (and, with --publish, push to nuget.org) this project's package right away -
-    # not after every other project has also finished generating - so packages show up
-    # on nuget.org incrementally as the run progresses instead of all at once at the end.
-    ensure_published(project_dir, package_id, state, state_path, publish)
     return True
 
 
@@ -767,9 +601,7 @@ def write_project_files(
     table_rows = []
     for url in sorted_urls:
         c = contracts_state[url]
-        if "download_error" in c:
-            table_rows.append(f"| _(unfetchable)_ | _(download failed - see state.json)_ | [{url}]({url}) |")
-        elif "generator_error" in c:
+        if "generator_error" in c:
             table_rows.append(f"| `{c['namespace']}` | _(generation failed - see state.json)_ | [{url}]({url}) |")
         elif "compile_error" in c:
             table_rows.append(f"| `{c['namespace']}` | _(fails to compile - excluded, see state.json)_ | [{url}]({url}) |")
@@ -800,11 +632,7 @@ _last_push_at: float | None = None
 def push_commits(force: bool = False) -> None:
     """Pushes whatever local commits exist so far. Called after every
     commit_project_changes() but throttled to at most once per PUSH_INTERVAL_SECONDS
-    (force=True bypasses the throttle, used for the final flush after the loop) - so a
-    long run doesn't do a network round-trip per project, while still bounding how much
-    already-finished, already-committed work could be lost if the job dies before
-    reaching its own final push step. Never raises: a push failure here just means the
-    next periodic push (or the workflow's own final push step) picks it up instead."""
+    (force=True bypasses the throttle, used for the final flush after the loop)."""
     global _last_push_at
     now = time.monotonic()
     if not force and _last_push_at is not None and now - _last_push_at < PUSH_INTERVAL_SECONDS:
@@ -817,9 +645,6 @@ def push_commits(force: bool = False) -> None:
 
 
 def configure_git_identity() -> None:
-    """Sets the git identity used by commit_project_changes(). Repo-local only (no
-    --global), so this never touches a developer's own git config outside this
-    checkout - safe to call even for a local --commit test run."""
     subprocess.run(["git", "config", "user.name", "github-actions[bot]"], cwd=REPO_ROOT, check=True)
     subprocess.run(
         ["git", "config", "user.email", "github-actions[bot]@users.noreply.github.com"],
@@ -828,20 +653,16 @@ def configure_git_identity() -> None:
 
 
 def commit_project_changes(owner: str, repo: str) -> None:
-    """Commits (but does not push) whatever changed on disk for this one project -
-    including a version bump - right after it's processed, so the run produces one
-    commit per changed project as it goes instead of a single giant commit for
-    everything at the very end. A no-op if nothing changed for this project. Also
-    stages clients/_incidents, since rebuild_incidents_index() (called right before
-    this, in main()) may have updated it to reflect this project's own incidents."""
+    """Commits (but does not push) whatever changed on disk for this one project's
+    dotnet/ folder, plus the shared clients/_incidents index."""
     paths = [
-        os.path.join("clients", sanitize_path_segment(owner), sanitize_path_segment(repo)),
+        os.path.join("clients", sanitize_path_segment(owner), sanitize_path_segment(repo), "dotnet"),
         os.path.join("clients", "_incidents"),
     ]
     subprocess.run(["git", "add", "--", *paths], cwd=REPO_ROOT, check=True)
     diff = subprocess.run(["git", "diff", "--cached", "--quiet", "--", *paths], cwd=REPO_ROOT)
     if diff.returncode == 0:
-        return  # nothing staged for this project
+        return
     subprocess.run(
         ["git", "commit", "-m", f"chore: regenerate .NET ARC-56 client for {owner}/{repo}"],
         cwd=REPO_ROOT, check=True,
@@ -850,7 +671,7 @@ def commit_project_changes(owner: str, repo: str) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--limit-projects", type=int, default=None,
                          help="Only process the first N owner/repo projects (for local testing).")
     parser.add_argument("--only-repo", action="append", default=[],
@@ -860,14 +681,10 @@ def main() -> int:
                               "substring, case-insensitive (e.g. 'scholtz' or 'scholtz/Biatec'). Can be "
                               "passed multiple times - matches are OR'd together. If --only-repo is also "
                               "given, a project must satisfy both.")
-    parser.add_argument("--publish", action="store_true",
-                         help="Push each changed project's package to nuget.org (via NUGET_API_KEY) "
-                              "as soon as that project is packed, instead of only packing.")
     parser.add_argument("--commit", action="store_true",
                          help="Git-commit each project's changes (including version bumps) as soon as "
                               "that project finishes, instead of leaving everything for the workflow to "
-                              "commit in one batch at the end. Off by default so local test runs don't "
-                              "create commits unless explicitly asked to.")
+                              "commit in one batch at the end.")
     args = parser.parse_args()
 
     if not os.path.isdir(CLIENTS_DIR):
@@ -911,19 +728,9 @@ def main() -> int:
     changed_projects = 0
     failed_projects = 0
     for (owner, repo), project_rows in selected:
-        # A single project must never be able to take down the whole run - process_project
-        # already handles the failure modes we've seen in practice (download/generator/
-        # compile errors) without raising, but this is the last line of defense against
-        # anything unanticipated (e.g. a permissions error from docker/dotnet/git) so a
-        # fresh failure mode degrades to "skip this one project" instead of aborting
-        # everything after it. Combined with pushing progress as we go (below), this is
-        # what makes the *next* run's catch-up fast: only the project that actually
-        # failed (or was mid-flight) needs to be redone, not everything after it too.
         try:
-            if process_project(owner, repo, project_rows, generator_digest, template_hash, args.publish):
+            if process_project(owner, repo, project_rows, generator_digest, template_hash):
                 changed_projects += 1
-            # Rebuilt per-project (not just once at the end) so a --commit run's
-            # per-project commit always includes this project's own incidents, if any.
             rebuild_incidents_index()
             if args.commit:
                 commit_project_changes(owner, repo)
@@ -939,10 +746,6 @@ def main() -> int:
 
     print(f"Done: {len(selected)}/{len(grouped)} project(s) scanned, "
           f"{changed_projects} regenerated/bumped, {failed_projects} failed unexpectedly", file=sys.stderr)
-    # Exit nonzero if anything hit the unexpected-failure path above, so CI still shows
-    # red and a human notices - but only after every successfully-processed project has
-    # already been packed/published/committed/pushed, so nothing already-done is lost
-    # or blocked on the failed one(s).
     return 1 if failed_projects else 0
 
 

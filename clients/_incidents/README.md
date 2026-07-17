@@ -1,6 +1,6 @@
-# Open ARC-56 client generation incidents
+# Open ARC-56 .NET client generation incidents
 
-Rebuilt automatically by `scripts/generate_dotnet_clients.py` on every run. Each row links to a report with the source URL, a repro command, and the full error/stack trace.
+Rebuilt automatically by `scripts/generate_dotnet_clients.py` on every run. Each row links to a report with the source URL, a repro command, and the full error/stack trace. Download failures are tracked separately in each repo's `clients/<owner>/<repo>/arc56/state.json` (see scripts/download_arc56_specs.py).
 
 | Repo | Contract | Failure | Report |
 | --- | --- | --- | --- |
@@ -9,7 +9,6 @@ Rebuilt automatically by `scripts/generate_dotnet_clients.py` on every run. Each
 | [0xYuvi/TrustAnchor](https://github.com/0xYuvi/TrustAnchor) | `TruthRegistry_36fbeecc` | Generated code fails to compile | [0xYuvi/TrustAnchor/TruthRegistry_36fbeecc.md](0xYuvi/TrustAnchor/TruthRegistry_36fbeecc.md) |
 | [A-Maugli/akt03](https://github.com/A-Maugli/akt03) | `BizKorE_12a3f575` | Generated code fails to compile | [A-Maugli/akt03/BizKorE_12a3f575.md](A-Maugli/akt03/BizKorE_12a3f575.md) |
 | [Aarti-panchal01/verifi.ed](https://github.com/Aarti-panchal01/verifi.ed) | `VerifiedProtocol_6470122f` | Generated code fails to compile | [Aarti-panchal01/verifi.ed/VerifiedProtocol_6470122f.md](Aarti-panchal01/verifi.ed/VerifiedProtocol_6470122f.md) |
-| [ADD183/Algo-Farmar](https://github.com/ADD183/Algo-Farmar) | `FarmerContract_2da64336` | Download failed | [ADD183/Algo-Farmar/FarmerContract_2da64336.md](ADD183/Algo-Farmar/FarmerContract_2da64336.md) |
 | [Aditya060806/Ciphera](https://github.com/Aditya060806/Ciphera) | `CredentialManager_25f86a34` | Generated code fails to compile | [Aditya060806/Ciphera/CredentialManager_25f86a34.md](Aditya060806/Ciphera/CredentialManager_25f86a34.md) |
 | [Aditya060806/Ciphera](https://github.com/Aditya060806/Ciphera) | `CredentialManager_d0a8b161` | Generated code fails to compile | [Aditya060806/Ciphera/CredentialManager_d0a8b161.md](Aditya060806/Ciphera/CredentialManager_d0a8b161.md) |
 | [Aditya060806/Ciphera](https://github.com/Aditya060806/Ciphera) | `KYCBoxStorage_1c1968ad` | Generated code fails to compile | [Aditya060806/Ciphera/KYCBoxStorage_1c1968ad.md](Aditya060806/Ciphera/KYCBoxStorage_1c1968ad.md) |
@@ -288,7 +287,6 @@ Rebuilt automatically by `scripts/generate_dotnet_clients.py` on every run. Each
 | [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol) | `C_9f651c3c` | Generated code fails to compile | [Argimirodelpozo/puya-sol/C_9f651c3c.md](Argimirodelpozo/puya-sol/C_9f651c3c.md) |
 | [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol) | `C_9f9004f8` | Generated code fails to compile | [Argimirodelpozo/puya-sol/C_9f9004f8.md](Argimirodelpozo/puya-sol/C_9f9004f8.md) |
 | [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol) | `C_9fb3fadd` | Generated code fails to compile | [Argimirodelpozo/puya-sol/C_9fb3fadd.md](Argimirodelpozo/puya-sol/C_9fb3fadd.md) |
-| [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol) | `C_9fbc1be6` | Download failed | [Argimirodelpozo/puya-sol/C_9fbc1be6.md](Argimirodelpozo/puya-sol/C_9fbc1be6.md) |
 | [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol) | `C_a03b2be0` | Generated code fails to compile | [Argimirodelpozo/puya-sol/C_a03b2be0.md](Argimirodelpozo/puya-sol/C_a03b2be0.md) |
 | [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol) | `C_a0f6cf56` | Generated code fails to compile | [Argimirodelpozo/puya-sol/C_a0f6cf56.md](Argimirodelpozo/puya-sol/C_a0f6cf56.md) |
 | [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol) | `C_a13995e4` | Generated code fails to compile | [Argimirodelpozo/puya-sol/C_a13995e4.md](Argimirodelpozo/puya-sol/C_a13995e4.md) |
@@ -1545,16 +1543,6 @@ Rebuilt automatically by `scripts/generate_dotnet_clients.py` on every run. Each
 | [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol) | `X_0204c7ca` | Generated code fails to compile | [Argimirodelpozo/puya-sol/X_0204c7ca.md](Argimirodelpozo/puya-sol/X_0204c7ca.md) |
 | [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol) | `X_f435f81d` | Generated code fails to compile | [Argimirodelpozo/puya-sol/X_f435f81d.md](Argimirodelpozo/puya-sol/X_f435f81d.md) |
 | [atsoc1993/On-Chain-Petitions-V2](https://github.com/atsoc1993/On-Chain-Petitions-V2) | `Petition_f12fa825` | Generated code fails to compile | [atsoc1993/On-Chain-Petitions-V2/Petition_f12fa825.md](atsoc1993/On-Chain-Petitions-V2/Petition_f12fa825.md) |
-| [atsoc1993/xGov-Proposals-Contracts](https://github.com/atsoc1993/xGov-Proposals-Contracts) | `AlgofunSharesSystem_7dfe8d61` | Download failed | [atsoc1993/xGov-Proposals-Contracts/AlgofunSharesSystem_7dfe8d61.md](atsoc1993/xGov-Proposals-Contracts/AlgofunSharesSystem_7dfe8d61.md) |
-| [atsoc1993/xGov-Proposals-Contracts](https://github.com/atsoc1993/xGov-Proposals-Contracts) | `EmailContract_477e818e` | Download failed | [atsoc1993/xGov-Proposals-Contracts/EmailContract_477e818e.md](atsoc1993/xGov-Proposals-Contracts/EmailContract_477e818e.md) |
-| [atsoc1993/xGov-Proposals-Contracts](https://github.com/atsoc1993/xGov-Proposals-Contracts) | `EmailListings_5c264ca7` | Download failed | [atsoc1993/xGov-Proposals-Contracts/EmailListings_5c264ca7.md](atsoc1993/xGov-Proposals-Contracts/EmailListings_5c264ca7.md) |
-| [atsoc1993/xGov-Proposals-Contracts](https://github.com/atsoc1993/xGov-Proposals-Contracts) | `EmailRegistry_4e49033a` | Download failed | [atsoc1993/xGov-Proposals-Contracts/EmailRegistry_4e49033a.md](atsoc1993/xGov-Proposals-Contracts/EmailRegistry_4e49033a.md) |
-| [atsoc1993/xGov-Proposals-Contracts](https://github.com/atsoc1993/xGov-Proposals-Contracts) | `GainifyMasterApp_f29a6ca3` | Download failed | [atsoc1993/xGov-Proposals-Contracts/GainifyMasterApp_f29a6ca3.md](atsoc1993/xGov-Proposals-Contracts/GainifyMasterApp_f29a6ca3.md) |
-| [atsoc1993/xGov-Proposals-Contracts](https://github.com/atsoc1993/xGov-Proposals-Contracts) | `GainifyStakingPool_fe0b7002` | Download failed | [atsoc1993/xGov-Proposals-Contracts/GainifyStakingPool_fe0b7002.md](atsoc1993/xGov-Proposals-Contracts/GainifyStakingPool_fe0b7002.md) |
-| [atsoc1993/xGov-Proposals-Contracts](https://github.com/atsoc1993/xGov-Proposals-Contracts) | `PrivateStakingPoolManager_018b9784` | Download failed | [atsoc1993/xGov-Proposals-Contracts/PrivateStakingPoolManager_018b9784.md](atsoc1993/xGov-Proposals-Contracts/PrivateStakingPoolManager_018b9784.md) |
-| [atsoc1993/xGov-Proposals-Contracts](https://github.com/atsoc1993/xGov-Proposals-Contracts) | `ServerContract_e5cb413b` | Download failed | [atsoc1993/xGov-Proposals-Contracts/ServerContract_e5cb413b.md](atsoc1993/xGov-Proposals-Contracts/ServerContract_e5cb413b.md) |
-| [atsoc1993/xGov-Proposals-Contracts](https://github.com/atsoc1993/xGov-Proposals-Contracts) | `SpamEmail_91181744` | Download failed | [atsoc1993/xGov-Proposals-Contracts/SpamEmail_91181744.md](atsoc1993/xGov-Proposals-Contracts/SpamEmail_91181744.md) |
-| [atsoc1993/xGov-Proposals-Contracts](https://github.com/atsoc1993/xGov-Proposals-Contracts) | `StakingPool_a01b9f68` | Download failed | [atsoc1993/xGov-Proposals-Contracts/StakingPool_a01b9f68.md](atsoc1993/xGov-Proposals-Contracts/StakingPool_a01b9f68.md) |
 | [chv-sneha/TenderVault](https://github.com/chv-sneha/TenderVault) | `HelloWorld_aba6b132` | Generated code fails to compile | [chv-sneha/TenderVault/HelloWorld_aba6b132.md](chv-sneha/TenderVault/HelloWorld_aba6b132.md) |
 | [compx-labs/flux-access-controls](https://github.com/compx-labs/flux-access-controls) | `flux_gate_9fada13f` | Generated code fails to compile | [compx-labs/flux-access-controls/flux_gate_9fada13f.md](compx-labs/flux-access-controls/flux_gate_9fada13f.md) |
 | [compx-labs/governance-contracts](https://github.com/compx-labs/governance-contracts) | `CompxGovernance_46f65b60` | Generator crash | [compx-labs/governance-contracts/CompxGovernance_46f65b60.md](compx-labs/governance-contracts/CompxGovernance_46f65b60.md) |
@@ -1572,9 +1560,7 @@ Rebuilt automatically by `scripts/generate_dotnet_clients.py` on every run. Each
 | [mrcointreau/algokit-utils-luca-py](https://github.com/mrcointreau/algokit-utils-luca-py) | `State_aa78165e` | Generated code fails to compile | [mrcointreau/algokit-utils-luca-py/State_aa78165e.md](mrcointreau/algokit-utils-luca-py/State_aa78165e.md) |
 | [PriyanshuXPRT/BLISS](https://github.com/PriyanshuXPRT/BLISS) | `AgentEscrowVault_b250dfbf` | Generator crash | [PriyanshuXPRT/BLISS/AgentEscrowVault_b250dfbf.md](PriyanshuXPRT/BLISS/AgentEscrowVault_b250dfbf.md) |
 | [purvacode-80/IntegriKey-Algorand](https://github.com/purvacode-80/IntegriKey-Algorand) | `ZKPVault_92eec5ab` | Generated code fails to compile | [purvacode-80/IntegriKey-Algorand/ZKPVault_92eec5ab.md](purvacode-80/IntegriKey-Algorand/ZKPVault_92eec5ab.md) |
-| [saiusesgithub/Algorand-Lock-In-Notes](https://github.com/saiusesgithub/Algorand-Lock-In-Notes) | `Counter_e2edfee7` | Download failed | [saiusesgithub/Algorand-Lock-In-Notes/Counter_e2edfee7.md](saiusesgithub/Algorand-Lock-In-Notes/Counter_e2edfee7.md) |
 | [sealed-channel/sealed](https://github.com/sealed-channel/sealed) | `sealed_098b3185` | Generated code fails to compile | [sealed-channel/sealed/sealed_098b3185.md](sealed-channel/sealed/sealed_098b3185.md) |
 | [sealed-channel/sealed](https://github.com/sealed-channel/sealed) | `Sealed_v2_d3a92bb7` | Generated code fails to compile | [sealed-channel/sealed/Sealed_v2_d3a92bb7.md](sealed-channel/sealed/Sealed_v2_d3a92bb7.md) |
 | [sunship-studio/sealed](https://github.com/sunship-studio/sealed) | `sealed_64ff5200` | Generated code fails to compile | [sunship-studio/sealed/sealed_64ff5200.md](sunship-studio/sealed/sealed_64ff5200.md) |
 | [sunship-studio/sealed](https://github.com/sunship-studio/sealed) | `Sealed_v2_6b3aba46` | Generated code fails to compile | [sunship-studio/sealed/Sealed_v2_6b3aba46.md](sunship-studio/sealed/Sealed_v2_6b3aba46.md) |
-| [VJLIVE/TrustFundX](https://github.com/VJLIVE/TrustFundX) | `GetFund_dc596fc4` | Download failed | [VJLIVE/TrustFundX/GetFund_dc596fc4.md](VJLIVE/TrustFundX/GetFund_dc596fc4.md) |

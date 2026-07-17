@@ -1,15 +1,15 @@
-name: Generate .NET ARC-56 clients
+name: Download ARC-56 specs
 
-# Second stage of the .NET pipeline (download -> generate -> publish; see
-# download-arc56-specs.yml and publish-dotnet-packages.yml). Only reads ARC-56 specs
-# already downloaded by that first stage and regenerates/commits C# client source - it
-# never touches the network for a spec and never publishes to nuget.org. See
-# docs/dotnet-client-pipeline.md.
+# First stage of both the .NET and TypeScript client pipelines (download -> generate ->
+# publish, x2). Downloads every active ARC-56 spec in arc56.links.csv into
+# clients/<owner>/<repo>/arc56/ - shared across every ecosystem's generated client for
+# that repo, so it only has to happen once no matter how many client languages are
+# generated from it. See docs/dotnet-client-pipeline.md and
+# docs/typescript-client-pipeline.md.
 
 on:
-  workflow_run:
-    workflows: ["Download ARC-56 specs"]
-    types: [completed]
+  schedule:
+    - cron: "0 4 * * *" # daily at 04:00 UTC, after the ARC-56 links update (03:00 UTC)
   workflow_dispatch:
     inputs:
       only_repo:
@@ -21,26 +21,24 @@ on:
           (e.g. 'scholtz' or 'scholtz/Biatec'; can be a comma-separated list of keywords, OR'd together)"
         required: false
         type: string
-  push:
-    paths:
-      - "clients/_template/**"
-  schedule:
-    - cron: "0 6 * * *" # daily fallback at 06:00 UTC, in case the workflow_run trigger is ever missed
+      retry_failed:
+        description: "Retry URLs that previously failed to download, instead of skipping them"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
 concurrency:
-  group: generate-dotnet-clients
+  group: download-arc56-specs
   cancel-in-progress: false
 
 jobs:
-  generate:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+  download:
     runs-on: ubuntu-latest
-    # No download delay in this stage (only generation/build), but a full first-time
-    # run still regenerates a client for every active URL and packs nothing small - see
-    # docs/dotnet-client-pipeline.md for why this can still take a while.
+    # A full run downloads every active ARC-56 URL, at least 7s apart; with thousands
+    # of URLs this can take hours. See docs/dotnet-client-pipeline.md.
     timeout-minutes: 350
     steps:
       - name: Checkout
@@ -51,12 +49,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "8.0.x"
-
-      - name: Generate/update .NET clients (commits each project as it's ready)
+      - name: Download ARC-56 specs (commits each project as it's ready)
         run: |
           ARGS=()
           if [ -n "${{ inputs.only_repo }}" ]; then
@@ -71,16 +64,19 @@ jobs:
               ARGS+=(--filter "$k")
             done
           fi
-          python scripts/generate_dotnet_clients.py --commit "${ARGS[@]}"
+          if [ "${{ inputs.retry_failed }}" = "true" ]; then
+            ARGS+=(--retry-failed)
+          fi
+          python scripts/download_arc56_specs.py --commit "${ARGS[@]}"
 
       - name: Commit any remaining changes and push
         if: always()
         run: |
-          CLIENT_PATHS=(clients/*/*/dotnet clients/_template clients/_incidents)
+          CLIENT_PATHS=(clients/*/*/arc56)
           if ! git diff --quiet -- "${CLIENT_PATHS[@]}" || ! git diff --quiet --cached -- "${CLIENT_PATHS[@]}"; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add "${CLIENT_PATHS[@]}"
-            git commit -m "chore: regenerate .NET ARC-56 clients"
+            git commit -m "chore: download ARC-56 specs"
           fi
           git push
