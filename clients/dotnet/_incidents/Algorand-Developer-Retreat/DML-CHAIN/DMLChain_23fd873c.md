@@ -3,8 +3,8 @@
 - **Repo**: [Algorand-Developer-Retreat/DML-CHAIN](https://github.com/Algorand-Developer-Retreat/DML-CHAIN)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Algorand-Developer-Retreat/DML-CHAIN/HEAD/projects/DML-contracts/contracts/artifacts/DMLChain.arc56.json](https://raw.githubusercontent.com/Algorand-Developer-Retreat/DML-CHAIN/HEAD/projects/DML-contracts/contracts/artifacts/DMLChain.arc56.json)
 - **Namespace used**: `Arc56.Generated.Algorand_Developer_Retreat.DML_CHAIN.DMLChain_23fd873c`
-- **Detected**: 2026-07-17T00:01:50.282205+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
+- **Detected**: 2026-07-17T00:26:14.624539+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:76700131f07234ca74e2ca11c5eed20920edf8dcce99efcda161765d9c7af451`
 
 ## Reproduce
 
