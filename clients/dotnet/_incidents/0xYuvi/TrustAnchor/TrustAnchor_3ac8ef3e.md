@@ -3,8 +3,8 @@
 - **Repo**: [0xYuvi/TrustAnchor](https://github.com/0xYuvi/TrustAnchor)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/trust_anchor/TrustAnchor.arc56.json](https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/trust_anchor/TrustAnchor.arc56.json)
 - **Namespace used**: `Arc56.Generated._0xYuvi.TrustAnchor.TrustAnchor_3ac8ef3e`
-- **Detected**: 2026-07-16T23:57:52.401944+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
+- **Detected**: 2026-07-17T00:22:17.421601+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:76700131f07234ca74e2ca11c5eed20920edf8dcce99efcda161765d9c7af451`
 
 ## Reproduce
 

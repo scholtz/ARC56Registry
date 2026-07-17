@@ -48,16 +48,29 @@ Versions follow `1.0.<increment>.<yyyyMMddHH>` - the same 4-part legacy scheme t
 `Algorand4` package itself uses (e.g. `4.7.3.2026071620`), which NuGet has always
 supported alongside strict 3-part SemVer.
 
-A project's version is bumped, and only that project is re-packed, when:
+A project's version is bumped, and only that project is re-packed, when **the actual
+generated C# code for at least one of its contracts changed** - compared by SHA-256 of
+the generated `.cs` file's bytes, not merely "we attempted regeneration". Two things can
+trigger an attempt at regeneration without necessarily changing anything:
 
-- any of its contracts' ARC-56 content actually changed (compared by SHA-256 of the raw
-  file bytes, not just presence in the CSV), or
-- the generator Docker image's digest changed since the last run (tracked in
-  `clients/dotnet/generator-image-state.json`) - this forces **every** project to
-  regenerate, since a generator update could change output for any contract.
+- a contract's ARC-56 content actually changed (compared by SHA-256 of the raw spec
+  bytes), or
+- the generator Docker image's digest changed since *this project* last recorded one
+  (each project's `state.json` stores the digest it was last processed with - there is
+  no single shared "last seen" file, so a large run's progress isn't all-or-nothing: a
+  project already processed under the current image won't be reprocessed just because
+  other projects haven't gotten to it yet, e.g. after an interrupted run).
+
+Either of those can cause a rerun of the generator, but if the resulting `.cs` content is
+byte-identical to what's already there (common: the same generator version reproduces
+the same output for unchanged input), the version is **not** bumped - only the
+bookkeeping (content hash, recorded generator digest) is updated, so the next run knows
+not to bother rechecking. Download and generator-crash failures are recorded in
+`state.json` for the same reason (so they aren't silently lost or retried every run) but
+never bump the version either, since no `.cs` file changed.
 
 `increment` is a per-project counter stored in that project's `state.json`, incremented
-by 1 each time the project is regenerated for any reason.
+by 1 only when the generated code actually changes.
 
 Existing rows are never deleted from `arc56.links.csv` (see
 [arc56-links-pipeline.md](arc56-links-pipeline.md)), and this pipeline mirrors that:
@@ -127,9 +140,10 @@ python scripts/generate_dotnet_clients.py --only-repo algorandfoundation/arc55-e
 python scripts/generate_dotnet_clients.py --limit-projects 3
 ```
 
-Full, unscoped runs are meant for CI. Note: `--only-repo`/`--limit-projects` runs never
-update the global generator-image-digest state file, so a full run afterwards will still
-correctly detect and act on any pending generator image change.
+Full, unscoped runs are meant for CI. Since the generator-image digest is tracked
+per-project rather than in one shared file, `--only-repo`/`--limit-projects` runs don't
+affect anything outside the projects they touch - a later full run will still correctly
+detect and act on a pending generator image change for every other project.
 
 To pack a project after generation:
 

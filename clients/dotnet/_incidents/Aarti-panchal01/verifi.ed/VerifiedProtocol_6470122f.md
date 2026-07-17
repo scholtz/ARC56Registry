@@ -3,8 +3,8 @@
 - **Repo**: [Aarti-panchal01/verifi.ed](https://github.com/Aarti-panchal01/verifi.ed)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Aarti-panchal01/verifi.ed/HEAD/smart_contracts/artifacts/verified_protocol/VerifiedProtocol.arc56.json](https://raw.githubusercontent.com/Aarti-panchal01/verifi.ed/HEAD/smart_contracts/artifacts/verified_protocol/VerifiedProtocol.arc56.json)
 - **Namespace used**: `Arc56.Generated.Aarti_panchal01.verifi_ed.VerifiedProtocol_6470122f`
-- **Detected**: 2026-07-16T23:58:06.764646+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
+- **Detected**: 2026-07-17T00:22:31.057317+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:76700131f07234ca74e2ca11c5eed20920edf8dcce99efcda161765d9c7af451`
 
 ## Reproduce
 
