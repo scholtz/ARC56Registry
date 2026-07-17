@@ -154,12 +154,26 @@ def save_project_state(path: str, state: dict) -> None:
         f.write("\n")
 
 
+def docker_user_args() -> list[str]:
+    """On POSIX, runs the generator container as the same uid:gid that owns the
+    bind-mounted host directories (getuid()/getgid() don't exist on Windows, where this
+    is a no-op). Without this, the container's baked-in default user can differ from
+    whoever created/owns those host directories - on GitHub Actions runners this has
+    been observed to make the generator crash with `UnauthorizedAccessException:
+    Access to the path '/app/out/<file>.cs' is denied` for some (not all - only
+    pre-existing or oddly-permissioned paths) contracts, exiting 139 (SIGSEGV) instead
+    of a clean nonzero exit."""
+    if hasattr(os, "getuid"):
+        return ["--user", f"{os.getuid()}:{os.getgid()}"]
+    return []
+
+
 def run_generator(arc56_dir: str, src_dir: str, arc56_filename: str, namespace: str) -> str:
     """Runs the docker generator and returns the path to the generated .cs file."""
     before = set(os.listdir(src_dir)) if os.path.isdir(src_dir) else set()
     os.makedirs(src_dir, exist_ok=True)
     cmd = [
-        "docker", "run", "--rm",
+        "docker", "run", "--rm", *docker_user_args(),
         "-v", f"{arc56_dir}:/app/artifacts",
         "-v", f"{src_dir}:/app/out",
         GENERATOR_IMAGE,
@@ -750,6 +764,39 @@ def write_project_files(
         f.write(readme)
 
 
+def configure_git_identity() -> None:
+    """Sets the git identity used by commit_project_changes(). Repo-local only (no
+    --global), so this never touches a developer's own git config outside this
+    checkout - safe to call even for a local --commit test run."""
+    subprocess.run(["git", "config", "user.name", "github-actions[bot]"], cwd=REPO_ROOT, check=True)
+    subprocess.run(
+        ["git", "config", "user.email", "github-actions[bot]@users.noreply.github.com"],
+        cwd=REPO_ROOT, check=True,
+    )
+
+
+def commit_project_changes(owner: str, repo: str) -> None:
+    """Commits (but does not push) whatever changed on disk for this one project -
+    including a version bump - right after it's processed, so the run produces one
+    commit per changed project as it goes instead of a single giant commit for
+    everything at the very end. A no-op if nothing changed for this project. Also
+    stages clients/_incidents, since rebuild_incidents_index() (called right before
+    this, in main()) may have updated it to reflect this project's own incidents."""
+    paths = [
+        os.path.join("clients", sanitize_path_segment(owner), sanitize_path_segment(repo)),
+        os.path.join("clients", "_incidents"),
+    ]
+    subprocess.run(["git", "add", "--", *paths], cwd=REPO_ROOT, check=True)
+    diff = subprocess.run(["git", "diff", "--cached", "--quiet", "--", *paths], cwd=REPO_ROOT)
+    if diff.returncode == 0:
+        return  # nothing staged for this project
+    subprocess.run(
+        ["git", "commit", "-m", f"chore: regenerate .NET ARC-56 client for {owner}/{repo}"],
+        cwd=REPO_ROOT, check=True,
+    )
+    print(f"Committed changes for {owner}/{repo}", file=sys.stderr)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit-projects", type=int, default=None,
@@ -759,6 +806,11 @@ def main() -> int:
     parser.add_argument("--publish", action="store_true",
                          help="Push each changed project's package to nuget.org (via NUGET_API_KEY) "
                               "as soon as that project is packed, instead of only packing.")
+    parser.add_argument("--commit", action="store_true",
+                         help="Git-commit each project's changes (including version bumps) as soon as "
+                              "that project finishes, instead of leaving everything for the workflow to "
+                              "commit in one batch at the end. Off by default so local test runs don't "
+                              "create commits unless explicitly asked to.")
     args = parser.parse_args()
 
     if not os.path.isdir(CLIENTS_DIR):
@@ -789,12 +841,18 @@ def main() -> int:
     if args.limit_projects is not None:
         selected = selected[: args.limit_projects]
 
+    if args.commit:
+        configure_git_identity()
+
     changed_projects = 0
     for (owner, repo), project_rows in selected:
         if process_project(owner, repo, project_rows, generator_digest, args.publish):
             changed_projects += 1
-
-    rebuild_incidents_index()
+        # Rebuilt per-project (not just once at the end) so a --commit run's per-project
+        # commit always includes this project's own incidents, if any.
+        rebuild_incidents_index()
+        if args.commit:
+            commit_project_changes(owner, repo)
 
     print(f"Done: {len(selected)}/{len(grouped)} project(s) scanned, "
           f"{changed_projects} regenerated/bumped", file=sys.stderr)

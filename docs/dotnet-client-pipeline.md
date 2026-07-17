@@ -111,6 +111,16 @@ the package) but will be **out of sync** with the newly-copied `arc56/*.json` sp
 the generator is fixed or the content reverts. This is a known, logged trade-off rather
 than a silent one.
 
+The generator container is run with `--user "$(getuid):$(getgid)"` on POSIX (a no-op on
+Windows, where `os.getuid()` doesn't exist) so it writes into the bind-mounted
+`arc56/`/`src/` directories as the same user that owns them on the host. Without this,
+a container-default user that differs from the host's (common on GitHub Actions
+runners) can hit `UnauthorizedAccessException: Access to the path '/app/out/<file>.cs'
+is denied` for some contracts - an ownership mismatch, not a bug in the ARC-56 spec
+itself. Like the other generator failures above, this was already non-fatal (recorded
+as a `generator_error`, run continues) even before the `--user` fix; the fix just
+avoids hitting that failure in the first place.
+
 ## Compile failures (quarantining)
 
 Because every contract in a repo shares one compiled project, generation succeeding is
@@ -159,6 +169,11 @@ unless you want to. To do it manually anyway:
 ```bash
 dotnet pack clients/<owner>/<repo>/dotnet/<PackageId>.csproj --configuration Release --output artifacts/nupkgs
 ```
+
+`--publish` and `--commit` (both used by CI - see below) are **off by default** for
+local runs, specifically so trying the script out locally never pushes a package to
+nuget.org or creates a commit in your working copy unless you pass those flags
+yourself.
 
 ## Publishing to NuGet.org
 
@@ -221,13 +236,42 @@ about an hour.
    (`steps.nuget_login.outputs.NUGET_API_KEY`), passed to the script as the
    `NUGET_API_KEY` env var. If `NUGET_USER` isn't set yet, this step (and therefore
    every push below) is skipped - the script still runs and packs normally.
-2. `python scripts/generate_dotnet_clients.py --publish ...` does the actual
-   per-project pack+push, described above - see `pack_project`, `push_to_nuget`, and
-   `ensure_published` in the script for the exact mechanics.
+2. `python scripts/generate_dotnet_clients.py --publish --commit ...` does the actual
+   per-project pack+push+commit, described above and below - see `pack_project`,
+   `push_to_nuget`, `ensure_published`, and `commit_project_changes` in the script for
+   the exact mechanics.
+3. `git push` at the very end pushes whatever local commits the run made - see
+   "Committing" below for why commits happen inside the script rather than here.
 
 Within the script, `dotnet nuget push ... --skip-duplicate` is used for every push,
 making it safe to retry: pushing a version that's already on nuget.org is a no-op
 instead of a failure.
+
+### Committing
+
+Like publishing, committing is **per-project, not batched**: with `--commit`,
+`commit_project_changes()` runs right after each project is processed (successfully or
+not - a download/generator failure alone still touches `state.json` and an incident
+report, which is worth its own commit) and stages+commits only that project's own
+`clients/<owner>/<repo>/` directory plus the shared `clients/_incidents/` index -
+nothing else. It's a no-op (`git diff --cached --quiet` short-circuits it) when nothing
+actually changed for that project. This mirrors the pack/publish reasoning: a run
+touching many repos produces one commit per changed repo as it goes, not one giant
+commit for the whole run at the end - useful for `git bisect`/history and for the same
+"see it progress instead of waiting for everything" reason as incremental publishing.
+
+`--commit` only *commits* locally; **CI still does a single `git push` at the end**
+(see `generate-dotnet-clients.yml`'s "Commit any remaining changes and push" step) to
+push every commit the run made in one go, rather than one push per project - pushing
+is a network round-trip per call and isn't worth doing per-project the way packing and
+publishing are. That step also picks up and commits anything that somehow wasn't
+captured per-project (defensive fallback; shouldn't normally find anything with
+`--commit` passed) before pushing.
+
+`--commit` is opt-in (see "Running it locally" above) precisely so it can configure a
+repo-local git identity (`github-actions[bot]`, via `git config` with no `--global`)
+and create real commits - safe for CI, but not something a plain local test run should
+do without asking for it.
 
 ### Retrying a failed publish
 
