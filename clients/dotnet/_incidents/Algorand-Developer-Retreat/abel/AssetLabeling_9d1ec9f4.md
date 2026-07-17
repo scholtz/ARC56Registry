@@ -3,7 +3,7 @@
 - **Repo**: [Algorand-Developer-Retreat/abel](https://github.com/Algorand-Developer-Retreat/abel)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Algorand-Developer-Retreat/abel/HEAD/projects/asset_labeling-contracts/smart_contracts/artifacts/asset_labeling/AssetLabeling.arc56.json](https://raw.githubusercontent.com/Algorand-Developer-Retreat/abel/HEAD/projects/asset_labeling-contracts/smart_contracts/artifacts/asset_labeling/AssetLabeling.arc56.json)
 - **Namespace used**: `Arc56.Generated.Algorand_Developer_Retreat.abel.AssetLabeling_9d1ec9f4`
-- **Detected**: 2026-07-16T23:51:45.940860+00:00
+- **Detected**: 2026-07-17T00:02:05.012840+00:00
 - **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
 
 ## Reproduce

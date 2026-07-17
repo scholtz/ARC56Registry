@@ -3,7 +3,7 @@
 - **Repo**: [0M3REXE/whisperbid](https://github.com/0M3REXE/whisperbid)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/0M3REXE/whisperbid/HEAD/projects/whisperbid-contracts/smart_contracts/artifacts/whisper_bid/WhisperBid.arc56.json](https://raw.githubusercontent.com/0M3REXE/whisperbid/HEAD/projects/whisperbid-contracts/smart_contracts/artifacts/whisper_bid/WhisperBid.arc56.json)
 - **Namespace used**: `Arc56.Generated._0M3REXE.whisperbid.WhisperBid_ad7b42ec`
-- **Detected**: 2026-07-16T23:46:55.521654+00:00
+- **Detected**: 2026-07-16T23:57:16.525329+00:00
 - **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
 
 ## Reproduce

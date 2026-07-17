@@ -3,7 +3,7 @@
 - **Repo**: [Algorand-Developer-Retreat/web-vrf-example](https://github.com/Algorand-Developer-Retreat/web-vrf-example)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Algorand-Developer-Retreat/web-vrf-example/HEAD/src/artifacts/AppVRF.arc56.json](https://raw.githubusercontent.com/Algorand-Developer-Retreat/web-vrf-example/HEAD/src/artifacts/AppVRF.arc56.json)
 - **Namespace used**: `Arc56.Generated.Algorand_Developer_Retreat.web_vrf_example.AppVRF_3d1e2d1c`
-- **Detected**: 2026-07-16T23:53:31.713999+00:00
+- **Detected**: 2026-07-17T00:03:57.117629+00:00
 - **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
 
 ## Reproduce

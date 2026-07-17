@@ -3,7 +3,7 @@
 - **Repo**: [Ananyaa-08/Refugee-Identity-System](https://github.com/Ananyaa-08/Refugee-Identity-System)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Ananyaa-08/Refugee-Identity-System/HEAD/projects/refugee-identity-system/Nexathon/blockchain/artifacts/refugee_contract/RefugeeContract.arc56.json](https://raw.githubusercontent.com/Ananyaa-08/Refugee-Identity-System/HEAD/projects/refugee-identity-system/Nexathon/blockchain/artifacts/refugee_contract/RefugeeContract.arc56.json)
 - **Namespace used**: `Arc56.Generated.Ananyaa_08.Refugee_Identity_System.RefugeeContract_92bbcaf9`
-- **Detected**: 2026-07-16T23:53:46.000652+00:00
+- **Detected**: 2026-07-17T00:04:11.526942+00:00
 - **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
 
 ## Reproduce

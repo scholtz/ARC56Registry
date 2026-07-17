@@ -3,7 +3,7 @@
 - **Repo**: [Aeztrest/BlockSign](https://github.com/Aeztrest/BlockSign)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Aeztrest/BlockSign/HEAD/blockchain/blocksign/projects/blocksign/smart_contracts/artifacts/blocksign/Blocksign.arc56.json](https://raw.githubusercontent.com/Aeztrest/BlockSign/HEAD/blockchain/blocksign/projects/blocksign/smart_contracts/artifacts/blocksign/Blocksign.arc56.json)
 - **Namespace used**: `Arc56.Generated.Aeztrest.BlockSign.Blocksign_e8098e7b`
-- **Detected**: 2026-07-16T23:51:07.831681+00:00
+- **Detected**: 2026-07-17T00:01:28.329436+00:00
 - **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
 
 ## Reproduce

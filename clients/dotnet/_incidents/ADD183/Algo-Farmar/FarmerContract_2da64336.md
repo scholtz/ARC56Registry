@@ -2,7 +2,7 @@
 
 - **Repo**: [ADD183/Algo-Farmar](https://github.com/ADD183/Algo-Farmar)
 - **Source ARC-56 spec URL**: https://raw.githubusercontent.com/ADD183/Algo-Farmar/HEAD/PICT 2.0/farmer-pay-contract/projects/farmer-pay-contract/smart_contracts/artifacts/farmer_contract/FarmerContract.arc56.json
-- **Detected**: 2026-07-16T23:53:28.486700+00:00
+- **Detected**: 2026-07-16T23:58:03.666485+00:00
 
 This is a fetch/network problem (invalid URL, renamed/deleted file, unreachable host,
 etc.), not a bug in the generator. Check whether the URL above is still correct (the

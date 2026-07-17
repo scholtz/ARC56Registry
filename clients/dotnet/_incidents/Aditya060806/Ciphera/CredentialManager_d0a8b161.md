@@ -3,7 +3,7 @@
 - **Repo**: [Aditya060806/Ciphera](https://github.com/Aditya060806/Ciphera)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Aditya060806/Ciphera/HEAD/Ciphera-kyc/projects/Ciphera-kyc/smart_contracts/artifacts/credential_manager/CredentialManager.arc56.json](https://raw.githubusercontent.com/Aditya060806/Ciphera/HEAD/Ciphera-kyc/projects/Ciphera-kyc/smart_contracts/artifacts/credential_manager/CredentialManager.arc56.json)
 - **Namespace used**: `Arc56.Generated.Aditya060806.Ciphera.CredentialManager_d0a8b161`
-- **Detected**: 2026-07-16T23:49:34.214775+00:00
+- **Detected**: 2026-07-16T23:59:54.417541+00:00
 - **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
 
 ## Reproduce

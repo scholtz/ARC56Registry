@@ -3,7 +3,7 @@
 - **Repo**: [AdityaWagh19/Cadencia-A2A-Platform](https://github.com/AdityaWagh19/Cadencia-A2A-Platform)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/AdityaWagh19/Cadencia-A2A-Platform/HEAD/backend/artifacts/CadenciaEscrow.arc56.json](https://raw.githubusercontent.com/AdityaWagh19/Cadencia-A2A-Platform/HEAD/backend/artifacts/CadenciaEscrow.arc56.json)
 - **Namespace used**: `Arc56.Generated.AdityaWagh19.Cadencia_A2A_Platform.CadenciaEscrow_08254c5a`
-- **Detected**: 2026-07-16T23:50:01.340434+00:00
+- **Detected**: 2026-07-17T00:00:21.466270+00:00
 - **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
 
 ## Reproduce

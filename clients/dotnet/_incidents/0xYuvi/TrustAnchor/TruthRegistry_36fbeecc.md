@@ -3,7 +3,7 @@
 - **Repo**: [0xYuvi/TrustAnchor](https://github.com/0xYuvi/TrustAnchor)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/truth_registry/TruthRegistry.arc56.json](https://raw.githubusercontent.com/0xYuvi/TrustAnchor/HEAD/projects/TrustAnchor-contracts/smart_contracts/artifacts/truth_registry/TruthRegistry.arc56.json)
 - **Namespace used**: `Arc56.Generated._0xYuvi.TrustAnchor.TruthRegistry_36fbeecc`
-- **Detected**: 2026-07-16T23:47:30.355433+00:00
+- **Detected**: 2026-07-16T23:57:52.403674+00:00
 - **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
 
 ## Reproduce

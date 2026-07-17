@@ -3,7 +3,7 @@
 - **Repo**: [Algorand-Developer-Retreat/smart-wallet-for-agent-to-agent-interaction](https://github.com/Algorand-Developer-Retreat/smart-wallet-for-agent-to-agent-interaction)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Algorand-Developer-Retreat/smart-wallet-for-agent-to-agent-interaction/HEAD/projects/contracts/smart_contracts/artifacts/abstracted_account/AbstractedAccount.arc56.json](https://raw.githubusercontent.com/Algorand-Developer-Retreat/smart-wallet-for-agent-to-agent-interaction/HEAD/projects/contracts/smart_contracts/artifacts/abstracted_account/AbstractedAccount.arc56.json)
 - **Namespace used**: `Arc56.Generated.Algorand_Developer_Retreat.smart_wallet_for_agent_to_agent_interaction.AbstractedAccount_30d4ea5c`
-- **Detected**: 2026-07-16T23:52:48.504533+00:00
+- **Detected**: 2026-07-17T00:03:13.535048+00:00
 - **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
 
 ## Reproduce

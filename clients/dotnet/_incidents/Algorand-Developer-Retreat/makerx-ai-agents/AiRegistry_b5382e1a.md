@@ -3,7 +3,7 @@
 - **Repo**: [Algorand-Developer-Retreat/makerx-ai-agents](https://github.com/Algorand-Developer-Retreat/makerx-ai-agents)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Algorand-Developer-Retreat/makerx-ai-agents/HEAD/projects/algorand-agent-mcp-server/AiRegistry.arc56.json](https://raw.githubusercontent.com/Algorand-Developer-Retreat/makerx-ai-agents/HEAD/projects/algorand-agent-mcp-server/AiRegistry.arc56.json)
 - **Namespace used**: `Arc56.Generated.Algorand_Developer_Retreat.makerx_ai_agents.AiRegistry_b5382e1a`
-- **Detected**: 2026-07-16T23:52:05.259186+00:00
+- **Detected**: 2026-07-17T00:02:27.369060+00:00
 - **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:e738b4d750aa1f25bbc94eec6a9322ce0e3d53dfeb06368c5806ae7475b201f7`
 
 ## Reproduce
