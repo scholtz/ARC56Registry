@@ -28,6 +28,11 @@ jobs:
     # 7s apart per download; with thousands of URLs this can take many hours. See
     # docs/dotnet-client-pipeline.md for why, and how incremental runs stay fast.
     timeout-minutes: 350
+    env:
+      # `secrets` can't be referenced directly in a step's `if:` - route it through a
+      # job-level env var instead (see "Invalid workflow file" / "Unrecognized
+      # named-value: 'secrets'" if this is inlined into the if: below).
+      NUGET_USER: ${{ secrets.NUGET_USER }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,11 +56,11 @@ jobs:
       # still generates/packs everything but leaves --publish's pushes to retry on a
       # later run once the secret exists.
       - name: NuGet login (OIDC -> short-lived API key)
-        if: ${{ secrets.NUGET_USER != '' }}
+        if: ${{ env.NUGET_USER != '' }}
         uses: NuGet/login@v1
         id: nuget_login
         with:
-          user: ${{ secrets.NUGET_USER }}
+          user: ${{ env.NUGET_USER }}
 
       - name: Generate/update .NET clients (packs + publishes each project as it's ready)
         id: generate
