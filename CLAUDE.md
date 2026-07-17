@@ -148,6 +148,12 @@ pins those separately from the package `<Version>`. Don't "simplify" that away.
   scripts also log per-URL progress as `[i/N]` (N = total rows selected for that run,
   not the whole registry) at the top of their per-row loop, and the publish scripts log
   `[i/N]` per project - keep both when editing these loops.
+- `generate_typescript_clients.py --commit` checkpoints (commits + pushes) **at least
+  every 5 minutes**, checked per-row inside a project's contract loop, not only when a
+  project finishes - a single large project (dozens of contracts, each its own `npx`
+  invocation, plus one `npm install` + `tsc` type-check) can itself run past 5 minutes.
+  See `maybe_checkpoint_commit()` and docs/typescript-client-pipeline.md#committing-during-generation.
+  Don't revert this back to "commit once per finished project only".
 - .NET versioning is the 4-part legacy scheme `1.0.<increment>.<yyyyMMddHH>` - matches
   what `Algorand4` (the runtime dependency of every generated client) already uses.
   TypeScript versioning is `1.<increment>.<yyyyMMddHH>` (3-part, valid semver - npm

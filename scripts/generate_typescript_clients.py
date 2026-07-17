@@ -67,7 +67,11 @@ INCIDENTS_DIR = os.path.join(CLIENTS_DIR, "_incidents")
 
 REGISTRY_REPO_URL = "https://github.com/scholtz/Arc56Registry"
 GENERATOR_PACKAGE = "@algorandfoundation/algokit-client-generator"
-PUSH_INTERVAL_SECONDS = 60
+# Commit (and push) at least this often - checked both between projects and *during* a
+# single large project's contract loop, since one project's generation + npm install +
+# tsc type-check can itself run past this interval. Keeps a crashed/killed run from
+# losing more than one checkpoint's worth of progress - see maybe_checkpoint_commit().
+PERIODIC_COMMIT_INTERVAL_SECONDS = 300
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -370,6 +374,7 @@ def process_project(
     generator_version: str,
     template_hash: str,
     progress: list[int],
+    commit_enabled: bool,
 ) -> bool:
     owner_slug = sanitize_path_segment(owner)
     repo_slug = sanitize_path_segment(repo)
@@ -390,6 +395,12 @@ def process_project(
         url = row["ARC56URL"]
         progress[0] += 1
         log(f"[{progress[0]}/{progress[1]}] {owner}/{repo}: {url}")
+        # Checked on every row (cheap: just a clock comparison unless the interval has
+        # actually elapsed) so a single large project - dozens of contracts, each its
+        # own `npx` invocation - still gets checkpointed mid-flight rather than only
+        # once the whole project (including its later npm install + tsc type-check)
+        # finishes. See maybe_checkpoint_commit().
+        maybe_checkpoint_commit(owner, repo, commit_enabled)
         try:
             _, _, path = parse_raw_url(url)
         except ValueError as exc:
@@ -585,19 +596,12 @@ def write_project_files(
         f.write(readme)
 
 
-_last_push_at: float | None = None
-
-
-def push_commits(force: bool = False) -> None:
-    global _last_push_at
-    now = time.monotonic()
-    if not force and _last_push_at is not None and now - _last_push_at < PUSH_INTERVAL_SECONDS:
-        return
+def push_commits() -> None:
+    """Pushes whatever local commits exist so far. Never raises: a push failure here
+    just means the next checkpoint (or the workflow's own final push step) retries it."""
     result = subprocess.run(["git", "push"], cwd=REPO_ROOT, capture_output=True, text=True)
     if result.returncode != 0:
         log(f"WARNING: git push failed (will retry later): {result.stdout}\n{result.stderr}")
-        return
-    _last_push_at = now
 
 
 def configure_git_identity() -> None:
@@ -622,6 +626,29 @@ def commit_project_changes(owner: str, repo: str) -> None:
         cwd=REPO_ROOT, check=True,
     )
     log(f"Committed changes for {owner}/{repo}")
+
+
+_last_checkpoint_at: float | None = None
+
+
+def maybe_checkpoint_commit(owner: str, repo: str, commit_enabled: bool, force: bool = False) -> None:
+    """Commits and pushes whatever's changed under this project's npm/ dir so far, at
+    most once every PERIODIC_COMMIT_INTERVAL_SECONDS unless force=True. Called both
+    after each contract inside a project's generation loop (so a single large project
+    - e.g. dozens of contracts, each its own `npx` invocation, plus one `npm install`
+    and `tsc` type-check - still checkpoints progress instead of only committing once
+    that whole project finishes) and, with force=True, right after a project finishes
+    (so finishing a project is always its own checkpoint, not delayed up to another
+    interval). A no-op entirely if --commit wasn't passed."""
+    global _last_checkpoint_at
+    if not commit_enabled:
+        return
+    now = time.monotonic()
+    if not force and _last_checkpoint_at is not None and now - _last_checkpoint_at < PERIODIC_COMMIT_INTERVAL_SECONDS:
+        return
+    commit_project_changes(owner, repo)
+    push_commits()
+    _last_checkpoint_at = now
 
 
 def main() -> int:
@@ -684,11 +711,9 @@ def main() -> int:
     failed_projects = 0
     for (owner, repo), project_rows in selected:
         try:
-            if process_project(owner, repo, project_rows, generator_version, template_hash, progress):
+            if process_project(owner, repo, project_rows, generator_version, template_hash, progress, args.commit):
                 changed_projects += 1
-            if args.commit:
-                commit_project_changes(owner, repo)
-                push_commits()
+            maybe_checkpoint_commit(owner, repo, args.commit, force=True)
         except Exception as exc:  # noqa: BLE001 - one project must never take down the whole run
             failed_projects += 1
             log(f"ERROR: unexpected failure processing {owner}/{repo}, skipping and "
@@ -696,7 +721,7 @@ def main() -> int:
             continue
 
     if args.commit:
-        push_commits(force=True)
+        push_commits()
 
     log(f"Done: {len(selected)}/{len(grouped)} project(s) scanned, "
           f"{changed_projects} regenerated/bumped, {failed_projects} failed unexpectedly")

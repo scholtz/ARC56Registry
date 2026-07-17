@@ -151,6 +151,21 @@ npm run build
 scripts. `publish_npm_packages.py` has no `--commit` flag - see "Publishing to npm"
 below.
 
+### Committing during generation
+
+Unlike the .NET pipeline's generate stage (which commits once per finished project),
+`generate_typescript_clients.py --commit` checkpoints **at least every 5 minutes**
+(`PERIODIC_COMMIT_INTERVAL_SECONDS`), checked on every row of a project's contract
+loop - not only when a project finishes. This matters here specifically because a
+single TypeScript project can itself run past 5 minutes: dozens of contracts, each its
+own `npx @algorandfoundation/algokit-client-generator` invocation, followed by one
+`npm install` and `tsc --noEmit` type-check for the whole package. Without a mid-project
+checkpoint, a crash partway through a large repo (e.g. `akita-protocol/akita-sc`'s 86
+contracts) would lose everything generated since that project started, not just since
+the last commit. Finishing a project is still its own checkpoint too (forced,
+bypassing the 5-minute throttle), so committing isn't delayed just because a project
+happened to finish early in the window. See `maybe_checkpoint_commit()` in the script.
+
 ## Publishing to npm
 
 Publishing is its own script and workflow
