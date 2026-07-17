@@ -39,7 +39,6 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CSV_PATH = os.path.join(REPO_ROOT, "arc56.links.csv")
 CLIENTS_DOTNET_DIR = os.path.join(REPO_ROOT, "clients", "dotnet")
 TEMPLATE_DIR = os.path.join(CLIENTS_DOTNET_DIR, "_template")
-GLOBAL_STATE_PATH = os.path.join(CLIENTS_DOTNET_DIR, "generator-image-state.json")
 INCIDENTS_DIR = os.path.join(CLIENTS_DOTNET_DIR, "_incidents")
 
 REGISTRY_REPO_URL = "https://github.com/scholtz/Arc56Registry"
@@ -136,19 +135,6 @@ def get_generator_image_digest() -> str:
         )
     repo_name = GENERATOR_IMAGE.split(":", 1)[0]
     return f"{repo_name}@{match.group(1)}"
-
-
-def load_global_state() -> dict:
-    if not os.path.exists(GLOBAL_STATE_PATH):
-        return {}
-    with open(GLOBAL_STATE_PATH, encoding="utf-8") as f:
-        return json.load(f)
-
-
-def save_global_state(state: dict) -> None:
-    with open(GLOBAL_STATE_PATH, "w", encoding="utf-8") as f:
-        json.dump(state, f, indent=2)
-        f.write("\n")
 
 
 def load_project_state(path: str) -> dict:
@@ -419,7 +405,6 @@ def process_project(
     owner: str,
     repo: str,
     rows: list[dict[str, str]],
-    global_force_regen: bool,
     generator_digest: str,
 ) -> bool:
     owner_slug = sanitize_path_segment(owner)
@@ -434,11 +419,17 @@ def process_project(
     state = load_project_state(state_path)
     contracts_state: dict = state.setdefault("contracts", {})
     package_id = f"Arc56.Generated.{owner_slug}.{repo_slug}"
+    # Recheck everything in *this* project if the generator image has changed since the
+    # last time *this* project recorded a digest - tracked per-project (not a single
+    # shared file) so a large run's progress survives being interrupted: a project that
+    # already completed under the current image is not reprocessed just because other
+    # projects haven't gotten to it yet.
+    force_regen = state.get("generator_image_digest") != generator_digest
     # state_dirty: something in state.json changed (including failure records) and must
     # be persisted. code_changed: the actual generated code changed, which is the only
     # thing that should bump the package version / trigger a rebuild+repack - a download
     # or generator failure alone doesn't touch any .cs file, so it shouldn't produce a
-    # new NuGet version.
+    # new NuGet version, and neither does regenerating byte-identical code.
     state_dirty = False
     code_changed = False
 
@@ -462,7 +453,7 @@ def process_project(
         # A URL that's already known to be unfetchable (bad path encoding, 404, etc.)
         # isn't worth retrying every single run - only recheck it when the generator
         # image changes, since that's our only "maybe something changed" signal here.
-        if existing is not None and "download_error" in existing and not global_force_regen:
+        if existing is not None and "download_error" in existing and not force_regen:
             continue
 
         try:
@@ -484,7 +475,7 @@ def process_project(
 
         content_hash = sha256_hex(content)
         needs_regen = (
-            global_force_regen
+            force_regen
             or existing is None
             or existing.get("content_sha256") != content_hash
         )
@@ -519,6 +510,8 @@ def process_project(
             if generated_path != final_path:
                 os.replace(generated_path, final_path)
             class_name = extract_class_name(final_path)
+            with open(final_path, "rb") as f:
+                cs_hash = sha256_hex(f.read())
         except Exception as exc:  # noqa: BLE001 - a single bad contract must never abort the whole run
             # The generator tool itself can crash on certain ARC-56 specs (observed:
             # NullReferenceException in ABITypeToCSType for some struct shapes). Don't
@@ -543,15 +536,36 @@ def process_project(
             state_dirty = True
             continue
 
-        contracts_state[url] = {
-            "content_sha256": content_hash,
-            "file_slug": file_slug,
-            "hash8": hash8,
-            "namespace": namespace,
-            "class_name": class_name,
-            "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-        }
-        code_changed = True
+        # Compare the newly generated code itself (not just whether we attempted
+        # regeneration) - a rerun triggered by force_regen (e.g. the generator image
+        # changed) very often reproduces byte-identical output, and that must not count
+        # as a change: it's what actually differentiates "we regenerated" from "the
+        # package's contents changed".
+        previous_cs_hash = (existing or {}).get("cs_sha256")
+        if previous_cs_hash is not None and previous_cs_hash == cs_hash:
+            contracts_state[url] = {
+                **{k: v for k, v in (existing or {}).items()
+                   if k not in ("generator_error", "download_error", "content_sha256", "cs_sha256")},
+                "content_sha256": content_hash,
+                "cs_sha256": cs_hash,
+                "file_slug": file_slug,
+                "hash8": hash8,
+                "namespace": namespace,
+                "class_name": class_name,
+            }
+            state_dirty = True
+            print(f"Regenerated {url} - identical code, not counted as a change", file=sys.stderr)
+        else:
+            contracts_state[url] = {
+                "content_sha256": content_hash,
+                "cs_sha256": cs_hash,
+                "file_slug": file_slug,
+                "hash8": hash8,
+                "namespace": namespace,
+                "class_name": class_name,
+                "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            }
+            code_changed = True
 
     if not (state_dirty or code_changed):
         return False
@@ -666,12 +680,6 @@ def main() -> int:
         return 1
     print(f"Generator image digest: {generator_digest}", file=sys.stderr)
 
-    global_state = load_global_state()
-    global_force_regen = global_state.get("digest") != generator_digest
-    if global_force_regen:
-        print("Generator image changed since last run - regenerating every project",
-              file=sys.stderr)
-
     rows = load_active_rows()
     grouped: dict[tuple[str, str], list[dict[str, str]]] = {}
     for row in rows:
@@ -686,23 +694,15 @@ def main() -> int:
     if args.only_repo:
         wanted = {tuple(r.split("/", 1)) for r in args.only_repo}
         selected = [item for item in selected if item[0] in wanted]
-    is_partial_run = bool(args.only_repo) or args.limit_projects is not None
     if args.limit_projects is not None:
         selected = selected[: args.limit_projects]
 
     changed_projects = 0
     for (owner, repo), project_rows in selected:
-        if process_project(owner, repo, project_rows, global_force_regen, generator_digest):
+        if process_project(owner, repo, project_rows, generator_digest):
             changed_projects += 1
 
     rebuild_incidents_index()
-
-    if is_partial_run:
-        print("Partial run (--only-repo/--limit-projects used): not updating the global "
-              "generator-image state, so a full run will still see any pending image change.",
-              file=sys.stderr)
-    else:
-        save_global_state({"image": GENERATOR_IMAGE, "digest": generator_digest})
 
     print(f"Done: {len(selected)}/{len(grouped)} project(s) scanned, "
           f"{changed_projects} regenerated/bumped", file=sys.stderr)
