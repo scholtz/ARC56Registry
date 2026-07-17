@@ -15,8 +15,10 @@ For every *active* row in arc56.links.csv, this script:
 
 One NuGet package is produced per GitHub repository (owner/repo), bundling every
 ARC-56 client found in that repo. A repo's package version is only bumped, and only
-`dotnet pack` re-run, when at least one of its contracts actually changed content, or
-the generator image changed (which forces every package to regenerate). Version
+`dotnet pack` re-run, when at least one of its contracts actually changed content, the
+generator image changed (which forces every package to regenerate), or the
+README/csproj templates under clients/_template/ changed (which forces every package
+to re-render its docs/metadata and republish, even with no contract changes). Version
 format: 1.0.<increment>.<yyyyMMddHH> (matches the legacy 4-part scheme already used by
 the Algorand4 package this depends on).
 
@@ -144,6 +146,19 @@ def get_generator_image_digest() -> str:
         )
     repo_name = GENERATOR_IMAGE.split(":", 1)[0]
     return f"{repo_name}@{match.group(1)}"
+
+
+def get_template_hash() -> str:
+    """Hashes the templates that write_project_files() renders into each project's
+    README.md/csproj (but NOT the generated .cs code). Compared against each project's
+    stored state["template_hash"] so a documentation/template-only edit - which never
+    touches any contract's content_sha256/cs_sha256 - still bumps that project's version
+    and gets republished, instead of silently sitting stale forever."""
+    parts = []
+    for name in ("Project.csproj.template", "README.md.template"):
+        with open(os.path.join(TEMPLATE_DIR, name), "rb") as f:
+            parts.append(f.read())
+    return sha256_hex(b"\x00".join(parts))
 
 
 def load_project_state(path: str) -> dict:
@@ -503,6 +518,7 @@ def process_project(
     repo: str,
     rows: list[dict[str, str]],
     generator_digest: str,
+    template_hash: str,
     publish: bool,
 ) -> bool:
     owner_slug = sanitize_path_segment(owner)
@@ -666,17 +682,25 @@ def process_project(
             }
             code_changed = True
 
-    if not (state_dirty or code_changed):
+    # A template-only edit (e.g. README.md.template) never touches any contract's
+    # content_sha256/cs_sha256, so it must be treated as its own trigger for a version
+    # bump + republish - otherwise every already-generated package keeps stale docs
+    # forever, since nothing else about this project ever changes again.
+    template_changed = state.get("template_hash") != template_hash
+    needs_version_bump = code_changed or template_changed
+
+    if not (state_dirty or needs_version_bump):
         # Nothing changed this run, but an earlier run may have bumped the version
         # without successfully publishing it (failed push, or a non-publish run) -
         # retry that now rather than waiting for the next code change.
         ensure_published(project_dir, package_id, state, state_path, publish)
         return False
 
-    if not code_changed:
+    if not needs_version_bump:
         # Only failure state changed (download/generator errors) - no .cs file was
         # actually added or modified, so don't bump the version or rebuild/repack.
         state["generator_image_digest"] = generator_digest
+        state["template_hash"] = template_hash
         save_project_state(state_path, state)
         print(f"Project {package_id}: recorded failure state only, no generated-code "
               f"changes - version not bumped", file=sys.stderr)
@@ -688,6 +712,7 @@ def process_project(
     state["increment"] = increment
     state["version"] = version
     state["generator_image_digest"] = generator_digest
+    state["template_hash"] = template_hash
 
     excluded_contract_ids = {
         contract_id_for(c) for c in contracts_state.values()
@@ -855,6 +880,7 @@ def main() -> int:
         print(f"ERROR: could not resolve {GENERATOR_IMAGE} digest: {exc}", file=sys.stderr)
         return 1
     print(f"Generator image digest: {generator_digest}", file=sys.stderr)
+    template_hash = get_template_hash()
 
     rows = load_active_rows()
     grouped: dict[tuple[str, str], list[dict[str, str]]] = {}
@@ -894,7 +920,7 @@ def main() -> int:
         # what makes the *next* run's catch-up fast: only the project that actually
         # failed (or was mid-flight) needs to be redone, not everything after it too.
         try:
-            if process_project(owner, repo, project_rows, generator_digest, args.publish):
+            if process_project(owner, repo, project_rows, generator_digest, template_hash, args.publish):
                 changed_projects += 1
             # Rebuilt per-project (not just once at the end) so a --commit run's
             # per-project commit always includes this project's own incidents, if any.

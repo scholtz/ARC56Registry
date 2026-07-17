@@ -76,8 +76,17 @@ not to bother rechecking. Download and generator-crash failures are recorded in
 `state.json` for the same reason (so they aren't silently lost or retried every run) but
 never bump the version either, since no `.cs` file changed.
 
+A project's version is also bumped - even with zero contract/code changes - when the
+shared templates under `clients/_template/` (`Project.csproj.template`,
+`README.md.template`) change. Each project's `state.json` stores a `template_hash`
+(SHA-256 over both template files); a mismatch is treated the same as a code change, so
+that project's README/csproj get re-rendered from the new templates, its version is
+bumped, and it gets re-packed/republished. Because every project shares the same two
+template files, editing a template bumps and republishes **every** package on the next
+run, not just one.
+
 `increment` is a per-project counter stored in that project's `state.json`, incremented
-by 1 only when the generated code actually changes.
+by 1 when the generated code actually changes, or when the shared templates change.
 
 Existing rows are never deleted from `arc56.links.csv` (see
 [arc56-links-pipeline.md](arc56-links-pipeline.md)), and this pipeline mirrors that:
