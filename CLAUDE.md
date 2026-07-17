@@ -15,14 +15,26 @@ cover.
   `npm/`/`python/` subfolders are planned so all of a repo's generated packages live
   together under `clients/<owner>/<repo>/`.
 - `clients/_template/` - shared csproj/README templates + shared package icon.
+- `scripts/generate_hash_registry.py` - builds `approval-programs/` and
+  `clear-programs/`, lookups from SHA-256(approval program) / SHA-256(clear program)
+  to a durable URL of the matching ARC-56 spec. Lets a wallet that only has a
+  deployed app's compiled bytecode find a spec to decode calls against it.
+- `approval-programs/<hash[:3]>/<hash>.txt`, `clear-programs/<hash[:3]>/<hash>.txt` -
+  the hash registry itself, one file per distinct program hash.
+- `pages/index.html` - the GitHub Pages landing page for the hash registry, published
+  by `deploy-hash-registry-pages.yml`.
 - `docs/arc56-links-pipeline.md` - full detail on the CSV pipeline.
 - `docs/dotnet-client-pipeline.md` - full detail on the .NET client pipeline.
+- `docs/hash-registry.md` - full detail on the hash registry + GitHub Pages pipeline.
 
 ## Hard rules - do not violate these
 
 1. **Never delete a row from `arc56.links.csv`, and never delete a generated
    `clients/**` file.** Deactivate instead: set `ActiveUntil` to a date. This
-   applies to scripts and to manual edits alike.
+   applies to scripts and to manual edits alike. `approval-programs/**` and
+   `clear-programs/**` files are similarly never deleted, but - unlike `clients/**` -
+   their *content* can legitimately be rewritten in place when a better (larger) spec
+   is found for the same hash; see docs/hash-registry.md.
 2. **`ActiveFrom`/`ActiveUntil` semantics**: a row is active when `ActiveFrom <= today`
    and (`ActiveUntil` is empty or `ActiveUntil` is in the future). New rows always get
    `ActiveFrom = today`, `ActiveUntil = ""`.
@@ -42,6 +54,10 @@ cover.
    from splitting into more packages.
 6. **Never commit changes unless asked.** This applies doubly to `git push` and to
    anything that would trigger a NuGet publish.
+7. **`deploy-hash-registry-pages.yml` needs a one-time manual repo setting** (Settings
+   > Pages > Source: "GitHub Actions") that no workflow file can set. If Pages
+   deployment ever fails with a permissions/source error, that setting - not the
+   workflow YAML - is the first thing to check.
 
 ## Local testing
 

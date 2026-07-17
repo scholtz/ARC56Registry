@@ -1,0 +1,61 @@
+name: Deploy hash registry to GitHub Pages
+
+# Publishes approval-programs/, clear-programs/, and pages/index.html (the developer
+# README explaining how to hash a program and look it up) as a static site, so a hash
+# lookup doesn't need a commit SHA - only generate-hash-registry.yml's *targets* (the
+# ARC-56 spec URLs inside each hash file) stay commit-pinned; this site itself always
+# serves the latest hash tables from `main`.
+#
+# One-time manual setup this workflow depends on: in the repo's Settings > Pages, set
+# "Source" to "GitHub Actions" (not "Deploy from a branch"). That can't be done from
+# a workflow file.
+
+on:
+  workflow_run:
+    workflows: ["Generate hash registry"]
+    types: [completed]
+  workflow_dispatch: {}
+  push:
+    paths:
+      - "pages/**"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Assemble site
+        run: |
+          set -e
+          rm -rf _site
+          mkdir -p _site
+          cp -r approval-programs _site/approval-programs
+          cp -r clear-programs _site/clear-programs
+          cp pages/index.html _site/index.html
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

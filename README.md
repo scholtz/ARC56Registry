@@ -17,10 +17,13 @@ publishes a NuGet package with a typed client for it.
 | [scripts/validate_arc56_links.py](scripts/validate_arc56_links.py) | Pull-request check enforcing the CSV's schema and edit rules. |
 | [scripts/generate_dotnet_clients.py](scripts/generate_dotnet_clients.py) | Generates the C# clients and NuGet packages described below. |
 | [clients/](clients/) | One folder per GitHub repo (`clients/<owner>/<repo>/`), each holding one subfolder per ecosystem's generated client package - `dotnet/` today, with `npm/`/`python/` planned so all of a repo's packages live together. |
-| [.github/workflows/](.github/workflows/) | The three scheduled/triggered pipelines tying all of the above together. |
+| [scripts/generate_hash_registry.py](scripts/generate_hash_registry.py) | Builds `approval-programs/` and `clear-programs/` - lookups from compiled-program SHA-256 hash to ARC-56 spec URL, described below. |
+| [approval-programs/](approval-programs/), [clear-programs/](clear-programs/) | The hash registry itself: `<program>-programs/<hash[:3]>/<hash>.txt`, one file per distinct program hash. |
+| [pages/index.html](pages/index.html) | Landing page for the registry's GitHub Pages site, published from the two folders above. |
+| [.github/workflows/](.github/workflows/) | The scheduled/triggered pipelines tying all of the above together. |
 | [docs/](docs/) | Detailed docs for each pipeline (linked below). |
 
-## The two pipelines
+## The pipelines
 
 ### 1. Keeping the registry up to date
 
@@ -60,10 +63,30 @@ repo's ARC-56 content changes, or whenever the generator Docker image itself is 
 
 Full details, naming rules, and failure handling: **[docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md)**.
 
+### 3. Program hash registry
+
+[`generate-hash-registry.yml`](.github/workflows/generate-hash-registry.yml) walks
+every `*.arc56.json` file in the repo, hashes its compiled approval and clear-state
+programs with SHA-256, and writes `approval-programs/<hash[:3]>/<hash>.txt` and
+`clear-programs/<hash[:3]>/<hash>.txt` containing a durable URL back to the matching
+spec (pinned to the commit that last touched it, so the link survives later edits to
+the source file). [`deploy-hash-registry-pages.yml`](.github/workflows/deploy-hash-registry-pages.yml)
+then publishes both folders, plus a developer-facing usage guide, to
+**[scholtz.github.io/ARC56Registry](https://scholtz.github.io/ARC56Registry/)**.
+
+The point: a wallet about to send an app call to some deployed application usually
+only has the app ID. It can fetch the app's compiled programs from the network, hash
+them, and look up that hash here to find a real ARC-56 spec it can use to decode the
+call - method name, argument types, everything - instead of showing the user an
+opaque raw transaction.
+
+Full details, including how duplicate hashes are resolved: **[docs/hash-registry.md](docs/hash-registry.md)**.
+
 ## Status
 
 - ✅ Registry discovery + validation (arc56.links.csv)
 - ✅ .NET/C# client generation pipeline
+- ✅ Program hash registry (approval-programs/, clear-programs/) + GitHub Pages site
 - ⏳ TypeScript client generation - not started
 - ⏳ Python client generation - not started
 - ⏳ Automated `dotnet nuget push` to nuget.org - packages are built and uploaded as a
