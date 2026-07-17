@@ -26,10 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Owner.Repo.Contract_hash;
+using Arc56.Generated.ADD183.Algo_Farmar.FarmerContract_74baae8c;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
-var client = new ContractProxy(algod, appId: 123456789);
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
+var client = new FarmerContractProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,6 +41,7 @@ var client = new ContractProxy(algod, appId: 123456789);
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
 | _(unfetchable)_ | _(download failed - see state.json)_ | [https://raw.githubusercontent.com/ADD183/Algo-Farmar/HEAD/PICT 2.0/farmer-pay-contract/projects/farmer-pay-contract/smart_contracts/artifacts/farmer_contract/FarmerContract.arc56.json](https://raw.githubusercontent.com/ADD183/Algo-Farmar/HEAD/PICT 2.0/farmer-pay-contract/projects/farmer-pay-contract/smart_contracts/artifacts/farmer_contract/FarmerContract.arc56.json) |
+| `Arc56.Generated.ADD183.Algo_Farmar.FarmerContract_74baae8c` | `FarmerContractProxy` | [https://raw.githubusercontent.com/ADD183/Algo-Farmar/HEAD/PICT%202.0/farmer-pay-contract/projects/farmer-pay-contract/smart_contracts/artifacts/farmer_contract/FarmerContract.arc56.json](https://raw.githubusercontent.com/ADD183/Algo-Farmar/HEAD/PICT%202.0/farmer-pay-contract/projects/farmer-pay-contract/smart_contracts/artifacts/farmer_contract/FarmerContract.arc56.json) |
 
 ## Versioning
 
