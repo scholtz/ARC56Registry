@@ -19,18 +19,21 @@ to deactivate a record manually. This script never removes or overwrites an
 existing row (so manually-set ActiveUntil values are preserved even if a
 later search run doesn't happen to find that URL again) - it only ever adds
 newly discovered URLs, with ActiveFrom set to today and ActiveUntil left
-empty. The file is written with the `csv` module using RFC 4180 quoting so it
-renders correctly as a table on GitHub.
+empty.
 
-Code search alone is known to under-report: GitHub's search index can lag or
-skip files for reasons that have nothing to do with sharding (indexing lag,
-forked/archived repos, etc.), and this has been observed in practice - a repo
-whose owner confirmed several `*.arc56.json` files existed only had about half
-of them turn up via search. To compensate, every repo that code search proves
-is "ARC-56 positive" (at least one real match in it) gets a second pass: the
-actual git tree of its default branch is listed via the Trees API and scanned
-for `*.arc56.json` paths directly, which is exhaustive and doesn't depend on
-the search index at all. See verify_repo_full_tree().
+This run can take well over an hour (thousands of code-search requests plus
+a per-repo full-tree verification pass, each throttled to stay under GitHub's
+rate limits - see REQUEST_DELAY_SECONDS / REPO_VERIFY_DELAY_SECONDS). Rather
+than accumulating everything in memory and writing/committing once at the
+very end, every time a batch of new URLs is discovered (one search shard's
+worth, or one repo's full-tree verification) it is committed and pushed
+immediately - see queue_new_urls()/flush_pending(). This means a crash,
+timeout, or rate-limit abort partway through never loses already-discovered
+links: whatever was found before the failure is already on origin. Each
+flush re-fetches and hard-resets to origin's tip first and only pushes if
+its URLs are still missing there, so this is safe even if another commit
+(e.g. a human editing arc56.links.csv, or a concurrent run) lands on the
+branch mid-run - see flush_pending().
 """
 from __future__ import annotations
 
@@ -38,6 +41,7 @@ import csv
 import datetime
 import json
 import os
+import subprocess
 import sys
 import time
 import urllib.error
@@ -60,11 +64,26 @@ REQUEST_DELAY_SECONDS = 7  # code search is limited to 10 requests/minute, so st
 # to code search's stricter 10/min cap (authenticated REST is ~5000/hour), but we still
 # pace requests conservatively to be a good citizen.
 REPO_VERIFY_DELAY_SECONDS = 1
-OUTPUT_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "arc56.links.csv")
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTPUT_PATH = os.path.join(REPO_ROOT, "arc56.links.csv")
 URL_COLUMN = "ARC56URL"
 ACTIVE_FROM_COLUMN = "ActiveFrom"
 ACTIVE_UNTIL_COLUMN = "ActiveUntil"
 FIELDNAMES = [URL_COLUMN, ACTIVE_FROM_COLUMN, ACTIVE_UNTIL_COLUMN]
+
+# Commit/push resilience: how hard to retry when another commit (a maintainer's
+# manual edit, or - in principle - a concurrent run) landed on the branch between
+# our fetch and our push.
+GIT_MAX_RETRIES = 8
+GIT_RETRY_BASE_DELAY_SECONDS = 3
+GIT_COMMIT_AUTHOR_NAME = "github-actions[bot]"
+GIT_COMMIT_AUTHOR_EMAIL = "github-actions[bot]@users.noreply.github.com"
+
+# URLs discovered but not yet confirmed pushed to origin. Entries only leave this
+# set once a commit containing them has been successfully pushed (or are found to
+# already be present on origin during a later flush).
+_pending_urls: set[str] = set()
+_branch: str | None = None
 
 
 def build_request(query: str, page: int, token: str) -> tuple[urllib.request.Request, str]:
@@ -134,13 +153,143 @@ def path_to_url(repo_full_name: str, path: str) -> str:
     return f"https://raw.githubusercontent.com/{repo_full_name}/HEAD/{encoded_path}"
 
 
-def add_matching_items(items: list[dict], urls: set[str], repos: set[str]) -> None:
+def add_matching_items(items: list[dict], urls: set[str], repos: set[str]) -> set[str]:
+    """Add matching items to urls/repos, returning only the URLs that were new."""
+    added: set[str] = set()
     for item in items:
         path = item["path"]
         if path.endswith(FILENAME_SUFFIX):
             repo_full_name = item["repository"]["full_name"]
             repos.add(repo_full_name)
-            urls.add(path_to_url(repo_full_name, path))
+            url = path_to_url(repo_full_name, path)
+            if url not in urls:
+                urls.add(url)
+                added.add(url)
+    return added
+
+
+def run_git(args: list[str], check: bool = True) -> subprocess.CompletedProcess:
+    result = subprocess.run(
+        ["git", *args], cwd=REPO_ROOT, capture_output=True, text=True
+    )
+    if check and result.returncode != 0:
+        raise RuntimeError(f"git {' '.join(args)} failed: {result.stderr.strip()}")
+    return result
+
+
+def current_branch() -> str:
+    global _branch
+    if _branch is None:
+        _branch = run_git(["rev-parse", "--abbrev-ref", "HEAD"]).stdout.strip()
+    return _branch
+
+
+def configure_git_identity() -> None:
+    run_git(["config", "user.name", GIT_COMMIT_AUTHOR_NAME])
+    run_git(["config", "user.email", GIT_COMMIT_AUTHOR_EMAIL])
+
+
+def read_existing_rows(path: str) -> dict[str, dict[str, str]]:
+    if not os.path.exists(path):
+        return {}
+    rows: dict[str, dict[str, str]] = {}
+    with open(path, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            url = row.get(URL_COLUMN, "")
+            if not url:
+                continue
+            rows[url] = {
+                ACTIVE_FROM_COLUMN: row.get(ACTIVE_FROM_COLUMN) or "",
+                ACTIVE_UNTIL_COLUMN: row.get(ACTIVE_UNTIL_COLUMN) or "",
+            }
+    return rows
+
+
+def write_csv(rows: dict[str, dict[str, str]]) -> None:
+    with open(OUTPUT_PATH, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=FIELDNAMES, lineterminator="\n")
+        writer.writeheader()
+        for url in sorted(rows.keys(), key=str.lower):
+            row = rows[url]
+            writer.writerow({
+                URL_COLUMN: url,
+                ACTIVE_FROM_COLUMN: row[ACTIVE_FROM_COLUMN],
+                ACTIVE_UNTIL_COLUMN: row[ACTIVE_UNTIL_COLUMN],
+            })
+
+
+def queue_new_urls(new_urls: set[str], source: str) -> None:
+    """Record newly discovered URLs and immediately try to commit+push them.
+
+    Committing after every single discovery (rather than once at the end of a
+    run that can take well over an hour) means a later crash, timeout, or
+    rate-limit error never loses progress already made.
+    """
+    if not new_urls:
+        return
+    _pending_urls.update(new_urls)
+    flush_pending(source)
+
+
+def flush_pending(source: str) -> None:
+    """Try to commit and push everything in _pending_urls.
+
+    Re-syncs to origin's current tip before every attempt and only commits
+    URLs still missing there, so this is safe to call even if someone else
+    (a maintainer's manual edit, or a concurrent run) has pushed to the same
+    branch in the meantime - we just fold our additions on top of theirs and
+    retry the push. On persistent failure this logs a warning and leaves the
+    URLs in _pending_urls for the next flush attempt (or the final flush at
+    the end of the run) to pick up, rather than raising and losing them.
+    """
+    if not _pending_urls:
+        return
+    branch = current_branch()
+    today = datetime.date.today().isoformat()
+
+    for attempt in range(1, GIT_MAX_RETRIES + 1):
+        try:
+            run_git(["fetch", "--depth=1", "origin", branch])
+            run_git(["reset", "--hard", "FETCH_HEAD"])
+
+            rows = read_existing_rows(OUTPUT_PATH)
+            to_add = sorted(u for u in _pending_urls if u not in rows)
+            if not to_add:
+                # Already present on origin (e.g. a previous attempt's push
+                # actually landed even though we didn't see success, or
+                # someone else added the same URL).
+                _pending_urls.clear()
+                return
+
+            for url in to_add:
+                rows[url] = {ACTIVE_FROM_COLUMN: today, ACTIVE_UNTIL_COLUMN: ""}
+            write_csv(rows)
+
+            run_git(["add", OUTPUT_PATH])
+            run_git(["commit", "-m", f"chore: add {len(to_add)} ARC-56 link(s) found via {source}"])
+            push = subprocess.run(
+                ["git", "push", "origin", f"HEAD:{branch}"],
+                cwd=REPO_ROOT, capture_output=True, text=True,
+            )
+            if push.returncode == 0:
+                print(f"Committed and pushed {len(to_add)} new ARC-56 link(s) ({source})",
+                      file=sys.stderr)
+                _pending_urls.difference_update(to_add)
+                return
+
+            print(f"Push rejected (attempt {attempt}/{GIT_MAX_RETRIES}), likely a concurrent "
+                  f"commit to {branch}; re-syncing and retrying: {push.stderr.strip()}",
+                  file=sys.stderr)
+        except RuntimeError as exc:
+            print(f"Git operation failed (attempt {attempt}/{GIT_MAX_RETRIES}): {exc}; "
+                  f"will retry", file=sys.stderr)
+
+        time.sleep(GIT_RETRY_BASE_DELAY_SECONDS * attempt)
+
+    print(f"WARNING: failed to push {len(_pending_urls)} pending link(s) after "
+          f"{GIT_MAX_RETRIES} attempts; will retry on the next discovery or at the end "
+          f"of the run", file=sys.stderr)
 
 
 def partition_and_collect(lo: int, hi: int, token: str, urls: set[str], repos: set[str], depth: int = 0) -> None:
@@ -174,7 +323,8 @@ def partition_and_collect(lo: int, hi: int, token: str, urls: set[str], repos: s
               f"pagination cap at max shard depth or cannot be split further; some results in "
               f"this range may be missing", file=sys.stderr)
 
-    add_matching_items(items_collected, urls, repos)
+    new_urls = add_matching_items(items_collected, urls, repos)
+    queue_new_urls(new_urls, f"code search size:{lo}..{hi}")
 
 
 def fetch_api_json(url: str, token: str, retries: int = 3) -> dict | None:
@@ -244,17 +394,20 @@ def verify_repo_full_tree(repo_full_name: str, token: str, urls: set[str]) -> No
               f"large for a single Trees API response); full-tree verification may be "
               f"incomplete for this repo", file=sys.stderr)
 
-    before = len(urls)
+    new_here: set[str] = set()
     for entry in tree.get("tree", []):
         if entry.get("type") != "blob":
             continue
         path = entry.get("path", "")
         if path.endswith(FILENAME_SUFFIX):
-            urls.add(path_to_url(repo_full_name, path))
-    added = len(urls) - before
-    if added:
-        print(f"Full-tree verification for {repo_full_name} found {added} additional "
+            url = path_to_url(repo_full_name, path)
+            if url not in urls:
+                urls.add(url)
+                new_here.add(url)
+    if new_here:
+        print(f"Full-tree verification for {repo_full_name} found {len(new_here)} additional "
               f"ARC-56 file(s) that code search missed", file=sys.stderr)
+        queue_new_urls(new_here, f"full-tree verification of {repo_full_name}")
 
 
 def collect_urls(token: str) -> set[str]:
@@ -271,64 +424,41 @@ def collect_urls(token: str) -> set[str]:
     return urls
 
 
-def read_existing_rows(path: str) -> dict[str, dict[str, str]]:
-    if not os.path.exists(path):
-        return {}
-    rows: dict[str, dict[str, str]] = {}
-    with open(path, newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            url = row.get(URL_COLUMN, "")
-            if not url:
-                continue
-            rows[url] = {
-                ACTIVE_FROM_COLUMN: row.get(ACTIVE_FROM_COLUMN) or "",
-                ACTIVE_UNTIL_COLUMN: row.get(ACTIVE_UNTIL_COLUMN) or "",
-            }
-    return rows
-
-
 def main() -> int:
     token = os.environ.get("GH_SEARCH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
     if not token:
         print("Warning: no GH_SEARCH_TOKEN/GITHUB_TOKEN set; unauthenticated search "
               "rate limits are very low and this will likely fail.", file=sys.stderr)
 
+    configure_git_identity()
+
     try:
         found_urls = collect_urls(token)
-    except Exception as exc:  # noqa: BLE001 - any failure must abort without touching the file
-        print(f"Aborting without writing {OUTPUT_PATH}: {exc}", file=sys.stderr)
+    except Exception as exc:  # noqa: BLE001 - a failure here must not lose already-pushed progress
+        print(f"Aborting early due to error: {exc}", file=sys.stderr)
+        try:
+            flush_pending("partial run before abort")
+        except Exception as flush_exc:  # noqa: BLE001
+            print(f"Final flush of pending links also failed: {flush_exc}", file=sys.stderr)
+        print("Links discovered before the error were already committed and pushed "
+              "incrementally, so no progress was lost.", file=sys.stderr)
         return 1
 
     if not found_urls:
-        print(f"Aborting without writing {OUTPUT_PATH}: search returned 0 results, "
-              f"which looks wrong for this query.", file=sys.stderr)
+        print("Aborting: search returned 0 results, which looks wrong for this query.",
+              file=sys.stderr)
         return 1
 
-    existing_rows = read_existing_rows(OUTPUT_PATH)
-    today = datetime.date.today().isoformat()
+    flush_pending("final sync")
+    if _pending_urls:
+        print(f"WARNING: {len(_pending_urls)} link(s) could not be pushed even after the "
+              f"final flush; they were discovered but are not yet on origin", file=sys.stderr)
+        return 1
 
-    added = 0
-    for url in found_urls:
-        if url not in existing_rows:
-            existing_rows[url] = {ACTIVE_FROM_COLUMN: today, ACTIVE_UNTIL_COLUMN: ""}
-            added += 1
-
-    sorted_urls = sorted(existing_rows.keys(), key=str.lower)
-
-    with open(OUTPUT_PATH, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=FIELDNAMES, lineterminator="\n")
-        writer.writeheader()
-        for url in sorted_urls:
-            row = existing_rows[url]
-            writer.writerow({
-                URL_COLUMN: url,
-                ACTIVE_FROM_COLUMN: row[ACTIVE_FROM_COLUMN],
-                ACTIVE_UNTIL_COLUMN: row[ACTIVE_UNTIL_COLUMN],
-            })
-
-    print(f"Wrote {len(sorted_urls)} rows to {OUTPUT_PATH} "
-          f"({added} newly added, {len(sorted_urls) - added} preserved unchanged)")
+    final_rows = read_existing_rows(OUTPUT_PATH)
+    print(f"Done: {len(final_rows)} total row(s) in {OUTPUT_PATH}, "
+          f"{len(found_urls)} link(s) found in this run "
+          f"(each already committed and pushed incrementally as it was found)")
     return 0
 
 
