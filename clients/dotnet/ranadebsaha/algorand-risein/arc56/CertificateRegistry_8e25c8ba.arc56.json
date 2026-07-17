@@ -1,0 +1,190 @@
+{
+    "name": "CertificateRegistry",
+    "structs": {},
+    "methods": [
+        {
+            "name": "register_certificate",
+            "args": [
+                {
+                    "type": "byte[]",
+                    "name": "cert_hash",
+                    "desc": "The SHA-256 hash of the certificate file."
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Registers a new certificate hash and associates it with the transaction sender.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "verify_certificate",
+            "args": [
+                {
+                    "type": "byte[]",
+                    "name": "cert_hash",
+                    "desc": "The SHA-256 hash of the certificate to verify."
+                }
+            ],
+            "returns": {
+                "type": "byte[]",
+                "desc": "The owner's address as Bytes if found, otherwise an empty Bytes string."
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Verifies if a given certificate hash is registered and returns the owner's address.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "transfer_certificate",
+            "args": [
+                {
+                    "type": "byte[]",
+                    "name": "cert_hash",
+                    "desc": "The hash of the certificate to transfer."
+                },
+                {
+                    "type": "byte[]",
+                    "name": "new_owner",
+                    "desc": "The Algorand address of the new owner."
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Transfers ownership of a certificate to a new address.\nThis can only be called by the current owner of the certificate.",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "\n    A smart contract for registering and verifying certificate hashes on the Algorand blockchain.\n    It uses Algorand's Box storage to map a certificate's hash to its owner's address.\n    ",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "certificates": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AVMBytes",
+                    "prefix": "Y2VydGlmaWNhdGVz"
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        159
+                    ],
+                    "errorMessage": "Certificate hash is already registered."
+                },
+                {
+                    "pc": [
+                        197
+                    ],
+                    "errorMessage": "Certificate not found or not registered."
+                },
+                {
+                    "pc": [
+                        59,
+                        83,
+                        118
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        201
+                    ],
+                    "errorMessage": "Permission denied: Only the current owner can transfer."
+                },
+                {
+                    "pc": [
+                        141
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        62,
+                        86,
+                        121
+                    ],
+                    "errorMessage": "can only call when not creating"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBzbWFydF9jb250cmFjdHMuY2VydGlmaWNhdGVfcmVnaXN0cnkuY29udHJhY3QuQ2VydGlmaWNhdGVSZWdpc3RyeS5fX2FsZ29weV9lbnRyeXBvaW50X3dpdGhfaW5pdCgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxCiAgICBieXRlY2Jsb2NrIDB4ICJjZXJ0aWZpY2F0ZXMiCiAgICAvLyBzbWFydF9jb250cmFjdHMvY2VydGlmaWNhdGVfcmVnaXN0cnkvY29udHJhY3QucHk6MTIKICAgIC8vIGNsYXNzIENlcnRpZmljYXRlUmVnaXN0cnkoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0A4CiAgICBwdXNoYnl0ZXNzIDB4NTc2NmY3ZTcgMHgzZTk1MjcwZSAweGJiZWExMmRiIC8vIG1ldGhvZCAicmVnaXN0ZXJfY2VydGlmaWNhdGUoYnl0ZVtdKXZvaWQiLCBtZXRob2QgInZlcmlmeV9jZXJ0aWZpY2F0ZShieXRlW10pYnl0ZVtdIiwgbWV0aG9kICJ0cmFuc2Zlcl9jZXJ0aWZpY2F0ZShieXRlW10sYnl0ZVtdKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3JlZ2lzdGVyX2NlcnRpZmljYXRlX3JvdXRlQDUgbWFpbl92ZXJpZnlfY2VydGlmaWNhdGVfcm91dGVANiBtYWluX3RyYW5zZmVyX2NlcnRpZmljYXRlX3JvdXRlQDcKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jZXJ0aWZpY2F0ZV9yZWdpc3RyeS9jb250cmFjdC5weToxMgogICAgLy8gY2xhc3MgQ2VydGlmaWNhdGVSZWdpc3RyeShBUkM0Q29udHJhY3QpOgogICAgcHVzaGludCAwIC8vIDAKICAgIHJldHVybgoKbWFpbl90cmFuc2Zlcl9jZXJ0aWZpY2F0ZV9yb3V0ZUA3OgogICAgLy8gc21hcnRfY29udHJhY3RzL2NlcnRpZmljYXRlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjQ3CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL2NlcnRpZmljYXRlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjEyCiAgICAvLyBjbGFzcyBDZXJ0aWZpY2F0ZVJlZ2lzdHJ5KEFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jZXJ0aWZpY2F0ZV9yZWdpc3RyeS9jb250cmFjdC5weTo0NwogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBjYWxsc3ViIHRyYW5zZmVyX2NlcnRpZmljYXRlCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3ZlcmlmeV9jZXJ0aWZpY2F0ZV9yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL2NlcnRpZmljYXRlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjM1CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL2NlcnRpZmljYXRlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjEyCiAgICAvLyBjbGFzcyBDZXJ0aWZpY2F0ZVJlZ2lzdHJ5KEFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2NlcnRpZmljYXRlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjM1CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGNhbGxzdWIgdmVyaWZ5X2NlcnRpZmljYXRlCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3JlZ2lzdGVyX2NlcnRpZmljYXRlX3JvdXRlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2VydGlmaWNhdGVfcmVnaXN0cnkvY29udHJhY3QucHk6MjEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvY2VydGlmaWNhdGVfcmVnaXN0cnkvY29udHJhY3QucHk6MTIKICAgIC8vIGNsYXNzIENlcnRpZmljYXRlUmVnaXN0cnkoQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvY2VydGlmaWNhdGVfcmVnaXN0cnkvY29udHJhY3QucHk6MjEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgY2FsbHN1YiByZWdpc3Rlcl9jZXJ0aWZpY2F0ZQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9iYXJlX3JvdXRpbmdAODoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jZXJ0aWZpY2F0ZV9yZWdpc3RyeS9jb250cmFjdC5weToxMgogICAgLy8gY2xhc3MgQ2VydGlmaWNhdGVSZWdpc3RyeShBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuY2VydGlmaWNhdGVfcmVnaXN0cnkuY29udHJhY3QuQ2VydGlmaWNhdGVSZWdpc3RyeS5yZWdpc3Rlcl9jZXJ0aWZpY2F0ZShjZXJ0X2hhc2g6IGJ5dGVzKSAtPiB2b2lkOgpyZWdpc3Rlcl9jZXJ0aWZpY2F0ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jZXJ0aWZpY2F0ZV9yZWdpc3RyeS9jb250cmFjdC5weToyMS0yMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICAvLyBkZWYgcmVnaXN0ZXJfY2VydGlmaWNhdGUoc2VsZiwgY2VydF9oYXNoOiBCeXRlcykgLT4gTm9uZToKICAgIHByb3RvIDEgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2NlcnRpZmljYXRlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjI4CiAgICAvLyBleGlzdGluZ19vd25lciA9IHNlbGYuY2VydGlmaWNhdGVzLmdldChjZXJ0X2hhc2gsIGRlZmF1bHQ9Qnl0ZXMoYiIiKSkKICAgIGJ5dGVjXzEgLy8gImNlcnRpZmljYXRlcyIKICAgIGZyYW1lX2RpZyAtMQogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9nZXQKICAgIGJ5dGVjXzAgLy8gMHgKICAgIGNvdmVyIDIKICAgIHNlbGVjdAogICAgLy8gc21hcnRfY29udHJhY3RzL2NlcnRpZmljYXRlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjMwLTMxCiAgICAvLyAjIFVzZSB0aGUgbG93ZXJjYXNlICdhc3NlcnQnIGtleXdvcmQKICAgIC8vIGFzc2VydCBleGlzdGluZ19vd25lciA9PSBCeXRlcyhiIiIpLCAiQ2VydGlmaWNhdGUgaGFzaCBpcyBhbHJlYWR5IHJlZ2lzdGVyZWQuIgogICAgYnl0ZWNfMCAvLyAweAogICAgPT0KICAgIGFzc2VydCAvLyBDZXJ0aWZpY2F0ZSBoYXNoIGlzIGFscmVhZHkgcmVnaXN0ZXJlZC4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jZXJ0aWZpY2F0ZV9yZWdpc3RyeS9jb250cmFjdC5weTozMwogICAgLy8gc2VsZi5jZXJ0aWZpY2F0ZXNbY2VydF9oYXNoXSA9IFR4bi5zZW5kZXIuYnl0ZXMKICAgIHR4biBTZW5kZXIKICAgIGRpZyAxCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGJveF9wdXQKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5jZXJ0aWZpY2F0ZV9yZWdpc3RyeS5jb250cmFjdC5DZXJ0aWZpY2F0ZVJlZ2lzdHJ5LnZlcmlmeV9jZXJ0aWZpY2F0ZShjZXJ0X2hhc2g6IGJ5dGVzKSAtPiBieXRlczoKdmVyaWZ5X2NlcnRpZmljYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL2NlcnRpZmljYXRlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjM1LTM2CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIC8vIGRlZiB2ZXJpZnlfY2VydGlmaWNhdGUoc2VsZiwgY2VydF9oYXNoOiBCeXRlcykgLT4gQnl0ZXM6CiAgICBwcm90byAxIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jZXJ0aWZpY2F0ZV9yZWdpc3RyeS9jb250cmFjdC5weTo0NAogICAgLy8gb3duZXIgPSBzZWxmLmNlcnRpZmljYXRlcy5nZXQoY2VydF9oYXNoLCBkZWZhdWx0PUJ5dGVzKGIiIikpCiAgICBieXRlY18xIC8vICJjZXJ0aWZpY2F0ZXMiCiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgYm94X2dldAogICAgYnl0ZWNfMCAvLyAweAogICAgY292ZXIgMgogICAgc2VsZWN0CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2VydGlmaWNhdGVfcmVnaXN0cnkvY29udHJhY3QucHk6NDUKICAgIC8vIHJldHVybiBvd25lcgogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLmNlcnRpZmljYXRlX3JlZ2lzdHJ5LmNvbnRyYWN0LkNlcnRpZmljYXRlUmVnaXN0cnkudHJhbnNmZXJfY2VydGlmaWNhdGUoY2VydF9oYXNoOiBieXRlcywgbmV3X293bmVyOiBieXRlcykgLT4gdm9pZDoKdHJhbnNmZXJfY2VydGlmaWNhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2VydGlmaWNhdGVfcmVnaXN0cnkvY29udHJhY3QucHk6NDctNDgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgLy8gZGVmIHRyYW5zZmVyX2NlcnRpZmljYXRlKHNlbGYsIGNlcnRfaGFzaDogQnl0ZXMsIG5ld19vd25lcjogQnl0ZXMpIC0+IE5vbmU6CiAgICBwcm90byAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jZXJ0aWZpY2F0ZV9yZWdpc3RyeS9jb250cmFjdC5weTo1NgogICAgLy8gY3VycmVudF9vd25lciA9IHNlbGYuY2VydGlmaWNhdGVzLmdldChjZXJ0X2hhc2gsIGRlZmF1bHQ9Qnl0ZXMoYiIiKSkKICAgIGJ5dGVjXzEgLy8gImNlcnRpZmljYXRlcyIKICAgIGZyYW1lX2RpZyAtMgogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9nZXQKICAgIGJ5dGVjXzAgLy8gMHgKICAgIGNvdmVyIDIKICAgIHNlbGVjdAogICAgLy8gc21hcnRfY29udHJhY3RzL2NlcnRpZmljYXRlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjU4LTU5CiAgICAvLyAjIFVzZSB0aGUgbG93ZXJjYXNlICdhc3NlcnQnIGtleXdvcmQKICAgIC8vIGFzc2VydCBjdXJyZW50X293bmVyICE9IEJ5dGVzKGIiIiksICJDZXJ0aWZpY2F0ZSBub3QgZm91bmQgb3Igbm90IHJlZ2lzdGVyZWQuIgogICAgZHVwCiAgICBieXRlY18wIC8vIDB4CiAgICAhPQogICAgYXNzZXJ0IC8vIENlcnRpZmljYXRlIG5vdCBmb3VuZCBvciBub3QgcmVnaXN0ZXJlZC4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jZXJ0aWZpY2F0ZV9yZWdpc3RyeS9jb250cmFjdC5weTo2MS02MgogICAgLy8gIyBVc2UgdGhlIGxvd2VyY2FzZSAnYXNzZXJ0JyBrZXl3b3JkCiAgICAvLyBhc3NlcnQgY3VycmVudF9vd25lciA9PSBUeG4uc2VuZGVyLmJ5dGVzLCAiUGVybWlzc2lvbiBkZW5pZWQ6IE9ubHkgdGhlIGN1cnJlbnQgb3duZXIgY2FuIHRyYW5zZmVyLiIKICAgIHR4biBTZW5kZXIKICAgID09CiAgICBhc3NlcnQgLy8gUGVybWlzc2lvbiBkZW5pZWQ6IE9ubHkgdGhlIGN1cnJlbnQgb3duZXIgY2FuIHRyYW5zZmVyLgogICAgLy8gc21hcnRfY29udHJhY3RzL2NlcnRpZmljYXRlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjY0CiAgICAvLyBzZWxmLmNlcnRpZmljYXRlc1tjZXJ0X2hhc2hdID0gbmV3X293bmVyCiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAogICAgZnJhbWVfZGlnIC0xCiAgICBib3hfcHV0CiAgICByZXRzdWIK",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiABASYCAAxjZXJ0aWZpY2F0ZXMxG0EAbIIDBFdm9+cEPpUnDgS76hLbNhoAjgMAPgAbAAOBAEMxGRREMRhENhoBVwIANhoCVwIAiABnIkMxGRREMRhENhoBVwIAiABISRUWVwYCTFCABBUffHVMULAiQzEZFEQxGEQ2GgFXAgCIAA0iQzEZQP+rMRgURCJDigEAKYv/UEm+KE4CTSgSRDEASwG8SL+JigEBKYv/UL4oTgJNiYoCACmL/lBJvihOAk1JKBNEMQASREm8SIv/v4k=",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 4,
+            "minor": 10,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

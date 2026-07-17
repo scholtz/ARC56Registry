@@ -1,0 +1,107 @@
+{
+    "name": "CallerContract",
+    "structs": {},
+    "methods": [
+        {
+            "name": "call",
+            "args": [
+                {
+                    "type": "application",
+                    "name": "app"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        28
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        51
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        31
+                    ],
+                    "errorMessage": "can only call when not creating"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jYWxsZXJfY29udHJhY3QvY29udHJhY3QucHk6MTAKICAgIC8vIGNsYXNzIENhbGxlckNvbnRyYWN0KEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdANgogICAgcHVzaGJ5dGVzIDB4OTcwZjJmM2EgLy8gbWV0aG9kICJjYWxsKGFwcGxpY2F0aW9uKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2NhbGxfcm91dGVAMwoKbWFpbl9hZnRlcl9pZl9lbHNlQDEwOgogICAgLy8gc21hcnRfY29udHJhY3RzL2NhbGxlcl9jb250cmFjdC9jb250cmFjdC5weToxMAogICAgLy8gY2xhc3MgQ2FsbGVyQ29udHJhY3QoQVJDNENvbnRyYWN0KToKICAgIGludGNfMCAvLyAwCiAgICByZXR1cm4KCm1haW5fY2FsbF9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL2NhbGxlcl9jb250cmFjdC9jb250cmFjdC5weToxMQogICAgLy8gQGFiaW1ldGhvZAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FsbGVyX2NvbnRyYWN0L2NvbnRyYWN0LnB5OjEwCiAgICAvLyBjbGFzcyBDYWxsZXJDb250cmFjdChBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgdHhuYXMgQXBwbGljYXRpb25zCiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FsbGVyX2NvbnRyYWN0L2NvbnRyYWN0LnB5OjExCiAgICAvLyBAYWJpbWV0aG9kCiAgICBjYWxsc3ViIGNhbGwKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fYmFyZV9yb3V0aW5nQDY6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FsbGVyX2NvbnRyYWN0L2NvbnRyYWN0LnB5OjEwCiAgICAvLyBjbGFzcyBDYWxsZXJDb250cmFjdChBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuY2FsbGVyX2NvbnRyYWN0LmNvbnRyYWN0LkNhbGxlckNvbnRyYWN0LmNhbGwoYXBwOiB1aW50NjQpIC0+IHZvaWQ6CmNhbGw6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FsbGVyX2NvbnRyYWN0L2NvbnRyYWN0LnB5OjExLTEyCiAgICAvLyBAYWJpbWV0aG9kCiAgICAvLyBkZWYgY2FsbChzZWxmLCBhcHA6IEFwcGxpY2F0aW9uKSAtPiBOb25lOgogICAgcHJvdG8gMSAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FsbGVyX2NvbnRyYWN0L2NvbnRyYWN0LnB5OjEzCiAgICAvLyBhYmlfY2FsbChDYWxsZWRDb250cmFjdC5mYWlsLCBhcHBfaWQ9YXBwLmlkLCBmZWU9MCkKICAgIGl0eG5fYmVnaW4KICAgIGZyYW1lX2RpZyAtMQogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICBwdXNoYnl0ZXMgMHhkMzczNDVmYSAvLyBtZXRob2QgImZhaWwoKXZvaWQiCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgcHVzaGludCA2IC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIHJldHN1Ygo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiACAAExG0EAIYAElw8vOjYaAI4BAAIiQzEZFEQxGEQ2GgEXwDKIAA0jQzEZQP/nMRgURCNDigEAsYv/shiABNNzRfqyGoEGshAisgGziQ==",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 4,
+            "minor": 8,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

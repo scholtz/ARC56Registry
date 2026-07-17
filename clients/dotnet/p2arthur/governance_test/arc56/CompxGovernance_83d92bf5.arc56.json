@@ -1,0 +1,1727 @@
+{
+  "name": "CompxGovernance",
+  "desc": "",
+  "methods": [
+    {
+      "name": "createApplication",
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [
+          "NoOp"
+        ],
+        "call": []
+      }
+    },
+    {
+      "name": "createNewProposal",
+      "desc": "Create a new proposal",
+      "args": [
+        {
+          "name": "proposalType",
+          "type": "string",
+          "desc": "Type of the proposal - can be reg or pool"
+        },
+        {
+          "name": "proposalTitle",
+          "type": "string",
+          "desc": "Title of the proposal"
+        },
+        {
+          "name": "proposalDescription",
+          "type": "string",
+          "desc": "Description of the proposal"
+        },
+        {
+          "name": "expiresIn",
+          "type": "uint64",
+          "desc": "Time in seconds for the proposal to expire"
+        },
+        {
+          "name": "mbrTxn",
+          "type": "pay"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    }
+  ],
+  "arcs": [
+    4,
+    56
+  ],
+  "structs": {
+    "ProposalDataType": [
+      {
+        "name": "proposalTitle",
+        "type": "string"
+      },
+      {
+        "name": "proposalDescription",
+        "type": "string"
+      },
+      {
+        "name": "ProposalTotalVotes",
+        "type": "uint64"
+      },
+      {
+        "name": "ProposalYesVotes",
+        "type": "uint64"
+      },
+      {
+        "name": "CreatedAtTimestamp",
+        "type": "uint64"
+      },
+      {
+        "name": "ExpiryTimestamp",
+        "type": "uint64"
+      }
+    ],
+    "ProposalIdType": [
+      {
+        "name": "nonce",
+        "type": "uint64"
+      },
+      {
+        "name": "proposalType",
+        "type": "string"
+      }
+    ]
+  },
+  "state": {
+    "schema": {
+      "global": {
+        "bytes": 1,
+        "ints": 1
+      },
+      "local": {
+        "bytes": 0,
+        "ints": 0
+      }
+    },
+    "keys": {
+      "global": {
+        "deployer_address": {
+          "key": "ZGVwbG95ZXJfYWRkcmVzcw==",
+          "keyType": "AVMBytes",
+          "valueType": "address"
+        },
+        "total_proposals": {
+          "key": "dG90YWxfcHJvcG9zYWxz",
+          "keyType": "AVMBytes",
+          "valueType": "uint64"
+        }
+      },
+      "local": {},
+      "box": {}
+    },
+    "maps": {
+      "global": {},
+      "local": {},
+      "box": {
+        "proposals": {
+          "keyType": "ProposalIdType",
+          "valueType": "ProposalDataType",
+          "prefix": "_proposals"
+        }
+      }
+    }
+  },
+  "bareActions": {
+    "create": [],
+    "call": []
+  },
+  "sourceInfo": {
+    "approval": {
+      "sourceInfo": [
+        {
+          "teal": 1,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            0
+          ]
+        },
+        {
+          "teal": 2,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "teal": 3,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63
+          ]
+        },
+        {
+          "teal": 15,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            64,
+            65
+          ]
+        },
+        {
+          "teal": 16,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            66
+          ]
+        },
+        {
+          "teal": 17,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            67,
+            68
+          ]
+        },
+        {
+          "teal": 18,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            69
+          ]
+        },
+        {
+          "teal": 19,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            70,
+            71
+          ]
+        },
+        {
+          "teal": 20,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            72
+          ]
+        },
+        {
+          "teal": 21,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98
+          ]
+        },
+        {
+          "teal": 25,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?",
+          "pc": [
+            99
+          ]
+        },
+        {
+          "teal": 30,
+          "source": "contracts/CompxGovernance.algo.ts:17",
+          "pc": [
+            100,
+            101,
+            102
+          ]
+        },
+        {
+          "teal": 31,
+          "source": "contracts/CompxGovernance.algo.ts:17",
+          "pc": [
+            103
+          ]
+        },
+        {
+          "teal": 32,
+          "source": "contracts/CompxGovernance.algo.ts:17",
+          "pc": [
+            104
+          ]
+        },
+        {
+          "teal": 36,
+          "source": "contracts/CompxGovernance.algo.ts:17",
+          "pc": [
+            105,
+            106,
+            107
+          ]
+        },
+        {
+          "teal": 40,
+          "source": "contracts/CompxGovernance.algo.ts:18",
+          "pc": [
+            108
+          ]
+        },
+        {
+          "teal": 41,
+          "source": "contracts/CompxGovernance.algo.ts:18",
+          "pc": [
+            109
+          ]
+        },
+        {
+          "teal": 42,
+          "source": "contracts/CompxGovernance.algo.ts:18",
+          "pc": [
+            110
+          ]
+        },
+        {
+          "teal": 46,
+          "source": "contracts/CompxGovernance.algo.ts:19",
+          "pc": [
+            111
+          ]
+        },
+        {
+          "teal": 47,
+          "source": "contracts/CompxGovernance.algo.ts:19",
+          "pc": [
+            112,
+            113
+          ]
+        },
+        {
+          "teal": 48,
+          "source": "contracts/CompxGovernance.algo.ts:19",
+          "pc": [
+            114
+          ]
+        },
+        {
+          "teal": 52,
+          "source": "contracts/CompxGovernance.algo.ts:20",
+          "pc": [
+            115
+          ]
+        },
+        {
+          "teal": 53,
+          "source": "contracts/CompxGovernance.algo.ts:20",
+          "pc": [
+            116
+          ]
+        },
+        {
+          "teal": 54,
+          "source": "contracts/CompxGovernance.algo.ts:20",
+          "pc": [
+            117
+          ]
+        },
+        {
+          "teal": 55,
+          "source": "contracts/CompxGovernance.algo.ts:17",
+          "pc": [
+            118
+          ]
+        },
+        {
+          "teal": 60,
+          "source": "contracts/CompxGovernance.algo.ts:36",
+          "pc": [
+            119,
+            120
+          ]
+        },
+        {
+          "teal": 61,
+          "source": "contracts/CompxGovernance.algo.ts:36",
+          "pc": [
+            121
+          ]
+        },
+        {
+          "teal": 62,
+          "source": "contracts/CompxGovernance.algo.ts:36",
+          "pc": [
+            122
+          ]
+        },
+        {
+          "teal": 63,
+          "source": "contracts/CompxGovernance.algo.ts:36",
+          "pc": [
+            123
+          ]
+        },
+        {
+          "teal": 64,
+          "source": "contracts/CompxGovernance.algo.ts:36",
+          "pc": [
+            124,
+            125
+          ]
+        },
+        {
+          "teal": 65,
+          "source": "contracts/CompxGovernance.algo.ts:36",
+          "pc": [
+            126
+          ]
+        },
+        {
+          "teal": 66,
+          "source": "contracts/CompxGovernance.algo.ts:36",
+          "pc": [
+            127
+          ]
+        },
+        {
+          "teal": 69,
+          "source": "contracts/CompxGovernance.algo.ts:36",
+          "errorMessage": "argument 0 (mbrTxn) for createNewProposal must be a pay transaction",
+          "pc": [
+            128
+          ]
+        },
+        {
+          "teal": 72,
+          "source": "contracts/CompxGovernance.algo.ts:35",
+          "pc": [
+            129,
+            130,
+            131
+          ]
+        },
+        {
+          "teal": 73,
+          "source": "contracts/CompxGovernance.algo.ts:35",
+          "pc": [
+            132
+          ]
+        },
+        {
+          "teal": 76,
+          "source": "contracts/CompxGovernance.algo.ts:34",
+          "pc": [
+            133,
+            134,
+            135
+          ]
+        },
+        {
+          "teal": 77,
+          "source": "contracts/CompxGovernance.algo.ts:34",
+          "pc": [
+            136,
+            137,
+            138
+          ]
+        },
+        {
+          "teal": 80,
+          "source": "contracts/CompxGovernance.algo.ts:33",
+          "pc": [
+            139,
+            140,
+            141
+          ]
+        },
+        {
+          "teal": 81,
+          "source": "contracts/CompxGovernance.algo.ts:33",
+          "pc": [
+            142,
+            143,
+            144
+          ]
+        },
+        {
+          "teal": 84,
+          "source": "contracts/CompxGovernance.algo.ts:32",
+          "pc": [
+            145,
+            146,
+            147
+          ]
+        },
+        {
+          "teal": 85,
+          "source": "contracts/CompxGovernance.algo.ts:32",
+          "pc": [
+            148,
+            149,
+            150
+          ]
+        },
+        {
+          "teal": 88,
+          "source": "contracts/CompxGovernance.algo.ts:31",
+          "pc": [
+            151,
+            152,
+            153
+          ]
+        },
+        {
+          "teal": 89,
+          "source": "contracts/CompxGovernance.algo.ts:31",
+          "pc": [
+            154
+          ]
+        },
+        {
+          "teal": 90,
+          "source": "contracts/CompxGovernance.algo.ts:31",
+          "pc": [
+            155
+          ]
+        },
+        {
+          "teal": 100,
+          "source": "contracts/CompxGovernance.algo.ts:31",
+          "pc": [
+            156,
+            157,
+            158
+          ]
+        },
+        {
+          "teal": 103,
+          "source": "contracts/CompxGovernance.algo.ts:31",
+          "pc": [
+            159
+          ]
+        },
+        {
+          "teal": 104,
+          "source": "contracts/CompxGovernance.algo.ts:31",
+          "pc": [
+            160,
+            161
+          ]
+        },
+        {
+          "teal": 108,
+          "source": "contracts/CompxGovernance.algo.ts:38",
+          "pc": [
+            162,
+            163
+          ]
+        },
+        {
+          "teal": 109,
+          "source": "contracts/CompxGovernance.algo.ts:38",
+          "pc": [
+            164,
+            165
+          ]
+        },
+        {
+          "teal": 113,
+          "source": "contracts/CompxGovernance.algo.ts:41",
+          "pc": [
+            166
+          ]
+        },
+        {
+          "teal": 114,
+          "source": "contracts/CompxGovernance.algo.ts:41",
+          "pc": [
+            167
+          ]
+        },
+        {
+          "teal": 115,
+          "source": "contracts/CompxGovernance.algo.ts:41",
+          "pc": [
+            168
+          ]
+        },
+        {
+          "teal": 116,
+          "source": "contracts/CompxGovernance.algo.ts:41",
+          "pc": [
+            169
+          ]
+        },
+        {
+          "teal": 117,
+          "source": "contracts/CompxGovernance.algo.ts:41",
+          "pc": [
+            170,
+            171
+          ]
+        },
+        {
+          "teal": 121,
+          "source": "contracts/CompxGovernance.algo.ts:42",
+          "pc": [
+            172,
+            173
+          ]
+        },
+        {
+          "teal": 122,
+          "source": "contracts/CompxGovernance.algo.ts:42",
+          "pc": [
+            174,
+            175
+          ]
+        },
+        {
+          "teal": 126,
+          "source": "contracts/CompxGovernance.algo.ts:45",
+          "pc": [
+            176,
+            177
+          ]
+        },
+        {
+          "teal": 127,
+          "source": "contracts/CompxGovernance.algo.ts:45",
+          "pc": [
+            178,
+            179
+          ]
+        },
+        {
+          "teal": 128,
+          "source": "contracts/CompxGovernance.algo.ts:45",
+          "pc": [
+            180
+          ]
+        },
+        {
+          "teal": 129,
+          "source": "contracts/CompxGovernance.algo.ts:45",
+          "pc": [
+            181,
+            182
+          ]
+        },
+        {
+          "teal": 133,
+          "source": "contracts/CompxGovernance.algo.ts:48",
+          "pc": [
+            183,
+            184
+          ]
+        },
+        {
+          "teal": 134,
+          "source": "contracts/CompxGovernance.algo.ts:48",
+          "pc": [
+            185
+          ]
+        },
+        {
+          "teal": 135,
+          "source": "contracts/CompxGovernance.algo.ts:48",
+          "pc": [
+            186
+          ]
+        },
+        {
+          "teal": 136,
+          "source": "contracts/CompxGovernance.algo.ts:48",
+          "pc": [
+            187
+          ]
+        },
+        {
+          "teal": 139,
+          "source": "contracts/CompxGovernance.algo.ts:48",
+          "errorMessage": "Only the deployer can create proposals",
+          "pc": [
+            188
+          ]
+        },
+        {
+          "teal": 143,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            189
+          ]
+        },
+        {
+          "teal": 144,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            190
+          ]
+        },
+        {
+          "teal": 145,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            191
+          ]
+        },
+        {
+          "teal": 146,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            192,
+            193
+          ]
+        },
+        {
+          "teal": 147,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            194,
+            195
+          ]
+        },
+        {
+          "teal": 148,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            196
+          ]
+        },
+        {
+          "teal": 149,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            197,
+            198,
+            199
+          ]
+        },
+        {
+          "teal": 150,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            200,
+            201
+          ]
+        },
+        {
+          "teal": 151,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            202
+          ]
+        },
+        {
+          "teal": 152,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            203
+          ]
+        },
+        {
+          "teal": 153,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            204
+          ]
+        },
+        {
+          "teal": 154,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            205,
+            206,
+            207
+          ]
+        },
+        {
+          "teal": 155,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            208
+          ]
+        },
+        {
+          "teal": 156,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            209
+          ]
+        },
+        {
+          "teal": 157,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            210,
+            211,
+            212
+          ]
+        },
+        {
+          "teal": 158,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            213
+          ]
+        },
+        {
+          "teal": 159,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            214
+          ]
+        },
+        {
+          "teal": 160,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            215
+          ]
+        },
+        {
+          "teal": 161,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            216
+          ]
+        },
+        {
+          "teal": 162,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            217
+          ]
+        },
+        {
+          "teal": 163,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            218
+          ]
+        },
+        {
+          "teal": 164,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "pc": [
+            219
+          ]
+        },
+        {
+          "teal": 167,
+          "source": "contracts/CompxGovernance.algo.ts:49",
+          "errorMessage": "Proposal already exists",
+          "pc": [
+            220
+          ]
+        },
+        {
+          "teal": 172,
+          "source": "contracts/CompxGovernance.algo.ts:52",
+          "pc": [
+            221,
+            222
+          ]
+        },
+        {
+          "teal": 173,
+          "source": "contracts/CompxGovernance.algo.ts:52",
+          "pc": [
+            223,
+            224
+          ]
+        },
+        {
+          "teal": 174,
+          "source": "contracts/CompxGovernance.algo.ts:52",
+          "pc": [
+            225,
+            226,
+            227
+          ]
+        },
+        {
+          "teal": 175,
+          "source": "contracts/CompxGovernance.algo.ts:52",
+          "pc": [
+            228
+          ]
+        },
+        {
+          "teal": 178,
+          "source": "contracts/CompxGovernance.algo.ts:52",
+          "errorMessage": "transaction verification failed: {\"txn\":\"mbrTxn\",\"field\":\"amount\",\"condition\":\"greaterThanEqualTo\",\"expected\":\">=proposalMbr\"}",
+          "pc": [
+            229
+          ]
+        },
+        {
+          "teal": 189,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            230
+          ]
+        },
+        {
+          "teal": 190,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            231
+          ]
+        },
+        {
+          "teal": 191,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            232
+          ]
+        },
+        {
+          "teal": 192,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            233,
+            234
+          ]
+        },
+        {
+          "teal": 193,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            235,
+            236
+          ]
+        },
+        {
+          "teal": 194,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            237
+          ]
+        },
+        {
+          "teal": 195,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            238,
+            239,
+            240
+          ]
+        },
+        {
+          "teal": 196,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            241,
+            242
+          ]
+        },
+        {
+          "teal": 197,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            243
+          ]
+        },
+        {
+          "teal": 198,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            244
+          ]
+        },
+        {
+          "teal": 199,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            245
+          ]
+        },
+        {
+          "teal": 200,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            246,
+            247,
+            248
+          ]
+        },
+        {
+          "teal": 201,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            249
+          ]
+        },
+        {
+          "teal": 202,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            250
+          ]
+        },
+        {
+          "teal": 203,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            251,
+            252,
+            253
+          ]
+        },
+        {
+          "teal": 204,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            254
+          ]
+        },
+        {
+          "teal": 205,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            255
+          ]
+        },
+        {
+          "teal": 206,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            256
+          ]
+        },
+        {
+          "teal": 207,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            257
+          ]
+        },
+        {
+          "teal": 208,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            258
+          ]
+        },
+        {
+          "teal": 209,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            259
+          ]
+        },
+        {
+          "teal": 210,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            260
+          ]
+        },
+        {
+          "teal": 211,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            261
+          ]
+        },
+        {
+          "teal": 212,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            262,
+            263,
+            264,
+            265
+          ]
+        },
+        {
+          "teal": 213,
+          "source": "contracts/CompxGovernance.algo.ts:56",
+          "pc": [
+            266,
+            267
+          ]
+        },
+        {
+          "teal": 214,
+          "source": "contracts/CompxGovernance.algo.ts:56",
+          "pc": [
+            268
+          ]
+        },
+        {
+          "teal": 215,
+          "source": "contracts/CompxGovernance.algo.ts:56",
+          "pc": [
+            269
+          ]
+        },
+        {
+          "teal": 216,
+          "source": "contracts/CompxGovernance.algo.ts:56",
+          "pc": [
+            270
+          ]
+        },
+        {
+          "teal": 217,
+          "source": "contracts/CompxGovernance.algo.ts:56",
+          "pc": [
+            271,
+            272,
+            273
+          ]
+        },
+        {
+          "teal": 218,
+          "source": "contracts/CompxGovernance.algo.ts:56",
+          "pc": [
+            274
+          ]
+        },
+        {
+          "teal": 219,
+          "source": "contracts/CompxGovernance.algo.ts:56",
+          "pc": [
+            275
+          ]
+        },
+        {
+          "teal": 220,
+          "source": "contracts/CompxGovernance.algo.ts:56",
+          "pc": [
+            276,
+            277,
+            278
+          ]
+        },
+        {
+          "teal": 221,
+          "source": "contracts/CompxGovernance.algo.ts:57",
+          "pc": [
+            279,
+            280
+          ]
+        },
+        {
+          "teal": 222,
+          "source": "contracts/CompxGovernance.algo.ts:57",
+          "pc": [
+            281
+          ]
+        },
+        {
+          "teal": 223,
+          "source": "contracts/CompxGovernance.algo.ts:57",
+          "pc": [
+            282
+          ]
+        },
+        {
+          "teal": 224,
+          "source": "contracts/CompxGovernance.algo.ts:57",
+          "pc": [
+            283
+          ]
+        },
+        {
+          "teal": 225,
+          "source": "contracts/CompxGovernance.algo.ts:57",
+          "pc": [
+            284,
+            285,
+            286
+          ]
+        },
+        {
+          "teal": 226,
+          "source": "contracts/CompxGovernance.algo.ts:57",
+          "pc": [
+            287
+          ]
+        },
+        {
+          "teal": 227,
+          "source": "contracts/CompxGovernance.algo.ts:57",
+          "pc": [
+            288
+          ]
+        },
+        {
+          "teal": 228,
+          "source": "contracts/CompxGovernance.algo.ts:57",
+          "pc": [
+            289,
+            290,
+            291
+          ]
+        },
+        {
+          "teal": 229,
+          "source": "contracts/CompxGovernance.algo.ts:58",
+          "pc": [
+            292,
+            293
+          ]
+        },
+        {
+          "teal": 230,
+          "source": "contracts/CompxGovernance.algo.ts:58",
+          "pc": [
+            294,
+            295,
+            296
+          ]
+        },
+        {
+          "teal": 231,
+          "source": "contracts/CompxGovernance.algo.ts:59",
+          "pc": [
+            297,
+            298
+          ]
+        },
+        {
+          "teal": 232,
+          "source": "contracts/CompxGovernance.algo.ts:59",
+          "pc": [
+            299,
+            300,
+            301
+          ]
+        },
+        {
+          "teal": 233,
+          "source": "contracts/CompxGovernance.algo.ts:60",
+          "pc": [
+            302,
+            303
+          ]
+        },
+        {
+          "teal": 234,
+          "source": "contracts/CompxGovernance.algo.ts:60",
+          "pc": [
+            304
+          ]
+        },
+        {
+          "teal": 235,
+          "source": "contracts/CompxGovernance.algo.ts:60",
+          "pc": [
+            305,
+            306,
+            307
+          ]
+        },
+        {
+          "teal": 236,
+          "source": "contracts/CompxGovernance.algo.ts:61",
+          "pc": [
+            308,
+            309
+          ]
+        },
+        {
+          "teal": 237,
+          "source": "contracts/CompxGovernance.algo.ts:61",
+          "pc": [
+            310
+          ]
+        },
+        {
+          "teal": 238,
+          "source": "contracts/CompxGovernance.algo.ts:61",
+          "pc": [
+            311,
+            312,
+            313
+          ]
+        },
+        {
+          "teal": 239,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            314
+          ]
+        },
+        {
+          "teal": 240,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            315
+          ]
+        },
+        {
+          "teal": 241,
+          "source": "contracts/CompxGovernance.algo.ts:55",
+          "pc": [
+            316
+          ]
+        },
+        {
+          "teal": 245,
+          "source": "contracts/CompxGovernance.algo.ts:64",
+          "pc": [
+            317
+          ]
+        },
+        {
+          "teal": 246,
+          "source": "contracts/CompxGovernance.algo.ts:64",
+          "pc": [
+            318
+          ]
+        },
+        {
+          "teal": 247,
+          "source": "contracts/CompxGovernance.algo.ts:64",
+          "pc": [
+            319
+          ]
+        },
+        {
+          "teal": 248,
+          "source": "contracts/CompxGovernance.algo.ts:64",
+          "pc": [
+            320
+          ]
+        },
+        {
+          "teal": 249,
+          "source": "contracts/CompxGovernance.algo.ts:64",
+          "pc": [
+            321
+          ]
+        },
+        {
+          "teal": 250,
+          "source": "contracts/CompxGovernance.algo.ts:64",
+          "pc": [
+            322
+          ]
+        },
+        {
+          "teal": 251,
+          "source": "contracts/CompxGovernance.algo.ts:64",
+          "pc": [
+            323
+          ]
+        },
+        {
+          "teal": 252,
+          "source": "contracts/CompxGovernance.algo.ts:31",
+          "pc": [
+            324
+          ]
+        },
+        {
+          "teal": 255,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            325,
+            326,
+            327,
+            328,
+            329,
+            330
+          ]
+        },
+        {
+          "teal": 256,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            331,
+            332,
+            333
+          ]
+        },
+        {
+          "teal": 257,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            334,
+            335,
+            336,
+            337
+          ]
+        },
+        {
+          "teal": 260,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "errorMessage": "this contract does not implement the given ABI method for create NoOp",
+          "pc": [
+            338
+          ]
+        },
+        {
+          "teal": 263,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            339,
+            340,
+            341,
+            342,
+            343,
+            344
+          ]
+        },
+        {
+          "teal": 264,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            345,
+            346,
+            347
+          ]
+        },
+        {
+          "teal": 265,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            348,
+            349,
+            350,
+            351
+          ]
+        },
+        {
+          "teal": 268,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "errorMessage": "this contract does not implement the given ABI method for call NoOp",
+          "pc": [
+            352
+          ]
+        },
+        {
+          "teal": 271,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            353,
+            354,
+            355
+          ]
+        },
+        {
+          "teal": 272,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            356,
+            357
+          ]
+        },
+        {
+          "teal": 273,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            358,
+            359
+          ]
+        },
+        {
+          "teal": 274,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            360
+          ]
+        },
+        {
+          "teal": 275,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            361,
+            362
+          ]
+        },
+        {
+          "teal": 276,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            363,
+            364
+          ]
+        },
+        {
+          "teal": 277,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            365
+          ]
+        },
+        {
+          "teal": 280,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            366,
+            367,
+            368
+          ]
+        },
+        {
+          "teal": 281,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            369,
+            370
+          ]
+        },
+        {
+          "teal": 282,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            371,
+            372
+          ]
+        },
+        {
+          "teal": 283,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            373
+          ]
+        },
+        {
+          "teal": 284,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            374,
+            375
+          ]
+        },
+        {
+          "teal": 285,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            376,
+            377
+          ]
+        },
+        {
+          "teal": 286,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            378
+          ]
+        },
+        {
+          "teal": 287,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            379
+          ]
+        },
+        {
+          "teal": 288,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            380,
+            381
+          ]
+        },
+        {
+          "teal": 289,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            382
+          ]
+        },
+        {
+          "teal": 290,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            383
+          ]
+        },
+        {
+          "teal": 291,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            384
+          ]
+        },
+        {
+          "teal": 292,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            385,
+            386,
+            387
+          ]
+        },
+        {
+          "teal": 293,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            388,
+            389
+          ]
+        },
+        {
+          "teal": 294,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            390,
+            391
+          ]
+        },
+        {
+          "teal": 295,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            392
+          ]
+        },
+        {
+          "teal": 296,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            393
+          ]
+        },
+        {
+          "teal": 297,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            394,
+            395
+          ]
+        },
+        {
+          "teal": 298,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            396,
+            397
+          ]
+        },
+        {
+          "teal": 299,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            398,
+            399
+          ]
+        },
+        {
+          "teal": 300,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            400,
+            401
+          ]
+        },
+        {
+          "teal": 301,
+          "source": "contracts/CompxGovernance.algo.ts:7",
+          "pc": [
+            402
+          ]
+        }
+      ],
+      "pcOffsetMethod": "none"
+    },
+    "clear": {
+      "sourceInfo": [],
+      "pcOffsetMethod": "none"
+    }
+  },
+  "source": {
+    "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDAKYnl0ZWNibG9jayAweCAweDc0NmY3NDYxNmM1ZjcwNzI2ZjcwNmY3MzYxNmM3MyAweDY0NjU3MDZjNmY3OTY1NzI1ZjYxNjQ2NDcyNjU3MzczIDB4NWY3MDcyNmY3MDZmNzM2MTZjNzMgMHgwMDAwMDAwMDAwMDAwMDAwIDB4MDAwYQoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDYuMgovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKcHVzaGludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CgkvLyBleGVjdXRlIGNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkCgljYWxsc3ViIGNyZWF0ZUFwcGxpY2F0aW9uCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBjcmVhdGVBcHBsaWNhdGlvbigpOiB2b2lkCmNyZWF0ZUFwcGxpY2F0aW9uOgoJcHJvdG8gMCAwCgoJLy8gY29udHJhY3RzL0NvbXB4R292ZXJuYW5jZS5hbGdvLnRzOjE4CgkvLyB0aGlzLnRvdGFsX3Byb3Bvc2Fscy52YWx1ZSA9IDAKCWJ5dGVjIDEgLy8gICJ0b3RhbF9wcm9wb3NhbHMiCglpbnRjIDEgLy8gMAoJYXBwX2dsb2JhbF9wdXQKCgkvLyBjb250cmFjdHMvQ29tcHhHb3Zlcm5hbmNlLmFsZ28udHM6MTkKCS8vIHRoaXMuZGVwbG95ZXJfYWRkcmVzcy52YWx1ZSA9IHRoaXMudHhuLnNlbmRlcgoJYnl0ZWMgMiAvLyAgImRlcGxveWVyX2FkZHJlc3MiCgl0eG4gU2VuZGVyCglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0cy9Db21weEdvdmVybmFuY2UuYWxnby50czoyMAoJLy8gdGhpcy50b3RhbF9wcm9wb3NhbHMudmFsdWUgPSAwCglieXRlYyAxIC8vICAidG90YWxfcHJvcG9zYWxzIgoJaW50YyAxIC8vIDAKCWFwcF9nbG9iYWxfcHV0CglyZXRzdWIKCi8vIGNyZWF0ZU5ld1Byb3Bvc2FsKHN0cmluZyxzdHJpbmcsc3RyaW5nLHVpbnQ2NCxwYXkpdm9pZAoqYWJpX3JvdXRlX2NyZWF0ZU5ld1Byb3Bvc2FsOgoJLy8gbWJyVHhuOiBwYXkKCXR4biBHcm91cEluZGV4CglpbnRjIDAgLy8gMQoJLQoJZHVwCglndHhucyBUeXBlRW51bQoJaW50YyAwIC8vICBwYXkKCT09CgoJLy8gYXJndW1lbnQgMCAobWJyVHhuKSBmb3IgY3JlYXRlTmV3UHJvcG9zYWwgbXVzdCBiZSBhIHBheSB0cmFuc2FjdGlvbgoJYXNzZXJ0CgoJLy8gZXhwaXJlc0luOiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDQKCWJ0b2kKCgkvLyBwcm9wb3NhbERlc2NyaXB0aW9uOiBzdHJpbmcKCXR4bmEgQXBwbGljYXRpb25BcmdzIDMKCWV4dHJhY3QgMiAwCgoJLy8gcHJvcG9zYWxUaXRsZTogc3RyaW5nCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglleHRyYWN0IDIgMAoKCS8vIHByb3Bvc2FsVHlwZTogc3RyaW5nCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglleHRyYWN0IDIgMAoKCS8vIGV4ZWN1dGUgY3JlYXRlTmV3UHJvcG9zYWwoc3RyaW5nLHN0cmluZyxzdHJpbmcsdWludDY0LHBheSl2b2lkCgljYWxsc3ViIGNyZWF0ZU5ld1Byb3Bvc2FsCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBjcmVhdGVOZXdQcm9wb3NhbChwcm9wb3NhbFR5cGU6IHN0cmluZywgcHJvcG9zYWxUaXRsZTogc3RyaW5nLCBwcm9wb3NhbERlc2NyaXB0aW9uOiBzdHJpbmcsIGV4cGlyZXNJbjogdWludDY0LCBtYnJUeG46IFBheVR4bik6IHZvaWQKLy8KLy8gQ3JlYXRlIGEgbmV3IHByb3Bvc2FsCi8vIEBwYXJhbSBwcm9wb3NhbFR5cGUgVHlwZSBvZiB0aGUgcHJvcG9zYWwgLSBjYW4gYmUgcmVnIG9yIHBvb2wKLy8gQHBhcmFtIHByb3Bvc2FsVGl0bGUgVGl0bGUgb2YgdGhlIHByb3Bvc2FsCi8vIEBwYXJhbSBwcm9wb3NhbERlc2NyaXB0aW9uIERlc2NyaXB0aW9uIG9mIHRoZSBwcm9wb3NhbAovLyBAcGFyYW0gZXhwaXJlc0luIFRpbWUgaW4gc2Vjb25kcyBmb3IgdGhlIHByb3Bvc2FsIHRvIGV4cGlyZQpjcmVhdGVOZXdQcm9wb3NhbDoKCXByb3RvIDUgMAoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAwIC8vIDB4CglkdXBuIDMKCgkvLyBjb250cmFjdHMvQ29tcHhHb3Zlcm5hbmNlLmFsZ28udHM6MzgKCS8vIHByb3Bvc2VyQWRkcmVzczogQWRkcmVzcyA9IHRoaXMudHhuLnNlbmRlcgoJdHhuIFNlbmRlcgoJZnJhbWVfYnVyeSAwIC8vIHByb3Bvc2VyQWRkcmVzczogQWRkcmVzcwoKCS8vIGNvbnRyYWN0cy9Db21weEdvdmVybmFuY2UuYWxnby50czo0MQoJLy8gcHJvcG9zYWxOb25jZTogdWludDY0ID0gdGhpcy50b3RhbF9wcm9wb3NhbHMudmFsdWUgKyAxCglieXRlYyAxIC8vICAidG90YWxfcHJvcG9zYWxzIgoJYXBwX2dsb2JhbF9nZXQKCWludGMgMCAvLyAxCgkrCglmcmFtZV9idXJ5IDEgLy8gcHJvcG9zYWxOb25jZTogdWludDY0CgoJLy8gY29udHJhY3RzL0NvbXB4R292ZXJuYW5jZS5hbGdvLnRzOjQyCgkvLyBjdXJyZW50VGltZXN0YW1wOiB1aW50NjQgPSBnbG9iYWxzLmxhdGVzdFRpbWVzdGFtcAoJZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAoJZnJhbWVfYnVyeSAyIC8vIGN1cnJlbnRUaW1lc3RhbXA6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0cy9Db21weEdvdmVybmFuY2UuYWxnby50czo0NQoJLy8gZXhwaXJ5VGltZXN0YW1wOiB1aW50NjQgPSBjdXJyZW50VGltZXN0YW1wICsgZXhwaXJlc0luCglmcmFtZV9kaWcgMiAvLyBjdXJyZW50VGltZXN0YW1wOiB1aW50NjQKCWZyYW1lX2RpZyAtNCAvLyBleHBpcmVzSW46IHVpbnQ2NAoJKwoJZnJhbWVfYnVyeSAzIC8vIGV4cGlyeVRpbWVzdGFtcDogdWludDY0CgoJLy8gY29udHJhY3RzL0NvbXB4R292ZXJuYW5jZS5hbGdvLnRzOjQ4CgkvLyBhc3NlcnQocHJvcG9zZXJBZGRyZXNzID09PSB0aGlzLmRlcGxveWVyX2FkZHJlc3MudmFsdWUsICdPbmx5IHRoZSBkZXBsb3llciBjYW4gY3JlYXRlIHByb3Bvc2FscycpCglmcmFtZV9kaWcgMCAvLyBwcm9wb3NlckFkZHJlc3M6IEFkZHJlc3MKCWJ5dGVjIDIgLy8gICJkZXBsb3llcl9hZGRyZXNzIgoJYXBwX2dsb2JhbF9nZXQKCT09CgoJLy8gT25seSB0aGUgZGVwbG95ZXIgY2FuIGNyZWF0ZSBwcm9wb3NhbHMKCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9Db21weEdvdmVybmFuY2UuYWxnby50czo0OQoJLy8gYXNzZXJ0KCF0aGlzLnByb3Bvc2Fscyh7IG5vbmNlOiBwcm9wb3NhbE5vbmNlLCBwcm9wb3NhbFR5cGU6IHByb3Bvc2FsVHlwZSB9KS5leGlzdHMsICdQcm9wb3NhbCBhbHJlYWR5IGV4aXN0cycpCglieXRlYyAzIC8vICAiX3Byb3Bvc2FscyIKCWJ5dGVjIDAgLy8gIGluaXRpYWwgaGVhZAoJYnl0ZWMgMCAvLyAgaW5pdGlhbCB0YWlsCglieXRlYyA1IC8vICBpbml0aWFsIGhlYWQgb2Zmc2V0CglmcmFtZV9kaWcgMSAvLyBwcm9wb3NhbE5vbmNlOiB1aW50NjQKCWl0b2IKCWNhbGxzdWIgKnByb2Nlc3Nfc3RhdGljX3R1cGxlX2VsZW1lbnQKCWZyYW1lX2RpZyAtMSAvLyBwcm9wb3NhbFR5cGU6IHN0cmluZwoJZHVwCglsZW4KCWl0b2IKCWV4dHJhY3QgNiAyCglzd2FwCgljb25jYXQKCWNhbGxzdWIgKnByb2Nlc3NfZHluYW1pY190dXBsZV9lbGVtZW50Cglwb3AgLy8gcG9wIGhlYWQgb2Zmc2V0Cgljb25jYXQgLy8gY29uY2F0IGhlYWQgYW5kIHRhaWwKCWNvbmNhdAoJYm94X2xlbgoJc3dhcAoJcG9wCgkhCgoJLy8gUHJvcG9zYWwgYWxyZWFkeSBleGlzdHMKCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9Db21weEdvdmVybmFuY2UuYWxnby50czo1MgoJLy8gdmVyaWZ5UGF5VHhuKG1iclR4biwgeyBhbW91bnQ6IHsgZ3JlYXRlclRoYW5FcXVhbFRvOiBwcm9wb3NhbE1iciB9IH0pCgkvLyB2ZXJpZnkgYW1vdW50CglmcmFtZV9kaWcgLTUgLy8gbWJyVHhuOiBQYXlUeG4KCWd0eG5zIEFtb3VudAoJcHVzaGludCAyOTEyCgk+PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoibWJyVHhuIiwiZmllbGQiOiJhbW91bnQiLCJjb25kaXRpb24iOiJncmVhdGVyVGhhbkVxdWFsVG8iLCJleHBlY3RlZCI6Ij49cHJvcG9zYWxNYnIifQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL0NvbXB4R292ZXJuYW5jZS5hbGdvLnRzOjU1CgkvLyB0aGlzLnByb3Bvc2Fscyh7IG5vbmNlOiBwcm9wb3NhbE5vbmNlLCBwcm9wb3NhbFR5cGU6IHByb3Bvc2FsVHlwZSB9KS52YWx1ZSA9IHsKCS8vICAgICAgIHByb3Bvc2FsVGl0bGU6IHByb3Bvc2FsVGl0bGUsCgkvLyAgICAgICBwcm9wb3NhbERlc2NyaXB0aW9uOiBwcm9wb3NhbERlc2NyaXB0aW9uLAoJLy8gICAgICAgUHJvcG9zYWxUb3RhbFZvdGVzOiAwLAoJLy8gICAgICAgUHJvcG9zYWxZZXNWb3RlczogMCwKCS8vICAgICAgIENyZWF0ZWRBdFRpbWVzdGFtcDogY3VycmVudFRpbWVzdGFtcCwKCS8vICAgICAgIEV4cGlyeVRpbWVzdGFtcDogZXhwaXJ5VGltZXN0YW1wLAoJLy8gICAgIH0KCWJ5dGVjIDMgLy8gICJfcHJvcG9zYWxzIgoJYnl0ZWMgMCAvLyAgaW5pdGlhbCBoZWFkCglieXRlYyAwIC8vICBpbml0aWFsIHRhaWwKCWJ5dGVjIDUgLy8gIGluaXRpYWwgaGVhZCBvZmZzZXQKCWZyYW1lX2RpZyAxIC8vIHByb3Bvc2FsTm9uY2U6IHVpbnQ2NAoJaXRvYgoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJZnJhbWVfZGlnIC0xIC8vIHByb3Bvc2FsVHlwZTogc3RyaW5nCglkdXAKCWxlbgoJaXRvYgoJZXh0cmFjdCA2IDIKCXN3YXAKCWNvbmNhdAoJY2FsbHN1YiAqcHJvY2Vzc19keW5hbWljX3R1cGxlX2VsZW1lbnQKCXBvcCAvLyBwb3AgaGVhZCBvZmZzZXQKCWNvbmNhdCAvLyBjb25jYXQgaGVhZCBhbmQgdGFpbAoJY29uY2F0CglkdXAKCWJveF9kZWwKCXBvcAoJYnl0ZWMgMCAvLyAgaW5pdGlhbCBoZWFkCglieXRlYyAwIC8vICBpbml0aWFsIHRhaWwKCXB1c2hieXRlcyAweDAwMjQgLy8gaW5pdGlhbCBoZWFkIG9mZnNldAoJZnJhbWVfZGlnIC0yIC8vIHByb3Bvc2FsVGl0bGU6IHN0cmluZwoJZHVwCglsZW4KCWl0b2IKCWV4dHJhY3QgNiAyCglzd2FwCgljb25jYXQKCWNhbGxzdWIgKnByb2Nlc3NfZHluYW1pY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgLTMgLy8gcHJvcG9zYWxEZXNjcmlwdGlvbjogc3RyaW5nCglkdXAKCWxlbgoJaXRvYgoJZXh0cmFjdCA2IDIKCXN3YXAKCWNvbmNhdAoJY2FsbHN1YiAqcHJvY2Vzc19keW5hbWljX3R1cGxlX2VsZW1lbnQKCWJ5dGVjIDQgLy8gMHgwMDAwMDAwMDAwMDAwMDAwCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglieXRlYyA0IC8vIDB4MDAwMDAwMDAwMDAwMDAwMAoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJZnJhbWVfZGlnIDIgLy8gY3VycmVudFRpbWVzdGFtcDogdWludDY0CglpdG9iCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgMyAvLyBleHBpcnlUaW1lc3RhbXA6IHVpbnQ2NAoJaXRvYgoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJcG9wIC8vIHBvcCBoZWFkIG9mZnNldAoJY29uY2F0IC8vIGNvbmNhdCBoZWFkIGFuZCB0YWlsCglib3hfcHV0CgoJLy8gY29udHJhY3RzL0NvbXB4R292ZXJuYW5jZS5hbGdvLnRzOjY0CgkvLyB0aGlzLnRvdGFsX3Byb3Bvc2Fscy52YWx1ZSArPSAxCglieXRlYyAxIC8vICAidG90YWxfcHJvcG9zYWxzIgoJYXBwX2dsb2JhbF9nZXQKCWludGMgMCAvLyAxCgkrCglieXRlYyAxIC8vICAidG90YWxfcHJvcG9zYWxzIgoJc3dhcAoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweDNlNWMxNWU2IC8vIG1ldGhvZCAiY3JlYXRlTmV3UHJvcG9zYWwoc3RyaW5nLHN0cmluZyxzdHJpbmcsdWludDY0LHBheSl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVOZXdQcm9wb3NhbAoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKKnByb2Nlc3Nfc3RhdGljX3R1cGxlX2VsZW1lbnQ6Cglwcm90byA0IDMKCWZyYW1lX2RpZyAtNCAvLyB0dXBsZSBoZWFkCglmcmFtZV9kaWcgLTEgLy8gZWxlbWVudAoJY29uY2F0CglmcmFtZV9kaWcgLTMgLy8gdHVwbGUgdGFpbAoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0CglyZXRzdWIKCipwcm9jZXNzX2R5bmFtaWNfdHVwbGVfZWxlbWVudDoKCXByb3RvIDQgMwoJZnJhbWVfZGlnIC00IC8vIHR1cGxlIGhlYWQKCWZyYW1lX2RpZyAtMiAvLyBoZWFkIG9mZnNldAoJY29uY2F0CglmcmFtZV9idXJ5IC00IC8vIHR1cGxlIGhlYWQKCWZyYW1lX2RpZyAtMSAvLyBlbGVtZW50CglkdXAKCWxlbgoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0CglidG9pCgkrCglpdG9iCglleHRyYWN0IDYgMgoJZnJhbWVfYnVyeSAtMiAvLyBoZWFkIG9mZnNldAoJZnJhbWVfZGlnIC0zIC8vIHR1cGxlIHRhaWwKCXN3YXAKCWNvbmNhdAoJZnJhbWVfYnVyeSAtMyAvLyB0dXBsZSB0YWlsCglmcmFtZV9kaWcgLTQgLy8gdHVwbGUgaGVhZAoJZnJhbWVfZGlnIC0zIC8vIHR1cGxlIHRhaWwKCWZyYW1lX2RpZyAtMiAvLyBoZWFkIG9mZnNldAoJcmV0c3Vi",
+    "clear": "I3ByYWdtYSB2ZXJzaW9uIDEw"
+  },
+  "byteCode": {
+    "approval": "CiACAQAmBgAPdG90YWxfcHJvcG9zYWxzEGRlcGxveWVyX2FkZHJlc3MKX3Byb3Bvc2FscwgAAAAAAAAAAAIACjEYFIEGCzEZCI0MAPAAAAAAAAAAAAAAAOIAAAAAAAAAAAAAAIgAAiJDigAAKSNnKjEAZykjZ4kxFiIJSTgQIhJENhoEFzYaA1cCADYaAlcCADYaAVcCAIgAAiJDigUAKEcDMQCMAClkIgiMATIHjAKLAov8CIwDiwAqZBJEKygoJwWLARaIAJmL/0kVFlcGAkxQiACZSFBQvUxIFESL+zgIgeAWD0QrKCgnBYsBFogAcIv/SRUWVwYCTFCIAHBIUFBJvEgoKIACACSL/kkVFlcGAkxQiABXi/1JFRZXBgJMUIgASicEiAA4JwSIADOLAhaIAC2LAxaIACdIUL8pZCIIKUxniYAEuER7NjYaAI4B/xIAgAQ+XBXmNhoAjgH/FwCKBAOL/Iv/UIv9i/6JigQDi/yL/lCM/Iv/SRWL/hcIFlcGAoz+i/1MUIz9i/yL/Yv+iQ==",
+    "clear": "Cg=="
+  },
+  "compilerInfo": {
+    "compiler": "algod",
+    "compilerVersion": {
+      "major": 3,
+      "minor": 25,
+      "patch": 0,
+      "commitHash": "9855f57c"
+    }
+  }
+}

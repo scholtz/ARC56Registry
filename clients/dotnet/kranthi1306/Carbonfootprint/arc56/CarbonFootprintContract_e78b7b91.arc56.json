@@ -1,0 +1,346 @@
+{
+    "name": "CarbonFootprintContract",
+    "structs": {},
+    "methods": [
+        {
+            "name": "opt_in",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "OptIn"
+                ]
+            },
+            "readonly": false,
+            "desc": "Opt into the contract to enable local state storage",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "register_device",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "device_id"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Register a new IoT device to the system",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "record_emission",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "device_id"
+                },
+                {
+                    "type": "uint64",
+                    "name": "emission_amount"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Record carbon emission data from an IoT device",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "transfer_emissions",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "receiver"
+                },
+                {
+                    "type": "uint64",
+                    "name": "emission_amount"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Transfer emission credits from sender to receiver",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_total_emissions",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Get the total carbon emissions recorded",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_device_emissions",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Get emissions for the calling device (sender)",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_emissions_for_account",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "account"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Get emissions for a specific account",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_device_count",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Get the total number of registered devices",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_sender_address",
+            "args": [],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Get the address of the transaction sender",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 2,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 1,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "total_emissions": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "dG90YWxfZW1pc3Npb25z",
+                    "desc": "Total carbon emissions from all devices"
+                },
+                "device_count": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "ZGV2aWNlX2NvdW50",
+                    "desc": "Number of registered IoT devices"
+                }
+            },
+            "local": {
+                "device_emissions": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "ZGV2aWNlX2VtaXNzaW9ucw==",
+                    "desc": "Emissions tracked per device"
+                }
+            },
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        300
+                    ],
+                    "errorMessage": "Insufficient emissions to transfer"
+                },
+                {
+                    "pc": [
+                        92
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp"
+                },
+                {
+                    "pc": [
+                        178
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp && can only call when creating"
+                },
+                {
+                    "pc": [
+                        167
+                    ],
+                    "errorMessage": "OnCompletion must be OptIn && can only call when not creating"
+                },
+                {
+                    "pc": [
+                        203,
+                        373
+                    ],
+                    "errorMessage": "check self.device_count exists"
+                },
+                {
+                    "pc": [
+                        257,
+                        293,
+                        307,
+                        319,
+                        342,
+                        362
+                    ],
+                    "errorMessage": "check self.device_emissions exists for account"
+                },
+                {
+                    "pc": [
+                        240,
+                        329
+                    ],
+                    "errorMessage": "check self.total_emissions exists"
+                },
+                {
+                    "pc": [
+                        193,
+                        222
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        199,
+                        228
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"
+                },
+                {
+                    "pc": [
+                        279,
+                        358
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        236,
+                        287
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint64"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMiA4CiAgICBieXRlY2Jsb2NrICJkZXZpY2VfZW1pc3Npb25zIiAweDE1MWY3Yzc1ICJ0b3RhbF9lbWlzc2lvbnMiICJkZXZpY2VfY291bnQiCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FyYm9uZm9vdHByaW50L2NvbnRyYWN0LnB5OjUtNgogICAgLy8gIyBTdG9yZSB0b3RhbCBjYXJib24gZW1pc3Npb25zIHJlY29yZGVkCiAgICAvLyBzZWxmLnRvdGFsX2VtaXNzaW9ucyA9IEdsb2JhbFN0YXRlKFVJbnQ2NCgwKSwga2V5PSJ0b3RhbF9lbWlzc2lvbnMiLCBkZXNjcmlwdGlvbj0iVG90YWwgY2FyYm9uIGVtaXNzaW9ucyBmcm9tIGFsbCBkZXZpY2VzIikKICAgIGJ5dGVjXzIgLy8gInRvdGFsX2VtaXNzaW9ucyIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weTo3LTgKICAgIC8vICMgU3RvcmUgbnVtYmVyIG9mIElvVCBkZXZpY2VzIHJlZ2lzdGVyZWQKICAgIC8vIHNlbGYuZGV2aWNlX2NvdW50ID0gR2xvYmFsU3RhdGUoVUludDY0KDApLCBrZXk9ImRldmljZV9jb3VudCIsIGRlc2NyaXB0aW9uPSJOdW1iZXIgb2YgcmVnaXN0ZXJlZCBJb1QgZGV2aWNlcyIpCiAgICBieXRlY18zIC8vICJkZXZpY2VfY291bnQiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weTozCiAgICAvLyBjbGFzcyBDYXJib25Gb290cHJpbnRDb250cmFjdChBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAMTkKICAgIHB1c2hieXRlcyAweDMwYzZkNThhIC8vIG1ldGhvZCAib3B0X2luKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9vcHRfaW5fcm91dGVANQoKbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDY6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FyYm9uZm9vdHByaW50L2NvbnRyYWN0LnB5OjMKICAgIC8vIGNsYXNzIENhcmJvbkZvb3RwcmludENvbnRyYWN0KEFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDBhNWVmZDViIDB4OGFiZjhiYzMgMHgzN2M5MTViMyAweDUzYzJiNWYwIDB4MTVjYzVhZTkgMHg3OGE4NjYxZSAweDAxMjM3Y2Y3IDB4YTlkMjU0OTYgLy8gbWV0aG9kICJyZWdpc3Rlcl9kZXZpY2Uoc3RyaW5nKXVpbnQ2NCIsIG1ldGhvZCAicmVjb3JkX2VtaXNzaW9uKHN0cmluZyx1aW50NjQpdWludDY0IiwgbWV0aG9kICJ0cmFuc2Zlcl9lbWlzc2lvbnMoYWRkcmVzcyx1aW50NjQpdm9pZCIsIG1ldGhvZCAiZ2V0X3RvdGFsX2VtaXNzaW9ucygpdWludDY0IiwgbWV0aG9kICJnZXRfZGV2aWNlX2VtaXNzaW9ucygpdWludDY0IiwgbWV0aG9kICJnZXRfZW1pc3Npb25zX2Zvcl9hY2NvdW50KGFkZHJlc3MpdWludDY0IiwgbWV0aG9kICJnZXRfZGV2aWNlX2NvdW50KCl1aW50NjQiLCBtZXRob2QgImdldF9zZW5kZXJfYWRkcmVzcygpYWRkcmVzcyIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHJlZ2lzdGVyX2RldmljZSByZWNvcmRfZW1pc3Npb24gdHJhbnNmZXJfZW1pc3Npb25zIGdldF90b3RhbF9lbWlzc2lvbnMgZ2V0X2RldmljZV9lbWlzc2lvbnMgZ2V0X2VtaXNzaW9uc19mb3JfYWNjb3VudCBnZXRfZGV2aWNlX2NvdW50IGdldF9zZW5kZXJfYWRkcmVzcwogICAgZXJyCgptYWluX29wdF9pbl9yb3V0ZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weToxMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJPcHRJbiJdKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgaW50Y18xIC8vIE9wdEluCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgT3B0SW4gJiYgY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgYiBvcHRfaW4KCm1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAMTk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wICYmIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5jYXJib25mb290cHJpbnQuY29udHJhY3QuQ2FyYm9uRm9vdHByaW50Q29udHJhY3Qub3B0X2luW3JvdXRpbmddKCkgLT4gdm9pZDoKb3B0X2luOgogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weToxNS0xNgogICAgLy8gIyBJbml0aWFsaXplIGRldmljZSBlbWlzc2lvbnMgdG8gMCB3aGVuIG9wdGluZyBpbgogICAgLy8gc2VsZi5kZXZpY2VfZW1pc3Npb25zW1R4bi5zZW5kZXJdID0gVUludDY0KDApCiAgICB0eG4gU2VuZGVyCiAgICBieXRlY18wIC8vICJkZXZpY2VfZW1pc3Npb25zIgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9sb2NhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jYXJib25mb290cHJpbnQvY29udHJhY3QucHk6MTIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiT3B0SW4iXSkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuY2FyYm9uZm9vdHByaW50LmNvbnRyYWN0LkNhcmJvbkZvb3RwcmludENvbnRyYWN0LnJlZ2lzdGVyX2RldmljZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlZ2lzdGVyX2RldmljZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jYXJib25mb290cHJpbnQvY29udHJhY3QucHk6MTgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FyYm9uZm9vdHByaW50L2NvbnRyYWN0LnB5OjIxCiAgICAvLyBzZWxmLmRldmljZV9jb3VudC52YWx1ZSArPSBVSW50NjQoMSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18zIC8vICJkZXZpY2VfY291bnQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuZGV2aWNlX2NvdW50IGV4aXN0cwogICAgaW50Y18xIC8vIDEKICAgICsKICAgIGJ5dGVjXzMgLy8gImRldmljZV9jb3VudCIKICAgIGRpZyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weToyMgogICAgLy8gcmV0dXJuIGFyYzQuVUludDY0KHNlbGYuZGV2aWNlX2NvdW50LnZhbHVlKQogICAgaXRvYgogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weToxOAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmNhcmJvbmZvb3RwcmludC5jb250cmFjdC5DYXJib25Gb290cHJpbnRDb250cmFjdC5yZWNvcmRfZW1pc3Npb25bcm91dGluZ10oKSAtPiB2b2lkOgpyZWNvcmRfZW1pc3Npb246CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FyYm9uZm9vdHByaW50L2NvbnRyYWN0LnB5OjI0CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBzd2FwCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weToyNy0yOAogICAgLy8gIyBVcGRhdGUgdG90YWwgZW1pc3Npb25zCiAgICAvLyBzZWxmLnRvdGFsX2VtaXNzaW9ucy52YWx1ZSArPSBlbWlzc2lvbl9hbW91bnQubmF0aXZlCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMiAvLyAidG90YWxfZW1pc3Npb25zIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX2VtaXNzaW9ucyBleGlzdHMKICAgIHN3YXAKICAgIGJ0b2kKICAgIHN3YXAKICAgIGRpZyAxCiAgICArCiAgICBieXRlY18yIC8vICJ0b3RhbF9lbWlzc2lvbnMiCiAgICBkaWcgMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jYXJib25mb290cHJpbnQvY29udHJhY3QucHk6MjktMzAKICAgIC8vICMgVXBkYXRlIGRldmljZS1zcGVjaWZpYyBlbWlzc2lvbnMKICAgIC8vIHNlbGYuZGV2aWNlX2VtaXNzaW9uc1tUeG4uc2VuZGVyXSArPSBlbWlzc2lvbl9hbW91bnQubmF0aXZlCiAgICB0eG4gU2VuZGVyCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJkZXZpY2VfZW1pc3Npb25zIgogICAgYXBwX2xvY2FsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuZGV2aWNlX2VtaXNzaW9ucyBleGlzdHMgZm9yIGFjY291bnQKICAgIHVuY292ZXIgMwogICAgKwogICAgYnl0ZWNfMCAvLyAiZGV2aWNlX2VtaXNzaW9ucyIKICAgIHN3YXAKICAgIGFwcF9sb2NhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jYXJib25mb290cHJpbnQvY29udHJhY3QucHk6MzEKICAgIC8vIHJldHVybiBhcmM0LlVJbnQ2NChzZWxmLnRvdGFsX2VtaXNzaW9ucy52YWx1ZSkKICAgIGl0b2IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jYXJib25mb290cHJpbnQvY29udHJhY3QucHk6MjQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5jYXJib25mb290cHJpbnQuY29udHJhY3QuQ2FyYm9uRm9vdHByaW50Q29udHJhY3QudHJhbnNmZXJfZW1pc3Npb25zW3JvdXRpbmddKCkgLT4gdm9pZDoKdHJhbnNmZXJfZW1pc3Npb25zOgogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weTozMwogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAzMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18zIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FyYm9uZm9vdHByaW50L2NvbnRyYWN0LnB5OjM2LTM3CiAgICAvLyAjIEVuc3VyZSBzZW5kZXIgaGFzIGVub3VnaCBlbWlzc2lvbnMgdG8gdHJhbnNmZXIKICAgIC8vIGFzc2VydCBzZWxmLmRldmljZV9lbWlzc2lvbnNbVHhuLnNlbmRlcl0gPj0gZW1pc3Npb25fYW1vdW50Lm5hdGl2ZSwgIkluc3VmZmljaWVudCBlbWlzc2lvbnMgdG8gdHJhbnNmZXIiCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAiZGV2aWNlX2VtaXNzaW9ucyIKICAgIGFwcF9sb2NhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmRldmljZV9lbWlzc2lvbnMgZXhpc3RzIGZvciBhY2NvdW50CiAgICBzd2FwCiAgICBidG9pCiAgICBzd2FwCiAgICBkaWcgMQogICAgPj0KICAgIGFzc2VydCAvLyBJbnN1ZmZpY2llbnQgZW1pc3Npb25zIHRvIHRyYW5zZmVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FyYm9uZm9vdHByaW50L2NvbnRyYWN0LnB5OjM5LTQwCiAgICAvLyAjIERlZHVjdCBmcm9tIHNlbmRlcgogICAgLy8gc2VsZi5kZXZpY2VfZW1pc3Npb25zW1R4bi5zZW5kZXJdIC09IGVtaXNzaW9uX2Ftb3VudC5uYXRpdmUKICAgIHR4biBTZW5kZXIKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gImRldmljZV9lbWlzc2lvbnMiCiAgICBhcHBfbG9jYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5kZXZpY2VfZW1pc3Npb25zIGV4aXN0cyBmb3IgYWNjb3VudAogICAgZGlnIDIKICAgIC0KICAgIGJ5dGVjXzAgLy8gImRldmljZV9lbWlzc2lvbnMiCiAgICBzd2FwCiAgICBhcHBfbG9jYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FyYm9uZm9vdHByaW50L2NvbnRyYWN0LnB5OjQxLTQyCiAgICAvLyAjIEFkZCB0byByZWNlaXZlcgogICAgLy8gc2VsZi5kZXZpY2VfZW1pc3Npb25zW3JlY2VpdmVyXSArPSBlbWlzc2lvbl9hbW91bnQubmF0aXZlCiAgICBkaWcgMQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gImRldmljZV9lbWlzc2lvbnMiCiAgICBhcHBfbG9jYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5kZXZpY2VfZW1pc3Npb25zIGV4aXN0cyBmb3IgYWNjb3VudAogICAgKwogICAgYnl0ZWNfMCAvLyAiZGV2aWNlX2VtaXNzaW9ucyIKICAgIHN3YXAKICAgIGFwcF9sb2NhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jYXJib25mb290cHJpbnQvY29udHJhY3QucHk6MzMKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5jYXJib25mb290cHJpbnQuY29udHJhY3QuQ2FyYm9uRm9vdHByaW50Q29udHJhY3QuZ2V0X3RvdGFsX2VtaXNzaW9uc1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF90b3RhbF9lbWlzc2lvbnM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FyYm9uZm9vdHByaW50L2NvbnRyYWN0LnB5OjQ3CiAgICAvLyByZXR1cm4gYXJjNC5VSW50NjQoc2VsZi50b3RhbF9lbWlzc2lvbnMudmFsdWUpCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMiAvLyAidG90YWxfZW1pc3Npb25zIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX2VtaXNzaW9ucyBleGlzdHMKICAgIGl0b2IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jYXJib25mb290cHJpbnQvY29udHJhY3QucHk6NDQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5jYXJib25mb290cHJpbnQuY29udHJhY3QuQ2FyYm9uRm9vdHByaW50Q29udHJhY3QuZ2V0X2RldmljZV9lbWlzc2lvbnNbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfZGV2aWNlX2VtaXNzaW9uczoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jYXJib25mb290cHJpbnQvY29udHJhY3QucHk6NTIKICAgIC8vIHJldHVybiBhcmM0LlVJbnQ2NChzZWxmLmRldmljZV9lbWlzc2lvbnNbVHhuLnNlbmRlcl0pCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAiZGV2aWNlX2VtaXNzaW9ucyIKICAgIGFwcF9sb2NhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmRldmljZV9lbWlzc2lvbnMgZXhpc3RzIGZvciBhY2NvdW50CiAgICBpdG9iCiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FyYm9uZm9vdHByaW50L2NvbnRyYWN0LnB5OjQ5CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuY2FyYm9uZm9vdHByaW50LmNvbnRyYWN0LkNhcmJvbkZvb3RwcmludENvbnRyYWN0LmdldF9lbWlzc2lvbnNfZm9yX2FjY291bnRbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfZW1pc3Npb25zX2Zvcl9hY2NvdW50OgogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weTo1NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAzMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FyYm9uZm9vdHByaW50L2NvbnRyYWN0LnB5OjU3CiAgICAvLyByZXR1cm4gYXJjNC5VSW50NjQoc2VsZi5kZXZpY2VfZW1pc3Npb25zW2FjY291bnRdKQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gImRldmljZV9lbWlzc2lvbnMiCiAgICBhcHBfbG9jYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5kZXZpY2VfZW1pc3Npb25zIGV4aXN0cyBmb3IgYWNjb3VudAogICAgaXRvYgogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weTo1NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmNhcmJvbmZvb3RwcmludC5jb250cmFjdC5DYXJib25Gb290cHJpbnRDb250cmFjdC5nZXRfZGV2aWNlX2NvdW50W3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X2RldmljZV9jb3VudDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jYXJib25mb290cHJpbnQvY29udHJhY3QucHk6NjIKICAgIC8vIHJldHVybiBhcmM0LlVJbnQ2NChzZWxmLmRldmljZV9jb3VudC52YWx1ZSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18zIC8vICJkZXZpY2VfY291bnQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuZGV2aWNlX2NvdW50IGV4aXN0cwogICAgaXRvYgogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weTo1OQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmNhcmJvbmZvb3RwcmludC5jb250cmFjdC5DYXJib25Gb290cHJpbnRDb250cmFjdC5nZXRfc2VuZGVyX2FkZHJlc3Nbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfc2VuZGVyX2FkZHJlc3M6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY2FyYm9uZm9vdHByaW50L2NvbnRyYWN0LnB5OjY0CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weTo2NwogICAgLy8gcmV0dXJuIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyLmJ5dGVzKQogICAgdHhuIFNlbmRlcgogICAgLy8gc21hcnRfY29udHJhY3RzL2NhcmJvbmZvb3RwcmludC9jb250cmFjdC5weTo2NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CyAEAAECCCYEEGRldmljZV9lbWlzc2lvbnMEFR98dQ90b3RhbF9lbWlzc2lvbnMMZGV2aWNlX2NvdW50MRhAAAYqImcrImcxG0EAX4AEMMbVijYaAI4BAEcxGRREMRhEgggECl79WwSKv4vDBDfJFbMEU8K18AQVzFrpBHioZh4EASN89wSp0lSWNhoAjggAHQA6AHAApwCyAL8A0wDeADEZIxIxGBBEQgAKMRkUMRgUEEQjQzEAKCJmI0M2GgFJIlkkCEwVEkQiK2VEIwgrSwFnFilMULAjQzYaAUkiWSQITBUSRDYaAkkVJRJEIiplREwXTEsBCCpLAWcxAEkiKGNETwMIKExmFilMULAjQzYaAUkVgSASRDYaAkkVJRJEMQAiKGNETBdMSwEPRDEASSIoY0RLAgkoTGZLASIoY0QIKExmI0MiKmVEFilMULAjQzEAIihjRBYpTFCwI0M2GgFJFYEgEkQiKGNEFilMULAjQyIrZUQWKUxQsCNDKTEAULAjQw==",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 3,
+            "patch": 2
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

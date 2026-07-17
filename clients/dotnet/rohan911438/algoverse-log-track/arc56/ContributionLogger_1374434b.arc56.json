@@ -1,0 +1,3896 @@
+{
+  "name": "ContributionLogger",
+  "desc": "",
+  "methods": [
+    {
+      "name": "createApplication",
+      "desc": "Initialize the ContributionLogger contract",
+      "args": [
+        {
+          "name": "organizerRegistryAppId",
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [
+          "NoOp"
+        ],
+        "call": []
+      }
+    },
+    {
+      "name": "logContribution",
+      "desc": "Log a contribution (called by authorized organizers)",
+      "args": [
+        {
+          "name": "volunteer",
+          "type": "address"
+        },
+        {
+          "name": "contributionType",
+          "type": "string"
+        },
+        {
+          "name": "hours",
+          "type": "uint64"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "location",
+          "type": "string"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "verifyContribution",
+      "desc": "Verify a contribution exists and return details",
+      "args": [
+        {
+          "name": "contributionId",
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "(uint64,uint64)"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "getVolunteerStats",
+      "desc": "Get volunteer statistics",
+      "args": [
+        {
+          "name": "volunteer",
+          "type": "address"
+        }
+      ],
+      "returns": {
+        "type": "(uint64,uint64,uint64)"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "bulkLogContributions",
+      "desc": "Bulk log contributions (for efficiency)",
+      "args": [
+        {
+          "name": "volunteers",
+          "type": "address[]"
+        },
+        {
+          "name": "contributionType",
+          "type": "string"
+        },
+        {
+          "name": "hours",
+          "type": "uint64[]"
+        },
+        {
+          "name": "descriptions",
+          "type": "string[]"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "optIn",
+      "desc": "Opt in to start tracking contributions",
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "getContractStats",
+      "desc": "Get contract statistics",
+      "args": [],
+      "returns": {
+        "type": "(uint64,uint64)"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    }
+  ],
+  "arcs": [
+    4,
+    56
+  ],
+  "structs": {},
+  "state": {
+    "schema": {
+      "global": {
+        "bytes": 0,
+        "ints": 3
+      },
+      "local": {
+        "bytes": 0,
+        "ints": 3
+      }
+    },
+    "keys": {
+      "global": {
+        "organizerRegistryAppId": {
+          "key": "b3JnYW5pemVyX3JlZ2lzdHJ5X2FwcA==",
+          "keyType": "AVMBytes",
+          "valueType": "uint64"
+        },
+        "totalContributions": {
+          "key": "dG90YWxfY29udHJpYnV0aW9ucw==",
+          "keyType": "AVMBytes",
+          "valueType": "uint64"
+        },
+        "contributionCounter": {
+          "key": "Y29udHJpYnV0aW9uX2NvdW50ZXI=",
+          "keyType": "AVMBytes",
+          "valueType": "uint64"
+        }
+      },
+      "local": {
+        "volunteerContributions": {
+          "key": "dm9sdW50ZWVyX2NvbnRyaWJ1dGlvbnM=",
+          "keyType": "AVMBytes",
+          "valueType": "uint64"
+        },
+        "volunteerReputation": {
+          "key": "dm9sdW50ZWVyX3JlcHV0YXRpb24=",
+          "keyType": "AVMBytes",
+          "valueType": "uint64"
+        },
+        "lastContributionTime": {
+          "key": "bGFzdF9jb250cmlidXRpb25fdGltZQ==",
+          "keyType": "AVMBytes",
+          "valueType": "uint64"
+        }
+      },
+      "box": {}
+    },
+    "maps": {
+      "global": {},
+      "local": {},
+      "box": {}
+    }
+  },
+  "bareActions": {
+    "create": [],
+    "call": []
+  },
+  "sourceInfo": {
+    "approval": {
+      "sourceInfo": [
+        {
+          "teal": 1,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            0
+          ]
+        },
+        {
+          "teal": 2,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        },
+        {
+          "teal": 3,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129
+          ]
+        },
+        {
+          "teal": 15,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            130,
+            131
+          ]
+        },
+        {
+          "teal": 16,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            132
+          ]
+        },
+        {
+          "teal": 17,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            133,
+            134
+          ]
+        },
+        {
+          "teal": 18,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            135
+          ]
+        },
+        {
+          "teal": 19,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            136,
+            137
+          ]
+        },
+        {
+          "teal": 20,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            138
+          ]
+        },
+        {
+          "teal": 21,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164
+          ]
+        },
+        {
+          "teal": 25,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?",
+          "pc": [
+            165
+          ]
+        },
+        {
+          "teal": 30,
+          "source": "contracts\\ContributionLogger.algo.ts:22",
+          "pc": [
+            166,
+            167,
+            168
+          ]
+        },
+        {
+          "teal": 31,
+          "source": "contracts\\ContributionLogger.algo.ts:22",
+          "pc": [
+            169
+          ]
+        },
+        {
+          "teal": 34,
+          "source": "contracts\\ContributionLogger.algo.ts:22",
+          "pc": [
+            170,
+            171,
+            172
+          ]
+        },
+        {
+          "teal": 35,
+          "source": "contracts\\ContributionLogger.algo.ts:22",
+          "pc": [
+            173
+          ]
+        },
+        {
+          "teal": 36,
+          "source": "contracts\\ContributionLogger.algo.ts:22",
+          "pc": [
+            174
+          ]
+        },
+        {
+          "teal": 42,
+          "source": "contracts\\ContributionLogger.algo.ts:22",
+          "pc": [
+            175,
+            176,
+            177
+          ]
+        },
+        {
+          "teal": 46,
+          "source": "contracts\\ContributionLogger.algo.ts:23",
+          "pc": [
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            186,
+            187,
+            188,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194,
+            195,
+            196,
+            197,
+            198,
+            199,
+            200,
+            201
+          ]
+        },
+        {
+          "teal": 47,
+          "source": "contracts\\ContributionLogger.algo.ts:23",
+          "pc": [
+            202,
+            203
+          ]
+        },
+        {
+          "teal": 48,
+          "source": "contracts\\ContributionLogger.algo.ts:23",
+          "pc": [
+            204
+          ]
+        },
+        {
+          "teal": 52,
+          "source": "contracts\\ContributionLogger.algo.ts:24",
+          "pc": [
+            205,
+            206
+          ]
+        },
+        {
+          "teal": 53,
+          "source": "contracts\\ContributionLogger.algo.ts:24",
+          "pc": [
+            207
+          ]
+        },
+        {
+          "teal": 54,
+          "source": "contracts\\ContributionLogger.algo.ts:24",
+          "pc": [
+            208
+          ]
+        },
+        {
+          "teal": 58,
+          "source": "contracts\\ContributionLogger.algo.ts:25",
+          "pc": [
+            209
+          ]
+        },
+        {
+          "teal": 59,
+          "source": "contracts\\ContributionLogger.algo.ts:25",
+          "pc": [
+            210
+          ]
+        },
+        {
+          "teal": 60,
+          "source": "contracts\\ContributionLogger.algo.ts:25",
+          "pc": [
+            211
+          ]
+        },
+        {
+          "teal": 61,
+          "source": "contracts\\ContributionLogger.algo.ts:22",
+          "pc": [
+            212
+          ]
+        },
+        {
+          "teal": 66,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            213,
+            214
+          ]
+        },
+        {
+          "teal": 69,
+          "source": "contracts\\ContributionLogger.algo.ts:36",
+          "pc": [
+            215,
+            216,
+            217
+          ]
+        },
+        {
+          "teal": 70,
+          "source": "contracts\\ContributionLogger.algo.ts:36",
+          "pc": [
+            218,
+            219,
+            220
+          ]
+        },
+        {
+          "teal": 73,
+          "source": "contracts\\ContributionLogger.algo.ts:35",
+          "pc": [
+            221,
+            222,
+            223
+          ]
+        },
+        {
+          "teal": 74,
+          "source": "contracts\\ContributionLogger.algo.ts:35",
+          "pc": [
+            224,
+            225,
+            226
+          ]
+        },
+        {
+          "teal": 77,
+          "source": "contracts\\ContributionLogger.algo.ts:34",
+          "pc": [
+            227,
+            228,
+            229
+          ]
+        },
+        {
+          "teal": 78,
+          "source": "contracts\\ContributionLogger.algo.ts:34",
+          "pc": [
+            230
+          ]
+        },
+        {
+          "teal": 81,
+          "source": "contracts\\ContributionLogger.algo.ts:33",
+          "pc": [
+            231,
+            232,
+            233
+          ]
+        },
+        {
+          "teal": 82,
+          "source": "contracts\\ContributionLogger.algo.ts:33",
+          "pc": [
+            234,
+            235,
+            236
+          ]
+        },
+        {
+          "teal": 85,
+          "source": "contracts\\ContributionLogger.algo.ts:32",
+          "pc": [
+            237,
+            238,
+            239
+          ]
+        },
+        {
+          "teal": 86,
+          "source": "contracts\\ContributionLogger.algo.ts:32",
+          "pc": [
+            240
+          ]
+        },
+        {
+          "teal": 87,
+          "source": "contracts\\ContributionLogger.algo.ts:32",
+          "pc": [
+            241
+          ]
+        },
+        {
+          "teal": 88,
+          "source": "contracts\\ContributionLogger.algo.ts:32",
+          "pc": [
+            242
+          ]
+        },
+        {
+          "teal": 89,
+          "source": "contracts\\ContributionLogger.algo.ts:32",
+          "pc": [
+            243
+          ]
+        },
+        {
+          "teal": 92,
+          "source": "contracts\\ContributionLogger.algo.ts:32",
+          "errorMessage": "argument 4 (volunteer) for logContribution must be a address",
+          "pc": [
+            244
+          ]
+        },
+        {
+          "teal": 95,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            245,
+            246,
+            247
+          ]
+        },
+        {
+          "teal": 96,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            248
+          ]
+        },
+        {
+          "teal": 97,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            249
+          ]
+        },
+        {
+          "teal": 98,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            250
+          ]
+        },
+        {
+          "teal": 99,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            251
+          ]
+        },
+        {
+          "teal": 100,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            252
+          ]
+        },
+        {
+          "teal": 106,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            253,
+            254,
+            255
+          ]
+        },
+        {
+          "teal": 109,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            256
+          ]
+        },
+        {
+          "teal": 110,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            257,
+            258
+          ]
+        },
+        {
+          "teal": 114,
+          "source": "contracts\\ContributionLogger.algo.ts:42",
+          "pc": [
+            259,
+            260
+          ]
+        },
+        {
+          "teal": 115,
+          "source": "contracts\\ContributionLogger.algo.ts:42",
+          "pc": [
+            261
+          ]
+        },
+        {
+          "teal": 116,
+          "source": "contracts\\ContributionLogger.algo.ts:42",
+          "pc": [
+            262
+          ]
+        },
+        {
+          "teal": 117,
+          "source": "contracts\\ContributionLogger.algo.ts:42",
+          "pc": [
+            263
+          ]
+        },
+        {
+          "teal": 118,
+          "source": "contracts\\ContributionLogger.algo.ts:42",
+          "pc": [
+            264,
+            265,
+            266
+          ]
+        },
+        {
+          "teal": 119,
+          "source": "contracts\\ContributionLogger.algo.ts:42",
+          "pc": [
+            267,
+            268
+          ]
+        },
+        {
+          "teal": 120,
+          "source": "contracts\\ContributionLogger.algo.ts:42",
+          "pc": [
+            269,
+            270
+          ]
+        },
+        {
+          "teal": 121,
+          "source": "contracts\\ContributionLogger.algo.ts:42",
+          "pc": [
+            271
+          ]
+        },
+        {
+          "teal": 122,
+          "source": "contracts\\ContributionLogger.algo.ts:42",
+          "pc": [
+            272
+          ]
+        },
+        {
+          "teal": 126,
+          "source": "contracts\\ContributionLogger.algo.ts:42",
+          "errorMessage": "Invalid hours: must be 1-24",
+          "pc": [
+            273
+          ]
+        },
+        {
+          "teal": 130,
+          "source": "contracts\\ContributionLogger.algo.ts:43",
+          "pc": [
+            274,
+            275
+          ]
+        },
+        {
+          "teal": 131,
+          "source": "contracts\\ContributionLogger.algo.ts:43",
+          "pc": [
+            276
+          ]
+        },
+        {
+          "teal": 132,
+          "source": "contracts\\ContributionLogger.algo.ts:43",
+          "pc": [
+            277
+          ]
+        },
+        {
+          "teal": 133,
+          "source": "contracts\\ContributionLogger.algo.ts:43",
+          "pc": [
+            278
+          ]
+        },
+        {
+          "teal": 134,
+          "source": "contracts\\ContributionLogger.algo.ts:43",
+          "pc": [
+            279
+          ]
+        },
+        {
+          "teal": 135,
+          "source": "contracts\\ContributionLogger.algo.ts:43",
+          "pc": [
+            280,
+            281,
+            282
+          ]
+        },
+        {
+          "teal": 136,
+          "source": "contracts\\ContributionLogger.algo.ts:43",
+          "pc": [
+            283,
+            284
+          ]
+        },
+        {
+          "teal": 137,
+          "source": "contracts\\ContributionLogger.algo.ts:43",
+          "pc": [
+            285
+          ]
+        },
+        {
+          "teal": 138,
+          "source": "contracts\\ContributionLogger.algo.ts:43",
+          "pc": [
+            286
+          ]
+        },
+        {
+          "teal": 139,
+          "source": "contracts\\ContributionLogger.algo.ts:43",
+          "pc": [
+            287
+          ]
+        },
+        {
+          "teal": 140,
+          "source": "contracts\\ContributionLogger.algo.ts:43",
+          "pc": [
+            288
+          ]
+        },
+        {
+          "teal": 144,
+          "source": "contracts\\ContributionLogger.algo.ts:43",
+          "errorMessage": "Invalid contribution type",
+          "pc": [
+            289
+          ]
+        },
+        {
+          "teal": 148,
+          "source": "contracts\\ContributionLogger.algo.ts:44",
+          "pc": [
+            290,
+            291
+          ]
+        },
+        {
+          "teal": 149,
+          "source": "contracts\\ContributionLogger.algo.ts:44",
+          "pc": [
+            292
+          ]
+        },
+        {
+          "teal": 150,
+          "source": "contracts\\ContributionLogger.algo.ts:44",
+          "pc": [
+            293,
+            294,
+            295
+          ]
+        },
+        {
+          "teal": 151,
+          "source": "contracts\\ContributionLogger.algo.ts:44",
+          "pc": [
+            296
+          ]
+        },
+        {
+          "teal": 154,
+          "source": "contracts\\ContributionLogger.algo.ts:44",
+          "errorMessage": "Description too long",
+          "pc": [
+            297
+          ]
+        },
+        {
+          "teal": 158,
+          "source": "contracts\\ContributionLogger.algo.ts:45",
+          "pc": [
+            298,
+            299
+          ]
+        },
+        {
+          "teal": 159,
+          "source": "contracts\\ContributionLogger.algo.ts:45",
+          "pc": [
+            300
+          ]
+        },
+        {
+          "teal": 160,
+          "source": "contracts\\ContributionLogger.algo.ts:45",
+          "pc": [
+            301,
+            302
+          ]
+        },
+        {
+          "teal": 161,
+          "source": "contracts\\ContributionLogger.algo.ts:45",
+          "pc": [
+            303
+          ]
+        },
+        {
+          "teal": 164,
+          "source": "contracts\\ContributionLogger.algo.ts:45",
+          "errorMessage": "Location too long",
+          "pc": [
+            304
+          ]
+        },
+        {
+          "teal": 169,
+          "source": "contracts\\ContributionLogger.algo.ts:48",
+          "pc": [
+            305,
+            306
+          ]
+        },
+        {
+          "teal": 170,
+          "source": "contracts\\ContributionLogger.algo.ts:48",
+          "pc": [
+            307,
+            308,
+            309
+          ]
+        },
+        {
+          "teal": 171,
+          "source": "contracts\\ContributionLogger.algo.ts:48",
+          "pc": [
+            310
+          ]
+        },
+        {
+          "teal": 172,
+          "source": "contracts\\ContributionLogger.algo.ts:48",
+          "pc": [
+            311
+          ]
+        },
+        {
+          "teal": 173,
+          "source": "contracts\\ContributionLogger.algo.ts:48",
+          "pc": [
+            312
+          ]
+        },
+        {
+          "teal": 174,
+          "source": "contracts\\ContributionLogger.algo.ts:48",
+          "pc": [
+            313
+          ]
+        },
+        {
+          "teal": 175,
+          "source": "contracts\\ContributionLogger.algo.ts:48",
+          "pc": [
+            314
+          ]
+        },
+        {
+          "teal": 176,
+          "source": "contracts\\ContributionLogger.algo.ts:48",
+          "pc": [
+            315,
+            316,
+            317
+          ]
+        },
+        {
+          "teal": 181,
+          "source": "contracts\\ContributionLogger.algo.ts:49",
+          "pc": [
+            318,
+            319
+          ]
+        },
+        {
+          "teal": 182,
+          "source": "contracts\\ContributionLogger.algo.ts:49",
+          "pc": [
+            320
+          ]
+        },
+        {
+          "teal": 183,
+          "source": "contracts\\ContributionLogger.algo.ts:49",
+          "pc": [
+            321
+          ]
+        },
+        {
+          "teal": 184,
+          "source": "contracts\\ContributionLogger.algo.ts:49",
+          "pc": [
+            322
+          ]
+        },
+        {
+          "teal": 188,
+          "source": "contracts\\ContributionLogger.algo.ts:50",
+          "pc": [
+            323,
+            324
+          ]
+        },
+        {
+          "teal": 189,
+          "source": "contracts\\ContributionLogger.algo.ts:50",
+          "pc": [
+            325
+          ]
+        },
+        {
+          "teal": 190,
+          "source": "contracts\\ContributionLogger.algo.ts:50",
+          "pc": [
+            326,
+            327
+          ]
+        },
+        {
+          "teal": 191,
+          "source": "contracts\\ContributionLogger.algo.ts:50",
+          "pc": [
+            328
+          ]
+        },
+        {
+          "teal": 195,
+          "source": "contracts\\ContributionLogger.algo.ts:51",
+          "pc": [
+            329,
+            330
+          ]
+        },
+        {
+          "teal": 196,
+          "source": "contracts\\ContributionLogger.algo.ts:51",
+          "pc": [
+            331,
+            332
+          ]
+        },
+        {
+          "teal": 197,
+          "source": "contracts\\ContributionLogger.algo.ts:51",
+          "pc": [
+            333
+          ]
+        },
+        {
+          "teal": 198,
+          "source": "contracts\\ContributionLogger.algo.ts:51",
+          "pc": [
+            334
+          ]
+        },
+        {
+          "teal": 203,
+          "source": "contracts\\ContributionLogger.algo.ts:55",
+          "pc": [
+            335
+          ]
+        },
+        {
+          "teal": 204,
+          "source": "contracts\\ContributionLogger.algo.ts:55",
+          "pc": [
+            336
+          ]
+        },
+        {
+          "teal": 205,
+          "source": "contracts\\ContributionLogger.algo.ts:55",
+          "pc": [
+            337
+          ]
+        },
+        {
+          "teal": 206,
+          "source": "contracts\\ContributionLogger.algo.ts:55",
+          "pc": [
+            338
+          ]
+        },
+        {
+          "teal": 207,
+          "source": "contracts\\ContributionLogger.algo.ts:55",
+          "pc": [
+            339
+          ]
+        },
+        {
+          "teal": 208,
+          "source": "contracts\\ContributionLogger.algo.ts:55",
+          "pc": [
+            340
+          ]
+        },
+        {
+          "teal": 212,
+          "source": "contracts\\ContributionLogger.algo.ts:56",
+          "pc": [
+            341
+          ]
+        },
+        {
+          "teal": 213,
+          "source": "contracts\\ContributionLogger.algo.ts:56",
+          "pc": [
+            342
+          ]
+        },
+        {
+          "teal": 214,
+          "source": "contracts\\ContributionLogger.algo.ts:56",
+          "pc": [
+            343,
+            344
+          ]
+        },
+        {
+          "teal": 218,
+          "source": "contracts\\ContributionLogger.algo.ts:58",
+          "pc": [
+            345,
+            346
+          ]
+        },
+        {
+          "teal": 219,
+          "source": "contracts\\ContributionLogger.algo.ts:58",
+          "pc": [
+            347
+          ]
+        },
+        {
+          "teal": 220,
+          "source": "contracts\\ContributionLogger.algo.ts:58",
+          "pc": [
+            348,
+            349
+          ]
+        },
+        {
+          "teal": 221,
+          "source": "contracts\\ContributionLogger.algo.ts:58",
+          "pc": [
+            350
+          ]
+        },
+        {
+          "teal": 222,
+          "source": "contracts\\ContributionLogger.algo.ts:58",
+          "pc": [
+            351
+          ]
+        },
+        {
+          "teal": 223,
+          "source": "contracts\\ContributionLogger.algo.ts:58",
+          "pc": [
+            352
+          ]
+        },
+        {
+          "teal": 224,
+          "source": "contracts\\ContributionLogger.algo.ts:58",
+          "pc": [
+            353
+          ]
+        },
+        {
+          "teal": 225,
+          "source": "contracts\\ContributionLogger.algo.ts:58",
+          "pc": [
+            354
+          ]
+        },
+        {
+          "teal": 229,
+          "source": "contracts\\ContributionLogger.algo.ts:59",
+          "pc": [
+            355,
+            356
+          ]
+        },
+        {
+          "teal": 230,
+          "source": "contracts\\ContributionLogger.algo.ts:59",
+          "pc": [
+            357
+          ]
+        },
+        {
+          "teal": 231,
+          "source": "contracts\\ContributionLogger.algo.ts:59",
+          "pc": [
+            358
+          ]
+        },
+        {
+          "teal": 232,
+          "source": "contracts\\ContributionLogger.algo.ts:59",
+          "pc": [
+            359
+          ]
+        },
+        {
+          "teal": 233,
+          "source": "contracts\\ContributionLogger.algo.ts:59",
+          "pc": [
+            360
+          ]
+        },
+        {
+          "teal": 234,
+          "source": "contracts\\ContributionLogger.algo.ts:59",
+          "pc": [
+            361
+          ]
+        },
+        {
+          "teal": 238,
+          "source": "contracts\\ContributionLogger.algo.ts:62",
+          "pc": [
+            362,
+            363
+          ]
+        },
+        {
+          "teal": 239,
+          "source": "contracts\\ContributionLogger.algo.ts:62",
+          "pc": [
+            364
+          ]
+        },
+        {
+          "teal": 240,
+          "source": "contracts\\ContributionLogger.algo.ts:62",
+          "pc": [
+            365
+          ]
+        },
+        {
+          "teal": 241,
+          "source": "contracts\\ContributionLogger.algo.ts:62",
+          "pc": [
+            366,
+            367
+          ]
+        },
+        {
+          "teal": 245,
+          "source": "contracts\\ContributionLogger.algo.ts:63",
+          "pc": [
+            368,
+            369
+          ]
+        },
+        {
+          "teal": 246,
+          "source": "contracts\\ContributionLogger.algo.ts:63",
+          "pc": [
+            370
+          ]
+        },
+        {
+          "teal": 247,
+          "source": "contracts\\ContributionLogger.algo.ts:63",
+          "pc": [
+            371,
+            372
+          ]
+        },
+        {
+          "teal": 248,
+          "source": "contracts\\ContributionLogger.algo.ts:63",
+          "pc": [
+            373,
+            374
+          ]
+        },
+        {
+          "teal": 249,
+          "source": "contracts\\ContributionLogger.algo.ts:63",
+          "pc": [
+            375,
+            376
+          ]
+        },
+        {
+          "teal": 250,
+          "source": "contracts\\ContributionLogger.algo.ts:63",
+          "pc": [
+            377
+          ]
+        },
+        {
+          "teal": 251,
+          "source": "contracts\\ContributionLogger.algo.ts:63",
+          "pc": [
+            378
+          ]
+        },
+        {
+          "teal": 252,
+          "source": "contracts\\ContributionLogger.algo.ts:63",
+          "pc": [
+            379
+          ]
+        },
+        {
+          "teal": 256,
+          "source": "contracts\\ContributionLogger.algo.ts:66",
+          "pc": [
+            380,
+            381
+          ]
+        },
+        {
+          "teal": 257,
+          "source": "contracts\\ContributionLogger.algo.ts:66",
+          "pc": [
+            382,
+            383
+          ]
+        },
+        {
+          "teal": 258,
+          "source": "contracts\\ContributionLogger.algo.ts:66",
+          "pc": [
+            384,
+            385
+          ]
+        },
+        {
+          "teal": 259,
+          "source": "contracts\\ContributionLogger.algo.ts:66",
+          "pc": [
+            386
+          ]
+        },
+        {
+          "teal": 263,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            387,
+            388
+          ]
+        },
+        {
+          "teal": 264,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            389
+          ]
+        },
+        {
+          "teal": 265,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            390,
+            391
+          ]
+        },
+        {
+          "teal": 266,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            392
+          ]
+        },
+        {
+          "teal": 267,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            393,
+            394
+          ]
+        },
+        {
+          "teal": 268,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            395
+          ]
+        },
+        {
+          "teal": 269,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            396,
+            397
+          ]
+        },
+        {
+          "teal": 270,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            398
+          ]
+        },
+        {
+          "teal": 271,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            399,
+            400
+          ]
+        },
+        {
+          "teal": 272,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            401
+          ]
+        },
+        {
+          "teal": 273,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            402
+          ]
+        },
+        {
+          "teal": 274,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            403,
+            404
+          ]
+        },
+        {
+          "teal": 275,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            405
+          ]
+        },
+        {
+          "teal": 276,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            406,
+            407
+          ]
+        },
+        {
+          "teal": 277,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            408
+          ]
+        },
+        {
+          "teal": 278,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            409
+          ]
+        },
+        {
+          "teal": 279,
+          "source": "contracts\\ContributionLogger.algo.ts:70",
+          "pc": [
+            410,
+            411
+          ]
+        },
+        {
+          "teal": 283,
+          "source": "contracts\\ContributionLogger.algo.ts:71",
+          "pc": [
+            412,
+            413
+          ]
+        },
+        {
+          "teal": 284,
+          "source": "contracts\\ContributionLogger.algo.ts:71",
+          "pc": [
+            414
+          ]
+        },
+        {
+          "teal": 288,
+          "source": "contracts\\ContributionLogger.algo.ts:73",
+          "pc": [
+            415,
+            416
+          ]
+        },
+        {
+          "teal": 291,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            417,
+            418
+          ]
+        },
+        {
+          "teal": 294,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            419,
+            420
+          ]
+        },
+        {
+          "teal": 295,
+          "source": "contracts\\ContributionLogger.algo.ts:31",
+          "pc": [
+            421
+          ]
+        },
+        {
+          "teal": 300,
+          "source": "contracts\\ContributionLogger.algo.ts:79",
+          "pc": [
+            422,
+            423
+          ]
+        },
+        {
+          "teal": 303,
+          "source": "contracts\\ContributionLogger.algo.ts:79",
+          "pc": [
+            424,
+            425,
+            426
+          ]
+        },
+        {
+          "teal": 304,
+          "source": "contracts\\ContributionLogger.algo.ts:79",
+          "pc": [
+            427
+          ]
+        },
+        {
+          "teal": 307,
+          "source": "contracts\\ContributionLogger.algo.ts:79",
+          "pc": [
+            428,
+            429,
+            430
+          ]
+        },
+        {
+          "teal": 308,
+          "source": "contracts\\ContributionLogger.algo.ts:79",
+          "pc": [
+            431
+          ]
+        },
+        {
+          "teal": 309,
+          "source": "contracts\\ContributionLogger.algo.ts:79",
+          "pc": [
+            432
+          ]
+        },
+        {
+          "teal": 310,
+          "source": "contracts\\ContributionLogger.algo.ts:79",
+          "pc": [
+            433
+          ]
+        },
+        {
+          "teal": 311,
+          "source": "contracts\\ContributionLogger.algo.ts:79",
+          "pc": [
+            434
+          ]
+        },
+        {
+          "teal": 317,
+          "source": "contracts\\ContributionLogger.algo.ts:79",
+          "pc": [
+            435,
+            436,
+            437
+          ]
+        },
+        {
+          "teal": 322,
+          "source": "contracts\\ContributionLogger.algo.ts:81",
+          "pc": [
+            438,
+            439
+          ]
+        },
+        {
+          "teal": 323,
+          "source": "contracts\\ContributionLogger.algo.ts:81",
+          "pc": [
+            440
+          ]
+        },
+        {
+          "teal": 324,
+          "source": "contracts\\ContributionLogger.algo.ts:81",
+          "pc": [
+            441
+          ]
+        },
+        {
+          "teal": 325,
+          "source": "contracts\\ContributionLogger.algo.ts:81",
+          "pc": [
+            442
+          ]
+        },
+        {
+          "teal": 326,
+          "source": "contracts\\ContributionLogger.algo.ts:81",
+          "pc": [
+            443,
+            444,
+            445
+          ]
+        },
+        {
+          "teal": 327,
+          "source": "contracts\\ContributionLogger.algo.ts:81",
+          "pc": [
+            446,
+            447
+          ]
+        },
+        {
+          "teal": 328,
+          "source": "contracts\\ContributionLogger.algo.ts:81",
+          "pc": [
+            448
+          ]
+        },
+        {
+          "teal": 329,
+          "source": "contracts\\ContributionLogger.algo.ts:81",
+          "pc": [
+            449
+          ]
+        },
+        {
+          "teal": 330,
+          "source": "contracts\\ContributionLogger.algo.ts:81",
+          "pc": [
+            450
+          ]
+        },
+        {
+          "teal": 331,
+          "source": "contracts\\ContributionLogger.algo.ts:81",
+          "pc": [
+            451
+          ]
+        },
+        {
+          "teal": 334,
+          "source": "contracts\\ContributionLogger.algo.ts:81",
+          "pc": [
+            452,
+            453,
+            454
+          ]
+        },
+        {
+          "teal": 339,
+          "source": "contracts\\ContributionLogger.algo.ts:82",
+          "pc": [
+            455,
+            456,
+            457,
+            458,
+            459,
+            460,
+            461,
+            462,
+            463,
+            464
+          ]
+        },
+        {
+          "teal": 340,
+          "source": "contracts\\ContributionLogger.algo.ts:82",
+          "pc": [
+            465,
+            466
+          ]
+        },
+        {
+          "teal": 341,
+          "source": "contracts\\ContributionLogger.algo.ts:82",
+          "pc": [
+            467
+          ]
+        },
+        {
+          "teal": 342,
+          "source": "contracts\\ContributionLogger.algo.ts:82",
+          "pc": [
+            468
+          ]
+        },
+        {
+          "teal": 343,
+          "source": "contracts\\ContributionLogger.algo.ts:82",
+          "pc": [
+            469
+          ]
+        },
+        {
+          "teal": 348,
+          "source": "contracts\\ContributionLogger.algo.ts:84",
+          "pc": [
+            470,
+            471,
+            472,
+            473,
+            474,
+            475,
+            476,
+            477,
+            478,
+            479,
+            480,
+            481,
+            482,
+            483,
+            484,
+            485,
+            486,
+            487
+          ]
+        },
+        {
+          "teal": 349,
+          "source": "contracts\\ContributionLogger.algo.ts:79",
+          "pc": [
+            488
+          ]
+        },
+        {
+          "teal": 354,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            489,
+            490
+          ]
+        },
+        {
+          "teal": 357,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            491,
+            492,
+            493
+          ]
+        },
+        {
+          "teal": 358,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            494
+          ]
+        },
+        {
+          "teal": 359,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            495
+          ]
+        },
+        {
+          "teal": 360,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            496
+          ]
+        },
+        {
+          "teal": 361,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            497
+          ]
+        },
+        {
+          "teal": 364,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "errorMessage": "argument 0 (volunteer) for getVolunteerStats must be a address",
+          "pc": [
+            498
+          ]
+        },
+        {
+          "teal": 367,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            499,
+            500,
+            501
+          ]
+        },
+        {
+          "teal": 368,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            502
+          ]
+        },
+        {
+          "teal": 369,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            503
+          ]
+        },
+        {
+          "teal": 370,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            504
+          ]
+        },
+        {
+          "teal": 371,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            505
+          ]
+        },
+        {
+          "teal": 377,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            506,
+            507,
+            508
+          ]
+        },
+        {
+          "teal": 382,
+          "source": "contracts\\ContributionLogger.algo.ts:91",
+          "pc": [
+            509,
+            510
+          ]
+        },
+        {
+          "teal": 383,
+          "source": "contracts\\ContributionLogger.algo.ts:91",
+          "pc": [
+            511,
+            512,
+            513
+          ]
+        },
+        {
+          "teal": 384,
+          "source": "contracts\\ContributionLogger.algo.ts:91",
+          "pc": [
+            514
+          ]
+        },
+        {
+          "teal": 385,
+          "source": "contracts\\ContributionLogger.algo.ts:91",
+          "pc": [
+            515
+          ]
+        },
+        {
+          "teal": 386,
+          "source": "contracts\\ContributionLogger.algo.ts:91",
+          "pc": [
+            516
+          ]
+        },
+        {
+          "teal": 387,
+          "source": "contracts\\ContributionLogger.algo.ts:91",
+          "pc": [
+            517
+          ]
+        },
+        {
+          "teal": 388,
+          "source": "contracts\\ContributionLogger.algo.ts:91",
+          "pc": [
+            518
+          ]
+        },
+        {
+          "teal": 389,
+          "source": "contracts\\ContributionLogger.algo.ts:91",
+          "pc": [
+            519,
+            520,
+            521
+          ]
+        },
+        {
+          "teal": 394,
+          "source": "contracts\\ContributionLogger.algo.ts:92",
+          "pc": [
+            522,
+            523,
+            524,
+            525,
+            526,
+            527,
+            528,
+            529,
+            530,
+            531,
+            532,
+            533,
+            534,
+            535,
+            536,
+            537,
+            538,
+            539,
+            540,
+            541,
+            542,
+            543,
+            544,
+            545,
+            546,
+            547
+          ]
+        },
+        {
+          "teal": 395,
+          "source": "contracts\\ContributionLogger.algo.ts:92",
+          "pc": [
+            548
+          ]
+        },
+        {
+          "teal": 404,
+          "source": "contracts\\ContributionLogger.algo.ts:96",
+          "pc": [
+            549,
+            550
+          ]
+        },
+        {
+          "teal": 405,
+          "source": "contracts\\ContributionLogger.algo.ts:96",
+          "pc": [
+            551
+          ]
+        },
+        {
+          "teal": 406,
+          "source": "contracts\\ContributionLogger.algo.ts:96",
+          "pc": [
+            552
+          ]
+        },
+        {
+          "teal": 407,
+          "source": "contracts\\ContributionLogger.algo.ts:96",
+          "pc": [
+            553
+          ]
+        },
+        {
+          "teal": 408,
+          "source": "contracts\\ContributionLogger.algo.ts:97",
+          "pc": [
+            554,
+            555
+          ]
+        },
+        {
+          "teal": 409,
+          "source": "contracts\\ContributionLogger.algo.ts:97",
+          "pc": [
+            556
+          ]
+        },
+        {
+          "teal": 410,
+          "source": "contracts\\ContributionLogger.algo.ts:97",
+          "pc": [
+            557
+          ]
+        },
+        {
+          "teal": 411,
+          "source": "contracts\\ContributionLogger.algo.ts:97",
+          "pc": [
+            558
+          ]
+        },
+        {
+          "teal": 412,
+          "source": "contracts\\ContributionLogger.algo.ts:97",
+          "pc": [
+            559
+          ]
+        },
+        {
+          "teal": 413,
+          "source": "contracts\\ContributionLogger.algo.ts:98",
+          "pc": [
+            560,
+            561
+          ]
+        },
+        {
+          "teal": 414,
+          "source": "contracts\\ContributionLogger.algo.ts:98",
+          "pc": [
+            562,
+            563
+          ]
+        },
+        {
+          "teal": 415,
+          "source": "contracts\\ContributionLogger.algo.ts:98",
+          "pc": [
+            564
+          ]
+        },
+        {
+          "teal": 416,
+          "source": "contracts\\ContributionLogger.algo.ts:98",
+          "pc": [
+            565
+          ]
+        },
+        {
+          "teal": 417,
+          "source": "contracts\\ContributionLogger.algo.ts:98",
+          "pc": [
+            566
+          ]
+        },
+        {
+          "teal": 418,
+          "source": "contracts\\ContributionLogger.algo.ts:90",
+          "pc": [
+            567
+          ]
+        },
+        {
+          "teal": 423,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            568,
+            569
+          ]
+        },
+        {
+          "teal": 426,
+          "source": "contracts\\ContributionLogger.algo.ts:109",
+          "pc": [
+            570,
+            571,
+            572
+          ]
+        },
+        {
+          "teal": 429,
+          "source": "contracts\\ContributionLogger.algo.ts:108",
+          "pc": [
+            573,
+            574,
+            575
+          ]
+        },
+        {
+          "teal": 430,
+          "source": "contracts\\ContributionLogger.algo.ts:108",
+          "pc": [
+            576,
+            577,
+            578
+          ]
+        },
+        {
+          "teal": 433,
+          "source": "contracts\\ContributionLogger.algo.ts:107",
+          "pc": [
+            579,
+            580,
+            581
+          ]
+        },
+        {
+          "teal": 434,
+          "source": "contracts\\ContributionLogger.algo.ts:107",
+          "pc": [
+            582,
+            583,
+            584
+          ]
+        },
+        {
+          "teal": 437,
+          "source": "contracts\\ContributionLogger.algo.ts:106",
+          "pc": [
+            585,
+            586,
+            587
+          ]
+        },
+        {
+          "teal": 438,
+          "source": "contracts\\ContributionLogger.algo.ts:106",
+          "pc": [
+            588,
+            589,
+            590
+          ]
+        },
+        {
+          "teal": 441,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            591,
+            592,
+            593
+          ]
+        },
+        {
+          "teal": 442,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            594
+          ]
+        },
+        {
+          "teal": 443,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            595
+          ]
+        },
+        {
+          "teal": 444,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            596
+          ]
+        },
+        {
+          "teal": 445,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            597
+          ]
+        },
+        {
+          "teal": 446,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            598
+          ]
+        },
+        {
+          "teal": 452,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            599,
+            600,
+            601
+          ]
+        },
+        {
+          "teal": 455,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            602
+          ]
+        },
+        {
+          "teal": 456,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            603,
+            604
+          ]
+        },
+        {
+          "teal": 460,
+          "source": "contracts\\ContributionLogger.algo.ts:111",
+          "pc": [
+            605,
+            606
+          ]
+        },
+        {
+          "teal": 461,
+          "source": "contracts\\ContributionLogger.algo.ts:111",
+          "pc": [
+            607
+          ]
+        },
+        {
+          "teal": 462,
+          "source": "contracts\\ContributionLogger.algo.ts:111",
+          "pc": [
+            608,
+            609
+          ]
+        },
+        {
+          "teal": 463,
+          "source": "contracts\\ContributionLogger.algo.ts:111",
+          "pc": [
+            610
+          ]
+        },
+        {
+          "teal": 466,
+          "source": "contracts\\ContributionLogger.algo.ts:111",
+          "errorMessage": "Too many contributions in one call",
+          "pc": [
+            611
+          ]
+        },
+        {
+          "teal": 470,
+          "source": "contracts\\ContributionLogger.algo.ts:112",
+          "pc": [
+            612,
+            613
+          ]
+        },
+        {
+          "teal": 471,
+          "source": "contracts\\ContributionLogger.algo.ts:112",
+          "pc": [
+            614
+          ]
+        },
+        {
+          "teal": 472,
+          "source": "contracts\\ContributionLogger.algo.ts:112",
+          "pc": [
+            615,
+            616
+          ]
+        },
+        {
+          "teal": 473,
+          "source": "contracts\\ContributionLogger.algo.ts:112",
+          "pc": [
+            617
+          ]
+        },
+        {
+          "teal": 474,
+          "source": "contracts\\ContributionLogger.algo.ts:112",
+          "pc": [
+            618
+          ]
+        },
+        {
+          "teal": 477,
+          "source": "contracts\\ContributionLogger.algo.ts:112",
+          "errorMessage": "Mismatched volunteers and hours",
+          "pc": [
+            619
+          ]
+        },
+        {
+          "teal": 481,
+          "source": "contracts\\ContributionLogger.algo.ts:113",
+          "pc": [
+            620,
+            621
+          ]
+        },
+        {
+          "teal": 482,
+          "source": "contracts\\ContributionLogger.algo.ts:113",
+          "pc": [
+            622
+          ]
+        },
+        {
+          "teal": 483,
+          "source": "contracts\\ContributionLogger.algo.ts:113",
+          "pc": [
+            623,
+            624
+          ]
+        },
+        {
+          "teal": 484,
+          "source": "contracts\\ContributionLogger.algo.ts:113",
+          "pc": [
+            625
+          ]
+        },
+        {
+          "teal": 485,
+          "source": "contracts\\ContributionLogger.algo.ts:113",
+          "pc": [
+            626
+          ]
+        },
+        {
+          "teal": 488,
+          "source": "contracts\\ContributionLogger.algo.ts:113",
+          "errorMessage": "Mismatched volunteers and descriptions",
+          "pc": [
+            627
+          ]
+        },
+        {
+          "teal": 492,
+          "source": "contracts\\ContributionLogger.algo.ts:115",
+          "pc": [
+            628
+          ]
+        },
+        {
+          "teal": 493,
+          "source": "contracts\\ContributionLogger.algo.ts:115",
+          "pc": [
+            629,
+            630
+          ]
+        },
+        {
+          "teal": 497,
+          "source": "contracts\\ContributionLogger.algo.ts:117",
+          "pc": [
+            631
+          ]
+        },
+        {
+          "teal": 498,
+          "source": "contracts\\ContributionLogger.algo.ts:117",
+          "pc": [
+            632,
+            633
+          ]
+        },
+        {
+          "teal": 503,
+          "source": "contracts\\ContributionLogger.algo.ts:117",
+          "pc": [
+            634,
+            635
+          ]
+        },
+        {
+          "teal": 504,
+          "source": "contracts\\ContributionLogger.algo.ts:117",
+          "pc": [
+            636,
+            637
+          ]
+        },
+        {
+          "teal": 505,
+          "source": "contracts\\ContributionLogger.algo.ts:117",
+          "pc": [
+            638
+          ]
+        },
+        {
+          "teal": 506,
+          "source": "contracts\\ContributionLogger.algo.ts:117",
+          "pc": [
+            639
+          ]
+        },
+        {
+          "teal": 507,
+          "source": "contracts\\ContributionLogger.algo.ts:117",
+          "pc": [
+            640,
+            641,
+            642
+          ]
+        },
+        {
+          "teal": 511,
+          "source": "contracts\\ContributionLogger.algo.ts:118",
+          "pc": [
+            643,
+            644
+          ]
+        },
+        {
+          "teal": 512,
+          "source": "contracts\\ContributionLogger.algo.ts:118",
+          "pc": [
+            645,
+            646
+          ]
+        },
+        {
+          "teal": 513,
+          "source": "contracts\\ContributionLogger.algo.ts:118",
+          "pc": [
+            647
+          ]
+        },
+        {
+          "teal": 514,
+          "source": "contracts\\ContributionLogger.algo.ts:118",
+          "pc": [
+            648,
+            649
+          ]
+        },
+        {
+          "teal": 515,
+          "source": "contracts\\ContributionLogger.algo.ts:118",
+          "pc": [
+            650
+          ]
+        },
+        {
+          "teal": 516,
+          "source": "contracts\\ContributionLogger.algo.ts:118",
+          "pc": [
+            651
+          ]
+        },
+        {
+          "teal": 517,
+          "source": "contracts\\ContributionLogger.algo.ts:118",
+          "pc": [
+            652
+          ]
+        },
+        {
+          "teal": 518,
+          "source": "contracts\\ContributionLogger.algo.ts:118",
+          "pc": [
+            653,
+            654
+          ]
+        },
+        {
+          "teal": 519,
+          "source": "contracts\\ContributionLogger.algo.ts:118",
+          "pc": [
+            655
+          ]
+        },
+        {
+          "teal": 520,
+          "source": "contracts\\ContributionLogger.algo.ts:118",
+          "pc": [
+            656
+          ]
+        },
+        {
+          "teal": 521,
+          "source": "contracts\\ContributionLogger.algo.ts:118",
+          "pc": [
+            657
+          ]
+        },
+        {
+          "teal": 522,
+          "source": "contracts\\ContributionLogger.algo.ts:118",
+          "pc": [
+            658,
+            659
+          ]
+        },
+        {
+          "teal": 526,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            660,
+            661
+          ]
+        },
+        {
+          "teal": 527,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            662,
+            663
+          ]
+        },
+        {
+          "teal": 528,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            664
+          ]
+        },
+        {
+          "teal": 529,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            665,
+            666
+          ]
+        },
+        {
+          "teal": 530,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            667,
+            668
+          ]
+        },
+        {
+          "teal": 531,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            669
+          ]
+        },
+        {
+          "teal": 532,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            670
+          ]
+        },
+        {
+          "teal": 533,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            671,
+            672
+          ]
+        },
+        {
+          "teal": 534,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            673
+          ]
+        },
+        {
+          "teal": 535,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            674,
+            675
+          ]
+        },
+        {
+          "teal": 536,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            676
+          ]
+        },
+        {
+          "teal": 537,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            677
+          ]
+        },
+        {
+          "teal": 538,
+          "source": "contracts\\ContributionLogger.algo.ts:119",
+          "pc": [
+            678,
+            679
+          ]
+        },
+        {
+          "teal": 542,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            680,
+            681
+          ]
+        },
+        {
+          "teal": 543,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            682,
+            683
+          ]
+        },
+        {
+          "teal": 544,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            684
+          ]
+        },
+        {
+          "teal": 545,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            685,
+            686
+          ]
+        },
+        {
+          "teal": 546,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            687
+          ]
+        },
+        {
+          "teal": 547,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            688
+          ]
+        },
+        {
+          "teal": 548,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            689
+          ]
+        },
+        {
+          "teal": 549,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            690
+          ]
+        },
+        {
+          "teal": 550,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            691
+          ]
+        },
+        {
+          "teal": 551,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            692,
+            693
+          ]
+        },
+        {
+          "teal": 552,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            694,
+            695
+          ]
+        },
+        {
+          "teal": 553,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            696,
+            697
+          ]
+        },
+        {
+          "teal": 554,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            698
+          ]
+        },
+        {
+          "teal": 555,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            699
+          ]
+        },
+        {
+          "teal": 556,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            700
+          ]
+        },
+        {
+          "teal": 557,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            701
+          ]
+        },
+        {
+          "teal": 558,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            702,
+            703
+          ]
+        },
+        {
+          "teal": 559,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            704
+          ]
+        },
+        {
+          "teal": 560,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            705
+          ]
+        },
+        {
+          "teal": 561,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            706
+          ]
+        },
+        {
+          "teal": 562,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            707
+          ]
+        },
+        {
+          "teal": 563,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            708
+          ]
+        },
+        {
+          "teal": 564,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            709
+          ]
+        },
+        {
+          "teal": 565,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            710
+          ]
+        },
+        {
+          "teal": 566,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            711,
+            712,
+            713
+          ]
+        },
+        {
+          "teal": 567,
+          "source": "contracts\\ContributionLogger.algo.ts:120",
+          "pc": [
+            714,
+            715
+          ]
+        },
+        {
+          "teal": 572,
+          "source": "contracts\\ContributionLogger.algo.ts:122",
+          "pc": [
+            716,
+            717
+          ]
+        },
+        {
+          "teal": 573,
+          "source": "contracts\\ContributionLogger.algo.ts:122",
+          "pc": [
+            718
+          ]
+        },
+        {
+          "teal": 574,
+          "source": "contracts\\ContributionLogger.algo.ts:122",
+          "pc": [
+            719
+          ]
+        },
+        {
+          "teal": 575,
+          "source": "contracts\\ContributionLogger.algo.ts:122",
+          "pc": [
+            720
+          ]
+        },
+        {
+          "teal": 576,
+          "source": "contracts\\ContributionLogger.algo.ts:122",
+          "pc": [
+            721,
+            722,
+            723
+          ]
+        },
+        {
+          "teal": 577,
+          "source": "contracts\\ContributionLogger.algo.ts:122",
+          "pc": [
+            724,
+            725
+          ]
+        },
+        {
+          "teal": 578,
+          "source": "contracts\\ContributionLogger.algo.ts:122",
+          "pc": [
+            726,
+            727
+          ]
+        },
+        {
+          "teal": 579,
+          "source": "contracts\\ContributionLogger.algo.ts:122",
+          "pc": [
+            728
+          ]
+        },
+        {
+          "teal": 580,
+          "source": "contracts\\ContributionLogger.algo.ts:122",
+          "pc": [
+            729
+          ]
+        },
+        {
+          "teal": 583,
+          "source": "contracts\\ContributionLogger.algo.ts:122",
+          "pc": [
+            730,
+            731,
+            732
+          ]
+        },
+        {
+          "teal": 589,
+          "source": "contracts\\ContributionLogger.algo.ts:124",
+          "pc": [
+            733,
+            734
+          ]
+        },
+        {
+          "teal": 590,
+          "source": "contracts\\ContributionLogger.algo.ts:124",
+          "pc": [
+            735,
+            736,
+            737
+          ]
+        },
+        {
+          "teal": 591,
+          "source": "contracts\\ContributionLogger.algo.ts:124",
+          "pc": [
+            738
+          ]
+        },
+        {
+          "teal": 592,
+          "source": "contracts\\ContributionLogger.algo.ts:124",
+          "pc": [
+            739
+          ]
+        },
+        {
+          "teal": 593,
+          "source": "contracts\\ContributionLogger.algo.ts:124",
+          "pc": [
+            740
+          ]
+        },
+        {
+          "teal": 594,
+          "source": "contracts\\ContributionLogger.algo.ts:124",
+          "pc": [
+            741
+          ]
+        },
+        {
+          "teal": 595,
+          "source": "contracts\\ContributionLogger.algo.ts:124",
+          "pc": [
+            742
+          ]
+        },
+        {
+          "teal": 596,
+          "source": "contracts\\ContributionLogger.algo.ts:124",
+          "pc": [
+            743,
+            744,
+            745
+          ]
+        },
+        {
+          "teal": 601,
+          "source": "contracts\\ContributionLogger.algo.ts:125",
+          "pc": [
+            746,
+            747
+          ]
+        },
+        {
+          "teal": 602,
+          "source": "contracts\\ContributionLogger.algo.ts:125",
+          "pc": [
+            748
+          ]
+        },
+        {
+          "teal": 603,
+          "source": "contracts\\ContributionLogger.algo.ts:125",
+          "pc": [
+            749
+          ]
+        },
+        {
+          "teal": 604,
+          "source": "contracts\\ContributionLogger.algo.ts:125",
+          "pc": [
+            750
+          ]
+        },
+        {
+          "teal": 608,
+          "source": "contracts\\ContributionLogger.algo.ts:126",
+          "pc": [
+            751,
+            752
+          ]
+        },
+        {
+          "teal": 609,
+          "source": "contracts\\ContributionLogger.algo.ts:126",
+          "pc": [
+            753
+          ]
+        },
+        {
+          "teal": 610,
+          "source": "contracts\\ContributionLogger.algo.ts:126",
+          "pc": [
+            754,
+            755
+          ]
+        },
+        {
+          "teal": 611,
+          "source": "contracts\\ContributionLogger.algo.ts:126",
+          "pc": [
+            756
+          ]
+        },
+        {
+          "teal": 615,
+          "source": "contracts\\ContributionLogger.algo.ts:127",
+          "pc": [
+            757,
+            758
+          ]
+        },
+        {
+          "teal": 616,
+          "source": "contracts\\ContributionLogger.algo.ts:127",
+          "pc": [
+            759,
+            760
+          ]
+        },
+        {
+          "teal": 617,
+          "source": "contracts\\ContributionLogger.algo.ts:127",
+          "pc": [
+            761
+          ]
+        },
+        {
+          "teal": 618,
+          "source": "contracts\\ContributionLogger.algo.ts:127",
+          "pc": [
+            762
+          ]
+        },
+        {
+          "teal": 623,
+          "source": "contracts\\ContributionLogger.algo.ts:131",
+          "pc": [
+            763
+          ]
+        },
+        {
+          "teal": 624,
+          "source": "contracts\\ContributionLogger.algo.ts:131",
+          "pc": [
+            764
+          ]
+        },
+        {
+          "teal": 625,
+          "source": "contracts\\ContributionLogger.algo.ts:131",
+          "pc": [
+            765
+          ]
+        },
+        {
+          "teal": 626,
+          "source": "contracts\\ContributionLogger.algo.ts:131",
+          "pc": [
+            766
+          ]
+        },
+        {
+          "teal": 627,
+          "source": "contracts\\ContributionLogger.algo.ts:131",
+          "pc": [
+            767
+          ]
+        },
+        {
+          "teal": 628,
+          "source": "contracts\\ContributionLogger.algo.ts:131",
+          "pc": [
+            768
+          ]
+        },
+        {
+          "teal": 632,
+          "source": "contracts\\ContributionLogger.algo.ts:132",
+          "pc": [
+            769,
+            770
+          ]
+        },
+        {
+          "teal": 633,
+          "source": "contracts\\ContributionLogger.algo.ts:132",
+          "pc": [
+            771
+          ]
+        },
+        {
+          "teal": 634,
+          "source": "contracts\\ContributionLogger.algo.ts:132",
+          "pc": [
+            772,
+            773
+          ]
+        },
+        {
+          "teal": 635,
+          "source": "contracts\\ContributionLogger.algo.ts:132",
+          "pc": [
+            774
+          ]
+        },
+        {
+          "teal": 636,
+          "source": "contracts\\ContributionLogger.algo.ts:132",
+          "pc": [
+            775
+          ]
+        },
+        {
+          "teal": 637,
+          "source": "contracts\\ContributionLogger.algo.ts:132",
+          "pc": [
+            776
+          ]
+        },
+        {
+          "teal": 638,
+          "source": "contracts\\ContributionLogger.algo.ts:132",
+          "pc": [
+            777
+          ]
+        },
+        {
+          "teal": 639,
+          "source": "contracts\\ContributionLogger.algo.ts:132",
+          "pc": [
+            778
+          ]
+        },
+        {
+          "teal": 643,
+          "source": "contracts\\ContributionLogger.algo.ts:133",
+          "pc": [
+            779,
+            780
+          ]
+        },
+        {
+          "teal": 644,
+          "source": "contracts\\ContributionLogger.algo.ts:133",
+          "pc": [
+            781
+          ]
+        },
+        {
+          "teal": 645,
+          "source": "contracts\\ContributionLogger.algo.ts:133",
+          "pc": [
+            782
+          ]
+        },
+        {
+          "teal": 646,
+          "source": "contracts\\ContributionLogger.algo.ts:133",
+          "pc": [
+            783
+          ]
+        },
+        {
+          "teal": 647,
+          "source": "contracts\\ContributionLogger.algo.ts:133",
+          "pc": [
+            784
+          ]
+        },
+        {
+          "teal": 648,
+          "source": "contracts\\ContributionLogger.algo.ts:133",
+          "pc": [
+            785
+          ]
+        },
+        {
+          "teal": 652,
+          "source": "contracts\\ContributionLogger.algo.ts:135",
+          "pc": [
+            786,
+            787
+          ]
+        },
+        {
+          "teal": 653,
+          "source": "contracts\\ContributionLogger.algo.ts:135",
+          "pc": [
+            788
+          ]
+        },
+        {
+          "teal": 654,
+          "source": "contracts\\ContributionLogger.algo.ts:135",
+          "pc": [
+            789
+          ]
+        },
+        {
+          "teal": 655,
+          "source": "contracts\\ContributionLogger.algo.ts:135",
+          "pc": [
+            790,
+            791
+          ]
+        },
+        {
+          "teal": 659,
+          "source": "contracts\\ContributionLogger.algo.ts:136",
+          "pc": [
+            792,
+            793
+          ]
+        },
+        {
+          "teal": 660,
+          "source": "contracts\\ContributionLogger.algo.ts:136",
+          "pc": [
+            794
+          ]
+        },
+        {
+          "teal": 661,
+          "source": "contracts\\ContributionLogger.algo.ts:136",
+          "pc": [
+            795,
+            796
+          ]
+        },
+        {
+          "teal": 662,
+          "source": "contracts\\ContributionLogger.algo.ts:136",
+          "pc": [
+            797,
+            798
+          ]
+        },
+        {
+          "teal": 663,
+          "source": "contracts\\ContributionLogger.algo.ts:136",
+          "pc": [
+            799,
+            800
+          ]
+        },
+        {
+          "teal": 664,
+          "source": "contracts\\ContributionLogger.algo.ts:136",
+          "pc": [
+            801
+          ]
+        },
+        {
+          "teal": 665,
+          "source": "contracts\\ContributionLogger.algo.ts:136",
+          "pc": [
+            802
+          ]
+        },
+        {
+          "teal": 666,
+          "source": "contracts\\ContributionLogger.algo.ts:136",
+          "pc": [
+            803
+          ]
+        },
+        {
+          "teal": 670,
+          "source": "contracts\\ContributionLogger.algo.ts:137",
+          "pc": [
+            804,
+            805
+          ]
+        },
+        {
+          "teal": 671,
+          "source": "contracts\\ContributionLogger.algo.ts:137",
+          "pc": [
+            806,
+            807
+          ]
+        },
+        {
+          "teal": 672,
+          "source": "contracts\\ContributionLogger.algo.ts:137",
+          "pc": [
+            808,
+            809
+          ]
+        },
+        {
+          "teal": 673,
+          "source": "contracts\\ContributionLogger.algo.ts:137",
+          "pc": [
+            810
+          ]
+        },
+        {
+          "teal": 677,
+          "source": "contracts\\ContributionLogger.algo.ts:139",
+          "pc": [
+            811,
+            812
+          ]
+        },
+        {
+          "teal": 678,
+          "source": "contracts\\ContributionLogger.algo.ts:139",
+          "pc": [
+            813
+          ]
+        },
+        {
+          "teal": 679,
+          "source": "contracts\\ContributionLogger.algo.ts:139",
+          "pc": [
+            814
+          ]
+        },
+        {
+          "teal": 680,
+          "source": "contracts\\ContributionLogger.algo.ts:139",
+          "pc": [
+            815,
+            816
+          ]
+        },
+        {
+          "teal": 687,
+          "source": "contracts\\ContributionLogger.algo.ts:117",
+          "pc": [
+            817,
+            818
+          ]
+        },
+        {
+          "teal": 688,
+          "source": "contracts\\ContributionLogger.algo.ts:117",
+          "pc": [
+            819
+          ]
+        },
+        {
+          "teal": 689,
+          "source": "contracts\\ContributionLogger.algo.ts:117",
+          "pc": [
+            820
+          ]
+        },
+        {
+          "teal": 690,
+          "source": "contracts\\ContributionLogger.algo.ts:117",
+          "pc": [
+            821,
+            822
+          ]
+        },
+        {
+          "teal": 691,
+          "source": "contracts\\ContributionLogger.algo.ts:117",
+          "pc": [
+            823,
+            824,
+            825
+          ]
+        },
+        {
+          "teal": 696,
+          "source": "contracts\\ContributionLogger.algo.ts:143",
+          "pc": [
+            826,
+            827
+          ]
+        },
+        {
+          "teal": 699,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            828,
+            829
+          ]
+        },
+        {
+          "teal": 702,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            830,
+            831
+          ]
+        },
+        {
+          "teal": 703,
+          "source": "contracts\\ContributionLogger.algo.ts:105",
+          "pc": [
+            832
+          ]
+        },
+        {
+          "teal": 708,
+          "source": "contracts\\ContributionLogger.algo.ts:149",
+          "pc": [
+            833,
+            834,
+            835
+          ]
+        },
+        {
+          "teal": 709,
+          "source": "contracts\\ContributionLogger.algo.ts:149",
+          "pc": [
+            836
+          ]
+        },
+        {
+          "teal": 710,
+          "source": "contracts\\ContributionLogger.algo.ts:149",
+          "pc": [
+            837
+          ]
+        },
+        {
+          "teal": 716,
+          "source": "contracts\\ContributionLogger.algo.ts:149",
+          "pc": [
+            838,
+            839,
+            840
+          ]
+        },
+        {
+          "teal": 720,
+          "source": "contracts\\ContributionLogger.algo.ts:150",
+          "pc": [
+            841,
+            842
+          ]
+        },
+        {
+          "teal": 721,
+          "source": "contracts\\ContributionLogger.algo.ts:150",
+          "pc": [
+            843
+          ]
+        },
+        {
+          "teal": 722,
+          "source": "contracts\\ContributionLogger.algo.ts:150",
+          "pc": [
+            844
+          ]
+        },
+        {
+          "teal": 723,
+          "source": "contracts\\ContributionLogger.algo.ts:150",
+          "pc": [
+            845
+          ]
+        },
+        {
+          "teal": 727,
+          "source": "contracts\\ContributionLogger.algo.ts:151",
+          "pc": [
+            846,
+            847
+          ]
+        },
+        {
+          "teal": 728,
+          "source": "contracts\\ContributionLogger.algo.ts:151",
+          "pc": [
+            848
+          ]
+        },
+        {
+          "teal": 729,
+          "source": "contracts\\ContributionLogger.algo.ts:151",
+          "pc": [
+            849,
+            850
+          ]
+        },
+        {
+          "teal": 730,
+          "source": "contracts\\ContributionLogger.algo.ts:151",
+          "pc": [
+            851
+          ]
+        },
+        {
+          "teal": 734,
+          "source": "contracts\\ContributionLogger.algo.ts:152",
+          "pc": [
+            852,
+            853
+          ]
+        },
+        {
+          "teal": 735,
+          "source": "contracts\\ContributionLogger.algo.ts:152",
+          "pc": [
+            854,
+            855
+          ]
+        },
+        {
+          "teal": 736,
+          "source": "contracts\\ContributionLogger.algo.ts:152",
+          "pc": [
+            856
+          ]
+        },
+        {
+          "teal": 737,
+          "source": "contracts\\ContributionLogger.algo.ts:152",
+          "pc": [
+            857
+          ]
+        },
+        {
+          "teal": 738,
+          "source": "contracts\\ContributionLogger.algo.ts:149",
+          "pc": [
+            858
+          ]
+        },
+        {
+          "teal": 743,
+          "source": "contracts\\ContributionLogger.algo.ts:158",
+          "pc": [
+            859,
+            860
+          ]
+        },
+        {
+          "teal": 746,
+          "source": "contracts\\ContributionLogger.algo.ts:158",
+          "pc": [
+            861,
+            862,
+            863
+          ]
+        },
+        {
+          "teal": 747,
+          "source": "contracts\\ContributionLogger.algo.ts:158",
+          "pc": [
+            864
+          ]
+        },
+        {
+          "teal": 748,
+          "source": "contracts\\ContributionLogger.algo.ts:158",
+          "pc": [
+            865
+          ]
+        },
+        {
+          "teal": 749,
+          "source": "contracts\\ContributionLogger.algo.ts:158",
+          "pc": [
+            866
+          ]
+        },
+        {
+          "teal": 750,
+          "source": "contracts\\ContributionLogger.algo.ts:158",
+          "pc": [
+            867
+          ]
+        },
+        {
+          "teal": 756,
+          "source": "contracts\\ContributionLogger.algo.ts:158",
+          "pc": [
+            868,
+            869,
+            870
+          ]
+        },
+        {
+          "teal": 760,
+          "source": "contracts\\ContributionLogger.algo.ts:159",
+          "pc": [
+            871,
+            872
+          ]
+        },
+        {
+          "teal": 761,
+          "source": "contracts\\ContributionLogger.algo.ts:159",
+          "pc": [
+            873
+          ]
+        },
+        {
+          "teal": 762,
+          "source": "contracts\\ContributionLogger.algo.ts:159",
+          "pc": [
+            874
+          ]
+        },
+        {
+          "teal": 763,
+          "source": "contracts\\ContributionLogger.algo.ts:159",
+          "pc": [
+            875
+          ]
+        },
+        {
+          "teal": 764,
+          "source": "contracts\\ContributionLogger.algo.ts:159",
+          "pc": [
+            876
+          ]
+        },
+        {
+          "teal": 765,
+          "source": "contracts\\ContributionLogger.algo.ts:159",
+          "pc": [
+            877
+          ]
+        },
+        {
+          "teal": 766,
+          "source": "contracts\\ContributionLogger.algo.ts:159",
+          "pc": [
+            878
+          ]
+        },
+        {
+          "teal": 767,
+          "source": "contracts\\ContributionLogger.algo.ts:158",
+          "pc": [
+            879
+          ]
+        },
+        {
+          "teal": 770,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            880,
+            881,
+            882,
+            883,
+            884,
+            885
+          ]
+        },
+        {
+          "teal": 771,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            886,
+            887,
+            888
+          ]
+        },
+        {
+          "teal": 772,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            889,
+            890,
+            891,
+            892
+          ]
+        },
+        {
+          "teal": 775,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "errorMessage": "this contract does not implement the given ABI method for create NoOp",
+          "pc": [
+            893
+          ]
+        },
+        {
+          "teal": 778,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            894,
+            895,
+            896,
+            897,
+            898,
+            899
+          ]
+        },
+        {
+          "teal": 779,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            900,
+            901,
+            902,
+            903,
+            904,
+            905
+          ]
+        },
+        {
+          "teal": 780,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            906,
+            907,
+            908,
+            909,
+            910,
+            911
+          ]
+        },
+        {
+          "teal": 781,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            912,
+            913,
+            914,
+            915,
+            916,
+            917
+          ]
+        },
+        {
+          "teal": 782,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            918,
+            919,
+            920,
+            921,
+            922,
+            923
+          ]
+        },
+        {
+          "teal": 783,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            924,
+            925,
+            926,
+            927,
+            928,
+            929
+          ]
+        },
+        {
+          "teal": 784,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            930,
+            931,
+            932
+          ]
+        },
+        {
+          "teal": 785,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "pc": [
+            933,
+            934,
+            935,
+            936,
+            937,
+            938,
+            939,
+            940,
+            941,
+            942,
+            943,
+            944,
+            945,
+            946
+          ]
+        },
+        {
+          "teal": 788,
+          "source": "contracts\\ContributionLogger.algo.ts:8",
+          "errorMessage": "this contract does not implement the given ABI method for call NoOp",
+          "pc": [
+            947
+          ]
+        }
+      ],
+      "pcOffsetMethod": "none"
+    },
+    "clear": {
+      "sourceInfo": [],
+      "pcOffsetMethod": "none"
+    }
+  },
+  "source": {
+    "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAwIDEgMzIgMiAxMDAgNSA4IDI0CmJ5dGVjYmxvY2sgMHg3NjZmNmM3NTZlNzQ2NTY1NzI1ZjYzNmY2ZTc0NzI2OTYyNzU3NDY5NmY2ZTczIDB4IDB4NjM2ZjZlNzQ3MjY5NjI3NTc0Njk2ZjZlNWY2MzZmNzU2ZTc0NjU3MiAweDc2NmY2Yzc1NmU3NDY1NjU3MjVmNzI2NTcwNzU3NDYxNzQ2OTZmNmUgMHg2YzYxNzM3NDVmNjM2ZjZlNzQ3MjY5NjI3NTc0Njk2ZjZlNWY3NDY5NmQ2NSAweDc0NmY3NDYxNmM1ZjYzNmY2ZTc0NzI2OTYyNzU3NDY5NmY2ZTczIDB4MTUxZjdjNzUgMHgzYQoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDcuMAovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKcHVzaGludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKHVpbnQ2NCl2b2lkCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CgkvLyBvcmdhbml6ZXJSZWdpc3RyeUFwcElkOiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWJ0b2kKCgkvLyBleGVjdXRlIGNyZWF0ZUFwcGxpY2F0aW9uKHVpbnQ2NCl2b2lkCgljYWxsc3ViIGNyZWF0ZUFwcGxpY2F0aW9uCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBjcmVhdGVBcHBsaWNhdGlvbihvcmdhbml6ZXJSZWdpc3RyeUFwcElkOiB1aW50NjQpOiB2b2lkCi8vCi8vIEluaXRpYWxpemUgdGhlIENvbnRyaWJ1dGlvbkxvZ2dlciBjb250cmFjdApjcmVhdGVBcHBsaWNhdGlvbjoKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoyMwoJLy8gdGhpcy5vcmdhbml6ZXJSZWdpc3RyeUFwcElkLnZhbHVlID0gb3JnYW5pemVyUmVnaXN0cnlBcHBJZAoJcHVzaGJ5dGVzIDB4NmY3MjY3NjE2ZTY5N2E2NTcyNWY3MjY1Njc2OTczNzQ3Mjc5NWY2MTcwNzAgLy8gIm9yZ2FuaXplcl9yZWdpc3RyeV9hcHAiCglmcmFtZV9kaWcgLTEgLy8gb3JnYW5pemVyUmVnaXN0cnlBcHBJZDogdWludDY0CglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoyNAoJLy8gdGhpcy50b3RhbENvbnRyaWJ1dGlvbnMudmFsdWUgPSAwCglieXRlYyA1IC8vICAidG90YWxfY29udHJpYnV0aW9ucyIKCWludGMgMCAvLyAwCglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoyNQoJLy8gdGhpcy5jb250cmlidXRpb25Db3VudGVyLnZhbHVlID0gMAoJYnl0ZWMgMiAvLyAgImNvbnRyaWJ1dGlvbl9jb3VudGVyIgoJaW50YyAwIC8vIDAKCWFwcF9nbG9iYWxfcHV0CglyZXRzdWIKCi8vIGxvZ0NvbnRyaWJ1dGlvbihhZGRyZXNzLHN0cmluZyx1aW50NjQsc3RyaW5nLHN0cmluZyl1aW50NjQKKmFiaV9yb3V0ZV9sb2dDb250cmlidXRpb246CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDYgLy8gMHgxNTFmN2M3NQoKCS8vIGxvY2F0aW9uOiBzdHJpbmcKCXR4bmEgQXBwbGljYXRpb25BcmdzIDUKCWV4dHJhY3QgMiAwCgoJLy8gZGVzY3JpcHRpb246IHN0cmluZwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNAoJZXh0cmFjdCAyIDAKCgkvLyBob3VyczogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAzCglidG9pCgoJLy8gY29udHJpYnV0aW9uVHlwZTogc3RyaW5nCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglleHRyYWN0IDIgMAoKCS8vIHZvbHVudGVlcjogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMiAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCA0ICh2b2x1bnRlZXIpIGZvciBsb2dDb250cmlidXRpb24gbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIGV4ZWN1dGUgbG9nQ29udHJpYnV0aW9uKGFkZHJlc3Msc3RyaW5nLHVpbnQ2NCxzdHJpbmcsc3RyaW5nKXVpbnQ2NAoJY2FsbHN1YiBsb2dDb250cmlidXRpb24KCWl0b2IKCWNvbmNhdAoJbG9nCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBsb2dDb250cmlidXRpb24odm9sdW50ZWVyOiBBZGRyZXNzLCBjb250cmlidXRpb25UeXBlOiBzdHJpbmcsIGhvdXJzOiB1aW50NjQsIGRlc2NyaXB0aW9uOiBzdHJpbmcsIGxvY2F0aW9uOiBzdHJpbmcpOiB1aW50NjQKLy8KLy8gTG9nIGEgY29udHJpYnV0aW9uIChjYWxsZWQgYnkgYXV0aG9yaXplZCBvcmdhbml6ZXJzKQpsb2dDb250cmlidXRpb246Cglwcm90byA1IDEKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgMSAvLyAweAoJZHVwbiAyCgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjQyCgkvLyBhc3NlcnQoaG91cnMgPiAwICYmIGhvdXJzIDw9IDI0LCAnSW52YWxpZCBob3VyczogbXVzdCBiZSAxLTI0JykKCWZyYW1lX2RpZyAtMyAvLyBob3VyczogdWludDY0CglpbnRjIDAgLy8gMAoJPgoJZHVwCglieiAqc2tpcF9hbmQwCglmcmFtZV9kaWcgLTMgLy8gaG91cnM6IHVpbnQ2NAoJaW50YyA3IC8vIDI0Cgk8PQoJJiYKCipza2lwX2FuZDA6CgkvLyBJbnZhbGlkIGhvdXJzOiBtdXN0IGJlIDEtMjQKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czo0MwoJLy8gYXNzZXJ0KGxlbihjb250cmlidXRpb25UeXBlKSA+IDAgJiYgbGVuKGNvbnRyaWJ1dGlvblR5cGUpIDw9IDMyLCAnSW52YWxpZCBjb250cmlidXRpb24gdHlwZScpCglmcmFtZV9kaWcgLTIgLy8gY29udHJpYnV0aW9uVHlwZTogc3RyaW5nCglsZW4KCWludGMgMCAvLyAwCgk+CglkdXAKCWJ6ICpza2lwX2FuZDEKCWZyYW1lX2RpZyAtMiAvLyBjb250cmlidXRpb25UeXBlOiBzdHJpbmcKCWxlbgoJaW50YyAyIC8vIDMyCgk8PQoJJiYKCipza2lwX2FuZDE6CgkvLyBJbnZhbGlkIGNvbnRyaWJ1dGlvbiB0eXBlCglhc3NlcnQKCgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6NDQKCS8vIGFzc2VydChsZW4oZGVzY3JpcHRpb24pIDw9IDEyOCwgJ0Rlc2NyaXB0aW9uIHRvbyBsb25nJykKCWZyYW1lX2RpZyAtNCAvLyBkZXNjcmlwdGlvbjogc3RyaW5nCglsZW4KCXB1c2hpbnQgMTI4Cgk8PQoKCS8vIERlc2NyaXB0aW9uIHRvbyBsb25nCglhc3NlcnQKCgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6NDUKCS8vIGFzc2VydChsZW4obG9jYXRpb24pIDw9IDY0LCAnTG9jYXRpb24gdG9vIGxvbmcnKQoJZnJhbWVfZGlnIC01IC8vIGxvY2F0aW9uOiBzdHJpbmcKCWxlbgoJcHVzaGludCA2NAoJPD0KCgkvLyBMb2NhdGlvbiB0b28gbG9uZwoJYXNzZXJ0CgoJLy8gKmlmMF9jb25kaXRpb24KCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czo0OAoJLy8gIXRoaXMudm9sdW50ZWVyQ29udHJpYnV0aW9ucyh2b2x1bnRlZXIpLmV4aXN0cwoJZnJhbWVfZGlnIC0xIC8vIHZvbHVudGVlcjogQWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbnMgMAoJYnl0ZWMgMCAvLyAgInZvbHVudGVlcl9jb250cmlidXRpb25zIgoJYXBwX2xvY2FsX2dldF9leAoJc3dhcAoJcG9wCgkhCglieiAqaWYwX2VuZAoKCS8vICppZjBfY29uc2VxdWVudAoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjQ5CgkvLyB0aGlzLnZvbHVudGVlckNvbnRyaWJ1dGlvbnModm9sdW50ZWVyKS52YWx1ZSA9IDAKCWZyYW1lX2RpZyAtMSAvLyB2b2x1bnRlZXI6IEFkZHJlc3MKCWJ5dGVjIDAgLy8gICJ2b2x1bnRlZXJfY29udHJpYnV0aW9ucyIKCWludGMgMCAvLyAwCglhcHBfbG9jYWxfcHV0CgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjUwCgkvLyB0aGlzLnZvbHVudGVlclJlcHV0YXRpb24odm9sdW50ZWVyKS52YWx1ZSA9IDEwMAoJZnJhbWVfZGlnIC0xIC8vIHZvbHVudGVlcjogQWRkcmVzcwoJYnl0ZWMgMyAvLyAgInZvbHVudGVlcl9yZXB1dGF0aW9uIgoJaW50YyA0IC8vIDEwMAoJYXBwX2xvY2FsX3B1dAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czo1MQoJLy8gdGhpcy5sYXN0Q29udHJpYnV0aW9uVGltZSh2b2x1bnRlZXIpLnZhbHVlID0gMAoJZnJhbWVfZGlnIC0xIC8vIHZvbHVudGVlcjogQWRkcmVzcwoJYnl0ZWMgNCAvLyAgImxhc3RfY29udHJpYnV0aW9uX3RpbWUiCglpbnRjIDAgLy8gMAoJYXBwX2xvY2FsX3B1dAoKKmlmMF9lbmQ6CgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6NTUKCS8vIHRoaXMuY29udHJpYnV0aW9uQ291bnRlci52YWx1ZSA9IHRoaXMuY29udHJpYnV0aW9uQ291bnRlci52YWx1ZSArIDEKCWJ5dGVjIDIgLy8gICJjb250cmlidXRpb25fY291bnRlciIKCWR1cAoJYXBwX2dsb2JhbF9nZXQKCWludGMgMSAvLyAxCgkrCglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czo1NgoJLy8gY29udHJpYnV0aW9uSWQgPSB0aGlzLmNvbnRyaWJ1dGlvbkNvdW50ZXIudmFsdWUKCWJ5dGVjIDIgLy8gICJjb250cmlidXRpb25fY291bnRlciIKCWFwcF9nbG9iYWxfZ2V0CglmcmFtZV9idXJ5IDAgLy8gY29udHJpYnV0aW9uSWQ6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czo1OAoJLy8gdGhpcy52b2x1bnRlZXJDb250cmlidXRpb25zKHZvbHVudGVlcikudmFsdWUgPSB0aGlzLnZvbHVudGVlckNvbnRyaWJ1dGlvbnModm9sdW50ZWVyKS52YWx1ZSArIDEKCWZyYW1lX2RpZyAtMSAvLyB2b2x1bnRlZXI6IEFkZHJlc3MKCWJ5dGVjIDAgLy8gICJ2b2x1bnRlZXJfY29udHJpYnV0aW9ucyIKCWZyYW1lX2RpZyAtMSAvLyB2b2x1bnRlZXI6IEFkZHJlc3MKCWJ5dGVjIDAgLy8gICJ2b2x1bnRlZXJfY29udHJpYnV0aW9ucyIKCWFwcF9sb2NhbF9nZXQKCWludGMgMSAvLyAxCgkrCglhcHBfbG9jYWxfcHV0CgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjU5CgkvLyB0aGlzLnRvdGFsQ29udHJpYnV0aW9ucy52YWx1ZSA9IHRoaXMudG90YWxDb250cmlidXRpb25zLnZhbHVlICsgMQoJYnl0ZWMgNSAvLyAgInRvdGFsX2NvbnRyaWJ1dGlvbnMiCglkdXAKCWFwcF9nbG9iYWxfZ2V0CglpbnRjIDEgLy8gMQoJKwoJYXBwX2dsb2JhbF9wdXQKCgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6NjIKCS8vIGN1cnJlbnRSZXB1dGF0aW9uID0gdGhpcy52b2x1bnRlZXJSZXB1dGF0aW9uKHZvbHVudGVlcikudmFsdWUKCWZyYW1lX2RpZyAtMSAvLyB2b2x1bnRlZXI6IEFkZHJlc3MKCWJ5dGVjIDMgLy8gICJ2b2x1bnRlZXJfcmVwdXRhdGlvbiIKCWFwcF9sb2NhbF9nZXQKCWZyYW1lX2J1cnkgMSAvLyBjdXJyZW50UmVwdXRhdGlvbjogdWludDY0CgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjYzCgkvLyB0aGlzLnZvbHVudGVlclJlcHV0YXRpb24odm9sdW50ZWVyKS52YWx1ZSA9IGN1cnJlbnRSZXB1dGF0aW9uICsgKGhvdXJzICogNSkKCWZyYW1lX2RpZyAtMSAvLyB2b2x1bnRlZXI6IEFkZHJlc3MKCWJ5dGVjIDMgLy8gICJ2b2x1bnRlZXJfcmVwdXRhdGlvbiIKCWZyYW1lX2RpZyAxIC8vIGN1cnJlbnRSZXB1dGF0aW9uOiB1aW50NjQKCWZyYW1lX2RpZyAtMyAvLyBob3VyczogdWludDY0CglpbnRjIDUgLy8gNQoJKgoJKwoJYXBwX2xvY2FsX3B1dAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czo2NgoJLy8gdGhpcy5sYXN0Q29udHJpYnV0aW9uVGltZSh2b2x1bnRlZXIpLnZhbHVlID0gZ2xvYmFscy5sYXRlc3RUaW1lc3RhbXAKCWZyYW1lX2RpZyAtMSAvLyB2b2x1bnRlZXI6IEFkZHJlc3MKCWJ5dGVjIDQgLy8gICJsYXN0X2NvbnRyaWJ1dGlvbl90aW1lIgoJZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAoJYXBwX2xvY2FsX3B1dAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czo3MAoJLy8gbG9nRGF0YSA9IGl0b2IoY29udHJpYnV0aW9uSWQpICsgJzonICsgY29udHJpYnV0aW9uVHlwZSArICc6JyArIGl0b2IoaG91cnMpICsgJzonICsgaXRvYihnbG9iYWxzLmxhdGVzdFRpbWVzdGFtcCkKCWZyYW1lX2RpZyAwIC8vIGNvbnRyaWJ1dGlvbklkOiB1aW50NjQKCWl0b2IKCWJ5dGVjIDcgLy8gICI6IgoJY29uY2F0CglmcmFtZV9kaWcgLTIgLy8gY29udHJpYnV0aW9uVHlwZTogc3RyaW5nCgljb25jYXQKCWJ5dGVjIDcgLy8gICI6IgoJY29uY2F0CglmcmFtZV9kaWcgLTMgLy8gaG91cnM6IHVpbnQ2NAoJaXRvYgoJY29uY2F0CglieXRlYyA3IC8vICAiOiIKCWNvbmNhdAoJZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAoJaXRvYgoJY29uY2F0CglmcmFtZV9idXJ5IDIgLy8gbG9nRGF0YTogYnl0ZVtdCgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjcxCgkvLyBsb2cobG9nRGF0YSkKCWZyYW1lX2RpZyAyIC8vIGxvZ0RhdGE6IGJ5dGVbXQoJbG9nCgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjczCgkvLyByZXR1cm4gY29udHJpYnV0aW9uSWQ7CglmcmFtZV9kaWcgMCAvLyBjb250cmlidXRpb25JZDogdWludDY0CgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCgoJLy8gcG9wIGFsbCBsb2NhbCB2YXJpYWJsZXMgZnJvbSB0aGUgc3RhY2sKCXBvcG4gMgoJcmV0c3ViCgovLyB2ZXJpZnlDb250cmlidXRpb24odWludDY0KSh1aW50NjQsdWludDY0KQoqYWJpX3JvdXRlX3ZlcmlmeUNvbnRyaWJ1dGlvbjoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgNiAvLyAweDE1MWY3Yzc1CgoJLy8gY29udHJpYnV0aW9uSWQ6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGV4ZWN1dGUgdmVyaWZ5Q29udHJpYnV0aW9uKHVpbnQ2NCkodWludDY0LHVpbnQ2NCkKCWNhbGxzdWIgdmVyaWZ5Q29udHJpYnV0aW9uCgljb25jYXQKCWxvZwoJaW50YyAxIC8vIDEKCXJldHVybgoKLy8gdmVyaWZ5Q29udHJpYnV0aW9uKGNvbnRyaWJ1dGlvbklkOiB1aW50NjQpOiBbdWludDY0LCB1aW50NjRdCi8vCi8vIFZlcmlmeSBhIGNvbnRyaWJ1dGlvbiBleGlzdHMgYW5kIHJldHVybiBkZXRhaWxzCnZlcmlmeUNvbnRyaWJ1dGlvbjoKCXByb3RvIDEgMQoKCS8vICppZjFfY29uZGl0aW9uCgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6ODEKCS8vIGNvbnRyaWJ1dGlvbklkID4gMCAmJiBjb250cmlidXRpb25JZCA8PSB0aGlzLmNvbnRyaWJ1dGlvbkNvdW50ZXIudmFsdWUKCWZyYW1lX2RpZyAtMSAvLyBjb250cmlidXRpb25JZDogdWludDY0CglpbnRjIDAgLy8gMAoJPgoJZHVwCglieiAqc2tpcF9hbmQyCglmcmFtZV9kaWcgLTEgLy8gY29udHJpYnV0aW9uSWQ6IHVpbnQ2NAoJYnl0ZWMgMiAvLyAgImNvbnRyaWJ1dGlvbl9jb3VudGVyIgoJYXBwX2dsb2JhbF9nZXQKCTw9CgkmJgoKKnNraXBfYW5kMjoKCWJ6ICppZjFfZW5kCgoJLy8gKmlmMV9jb25zZXF1ZW50CgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6ODIKCS8vIHJldHVybiBbMSwgZ2xvYmFscy5sYXRlc3RUaW1lc3RhbXBdOwoJcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDAwMQoJZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAoJaXRvYgoJY29uY2F0CglyZXRzdWIKCippZjFfZW5kOgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjg0CgkvLyByZXR1cm4gWzAsIDBdOwoJcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKCXJldHN1YgoKLy8gZ2V0Vm9sdW50ZWVyU3RhdHMoYWRkcmVzcykodWludDY0LHVpbnQ2NCx1aW50NjQpCiphYmlfcm91dGVfZ2V0Vm9sdW50ZWVyU3RhdHM6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDYgLy8gMHgxNTFmN2M3NQoKCS8vIHZvbHVudGVlcjogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMiAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwICh2b2x1bnRlZXIpIGZvciBnZXRWb2x1bnRlZXJTdGF0cyBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBnZXRWb2x1bnRlZXJTdGF0cyhhZGRyZXNzKSh1aW50NjQsdWludDY0LHVpbnQ2NCkKCWNhbGxzdWIgZ2V0Vm9sdW50ZWVyU3RhdHMKCWNvbmNhdAoJbG9nCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBnZXRWb2x1bnRlZXJTdGF0cyh2b2x1bnRlZXI6IEFkZHJlc3MpOiBbdWludDY0LCB1aW50NjQsIHVpbnQ2NF0KLy8KLy8gR2V0IHZvbHVudGVlciBzdGF0aXN0aWNzCmdldFZvbHVudGVlclN0YXRzOgoJcHJvdG8gMSAxCgoJLy8gKmlmMl9jb25kaXRpb24KCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czo5MQoJLy8gIXRoaXMudm9sdW50ZWVyQ29udHJpYnV0aW9ucyh2b2x1bnRlZXIpLmV4aXN0cwoJZnJhbWVfZGlnIC0xIC8vIHZvbHVudGVlcjogQWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbnMgMAoJYnl0ZWMgMCAvLyAgInZvbHVudGVlcl9jb250cmlidXRpb25zIgoJYXBwX2xvY2FsX2dldF9leAoJc3dhcAoJcG9wCgkhCglieiAqaWYyX2VuZAoKCS8vICppZjJfY29uc2VxdWVudAoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjkyCgkvLyByZXR1cm4gWzAsIDAsIDBdOwoJcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCglyZXRzdWIKCippZjJfZW5kOgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjk1CgkvLyByZXR1cm4gWwoJLy8gICAgICAgdGhpcy52b2x1bnRlZXJDb250cmlidXRpb25zKHZvbHVudGVlcikudmFsdWUsCgkvLyAgICAgICB0aGlzLnZvbHVudGVlclJlcHV0YXRpb24odm9sdW50ZWVyKS52YWx1ZSwKCS8vICAgICAgIHRoaXMubGFzdENvbnRyaWJ1dGlvblRpbWUodm9sdW50ZWVyKS52YWx1ZQoJLy8gICAgIF07CglmcmFtZV9kaWcgLTEgLy8gdm9sdW50ZWVyOiBBZGRyZXNzCglieXRlYyAwIC8vICAidm9sdW50ZWVyX2NvbnRyaWJ1dGlvbnMiCglhcHBfbG9jYWxfZ2V0CglpdG9iCglmcmFtZV9kaWcgLTEgLy8gdm9sdW50ZWVyOiBBZGRyZXNzCglieXRlYyAzIC8vICAidm9sdW50ZWVyX3JlcHV0YXRpb24iCglhcHBfbG9jYWxfZ2V0CglpdG9iCgljb25jYXQKCWZyYW1lX2RpZyAtMSAvLyB2b2x1bnRlZXI6IEFkZHJlc3MKCWJ5dGVjIDQgLy8gICJsYXN0X2NvbnRyaWJ1dGlvbl90aW1lIgoJYXBwX2xvY2FsX2dldAoJaXRvYgoJY29uY2F0CglyZXRzdWIKCi8vIGJ1bGtMb2dDb250cmlidXRpb25zKGFkZHJlc3NbXSxzdHJpbmcsdWludDY0W10sc3RyaW5nW10pdWludDY0CiphYmlfcm91dGVfYnVsa0xvZ0NvbnRyaWJ1dGlvbnM6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDYgLy8gMHgxNTFmN2M3NQoKCS8vIGRlc2NyaXB0aW9uczogc3RyaW5nW10KCXR4bmEgQXBwbGljYXRpb25BcmdzIDQKCgkvLyBob3VyczogdWludDY0W10KCXR4bmEgQXBwbGljYXRpb25BcmdzIDMKCWV4dHJhY3QgMiAwCgoJLy8gY29udHJpYnV0aW9uVHlwZTogc3RyaW5nCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglleHRyYWN0IDIgMAoKCS8vIHZvbHVudGVlcnM6IGFkZHJlc3NbXQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZXh0cmFjdCAyIDAKCgkvLyBleGVjdXRlIGJ1bGtMb2dDb250cmlidXRpb25zKGFkZHJlc3NbXSxzdHJpbmcsdWludDY0W10sc3RyaW5nW10pdWludDY0CgljYWxsc3ViIGJ1bGtMb2dDb250cmlidXRpb25zCglpdG9iCgljb25jYXQKCWxvZwoJaW50YyAxIC8vIDEKCXJldHVybgoKLy8gYnVsa0xvZ0NvbnRyaWJ1dGlvbnModm9sdW50ZWVyczogQWRkcmVzc1tdLCBjb250cmlidXRpb25UeXBlOiBzdHJpbmcsIGhvdXJzOiB1aW50NjRbXSwgZGVzY3JpcHRpb25zOiBzdHJpbmdbXSk6IHVpbnQ2NAovLwovLyBCdWxrIGxvZyBjb250cmlidXRpb25zIChmb3IgZWZmaWNpZW5jeSkKYnVsa0xvZ0NvbnRyaWJ1dGlvbnM6Cglwcm90byA0IDEKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgMSAvLyAweAoJZHVwbiA1CgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjExMQoJLy8gYXNzZXJ0KGxlbih2b2x1bnRlZXJzKSA8PSAxMCwgJ1RvbyBtYW55IGNvbnRyaWJ1dGlvbnMgaW4gb25lIGNhbGwnKQoJZnJhbWVfZGlnIC0xIC8vIHZvbHVudGVlcnM6IEFkZHJlc3NbXQoJbGVuCglwdXNoaW50IDEwCgk8PQoKCS8vIFRvbyBtYW55IGNvbnRyaWJ1dGlvbnMgaW4gb25lIGNhbGwKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoxMTIKCS8vIGFzc2VydChsZW4odm9sdW50ZWVycykgPT09IGxlbihob3VycyksICdNaXNtYXRjaGVkIHZvbHVudGVlcnMgYW5kIGhvdXJzJykKCWZyYW1lX2RpZyAtMSAvLyB2b2x1bnRlZXJzOiBBZGRyZXNzW10KCWxlbgoJZnJhbWVfZGlnIC0zIC8vIGhvdXJzOiB1aW50NjRbXQoJbGVuCgk9PQoKCS8vIE1pc21hdGNoZWQgdm9sdW50ZWVycyBhbmQgaG91cnMKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoxMTMKCS8vIGFzc2VydChsZW4odm9sdW50ZWVycykgPT09IGxlbihkZXNjcmlwdGlvbnMpLCAnTWlzbWF0Y2hlZCB2b2x1bnRlZXJzIGFuZCBkZXNjcmlwdGlvbnMnKQoJZnJhbWVfZGlnIC0xIC8vIHZvbHVudGVlcnM6IEFkZHJlc3NbXQoJbGVuCglmcmFtZV9kaWcgLTQgLy8gZGVzY3JpcHRpb25zOiBzdHJpbmdbXQoJbGVuCgk9PQoKCS8vIE1pc21hdGNoZWQgdm9sdW50ZWVycyBhbmQgZGVzY3JpcHRpb25zCglhc3NlcnQKCgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6MTE1CgkvLyBjb250cmlidXRpb25zTG9nZ2VkOiB1aW50NjQgPSAwCglpbnRjIDAgLy8gMAoJZnJhbWVfYnVyeSAwIC8vIGNvbnRyaWJ1dGlvbnNMb2dnZWQ6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoxMTcKCS8vIGZvciAobGV0IGk6IHVpbnQ2NCA9IDA7IGkgPCBsZW4odm9sdW50ZWVycyk7IGkgPSBpICsgMSkKCWludGMgMCAvLyAwCglmcmFtZV9idXJ5IDEgLy8gaTogdWludDY0CgoqZm9yXzA6CgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6MTE3CgkvLyBpIDwgbGVuKHZvbHVudGVlcnMpCglmcmFtZV9kaWcgMSAvLyBpOiB1aW50NjQKCWZyYW1lX2RpZyAtMSAvLyB2b2x1bnRlZXJzOiBBZGRyZXNzW10KCWxlbgoJPAoJYnogKmZvcl8wX2VuZAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoxMTgKCS8vIHZvbHVudGVlciA9IHZvbHVudGVlcnNbaV0KCWZyYW1lX2RpZyAtMSAvLyB2b2x1bnRlZXJzOiBBZGRyZXNzW10KCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5CglpbnRjIDAgLy8gIGluaXRpYWwgb2Zmc2V0CglmcmFtZV9kaWcgMSAvLyBpOiB1aW50NjQKCWludGMgMiAvLyAzMgoJKiAvLyBhY2MgKiB0eXBlTGVuZ3RoCgkrCglsb2FkIDI1NSAvLyBmdWxsIGFycmF5Cglzd2FwCglpbnRjIDIgLy8gMzIKCWV4dHJhY3QzCglmcmFtZV9idXJ5IDIgLy8gdm9sdW50ZWVyOiBhZGRyZXNzCgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjExOQoJLy8gdm9sdW50ZWVySG91cnMgPSBob3Vyc1tpXQoJZnJhbWVfZGlnIC0zIC8vIGhvdXJzOiB1aW50NjRbXQoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWludGMgMCAvLyAgaW5pdGlhbCBvZmZzZXQKCWZyYW1lX2RpZyAxIC8vIGk6IHVpbnQ2NAoJaW50YyA2IC8vIDgKCSogLy8gYWNjICogdHlwZUxlbmd0aAoJKwoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJc3dhcAoJaW50YyA2IC8vIDgKCWV4dHJhY3QzCglidG9pCglmcmFtZV9idXJ5IDMgLy8gdm9sdW50ZWVySG91cnM6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoxMjAKCS8vIGRlc2NyaXB0aW9uID0gZGVzY3JpcHRpb25zW2ldCglmcmFtZV9kaWcgLTQgLy8gZGVzY3JpcHRpb25zOiBzdHJpbmdbXQoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWludGMgMCAvLyAgaW5pdGlhbCBvZmZzZXQKCWZyYW1lX2RpZyAxIC8vIGk6IHVpbnQ2NAoJaW50YyAzIC8vIDIKCSogLy8gYWNjICogMgoJKwoJaW50YyAzIC8vIDIKCSsgLy8gYWRkIHR3byBmb3IgbGVuZ3RoCglsb2FkIDI1NSAvLyBmdWxsIGFycmF5Cglsb2FkIDI1NSAvLyBmdWxsIGFycmF5Cgl1bmNvdmVyIDIKCWV4dHJhY3RfdWludDE2CglpbnRjIDMgLy8gMgoJKyAvLyBhZGQgdHdvIGZvciBsZW5ndGgKCWR1cCAvLyBkdXBsaWNhdGUgc3RhcnQgb2YgZWxlbWVudAoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJc3dhcAoJZXh0cmFjdF91aW50MTYgLy8gZ2V0IG51bWJlciBvZiBlbGVtZW50cwoJaW50YyAxIC8vICBnZXQgdHlwZSBsZW5ndGgKCSogLy8gbXVsdGlwbHkgYnkgdHlwZSBsZW5ndGgKCWludGMgMyAvLyAyCgkrIC8vIGFkZCB0d28gZm9yIGxlbmd0aAoJZXh0cmFjdDMKCWV4dHJhY3QgMiAwCglmcmFtZV9idXJ5IDQgLy8gZGVzY3JpcHRpb246IHN0cmluZwoKCS8vICppZjNfY29uZGl0aW9uCgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6MTIyCgkvLyB2b2x1bnRlZXJIb3VycyA+IDAgJiYgdm9sdW50ZWVySG91cnMgPD0gMjQKCWZyYW1lX2RpZyAzIC8vIHZvbHVudGVlckhvdXJzOiB1aW50NjQKCWludGMgMCAvLyAwCgk+CglkdXAKCWJ6ICpza2lwX2FuZDMKCWZyYW1lX2RpZyAzIC8vIHZvbHVudGVlckhvdXJzOiB1aW50NjQKCWludGMgNyAvLyAyNAoJPD0KCSYmCgoqc2tpcF9hbmQzOgoJYnogKmlmM19lbmQKCgkvLyAqaWYzX2NvbnNlcXVlbnQKCS8vICppZjRfY29uZGl0aW9uCgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6MTI0CgkvLyAhdGhpcy52b2x1bnRlZXJDb250cmlidXRpb25zKHZvbHVudGVlcikuZXhpc3RzCglmcmFtZV9kaWcgMiAvLyB2b2x1bnRlZXI6IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25zIDAKCWJ5dGVjIDAgLy8gICJ2b2x1bnRlZXJfY29udHJpYnV0aW9ucyIKCWFwcF9sb2NhbF9nZXRfZXgKCXN3YXAKCXBvcAoJIQoJYnogKmlmNF9lbmQKCgkvLyAqaWY0X2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoxMjUKCS8vIHRoaXMudm9sdW50ZWVyQ29udHJpYnV0aW9ucyh2b2x1bnRlZXIpLnZhbHVlID0gMAoJZnJhbWVfZGlnIDIgLy8gdm9sdW50ZWVyOiBhZGRyZXNzCglieXRlYyAwIC8vICAidm9sdW50ZWVyX2NvbnRyaWJ1dGlvbnMiCglpbnRjIDAgLy8gMAoJYXBwX2xvY2FsX3B1dAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoxMjYKCS8vIHRoaXMudm9sdW50ZWVyUmVwdXRhdGlvbih2b2x1bnRlZXIpLnZhbHVlID0gMTAwCglmcmFtZV9kaWcgMiAvLyB2b2x1bnRlZXI6IGFkZHJlc3MKCWJ5dGVjIDMgLy8gICJ2b2x1bnRlZXJfcmVwdXRhdGlvbiIKCWludGMgNCAvLyAxMDAKCWFwcF9sb2NhbF9wdXQKCgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6MTI3CgkvLyB0aGlzLmxhc3RDb250cmlidXRpb25UaW1lKHZvbHVudGVlcikudmFsdWUgPSAwCglmcmFtZV9kaWcgMiAvLyB2b2x1bnRlZXI6IGFkZHJlc3MKCWJ5dGVjIDQgLy8gICJsYXN0X2NvbnRyaWJ1dGlvbl90aW1lIgoJaW50YyAwIC8vIDAKCWFwcF9sb2NhbF9wdXQKCippZjRfZW5kOgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjEzMQoJLy8gdGhpcy5jb250cmlidXRpb25Db3VudGVyLnZhbHVlID0gdGhpcy5jb250cmlidXRpb25Db3VudGVyLnZhbHVlICsgMQoJYnl0ZWMgMiAvLyAgImNvbnRyaWJ1dGlvbl9jb3VudGVyIgoJZHVwCglhcHBfZ2xvYmFsX2dldAoJaW50YyAxIC8vIDEKCSsKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjEzMgoJLy8gdGhpcy52b2x1bnRlZXJDb250cmlidXRpb25zKHZvbHVudGVlcikudmFsdWUgPSB0aGlzLnZvbHVudGVlckNvbnRyaWJ1dGlvbnModm9sdW50ZWVyKS52YWx1ZSArIDEKCWZyYW1lX2RpZyAyIC8vIHZvbHVudGVlcjogYWRkcmVzcwoJYnl0ZWMgMCAvLyAgInZvbHVudGVlcl9jb250cmlidXRpb25zIgoJZnJhbWVfZGlnIDIgLy8gdm9sdW50ZWVyOiBhZGRyZXNzCglieXRlYyAwIC8vICAidm9sdW50ZWVyX2NvbnRyaWJ1dGlvbnMiCglhcHBfbG9jYWxfZ2V0CglpbnRjIDEgLy8gMQoJKwoJYXBwX2xvY2FsX3B1dAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoxMzMKCS8vIHRoaXMudG90YWxDb250cmlidXRpb25zLnZhbHVlID0gdGhpcy50b3RhbENvbnRyaWJ1dGlvbnMudmFsdWUgKyAxCglieXRlYyA1IC8vICAidG90YWxfY29udHJpYnV0aW9ucyIKCWR1cAoJYXBwX2dsb2JhbF9nZXQKCWludGMgMSAvLyAxCgkrCglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoxMzUKCS8vIGN1cnJlbnRSZXB1dGF0aW9uID0gdGhpcy52b2x1bnRlZXJSZXB1dGF0aW9uKHZvbHVudGVlcikudmFsdWUKCWZyYW1lX2RpZyAyIC8vIHZvbHVudGVlcjogYWRkcmVzcwoJYnl0ZWMgMyAvLyAgInZvbHVudGVlcl9yZXB1dGF0aW9uIgoJYXBwX2xvY2FsX2dldAoJZnJhbWVfYnVyeSA1IC8vIGN1cnJlbnRSZXB1dGF0aW9uOiB1aW50NjQKCgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6MTM2CgkvLyB0aGlzLnZvbHVudGVlclJlcHV0YXRpb24odm9sdW50ZWVyKS52YWx1ZSA9IGN1cnJlbnRSZXB1dGF0aW9uICsgKHZvbHVudGVlckhvdXJzICogNSkKCWZyYW1lX2RpZyAyIC8vIHZvbHVudGVlcjogYWRkcmVzcwoJYnl0ZWMgMyAvLyAgInZvbHVudGVlcl9yZXB1dGF0aW9uIgoJZnJhbWVfZGlnIDUgLy8gY3VycmVudFJlcHV0YXRpb246IHVpbnQ2NAoJZnJhbWVfZGlnIDMgLy8gdm9sdW50ZWVySG91cnM6IHVpbnQ2NAoJaW50YyA1IC8vIDUKCSoKCSsKCWFwcF9sb2NhbF9wdXQKCgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6MTM3CgkvLyB0aGlzLmxhc3RDb250cmlidXRpb25UaW1lKHZvbHVudGVlcikudmFsdWUgPSBnbG9iYWxzLmxhdGVzdFRpbWVzdGFtcAoJZnJhbWVfZGlnIDIgLy8gdm9sdW50ZWVyOiBhZGRyZXNzCglieXRlYyA0IC8vICAibGFzdF9jb250cmlidXRpb25fdGltZSIKCWdsb2JhbCBMYXRlc3RUaW1lc3RhbXAKCWFwcF9sb2NhbF9wdXQKCgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6MTM5CgkvLyBjb250cmlidXRpb25zTG9nZ2VkID0gY29udHJpYnV0aW9uc0xvZ2dlZCArIDEKCWZyYW1lX2RpZyAwIC8vIGNvbnRyaWJ1dGlvbnNMb2dnZWQ6IHVpbnQ2NAoJaW50YyAxIC8vIDEKCSsKCWZyYW1lX2J1cnkgMCAvLyBjb250cmlidXRpb25zTG9nZ2VkOiB1aW50NjQKCippZjNfZW5kOgoKKmZvcl8wX2NvbnRpbnVlOgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjExNwoJLy8gaSA9IGkgKyAxCglmcmFtZV9kaWcgMSAvLyBpOiB1aW50NjQKCWludGMgMSAvLyAxCgkrCglmcmFtZV9idXJ5IDEgLy8gaTogdWludDY0CgliICpmb3JfMAoKKmZvcl8wX2VuZDoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoxNDMKCS8vIHJldHVybiBjb250cmlidXRpb25zTG9nZ2VkOwoJZnJhbWVfZGlnIDAgLy8gY29udHJpYnV0aW9uc0xvZ2dlZDogdWludDY0CgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCgoJLy8gcG9wIGFsbCBsb2NhbCB2YXJpYWJsZXMgZnJvbSB0aGUgc3RhY2sKCXBvcG4gNQoJcmV0c3ViCgovLyBvcHRJbigpdm9pZAoqYWJpX3JvdXRlX29wdEluOgoJLy8gZXhlY3V0ZSBvcHRJbigpdm9pZAoJY2FsbHN1YiBvcHRJbgoJaW50YyAxIC8vIDEKCXJldHVybgoKLy8gb3B0SW4oKTogdm9pZAovLwovLyBPcHQgaW4gdG8gc3RhcnQgdHJhY2tpbmcgY29udHJpYnV0aW9ucwpvcHRJbjoKCXByb3RvIDAgMAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoxNTAKCS8vIHRoaXMudm9sdW50ZWVyQ29udHJpYnV0aW9ucyh0aGlzLnR4bi5zZW5kZXIpLnZhbHVlID0gMAoJdHhuIFNlbmRlcgoJYnl0ZWMgMCAvLyAgInZvbHVudGVlcl9jb250cmlidXRpb25zIgoJaW50YyAwIC8vIDAKCWFwcF9sb2NhbF9wdXQKCgkvLyBjb250cmFjdHNcQ29udHJpYnV0aW9uTG9nZ2VyLmFsZ28udHM6MTUxCgkvLyB0aGlzLnZvbHVudGVlclJlcHV0YXRpb24odGhpcy50eG4uc2VuZGVyKS52YWx1ZSA9IDEwMAoJdHhuIFNlbmRlcgoJYnl0ZWMgMyAvLyAgInZvbHVudGVlcl9yZXB1dGF0aW9uIgoJaW50YyA0IC8vIDEwMAoJYXBwX2xvY2FsX3B1dAoKCS8vIGNvbnRyYWN0c1xDb250cmlidXRpb25Mb2dnZXIuYWxnby50czoxNTIKCS8vIHRoaXMubGFzdENvbnRyaWJ1dGlvblRpbWUodGhpcy50eG4uc2VuZGVyKS52YWx1ZSA9IDAKCXR4biBTZW5kZXIKCWJ5dGVjIDQgLy8gICJsYXN0X2NvbnRyaWJ1dGlvbl90aW1lIgoJaW50YyAwIC8vIDAKCWFwcF9sb2NhbF9wdXQKCXJldHN1YgoKLy8gZ2V0Q29udHJhY3RTdGF0cygpKHVpbnQ2NCx1aW50NjQpCiphYmlfcm91dGVfZ2V0Q29udHJhY3RTdGF0czoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgNiAvLyAweDE1MWY3Yzc1CgoJLy8gZXhlY3V0ZSBnZXRDb250cmFjdFN0YXRzKCkodWludDY0LHVpbnQ2NCkKCWNhbGxzdWIgZ2V0Q29udHJhY3RTdGF0cwoJY29uY2F0Cglsb2cKCWludGMgMSAvLyAxCglyZXR1cm4KCi8vIGdldENvbnRyYWN0U3RhdHMoKTogW3VpbnQ2NCwgdWludDY0XQovLwovLyBHZXQgY29udHJhY3Qgc3RhdGlzdGljcwpnZXRDb250cmFjdFN0YXRzOgoJcHJvdG8gMCAxCgoJLy8gY29udHJhY3RzXENvbnRyaWJ1dGlvbkxvZ2dlci5hbGdvLnRzOjE1OQoJLy8gcmV0dXJuIFt0aGlzLnRvdGFsQ29udHJpYnV0aW9ucy52YWx1ZSwgdGhpcy5jb250cmlidXRpb25Db3VudGVyLnZhbHVlXTsKCWJ5dGVjIDUgLy8gICJ0b3RhbF9jb250cmlidXRpb25zIgoJYXBwX2dsb2JhbF9nZXQKCWl0b2IKCWJ5dGVjIDIgLy8gICJjb250cmlidXRpb25fY291bnRlciIKCWFwcF9nbG9iYWxfZ2V0CglpdG9iCgljb25jYXQKCXJldHN1YgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4OTczYjYxNmYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbih1aW50NjQpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweDE2ZTc4NDM4IC8vIG1ldGhvZCAibG9nQ29udHJpYnV0aW9uKGFkZHJlc3Msc3RyaW5nLHVpbnQ2NCxzdHJpbmcsc3RyaW5nKXVpbnQ2NCIKCXB1c2hieXRlcyAweGRkZDc4MjhiIC8vIG1ldGhvZCAidmVyaWZ5Q29udHJpYnV0aW9uKHVpbnQ2NCkodWludDY0LHVpbnQ2NCkiCglwdXNoYnl0ZXMgMHgwZDc0MjgwYiAvLyBtZXRob2QgImdldFZvbHVudGVlclN0YXRzKGFkZHJlc3MpKHVpbnQ2NCx1aW50NjQsdWludDY0KSIKCXB1c2hieXRlcyAweDM5YjRhZGVhIC8vIG1ldGhvZCAiYnVsa0xvZ0NvbnRyaWJ1dGlvbnMoYWRkcmVzc1tdLHN0cmluZyx1aW50NjRbXSxzdHJpbmdbXSl1aW50NjQiCglwdXNoYnl0ZXMgMHgyOTMxNGQ5NSAvLyBtZXRob2QgIm9wdEluKCl2b2lkIgoJcHVzaGJ5dGVzIDB4YjEyY2NhNmYgLy8gbWV0aG9kICJnZXRDb250cmFjdFN0YXRzKCkodWludDY0LHVpbnQ2NCkiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2xvZ0NvbnRyaWJ1dGlvbiAqYWJpX3JvdXRlX3ZlcmlmeUNvbnRyaWJ1dGlvbiAqYWJpX3JvdXRlX2dldFZvbHVudGVlclN0YXRzICphYmlfcm91dGVfYnVsa0xvZ0NvbnRyaWJ1dGlvbnMgKmFiaV9yb3V0ZV9vcHRJbiAqYWJpX3JvdXRlX2dldENvbnRyYWN0U3RhdHMKCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY2FsbCBOb09wCgllcnI=",
+    "clear": "I3ByYWdtYSB2ZXJzaW9uIDEw"
+  },
+  "byteCode": {
+    "approval": "CiAIAAEgAmQFCBgmCBd2b2x1bnRlZXJfY29udHJpYnV0aW9ucwAUY29udHJpYnV0aW9uX2NvdW50ZXIUdm9sdW50ZWVyX3JlcHV0YXRpb24WbGFzdF9jb250cmlidXRpb25fdGltZRN0b3RhbF9jb250cmlidXRpb25zBBUffHUBOjEYFIEGCzEZCI0MAtkAAAAAAAAAAAAAAssAAAAAAAAAAAAAADYaAReIAAIjQ4oBAIAWb3JnYW5pemVyX3JlZ2lzdHJ5X2FwcIv/ZycFImcqImeJJwY2GgVXAgA2GgRXAgA2GgMXNhoCVwIANhoBSRUkEkSIAAUWULAjQ4oFASlHAov9Ig1JQQAGi/0hBw4QRIv+FSINSUEABov+FSQOEESL/BWBgAEORIv7FYFADkSL/zYyAChjTEgUQQARi/8oImaL/yshBGaL/ycEImYqSWQjCGcqZIwAi/8oi/8oYiMIZicFSWQjCGeL/ytijAGL/yuLAYv9IQULCGaL/ycEMgdmiwAWJwdQi/5QJwdQi/0WUCcHUDIHFlCMAosCsIsAjABGAoknBjYaAReIAARQsCNDigEBi/8iDUlBAAaL/ypkDhBBAA+ACAAAAAAAAAABMgcWUImAEAAAAAAAAAAAAAAAAAAAAACJJwY2GgFJFSQSRIgABFCwI0OKAQGL/zYyAChjTEgUQQAbgBgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACJi/8oYhaL/ytiFlCL/ycEYhZQiScGNhoENhoDVwIANhoCVwIANhoBVwIAiAAFFlCwI0OKBAEpRwWL/xWBCg5Ei/8Vi/0VEkSL/xWL/BUSRCKMACKMAYsBi/8VDEEAt4v/Nf8iiwEkCwg0/0wkWIwCi/01/yKLASEGCwg0/0whBlgXjAOL/DX/IosBJQsIJQg0/zT/TwJZJQhJNP9MWSMLJQhYVwIAjASLAyINSUEABosDIQcOEEEAVIsCNjIAKGNMSBRBABGLAigiZosCKyEEZosCJwQiZipJZCMIZ4sCKIsCKGIjCGYnBUlkIwhniwIrYowFiwIriwWLAyEFCwhmiwInBDIHZosAIwiMAIsBIwiMAUL/QIsAjABGBYmIAAIjQ4oAADEAKCJmMQArIQRmMQAnBCJmiScGiAAEULAjQ4oAAScFZBYqZBZQiYAElzthbzYaAI4B/SkAgAQW54Q4gATd14KLgAQNdCgLgAQ5tK3qgAQpMU2VgASxLMpvNhoAjgb9Iv3z/jb+hf+O/6gA",
+    "clear": "Cg=="
+  },
+  "compilerInfo": {
+    "compiler": "algod",
+    "compilerVersion": {
+      "major": 4,
+      "minor": 3,
+      "patch": 0,
+      "commitHash": "3e5d694b+"
+    }
+  }
+}
