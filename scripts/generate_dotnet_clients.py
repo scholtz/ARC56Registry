@@ -48,6 +48,11 @@ GENERATOR_IMAGE = "scholtz2/dotnet-avm-generated-client:latest"
 DOWNLOAD_DELAY_SECONDS = 7
 NUPKG_OUTPUT_DIR = os.path.join(REPO_ROOT, "artifacts", "nupkgs")
 NUGET_SOURCE = "https://api.nuget.org/v3/index.json"
+# How often --commit pushes local commits to the remote while the run is still going,
+# rather than only once at the very end. Bounds how much already-finished work (commits,
+# and the nuget.org publishes that go with them) could be stranded on the runner and
+# lost if the job later dies (crash, runner timeout, etc.) - see push_commits().
+PUSH_INTERVAL_SECONDS = 60
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -764,6 +769,28 @@ def write_project_files(
         f.write(readme)
 
 
+_last_push_at: float | None = None
+
+
+def push_commits(force: bool = False) -> None:
+    """Pushes whatever local commits exist so far. Called after every
+    commit_project_changes() but throttled to at most once per PUSH_INTERVAL_SECONDS
+    (force=True bypasses the throttle, used for the final flush after the loop) - so a
+    long run doesn't do a network round-trip per project, while still bounding how much
+    already-finished, already-committed work could be lost if the job dies before
+    reaching its own final push step. Never raises: a push failure here just means the
+    next periodic push (or the workflow's own final push step) picks it up instead."""
+    global _last_push_at
+    now = time.monotonic()
+    if not force and _last_push_at is not None and now - _last_push_at < PUSH_INTERVAL_SECONDS:
+        return
+    result = subprocess.run(["git", "push"], cwd=REPO_ROOT, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"WARNING: git push failed (will retry later): {result.stdout}\n{result.stderr}", file=sys.stderr)
+        return
+    _last_push_at = now
+
+
 def configure_git_identity() -> None:
     """Sets the git identity used by commit_project_changes(). Repo-local only (no
     --global), so this never touches a developer's own git config outside this
@@ -845,18 +872,41 @@ def main() -> int:
         configure_git_identity()
 
     changed_projects = 0
+    failed_projects = 0
     for (owner, repo), project_rows in selected:
-        if process_project(owner, repo, project_rows, generator_digest, args.publish):
-            changed_projects += 1
-        # Rebuilt per-project (not just once at the end) so a --commit run's per-project
-        # commit always includes this project's own incidents, if any.
-        rebuild_incidents_index()
-        if args.commit:
-            commit_project_changes(owner, repo)
+        # A single project must never be able to take down the whole run - process_project
+        # already handles the failure modes we've seen in practice (download/generator/
+        # compile errors) without raising, but this is the last line of defense against
+        # anything unanticipated (e.g. a permissions error from docker/dotnet/git) so a
+        # fresh failure mode degrades to "skip this one project" instead of aborting
+        # everything after it. Combined with pushing progress as we go (below), this is
+        # what makes the *next* run's catch-up fast: only the project that actually
+        # failed (or was mid-flight) needs to be redone, not everything after it too.
+        try:
+            if process_project(owner, repo, project_rows, generator_digest, args.publish):
+                changed_projects += 1
+            # Rebuilt per-project (not just once at the end) so a --commit run's
+            # per-project commit always includes this project's own incidents, if any.
+            rebuild_incidents_index()
+            if args.commit:
+                commit_project_changes(owner, repo)
+                push_commits()
+        except Exception as exc:  # noqa: BLE001 - see comment above
+            failed_projects += 1
+            print(f"ERROR: unexpected failure processing {owner}/{repo}, skipping and "
+                  f"continuing with the next project: {exc}", file=sys.stderr)
+            continue
+
+    if args.commit:
+        push_commits(force=True)
 
     print(f"Done: {len(selected)}/{len(grouped)} project(s) scanned, "
-          f"{changed_projects} regenerated/bumped", file=sys.stderr)
-    return 0
+          f"{changed_projects} regenerated/bumped, {failed_projects} failed unexpectedly", file=sys.stderr)
+    # Exit nonzero if anything hit the unexpected-failure path above, so CI still shows
+    # red and a human notices - but only after every successfully-processed project has
+    # already been packed/published/committed/pushed, so nothing already-done is lost
+    # or blocked on the failed one(s).
+    return 1 if failed_projects else 0
 
 
 if __name__ == "__main__":

@@ -79,7 +79,14 @@ jobs:
           fi
           python scripts/generate_dotnet_clients.py --publish --commit "${ARGS[@]}"
 
+      # `if: always()` on this and the next step matters: the generate step above pushes
+      # its own commits periodically as it goes (see push_commits() in the script) and
+      # can still exit nonzero for an unexpected per-project failure (script still
+      # processes/commits/pushes every other project first - see main()'s try/except).
+      # Without always(), that nonzero exit would skip both steps below and strand
+      # whatever was packed/committed-but-not-yet-pushed since the last periodic push.
       - name: Upload packed NuGet packages
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: nupkgs
@@ -87,8 +94,12 @@ jobs:
           if-no-files-found: ignore
 
       - name: Commit any remaining changes and push
+        if: always()
         run: |
-          CLIENT_PATHS=(clients/*/*/dotnet clients/_template clients/_incidents)
+          # Mirrors what commit_project_changes() in the script stages per-project
+          # (the whole clients/<owner>/<repo>/ dir, i.e. both dotnet/ and arc56/), plus
+          # the shared _template/_incidents dirs.
+          CLIENT_PATHS=(clients/*/*/dotnet clients/*/*/arc56 clients/_template clients/_incidents)
           if ! git diff --quiet -- "${CLIENT_PATHS[@]}" || ! git diff --quiet --cached -- "${CLIENT_PATHS[@]}"; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"

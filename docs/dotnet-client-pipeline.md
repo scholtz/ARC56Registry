@@ -260,13 +260,20 @@ touching many repos produces one commit per changed repo as it goes, not one gia
 commit for the whole run at the end - useful for `git bisect`/history and for the same
 "see it progress instead of waiting for everything" reason as incremental publishing.
 
-`--commit` only *commits* locally; **CI still does a single `git push` at the end**
-(see `generate-dotnet-clients.yml`'s "Commit any remaining changes and push" step) to
-push every commit the run made in one go, rather than one push per project - pushing
-is a network round-trip per call and isn't worth doing per-project the way packing and
-publishing are. That step also picks up and commits anything that somehow wasn't
-captured per-project (defensive fallback; shouldn't normally find anything with
-`--commit` passed) before pushing.
+`--commit` also pushes - throttled, not once per commit and not only at the very end.
+`push_commits()` runs after every `commit_project_changes()` call but is a no-op unless
+at least `PUSH_INTERVAL_SECONDS` (60s) have passed since the last push, plus one
+unconditional final flush after the whole loop finishes. This bounds how much
+already-finished work (commits, and the nuget.org publishes that go with them) can be
+stranded on the runner if the job dies before its own final step runs - see "Recovering
+from a failed run" below, which is the actual point of pushing periodically rather than
+only at the end.
+
+CI's own final step ("Commit any remaining changes and push" in
+`generate-dotnet-clients.yml`) still exists on top of this, as a defensive fallback: it
+commits anything that somehow wasn't captured per-project (shouldn't normally find
+anything with `--commit` passed) and then unconditionally runs `git push` once more, to
+flush whatever's left since the script's last periodic push.
 
 `--commit` is opt-in (see "Running it locally" above) precisely so it can configure a
 repo-local git identity (`github-actions[bot]`, via `git config` with no `--global`)
@@ -282,6 +289,38 @@ happens `published_version` is simply left behind `version`. The **next** run - 
 one that finds no new code changes for that project - notices the mismatch and retries
 the pack+push before doing anything else for that project, so a failed publish always
 self-heals on the next scheduled/dispatched run rather than being silently dropped.
+
+### Recovering from a failed run (fast catch-up)
+
+A run touching thousands of URLs, 7+ seconds apart, is exactly the kind of long-running
+process where *something* eventually goes wrong partway through - a docker/dotnet/git
+permissions error, a transient network failure, a runner hiccup. The pipeline is built
+so that when that happens, the **next** run picks up close to where the failed one left
+off instead of redoing everything from scratch:
+
+1. **One unexpected project failure doesn't abort the run.** `process_project` already
+   turns the failure modes seen in practice (download errors, generator crashes,
+   compile errors) into recorded, non-fatal state. `main()`'s per-project loop wraps the
+   whole iteration (`process_project` + incidents rebuild + commit + push) in a
+   try/except as a last line of defense: an exception for one project is logged and
+   that project is skipped, but the loop continues on to every other project rather
+   than dying. The script still exits nonzero if *any* project hit this path (so CI
+   shows red and a human notices), but only after everything else has already been
+   packed, published, committed, and pushed.
+2. **Completed work is pushed as it happens, not stranded on the runner.** Because
+   `--commit` pushes periodically (see above) rather than only at the very end, a run
+   that dies loses at most the last `PUSH_INTERVAL_SECONDS` worth of commits - not
+   hours of prior progress. The workflow's tail steps (`Upload packed NuGet packages`,
+   `Commit any remaining changes and push`) run with `if: always()`, so even a hard
+   script crash still gets whatever's left flushed and pushed.
+3. **The next run only has real work to do for what's actually missing.** Since
+   everything up to the failure point is already committed to `main` and already
+   published (`published_version` matches `version` in `state.json`), the next run's
+   `needs_regen`/`ensure_published` checks see no work needed for those projects -
+   `git status`/content-hash comparisons make that fast, not "download and regenerate
+   everything from the beginning to confirm nothing changed." Only the project that was
+   genuinely mid-flight (or never reached at all) when the run stopped ends up doing
+   real work, which is what makes catch-up fast rather than a full-cost rerun.
 
 ## Known limitations
 
