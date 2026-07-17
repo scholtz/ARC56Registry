@@ -26,10 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.scholtz.BiatecCLAMM.BiatecConfigProvider_0edcff0d;
+using Arc56.Generated.scholtz.BiatecCLAMM.BiatecClammPool_30b1be75;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
-var client = new BiatecConfigProviderProxy(algod, appId: 123456789);
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
+var client = new BiatecClammPoolProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -39,8 +40,10 @@ var client = new BiatecConfigProviderProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
+| `Arc56.Generated.scholtz.BiatecCLAMM.BiatecClammPool_30b1be75` | `BiatecClammPoolProxy` | [https://raw.githubusercontent.com/scholtz/BiatecCLAMM/HEAD/contracts/artifacts/BiatecClammPool.arc56.json](https://raw.githubusercontent.com/scholtz/BiatecCLAMM/HEAD/contracts/artifacts/BiatecClammPool.arc56.json) |
 | `Arc56.Generated.scholtz.BiatecCLAMM.BiatecConfigProvider_0edcff0d` | `BiatecConfigProviderProxy` | [https://raw.githubusercontent.com/scholtz/BiatecCLAMM/HEAD/contracts/artifacts/BiatecConfigProvider.arc56.json](https://raw.githubusercontent.com/scholtz/BiatecCLAMM/HEAD/contracts/artifacts/BiatecConfigProvider.arc56.json) |
 | `Arc56.Generated.scholtz.BiatecCLAMM.BiatecIdentityProvider_828b8c65` | `BiatecIdentityProviderProxy` | [https://raw.githubusercontent.com/scholtz/BiatecCLAMM/HEAD/contracts/artifacts/BiatecIdentityProvider.arc56.json](https://raw.githubusercontent.com/scholtz/BiatecCLAMM/HEAD/contracts/artifacts/BiatecIdentityProvider.arc56.json) |
+| `Arc56.Generated.scholtz.BiatecCLAMM.BiatecPoolProvider_1b5bd436` | `BiatecPoolProviderProxy` | [https://raw.githubusercontent.com/scholtz/BiatecCLAMM/HEAD/contracts/artifacts/BiatecPoolProvider.arc56.json](https://raw.githubusercontent.com/scholtz/BiatecCLAMM/HEAD/contracts/artifacts/BiatecPoolProvider.arc56.json) |
 | `Arc56.Generated.scholtz.BiatecCLAMM.FakePool_4ff47865` | `FakePoolProxy` | [https://raw.githubusercontent.com/scholtz/BiatecCLAMM/HEAD/contracts/artifacts/FakePool.arc56.json](https://raw.githubusercontent.com/scholtz/BiatecCLAMM/HEAD/contracts/artifacts/FakePool.arc56.json) |
 
 ## Versioning
