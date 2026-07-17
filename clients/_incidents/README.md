@@ -4,7 +4,6 @@ Rebuilt automatically by `scripts/generate_dotnet_clients.py` on every run. Each
 
 | Repo | Contract | Failure | Report |
 | --- | --- | --- | --- |
-| [0M3REXE/whisperbid](https://github.com/0M3REXE/whisperbid) | `WhisperBid_ad7b42ec` | Generated code fails to compile | [0M3REXE/whisperbid/WhisperBid_ad7b42ec.md](0M3REXE/whisperbid/WhisperBid_ad7b42ec.md) |
 | [0xYuvi/TrustAnchor](https://github.com/0xYuvi/TrustAnchor) | `IdentityRegistry_8b7065c3` | Generated code fails to compile | [0xYuvi/TrustAnchor/IdentityRegistry_8b7065c3.md](0xYuvi/TrustAnchor/IdentityRegistry_8b7065c3.md) |
 | [0xYuvi/TrustAnchor](https://github.com/0xYuvi/TrustAnchor) | `TrustAnchor_3ac8ef3e` | Generated code fails to compile | [0xYuvi/TrustAnchor/TrustAnchor_3ac8ef3e.md](0xYuvi/TrustAnchor/TrustAnchor_3ac8ef3e.md) |
 | [0xYuvi/TrustAnchor](https://github.com/0xYuvi/TrustAnchor) | `TruthRegistry_36fbeecc` | Generated code fails to compile | [0xYuvi/TrustAnchor/TruthRegistry_36fbeecc.md](0xYuvi/TrustAnchor/TruthRegistry_36fbeecc.md) |
