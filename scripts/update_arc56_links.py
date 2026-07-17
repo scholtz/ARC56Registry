@@ -21,6 +21,16 @@ later search run doesn't happen to find that URL again) - it only ever adds
 newly discovered URLs, with ActiveFrom set to today and ActiveUntil left
 empty. The file is written with the `csv` module using RFC 4180 quoting so it
 renders correctly as a table on GitHub.
+
+Code search alone is known to under-report: GitHub's search index can lag or
+skip files for reasons that have nothing to do with sharding (indexing lag,
+forked/archived repos, etc.), and this has been observed in practice - a repo
+whose owner confirmed several `*.arc56.json` files existed only had about half
+of them turn up via search. To compensate, every repo that code search proves
+is "ARC-56 positive" (at least one real match in it) gets a second pass: the
+actual git tree of its default branch is listed via the Trees API and scanned
+for `*.arc56.json` paths directly, which is exhaustive and doesn't depend on
+the search index at all. See verify_repo_full_tree().
 """
 from __future__ import annotations
 
@@ -46,6 +56,10 @@ MAX_RESULTS_PER_QUERY = 1000
 MAX_FILE_SIZE_BYTES = 384 * 1024
 MAX_SHARD_DEPTH = 25  # safety net against pathological size distributions
 REQUEST_DELAY_SECONDS = 7  # code search is limited to 10 requests/minute, so stay safely under that.
+# The Trees/Repos REST endpoints used for the full-tree verification pass aren't subject
+# to code search's stricter 10/min cap (authenticated REST is ~5000/hour), but we still
+# pace requests conservatively to be a good citizen.
+REPO_VERIFY_DELAY_SECONDS = 1
 OUTPUT_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "arc56.links.csv")
 URL_COLUMN = "ARC56URL"
 ACTIVE_FROM_COLUMN = "ActiveFrom"
@@ -110,20 +124,26 @@ def size_qualifier(lo: int, hi: int) -> str:
     return f"size:{lo}..{hi}"
 
 
-def add_matching_items(items: list[dict], urls: set[str]) -> None:
+def path_to_url(repo_full_name: str, path: str) -> str:
+    # GitHub paths can contain spaces and other reserved characters (seen in
+    # practice: "PICT 2.0/farmer-pay-contract/..."). Percent-encode each path
+    # segment (but not the "/" separators) so the URL is actually valid and
+    # fetchable - an unencoded space here isn't just wrong, it makes Python's
+    # http.client outright refuse the request with InvalidURL.
+    encoded_path = urllib.parse.quote(path, safe="/")
+    return f"https://raw.githubusercontent.com/{repo_full_name}/HEAD/{encoded_path}"
+
+
+def add_matching_items(items: list[dict], urls: set[str], repos: set[str]) -> None:
     for item in items:
         path = item["path"]
         if path.endswith(FILENAME_SUFFIX):
-            # GitHub paths can contain spaces and other reserved characters (seen in
-            # practice: "PICT 2.0/farmer-pay-contract/..."). Percent-encode each path
-            # segment (but not the "/" separators) so the URL is actually valid and
-            # fetchable - an unencoded space here isn't just wrong, it makes Python's
-            # http.client outright refuse the request with InvalidURL.
-            encoded_path = urllib.parse.quote(path, safe="/")
-            urls.add(f"https://raw.githubusercontent.com/{item['repository']['full_name']}/HEAD/{encoded_path}")
+            repo_full_name = item["repository"]["full_name"]
+            repos.add(repo_full_name)
+            urls.add(path_to_url(repo_full_name, path))
 
 
-def partition_and_collect(lo: int, hi: int, token: str, urls: set[str], depth: int = 0) -> None:
+def partition_and_collect(lo: int, hi: int, token: str, urls: set[str], repos: set[str], depth: int = 0) -> None:
     # Deciding whether to split based on the API's reported total_count doesn't work:
     # GitHub explicitly documents total_count as only an approximation once a query
     # has more than 1,000 matches, and in practice it fluctuates wildly (e.g. a narrow
@@ -147,19 +167,107 @@ def partition_and_collect(lo: int, hi: int, token: str, urls: set[str], depth: i
     if hit_pagination_cap:
         if lo < hi and depth < MAX_SHARD_DEPTH:
             mid = (lo + hi) // 2
-            partition_and_collect(lo, mid, token, urls, depth + 1)
-            partition_and_collect(mid + 1, hi, token, urls, depth + 1)
+            partition_and_collect(lo, mid, token, urls, repos, depth + 1)
+            partition_and_collect(mid + 1, hi, token, urls, repos, depth + 1)
             return
         print(f"WARNING: size range {lo}..{hi} still hits the {MAX_RESULTS_PER_QUERY}-result "
               f"pagination cap at max shard depth or cannot be split further; some results in "
               f"this range may be missing", file=sys.stderr)
 
-    add_matching_items(items_collected, urls)
+    add_matching_items(items_collected, urls, repos)
+
+
+def fetch_api_json(url: str, token: str, retries: int = 3) -> dict | None:
+    """GET a plain (non-search) GitHub REST API URL, returning None on failure.
+
+    Used for the full-tree verification pass, which must never abort the whole
+    run just because one repo is inaccessible (renamed, deleted, empty, etc.) -
+    the code-search results already collected are still worth writing out.
+    """
+    for attempt in range(1, retries + 1):
+        req = urllib.request.Request(url)
+        req.add_header("Accept", "application/vnd.github+json")
+        req.add_header("X-GitHub-Api-Version", "2022-11-28")
+        req.add_header("User-Agent", "arc56-links-updater")
+        if token:
+            req.add_header("Authorization", f"Bearer {token}")
+        try:
+            with urllib.request.urlopen(req) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            if exc.code in (403, 429) and attempt < retries:
+                retry_after = exc.headers.get("Retry-After")
+                wait = int(retry_after) if retry_after else 10 * attempt
+                print(f"Rate limited (HTTP {exc.code}) fetching {url}, retrying in {wait}s "
+                      f"(attempt {attempt}/{retries})", file=sys.stderr)
+                time.sleep(wait)
+                continue
+            body = exc.read().decode("utf-8", errors="replace")
+            print(f"GitHub API error {exc.code} for {url}: {body}", file=sys.stderr)
+            return None
+        except urllib.error.URLError as exc:
+            print(f"Network error fetching {url}: {exc}", file=sys.stderr)
+            return None
+    return None
+
+
+def verify_repo_full_tree(repo_full_name: str, token: str, urls: set[str]) -> None:
+    """Cross-check a known ARC-56-positive repo against its full git tree.
+
+    Code search missing real files in a repo it already matched has been
+    observed in practice, so for any repo we know contains at least one
+    *.arc56.json (found above via search), list every file in the default
+    branch directly via the Trees API and add any *.arc56.json paths that
+    the search pass didn't find. This is exhaustive per-repo and doesn't
+    depend on GitHub's search index at all.
+    """
+    time.sleep(REPO_VERIFY_DELAY_SECONDS)
+    repo_info = fetch_api_json(f"https://api.github.com/repos/{repo_full_name}", token)
+    if not repo_info:
+        print(f"WARNING: could not fetch repo info for {repo_full_name}; skipping full-tree "
+              f"verification for this repo", file=sys.stderr)
+        return
+    default_branch = repo_info.get("default_branch")
+    if not default_branch:
+        return
+
+    time.sleep(REPO_VERIFY_DELAY_SECONDS)
+    tree_url = (f"https://api.github.com/repos/{repo_full_name}/git/trees/"
+                f"{urllib.parse.quote(default_branch, safe='')}?recursive=1")
+    tree = fetch_api_json(tree_url, token)
+    if not tree:
+        print(f"WARNING: could not fetch file tree for {repo_full_name}; skipping full-tree "
+              f"verification for this repo", file=sys.stderr)
+        return
+    if tree.get("truncated"):
+        print(f"WARNING: file tree for {repo_full_name} was truncated by GitHub (repo too "
+              f"large for a single Trees API response); full-tree verification may be "
+              f"incomplete for this repo", file=sys.stderr)
+
+    before = len(urls)
+    for entry in tree.get("tree", []):
+        if entry.get("type") != "blob":
+            continue
+        path = entry.get("path", "")
+        if path.endswith(FILENAME_SUFFIX):
+            urls.add(path_to_url(repo_full_name, path))
+    added = len(urls) - before
+    if added:
+        print(f"Full-tree verification for {repo_full_name} found {added} additional "
+              f"ARC-56 file(s) that code search missed", file=sys.stderr)
 
 
 def collect_urls(token: str) -> set[str]:
     urls: set[str] = set()
-    partition_and_collect(0, MAX_FILE_SIZE_BYTES, token, urls)
+    repos: set[str] = set()
+    partition_and_collect(0, MAX_FILE_SIZE_BYTES, token, urls, repos)
+
+    print(f"Code search found {len(urls)} ARC-56 file(s) across {len(repos)} repo(s); "
+          f"double-checking each repo's full file tree for anything code search missed",
+          file=sys.stderr)
+    for repo_full_name in sorted(repos):
+        verify_repo_full_tree(repo_full_name, token, urls)
+
     return urls
 
 
