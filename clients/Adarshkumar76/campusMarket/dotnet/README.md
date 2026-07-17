@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.Adarshkumar76.campusMarket.CampusMarketplace_36dfe96f;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new CampusMarketplaceProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
