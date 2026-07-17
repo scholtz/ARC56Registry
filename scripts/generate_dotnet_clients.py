@@ -46,6 +46,8 @@ INCIDENTS_DIR = os.path.join(CLIENTS_DIR, "_incidents")
 REGISTRY_REPO_URL = "https://github.com/scholtz/Arc56Registry"
 GENERATOR_IMAGE = "scholtz2/dotnet-avm-generated-client:latest"
 DOWNLOAD_DELAY_SECONDS = 7
+NUPKG_OUTPUT_DIR = os.path.join(REPO_ROOT, "artifacts", "nupkgs")
+NUGET_SOURCE = "https://api.nuget.org/v3/index.json"
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -403,11 +405,86 @@ def build_and_quarantine(
                         f"{MAX_BUILD_QUARANTINE_ATTEMPTS} quarantine attempts")
 
 
+def pack_project(project_dir: str, package_id: str, version: str) -> str:
+    """Packs a single project's .csproj right away (not batched with every other
+    project) and returns the resulting .nupkg path, so a package can be pushed to
+    nuget.org as soon as its own version is ready instead of waiting for the whole
+    run to finish."""
+    csproj_path = os.path.join(project_dir, f"{package_id}.csproj")
+    os.makedirs(NUPKG_OUTPUT_DIR, exist_ok=True)
+    print(f"Packing {package_id} {version}", file=sys.stderr)
+    result = subprocess.run(
+        ["dotnet", "pack", csproj_path, "--configuration", "Release", "--output", NUPKG_OUTPUT_DIR],
+        capture_output=True, text=True,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"dotnet pack failed for {csproj_path}\n--- stdout ---\n{result.stdout}\n--- stderr ---\n{result.stderr}"
+        )
+    return os.path.join(NUPKG_OUTPUT_DIR, f"{package_id}.{version}.nupkg")
+
+
+def push_to_nuget(nupkg_path: str) -> bool:
+    """Pushes one already-packed .nupkg to nuget.org using the short-lived API key the
+    workflow obtained via Trusted Publishing (NUGET_API_KEY env var - see
+    docs/dotnet-client-pipeline.md). Returns False (never raises) on any failure, since
+    a push failure for one project must not abort generation of the rest, and
+    ensure_published() below leaves the version unmarked so it's retried on the next
+    run rather than silently lost."""
+    api_key = os.environ.get("NUGET_API_KEY")
+    if not api_key:
+        print(f"NUGET_API_KEY not set - skipping nuget push for {os.path.basename(nupkg_path)}", file=sys.stderr)
+        return False
+    result = subprocess.run(
+        ["dotnet", "nuget", "push", nupkg_path, "--api-key", api_key,
+         "--source", NUGET_SOURCE, "--skip-duplicate"],
+        capture_output=True, text=True,
+    )
+    if result.returncode != 0:
+        print(
+            f"WARNING: nuget push failed for {nupkg_path} (will retry next run):\n"
+            f"{result.stdout}\n{result.stderr}",
+            file=sys.stderr,
+        )
+        return False
+    return True
+
+
+def ensure_published(
+    project_dir: str, package_id: str, state: dict, state_path: str, publish: bool
+) -> bool:
+    """Packs and (if --publish) pushes package_id's current state["version"] the
+    moment it's known to need it - whether that's because this run just bumped it, or
+    because an earlier run bumped it but never got it published (e.g. a nuget push
+    failed, or that earlier run wasn't a --publish run at all). Idempotent: a no-op
+    once state["published_version"] already matches state["version"]."""
+    version = state.get("version")
+    if not version or state.get("published_version") == version:
+        return False
+    csproj_path = os.path.join(project_dir, f"{package_id}.csproj")
+    if not os.path.exists(csproj_path):
+        return False
+    try:
+        nupkg_path = pack_project(project_dir, package_id, version)
+    except Exception as exc:  # noqa: BLE001 - a pack failure must never abort the whole run
+        print(f"WARNING: pack failed for {package_id} {version}: {exc}", file=sys.stderr)
+        return False
+    if not publish:
+        return False
+    if push_to_nuget(nupkg_path):
+        state["published_version"] = version
+        save_project_state(state_path, state)
+        print(f"Published {package_id} {version} to nuget.org", file=sys.stderr)
+        return True
+    return False
+
+
 def process_project(
     owner: str,
     repo: str,
     rows: list[dict[str, str]],
     generator_digest: str,
+    publish: bool,
 ) -> bool:
     owner_slug = sanitize_path_segment(owner)
     repo_slug = sanitize_path_segment(repo)
@@ -571,6 +648,10 @@ def process_project(
             code_changed = True
 
     if not (state_dirty or code_changed):
+        # Nothing changed this run, but an earlier run may have bumped the version
+        # without successfully publishing it (failed push, or a non-publish run) -
+        # retry that now rather than waiting for the next code change.
+        ensure_published(project_dir, package_id, state, state_path, publish)
         return False
 
     if not code_changed:
@@ -580,6 +661,7 @@ def process_project(
         save_project_state(state_path, state)
         print(f"Project {package_id}: recorded failure state only, no generated-code "
               f"changes - version not bumped", file=sys.stderr)
+        ensure_published(project_dir, package_id, state, state_path, publish)
         return False
 
     increment = state.get("increment", 0) + 1
@@ -600,6 +682,10 @@ def process_project(
 
     print(f"Project {package_id} -> version {version} ({len(contracts_state)} contract(s), "
           f"{len(excluded_contract_ids)} quarantined)", file=sys.stderr)
+    # Pack (and, with --publish, push to nuget.org) this project's package right away -
+    # not after every other project has also finished generating - so packages show up
+    # on nuget.org incrementally as the run progresses instead of all at once at the end.
+    ensure_published(project_dir, package_id, state, state_path, publish)
     return True
 
 
@@ -670,6 +756,9 @@ def main() -> int:
                          help="Only process the first N owner/repo projects (for local testing).")
     parser.add_argument("--only-repo", action="append", default=[],
                          help="Only process owner/repo (can be passed multiple times).")
+    parser.add_argument("--publish", action="store_true",
+                         help="Push each changed project's package to nuget.org (via NUGET_API_KEY) "
+                              "as soon as that project is packed, instead of only packing.")
     args = parser.parse_args()
 
     if not os.path.isdir(CLIENTS_DIR):
@@ -702,7 +791,7 @@ def main() -> int:
 
     changed_projects = 0
     for (owner, repo), project_rows in selected:
-        if process_project(owner, repo, project_rows, generator_digest):
+        if process_project(owner, repo, project_rows, generator_digest, args.publish):
             changed_projects += 1
 
     rebuild_incidents_index()

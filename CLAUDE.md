@@ -90,6 +90,9 @@ pins those separately from the package `<Version>`. Don't "simplify" that away.
   `Algorand4` (the runtime dependency of every generated client) already uses.
 - No LICENSE file exists yet, so generated `.csproj`s intentionally omit
   `PackageLicenseExpression`. Don't add one without the user deciding on a license first.
-- `dotnet nuget push` to nuget.org is NOT wired up (commented out in the workflow) -
-  needs a `NUGET_API_KEY` secret the user hasn't provisioned yet. Don't uncomment it
-  without confirming that secret exists.
+- `dotnet nuget push` to nuget.org is wired up via **Trusted Publishing** (OIDC,
+  `NuGet/login@v1`), not a long-lived API key - see
+  [docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md#publishing-to-nugetorg).
+  Needs a one-time Trusted Publishing policy on nuget.org plus a `NUGET_USER` repo
+  secret (the nuget.org *username*, not a key). Don't add a `NUGET_API_KEY` secret or
+  revert to key-based publishing without the user deciding to.

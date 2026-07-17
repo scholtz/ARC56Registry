@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write # required for NuGet.org Trusted Publishing (OIDC token exchange)
 
 concurrency:
   group: generate-dotnet-clients
@@ -41,8 +42,25 @@ jobs:
         with:
           dotnet-version: "8.0.x"
 
-      - name: Generate/update .NET clients
+      # Trusted Publishing (OIDC -> short-lived nuget.org API key), obtained once up
+      # front and handed to the generator script below, which pushes each project's
+      # package the moment that project is packed rather than batching every push
+      # until the whole (potentially hours-long) run finishes - see
+      # docs/dotnet-client-pipeline.md. Skipped if NUGET_USER isn't configured yet
+      # (e.g. before the one-time nuget.org policy setup), in which case the script
+      # still generates/packs everything but leaves --publish's pushes to retry on a
+      # later run once the secret exists.
+      - name: NuGet login (OIDC -> short-lived API key)
+        if: ${{ secrets.NUGET_USER != '' }}
+        uses: NuGet/login@v1
+        id: nuget_login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
+      - name: Generate/update .NET clients (packs + publishes each project as it's ready)
         id: generate
+        env:
+          NUGET_API_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
         run: |
           ARGS=()
           if [ -n "${{ inputs.only_repo }}" ]; then
@@ -51,15 +69,7 @@ jobs:
               ARGS+=(--only-repo "$r")
             done
           fi
-          python scripts/generate_dotnet_clients.py "${ARGS[@]}"
-
-      - name: Pack changed projects
-        run: |
-          set -e
-          for csproj in $(git status --porcelain -- 'clients/*/*/dotnet' | awk '{print $2}' | grep -E '\.csproj$' || true); do
-            echo "Packing $csproj"
-            dotnet pack "$csproj" --configuration Release --output artifacts/nupkgs
-          done
+          python scripts/generate_dotnet_clients.py --publish "${ARGS[@]}"
 
       - name: Upload packed NuGet packages
         uses: actions/upload-artifact@v4
@@ -80,8 +90,3 @@ jobs:
           git add "${CLIENT_PATHS[@]}"
           git commit -m "chore: regenerate .NET ARC-56 clients"
           git push
-
-      # Publishing to nuget.org is intentionally left as a manual/separate step until
-      # a NUGET_API_KEY secret is configured - see docs/dotnet-client-pipeline.md.
-      # - name: Push to NuGet.org
-      #   run: dotnet nuget push "artifacts/nupkgs/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate

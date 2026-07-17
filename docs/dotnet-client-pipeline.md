@@ -152,7 +152,9 @@ per-project rather than in one shared file, `--only-repo`/`--limit-projects` run
 affect anything outside the projects they touch - a later full run will still correctly
 detect and act on a pending generator image change for every other project.
 
-To pack a project after generation:
+The script packs a project itself (see "Publishing to NuGet.org" below) as soon as
+that project's version is bumped - you don't need to run `dotnet pack` separately
+unless you want to. To do it manually anyway:
 
 ```bash
 dotnet pack clients/<owner>/<repo>/dotnet/<PackageId>.csproj --configuration Release --output artifacts/nupkgs
@@ -160,11 +162,82 @@ dotnet pack clients/<owner>/<repo>/dotnet/<PackageId>.csproj --configuration Rel
 
 ## Publishing to NuGet.org
 
-The workflow builds and uploads `.nupkg` files as a workflow artifact but does **not**
-push to nuget.org yet - that requires a `NUGET_API_KEY` secret (an API key from
-nuget.org scoped to the `Arc56.Generated.*` package prefix) and uncommenting the push
-step in `generate-dotnet-clients.yml`. This is left as a deliberate manual step until
-that key is provisioned.
+Publishing is **per-project and immediate, not batched**: the script processes
+`owner/repo` projects one at a time (see `process_project`/`main` in
+`scripts/generate_dotnet_clients.py`), and the moment a project's version is bumped it
+is packed and (with `--publish`) pushed to nuget.org right there, before the script
+moves on to the next project. A full run touching many repos therefore shows packages
+landing on nuget.org steadily as the run progresses, not all at once in a final step
+after every repo has been generated - useful given a full run can take hours (see
+"Known limitations").
+
+Pushing uses **Trusted Publishing** - short-lived, OIDC-issued API keys, not a
+long-lived secret stored in the repo. This is the same mechanism as PyPI's Trusted
+Publishing: GitHub Actions issues a signed OIDC token for the job, nuget.org validates
+it against a policy you configure once, and hands back an API key that's valid for
+about an hour.
+
+### One-time setup
+
+1. **Create a Trusted Publishing policy on nuget.org.**
+   - Log into [nuget.org](https://www.nuget.org) with an account that owns (or is a
+     member of the org that owns) the `Arc56.Generated.*` packages.
+   - Click your username -> **Trusted Publishing** -> add a new policy.
+   - Fill in, for this repo (`https://github.com/scholtz/ARC56Registry`, workflow at
+     `.github/workflows/generate-dotnet-clients.yml`):
+     - **Repository Owner**: `scholtz`
+     - **Repository**: `ARC56Registry`
+     - **Workflow File**: `generate-dotnet-clients.yml` (file name only - do **not**
+       include the `.github/workflows/` path)
+     - **Environment**: leave empty (this workflow doesn't use a GitHub Actions
+       `environment:`)
+   - Choose the policy **owner** (your user, or the org, whichever owns the packages) -
+     this determines which packages the policy is allowed to publish to.
+   - If the repo is private, the policy starts in a 7-day "pending activation" window
+     and needs one successful publish within that window to become permanent (see
+     Microsoft's [Trusted Publishing docs](https://learn.microsoft.com/en-us/nuget/nuget-org/trusted-publishing)
+     for why - it's to bind the policy to the repo's durable GitHub ID, preventing
+     resurrection attacks after a repo delete/recreate).
+
+2. **Add the `NUGET_USER` repo secret.** Trusted Publishing still needs to know *which*
+   nuget.org account to request a temporary key for - that's the `user` input to the
+   `NuGet/login` action in the workflow, sourced from `${{ secrets.NUGET_USER }}`. In
+   this repo's **Settings > Secrets and variables > Actions**, add:
+   - Name: `NUGET_USER`
+   - Value: your nuget.org **username** (profile name) - not your email address, and
+     not an API key. There is nothing secret about this value on its own; it's stored
+     as a secret only so it isn't hardcoded in the workflow file.
+
+   No `NUGET_API_KEY` (or any other long-lived credential) is needed or stored in this
+   repo - that's the point of Trusted Publishing. The workflow's `id-token: write`
+   permission (already set at the workflow level) is what lets the job request the
+   short-lived OIDC token in the first place; without it the `NuGet/login` step fails
+   silently to obtain a usable token.
+
+### What the workflow does
+
+1. Once, at job start: if the `NUGET_USER` secret is set, `NuGet/login@v1` exchanges the
+   job's GitHub OIDC token for a short-lived nuget.org API key
+   (`steps.nuget_login.outputs.NUGET_API_KEY`), passed to the script as the
+   `NUGET_API_KEY` env var. If `NUGET_USER` isn't set yet, this step (and therefore
+   every push below) is skipped - the script still runs and packs normally.
+2. `python scripts/generate_dotnet_clients.py --publish ...` does the actual
+   per-project pack+push, described above - see `pack_project`, `push_to_nuget`, and
+   `ensure_published` in the script for the exact mechanics.
+
+Within the script, `dotnet nuget push ... --skip-duplicate` is used for every push,
+making it safe to retry: pushing a version that's already on nuget.org is a no-op
+instead of a failure.
+
+### Retrying a failed publish
+
+Each project's `state.json` records a `published_version` field alongside the existing
+`version`. A push can fail without aborting the run (network blip, or - see "Known
+limitations" below - the OIDC API key expiring mid-run on a very long run); when that
+happens `published_version` is simply left behind `version`. The **next** run - even
+one that finds no new code changes for that project - notices the mismatch and retries
+the pack+push before doing anything else for that project, so a failed publish always
+self-heals on the next scheduled/dispatched run rather than being silently dropped.
 
 ## Known limitations
 
@@ -173,6 +246,12 @@ that key is provisioned.
   projects) `dotnet pack` time. This can take hours. The workflow's `timeout-minutes` is
   set high (350) to accommodate this; subsequent runs are much faster since only changed
   content triggers regeneration.
+- **OIDC API key expiry on very long runs**: the Trusted Publishing API key obtained at
+  job start is valid for about an hour. On a run so large that generation is still
+  going after that (realistically only an initial full run across thousands of URLs,
+  not a routine incremental one), later pushes in that same run will fail once the key
+  expires. This is not silently lost - see "Retrying a failed publish" above - but it
+  does mean publishing for those later projects lags by one more scheduled run.
 - **`HEAD`-pinned sources**: like the links CSV itself, ARC-56 URLs point at `HEAD`, so a
   source repo rewriting its default branch could change what the next run downloads.
 - **No license metadata**: generated packages don't set `PackageLicenseExpression` since
