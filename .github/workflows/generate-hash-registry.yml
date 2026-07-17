@@ -29,17 +29,17 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Regenerate approval-programs/ and clear-programs/
+      - name: Regenerate approval-programs/, clear-programs/, and abi-signatures/
         run: python scripts/generate_hash_registry.py
 
       - name: Commit and push if changed
         run: |
-          if git diff --quiet -- approval-programs clear-programs && [ -z "$(git status --porcelain -- approval-programs clear-programs)" ]; then
-            echo "No changes to approval-programs/ or clear-programs/"
+          if git diff --quiet -- approval-programs clear-programs abi-signatures && [ -z "$(git status --porcelain -- approval-programs clear-programs abi-signatures)" ]; then
+            echo "No changes to approval-programs/, clear-programs/, or abi-signatures/"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add approval-programs clear-programs
+          git add approval-programs clear-programs abi-signatures
           git commit -m "chore: update program hash registry"
           git push

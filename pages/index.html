@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ARC-56 program hash registry</title>
+<title>ARC-56 program hash + ABI signature registry</title>
 <style>
   :root {
     color-scheme: light dark;
@@ -61,11 +61,12 @@
 </head>
 <body>
 <main>
-  <h1>ARC-56 program hash registry</h1>
+  <h1>ARC-56 program hash + ABI signature registry</h1>
   <p class="tagline">
     Look up a deployed Algorand app's compiled TEAL by SHA-256 hash and get back a
     real <a href="https://github.com/algorandfoundation/ARCs/blob/main/ARCs/arc-0056.md">ARC-56</a>
-    spec you can use to decode its calls.
+    spec you can use to decode its calls - or look up a raw 4-byte ARC-4 method
+    selector and get back the human-readable method signature it came from.
   </p>
 
   <h2>Why this exists</h2>
@@ -84,16 +85,19 @@
 
   <h2>Folder layout</h2>
   <table>
-    <tr><th>Program</th><th>Path</th></tr>
-    <tr><td>Approval</td><td><code>approval-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.txt</code></td></tr>
-    <tr><td>Clear-state</td><td><code>clear-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.txt</code></td></tr>
+    <tr><th>Registry</th><th>Path</th></tr>
+    <tr><td>Approval program hash</td><td><code>approval-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.txt</code></td></tr>
+    <tr><td>Clear-state program hash</td><td><code>clear-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.txt</code></td></tr>
+    <tr><td>ABI method selector</td><td><code>abi-signatures/&lt;selector[:2]&gt;/&lt;selector&gt;.txt</code></td></tr>
   </table>
   <p>
-    Splitting on the hash's first 3 hex characters keeps any one folder from holding
-    thousands of files. Each <code>.txt</code> file contains exactly one line: a
-    <code>raw.githubusercontent.com</code> URL pinned to the commit that last touched
-    the matching ARC-56 spec, so it keeps resolving to the exact spec that produced
-    this hash even after the source file is edited or replaced later.
+    Splitting on the hash's first few hex characters keeps any one folder from holding
+    thousands of files. Each program-hash <code>.txt</code> file contains exactly one
+    line: a <code>raw.githubusercontent.com</code> URL pinned to the commit that last
+    touched the matching ARC-56 spec, so it keeps resolving to the exact spec that
+    produced this hash even after the source file is edited or replaced later. Each
+    <code>abi-signatures/</code> file instead contains the plain-text ABI method
+    signature itself, e.g. <code>add(uint64,uint64)uint128</code>.
   </p>
 
   <h2>How to look up a hash</h2>
@@ -117,7 +121,7 @@
     </li>
   </ol>
 
-  <h2>Example</h2>
+  <h2>Example: program hash to spec</h2>
   <pre><code>import base64, hashlib, urllib.request, json
 
 app_id = 123456789
@@ -134,16 +138,46 @@ except urllib.error.HTTPError:
     print("No ARC-56 spec indexed for this program yet")
 </code></pre>
 
+  <h2>How to look up a method selector</h2>
+  <p>
+    Every ARC-4/ARC-56 application call's first argument is a 4-byte method
+    <em>selector</em>: the first 4 bytes of <code>SHA-512/256</code> (not SHA-256) over
+    the method's ABI signature string, <code>name(argtype,argtype,...)returntype</code>.
+    If you've extracted that selector from a transaction but don't have the app's ARC-56
+    spec, this registry can still resolve it to a human-readable signature:
+  </p>
+  <ol>
+    <li>Hex-encode the 4 selector bytes, lowercase, e.g. <code>8aa3b61f</code>.</li>
+    <li>
+      Fetch <code>/abi-signatures/&lt;selector[:2]&gt;/&lt;selector&gt;.txt</code> -
+      relative to wherever this page is hosted. A 404 just means this registry hasn't
+      indexed a method with that selector yet, not an error.
+    </li>
+    <li>If found, its content is the plain-text ABI signature, e.g. <code>add(uint64,uint64)uint128</code>.</li>
+  </ol>
+
+  <h2>Example: method selector to signature</h2>
+  <pre><code>import urllib.request
+
+selector = "8aa3b61f"  # first 4 bytes of an app call's method-call arg, hex-encoded
+lookup_url = f"https://scholtz.github.io/ARC56Registry/abi-signatures/{selector[:2]}/{selector}.txt"
+try:
+    signature = urllib.request.urlopen(lookup_url).read().decode().strip()
+    print("Selector resolves to", signature)  # add(uint64,uint64)uint128
+except urllib.error.HTTPError:
+    print("No ABI method indexed for this selector yet")
+</code></pre>
+
   <h2>Freshness</h2>
   <p>
-    The hash tables are regenerated daily by
+    All three tables are regenerated daily by
     <a href="https://github.com/scholtz/ARC56Registry/blob/main/.github/workflows/generate-hash-registry.yml">generate-hash-registry.yml</a>
     and this site is redeployed right after by
     <a href="https://github.com/scholtz/ARC56Registry/blob/main/.github/workflows/deploy-hash-registry-pages.yml">deploy-hash-registry-pages.yml</a>.
     If two indexed specs compile to the same program bytes, the hash points at whichever
     spec file is larger (generally the more complete one) - see
     <a href="https://github.com/scholtz/ARC56Registry/blob/main/docs/hash-registry.md">docs/hash-registry.md</a>
-    for the exact tie-breaking rule.
+    for the exact tie-breaking rule and the ABI signature registry's own rules.
   </p>
 
   <footer>

@@ -1,7 +1,8 @@
 # Program hash registry
 
 This pipeline turns every `*.arc56.json` file in the repo into lookup entries keyed by
-the SHA-256 hash of its compiled **approval** and **clear-state** programs, via
+the SHA-256 hash of its compiled **approval** and **clear-state** programs, and every
+ARC-56 **method** into a lookup entry keyed by its ARC-4 method selector, via
 [`generate-hash-registry.yml`](../.github/workflows/generate-hash-registry.yml) and
 [`scripts/generate_hash_registry.py`](../scripts/generate_hash_registry.py). A second
 workflow, [`deploy-hash-registry-pages.yml`](../.github/workflows/deploy-hash-registry-pages.yml),
@@ -21,6 +22,7 @@ box/global/local state layout, instead of showing the user an opaque raw transac
 ```
 approval-programs/<hash[:3]>/<hash>.txt   # keyed by sha256(byteCode.approval)
 clear-programs/<hash[:3]>/<hash>.txt      # keyed by sha256(byteCode.clear)
+abi-signatures/<selector[:2]>/<selector>.txt  # keyed by the method's ARC-4 selector
 ```
 
 Each `.txt` file contains one line: the `raw.githubusercontent.com` URL of the ARC-56
@@ -95,6 +97,46 @@ convention (see the main [CLAUDE.md](../CLAUDE.md)) - though unlike `arc56.links
 and `clients/**`, an existing hash file's *content* can legitimately change (to a
 longer spec for the same hash), since it's a derived pointer, not a historical
 record.
+
+## ABI method-signature registry
+
+Separately from the two program-hash tables above (same script, same workflow, no
+relation to `byteCode` at all), the script also walks every `methods[]` entry of every
+indexed ARC-56 spec and writes:
+
+```
+abi-signatures/<selector[:2]>/<selector>.txt
+```
+
+`<selector>` is the lowercase 8-hex-char ARC-4 method selector - the first 4 bytes of
+`SHA-512/256` (**not** SHA-256) over the ABI method signature string
+`name(argtype,argtype,...)returntype` - the same selector Algorand uses on-chain to
+route an application call to the right method. The file's content is that exact
+signature string. For example, `add(uint64,uint64)uint128` hashes to selector
+`8aa3b61f`, so the registry contains `abi-signatures/8a/8aa3b61f.txt` with the single
+line `add(uint64,uint64)uint128`.
+
+Struct-typed args and return values use the plain ABI tuple type already present in
+each arg/return's `type` field - never the human-readable `struct` name ARC-56 also
+carries alongside it (e.g. `{"type": "(string,uint64)", "struct": "EscrowConfig"}`) -
+because the on-chain selector is computed over the ABI type, not the struct name. A
+method with no return value uses the literal `void`, per the ARC-4 selector
+convention.
+
+Unlike the program-hash tables, there's no "pick the bigger one" tie-break here: for a
+given selector, the signature string is fully determined by the hash (barring an
+astronomically unlikely SHA-512/256 collision), so the first signature seen for a
+selector is written and any later duplicate is simply skipped without comparison. If a
+genuine collision is ever found (two different signatures hashing to the same 4-byte
+selector), the script logs a warning and keeps the first one - see
+`build_abi_signature_registry` in
+[`scripts/generate_hash_registry.py`](../scripts/generate_hash_registry.py).
+
+This lets a wallet that already knows an app's ABI method selector (e.g. from decoding
+the first 4 bytes of an application-call transaction's args, without needing the whole
+ARC-56 spec resolved first) recover the human-readable method signature directly -
+useful for showing a preview of what a transaction calls before the full spec lookup
+(via `approval-programs/`/`clear-programs/`) resolves.
 
 ## Running locally
 

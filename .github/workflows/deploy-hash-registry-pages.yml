@@ -1,10 +1,11 @@
 name: Deploy hash registry to GitHub Pages
 
-# Publishes approval-programs/, clear-programs/, and pages/index.html (the developer
-# README explaining how to hash a program and look it up) as a static site, so a hash
-# lookup doesn't need a commit SHA - only generate-hash-registry.yml's *targets* (the
-# ARC-56 spec URLs inside each hash file) stay commit-pinned; this site itself always
-# serves the latest hash tables from `main`.
+# Publishes approval-programs/, clear-programs/, abi-signatures/, and pages/index.html
+# (the developer README explaining how to hash a program / decode a method selector
+# and look it up) as a static site, so a hash lookup doesn't need a commit SHA - only
+# generate-hash-registry.yml's *targets* (the ARC-56 spec URLs inside each hash file)
+# stay commit-pinned; this site itself always serves the latest hash tables from
+# `main`.
 #
 # One-time manual setup this workflow depends on: in the repo's Settings > Pages, set
 # "Source" to "GitHub Actions" (not "Deploy from a branch"). That can't be done from
@@ -46,6 +47,7 @@ jobs:
           mkdir -p _site
           cp -r approval-programs _site/approval-programs
           cp -r clear-programs _site/clear-programs
+          cp -r abi-signatures _site/abi-signatures
           cp pages/index.html _site/index.html
 
       - name: Configure Pages

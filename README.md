@@ -17,9 +17,10 @@ publishes a NuGet package with a typed client for it.
 | [scripts/validate_arc56_links.py](scripts/validate_arc56_links.py) | Pull-request check enforcing the CSV's schema and edit rules. |
 | [scripts/generate_dotnet_clients.py](scripts/generate_dotnet_clients.py) | Generates the C# clients and NuGet packages described below. |
 | [clients/](clients/) | One folder per GitHub repo (`clients/<owner>/<repo>/`), each holding one subfolder per ecosystem's generated client package - `dotnet/` today, with `npm/`/`python/` planned so all of a repo's packages live together. |
-| [scripts/generate_hash_registry.py](scripts/generate_hash_registry.py) | Builds `approval-programs/` and `clear-programs/` - lookups from compiled-program SHA-256 hash to ARC-56 spec URL, described below. |
-| [approval-programs/](approval-programs/), [clear-programs/](clear-programs/) | The hash registry itself: `<program>-programs/<hash[:3]>/<hash>.txt`, one file per distinct program hash. |
-| [pages/index.html](pages/index.html) | Landing page for the registry's GitHub Pages site, published from the two folders above. |
+| [scripts/generate_hash_registry.py](scripts/generate_hash_registry.py) | Builds `approval-programs/`, `clear-programs/` (compiled-program SHA-256 hash to ARC-56 spec URL) and `abi-signatures/` (ARC-4 method selector to ABI method signature), described below. |
+| [approval-programs/](approval-programs/), [clear-programs/](clear-programs/) | The program hash registry: `<program>-programs/<hash[:3]>/<hash>.txt`, one file per distinct program hash. |
+| [abi-signatures/](abi-signatures/) | The ABI method-signature registry: `abi-signatures/<selector[:2]>/<selector>.txt`, one file per distinct ARC-4 method selector. |
+| [pages/index.html](pages/index.html) | Landing page for the registry's GitHub Pages site, published from the folders above. |
 | [.github/workflows/](.github/workflows/) | The scheduled/triggered pipelines tying all of the above together. |
 | [docs/](docs/) | Detailed docs for each pipeline (linked below). |
 
@@ -82,11 +83,21 @@ opaque raw transaction.
 
 Full details, including how duplicate hashes are resolved: **[docs/hash-registry.md](docs/hash-registry.md)**.
 
+The same script and workflow also build an **ABI method-signature registry**:
+`abi-signatures/<selector[:2]>/<selector>.txt`, keyed by each ARC-56 method's ARC-4
+selector (the first 4 bytes of `SHA-512/256` over its ABI signature string), containing
+that plain-text signature - e.g. `abi-signatures/8a/8aa3b61f.txt` contains
+`add(uint64,uint64)uint128`. It's published on the same GitHub Pages site, and lets a
+wallet that only has a 4-byte method selector (decoded from an app-call transaction's
+args) recover a human-readable method signature without needing the whole ARC-56 spec
+resolved first.
+
 ## Status
 
 - ✅ Registry discovery + validation (arc56.links.csv)
 - ✅ .NET/C# client generation pipeline
 - ✅ Program hash registry (approval-programs/, clear-programs/) + GitHub Pages site
+- ✅ ABI method-signature registry (abi-signatures/) + GitHub Pages site
 - ⏳ TypeScript client generation - not started
 - ⏳ Python client generation - not started
 - ⏳ Automated `dotnet nuget push` to nuget.org - packages are built and uploaded as a

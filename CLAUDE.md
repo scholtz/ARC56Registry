@@ -18,9 +18,15 @@ cover.
 - `scripts/generate_hash_registry.py` - builds `approval-programs/` and
   `clear-programs/`, lookups from SHA-256(approval program) / SHA-256(clear program)
   to a durable URL of the matching ARC-56 spec. Lets a wallet that only has a
-  deployed app's compiled bytecode find a spec to decode calls against it.
+  deployed app's compiled bytecode find a spec to decode calls against it. The same
+  script also builds `abi-signatures/`, a lookup from ARC-4 method selector (4-byte
+  SHA-512/256 of the ABI method signature) to the plain-text signature string, e.g.
+  `add(uint64,uint64)uint128` for selector `8aa3b61f`.
 - `approval-programs/<hash[:3]>/<hash>.txt`, `clear-programs/<hash[:3]>/<hash>.txt` -
   the hash registry itself, one file per distinct program hash.
+- `abi-signatures/<selector[:2]>/<selector>.txt` - ARC-4 method selector to ABI method
+  signature string, one file per distinct 4-byte selector, built from every method of
+  every ARC-56 spec in the repo.
 - `pages/index.html` - the GitHub Pages landing page for the hash registry, published
   by `deploy-hash-registry-pages.yml`.
 - `docs/arc56-links-pipeline.md` - full detail on the CSV pipeline.
@@ -34,7 +40,10 @@ cover.
    applies to scripts and to manual edits alike. `approval-programs/**` and
    `clear-programs/**` files are similarly never deleted, but - unlike `clients/**` -
    their *content* can legitimately be rewritten in place when a better (larger) spec
-   is found for the same hash; see docs/hash-registry.md.
+   is found for the same hash; see docs/hash-registry.md. `abi-signatures/**` files
+   follow the same never-delete rule; their content should never need to change once
+   written (a selector determines its signature, barring a SHA-512/256 collision), so
+   the generator only ever adds new files there, never rewrites existing ones.
 2. **`ActiveFrom`/`ActiveUntil` semantics**: a row is active when `ActiveFrom <= today`
    and (`ActiveUntil` is empty or `ActiveUntil` is in the future). New rows always get
    `ActiveFrom = today`, `ActiveUntil = ""`.
