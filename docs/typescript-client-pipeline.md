@@ -212,6 +212,15 @@ always comparing against the npm registry's own live list rather than a local fl
   every generated package will fail to type-check against whatever version npm actually
   resolves. Because a template edit bumps and regenerates every project on the next
   run (see "Versioning" above), fixing the template once fixes every package.
+- **`typescript` devDependency version drift**: `clients/_template_npm/tsconfig.json.template`
+  pins `"moduleResolution": "node10"` with `"ignoreDeprecations": "6.0"` because
+  TypeScript 6 deprecated the old `"node"` value (renamed to `"node10"`) and turned the
+  deprecation into a hard `tsc` error by default - hit once already when
+  `package.json.template`'s `typescript` range was bumped to `^6.0.3`. If a future
+  TypeScript major actually removes `"node10"` resolution, this template needs a real
+  module-resolution strategy change (e.g. `"node16"`/`"nodenext"`), which also requires
+  adding explicit `.js` extensions to every generated file's relative imports - not a
+  one-line fix like this was.
 - **`HEAD`-pinned sources**: like the links CSV itself, ARC-56 URLs point at `HEAD`.
 - **No license metadata**: generated `package.json` files don't set a `license` field,
   matching the .NET pipeline's reasoning (no LICENSE file in this repo yet).

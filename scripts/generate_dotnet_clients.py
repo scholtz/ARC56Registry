@@ -74,6 +74,13 @@ COMPILE_ERROR_FILE_RE = re.compile(r"[\\/](?P<contract_id>[A-Za-z0-9_]+)\.cs\(\d
 MAX_BUILD_QUARANTINE_ATTEMPTS = 10
 
 
+def log(message: str) -> None:
+    """Every log line is prefixed with a UTC timestamp, so a multi-hour CI run's output
+    can be correlated with wall-clock time."""
+    timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    print(f"{timestamp} {message}", file=sys.stderr)
+
+
 def sanitize_path_segment(name: str) -> str:
     return re.sub(r"[^A-Za-z0-9_.-]", "-", name)
 
@@ -395,7 +402,7 @@ def build_and_quarantine(
                     owner, repo, url, contract_id, contracts_state[url]["namespace"],
                     "compile_error", error_text, generator_digest,
                 )
-            print(f"WARNING: quarantining {contract_id} - fails to compile", file=sys.stderr)
+            log(f"WARNING: quarantining {contract_id} - fails to compile")
         excluded_contract_ids |= broken
         write_project_files(project_dir, owner, repo, package_id, version, contracts_state, excluded_contract_ids)
 
@@ -409,6 +416,7 @@ def process_project(
     rows: list[dict[str, str]],
     generator_digest: str,
     template_hash: str,
+    progress: list[int],
 ) -> bool:
     owner_slug = sanitize_path_segment(owner)
     repo_slug = sanitize_path_segment(repo)
@@ -431,14 +439,16 @@ def process_project(
 
     for row in rows:
         url = row["ARC56URL"]
+        progress[0] += 1
+        log(f"[{progress[0]}/{progress[1]}] {owner}/{repo}: {url}")
         try:
             _, _, path = parse_raw_url(url)
         except ValueError as exc:
-            print(f"WARNING: skipping unparseable URL {url}: {exc}", file=sys.stderr)
+            log(f"WARNING: skipping unparseable URL {url}: {exc}")
             continue
         filename = path.rsplit("/", 1)[-1]
         if not filename.endswith(FILENAME_SUFFIX):
-            print(f"WARNING: skipping non-ARC56 URL {url}", file=sys.stderr)
+            log(f"WARNING: skipping non-ARC56 URL {url}")
             continue
         file_slug = sanitize_identifier(filename[: -len(FILENAME_SUFFIX)])
         hash8 = url_hash8(url)
@@ -465,7 +475,7 @@ def process_project(
         if not needs_regen:
             continue
 
-        print(f"Generating client for {url} -> namespace {namespace}", file=sys.stderr)
+        log(f"Generating client for {url} -> namespace {namespace}")
         try:
             generated_path = run_generator(arc56_dir, src_dir, f"{contract_id}.arc56.json", namespace)
             final_path = os.path.join(src_dir, f"{contract_id}.cs")
@@ -479,7 +489,7 @@ def process_project(
             # NullReferenceException in ABITypeToCSType for some struct shapes). Don't
             # let one broken contract abort the whole project/run - record the failure
             # so we don't retry every run until the content or generator image changes.
-            print(f"WARNING: generator failed for {url}: {exc}", file=sys.stderr)
+            log(f"WARNING: generator failed for {url}: {exc}")
             contracts_state[url] = {
                 **{k: v for k, v in (existing or {}).items() if k != "content_sha256"},
                 "content_sha256": content_hash,
@@ -512,7 +522,7 @@ def process_project(
                 "class_name": class_name,
             }
             state_dirty = True
-            print(f"Regenerated {url} - identical code, not counted as a change", file=sys.stderr)
+            log(f"Regenerated {url} - identical code, not counted as a change")
         else:
             contracts_state[url] = {
                 "content_sha256": content_hash,
@@ -541,8 +551,8 @@ def process_project(
         state["generator_image_digest"] = generator_digest
         state["template_hash"] = template_hash
         save_project_state(state_path, state)
-        print(f"Project {package_id}: recorded failure state only, no generated-code "
-              f"changes - version not bumped", file=sys.stderr)
+        log(f"Project {package_id}: recorded failure state only, no generated-code "
+              f"changes - version not bumped")
         return False
 
     increment = state.get("increment", 0) + 1
@@ -562,8 +572,8 @@ def process_project(
     )
     save_project_state(state_path, state)
 
-    print(f"Project {package_id} -> version {version} ({len(contracts_state)} contract(s), "
-          f"{len(excluded_contract_ids)} quarantined)", file=sys.stderr)
+    log(f"Project {package_id} -> version {version} ({len(contracts_state)} contract(s), "
+          f"{len(excluded_contract_ids)} quarantined)")
     return True
 
 
@@ -639,7 +649,7 @@ def push_commits(force: bool = False) -> None:
         return
     result = subprocess.run(["git", "push"], cwd=REPO_ROOT, capture_output=True, text=True)
     if result.returncode != 0:
-        print(f"WARNING: git push failed (will retry later): {result.stdout}\n{result.stderr}", file=sys.stderr)
+        log(f"WARNING: git push failed (will retry later): {result.stdout}\n{result.stderr}")
         return
     _last_push_at = now
 
@@ -667,7 +677,7 @@ def commit_project_changes(owner: str, repo: str) -> None:
         ["git", "commit", "-m", f"chore: regenerate .NET ARC-56 client for {owner}/{repo}"],
         cwd=REPO_ROOT, check=True,
     )
-    print(f"Committed changes for {owner}/{repo}", file=sys.stderr)
+    log(f"Committed changes for {owner}/{repo}")
 
 
 def main() -> int:
@@ -688,15 +698,15 @@ def main() -> int:
     args = parser.parse_args()
 
     if not os.path.isdir(CLIENTS_DIR):
-        print(f"ERROR: {CLIENTS_DIR} does not exist", file=sys.stderr)
+        log(f"ERROR: {CLIENTS_DIR} does not exist")
         return 1
 
     try:
         generator_digest = get_generator_image_digest()
     except subprocess.CalledProcessError as exc:
-        print(f"ERROR: could not resolve {GENERATOR_IMAGE} digest: {exc}", file=sys.stderr)
+        log(f"ERROR: could not resolve {GENERATOR_IMAGE} digest: {exc}")
         return 1
-    print(f"Generator image digest: {generator_digest}", file=sys.stderr)
+    log(f"Generator image digest: {generator_digest}")
     template_hash = get_template_hash()
 
     rows = load_active_rows()
@@ -705,7 +715,7 @@ def main() -> int:
         try:
             owner, repo, _ = parse_raw_url(row["ARC56URL"])
         except ValueError as exc:
-            print(f"WARNING: {exc}", file=sys.stderr)
+            log(f"WARNING: {exc}")
             continue
         grouped.setdefault((owner, repo), []).append(row)
 
@@ -725,11 +735,14 @@ def main() -> int:
     if args.commit:
         configure_git_identity()
 
+    total_rows = sum(len(project_rows) for _, project_rows in selected)
+    progress = [0, total_rows]  # [rows processed so far, total rows selected this run]
+
     changed_projects = 0
     failed_projects = 0
     for (owner, repo), project_rows in selected:
         try:
-            if process_project(owner, repo, project_rows, generator_digest, template_hash):
+            if process_project(owner, repo, project_rows, generator_digest, template_hash, progress):
                 changed_projects += 1
             rebuild_incidents_index()
             if args.commit:
@@ -737,15 +750,15 @@ def main() -> int:
                 push_commits()
         except Exception as exc:  # noqa: BLE001 - see comment above
             failed_projects += 1
-            print(f"ERROR: unexpected failure processing {owner}/{repo}, skipping and "
-                  f"continuing with the next project: {exc}", file=sys.stderr)
+            log(f"ERROR: unexpected failure processing {owner}/{repo}, skipping and "
+                  f"continuing with the next project: {exc}")
             continue
 
     if args.commit:
         push_commits(force=True)
 
-    print(f"Done: {len(selected)}/{len(grouped)} project(s) scanned, "
-          f"{changed_projects} regenerated/bumped, {failed_projects} failed unexpectedly", file=sys.stderr)
+    log(f"Done: {len(selected)}/{len(grouped)} project(s) scanned, "
+          f"{changed_projects} regenerated/bumped, {failed_projects} failed unexpectedly")
     return 1 if failed_projects else 0
 
 

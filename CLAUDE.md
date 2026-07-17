@@ -138,6 +138,16 @@ pins those separately from the package `<Version>`. Don't "simplify" that away.
 
 ## Conventions worth knowing before editing scripts
 
+- Every pipeline script (`download_arc56_specs.py`, `generate_dotnet_clients.py`,
+  `publish_dotnet_packages.py`, `generate_typescript_clients.py`,
+  `publish_npm_packages.py`) defines its own local `log(message)` helper that prefixes
+  a UTC timestamp and writes to stderr - use it for anything that's genuinely a log
+  line. The one exception is each publish script's `--dry-run` "would pack + push ..."
+  / "would build + publish ..." preview line, which stays a plain `print()` to stdout
+  (no timestamp) since it's scriptable output, not a log. The download/generate
+  scripts also log per-URL progress as `[i/N]` (N = total rows selected for that run,
+  not the whole registry) at the top of their per-row loop, and the publish scripts log
+  `[i/N]` per project - keep both when editing these loops.
 - .NET versioning is the 4-part legacy scheme `1.0.<increment>.<yyyyMMddHH>` - matches
   what `Algorand4` (the runtime dependency of every generated client) already uses.
   TypeScript versioning is `1.<increment>.<yyyyMMddHH>` (3-part, valid semver - npm

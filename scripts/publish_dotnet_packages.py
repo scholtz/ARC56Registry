@@ -29,10 +29,10 @@ not a long-lived secret - see docs/dotnet-client-pipeline.md.
 from __future__ import annotations
 
 import argparse
+import datetime
 import glob
 import json
 import os
-import re
 import subprocess
 import sys
 import time
@@ -50,6 +50,16 @@ LIST_DELAY_SECONDS = 1  # minimum time between successive "list published versio
 
 _last_push_at: float | None = None
 _last_list_at: float | None = None
+
+
+def log(message: str) -> None:
+    """Every log line is prefixed with a UTC timestamp so a long-running CI job's
+    output can be correlated with wall-clock time (e.g. how long a given project
+    actually took) - always to stderr, never buffered behind the dry-run "would ..."
+    preview lines below, which intentionally go to stdout as plain, scriptable output
+    rather than a log."""
+    timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    print(f"{timestamp} {message}", file=sys.stderr)
 
 
 def _rate_limit(last_at: float | None, delay_seconds: float) -> float:
@@ -113,7 +123,7 @@ def list_published_versions(package_id: str) -> set[str]:
 def pack_project(project_dir: str, package_id: str, version: str) -> str:
     os.makedirs(NUPKG_OUTPUT_DIR, exist_ok=True)
     csproj_path = os.path.join(project_dir, f"{package_id}.csproj")
-    print(f"Packing {package_id} {version}", file=sys.stderr)
+    log(f"Packing {package_id} {version}")
     result = subprocess.run(
         ["dotnet", "pack", csproj_path, "--configuration", "Release", "--output", NUPKG_OUTPUT_DIR],
         capture_output=True, text=True,
@@ -134,11 +144,8 @@ def push_to_nuget(nupkg_path: str, api_key: str) -> bool:
         capture_output=True, text=True,
     )
     if result.returncode != 0:
-        print(
-            f"WARNING: nuget push failed for {nupkg_path} (will retry next run):\n"
-            f"{result.stdout}\n{result.stderr}",
-            file=sys.stderr,
-        )
+        log(f"WARNING: nuget push failed for {nupkg_path} (will retry next run):\n"
+            f"{result.stdout}\n{result.stderr}")
         return False
     return True
 
@@ -159,7 +166,7 @@ def main() -> int:
 
     api_key = os.environ.get("NUGET_API_KEY")
     if not api_key and not args.dry_run:
-        print("ERROR: NUGET_API_KEY not set (and --dry-run not passed) - nothing to push", file=sys.stderr)
+        log("ERROR: NUGET_API_KEY not set (and --dry-run not passed) - nothing to push")
         return 1
 
     projects = find_dotnet_projects()
@@ -172,14 +179,16 @@ def main() -> int:
     if args.limit_projects is not None:
         projects = projects[: args.limit_projects]
 
-    print(f"Found {len(projects)} generated .NET project(s)", file=sys.stderr)
+    total = len(projects)
+    log(f"Found {total} generated .NET project(s)")
 
     published_count = 0
     up_to_date_count = 0
     no_version_count = 0
     failed_count = 0
 
-    for owner, repo, project_dir, package_id in projects:
+    for i, (owner, repo, project_dir, package_id) in enumerate(projects, start=1):
+        log(f"[{i}/{total}] {owner}/{repo}: {package_id}")
         state_path = os.path.join(project_dir, "state.json")
         state = load_state(state_path)
         version = state.get("version")
@@ -190,7 +199,7 @@ def main() -> int:
         try:
             published_versions = list_published_versions(package_id)
         except Exception as exc:  # noqa: BLE001 - one project's lookup must not abort the run
-            print(f"WARNING: could not list published versions for {package_id}: {exc}", file=sys.stderr)
+            log(f"WARNING: could not list published versions for {package_id}: {exc}")
             failed_count += 1
             continue
 
@@ -198,8 +207,7 @@ def main() -> int:
             up_to_date_count += 1
             continue
 
-        print(f"{package_id} needs publishing: {version} not in {len(published_versions)} published version(s)",
-              file=sys.stderr)
+        log(f"{package_id} needs publishing: {version} not in {len(published_versions)} published version(s)")
         if args.dry_run:
             print(f"would pack + push {package_id} {version}")
             continue
@@ -207,25 +215,22 @@ def main() -> int:
         try:
             nupkg_path = pack_project(project_dir, package_id, version)
         except Exception as exc:  # noqa: BLE001
-            print(f"WARNING: pack failed for {package_id} {version}: {exc}", file=sys.stderr)
+            log(f"WARNING: pack failed for {package_id} {version}: {exc}")
             failed_count += 1
             continue
 
         if push_to_nuget(nupkg_path, api_key):
             state["published_version"] = version
             save_state(state_path, state)
-            print(f"Published {package_id} {version} to nuget.org", file=sys.stderr)
+            log(f"Published {package_id} {version} to nuget.org")
             published_count += 1
         else:
             failed_count += 1
 
     verb = "Would publish" if args.dry_run else "Published"
-    print(
-        f"Done: {len(projects)} project(s) checked, {published_count if not args.dry_run else 'N/A'} "
+    log(f"Done: {total} project(s) checked, {published_count if not args.dry_run else 'N/A'} "
         f"{verb.lower()}, {up_to_date_count} already up to date, {no_version_count} with no version yet, "
-        f"{failed_count} failed",
-        file=sys.stderr,
-    )
+        f"{failed_count} failed")
     return 1 if failed_count else 0
 
 

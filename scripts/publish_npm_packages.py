@@ -35,6 +35,7 @@ automation token does).
 from __future__ import annotations
 
 import argparse
+import datetime
 import glob
 import json
 import os
@@ -58,6 +59,14 @@ LIST_DELAY_SECONDS = 1  # minimum time between successive "list published versio
 
 _last_push_at: float | None = None
 _last_list_at: float | None = None
+
+
+def log(message: str) -> None:
+    """Every log line is prefixed with a UTC timestamp - always to stderr, never the
+    dry-run "would ..." preview lines below, which intentionally stay plain stdout
+    output rather than a log."""
+    timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    print(f"{timestamp} {message}", file=sys.stderr)
 
 
 def _rate_limit(last_at: float | None, delay_seconds: float) -> float:
@@ -139,11 +148,8 @@ def publish_to_npm(project_dir: str, npmrc_path: str | None) -> bool:
         cwd=project_dir, capture_output=True, text=True, env=env,
     )
     if result.returncode != 0:
-        print(
-            f"WARNING: npm publish failed for {project_dir} (will retry next run):\n"
-            f"{result.stdout}\n{result.stderr}",
-            file=sys.stderr,
-        )
+        log(f"WARNING: npm publish failed for {project_dir} (will retry next run):\n"
+            f"{result.stdout}\n{result.stderr}")
         return False
     return True
 
@@ -177,7 +183,7 @@ def main() -> int:
 
     npm_token = os.environ.get("NPM_TOKEN")
     if not npm_token and not args.dry_run:
-        print("ERROR: NPM_TOKEN not set (and --dry-run not passed) - nothing to publish", file=sys.stderr)
+        log("ERROR: NPM_TOKEN not set (and --dry-run not passed) - nothing to publish")
         return 1
 
     npmrc_path = write_temp_npmrc(npm_token) if npm_token else None
@@ -193,14 +199,16 @@ def main() -> int:
         if args.limit_projects is not None:
             projects = projects[: args.limit_projects]
 
-        print(f"Found {len(projects)} generated TypeScript project(s)", file=sys.stderr)
+        total = len(projects)
+        log(f"Found {total} generated TypeScript project(s)")
 
         published_count = 0
         up_to_date_count = 0
         no_version_count = 0
         failed_count = 0
 
-        for owner, repo, project_dir in projects:
+        for i, (owner, repo, project_dir) in enumerate(projects, start=1):
+            log(f"[{i}/{total}] {owner}/{repo}")
             package_json_path = os.path.join(project_dir, "package.json")
             state_path = os.path.join(project_dir, "state.json")
             package_json = load_json(package_json_path)
@@ -214,7 +222,7 @@ def main() -> int:
             try:
                 published_versions = list_published_versions(package_name)
             except Exception as exc:  # noqa: BLE001 - one project's lookup must not abort the run
-                print(f"WARNING: could not list published versions for {package_name}: {exc}", file=sys.stderr)
+                log(f"WARNING: could not list published versions for {package_name}: {exc}")
                 failed_count += 1
                 continue
 
@@ -222,8 +230,8 @@ def main() -> int:
                 up_to_date_count += 1
                 continue
 
-            print(f"{package_name} needs publishing: {version} not in {len(published_versions)} "
-                  f"published version(s)", file=sys.stderr)
+            log(f"{package_name} needs publishing: {version} not in {len(published_versions)} "
+                f"published version(s)")
             if args.dry_run:
                 print(f"would build + publish {package_name} {version}")
                 continue
@@ -231,25 +239,22 @@ def main() -> int:
             try:
                 npm_build(project_dir)
             except Exception as exc:  # noqa: BLE001
-                print(f"WARNING: build failed for {package_name} {version}: {exc}", file=sys.stderr)
+                log(f"WARNING: build failed for {package_name} {version}: {exc}")
                 failed_count += 1
                 continue
 
             if publish_to_npm(project_dir, npmrc_path):
                 state["published_version"] = version
                 save_json(state_path, state)
-                print(f"Published {package_name} {version} to npm", file=sys.stderr)
+                log(f"Published {package_name} {version} to npm")
                 published_count += 1
             else:
                 failed_count += 1
 
         verb = "Would publish" if args.dry_run else "Published"
-        print(
-            f"Done: {len(projects)} project(s) checked, {published_count if not args.dry_run else 'N/A'} "
+        log(f"Done: {total} project(s) checked, {published_count if not args.dry_run else 'N/A'} "
             f"{verb.lower()}, {up_to_date_count} already up to date, {no_version_count} with no version yet, "
-            f"{failed_count} failed",
-            file=sys.stderr,
-        )
+            f"{failed_count} failed")
         return 1 if failed_count else 0
     finally:
         if npmrc_path and os.path.exists(npmrc_path):

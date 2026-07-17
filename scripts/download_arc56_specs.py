@@ -58,6 +58,13 @@ _last_download_at: float | None = None
 _last_push_at: float | None = None
 
 
+def log(message: str) -> None:
+    """Every log line is prefixed with a UTC timestamp, so a multi-hour CI run's output
+    can be correlated with wall-clock time."""
+    timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    print(f"{timestamp} {message}", file=sys.stderr)
+
+
 def sanitize_path_segment(name: str) -> str:
     return re.sub(r"[^A-Za-z0-9_.-]", "-", name)
 
@@ -106,7 +113,7 @@ def download_with_rate_limit(url: str) -> bytes:
         wait = DOWNLOAD_DELAY_SECONDS - elapsed
         if wait > 0:
             time.sleep(wait)
-    print(f"Downloading {url}", file=sys.stderr)
+    log(f"Downloading {url}")
     req = urllib.request.Request(url, headers={"User-Agent": "arc56-spec-downloader"})
     with urllib.request.urlopen(req) as resp:
         data = resp.read()
@@ -144,7 +151,7 @@ def push_commits(force: bool = False) -> None:
         return
     result = subprocess.run(["git", "push"], cwd=REPO_ROOT, capture_output=True, text=True)
     if result.returncode != 0:
-        print(f"WARNING: git push failed (will retry later): {result.stdout}\n{result.stderr}", file=sys.stderr)
+        log(f"WARNING: git push failed (will retry later): {result.stdout}\n{result.stderr}")
         return
     _last_push_at = now
 
@@ -159,10 +166,12 @@ def commit_project_changes(owner: str, repo: str) -> None:
         ["git", "commit", "-m", f"chore: download ARC-56 specs for {owner}/{repo}"],
         cwd=REPO_ROOT, check=True,
     )
-    print(f"Committed spec downloads for {owner}/{repo}", file=sys.stderr)
+    log(f"Committed spec downloads for {owner}/{repo}")
 
 
-def process_project(owner: str, repo: str, rows: list[dict[str, str]], retry_failed: bool) -> bool:
+def process_project(
+    owner: str, repo: str, rows: list[dict[str, str]], retry_failed: bool, progress: list[int],
+) -> bool:
     owner_slug = sanitize_path_segment(owner)
     repo_slug = sanitize_path_segment(repo)
     arc56_dir = os.path.join(CLIENTS_DIR, owner_slug, repo_slug, "arc56")
@@ -175,14 +184,16 @@ def process_project(owner: str, repo: str, rows: list[dict[str, str]], retry_fai
 
     for row in rows:
         url = row["ARC56URL"]
+        progress[0] += 1
+        log(f"[{progress[0]}/{progress[1]}] {owner}/{repo}: {url}")
         try:
             _, _, path = parse_raw_url(url)
         except ValueError as exc:
-            print(f"WARNING: skipping unparseable URL {url}: {exc}", file=sys.stderr)
+            log(f"WARNING: skipping unparseable URL {url}: {exc}")
             continue
         filename = path.rsplit("/", 1)[-1]
         if not filename.endswith(FILENAME_SUFFIX):
-            print(f"WARNING: skipping non-ARC56 URL {url}", file=sys.stderr)
+            log(f"WARNING: skipping non-ARC56 URL {url}")
             continue
         file_slug = sanitize_identifier(filename[: -len(FILENAME_SUFFIX)])
         hash8 = url_hash8(url)
@@ -195,7 +206,7 @@ def process_project(owner: str, repo: str, rows: list[dict[str, str]], retry_fai
         try:
             content = download_with_rate_limit(url)
         except Exception as exc:  # noqa: BLE001 - one bad row must never abort the whole run
-            print(f"WARNING: download failed for {url}: {exc}", file=sys.stderr)
+            log(f"WARNING: download failed for {url}: {exc}")
             contracts_state[url] = {
                 "file_slug": file_slug,
                 "hash8": hash8,
@@ -210,7 +221,7 @@ def process_project(owner: str, repo: str, rows: list[dict[str, str]], retry_fai
             with open(arc56_path, "wb") as f:
                 f.write(content)
         except OSError as exc:
-            print(f"WARNING: could not write {arc56_path}: {exc}", file=sys.stderr)
+            log(f"WARNING: could not write {arc56_path}: {exc}")
             contracts_state[url] = {
                 "file_slug": file_slug,
                 "hash8": hash8,
@@ -229,7 +240,7 @@ def process_project(owner: str, repo: str, rows: list[dict[str, str]], retry_fai
             "downloaded_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         }
         dirty = True
-        print(f"Downloaded {url} -> {arc56_path}", file=sys.stderr)
+        log(f"Downloaded {url} -> {arc56_path}")
 
     if dirty:
         save_state(state_path, state)
@@ -259,7 +270,7 @@ def main() -> int:
         try:
             owner, repo, _ = parse_raw_url(row["ARC56URL"])
         except ValueError as exc:
-            print(f"WARNING: {exc}", file=sys.stderr)
+            log(f"WARNING: {exc}")
             continue
         grouped.setdefault((owner, repo), []).append(row)
 
@@ -279,26 +290,29 @@ def main() -> int:
     if args.commit:
         configure_git_identity()
 
+    total_rows = sum(len(project_rows) for _, project_rows in selected)
+    progress = [0, total_rows]  # [rows processed so far, total rows selected this run]
+
     changed_projects = 0
     failed_projects = 0
     for (owner, repo), project_rows in selected:
         try:
-            if process_project(owner, repo, project_rows, args.retry_failed):
+            if process_project(owner, repo, project_rows, args.retry_failed, progress):
                 changed_projects += 1
             if args.commit:
                 commit_project_changes(owner, repo)
                 push_commits()
         except Exception as exc:  # noqa: BLE001 - one project must never take down the whole run
             failed_projects += 1
-            print(f"ERROR: unexpected failure downloading specs for {owner}/{repo}, skipping and "
-                  f"continuing with the next project: {exc}", file=sys.stderr)
+            log(f"ERROR: unexpected failure downloading specs for {owner}/{repo}, skipping and "
+                  f"continuing with the next project: {exc}")
             continue
 
     if args.commit:
         push_commits(force=True)
 
-    print(f"Done: {len(selected)}/{len(grouped)} project(s) scanned, "
-          f"{changed_projects} with new/changed downloads, {failed_projects} failed unexpectedly", file=sys.stderr)
+    log(f"Done: {len(selected)}/{len(grouped)} project(s) scanned, "
+          f"{changed_projects} with new/changed downloads, {failed_projects} failed unexpectedly")
     return 1 if failed_projects else 0
 
 
