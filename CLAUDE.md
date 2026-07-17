@@ -11,15 +11,17 @@ cover.
 - `scripts/update_arc56_links.py` - finds new ARC-56 files on GitHub, merges into the CSV.
 - `scripts/validate_arc56_links.py` - PR check enforcing the CSV's rules.
 - `scripts/generate_dotnet_clients.py` - generates C# clients + NuGet packages.
-- `clients/dotnet/<owner>/<repo>/` - one .NET project per source GitHub repo.
-- `clients/dotnet/_template/` - shared csproj/README templates + shared package icon.
+- `clients/<owner>/<repo>/dotnet/` - one .NET project per source GitHub repo. Sibling
+  `npm/`/`python/` subfolders are planned so all of a repo's generated packages live
+  together under `clients/<owner>/<repo>/`.
+- `clients/_template/` - shared csproj/README templates + shared package icon.
 - `docs/arc56-links-pipeline.md` - full detail on the CSV pipeline.
 - `docs/dotnet-client-pipeline.md` - full detail on the .NET client pipeline.
 
 ## Hard rules - do not violate these
 
 1. **Never delete a row from `arc56.links.csv`, and never delete a generated
-   `clients/dotnet/**` file.** Deactivate instead: set `ActiveUntil` to a date. This
+   `clients/**` file.** Deactivate instead: set `ActiveUntil` to a date. This
    applies to scripts and to manual edits alike.
 2. **`ActiveFrom`/`ActiveUntil` semantics**: a row is active when `ActiveFrom <= today`
    and (`ActiveUntil` is empty or `ActiveUntil` is in the future). New rows always get

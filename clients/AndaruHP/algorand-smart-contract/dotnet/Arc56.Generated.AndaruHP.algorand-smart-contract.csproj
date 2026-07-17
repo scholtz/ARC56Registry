@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+
+    <PackageId>Arc56.Generated.AndaruHP.algorand-smart-contract</PackageId>
+    <Version>1.0.4.2026071700</Version>
+    <!-- AssemblyVersion/FileVersion each component must fit in 16 bits (max 65535), which
+         our yyyyMMddHH-based package Version does not; pin them separately and keep the
+         full, precise version only in the NuGet package Version and InformationalVersion. -->
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>1.0.4.2026071700</InformationalVersion>
+    <Authors>AndaruHP</Authors>
+    <Description>Generated ARC-56 Algorand smart-contract clients for AndaruHP/algorand-smart-contract.</Description>
+    <PackageProjectUrl>https://github.com/scholtz/Arc56Registry</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/scholtz/Arc56Registry</RepositoryUrl>
+    <PackageTags>algorand;arc56;avm;smart-contract;generated-client;AndaruHP;algorand-smart-contract</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Algorand4" Version="4.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../../_template/icon.png" Pack="true" PackagePath="" />
+    <None Include="README.md" Pack="true" PackagePath="" />
+    <None Include="arc56/**/*.json" Pack="true" PackagePath="contentFiles/any/any/arc56/" />
+  </ItemGroup>
+
+  <!-- Contracts whose generated code fails to compile in this aggregate project (a known
+       limitation of the upstream generator for some ABI type shapes) are excluded here
+       rather than blocking every other contract in this package - see state.json and
+       docs/dotnet-client-pipeline.md. -->
+  <ItemGroup>
+
+  </ItemGroup>
+
+</Project>

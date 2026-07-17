@@ -16,8 +16,7 @@ publishes a NuGet package with a typed client for it.
 | [scripts/update_arc56_links.py](scripts/update_arc56_links.py) | Finds ARC-56 files on GitHub and updates the CSV. Never removes a row. |
 | [scripts/validate_arc56_links.py](scripts/validate_arc56_links.py) | Pull-request check enforcing the CSV's schema and edit rules. |
 | [scripts/generate_dotnet_clients.py](scripts/generate_dotnet_clients.py) | Generates the C# clients and NuGet packages described below. |
-| [clients/dotnet/](clients/dotnet/) | One folder per GitHub repo, each an independent .NET class-library project bundling all of that repo's generated ARC-56 clients. |
-| [clients/typescript/](clients/typescript/), [clients/python/](clients/python/) | Reserved for future generators - not implemented yet. |
+| [clients/](clients/) | One folder per GitHub repo (`clients/<owner>/<repo>/`), each holding one subfolder per ecosystem's generated client package - `dotnet/` today, with `npm/`/`python/` planned so all of a repo's packages live together. |
 | [.github/workflows/](.github/workflows/) | The three scheduled/triggered pipelines tying all of the above together. |
 | [docs/](docs/) | Detailed docs for each pipeline (linked below). |
 
@@ -78,4 +77,4 @@ Full details, naming rules, and failure handling: **[docs/dotnet-client-pipeline
   for the exact rules the PR check enforces.
 - To change how .NET clients are generated or packaged, see
   [docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md) and
-  `clients/dotnet/_template/`.
+  `clients/_template/`.

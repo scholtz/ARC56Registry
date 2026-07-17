@@ -11,7 +11,7 @@ on:
         type: string
   push:
     paths:
-      - "clients/dotnet/_template/**"
+      - "clients/_template/**"
 
 permissions:
   contents: write
@@ -56,7 +56,7 @@ jobs:
       - name: Pack changed projects
         run: |
           set -e
-          for csproj in $(git status --porcelain clients/dotnet | awk '{print $2}' | grep -E '\.csproj$' || true); do
+          for csproj in $(git status --porcelain -- 'clients/*/*/dotnet' | awk '{print $2}' | grep -E '\.csproj$' || true); do
             echo "Packing $csproj"
             dotnet pack "$csproj" --configuration Release --output artifacts/nupkgs
           done
@@ -70,13 +70,14 @@ jobs:
 
       - name: Commit and push generated clients
         run: |
-          if git diff --quiet -- clients/dotnet && git diff --quiet --cached -- clients/dotnet; then
-            echo "No changes under clients/dotnet"
+          CLIENT_PATHS=(clients/*/*/dotnet clients/_template clients/_incidents)
+          if git diff --quiet -- "${CLIENT_PATHS[@]}" && git diff --quiet --cached -- "${CLIENT_PATHS[@]}"; then
+            echo "No changes under clients/*/*/dotnet"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add clients/dotnet
+          git add "${CLIENT_PATHS[@]}"
           git commit -m "chore: regenerate .NET ARC-56 clients"
           git push
 

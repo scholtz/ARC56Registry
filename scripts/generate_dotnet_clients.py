@@ -5,10 +5,10 @@ For every *active* row in arc56.links.csv, this script:
 
   1. Downloads the ARC-56 JSON spec (rate-limited: at least DOWNLOAD_DELAY_SECONDS
      between downloads, so we don't hammer raw.githubusercontent.com).
-  2. Copies it into clients/dotnet/<owner>/<repo>/arc56/<file_slug>_<hash8>.arc56.json.
+  2. Copies it into clients/<owner>/<repo>/dotnet/arc56/<file_slug>_<hash8>.arc56.json.
   3. If its content changed (or the generator docker image changed, or it's new),
      regenerates the C# client via the scholtz2/dotnet-avm-generated-client docker
-     image into clients/dotnet/<owner>/<repo>/src/<file_slug>_<hash8>.cs, in a
+     image into clients/<owner>/<repo>/dotnet/src/<file_slug>_<hash8>.cs, in a
      namespace unique to that contract (Arc56.Generated.<Owner>.<Repo>.<file_slug>_<hash8>).
 
 One NuGet package is produced per GitHub repository (owner/repo), bundling every
@@ -37,9 +37,9 @@ import urllib.request
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CSV_PATH = os.path.join(REPO_ROOT, "arc56.links.csv")
-CLIENTS_DOTNET_DIR = os.path.join(REPO_ROOT, "clients", "dotnet")
-TEMPLATE_DIR = os.path.join(CLIENTS_DOTNET_DIR, "_template")
-INCIDENTS_DIR = os.path.join(CLIENTS_DOTNET_DIR, "_incidents")
+CLIENTS_DIR = os.path.join(REPO_ROOT, "clients")
+TEMPLATE_DIR = os.path.join(CLIENTS_DIR, "_template")
+INCIDENTS_DIR = os.path.join(CLIENTS_DIR, "_incidents")
 
 REGISTRY_REPO_URL = "https://github.com/scholtz/Arc56Registry"
 GENERATOR_IMAGE = "scholtz2/dotnet-avm-generated-client:latest"
@@ -271,19 +271,19 @@ file has permanently moved.
 
 
 def rebuild_incidents_index() -> None:
-    """Rebuilds clients/dotnet/_incidents/README.md from every project's state.json,
+    """Rebuilds clients/_incidents/README.md from every project's state.json,
     so there's always one place to see every open generator/compile/download failure."""
     rows = []
-    for root, _dirs, files in os.walk(CLIENTS_DOTNET_DIR):
+    for root, _dirs, files in os.walk(CLIENTS_DIR):
         if "state.json" not in files:
             continue
         if os.path.commonpath([root, INCIDENTS_DIR]) == INCIDENTS_DIR or os.path.commonpath([root, TEMPLATE_DIR]) == TEMPLATE_DIR:
             continue
-        rel = os.path.relpath(root, CLIENTS_DOTNET_DIR)
+        rel = os.path.relpath(root, CLIENTS_DIR)
         parts = rel.split(os.sep)
-        if len(parts) != 2:
+        if len(parts) != 3 or parts[2] != "dotnet":
             continue
-        owner, repo = parts
+        owner, repo, _ecosystem = parts
         state = load_project_state(os.path.join(root, "state.json"))
         for url, c in state.get("contracts", {}).items():
             failure_type = next((ft for ft in FAILURE_LABELS if ft in c), None)
@@ -409,7 +409,7 @@ def process_project(
 ) -> bool:
     owner_slug = sanitize_path_segment(owner)
     repo_slug = sanitize_path_segment(repo)
-    project_dir = os.path.join(CLIENTS_DOTNET_DIR, owner_slug, repo_slug)
+    project_dir = os.path.join(CLIENTS_DIR, owner_slug, repo_slug, "dotnet")
     arc56_dir = os.path.join(project_dir, "arc56")
     src_dir = os.path.join(project_dir, "src")
     state_path = os.path.join(project_dir, "state.json")
@@ -669,8 +669,8 @@ def main() -> int:
                          help="Only process owner/repo (can be passed multiple times).")
     args = parser.parse_args()
 
-    if not os.path.isdir(CLIENTS_DOTNET_DIR):
-        print(f"ERROR: {CLIENTS_DOTNET_DIR} does not exist", file=sys.stderr)
+    if not os.path.isdir(CLIENTS_DIR):
+        print(f"ERROR: {CLIENTS_DIR} does not exist", file=sys.stderr)
         return 1
 
     try:

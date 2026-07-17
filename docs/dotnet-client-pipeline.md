@@ -27,19 +27,22 @@ consumers add one package reference per source repo, not one per contract.
   and therefore different hashes. The generated class name inside that namespace (e.g.
   `HelloWorldProxy`) comes from the contract's own `name` field in the ARC-56 spec, not
   from our naming - only the namespace is ours to control.
-- **On-disk layout**:
+- **On-disk layout**: each source GitHub repo gets one directory under `clients/`,
+  shared across every ecosystem's generated client for that repo (.NET today, npm and
+  Python planned - see [README.md](../README.md)); the .NET package lives in its
+  `dotnet/` subfolder:
   ```
-  clients/dotnet/<owner>/<repo>/
+  clients/<owner>/<repo>/dotnet/
     <PackageId>.csproj
     README.md              # per-project usage doc, includes a table of every contract
     state.json             # generation state: version, increment, per-contract content hashes
     arc56/<file_slug>_<hash8>.arc56.json   # copy of the source spec, also bundled into the nupkg
     src/<file_slug>_<hash8>.cs             # generated client
   ```
-- **Shared assets**: `clients/dotnet/_template/` holds `Project.csproj.template`,
+- **Shared assets**: `clients/_template/` holds `Project.csproj.template`,
   `README.md.template`, and `icon.png` (one shared package icon reused by every project,
   so all Arc56Registry-generated packages are visually recognizable together - see it at
-  `clients/dotnet/_template/icon.png`). Every package's `PackageProjectUrl` and
+  `clients/_template/icon.png`). Every package's `PackageProjectUrl` and
   `RepositoryUrl` point back to this repo.
 
 ## Versioning
@@ -148,7 +151,7 @@ detect and act on a pending generator image change for every other project.
 To pack a project after generation:
 
 ```bash
-dotnet pack clients/dotnet/<owner>/<repo>/<PackageId>.csproj --configuration Release --output artifacts/nupkgs
+dotnet pack clients/<owner>/<repo>/dotnet/<PackageId>.csproj --configuration Release --output artifacts/nupkgs
 ```
 
 ## Publishing to NuGet.org
@@ -170,4 +173,4 @@ that key is provisioned.
   source repo rewriting its default branch could change what the next run downloads.
 - **No license metadata**: generated packages don't set `PackageLicenseExpression` since
   this repository doesn't currently have a LICENSE file. Add one and update
-  `clients/dotnet/_template/Project.csproj.template` accordingly.
+  `clients/_template/Project.csproj.template` accordingly.
