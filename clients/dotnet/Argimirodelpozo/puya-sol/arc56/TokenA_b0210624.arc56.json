@@ -1,0 +1,161 @@
+{
+    "name": "TokenA",
+    "structs": {},
+    "methods": [
+        {
+            "name": "mint",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "to"
+                },
+                {
+                    "type": "uint256",
+                    "name": "amount"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "balanceOf",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "who"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "balances",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "key0"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": " M43: Multiple contracts in a single file (Gap 4 verification).",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "balances": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AVMBytes",
+                    "prefix": "YmFsYW5jZXM="
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        118,
+                        191,
+                        222
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        126
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint256"
+                },
+                {
+                    "pc": [
+                        205,
+                        236
+                    ],
+                    "errorMessage": "overflow"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc2VsZl9mZWF0dXJlcy9jb250cmFjdHMvTTQzX011bHRpQ29udHJhY3Quc29sLlRva2VuQS5hcHByb3ZhbF9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgaW50Y2Jsb2NrIDMyIDEKICAgIGJ5dGVjYmxvY2sgImJhbGFuY2VzIiAweCAweDE1MWY3Yzc1CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIHB1c2hpbnQgNDA5NgogICAgYnplcm8KICAgIHN0b3JlIDAKICAgIGxvYWQgMAogICAgcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA4MAogICAgcmVwbGFjZTIgNjQKICAgIHN0b3JlIDAKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweGI1OTVlYzEzIDB4ODNiYWQ3Y2MgMHgxZDU0M2Y1NCAvLyBtZXRob2QgIm1pbnQoYWRkcmVzcyx1aW50MjU2KXZvaWQiLCBtZXRob2QgImJhbGFuY2VPZihhZGRyZXNzKXVpbnQyNTYiLCBtZXRob2QgImJhbGFuY2VzKGFkZHJlc3MpdWludDI1NiIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1pbnQgYmFsYW5jZU9mIGJhbGFuY2VzCiAgICBlcnIKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc2VsZl9mZWF0dXJlcy9jb250cmFjdHMvTTQzX011bHRpQ29udHJhY3Quc29sLlRva2VuQS5taW50W3JvdXRpbmddKCkgLT4gdm9pZDoKbWludDoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICBzd2FwCiAgICBzaGEyNTYKICAgIGJ5dGVjXzAgLy8gImJhbGFuY2VzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9nZXQKICAgIGJ5dGVjXzEgLy8gMHgKICAgIGNvdmVyIDIKICAgIHNlbGVjdAogICAgdW5jb3ZlciAyCiAgICBiKwogICAgcHVzaGJ5dGVzIDB4MDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCiAgICBiJQogICAgZGlnIDEKICAgIGJveF9kZWwKICAgIHBvcAogICAgYm94X3B1dAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9zZWxmX2ZlYXR1cmVzL2NvbnRyYWN0cy9NNDNfTXVsdGlDb250cmFjdC5zb2wuVG9rZW5BLmJhbGFuY2VPZltyb3V0aW5nXSgpIC0+IHZvaWQ6CmJhbGFuY2VPZjoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgc2hhMjU2CiAgICBieXRlY18wIC8vICJiYWxhbmNlcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYm94X2dldAogICAgYnl0ZWNfMSAvLyAweAogICAgY292ZXIgMgogICAgc2VsZWN0CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA8PQogICAgYXNzZXJ0IC8vIG92ZXJmbG93CiAgICBpbnRjXzAgLy8gMzIKICAgIGJ6ZXJvCiAgICBifAogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9zZWxmX2ZlYXR1cmVzL2NvbnRyYWN0cy9NNDNfTXVsdGlDb250cmFjdC5zb2wuVG9rZW5BLmJhbGFuY2VzW3JvdXRpbmddKCkgLT4gdm9pZDoKYmFsYW5jZXM6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHNoYTI1NgogICAgYnl0ZWNfMCAvLyAiYmFsYW5jZXMiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJveF9nZXQKICAgIGJ5dGVjXzEgLy8gMHgKICAgIGNvdmVyIDIKICAgIHNlbGVjdAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgaW50Y18wIC8vIDMyCiAgICBiemVybwogICAgYnwKICAgIGJ5dGVjXzIgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc2VsZl9mZWF0dXJlcy9jb250cmFjdHMvTTQzX011bHRpQ29udHJhY3Quc29sLlRva2VuQS5jbGVhcl9zdGF0ZV9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiACIAEmAwhiYWxhbmNlcwAEFR98dTEYQAACI0OBgCCvNQA0AIAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBcQDUAMRkURDEYRIIDBLWV7BMEg7rXzAQdVD9UNhoAjgMAAQBKAGkANhoBSRUiEkQ2GgJJFSISREwBKExQSb4pTgJNTwKggCEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACqSwG8SL8jQzYaAUkVIhJEAShMUL4pTgJNSRUiDkQir6sqTFCwI0M2GgFJFSISRAEoTFC+KU4CTUkVIg5EIq+rKkxQsCND",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

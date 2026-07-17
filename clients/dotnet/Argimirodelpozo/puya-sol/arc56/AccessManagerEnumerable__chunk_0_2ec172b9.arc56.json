@@ -1,0 +1,1714 @@
+{
+    "name": "AccessManagerEnumerable__chunk_0",
+    "structs": {
+        "AddressSet": [
+            {
+                "name": "_inner",
+                "type": "Set"
+            }
+        ],
+        "Bytes32Set": [
+            {
+                "name": "_inner",
+                "type": "Set"
+            }
+        ],
+        "Role": [
+            {
+                "name": "members",
+                "type": "byte[]"
+            },
+            {
+                "name": "admin",
+                "type": "uint64"
+            },
+            {
+                "name": "guardian",
+                "type": "uint64"
+            },
+            {
+                "name": "grantDelay",
+                "type": "uint112"
+            }
+        ],
+        "Schedule": [
+            {
+                "name": "timepoint",
+                "type": "uint48"
+            },
+            {
+                "name": "nonce",
+                "type": "uint32"
+            }
+        ],
+        "Set": [
+            {
+                "name": "_values",
+                "type": "uint8[32][]"
+            },
+            {
+                "name": "_positions",
+                "type": "byte[]"
+            }
+        ],
+        "TargetConfig": [
+            {
+                "name": "allowedRoles",
+                "type": "byte[]"
+            },
+            {
+                "name": "adminDelay",
+                "type": "uint112"
+            },
+            {
+                "name": "closed",
+                "type": "bool"
+            }
+        ],
+        "UintSet": [
+            {
+                "name": "_inner",
+                "type": "Set"
+            }
+        ],
+        "canCallReturn": [
+            {
+                "name": "immediate",
+                "type": "bool"
+            },
+            {
+                "name": "delay",
+                "type": "uint64"
+            }
+        ],
+        "getAccessReturn": [
+            {
+                "name": "since",
+                "type": "uint64"
+            },
+            {
+                "name": "currentDelay",
+                "type": "uint64"
+            },
+            {
+                "name": "pendingDelay",
+                "type": "uint64"
+            },
+            {
+                "name": "effect",
+                "type": "uint64"
+            }
+        ],
+        "hasRoleReturn": [
+            {
+                "name": "isMember",
+                "type": "bool"
+            },
+            {
+                "name": "executionDelay",
+                "type": "uint64"
+            }
+        ],
+        "scheduleReturn": [
+            {
+                "name": "operationId",
+                "type": "byte[32]"
+            },
+            {
+                "name": "nonce",
+                "type": "uint64"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "__postInit",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "initialAdmin_"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRole",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_index"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleCount",
+            "args": [],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoles",
+            "args": [
+                {
+                    "type": "uint512",
+                    "name": "start"
+                },
+                {
+                    "type": "uint512",
+                    "name": "end"
+                }
+            ],
+            "returns": {
+                "type": "uint64[]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getAdminRole",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_index"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getAdminRoleCount",
+            "args": [],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getAdminRoles",
+            "args": [
+                {
+                    "type": "uint512",
+                    "name": "start"
+                },
+                {
+                    "type": "uint512",
+                    "name": "end"
+                }
+            ],
+            "returns": {
+                "type": "uint64[]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleMember",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_index"
+                }
+            ],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleMemberCount",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleMembers",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_start"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_end"
+                }
+            ],
+            "returns": {
+                "type": "uint8[32][]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleOfAdminRole",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "adminRoleId"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_index"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleOfAdminRoleCount",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "adminRoleId"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRolesOfAdminRole",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "adminRoleId"
+                },
+                {
+                    "type": "uint512",
+                    "name": "start"
+                },
+                {
+                    "type": "uint512",
+                    "name": "end"
+                }
+            ],
+            "returns": {
+                "type": "uint64[]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleTarget",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_index"
+                }
+            ],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleTargetCount",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleTargets",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_start"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_end"
+                }
+            ],
+            "returns": {
+                "type": "uint8[32][]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleTargetSelector",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "address",
+                    "name": "target"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_index"
+                }
+            ],
+            "returns": {
+                "type": "byte[4]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleTargetSelectorCount",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "address",
+                    "name": "target"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleTargetSelectors",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "address",
+                    "name": "target"
+                },
+                {
+                    "type": "uint512",
+                    "name": "start"
+                },
+                {
+                    "type": "uint512",
+                    "name": "end"
+                }
+            ],
+            "returns": {
+                "type": "uint8[4][]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManagerEnumerable",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "ADMIN_ROLE",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "PUBLIC_ROLE",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "canCall",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "caller"
+                },
+                {
+                    "type": "address",
+                    "name": "target"
+                },
+                {
+                    "type": "byte[4]",
+                    "name": "selector"
+                }
+            ],
+            "returns": {
+                "type": "(bool,uint64)",
+                "struct": "canCallReturn"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "expiration",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "minSetback",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "isTargetClosed",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "target"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getTargetFunctionRole",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "target"
+                },
+                {
+                    "type": "byte[4]",
+                    "name": "selector"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getTargetAdminDelay",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "target"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleAdmin",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleGuardian",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getRoleGrantDelay",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getAccess",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "address",
+                    "name": "account"
+                }
+            ],
+            "returns": {
+                "type": "(uint64,uint64,uint64,uint64)",
+                "struct": "getAccessReturn"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "hasRole",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "address",
+                    "name": "account"
+                }
+            ],
+            "returns": {
+                "type": "(bool,uint64)",
+                "struct": "hasRoleReturn"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "labelRole",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "string",
+                    "name": "label"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "grantRole",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "address",
+                    "name": "account"
+                },
+                {
+                    "type": "uint64",
+                    "name": "executionDelay"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "revokeRole",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "address",
+                    "name": "account"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "renounceRole",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "address",
+                    "name": "callerConfirmation"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "setRoleAdmin",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "admin"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "setRoleGuardian",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "guardian"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "setGrantDelay",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "newDelay"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "setTargetFunctionRole",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "target"
+                },
+                {
+                    "type": "uint8[4][]",
+                    "name": "selectors"
+                },
+                {
+                    "type": "uint64",
+                    "name": "roleId"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "setTargetAdminDelay",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "target"
+                },
+                {
+                    "type": "uint64",
+                    "name": "newDelay"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "setTargetClosed",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "target"
+                },
+                {
+                    "type": "bool",
+                    "name": "closed"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getSchedule",
+            "args": [
+                {
+                    "type": "byte[32]",
+                    "name": "id"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getNonce",
+            "args": [
+                {
+                    "type": "byte[32]",
+                    "name": "id"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "schedule",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "target"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "data"
+                },
+                {
+                    "type": "uint64",
+                    "name": "when"
+                }
+            ],
+            "returns": {
+                "type": "(byte[32],uint64)",
+                "struct": "scheduleReturn"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "execute",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "target"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "data"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "cancel",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "caller"
+                },
+                {
+                    "type": "address",
+                    "name": "target"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "data"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "consumeScheduledOp",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "caller"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "data"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "hashOperation",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "caller"
+                },
+                {
+                    "type": "address",
+                    "name": "target"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "data"
+                }
+            ],
+            "returns": {
+                "type": "byte[32]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "updateAuthority",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "target"
+                },
+                {
+                    "type": "address",
+                    "name": "newAuthority"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManager",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "multicall",
+            "args": [
+                {
+                    "type": "byte[][]",
+                    "name": "data"
+                }
+            ],
+            "returns": {
+                "type": "byte[][]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IMulticall",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "__delegate_update",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "UpdateApplication"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "@title AccessManagerEnumerable\n @author Aave Labs\n @notice Extension of AccessManager that tracks role members and their function selectors using EnumerableSet.\n @dev Roles, target contracts, and function selectors assigned to `ADMIN_ROLE` are excluded from tracking.",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 1,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "_executionId": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X2V4ZWN1dGlvbklk"
+                },
+                "__ctor_pending": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "X19jdG9yX3BlbmRpbmc="
+                }
+            },
+            "local": {},
+            "box": {
+                "_rolesSet": {
+                    "keyType": "AVMString",
+                    "valueType": "UintSet",
+                    "key": "X3JvbGVzU2V0"
+                },
+                "_adminRolesSet": {
+                    "keyType": "AVMString",
+                    "valueType": "UintSet",
+                    "key": "X2FkbWluUm9sZXNTZXQ="
+                }
+            }
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "_roleMemberSet": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AddressSet",
+                    "prefix": "X3JvbGVNZW1iZXJTZXQ="
+                },
+                "_roleAdminToRoleSet": {
+                    "keyType": "AVMBytes",
+                    "valueType": "UintSet",
+                    "prefix": "X3JvbGVBZG1pblRvUm9sZVNldA=="
+                },
+                "_roleToTargetSet": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AddressSet",
+                    "prefix": "X3JvbGVUb1RhcmdldFNldA=="
+                },
+                "_targetToSelectorToRole": {
+                    "keyType": "AVMBytes",
+                    "valueType": "uint64",
+                    "prefix": "X3RhcmdldFRvU2VsZWN0b3JUb1JvbGU="
+                },
+                "_roleToTargetToSelectorSet": {
+                    "keyType": "AVMBytes",
+                    "valueType": "Bytes32Set",
+                    "prefix": "X3JvbGVUb1RhcmdldFRvU2VsZWN0b3JTZXQ="
+                },
+                "_targets": {
+                    "keyType": "AVMBytes",
+                    "valueType": "TargetConfig",
+                    "prefix": "X3RhcmdldHM="
+                },
+                "_roles": {
+                    "keyType": "AVMBytes",
+                    "valueType": "Role",
+                    "prefix": "X3JvbGVz"
+                },
+                "_schedules": {
+                    "keyType": "AVMBytes",
+                    "valueType": "Schedule",
+                    "prefix": "X3NjaGVkdWxlcw=="
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        1886,
+                        2018
+                    ],
+                    "errorMessage": "index access is out of bounds"
+                },
+                {
+                    "pc": [
+                        703
+                    ],
+                    "errorMessage": "invalid array encoding"
+                },
+                {
+                    "pc": [
+                        663,
+                        717,
+                        779,
+                        803,
+                        832,
+                        856,
+                        880,
+                        954,
+                        1041,
+                        1847
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        923
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.bool"
+                },
+                {
+                    "pc": [
+                        739
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.dynamic_array<arc4.uint8>>"
+                },
+                {
+                    "pc": [
+                        964
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.static_array<arc4.uint8, 4>>"
+                },
+                {
+                    "pc": [
+                        786,
+                        810,
+                        839,
+                        863,
+                        887,
+                        1048
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"
+                },
+                {
+                    "pc": [
+                        750,
+                        757,
+                        766,
+                        773,
+                        797,
+                        819,
+                        826,
+                        850,
+                        874,
+                        905,
+                        916,
+                        932,
+                        948,
+                        1003,
+                        1019,
+                        1064,
+                        1083,
+                        1142,
+                        1161,
+                        1182,
+                        1189,
+                        1216,
+                        1250,
+                        1268,
+                        1817
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        1150,
+                        1197
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 4>"
+                },
+                {
+                    "pc": [
+                        1275,
+                        1296,
+                        1304,
+                        1398,
+                        1480,
+                        1501,
+                        1509,
+                        1603,
+                        1664,
+                        1756
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint256"
+                },
+                {
+                    "pc": [
+                        1224,
+                        1232,
+                        1443,
+                        1451,
+                        1641,
+                        1649,
+                        1677,
+                        1686
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint512"
+                },
+                {
+                    "pc": [
+                        894,
+                        939,
+                        971,
+                        980,
+                        987,
+                        996,
+                        1012,
+                        1026,
+                        1035,
+                        1057,
+                        1076,
+                        1131,
+                        1209,
+                        1243,
+                        1261,
+                        1287,
+                        1344,
+                        1389,
+                        1435,
+                        1462,
+                        1473,
+                        1492,
+                        1549,
+                        1594
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint64"
+                },
+                {
+                    "pc": [
+                        711
+                    ],
+                    "errorMessage": "invalid tail pointer for (len+(len+uint8[])[])"
+                },
+                {
+                    "pc": [
+                        1311,
+                        1352,
+                        1405,
+                        1516,
+                        1557,
+                        1610,
+                        1693,
+                        1723,
+                        1763
+                    ],
+                    "errorMessage": "not payable"
+                },
+                {
+                    "pc": [
+                        1372,
+                        1577,
+                        1739
+                    ],
+                    "errorMessage": "overflow"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL0FjY2Vzc01hbmFnZXJFbnVtZXJhYmxlLnNvbC5BY2Nlc3NNYW5hZ2VyRW51bWVyYWJsZS5hcHByb3ZhbF9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgaW50Y2Jsb2NrIDEgMzIgOCAwIFRNUExfVVJPU19NQUlOX0FQUF9JRAogICAgYnl0ZWNibG9jayAweDE1MWY3Yzc1IDB4MDAwMjAwMDQwMDA2MDAwMDAwMDAgMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAgIl9fb2dfdmFsdWUiICJfcm9sZXNTZXQiICJfcm9sZVRvVGFyZ2V0U2V0IiAiX3JvbGVNZW1iZXJTZXQiIDB4MDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwMDAgMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDB4ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZgogICAgaW50Y18zIC8vIDAKICAgIHB1c2hieXRlcyAiIgogICAgZHVwbiAzCiAgICBwdXNoaW50IDQwOTYKICAgIGJ6ZXJvCiAgICBkdXAKICAgIHN0b3JlIDUKICAgIHN0b3JlIDAKICAgIGxvYWQgMAogICAgcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA4MAogICAgcmVwbGFjZTIgNjQKICAgIHN0b3JlIDAKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIHB1c2hieXRlcyAiX19jdG9yX3BlbmRpbmciCiAgICBpbnRjXzAgLy8gMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgcHVzaGJ5dGVzIDB4ZGM1ZTM3OTggLy8gbWV0aG9kICJfX2RlbGVnYXRlX3VwZGF0ZSgpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fX19kZWxlZ2F0ZV91cGRhdGVfcm91dGVANAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4OTkwZjMwYWUgMHhjZmM1OTgwYyAweDUwNGVmZjAyIDB4ZDM1NTY0ZDUgMHg4YzQ2NDQ1ZCAweDhiZTMyYzY2IDB4M2M1ZGFkNGEgMHg5MzNmYmI2YSAweDRjZjhjYjJlIDB4NjE2ODEwNjQgMHhjZmM0OTg5OCAweGU0NjgyMDUyIDB4NWFmMGJkMjcgMHhmNzM3YWNmOCAweGEwMGJmNDMwIDB4MDI5ZDFhODQgMHhkYmYwOGUxMCAweGJmM2Q2ZmFiIDB4NGMwNGYzZDggMHg2ZGMzMDMwNSAweGJmNjM3NjViIDB4ZDA3OTY0MzEgMHg5ZWFhNTczYSAweGNmZjJlNjIxIDB4ZDQ0NDBmNTcgMHg4N2Q1NDUwYiAweDJjMGFjZDgxIDB4ZGE3NTBiMjMgMHgxM2U5Mjg4NiAweDNkYmM2ZDQzIDB4OTBmNThlNzUgMHhmMTA2Njc5OSAweDg5MWMzNzRhIDB4YzRkZTE3MGIgMHhmMThhODNhOCAweGI1MTI1NTVjIDB4MmRmMDJhMjcgMHgyODQ0ZGI5ZSAweDM0NGFmZjQwIDB4ZDk2YjhhN2QgMHgwNmVkYzMyZSAweGM2ZDUxNTJlIDB4YWM5Y2JhMGUgMHg4NWQzODJlMSAweDJhMzJjZGQxIDB4M2I1Y2EwODYgMHgyYzgzNjZkOCAweDY2OWFjMDRiIDB4MDQ5NTFjMjkgMHhkZDk4MjhkNSAweDA0OTE5YTI2IC8vIG1ldGhvZCAiX19wb3N0SW5pdChhZGRyZXNzKXZvaWQiLCBtZXRob2QgImdldFJvbGUodWludDI1Nil1aW50NjQiLCBtZXRob2QgImdldFJvbGVDb3VudCgpdWludDI1NiIsIG1ldGhvZCAiZ2V0Um9sZXModWludDUxMix1aW50NTEyKXVpbnQ2NFtdIiwgbWV0aG9kICJnZXRBZG1pblJvbGUodWludDI1Nil1aW50NjQiLCBtZXRob2QgImdldEFkbWluUm9sZUNvdW50KCl1aW50MjU2IiwgbWV0aG9kICJnZXRBZG1pblJvbGVzKHVpbnQ1MTIsdWludDUxMil1aW50NjRbXSIsIG1ldGhvZCAiZ2V0Um9sZU1lbWJlcih1aW50NjQsdWludDI1NilhZGRyZXNzIiwgbWV0aG9kICJnZXRSb2xlTWVtYmVyQ291bnQodWludDY0KXVpbnQyNTYiLCBtZXRob2QgImdldFJvbGVNZW1iZXJzKHVpbnQ2NCx1aW50MjU2LHVpbnQyNTYpdWludDhbMzJdW10iLCBtZXRob2QgImdldFJvbGVPZkFkbWluUm9sZSh1aW50NjQsdWludDI1Nil1aW50NjQiLCBtZXRob2QgImdldFJvbGVPZkFkbWluUm9sZUNvdW50KHVpbnQ2NCl1aW50MjU2IiwgbWV0aG9kICJnZXRSb2xlc09mQWRtaW5Sb2xlKHVpbnQ2NCx1aW50NTEyLHVpbnQ1MTIpdWludDY0W10iLCBtZXRob2QgImdldFJvbGVUYXJnZXQodWludDY0LHVpbnQyNTYpYWRkcmVzcyIsIG1ldGhvZCAiZ2V0Um9sZVRhcmdldENvdW50KHVpbnQ2NCl1aW50MjU2IiwgbWV0aG9kICJnZXRSb2xlVGFyZ2V0cyh1aW50NjQsdWludDI1Nix1aW50MjU2KXVpbnQ4WzMyXVtdIiwgbWV0aG9kICJnZXRSb2xlVGFyZ2V0U2VsZWN0b3IodWludDY0LGFkZHJlc3MsdWludDI1NilieXRlWzRdIiwgbWV0aG9kICJnZXRSb2xlVGFyZ2V0U2VsZWN0b3JDb3VudCh1aW50NjQsYWRkcmVzcyl1aW50MjU2IiwgbWV0aG9kICJnZXRSb2xlVGFyZ2V0U2VsZWN0b3JzKHVpbnQ2NCxhZGRyZXNzLHVpbnQ1MTIsdWludDUxMil1aW50OFs0XVtdIiwgbWV0aG9kICJBRE1JTl9ST0xFKCl1aW50NjQiLCBtZXRob2QgIlBVQkxJQ19ST0xFKCl1aW50NjQiLCBtZXRob2QgImNhbkNhbGwoYWRkcmVzcyxhZGRyZXNzLGJ5dGVbNF0pKGJvb2wsdWludDY0KSIsIG1ldGhvZCAiZXhwaXJhdGlvbigpdWludDY0IiwgbWV0aG9kICJtaW5TZXRiYWNrKCl1aW50NjQiLCBtZXRob2QgImlzVGFyZ2V0Q2xvc2VkKGFkZHJlc3MpYm9vbCIsIG1ldGhvZCAiZ2V0VGFyZ2V0RnVuY3Rpb25Sb2xlKGFkZHJlc3MsYnl0ZVs0XSl1aW50NjQiLCBtZXRob2QgImdldFRhcmdldEFkbWluRGVsYXkoYWRkcmVzcyl1aW50NjQiLCBtZXRob2QgImdldFJvbGVBZG1pbih1aW50NjQpdWludDY0IiwgbWV0aG9kICJnZXRSb2xlR3VhcmRpYW4odWludDY0KXVpbnQ2NCIsIG1ldGhvZCAiZ2V0Um9sZUdyYW50RGVsYXkodWludDY0KXVpbnQ2NCIsIG1ldGhvZCAiZ2V0QWNjZXNzKHVpbnQ2NCxhZGRyZXNzKSh1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQpIiwgbWV0aG9kICJoYXNSb2xlKHVpbnQ2NCxhZGRyZXNzKShib29sLHVpbnQ2NCkiLCBtZXRob2QgImxhYmVsUm9sZSh1aW50NjQsc3RyaW5nKXZvaWQiLCBtZXRob2QgImdyYW50Um9sZSh1aW50NjQsYWRkcmVzcyx1aW50NjQpdm9pZCIsIG1ldGhvZCAicmV2b2tlUm9sZSh1aW50NjQsYWRkcmVzcyl2b2lkIiwgbWV0aG9kICJyZW5vdW5jZVJvbGUodWludDY0LGFkZHJlc3Mpdm9pZCIsIG1ldGhvZCAic2V0Um9sZUFkbWluKHVpbnQ2NCx1aW50NjQpdm9pZCIsIG1ldGhvZCAic2V0Um9sZUd1YXJkaWFuKHVpbnQ2NCx1aW50NjQpdm9pZCIsIG1ldGhvZCAic2V0R3JhbnREZWxheSh1aW50NjQsdWludDY0KXZvaWQiLCBtZXRob2QgInNldFRhcmdldEZ1bmN0aW9uUm9sZShhZGRyZXNzLHVpbnQ4WzRdW10sdWludDY0KXZvaWQiLCBtZXRob2QgInNldFRhcmdldEFkbWluRGVsYXkoYWRkcmVzcyx1aW50NjQpdm9pZCIsIG1ldGhvZCAic2V0VGFyZ2V0Q2xvc2VkKGFkZHJlc3MsYm9vbCl2b2lkIiwgbWV0aG9kICJnZXRTY2hlZHVsZShieXRlWzMyXSl1aW50NjQiLCBtZXRob2QgImdldE5vbmNlKGJ5dGVbMzJdKXVpbnQ2NCIsIG1ldGhvZCAic2NoZWR1bGUoYWRkcmVzcyxieXRlW10sdWludDY0KShieXRlWzMyXSx1aW50NjQpIiwgbWV0aG9kICJleGVjdXRlKGFkZHJlc3MsYnl0ZVtdKXVpbnQ2NCIsIG1ldGhvZCAiY2FuY2VsKGFkZHJlc3MsYWRkcmVzcyxieXRlW10pdWludDY0IiwgbWV0aG9kICJjb25zdW1lU2NoZWR1bGVkT3AoYWRkcmVzcyxieXRlW10pdm9pZCIsIG1ldGhvZCAiaGFzaE9wZXJhdGlvbihhZGRyZXNzLGFkZHJlc3MsYnl0ZVtdKWJ5dGVbMzJdIiwgbWV0aG9kICJ1cGRhdGVBdXRob3JpdHkoYWRkcmVzcyxhZGRyZXNzKXZvaWQiLCBtZXRob2QgIm11bHRpY2FsbChieXRlW11bXSlieXRlW11bXSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fX19wb3N0SW5pdF9yb3V0ZUA3IG1haW5fZ2V0Um9sZV9yb3V0ZUA4IG1haW5fZ2V0Um9sZUNvdW50X3JvdXRlQDkgbWFpbl9nZXRSb2xlc19yb3V0ZUAxMCBtYWluX2dldEFkbWluUm9sZV9yb3V0ZUAxMSBtYWluX2dldEFkbWluUm9sZUNvdW50X3JvdXRlQDEyIG1haW5fZ2V0QWRtaW5Sb2xlc19yb3V0ZUAxMyBtYWluX2dldFJvbGVNZW1iZXJfcm91dGVAMTQgbWFpbl9nZXRSb2xlTWVtYmVyQ291bnRfcm91dGVAMTUgbWFpbl9nZXRSb2xlTWVtYmVyc19yb3V0ZUAxNiBtYWluX2dldFJvbGVPZkFkbWluUm9sZV9yb3V0ZUAxNyBtYWluX2dldFJvbGVPZkFkbWluUm9sZUNvdW50X3JvdXRlQDE4IG1haW5fZ2V0Um9sZXNPZkFkbWluUm9sZV9yb3V0ZUAxOSBtYWluX2dldFJvbGVUYXJnZXRfcm91dGVAMjAgbWFpbl9nZXRSb2xlVGFyZ2V0Q291bnRfcm91dGVAMjEgbWFpbl9nZXRSb2xlVGFyZ2V0c19yb3V0ZUAyMiBtYWluX2dldFJvbGVUYXJnZXRTZWxlY3Rvcl9yb3V0ZUAyMyBtYWluX2dldFJvbGVUYXJnZXRTZWxlY3RvckNvdW50X3JvdXRlQDI0IG1haW5fZ2V0Um9sZVRhcmdldFNlbGVjdG9yc19yb3V0ZUAyNSBtYWluX0FETUlOX1JPTEVfcm91dGVAMjYgbWFpbl9BRE1JTl9ST0xFX3JvdXRlQDI2IG1haW5fY2FuQ2FsbF9yb3V0ZUAyOCBtYWluX0FETUlOX1JPTEVfcm91dGVAMjYgbWFpbl9BRE1JTl9ST0xFX3JvdXRlQDI2IG1haW5faXNUYXJnZXRDbG9zZWRfcm91dGVAMzEgbWFpbl9nZXRUYXJnZXRGdW5jdGlvblJvbGVfcm91dGVAMzIgbWFpbl9nZXRUYXJnZXRBZG1pbkRlbGF5X3JvdXRlQDMzIG1haW5fZ2V0Um9sZUFkbWluX3JvdXRlQDM0IG1haW5fZ2V0Um9sZUFkbWluX3JvdXRlQDM0IG1haW5fZ2V0Um9sZUFkbWluX3JvdXRlQDM0IG1haW5fZ2V0QWNjZXNzX3JvdXRlQDM3IG1haW5faGFzUm9sZV9yb3V0ZUAzOCBtYWluX2xhYmVsUm9sZV9yb3V0ZUAzOSBtYWluX2dyYW50Um9sZV9yb3V0ZUA0MCBtYWluX3Jldm9rZVJvbGVfcm91dGVANDEgbWFpbl9yZXZva2VSb2xlX3JvdXRlQDQxIG1haW5fc2V0Um9sZUFkbWluX3JvdXRlQDQzIG1haW5fc2V0Um9sZUFkbWluX3JvdXRlQDQzIG1haW5fc2V0Um9sZUFkbWluX3JvdXRlQDQzIG1haW5fc2V0VGFyZ2V0RnVuY3Rpb25Sb2xlX3JvdXRlQDQ2IG1haW5fc2V0VGFyZ2V0QWRtaW5EZWxheV9yb3V0ZUA0NyBtYWluX3NldFRhcmdldENsb3NlZF9yb3V0ZUA0OCBtYWluX2dldFRhcmdldEFkbWluRGVsYXlfcm91dGVAMzMgbWFpbl9nZXRUYXJnZXRBZG1pbkRlbGF5X3JvdXRlQDMzIG1haW5fc2NoZWR1bGVfcm91dGVANTEgbWFpbl9leGVjdXRlX3JvdXRlQDUyIG1haW5fY2FuY2VsX3JvdXRlQDUzIG1haW5fY29uc3VtZVNjaGVkdWxlZE9wX3JvdXRlQDU0IG1haW5faGFzaE9wZXJhdGlvbl9yb3V0ZUA1NSBtYWluX3VwZGF0ZUF1dGhvcml0eV9yb3V0ZUA1NiBtYWluX211bHRpY2FsbF9yb3V0ZUA1NwogICAgZXJyCgptYWluX211bHRpY2FsbF9yb3V0ZUA1NzoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18zIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGR1cAogICAgYnVyeSA2CiAgICBwdXNoaW50IDIKICAgICoKICAgIGJ1cnkgMwogICAgZHVwCiAgICBsZW4KICAgIGJ1cnkgMgogICAgZXh0cmFjdCAyIDAKICAgIGJ1cnkgNQogICAgaW50Y18zIC8vIDAKICAgIGJ1cnkgMwoKbWFpbl9mb3JfaGVhZGVyQDYyOgogICAgZGlnIDIKICAgIGRpZyA0CiAgICA8CiAgICBieiBtYWluX2FmdGVyX2ZvckA2NAogICAgZGlnIDIKICAgIGR1cAogICAgcHVzaGludCAyCiAgICAqCiAgICBkaWcgNgogICAgZHVwCiAgICB1bmNvdmVyIDIKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGVuY29kaW5nCiAgICBkdXAKICAgIGRpZyA1CiAgICBkdXAKICAgIGNvdmVyIDQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCB0YWlsIHBvaW50ZXIgZm9yIChsZW4rKGxlbit1aW50OFtdKVtdKQogICAgZGlnIDEKICAgIGxlbgogICAgc3Vic3RyaW5nMwogICAgaW50Y18zIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMgogICAgKwogICAgKwogICAgYnVyeSAzCiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgYnVyeSAzCiAgICBiIG1haW5fZm9yX2hlYWRlckA2MgoKbWFpbl9hZnRlcl9mb3JANjQ6CiAgICBkaWcgMQogICAgcHVzaGludCAyCiAgICArCiAgICBkaWcgMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4Pj4KICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3VwZGF0ZUF1dGhvcml0eV9yb3V0ZUA1NjoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5faGFzaE9wZXJhdGlvbl9yb3V0ZUA1NToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cAogICAgaW50Y18zIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMgogICAgKwogICAgc3dhcAogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2NvbnN1bWVTY2hlZHVsZWRPcF9yb3V0ZUA1NDoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgaW50Y18zIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMgogICAgKwogICAgc3dhcAogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fY2FuY2VsX3JvdXRlQDUzOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBpbnRjXzMgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAyCiAgICArCiAgICBzd2FwCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2V4ZWN1dGVfcm91dGVANTI6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGludGNfMyAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fc2NoZWR1bGVfcm91dGVANTE6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGludGNfMyAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFRhcmdldEFkbWluRGVsYXlfcm91dGVAMzM6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fc2V0VGFyZ2V0Q2xvc2VkX3JvdXRlQDQ4OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBpbnRjXzAgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5ib29sCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3NldFRhcmdldEFkbWluRGVsYXlfcm91dGVANDc6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9zZXRUYXJnZXRGdW5jdGlvblJvbGVfcm91dGVANDY6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGludGNfMyAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDQKICAgICoKICAgIHB1c2hpbnQgMgogICAgKwogICAgc3dhcAogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgND4+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9zZXRSb2xlQWRtaW5fcm91dGVANDM6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fcmV2b2tlUm9sZV9yb3V0ZUA0MToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dyYW50Um9sZV9yb3V0ZUA0MDoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9sYWJlbFJvbGVfcm91dGVAMzk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzMgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAyCiAgICArCiAgICBzd2FwCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9oYXNSb2xlX3JvdXRlQDM4OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIGJ5dGVjIDggLy8gMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAwMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldEFjY2Vzc19yb3V0ZUAzNzoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRSb2xlQWRtaW5fcm91dGVAMzQ6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFRhcmdldEZ1bmN0aW9uUm9sZV9yb3V0ZUAzMjoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgcHVzaGludCA0CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCA0PgogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2lzVGFyZ2V0Q2xvc2VkX3JvdXRlQDMxOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX0FETUlOX1JPTEVfcm91dGVAMjY6CiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fY2FuQ2FsbF9yb3V0ZUAyODoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGxlbgogICAgcHVzaGludCA0CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCA0PgogICAgYnl0ZWMgOCAvLyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMDAwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0Um9sZVRhcmdldFNlbGVjdG9yc19yb3V0ZUAyNToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBsZW4KICAgIHB1c2hpbnQgNjQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDUxMgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNAogICAgbGVuCiAgICBwdXNoaW50IDY0CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ1MTIKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFJvbGVUYXJnZXRTZWxlY3RvckNvdW50X3JvdXRlQDI0OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFJvbGVUYXJnZXRTZWxlY3Rvcl9yb3V0ZUAyMzoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRSb2xlVGFyZ2V0c19yb3V0ZUAyMjoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICBpbnRjIDQgLy8gVE1QTF9VUk9TX01BSU5fQVBQX0lECiAgICBieXRlY18zIC8vICJfX29nX3ZhbHVlIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICB1bmNvdmVyIDIKICAgIGl0b2IKICAgIHNoYTI1NgogICAgYnl0ZWMgNSAvLyAiX3JvbGVUb1RhcmdldFNldCIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYm94X2dldAogICAgYnl0ZWNfMSAvLyAweDAwMDIwMDA0MDAwNjAwMDAwMDAwCiAgICBjb3ZlciAyCiAgICBzZWxlY3QKICAgIGNvdmVyIDIKICAgIGNhbGxzdWIgRW51bWVyYWJsZVNldC52YWx1ZXMKICAgIHBvcAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRSb2xlVGFyZ2V0Q291bnRfcm91dGVAMjE6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICBpbnRjIDQgLy8gVE1QTF9VUk9TX01BSU5fQVBQX0lECiAgICBieXRlY18zIC8vICJfX29nX3ZhbHVlIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICBpdG9iCiAgICBzaGEyNTYKICAgIGJ5dGVjIDUgLy8gIl9yb2xlVG9UYXJnZXRTZXQiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJveF9nZXQKICAgIGJ5dGVjXzEgLy8gMHgwMDAyMDAwNDAwMDYwMDAwMDAwMAogICAgY292ZXIgMgogICAgc2VsZWN0CiAgICBjYWxsc3ViIEVudW1lcmFibGVTZXQubGVuZ3RoCiAgICBwb3AKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGludGNfMSAvLyAzMgogICAgYnplcm8KICAgIGJ8CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFJvbGVUYXJnZXRfcm91dGVAMjA6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIGludGMgNCAvLyBUTVBMX1VST1NfTUFJTl9BUFBfSUQKICAgIGJ5dGVjXzMgLy8gIl9fb2dfdmFsdWUiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgcG9wCiAgICAhCiAgICBhc3NlcnQgLy8gbm90IHBheWFibGUKICAgIHN3YXAKICAgIGl0b2IKICAgIHNoYTI1NgogICAgYnl0ZWMgNSAvLyAiX3JvbGVUb1RhcmdldFNldCIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYm94X2dldAogICAgYnl0ZWNfMSAvLyAweDAwMDIwMDA0MDAwNjAwMDAwMDAwCiAgICBjb3ZlciAyCiAgICBzZWxlY3QKICAgIHN3YXAKICAgIGNhbGxzdWIgRW51bWVyYWJsZVNldC5hdAogICAgcG9wCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFJvbGVzT2ZBZG1pblJvbGVfcm91dGVAMTk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBwdXNoaW50IDY0CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ1MTIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGxlbgogICAgcHVzaGludCA2NAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NTEyCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRSb2xlT2ZBZG1pblJvbGVDb3VudF9yb3V0ZUAxODoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRSb2xlT2ZBZG1pblJvbGVfcm91dGVAMTc6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFJvbGVNZW1iZXJzX3JvdXRlQDE2OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIGludGMgNCAvLyBUTVBMX1VST1NfTUFJTl9BUFBfSUQKICAgIGJ5dGVjXzMgLy8gIl9fb2dfdmFsdWUiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgcG9wCiAgICAhCiAgICBhc3NlcnQgLy8gbm90IHBheWFibGUKICAgIHVuY292ZXIgMgogICAgaXRvYgogICAgc2hhMjU2CiAgICBieXRlYyA2IC8vICJfcm9sZU1lbWJlclNldCIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYm94X2dldAogICAgYnl0ZWNfMSAvLyAweDAwMDIwMDA0MDAwNjAwMDAwMDAwCiAgICBjb3ZlciAyCiAgICBzZWxlY3QKICAgIGNvdmVyIDIKICAgIGNhbGxzdWIgRW51bWVyYWJsZVNldC52YWx1ZXMKICAgIHBvcAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRSb2xlTWVtYmVyQ291bnRfcm91dGVAMTU6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICBpbnRjIDQgLy8gVE1QTF9VUk9TX01BSU5fQVBQX0lECiAgICBieXRlY18zIC8vICJfX29nX3ZhbHVlIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICBpdG9iCiAgICBzaGEyNTYKICAgIGJ5dGVjIDYgLy8gIl9yb2xlTWVtYmVyU2V0IgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBieXRlY18xIC8vIDB4MDAwMjAwMDQwMDA2MDAwMDAwMDAKICAgIGNvdmVyIDIKICAgIHNlbGVjdAogICAgY2FsbHN1YiBFbnVtZXJhYmxlU2V0Lmxlbmd0aAogICAgcG9wCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA8PQogICAgYXNzZXJ0IC8vIG92ZXJmbG93CiAgICBpbnRjXzEgLy8gMzIKICAgIGJ6ZXJvCiAgICBifAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRSb2xlTWVtYmVyX3JvdXRlQDE0OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICBpbnRjIDQgLy8gVE1QTF9VUk9TX01BSU5fQVBQX0lECiAgICBieXRlY18zIC8vICJfX29nX3ZhbHVlIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICBzd2FwCiAgICBpdG9iCiAgICBzaGEyNTYKICAgIGJ5dGVjIDYgLy8gIl9yb2xlTWVtYmVyU2V0IgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBieXRlY18xIC8vIDB4MDAwMjAwMDQwMDA2MDAwMDAwMDAKICAgIGNvdmVyIDIKICAgIHNlbGVjdAogICAgc3dhcAogICAgY2FsbHN1YiBFbnVtZXJhYmxlU2V0LmF0CiAgICBwb3AKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0QWRtaW5Sb2xlc19yb3V0ZUAxMzoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgcHVzaGludCA2NAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NTEyCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIHB1c2hpbnQgNjQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDUxMgogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0QWRtaW5Sb2xlQ291bnRfcm91dGVAMTI6CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRBZG1pblJvbGVfcm91dGVAMTE6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0Um9sZXNfcm91dGVAMTA6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA2NAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NTEyCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA2NAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NTEyCiAgICBpbnRjIDQgLy8gVE1QTF9VUk9TX01BSU5fQVBQX0lECiAgICBieXRlY18zIC8vICJfX29nX3ZhbHVlIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICBieXRlYyA0IC8vICJfcm9sZXNTZXQiCiAgICBib3hfZ2V0CiAgICBieXRlY18xIC8vIDB4MDAwMjAwMDQwMDA2MDAwMDAwMDAKICAgIGNvdmVyIDIKICAgIHNlbGVjdAogICAgY292ZXIgMgogICAgY2FsbHN1YiAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL0FjY2Vzc01hbmFnZXJFbnVtZXJhYmxlLnNvbC5FbnVtZXJhYmxlU2V0LnZhbHVlcygzKV8yCiAgICBwb3AKICAgIGxvYWQgMAogICAgc3RvcmUgMAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRSb2xlQ291bnRfcm91dGVAOToKICAgIGludGMgNCAvLyBUTVBMX1VST1NfTUFJTl9BUFBfSUQKICAgIGJ5dGVjXzMgLy8gIl9fb2dfdmFsdWUiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgcG9wCiAgICAhCiAgICBhc3NlcnQgLy8gbm90IHBheWFibGUKICAgIGJ5dGVjIDQgLy8gIl9yb2xlc1NldCIKICAgIGJveF9nZXQKICAgIGJ5dGVjXzEgLy8gMHgwMDAyMDAwNDAwMDYwMDAwMDAwMAogICAgY292ZXIgMgogICAgc2VsZWN0CiAgICBjYWxsc3ViIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvYWF2ZS12NC9jb250cmFjdHMvQWNjZXNzTWFuYWdlckVudW1lcmFibGUuc29sLkVudW1lcmFibGVTZXQubGVuZ3RoKDEpXzIKICAgIHBvcAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgaW50Y18xIC8vIDMyCiAgICBiemVybwogICAgYnwKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0Um9sZV9yb3V0ZUA4OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICBpbnRjIDQgLy8gVE1QTF9VUk9TX01BSU5fQVBQX0lECiAgICBieXRlY18zIC8vICJfX29nX3ZhbHVlIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICBpbnRjXzIgLy8gOAogICAgYnplcm8KICAgIGJ5dGVjIDQgLy8gIl9yb2xlc1NldCIKICAgIGJveF9nZXQKICAgIGJ5dGVjXzEgLy8gMHgwMDAyMDAwNDAwMDYwMDAwMDAwMAogICAgY292ZXIgMgogICAgc2VsZWN0CiAgICBkaWcgMgogICAgY2FsbHN1YiAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL0FjY2Vzc01hbmFnZXJFbnVtZXJhYmxlLnNvbC5FbnVtZXJhYmxlU2V0LmF0KDIpXzIKICAgIHBvcAogICAgZGlnIDEKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWMgNCAvLyAiX3JvbGVzU2V0IgogICAgYm94X2dldAogICAgYnl0ZWNfMSAvLyAweDAwMDIwMDA0MDAwNjAwMDAwMDAwCiAgICBjb3ZlciAyCiAgICBzZWxlY3QKICAgIHVuY292ZXIgMwogICAgY2FsbHN1YiAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL0FjY2Vzc01hbmFnZXJFbnVtZXJhYmxlLnNvbC5FbnVtZXJhYmxlU2V0LmF0KDIpXzIKICAgIHBvcAogICAgdW5jb3ZlciAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgIC0KICAgIGludGNfMiAvLyA4CiAgICBleHRyYWN0MwogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9fX3Bvc3RJbml0X3JvdXRlQDc6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX19fZGVsZWdhdGVfdXBkYXRlX3JvdXRlQDQ6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDQgLy8gVXBkYXRlQXBwbGljYXRpb24KICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIHJldHVybgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvYWF2ZS12NC9jb250cmFjdHMvQWNjZXNzTWFuYWdlckVudW1lcmFibGUuc29sLkVudW1lcmFibGVTZXQuX2xlbmd0aChzZXQ6IGJ5dGVzKSAtPiBieXRlcywgYnl0ZXM6CkVudW1lcmFibGVTZXQuX2xlbmd0aDoKICAgIHByb3RvIDEgMgogICAgZnJhbWVfZGlnIC0xCiAgICBpbnRjXzMgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgIGZyYW1lX2RpZyAtMQogICAgcHVzaGludCAyCiAgICBleHRyYWN0X3VpbnQxNgogICAgZnJhbWVfZGlnIC0xCiAgICBjb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBpbnRjXzMgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaXRvYgogICAgZnJhbWVfZGlnIC0xCiAgICByZXRzdWIKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL0FjY2Vzc01hbmFnZXJFbnVtZXJhYmxlLnNvbC5FbnVtZXJhYmxlU2V0Ll9hdChzZXQ6IGJ5dGVzLCBpbmRleDogYnl0ZXMpIC0+IGJ5dGVzLCBieXRlczoKRW51bWVyYWJsZVNldC5fYXQ6CiAgICBwcm90byAyIDIKICAgIGludGNfMiAvLyA4CiAgICBiemVybwogICAgZnJhbWVfZGlnIC0xCiAgICBjb25jYXQKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgLQogICAgZXh0cmFjdF91aW50NjQKICAgIGZyYW1lX2RpZyAtMgogICAgaW50Y18zIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTIKICAgIHB1c2hpbnQgMgogICAgZXh0cmFjdF91aW50MTYKICAgIGZyYW1lX2RpZyAtMgogICAgY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgZXh0cmFjdCAyIDAKICAgIHN3YXAKICAgIGludGNfMSAvLyAzMgogICAgKgogICAgaW50Y18xIC8vIDMyCiAgICBleHRyYWN0MyAvLyBvbiBlcnJvcjogaW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIGZyYW1lX2RpZyAtMgogICAgcmV0c3ViCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9hYXZlLXY0L2NvbnRyYWN0cy9BY2Nlc3NNYW5hZ2VyRW51bWVyYWJsZS5zb2wuRW51bWVyYWJsZVNldC5fdmFsdWVzKDMpKHNldDogYnl0ZXMsIHN0YXJ0OiBieXRlcywgZW5kOiBieXRlcykgLT4gYnl0ZXMsIGJ5dGVzOgpFbnVtZXJhYmxlU2V0Ll92YWx1ZXM6CiAgICBwcm90byAzIDIKICAgIGludGNfMyAvLyAwCiAgICBkdXAKICAgIGZyYW1lX2RpZyAtMwogICAgY2FsbHN1YiBFbnVtZXJhYmxlU2V0Ll9sZW5ndGgKICAgIGZyYW1lX2J1cnkgLTMKICAgIGZyYW1lX2RpZyAtMQogICAgc3dhcAogICAgY2FsbHN1YiBNYXRoLm1pbgogICAgZnJhbWVfYnVyeSAtMQogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9kaWcgLTEKICAgIGNhbGxzdWIgTWF0aC5taW4KICAgIGZyYW1lX2J1cnkgLTIKICAgIGZyYW1lX2RpZyAtMQogICAgYnl0ZWMgNyAvLyAweDAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAogICAgYisKICAgIGZyYW1lX2RpZyAtMgogICAgYi0KICAgIGJ5dGVjIDcgLy8gMHgwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGIlCiAgICBpbnRjXzMgLy8gMAogICAgaXRvYgogICAgcHVzaGJ5dGVzIDB4MDAwMAogICAgaW50Y18zIC8vIDAKCkVudW1lcmFibGVTZXQuX3ZhbHVlc193aGlsZV90b3BAMzoKICAgIGludGNfMiAvLyA4CiAgICBiemVybwogICAgZHVwCiAgICBmcmFtZV9idXJ5IDEKICAgIGZyYW1lX2RpZyAyCiAgICBjb25jYXQKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgLQogICAgZXh0cmFjdF91aW50NjQKICAgIGZyYW1lX2RpZyA1CiAgICA+CiAgICBieiBFbnVtZXJhYmxlU2V0Ll92YWx1ZXNfYWZ0ZXJfd2hpbGVANQogICAgZnJhbWVfZGlnIDQKICAgIGR1cAogICAgaW50Y18zIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgaXRvYgogICAgZXh0cmFjdCA2IDAKICAgIHJlcGxhY2UyIDAKICAgIGJ5dGVjIDkgLy8gMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCiAgICBjb25jYXQKICAgIGZyYW1lX2J1cnkgNAogICAgZnJhbWVfZGlnIDUKICAgIGludGNfMCAvLyAxCiAgICArCiAgICBmcmFtZV9idXJ5IDUKICAgIGIgRW51bWVyYWJsZVNldC5fdmFsdWVzX3doaWxlX3RvcEAzCgpFbnVtZXJhYmxlU2V0Ll92YWx1ZXNfYWZ0ZXJfd2hpbGVANToKICAgIGZyYW1lX2RpZyA0CiAgICBmcmFtZV9idXJ5IDAKCkVudW1lcmFibGVTZXQuX3ZhbHVlc193aGlsZV90b3BANjoKICAgIGZyYW1lX2RpZyAzCiAgICBmcmFtZV9kaWcgMgogICAgYjwKICAgIGJ6IEVudW1lcmFibGVTZXQuX3ZhbHVlc19hZnRlcl93aGlsZUA4CiAgICBmcmFtZV9kaWcgMQogICAgZnJhbWVfZGlnIDMKICAgIGR1cAogICAgY292ZXIgMgogICAgY29uY2F0CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgIC0KICAgIGV4dHJhY3RfdWludDY0CiAgICBpbnRjXzEgLy8gMzIKICAgICoKICAgIHB1c2hpbnQgMgogICAgKwogICAgZnJhbWVfZGlnIDAKICAgIHN3YXAKICAgIGJ5dGVjIDkgLy8gMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCiAgICByZXBsYWNlMyAvLyBvbiBlcnJvcjogaW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIGZyYW1lX2J1cnkgMAogICAgcHVzaGJ5dGVzIDB4MDEKICAgIGIrCiAgICBmcmFtZV9idXJ5IDMKICAgIGIgRW51bWVyYWJsZVNldC5fdmFsdWVzX3doaWxlX3RvcEA2CgpFbnVtZXJhYmxlU2V0Ll92YWx1ZXNfYWZ0ZXJfd2hpbGVAODoKICAgIGZyYW1lX2RpZyAwCiAgICBmcmFtZV9kaWcgLTMKICAgIGZyYW1lX2J1cnkgMQogICAgZnJhbWVfYnVyeSAwCiAgICByZXRzdWIKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL0FjY2Vzc01hbmFnZXJFbnVtZXJhYmxlLnNvbC5FbnVtZXJhYmxlU2V0Lmxlbmd0aCgxKV8xKHNldDogYnl0ZXMpIC0+IGJ5dGVzLCBieXRlczoKRW51bWVyYWJsZVNldC5sZW5ndGg6CiAgICBwcm90byAxIDIKICAgIGZyYW1lX2RpZyAtMQogICAgaW50Y18zIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTEKICAgIGxlbgogICAgZnJhbWVfZGlnIC0xCiAgICBjb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBjYWxsc3ViIEVudW1lcmFibGVTZXQuX2xlbmd0aAogICAgcG9wCiAgICBmcmFtZV9kaWcgLTEKICAgIHJldHN1YgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvYWF2ZS12NC9jb250cmFjdHMvQWNjZXNzTWFuYWdlckVudW1lcmFibGUuc29sLkVudW1lcmFibGVTZXQuYXQoMilfMShzZXQ6IGJ5dGVzLCBpbmRleDogYnl0ZXMpIC0+IGJ5dGVzLCBieXRlczoKRW51bWVyYWJsZVNldC5hdDoKICAgIHByb3RvIDIgMgogICAgaW50Y18xIC8vIDMyCiAgICBiemVybwogICAgZnJhbWVfZGlnIC0yCiAgICBpbnRjXzMgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgIGZyYW1lX2RpZyAtMgogICAgbGVuCiAgICBmcmFtZV9kaWcgLTIKICAgIGNvdmVyIDIKICAgIHN1YnN0cmluZzMKICAgIGR1cAogICAgZnJhbWVfZGlnIC0xCiAgICBjYWxsc3ViIEVudW1lcmFibGVTZXQuX2F0CiAgICBwb3AKICAgIGJ5dGVjIDEwIC8vIDB4ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZgogICAgYiYKICAgIGRpZyAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGZyYW1lX2RpZyAtMQogICAgY2FsbHN1YiBFbnVtZXJhYmxlU2V0Ll9hdAogICAgcG9wCiAgICBieXRlYyAxMCAvLyAweGZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmYKICAgIGImCiAgICB1bmNvdmVyIDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgIC0KICAgIGludGNfMSAvLyAzMgogICAgZXh0cmFjdDMKICAgIGZyYW1lX2RpZyAtMgogICAgcmV0c3ViCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9hYXZlLXY0L2NvbnRyYWN0cy9BY2Nlc3NNYW5hZ2VyRW51bWVyYWJsZS5zb2wuRW51bWVyYWJsZVNldC52YWx1ZXMoMylfMShzZXQ6IGJ5dGVzLCBzdGFydDogYnl0ZXMsIGVuZDogYnl0ZXMpIC0+IGJ5dGVzLCBieXRlczoKRW51bWVyYWJsZVNldC52YWx1ZXM6CiAgICBwcm90byAzIDIKICAgIGZyYW1lX2RpZyAtMwogICAgaW50Y18zIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTMKICAgIGxlbgogICAgZnJhbWVfZGlnIC0zCiAgICBjb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBmcmFtZV9kaWcgLTIKICAgIGZyYW1lX2RpZyAtMQogICAgY2FsbHN1YiBFbnVtZXJhYmxlU2V0Ll92YWx1ZXMKICAgIHBvcAogICAgbG9hZCAwCiAgICBzdG9yZSAwCiAgICBmcmFtZV9kaWcgLTMKICAgIHJldHN1YgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvYWF2ZS12NC9jb250cmFjdHMvQWNjZXNzTWFuYWdlckVudW1lcmFibGUuc29sLkVudW1lcmFibGVTZXQubGVuZ3RoKDEpXzIoc2V0OiBieXRlcykgLT4gYnl0ZXMsIGJ5dGVzOgovaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL0FjY2Vzc01hbmFnZXJFbnVtZXJhYmxlLnNvbC5FbnVtZXJhYmxlU2V0Lmxlbmd0aCgxKV8yOgogICAgcHJvdG8gMSAyCiAgICBmcmFtZV9kaWcgLTEKICAgIGludGNfMyAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgZnJhbWVfZGlnIC0xCiAgICBsZW4KICAgIGZyYW1lX2RpZyAtMQogICAgY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgY2FsbHN1YiBFbnVtZXJhYmxlU2V0Ll9sZW5ndGgKICAgIHBvcAogICAgZnJhbWVfZGlnIC0xCiAgICByZXRzdWIKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL0FjY2Vzc01hbmFnZXJFbnVtZXJhYmxlLnNvbC5FbnVtZXJhYmxlU2V0LmF0KDIpXzIoc2V0OiBieXRlcywgaW5kZXg6IGJ5dGVzKSAtPiBieXRlcywgYnl0ZXM6Ci9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvYWF2ZS12NC9jb250cmFjdHMvQWNjZXNzTWFuYWdlckVudW1lcmFibGUuc29sLkVudW1lcmFibGVTZXQuYXQoMilfMjoKICAgIHByb3RvIDIgMgogICAgZnJhbWVfZGlnIC0yCiAgICBpbnRjXzMgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgIGZyYW1lX2RpZyAtMgogICAgbGVuCiAgICBmcmFtZV9kaWcgLTIKICAgIGNvdmVyIDIKICAgIHN1YnN0cmluZzMKICAgIGZyYW1lX2RpZyAtMQogICAgY2FsbHN1YiBFbnVtZXJhYmxlU2V0Ll9hdAogICAgcG9wCiAgICBmcmFtZV9kaWcgLTIKICAgIHJldHN1YgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvYWF2ZS12NC9jb250cmFjdHMvQWNjZXNzTWFuYWdlckVudW1lcmFibGUuc29sLkVudW1lcmFibGVTZXQudmFsdWVzKDMpXzIoc2V0OiBieXRlcywgc3RhcnQ6IGJ5dGVzLCBlbmQ6IGJ5dGVzKSAtPiBieXRlcywgYnl0ZXM6Ci9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvYWF2ZS12NC9jb250cmFjdHMvQWNjZXNzTWFuYWdlckVudW1lcmFibGUuc29sLkVudW1lcmFibGVTZXQudmFsdWVzKDMpXzI6CiAgICBwcm90byAzIDIKICAgIGZyYW1lX2RpZyAtMwogICAgaW50Y18zIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTMKICAgIGxlbgogICAgZnJhbWVfZGlnIC0zCiAgICBjb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBmcmFtZV9kaWcgLTIKICAgIGZyYW1lX2RpZyAtMQogICAgY2FsbHN1YiBFbnVtZXJhYmxlU2V0Ll92YWx1ZXMKICAgIHBvcAogICAgbG9hZCAwCiAgICBzdG9yZSAwCiAgICBmcmFtZV9kaWcgLTMKICAgIHJldHN1YgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvYWF2ZS12NC9jb250cmFjdHMvQWNjZXNzTWFuYWdlckVudW1lcmFibGUuc29sLk1hdGgudGVybmFyeShjb25kaXRpb246IHVpbnQ2NCwgYTogYnl0ZXMsIGI6IGJ5dGVzKSAtPiBieXRlczoKTWF0aC50ZXJuYXJ5OgogICAgcHJvdG8gMyAxCiAgICBmcmFtZV9kaWcgLTIKICAgIGZyYW1lX2RpZyAtMQogICAgYl4KICAgIGZyYW1lX2RpZyAtMwogICAgY2FsbHN1YiBTYWZlQ2FzdC50b1VpbnQKICAgIGIqCiAgICBieXRlYyA3IC8vIDB4MDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCiAgICBiJQogICAgZnJhbWVfZGlnIC0xCiAgICBiXgogICAgcmV0c3ViCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9hYXZlLXY0L2NvbnRyYWN0cy9BY2Nlc3NNYW5hZ2VyRW51bWVyYWJsZS5zb2wuTWF0aC5taW4oYTogYnl0ZXMsIGI6IGJ5dGVzKSAtPiBieXRlczoKTWF0aC5taW46CiAgICBwcm90byAyIDEKICAgIGZyYW1lX2RpZyAtMgogICAgZnJhbWVfZGlnIC0xCiAgICBiPAogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9kaWcgLTEKICAgIGNhbGxzdWIgTWF0aC50ZXJuYXJ5CiAgICByZXRzdWIKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL0FjY2Vzc01hbmFnZXJFbnVtZXJhYmxlLnNvbC5TYWZlQ2FzdC50b1VpbnQoYjogdWludDY0KSAtPiBieXRlczoKU2FmZUNhc3QudG9VaW50OgogICAgcHJvdG8gMSAxCiAgICBsb2FkIDAKICAgIGZyYW1lX2RpZyAtMQogICAgIQogICAgIQogICAgcHVzaGJ5dGVzcyAweCAweDAxCiAgICB1bmNvdmVyIDIKICAgIHNlbGVjdAogICAgc3dhcAogICAgc3RvcmUgMAogICAgcmV0c3ViCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL0FjY2Vzc01hbmFnZXJFbnVtZXJhYmxlLnNvbC5BY2Nlc3NNYW5hZ2VyRW51bWVyYWJsZS5jbGVhcl9zdGF0ZV9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiAFASAIAAAmCwQVH3x1CgACAAQABgAAAAAMFR98dQAAAAAAAAAACl9fb2dfdmFsdWUJX3JvbGVzU2V0EF9yb2xlVG9UYXJnZXRTZXQOX3JvbGVNZW1iZXJTZXQhAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADRUffHUAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU//////////////////////////8lgABHA4GAIK9JNQU1ADQAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgFxANQAxGEAAFIAOX19jdG9yX3BlbmRpbmciZyJDgATcXjeYNhoAjgEF/jEZFEQxGESCMwSZDzCuBM/FmAwEUE7/AgTTVWTVBIxGRF0Ei+MsZgQ8Xa1KBJM/u2oETPjLLgRhaBBkBM/EmJgE5GggUgRa8L0nBPc3rPgEoAv0MAQCnRqEBNvwjhAEvz1vqwRMBPPYBG3DAwUEv2N2WwTQeWQxBJ6qVzoEz/LmIQTURA9XBIfVRQsELArNgQTadQsjBBPpKIYEPbxtQwSQ9Y51BPEGZ5kEiRw3SgTE3hcLBPGKg6gEtRJVXAQt8ConBChE254ENEr/QATZa4p9BAbtwy4ExtUVLgSsnLoOBIXTguEEKjLN0QQ7XKCGBCyDZtgEZprASwQElRwpBN2YKNUEBJGaJjYaAI4zBIIERAQkA/QD6QPlA9EDogN1AzwDKgMfAwQC1QKoAm8CVgJEAiICAwIDAgcCAwIDAfIB3wDyAdQB1AHUAZ0BigF0AV0BTQFNAT0BPQE9AR0BDQD9APIA8gDTALsAnACGAGcAVwABADYaAUklWUlFBoECC0UDSRVFAlcCAEUFJUUDSwJLBAxBACdLAkmBAgtLBklPAllJSwVJTgQSREsBFVIlWYECCAhFAyIIRQNC/9FLAYECCEsBEkQosCJDNhoBFSMSRDYaAhUjEkQiQzYaARUjEkQ2GgIVIxJENhoDSSVZgQIITBUSRCiwIkM2GgEVIxJENhoCSSVZgQIITBUSRCJDNhoBFSMSRDYaAhUjEkQ2GgNJJVmBAghMFRJEKrAiQzYaARUjEkQ2GgJJJVmBAghMFRJEKrAiQzYaARUjEkQ2GgJJJVmBAghMFRJENhoDFSQSRCqwIkM2GgEVIxJEKrAiQzYaARUjEkQ2GgIVIhJEIkM2GgEVIxJENhoCFSQSRCJDNhoBFSMSRDYaAkklWYEEC4ECCEwVEkQ2GgMVJBJEIkM2GgEVJBJENhoCFSQSRCJDNhoBFSQSRDYaAhUjEkQiQzYaARUkEkQ2GgIVIxJENhoDFSQSRCJDNhoBFSQSRDYaAkklWYECCEwVEkQiQzYaARUkEkQ2GgIVIxJEJwiwIkM2GgEVJBJENhoCFSMSRIAkFR98dQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsCJDNhoBFSQSRCqwIkM2GgEVIxJENhoCFYEEEkQqsCJDNhoBFSMSRIAFFR98dQCwIkMqsCJDNhoBFSMSRDYaAhUjEkQ2GgMVgQQSRCcIsCJDNhoBFSQSRDYaAhUjEkQ2GgMVgUASRDYaBBWBQBJEKLAiQzYaARUkEkQ2GgIVIxJEKLAiQzYaARUkEkQ2GgIVIxJENhoDFSMSRCiwIkM2GgFJFSQSRBc2GgJJFSMSRDYaA0kVIxJEIQQrZUgURE8CFgEnBUxQvilOAk1OAogDEEgoTFCwIkM2GgFJFSQSRBchBCtlSBREFgEnBUxQvilOAk2IAqBISRUjDkQjr6soTFCwIkM2GgFJFSQSRBc2GgJJFSMSRCEEK2VIFERMFgEnBUxQvilOAk1MiAJ/SChMULAiQzYaARUkEkQ2GgIVgUASRDYaAxWBQBJEKLAiQzYaARUkEkQosCJDNhoBFSQSRDYaAhUjEkQqsCJDNhoBSRUkEkQXNhoCSRUjEkQ2GgNJFSMSRCEEK2VIFERPAhYBJwZMUL4pTgJNTgKIAkNIKExQsCJDNhoBSRUkEkQXIQQrZUgURBYBJwZMUL4pTgJNiAHTSEkVIw5EI6+rKExQsCJDNhoBSRUkEkQXNhoCSRUjEkQhBCtlSBRETBYBJwZMUL4pTgJNTIgBskgoTFCwIkM2GgEVgUASRDYaAhWBQBJEKLAiQyiwIkM2GgEVIxJEKrAiQzYaAUkVgUASRDYaAkkVgUASRCEEK2VIFEQnBL4pTgJNTgKIAeRINAA1AChMULAiQyEEK2VIFEQnBL4pTgJNiAGaSEkVIw5EI6+rKExQsCJDNhoBSRUjEkQhBCtlSBREJK8nBL4pTgJNSwKIAYRISwFMUCcEvilOAk1PA4gBc0hPAkxQFSQJJFgoTFCwIkM2GgEVIxJEIkMxGYEEEjEYEEOKAQKL/yVZi/+BAlmL/04CUiVZFov/iYoCAiSvi/9QSRUkCVuL/iVZi/6BAlmL/k4CUlcCAEwjCyNYi/6JigMCJUmL/Yj/uYz9i/9MiAFNjP+L/ov/iAFEjP6L/ycHoIv+oScHqiUWgAIAACUkr0mMAYsCUEkVJAlbiwUNQQAbiwRJJVkiCBZXBgBcACcJUIwEiwUiCIwFQv/SiwSMAIsDiwKkQQAjiwGLA0lOAlBJFSQJWyMLgQIIiwBMJwldjACAAQGgjANC/9WLAIv9jAGMAImKAQKL/yVZi/8Vi/9OAlKI/xxIi/+JigICI6+L/iVZi/4Vi/5OAlJJi/+I/xhIJwqsSwJMUEyL/4j/CkgnCqxPAkxQFSMJI1iL/omKAwKL/SVZi/0Vi/1OAlKL/ov/iP8KSDQANQCL/YmKAQKL/yVZi/8Vi/9OAlKI/rNIi/+JigICi/4lWYv+FYv+TgJSi/+I/rJIi/6JigMCi/0lWYv9FYv9TgJSi/6L/4j+vkg0ADUAi/2JigMBi/6L/62L/YgAGKMnB6qL/62JigIBi/6L/6SL/ov/iP/ciYoBATQAi/8UFIICAAEBTwJNTDUAiQ==",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 8,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {
+        "UROS_MAIN_APP_ID": {
+            "type": "AVMUint64",
+            "value": "AAAAAAAAAAA="
+        }
+    }
+}

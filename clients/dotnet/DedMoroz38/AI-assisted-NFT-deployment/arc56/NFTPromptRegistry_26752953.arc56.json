@@ -1,0 +1,225 @@
+{
+    "name": "NFTPromptRegistry",
+    "structs": {},
+    "methods": [
+        {
+            "name": "create_application",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [
+                    "NoOp"
+                ],
+                "call": []
+            },
+            "readonly": false,
+            "desc": "Create the application and set the creator.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "store_prompt",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "asset_id"
+                },
+                {
+                    "type": "string",
+                    "name": "prompt"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Store an AI prompt for a given NFT asset ID. Anyone can call this.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_prompt",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "asset_id"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Retrieve the AI prompt for a given NFT asset ID.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_creator",
+            "args": [],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Get the creator address of the contract.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "update_creator",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "new_creator"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Transfer creator privileges to a new address.",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 2
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "creator": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "Y3JlYXRvcg=="
+                },
+                "prompt": {
+                    "keyType": "AVMString",
+                    "valueType": "string",
+                    "key": "cHJvbXB0"
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        40
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp"
+                },
+                {
+                    "pc": [
+                        171
+                    ],
+                    "errorMessage": "Only creator can transfer ownership"
+                },
+                {
+                    "pc": [
+                        148,
+                        169
+                    ],
+                    "errorMessage": "check self.creator exists"
+                },
+                {
+                    "pc": [
+                        138
+                    ],
+                    "errorMessage": "check self.prompt exists"
+                },
+                {
+                    "pc": [
+                        122
+                    ],
+                    "errorMessage": "invalid number of bytes for (len+utf8[])"
+                },
+                {
+                    "pc": [
+                        108,
+                        134
+                    ],
+                    "errorMessage": "invalid number of bytes for uint64"
+                },
+                {
+                    "pc": [
+                        163
+                    ],
+                    "errorMessage": "invalid number of bytes for uint8[32]"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAgOAogICAgYnl0ZWNibG9jayAiY3JlYXRvciIgInByb21wdCIgMHgxNTFmN2M3NQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9wcm9tcHRfcmVnaXN0cnkvY29udHJhY3QucHk6MTcKICAgIC8vIHNlbGYuY3JlYXRvciA9IEdsb2JhbFN0YXRlKFR4bi5zZW5kZXIpCiAgICBieXRlY18wIC8vICJjcmVhdG9yIgogICAgdHhuIFNlbmRlcgogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9wcm9tcHRfcmVnaXN0cnkvY29udHJhY3QucHk6MTMKICAgIC8vIGNsYXNzIE5GVFByb21wdFJlZ2lzdHJ5KEFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BAMTAKICAgIHB1c2hieXRlc3MgMHgzMjg2NDYyMyAweDcxMDY1OTkxIDB4MjAyYTBlMTkgMHhiOTIyNjhmOCAvLyBtZXRob2QgInN0b3JlX3Byb21wdCh1aW50NjQsc3RyaW5nKXZvaWQiLCBtZXRob2QgImdldF9wcm9tcHQodWludDY0KXN0cmluZyIsIG1ldGhvZCAiZ2V0X2NyZWF0b3IoKWFkZHJlc3MiLCBtZXRob2QgInVwZGF0ZV9jcmVhdG9yKGFkZHJlc3Mpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHN0b3JlX3Byb21wdCBnZXRfcHJvbXB0IGdldF9jcmVhdG9yIHVwZGF0ZV9jcmVhdG9yCiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X3Byb21wdF9yZWdpc3RyeS9jb250cmFjdC5weToxMwogICAgLy8gY2xhc3MgTkZUUHJvbXB0UmVnaXN0cnkoQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweDc1MmMzYWMwIC8vIG1ldGhvZCAiY3JlYXRlX2FwcGxpY2F0aW9uKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlX2FwcGxpY2F0aW9uCiAgICBlcnIKCgovLyBzbWFydF9jb250cmFjdHMubmZ0X3Byb21wdF9yZWdpc3RyeS5jb250cmFjdC5ORlRQcm9tcHRSZWdpc3RyeS5jcmVhdGVfYXBwbGljYXRpb25bcm91dGluZ10oKSAtPiB2b2lkOgpjcmVhdGVfYXBwbGljYXRpb246CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X3Byb21wdF9yZWdpc3RyeS9jb250cmFjdC5weToyMwogICAgLy8gc2VsZi5jcmVhdG9yLnZhbHVlID0gVHhuLnNlbmRlcgogICAgYnl0ZWNfMCAvLyAiY3JlYXRvciIKICAgIHR4biBTZW5kZXIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X3Byb21wdF9yZWdpc3RyeS9jb250cmFjdC5weToyMAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLm5mdF9wcm9tcHRfcmVnaXN0cnkuY29udHJhY3QuTkZUUHJvbXB0UmVnaXN0cnkuc3RvcmVfcHJvbXB0W3JvdXRpbmddKCkgLT4gdm9pZDoKc3RvcmVfcHJvbXB0OgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9wcm9tcHRfcmVnaXN0cnkvY29udHJhY3QucHk6MjUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgdWludDY0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgcHVzaGludCAyIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIChsZW4rdXRmOFtdKQogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9wcm9tcHRfcmVnaXN0cnkvY29udHJhY3QucHk6MzEtMzIKICAgIC8vICMgU2ltcGxlIHN0b3JhZ2UgLSBzdG9yZSBvbmx5IG9uZSBwcm9tcHQgZm9yIG5vdwogICAgLy8gc2VsZi5wcm9tcHQudmFsdWUgPSBwcm9tcHQKICAgIGJ5dGVjXzEgLy8gInByb21wdCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X3Byb21wdF9yZWdpc3RyeS9jb250cmFjdC5weToyNQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLm5mdF9wcm9tcHRfcmVnaXN0cnkuY29udHJhY3QuTkZUUHJvbXB0UmVnaXN0cnkuZ2V0X3Byb21wdFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9wcm9tcHQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X3Byb21wdF9yZWdpc3RyeS9jb250cmFjdC5weTozNAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciB1aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnRfcHJvbXB0X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjM3CiAgICAvLyByZXR1cm4gc2VsZi5wcm9tcHQudmFsdWUKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18xIC8vICJwcm9tcHQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYucHJvbXB0IGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9wcm9tcHRfcmVnaXN0cnkvY29udHJhY3QucHk6MzQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5uZnRfcHJvbXB0X3JlZ2lzdHJ5LmNvbnRyYWN0Lk5GVFByb21wdFJlZ2lzdHJ5LmdldF9jcmVhdG9yW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X2NyZWF0b3I6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X3Byb21wdF9yZWdpc3RyeS9jb250cmFjdC5weTo0MgogICAgLy8gcmV0dXJuIGFyYzQuQWRkcmVzcyhzZWxmLmNyZWF0b3IudmFsdWUpCiAgICBpbnRjXzEgLy8gMAogICAgYnl0ZWNfMCAvLyAiY3JlYXRvciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jcmVhdG9yIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9wcm9tcHRfcmVnaXN0cnkvY29udHJhY3QucHk6MzkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5uZnRfcHJvbXB0X3JlZ2lzdHJ5LmNvbnRyYWN0Lk5GVFByb21wdFJlZ2lzdHJ5LnVwZGF0ZV9jcmVhdG9yW3JvdXRpbmddKCkgLT4gdm9pZDoKdXBkYXRlX2NyZWF0b3I6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X3Byb21wdF9yZWdpc3RyeS9jb250cmFjdC5weTo0NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAzMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgdWludDhbMzJdCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X3Byb21wdF9yZWdpc3RyeS9jb250cmFjdC5weTo0NwogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gc2VsZi5jcmVhdG9yLnZhbHVlLCAiT25seSBjcmVhdG9yIGNhbiB0cmFuc2ZlciBvd25lcnNoaXAiCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzEgLy8gMAogICAgYnl0ZWNfMCAvLyAiY3JlYXRvciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jcmVhdG9yIGV4aXN0cwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3IgY2FuIHRyYW5zZmVyIG93bmVyc2hpcAogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9wcm9tcHRfcmVnaXN0cnkvY29udHJhY3QucHk6NDgKICAgIC8vIHNlbGYuY3JlYXRvci52YWx1ZSA9IG5ld19jcmVhdG9yLm5hdGl2ZQogICAgYnl0ZWNfMCAvLyAiY3JlYXRvciIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X3Byb21wdF9yZWdpc3RyeS9jb250cmFjdC5weTo0NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CyADAQAIJgMHY3JlYXRvcgZwcm9tcHQEFR98dTEYQAAEKDEAZzEZFEQxGEEAJIIEBDKGRiMEcQZZkQQgKg4ZBLkiaPg2GgCOBAAVAC8AQABKAIAEdSw6wDYaAI4BAAEAKDEAZyJDNhoBFSQSRDYaAkkjWYECCEsBFRJEKUxnIkM2GgEVJBJEIyllRCpMULAiQyMoZUQqTFCwIkM2GgFJFYEgEkQxACMoZUQSRChMZyJD",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 2,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

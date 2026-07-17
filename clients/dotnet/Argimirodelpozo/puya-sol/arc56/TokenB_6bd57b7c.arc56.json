@@ -1,0 +1,190 @@
+{
+    "name": "TokenB",
+    "structs": {},
+    "methods": [
+        {
+            "name": "mint",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "to"
+                },
+                {
+                    "type": "uint256",
+                    "name": "amount"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "balanceOf",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "who"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "balances",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "key0"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "totalMinted",
+            "args": [],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "totalMinted": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "dG90YWxNaW50ZWQ="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "balances": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AVMBytes",
+                    "prefix": "YmFsYW5jZXM="
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        209,
+                        284
+                    ],
+                    "errorMessage": "check totalMinted exists"
+                },
+                {
+                    "pc": [
+                        175,
+                        226,
+                        257
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        183
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint256"
+                },
+                {
+                    "pc": [
+                        240,
+                        271,
+                        289
+                    ],
+                    "errorMessage": "overflow"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc2VsZl9mZWF0dXJlcy9jb250cmFjdHMvTTQzX011bHRpQ29udHJhY3Quc29sLlRva2VuQi5hcHByb3ZhbF9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgaW50Y2Jsb2NrIDMyIDEgMAogICAgYnl0ZWNibG9jayAidG90YWxNaW50ZWQiIDB4ICJiYWxhbmNlcyIgMHgxNTFmN2M3NSAweDAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgYnl0ZWNfMCAvLyAidG90YWxNaW50ZWQiCiAgICBieXRlY18xIC8vIDB4CiAgICBhcHBfZ2xvYmFsX3B1dAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICBwdXNoaW50IDQwOTYKICAgIGJ6ZXJvCiAgICBzdG9yZSAwCiAgICBsb2FkIDAKICAgIHB1c2hieXRlcyAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwODAKICAgIHJlcGxhY2UyIDY0CiAgICBzdG9yZSAwCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHhiNTk1ZWMxMyAweDgzYmFkN2NjIDB4MWQ1NDNmNTQgMHg0ZGFlMTk2OCAvLyBtZXRob2QgIm1pbnQoYWRkcmVzcyx1aW50MjU2KXZvaWQiLCBtZXRob2QgImJhbGFuY2VPZihhZGRyZXNzKXVpbnQyNTYiLCBtZXRob2QgImJhbGFuY2VzKGFkZHJlc3MpdWludDI1NiIsIG1ldGhvZCAidG90YWxNaW50ZWQoKXVpbnQyNTYiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtaW50IGJhbGFuY2VPZiBiYWxhbmNlcyB0b3RhbE1pbnRlZAogICAgZXJyCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL3NlbGZfZmVhdHVyZXMvY29udHJhY3RzL000M19NdWx0aUNvbnRyYWN0LnNvbC5Ub2tlbkIubWludFtyb3V0aW5nXSgpIC0+IHZvaWQ6Cm1pbnQ6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgc3dhcAogICAgc2hhMjU2CiAgICBieXRlY18yIC8vICJiYWxhbmNlcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfZ2V0CiAgICBieXRlY18xIC8vIDB4CiAgICBjb3ZlciAyCiAgICBzZWxlY3QKICAgIGRpZyAyCiAgICBiKwogICAgYnl0ZWMgNCAvLyAweDAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAogICAgYiUKICAgIGRpZyAxCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGJveF9wdXQKICAgIGludGNfMiAvLyAwCiAgICBieXRlY18wIC8vICJ0b3RhbE1pbnRlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgdG90YWxNaW50ZWQgZXhpc3RzCiAgICBiKwogICAgYnl0ZWMgNCAvLyAweDAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAogICAgYiUKICAgIGJ5dGVjXzAgLy8gInRvdGFsTWludGVkIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc2VsZl9mZWF0dXJlcy9jb250cmFjdHMvTTQzX011bHRpQ29udHJhY3Quc29sLlRva2VuQi5iYWxhbmNlT2Zbcm91dGluZ10oKSAtPiB2b2lkOgpiYWxhbmNlT2Y6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHNoYTI1NgogICAgYnl0ZWNfMiAvLyAiYmFsYW5jZXMiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJveF9nZXQKICAgIGJ5dGVjXzEgLy8gMHgKICAgIGNvdmVyIDIKICAgIHNlbGVjdAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgaW50Y18wIC8vIDMyCiAgICBiemVybwogICAgYnwKICAgIGJ5dGVjXzMgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc2VsZl9mZWF0dXJlcy9jb250cmFjdHMvTTQzX011bHRpQ29udHJhY3Quc29sLlRva2VuQi5iYWxhbmNlc1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmJhbGFuY2VzOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBzaGEyNTYKICAgIGJ5dGVjXzIgLy8gImJhbGFuY2VzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBieXRlY18xIC8vIDB4CiAgICBjb3ZlciAyCiAgICBzZWxlY3QKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGludGNfMCAvLyAzMgogICAgYnplcm8KICAgIGJ8CiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL3NlbGZfZmVhdHVyZXMvY29udHJhY3RzL000M19NdWx0aUNvbnRyYWN0LnNvbC5Ub2tlbkIudG90YWxNaW50ZWRbcm91dGluZ10oKSAtPiB2b2lkOgp0b3RhbE1pbnRlZDoKICAgIGludGNfMiAvLyAwCiAgICBieXRlY18wIC8vICJ0b3RhbE1pbnRlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgdG90YWxNaW50ZWQgZXhpc3RzCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA8PQogICAgYXNzZXJ0IC8vIG92ZXJmbG93CiAgICBpbnRjXzAgLy8gMzIKICAgIGJ6ZXJvCiAgICBifAogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc2VsZl9mZWF0dXJlcy9jb250cmFjdHMvTTQzX011bHRpQ29udHJhY3Quc29sLlRva2VuQi5jbGVhcl9zdGF0ZV9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiADIAEAJgULdG90YWxNaW50ZWQACGJhbGFuY2VzBBUffHUhAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMRhAAAUoKWcjQ4GAIK81ADQAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgFxANQAxGRREMRhEggQEtZXsEwSDutfMBB1UP1QETa4ZaDYaAI4EAAEANABTAHIANhoBSRUiEkQ2GgJJFSISREwBKkxQSb4pTgJNSwKgJwSqSwG8SL8kKGVEoCcEqihMZyNDNhoBSRUiEkQBKkxQvilOAk1JFSIORCKvqytMULAjQzYaAUkVIhJEASpMUL4pTgJNSRUiDkQir6srTFCwI0MkKGVESRUiDkQir6srTFCwI0M=",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

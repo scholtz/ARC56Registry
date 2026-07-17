@@ -1,0 +1,142 @@
+{
+    "name": "NoncesKeyed",
+    "structs": {},
+    "methods": [
+        {
+            "name": "useNonce",
+            "args": [
+                {
+                    "type": "uint192",
+                    "name": "__arc4_key"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc INoncesKeyed",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "nonces",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "owner"
+                },
+                {
+                    "type": "uint192",
+                    "name": "__arc4_key"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc INoncesKeyed",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "@title NoncesKeyed\n @author Aave Labs\n @notice Provides tracking nonces for addresses. Supports keyed nonces, where nonces will only increment for each key.\n @dev Follows the https://eips.ethereum.org/EIPS/eip-4337#semi-abstracted-nonce-support[ERC-4337's semi-abstracted nonce system].\n @dev Inspired by the OpenZeppelin NoncesKeyed contract.",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        185
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        195,
+                        273
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint192"
+                },
+                {
+                    "pc": [
+                        208,
+                        286
+                    ],
+                    "errorMessage": "not payable"
+                },
+                {
+                    "pc": [
+                        252,
+                        342
+                    ],
+                    "errorMessage": "overflow"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL1Rha2VyUG9zaXRpb25NYW5hZ2VyLnNvbC5Ob25jZXNLZXllZC5hcHByb3ZhbF9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgaW50Y2Jsb2NrIDMyIDEgMCAyNAogICAgYnl0ZWNibG9jayAiX25vbmNlcyIgMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMDAwMDAwMDAwMDAwMDAwIDB4MDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDB4MTUxZjdjNzUKICAgIGludGNfMiAvLyAwCiAgICBkdXAKICAgIHB1c2hpbnQgNDA5NgogICAgYnplcm8KICAgIGR1cAogICAgc3RvcmUgNQogICAgc3RvcmUgMAogICAgbG9hZCAwCiAgICBwdXNoYnl0ZXMgMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDgwCiAgICByZXBsYWNlMiA2NAogICAgc3RvcmUgMAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHhkNmQ2ODU5MyAweDRiZWJmOTFiIC8vIG1ldGhvZCAidXNlTm9uY2UodWludDE5Mil1aW50MjU2IiwgbWV0aG9kICJub25jZXMoYWRkcmVzcyx1aW50MTkyKXVpbnQyNTYiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3VzZU5vbmNlX3JvdXRlQDUgbWFpbl9ub25jZXNfcm91dGVANgogICAgZXJyCgptYWluX25vbmNlc19yb3V0ZUA2OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBidXJ5IDIKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgYnVyeSAzCiAgICBsZW4KICAgIGludGNfMyAvLyAyNAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MTkyCiAgICB0eG4gR3JvdXBJbmRleAogICAgYnogbWFpbl90ZXJuYXJ5X2ZhbHNlQDEyCiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18xIC8vIDEKICAgIC0KICAgIGd0eG5zIEFtb3VudAoKbWFpbl90ZXJuYXJ5X21lcmdlQDEzOgogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICBpbnRjXzAgLy8gMzIKICAgIGJ6ZXJvCiAgICBkdXAKICAgIGRpZyAzCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGNvbmNhdAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgLQogICAgaW50Y18wIC8vIDMyCiAgICBleHRyYWN0MwogICAgZGlnIDMKICAgIHN3YXAKICAgIGNvbmNhdAogICAgc2hhMjU2CiAgICBieXRlY18wIC8vICJfbm9uY2VzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBzd2FwCiAgICBidG9pCiAgICBpbnRjXzIgLy8gMAogICAgc3dhcAogICAgdW5jb3ZlciAyCiAgICBzZWxlY3QKICAgIHN3YXAKICAgIGJ5dGVjXzEgLy8gMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEwMDAwMDAwMDAwMDAwMDAwCiAgICBiKgogICAgYnl0ZWNfMiAvLyAweDAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAogICAgYiUKICAgIHN3YXAKICAgIGl0b2IKICAgIGJ8CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA8PQogICAgYXNzZXJ0IC8vIG92ZXJmbG93CiAgICBifAogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl90ZXJuYXJ5X2ZhbHNlQDEyOgogICAgaW50Y18yIC8vIDAKICAgIGIgbWFpbl90ZXJuYXJ5X21lcmdlQDEzCgptYWluX3VzZU5vbmNlX3JvdXRlQDU6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGJ1cnkgMwogICAgbGVuCiAgICBpbnRjXzMgLy8gMjQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDE5MgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGJ6IG1haW5fdGVybmFyeV9mYWxzZUAxNwogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMSAvLyAxCiAgICAtCiAgICBndHhucyBBbW91bnQKCm1haW5fdGVybmFyeV9tZXJnZUAxODoKICAgICEKICAgIGFzc2VydCAvLyBub3QgcGF5YWJsZQogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDMyCiAgICBiemVybwogICAgZHVwCiAgICBkaWcgNAogICAgZHVwCiAgICBjb3ZlciAzCiAgICBjb25jYXQKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgIC0KICAgIGludGNfMCAvLyAzMgogICAgZXh0cmFjdDMKICAgIHVuY292ZXIgMwogICAgc3dhcAogICAgY29uY2F0CiAgICBzaGEyNTYKICAgIGJ5dGVjXzAgLy8gIl9ub25jZXMiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2dldAogICAgc3dhcAogICAgYnRvaQogICAgaW50Y18yIC8vIDAKICAgIHN3YXAKICAgIHVuY292ZXIgMgogICAgc2VsZWN0CiAgICBkdXAKICAgIGludGNfMSAvLyAxCiAgICArCiAgICBpdG9iCiAgICB1bmNvdmVyIDIKICAgIHN3YXAKICAgIGJveF9wdXQKICAgIHVuY292ZXIgMgogICAgYnl0ZWNfMSAvLyAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMTAwMDAwMDAwMDAwMDAwMDAKICAgIGIqCiAgICBieXRlY18yIC8vIDB4MDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCiAgICBiJQogICAgc3dhcAogICAgaXRvYgogICAgYnwKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGJ8CiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX3Rlcm5hcnlfZmFsc2VAMTc6CiAgICBpbnRjXzIgLy8gMAogICAgYiBtYWluX3Rlcm5hcnlfbWVyZ2VAMTgK",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL1Rha2VyUG9zaXRpb25NYW5hZ2VyLnNvbC5Ob25jZXNLZXllZC5jbGVhcl9zdGF0ZV9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiAEIAEAGCYEB19ub25jZXMgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAhAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBUffHUkSYGAIK9JNQU1ADQAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgFxANQAxGEAAAiNDMRkURDEYRIICBNbWhZMES+v5GzYaAI4CAFkAAQA2GgFJRQIVIhJENhoCSUUDFSUSRDEWQQA7MRYjCTgIFEQir0lLA0lOAlBJFSIJIlhLA0xQAShMUL5MFyRMTwJNTCmjKqpMFqtJFSIORKsrTFCwI0MkQv/HNhoBSUUDFSUSRDEWQQBHMRYjCTgIFEQxACKvSUsESU4DUEkVIgkiWE8DTFABKExQSb5MFyRMTwJNSSMIFk8CTL9PAimjKqpMFqtJFSIORKsrTFCwI0MkQv+7",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 8,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

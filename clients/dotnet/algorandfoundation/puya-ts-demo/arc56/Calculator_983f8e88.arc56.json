@@ -1,0 +1,128 @@
+{
+    "name": "Calculator",
+    "structs": {},
+    "methods": [
+        {
+            "name": "createApplication",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [
+                    "NoOp"
+                ],
+                "call": []
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "doMath",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "a",
+                    "desc": "The first number"
+                },
+                {
+                    "type": "uint64",
+                    "name": "b",
+                    "desc": "The second number"
+                },
+                {
+                    "type": "string",
+                    "name": "operation",
+                    "desc": "The operation to perform. Can be either 'sum' or 'difference'"
+                }
+            ],
+            "returns": {
+                "type": "uint64",
+                "desc": "The result of the operation"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "A method that takes two numbers and does either addition or subtraction",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        97
+                    ],
+                    "errorMessage": "Invalid operation"
+                },
+                {
+                    "pc": [
+                        4
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyBjb250cmFjdHMvY2FsY3VsYXRvci9jYWxjdWxhdG9yLmFsZ28udHM6OAogICAgLy8gZXhwb3J0IGNsYXNzIENhbGN1bGF0b3IgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BANQogICAgcHVzaGJ5dGVzIDB4NzZhN2VmMzMgLy8gbWV0aG9kICJkb01hdGgodWludDY0LHVpbnQ2NCxzdHJpbmcpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggZG9NYXRoCiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BANToKICAgIC8vIGNvbnRyYWN0cy9jYWxjdWxhdG9yL2NhbGN1bGF0b3IuYWxnby50czo4CiAgICAvLyBleHBvcnQgY2xhc3MgQ2FsY3VsYXRvciBleHRlbmRzIENvbnRyYWN0IHsKICAgIHB1c2hieXRlcyAweGI4NDQ3YjM2IC8vIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2NyZWF0ZUFwcGxpY2F0aW9uX3JvdXRlQDYKICAgIGVycgoKbWFpbl9jcmVhdGVBcHBsaWNhdGlvbl9yb3V0ZUA2OgogICAgLy8gY29udHJhY3RzL2NhbGN1bGF0b3IvY2FsY3VsYXRvci5hbGdvLnRzOjkKICAgIC8vIEBhYmltZXRob2QoeyBvbkNyZWF0ZTogInJlcXVpcmUiIH0pCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgoKLy8gY29udHJhY3RzL2NhbGN1bGF0b3IvY2FsY3VsYXRvci5hbGdvLnRzOjpDYWxjdWxhdG9yLmRvTWF0aFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmRvTWF0aDoKICAgIC8vIGNvbnRyYWN0cy9jYWxjdWxhdG9yL2NhbGN1bGF0b3IuYWxnby50czo0MwogICAgLy8gZG9NYXRoKGE6IHVpbnQ2NCwgYjogdWludDY0LCBvcGVyYXRpb246IHN0cmluZyk6IHVpbnQ2NCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBleHRyYWN0IDIgMAogICAgZHVwCiAgICAvLyBjb250cmFjdHMvY2FsY3VsYXRvci9jYWxjdWxhdG9yLmFsZ28udHM6NDYKICAgIC8vIGlmIChvcGVyYXRpb24gPT09ICJzdW0iKSB7CiAgICBwdXNoYnl0ZXMgInN1bSIKICAgID09CiAgICBieiBkb01hdGhfZWxzZV9ib2R5QDMKICAgIC8vIGNvbnRyYWN0cy9jYWxjdWxhdG9yL2NhbGN1bGF0b3IuYWxnby50czoyMAogICAgLy8gcmV0dXJuIGEgKyBiOwogICAgZGlnIDIKICAgIGRpZyAyCiAgICArCgpkb01hdGhfYWZ0ZXJfaWZfZWxzZUA3OgogICAgLy8gY29udHJhY3RzL2NhbGN1bGF0b3IvY2FsY3VsYXRvci5hbGdvLnRzOjQzCiAgICAvLyBkb01hdGgoYTogdWludDY0LCBiOiB1aW50NjQsIG9wZXJhdGlvbjogc3RyaW5nKTogdWludDY0IHsKICAgIGl0b2IKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgcHVzaGludCAxIC8vIDEKICAgIHJldHVybgoKZG9NYXRoX2Vsc2VfYm9keUAzOgogICAgLy8gY29udHJhY3RzL2NhbGN1bGF0b3IvY2FsY3VsYXRvci5hbGdvLnRzOjQ4CiAgICAvLyB9IGVsc2UgaWYgKG9wZXJhdGlvbiA9PT0gImRpZmZlcmVuY2UiKSB7CiAgICBkdXAKICAgIHB1c2hieXRlcyAiZGlmZmVyZW5jZSIKICAgID09CiAgICBhc3NlcnQgLy8gSW52YWxpZCBvcGVyYXRpb24KICAgIC8vIGNvbnRyYWN0cy9jYWxjdWxhdG9yL2NhbGN1bGF0b3IuYWxnby50czozMQogICAgLy8gcmV0dXJuIGEgPj0gYiA/IGEgLSBiIDogYiAtIGE7CiAgICBkaWcgMgogICAgZGlnIDIKICAgID49CiAgICBieiBkb01hdGhfdGVybmFyeV9mYWxzZUAxMAogICAgZGlnIDIKICAgIGRpZyAyCiAgICAtCiAgICBiIGRvTWF0aF9hZnRlcl9pZl9lbHNlQDcKCmRvTWF0aF90ZXJuYXJ5X2ZhbHNlQDEwOgogICAgLy8gY29udHJhY3RzL2NhbGN1bGF0b3IvY2FsY3VsYXRvci5hbGdvLnRzOjMxCiAgICAvLyByZXR1cm4gYSA+PSBiID8gYSAtIGIgOiBiIC0gYTsKICAgIGRpZyAxCiAgICBkaWcgMwogICAgLQogICAgYiBkb01hdGhfYWZ0ZXJfaWZfZWxzZUA3Cg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CjEZFEQxGEEADoAEdqfvMzYaAI4BABIAgAS4RHs2NhoAjgEAAQCBAUM2GgEXNhoCFzYaA1cCAEmAA3N1bRJBABJLAksCCBaABBUffHVMULCBAUNJgApkaWZmZXJlbmNlEkRLAksCD0EACEsCSwIJQv/USwFLAwlC/8w=",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 0,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

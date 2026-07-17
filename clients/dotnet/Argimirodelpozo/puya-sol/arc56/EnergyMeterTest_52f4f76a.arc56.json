@@ -1,0 +1,339 @@
+{
+    "name": "EnergyMeterTest",
+    "structs": {},
+    "methods": [
+        {
+            "name": "initMeter",
+            "args": [
+                {
+                    "type": "uint512",
+                    "name": "meterId"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getAdmin",
+            "args": [],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getMeterCount",
+            "args": [],
+            "returns": {
+                "type": "uint512"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getGlobalConsumption",
+            "args": [],
+            "returns": {
+                "type": "uint512"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getMeterHash",
+            "args": [
+                {
+                    "type": "uint512",
+                    "name": "meterId"
+                }
+            ],
+            "returns": {
+                "type": "uint512"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getTotalConsumption",
+            "args": [
+                {
+                    "type": "uint512",
+                    "name": "meterId"
+                }
+            ],
+            "returns": {
+                "type": "uint512"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getReadingCount",
+            "args": [
+                {
+                    "type": "uint512",
+                    "name": "meterId"
+                }
+            ],
+            "returns": {
+                "type": "uint512"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "registerMeter",
+            "args": [
+                {
+                    "type": "uint512",
+                    "name": "meterHash"
+                }
+            ],
+            "returns": {
+                "type": "uint512"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "recordReading",
+            "args": [
+                {
+                    "type": "uint512",
+                    "name": "meterId"
+                },
+                {
+                    "type": "uint512",
+                    "name": "readingValue"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 3
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "_admin": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "X2FkbWlu"
+                },
+                "_meterCount": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X21ldGVyQ291bnQ="
+                },
+                "_globalConsumption": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X2dsb2JhbENvbnN1bXB0aW9u"
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "_meterHash": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AVMBytes",
+                    "prefix": "X21ldGVySGFzaA=="
+                },
+                "_meterConsumption": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AVMBytes",
+                    "prefix": "X21ldGVyQ29uc3VtcHRpb24="
+                },
+                "_meterReadings": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AVMBytes",
+                    "prefix": "X21ldGVyUmVhZGluZ3M="
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        578
+                    ],
+                    "errorMessage": "Meter does not exist"
+                },
+                {
+                    "pc": [
+                        482
+                    ],
+                    "errorMessage": "Only admin"
+                },
+                {
+                    "pc": [
+                        584
+                    ],
+                    "errorMessage": "Reading must be positive"
+                },
+                {
+                    "pc": [
+                        297,
+                        480
+                    ],
+                    "errorMessage": "check _admin exists"
+                },
+                {
+                    "pc": [
+                        325,
+                        637
+                    ],
+                    "errorMessage": "check _globalConsumption exists"
+                },
+                {
+                    "pc": [
+                        307,
+                        486,
+                        574
+                    ],
+                    "errorMessage": "check _meterCount exists"
+                },
+                {
+                    "pc": [
+                        245,
+                        347,
+                        389,
+                        431,
+                        473,
+                        562,
+                        570
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint512"
+                },
+                {
+                    "pc": [
+                        312,
+                        330,
+                        374,
+                        416,
+                        458,
+                        547
+                    ],
+                    "errorMessage": "overflow"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvb3BlbnplcHBlbGluL2NvbnRyYWN0cy9FbmVyZ3lNZXRlci5zb2wuRW5lcmd5TWV0ZXJUZXN0LmFwcHJvdmFsX3Byb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgNjQgMSAwCiAgICBieXRlY2Jsb2NrIDB4IDB4MTUxZjdjNzUgIl9tZXRlckNvdW50IiAiX2dsb2JhbENvbnN1bXB0aW9uIiAiX2FkbWluIiAiX21ldGVyQ29uc3VtcHRpb24iICJfbWV0ZXJSZWFkaW5ncyIgIl9tZXRlckhhc2giCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICBieXRlYyA0IC8vICJfYWRtaW4iCiAgICBwdXNoYnl0ZXMgYmFzZTMyKEFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUEpIC8vIGFkZHIgQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQVk1SEZLUQogICAgYXBwX2dsb2JhbF9wdXQKICAgIGJ5dGVjXzIgLy8gIl9tZXRlckNvdW50IgogICAgYnl0ZWNfMCAvLyAweAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGJ5dGVjXzMgLy8gIl9nbG9iYWxDb25zdW1wdGlvbiIKICAgIGJ5dGVjXzAgLy8gMHgKICAgIGFwcF9nbG9iYWxfcHV0CiAgICBieXRlYyA0IC8vICJfYWRtaW4iCiAgICB0eG4gU2VuZGVyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgaW50Y18yIC8vIDAKICAgIGl0b2IKICAgIGJ5dGVjXzIgLy8gIl9tZXRlckNvdW50IgogICAgZGlnIDEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICBieXRlY18zIC8vICJfZ2xvYmFsQ29uc3VtcHRpb24iCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHg3NzAxMmE1YyAweGFjOGIyNGRlIDB4OTEwMDZjZjkgMHg4MDE4ZmE0ZCAweGE0MWU2MTkxIDB4NjU2NjExMDYgMHgyZjBlZTJjZCAweDM3ZGE1ZWEwIDB4MGJhMjc5OGMgLy8gbWV0aG9kICJpbml0TWV0ZXIodWludDUxMil2b2lkIiwgbWV0aG9kICJnZXRBZG1pbigpYWRkcmVzcyIsIG1ldGhvZCAiZ2V0TWV0ZXJDb3VudCgpdWludDUxMiIsIG1ldGhvZCAiZ2V0R2xvYmFsQ29uc3VtcHRpb24oKXVpbnQ1MTIiLCBtZXRob2QgImdldE1ldGVySGFzaCh1aW50NTEyKXVpbnQ1MTIiLCBtZXRob2QgImdldFRvdGFsQ29uc3VtcHRpb24odWludDUxMil1aW50NTEyIiwgbWV0aG9kICJnZXRSZWFkaW5nQ291bnQodWludDUxMil1aW50NTEyIiwgbWV0aG9kICJyZWdpc3Rlck1ldGVyKHVpbnQ1MTIpdWludDUxMiIsIG1ldGhvZCAicmVjb3JkUmVhZGluZyh1aW50NTEyLHVpbnQ1MTIpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGluaXRNZXRlciBnZXRBZG1pbiBnZXRNZXRlckNvdW50IGdldEdsb2JhbENvbnN1bXB0aW9uIGdldE1ldGVySGFzaCBnZXRUb3RhbENvbnN1bXB0aW9uIGdldFJlYWRpbmdDb3VudCByZWdpc3Rlck1ldGVyIHJlY29yZFJlYWRpbmcKICAgIGVycgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9vcGVuemVwcGVsaW4vY29udHJhY3RzL0VuZXJneU1ldGVyLnNvbC5FbmVyZ3lNZXRlclRlc3QuaW5pdE1ldGVyW3JvdXRpbmddKCkgLT4gdm9pZDoKaW5pdE1ldGVyOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyA2NAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NTEyCiAgICBpbnRjXzIgLy8gMAogICAgaXRvYgogICAgaW50Y18wIC8vIDY0CiAgICBiemVybwogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gNjQKICAgIC0KICAgIGludGNfMCAvLyA2NAogICAgZXh0cmFjdDMKICAgIHNoYTI1NgogICAgYnl0ZWMgNyAvLyAiX21ldGVySGFzaCIKICAgIGRpZyAxCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2RlbAogICAgcG9wCiAgICBkaWcgMgogICAgYm94X3B1dAogICAgYnl0ZWMgNSAvLyAiX21ldGVyQ29uc3VtcHRpb24iCiAgICBkaWcgMQogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAogICAgZGlnIDIKICAgIGJveF9wdXQKICAgIGJ5dGVjIDYgLy8gIl9tZXRlclJlYWRpbmdzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAogICAgc3dhcAogICAgYm94X3B1dAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9vcGVuemVwcGVsaW4vY29udHJhY3RzL0VuZXJneU1ldGVyLnNvbC5FbmVyZ3lNZXRlclRlc3QuZ2V0QWRtaW5bcm91dGluZ10oKSAtPiB2b2lkOgpnZXRBZG1pbjoKICAgIGludGNfMiAvLyAwCiAgICBieXRlYyA0IC8vICJfYWRtaW4iCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIF9hZG1pbiBleGlzdHMKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvb3BlbnplcHBlbGluL2NvbnRyYWN0cy9FbmVyZ3lNZXRlci5zb2wuRW5lcmd5TWV0ZXJUZXN0LmdldE1ldGVyQ291bnRbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRNZXRlckNvdW50OgogICAgaW50Y18yIC8vIDAKICAgIGJ5dGVjXzIgLy8gIl9tZXRlckNvdW50IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBfbWV0ZXJDb3VudCBleGlzdHMKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gNjQKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGludGNfMCAvLyA2NAogICAgYnplcm8KICAgIGJ8CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL29wZW56ZXBwZWxpbi9jb250cmFjdHMvRW5lcmd5TWV0ZXIuc29sLkVuZXJneU1ldGVyVGVzdC5nZXRHbG9iYWxDb25zdW1wdGlvbltyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldEdsb2JhbENvbnN1bXB0aW9uOgogICAgaW50Y18yIC8vIDAKICAgIGJ5dGVjXzMgLy8gIl9nbG9iYWxDb25zdW1wdGlvbiIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgX2dsb2JhbENvbnN1bXB0aW9uIGV4aXN0cwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyA2NAogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgaW50Y18wIC8vIDY0CiAgICBiemVybwogICAgYnwKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvb3BlbnplcHBlbGluL2NvbnRyYWN0cy9FbmVyZ3lNZXRlci5zb2wuRW5lcmd5TWV0ZXJUZXN0LmdldE1ldGVySGFzaFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldE1ldGVySGFzaDoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gNjQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDUxMgogICAgaW50Y18wIC8vIDY0CiAgICBiemVybwogICAgZHVwCiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyA2NAogICAgLQogICAgaW50Y18wIC8vIDY0CiAgICBleHRyYWN0MwogICAgc2hhMjU2CiAgICBieXRlYyA3IC8vICJfbWV0ZXJIYXNoIgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBieXRlY18wIC8vIDB4CiAgICBjb3ZlciAyCiAgICBzZWxlY3QKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gNjQKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGJ8CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL29wZW56ZXBwZWxpbi9jb250cmFjdHMvRW5lcmd5TWV0ZXIuc29sLkVuZXJneU1ldGVyVGVzdC5nZXRUb3RhbENvbnN1bXB0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0VG90YWxDb25zdW1wdGlvbjoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gNjQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDUxMgogICAgaW50Y18wIC8vIDY0CiAgICBiemVybwogICAgZHVwCiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyA2NAogICAgLQogICAgaW50Y18wIC8vIDY0CiAgICBleHRyYWN0MwogICAgc2hhMjU2CiAgICBieXRlYyA1IC8vICJfbWV0ZXJDb25zdW1wdGlvbiIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYm94X2dldAogICAgYnl0ZWNfMCAvLyAweAogICAgY292ZXIgMgogICAgc2VsZWN0CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDY0CiAgICA8PQogICAgYXNzZXJ0IC8vIG92ZXJmbG93CiAgICBifAogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9vcGVuemVwcGVsaW4vY29udHJhY3RzL0VuZXJneU1ldGVyLnNvbC5FbmVyZ3lNZXRlclRlc3QuZ2V0UmVhZGluZ0NvdW50W3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0UmVhZGluZ0NvdW50OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyA2NAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NTEyCiAgICBpbnRjXzAgLy8gNjQKICAgIGJ6ZXJvCiAgICBkdXAKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDY0CiAgICAtCiAgICBpbnRjXzAgLy8gNjQKICAgIGV4dHJhY3QzCiAgICBzaGEyNTYKICAgIGJ5dGVjIDYgLy8gIl9tZXRlclJlYWRpbmdzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBieXRlY18wIC8vIDB4CiAgICBjb3ZlciAyCiAgICBzZWxlY3QKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gNjQKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGJ8CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL29wZW56ZXBwZWxpbi9jb250cmFjdHMvRW5lcmd5TWV0ZXIuc29sLkVuZXJneU1ldGVyVGVzdC5yZWdpc3Rlck1ldGVyW3JvdXRpbmddKCkgLT4gdm9pZDoKcmVnaXN0ZXJNZXRlcjoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gNjQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDUxMgogICAgdHhuIFNlbmRlcgogICAgaW50Y18yIC8vIDAKICAgIGJ5dGVjIDQgLy8gIl9hZG1pbiIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgX2FkbWluIGV4aXN0cwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGFkbWluCiAgICBpbnRjXzIgLy8gMAogICAgYnl0ZWNfMiAvLyAiX21ldGVyQ291bnQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIF9tZXRlckNvdW50IGV4aXN0cwogICAgaW50Y18wIC8vIDY0CiAgICBiemVybwogICAgZHVwCiAgICBkaWcgMgogICAgY29uY2F0CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDY0CiAgICAtCiAgICBpbnRjXzAgLy8gNjQKICAgIGV4dHJhY3QzCiAgICBzaGEyNTYKICAgIGJ5dGVjIDcgLy8gIl9tZXRlckhhc2giCiAgICBkaWcgMQogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAogICAgdW5jb3ZlciA0CiAgICBib3hfcHV0CiAgICBpbnRjXzIgLy8gMAogICAgaXRvYgogICAgYnl0ZWMgNSAvLyAiX21ldGVyQ29uc3VtcHRpb24iCiAgICBkaWcgMgogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAogICAgZGlnIDEKICAgIGJveF9wdXQKICAgIGJ5dGVjIDYgLy8gIl9tZXRlclJlYWRpbmdzIgogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2RlbAogICAgcG9wCiAgICBzd2FwCiAgICBib3hfcHV0CiAgICBpbnRjXzEgLy8gMQogICAgaXRvYgogICAgZGlnIDIKICAgIGIrCiAgICBieXRlY18yIC8vICJfbWV0ZXJDb3VudCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICBkaWcgMQogICAgbGVuCiAgICBpbnRjXzAgLy8gNjQKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGJ8CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL29wZW56ZXBwZWxpbi9jb250cmFjdHMvRW5lcmd5TWV0ZXIuc29sLkVuZXJneU1ldGVyVGVzdC5yZWNvcmRSZWFkaW5nW3JvdXRpbmddKCkgLT4gdm9pZDoKcmVjb3JkUmVhZGluZzoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gNjQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDUxMgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyA2NAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NTEyCiAgICBpbnRjXzIgLy8gMAogICAgYnl0ZWNfMiAvLyAiX21ldGVyQ291bnQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIF9tZXRlckNvdW50IGV4aXN0cwogICAgZGlnIDIKICAgIGI+CiAgICBhc3NlcnQgLy8gTWV0ZXIgZG9lcyBub3QgZXhpc3QKICAgIGludGNfMiAvLyAwCiAgICBpdG9iCiAgICBkaWcgMQogICAgYjwKICAgIGFzc2VydCAvLyBSZWFkaW5nIG11c3QgYmUgcG9zaXRpdmUKICAgIGludGNfMCAvLyA2NAogICAgYnplcm8KICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDY0CiAgICAtCiAgICBpbnRjXzAgLy8gNjQKICAgIGV4dHJhY3QzCiAgICBzaGEyNTYKICAgIGJ5dGVjIDUgLy8gIl9tZXRlckNvbnN1bXB0aW9uIgogICAgZGlnIDEKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfZ2V0CiAgICBieXRlY18wIC8vIDB4CiAgICBjb3ZlciAyCiAgICBzZWxlY3QKICAgIGRpZyAzCiAgICBiKwogICAgZGlnIDEKICAgIGJveF9kZWwKICAgIHBvcAogICAgYm94X3B1dAogICAgYnl0ZWMgNiAvLyAiX21ldGVyUmVhZGluZ3MiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2dldAogICAgYnl0ZWNfMCAvLyAweAogICAgY292ZXIgMgogICAgc2VsZWN0CiAgICBpbnRjXzEgLy8gMQogICAgaXRvYgogICAgYisKICAgIGRpZyAxCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGJveF9wdXQKICAgIGludGNfMiAvLyAwCiAgICBieXRlY18zIC8vICJfZ2xvYmFsQ29uc3VtcHRpb24iCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIF9nbG9iYWxDb25zdW1wdGlvbiBleGlzdHMKICAgIGIrCiAgICBieXRlY18zIC8vICJfZ2xvYmFsQ29uc3VtcHRpb24iCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvb3BlbnplcHBlbGluL2NvbnRyYWN0cy9FbmVyZ3lNZXRlci5zb2wuRW5lcmd5TWV0ZXJUZXN0LmNsZWFyX3N0YXRlX3Byb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="
+    },
+    "byteCode": {
+        "approval": "CiADQAEAJggABBUffHULX21ldGVyQ291bnQSX2dsb2JhbENvbnN1bXB0aW9uBl9hZG1pbhFfbWV0ZXJDb25zdW1wdGlvbg5fbWV0ZXJSZWFkaW5ncwpfbWV0ZXJIYXNoMRhAADsnBIAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABnKihnKyhnJwQxAGckFipLAWcrTGcjQzEZFEQxGESCCQR3ASpcBKyLJN4EkQBs+QSAGPpNBKQeYZEEZWYRBgQvDuLNBDfaXqAEC6J5jDYaAI4JAAEAOABDAFUAZwCRALsA5QE+ADYaAUkVIhJEJBYir08CUEkVIgkiWAEnB0sBUEm8SEsCvycFSwFQSbxISwK/JwZMUEm8SEy/I0MkJwRlRClMULAjQyQqZURJFSIORCKvqylMULAjQyQrZURJFSIORCKvqylMULAjQzYaAUkVIhJEIq9JTwJQSRUiCSJYAScHTFC+KE4CTUkVIg5EqylMULAjQzYaAUkVIhJEIq9JTwJQSRUiCSJYAScFTFC+KE4CTUkVIg5EqylMULAjQzYaAUkVIhJEIq9JTwJQSRUiCSJYAScGTFC+KE4CTUkVIg5EqylMULAjQzYaAUkVIhJEMQAkJwRlRBJEJCplRCKvSUsCUEkVIgkiWAEnB0sBUEm8SE8EvyQWJwVLAlBJvEhLAb8nBk8CUEm8SEy/IxZLAqAqTGdLARUiDkSrKUxQsCNDNhoBSRUiEkQ2GgJJFSISRCQqZURLAqVEJBZLAaREIq9PAlBJFSIJIlgBJwVLAVBJvihOAk1LA6BLAbxIvycGTFBJvihOAk0jFqBLAbxIvyQrZUSgK0xnI0M=",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

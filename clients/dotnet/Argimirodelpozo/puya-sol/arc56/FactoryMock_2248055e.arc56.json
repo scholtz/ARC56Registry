@@ -1,0 +1,171 @@
+{
+    "name": "FactoryMock",
+    "structs": {},
+    "methods": [
+        {
+            "name": "setFeeTo",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "_feeTo"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "setMigrator",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "_migrator"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "feeTo",
+            "args": [],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "migrator",
+            "args": [],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "@title Minimal Factory mock for SushiSwap V2 Pair testing.\n Provides feeTo() and migrator() that the Pair reads during mint/burn.",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 2
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "feeTo": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "ZmVlVG8="
+                },
+                "migrator": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "bWlncmF0b3I="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        146
+                    ],
+                    "errorMessage": "check feeTo exists"
+                },
+                {
+                    "pc": [
+                        156
+                    ],
+                    "errorMessage": "check migrator exists"
+                },
+                {
+                    "pc": [
+                        124,
+                        137
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc3VzaGlzd2FwLXYyL2NvbnRyYWN0cy9tb2Nrcy9GYWN0b3J5TW9jay5zb2wuRmFjdG9yeU1vY2suYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDMyIDAKICAgIGJ5dGVjYmxvY2sgImZlZVRvIiAibWlncmF0b3IiIGJhc2UzMihBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBKSAweDE1MWY3Yzc1CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICBieXRlY18wIC8vICJmZWVUbyIKICAgIGJ5dGVjXzIgLy8gYWRkciBBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBWTVIRktRCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgYnl0ZWNfMSAvLyAibWlncmF0b3IiCiAgICBieXRlY18yIC8vIGFkZHIgQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQVk1SEZLUQogICAgYXBwX2dsb2JhbF9wdXQKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4ZDAxYjk0YjYgMHg3YmU4ZTBhYyAweDkzMzIxY2YzIDB4ODMwZWZmODQgLy8gbWV0aG9kICJzZXRGZWVUbyhhZGRyZXNzKXZvaWQiLCBtZXRob2QgInNldE1pZ3JhdG9yKGFkZHJlc3Mpdm9pZCIsIG1ldGhvZCAiZmVlVG8oKWFkZHJlc3MiLCBtZXRob2QgIm1pZ3JhdG9yKClhZGRyZXNzIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggc2V0RmVlVG8gc2V0TWlncmF0b3IgZmVlVG8gbWlncmF0b3IKICAgIGVycgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9zdXNoaXN3YXAtdjIvY29udHJhY3RzL21vY2tzL0ZhY3RvcnlNb2NrLnNvbC5GYWN0b3J5TW9jay5zZXRGZWVUb1tyb3V0aW5nXSgpIC0+IHZvaWQ6CnNldEZlZVRvOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBieXRlY18wIC8vICJmZWVUbyIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL3N1c2hpc3dhcC12Mi9jb250cmFjdHMvbW9ja3MvRmFjdG9yeU1vY2suc29sLkZhY3RvcnlNb2NrLnNldE1pZ3JhdG9yW3JvdXRpbmddKCkgLT4gdm9pZDoKc2V0TWlncmF0b3I6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIGJ5dGVjXzEgLy8gIm1pZ3JhdG9yIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc3VzaGlzd2FwLXYyL2NvbnRyYWN0cy9tb2Nrcy9GYWN0b3J5TW9jay5zb2wuRmFjdG9yeU1vY2suZmVlVG9bcm91dGluZ10oKSAtPiB2b2lkOgpmZWVUbzoKICAgIGludGNfMiAvLyAwCiAgICBieXRlY18wIC8vICJmZWVUbyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgZmVlVG8gZXhpc3RzCiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL3N1c2hpc3dhcC12Mi9jb250cmFjdHMvbW9ja3MvRmFjdG9yeU1vY2suc29sLkZhY3RvcnlNb2NrLm1pZ3JhdG9yW3JvdXRpbmddKCkgLT4gdm9pZDoKbWlncmF0b3I6CiAgICBpbnRjXzIgLy8gMAogICAgYnl0ZWNfMSAvLyAibWlncmF0b3IiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIG1pZ3JhdG9yIGV4aXN0cwogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc3VzaGlzd2FwLXYyL2NvbnRyYWN0cy9tb2Nrcy9GYWN0b3J5TW9jay5zb2wuRmFjdG9yeU1vY2suY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiADASAAJgQFZmVlVG8IbWlncmF0b3IgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEFR98dTEYQAAIKCpnKSpnIkMxGRREMRhEggQE0BuUtgR76OCsBJMyHPMEgw7/hDYaAI4EAAEADgAbACUANhoBSRUjEkQoTGciQzYaAUkVIxJEKUxnIkMkKGVEK0xQsCJDJCllRCtMULAiQw==",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

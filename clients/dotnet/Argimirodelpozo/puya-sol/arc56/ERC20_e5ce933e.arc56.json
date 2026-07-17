@@ -1,0 +1,771 @@
+{
+    "name": "ERC20",
+    "structs": {},
+    "methods": [
+        {
+            "name": "__postInit",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "__name"
+                },
+                {
+                    "type": "string",
+                    "name": "__symbol"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "name",
+            "args": [],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": " @dev Returns the name of the token.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "symbol",
+            "args": [],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": " @dev Returns the symbol of the token, usually a shorter version of the\n name.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "decimals",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": " @dev Returns the number of decimals used to get its user representation.\n For example, if `decimals` equals `2`, a balance of `505` tokens should\n be displayed to a user as `5,05` (`505 / 10 ** 2`).\n Tokens usually opt for a value of 18, imitating the relationship between\n Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is\n called.\n NOTE: This information is only used for _display_ purposes: it in\n no way affects any of the arithmetic of the contract, including\n {IERC20-balanceOf} and {IERC20-transfer}.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "totalSupply",
+            "args": [],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": " @dev See {IERC20-totalSupply}.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "balanceOf",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "account"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": " @dev See {IERC20-balanceOf}.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "transfer",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "recipient"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_amount"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": " @dev See {IERC20-transfer}.\n Requirements:\n - `recipient` cannot be the zero address.\n - the caller must have a balance of at least `amount`.",
+            "events": [
+                {
+                    "name": "Transfer",
+                    "args": [
+                        {
+                            "type": "uint8[32]",
+                            "name": "from"
+                        },
+                        {
+                            "type": "uint8[32]",
+                            "name": "to"
+                        },
+                        {
+                            "type": "uint256",
+                            "name": "value"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "allowance",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "owner"
+                },
+                {
+                    "type": "address",
+                    "name": "spender"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": " @dev See {IERC20-allowance}.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "approve",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "spender"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_amount"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": " @dev See {IERC20-approve}.\n Requirements:\n - `spender` cannot be the zero address.approve(address spender, uint256 amount)",
+            "events": [
+                {
+                    "name": "Approval",
+                    "args": [
+                        {
+                            "type": "uint8[32]",
+                            "name": "owner"
+                        },
+                        {
+                            "type": "uint8[32]",
+                            "name": "spender"
+                        },
+                        {
+                            "type": "uint256",
+                            "name": "value"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "transferFrom",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "sender"
+                },
+                {
+                    "type": "address",
+                    "name": "recipient"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_amount"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": " @dev See {IERC20-transferFrom}.\n Emits an {Approval} event indicating the updated allowance. This is not\n required by the EIP. See the note at the beginning of {ERC20};\n Requirements:\n - `sender` and `recipient` cannot be the zero address.\n - `sender` must have a balance of at least `amount`.\n - the caller must have allowance for `sender`'s tokens of at least\n `amount`.",
+            "events": [
+                {
+                    "name": "Transfer",
+                    "args": [
+                        {
+                            "type": "uint8[32]",
+                            "name": "from"
+                        },
+                        {
+                            "type": "uint8[32]",
+                            "name": "to"
+                        },
+                        {
+                            "type": "uint256",
+                            "name": "value"
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "args": [
+                        {
+                            "type": "uint8[32]",
+                            "name": "owner"
+                        },
+                        {
+                            "type": "uint8[32]",
+                            "name": "spender"
+                        },
+                        {
+                            "type": "uint256",
+                            "name": "value"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "increaseAllowance",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "spender"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_addedValue"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": " @dev Atomically increases the allowance granted to `spender` by the caller.\n This is an alternative to {approve} that can be used as a mitigation for\n problems described in {IERC20-approve}.\n Emits an {Approval} event indicating the updated allowance.\n Requirements:\n - `spender` cannot be the zero address.",
+            "events": [
+                {
+                    "name": "Approval",
+                    "args": [
+                        {
+                            "type": "uint8[32]",
+                            "name": "owner"
+                        },
+                        {
+                            "type": "uint8[32]",
+                            "name": "spender"
+                        },
+                        {
+                            "type": "uint256",
+                            "name": "value"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "decreaseAllowance",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "spender"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_subtractedValue"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": " @dev Atomically decreases the allowance granted to `spender` by the caller.\n This is an alternative to {approve} that can be used as a mitigation for\n problems described in {IERC20-approve}.\n Emits an {Approval} event indicating the updated allowance.\n Requirements:\n - `spender` cannot be the zero address.\n - `spender` must have allowance for the caller of at least\n `subtractedValue`.",
+            "events": [
+                {
+                    "name": "Approval",
+                    "args": [
+                        {
+                            "type": "uint8[32]",
+                            "name": "owner"
+                        },
+                        {
+                            "type": "uint8[32]",
+                            "name": "spender"
+                        },
+                        {
+                            "type": "uint256",
+                            "name": "value"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "burn",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_amount"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": " @dev Destroys `amount` tokens from the caller.\n See {ERC20-_burn}.",
+            "events": [
+                {
+                    "name": "Transfer",
+                    "args": [
+                        {
+                            "type": "uint8[32]",
+                            "name": "from"
+                        },
+                        {
+                            "type": "uint8[32]",
+                            "name": "to"
+                        },
+                        {
+                            "type": "uint256",
+                            "name": "value"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "burnFrom",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "account"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_amount"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": " @dev Destroys `amount` tokens from `account`, deducting from the caller's\n allowance.\n See {ERC20-_burn} and {ERC20-allowance}.\n Requirements:\n - the caller must have allowance for `accounts`'s tokens of at least\n `amount`.",
+            "events": [
+                {
+                    "name": "Approval",
+                    "args": [
+                        {
+                            "type": "uint8[32]",
+                            "name": "owner"
+                        },
+                        {
+                            "type": "uint8[32]",
+                            "name": "spender"
+                        },
+                        {
+                            "type": "uint256",
+                            "name": "value"
+                        }
+                    ]
+                },
+                {
+                    "name": "Transfer",
+                    "args": [
+                        {
+                            "type": "uint8[32]",
+                            "name": "from"
+                        },
+                        {
+                            "type": "uint8[32]",
+                            "name": "to"
+                        },
+                        {
+                            "type": "uint256",
+                            "name": "value"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": " @dev Implementation of the {IERC20} interface.\n This implementation is agnostic to the way tokens are created. This means\n that a supply mechanism has to be added in a derived contract using {_mint}.\n For a generic mechanism see {ERC20Mintable}.\n TIP: For a detailed writeup see our guide\n https://forum.zeppelin.solutions/t/how-to-implement-erc20-supply-mechanisms/226[How\n to implement supply mechanisms].\n We have followed general OpenZeppelin guidelines: functions revert instead\n of returning `false` on failure. This behavior is nonetheless conventional\n and does not conflict with the expectations of ERC20 applications.\n Additionally, an {Approval} event is emitted on calls to {transferFrom}.\n This allows applications to reconstruct the allowance for all accounts just\n by listening to said events. Other implementations of the EIP may not emit\n these events, as it isn't required by the specification.\n Finally, the non-standard {decreaseAllowance} and {increaseAllowance}\n functions have been added to mitigate the well-known issues around setting\n allowances. See {IERC20-approve}.",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 2,
+                "bytes": 3
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "_totalSupply": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X3RvdGFsU3VwcGx5"
+                },
+                "_name": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMString",
+                    "key": "X25hbWU="
+                },
+                "_symbol": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMString",
+                    "key": "X3N5bWJvbA=="
+                },
+                "_decimals": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "X2RlY2ltYWxz"
+                },
+                "__ctor_pending": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "X19jdG9yX3BlbmRpbmc="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "_balances": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AVMBytes",
+                    "prefix": "X2JhbGFuY2Vz"
+                },
+                "_allowances": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AVMBytes",
+                    "prefix": "X2FsbG93YW5jZXM="
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        1522
+                    ],
+                    "errorMessage": "ERC20: approve from the zero address"
+                },
+                {
+                    "pc": [
+                        1527
+                    ],
+                    "errorMessage": "ERC20: approve to the zero address"
+                },
+                {
+                    "pc": [
+                        1418
+                    ],
+                    "errorMessage": "ERC20: burn from the zero address"
+                },
+                {
+                    "pc": [
+                        1295
+                    ],
+                    "errorMessage": "ERC20: transfer from the zero address"
+                },
+                {
+                    "pc": [
+                        1300
+                    ],
+                    "errorMessage": "ERC20: transfer to the zero address"
+                },
+                {
+                    "pc": [
+                        352
+                    ],
+                    "errorMessage": "SafeMath: addition overflow"
+                },
+                {
+                    "pc": [
+                        459
+                    ],
+                    "errorMessage": "__postInit already called"
+                },
+                {
+                    "pc": [
+                        405
+                    ],
+                    "errorMessage": "assertion failed"
+                },
+                {
+                    "pc": [
+                        594
+                    ],
+                    "errorMessage": "check _decimals exists"
+                },
+                {
+                    "pc": [
+                        522
+                    ],
+                    "errorMessage": "check _name exists"
+                },
+                {
+                    "pc": [
+                        558
+                    ],
+                    "errorMessage": "check _symbol exists"
+                },
+                {
+                    "pc": [
+                        627,
+                        1482
+                    ],
+                    "errorMessage": "check _totalSupply exists"
+                },
+                {
+                    "pc": [
+                        429,
+                        445
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        436,
+                        452
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"
+                },
+                {
+                    "pc": [
+                        653,
+                        703,
+                        750,
+                        758,
+                        775,
+                        822,
+                        830,
+                        947,
+                        1011,
+                        1148
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        711,
+                        783,
+                        838,
+                        955,
+                        1019,
+                        1114,
+                        1156
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint256"
+                },
+                {
+                    "pc": [
+                        517,
+                        553,
+                        589,
+                        622,
+                        666,
+                        724,
+                        796,
+                        851,
+                        968,
+                        1032,
+                        1127,
+                        1169,
+                        1260
+                    ],
+                    "errorMessage": "not payable"
+                },
+                {
+                    "pc": [
+                        632,
+                        682,
+                        1279,
+                        1392,
+                        1497,
+                        1549
+                    ],
+                    "errorMessage": "overflow"
+                },
+                {
+                    "pc": [
+                        411
+                    ],
+                    "errorMessage": "underflow"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0VSQzIwLnNvbC5FUkMyMC5hcHByb3ZhbF9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgaW50Y2Jsb2NrIDEgMzIgMCAyCiAgICBieXRlY2Jsb2NrIDB4ICJfYWxsb3dhbmNlcyIgMHgxNTFmN2M3NSAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgIl9iYWxhbmNlcyIgMHgxNTFmN2M3NTgwICJfdG90YWxTdXBwbHkiICJfX2N0b3JfcGVuZGluZyIgIl9uYW1lIiAiX3N5bWJvbCIgIl9kZWNpbWFscyIgMHgwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgMHg5YWM4ZDNmMQogICAgcHVzaGludCA0MDk2CiAgICBiemVybwogICAgZHVwCiAgICBzdG9yZSA1CiAgICBzdG9yZSAwCiAgICBsb2FkIDAKICAgIHB1c2hieXRlcyAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwODAKICAgIHJlcGxhY2UyIDY0CiAgICBzdG9yZSAwCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICBieXRlYyA3IC8vICJfX2N0b3JfcGVuZGluZyIKICAgIGludGNfMCAvLyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHg0YTQxMWQ5OSAweDE5NzUwNjE2IDB4MDA1YjUyYjggMHhiODc3OWVlNyAweDc5ZmFiNDY1IDB4ODNiYWQ3Y2MgMHgxOThjOTgyMCAweDVkODU0ZDBlIDB4ZmFmYjZhMDggMHg2ZGY0MWY2ZCAweGU5OWNjOTc5IDB4N2ViNmRiNGMgMHhmMTUwNTUyNyAweGQzNDM3NTU0IC8vIG1ldGhvZCAiX19wb3N0SW5pdChzdHJpbmcsc3RyaW5nKXZvaWQiLCBtZXRob2QgIm5hbWUoKXN0cmluZyIsIG1ldGhvZCAic3ltYm9sKClzdHJpbmciLCBtZXRob2QgImRlY2ltYWxzKCl1aW50NjQiLCBtZXRob2QgInRvdGFsU3VwcGx5KCl1aW50MjU2IiwgbWV0aG9kICJiYWxhbmNlT2YoYWRkcmVzcyl1aW50MjU2IiwgbWV0aG9kICJ0cmFuc2ZlcihhZGRyZXNzLHVpbnQyNTYpYm9vbCIsIG1ldGhvZCAiYWxsb3dhbmNlKGFkZHJlc3MsYWRkcmVzcyl1aW50MjU2IiwgbWV0aG9kICJhcHByb3ZlKGFkZHJlc3MsdWludDI1Nilib29sIiwgbWV0aG9kICJ0cmFuc2ZlckZyb20oYWRkcmVzcyxhZGRyZXNzLHVpbnQyNTYpYm9vbCIsIG1ldGhvZCAiaW5jcmVhc2VBbGxvd2FuY2UoYWRkcmVzcyx1aW50MjU2KWJvb2wiLCBtZXRob2QgImRlY3JlYXNlQWxsb3dhbmNlKGFkZHJlc3MsdWludDI1Nilib29sIiwgbWV0aG9kICJidXJuKHVpbnQyNTYpdm9pZCIsIG1ldGhvZCAiYnVybkZyb20oYWRkcmVzcyx1aW50MjU2KXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBfX3Bvc3RJbml0IG5hbWUgc3ltYm9sIGRlY2ltYWxzIHRvdGFsU3VwcGx5IGJhbGFuY2VPZiB0cmFuc2ZlciBhbGxvd2FuY2UgYXBwcm92ZSB0cmFuc2ZlckZyb20gaW5jcmVhc2VBbGxvd2FuY2UgZGVjcmVhc2VBbGxvd2FuY2UgYnVybiBidXJuRnJvbQogICAgZXJyCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9FUkMyMC5zb2wuU2FmZU1hdGguYWRkKGE6IGJ5dGVzLCBiOiBieXRlcykgLT4gYnl0ZXM6ClNhZmVNYXRoLmFkZDoKICAgIHByb3RvIDIgMQogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9kaWcgLTEKICAgIGIrCiAgICBkdXAKICAgIGZyYW1lX2RpZyAtMgogICAgYj49CiAgICBhc3NlcnQgLy8gU2FmZU1hdGg6IGFkZGl0aW9uIG92ZXJmbG93CiAgICByZXRzdWIKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0VSQzIwLnNvbC5TYWZlTWF0aC5zdWIoMikoYTogYnl0ZXMsIGI6IGJ5dGVzKSAtPiBieXRlczoKU2FmZU1hdGguc3ViOgogICAgcHJvdG8gMiAxCiAgICBmcmFtZV9kaWcgLTIKICAgIGZyYW1lX2RpZyAtMQogICAgcHVzaGJ5dGVzICJTYWZlTWF0aDogc3VidHJhY3Rpb24gb3ZlcmZsb3ciCiAgICBjYWxsc3ViIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLlNhZmVNYXRoLnN1YigzKQogICAgcmV0c3ViCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9FUkMyMC5zb2wuU2FmZU1hdGguc3ViKDMpKGE6IGJ5dGVzLCBiOiBieXRlcywgZXJyb3JNZXNzYWdlOiBieXRlcykgLT4gYnl0ZXM6Ci9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLlNhZmVNYXRoLnN1YigzKToKICAgIHByb3RvIDMgMQogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9kaWcgLTMKICAgIGI8PQogICAgYXNzZXJ0IC8vIGFzc2VydGlvbiBmYWlsZWQKICAgIGZyYW1lX2RpZyAtMwogICAgZnJhbWVfZGlnIC0yCiAgICBiPj0KICAgIGFzc2VydCAvLyB1bmRlcmZsb3cKICAgIGZyYW1lX2RpZyAtMwogICAgYnl0ZWMgMTEgLy8gMHgwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGIrCiAgICBmcmFtZV9kaWcgLTIKICAgIGItCiAgICBieXRlYyAxMSAvLyAweDAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAogICAgYiUKICAgIHJldHN1YgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLkVSQzIwLl9fcG9zdEluaXRbcm91dGluZ10oKSAtPiB2b2lkOgpfX3Bvc3RJbml0OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzIgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18zIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgaW50Y18yIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMyAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICBieXRlYyA3IC8vICJfX2N0b3JfcGVuZGluZyIKICAgIGFwcF9nbG9iYWxfZ2V0CiAgICBhc3NlcnQgLy8gX19wb3N0SW5pdCBhbHJlYWR5IGNhbGxlZAogICAgYnl0ZWMgNyAvLyAiX19jdG9yX3BlbmRpbmciCiAgICBpbnRjXzIgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGJ5dGVjIDQgLy8gIl9iYWxhbmNlcyIKICAgIGludGNfMyAvLyAyCiAgICBib3hfY3JlYXRlCiAgICBwb3AKICAgIGJ5dGVjXzEgLy8gIl9hbGxvd2FuY2VzIgogICAgaW50Y18zIC8vIDIKICAgIGJveF9jcmVhdGUKICAgIHBvcAogICAgYnl0ZWMgNiAvLyAiX3RvdGFsU3VwcGx5IgogICAgYnl0ZWNfMCAvLyAweAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGJ5dGVjIDggLy8gIl9uYW1lIgogICAgYnl0ZWNfMCAvLyAweAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGJ5dGVjIDkgLy8gIl9zeW1ib2wiCiAgICBieXRlY18wIC8vIDB4CiAgICBhcHBfZ2xvYmFsX3B1dAogICAgYnl0ZWMgMTAgLy8gIl9kZWNpbWFscyIKICAgIGludGNfMiAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgYnl0ZWMgOCAvLyAiX25hbWUiCiAgICB1bmNvdmVyIDIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICBieXRlYyA5IC8vICJfc3ltYm9sIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGJ5dGVjIDEwIC8vICJfZGVjaW1hbHMiCiAgICBwdXNoaW50IDE4CiAgICBhcHBfZ2xvYmFsX3B1dAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLkVSQzIwLm5hbWVbcm91dGluZ10oKSAtPiB2b2lkOgpuYW1lOgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGJ6IG5hbWVfdGVybmFyeV9mYWxzZUAzCiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18wIC8vIDEKICAgIC0KICAgIGd0eG5zIEFtb3VudAoKbmFtZV90ZXJuYXJ5X21lcmdlQDQ6CiAgICAhCiAgICBhc3NlcnQgLy8gbm90IHBheWFibGUKICAgIGludGNfMiAvLyAwCiAgICBieXRlYyA4IC8vICJfbmFtZSIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgX25hbWUgZXhpc3RzCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbmFtZV90ZXJuYXJ5X2ZhbHNlQDM6CiAgICBpbnRjXzIgLy8gMAogICAgYiBuYW1lX3Rlcm5hcnlfbWVyZ2VANAoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLkVSQzIwLnN5bWJvbFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnN5bWJvbDoKICAgIHR4biBHcm91cEluZGV4CiAgICBieiBzeW1ib2xfdGVybmFyeV9mYWxzZUAzCiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18wIC8vIDEKICAgIC0KICAgIGd0eG5zIEFtb3VudAoKc3ltYm9sX3Rlcm5hcnlfbWVyZ2VANDoKICAgICEKICAgIGFzc2VydCAvLyBub3QgcGF5YWJsZQogICAgaW50Y18yIC8vIDAKICAgIGJ5dGVjIDkgLy8gIl9zeW1ib2wiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIF9zeW1ib2wgZXhpc3RzCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKc3ltYm9sX3Rlcm5hcnlfZmFsc2VAMzoKICAgIGludGNfMiAvLyAwCiAgICBiIHN5bWJvbF90ZXJuYXJ5X21lcmdlQDQKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0VSQzIwLnNvbC5FUkMyMC5kZWNpbWFsc1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmRlY2ltYWxzOgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGJ6IGRlY2ltYWxzX3Rlcm5hcnlfZmFsc2VAMwogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMCAvLyAxCiAgICAtCiAgICBndHhucyBBbW91bnQKCmRlY2ltYWxzX3Rlcm5hcnlfbWVyZ2VANDoKICAgICEKICAgIGFzc2VydCAvLyBub3QgcGF5YWJsZQogICAgaW50Y18yIC8vIDAKICAgIGJ5dGVjIDEwIC8vICJfZGVjaW1hbHMiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIF9kZWNpbWFscyBleGlzdHMKICAgIHB1c2hpbnQgMjU1CiAgICAmCiAgICBpdG9iCiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgpkZWNpbWFsc190ZXJuYXJ5X2ZhbHNlQDM6CiAgICBpbnRjXzIgLy8gMAogICAgYiBkZWNpbWFsc190ZXJuYXJ5X21lcmdlQDQKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0VSQzIwLnNvbC5FUkMyMC50b3RhbFN1cHBseVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnRvdGFsU3VwcGx5OgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGJ6IHRvdGFsU3VwcGx5X3Rlcm5hcnlfZmFsc2VAMwogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMCAvLyAxCiAgICAtCiAgICBndHhucyBBbW91bnQKCnRvdGFsU3VwcGx5X3Rlcm5hcnlfbWVyZ2VANDoKICAgICEKICAgIGFzc2VydCAvLyBub3QgcGF5YWJsZQogICAgaW50Y18yIC8vIDAKICAgIGJ5dGVjIDYgLy8gIl90b3RhbFN1cHBseSIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgX3RvdGFsU3VwcGx5IGV4aXN0cwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgaW50Y18xIC8vIDMyCiAgICBiemVybwogICAgYnwKICAgIGJ5dGVjXzIgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCnRvdGFsU3VwcGx5X3Rlcm5hcnlfZmFsc2VAMzoKICAgIGludGNfMiAvLyAwCiAgICBiIHRvdGFsU3VwcGx5X3Rlcm5hcnlfbWVyZ2VANAoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLkVSQzIwLmJhbGFuY2VPZltyb3V0aW5nXSgpIC0+IHZvaWQ6CmJhbGFuY2VPZjoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGJ6IGJhbGFuY2VPZl90ZXJuYXJ5X2ZhbHNlQDMKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZ3R4bnMgQW1vdW50CgpiYWxhbmNlT2ZfdGVybmFyeV9tZXJnZUA0OgogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICBkdXAKICAgIHNoYTI1NgogICAgYnl0ZWMgNCAvLyAiX2JhbGFuY2VzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBieXRlY18wIC8vIDB4CiAgICBjb3ZlciAyCiAgICBzZWxlY3QKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGludGNfMSAvLyAzMgogICAgYnplcm8KICAgIGJ8CiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgpiYWxhbmNlT2ZfdGVybmFyeV9mYWxzZUAzOgogICAgaW50Y18yIC8vIDAKICAgIGIgYmFsYW5jZU9mX3Rlcm5hcnlfbWVyZ2VANAoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLkVSQzIwLnRyYW5zZmVyW3JvdXRpbmddKCkgLT4gdm9pZDoKdHJhbnNmZXI6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGJ6IHRyYW5zZmVyX3Rlcm5hcnlfZmFsc2VAMwogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMCAvLyAxCiAgICAtCiAgICBndHhucyBBbW91bnQKCnRyYW5zZmVyX3Rlcm5hcnlfbWVyZ2VANDoKICAgICEKICAgIGFzc2VydCAvLyBub3QgcGF5YWJsZQogICAgdHhuIFNlbmRlcgogICAgZGlnIDIKICAgIGRpZyAyCiAgICBjYWxsc3ViIF90cmFuc2ZlcgogICAgYnl0ZWMgNSAvLyAweDE1MWY3Yzc1ODAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKdHJhbnNmZXJfdGVybmFyeV9mYWxzZUAzOgogICAgaW50Y18yIC8vIDAKICAgIGIgdHJhbnNmZXJfdGVybmFyeV9tZXJnZUA0CgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9FUkMyMC5zb2wuRVJDMjAuYWxsb3dhbmNlW3JvdXRpbmddKCkgLT4gdm9pZDoKYWxsb3dhbmNlOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIGNhbGxzdWIgL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9FUkMyMC5zb2wuRVJDMjAuYWxsb3dhbmNlCiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9FUkMyMC5zb2wuRVJDMjAuYXBwcm92ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmFwcHJvdmU6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGJ6IGFwcHJvdmVfdGVybmFyeV9mYWxzZUAzCiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18wIC8vIDEKICAgIC0KICAgIGd0eG5zIEFtb3VudAoKYXBwcm92ZV90ZXJuYXJ5X21lcmdlQDQ6CiAgICAhCiAgICBhc3NlcnQgLy8gbm90IHBheWFibGUKICAgIHR4biBTZW5kZXIKICAgIGRpZyAyCiAgICBkaWcgMgogICAgY2FsbHN1YiBfYXBwcm92ZQogICAgYnl0ZWMgNSAvLyAweDE1MWY3Yzc1ODAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKYXBwcm92ZV90ZXJuYXJ5X2ZhbHNlQDM6CiAgICBpbnRjXzIgLy8gMAogICAgYiBhcHByb3ZlX3Rlcm5hcnlfbWVyZ2VANAoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLkVSQzIwLnRyYW5zZmVyRnJvbVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnRyYW5zZmVyRnJvbToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4biBHcm91cEluZGV4CiAgICBieiB0cmFuc2ZlckZyb21fdGVybmFyeV9mYWxzZUAzCiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18wIC8vIDEKICAgIC0KICAgIGd0eG5zIEFtb3VudAoKdHJhbnNmZXJGcm9tX3Rlcm5hcnlfbWVyZ2VANDoKICAgICEKICAgIGFzc2VydCAvLyBub3QgcGF5YWJsZQogICAgZGlnIDIKICAgIGR1cAogICAgZGlnIDMKICAgIGRpZyAzCiAgICBkdXAKICAgIGNvdmVyIDQKICAgIGNhbGxzdWIgX3RyYW5zZmVyCiAgICB0eG4gU2VuZGVyCiAgICBkaWcgMQogICAgdHhuIFNlbmRlcgogICAgY29uY2F0CiAgICBzaGEyNTYKICAgIGJ5dGVjXzEgLy8gIl9hbGxvd2FuY2VzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBieXRlY18wIC8vIDB4CiAgICBjb3ZlciAyCiAgICBzZWxlY3QKICAgIHVuY292ZXIgMwogICAgcHVzaGJ5dGVzICJFUkMyMDogdHJhbnNmZXIgYW1vdW50IGV4Y2VlZHMgYWxsb3dhbmNlIgogICAgY2FsbHN1YiAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0VSQzIwLnNvbC5TYWZlTWF0aC5zdWIoMykKICAgIGNhbGxzdWIgX2FwcHJvdmUKICAgIGJ5dGVjIDUgLy8gMHgxNTFmN2M3NTgwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCnRyYW5zZmVyRnJvbV90ZXJuYXJ5X2ZhbHNlQDM6CiAgICBpbnRjXzIgLy8gMAogICAgYiB0cmFuc2ZlckZyb21fdGVybmFyeV9tZXJnZUA0CgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9FUkMyMC5zb2wuRVJDMjAuaW5jcmVhc2VBbGxvd2FuY2Vbcm91dGluZ10oKSAtPiB2b2lkOgppbmNyZWFzZUFsbG93YW5jZToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICB0eG4gR3JvdXBJbmRleAogICAgYnogaW5jcmVhc2VBbGxvd2FuY2VfdGVybmFyeV9mYWxzZUAzCiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18wIC8vIDEKICAgIC0KICAgIGd0eG5zIEFtb3VudAoKaW5jcmVhc2VBbGxvd2FuY2VfdGVybmFyeV9tZXJnZUA0OgogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICB0eG4gU2VuZGVyCiAgICBkdXAKICAgIGRpZyAzCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGNvbmNhdAogICAgc2hhMjU2CiAgICBieXRlY18xIC8vICJfYWxsb3dhbmNlcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYm94X2dldAogICAgYnl0ZWNfMCAvLyAweAogICAgY292ZXIgMgogICAgc2VsZWN0CiAgICBkaWcgMwogICAgY2FsbHN1YiBTYWZlTWF0aC5hZGQKICAgIGNhbGxzdWIgX2FwcHJvdmUKICAgIGJ5dGVjIDUgLy8gMHgxNTFmN2M3NTgwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCmluY3JlYXNlQWxsb3dhbmNlX3Rlcm5hcnlfZmFsc2VAMzoKICAgIGludGNfMiAvLyAwCiAgICBiIGluY3JlYXNlQWxsb3dhbmNlX3Rlcm5hcnlfbWVyZ2VANAoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLkVSQzIwLmRlY3JlYXNlQWxsb3dhbmNlW3JvdXRpbmddKCkgLT4gdm9pZDoKZGVjcmVhc2VBbGxvd2FuY2U6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGJ6IGRlY3JlYXNlQWxsb3dhbmNlX3Rlcm5hcnlfZmFsc2VAMwogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMCAvLyAxCiAgICAtCiAgICBndHhucyBBbW91bnQKCmRlY3JlYXNlQWxsb3dhbmNlX3Rlcm5hcnlfbWVyZ2VANDoKICAgICEKICAgIGFzc2VydCAvLyBub3QgcGF5YWJsZQogICAgdHhuIFNlbmRlcgogICAgZHVwCiAgICBkaWcgMwogICAgZHVwCiAgICBjb3ZlciAyCiAgICBjb25jYXQKICAgIHNoYTI1NgogICAgYnl0ZWNfMSAvLyAiX2FsbG93YW5jZXMiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJveF9nZXQKICAgIGJ5dGVjXzAgLy8gMHgKICAgIGNvdmVyIDIKICAgIHNlbGVjdAogICAgZGlnIDMKICAgIHB1c2hieXRlcyAiRVJDMjA6IGRlY3JlYXNlZCBhbGxvd2FuY2UgYmVsb3cgemVybyIKICAgIGNhbGxzdWIgL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9FUkMyMC5zb2wuU2FmZU1hdGguc3ViKDMpCiAgICBjYWxsc3ViIF9hcHByb3ZlCiAgICBieXRlYyA1IC8vIDB4MTUxZjdjNzU4MAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgpkZWNyZWFzZUFsbG93YW5jZV90ZXJuYXJ5X2ZhbHNlQDM6CiAgICBpbnRjXzIgLy8gMAogICAgYiBkZWNyZWFzZUFsbG93YW5jZV90ZXJuYXJ5X21lcmdlQDQKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0VSQzIwLnNvbC5FUkMyMC5idXJuW3JvdXRpbmddKCkgLT4gdm9pZDoKYnVybjoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGJ6IGJ1cm5fdGVybmFyeV9mYWxzZUAzCiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18wIC8vIDEKICAgIC0KICAgIGd0eG5zIEFtb3VudAoKYnVybl90ZXJuYXJ5X21lcmdlQDQ6CiAgICAhCiAgICBhc3NlcnQgLy8gbm90IHBheWFibGUKICAgIHR4biBTZW5kZXIKICAgIGRpZyAxCiAgICBjYWxsc3ViIF9idXJuCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgpidXJuX3Rlcm5hcnlfZmFsc2VAMzoKICAgIGludGNfMiAvLyAwCiAgICBiIGJ1cm5fdGVybmFyeV9tZXJnZUA0CgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9FUkMyMC5zb2wuRVJDMjAuYnVybkZyb21bcm91dGluZ10oKSAtPiB2b2lkOgpidXJuRnJvbToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICB0eG4gR3JvdXBJbmRleAogICAgYnogYnVybkZyb21fdGVybmFyeV9mYWxzZUAzCiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18wIC8vIDEKICAgIC0KICAgIGd0eG5zIEFtb3VudAoKYnVybkZyb21fdGVybmFyeV9tZXJnZUA0OgogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICB0eG4gU2VuZGVyCiAgICBkaWcgMgogICAgZHVwCiAgICB1bmNvdmVyIDIKICAgIGNhbGxzdWIgL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9FUkMyMC5zb2wuRVJDMjAuYWxsb3dhbmNlCiAgICBkaWcgMgogICAgZHVwCiAgICBjb3ZlciAzCiAgICBwdXNoYnl0ZXMgIkVSQzIwOiBidXJuIGFtb3VudCBleGNlZWRzIGFsbG93YW5jZSIKICAgIGNhbGxzdWIgL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9FUkMyMC5zb2wuU2FmZU1hdGguc3ViKDMpCiAgICBkaWcgMQogICAgdHhuIFNlbmRlcgogICAgdW5jb3ZlciAyCiAgICBjYWxsc3ViIF9hcHByb3ZlCiAgICBzd2FwCiAgICBjYWxsc3ViIF9idXJuCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgpidXJuRnJvbV90ZXJuYXJ5X2ZhbHNlQDM6CiAgICBpbnRjXzIgLy8gMAogICAgYiBidXJuRnJvbV90ZXJuYXJ5X21lcmdlQDQKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0VSQzIwLnNvbC5FUkMyMC5hbGxvd2FuY2Uob3duZXI6IGJ5dGVzLCBzcGVuZGVyOiBieXRlcykgLT4gYnl0ZXM6Ci9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLkVSQzIwLmFsbG93YW5jZToKICAgIHByb3RvIDIgMQogICAgdHhuIEdyb3VwSW5kZXgKICAgIGJ6IC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLkVSQzIwLmFsbG93YW5jZV90ZXJuYXJ5X2ZhbHNlQDIKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZ3R4bnMgQW1vdW50CgovaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0VSQzIwLnNvbC5FUkMyMC5hbGxvd2FuY2VfdGVybmFyeV9tZXJnZUAzOgogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICBmcmFtZV9kaWcgLTIKICAgIGZyYW1lX2RpZyAtMQogICAgY29uY2F0CiAgICBzaGEyNTYKICAgIGJ5dGVjXzEgLy8gIl9hbGxvd2FuY2VzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBieXRlY18wIC8vIDB4CiAgICBjb3ZlciAyCiAgICBzZWxlY3QKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGludGNfMSAvLyAzMgogICAgYnplcm8KICAgIGJ8CiAgICByZXRzdWIKCi9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLkVSQzIwLmFsbG93YW5jZV90ZXJuYXJ5X2ZhbHNlQDI6CiAgICBpbnRjXzIgLy8gMAogICAgYiAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0VSQzIwLnNvbC5FUkMyMC5hbGxvd2FuY2VfdGVybmFyeV9tZXJnZUAzCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9FUkMyMC5zb2wuRVJDMjAuX3RyYW5zZmVyKHNlbmRlcjogYnl0ZXMsIHJlY2lwaWVudDogYnl0ZXMsIGFtb3VudDogYnl0ZXMpIC0+IHZvaWQ6Cl90cmFuc2ZlcjoKICAgIHByb3RvIDMgMAogICAgZnJhbWVfZGlnIC0zCiAgICBieXRlY18zIC8vIDB4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAogICAgIT0KICAgIGFzc2VydCAvLyBFUkMyMDogdHJhbnNmZXIgZnJvbSB0aGUgemVybyBhZGRyZXNzCiAgICBmcmFtZV9kaWcgLTIKICAgIGJ5dGVjXzMgLy8gMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCiAgICAhPQogICAgYXNzZXJ0IC8vIEVSQzIwOiB0cmFuc2ZlciB0byB0aGUgemVybyBhZGRyZXNzCiAgICBmcmFtZV9kaWcgLTMKICAgIHNoYTI1NgogICAgYnl0ZWMgNCAvLyAiX2JhbGFuY2VzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9nZXQKICAgIGJ5dGVjXzAgLy8gMHgKICAgIGNvdmVyIDIKICAgIHNlbGVjdAogICAgZnJhbWVfZGlnIC0xCiAgICBwdXNoYnl0ZXMgIkVSQzIwOiB0cmFuc2ZlciBhbW91bnQgZXhjZWVkcyBiYWxhbmNlIgogICAgY2FsbHN1YiAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0VSQzIwLnNvbC5TYWZlTWF0aC5zdWIoMykKICAgIGRpZyAxCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGJveF9wdXQKICAgIGZyYW1lX2RpZyAtMgogICAgc2hhMjU2CiAgICBieXRlYyA0IC8vICJfYmFsYW5jZXMiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2dldAogICAgYnl0ZWNfMCAvLyAweAogICAgY292ZXIgMgogICAgc2VsZWN0CiAgICBmcmFtZV9kaWcgLTEKICAgIGNhbGxzdWIgU2FmZU1hdGguYWRkCiAgICBkaWcgMQogICAgYm94X2RlbAogICAgcG9wCiAgICBib3hfcHV0CiAgICBmcmFtZV9kaWcgLTEKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA8PQogICAgYXNzZXJ0IC8vIG92ZXJmbG93CiAgICBpbnRjXzEgLy8gMzIKICAgIGJ6ZXJvCiAgICBmcmFtZV9kaWcgLTEKICAgIGJ8CiAgICBmcmFtZV9kaWcgLTMKICAgIGZyYW1lX2RpZyAtMgogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJ5dGVjIDEyIC8vIG1ldGhvZCAiVHJhbnNmZXIodWludDhbMzJdLHVpbnQ4WzMyXSx1aW50MjU2KSIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICByZXRzdWIKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0VSQzIwLnNvbC5FUkMyMC5fYnVybihhY2NvdW50OiBieXRlcywgYW1vdW50OiBieXRlcykgLT4gdm9pZDoKX2J1cm46CiAgICBwcm90byAyIDAKICAgIGZyYW1lX2RpZyAtMgogICAgYnl0ZWNfMyAvLyAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgICE9CiAgICBhc3NlcnQgLy8gRVJDMjA6IGJ1cm4gZnJvbSB0aGUgemVybyBhZGRyZXNzCiAgICBmcmFtZV9kaWcgLTIKICAgIHNoYTI1NgogICAgYnl0ZWMgNCAvLyAiX2JhbGFuY2VzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9nZXQKICAgIGJ5dGVjXzAgLy8gMHgKICAgIGNvdmVyIDIKICAgIHNlbGVjdAogICAgZnJhbWVfZGlnIC0xCiAgICBwdXNoYnl0ZXMgIkVSQzIwOiBidXJuIGFtb3VudCBleGNlZWRzIGJhbGFuY2UiCiAgICBjYWxsc3ViIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9XSVAvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRVJDMjAuc29sLlNhZmVNYXRoLnN1YigzKQogICAgZGlnIDEKICAgIGJveF9kZWwKICAgIHBvcAogICAgYm94X3B1dAogICAgaW50Y18yIC8vIDAKICAgIGJ5dGVjIDYgLy8gIl90b3RhbFN1cHBseSIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgX3RvdGFsU3VwcGx5IGV4aXN0cwogICAgZnJhbWVfZGlnIC0xCiAgICBjYWxsc3ViIFNhZmVNYXRoLnN1YgogICAgYnl0ZWMgNiAvLyAiX3RvdGFsU3VwcGx5IgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGZyYW1lX2RpZyAtMQogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGludGNfMSAvLyAzMgogICAgYnplcm8KICAgIGZyYW1lX2RpZyAtMQogICAgYnwKICAgIGZyYW1lX2RpZyAtMgogICAgYnl0ZWNfMyAvLyAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlYyAxMiAvLyBtZXRob2QgIlRyYW5zZmVyKHVpbnQ4WzMyXSx1aW50OFszMl0sdWludDI1NikiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgcmV0c3ViCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL1dJUC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9FUkMyMC5zb2wuRVJDMjAuX2FwcHJvdmUob3duZXI6IGJ5dGVzLCBzcGVuZGVyOiBieXRlcywgYW1vdW50OiBieXRlcykgLT4gdm9pZDoKX2FwcHJvdmU6CiAgICBwcm90byAzIDAKICAgIGZyYW1lX2RpZyAtMwogICAgYnl0ZWNfMyAvLyAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgICE9CiAgICBhc3NlcnQgLy8gRVJDMjA6IGFwcHJvdmUgZnJvbSB0aGUgemVybyBhZGRyZXNzCiAgICBmcmFtZV9kaWcgLTIKICAgIGJ5dGVjXzMgLy8gMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCiAgICAhPQogICAgYXNzZXJ0IC8vIEVSQzIwOiBhcHByb3ZlIHRvIHRoZSB6ZXJvIGFkZHJlc3MKICAgIGZyYW1lX2RpZyAtMwogICAgZnJhbWVfZGlnIC0yCiAgICBjb25jYXQKICAgIGR1cAogICAgc2hhMjU2CiAgICBieXRlY18xIC8vICJfYWxsb3dhbmNlcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGZyYW1lX2RpZyAtMQogICAgYm94X3B1dAogICAgZnJhbWVfZGlnIC0xCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgaW50Y18xIC8vIDMyCiAgICBiemVybwogICAgZnJhbWVfZGlnIC0xCiAgICBifAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgwNTBkNWE5MCAvLyBtZXRob2QgIkFwcHJvdmFsKHVpbnQ4WzMyXSx1aW50OFszMl0sdWludDI1NikiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgcmV0c3ViCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0VSQzIwLnNvbC5FUkMyMC5jbGVhcl9zdGF0ZV9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiAEASAAAiYNAAtfYWxsb3dhbmNlcwQVH3x1IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACV9iYWxhbmNlcwUVH3x1gAxfdG90YWxTdXBwbHkOX19jdG9yX3BlbmRpbmcFX25hbWUHX3N5bWJvbAlfZGVjaW1hbHMhAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABJrI0/GBgCCvSTUFNQA0AIAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBcQDUAMRhAAAYnByJnIkMxGRREMRhEgg4ESkEdmQQZdQYWBABbUrgEuHee5wR5+rRlBIO618wEGYyYIARdhU0OBPr7aggEbfQfbQTpnMl5BH6220wE8VBVJwTTQ3VUNhoAjg4AVQCmAMoA7gEPATMBZQGUAa0B3AJZApkDAAMiAIoCAYv+i/+gSYv+p0SJigIBi/6L/4AeU2FmZU1hdGg6IHN1YnRyYWN0aW9uIG92ZXJmbG93iAABiYoDAYv+i/2mRIv9i/6nRIv9Jwugi/6hJwuqiTYaAUkkWSUISwEVEkRXAgA2GgJJJFklCEsBFRJEVwIAJwdkRCcHJGcnBCW5SCkluUgnBihnJwgoZycJKGcnCiRnJwhPAmcnCUxnJwqBEmciQzEWQQAbMRYiCTgIFEQkJwhlREkVFlcGAkxQKkxQsCJDJEL/5zEWQQAbMRYiCTgIFEQkJwllREkVFlcGAkxQKkxQsCJDJEL/5zEWQQAYMRYiCTgIFEQkJwplRIH/ARoWKkxQsCJDJEL/6jEWQQAbMRYiCTgIFEQkJwZlREkVIw5EI6+rKkxQsCJDJEL/5zYaAUkVIxJEMRZBACExFiIJOAgUREkBJwRMUL4oTgJNSRUjDkQjr6sqTFCwIkMkQv/hNhoBSRUjEkQ2GgJJFSMSRDEWQQAWMRYiCTgIFEQxAEsCSwKIAionBbAiQyRC/+w2GgFJFSMSRDYaAkkVIxJEiAHjKkxQsCJDNhoBSRUjEkQ2GgJJFSMSRDEWQQAWMRYiCTgIFEQxAEsCSwKIAsUnBbAiQyRC/+w2GgFJFSMSRDYaAkkVIxJENhoDSRUjEkQxFkEAXDEWIgk4CBRESwJJSwNLA0lOBIgBpzEASwExAFABKUxQvihOAk1PA4AoRVJDMjA6IHRyYW5zZmVyIGFtb3VudCBleGNlZWRzIGFsbG93YW5jZYj97YgCSCcFsCJDJEL/pjYaAUkVIxJENhoCSRUjEkQxFkEAJzEWIgk4CBREMQBJSwNJTgJQASlMUL4oTgJNSwOI/XSIAggnBbAiQyRC/9s2GgFJFSMSRDYaAkkVIxJEMRZBAE4xFiIJOAgURDEASUsDSU4CUAEpTFC+KE4CTUsDgCVFUkMyMDogZGVjcmVhc2VkIGFsbG93YW5jZSBiZWxvdyB6ZXJviP1GiAGhJwWwIkMkQv+0NhoBSRUjEkQxFkEAETEWIgk4CBREMQBLAYgBFCJDJEL/8TYaAUkVIxJENhoCSRUjEkQxFkEATzEWIgk4CBREMQBLAklPAogAQUsCSU4DgCRFUkMyMDogYnVybiBhbW91bnQgZXhjZWVkcyBhbGxvd2FuY2WI/MNLATEATwKIARhMiACsIkMkQv+zigIBMRZBAB8xFiIJOAgURIv+i/9QASlMUL4oTgJNSRUjDkQjr6uJJEL/44oDAIv9KxNEi/4rE0SL/QEnBExQSb4oTgJNi/+AJkVSQzIwOiB0cmFuc2ZlciBhbW91bnQgZXhjZWVkcyBiYWxhbmNliPw+SwG8SL+L/gEnBExQSb4oTgJNi/+I++5LAbxIv4v/FSMORCOvi/+ri/2L/lBMUCcMTFCwiYoCAIv+KxNEi/4BJwRMUEm+KE4CTYv/gCJFUkMyMDogYnVybiBhbW91bnQgZXhjZWVkcyBiYWxhbmNliPvMSwG8SL8kJwZlRIv/iPuSJwZMZ4v/FSMORCOvi/+ri/4rUExQJwxMULCJigMAi/0rE0SL/isTRIv9i/5QSQEpTFBJvEiL/7+L/xUjDkQjr4v/q1CABAUNWpBMULCJ",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 8,
+            "patch": 0
+        }
+    },
+    "events": [
+        {
+            "name": "Transfer",
+            "args": [
+                {
+                    "type": "uint8[32]",
+                    "name": "from"
+                },
+                {
+                    "type": "uint8[32]",
+                    "name": "to"
+                },
+                {
+                    "type": "uint256",
+                    "name": "value"
+                }
+            ]
+        },
+        {
+            "name": "Approval",
+            "args": [
+                {
+                    "type": "uint8[32]",
+                    "name": "owner"
+                },
+                {
+                    "type": "uint8[32]",
+                    "name": "spender"
+                },
+                {
+                    "type": "uint256",
+                    "name": "value"
+                }
+            ]
+        }
+    ],
+    "templateVariables": {}
+}

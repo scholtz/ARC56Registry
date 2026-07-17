@@ -1,0 +1,307 @@
+{
+    "name": "EcdsaHonkVerifier__Helper3",
+    "structs": {
+        "G1ProofPoint": [
+            {
+                "name": "x_0",
+                "type": "uint512"
+            },
+            {
+                "name": "x_1",
+                "type": "uint512"
+            },
+            {
+                "name": "y_0",
+                "type": "uint512"
+            },
+            {
+                "name": "y_1",
+                "type": "uint512"
+            }
+        ],
+        "Proof": [
+            {
+                "name": "circuitSize",
+                "type": "uint512"
+            },
+            {
+                "name": "publicInputsSize",
+                "type": "uint512"
+            },
+            {
+                "name": "publicInputsOffset",
+                "type": "uint512"
+            },
+            {
+                "name": "w1",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "w2",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "w3",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "w4",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "zPerm",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "lookupReadCounts",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "lookupReadTags",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "lookupInverses",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "sumcheckUnivariates",
+                "type": "uint512[8][28]"
+            },
+            {
+                "name": "sumcheckEvaluations",
+                "type": "uint512[44]"
+            },
+            {
+                "name": "geminiFoldComms",
+                "type": "(uint512,uint512,uint512,uint512)[27]"
+            },
+            {
+                "name": "geminiAEvaluations",
+                "type": "uint512[28]"
+            },
+            {
+                "name": "shplonkQ",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "kzgQuotient",
+                "type": "G1ProofPoint"
+            }
+        ],
+        "Transcript": [
+            {
+                "name": "eta",
+                "type": "uint512"
+            },
+            {
+                "name": "etaTwo",
+                "type": "uint512"
+            },
+            {
+                "name": "etaThree",
+                "type": "uint512"
+            },
+            {
+                "name": "beta",
+                "type": "uint512"
+            },
+            {
+                "name": "gamma",
+                "type": "uint512"
+            },
+            {
+                "name": "alphas",
+                "type": "uint512[25]"
+            },
+            {
+                "name": "gateChallenges",
+                "type": "uint512[28]"
+            },
+            {
+                "name": "sumCheckUChallenges",
+                "type": "uint512[28]"
+            },
+            {
+                "name": "rho",
+                "type": "uint512"
+            },
+            {
+                "name": "geminiR",
+                "type": "uint512"
+            },
+            {
+                "name": "shplonkNu",
+                "type": "uint512"
+            },
+            {
+                "name": "shplonkZ",
+                "type": "uint512"
+            },
+            {
+                "name": "publicInputsDelta",
+                "type": "uint512"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "TranscriptLib.generateTranscript__chunk_11__chunk_2",
+            "args": [
+                {
+                    "type": "(uint512,uint512,uint512,(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),uint512[8][28],uint512[44],(uint512,uint512,uint512,uint512)[27],uint512[28],(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512))",
+                    "struct": "Proof",
+                    "name": "proof"
+                },
+                {
+                    "type": "byte[32][]",
+                    "name": "publicInputs"
+                },
+                {
+                    "type": "uint512",
+                    "name": "publicInputsSize"
+                },
+                {
+                    "type": "uint512",
+                    "name": "previousChallenge"
+                },
+                {
+                    "type": "(uint512,uint512,uint512,uint512,uint512,uint512[25],uint512[28],uint512[28],uint512,uint512,uint512,uint512,uint512)",
+                    "struct": "Transcript",
+                    "name": "t"
+                },
+                {
+                    "type": "uint512[109]",
+                    "name": "gR"
+                },
+                {
+                    "type": "uint512",
+                    "name": "geminiR"
+                },
+                {
+                    "type": "uint512",
+                    "name": "nextPreviousChallenge"
+                }
+            ],
+            "returns": {
+                "type": "(uint512[109],uint512,uint512)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "Helper contract 3 for EcdsaHonkVerifier",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        48
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        42
+                    ],
+                    "errorMessage": "invalid number of bytes for Proof"
+                },
+                {
+                    "pc": [
+                        85
+                    ],
+                    "errorMessage": "invalid number of bytes for Transcript"
+                },
+                {
+                    "pc": [
+                        58
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.static_array<arc4.uint8, 32>>"
+                },
+                {
+                    "pc": [
+                        95
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint512, 109>"
+                },
+                {
+                    "pc": [
+                        69,
+                        76,
+                        104,
+                        113
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint512"
+                },
+                {
+                    "pc": [
+                        118,
+                        134
+                    ],
+                    "errorMessage": "overflow"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvaG9uay9jb250cmFjdHMvcmVmZXJlbmNlL0VjZHNhSG9ua1ZlcmlmaWVyLnNvbC5FY2RzYUhvbmtWZXJpZmllcl9fSGVscGVyMy5fX3B1eWFfYXJjNF9yb3V0ZXJfXygpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayA2NCAwIDIKICAgIGIgX19wdXlhX2FyYzRfcm91dGVyX18KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvaG9uay9jb250cmFjdHMvcmVmZXJlbmNlL0VjZHNhSG9ua1ZlcmlmaWVyLnNvbC5FY2RzYUhvbmtWZXJpZmllcl9fSGVscGVyMy5fX3B1eWFfYXJjNF9yb3V0ZXJfXygpIC0+IHVpbnQ2NDoKX19wdXlhX2FyYzRfcm91dGVyX186CiAgICBwdXNoYnl0ZXMgMHgwODliOTFhMiAvLyBtZXRob2QgIlRyYW5zY3JpcHRMaWIuZ2VuZXJhdGVUcmFuc2NyaXB0X19jaHVua18xMV9fY2h1bmtfMigodWludDUxMix1aW50NTEyLHVpbnQ1MTIsKHVpbnQ1MTIsdWludDUxMix1aW50NTEyLHVpbnQ1MTIpLCh1aW50NTEyLHVpbnQ1MTIsdWludDUxMix1aW50NTEyKSwodWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMiksKHVpbnQ1MTIsdWludDUxMix1aW50NTEyLHVpbnQ1MTIpLCh1aW50NTEyLHVpbnQ1MTIsdWludDUxMix1aW50NTEyKSwodWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMiksKHVpbnQ1MTIsdWludDUxMix1aW50NTEyLHVpbnQ1MTIpLCh1aW50NTEyLHVpbnQ1MTIsdWludDUxMix1aW50NTEyKSx1aW50NTEyWzhdWzI4XSx1aW50NTEyWzQ0XSwodWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMilbMjddLHVpbnQ1MTJbMjhdLCh1aW50NTEyLHVpbnQ1MTIsdWludDUxMix1aW50NTEyKSwodWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMikpLGJ5dGVbMzJdW10sdWludDUxMix1aW50NTEyLCh1aW50NTEyLHVpbnQ1MTIsdWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMlsyNV0sdWludDUxMlsyOF0sdWludDUxMlsyOF0sdWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMix1aW50NTEyKSx1aW50NTEyWzEwOV0sdWludDUxMix1aW50NTEyKSh1aW50NTEyWzEwOV0sdWludDUxMix1aW50NTEyKSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIF9fcHV5YV9hcmM0X3JvdXRlcl9fX1RyYW5zY3JpcHRMaWIuZ2VuZXJhdGVUcmFuc2NyaXB0X19jaHVua18xMV9fY2h1bmtfMl9yb3V0ZUAxCiAgICBlcnIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX1RyYW5zY3JpcHRMaWIuZ2VuZXJhdGVUcmFuc2NyaXB0X19jaHVua18xMV9fY2h1bmtfMl9yb3V0ZUAxOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgVHJhbnNjcmlwdExpYi5nZW5lcmF0ZVRyYW5zY3JpcHRfX2NodW5rXzExX19jaHVua18yCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL2hvbmsvY29udHJhY3RzL3JlZmVyZW5jZS9FY2RzYUhvbmtWZXJpZmllci5zb2wuRWNkc2FIb25rVmVyaWZpZXJfX0hlbHBlcjMuVHJhbnNjcmlwdExpYi5nZW5lcmF0ZVRyYW5zY3JpcHRfX2NodW5rXzExX19jaHVua18yW3JvdXRpbmddKCkgLT4gdm9pZDoKVHJhbnNjcmlwdExpYi5nZW5lcmF0ZVRyYW5zY3JpcHRfX2NodW5rXzExX19jaHVua18yOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBwdXNoaW50IDI4NjA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBQcm9vZgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAzMgogICAgKgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4+CiAgICBpbnRjXzIgLy8gMgogICAgaW50Y18xIC8vIDAKICAgIGV4dHJhY3QzCiAgICBwb3AKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGxlbgogICAgaW50Y18wIC8vIDY0CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ1MTIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDQKICAgIGxlbgogICAgaW50Y18wIC8vIDY0CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ1MTIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDUKICAgIGxlbgogICAgcHVzaGludCA1ODI0CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBUcmFuc2NyaXB0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA2CiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA2OTc2CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ1MTIsIDEwOT4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDcKICAgIGR1cAogICAgbGVuCiAgICBkdXAKICAgIGludGNfMCAvLyA2NAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NTEyCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA4CiAgICBkdXAKICAgIGxlbgogICAgZHVwCiAgICBpbnRjXzAgLy8gNjQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDUxMgogICAgdW5jb3ZlciAyCiAgICBpbnRjXzAgLy8gNjQKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGludGNfMCAvLyA2NAogICAgYnplcm8KICAgIHVuY292ZXIgMwogICAgZGlnIDEKICAgIGJ8CiAgICB1bmNvdmVyIDQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBpbnRjXzAgLy8gNjQKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGNvdmVyIDIKICAgIGJ8CiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgcHVzaGludCAxCiAgICByZXR1cm4K",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvaG9uay9jb250cmFjdHMvcmVmZXJlbmNlL0VjZHNhSG9ua1ZlcmlmaWVyLnNvbC5FY2RzYUhvbmtWZXJpZmllcl9fSGVscGVyMy5jbGVhcl9zdGF0ZV9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiADQAACQgAAgAQIm5GiNhoAjgEAAQAxGRQxGBBEQgAANhoBFYHA3wESRDYaAkkjWYEgCyQISwEVEkQkI1hINhoDFSISRDYaBBUiEkQ2GgUVgcAtEkQ2GgZJFYHANhJENhoHSRVJIhJENhoISRVJIhJETwIiDkQir08DSwGrTwRMUE8CIg5ETgKrUIAEFR98dUxQsIEBQw==",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

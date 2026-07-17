@@ -1,0 +1,127 @@
+{
+    "name": "BaseTwo",
+    "structs": {},
+    "methods": [
+        {
+            "name": "methodTwo",
+            "args": [],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "b2CantOverride",
+            "args": [],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Because CommonBase implements this method, and MRO for polytype is depth first; this method\nshould not be accessible from MultiBases as the MRO should be `BaseOne => CommonBase => BaseTwo => CommonBase`\nand since CommonBase provides an implementation, this one should not be used",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "methodCommon",
+            "args": [],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 1,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "stateTwo": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMString",
+                    "key": "c3RhdGVUd28="
+                },
+                "stateCommon": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "c3RhdGVDb21tb24="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUwMDA4NjI2MTczNjUyZDc0Nzc2ZgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gdGVzdHMvYXBwcm92YWxzL211bHRpLWluaGVyaXRhbmNlLmFsZ28udHM6MTEKICAgIC8vIHN0YXRlQ29tbW9uID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGluaXRpYWxWYWx1ZTogMTIzIH0pCiAgICBwdXNoYnl0ZXMgInN0YXRlQ29tbW9uIgogICAgcHVzaGludCAxMjMKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvbXVsdGktaW5oZXJpdGFuY2UuYWxnby50czozMAogICAgLy8gc3RhdGVUd28gPSBHbG9iYWxTdGF0ZSh7IGluaXRpYWxWYWx1ZTogJ0hlbGxvJyB9KQogICAgcHVzaGJ5dGVzcyAic3RhdGVUd28iICJIZWxsbyIKICAgIGFwcF9nbG9iYWxfcHV0CgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9tdWx0aS1pbmhlcml0YW5jZS5hbGdvLnRzOjI5CiAgICAvLyBleHBvcnQgY2xhc3MgQmFzZVR3byBleHRlbmRzIENvbW1vbkJhc2UgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDEyCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHgzNjNiMzI5ZSAweGY5ZjUxNDJjIDB4NDU1YzhkMDkgLy8gbWV0aG9kICJtZXRob2RUd28oKXN0cmluZyIsIG1ldGhvZCAiYjJDYW50T3ZlcnJpZGUoKXN0cmluZyIsIG1ldGhvZCAibWV0aG9kQ29tbW9uKClzdHJpbmciCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX21ldGhvZFR3b19yb3V0ZUA2IG1haW5fYjJDYW50T3ZlcnJpZGVfcm91dGVANyBtYWluX21ldGhvZENvbW1vbl9yb3V0ZUA4CiAgICBlcnIKCm1haW5fbWV0aG9kQ29tbW9uX3JvdXRlQDg6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvbXVsdGktaW5oZXJpdGFuY2UuYWxnby50czoxMwogICAgLy8gbWV0aG9kQ29tbW9uKCkgewogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDA2NjM2ZjZkNmQ2ZjZlCiAgICBsb2cKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCgptYWluX2IyQ2FudE92ZXJyaWRlX3JvdXRlQDc6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvbXVsdGktaW5oZXJpdGFuY2UuYWxnby50czo0MAogICAgLy8gYjJDYW50T3ZlcnJpZGUoKTogc3RyaW5nIHsKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NTAwMDg2MjYxNzM2NTJkNzQ3NzZmCiAgICBsb2cKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCgptYWluX21ldGhvZFR3b19yb3V0ZUA2OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL211bHRpLWluaGVyaXRhbmNlLmFsZ28udHM6MzEKICAgIC8vIG1ldGhvZFR3bygpIHsKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NTAwMDg2MjYxNzM2NTJkNzQ3NzZmCiAgICBsb2cKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUAxMjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9tdWx0aS1pbmhlcml0YW5jZS5hbGdvLnRzOjI5CiAgICAvLyBleHBvcnQgY2xhc3MgQmFzZVR3byBleHRlbmRzIENvbW1vbkJhc2UgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4K",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="
+    },
+    "byteCode": {
+        "approval": "CyYBDhUffHUACGJhc2UtdHdvMRhAACKAC3N0YXRlQ29tbW9ugXtnggIIc3RhdGVUd28FSGVsbG9nMRtBAEAxGRREMRhEggMENjsyngT59RQsBEVcjQk2GgCOAwAYABMAAQCADBUffHUABmNvbW1vbrCBAUMosIEBQyiwgQFDMRkUMRgUEEM=",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 9,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

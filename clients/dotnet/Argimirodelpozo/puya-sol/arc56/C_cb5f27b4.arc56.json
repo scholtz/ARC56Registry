@@ -1,0 +1,135 @@
+{
+    "name": "C",
+    "structs": {
+        "S": [
+            {
+                "name": "x",
+                "type": "uint8[1]"
+            },
+            {
+                "name": "y",
+                "type": "uint8[]"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "test",
+            "args": [
+                {
+                    "type": "(uint8[1],uint8[])",
+                    "struct": "S",
+                    "name": "src"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "s": {
+                    "keyType": "AVMString",
+                    "valueType": "S",
+                    "key": "cw=="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        124
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        132
+                    ],
+                    "errorMessage": "invalid number of bytes for S"
+                },
+                {
+                    "pc": [
+                        113
+                    ],
+                    "errorMessage": "invalid tail pointer at index 1 of (uint8[1],(len+uint8[]))"
+                },
+                {
+                    "pc": [
+                        109
+                    ],
+                    "errorMessage": "invalid tuple encoding"
+                },
+                {
+                    "pc": [
+                        145
+                    ],
+                    "errorMessage": "not payable"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvdGVzdHMvc29saWRpdHktc2VtYW50aWMtdGVzdHMvdGVzdHMvc3RydWN0cy9jb3B5X3N0cnVjdF93aXRoX25lc3RlZF9hcnJheV9mcm9tX2NhbGxkYXRhX3RvX3N0b3JhZ2Uuc29sLkMuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMwogICAgaW50Y18wIC8vIDAKICAgIGR1cAogICAgcHVzaGJ5dGVzICIiCiAgICBwdXNoaW50IDQwOTYKICAgIGJ6ZXJvCiAgICBkdXAKICAgIHN0b3JlIDUKICAgIHN0b3JlIDAKICAgIGxvYWQgMAogICAgcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA4MAogICAgcmVwbGFjZTIgNjQKICAgIHN0b3JlIDAKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIHB1c2hieXRlc3MgInMiIDB4MDAwMDAzMDAwMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgcHVzaGJ5dGVzIDB4MGU5MmZkYjkgLy8gbWV0aG9kICJ0ZXN0KCh1aW50OFsxXSx1aW50OFtdKSl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl90ZXN0X3JvdXRlQDQKICAgIGVycgoKbWFpbl90ZXN0X3JvdXRlQDQ6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBidXJ5IDQKICAgIGR1cAogICAgbGVuCiAgICBkaWcgMQogICAgaW50Y18xIC8vIDEKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIHR1cGxlIGVuY29kaW5nCiAgICBkdXAKICAgIGludGNfMiAvLyAzCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgdGFpbCBwb2ludGVyIGF0IGluZGV4IDEgb2YgKHVpbnQ4WzFdLChsZW4rdWludDhbXSkpCiAgICB1bmNvdmVyIDIKICAgIHN3YXAKICAgIGRpZyAyCiAgICBzdWJzdHJpbmczCiAgICBkdXAKICAgIGJ1cnkgNAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGR1cAogICAgYnVyeSAzCiAgICBwdXNoaW50IDUKICAgICsKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIFMKICAgIHR4biBHcm91cEluZGV4CiAgICBieiBtYWluX3Rlcm5hcnlfZmFsc2VAOAogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMSAvLyAxCiAgICAtCiAgICBndHhucyBBbW91bnQKCm1haW5fdGVybmFyeV9tZXJnZUA5OgogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICBwdXNoYnl0ZXMgInMiCiAgICBkaWcgMwogICAgZHVwCiAgICBjb3ZlciAyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgZXh0cmFjdCAwIDEKICAgIGludGNfMCAvLyAwCiAgICBnZXRieXRlCiAgICBpbnRjXzIgLy8gMwogICAgPT0KICAgIGFzc2VydAogICAgZHVwCiAgICBpdG9iCiAgICBwdXNoYnl0ZXMgMHgwMgogICAgYj09CiAgICBhc3NlcnQKICAgIGRpZyAxCiAgICBkdXAKICAgIHB1c2hpbnQgMgogICAgZ2V0Ynl0ZQogICAgcHVzaGludCA3CiAgICA9PQogICAgYXNzZXJ0CiAgICBpbnRjXzIgLy8gMwogICAgZ2V0Ynl0ZQogICAgcHVzaGludCAxMQogICAgPT0KICAgIGFzc2VydAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl90ZXJuYXJ5X2ZhbHNlQDg6CiAgICBpbnRjXzAgLy8gMAogICAgYiBtYWluX3Rlcm5hcnlfbWVyZ2VAOQo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvdGVzdHMvc29saWRpdHktc2VtYW50aWMtdGVzdHMvdGVzdHMvc3RydWN0cy9jb3B5X3N0cnVjdF93aXRoX25lc3RlZF9hcnJheV9mcm9tX2NhbGxkYXRhX3RvX3N0b3JhZ2Uuc29sLkMuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiADAAEDIkmAAIGAIK9JNQU1ADQAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgFxANQAxGEAADYICAXMFAAADAABnI0OABA6S/bk2GgCOAQABADEZFDEYEEQ2GgFJRQRJFUsBI1lJJBJETwJMSwJSSUUEIllJRQOBBQgSRDEWQQAyMRYjCTgIFESAAXNLA0lOAmdXAAEiVSQSREkWgAECqERLAUmBAlWBBxJEJFWBCxJEI0MiQv/Q",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 8,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

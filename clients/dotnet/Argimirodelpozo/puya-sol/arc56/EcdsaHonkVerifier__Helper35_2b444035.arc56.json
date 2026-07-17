@@ -1,0 +1,301 @@
+{
+    "name": "EcdsaHonkVerifier__Helper35",
+    "structs": {
+        "G1ProofPoint": [
+            {
+                "name": "x_0",
+                "type": "uint512"
+            },
+            {
+                "name": "x_1",
+                "type": "uint512"
+            },
+            {
+                "name": "y_0",
+                "type": "uint512"
+            },
+            {
+                "name": "y_1",
+                "type": "uint512"
+            }
+        ],
+        "Proof": [
+            {
+                "name": "circuitSize",
+                "type": "uint512"
+            },
+            {
+                "name": "publicInputsSize",
+                "type": "uint512"
+            },
+            {
+                "name": "publicInputsOffset",
+                "type": "uint512"
+            },
+            {
+                "name": "w1",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "w2",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "w3",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "w4",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "zPerm",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "lookupReadCounts",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "lookupReadTags",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "lookupInverses",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "sumcheckUnivariates",
+                "type": "uint512[8][28]"
+            },
+            {
+                "name": "sumcheckEvaluations",
+                "type": "uint512[44]"
+            },
+            {
+                "name": "geminiFoldComms",
+                "type": "(uint512,uint512,uint512,uint512)[27]"
+            },
+            {
+                "name": "geminiAEvaluations",
+                "type": "uint512[28]"
+            },
+            {
+                "name": "shplonkQ",
+                "type": "G1ProofPoint"
+            },
+            {
+                "name": "kzgQuotient",
+                "type": "G1ProofPoint"
+            }
+        ],
+        "Transcript": [
+            {
+                "name": "eta",
+                "type": "uint512"
+            },
+            {
+                "name": "etaTwo",
+                "type": "uint512"
+            },
+            {
+                "name": "etaThree",
+                "type": "uint512"
+            },
+            {
+                "name": "beta",
+                "type": "uint512"
+            },
+            {
+                "name": "gamma",
+                "type": "uint512"
+            },
+            {
+                "name": "alphas",
+                "type": "uint512[25]"
+            },
+            {
+                "name": "gateChallenges",
+                "type": "uint512[28]"
+            },
+            {
+                "name": "sumCheckUChallenges",
+                "type": "uint512[28]"
+            },
+            {
+                "name": "rho",
+                "type": "uint512"
+            },
+            {
+                "name": "geminiR",
+                "type": "uint512"
+            },
+            {
+                "name": "shplonkNu",
+                "type": "uint512"
+            },
+            {
+                "name": "shplonkZ",
+                "type": "uint512"
+            },
+            {
+                "name": "publicInputsDelta",
+                "type": "uint512"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "TranscriptLib.generateTranscript__chunk_14",
+            "args": [
+                {
+                    "type": "(uint512,uint512,uint512,(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512),uint512[8][28],uint512[44],(uint512,uint512,uint512,uint512)[27],uint512[28],(uint512,uint512,uint512,uint512),(uint512,uint512,uint512,uint512))",
+                    "struct": "Proof",
+                    "name": "proof"
+                },
+                {
+                    "type": "byte[32][]",
+                    "name": "publicInputs"
+                },
+                {
+                    "type": "uint512",
+                    "name": "publicInputsSize"
+                },
+                {
+                    "type": "uint512",
+                    "name": "previousChallenge"
+                },
+                {
+                    "type": "(uint512,uint512,uint512,uint512,uint512,uint512[25],uint512[28],uint512[28],uint512,uint512,uint512,uint512,uint512)",
+                    "struct": "Transcript",
+                    "name": "t"
+                }
+            ],
+            "returns": {
+                "type": "(uint512,(uint512,uint512,uint512,uint512,uint512,uint512[25],uint512[28],uint512[28],uint512,uint512,uint512,uint512,uint512))"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "Helper contract 35 for EcdsaHonkVerifier",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        2013,
+                        2057,
+                        2095
+                    ],
+                    "errorMessage": "index access is out of bounds"
+                },
+                {
+                    "pc": [
+                        86
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        80
+                    ],
+                    "errorMessage": "invalid number of bytes for Proof"
+                },
+                {
+                    "pc": [
+                        128
+                    ],
+                    "errorMessage": "invalid number of bytes for Transcript"
+                },
+                {
+                    "pc": [
+                        96
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.static_array<arc4.uint8, 32>>"
+                },
+                {
+                    "pc": [
+                        107,
+                        116
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint512"
+                },
+                {
+                    "pc": [
+                        2139
+                    ],
+                    "errorMessage": "no available slots"
+                },
+                {
+                    "pc": [
+                        146,
+                        2078
+                    ],
+                    "errorMessage": "overflow"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvaG9uay9jb250cmFjdHMvcmVmZXJlbmNlL0VjZHNhSG9ua1ZlcmlmaWVyLnNvbC5FY2RzYUhvbmtWZXJpZmllcl9fSGVscGVyMzUuX19wdXlhX2FyYzRfcm91dGVyX18oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgNjQgMCA4IDIKICAgIHB1c2hieXRlcyAweDdmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmYKICAgIHN0b3JlIDAKICAgIGIgX19wdXlhX2FyYzRfcm91dGVyX18KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvaG9uay9jb250cmFjdHMvcmVmZXJlbmNlL0VjZHNhSG9ua1ZlcmlmaWVyLnNvbC5FY2RzYUhvbmtWZXJpZmllcl9fSGVscGVyMzUuX19wdXlhX2FyYzRfcm91dGVyX18oKSAtPiB1aW50NjQ6Cl9fcHV5YV9hcmM0X3JvdXRlcl9fOgogICAgcHVzaGJ5dGVzIDB4YTNkYjFlODMgLy8gbWV0aG9kICJUcmFuc2NyaXB0TGliLmdlbmVyYXRlVHJhbnNjcmlwdF9fY2h1bmtfMTQoKHVpbnQ1MTIsdWludDUxMix1aW50NTEyLCh1aW50NTEyLHVpbnQ1MTIsdWludDUxMix1aW50NTEyKSwodWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMiksKHVpbnQ1MTIsdWludDUxMix1aW50NTEyLHVpbnQ1MTIpLCh1aW50NTEyLHVpbnQ1MTIsdWludDUxMix1aW50NTEyKSwodWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMiksKHVpbnQ1MTIsdWludDUxMix1aW50NTEyLHVpbnQ1MTIpLCh1aW50NTEyLHVpbnQ1MTIsdWludDUxMix1aW50NTEyKSwodWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMiksdWludDUxMls4XVsyOF0sdWludDUxMls0NF0sKHVpbnQ1MTIsdWludDUxMix1aW50NTEyLHVpbnQ1MTIpWzI3XSx1aW50NTEyWzI4XSwodWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMiksKHVpbnQ1MTIsdWludDUxMix1aW50NTEyLHVpbnQ1MTIpKSxieXRlWzMyXVtdLHVpbnQ1MTIsdWludDUxMiwodWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMix1aW50NTEyLHVpbnQ1MTJbMjVdLHVpbnQ1MTJbMjhdLHVpbnQ1MTJbMjhdLHVpbnQ1MTIsdWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMikpKHVpbnQ1MTIsKHVpbnQ1MTIsdWludDUxMix1aW50NTEyLHVpbnQ1MTIsdWludDUxMix1aW50NTEyWzI1XSx1aW50NTEyWzI4XSx1aW50NTEyWzI4XSx1aW50NTEyLHVpbnQ1MTIsdWludDUxMix1aW50NTEyLHVpbnQ1MTIpKSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIF9fcHV5YV9hcmM0X3JvdXRlcl9fX1RyYW5zY3JpcHRMaWIuZ2VuZXJhdGVUcmFuc2NyaXB0X19jaHVua18xNF9yb3V0ZUAxCiAgICBlcnIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX1RyYW5zY3JpcHRMaWIuZ2VuZXJhdGVUcmFuc2NyaXB0X19jaHVua18xNF9yb3V0ZUAxOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgVHJhbnNjcmlwdExpYi5nZW5lcmF0ZVRyYW5zY3JpcHRfX2NodW5rXzE0CgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL2hvbmsvY29udHJhY3RzL3JlZmVyZW5jZS9FY2RzYUhvbmtWZXJpZmllci5zb2wuRWNkc2FIb25rVmVyaWZpZXJfX0hlbHBlcjM1LlRyYW5zY3JpcHRMaWIuZ2VuZXJhdGVUcmFuc2NyaXB0X19jaHVua18xNFtyb3V0aW5nXSgpIC0+IHZvaWQ6ClRyYW5zY3JpcHRMaWIuZ2VuZXJhdGVUcmFuc2NyaXB0X19jaHVua18xNDoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDI4NjA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBQcm9vZgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAzMgogICAgKgogICAgaW50Y18zIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4+CiAgICBpbnRjXzMgLy8gMgogICAgaW50Y18xIC8vIDAKICAgIGV4dHJhY3QzCiAgICBwb3AKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGxlbgogICAgaW50Y18wIC8vIDY0CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ1MTIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDQKICAgIGR1cAogICAgbGVuCiAgICBkdXAKICAgIGludGNfMCAvLyA2NAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NTEyCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA1CiAgICBkdXAKICAgIGNvdmVyIDMKICAgIGxlbgogICAgcHVzaGludCA1ODI0CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBUcmFuc2NyaXB0CiAgICBpbnRjXzAgLy8gNjQKICAgIGJ6ZXJvCiAgICBkdXAKICAgIGNvdmVyIDMKICAgIGNhbGxzdWIgX3B1eWFfbGliLm1lbS5uZXdfc2xvdAogICAgZHVwCiAgICBjb3ZlciAyCiAgICBjb3ZlciA0CiAgICB1bmNvdmVyIDIKICAgIGludGNfMCAvLyA2NAogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgdW5jb3ZlciAyCiAgICBifAogICAgZHVwCiAgICBjb3ZlciAyCiAgICBwdXNoYnl0ZXMgMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCiAgICBzd2FwCiAgICByZXBsYWNlMiAwIC8vIG9uIGVycm9yOiBpbmRleCBhY2Nlc3MgaXMgb3V0IG9mIGJvdW5kcwogICAgc3RvcmVzCiAgICBpbnRjXzEgLy8gMAogICAgaXRvYgoKVHJhbnNjcmlwdExpYi5nZW5lcmF0ZVRyYW5zY3JpcHRfX2NodW5rXzE0X3doaWxlX3RvcEAyOgogICAgcHVzaGludCAyOAogICAgaXRvYgogICAgZGlnIDEKICAgIGI+CiAgICBieiBUcmFuc2NyaXB0TGliLmdlbmVyYXRlVHJhbnNjcmlwdF9fY2h1bmtfMTRfYWZ0ZXJfd2hpbGVANAogICAgZGlnIDUKICAgIHB1c2hpbnRzIDI2MzA0IDE3OTIKICAgIGV4dHJhY3QzCiAgICBpbnRjXzIgLy8gOAogICAgYnplcm8KICAgIGR1cAogICAgZGlnIDMKICAgIGR1cAogICAgY292ZXIgMwogICAgY29uY2F0CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgIC0KICAgIGV4dHJhY3RfdWludDY0CiAgICBpbnRjXzAgLy8gNjQKICAgICoKICAgIHVuY292ZXIgMwogICAgc3dhcAogICAgaW50Y18wIC8vIDY0CiAgICBleHRyYWN0MyAvLyBvbiBlcnJvcjogaW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIHB1c2hpbnQgMQogICAgaXRvYgogICAgZGlnIDMKICAgIGIrCiAgICB1bmNvdmVyIDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICAtCiAgICBleHRyYWN0X3VpbnQ2NAogICAgZGlnIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDY0CiAgICA8PQogICAgYXNzZXJ0IC8vIG92ZXJmbG93CiAgICBzd2FwCiAgICBkaWcgNgogICAgYnwKICAgIGRpZyA1CiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGxvYWRzCiAgICB1bmNvdmVyIDMKICAgIGludGNfMCAvLyA2NAogICAgKgogICAgdW5jb3ZlciAyCiAgICByZXBsYWNlMyAvLyBvbiBlcnJvcjogaW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIHN0b3JlcwogICAgcHVzaGJ5dGVzIDB4MDEKICAgIGIrCiAgICBidXJ5IDEKICAgIGIgVHJhbnNjcmlwdExpYi5nZW5lcmF0ZVRyYW5zY3JpcHRfX2NodW5rXzE0X3doaWxlX3RvcEAyCgpUcmFuc2NyaXB0TGliLmdlbmVyYXRlVHJhbnNjcmlwdF9fY2h1bmtfMTRfYWZ0ZXJfd2hpbGVANDoKICAgIGRpZyAyCiAgICBsb2FkcwogICAgcG9wCiAgICBkaWcgMQogICAgZGlnIDUKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEKICAgIHJldHVybgoKCi8vIF9wdXlhX2xpYi5tZW0ubmV3X3Nsb3QoKSAtPiB1aW50NjQ6Cl9wdXlhX2xpYi5tZW0ubmV3X3Nsb3Q6CiAgICBsb2FkIDAKICAgIGJpdGxlbgogICAgbG9hZCAwCiAgICBwdXNoaW50IDI1NgogICAgZGlnIDIKICAgIC0KICAgIGludGNfMSAvLyAwCiAgICBzZXRiaXQgLy8gb24gZXJyb3I6IG5vIGF2YWlsYWJsZSBzbG90cwogICAgc3RvcmUgMAogICAgcmV0c3ViCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvaG9uay9jb250cmFjdHMvcmVmZXJlbmNlL0VjZHNhSG9ua1ZlcmlmaWVyLnNvbC5FY2RzYUhvbmtWZXJpZmllcl9fSGVscGVyMzUuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiAEQAAIAoAgf/////////////////////////////////////////81AEIAAIAEo9segzYaAI4BAAEAMRkUMRgQREIAADYaAUkVgcDfARJENhoCSSNZgSALJQhLARUSRCUjWEg2GgMVIhJENhoESRVJIhJENhoFSU4DFYHALRJEIq9JTgOIB8ZJTgJOBE8CIg5ETwKrSU4CgMAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABMXAA/IxaBHBZLAaVBAE9LBYMCwM0BgA5YJK9JSwNJTgNQSRUkCVsiC08DTCJYgQEWSwOgTwJMUEkVJAlbSwEVIg5ETEsGq0sFSU4CPk8DIgtPAl0/gAEBoEUBQv+oSwI+SEsBSwVQgAQVH3x1TFCwgQFDNACTNACBgAJLAgkjVDUAiQ==",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

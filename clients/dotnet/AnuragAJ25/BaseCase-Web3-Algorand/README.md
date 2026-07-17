@@ -26,10 +26,10 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Owner.Repo.Contract_hash;
+using Arc56.Generated.AnuragAJ25.BaseCase_Web3_Algorand.BountyEscrowContract_0ac88497;
 
 var algod = new DefaultApi(httpClient); // configure with your algod endpoint
-var client = new ContractProxy(algod, appId: 123456789);
+var client = new BountyEscrowContractProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -39,7 +39,7 @@ var client = new ContractProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| `Arc56.Generated.AnuragAJ25.BaseCase_Web3_Algorand.BountyEscrowContract_0ac88497` | _(fails to compile - excluded, see state.json)_ | [https://raw.githubusercontent.com/AnuragAJ25/BaseCase-Web3-Algorand/HEAD/contracts/bounty_escrow/backend/contract_artifacts/BountyEscrowContract.arc56.json](https://raw.githubusercontent.com/AnuragAJ25/BaseCase-Web3-Algorand/HEAD/contracts/bounty_escrow/backend/contract_artifacts/BountyEscrowContract.arc56.json) |
+| `Arc56.Generated.AnuragAJ25.BaseCase_Web3_Algorand.BountyEscrowContract_0ac88497` | `BountyEscrowContractProxy` | [https://raw.githubusercontent.com/AnuragAJ25/BaseCase-Web3-Algorand/HEAD/contracts/bounty_escrow/backend/contract_artifacts/BountyEscrowContract.arc56.json](https://raw.githubusercontent.com/AnuragAJ25/BaseCase-Web3-Algorand/HEAD/contracts/bounty_escrow/backend/contract_artifacts/BountyEscrowContract.arc56.json) |
 
 ## Versioning
 

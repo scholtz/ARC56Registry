@@ -1,0 +1,118 @@
+{
+    "name": "HasherMock",
+    "structs": {
+        "MiMCSpongeReturn": [
+            {
+                "name": "xL",
+                "type": "uint256"
+            },
+            {
+                "name": "xR",
+                "type": "uint256"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "MiMCSponge",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "in_xL"
+                },
+                {
+                    "type": "uint256",
+                    "name": "in_xR"
+                }
+            ],
+            "returns": {
+                "type": "(uint256,uint256)",
+                "struct": "MiMCSpongeReturn"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "@dev A simple mock hasher that returns keccak256-based values\n instead of real MiMC. Used only for testing the Merkle tree structure.\n Output is reduced mod FIELD_SIZE so values stay within the BN254 field.",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        124,
+                        132
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint256"
+                },
+                {
+                    "pc": [
+                        180,
+                        190
+                    ],
+                    "errorMessage": "overflow"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvdG9ybmFkby1jYXNoL2NvbnRyYWN0cy9Nb2Nrcy9IYXNoZXJNb2NrLnNvbC5IYXNoZXJNb2NrLmFwcHJvdmFsX3Byb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMzIgMQogICAgYnl0ZWNibG9jayAweDMwNjQ0ZTcyZTEzMWEwMjliODUwNDViNjgxODE1ODVkMjgzM2U4NDg3OWI5NzA5MTQzZTFmNTkzZjAwMDAwMDEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgcHVzaGludCA0MDk2CiAgICBiemVybwogICAgc3RvcmUgMAogICAgbG9hZCAwCiAgICBwdXNoYnl0ZXMgMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDgwCiAgICByZXBsYWNlMiA2NAogICAgc3RvcmUgMAogICAgcHVzaGJ5dGVzIDB4NTYyZjEyMGUgLy8gbWV0aG9kICJNaU1DU3BvbmdlKHVpbnQyNTYsdWludDI1NikodWludDI1Nix1aW50MjU2KSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fTWlNQ1Nwb25nZV9yb3V0ZUA0CiAgICBlcnIKCm1haW5fTWlNQ1Nwb25nZV9yb3V0ZUA0OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgTWlNQ1Nwb25nZQoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy90b3JuYWRvLWNhc2gvY29udHJhY3RzL01vY2tzL0hhc2hlck1vY2suc29sLkhhc2hlck1vY2suTWlNQ1Nwb25nZVtyb3V0aW5nXSgpIC0+IHZvaWQ6Ck1pTUNTcG9uZ2U6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgaW50Y18wIC8vIDMyCiAgICBiemVybwogICAgZHVwCiAgICB1bmNvdmVyIDMKICAgIGNvbmNhdAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgLQogICAgaW50Y18wIC8vIDMyCiAgICBleHRyYWN0MwogICAgZGlnIDEKICAgIHVuY292ZXIgMwogICAgY29uY2F0CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICAtCiAgICBpbnRjXzAgLy8gMzIKICAgIGV4dHJhY3QzCiAgICBjb25jYXQKICAgIGtlY2NhazI1NgogICAgZHVwCiAgICBieXRlY18wIC8vIDB4MzA2NDRlNzJlMTMxYTAyOWI4NTA0NWI2ODE4MTU4NWQyODMzZTg0ODc5Yjk3MDkxNDNlMWY1OTNmMDAwMDAwMQogICAgYiUKICAgIGRpZyAyCiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgLQogICAgaW50Y18wIC8vIDMyCiAgICBleHRyYWN0MwogICAga2VjY2FrMjU2CiAgICBieXRlY18wIC8vIDB4MzA2NDRlNzJlMTMxYTAyOWI4NTA0NWI2ODE4MTU4NWQyODMzZTg0ODc5Yjk3MDkxNDNlMWY1OTNmMDAwMDAwMQogICAgYiUKICAgIGRpZyAxCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgc3dhcAogICAgZGlnIDIKICAgIGJ8CiAgICBkaWcgMQogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIHN3YXAKICAgIHVuY292ZXIgMgogICAgYnwKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvdG9ybmFkby1jYXNoL2NvbnRyYWN0cy9Nb2Nrcy9IYXNoZXJNb2NrLnNvbC5IYXNoZXJNb2NrLmNsZWFyX3N0YXRlX3Byb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="
+    },
+    "byteCode": {
+        "approval": "CiACIAEmASAwZE5y4TGgKbhQRbaBgVhdKDPoSHm5cJFD4fWT8AAAATEYQAACI0OBgCCvNQA0AIAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBcQDUAgARWLxIONhoAjgEAAQAxGRQxGBBEQgAANhoBSRUiEkQ2GgJJFSISRCKvSU8DUEkVIgkiWEsBTwNQSRUiCSJYUAJJKKpLAk8CUEkVIgkiWAIoqksBFSIORExLAqtLARUiDkRMTwKrUIAEFR98dUxQsCND",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

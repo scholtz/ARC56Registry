@@ -42,7 +42,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.Escrow_fbf3a716
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 142, 121, 53, 141 };
-            var creatorAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); creatorAbi.From(creator);
+            var creatorAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); creatorAbi.From(creator);
 
             var result = await base.CallApp(new List<object> { abiHandle, creatorAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -56,7 +56,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.Escrow_fbf3a716
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 142, 121, 53, 141 };
-            var creatorAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); creatorAbi.From(creator);
+            var creatorAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); creatorAbi.From(creator);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, creatorAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 

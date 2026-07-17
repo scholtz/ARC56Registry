@@ -156,7 +156,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.WalletFactorySunsetContract_15
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 62, 161, 5, 52 };
             var walletAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); walletAbi.From(wallet);
-            var boxesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); boxesAbi.From(boxes);
+            var boxesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[]"); boxesAbi.From(boxes);
 
             var result = await base.CallApp(new List<object> { abiHandle, walletAbi, boxesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -171,7 +171,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.WalletFactorySunsetContract_15
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 62, 161, 5, 52 };
             var walletAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); walletAbi.From(wallet);
-            var boxesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); boxesAbi.From(boxes);
+            var boxesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[]"); boxesAbi.From(boxes);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, walletAbi, boxesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -226,7 +226,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.WalletFactorySunsetContract_15
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 182, 39, 225, 136 };
             var walletAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); walletAbi.From(wallet);
-            var assetsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); assetsAbi.From(assets);
+            var assetsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); assetsAbi.From(assets);
 
             var result = await base.CallApp(new List<object> { abiHandle, walletAbi, assetsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -241,7 +241,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.WalletFactorySunsetContract_15
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 182, 39, 225, 136 };
             var walletAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); walletAbi.From(wallet);
-            var assetsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); assetsAbi.From(assets);
+            var assetsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); assetsAbi.From(assets);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, walletAbi, assetsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -263,7 +263,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.WalletFactorySunsetContract_15
             byte[] abiHandle = { 100, 48, 60, 63 };
             var walletAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); walletAbi.From(wallet);
             var escrowFactoryAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); escrowFactoryAbi.From(escrowFactory);
-            var escrowIdsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); escrowIdsAbi.From(escrowIds);
+            var escrowIdsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); escrowIdsAbi.From(escrowIds);
 
             var result = await base.CallApp(new List<object> { abiHandle, walletAbi, escrowFactoryAbi, escrowIdsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -279,7 +279,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.WalletFactorySunsetContract_15
             byte[] abiHandle = { 100, 48, 60, 63 };
             var walletAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); walletAbi.From(wallet);
             var escrowFactoryAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); escrowFactoryAbi.From(escrowFactory);
-            var escrowIdsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); escrowIdsAbi.From(escrowIds);
+            var escrowIdsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); escrowIdsAbi.From(escrowIds);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, walletAbi, escrowFactoryAbi, escrowIdsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -361,7 +361,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.WalletFactorySunsetContract_15
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 152, 253, 101, 167 };
-            var boxesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); boxesAbi.From(boxes);
+            var boxesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[]"); boxesAbi.From(boxes);
 
             var result = await base.CallApp(new List<object> { abiHandle, boxesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -375,7 +375,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.WalletFactorySunsetContract_15
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 152, 253, 101, 167 };
-            var boxesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); boxesAbi.From(boxes);
+            var boxesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[]"); boxesAbi.From(boxes);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, boxesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -425,7 +425,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.WalletFactorySunsetContract_15
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 199, 216, 16, 20 };
-            var assetsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); assetsAbi.From(assets);
+            var assetsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); assetsAbi.From(assets);
 
             var result = await base.CallApp(new List<object> { abiHandle, assetsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -439,7 +439,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.WalletFactorySunsetContract_15
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 199, 216, 16, 20 };
-            var assetsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); assetsAbi.From(assets);
+            var assetsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); assetsAbi.From(assets);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, assetsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 

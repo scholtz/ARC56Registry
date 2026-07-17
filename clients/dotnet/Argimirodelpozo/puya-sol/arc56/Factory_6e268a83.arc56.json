@@ -1,0 +1,121 @@
+{
+    "name": "Factory",
+    "structs": {},
+    "methods": [
+        {
+            "name": "deploy",
+            "args": [
+                {
+                    "type": "byte[32]",
+                    "name": "_salt"
+                }
+            ],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [
+                {
+                    "name": "Deployed",
+                    "args": [
+                        {
+                            "type": "uint8[32]",
+                            "name": "_0"
+                        },
+                        {
+                            "type": "uint8[32]",
+                            "name": "_1"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        145
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvdGVzdHMvc29saWRpdHktc2VtYW50aWMtdGVzdHMvdGVzdHMvdmFyaW91cy9zZWxmZGVzdHJ1Y3RfcG9zdF9jYW5jdW5fcmVkZXBsb3kuc29sLkZhY3RvcnkuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAzMiAxCiAgICBieXRlY2Jsb2NrIDB4NWFkOTNjOWQzYzI4MTZjMzRiMzU4NTY1ZThmNWZjZDZlZDZhODEyMGU0YjA3M2M4ZWU3ODEyZTMzMTdlZjBmOCAweGZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmYKICAgIHB1c2hpbnQgNDA5NgogICAgYnplcm8KICAgIGR1cAogICAgc3RvcmUgNQogICAgc3RvcmUgMAogICAgbG9hZCAwCiAgICBwdXNoYnl0ZXMgMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDgwCiAgICByZXBsYWNlMiA2NAogICAgc3RvcmUgMAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICBwdXNoYnl0ZXMgMHg1MzUyYTkwMCAvLyBtZXRob2QgImRlcGxveShieXRlWzMyXSlhZGRyZXNzIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9kZXBsb3lfcm91dGVANAogICAgZXJyCgptYWluX2RlcGxveV9yb3V0ZUA0OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgaW50Y18wIC8vIDMyCiAgICBiemVybwogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIGRpZyAxCiAgICBkaWcgMwogICAgY29uY2F0CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICAtCiAgICBpbnRjXzAgLy8gMzIKICAgIGV4dHJhY3QzCiAgICBzd2FwCiAgICBkaWcgMQogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4NWFkOTNjOWQzYzI4MTZjMzRiMzU4NTY1ZThmNWZjZDZlZDZhODEyMGU0YjA3M2M4ZWU3ODEyZTMzMTdlZjBmOAogICAgY29uY2F0CiAgICBrZWNjYWsyNTYKICAgIGJ5dGVjXzEgLy8gMHhmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmCiAgICBiJgogICAgZGlnIDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4NWFkOTNjOWQzYzI4MTZjMzRiMzU4NTY1ZThmNWZjZDZlZDZhODEyMGU0YjA3M2M4ZWU3ODEyZTMzMTdlZjBmOAogICAgY29uY2F0CiAgICBrZWNjYWsyNTYKICAgIGJ5dGVjXzEgLy8gMHhmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmCiAgICBiJgogICAgdW5jb3ZlciAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICAtCiAgICBpbnRjXzAgLy8gMzIKICAgIGV4dHJhY3QzCiAgICBsb2FkIDAKICAgIHN0b3JlIDAKICAgIHB1c2hieXRlcyAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgID09CiAgICBhc3NlcnQKICAgIHB1c2hieXRlcyAweDQ2NjZiNTQ4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvdGVzdHMvc29saWRpdHktc2VtYW50aWMtdGVzdHMvdGVzdHMvdmFyaW91cy9zZWxmZGVzdHJ1Y3RfcG9zdF9jYW5jdW5fcmVkZXBsb3kuc29sLkZhY3RvcnkuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiACIAEmAiBa2TydPCgWw0s1hWXo9fzW7WqBIOSwc8jueBLjMX7w+BT//////////////////////////4GAIK9JNQU1ADQAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgFxANQAxGEAAAiNDgARTUqkANhoAjgEAAQAxGRQxGBBENhoBSRUiEkQirzIKSwFLA1BJFSIJIlhMSwFQKFACKaxLAkxQMgpPAlAoUAIprE8CTFAVIgkiWDQANQCAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEkSAJEZmtUgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAExQsIAkFR98dQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsCND",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 8,
+            "patch": 0
+        }
+    },
+    "events": [
+        {
+            "name": "Deployed",
+            "args": [
+                {
+                    "type": "uint8[32]",
+                    "name": "_0"
+                },
+                {
+                    "type": "uint8[32]",
+                    "name": "_1"
+                }
+            ]
+        }
+    ],
+    "templateVariables": {}
+}

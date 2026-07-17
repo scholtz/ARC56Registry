@@ -153,7 +153,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaDAOPlugin_f4ea2bf7
             var walletAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); walletAbi.From(wallet);
             var rekeyBackAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Bool(); rekeyBackAbi.From(rekeyBack);
             var nicknameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nicknameAbi.From(nickname);
-            var saltAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); saltAbi.From(salt);
+            var saltAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); saltAbi.From(salt);
 
             var result = await base.CallApp(new List<object> { abiHandle, walletAbi, rekeyBackAbi, nicknameAbi, saltAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -170,7 +170,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaDAOPlugin_f4ea2bf7
             var walletAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); walletAbi.From(wallet);
             var rekeyBackAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Bool(); rekeyBackAbi.From(rekeyBack);
             var nicknameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nicknameAbi.From(nickname);
-            var saltAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); saltAbi.From(salt);
+            var saltAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); saltAbi.From(salt);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, walletAbi, rekeyBackAbi, nicknameAbi, saltAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -193,7 +193,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaDAOPlugin_f4ea2bf7
             byte[] abiHandle = { 5, 103, 127, 14 };
             var walletAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); walletAbi.From(wallet);
             var rekeyBackAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Bool(); rekeyBackAbi.From(rekeyBack);
-            var cidAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(36); cidAbi.From(cid);
+            var cidAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(36, "byte"); cidAbi.From(cid);
             var actionsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.StructArray<Structs.NewProposalArgActions>(x => Structs.NewProposalArgActions.Parse(x)) { IsFixedLength = false, FixedLength = 0 }; actionsAbi.From(actions);
 
             var result = await base.CallApp(new List<object> { abiHandle, walletAbi, rekeyBackAbi, cidAbi, actionsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -216,7 +216,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaDAOPlugin_f4ea2bf7
             byte[] abiHandle = { 5, 103, 127, 14 };
             var walletAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); walletAbi.From(wallet);
             var rekeyBackAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Bool(); rekeyBackAbi.From(rekeyBack);
-            var cidAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(36); cidAbi.From(cid);
+            var cidAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(36, "byte"); cidAbi.From(cid);
             var actionsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.StructArray<Structs.NewProposalArgActions>(x => Structs.NewProposalArgActions.Parse(x)) { IsFixedLength = false, FixedLength = 0 }; actionsAbi.From(actions);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, walletAbi, rekeyBackAbi, cidAbi, actionsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -242,7 +242,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaDAOPlugin_f4ea2bf7
             var walletAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); walletAbi.From(wallet);
             var rekeyBackAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Bool(); rekeyBackAbi.From(rekeyBack);
             var idAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); idAbi.From(id);
-            var cidAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(36); cidAbi.From(cid);
+            var cidAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(36, "byte"); cidAbi.From(cid);
             var actionsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.StructArray<Structs.NewProposalArgActions>(x => Structs.NewProposalArgActions.Parse(x)) { IsFixedLength = false, FixedLength = 0 }; actionsAbi.From(actions);
 
             var result = await base.CallApp(new List<object> { abiHandle, walletAbi, rekeyBackAbi, idAbi, cidAbi, actionsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -260,7 +260,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaDAOPlugin_f4ea2bf7
             var walletAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); walletAbi.From(wallet);
             var rekeyBackAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Bool(); rekeyBackAbi.From(rekeyBack);
             var idAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); idAbi.From(id);
-            var cidAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(36); cidAbi.From(cid);
+            var cidAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(36, "byte"); cidAbi.From(cid);
             var actionsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.StructArray<Structs.NewProposalArgActions>(x => Structs.NewProposalArgActions.Parse(x)) { IsFixedLength = false, FixedLength = 0 }; actionsAbi.From(actions);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, walletAbi, rekeyBackAbi, idAbi, cidAbi, actionsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);

@@ -1,0 +1,206 @@
+{
+  "arcs": [4, 56],
+  "name": "CadenciaEscrow",
+  "desc": "Cadencia B2B Trade Escrow Contract. ARC-4 + ARC-56 compliant smart contract for MSME trade settlement on Algorand.",
+  "methods": [
+    {
+      "name": "initialize",
+      "desc": "Initialize escrow on contract creation. Creator only. Sets status=DEPLOYED(0), frozen=0.",
+      "readonly": false,
+      "args": [
+        {
+          "name": "buyer",
+          "type": "address",
+          "desc": "Algorand address of buyer enterprise"
+        },
+        {
+          "name": "seller",
+          "type": "address",
+          "desc": "Algorand address of seller enterprise"
+        },
+        {
+          "name": "amount",
+          "type": "uint64",
+          "desc": "Escrow amount in microALGO"
+        },
+        {
+          "name": "session_id",
+          "type": "string",
+          "desc": "Cadencia negotiation session UUID (UTF-8)"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "events": [],
+      "actions": {
+        "create": ["call"],
+        "call": []
+      }
+    },
+    {
+      "name": "fund",
+      "desc": "Fund the escrow. Must be atomic group: [PaymentTxn, AppCallTxn]. payment.amount must equal escrow amount (SRS-SC-002).",
+      "readonly": false,
+      "args": [
+        {
+          "name": "payment",
+          "type": "pay",
+          "desc": "Payment transaction funding the escrow. Receiver must be contract address."
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "events": [],
+      "actions": {
+        "create": [],
+        "call": ["call"]
+      }
+    },
+    {
+      "name": "release",
+      "desc": "Release funds to seller. Creator only. Anchors Merkle root in inner transaction note field.",
+      "readonly": false,
+      "args": [
+        {
+          "name": "merkle_root",
+          "type": "string",
+          "desc": "SHA-256 Merkle root of all session audit events (hex-encoded)"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "events": [],
+      "actions": {
+        "create": [],
+        "call": ["call"]
+      }
+    },
+    {
+      "name": "refund",
+      "desc": "Refund buyer. Creator only. Used when trade fails or dispute resolved in buyer favour.",
+      "readonly": false,
+      "args": [
+        {
+          "name": "reason",
+          "type": "string",
+          "desc": "Refund reason (stored in inner transaction note)"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "events": [],
+      "actions": {
+        "create": [],
+        "call": ["call"]
+      }
+    },
+    {
+      "name": "freeze",
+      "desc": "Freeze escrow to halt all state transitions. Access: buyer, seller, or creator.",
+      "readonly": false,
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "events": [],
+      "actions": {
+        "create": [],
+        "call": ["call"]
+      }
+    },
+    {
+      "name": "unfreeze",
+      "desc": "Unfreeze escrow after dispute resolution. Creator only (SRS-SC-004).",
+      "readonly": false,
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "events": [],
+      "actions": {
+        "create": [],
+        "call": ["call"]
+      }
+    }
+  ],
+  "state": {
+    "schema": {
+      "global": {
+        "ints": 3,
+        "bytes": 3
+      },
+      "local": {
+        "ints": 0,
+        "bytes": 0
+      }
+    },
+    "keys": {
+      "global": {
+        "buyer": {
+          "keyType": "AVMBytes",
+          "valueType": "AVMBytes",
+          "key": "YnV5ZXI=",
+          "desc": "Algorand address of buyer enterprise (32 bytes)"
+        },
+        "seller": {
+          "keyType": "AVMBytes",
+          "valueType": "AVMBytes",
+          "key": "c2VsbGVy",
+          "desc": "Algorand address of seller enterprise (32 bytes)"
+        },
+        "amount": {
+          "keyType": "AVMBytes",
+          "valueType": "AVMUint64",
+          "key": "YW1vdW50",
+          "desc": "Escrow amount in microALGO"
+        },
+        "session_id": {
+          "keyType": "AVMBytes",
+          "valueType": "AVMBytes",
+          "key": "c2Vzc2lvbl9pZA==",
+          "desc": "Cadencia negotiation session UUID (ARC-4 encoded string)"
+        },
+        "status": {
+          "keyType": "AVMBytes",
+          "valueType": "AVMUint64",
+          "key": "c3RhdHVz",
+          "desc": "0=DEPLOYED, 1=FUNDED, 2=RELEASED, 3=REFUNDED"
+        },
+        "frozen": {
+          "keyType": "AVMBytes",
+          "valueType": "AVMUint64",
+          "key": "ZnJvemVu",
+          "desc": "0=normal, 1=frozen (blocks fund and release)"
+        }
+      },
+      "local": {},
+      "box": {}
+    },
+    "maps": {
+      "global": {},
+      "local": {},
+      "box": {}
+    }
+  },
+  "bareActions": {
+    "create": [],
+    "call": []
+  },
+  "events": [],
+  "networks": {},
+  "templateVariables": {},
+  "sourceInfo": {
+    "approval": {
+      "sourceHash": "",
+      "pcOffsetMethod": "none"
+    },
+    "clear": {
+      "sourceHash": "",
+      "pcOffsetMethod": "none"
+    }
+  }
+}

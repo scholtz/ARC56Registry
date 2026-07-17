@@ -1,0 +1,1965 @@
+{
+    "name": "SpokeInstance__chunk_15",
+    "structs": {
+        "DynamicReserveConfig": [
+            {
+                "name": "collateralFactor",
+                "type": "uint16"
+            },
+            {
+                "name": "maxLiquidationBonus",
+                "type": "uint32"
+            },
+            {
+                "name": "liquidationFee",
+                "type": "uint16"
+            }
+        ],
+        "LiquidationConfig": [
+            {
+                "name": "targetHealthFactor",
+                "type": "uint128"
+            },
+            {
+                "name": "healthFactorForMaxBonus",
+                "type": "uint64"
+            },
+            {
+                "name": "liquidationBonusFactor",
+                "type": "uint16"
+            }
+        ],
+        "PositionManagerConfig": [
+            {
+                "name": "approval",
+                "type": "byte[]"
+            },
+            {
+                "name": "active",
+                "type": "bool"
+            }
+        ],
+        "PositionStatus": [
+            {
+                "name": "map",
+                "type": "byte[]"
+            },
+            {
+                "name": "riskPremium",
+                "type": "uint24"
+            }
+        ],
+        "Reserve": [
+            {
+                "name": "underlying",
+                "type": "uint8[32]"
+            },
+            {
+                "name": "hub",
+                "type": "uint8[32]"
+            },
+            {
+                "name": "assetId",
+                "type": "uint16"
+            },
+            {
+                "name": "decimals",
+                "type": "uint8"
+            },
+            {
+                "name": "collateralRisk",
+                "type": "uint24"
+            },
+            {
+                "name": "flags",
+                "type": "uint8"
+            },
+            {
+                "name": "dynamicConfigKey",
+                "type": "uint32"
+            }
+        ],
+        "ReserveConfig": [
+            {
+                "name": "collateralRisk",
+                "type": "uint24"
+            },
+            {
+                "name": "paused",
+                "type": "bool"
+            },
+            {
+                "name": "frozen",
+                "type": "bool"
+            },
+            {
+                "name": "borrowable",
+                "type": "bool"
+            },
+            {
+                "name": "receiveSharesEnabled",
+                "type": "bool"
+            }
+        ],
+        "SetUserPositionManagers": [
+            {
+                "name": "onBehalfOf",
+                "type": "uint8[32]"
+            },
+            {
+                "name": "updates",
+                "type": "(uint8[32],bool)[]"
+            },
+            {
+                "name": "nonce",
+                "type": "uint256"
+            },
+            {
+                "name": "deadline",
+                "type": "uint256"
+            }
+        ],
+        "UserAccountData": [
+            {
+                "name": "riskPremium",
+                "type": "uint256"
+            },
+            {
+                "name": "avgCollateralFactor",
+                "type": "uint256"
+            },
+            {
+                "name": "healthFactor",
+                "type": "uint256"
+            },
+            {
+                "name": "totalCollateralValue",
+                "type": "uint256"
+            },
+            {
+                "name": "totalDebtValueRay",
+                "type": "uint256"
+            },
+            {
+                "name": "activeCollateralCount",
+                "type": "uint256"
+            },
+            {
+                "name": "borrowCount",
+                "type": "uint256"
+            }
+        ],
+        "UserPosition": [
+            {
+                "name": "drawnShares",
+                "type": "uint120"
+            },
+            {
+                "name": "premiumShares",
+                "type": "uint120"
+            },
+            {
+                "name": "premiumOffsetRay",
+                "type": "int200"
+            },
+            {
+                "name": "suppliedShares",
+                "type": "uint120"
+            },
+            {
+                "name": "dynamicConfigKey",
+                "type": "uint32"
+            }
+        ],
+        "eip712DomainReturn": [
+            {
+                "name": "fields",
+                "type": "byte[1]"
+            },
+            {
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "name": "version",
+                "type": "string"
+            },
+            {
+                "name": "chainId",
+                "type": "uint512"
+            },
+            {
+                "name": "verifyingContract",
+                "type": "address"
+            },
+            {
+                "name": "salt",
+                "type": "byte[32]"
+            },
+            {
+                "name": "extensions",
+                "type": "uint256[]"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "__postInit",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "oracle_"
+                },
+                {
+                    "type": "uint64",
+                    "name": "maxUserReservesLimit_"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "initialize",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "authority"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@notice Initializer.\n @dev The authority contract must implement the `AccessManaged` interface for access control.\n @param authority The address of the authority contract which manages permissions.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "SPOKE_REVISION",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "SET_USER_POSITION_MANAGERS_TYPEHASH",
+            "args": [],
+            "returns": {
+                "type": "byte[32]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "MAX_USER_RESERVES_LIMIT",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "ORACLE",
+            "args": [],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "updateLiquidationConfig",
+            "args": [
+                {
+                    "type": "(uint128,uint64,uint16)",
+                    "struct": "LiquidationConfig",
+                    "name": "config"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "addReserve",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "hub"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_assetId"
+                },
+                {
+                    "type": "address",
+                    "name": "priceSource"
+                },
+                {
+                    "type": "(uint24,bool,bool,bool,bool)",
+                    "struct": "ReserveConfig",
+                    "name": "config"
+                },
+                {
+                    "type": "(uint16,uint32,uint16)",
+                    "struct": "DynamicReserveConfig",
+                    "name": "dynamicConfig"
+                }
+            ],
+            "returns": {
+                "type": "uint512"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "updateReserveConfig",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "(uint24,bool,bool,bool,bool)",
+                    "struct": "ReserveConfig",
+                    "name": "config"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "updateReservePriceSource",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "address",
+                    "name": "priceSource"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "addDynamicReserveConfig",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "(uint16,uint32,uint16)",
+                    "struct": "DynamicReserveConfig",
+                    "name": "dynamicConfig"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "updateDynamicReserveConfig",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "dynamicConfigKey"
+                },
+                {
+                    "type": "(uint16,uint32,uint16)",
+                    "struct": "DynamicReserveConfig",
+                    "name": "dynamicConfig"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "updatePositionManager",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "positionManager"
+                },
+                {
+                    "type": "bool",
+                    "name": "active"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "supply",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_amount"
+                },
+                {
+                    "type": "address",
+                    "name": "onBehalfOf"
+                }
+            ],
+            "returns": {
+                "type": "(uint512,uint512)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "withdraw",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_amount"
+                },
+                {
+                    "type": "address",
+                    "name": "onBehalfOf"
+                }
+            ],
+            "returns": {
+                "type": "(uint512,uint512)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "borrow",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_amount"
+                },
+                {
+                    "type": "address",
+                    "name": "onBehalfOf"
+                }
+            ],
+            "returns": {
+                "type": "(uint512,uint512)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "repay",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_amount"
+                },
+                {
+                    "type": "address",
+                    "name": "onBehalfOf"
+                }
+            ],
+            "returns": {
+                "type": "(uint512,uint512)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "liquidationCall",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_collateralReserveId"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_debtReserveId"
+                },
+                {
+                    "type": "address",
+                    "name": "user"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_debtToCover"
+                },
+                {
+                    "type": "bool",
+                    "name": "receiveShares"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "setUsingAsCollateral",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "bool",
+                    "name": "usingAsCollateral"
+                },
+                {
+                    "type": "address",
+                    "name": "onBehalfOf"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "updateUserRiskPremium",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "onBehalfOf"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "updateUserDynamicConfig",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "onBehalfOf"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "setUserPositionManager",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "positionManager"
+                },
+                {
+                    "type": "bool",
+                    "name": "approve"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "setUserPositionManagersWithSig",
+            "args": [
+                {
+                    "type": "(uint8[32],(uint8[32],bool)[],uint256,uint256)",
+                    "struct": "SetUserPositionManagers",
+                    "name": "params"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "signature"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "renouncePositionManagerRole",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "onBehalfOf"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "permitReserve",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "address",
+                    "name": "onBehalfOf"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_value"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_deadline"
+                },
+                {
+                    "type": "uint64",
+                    "name": "permitV"
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "permitR"
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "permitS"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getLiquidationConfig",
+            "args": [],
+            "returns": {
+                "type": "(uint128,uint64,uint16)",
+                "struct": "LiquidationConfig"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getReserveCount",
+            "args": [],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getReserveSuppliedAssets",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getReserveSuppliedShares",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getReserveDebt",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                }
+            ],
+            "returns": {
+                "type": "(uint256,uint256)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getReserveTotalDebt",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getReserveId",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "hub"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_assetId"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getReserve",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                }
+            ],
+            "returns": {
+                "type": "(uint8[32],uint8[32],uint16,uint8,uint24,uint8,uint32)",
+                "struct": "Reserve"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getReserveConfig",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                }
+            ],
+            "returns": {
+                "type": "(uint24,bool,bool,bool,bool)",
+                "struct": "ReserveConfig"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getDynamicReserveConfig",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "dynamicConfigKey"
+                }
+            ],
+            "returns": {
+                "type": "(uint16,uint32,uint16)",
+                "struct": "DynamicReserveConfig"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getUserReserveStatus",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "address",
+                    "name": "user"
+                }
+            ],
+            "returns": {
+                "type": "(bool,bool)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getUserSuppliedAssets",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "address",
+                    "name": "user"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getUserSuppliedShares",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "address",
+                    "name": "user"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getUserDebt",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "address",
+                    "name": "user"
+                }
+            ],
+            "returns": {
+                "type": "(uint256,uint256)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getUserTotalDebt",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "address",
+                    "name": "user"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getUserPremiumDebtRay",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "address",
+                    "name": "user"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpokeBase",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getUserPosition",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "address",
+                    "name": "user"
+                }
+            ],
+            "returns": {
+                "type": "(uint120,uint120,int200,uint120,uint32)",
+                "struct": "UserPosition"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getUserLastRiskPremium",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "user"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getUserAccountData",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "user"
+                }
+            ],
+            "returns": {
+                "type": "(uint256,uint256,uint256,uint256,uint256,uint256,uint256)",
+                "struct": "UserAccountData"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getLiquidationBonus",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "__arc4_reserveId"
+                },
+                {
+                    "type": "address",
+                    "name": "user"
+                },
+                {
+                    "type": "uint256",
+                    "name": "__arc4_healthFactor"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "isPositionManagerActive",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "positionManager"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "isPositionManager",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "user"
+                },
+                {
+                    "type": "address",
+                    "name": "positionManager"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getLiquidationLogic",
+            "args": [],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc ISpoke",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "multicall",
+            "args": [
+                {
+                    "type": "byte[][]",
+                    "name": "data"
+                }
+            ],
+            "returns": {
+                "type": "byte[][]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IMulticall",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "extSload",
+            "args": [
+                {
+                    "type": "byte[32]",
+                    "name": "slot"
+                }
+            ],
+            "returns": {
+                "type": "byte[32]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IExtSload",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "extSloads",
+            "args": [
+                {
+                    "type": "uint8[32][]",
+                    "name": "slots"
+                }
+            ],
+            "returns": {
+                "type": "uint8[32][]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IExtSload",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "DOMAIN_SEPARATOR",
+            "args": [],
+            "returns": {
+                "type": "byte[32]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IIntentConsumer",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "eip712Domain",
+            "args": [],
+            "returns": {
+                "type": "(byte[1],string,string,uint512,address,byte[32],uint256[])",
+                "struct": "eip712DomainReturn"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@dev See: https://eips.ethereum.org/EIPS/eip-5267",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "useNonce",
+            "args": [
+                {
+                    "type": "uint192",
+                    "name": "__arc4_key"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc INoncesKeyed",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "nonces",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "owner"
+                },
+                {
+                    "type": "uint192",
+                    "name": "__arc4_key"
+                }
+            ],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc INoncesKeyed",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "authority",
+            "args": [],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManaged",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "setAuthority",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "newAuthority"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@inheritdoc IAccessManaged",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "isConsumingScheduledOp",
+            "args": [],
+            "returns": {
+                "type": "byte[4]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@inheritdoc IAccessManaged",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "__delegate_update",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "UpdateApplication"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "@title SpokeInstance\n @author Aave Labs\n @notice Implementation contract for the Spoke.",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 2,
+                "bytes": 7
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "MAX_USER_RESERVES_LIMIT": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "TUFYX1VTRVJfUkVTRVJWRVNfTElNSVQ="
+                },
+                "ORACLE": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "T1JBQ0xF"
+                },
+                "_cachedThis": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X2NhY2hlZFRoaXM="
+                },
+                "_cachedChainId": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X2NhY2hlZENoYWluSWQ="
+                },
+                "_cachedNameHash": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X2NhY2hlZE5hbWVIYXNo"
+                },
+                "_cachedVersionHash": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X2NhY2hlZFZlcnNpb25IYXNo"
+                },
+                "_cachedDomainSeparator": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X2NhY2hlZERvbWFpblNlcGFyYXRvcg=="
+                },
+                "_reserveCount": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X3Jlc2VydmVDb3VudA=="
+                },
+                "__ctor_pending": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "X19jdG9yX3BlbmRpbmc="
+                }
+            },
+            "local": {},
+            "box": {
+                "_liquidationConfig": {
+                    "keyType": "AVMString",
+                    "valueType": "LiquidationConfig",
+                    "key": "X2xpcXVpZGF0aW9uQ29uZmln"
+                },
+                "__gap": {
+                    "keyType": "AVMString",
+                    "valueType": "uint256[50]",
+                    "key": "X19nYXA="
+                }
+            }
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "_reserves": {
+                    "keyType": "AVMBytes",
+                    "valueType": "Reserve",
+                    "prefix": "X3Jlc2VydmVz"
+                },
+                "_hubAssetIdToReserveId": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AVMBytes",
+                    "prefix": "X2h1YkFzc2V0SWRUb1Jlc2VydmVJZA=="
+                },
+                "_dynamicConfig": {
+                    "keyType": "AVMBytes",
+                    "valueType": "DynamicReserveConfig",
+                    "prefix": "X2R5bmFtaWNDb25maWc="
+                },
+                "_positionStatus": {
+                    "keyType": "AVMBytes",
+                    "valueType": "PositionStatus",
+                    "prefix": "X3Bvc2l0aW9uU3RhdHVz"
+                },
+                "_userPositions": {
+                    "keyType": "AVMBytes",
+                    "valueType": "UserPosition",
+                    "prefix": "X3VzZXJQb3NpdGlvbnM="
+                },
+                "_positionManager": {
+                    "keyType": "AVMBytes",
+                    "valueType": "PositionManagerConfig",
+                    "prefix": "X3Bvc2l0aW9uTWFuYWdlcg=="
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        1108
+                    ],
+                    "errorMessage": "ABI validation"
+                },
+                {
+                    "pc": [
+                        1261
+                    ],
+                    "errorMessage": "ReserveNotListed"
+                },
+                {
+                    "pc": [
+                        819
+                    ],
+                    "errorMessage": "invalid array encoding"
+                },
+                {
+                    "pc": [
+                        752,
+                        781,
+                        833,
+                        1366,
+                        1380
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        1646,
+                        1663,
+                        1737
+                    ],
+                    "errorMessage": "invalid number of bytes for DynamicReserveConfig"
+                },
+                {
+                    "pc": [
+                        1818
+                    ],
+                    "errorMessage": "invalid number of bytes for LiquidationConfig"
+                },
+                {
+                    "pc": [
+                        1698,
+                        1729
+                    ],
+                    "errorMessage": "invalid number of bytes for ReserveConfig"
+                },
+                {
+                    "pc": [
+                        1374
+                    ],
+                    "errorMessage": "invalid number of bytes for SetUserPositionManagers"
+                },
+                {
+                    "pc": [
+                        1402,
+                        1418,
+                        1462
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.bool"
+                },
+                {
+                    "pc": [
+                        853
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.dynamic_array<arc4.uint8>>"
+                },
+                {
+                    "pc": [
+                        760
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.static_array<arc4.uint8, 32>>"
+                },
+                {
+                    "pc": [
+                        1386
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"
+                },
+                {
+                    "pc": [
+                        557,
+                        607,
+                        771,
+                        864,
+                        871,
+                        882,
+                        900,
+                        925,
+                        943,
+                        1014,
+                        1041,
+                        1075,
+                        1083,
+                        1395,
+                        1425,
+                        1448,
+                        1485,
+                        1681,
+                        1707,
+                        1721,
+                        1831
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        615,
+                        627
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint192"
+                },
+                {
+                    "pc": [
+                        893,
+                        907,
+                        918,
+                        936,
+                        954,
+                        973,
+                        1003,
+                        1021,
+                        1033,
+                        1049,
+                        1057,
+                        1411,
+                        1434,
+                        1441,
+                        1455,
+                        1471,
+                        1478,
+                        1630,
+                        1655,
+                        1674,
+                        1690,
+                        1714
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint256"
+                },
+                {
+                    "pc": [
+                        962,
+                        1066,
+                        1638,
+                        1839
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint64"
+                },
+                {
+                    "pc": [
+                        1358
+                    ],
+                    "errorMessage": "invalid tail pointer at index 1 of (uint8[32],(len+(uint8[32],bool1)[]),uint256,uint256)"
+                },
+                {
+                    "pc": [
+                        827
+                    ],
+                    "errorMessage": "invalid tail pointer for (len+(len+uint8[])[])"
+                },
+                {
+                    "pc": [
+                        1353
+                    ],
+                    "errorMessage": "invalid tuple encoding"
+                },
+                {
+                    "pc": [
+                        1101
+                    ],
+                    "errorMessage": "not payable"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL1Nwb2tlSW5zdGFuY2Uuc29sLlNwb2tlSW5zdGFuY2UuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAzMiAxIDAgMiBUTVBMX1VST1NfTUFJTl9BUFBfSUQKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NSAweCAweDE1MWY3Yzc1MDAgMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAKICAgIGludGNfMiAvLyAwCiAgICBieXRlY18xIC8vICIiCiAgICBkdXBuIDMKICAgIHB1c2hpbnQgNDA5NgogICAgYnplcm8KICAgIGR1cAogICAgc3RvcmUgNQogICAgc3RvcmUgMAogICAgbG9hZCAwCiAgICBwdXNoYnl0ZXMgMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDgwCiAgICByZXBsYWNlMiA2NAogICAgc3RvcmUgMAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgcHVzaGJ5dGVzICJfX2N0b3JfcGVuZGluZyIKICAgIGludGNfMSAvLyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICBwdXNoYnl0ZXMgMHhkYzVlMzc5OCAvLyBtZXRob2QgIl9fZGVsZWdhdGVfdXBkYXRlKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9fX2RlbGVnYXRlX3VwZGF0ZV9yb3V0ZUA0CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHgwNmZiNGEzOSAweGVlMWM3MTU2IDB4YjFmMzBkY2QgMHhmYmUxMTYzYiAweGVhNWViMDNhIDB4OTNhOTVjZTUgMHg1NWY1ODNhOSAweGZjYTdkMzMzIDB4Y2Y5Njk1MGEgMHhlZmE3MjRkMCAweDY2MWM1M2M4IDB4NWEyMWQzNzYgMHg2MmEwYmU4YiAweGI4YjBlZGMwIDB4NDc0ODZjNzMgMHgxYTI2NzVkYyAweGJhZGJiMjlmIDB4NjNiN2E1NjcgMHhjMmFiZTY4OCAweDEzMTI3MTdhIDB4MWYxZDFiMDYgMHhjMGFlZTM5YyAweDU3ZTlhNGM4IDB4YmVkMzc4ZTggMHgzNmI1OGRhYiAweGE5ZWFmY2VhIDB4NmIwOTg0ZDEgMHhjOWQ4NGNkMCAweDA4OWVmYWNmIDB4YTM5MzRlNjEgMHgxZGE4ODJlMyAweDA4OGFhNDZhIDB4OGUzNWZmN2UgMHgwYWRhZWIzZSAweGU5ZTU5MmM2IDB4NjMwMjNlODkgMHg1YTljYThlNCAweDA1OGNiYWIyIDB4MzVmNWFmMjcgMHgwNDY3MWFkYiAweGUzNzc5NmE0IDB4OGI3MjZiMDcgMHg3OGQyZjk1YyAweGMxYzk3ZDUxIDB4ZTdjNDRiYzkgMHg0NjZhY2Q2NyAweDc1YTZhZGQxIDB4ZDU1MTliYTEgMHgwNDkxOWEyNiAweDczOTliZTA4IDB4MzYyMTY4ZTUgMHhiZDBiOGU0NiAweGM4NmIxODMyIDB4ZDZkNjg1OTMgMHg0YmViZjkxYiAweGVjZTU5ZGQ0IDB4Y2RkYTRlYTYgMHhjZDUxM2RhNSAvLyBtZXRob2QgIl9fcG9zdEluaXQoYWRkcmVzcyx1aW50NjQpdm9pZCIsIG1ldGhvZCAiaW5pdGlhbGl6ZShhZGRyZXNzKXZvaWQiLCBtZXRob2QgIlNQT0tFX1JFVklTSU9OKCl1aW50NjQiLCBtZXRob2QgIlNFVF9VU0VSX1BPU0lUSU9OX01BTkFHRVJTX1RZUEVIQVNIKClieXRlWzMyXSIsIG1ldGhvZCAiTUFYX1VTRVJfUkVTRVJWRVNfTElNSVQoKXVpbnQ2NCIsIG1ldGhvZCAiT1JBQ0xFKClhZGRyZXNzIiwgbWV0aG9kICJ1cGRhdGVMaXF1aWRhdGlvbkNvbmZpZygodWludDEyOCx1aW50NjQsdWludDE2KSl2b2lkIiwgbWV0aG9kICJhZGRSZXNlcnZlKGFkZHJlc3MsdWludDI1NixhZGRyZXNzLCh1aW50MjQsYm9vbCxib29sLGJvb2wsYm9vbCksKHVpbnQxNix1aW50MzIsdWludDE2KSl1aW50NTEyIiwgbWV0aG9kICJ1cGRhdGVSZXNlcnZlQ29uZmlnKHVpbnQyNTYsKHVpbnQyNCxib29sLGJvb2wsYm9vbCxib29sKSl2b2lkIiwgbWV0aG9kICJ1cGRhdGVSZXNlcnZlUHJpY2VTb3VyY2UodWludDI1NixhZGRyZXNzKXZvaWQiLCBtZXRob2QgImFkZER5bmFtaWNSZXNlcnZlQ29uZmlnKHVpbnQyNTYsKHVpbnQxNix1aW50MzIsdWludDE2KSl1aW50NjQiLCBtZXRob2QgInVwZGF0ZUR5bmFtaWNSZXNlcnZlQ29uZmlnKHVpbnQyNTYsdWludDY0LCh1aW50MTYsdWludDMyLHVpbnQxNikpdm9pZCIsIG1ldGhvZCAidXBkYXRlUG9zaXRpb25NYW5hZ2VyKGFkZHJlc3MsYm9vbCl2b2lkIiwgbWV0aG9kICJzdXBwbHkodWludDI1Nix1aW50MjU2LGFkZHJlc3MpKHVpbnQ1MTIsdWludDUxMikiLCBtZXRob2QgIndpdGhkcmF3KHVpbnQyNTYsdWludDI1NixhZGRyZXNzKSh1aW50NTEyLHVpbnQ1MTIpIiwgbWV0aG9kICJib3Jyb3codWludDI1Nix1aW50MjU2LGFkZHJlc3MpKHVpbnQ1MTIsdWludDUxMikiLCBtZXRob2QgInJlcGF5KHVpbnQyNTYsdWludDI1NixhZGRyZXNzKSh1aW50NTEyLHVpbnQ1MTIpIiwgbWV0aG9kICJsaXF1aWRhdGlvbkNhbGwodWludDI1Nix1aW50MjU2LGFkZHJlc3MsdWludDI1Nixib29sKXZvaWQiLCBtZXRob2QgInNldFVzaW5nQXNDb2xsYXRlcmFsKHVpbnQyNTYsYm9vbCxhZGRyZXNzKXZvaWQiLCBtZXRob2QgInVwZGF0ZVVzZXJSaXNrUHJlbWl1bShhZGRyZXNzKXZvaWQiLCBtZXRob2QgInVwZGF0ZVVzZXJEeW5hbWljQ29uZmlnKGFkZHJlc3Mpdm9pZCIsIG1ldGhvZCAic2V0VXNlclBvc2l0aW9uTWFuYWdlcihhZGRyZXNzLGJvb2wpdm9pZCIsIG1ldGhvZCAic2V0VXNlclBvc2l0aW9uTWFuYWdlcnNXaXRoU2lnKCh1aW50OFszMl0sKHVpbnQ4WzMyXSxib29sKVtdLHVpbnQyNTYsdWludDI1NiksYnl0ZVtdKXZvaWQiLCBtZXRob2QgInJlbm91bmNlUG9zaXRpb25NYW5hZ2VyUm9sZShhZGRyZXNzKXZvaWQiLCBtZXRob2QgInBlcm1pdFJlc2VydmUodWludDI1NixhZGRyZXNzLHVpbnQyNTYsdWludDI1Nix1aW50NjQsYnl0ZVszMl0sYnl0ZVszMl0pdm9pZCIsIG1ldGhvZCAiZ2V0TGlxdWlkYXRpb25Db25maWcoKSh1aW50MTI4LHVpbnQ2NCx1aW50MTYpIiwgbWV0aG9kICJnZXRSZXNlcnZlQ291bnQoKXVpbnQyNTYiLCBtZXRob2QgImdldFJlc2VydmVTdXBwbGllZEFzc2V0cyh1aW50MjU2KXVpbnQyNTYiLCBtZXRob2QgImdldFJlc2VydmVTdXBwbGllZFNoYXJlcyh1aW50MjU2KXVpbnQyNTYiLCBtZXRob2QgImdldFJlc2VydmVEZWJ0KHVpbnQyNTYpKHVpbnQyNTYsdWludDI1NikiLCBtZXRob2QgImdldFJlc2VydmVUb3RhbERlYnQodWludDI1Nil1aW50MjU2IiwgbWV0aG9kICJnZXRSZXNlcnZlSWQoYWRkcmVzcyx1aW50MjU2KXVpbnQyNTYiLCBtZXRob2QgImdldFJlc2VydmUodWludDI1NikodWludDhbMzJdLHVpbnQ4WzMyXSx1aW50MTYsdWludDgsdWludDI0LHVpbnQ4LHVpbnQzMikiLCBtZXRob2QgImdldFJlc2VydmVDb25maWcodWludDI1NikodWludDI0LGJvb2wsYm9vbCxib29sLGJvb2wpIiwgbWV0aG9kICJnZXREeW5hbWljUmVzZXJ2ZUNvbmZpZyh1aW50MjU2LHVpbnQ2NCkodWludDE2LHVpbnQzMix1aW50MTYpIiwgbWV0aG9kICJnZXRVc2VyUmVzZXJ2ZVN0YXR1cyh1aW50MjU2LGFkZHJlc3MpKGJvb2wsYm9vbCkiLCBtZXRob2QgImdldFVzZXJTdXBwbGllZEFzc2V0cyh1aW50MjU2LGFkZHJlc3MpdWludDI1NiIsIG1ldGhvZCAiZ2V0VXNlclN1cHBsaWVkU2hhcmVzKHVpbnQyNTYsYWRkcmVzcyl1aW50MjU2IiwgbWV0aG9kICJnZXRVc2VyRGVidCh1aW50MjU2LGFkZHJlc3MpKHVpbnQyNTYsdWludDI1NikiLCBtZXRob2QgImdldFVzZXJUb3RhbERlYnQodWludDI1NixhZGRyZXNzKXVpbnQyNTYiLCBtZXRob2QgImdldFVzZXJQcmVtaXVtRGVidFJheSh1aW50MjU2LGFkZHJlc3MpdWludDI1NiIsIG1ldGhvZCAiZ2V0VXNlclBvc2l0aW9uKHVpbnQyNTYsYWRkcmVzcykodWludDEyMCx1aW50MTIwLGludDIwMCx1aW50MTIwLHVpbnQzMikiLCBtZXRob2QgImdldFVzZXJMYXN0Umlza1ByZW1pdW0oYWRkcmVzcyl1aW50MjU2IiwgbWV0aG9kICJnZXRVc2VyQWNjb3VudERhdGEoYWRkcmVzcykodWludDI1Nix1aW50MjU2LHVpbnQyNTYsdWludDI1Nix1aW50MjU2LHVpbnQyNTYsdWludDI1NikiLCBtZXRob2QgImdldExpcXVpZGF0aW9uQm9udXModWludDI1NixhZGRyZXNzLHVpbnQyNTYpdWludDI1NiIsIG1ldGhvZCAiaXNQb3NpdGlvbk1hbmFnZXJBY3RpdmUoYWRkcmVzcylib29sIiwgbWV0aG9kICJpc1Bvc2l0aW9uTWFuYWdlcihhZGRyZXNzLGFkZHJlc3MpYm9vbCIsIG1ldGhvZCAiZ2V0TGlxdWlkYXRpb25Mb2dpYygpYWRkcmVzcyIsIG1ldGhvZCAibXVsdGljYWxsKGJ5dGVbXVtdKWJ5dGVbXVtdIiwgbWV0aG9kICJleHRTbG9hZChieXRlWzMyXSlieXRlWzMyXSIsIG1ldGhvZCAiZXh0U2xvYWRzKHVpbnQ4WzMyXVtdKXVpbnQ4WzMyXVtdIiwgbWV0aG9kICJET01BSU5fU0VQQVJBVE9SKClieXRlWzMyXSIsIG1ldGhvZCAiZWlwNzEyRG9tYWluKCkoYnl0ZVsxXSxzdHJpbmcsc3RyaW5nLHVpbnQ1MTIsYWRkcmVzcyxieXRlWzMyXSx1aW50MjU2W10pIiwgbWV0aG9kICJ1c2VOb25jZSh1aW50MTkyKXVpbnQyNTYiLCBtZXRob2QgIm5vbmNlcyhhZGRyZXNzLHVpbnQxOTIpdWludDI1NiIsIG1ldGhvZCAiYXV0aG9yaXR5KClhZGRyZXNzIiwgbWV0aG9kICJzZXRBdXRob3JpdHkoYWRkcmVzcyl2b2lkIiwgbWV0aG9kICJpc0NvbnN1bWluZ1NjaGVkdWxlZE9wKClieXRlWzRdIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9fX3Bvc3RJbml0X3JvdXRlQDcgbWFpbl9pbml0aWFsaXplX3JvdXRlQDggbWFpbl9TUE9LRV9SRVZJU0lPTl9yb3V0ZUA5IG1haW5fU0VUX1VTRVJfUE9TSVRJT05fTUFOQUdFUlNfVFlQRUhBU0hfcm91dGVAMTAgbWFpbl9TUE9LRV9SRVZJU0lPTl9yb3V0ZUA5IG1haW5fT1JBQ0xFX3JvdXRlQDEyIG1haW5fdXBkYXRlTGlxdWlkYXRpb25Db25maWdfcm91dGVAMTMgbWFpbl9hZGRSZXNlcnZlX3JvdXRlQDE0IG1haW5fdXBkYXRlUmVzZXJ2ZUNvbmZpZ19yb3V0ZUAxNSBtYWluX3VwZGF0ZVJlc2VydmVQcmljZVNvdXJjZV9yb3V0ZUAxNiBtYWluX2FkZER5bmFtaWNSZXNlcnZlQ29uZmlnX3JvdXRlQDE3IG1haW5fdXBkYXRlRHluYW1pY1Jlc2VydmVDb25maWdfcm91dGVAMTggbWFpbl91cGRhdGVQb3NpdGlvbk1hbmFnZXJfcm91dGVAMTkgbWFpbl9zdXBwbHlfcm91dGVAMjAgbWFpbl9zdXBwbHlfcm91dGVAMjAgbWFpbl9zdXBwbHlfcm91dGVAMjAgbWFpbl9zdXBwbHlfcm91dGVAMjAgbWFpbl9saXF1aWRhdGlvbkNhbGxfcm91dGVAMjQgbWFpbl9zZXRVc2luZ0FzQ29sbGF0ZXJhbF9yb3V0ZUAyNSBtYWluX2luaXRpYWxpemVfcm91dGVAOCBtYWluX2luaXRpYWxpemVfcm91dGVAOCBtYWluX3VwZGF0ZVBvc2l0aW9uTWFuYWdlcl9yb3V0ZUAxOSBtYWluX3NldFVzZXJQb3NpdGlvbk1hbmFnZXJzV2l0aFNpZ19yb3V0ZUAyOSBtYWluX2luaXRpYWxpemVfcm91dGVAOCBtYWluX3Blcm1pdFJlc2VydmVfcm91dGVAMzEgbWFpbl9TRVRfVVNFUl9QT1NJVElPTl9NQU5BR0VSU19UWVBFSEFTSF9yb3V0ZUAxMCBtYWluX1NFVF9VU0VSX1BPU0lUSU9OX01BTkFHRVJTX1RZUEVIQVNIX3JvdXRlQDEwIG1haW5fZ2V0UmVzZXJ2ZVN1cHBsaWVkQXNzZXRzX3JvdXRlQDM0IG1haW5fZ2V0UmVzZXJ2ZVN1cHBsaWVkQXNzZXRzX3JvdXRlQDM0IG1haW5fZ2V0UmVzZXJ2ZVN1cHBsaWVkQXNzZXRzX3JvdXRlQDM0IG1haW5fZ2V0UmVzZXJ2ZVN1cHBsaWVkQXNzZXRzX3JvdXRlQDM0IG1haW5fZ2V0UmVzZXJ2ZUlkX3JvdXRlQDM4IG1haW5fZ2V0UmVzZXJ2ZVN1cHBsaWVkQXNzZXRzX3JvdXRlQDM0IG1haW5fZ2V0UmVzZXJ2ZUNvbmZpZ19yb3V0ZUA0MCBtYWluX2dldER5bmFtaWNSZXNlcnZlQ29uZmlnX3JvdXRlQDQxIG1haW5fZ2V0VXNlclJlc2VydmVTdGF0dXNfcm91dGVANDIgbWFpbl9nZXRVc2VyU3VwcGxpZWRBc3NldHNfcm91dGVANDMgbWFpbl9nZXRVc2VyU3VwcGxpZWRBc3NldHNfcm91dGVANDMgbWFpbl9nZXRVc2VyU3VwcGxpZWRBc3NldHNfcm91dGVANDMgbWFpbl9nZXRVc2VyU3VwcGxpZWRBc3NldHNfcm91dGVANDMgbWFpbl9nZXRVc2VyU3VwcGxpZWRBc3NldHNfcm91dGVANDMgbWFpbl9nZXRVc2VyU3VwcGxpZWRBc3NldHNfcm91dGVANDMgbWFpbl9nZXRVc2VyTGFzdFJpc2tQcmVtaXVtX3JvdXRlQDQ5IG1haW5fZ2V0VXNlckxhc3RSaXNrUHJlbWl1bV9yb3V0ZUA0OSBtYWluX2dldExpcXVpZGF0aW9uQm9udXNfcm91dGVANTEgbWFpbl9pc1Bvc2l0aW9uTWFuYWdlckFjdGl2ZV9yb3V0ZUA1MiBtYWluX2lzUG9zaXRpb25NYW5hZ2VyX3JvdXRlQDUzIG1haW5fT1JBQ0xFX3JvdXRlQDEyIG1haW5fbXVsdGljYWxsX3JvdXRlQDU1IG1haW5fZ2V0VXNlckxhc3RSaXNrUHJlbWl1bV9yb3V0ZUA0OSBtYWluX2V4dFNsb2Fkc19yb3V0ZUA1NyBtYWluX1NFVF9VU0VSX1BPU0lUSU9OX01BTkFHRVJTX1RZUEVIQVNIX3JvdXRlQDEwIG1haW5fZWlwNzEyRG9tYWluX3JvdXRlQDU5IG1haW5fdXNlTm9uY2Vfcm91dGVANjAgbWFpbl9ub25jZXNfcm91dGVANjEgbWFpbl9PUkFDTEVfcm91dGVAMTIgbWFpbl9pbml0aWFsaXplX3JvdXRlQDggbWFpbl9TRVRfVVNFUl9QT1NJVElPTl9NQU5BR0VSU19UWVBFSEFTSF9yb3V0ZUAxMAogICAgZXJyCgptYWluX1NFVF9VU0VSX1BPU0lUSU9OX01BTkFHRVJTX1RZUEVIQVNIX3JvdXRlQDEwOgogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5faW5pdGlhbGl6ZV9yb3V0ZUA4OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9PUkFDTEVfcm91dGVAMTI6CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9ub25jZXNfcm91dGVANjE6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIHB1c2hpbnQgMjQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDE5MgogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fdXNlTm9uY2Vfcm91dGVANjA6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIHB1c2hpbnQgMjQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDE5MgogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fZWlwNzEyRG9tYWluX3JvdXRlQDU5OgogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDg3MDA4OTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwOGIwMDAwMDAwMAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2V4dFNsb2Fkc19yb3V0ZUA1NzoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18yIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMCAvLyAzMgogICAgKgogICAgaW50Y18zIC8vIDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPj4KICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFVzZXJMYXN0Umlza1ByZW1pdW1fcm91dGVANDk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9tdWx0aWNhbGxfcm91dGVANTU6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMiAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBkdXAKICAgIGJ1cnkgNgogICAgaW50Y18zIC8vIDIKICAgICoKICAgIGJ1cnkgMwogICAgZHVwCiAgICBsZW4KICAgIGJ1cnkgMgogICAgZXh0cmFjdCAyIDAKICAgIGJ1cnkgNQogICAgaW50Y18yIC8vIDAKICAgIGJ1cnkgMwoKbWFpbl9mb3JfaGVhZGVyQDg3OgogICAgZGlnIDIKICAgIGRpZyA0CiAgICA8CiAgICBieiBtYWluX2FmdGVyX2ZvckA4OQogICAgZGlnIDIKICAgIGR1cAogICAgaW50Y18zIC8vIDIKICAgICoKICAgIGRpZyA2CiAgICBkdXAKICAgIHVuY292ZXIgMgogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgZW5jb2RpbmcKICAgIGR1cAogICAgZGlnIDUKICAgIGR1cAogICAgY292ZXIgNAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIHRhaWwgcG9pbnRlciBmb3IgKGxlbisobGVuK3VpbnQ4W10pW10pCiAgICBkaWcgMQogICAgbGVuCiAgICBzdWJzdHJpbmczCiAgICBpbnRjXzIgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18zIC8vIDIKICAgICsKICAgICsKICAgIGJ1cnkgMwogICAgaW50Y18xIC8vIDEKICAgICsKICAgIGJ1cnkgMwogICAgYiBtYWluX2Zvcl9oZWFkZXJAODcKCm1haW5fYWZ0ZXJfZm9yQDg5OgogICAgZGlnIDEKICAgIGludGNfMyAvLyAyCiAgICArCiAgICBkaWcgMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4Pj4KICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2lzUG9zaXRpb25NYW5hZ2VyX3JvdXRlQDUzOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1MDAKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9pc1Bvc2l0aW9uTWFuYWdlckFjdGl2ZV9yb3V0ZUA1MjoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIGJ5dGVjXzIgLy8gMHgxNTFmN2M3NTAwCiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0TGlxdWlkYXRpb25Cb251c19yb3V0ZUA1MToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFVzZXJTdXBwbGllZEFzc2V0c19yb3V0ZUA0MzoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFVzZXJSZXNlcnZlU3RhdHVzX3JvdXRlQDQyOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1MDAKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXREeW5hbWljUmVzZXJ2ZUNvbmZpZ19yb3V0ZUA0MToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgcHVzaGludCA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0UmVzZXJ2ZUNvbmZpZ19yb3V0ZUA0MDoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIGJ5dGVjXzEgLy8gMHgKICAgIGludGNfMiAvLyAwCiAgICBnZXRiaXQKICAgIGJ5dGVjXzEgLy8gMHgKICAgIGludGNfMSAvLyAxCiAgICBkaWcgMgogICAgc2V0Yml0CiAgICBpbnRjXzMgLy8gMgogICAgZGlnIDIKICAgIHNldGJpdAogICAgcHVzaGludCAzCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRSZXNlcnZlU3VwcGxpZWRBc3NldHNfcm91dGVAMzQ6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRSZXNlcnZlSWRfcm91dGVAMzg6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9wZXJtaXRSZXNlcnZlX3JvdXRlQDMxOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA1CiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA3CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIGludGMgNCAvLyBUTVBMX1VST1NfTUFJTl9BUFBfSUQKICAgIHB1c2hieXRlcyAiX19vZ192YWx1ZSIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgICEKICAgIGFzc2VydCAvLyBub3QgcGF5YWJsZQogICAgZGlnIDIKICAgIHB1c2hpbnQgMjU1CiAgICA8PQogICAgYXNzZXJ0IC8vIEFCSSB2YWxpZGF0aW9uCiAgICB1bmNvdmVyIDIKICAgIHB1c2hpbnQgMjU1CiAgICAmCiAgICBpbnRjXzAgLy8gMzIKICAgIGJ6ZXJvCiAgICBkdXAKICAgIHVuY292ZXIgOAogICAgY29uY2F0CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICAtCiAgICBpbnRjXzAgLy8gMzIKICAgIGV4dHJhY3QzCiAgICBzaGEyNTYKICAgIHB1c2hieXRlcyAiX3Jlc2VydmVzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBwdXNoYnl0ZXMgMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGNvdmVyIDIKICAgIHNlbGVjdAogICAgZXh0cmFjdCAwIDMyCiAgICBkdXAKICAgIHB1c2hieXRlcyAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgICE9CiAgICBhc3NlcnQgLy8gUmVzZXJ2ZU5vdExpc3RlZAogICAgaXR4bl9iZWdpbgogICAgaW50YyA0IC8vIFRNUExfVVJPU19NQUlOX0FQUF9JRAogICAgYXBwX3BhcmFtc19nZXQgQXBwQWRkcmVzcwogICAgcG9wCiAgICBjb3ZlciAyCiAgICBkaWcgMQogICAgdW5jb3ZlciA4CiAgICBjb25jYXQKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgIC0KICAgIGludGNfMCAvLyAzMgogICAgZXh0cmFjdDMKICAgIHVuY292ZXIgMgogICAgdW5jb3ZlciA3CiAgICBjb25jYXQKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgIC0KICAgIGludGNfMCAvLyAzMgogICAgZXh0cmFjdDMKICAgIHVuY292ZXIgNAogICAgaXRvYgogICAgdW5jb3ZlciAzCiAgICBwdXNoaW50IDI0CiAgICBleHRyYWN0X3VpbnQ2NAogICAgcHVzaGludCA2CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzIgLy8gMAogICAgaXR4bl9maWVsZCBPbkNvbXBsZXRpb24KICAgIGludGNfMiAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICBwdXNoYnl0ZXMgMHg0YThkZDA4ZiAvLyBtZXRob2QgInBlcm1pdChhZGRyZXNzLGFkZHJlc3MsdWludDI1Nix1aW50MjU2LHVpbnQ2NCxieXRlWzMyXSxieXRlWzMyXSl2b2lkIgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIHVuY292ZXIgNgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIHVuY292ZXIgMwogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIHVuY292ZXIgMgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIHN3YXAKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgc3dhcAogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpdHhuX3N1Ym1pdAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9zZXRVc2VyUG9zaXRpb25NYW5hZ2Vyc1dpdGhTaWdfcm91dGVAMjk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgZGlnIDEKICAgIGludGNfMCAvLyAzMgogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgdHVwbGUgZW5jb2RpbmcKICAgIGR1cAogICAgcHVzaGludCA5OAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIHRhaWwgcG9pbnRlciBhdCBpbmRleCAxIG9mICh1aW50OFszMl0sKGxlbisodWludDhbMzJdLGJvb2wxKVtdKSx1aW50MjU2LHVpbnQyNTYpCiAgICB1bmNvdmVyIDIKICAgIHN3YXAKICAgIGRpZyAyCiAgICBzdWJzdHJpbmczCiAgICBpbnRjXzIgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAzMwogICAgKgogICAgcHVzaGludCAxMDAKICAgICsKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIFNldFVzZXJQb3NpdGlvbk1hbmFnZXJzCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGludGNfMiAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzMgLy8gMgogICAgKwogICAgc3dhcAogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fdXBkYXRlUG9zaXRpb25NYW5hZ2VyX3JvdXRlQDE5OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBpbnRjXzEgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5ib29sCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX3NldFVzaW5nQXNDb2xsYXRlcmFsX3JvdXRlQDI1OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBpbnRjXzEgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5ib29sCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2xpcXVpZGF0aW9uQ2FsbF9yb3V0ZUAyNDoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDQKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDUKICAgIGxlbgogICAgaW50Y18xIC8vIDEKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuYm9vbAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9zdXBwbHlfcm91dGVAMjA6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl91cGRhdGVEeW5hbWljUmVzZXJ2ZUNvbmZpZ19yb3V0ZUAxODoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgcHVzaGludCA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgbGVuCiAgICBwdXNoaW50IDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIER5bmFtaWNSZXNlcnZlQ29uZmlnCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2FkZER5bmFtaWNSZXNlcnZlQ29uZmlnX3JvdXRlQDE3OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBwdXNoaW50IDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIER5bmFtaWNSZXNlcnZlQ29uZmlnCiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwCiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fdXBkYXRlUmVzZXJ2ZVByaWNlU291cmNlX3JvdXRlQDE2OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl91cGRhdGVSZXNlcnZlQ29uZmlnX3JvdXRlQDE1OgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBwdXNoaW50IDQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIFJlc2VydmVDb25maWcKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fYWRkUmVzZXJ2ZV9yb3V0ZUAxNDoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDQKICAgIGxlbgogICAgcHVzaGludCA0CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBSZXNlcnZlQ29uZmlnCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA1CiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgRHluYW1pY1Jlc2VydmVDb25maWcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl91cGRhdGVMaXF1aWRhdGlvbkNvbmZpZ19yb3V0ZUAxMzoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgcHVzaGludCAyNgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgTGlxdWlkYXRpb25Db25maWcKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fU1BPS0VfUkVWSVNJT05fcm91dGVAOToKICAgIGJ5dGVjXzMgLy8gMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9fX3Bvc3RJbml0X3JvdXRlQDc6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fX19kZWxlZ2F0ZV91cGRhdGVfcm91dGVANDoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIHB1c2hpbnQgNCAvLyBVcGRhdGVBcHBsaWNhdGlvbgogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgcmV0dXJuCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvV0lQL2V4YW1wbGVzL2FhdmUtdjQvY29udHJhY3RzL1Nwb2tlSW5zdGFuY2Uuc29sLlNwb2tlSW5zdGFuY2UuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiAFIAEAAgAmBAQVH3x1AAUVH3x1AAwVH3x1AAAAAAAAAAAkKUcDgYAgr0k1BTUANACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAXEA1ADEYQAAUgA5fX2N0b3JfcGVuZGluZyNnI0OABNxeN5g2GgCOAQa0MRkURDEYRII6BAb7SjkE7hxxVgSx8w3NBPvhFjsE6l6wOgSTqVzlBFX1g6kE/KfTMwTPlpUKBO+nJNAEZhxTyARaIdN2BGKgvosEuLDtwARHSGxzBBomddwEutuynwRjt6VnBMKr5ogEExJxegQfHRsGBMCu45wEV+mkyAS+03joBDa1jasEqer86gRrCYTRBMnYTNAECJ76zwSjk05hBB2oguMECIqkagSONf9+BAra6z4E6eWSxgRjAj6JBFqcqOQEBYy6sgQ19a8nBARnGtsE43eWpASLcmsHBHjS+VwEwcl9UQTnxEvJBEZqzWcEdaat0QTVUZuhBASRmiYEc5m+CAQ2IWjlBL0LjkYEyGsYMgTW1oWTBEvr+RsE7OWd1ATN2k6mBM1RPaU2GgCOOgT/AAUE+wABBPsADgTxBIMEcgRiBE8ENgNLA5cDlwOXA5cDcgNbAAUABQNLAx8ABQHgAAEAAQHDAcMBwwHDAc4BwwGlAZIBgAFuAW4BbgFuAW4BbgDbANsBVQFKATgADgDmANsAyQABAFYASgA3AA4ABQABACiwI0M2GgEVIhJEI0OAJBUffHUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALAjQzYaARUiEkQ2GgIVgRgSRCiwI0M2GgEVgRgSRCiwI0OAbhUffHUAhwCJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIsAAAAAsCNDNhoBSSRZIgslCEwVEkQosCNDNhoBFSISRCiwI0M2GgFJJFlJRQYlC0UDSRVFAlcCAEUFJEUDSwJLBAxBACVLAkklC0sGSU8CWUlLBUlOBBJESwEVUiRZJQgIRQMjCEUDQv/TSwElCEsBEkQosCNDNhoBFSISRDYaAhUiEkQqsCNDNhoBFSISRCqwI0M2GgEVIhJENhoCFSISRDYaAxUiEkQosCNDNhoBFSISRDYaAhUiEkQosCNDNhoBFSISRDYaAhUiEkQqsCNDNhoBFSISRDYaAhWBCBJEKLAjQzYaARUiEkQpJFMpI0sCVCVLAlSBA08CVChMULAjQzYaARUiEkQosCNDNhoBFSISRDYaAhUiEkQosCNDNhoBSRUiEkQ2GgJJFSISRDYaA0kVIhJENhoESRUiEkQ2GgVJFYEIEkQXNhoGSRUiEkQ2GgdJFSISRCEEgApfX29nX3ZhbHVlZUgUREsCgf8BDkRPAoH/ARoir0lPCFBJFSIJIlgBgAlfcmVzZXJ2ZXNMUL6ASwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE4CTVcAIEmAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE0SxIQRyCEhOAksBTwhQSRUiCSJYTwJPB1BJFSIJIlhPBBZPA4EYW4EGshAkshkksgGyGIAESo3Qj7IaTwayGk8DshpPArIaTLIashpMshqyGrMjQzYaAUkVSwEiWUmBYhJETwJMSwJSJFmBIQuBZAgSRDYaAkkkWSUITBUSRCNDNhoBFSISRDYaAhUjEkQjQzYaARUiEkQ2GgIVIxJENhoDFSISRCNDNhoBFSISRDYaAhUiEkQ2GgMVIhJENhoEFSISRDYaBRUjEkQjQzYaARUiEkQ2GgIVIhJENhoDFSISRICEARUffHUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALAjQzYaARUiEkQ2GgIVgQgSRDYaAxWBCBJEI0M2GgEVIhJENhoCFYEIEkQrsCNDNhoBFSISRDYaAhUiEkQjQzYaARUiEkQ2GgIVgQQSRCNDNhoBFSISRDYaAhUiEkQ2GgMVIhJENhoEFYEEEkQ2GgUVgQgSRIBEFR98dQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwI0M2GgEVgRoSRCNDK7AjQzYaARUiEkQ2GgIVgQgSRCNDMRmBBBIxGBBD",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 8,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {
+        "UROS_MAIN_APP_ID": {
+            "type": "AVMUint64",
+            "value": "AAAAAAAAAAA="
+        }
+    }
+}

@@ -1,0 +1,128 @@
+{
+    "name": "VulnerableGroupContract",
+    "structs": {},
+    "methods": [
+        {
+            "name": "createApplication",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [
+                    "NoOp"
+                ],
+                "call": []
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "buyCredit",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 1,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "totalCredits": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "Y3JlZGl0cw=="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        69
+                    ],
+                    "errorMessage": "Must pay app"
+                },
+                {
+                    "pc": [
+                        18
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp"
+                },
+                {
+                    "pc": [
+                        73
+                    ],
+                    "errorMessage": "check GlobalState exists"
+                },
+                {
+                    "pc": [
+                        62
+                    ],
+                    "errorMessage": "transaction type is pay"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICBieXRlY2Jsb2NrICJjcmVkaXRzIgogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjEzCiAgICAvLyBleHBvcnQgY2xhc3MgVnVsbmVyYWJsZUdyb3VwQ29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BANQogICAgcHVzaGJ5dGVzIDB4NTdlNTQ1NmYgLy8gbWV0aG9kICJidXlDcmVkaXQoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBidXlDcmVkaXQKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEA1OgogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjEzCiAgICAvLyBleHBvcnQgY2xhc3MgVnVsbmVyYWJsZUdyb3VwQ29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVBcHBsaWNhdGlvbl9yb3V0ZUA2CiAgICBlcnIKCm1haW5fY3JlYXRlQXBwbGljYXRpb25fcm91dGVANjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czoxNAogICAgLy8gcHVibGljIHRvdGFsQ3JlZGl0cyA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICJjcmVkaXRzIiB9KTsKICAgIGJ5dGVjXzAgLy8gImNyZWRpdHMiCiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6MTcKICAgIC8vIHRoaXMudG90YWxDcmVkaXRzLnZhbHVlID0gMDsKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjE2CiAgICAvLyBwdWJsaWMgY3JlYXRlQXBwbGljYXRpb24oKTogdm9pZCB7CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjpWdWxuZXJhYmxlR3JvdXBDb250cmFjdC5idXlDcmVkaXRbcm91dGluZ10oKSAtPiB2b2lkOgpidXlDcmVkaXQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6MjEKICAgIC8vIGNvbnN0IHBheW1lbnQgPSBndHhuLlBheW1lbnRUeG4oVWludDY0KDApKTsgLy8gQWx3YXlzIHJlYWRzIGluZGV4IDAKICAgIGludGNfMCAvLyAwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18xIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czoyMwogICAgLy8gcGF5bWVudC5yZWNlaXZlciA9PT0gR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MsCiAgICBndHhucyBSZWNlaXZlcgogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgID09CiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6MjItMjUKICAgIC8vIGFzc2VydCgKICAgIC8vICAgcGF5bWVudC5yZWNlaXZlciA9PT0gR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MsCiAgICAvLyAgICJNdXN0IHBheSBhcHAiLAogICAgLy8gKTsKICAgIGFzc2VydCAvLyBNdXN0IHBheSBhcHAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czoyOAogICAgLy8gdGhpcy50b3RhbENyZWRpdHMudmFsdWUgPSB0aGlzLnRvdGFsQ3JlZGl0cy52YWx1ZSArIFVpbnQ2NCgxKTsKICAgIGludGNfMCAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6MTQKICAgIC8vIHB1YmxpYyB0b3RhbENyZWRpdHMgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAiY3JlZGl0cyIgfSk7CiAgICBieXRlY18wIC8vICJjcmVkaXRzIgogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjI4CiAgICAvLyB0aGlzLnRvdGFsQ3JlZGl0cy52YWx1ZSA9IHRoaXMudG90YWxDcmVkaXRzLnZhbHVlICsgVWludDY0KDEpOwogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIGludGNfMSAvLyAxCiAgICArCiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6MTQKICAgIC8vIHB1YmxpYyB0b3RhbENyZWRpdHMgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAiY3JlZGl0cyIgfSk7CiAgICBieXRlY18wIC8vICJjcmVkaXRzIgogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjI4CiAgICAvLyB0aGlzLnRvdGFsQ3JlZGl0cy52YWx1ZSA9IHRoaXMudG90YWxDcmVkaXRzLnZhbHVlICsgVWludDY0KDEpOwogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czoyMAogICAgLy8gcHVibGljIGJ1eUNyZWRpdCgpOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CyACAAEmAQdjcmVkaXRzMRkURDEYQQAOgARX5UVvNhoAjgEAFACABLhEezY2GgCOAQABACgiZyNDIjgQIxJEIjgHMgoSRCIoZUQjCChMZyND",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 3,
+            "patch": 2
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

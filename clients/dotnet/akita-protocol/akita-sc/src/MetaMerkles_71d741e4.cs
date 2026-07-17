@@ -332,7 +332,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.MetaMerkles_71d741e4
             _tx_transactions.AddRange(new List<Transaction> { payment });
             byte[] abiHandle = { 162, 76, 6, 124 };
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
-            var rootAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); rootAbi.From(root);
+            var rootAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); rootAbi.From(root);
             var typeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); typeAbi.From(type);
 
             var result = await base.CallApp(new List<object> { abiHandle, payment, nameAbi, rootAbi, typeAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -349,7 +349,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.MetaMerkles_71d741e4
             _tx_transactions.AddRange(new List<Transaction> { payment });
             byte[] abiHandle = { 162, 76, 6, 124 };
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
-            var rootAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); rootAbi.From(root);
+            var rootAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); rootAbi.From(root);
             var typeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); typeAbi.From(type);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, payment, nameAbi, rootAbi, typeAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -402,7 +402,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.MetaMerkles_71d741e4
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 198, 211, 215, 4 };
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
-            var newRootAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); newRootAbi.From(newRoot);
+            var newRootAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); newRootAbi.From(newRoot);
 
             var result = await base.CallApp(new List<object> { abiHandle, nameAbi, newRootAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -417,7 +417,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.MetaMerkles_71d741e4
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 198, 211, 215, 4 };
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
-            var newRootAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); newRootAbi.From(newRoot);
+            var newRootAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); newRootAbi.From(newRoot);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, nameAbi, newRootAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -518,8 +518,8 @@ namespace Arc56.Generated.akita_protocol.akita_sc.MetaMerkles_71d741e4
             byte[] abiHandle = { 43, 243, 204, 90 };
             var addressAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Address(); addressAbi.From(address);
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
-            var leafAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); leafAbi.From(leaf);
-            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); proofAbi.From(proof);
+            var leafAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); leafAbi.From(leaf);
+            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[32]"); proofAbi.From(proof);
             var typeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); typeAbi.From(type);
 
             var result = await base.CallApp(new List<object> { abiHandle, addressAbi, nameAbi, leafAbi, proofAbi, typeAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -542,8 +542,8 @@ namespace Arc56.Generated.akita_protocol.akita_sc.MetaMerkles_71d741e4
             byte[] abiHandle = { 43, 243, 204, 90 };
             var addressAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Address(); addressAbi.From(address);
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
-            var leafAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); leafAbi.From(leaf);
-            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); proofAbi.From(proof);
+            var leafAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); leafAbi.From(leaf);
+            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[32]"); proofAbi.From(proof);
             var typeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); typeAbi.From(type);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, addressAbi, nameAbi, leafAbi, proofAbi, typeAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -621,8 +621,8 @@ namespace Arc56.Generated.akita_protocol.akita_sc.MetaMerkles_71d741e4
             byte[] abiHandle = { 12, 241, 185, 207 };
             var addressAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Address(); addressAbi.From(address);
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
-            var leafAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); leafAbi.From(leaf);
-            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); proofAbi.From(proof);
+            var leafAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); leafAbi.From(leaf);
+            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[32]"); proofAbi.From(proof);
             var typeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); typeAbi.From(type);
             var keyAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); keyAbi.From(key);
 
@@ -646,8 +646,8 @@ namespace Arc56.Generated.akita_protocol.akita_sc.MetaMerkles_71d741e4
             byte[] abiHandle = { 12, 241, 185, 207 };
             var addressAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Address(); addressAbi.From(address);
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
-            var leafAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); leafAbi.From(leaf);
-            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); proofAbi.From(proof);
+            var leafAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); leafAbi.From(leaf);
+            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[32]"); proofAbi.From(proof);
             var typeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); typeAbi.From(type);
             var keyAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); keyAbi.From(key);
 
@@ -682,8 +682,8 @@ namespace Arc56.Generated.akita_protocol.akita_sc.MetaMerkles_71d741e4
             byte[] abiHandle = { 31, 247, 199, 76 };
             var addressAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Address(); addressAbi.From(address);
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
-            var leafAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); leafAbi.From(leaf);
-            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); proofAbi.From(proof);
+            var leafAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); leafAbi.From(leaf);
+            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[32]"); proofAbi.From(proof);
             var typeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); typeAbi.From(type);
             var keyAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); keyAbi.From(key);
 
@@ -707,8 +707,8 @@ namespace Arc56.Generated.akita_protocol.akita_sc.MetaMerkles_71d741e4
             byte[] abiHandle = { 31, 247, 199, 76 };
             var addressAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Address(); addressAbi.From(address);
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
-            var leafAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); leafAbi.From(leaf);
-            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); proofAbi.From(proof);
+            var leafAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); leafAbi.From(leaf);
+            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[32]"); proofAbi.From(proof);
             var typeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); typeAbi.From(type);
             var keyAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); keyAbi.From(key);
 
@@ -732,7 +732,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.MetaMerkles_71d741e4
             _tx_transactions.AddRange(new List<Transaction> { payment });
             byte[] abiHandle = { 57, 193, 125, 237 };
             var descriptionAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); descriptionAbi.From(description);
-            var schemaListAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); schemaListAbi.From(schemaList);
+            var schemaListAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); schemaListAbi.From(schemaList);
 
             var result = await base.CallApp(new List<object> { abiHandle, payment, descriptionAbi, schemaListAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -748,7 +748,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.MetaMerkles_71d741e4
             _tx_transactions.AddRange(new List<Transaction> { payment });
             byte[] abiHandle = { 57, 193, 125, 237 };
             var descriptionAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); descriptionAbi.From(description);
-            var schemaListAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); schemaListAbi.From(schemaList);
+            var schemaListAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); schemaListAbi.From(schemaList);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, payment, descriptionAbi, schemaListAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 

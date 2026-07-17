@@ -1,0 +1,295 @@
+{
+    "name": "ServiceRegistry",
+    "structs": {
+        "ServiceListing": [
+            {
+                "name": "provider",
+                "type": "address"
+            },
+            {
+                "name": "price_microalgos",
+                "type": "uint64"
+            },
+            {
+                "name": "cycle_days",
+                "type": "uint64"
+            },
+            {
+                "name": "name",
+                "type": "string"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "create",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "fee_micro"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [
+                    "NoOp"
+                ],
+                "call": []
+            },
+            "readonly": false,
+            "desc": "Initialize the registry. Sender becomes admin.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "register",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "service_id"
+                },
+                {
+                    "type": "uint64",
+                    "name": "price_microalgos"
+                },
+                {
+                    "type": "uint64",
+                    "name": "cycle_days"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Register or update a service. Caller must have paid `fee_micro`\nin a grouped Payment txn (verified by min-balance accounting). Only the original provider can re-register the same service_id.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "deregister",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "service_id"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Provider removes their own listing.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_listing",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "service_id"
+                }
+            ],
+            "returns": {
+                "type": "(address,uint64,uint64,string)",
+                "struct": "ServiceListing"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Read-only lookup used by agents during discovery.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_count",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Number of registered services.",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "\n    A2A Service Registry \u2014 autonomous agents discover services here.\n\n    Implements the discovery half of the A2A Agentic Commerce Framework\n    (Track: Agentic Commerce \u2192 Advanced #7).\n\n    Each registered service is stored in its OWN box (Box Storage), so the\n    registry scales to thousands of services without bumping global schema.\n\n    State:\n        Box \"svc:<service_id>\"  \u2192 ServiceListing (provider, price, cycle, name)\n        GlobalState.admin       \u2192 registry admin (can prune stale entries)\n        GlobalState.fee_micro   \u2192 registration fee (anti-spam)\n        GlobalState.count       \u2192 total registered services\n\n    Anyone can register a service by paying `fee_micro` ALGO; only the\n    provider can update or delete their own entry.\n    ",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 2,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "admin": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "YWRtaW4=",
+                    "desc": "Registry admin"
+                },
+                "fee_micro": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "ZmVlX21pY3Jv",
+                    "desc": "Registration fee in microalgos"
+                },
+                "count": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "Y291bnQ=",
+                    "desc": "Total registered services"
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "listings": {
+                    "keyType": "string",
+                    "valueType": "ServiceListing",
+                    "prefix": "c3ZjOg=="
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        188
+                    ],
+                    "errorMessage": "Only original provider can update this service"
+                },
+                {
+                    "pc": [
+                        270
+                    ],
+                    "errorMessage": "Only provider or admin can deregister"
+                },
+                {
+                    "pc": [
+                        247,
+                        309
+                    ],
+                    "errorMessage": "Service not found"
+                },
+                {
+                    "pc": [
+                        264
+                    ],
+                    "errorMessage": "check self.admin exists"
+                },
+                {
+                    "pc": [
+                        217,
+                        277,
+                        321
+                    ],
+                    "errorMessage": "check self.count exists"
+                },
+                {
+                    "pc": [
+                        186,
+                        254
+                    ],
+                    "errorMessage": "index out of bounds"
+                },
+                {
+                    "pc": [
+                        126,
+                        162,
+                        231,
+                        294
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        133,
+                        168,
+                        238,
+                        301
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"
+                },
+                {
+                    "pc": [
+                        97,
+                        143,
+                        153
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint64"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMiA4CiAgICBieXRlY2Jsb2NrICJjb3VudCIgInN2YzoiICJhZG1pbiIgMHgxNTFmN2M3NQogICAgLy8gY29udHJhY3QucHk6MjMKICAgIC8vIGNsYXNzIFNlcnZpY2VSZWdpc3RyeShBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEAxMAogICAgcHVzaGJ5dGVzcyAweGI2NTgwNTRiIDB4OGU0ZGI4YjggMHhjYTdjOWQ2MCAweDc1NWY5NTg5IC8vIG1ldGhvZCAicmVnaXN0ZXIoc3RyaW5nLHVpbnQ2NCx1aW50NjQsc3RyaW5nKXZvaWQiLCBtZXRob2QgImRlcmVnaXN0ZXIoc3RyaW5nKXZvaWQiLCBtZXRob2QgImdldF9saXN0aW5nKHN0cmluZykoYWRkcmVzcyx1aW50NjQsdWludDY0LHN0cmluZykiLCBtZXRob2QgImdldF9jb3VudCgpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggcmVnaXN0ZXIgZGVyZWdpc3RlciBnZXRfbGlzdGluZyBnZXRfY291bnQKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEAxMDoKICAgIC8vIGNvbnRyYWN0LnB5OjIzCiAgICAvLyBjbGFzcyBTZXJ2aWNlUmVnaXN0cnkoQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweDI0MGQyZjY3IC8vIG1ldGhvZCAiY3JlYXRlKHVpbnQ2NCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlCiAgICBlcnIKCgovLyBzbWFydF9jb250cmFjdHMuc2VydmljZV9yZWdpc3RyeS5jb250cmFjdC5TZXJ2aWNlUmVnaXN0cnkuY3JlYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgLy8gY29udHJhY3QucHk6NDkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiTm9PcCJdLCBjcmVhdGU9InJlcXVpcmUiKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gY29udHJhY3QucHk6NTIKICAgIC8vIHNlbGYuYWRtaW4udmFsdWUgPSBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlcikKICAgIGJ5dGVjXzIgLy8gImFkbWluIgogICAgdHhuIFNlbmRlcgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0LnB5OjUzCiAgICAvLyBzZWxmLmZlZV9taWNyby52YWx1ZSA9IGZlZV9taWNyby5uYXRpdmUKICAgIGJ0b2kKICAgIHB1c2hieXRlcyAiZmVlX21pY3JvIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0LnB5OjU0CiAgICAvLyBzZWxmLmNvdW50LnZhbHVlID0gVUludDY0KDApCiAgICBieXRlY18wIC8vICJjb3VudCIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29udHJhY3QucHk6NDkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiTm9PcCJdLCBjcmVhdGU9InJlcXVpcmUiKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5zZXJ2aWNlX3JlZ2lzdHJ5LmNvbnRyYWN0LlNlcnZpY2VSZWdpc3RyeS5yZWdpc3Rlcltyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlZ2lzdGVyOgogICAgLy8gY29udHJhY3QucHk6NTYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGxlbgogICAgaW50Y18zIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGxlbgogICAgaW50Y18zIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA0CiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBzd2FwCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgLy8gY29udHJhY3QucHk6NjkKICAgIC8vIGlmIHNlcnZpY2VfaWQgaW4gc2VsZi5saXN0aW5nczoKICAgIGJ5dGVjXzEgLy8gInN2YzoiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBieiByZWdpc3Rlcl9lbHNlX2JvZHlAMwogICAgLy8gY29udHJhY3QucHk6NzIKICAgIC8vIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBleGlzdGluZy5wcm92aWRlcgogICAgdHhuIFNlbmRlcgogICAgZGlnIDEKICAgIGludGNfMCAvLyAwCiAgICBwdXNoaW50IDMyCiAgICBib3hfZXh0cmFjdCAvLyBvbiBlcnJvcjogaW5kZXggb3V0IG9mIGJvdW5kcwogICAgPT0KICAgIC8vIGNvbnRyYWN0LnB5OjcxLTczCiAgICAvLyBhc3NlcnQgKAogICAgLy8gICAgIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBleGlzdGluZy5wcm92aWRlcgogICAgLy8gKSwgIk9ubHkgb3JpZ2luYWwgcHJvdmlkZXIgY2FuIHVwZGF0ZSB0aGlzIHNlcnZpY2UiCiAgICBhc3NlcnQgLy8gT25seSBvcmlnaW5hbCBwcm92aWRlciBjYW4gdXBkYXRlIHRoaXMgc2VydmljZQoKcmVnaXN0ZXJfYWZ0ZXJfaWZfZWxzZUA0OgogICAgLy8gY29udHJhY3QucHk6NzgKICAgIC8vIHByb3ZpZGVyPWFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSwKICAgIHR4biBTZW5kZXIKICAgIC8vIGNvbnRyYWN0LnB5Ojc3LTgyCiAgICAvLyBzZWxmLmxpc3RpbmdzW3NlcnZpY2VfaWRdID0gU2VydmljZUxpc3RpbmcoCiAgICAvLyAgICAgcHJvdmlkZXI9YXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpLAogICAgLy8gICAgIHByaWNlX21pY3JvYWxnb3M9cHJpY2VfbWljcm9hbGdvcywKICAgIC8vICAgICBjeWNsZV9kYXlzPWN5Y2xlX2RheXMsCiAgICAvLyAgICAgbmFtZT1uYW1lLAogICAgLy8gKQogICAgZGlnIDQKICAgIGNvbmNhdAogICAgZGlnIDMKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MDAzMgogICAgY29uY2F0CiAgICBkaWcgMgogICAgY29uY2F0CiAgICBkaWcgMQogICAgZHVwCiAgICBib3hfZGVsCiAgICBwb3AKICAgIHN3YXAKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0LnB5OjU2CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKcmVnaXN0ZXJfZWxzZV9ib2R5QDM6CiAgICAvLyBjb250cmFjdC5weTo3NQogICAgLy8gc2VsZi5jb3VudC52YWx1ZSA9IHNlbGYuY291bnQudmFsdWUgKyBVSW50NjQoMSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJjb3VudCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jb3VudCBleGlzdHMKICAgIGludGNfMSAvLyAxCiAgICArCiAgICBieXRlY18wIC8vICJjb3VudCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICBiIHJlZ2lzdGVyX2FmdGVyX2lmX2Vsc2VANAoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5zZXJ2aWNlX3JlZ2lzdHJ5LmNvbnRyYWN0LlNlcnZpY2VSZWdpc3RyeS5kZXJlZ2lzdGVyW3JvdXRpbmddKCkgLT4gdm9pZDoKZGVyZWdpc3RlcjoKICAgIC8vIGNvbnRyYWN0LnB5Ojg0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgLy8gY29udHJhY3QucHk6ODcKICAgIC8vIGFzc2VydCBzZXJ2aWNlX2lkIGluIHNlbGYubGlzdGluZ3MsICJTZXJ2aWNlIG5vdCBmb3VuZCIKICAgIGJ5dGVjXzEgLy8gInN2YzoiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cG4gMgogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBhc3NlcnQgLy8gU2VydmljZSBub3QgZm91bmQKICAgIC8vIGNvbnRyYWN0LnB5OjkwCiAgICAvLyBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlcikgPT0gZXhpc3RpbmcucHJvdmlkZXIKICAgIHR4biBTZW5kZXIKICAgIHN3YXAKICAgIGludGNfMCAvLyAwCiAgICBwdXNoaW50IDMyCiAgICBib3hfZXh0cmFjdCAvLyBvbiBlcnJvcjogaW5kZXggb3V0IG9mIGJvdW5kcwogICAgPT0KICAgIC8vIGNvbnRyYWN0LnB5OjkwLTkxCiAgICAvLyBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlcikgPT0gZXhpc3RpbmcucHJvdmlkZXIKICAgIC8vIG9yIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmFkbWluLnZhbHVlCiAgICBibnogZGVyZWdpc3Rlcl9ib29sX3RydWVAMwogICAgLy8gY29udHJhY3QucHk6OTEKICAgIC8vIG9yIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmFkbWluLnZhbHVlCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMiAvLyAiYWRtaW4iCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuYWRtaW4gZXhpc3RzCiAgICA9PQogICAgLy8gY29udHJhY3QucHk6OTAtOTEKICAgIC8vIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBleGlzdGluZy5wcm92aWRlcgogICAgLy8gb3IgYXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpID09IHNlbGYuYWRtaW4udmFsdWUKICAgIGJ6IGRlcmVnaXN0ZXJfYm9vbF9mYWxzZUA0CgpkZXJlZ2lzdGVyX2Jvb2xfdHJ1ZUAzOgogICAgaW50Y18xIC8vIDEKCmRlcmVnaXN0ZXJfYm9vbF9tZXJnZUA1OgogICAgLy8gY29udHJhY3QucHk6ODktOTIKICAgIC8vIGFzc2VydCAoCiAgICAvLyAgICAgYXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpID09IGV4aXN0aW5nLnByb3ZpZGVyCiAgICAvLyAgICAgb3IgYXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpID09IHNlbGYuYWRtaW4udmFsdWUKICAgIC8vICksICJPbmx5IHByb3ZpZGVyIG9yIGFkbWluIGNhbiBkZXJlZ2lzdGVyIgogICAgYXNzZXJ0IC8vIE9ubHkgcHJvdmlkZXIgb3IgYWRtaW4gY2FuIGRlcmVnaXN0ZXIKICAgIC8vIGNvbnRyYWN0LnB5OjkzCiAgICAvLyBkZWwgc2VsZi5saXN0aW5nc1tzZXJ2aWNlX2lkXQogICAgZHVwCiAgICBib3hfZGVsCiAgICBwb3AKICAgIC8vIGNvbnRyYWN0LnB5Ojk0CiAgICAvLyBzZWxmLmNvdW50LnZhbHVlID0gc2VsZi5jb3VudC52YWx1ZSAtIFVJbnQ2NCgxKQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gImNvdW50IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmNvdW50IGV4aXN0cwogICAgaW50Y18xIC8vIDEKICAgIC0KICAgIGJ5dGVjXzAgLy8gImNvdW50IgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0LnB5Ojg0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKZGVyZWdpc3Rlcl9ib29sX2ZhbHNlQDQ6CiAgICBpbnRjXzAgLy8gMAogICAgYiBkZXJlZ2lzdGVyX2Jvb2xfbWVyZ2VANQoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5zZXJ2aWNlX3JlZ2lzdHJ5LmNvbnRyYWN0LlNlcnZpY2VSZWdpc3RyeS5nZXRfbGlzdGluZ1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9saXN0aW5nOgogICAgLy8gY29udHJhY3QucHk6OTYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgLy8gY29udHJhY3QucHk6OTkKICAgIC8vIGFzc2VydCBzZXJ2aWNlX2lkIGluIHNlbGYubGlzdGluZ3MsICJTZXJ2aWNlIG5vdCBmb3VuZCIKICAgIGJ5dGVjXzEgLy8gInN2YzoiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBhc3NlcnQgLy8gU2VydmljZSBub3QgZm91bmQKICAgIC8vIGNvbnRyYWN0LnB5OjEwMAogICAgLy8gcmV0dXJuIHNlbGYubGlzdGluZ3Nbc2VydmljZV9pZF0uY29weSgpCiAgICBib3hfZ2V0CiAgICBwb3AKICAgIC8vIGNvbnRyYWN0LnB5Ojk2CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGJ5dGVjXzMgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuc2VydmljZV9yZWdpc3RyeS5jb250cmFjdC5TZXJ2aWNlUmVnaXN0cnkuZ2V0X2NvdW50W3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X2NvdW50OgogICAgLy8gY29udHJhY3QucHk6MTA1CiAgICAvLyByZXR1cm4gYXJjNC5VSW50NjQoc2VsZi5jb3VudC52YWx1ZSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJjb3VudCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jb3VudCBleGlzdHMKICAgIGl0b2IKICAgIC8vIGNvbnRyYWN0LnB5OjEwMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CyAEAAECCCYEBWNvdW50BHN2YzoFYWRtaW4EFR98dTEZFEQxGEEAJIIEBLZYBUsEjk24uATKfJ1gBHVflYk2GgCOBAAuAJcA1gDzAIAEJA0vZzYaAI4BAAEANhoBSRUlEkQqMQBnF4AJZmVlX21pY3JvTGcoImcjQzYaAUkiWSQISwEVEkQ2GgJJTgIVJRJENhoDSU4CFSUSRDYaBElOAkkiWSQITBUSRClMUEm9RQFBACMxAEsBIoEguhJEMQBLBFBLA1CAAgAyUEsCUEsBSbxITL8jQyIoZUQjCChMZ0L/2zYaAUkiWSQISwEVEkQpTFBHAr1FAUQxAEwigSC6EkAACjEAIiplRBJBABAjREm8SCIoZUQjCShMZyNDIkL/7TYaAUkiWSQISwEVEkQpTFBJvUUBRL5IK0xQsCNDIihlRBYrTFCwI0M=",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 8,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

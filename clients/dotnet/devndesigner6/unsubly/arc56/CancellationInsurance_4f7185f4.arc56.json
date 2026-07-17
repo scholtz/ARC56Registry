@@ -1,0 +1,73 @@
+{
+    "name": "CancellationInsuranceVault",
+    "structs": {},
+    "methods": [
+        {
+            "name": "create",
+            "args": [
+                { "type": "address", "name": "recipient" },
+                { "type": "address", "name": "agent" },
+                { "type": "uint64", "name": "billing_date" }
+            ],
+            "returns": { "type": "void" },
+            "actions": { "create": ["NoOp"] }
+        },
+        {
+            "name": "submit_proof",
+            "args": [
+                { "type": "byte[]", "name": "proof_hash" }
+            ],
+            "returns": { "type": "void" }
+        },
+        {
+            "name": "release_to_user",
+            "args": [],
+            "returns": { "type": "void" }
+        },
+        {
+            "name": "release_to_vendor",
+            "args": [],
+            "returns": { "type": "void" }
+        },
+        {
+            "name": "kill",
+            "args": [],
+            "returns": { "type": "void" }
+        },
+        {
+            "name": "get_status",
+            "args": [],
+            "returns": { "type": "uint64" }
+        },
+        {
+            "name": "delete",
+            "args": [],
+            "returns": { "type": "void" },
+            "actions": { "delete": ["DeleteApplication"] }
+        }
+    ],
+    "state": {
+        "schema": {
+            "global": { "ints": 2, "bytes": 4 },
+            "local": { "ints": 0, "bytes": 0 }
+        },
+        "keys": {
+            "global": {
+                "creator": { "type": "address", "desc": "User wallet" },
+                "recipient": { "type": "address", "desc": "Vendor address" },
+                "agent": { "type": "address", "desc": "Autonomous agent" },
+                "billing_date": { "type": "uint64", "desc": "Billing date unix timestamp" },
+                "proof_hash": { "type": "byte[]", "desc": "Cancellation proof hash" },
+                "status": { "type": "uint64", "desc": "0=locked 1=user 2=vendor" }
+            }
+        }
+    },
+    "source": {
+        "approval": "smart_contracts/cancellation_insurance/contract.py",
+        "clear": "smart_contracts/cancellation_insurance/contract.py"
+    },
+    "byteCode": {
+        "approval": "",
+        "clear": ""
+    }
+}

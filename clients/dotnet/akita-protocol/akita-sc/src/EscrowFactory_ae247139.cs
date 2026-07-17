@@ -261,7 +261,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.EscrowFactory_ae247139
             var lastLogBytes = result.Last();
             if (lastLogBytes.Length < 4 || lastLogBytes[0] != 21 || lastLogBytes[1] != 31 || lastLogBytes[2] != 124 || lastLogBytes[3] != 117) throw new Exception("Invalid ABI handle");
             var lastLogReturnData = lastLogBytes.Skip(4).ToArray();
-            var returnValueObj = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>();
+            var returnValueObj = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte");
             returnValueObj.Decode(lastLogReturnData);
             return returnValueObj.ToByteArray();
 
@@ -299,7 +299,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.EscrowFactory_ae247139
             var lastLogBytes = result.Last();
             if (lastLogBytes.Length < 4 || lastLogBytes[0] != 21 || lastLogBytes[1] != 31 || lastLogBytes[2] != 124 || lastLogBytes[3] != 117) throw new Exception("Invalid ABI handle");
             var lastLogReturnData = lastLogBytes.Skip(4).ToArray();
-            var returnValueObj = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>();
+            var returnValueObj = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte");
             returnValueObj.Decode(lastLogReturnData);
             return returnValueObj.ToByteArray();
 
@@ -331,7 +331,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.EscrowFactory_ae247139
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 19, 220, 80, 138 };
-            var addressesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Address>(); addressesAbi.From(addresses);
+            var addressesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Address>("address"); addressesAbi.From(addresses);
 
             var result = await base.SimApp(new List<object> { abiHandle, addressesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
             throw new Exception("Conversion not implemented"); // <unknown return conversion>
@@ -346,7 +346,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.EscrowFactory_ae247139
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 19, 220, 80, 138 };
-            var addressesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Address>(); addressesAbi.From(addresses);
+            var addressesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Address>("address"); addressesAbi.From(addresses);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, addressesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -364,7 +364,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.EscrowFactory_ae247139
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 71, 93, 55, 115 };
-            var addressesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Address>(); addressesAbi.From(addresses);
+            var addressesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Address>("address"); addressesAbi.From(addresses);
 
             var result = await base.SimApp(new List<object> { abiHandle, addressesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
             throw new Exception("Conversion not implemented"); // <unknown return conversion>
@@ -379,7 +379,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.EscrowFactory_ae247139
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 71, 93, 55, 115 };
-            var addressesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Address>(); addressesAbi.From(addresses);
+            var addressesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Address>("address"); addressesAbi.From(addresses);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, addressesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 

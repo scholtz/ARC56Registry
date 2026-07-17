@@ -1,0 +1,191 @@
+{
+    "name": "DemoContract",
+    "structs": {
+        "StructOne": [
+            {
+                "name": "x",
+                "type": "uint8"
+            },
+            {
+                "name": "y",
+                "type": "uint8"
+            }
+        ],
+        "StructTwo": [
+            {
+                "name": "x",
+                "type": "uint8"
+            },
+            {
+                "name": "y",
+                "type": "uint8"
+            }
+        ],
+        "test_cases.struct_by_name.mod.StructTwo": [
+            {
+                "name": "x",
+                "type": "uint8"
+            },
+            {
+                "name": "y",
+                "type": "uint8"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "get_one",
+            "args": [],
+            "returns": {
+                "type": "(uint8,uint8)",
+                "struct": "StructOne"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_two",
+            "args": [],
+            "returns": {
+                "type": "(uint8,uint8)",
+                "struct": "StructTwo"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_three",
+            "args": [],
+            "returns": {
+                "type": "(uint8,uint8)",
+                "struct": "test_cases.struct_by_name.mod.StructTwo"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "compare",
+            "args": [],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "\n    Verify that even though named tuples with different names but the same structure should be\n    considered 'comparable' in the type system, they should be output separately when being\n    interpreted as an arc4 Struct in an abi method\n    ",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        59,
+                        76,
+                        87,
+                        98
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        114
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        62,
+                        79,
+                        90,
+                        101
+                    ],
+                    "errorMessage": "can only call when not creating"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxCiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUwMTAxCiAgICAvLyBzdHJ1Y3RfYnlfbmFtZS9jb250cmFjdC5weToxOAogICAgLy8gY2xhc3MgRGVtb0NvbnRyYWN0KEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdAOQogICAgcHVzaGJ5dGVzcyAweDNkNjk0YjcwIDB4N2ZiMzRlOGEgMHg4YmE3YzRjMiAweDQ2ZGFkZWEzIC8vIG1ldGhvZCAiZ2V0X29uZSgpKHVpbnQ4LHVpbnQ4KSIsIG1ldGhvZCAiZ2V0X3R3bygpKHVpbnQ4LHVpbnQ4KSIsIG1ldGhvZCAiZ2V0X3RocmVlKCkodWludDgsdWludDgpIiwgbWV0aG9kICJjb21wYXJlKClib29sIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9nZXRfb25lX3JvdXRlQDMgbWFpbl9nZXRfdHdvX3JvdXRlQDQgbWFpbl9nZXRfdGhyZWVfcm91dGVANSBtYWluX2NvbXBhcmVfcm91dGVANgoKbWFpbl9hZnRlcl9pZl9lbHNlQDEzOgogICAgLy8gc3RydWN0X2J5X25hbWUvY29udHJhY3QucHk6MTgKICAgIC8vIGNsYXNzIERlbW9Db250cmFjdChBUkM0Q29udHJhY3QpOgogICAgcHVzaGludCAwIC8vIDAKICAgIHJldHVybgoKbWFpbl9jb21wYXJlX3JvdXRlQDY6CiAgICAvLyBzdHJ1Y3RfYnlfbmFtZS9jb250cmFjdC5weTo0NgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzU4MAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldF90aHJlZV9yb3V0ZUA1OgogICAgLy8gc3RydWN0X2J5X25hbWUvY29udHJhY3QucHk6MzkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NTAxMDEKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRfdHdvX3JvdXRlQDQ6CiAgICAvLyBzdHJ1Y3RfYnlfbmFtZS9jb250cmFjdC5weTozMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1MDEwMQogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldF9vbmVfcm91dGVAMzoKICAgIC8vIHN0cnVjdF9ieV9uYW1lL2NvbnRyYWN0LnB5OjI1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUwMTAxCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYmFyZV9yb3V0aW5nQDk6CiAgICAvLyBzdHJ1Y3RfYnlfbmFtZS9jb250cmFjdC5weToxOAogICAgLy8gY2xhc3MgRGVtb0NvbnRyYWN0KEFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDEzCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiABASYBBhUffHUBATEbQQBYggQEPWlLcAR/s06KBIunxMIERtreozYaAI4EACoAHwAUAAOBAEMxGRREMRhEgAUVH3x1gLAiQzEZFEQxGEQosCJDMRkURDEYRCiwIkMxGRREMRhEKLAiQzEZQP/GMRgURCJD",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 99,
+            "minor": 99,
+            "patch": 99
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

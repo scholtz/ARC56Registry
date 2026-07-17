@@ -127,7 +127,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.Poll_5fec6ae3
             var endTimeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); endTimeAbi.From(endTime);
             var maxSelectedAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); maxSelectedAbi.From(maxSelected);
             var questionAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); questionAbi.From(question);
-            var optionsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.String>(); optionsAbi.From(options);
+            var optionsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.String>("string"); optionsAbi.From(options);
             var gateIDAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); gateIDAbi.From(gateID);
 
             var result = await base.CallApp(new List<object> { abiHandle, akitaDAOAbi, typeAbi, endTimeAbi, maxSelectedAbi, funder, questionAbi, optionsAbi, gateIDAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -147,7 +147,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.Poll_5fec6ae3
             var endTimeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); endTimeAbi.From(endTime);
             var maxSelectedAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); maxSelectedAbi.From(maxSelected);
             var questionAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); questionAbi.From(question);
-            var optionsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.String>(); optionsAbi.From(options);
+            var optionsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.String>("string"); optionsAbi.From(options);
             var gateIDAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); gateIDAbi.From(gateID);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, akitaDAOAbi, typeAbi, endTimeAbi, maxSelectedAbi, funder, questionAbi, optionsAbi, gateIDAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -166,7 +166,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.Poll_5fec6ae3
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 225, 65, 144, 128 };
-            var addressesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Address>(); addressesAbi.From(addresses);
+            var addressesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Address>("address"); addressesAbi.From(addresses);
 
             var result = await base.CallApp(new List<object> { abiHandle, addressesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -180,7 +180,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.Poll_5fec6ae3
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 225, 65, 144, 128 };
-            var addressesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Address>(); addressesAbi.From(addresses);
+            var addressesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Address>("address"); addressesAbi.From(addresses);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, addressesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -230,7 +230,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.Poll_5fec6ae3
             _tx_accounts ??= new List<Address>();
             _tx_transactions.AddRange(new List<Transaction> { mbrPayment, gateTxn });
             byte[] abiHandle = { 91, 207, 145, 0 };
-            var votesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); votesAbi.From(votes);
+            var votesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); votesAbi.From(votes);
 
             var result = await base.CallApp(new List<object> { abiHandle, mbrPayment, gateTxn, votesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -245,7 +245,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.Poll_5fec6ae3
             _tx_accounts ??= new List<Address>();
             _tx_transactions.AddRange(new List<Transaction> { mbrPayment, gateTxn });
             byte[] abiHandle = { 91, 207, 145, 0 };
-            var votesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); votesAbi.From(votes);
+            var votesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); votesAbi.From(votes);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, mbrPayment, gateTxn, votesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -265,7 +265,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.Poll_5fec6ae3
             _tx_accounts ??= new List<Address>();
             _tx_transactions.AddRange(new List<Transaction> { mbrPayment });
             byte[] abiHandle = { 221, 48, 156, 123 };
-            var votesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); votesAbi.From(votes);
+            var votesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); votesAbi.From(votes);
 
             var result = await base.CallApp(new List<object> { abiHandle, mbrPayment, votesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -280,7 +280,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.Poll_5fec6ae3
             _tx_accounts ??= new List<Address>();
             _tx_transactions.AddRange(new List<Transaction> { mbrPayment });
             byte[] abiHandle = { 221, 48, 156, 123 };
-            var votesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); votesAbi.From(votes);
+            var votesAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); votesAbi.From(votes);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, mbrPayment, votesAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 

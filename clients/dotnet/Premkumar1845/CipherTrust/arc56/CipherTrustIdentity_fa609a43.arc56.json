@@ -1,0 +1,160 @@
+{
+  "name": "CipherTrustIdentity",
+  "desc": "Registers organization DIDs on Algorand. Each org gets a decentralized identifier (did:algo:<address>) linked to their metadata hash.",
+  "networks": {
+    "testnet": {
+      "appId": 0
+    },
+    "mainnet": {
+      "appId": 0
+    }
+  },
+  "arcs": [56, 4, 32],
+  "structs": {},
+  "methods": [
+    {
+      "name": "create",
+      "desc": "Initialize the contract with the deployer as admin",
+      "readonly": false,
+      "args": [],
+      "returns": {
+        "type": "bool",
+        "desc": "Success status"
+      },
+      "events": []
+    },
+    {
+      "name": "register_org",
+      "desc": "Register an organization's DID on-chain. Stores wallet_address → metadata_hash mapping.",
+      "readonly": false,
+      "args": [
+        {
+          "name": "org_name",
+          "type": "string",
+          "desc": "Name of the organization"
+        },
+        {
+          "name": "metadata_hash",
+          "type": "string",
+          "desc": "SHA-256 hash of organization metadata JSON"
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "desc": "DID string (did:algo:<wallet_address>)"
+      },
+      "events": []
+    },
+    {
+      "name": "get_org_info",
+      "desc": "Retrieve metadata hash for a registered organization",
+      "readonly": true,
+      "args": [
+        {
+          "name": "wallet_address",
+          "type": "address",
+          "desc": "Algorand address of the organization"
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "desc": "Metadata hash"
+      },
+      "events": []
+    },
+    {
+      "name": "update_metadata",
+      "desc": "Allow an org to update their metadata hash",
+      "readonly": false,
+      "args": [
+        {
+          "name": "new_metadata_hash",
+          "type": "string",
+          "desc": "New metadata hash"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "desc": "Success status"
+      },
+      "events": []
+    },
+    {
+      "name": "get_org_count",
+      "desc": "Get total number of registered organizations",
+      "readonly": true,
+      "args": [],
+      "returns": {
+        "type": "uint64",
+        "desc": "Total organization count"
+      },
+      "events": []
+    }
+  ],
+  "state": {
+    "schema": {
+      "global": {
+        "ints": 1,
+        "bytes": 1
+      },
+      "local": {
+        "ints": 0,
+        "bytes": 0
+      }
+    },
+    "keys": {
+      "global": {
+        "org_count": {
+          "key": "org_count",
+          "keyType": "string",
+          "valueType": "uint64",
+          "desc": "Total orgs registered"
+        },
+        "admin": {
+          "key": "admin",
+          "keyType": "string",
+          "valueType": "address",
+          "desc": "Contract admin address"
+        }
+      },
+      "local": {},
+      "box": {
+        "org_registry": {
+          "keyType": "string",
+          "valueType": "string",
+          "desc": "Box mapping: wallet_address → metadata_hash"
+        }
+      }
+    }
+  },
+  "bareActions": {
+    "create": ["NoOp"],
+    "call": []
+  },
+  "sourceInfo": {
+    "approval": {
+      "sourceInfo": []
+    },
+    "clear": {
+      "sourceInfo": []
+    }
+  },
+  "source": {
+    "approval": "",
+    "clear": ""
+  },
+  "byteCode": {
+    "approval": "",
+    "clear": ""
+  },
+  "compilerInfo": {
+    "compiler": "beaker",
+    "compilerVersion": {
+      "major": 1,
+      "minor": 1,
+      "patch": 1
+    }
+  },
+  "events": [],
+  "templateVariables": {}
+}

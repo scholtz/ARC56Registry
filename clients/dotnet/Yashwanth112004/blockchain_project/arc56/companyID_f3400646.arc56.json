@@ -1,0 +1,118 @@
+{
+    "name": "companyID",
+    "structs": {},
+    "methods": [
+        {
+            "name": "companyhashCode",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "wallet"
+                },
+                {
+                    "type": "string",
+                    "name": "companyname"
+                }
+            ],
+            "returns": {
+                "type": "byte[]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        41
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp && can only call when creating"
+                },
+                {
+                    "pc": [
+                        30
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp && can only call when not creating"
+                },
+                {
+                    "pc": [
+                        54,
+                        67
+                    ],
+                    "errorMessage": "invalid number of bytes for (len+utf8[])"
+                },
+                {
+                    "pc": [
+                        81
+                    ],
+                    "errorMessage": "max array length exceeded"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDIKICAgIC8vIGhlbGxvX3dvcmxkL2NvbnRyYWN0LnB5OjEyCiAgICAvLyBjbGFzcyBjb21wYW55SUQoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDUKICAgIHB1c2hieXRlcyAweDJmMzVlYTRkIC8vIG1ldGhvZCAiY29tcGFueWhhc2hDb2RlKHN0cmluZyxzdHJpbmcpYnl0ZVtdIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jb21wYW55aGFzaENvZGVfcm91dGVAMwogICAgZXJyCgptYWluX2NvbXBhbnloYXNoQ29kZV9yb3V0ZUAzOgogICAgLy8gaGVsbG9fd29ybGQvY29udHJhY3QucHk6MTMKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcCAmJiBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBiIGNvbXBhbnloYXNoQ29kZQoKbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA1OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4gLy8gb24gZXJyb3I6IE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AgJiYgY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCgoKLy8gc21hcnRfY29udHJhY3RzLmhlbGxvX3dvcmxkLmNvbnRyYWN0LmNvbXBhbnlJRC5jb21wYW55aGFzaENvZGVbcm91dGluZ10oKSAtPiB2b2lkOgpjb21wYW55aGFzaENvZGU6CiAgICAvLyBoZWxsb193b3JsZC9jb250cmFjdC5weToxMwogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIChsZW4rdXRmOFtdKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciAobGVuK3V0ZjhbXSkKICAgIC8vIGhlbGxvX3dvcmxkL2NvbnRyYWN0LnB5OjE1CiAgICAvLyBpbnB1dF9ieXRlcyA9IHdhbGxldC5ieXRlcyArIGNvbXBhbnluYW1lLmJ5dGVzCiAgICBjb25jYXQKICAgIC8vIGhlbGxvX3dvcmxkL2NvbnRyYWN0LnB5OjE2CiAgICAvLyBjb2RlID0gc2hhMjU2KGlucHV0X2J5dGVzKQogICAgc2hhMjU2CiAgICAvLyBoZWxsb193b3JsZC9jb250cmFjdC5weToxNwogICAgLy8gcGFydDEgPSBhcmM0LkR5bmFtaWNCeXRlcy5mcm9tX2J5dGVzKGV4dHJhY3QoY29kZSwgNywgNSkpCiAgICBkdXAKICAgIGV4dHJhY3QgNyA1CiAgICAvLyBoZWxsb193b3JsZC9jb250cmFjdC5weToxOAogICAgLy8gcGFydDIgPSBhcmM0LkR5bmFtaWNCeXRlcy5mcm9tX2J5dGVzKGV4dHJhY3QoY29kZSwgMTYsIDMpKQogICAgc3dhcAogICAgZXh0cmFjdCAxNiAzCiAgICAvLyBoZWxsb193b3JsZC9jb250cmFjdC5weToxOQogICAgLy8gcmVzID0gcGFydDEgKyBwYXJ0MgogICAgZXh0cmFjdCAyIDAKICAgIGNvbmNhdCAvLyBvbiBlcnJvcjogbWF4IGFycmF5IGxlbmd0aCBleGNlZWRlZAogICAgZHVwCiAgICBleHRyYWN0IDIgMAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgcmVwbGFjZTIgMAogICAgLy8gaGVsbG9fd29ybGQvY29udHJhY3QucHk6MTMKICAgIC8vIEBhYmltZXRob2QoKQogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CyACAAIxG0EAGIAELzXqTTYaAI4BAAEAMRkUMRgQREIACDEZFDEYFBBDNhoBSSJZIwhLARUSRDYaAkkiWSMISwEVEkRQAUlXBwVMVxADVwIAUElXAgAVFlcGAlwAgAQVH3x1TFCwgQFD",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 2,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

@@ -1,0 +1,247 @@
+{
+    "name": "DSGuard",
+    "structs": {},
+    "methods": [
+        {
+            "name": "owner",
+            "args": [],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "canCall",
+            "args": [
+                {
+                    "type": "byte[32]",
+                    "name": "src"
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "dst"
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "sig"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@notice Check if src can call dst with sig, checking all wildcard combinations",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getAcl",
+            "args": [
+                {
+                    "type": "byte[32]",
+                    "name": "src"
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "dst"
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "sig"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@notice Read a specific ACL entry without wildcard expansion",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "permit",
+            "args": [
+                {
+                    "type": "byte[32]",
+                    "name": "src"
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "dst"
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "sig"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@notice Grant permission for src to call dst with sig",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "forbid",
+            "args": [
+                {
+                    "type": "byte[32]",
+                    "name": "src"
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "dst"
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "sig"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@notice Revoke permission for src to call dst with sig",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "@notice Simple whitelist implementation of DSAuthority \u2014 3D Access Control List\n @author DappHub (https://github.com/dapphub/ds-guard/blob/master/src/guard.sol)\n @dev Modifications for AVM: inlined DSAuth (simplified to owner-only), removed\n      DSGuardFactory, added explicit getters. Uses bytes32 for all ACL dimensions\n      (original used bytes4 for sig, but bytes32 needed for ANY wildcard constant).\n The ACL maps (src, dst, sig) \u2192 bool, where ANY (all 1s) is a wildcard.\n canCall checks all 8 combinations of specific/ANY for each dimension.",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "_owner": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "X293bmVy"
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "_acl": {
+                    "keyType": "AVMBytes",
+                    "valueType": "uint64",
+                    "prefix": "X2FjbA=="
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        194,
+                        529,
+                        582
+                    ],
+                    "errorMessage": "check _owner exists"
+                },
+                {
+                    "pc": [
+                        531,
+                        584
+                    ],
+                    "errorMessage": "ds-guard-auth-unauthorized"
+                },
+                {
+                    "pc": [
+                        210,
+                        221,
+                        232,
+                        453,
+                        461,
+                        469,
+                        507,
+                        515,
+                        523,
+                        560,
+                        568,
+                        576
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvZGFwcGh1Yi1kc2d1YXJkL2NvbnRyYWN0cy9EU0d1YXJkLnNvbC5EU0d1YXJkLmFwcHJvdmFsX3Byb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAzMiAxCiAgICBieXRlY2Jsb2NrICJfYWNsIiAiX293bmVyIiAweGZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmYgMHgxNTFmN2M3NSAweGZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICBieXRlY18xIC8vICJfb3duZXIiCiAgICB0eG4gU2VuZGVyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgcHVzaGJ5dGVzIDB4OGJlMDA3OWMKICAgIGxvZwogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHhiMWJiYjBhOCAweGZlMjM4Y2VmIDB4ODQ2ZjgyMzcgMHgxNTU5Y2VmZSAweDczOWExYzIzIC8vIG1ldGhvZCAib3duZXIoKWFkZHJlc3MiLCBtZXRob2QgImNhbkNhbGwoYnl0ZVszMl0sYnl0ZVszMl0sYnl0ZVszMl0pYm9vbCIsIG1ldGhvZCAiZ2V0QWNsKGJ5dGVbMzJdLGJ5dGVbMzJdLGJ5dGVbMzJdKWJvb2wiLCBtZXRob2QgInBlcm1pdChieXRlWzMyXSxieXRlWzMyXSxieXRlWzMyXSl2b2lkIiwgbWV0aG9kICJmb3JiaWQoYnl0ZVszMl0sYnl0ZVszMl0sYnl0ZVszMl0pdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG93bmVyIGNhbkNhbGwgZ2V0QWNsIHBlcm1pdCBmb3JiaWQKICAgIGVycgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9kYXBwaHViLWRzZ3VhcmQvY29udHJhY3RzL0RTR3VhcmQuc29sLkRTR3VhcmQub3duZXJbcm91dGluZ10oKSAtPiB2b2lkOgpvd25lcjoKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJfb3duZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIF9vd25lciBleGlzdHMKICAgIGJ5dGVjXzMgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMiAvLyAxCiAgICByZXR1cm4KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvZGFwcGh1Yi1kc2d1YXJkL2NvbnRyYWN0cy9EU0d1YXJkLnNvbC5EU0d1YXJkLmNhbkNhbGxbcm91dGluZ10oKSAtPiB2b2lkOgpjYW5DYWxsOgogICAgaW50Y18wIC8vIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cG4gMgogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBjb3ZlciAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cAogICAgY292ZXIgMwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBjb3ZlciAyCiAgICBjb25jYXQKICAgIGR1cAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIHNoYTI1NgogICAgYnl0ZWNfMCAvLyAiX2FjbCIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYm94X2dldAogICAgc3dhcAogICAgYnRvaQogICAgaW50Y18wIC8vIDAKICAgIHN3YXAKICAgIHVuY292ZXIgMgogICAgc2VsZWN0CiAgICBibnogY2FuQ2FsbF9ib29sX3RydWVAOQogICAgZHVwCiAgICBieXRlY18yIC8vIDB4ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZgogICAgY29uY2F0CiAgICBzaGEyNTYKICAgIGJ5dGVjXzAgLy8gIl9hY2wiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJveF9nZXQKICAgIHN3YXAKICAgIGJ0b2kKICAgIGludGNfMCAvLyAwCiAgICBzd2FwCiAgICB1bmNvdmVyIDIKICAgIHNlbGVjdAogICAgYm56IGNhbkNhbGxfYm9vbF90cnVlQDkKICAgIGRpZyAzCiAgICBieXRlY18yIC8vIDB4ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZgogICAgY29uY2F0CiAgICBkaWcgMgogICAgY29uY2F0CiAgICBzaGEyNTYKICAgIGJ5dGVjXzAgLy8gIl9hY2wiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJveF9nZXQKICAgIHN3YXAKICAgIGJ0b2kKICAgIGludGNfMCAvLyAwCiAgICBzd2FwCiAgICB1bmNvdmVyIDIKICAgIHNlbGVjdAogICAgYm56IGNhbkNhbGxfYm9vbF90cnVlQDkKICAgIGRpZyAzCiAgICBieXRlYyA0IC8vIDB4ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmYKICAgIGNvbmNhdAogICAgc2hhMjU2CiAgICBieXRlY18wIC8vICJfYWNsIgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBzd2FwCiAgICBidG9pCiAgICBpbnRjXzAgLy8gMAogICAgc3dhcAogICAgdW5jb3ZlciAyCiAgICBzZWxlY3QKICAgIGJueiBjYW5DYWxsX2Jvb2xfdHJ1ZUA5CiAgICBieXRlY18yIC8vIDB4ZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZgogICAgZGlnIDMKICAgIGNvbmNhdAogICAgZHVwCiAgICBidXJ5IDYKICAgIGRpZyAyCiAgICBjb25jYXQKICAgIHNoYTI1NgogICAgYnl0ZWNfMCAvLyAiX2FjbCIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYm94X2dldAogICAgc3dhcAogICAgYnRvaQogICAgaW50Y18wIC8vIDAKICAgIHN3YXAKICAgIHVuY292ZXIgMgogICAgc2VsZWN0CiAgICBibnogY2FuQ2FsbF9ib29sX3RydWVAOQogICAgZGlnIDQKICAgIGJ5dGVjXzIgLy8gMHhmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmCiAgICBjb25jYXQKICAgIHNoYTI1NgogICAgYnl0ZWNfMCAvLyAiX2FjbCIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYm94X2dldAogICAgc3dhcAogICAgYnRvaQogICAgaW50Y18wIC8vIDAKICAgIHN3YXAKICAgIHVuY292ZXIgMgogICAgc2VsZWN0CiAgICBibnogY2FuQ2FsbF9ib29sX3RydWVAOQogICAgYnl0ZWMgNCAvLyAweGZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmCiAgICBkaWcgMgogICAgY29uY2F0CiAgICBzaGEyNTYKICAgIGJ5dGVjXzAgLy8gIl9hY2wiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJveF9nZXQKICAgIHN3YXAKICAgIGJ0b2kKICAgIGludGNfMCAvLyAwCiAgICBzd2FwCiAgICB1bmNvdmVyIDIKICAgIHNlbGVjdAogICAgYm56IGNhbkNhbGxfYm9vbF90cnVlQDkKICAgIHB1c2hieXRlcyAweDVmNjE2MzZjY2U2NTYwOWNjNTY0Y2UzZDhjYjcyZDQ2YmM0NGNkNTQ5NWFmYmFkN2JjNjFiNWVkZmEwNzk5YmFhNTA2MzE5MQogICAgYm94X2dldAogICAgc3dhcAogICAgYnRvaQogICAgaW50Y18wIC8vIDAKICAgIHN3YXAKICAgIHVuY292ZXIgMgogICAgc2VsZWN0CiAgICBieiBjYW5DYWxsX2Jvb2xfZmFsc2VAMTAKCmNhbkNhbGxfYm9vbF90cnVlQDk6CiAgICBpbnRjXzIgLy8gMQoKY2FuQ2FsbF9ib29sX21lcmdlQDExOgogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGludGNfMCAvLyAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgoKY2FuQ2FsbF9ib29sX2ZhbHNlQDEwOgogICAgaW50Y18wIC8vIDAKICAgIGIgY2FuQ2FsbF9ib29sX21lcmdlQDExCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL2RhcHBodWItZHNndWFyZC9jb250cmFjdHMvRFNHdWFyZC5zb2wuRFNHdWFyZC5nZXRBY2xbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRBY2w6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBjb3ZlciAyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgc2hhMjU2CiAgICBieXRlY18wIC8vICJfYWNsIgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfZ2V0CiAgICBzd2FwCiAgICBidG9pCiAgICBpbnRjXzAgLy8gMAogICAgc3dhcAogICAgdW5jb3ZlciAyCiAgICBzZWxlY3QKICAgIHB1c2hieXRlcyAweDAwCiAgICBpbnRjXzAgLy8gMAogICAgdW5jb3ZlciAyCiAgICBzZXRiaXQKICAgIGJ5dGVjXzMgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMiAvLyAxCiAgICByZXR1cm4KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvZGFwcGh1Yi1kc2d1YXJkL2NvbnRyYWN0cy9EU0d1YXJkLnNvbC5EU0d1YXJkLnBlcm1pdFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnBlcm1pdDoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJfb3duZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIF9vd25lciBleGlzdHMKICAgID09CiAgICBhc3NlcnQgLy8gZHMtZ3VhcmQtYXV0aC11bmF1dGhvcml6ZWQKICAgIGNvdmVyIDIKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBzaGEyNTYKICAgIGJ5dGVjXzAgLy8gIl9hY2wiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGludGNfMiAvLyAxCiAgICBpdG9iCiAgICBib3hfcHV0CiAgICBwdXNoYnl0ZXMgMHg2ZjUwMzc1MAogICAgbG9nCiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL2RhcHBodWItZHNndWFyZC9jb250cmFjdHMvRFNHdWFyZC5zb2wuRFNHdWFyZC5mb3JiaWRbcm91dGluZ10oKSAtPiB2b2lkOgpmb3JiaWQ6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAiX293bmVyIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBfb3duZXIgZXhpc3RzCiAgICA9PQogICAgYXNzZXJ0IC8vIGRzLWd1YXJkLWF1dGgtdW5hdXRob3JpemVkCiAgICBjb3ZlciAyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgc2hhMjU2CiAgICBieXRlY18wIC8vICJfYWNsIgogICAgc3dhcAogICAgY29uY2F0CiAgICBpbnRjXzAgLy8gMAogICAgaXRvYgogICAgYm94X3B1dAogICAgcHVzaGJ5dGVzIDB4OTViYTY0YzkKICAgIGxvZwogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvZGFwcGh1Yi1kc2d1YXJkL2NvbnRyYWN0cy9EU0d1YXJkLnNvbC5EU0d1YXJkLmNsZWFyX3N0YXRlX3Byb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="
+    },
+    "byteCode": {
+        "approval": "CiADACABJgUEX2FjbAZfb3duZXIg//////////////////////////////////////////8EFR98dUD/////////////////////////////////////////////////////////////////////////////////////MRhAAA0pMQBngASL4AecsCRDMRkURDEYRIIFBLG7sKgE/iOM7wSEb4I3BBVZzv4Ec5ocIzYaAI4FAAEACwEAATYBawAiKWVEK0xQsCRDIjYaAUcCFSMSRDYaAklOAkkVIxJENhoDSU4DSRUjEkROAlBJTwJQAShMUL5MFyJMTwJNQACtSSpQAShMUL5MFyJMTwJNQACbSwMqUEsCUAEoTFC+TBciTE8CTUAAhUsDJwRQAShMUL5MFyJMTwJNQABxKksDUElFBksCUAEoTFC+TBciTE8CTUAAWEsEKlABKExQvkwXIkxPAk1AAEUnBEsCUAEoTFC+TBciTE8CTUAAMYAkX2FjbM5lYJzFZM49jLctRrxEzVSVr7rXvGG17foHmbqlBjGRvkwXIkxPAk1BAA4kgAEAIk8CVCtMULAkQyJC/+82GgFJFSMSRDYaAkkVIxJENhoDSRUjEkROAlBMUAEoTFC+TBciTE8CTYABACJPAlQrTFCwJEM2GgFJFSMSRDYaAkkVIxJENhoDSRUjEkQxACIpZUQSRE4CUExQAShMUCQWv4AEb1A3ULAkQzYaAUkVIxJENhoCSRUjEkQ2GgNJFSMSRDEAIillRBJETgJQTFABKExQIha/gASVumTJsCRD",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

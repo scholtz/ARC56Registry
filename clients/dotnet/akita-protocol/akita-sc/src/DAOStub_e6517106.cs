@@ -43,7 +43,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.DAOStub_e6517106
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 44, 47, 81, 195 };
-            var leaseAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); leaseAbi.From(lease);
+            var leaseAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); leaseAbi.From(lease);
             var appBeingUpgradedAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); appBeingUpgradedAbi.From(appBeingUpgraded);
 
             var result = await base.CallApp(new List<object> { abiHandle, leaseAbi, appBeingUpgradedAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -64,7 +64,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.DAOStub_e6517106
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 44, 47, 81, 195 };
-            var leaseAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); leaseAbi.From(lease);
+            var leaseAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); leaseAbi.From(lease);
             var appBeingUpgradedAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); appBeingUpgradedAbi.From(appBeingUpgraded);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, leaseAbi, appBeingUpgradedAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);

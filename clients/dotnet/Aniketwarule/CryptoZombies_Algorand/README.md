@@ -26,10 +26,10 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Aniketwarule.CryptoZombies_Algorand.ZombiesContract_c6093e7b;
+using Arc56.Generated.Aniketwarule.CryptoZombies_Algorand.AlgoZombiesContract_0b09c6f3;
 
 var algod = new DefaultApi(httpClient); // configure with your algod endpoint
-var client = new ZombiesContractProxy(algod, appId: 123456789);
+var client = new AlgoZombiesContractProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -39,7 +39,7 @@ var client = new ZombiesContractProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| `Arc56.Generated.Aniketwarule.CryptoZombies_Algorand.AlgoZombiesContract_0b09c6f3` | _(fails to compile - excluded, see state.json)_ | [https://raw.githubusercontent.com/Aniketwarule/CryptoZombies_Algorand/HEAD/projects/algoZombiesSetup-contracts/smart_contracts/artifacts/zombies_contract/AlgoZombiesContract.arc56.json](https://raw.githubusercontent.com/Aniketwarule/CryptoZombies_Algorand/HEAD/projects/algoZombiesSetup-contracts/smart_contracts/artifacts/zombies_contract/AlgoZombiesContract.arc56.json) |
+| `Arc56.Generated.Aniketwarule.CryptoZombies_Algorand.AlgoZombiesContract_0b09c6f3` | `AlgoZombiesContractProxy` | [https://raw.githubusercontent.com/Aniketwarule/CryptoZombies_Algorand/HEAD/projects/algoZombiesSetup-contracts/smart_contracts/artifacts/zombies_contract/AlgoZombiesContract.arc56.json](https://raw.githubusercontent.com/Aniketwarule/CryptoZombies_Algorand/HEAD/projects/algoZombiesSetup-contracts/smart_contracts/artifacts/zombies_contract/AlgoZombiesContract.arc56.json) |
 | `Arc56.Generated.Aniketwarule.CryptoZombies_Algorand.ZombiesContract_c6093e7b` | `ZombiesContractProxy` | [https://raw.githubusercontent.com/Aniketwarule/CryptoZombies_Algorand/HEAD/projects/algoZombiesSetup-contracts/smart_contracts/artifacts/zombies_contract/ZombiesContract.arc56.json](https://raw.githubusercontent.com/Aniketwarule/CryptoZombies_Algorand/HEAD/projects/algoZombiesSetup-contracts/smart_contracts/artifacts/zombies_contract/ZombiesContract.arc56.json) |
 
 ## Versioning

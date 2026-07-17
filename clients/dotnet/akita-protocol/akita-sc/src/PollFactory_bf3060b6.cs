@@ -173,7 +173,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.PollFactory_bf3060b6
             var endTimeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); endTimeAbi.From(endTime);
             var maxSelectedAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); maxSelectedAbi.From(maxSelected);
             var questionAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); questionAbi.From(question);
-            var optionsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.String>(); optionsAbi.From(options);
+            var optionsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.String>("string"); optionsAbi.From(options);
             var gateIDAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); gateIDAbi.From(gateID);
 
             var result = await base.CallApp(new List<object> { abiHandle, payment, typeAbi, endTimeAbi, maxSelectedAbi, questionAbi, optionsAbi, gateIDAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -199,7 +199,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.PollFactory_bf3060b6
             var endTimeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); endTimeAbi.From(endTime);
             var maxSelectedAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); maxSelectedAbi.From(maxSelected);
             var questionAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); questionAbi.From(question);
-            var optionsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.String>(); optionsAbi.From(options);
+            var optionsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.String>("string"); optionsAbi.From(options);
             var gateIDAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); gateIDAbi.From(gateID);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, payment, typeAbi, endTimeAbi, maxSelectedAbi, questionAbi, optionsAbi, gateIDAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -322,7 +322,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.PollFactory_bf3060b6
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 220, 162, 216, 98 };
             var offsetAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); offsetAbi.From(offset);
-            var dataAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); dataAbi.From(data);
+            var dataAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); dataAbi.From(data);
 
             var result = await base.CallApp(new List<object> { abiHandle, offsetAbi, dataAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -337,7 +337,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.PollFactory_bf3060b6
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 220, 162, 216, 98 };
             var offsetAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); offsetAbi.From(offset);
-            var dataAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(); dataAbi.From(data);
+            var dataAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>("byte"); dataAbi.From(data);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, offsetAbi, dataAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 

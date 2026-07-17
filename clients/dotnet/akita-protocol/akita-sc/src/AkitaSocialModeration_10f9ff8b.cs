@@ -344,7 +344,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaSocialModeration_10f9ff8b
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 97, 220, 210, 239 };
-            var refAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); refAbi.From(@ref);
+            var refAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); refAbi.From(@ref);
 
             var result = await base.CallApp(new List<object> { abiHandle, refAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -358,7 +358,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaSocialModeration_10f9ff8b
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 97, 220, 210, 239 };
-            var refAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); refAbi.From(@ref);
+            var refAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); refAbi.From(@ref);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, refAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -376,7 +376,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaSocialModeration_10f9ff8b
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 121, 96, 234, 118 };
-            var refAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); refAbi.From(@ref);
+            var refAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); refAbi.From(@ref);
 
             var result = await base.CallApp(new List<object> { abiHandle, refAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -390,7 +390,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaSocialModeration_10f9ff8b
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 121, 96, 234, 118 };
-            var refAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); refAbi.From(@ref);
+            var refAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); refAbi.From(@ref);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, refAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -409,7 +409,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaSocialModeration_10f9ff8b
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 251, 244, 221, 53 };
-            var refAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); refAbi.From(@ref);
+            var refAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); refAbi.From(@ref);
             var flagsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); flagsAbi.From(flags);
 
             var result = await base.CallApp(new List<object> { abiHandle, refAbi, flagsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -424,7 +424,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaSocialModeration_10f9ff8b
             _tx_apps ??= new List<ulong>();
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 251, 244, 221, 53 };
-            var refAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32); refAbi.From(@ref);
+            var refAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(32, "byte"); refAbi.From(@ref);
             var flagsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); flagsAbi.From(flags);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, refAbi, flagsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -445,7 +445,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaSocialModeration_10f9ff8b
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 218, 106, 220, 217 };
             var actionAppIDAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); actionAppIDAbi.From(actionAppID);
-            var contentAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(36); contentAbi.From(content);
+            var contentAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(36, "byte"); contentAbi.From(content);
 
             var result = await base.CallApp(new List<object> { abiHandle, actionAppIDAbi, contentAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 
@@ -460,7 +460,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AkitaSocialModeration_10f9ff8b
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 218, 106, 220, 217 };
             var actionAppIDAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); actionAppIDAbi.From(actionAppID);
-            var contentAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(36); contentAbi.From(content);
+            var contentAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(36, "byte"); contentAbi.From(content);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, actionAppIDAbi, contentAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 

@@ -1,0 +1,412 @@
+{
+    "name": "KYCRegistry",
+    "structs": {
+        "KYCRecord": [
+            {
+                "name": "kyc_tier",
+                "type": "uint8"
+            },
+            {
+                "name": "role",
+                "type": "uint8"
+            },
+            {
+                "name": "verified_at",
+                "type": "uint64"
+            },
+            {
+                "name": "kyc_hash",
+                "type": "byte[32]"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "create",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "admin"
+                },
+                {
+                    "type": "address",
+                    "name": "oracle"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [
+                    "NoOp"
+                ],
+                "call": []
+            },
+            "readonly": false,
+            "desc": "Initialize the contract. Called once at deployment.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "register",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "address"
+                },
+                {
+                    "type": "uint8",
+                    "name": "role"
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "kyc_hash"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Register or update a KYC record. Oracle-only.\nThe caller must include a payment transaction covering the box MBR if this is a new registration (box doesn't exist yet).",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "update_tier",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "address"
+                },
+                {
+                    "type": "uint8",
+                    "name": "new_tier"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Upgrade KYC tier (e.g., basic \u2192 enhanced). Oracle-only.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "revoke",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "address"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Revoke KYC for an address. Admin-only.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "set_oracle",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "new_oracle"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Update the oracle address. Admin-only.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "is_verified",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "address"
+                }
+            ],
+            "returns": {
+                "type": "bool"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Check if an address has a valid KYC record.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_record",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "address"
+                }
+            ],
+            "returns": {
+                "type": "(uint8,uint8,uint64,byte[32])",
+                "struct": "KYCRecord"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Get the full KYC record for an address. Reverts if not found.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_role",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "address"
+                }
+            ],
+            "returns": {
+                "type": "uint8"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Get the role for an address. Returns 0 if not registered.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_stats",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Return the total number of verified accounts.",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "\n    On-chain KYC status registry.\n\n    Access control:\n        - register / update_tier: oracle only\n        - revoke: admin only\n        - is_verified / get_record: anyone (read-only)\n    ",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 1,
+                "bytes": 2
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "admin": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "YWRtaW4="
+                },
+                "oracle": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "b3JhY2xl"
+                },
+                "total_verified": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "dG90YWxfdmVyaWZpZWQ="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "records": {
+                    "keyType": "address",
+                    "valueType": "KYCRecord",
+                    "prefix": "a3ljXw=="
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        287,
+                        318,
+                        396
+                    ],
+                    "errorMessage": "address not registered"
+                },
+                {
+                    "pc": [
+                        308,
+                        346
+                    ],
+                    "errorMessage": "check self.admin exists"
+                },
+                {
+                    "pc": [
+                        194,
+                        276
+                    ],
+                    "errorMessage": "check self.oracle exists"
+                },
+                {
+                    "pc": [
+                        425
+                    ],
+                    "errorMessage": "check self.records entry exists"
+                },
+                {
+                    "pc": [
+                        243,
+                        324,
+                        444
+                    ],
+                    "errorMessage": "check self.total_verified exists"
+                },
+                {
+                    "pc": [
+                        291
+                    ],
+                    "errorMessage": "index out of bounds"
+                },
+                {
+                    "pc": [
+                        140,
+                        148,
+                        169,
+                        188,
+                        262,
+                        301,
+                        339,
+                        361,
+                        388,
+                        412
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        178,
+                        270
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint8"
+                },
+                {
+                    "pc": [
+                        210
+                    ],
+                    "errorMessage": "invalid role"
+                },
+                {
+                    "pc": [
+                        310
+                    ],
+                    "errorMessage": "only admin can revoke"
+                },
+                {
+                    "pc": [
+                        348
+                    ],
+                    "errorMessage": "only admin can set oracle"
+                },
+                {
+                    "pc": [
+                        196
+                    ],
+                    "errorMessage": "only oracle can register"
+                },
+                {
+                    "pc": [
+                        278
+                    ],
+                    "errorMessage": "only oracle can update tier"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAgMzIKICAgIGJ5dGVjYmxvY2sgInRvdGFsX3ZlcmlmaWVkIiAweDZiNzk2MzVmICJvcmFjbGUiIDB4MTUxZjdjNzUgImFkbWluIgogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjU1CiAgICAvLyBjbGFzcyBLWUNSZWdpc3RyeShBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEAxNAogICAgcHVzaGJ5dGVzcyAweGY3NTcwNTQ3IDB4MDJlZmI0YzkgMHgyMzgzMTU5NyAweDMzNjhmNTU2IDB4MzY2MTQ3ZmMgMHgzNjg1MDQ3MiAweDE3ZGQ1ZmRmIDB4ZjJlYjI5MzYgLy8gbWV0aG9kICJyZWdpc3RlcihhZGRyZXNzLHVpbnQ4LGJ5dGVbMzJdKXZvaWQiLCBtZXRob2QgInVwZGF0ZV90aWVyKGFkZHJlc3MsdWludDgpdm9pZCIsIG1ldGhvZCAicmV2b2tlKGFkZHJlc3Mpdm9pZCIsIG1ldGhvZCAic2V0X29yYWNsZShhZGRyZXNzKXZvaWQiLCBtZXRob2QgImlzX3ZlcmlmaWVkKGFkZHJlc3MpYm9vbCIsIG1ldGhvZCAiZ2V0X3JlY29yZChhZGRyZXNzKSh1aW50OCx1aW50OCx1aW50NjQsYnl0ZVszMl0pIiwgbWV0aG9kICJnZXRfcm9sZShhZGRyZXNzKXVpbnQ4IiwgbWV0aG9kICJnZXRfc3RhdHMoKXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHJlZ2lzdGVyIHVwZGF0ZV90aWVyIHJldm9rZSBzZXRfb3JhY2xlIGlzX3ZlcmlmaWVkIGdldF9yZWNvcmQgZ2V0X3JvbGUgZ2V0X3N0YXRzCiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BAMTQ6CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6NTUKICAgIC8vIGNsYXNzIEtZQ1JlZ2lzdHJ5KEFSQzRDb250cmFjdCk6CiAgICBwdXNoYnl0ZXMgMHg4YTk2OTgwZSAvLyBtZXRob2QgImNyZWF0ZShhZGRyZXNzLGFkZHJlc3Mpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGNyZWF0ZQogICAgZXJyCgoKLy8gY2FkZW5jaWEua3ljX3JlZ2lzdHJ5LktZQ1JlZ2lzdHJ5LmNyZWF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZToKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weTo3NwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjgwCiAgICAvLyBzZWxmLmFkbWluLnZhbHVlID0gYWRtaW4KICAgIGJ5dGVjIDQgLy8gImFkbWluIgogICAgdW5jb3ZlciAyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjgxCiAgICAvLyBzZWxmLm9yYWNsZS52YWx1ZSA9IG9yYWNsZQogICAgYnl0ZWNfMiAvLyAib3JhY2xlIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weTo4MgogICAgLy8gc2VsZi50b3RhbF92ZXJpZmllZC52YWx1ZSA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMCAvLyAidG90YWxfdmVyaWZpZWQiCiAgICBpbnRjXzEgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weTo3NwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gY2FkZW5jaWEua3ljX3JlZ2lzdHJ5LktZQ1JlZ2lzdHJ5LnJlZ2lzdGVyW3JvdXRpbmddKCkgLT4gdm9pZDoKcmVnaXN0ZXI6CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6ODQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXBuIDIKICAgIGxlbgogICAgaW50Y18wIC8vIDEKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDgKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cAogICAgY292ZXIgMgogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5Ojk3CiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBzZWxmLm9yYWNsZS52YWx1ZSwgIm9ubHkgb3JhY2xlIGNhbiByZWdpc3RlciIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18yIC8vICJvcmFjbGUiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYub3JhY2xlIGV4aXN0cwogICAgPT0KICAgIGFzc2VydCAvLyBvbmx5IG9yYWNsZSBjYW4gcmVnaXN0ZXIKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weTo5OQogICAgLy8gcm9sZV92YWwgPSByb2xlLm5hdGl2ZQogICAgYnRvaQogICAgZHVwCiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTAwCiAgICAvLyBhc3NlcnQgcm9sZV92YWwgPj0gMSBhbmQgcm9sZV92YWwgPD0gMywgImludmFsaWQgcm9sZSIKICAgIGJ6IHJlZ2lzdGVyX2Jvb2xfZmFsc2VANAogICAgZHVwCiAgICBwdXNoaW50IDMKICAgIDw9CiAgICBieiByZWdpc3Rlcl9ib29sX2ZhbHNlQDQKICAgIGludGNfMCAvLyAxCgpyZWdpc3Rlcl9ib29sX21lcmdlQDU6CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTAwCiAgICAvLyBhc3NlcnQgcm9sZV92YWwgPj0gMSBhbmQgcm9sZV92YWwgPD0gMywgImludmFsaWQgcm9sZSIKICAgIGFzc2VydCAvLyBpbnZhbGlkIHJvbGUKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxMDUKICAgIC8vIHZlcmlmaWVkX2F0PWFyYzQuVUludDY0KEdsb2JhbC5yb3VuZCksCiAgICBnbG9iYWwgUm91bmQKICAgIGl0b2IKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxMDMKICAgIC8vIGt5Y190aWVyPWFyYzQuVUludDgoMSksICAjIFRJRVJfQkFTSUMgZm9yIE1WUAogICAgcHVzaGJ5dGVzIDB4MDEKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxMDItMTA3CiAgICAvLyByZWNvcmQgPSBLWUNSZWNvcmQoCiAgICAvLyAgICAga3ljX3RpZXI9YXJjNC5VSW50OCgxKSwgICMgVElFUl9CQVNJQyBmb3IgTVZQCiAgICAvLyAgICAgcm9sZT1yb2xlLAogICAgLy8gICAgIHZlcmlmaWVkX2F0PWFyYzQuVUludDY0KEdsb2JhbC5yb3VuZCksCiAgICAvLyAgICAga3ljX2hhc2g9a3ljX2hhc2guY29weSgpLAogICAgLy8gKQogICAgZGlnIDQKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBkaWcgMgogICAgY29uY2F0CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTA5CiAgICAvLyBpc19uZXcgPSBhZGRyZXNzIG5vdCBpbiBzZWxmLnJlY29yZHMKICAgIGJ5dGVjXzEgLy8gMHg2Yjc5NjM1ZgogICAgZGlnIDUKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBjb3ZlciAyCiAgICBwb3AKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxMTAKICAgIC8vIHNlbGYucmVjb3Jkc1thZGRyZXNzXSA9IHJlY29yZC5jb3B5KCkKICAgIHVuY292ZXIgMgogICAgYm94X3B1dAogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjExMgogICAgLy8gaWYgaXNfbmV3OgogICAgYm56IHJlZ2lzdGVyX2FmdGVyX2lmX2Vsc2VANwogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjExMwogICAgLy8gc2VsZi50b3RhbF92ZXJpZmllZC52YWx1ZSArPSBVSW50NjQoMSkKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18wIC8vICJ0b3RhbF92ZXJpZmllZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF92ZXJpZmllZCBleGlzdHMKICAgIGludGNfMCAvLyAxCiAgICArCiAgICBieXRlY18wIC8vICJ0b3RhbF92ZXJpZmllZCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CgpyZWdpc3Rlcl9hZnRlcl9pZl9lbHNlQDc6CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6ODQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKcmVnaXN0ZXJfYm9vbF9mYWxzZUA0OgogICAgaW50Y18xIC8vIDAKICAgIGIgcmVnaXN0ZXJfYm9vbF9tZXJnZUA1CgoKLy8gY2FkZW5jaWEua3ljX3JlZ2lzdHJ5LktZQ1JlZ2lzdHJ5LnVwZGF0ZV90aWVyW3JvdXRpbmddKCkgLT4gdm9pZDoKdXBkYXRlX3RpZXI6CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTE1CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ4CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTE4CiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBzZWxmLm9yYWNsZS52YWx1ZSwgIm9ubHkgb3JhY2xlIGNhbiB1cGRhdGUgdGllciIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18yIC8vICJvcmFjbGUiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYub3JhY2xlIGV4aXN0cwogICAgPT0KICAgIGFzc2VydCAvLyBvbmx5IG9yYWNsZSBjYW4gdXBkYXRlIHRpZXIKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxMTkKICAgIC8vIGFzc2VydCBhZGRyZXNzIGluIHNlbGYucmVjb3JkcywgImFkZHJlc3Mgbm90IHJlZ2lzdGVyZWQiCiAgICBieXRlY18xIC8vIDB4NmI3OTYzNWYKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgYXNzZXJ0IC8vIGFkZHJlc3Mgbm90IHJlZ2lzdGVyZWQKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxMjItMTIzCiAgICAvLyByZWNvcmQua3ljX3RpZXIgPSBuZXdfdGllcgogICAgLy8gc2VsZi5yZWNvcmRzW2FkZHJlc3NdID0gcmVjb3JkLmNvcHkoKQogICAgaW50Y18xIC8vIDAKICAgIHVuY292ZXIgMgogICAgYm94X3JlcGxhY2UgLy8gb24gZXJyb3I6IGluZGV4IG91dCBvZiBib3VuZHMKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxMTUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNhZGVuY2lhLmt5Y19yZWdpc3RyeS5LWUNSZWdpc3RyeS5yZXZva2Vbcm91dGluZ10oKSAtPiB2b2lkOgpyZXZva2U6CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTI1CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjEyOAogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gc2VsZi5hZG1pbi52YWx1ZSwgIm9ubHkgYWRtaW4gY2FuIHJldm9rZSIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMSAvLyAwCiAgICBieXRlYyA0IC8vICJhZG1pbiIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5hZG1pbiBleGlzdHMKICAgID09CiAgICBhc3NlcnQgLy8gb25seSBhZG1pbiBjYW4gcmV2b2tlCiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTI5CiAgICAvLyBhc3NlcnQgYWRkcmVzcyBpbiBzZWxmLnJlY29yZHMsICJhZGRyZXNzIG5vdCByZWdpc3RlcmVkIgogICAgYnl0ZWNfMSAvLyAweDZiNzk2MzVmCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBhc3NlcnQgLy8gYWRkcmVzcyBub3QgcmVnaXN0ZXJlZAogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjEzMQogICAgLy8gZGVsIHNlbGYucmVjb3Jkc1thZGRyZXNzXQogICAgYm94X2RlbAogICAgcG9wCiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTMyCiAgICAvLyBzZWxmLnRvdGFsX3ZlcmlmaWVkLnZhbHVlIC09IFVJbnQ2NCgxKQogICAgaW50Y18xIC8vIDAKICAgIGJ5dGVjXzAgLy8gInRvdGFsX3ZlcmlmaWVkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX3ZlcmlmaWVkIGV4aXN0cwogICAgaW50Y18wIC8vIDEKICAgIC0KICAgIGJ5dGVjXzAgLy8gInRvdGFsX3ZlcmlmaWVkIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxMjUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNhZGVuY2lhLmt5Y19yZWdpc3RyeS5LWUNSZWdpc3RyeS5zZXRfb3JhY2xlW3JvdXRpbmddKCkgLT4gdm9pZDoKc2V0X29yYWNsZToKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxMzQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTM3CiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBzZWxmLmFkbWluLnZhbHVlLCAib25seSBhZG1pbiBjYW4gc2V0IG9yYWNsZSIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMSAvLyAwCiAgICBieXRlYyA0IC8vICJhZG1pbiIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5hZG1pbiBleGlzdHMKICAgID09CiAgICBhc3NlcnQgLy8gb25seSBhZG1pbiBjYW4gc2V0IG9yYWNsZQogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjEzOAogICAgLy8gc2VsZi5vcmFjbGUudmFsdWUgPSBuZXdfb3JhY2xlCiAgICBieXRlY18yIC8vICJvcmFjbGUiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjEzNAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gY2FkZW5jaWEua3ljX3JlZ2lzdHJ5LktZQ1JlZ2lzdHJ5LmlzX3ZlcmlmaWVkW3JvdXRpbmddKCkgLT4gdm9pZDoKaXNfdmVyaWZpZWQ6CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTQwCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjE0MwogICAgLy8gcmV0dXJuIGFyYzQuQm9vbChhZGRyZXNzIGluIHNlbGYucmVjb3JkcykKICAgIGJ5dGVjXzEgLy8gMHg2Yjc5NjM1ZgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIHB1c2hieXRlcyAweDAwCiAgICBpbnRjXzEgLy8gMAogICAgdW5jb3ZlciAyCiAgICBzZXRiaXQKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxNDAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNhZGVuY2lhLmt5Y19yZWdpc3RyeS5LWUNSZWdpc3RyeS5nZXRfcmVjb3JkW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X3JlY29yZDoKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxNDUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTQ4CiAgICAvLyBhc3NlcnQgYWRkcmVzcyBpbiBzZWxmLnJlY29yZHMsICJhZGRyZXNzIG5vdCByZWdpc3RlcmVkIgogICAgYnl0ZWNfMSAvLyAweDZiNzk2MzVmCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBhc3NlcnQgLy8gYWRkcmVzcyBub3QgcmVnaXN0ZXJlZAogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjE0OQogICAgLy8gcmV0dXJuIHNlbGYucmVjb3Jkc1thZGRyZXNzXQogICAgYm94X2dldAogICAgcG9wCiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTQ1CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGJ5dGVjXzMgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBjYWRlbmNpYS5reWNfcmVnaXN0cnkuS1lDUmVnaXN0cnkuZ2V0X3JvbGVbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfcm9sZToKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxNTEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTU0CiAgICAvLyBpZiBhZGRyZXNzIGluIHNlbGYucmVjb3JkczoKICAgIGJ5dGVjXzEgLy8gMHg2Yjc5NjM1ZgogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgYnogZ2V0X3JvbGVfYWZ0ZXJfaWZfZWxzZUAzCiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTU1CiAgICAvLyByZXR1cm4gc2VsZi5yZWNvcmRzW2FkZHJlc3NdLnJvbGUKICAgIGR1cAogICAgYm94X2dldAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYucmVjb3JkcyBlbnRyeSBleGlzdHMKICAgIGV4dHJhY3QgMSAxCgpnZXRfcm9sZV9hZnRlcl9pbmxpbmVkX2NhZGVuY2lhLmt5Y19yZWdpc3RyeS5LWUNSZWdpc3RyeS5nZXRfcm9sZUA0OgogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjE1MQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgpnZXRfcm9sZV9hZnRlcl9pZl9lbHNlQDM6CiAgICAvLyBjYWRlbmNpYS9reWNfcmVnaXN0cnkucHk6MTU2CiAgICAvLyByZXR1cm4gYXJjNC5VSW50OCgwKQogICAgcHVzaGJ5dGVzIDB4MDAKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxNTEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgYiBnZXRfcm9sZV9hZnRlcl9pbmxpbmVkX2NhZGVuY2lhLmt5Y19yZWdpc3RyeS5LWUNSZWdpc3RyeS5nZXRfcm9sZUA0CgoKLy8gY2FkZW5jaWEua3ljX3JlZ2lzdHJ5LktZQ1JlZ2lzdHJ5LmdldF9zdGF0c1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9zdGF0czoKICAgIC8vIGNhZGVuY2lhL2t5Y19yZWdpc3RyeS5weToxNjEKICAgIC8vIHJldHVybiBhcmM0LlVJbnQ2NChzZWxmLnRvdGFsX3ZlcmlmaWVkLnZhbHVlKQogICAgaW50Y18xIC8vIDAKICAgIGJ5dGVjXzAgLy8gInRvdGFsX3ZlcmlmaWVkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX3ZlcmlmaWVkIGV4aXN0cwogICAgaXRvYgogICAgLy8gY2FkZW5jaWEva3ljX3JlZ2lzdHJ5LnB5OjE1OAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CyADAQAgJgUOdG90YWxfdmVyaWZpZWQEa3ljXwZvcmFjbGUEFR98dQVhZG1pbjEZFEQxGEEAQIIIBPdXBUcEAu+0yQQjgxWXBDNo9VYENmFH/AQ2hQRyBBfdX98E8uspNjYaAI4IACwAiQCwANYA7AEHAR8BQwCABIqWmA42GgCOAQABADYaAUkVJBJENhoCSRUkEkQnBE8CZypMZygjZyJDNhoBSRUkEkQ2GgJHAhUiEkQ2GgNJTgIVJBJEMQAjKmVEEkQXSUEAMUmBAw5BACoiRDIGFoABAUsEUExQSwJQKUsFUEm9TgJITwK/QAAJIyhlRCIIKExnIkMjQv/TNhoBSRUkEkQ2GgJJFSISRDEAIyplRBJEKU8CUEm9RQFEI08CuyJDNhoBSRUkEkQxACMnBGVEEkQpTFBJvUUBRLxIIyhlRCIJKExnIkM2GgFJFSQSRDEAIycEZUQSRCpMZyJDNhoBSRUkEkQpTFC9RQGAAQAjTwJUK0xQsCJDNhoBSRUkEkQpTFBJvUUBRL5IK0xQsCJDNhoBSRUkEkQpTFBJvUUBQQAMSb5EVwEBK0xQsCJDgAEAQv/0IyhlRBYrTFCwIkM=",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 8,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

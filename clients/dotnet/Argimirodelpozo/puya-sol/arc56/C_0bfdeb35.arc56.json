@@ -1,0 +1,128 @@
+{
+    "name": "C",
+    "structs": {
+        "viaasmReturn": [
+            {
+                "name": "x",
+                "type": "byte[32]"
+            },
+            {
+                "name": "y",
+                "type": "byte[32]"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "viaasm",
+            "args": [],
+            "returns": {
+                "type": "(byte[32],byte[32])",
+                "struct": "viaasmReturn"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 2,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "a": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "YQ=="
+                },
+                "b": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "Yg=="
+                },
+                "f": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "Zg=="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        129
+                    ],
+                    "errorMessage": "check a exists"
+                },
+                {
+                    "pc": [
+                        133
+                    ],
+                    "errorMessage": "check b exists"
+                },
+                {
+                    "pc": [
+                        125
+                    ],
+                    "errorMessage": "not payable"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvdGVzdHMvc29saWRpdHktc2VtYW50aWMtdGVzdHMvdGVzdHMvaW1tdXRhYmxlL2ltbXV0YWJsZV9zaWduZWQuc29sLkMuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAzMiAxIDAKICAgIGJ5dGVjYmxvY2sgImEiICJiIgogICAgcHVzaGludCA0MDk2CiAgICBiemVybwogICAgZHVwCiAgICBzdG9yZSA1CiAgICBzdG9yZSAwCiAgICBsb2FkIDAKICAgIHB1c2hieXRlcyAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwODAKICAgIHJlcGxhY2UyIDY0CiAgICBzdG9yZSAwCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICBieXRlY18wIC8vICJhIgogICAgcHVzaGludCAxODQ0Njc0NDA3MzcwOTU1MTYxNAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGJ5dGVjXzEgLy8gImIiCiAgICBwdXNoYnl0ZXMgMHg2MTYyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgcHVzaGJ5dGVzICJmIgogICAgaW50Y18xIC8vIDEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIHB1c2hieXRlcyAweGQ5ZDEyYjQ4IC8vIG1ldGhvZCAidmlhYXNtKCkoYnl0ZVszMl0sYnl0ZVszMl0pIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl92aWFhc21fcm91dGVANAogICAgZXJyCgptYWluX3ZpYWFzbV9yb3V0ZUA0OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIHR4biBHcm91cEluZGV4CiAgICBieiBtYWluX3Rlcm5hcnlfZmFsc2VAOAogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMSAvLyAxCiAgICAtCiAgICBndHhucyBBbW91bnQKCm1haW5fdGVybmFyeV9tZXJnZUA5OgogICAgIQogICAgYXNzZXJ0IC8vIG5vdCBwYXlhYmxlCiAgICBpbnRjXzIgLy8gMAogICAgYnl0ZWNfMCAvLyAiYSIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgYSBleGlzdHMKICAgIGludGNfMiAvLyAwCiAgICBieXRlY18xIC8vICJiIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBiIGV4aXN0cwogICAgbG9hZCAwCiAgICBpbnRjXzAgLy8gMzIKICAgIGJ6ZXJvCiAgICB1bmNvdmVyIDMKICAgIGl0b2IKICAgIGRpZyAxCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgIC0KICAgIGludGNfMCAvLyAzMgogICAgZXh0cmFjdDMKICAgIGV4dHJhY3QgMCAzMgogICAgcHVzaGludCAzMAogICAgYnplcm8KICAgIHVuY292ZXIgNAogICAgc3dhcAogICAgY29uY2F0CiAgICB1bmNvdmVyIDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgLQogICAgaW50Y18wIC8vIDMyCiAgICBleHRyYWN0MwogICAgZXh0cmFjdCAwIDMyCiAgICB1bmNvdmVyIDIKICAgIHN0b3JlIDAKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX3Rlcm5hcnlfZmFsc2VAODoKICAgIGludGNfMiAvLyAwCiAgICBiIG1haW5fdGVybmFyeV9tZXJnZUA5Cg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvdGVzdHMvc29saWRpdHktc2VtYW50aWMtdGVzdHMvdGVzdHMvaW1tdXRhYmxlL2ltbXV0YWJsZV9zaWduZWQuc29sLkMuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiADIAEAJgIBYQFigYAgr0k1BTUANACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAXEA1ADEYQAAaKIH+//////////8BZymAAmFiZ4ABZiNnI0OABNnRK0g2GgCOAQABADEZFDEYEEQxFkEASDEWIwk4CBREJChlRCQpZUQ0ACKvTwMWSwFMUEkVIgkiWFcAIIEer08ETFBPAkxQSRUiCSJYVwAgTwI1AFCABBUffHVMULAjQyRC/7o=",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 8,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

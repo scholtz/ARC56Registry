@@ -1,0 +1,134 @@
+{
+    "name": "ReentrancyGuardTest",
+    "structs": {},
+    "methods": [
+        {
+            "name": "increment",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getCounter",
+            "args": [],
+            "returns": {
+                "type": "uint512"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 2
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "_counter": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X2NvdW50ZXI="
+                },
+                "_status": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X3N0YXR1cw=="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        85
+                    ],
+                    "errorMessage": "ReentrancyGuardReentrantCall"
+                },
+                {
+                    "pc": [
+                        92,
+                        110
+                    ],
+                    "errorMessage": "check _counter exists"
+                },
+                {
+                    "pc": [
+                        76
+                    ],
+                    "errorMessage": "check _status exists"
+                },
+                {
+                    "pc": [
+                        115
+                    ],
+                    "errorMessage": "overflow"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvb3BlbnplcHBlbGluL2NvbnRyYWN0cy9SZWVudHJhbmN5R3VhcmQuc29sLlJlZW50cmFuY3lHdWFyZFRlc3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAgNjQKICAgIGJ5dGVjYmxvY2sgIl9zdGF0dXMiICJfY291bnRlciIgMHgKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIGJ5dGVjXzAgLy8gIl9zdGF0dXMiCiAgICBieXRlY18yIC8vIDB4CiAgICBhcHBfZ2xvYmFsX3B1dAogICAgYnl0ZWNfMSAvLyAiX2NvdW50ZXIiCiAgICBieXRlY18yIC8vIDB4CiAgICBhcHBfZ2xvYmFsX3B1dAogICAgaW50Y18wIC8vIDEKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gIl9zdGF0dXMiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHgyZmE0NzMyOCAweDg3ZGQ1YTRiIC8vIG1ldGhvZCAiaW5jcmVtZW50KCl2b2lkIiwgbWV0aG9kICJnZXRDb3VudGVyKCl1aW50NTEyIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggaW5jcmVtZW50IGdldENvdW50ZXIKICAgIGVycgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9vcGVuemVwcGVsaW4vY29udHJhY3RzL1JlZW50cmFuY3lHdWFyZC5zb2wuUmVlbnRyYW5jeUd1YXJkVGVzdC5pbmNyZW1lbnRbcm91dGluZ10oKSAtPiB2b2lkOgppbmNyZW1lbnQ6CiAgICBpbnRjXzEgLy8gMAogICAgYnl0ZWNfMCAvLyAiX3N0YXR1cyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgX3N0YXR1cyBleGlzdHMKICAgIHB1c2hpbnQgMgogICAgaXRvYgogICAgc3dhcAogICAgZGlnIDEKICAgIGI9PQogICAgIQogICAgYXNzZXJ0IC8vIFJlZW50cmFuY3lHdWFyZFJlZW50cmFudENhbGwKICAgIGJ5dGVjXzAgLy8gIl9zdGF0dXMiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgaW50Y18xIC8vIDAKICAgIGJ5dGVjXzEgLy8gIl9jb3VudGVyIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBfY291bnRlciBleGlzdHMKICAgIGludGNfMCAvLyAxCiAgICBpdG9iCiAgICBzd2FwCiAgICBkaWcgMQogICAgYisKICAgIGJ5dGVjXzEgLy8gIl9jb3VudGVyIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGJ5dGVjXzAgLy8gIl9zdGF0dXMiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9vcGVuemVwcGVsaW4vY29udHJhY3RzL1JlZW50cmFuY3lHdWFyZC5zb2wuUmVlbnRyYW5jeUd1YXJkVGVzdC5nZXRDb3VudGVyW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0Q291bnRlcjoKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18xIC8vICJfY291bnRlciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgX2NvdW50ZXIgZXhpc3RzCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDY0CiAgICA8PQogICAgYXNzZXJ0IC8vIG92ZXJmbG93CiAgICBpbnRjXzIgLy8gNjQKICAgIGJ6ZXJvCiAgICBifAogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvb3BlbnplcHBlbGluL2NvbnRyYWN0cy9SZWVudHJhbmN5R3VhcmQuc29sLlJlZW50cmFuY3lHdWFyZFRlc3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiADAQBAJgMHX3N0YXR1cwhfY291bnRlcgAxGEAADSgqZykqZyIWKExnIkMxGRREMRhEggIEL6RzKASH3VpLNhoAjgIAAQAjACMoZUSBAhZMSwGoFEQoTGcjKWVEIhZMSwGgKUxnKExnIkMjKWVESRUkDkQkr6uABBUffHVMULAiQw==",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

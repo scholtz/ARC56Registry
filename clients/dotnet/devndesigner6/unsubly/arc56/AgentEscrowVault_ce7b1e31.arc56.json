@@ -1,0 +1,71 @@
+{
+  "name": "AgentEscrowVault",
+  "desc": "Agent-Managed Escrow Vault — A2A Autonomous Payments (ARC-4). Creator locks ALGO; agent wallet autonomously releases on billing date.",
+  "arcs": [4],
+  "structs": [],
+  "methods": [
+    {
+      "name": "create",
+      "args": [
+        { "type": "address", "name": "recipient" },
+        { "type": "address", "name": "agent" }
+      ],
+      "returns": { "type": "void" },
+      "desc": "Deploy vault. Caller becomes creator. Agent wallet authorized for autonomous release."
+    },
+    {
+      "name": "release",
+      "args": [],
+      "returns": { "type": "void" },
+      "desc": "Release funds to recipient. Callable by creator OR agent (autonomous A2A payment)."
+    },
+    {
+      "name": "kill",
+      "args": [],
+      "returns": { "type": "void" },
+      "desc": "Reclaim funds to creator. Only creator can kill."
+    },
+    {
+      "name": "delete",
+      "args": [],
+      "returns": { "type": "void" },
+      "desc": "Delete application after release or kill. Only creator."
+    }
+  ],
+  "state": {
+    "schema": {
+      "global": { "ints": 1, "bytes": 3 },
+      "local": { "ints": 0, "bytes": 0 }
+    },
+    "keys": {
+      "global": {
+        "status": { "keyType": "string", "valueType": "uint64", "key": "status" },
+        "creator": { "keyType": "string", "valueType": "address", "key": "creator" },
+        "recipient": { "keyType": "string", "valueType": "address", "key": "recipient" },
+        "agent": { "keyType": "string", "valueType": "address", "key": "agent" }
+      },
+      "local": {},
+      "box": {}
+    },
+    "maps": { "global": {}, "local": {}, "box": {} }
+  },
+  "bareActions": {
+    "call": [],
+    "create": []
+  },
+  "byteCode": {
+    "approval": "CyACAAEmBAZzdGF0dXMHY3JlYXRvcglyZWNpcGllbnQFYWdlbnSABCQ3jTw2GgCOAQAtMRkURDEYQQAWggIEB2u9TQS5whFVNhoAjgIAPQBxAIAEipaYDjYaAI4BAA0AMRmBBRIxGBBEQgCBNhoBSRWBIBJENhoCSRWBIBJEKTEAZypPAmcrTGcoImcjQzEAIillRBJAAAgxACIrZUQSRCIoZUQURDIKSWBMeAmxIiplRLIHsggjshAisgGzKCNnI0MxACIpZUQSRCIoZUQURDIKSWBMeAmxIillRLIHsggjshAisgGzKIECZyNDMQAiKWVETEsBEkQiKGVERLFJsgkisgiyByOyECKyAbMjQw==",
+    "clear": "C4EBQw=="
+  },
+  "compilerInfo": {
+    "compiler": "tealscript-manual",
+    "compilerVersion": "11"
+  },
+  "source": {
+    "approval": "",
+    "clear": ""
+  },
+  "events": [],
+  "templateVariables": {},
+  "networks": {}
+}

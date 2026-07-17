@@ -1,0 +1,202 @@
+{
+  "name": "CipherTrustComplianceCert",
+  "desc": "Issues verifiable compliance certificates on Algorand. Each certificate is tracked with status (active/revoked) and linked to organization and proof.",
+  "networks": {
+    "testnet": {
+      "appId": 0
+    },
+    "mainnet": {
+      "appId": 0
+    }
+  },
+  "arcs": [56, 4, 32, 69],
+  "structs": {},
+  "methods": [
+    {
+      "name": "create",
+      "desc": "Initialize the compliance certificate contract with deployer as admin",
+      "readonly": false,
+      "args": [],
+      "returns": {
+        "type": "bool",
+        "desc": "Success status"
+      },
+      "events": []
+    },
+    {
+      "name": "issue_certificate",
+      "desc": "Record a certificate issuance on-chain. Only admin can issue certificates.",
+      "readonly": false,
+      "args": [
+        {
+          "name": "org_id",
+          "type": "string",
+          "desc": "Organization ID receiving the certificate"
+        },
+        {
+          "name": "proof_id",
+          "type": "string",
+          "desc": "ZK proof ID that validated compliance"
+        },
+        {
+          "name": "regulation",
+          "type": "string",
+          "desc": "Regulation name (DPDPA, GDPR, CCPA, etc.)"
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "desc": "Certificate key (org_id:proof_id)"
+      },
+      "events": []
+    },
+    {
+      "name": "revoke_certificate",
+      "desc": "Revoke a compliance certificate. Only admin can revoke.",
+      "readonly": false,
+      "args": [
+        {
+          "name": "org_id",
+          "type": "string",
+          "desc": "Organization ID"
+        },
+        {
+          "name": "proof_id",
+          "type": "string",
+          "desc": "Proof ID"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "desc": "Success status"
+      },
+      "events": []
+    },
+    {
+      "name": "verify_certificate",
+      "desc": "Check if an organization has an active compliance certificate",
+      "readonly": true,
+      "args": [
+        {
+          "name": "org_id",
+          "type": "string",
+          "desc": "Organization ID"
+        },
+        {
+          "name": "proof_id",
+          "type": "string",
+          "desc": "Proof ID"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "desc": "True if certificate exists and is active"
+      },
+      "events": []
+    },
+    {
+      "name": "get_cert_status",
+      "desc": "Get the status of a certificate (active or revoked)",
+      "readonly": true,
+      "args": [
+        {
+          "name": "org_id",
+          "type": "string",
+          "desc": "Organization ID"
+        },
+        {
+          "name": "proof_id",
+          "type": "string",
+          "desc": "Proof ID"
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "desc": "Certificate status ('active' or 'revoked')"
+      },
+      "events": []
+    },
+    {
+      "name": "get_cert_count",
+      "desc": "Get total number of certificates issued",
+      "readonly": true,
+      "args": [],
+      "returns": {
+        "type": "uint64",
+        "desc": "Total certificate count"
+      },
+      "events": []
+    }
+  ],
+  "state": {
+    "schema": {
+      "global": {
+        "ints": 1,
+        "bytes": 1
+      },
+      "local": {
+        "ints": 0,
+        "bytes": 0
+      }
+    },
+    "keys": {
+      "global": {
+        "cert_count": {
+          "key": "cert_count",
+          "keyType": "string",
+          "valueType": "uint64",
+          "desc": "Total certificates issued"
+        },
+        "admin": {
+          "key": "admin",
+          "keyType": "string",
+          "valueType": "address",
+          "desc": "Contract admin address"
+        }
+      },
+      "local": {},
+      "box": {
+        "org_certs": {
+          "keyType": "string",
+          "valueType": "string",
+          "desc": "Box mapping: org_id → latest certificate key"
+        },
+        "cert_status": {
+          "keyType": "string",
+          "valueType": "string",
+          "desc": "Box mapping: certificate_key → status ('active' or 'revoked')"
+        }
+      }
+    }
+  },
+  "bareActions": {
+    "create": ["NoOp"],
+    "call": []
+  },
+  "sourceInfo": {
+    "approval": {
+      "sourceInfo": []
+    },
+    "clear": {
+      "sourceInfo": []
+    }
+  },
+  "source": {
+    "approval": "",
+    "clear": ""
+  },
+  "byteCode": {
+    "approval": "",
+    "clear": ""
+  },
+  "compilerInfo": {
+    "compiler": "beaker",
+    "compilerVersion": {
+      "major": 1,
+      "minor": 1,
+      "patch": 1
+    }
+  },
+  "events": [],
+  "templateVariables": {}
+}

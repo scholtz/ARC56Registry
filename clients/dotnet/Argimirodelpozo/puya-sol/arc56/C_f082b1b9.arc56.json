@@ -1,0 +1,119 @@
+{
+    "name": "C",
+    "structs": {
+        "S": [
+            {
+                "name": "a",
+                "type": "uint256"
+            },
+            {
+                "name": "b",
+                "type": "uint64"
+            },
+            {
+                "name": "c",
+                "type": "uint64"
+            },
+            {
+                "name": "d",
+                "type": "uint8[2]"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "f",
+            "args": [
+                {
+                    "type": "(uint256,uint64,uint64,uint8[2])",
+                    "struct": "S",
+                    "name": "s"
+                }
+            ],
+            "returns": {
+                "type": "(uint256,uint256,uint256,uint256)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        87
+                    ],
+                    "errorMessage": "invalid number of bytes for S"
+                },
+                {
+                    "pc": [
+                        101
+                    ],
+                    "errorMessage": "not payable"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvc29saWRpdHkvdGVzdC9saWJzb2xpZGl0eS9zZW1hbnRpY1Rlc3RzL2FiaUVuY29kZXJWMi9zdHJ1Y3Qvc3RydWN0X3NpbXBsZS5zb2wuQy5hcHByb3ZhbF9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgcHVzaGludCAxCiAgICByZXR1cm4KCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgcHVzaGludCA0MDk2CiAgICBiemVybwogICAgc3RvcmUgMAogICAgbG9hZCAwCiAgICBwdXNoYnl0ZXMgMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDgwCiAgICByZXBsYWNlMiA2NAogICAgc3RvcmUgMAogICAgcHVzaGJ5dGVzIDB4NGMwYjFhYTMgLy8gbWV0aG9kICJmKCh1aW50MjU2LHVpbnQ2NCx1aW50NjQsdWludDhbMl0pKSh1aW50MjU2LHVpbnQyNTYsdWludDI1Nix1aW50MjU2KSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fZl9yb3V0ZUA0CiAgICBlcnIKCm1haW5fZl9yb3V0ZUA0OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgZgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9zb2xpZGl0eS90ZXN0L2xpYnNvbGlkaXR5L3NlbWFudGljVGVzdHMvYWJpRW5jb2RlclYyL3N0cnVjdC9zdHJ1Y3Rfc2ltcGxlLnNvbC5DLmZbcm91dGluZ10oKSAtPiB2b2lkOgpmOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgNTAKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIFMKICAgIHR4biBHcm91cEluZGV4CiAgICBieiBmX3Rlcm5hcnlfZmFsc2VAMwogICAgdHhuIEdyb3VwSW5kZXgKICAgIHB1c2hpbnQgMQogICAgLQogICAgZ3R4bnMgQW1vdW50CgpmX3Rlcm5hcnlfbWVyZ2VANDoKICAgICEKICAgIGFzc2VydCAvLyBub3QgcGF5YWJsZQogICAgZHVwbiAyCiAgICBleHRyYWN0IDAgMzIKICAgIGRpZyAxCiAgICBleHRyYWN0IDMyIDgKICAgIGRpZyAyCiAgICBleHRyYWN0IDQwIDgKICAgIHVuY292ZXIgMwogICAgcHVzaGludCA0OAogICAgZXh0cmFjdF91aW50MTYKICAgIHB1c2hpbnQgNjU1MzUKICAgICYKICAgIGl0b2IKICAgIHB1c2hpbnQgMzIKICAgIGJ6ZXJvCiAgICB1bmNvdmVyIDMKICAgIGRpZyAxCiAgICBifAogICAgdW5jb3ZlciAzCiAgICBkaWcgMgogICAgYnwKICAgIHVuY292ZXIgMwogICAgdW5jb3ZlciAzCiAgICBifAogICAgdW5jb3ZlciAzCiAgICB1bmNvdmVyIDMKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEKICAgIHJldHVybgoKZl90ZXJuYXJ5X2ZhbHNlQDM6CiAgICBwdXNoaW50IDAKICAgIGIgZl90ZXJuYXJ5X21lcmdlQDQK",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvc29saWRpdHkvdGVzdC9saWJzb2xpZGl0eS9zZW1hbnRpY1Rlc3RzL2FiaUVuY29kZXJWMi9zdHJ1Y3Qvc3RydWN0X3NpbXBsZS5zb2wuQy5jbGVhcl9zdGF0ZV9wcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CjEYQAADgQFDgYAgrzUANACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAXEA1AIAETAsaozYaAI4BAAEAMRkUMRgQREIAADYaAUkVgTISRDEWQQBLMRaBAQk4CBRERwJXACBLAVcgCEsCVygITwOBMFmB//8DGhaBIK9PA0sBq08DSwKrTwNPA6tPA08DUE8CUExQgAQVH3x1TFCwgQFDgQBC/7c=",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

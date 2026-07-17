@@ -1,0 +1,148 @@
+{
+    "name": "TemplateVariablesContract",
+    "structs": {},
+    "methods": [
+        {
+            "name": "get_bytes",
+            "args": [],
+            "returns": {
+                "type": "byte[]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_big_uint",
+            "args": [],
+            "returns": {
+                "type": "uint512"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": [
+            "DeleteApplication",
+            "UpdateApplication"
+        ]
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        48,
+                        64
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        123
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        51,
+                        67,
+                        106,
+                        114
+                    ],
+                    "errorMessage": "can only call when not creating"
+                },
+                {
+                    "pc": [
+                        133
+                    ],
+                    "errorMessage": "overflow"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDY0IFRNUExfVVBEQVRBQkxFIFRNUExfREVMRVRBQkxFCiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUgVE1QTF9TT01FX0JZVEVTIFRNUExfU09NRV9CSUdfVUlOVAogICAgLy8gdGVtcGxhdGVfdmFyaWFibGVzL2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIFRlbXBsYXRlVmFyaWFibGVzQ29udHJhY3QoYXJjNC5BUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYmFyZV9yb3V0aW5nQDcKICAgIHB1c2hieXRlc3MgMHgyZmNhZGRmNiAweDM3ZjY0Y2YzIC8vIG1ldGhvZCAiZ2V0X2J5dGVzKClieXRlW10iLCBtZXRob2QgImdldF9iaWdfdWludCgpdWludDUxMiIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fZ2V0X2J5dGVzX3JvdXRlQDMgbWFpbl9nZXRfYmlnX3VpbnRfcm91dGVANAoKbWFpbl9hZnRlcl9pZl9lbHNlQDEzOgogICAgLy8gdGVtcGxhdGVfdmFyaWFibGVzL2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIFRlbXBsYXRlVmFyaWFibGVzQ29udHJhY3QoYXJjNC5BUkM0Q29udHJhY3QpOgogICAgcHVzaGludCAwIC8vIDAKICAgIHJldHVybgoKbWFpbl9nZXRfYmlnX3VpbnRfcm91dGVANDoKICAgIC8vIHRlbXBsYXRlX3ZhcmlhYmxlcy9jb250cmFjdC5weToxMAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgY2FsbHN1YiBnZXRfYmlnX3VpbnQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0X2J5dGVzX3JvdXRlQDM6CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6NgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgY2FsbHN1YiBnZXRfYnl0ZXMKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0A3OgogICAgLy8gdGVtcGxhdGVfdmFyaWFibGVzL2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIFRlbXBsYXRlVmFyaWFibGVzQ29udHJhY3QoYXJjNC5BUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgc3dpdGNoIG1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAMTAgbWFpbl9hZnRlcl9pZl9lbHNlQDEzIG1haW5fYWZ0ZXJfaWZfZWxzZUAxMyBtYWluX2FmdGVyX2lmX2Vsc2VAMTMgbWFpbl9vbl91cGRhdGVAOCBtYWluX29uX2RlbGV0ZUA5CiAgICBiIG1haW5fYWZ0ZXJfaWZfZWxzZUAxMwoKbWFpbl9vbl9kZWxldGVAOToKICAgIC8vIHRlbXBsYXRlX3ZhcmlhYmxlcy9jb250cmFjdC5weToxOQogICAgLy8gQGFyYzQuYmFyZW1ldGhvZChhbGxvd19hY3Rpb25zPVsiRGVsZXRlQXBwbGljYXRpb24iXSkKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgY2FsbHN1YiBvbl9kZWxldGUKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fb25fdXBkYXRlQDg6CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6MTUKICAgIC8vIEBhcmM0LmJhcmVtZXRob2QoYWxsb3dfYWN0aW9ucz1bIlVwZGF0ZUFwcGxpY2F0aW9uIl0pCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgb25fdXBkYXRlCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDEwOgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0X2Nhc2VzLnRlbXBsYXRlX3ZhcmlhYmxlcy5jb250cmFjdC5UZW1wbGF0ZVZhcmlhYmxlc0NvbnRyYWN0LmdldF9ieXRlcygpIC0+IGJ5dGVzOgpnZXRfYnl0ZXM6CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6OAogICAgLy8gcmV0dXJuIHNlbGYucmVjZWl2ZV92YWx1ZShUZW1wbGF0ZVZhcltCeXRlc10oIlNPTUVfQllURVMiKSkKICAgIGJ5dGVjXzEgLy8gVE1QTF9TT01FX0JZVEVTCiAgICByZXRzdWIKCgovLyB0ZXN0X2Nhc2VzLnRlbXBsYXRlX3ZhcmlhYmxlcy5jb250cmFjdC5UZW1wbGF0ZVZhcmlhYmxlc0NvbnRyYWN0LmdldF9iaWdfdWludCgpIC0+IGJ5dGVzOgpnZXRfYmlnX3VpbnQ6CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6MTIKICAgIC8vIHggPSBUZW1wbGF0ZVZhcltCaWdVSW50XSgiU09NRV9CSUdfVUlOVCIpCiAgICBieXRlY18yIC8vIFRNUExfU09NRV9CSUdfVUlOVAogICAgLy8gdGVtcGxhdGVfdmFyaWFibGVzL2NvbnRyYWN0LnB5OjEzCiAgICAvLyByZXR1cm4gVUludDUxMih4KQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyA2NAogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgaW50Y18xIC8vIDY0CiAgICBiemVybwogICAgYnwKICAgIHJldHN1YgoKCi8vIHRlc3RfY2FzZXMudGVtcGxhdGVfdmFyaWFibGVzLmNvbnRyYWN0LlRlbXBsYXRlVmFyaWFibGVzQ29udHJhY3Qub25fdXBkYXRlKCkgLT4gdm9pZDoKb25fdXBkYXRlOgogICAgLy8gdGVtcGxhdGVfdmFyaWFibGVzL2NvbnRyYWN0LnB5OjE3CiAgICAvLyBhc3NlcnQgVGVtcGxhdGVWYXJbYm9vbF0oIlVQREFUQUJMRSIpCiAgICBpbnRjXzIgLy8gVE1QTF9VUERBVEFCTEUKICAgIGFzc2VydAogICAgcmV0c3ViCgoKLy8gdGVzdF9jYXNlcy50ZW1wbGF0ZV92YXJpYWJsZXMuY29udHJhY3QuVGVtcGxhdGVWYXJpYWJsZXNDb250cmFjdC5vbl9kZWxldGUoKSAtPiB2b2lkOgpvbl9kZWxldGU6CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6MjEKICAgIC8vIGFzc2VydCBUZW1wbGF0ZVZhcltVSW50NjRdKCJERUxFVEFCTEUiKQogICAgaW50Y18zIC8vIFRNUExfREVMRVRBQkxFCiAgICBhc3NlcnQKICAgIHJldHN1Ygo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiAEAUAAACYDBBUffHUAADEbQQBAggIEL8rd9gQ39kzzNhoAjgIAEwADgQBDMRkURDEYRIgASShMULAiQzEZFEQxGESIADdJFRZXBgJMUChMULAiQzEZjQYAE//F/8X/xQALAANC/8IxGESIAB8iQzEYRIgAFCJDMRgURCJDKYkqSRUjDkQjr6uJJESJJUSJ",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 99,
+            "minor": 99,
+            "patch": 99
+        }
+    },
+    "events": [],
+    "templateVariables": {
+        "UPDATABLE": {
+            "type": "AVMUint64",
+            "value": "AAAAAAAAAAA="
+        },
+        "DELETABLE": {
+            "type": "AVMUint64",
+            "value": "AAAAAAAAAAA="
+        },
+        "SOME_BYTES": {
+            "type": "AVMBytes",
+            "value": ""
+        },
+        "SOME_BIG_UINT": {
+            "type": "AVMBytes",
+            "value": ""
+        }
+    }
+}

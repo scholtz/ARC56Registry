@@ -1,0 +1,138 @@
+{
+    "name": "TestChild",
+    "structs": {},
+    "methods": [
+        {
+            "name": "update_or_delete",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "UpdateApplication",
+                    "DeleteApplication"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "create_box",
+            "args": [
+                {
+                    "type": "pay",
+                    "name": "mbr_payment"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        60
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp && can only call when creating"
+                },
+                {
+                    "pc": [
+                        38
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp && can only call when not creating"
+                },
+                {
+                    "pc": [
+                        52
+                    ],
+                    "errorMessage": "OnCompletion must be one of UpdateApplication, DeleteApplication && can only call when not creating"
+                },
+                {
+                    "pc": [
+                        75,
+                        80,
+                        104
+                    ],
+                    "errorMessage": "account funded"
+                },
+                {
+                    "pc": [
+                        70
+                    ],
+                    "errorMessage": "transaction type is pay"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NjcKICAgIC8vIGNsYXNzIFRlc3RDaGlsZChBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVANgogICAgcHVzaGJ5dGVzcyAweDUwZGMzYTBlIDB4OTBmYWZiZTggLy8gbWV0aG9kICJ1cGRhdGVfb3JfZGVsZXRlKCl2b2lkIiwgbWV0aG9kICJjcmVhdGVfYm94KHBheSl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3VwZGF0ZV9vcl9kZWxldGVfcm91dGVAMyBtYWluX2NyZWF0ZV9ib3hfcm91dGVANAogICAgZXJyCgptYWluX2NyZWF0ZV9ib3hfcm91dGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NzMKICAgIC8vIEBhYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AgJiYgY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgYiBjcmVhdGVfYm94CgptYWluX3VwZGF0ZV9vcl9kZWxldGVfcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NjkKICAgIC8vIEBhYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIlVwZGF0ZUFwcGxpY2F0aW9uIiwgIkRlbGV0ZUFwcGxpY2F0aW9uIl0pCiAgICBpbnRjXzAgLy8gMQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgc2hsCiAgICBwdXNoaW50IDQ4IC8vIDQ4CiAgICAmCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIHJldHVybiAvLyBvbiBlcnJvcjogT25Db21wbGV0aW9uIG11c3QgYmUgb25lIG9mIFVwZGF0ZUFwcGxpY2F0aW9uLCBEZWxldGVBcHBsaWNhdGlvbiAmJiBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDY6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybiAvLyBvbiBlcnJvcjogT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcCAmJiBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKCgovLyBzbWFydF9jb250cmFjdHMudGVzdF9mYWN0b3J5LmNvbnRyYWN0LlRlc3RDaGlsZC5jcmVhdGVfYm94W3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlX2JveDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NzMKICAgIC8vIEBhYmltZXRob2QKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18wIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weToxOAogICAgLy8gcmV0dXJuIEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MubWluX2JhbGFuY2UKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICBhY2N0X3BhcmFtc19nZXQgQWNjdE1pbkJhbGFuY2UKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTo3NgogICAgLy8gaWYgR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcy5iYWxhbmNlID09IDA6CiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIGJueiBjcmVhdGVfYm94X2FmdGVyX2lmX2Vsc2VAMwogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTo3NwogICAgLy8gcHJlX21iciA9IFVJbnQ2NCgwKQogICAgaW50Y18xIC8vIDAKICAgIGJ1cnkgMQoKY3JlYXRlX2JveF9hZnRlcl9pZl9lbHNlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5Ojc5CiAgICAvLyB0ZXN0X2JveCA9IEJveFJlZihrZXk9YXJjNC5VSW50NjQoMCkuYnl0ZXMpCiAgICBwdXNoYnl0ZXMgMHgwMDAwMDAwMDAwMDAwMDAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjgwCiAgICAvLyB0ZXN0X2JveC5jcmVhdGUoc2l6ZT0wKQogICAgaW50Y18xIC8vIDAKICAgIGJveF9jcmVhdGUKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weToxOAogICAgLy8gcmV0dXJuIEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MubWluX2JhbGFuY2UKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICBhY2N0X3BhcmFtc19nZXQgQWNjdE1pbkJhbGFuY2UKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTo4NAogICAgLy8gZXhjZXNzX21iciA9IG1icl9wYXltZW50LmFtb3VudCAtIChwb3N0X21iciAtIHByZV9tYnIpCiAgICBkaWcgMgogICAgZ3R4bnMgQW1vdW50CiAgICBzd2FwCiAgICBkaWcgMgogICAgLQogICAgLQogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTo4NgogICAgLy8gaXR4bi5QYXltZW50KHJlY2VpdmVyPVR4bi5zZW5kZXIsIGFtb3VudD1leGNlc3NfbWJyKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgdHhuIFNlbmRlcgogICAgZGlnIDEKICAgIGl0eG5fZmllbGQgQW1vdW50CiAgICBpdHhuX2ZpZWxkIFJlY2VpdmVyCiAgICBpbnRjXzAgLy8gcGF5CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzEgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIGl0eG5fc3VibWl0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjczCiAgICAvLyBAYWJpbWV0aG9kCiAgICBpdG9iCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4K",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CyACAQAxG0EAK4ICBFDcOg4EkPr76DYaAI4CAAsAAQAxGRQxGBBEQgATIjEZkIEwGjEYEEMxGRQxGBQQQzEWIglJOBAiEkQyCnMBRDIKcwBEQAADI0UBgAgAAAAAAAAAACO5SDIKcwFESwI4CExLAgkJsTEASwGyCLIHIrIQI7IBsxaABBUffHVMULAiQw==",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 0,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

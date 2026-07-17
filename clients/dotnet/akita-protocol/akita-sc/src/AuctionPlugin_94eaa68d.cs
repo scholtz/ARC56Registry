@@ -192,7 +192,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AuctionPlugin_94eaa68d
             var prizeIDAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); prizeIDAbi.From(prizeID);
             var prizeAmountAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); prizeAmountAbi.From(prizeAmount);
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
-            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); proofAbi.From(proof);
+            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[32]"); proofAbi.From(proof);
             var bidAssetIDAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); bidAssetIDAbi.From(bidAssetID);
             var bidFeeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); bidFeeAbi.From(bidFee);
             var startingBidAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); startingBidAbi.From(startingBid);
@@ -226,7 +226,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AuctionPlugin_94eaa68d
             var prizeIDAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); prizeIDAbi.From(prizeID);
             var prizeAmountAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); prizeAmountAbi.From(prizeAmount);
             var nameAbi = new AVM.ClientGenerator.ABI.ARC4.Types.String(); nameAbi.From(name);
-            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); proofAbi.From(proof);
+            var proofAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[32]"); proofAbi.From(proof);
             var bidAssetIDAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); bidAssetIDAbi.From(bidAssetID);
             var bidFeeAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); bidFeeAbi.From(bidFee);
             var startingBidAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); startingBidAbi.From(startingBid);
@@ -412,7 +412,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AuctionPlugin_94eaa68d
             var rekeyBackAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Bool(); rekeyBackAbi.From(rekeyBack);
             var appIdAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); appIdAbi.From(appId);
             var amountAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); amountAbi.From(amount);
-            var argsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); argsAbi.From(args);
+            var argsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[]"); argsAbi.From(args);
             var marketplaceAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Address(); marketplaceAbi.From(marketplace);
 
             var result = await base.CallApp(new List<object> { abiHandle, walletAbi, rekeyBackAbi, appIdAbi, amountAbi, argsAbi, marketplaceAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
@@ -431,7 +431,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.AuctionPlugin_94eaa68d
             var rekeyBackAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Bool(); rekeyBackAbi.From(rekeyBack);
             var appIdAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); appIdAbi.From(appId);
             var amountAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); amountAbi.From(amount);
-            var argsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>(); argsAbi.From(args);
+            var argsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>>("byte[]"); argsAbi.From(args);
             var marketplaceAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Address(); marketplaceAbi.From(marketplace);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, walletAbi, rekeyBackAbi, appIdAbi, amountAbi, argsAbi, marketplaceAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);

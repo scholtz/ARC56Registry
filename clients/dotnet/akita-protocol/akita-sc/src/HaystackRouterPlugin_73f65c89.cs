@@ -46,7 +46,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.HaystackRouterPlugin_73f65c89
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 136, 19, 31, 196 };
             var routerAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); routerAbi.From(router);
-            var routerMethodAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(4); routerMethodAbi.From(routerMethod);
+            var routerMethodAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(4, "byte"); routerMethodAbi.From(routerMethod);
             var referrerAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Address(); referrerAbi.From(referrer);
             var referrerTreasuryAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); referrerTreasuryAbi.From(referrerTreasury);
 
@@ -63,7 +63,7 @@ namespace Arc56.Generated.akita_protocol.akita_sc.HaystackRouterPlugin_73f65c89
             _tx_accounts ??= new List<Address>();
             byte[] abiHandle = { 136, 19, 31, 196 };
             var routerAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); routerAbi.From(router);
-            var routerMethodAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(4); routerMethodAbi.From(routerMethod);
+            var routerMethodAbi = new AVM.ClientGenerator.ABI.ARC4.Types.FixedArray<AVM.ClientGenerator.ABI.ARC4.Types.Byte>(4, "byte"); routerMethodAbi.From(routerMethod);
             var referrerAbi = new AVM.ClientGenerator.ABI.ARC4.Types.Address(); referrerAbi.From(referrer);
             var referrerTreasuryAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); referrerTreasuryAbi.From(referrerTreasury);
 

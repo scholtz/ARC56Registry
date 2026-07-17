@@ -26,10 +26,10 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Algorand_Developer_Retreat.WeTrust.Wetrust_1233a2c7;
+using Arc56.Generated.Owner.Repo.Contract_hash;
 
 var algod = new DefaultApi(httpClient); // configure with your algod endpoint
-var client = new WetrustProxy(algod, appId: 123456789);
+var client = new ContractProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -39,7 +39,7 @@ var client = new WetrustProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| `Arc56.Generated.Algorand_Developer_Retreat.WeTrust.Wetrust_1233a2c7` | `WetrustProxy` | [https://raw.githubusercontent.com/Algorand-Developer-Retreat/WeTrust/HEAD/projects/WeTrust/smart_contracts/artifacts/wetrust/Wetrust.arc56.json](https://raw.githubusercontent.com/Algorand-Developer-Retreat/WeTrust/HEAD/projects/WeTrust/smart_contracts/artifacts/wetrust/Wetrust.arc56.json) |
+| `Arc56.Generated.Algorand_Developer_Retreat.WeTrust.Wetrust_1233a2c7` | _(fails to compile - excluded, see state.json)_ | [https://raw.githubusercontent.com/Algorand-Developer-Retreat/WeTrust/HEAD/projects/WeTrust/smart_contracts/artifacts/wetrust/Wetrust.arc56.json](https://raw.githubusercontent.com/Algorand-Developer-Retreat/WeTrust/HEAD/projects/WeTrust/smart_contracts/artifacts/wetrust/Wetrust.arc56.json) |
 
 ## Versioning
 

@@ -1,0 +1,192 @@
+{
+  "name": "CipherTrustProofVerifier",
+  "desc": "Records ZK proof submissions and their verification outcomes. Stores proof hashes with off-chain verification results from trusted backend oracle.",
+  "networks": {
+    "testnet": {
+      "appId": 0
+    },
+    "mainnet": {
+      "appId": 0
+    }
+  },
+  "arcs": [56, 4, 32],
+  "structs": {},
+  "methods": [
+    {
+      "name": "create",
+      "desc": "Initialize the proof verifier contract with deployer as admin",
+      "readonly": false,
+      "args": [],
+      "returns": {
+        "type": "bool",
+        "desc": "Success status"
+      },
+      "events": []
+    },
+    {
+      "name": "submit_proof",
+      "desc": "Submit a ZK proof hash and its off-chain verification result. Only callable by trusted admin.",
+      "readonly": false,
+      "args": [
+        {
+          "name": "proof_hash",
+          "type": "string",
+          "desc": "SHA-256 hash of the ZK proof"
+        },
+        {
+          "name": "org_id",
+          "type": "string",
+          "desc": "Organization ID that generated the proof"
+        },
+        {
+          "name": "compliance_type",
+          "type": "string",
+          "desc": "Type of compliance being proven (DPDPA, GDPR, etc.)"
+        },
+        {
+          "name": "verification_result",
+          "type": "uint64",
+          "desc": "1 = verified successfully, 0 = verification failed"
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "desc": "The submitted proof hash"
+      },
+      "events": []
+    },
+    {
+      "name": "verify_proof",
+      "desc": "Check if a proof hash was verified successfully",
+      "readonly": true,
+      "args": [
+        {
+          "name": "proof_hash",
+          "type": "string",
+          "desc": "Proof hash to verify"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "desc": "True if proof was verified successfully"
+      },
+      "events": []
+    },
+    {
+      "name": "get_proof_org",
+      "desc": "Get the organization ID associated with a proof",
+      "readonly": true,
+      "args": [
+        {
+          "name": "proof_hash",
+          "type": "string",
+          "desc": "Proof hash to look up"
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "desc": "Organization ID"
+      },
+      "events": []
+    },
+    {
+      "name": "get_proof_count",
+      "desc": "Get total number of proofs submitted",
+      "readonly": true,
+      "args": [],
+      "returns": {
+        "type": "uint64",
+        "desc": "Total proof count"
+      },
+      "events": []
+    },
+    {
+      "name": "get_verified_count",
+      "desc": "Get total number of successfully verified proofs",
+      "readonly": true,
+      "args": [],
+      "returns": {
+        "type": "uint64",
+        "desc": "Verified proof count"
+      },
+      "events": []
+    }
+  ],
+  "state": {
+    "schema": {
+      "global": {
+        "ints": 2,
+        "bytes": 1
+      },
+      "local": {
+        "ints": 0,
+        "bytes": 0
+      }
+    },
+    "keys": {
+      "global": {
+        "proof_count": {
+          "key": "proof_count",
+          "keyType": "string",
+          "valueType": "uint64",
+          "desc": "Total proofs submitted"
+        },
+        "verified_count": {
+          "key": "verified_count",
+          "keyType": "string",
+          "valueType": "uint64",
+          "desc": "Total proofs verified successfully"
+        },
+        "admin": {
+          "key": "admin",
+          "keyType": "string",
+          "valueType": "address",
+          "desc": "Trusted backend submitter address"
+        }
+      },
+      "local": {},
+      "box": {
+        "proof_results": {
+          "keyType": "string",
+          "valueType": "string",
+          "desc": "Box mapping: proof_hash → '1' (verified) or '0' (failed)"
+        },
+        "proof_orgs": {
+          "keyType": "string",
+          "valueType": "string",
+          "desc": "Box mapping: proof_hash → org_id"
+        }
+      }
+    }
+  },
+  "bareActions": {
+    "create": ["NoOp"],
+    "call": []
+  },
+  "sourceInfo": {
+    "approval": {
+      "sourceInfo": []
+    },
+    "clear": {
+      "sourceInfo": []
+    }
+  },
+  "source": {
+    "approval": "",
+    "clear": ""
+  },
+  "byteCode": {
+    "approval": "",
+    "clear": ""
+  },
+  "compilerInfo": {
+    "compiler": "beaker",
+    "compilerVersion": {
+      "major": 1,
+      "minor": 1,
+      "patch": 1
+    }
+  },
+  "events": [],
+  "templateVariables": {}
+}

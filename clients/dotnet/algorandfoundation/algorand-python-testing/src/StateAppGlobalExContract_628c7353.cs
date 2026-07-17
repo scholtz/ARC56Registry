@@ -1,0 +1,66 @@
+using System;
+using Algorand;
+using Algorand.Algod;
+using Algorand.Algod.Model;
+using Algorand.Algod.Model.Transactions;
+using AVM.ClientGenerator;
+using AVM.ClientGenerator.Core;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AVM.ClientGenerator.ABI.ARC56;
+using Algorand.AVM.ClientGenerator.ABI.ARC56;
+
+namespace Arc56.Generated.algorandfoundation.algorand_python_testing.StateAppGlobalExContract_628c7353
+{
+
+
+    public class StateAppGlobalExContractProxy : ProxyBase
+    {
+        public override AppDescriptionArc56 App { get; set; }
+
+        public StateAppGlobalExContractProxy(DefaultApi defaultApi, ulong appId) : base(defaultApi, appId)
+        {
+            App = Newtonsoft.Json.JsonConvert.DeserializeObject<AVM.ClientGenerator.ABI.ARC56.AppDescriptionArc56>(Encoding.UTF8.GetString(Convert.FromBase64String(_ARC56DATA))) ?? throw new Exception("Error reading ARC56 data");
+
+        }
+
+        public class Structs
+        {
+        }
+
+        ///<summary>
+        ///Constructor Bare Action
+        ///</summary>
+        public async Task CreateApplication(Account _tx_sender, ulong? _tx_fee, string _tx_note = "", ulong _tx_roundValidity = 1000, List<BoxRef>? _tx_boxes = null, List<Transaction>? _tx_transactions = null, List<ulong>? _tx_assets = null, List<ulong>? _tx_apps = null, List<Address>? _tx_accounts = null, AVM.ClientGenerator.Core.OnCompleteType _tx_callType = AVM.ClientGenerator.Core.OnCompleteType.CreateApplication)
+        {
+            _tx_boxes ??= new List<BoxRef>();
+            _tx_transactions ??= new List<Transaction>();
+            _tx_assets ??= new List<ulong>();
+            _tx_apps ??= new List<ulong>();
+            _tx_accounts ??= new List<Address>();
+            byte[] abiHandle = { 0, 193, 250, 21 };
+
+            var result = await base.CallApp(new List<object> { }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
+
+        }
+
+        public async Task<List<Transaction>> CreateApplication_Transactions(Account _tx_sender, ulong? _tx_fee, string _tx_note = "", ulong _tx_roundValidity = 1000, List<BoxRef>? _tx_boxes = null, List<Transaction>? _tx_transactions = null, List<ulong>? _tx_assets = null, List<ulong>? _tx_apps = null, List<Address>? _tx_accounts = null, AVM.ClientGenerator.Core.OnCompleteType _tx_callType = AVM.ClientGenerator.Core.OnCompleteType.CreateApplication)
+        {
+            _tx_boxes ??= new List<BoxRef>();
+            _tx_transactions ??= new List<Transaction>();
+            _tx_assets ??= new List<ulong>();
+            _tx_apps ??= new List<ulong>();
+            _tx_accounts ??= new List<Address>();
+            byte[] abiHandle = { 0, 193, 250, 21 };
+
+            return await base.MakeTransactionList(new List<object> { }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
+
+        }
+
+        protected override ulong? ExtraProgramPages { get; set; } = 0;
+        protected string _ARC56DATA = "eyJhcmNzIjpbMjIsMjhdLCJuYW1lIjoiU3RhdGVBcHBHbG9iYWxFeENvbnRyYWN0IiwiZGVzYyI6bnVsbCwibmV0d29ya3MiOnt9LCJzdHJ1Y3RzIjp7fSwiTWV0aG9kcyI6W10sInN0YXRlIjp7InNjaGVtYSI6eyJnbG9iYWwiOnsiaW50cyI6MiwiYnl0ZXMiOjV9LCJsb2NhbCI6eyJpbnRzIjowLCJieXRlcyI6MH19LCJrZXlzIjp7Imdsb2JhbCI6eyJkZXNjIjpudWxsLCJrZXlUeXBlIjoiIiwidmFsdWVUeXBlIjoiIiwia2V5IjoiIn0sImxvY2FsIjp7ImRlc2MiOm51bGwsImtleVR5cGUiOiIiLCJ2YWx1ZVR5cGUiOiIiLCJrZXkiOiIifSwiYm94Ijp7ImRlc2MiOm51bGwsImtleVR5cGUiOiIiLCJ2YWx1ZVR5cGUiOiIiLCJrZXkiOiIifX0sIm1hcHMiOnsiZ2xvYmFsIjp7ImRlc2MiOm51bGwsImtleVR5cGUiOiIiLCJ2YWx1ZVR5cGUiOiIiLCJwcmVmaXgiOm51bGx9LCJsb2NhbCI6eyJkZXNjIjpudWxsLCJrZXlUeXBlIjoiIiwidmFsdWVUeXBlIjoiIiwicHJlZml4IjpudWxsfSwiYm94Ijp7ImRlc2MiOm51bGwsImtleVR5cGUiOiIiLCJ2YWx1ZVR5cGUiOiIiLCJwcmVmaXgiOm51bGx9fX0sImJhcmVBY3Rpb25zIjp7ImNyZWF0ZSI6WyJOb09wIl0sImNhbGwiOltdfSwic291cmNlSW5mbyI6eyJhcHByb3ZhbCI6eyJzb3VyY2VJbmZvIjpbXSwicGNPZmZzZXRNZXRob2QiOiJub25lIn0sImNsZWFyIjp7InNvdXJjZUluZm8iOltdLCJwY09mZnNldE1ldGhvZCI6Im5vbmUifX0sInNvdXJjZSI6eyJhcHByb3ZhbCI6IkkzQnlZV2R0WVNCMlpYSnphVzl1SURFeENpTndjbUZuYldFZ2RIbHdaWFJ5WVdOcklHWmhiSE5sQ2dvdkx5QmhiR2R2Y0hrdVlYSmpOQzVCVWtNMFEyOXVkSEpoWTNRdVlYQndjbTkyWVd4ZmNISnZaM0poYlNncElDMCtJSFZwYm5RMk5Eb0tiV0ZwYmpvS0lDQWdJR0o1ZEdWallteHZZMnNnTUhnMk5EYzFObVEyWkRjNU5XWTJNamM1TnpRMk5UY3pJREI0TURBeE1EWTBOelUyWkRaa056azFaall4TnpJMk16TTBOV1kyTWpjNU56UTJOVGN6Q2lBZ0lDQjBlRzRnUVhCd2JHbGpZWFJwYjI1SlJBb2dJQ0FnWW01NklHMWhhVzVmWVdaMFpYSmZhV1pmWld4elpVQXlDaUFnSUNBdkx5QjBaWE4wY3k5aGNuUnBabUZqZEhNdlUzUmhkR1ZQY0hNdlkyOXVkSEpoWTNRdWNIazZORE0wQ2lBZ0lDQXZMeUJyWlhrOUltZHNiMkpoYkY5MWFXNTBOalFpTEFvZ0lDQWdjSFZ6YUdKNWRHVnpJQ0puYkc5aVlXeGZkV2x1ZERZMElnb2dJQ0FnTHk4Z2RHVnpkSE12WVhKMGFXWmhZM1J6TDFOMFlYUmxUM0J6TDJOdmJuUnlZV04wTG5CNU9qUXpNd29nSUNBZ0x5OGdWVWx1ZERZMEtESXBMQW9nSUNBZ2NIVnphR2x1ZENBeUNpQWdJQ0F2THlCMFpYTjBjeTloY25ScFptRmpkSE12VTNSaGRHVlBjSE12WTI5dWRISmhZM1F1Y0hrNk5ETXlMVFF6TlFvZ0lDQWdMeThnYzJWc1ppNW5iRzlpWVd4ZmRXbHVkRFkwSUQwZ1IyeHZZbUZzVTNSaGRHVW9DaUFnSUNBdkx5QWdJQ0FnVlVsdWREWTBLRElwTEFvZ0lDQWdMeThnSUNBZ0lHdGxlVDBpWjJ4dlltRnNYM1ZwYm5RMk5DSXNDaUFnSUNBdkx5QXBDaUFnSUNCaGNIQmZaMnh2WW1Gc1gzQjFkQW9nSUNBZ0x5OGdkR1Z6ZEhNdllYSjBhV1poWTNSekwxTjBZWFJsVDNCekwyTnZiblJ5WVdOMExuQjVPalF6T0FvZ0lDQWdMeThnYTJWNVBTSm5iRzlpWVd4ZllubDBaWE1pTEFvZ0lDQWdjSFZ6YUdKNWRHVnpJQ0puYkc5aVlXeGZZbmwwWlhNaUNpQWdJQ0F2THlCMFpYTjBjeTloY25ScFptRmpkSE12VTNSaGRHVlBjSE12WTI5dWRISmhZM1F1Y0hrNk5ETTNDaUFnSUNBdkx5QkNlWFJsY3loaUltUjFiVzE1WDJKNWRHVnpJaWtzQ2lBZ0lDQmllWFJsWTE4d0lDOHZJREI0TmpRM05UWmtObVEzT1RWbU5qSTNPVGMwTmpVM013b2dJQ0FnTHk4Z2RHVnpkSE12WVhKMGFXWmhZM1J6TDFOMFlYUmxUM0J6TDJOdmJuUnlZV04wTG5CNU9qUXpOaTAwTXprS0lDQWdJQzh2SUhObGJHWXVaMnh2WW1Gc1gySjVkR1Z6SUQwZ1IyeHZZbUZzVTNSaGRHVW9DaUFnSUNBdkx5QWdJQ0FnUW5sMFpYTW9ZaUprZFcxdGVWOWllWFJsY3lJcExBb2dJQ0FnTHk4Z0lDQWdJR3RsZVQwaVoyeHZZbUZzWDJKNWRHVnpJaXdLSUNBZ0lDOHZJQ2tLSUNBZ0lHRndjRjluYkc5aVlXeGZjSFYwQ2lBZ0lDQXZMeUIwWlhOMGN5OWhjblJwWm1GamRITXZVM1JoZEdWUGNITXZZMjl1ZEhKaFkzUXVjSGs2TkRRd0NpQWdJQ0F2THlCelpXeG1MbWRzYjJKaGJGOTFhVzUwTmpSZlpYaHdiR2xqYVhRZ1BTQmhiR2R2Y0hrdVZVbHVkRFkwS0RJcENpQWdJQ0J3ZFhOb1lubDBaWE1nSW1kc2IySmhiRjkxYVc1ME5qUmZaWGh3YkdsamFYUWlDaUFnSUNCd2RYTm9hVzUwSURJS0lDQWdJR0Z3Y0Y5bmJHOWlZV3hmY0hWMENpQWdJQ0F2THlCMFpYTjBjeTloY25ScFptRmpkSE12VTNSaGRHVlBjSE12WTI5dWRISmhZM1F1Y0hrNk5EUXhDaUFnSUNBdkx5QnpaV3htTG1kc2IySmhiRjlpZVhSbGMxOWxlSEJzYVdOcGRDQTlJR0ZzWjI5d2VTNUNlWFJsY3loaUltUjFiVzE1WDJKNWRHVnpJaWtLSUNBZ0lIQjFjMmhpZVhSbGN5QWlaMnh2WW1Gc1gySjVkR1Z6WDJWNGNHeHBZMmwwSWdvZ0lDQWdZbmwwWldOZk1DQXZMeUF3ZURZME56VTJaRFprTnprMVpqWXlOemszTkRZMU56TUtJQ0FnSUdGd2NGOW5iRzlpWVd4ZmNIVjBDaUFnSUNBdkx5QjBaWE4wY3k5aGNuUnBabUZqZEhNdlUzUmhkR1ZQY0hNdlkyOXVkSEpoWTNRdWNIazZORFF6Q2lBZ0lDQXZMeUJoYkdkdmNIa3VZWEpqTkM1RWVXNWhiV2xqUW5sMFpYTW9ZaUprZFcxdGVWOWhjbU0wWDJKNWRHVnpJaWtzSUd0bGVUMGlaMnh2WW1Gc1gyRnlZelJmWW5sMFpYTWlDaUFnSUNCd2RYTm9ZbmwwWlhNZ0ltZHNiMkpoYkY5aGNtTTBYMko1ZEdWeklnb2dJQ0FnWW5sMFpXTmZNU0F2THlBd2VEQXdNVEEyTkRjMU5tUTJaRGM1TldZMk1UY3lOak16TkRWbU5qSTNPVGMwTmpVM013b2dJQ0FnTHk4Z2RHVnpkSE12WVhKMGFXWmhZM1J6TDFOMFlYUmxUM0J6TDJOdmJuUnlZV04wTG5CNU9qUTBNaTAwTkRRS0lDQWdJQzh2SUhObGJHWXVaMnh2WW1Gc1gyRnlZelJmWW5sMFpYTWdQU0JIYkc5aVlXeFRkR0YwWlNnS0lDQWdJQzh2SUNBZ0lDQmhiR2R2Y0hrdVlYSmpOQzVFZVc1aGJXbGpRbmwwWlhNb1lpSmtkVzF0ZVY5aGNtTTBYMko1ZEdWeklpa3NJR3RsZVQwaVoyeHZZbUZzWDJGeVl6UmZZbmwwWlhNaUNpQWdJQ0F2THlBcENpQWdJQ0JoY0hCZloyeHZZbUZzWDNCMWRBb2dJQ0FnTHk4Z2RHVnpkSE12WVhKMGFXWmhZM1J6TDFOMFlYUmxUM0J6TDJOdmJuUnlZV04wTG5CNU9qUTBOUW9nSUNBZ0x5OGdjMlZzWmk1bmJHOWlZV3hmWVhKak5GOWllWFJsYzE5bGVIQnNhV05wZENBOUlHRnNaMjl3ZVM1aGNtTTBMa1I1Ym1GdGFXTkNlWFJsY3loaUltUjFiVzE1WDJGeVl6UmZZbmwwWlhNaUtRb2dJQ0FnY0hWemFHSjVkR1Z6SUNKbmJHOWlZV3hmWVhKak5GOWllWFJsYzE5bGVIQnNhV05wZENJS0lDQWdJQzh2SUhSbGMzUnpMMkZ5ZEdsbVlXTjBjeTlUZEdGMFpVOXdjeTlqYjI1MGNtRmpkQzV3ZVRvME5ETUtJQ0FnSUM4dklHRnNaMjl3ZVM1aGNtTTBMa1I1Ym1GdGFXTkNlWFJsY3loaUltUjFiVzE1WDJGeVl6UmZZbmwwWlhNaUtTd2dhMlY1UFNKbmJHOWlZV3hmWVhKak5GOWllWFJsY3lJS0lDQWdJR0o1ZEdWalh6RWdMeThnTUhnd01ERXdOalEzTlRaa05tUTNPVFZtTmpFM01qWXpNelExWmpZeU56azNORFkxTnpNS0lDQWdJQzh2SUhSbGMzUnpMMkZ5ZEdsbVlXTjBjeTlUZEdGMFpVOXdjeTlqYjI1MGNtRmpkQzV3ZVRvME5EVUtJQ0FnSUM4dklITmxiR1l1WjJ4dlltRnNYMkZ5WXpSZllubDBaWE5mWlhod2JHbGphWFFnUFNCaGJHZHZjSGt1WVhKak5DNUVlVzVoYldsalFubDBaWE1vWWlKa2RXMXRlVjloY21NMFgySjVkR1Z6SWlrS0lDQWdJR0Z3Y0Y5bmJHOWlZV3hmY0hWMENpQWdJQ0F2THlCMFpYTjBjeTloY25ScFptRmpkSE12VTNSaGRHVlBjSE12WTI5dWRISmhZM1F1Y0hrNk5EUTJDaUFnSUNBdkx5QnpaV3htTG1kc2IySmhiRjkwZFhCc1pTQTlJQ2hWU1c1ME5qUW9NQ2tzSUZWSmJuUTJOQ2d4S1NrS0lDQWdJSEIxYzJoaWVYUmxjM01nSW1kc2IySmhiRjkwZFhCc1pTSWdNSGd3TURBd01EQXdNREF3TURBd01EQXdNREF3TURBd01EQXdNREF3TURBd01Rb2dJQ0FnWVhCd1gyZHNiMkpoYkY5d2RYUUtDbTFoYVc1ZllXWjBaWEpmYVdaZlpXeHpaVUF5T2dvZ0lDQWdMeThnZEdWemRITXZZWEowYVdaaFkzUnpMMU4wWVhSbFQzQnpMMk52Ym5SeVlXTjBMbkI1T2pRek1Bb2dJQ0FnTHk4Z1kyeGhjM01nVTNSaGRHVkJjSEJIYkc5aVlXeEZlRU52Ym5SeVlXTjBLRUZTUXpSRGIyNTBjbUZqZENrNkNpQWdJQ0IwZUc0Z1RuVnRRWEJ3UVhKbmN3b2dJQ0FnSVFvZ0lDQWdZWE56WlhKMENpQWdJQ0IwZUc0Z1QyNURiMjF3YkdWMGFXOXVDaUFnSUNBaENpQWdJQ0IwZUc0Z1FYQndiR2xqWVhScGIyNUpSQW9nSUNBZ0lRb2dJQ0FnSmlZS0lDQWdJSEpsZEhWeWJnbz0iLCJjbGVhciI6IkkzQnlZV2R0WVNCMlpYSnphVzl1SURFeENpTndjbUZuYldFZ2RIbHdaWFJ5WVdOcklHWmhiSE5sQ2dvdkx5QmhiR2R2Y0hrdVlYSmpOQzVCVWtNMFEyOXVkSEpoWTNRdVkyeGxZWEpmYzNSaGRHVmZjSEp2WjNKaGJTZ3BJQzArSUhWcGJuUTJORG9LYldGcGJqb0tJQ0FnSUhCMWMyaHBiblFnTVFvZ0lDQWdjbVYwZFhKdUNnPT0ifSwiYnl0ZUNvZGUiOnsiYXBwcm92YWwiOiJDeVlDQzJSMWJXMTVYMko1ZEdWekVnQVFaSFZ0YlhsZllYSmpORjlpZVhSbGN6RVlRQUNxZ0ExbmJHOWlZV3hmZFdsdWREWTBnUUpuZ0F4bmJHOWlZV3hmWW5sMFpYTW9aNEFXWjJ4dlltRnNYM1ZwYm5RMk5GOWxlSEJzYVdOcGRJRUNaNEFWWjJ4dlltRnNYMko1ZEdWelgyVjRjR3hwWTJsMEtHZUFFV2RzYjJKaGJGOWhjbU0wWDJKNWRHVnpLV2VBR21kc2IySmhiRjloY21NMFgySjVkR1Z6WDJWNGNHeHBZMmwwS1dlQ0FneG5iRzlpWVd4ZmRIVndiR1VRQUFBQUFBQUFBQUFBQUFBQUFBQUFBV2N4R3hSRU1Sa1VNUmdVRUVNPSIsImNsZWFyIjoiQzRFQlF3PT0ifSwiY29tcGlsZXJJbmZvIjp7ImNvbXBpbGVyIjoicHV5YSIsImNvbXBpbGVyVmVyc2lvbiI6eyJtYWpvciI6NSwibWlub3IiOjgsInBhdGNoIjoxLCJjb21taXRIYXNoIjpudWxsfX0sImV2ZW50cyI6W10sInRlbXBsYXRlVmFyaWFibGVzIjp7fSwic2NyYXRjaFZhcmlhYmxlcyI6e319";
+    }
+
+}

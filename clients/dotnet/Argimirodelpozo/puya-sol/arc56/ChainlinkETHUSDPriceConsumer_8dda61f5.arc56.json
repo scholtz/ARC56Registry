@@ -1,0 +1,118 @@
+{
+    "name": "ChainlinkETHUSDPriceConsumer",
+    "structs": {},
+    "methods": [
+        {
+            "name": "getLatestPrice",
+            "args": [],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": " Returns the latest price",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getDecimals",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "priceFeed": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "cHJpY2VGZWVk"
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        169
+                    ],
+                    "errorMessage": "Invalid chainlink price"
+                },
+                {
+                    "pc": [
+                        101,
+                        190
+                    ],
+                    "errorMessage": "check priceFeed exists"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRlhTLnNvbC5DaGFpbmxpbmtFVEhVU0RQcmljZUNvbnN1bWVyLmFwcHJvdmFsX3Byb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDI0IDYKICAgIGJ5dGVjYmxvY2sgInByaWNlRmVlZCIgMHggMHg4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwIDB4MTUxZjdjNzUKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIGJ5dGVjXzAgLy8gInByaWNlRmVlZCIKICAgIGJ5dGVjXzEgLy8gMHgKICAgIGFwcF9nbG9iYWxfcHV0CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweGE0MmZjNGQ5IDB4MGVjYWQ4ZDAgLy8gbWV0aG9kICJnZXRMYXRlc3RQcmljZSgpdWludDI1NiIsIG1ldGhvZCAiZ2V0RGVjaW1hbHMoKXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGdldExhdGVzdFByaWNlIGdldERlY2ltYWxzCiAgICBlcnIKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRlhTLnNvbC5DaGFpbmxpbmtFVEhVU0RQcmljZUNvbnN1bWVyLmdldExhdGVzdFByaWNlW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0TGF0ZXN0UHJpY2U6CiAgICBpdHhuX2JlZ2luCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAicHJpY2VGZWVkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBwcmljZUZlZWQgZXhpc3RzCiAgICBpbnRjXzIgLy8gMjQKICAgIGV4dHJhY3RfdWludDY0CiAgICBpbnRjXzMgLy8gNgogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgT25Db21wbGV0aW9uCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25JRAogICAgcHVzaGJ5dGVzIDB4OTNhZTlkZGMgLy8gbWV0aG9kICJsYXRlc3RSb3VuZERhdGEoKSh1aW50MjU2LHVpbnQyNTYsdWludDI1Nix1aW50MjU2LHVpbnQyNTYpIgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGl0eG5fc3VibWl0CiAgICBpdHhuIExhc3RMb2cKICAgIGV4dHJhY3QgNCAzMgogICAgaXR4biBMYXN0TG9nCiAgICBleHRyYWN0IDM2IDMyCiAgICBkdXAKICAgIGl0eG4gTGFzdExvZwogICAgZXh0cmFjdCAxMDAgMzIKICAgIHN3YXAKICAgIGl0eG4gTGFzdExvZwogICAgZXh0cmFjdCAxMzIgMzIKICAgIHN3YXAKICAgIGJ5dGVjXzIgLy8gMHg4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCiAgICBiXgogICAgYnl0ZWNfMiAvLyAweDgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGI+PQogICAgYnogZ2V0TGF0ZXN0UHJpY2VfYm9vbF9mYWxzZUA2CiAgICBkaWcgMQogICAgYnl0ZWNfMSAvLyAweAogICAgYiE9CiAgICBieiBnZXRMYXRlc3RQcmljZV9ib29sX2ZhbHNlQDYKICAgIGR1cAogICAgZGlnIDQKICAgIGI+PQogICAgYnogZ2V0TGF0ZXN0UHJpY2VfYm9vbF9mYWxzZUA2CiAgICBpbnRjXzEgLy8gMQoKZ2V0TGF0ZXN0UHJpY2VfYm9vbF9tZXJnZUA3OgogICAgYXNzZXJ0IC8vIEludmFsaWQgY2hhaW5saW5rIHByaWNlCiAgICBwdXNoaW50IDMyCiAgICBiemVybwogICAgZGlnIDMKICAgIGJ8CiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgpnZXRMYXRlc3RQcmljZV9ib29sX2ZhbHNlQDY6CiAgICBpbnRjXzAgLy8gMAogICAgYiBnZXRMYXRlc3RQcmljZV9ib29sX21lcmdlQDcKCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRlhTLnNvbC5DaGFpbmxpbmtFVEhVU0RQcmljZUNvbnN1bWVyLmdldERlY2ltYWxzW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0RGVjaW1hbHM6CiAgICBpdHhuX2JlZ2luCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAicHJpY2VGZWVkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBwcmljZUZlZWQgZXhpc3RzCiAgICBpbnRjXzIgLy8gMjQKICAgIGV4dHJhY3RfdWludDY0CiAgICBpbnRjXzMgLy8gNgogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgT25Db21wbGV0aW9uCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25JRAogICAgcHVzaGJ5dGVzIDB4Yjg3NzllZTcgLy8gbWV0aG9kICJkZWNpbWFscygpdWludDY0IgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGl0eG5fc3VibWl0CiAgICBpdHhuIExhc3RMb2cKICAgIGV4dHJhY3QgNCAwCiAgICBidG9pCiAgICBpdG9iCiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRlhTLnNvbC5DaGFpbmxpbmtFVEhVU0RQcmljZUNvbnN1bWVyLmNsZWFyX3N0YXRlX3Byb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="
+    },
+    "byteCode": {
+        "approval": "CiAEAAEYBiYECXByaWNlRmVlZAAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEFR98dTEYQAAFKClnI0MxGRREMRhEggIEpC/E2QQOytjQNhoAjgIAAQBaALEiKGVEJFslshAishkisgGyGIAEk66d3LIas7Q+VwQgtD5XJCBJtD5XZCBMtD5XhCBMKq0qp0EAHEsBKalBABVJSwSnQQAOI0SBIK9LA6srTFCwI0MiQv/vsSIoZUQkWyWyECKyGSKyAbIYgAS4d57nshqztD5XBAAXFitMULAjQw==",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

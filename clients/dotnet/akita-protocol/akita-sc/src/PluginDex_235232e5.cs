@@ -797,8 +797,8 @@ namespace Arc56.Generated.akita_protocol.akita_sc.PluginDex_235232e5
             var assetAAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); assetAAbi.From(assetA);
             var assetBAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); assetBAbi.From(assetB);
             var feeBpsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); feeBpsAbi.From(feeBps);
-            var hookPointsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); hookPointsAbi.From(hookPoints);
-            var hookPluginsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); hookPluginsAbi.From(hookPlugins);
+            var hookPointsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); hookPointsAbi.From(hookPoints);
+            var hookPluginsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); hookPluginsAbi.From(hookPlugins);
 
             var result = await base.CallApp(new List<object> { abiHandle, mbrPayment, assetAAbi, assetBAbi, feeBpsAbi, hookPointsAbi, hookPluginsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
             var lastLogBytes = result.Last();
@@ -822,8 +822,8 @@ namespace Arc56.Generated.akita_protocol.akita_sc.PluginDex_235232e5
             var assetAAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); assetAAbi.From(assetA);
             var assetBAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); assetBAbi.From(assetB);
             var feeBpsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.UInt64(); feeBpsAbi.From(feeBps);
-            var hookPointsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); hookPointsAbi.From(hookPoints);
-            var hookPluginsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>(); hookPluginsAbi.From(hookPlugins);
+            var hookPointsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); hookPointsAbi.From(hookPoints);
+            var hookPluginsAbi = new AVM.ClientGenerator.ABI.ARC4.Types.VariableArray<AVM.ClientGenerator.ABI.ARC4.Types.UInt64>("uint64"); hookPluginsAbi.From(hookPlugins);
 
             return await base.MakeTransactionList(new List<object> { abiHandle, mbrPayment, assetAAbi, assetBAbi, feeBpsAbi, hookPointsAbi, hookPluginsAbi }, _tx_fee: _tx_fee, _tx_callType: _tx_callType, _tx_roundValidity: _tx_roundValidity, _tx_note: _tx_note, _tx_sender: _tx_sender, _tx_transactions: _tx_transactions, _tx_apps: _tx_apps, _tx_assets: _tx_assets, _tx_accounts: _tx_accounts, _tx_boxes: _tx_boxes);
 

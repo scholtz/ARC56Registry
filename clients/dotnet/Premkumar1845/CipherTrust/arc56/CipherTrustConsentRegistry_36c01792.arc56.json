@@ -1,0 +1,159 @@
+{
+  "name": "CipherTrustConsentRegistry",
+  "desc": "Immutable on-chain log of consent hashes for DPDPA compliance. Records consent_hash, org_id, consent_type with tamper-proof timestamping.",
+  "networks": {
+    "testnet": {
+      "appId": 0
+    },
+    "mainnet": {
+      "appId": 0
+    }
+  },
+  "arcs": [56, 4, 32],
+  "structs": {},
+  "methods": [
+    {
+      "name": "create",
+      "desc": "Initialize the consent registry contract",
+      "readonly": false,
+      "args": [],
+      "returns": {
+        "type": "bool",
+        "desc": "Success status"
+      },
+      "events": []
+    },
+    {
+      "name": "log_consent",
+      "desc": "Log a consent hash on-chain. Idempotent — re-logging the same hash is rejected.",
+      "readonly": false,
+      "args": [
+        {
+          "name": "consent_hash",
+          "type": "string",
+          "desc": "SHA-256 hash of consent record (org_id + user_hash + type + timestamp)"
+        },
+        {
+          "name": "org_id",
+          "type": "uint64",
+          "desc": "Organization ID"
+        },
+        {
+          "name": "consent_type",
+          "type": "string",
+          "desc": "Type of consent (data_processing, marketing, analytics, third_party)"
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "desc": "The logged consent hash as confirmation"
+      },
+      "events": []
+    },
+    {
+      "name": "verify_consent",
+      "desc": "Check whether a consent hash exists in the registry",
+      "readonly": true,
+      "args": [
+        {
+          "name": "consent_hash",
+          "type": "string",
+          "desc": "Consent hash to verify"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "desc": "True if consent hash exists"
+      },
+      "events": []
+    },
+    {
+      "name": "get_consent_type",
+      "desc": "Return the consent type stored for a given hash",
+      "readonly": true,
+      "args": [
+        {
+          "name": "consent_hash",
+          "type": "string",
+          "desc": "Consent hash to look up"
+        }
+      ],
+      "returns": {
+        "type": "string",
+        "desc": "Consent type"
+      },
+      "events": []
+    },
+    {
+      "name": "get_consent_count",
+      "desc": "Get total number of consent records logged",
+      "readonly": true,
+      "args": [],
+      "returns": {
+        "type": "uint64",
+        "desc": "Total consent count"
+      },
+      "events": []
+    }
+  ],
+  "state": {
+    "schema": {
+      "global": {
+        "ints": 1,
+        "bytes": 0
+      },
+      "local": {
+        "ints": 0,
+        "bytes": 0
+      }
+    },
+    "keys": {
+      "global": {
+        "consent_count": {
+          "key": "consent_count",
+          "keyType": "string",
+          "valueType": "uint64",
+          "desc": "Total consent records logged"
+        }
+      },
+      "local": {},
+      "box": {
+        "consent_log": {
+          "keyType": "string",
+          "valueType": "string",
+          "desc": "Box mapping: consent_hash → consent_type"
+        }
+      }
+    }
+  },
+  "bareActions": {
+    "create": ["NoOp"],
+    "call": []
+  },
+  "sourceInfo": {
+    "approval": {
+      "sourceInfo": []
+    },
+    "clear": {
+      "sourceInfo": []
+    }
+  },
+  "source": {
+    "approval": "",
+    "clear": ""
+  },
+  "byteCode": {
+    "approval": "",
+    "clear": ""
+  },
+  "compilerInfo": {
+    "compiler": "beaker",
+    "compilerVersion": {
+      "major": 1,
+      "minor": 1,
+      "patch": 1
+    }
+  },
+  "events": [],
+  "templateVariables": {}
+}
