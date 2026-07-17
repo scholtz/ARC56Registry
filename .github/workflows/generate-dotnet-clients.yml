@@ -6,7 +6,12 @@ on:
   workflow_dispatch:
     inputs:
       only_repo:
-        description: "Optional: only process owner/repo (can be a comma-separated list), for testing"
+        description: "Optional: only process owner/repo, exact match (can be a comma-separated list)"
+        required: false
+        type: string
+      filter:
+        description: "Optional: only process owner/repo pairs containing this keyword, case-insensitive
+          (e.g. 'scholtz' or 'scholtz/Biatec'; can be a comma-separated list of keywords, OR'd together)"
         required: false
         type: string
   push:
@@ -75,6 +80,12 @@ jobs:
             IFS=',' read -ra REPOS <<< "${{ inputs.only_repo }}"
             for r in "${REPOS[@]}"; do
               ARGS+=(--only-repo "$r")
+            done
+          fi
+          if [ -n "${{ inputs.filter }}" ]; then
+            IFS=',' read -ra KEYWORDS <<< "${{ inputs.filter }}"
+            for k in "${KEYWORDS[@]}"; do
+              ARGS+=(--filter "$k")
             done
           fi
           python scripts/generate_dotnet_clients.py --publish --commit "${ARGS[@]}"

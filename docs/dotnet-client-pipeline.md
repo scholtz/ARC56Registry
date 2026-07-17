@@ -155,12 +155,25 @@ testing, use the scoping flags:
 ```bash
 python scripts/generate_dotnet_clients.py --only-repo algorandfoundation/arc55-encryption
 python scripts/generate_dotnet_clients.py --limit-projects 3
+python scripts/generate_dotnet_clients.py --filter scholtz
+python scripts/generate_dotnet_clients.py --filter scholtz/Biatec
 ```
 
+`--only-repo` matches `owner/repo` exactly; `--filter` matches any `owner/repo` pair
+whose (case-insensitive) string *contains* the given keyword - `--filter scholtz`
+matches every repo under the `scholtz` owner (and any repo with `scholtz` in its own
+name), while `--filter scholtz/Biatec` narrows further to just that owner's repos
+starting with `Biatec`. Both flags can be passed multiple times (repeat the flag; in
+the GitHub Actions `workflow_dispatch` inputs, use a comma-separated list instead -
+`inputs.only_repo` / `inputs.filter`) - multiple values for the same flag are OR'd
+together, but if both `--only-repo` and `--filter` are given, a project must satisfy
+both.
+
 Full, unscoped runs are meant for CI. Since the generator-image digest is tracked
-per-project rather than in one shared file, `--only-repo`/`--limit-projects` runs don't
-affect anything outside the projects they touch - a later full run will still correctly
-detect and act on a pending generator image change for every other project.
+per-project rather than in one shared file, `--only-repo`/`--filter`/`--limit-projects`
+runs don't affect anything outside the projects they touch - a later full run will
+still correctly detect and act on a pending generator image change for every other
+project.
 
 The script packs a project itself (see "Publishing to NuGet.org" below) as soon as
 that project's version is bumped - you don't need to run `dotnet pack` separately

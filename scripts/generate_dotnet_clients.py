@@ -829,7 +829,12 @@ def main() -> int:
     parser.add_argument("--limit-projects", type=int, default=None,
                          help="Only process the first N owner/repo projects (for local testing).")
     parser.add_argument("--only-repo", action="append", default=[],
-                         help="Only process owner/repo (can be passed multiple times).")
+                         help="Only process owner/repo (exact match, can be passed multiple times).")
+    parser.add_argument("--filter", action="append", default=[],
+                         help="Only process owner/repo pairs whose \"owner/repo\" string contains this "
+                              "substring, case-insensitive (e.g. 'scholtz' or 'scholtz/Biatec'). Can be "
+                              "passed multiple times - matches are OR'd together. If --only-repo is also "
+                              "given, a project must satisfy both.")
     parser.add_argument("--publish", action="store_true",
                          help="Push each changed project's package to nuget.org (via NUGET_API_KEY) "
                               "as soon as that project is packed, instead of only packing.")
@@ -865,6 +870,12 @@ def main() -> int:
     if args.only_repo:
         wanted = {tuple(r.split("/", 1)) for r in args.only_repo}
         selected = [item for item in selected if item[0] in wanted]
+    if args.filter:
+        keywords = [f.lower() for f in args.filter]
+        selected = [
+            item for item in selected
+            if any(kw in f"{item[0][0]}/{item[0][1]}".lower() for kw in keywords)
+        ]
     if args.limit_projects is not None:
         selected = selected[: args.limit_projects]
 
