@@ -29,16 +29,20 @@ consumers add one package reference per source repo, not one per contract.
   from our naming - only the namespace is ours to control.
 - **On-disk layout**: each source GitHub repo gets one directory under `clients/`,
   shared across every ecosystem's generated client for that repo (.NET today, npm and
-  Python planned - see [README.md](../README.md)); the .NET package lives in its
-  `dotnet/` subfolder:
+  Python planned - see [README.md](../README.md)). The downloaded ARC-56 specs live at
+  the repo level (`arc56/`), shared across ecosystems since they're the same source
+  files regardless of which client language is generated from them; the .NET package
+  lives in its own `dotnet/` subfolder:
   ```
-  clients/<owner>/<repo>/dotnet/
-    <PackageId>.csproj
-    README.md              # per-project usage doc, includes a table of every contract
-    state.json             # generation state: version, increment, per-contract content hashes
-    arc56/<file_slug>_<hash8>.arc56.json   # copy of the source spec, also bundled into the nupkg
-    src/<file_slug>_<hash8>.cs             # generated client
+  clients/<owner>/<repo>/
+    arc56/<file_slug>_<hash8>.arc56.json   # copy of the source spec, shared across ecosystems
+    dotnet/
+      <PackageId>.csproj
+      README.md              # per-project usage doc, includes a table of every contract
+      state.json             # generation state: version, increment, per-contract content hashes
+      src/<file_slug>_<hash8>.cs             # generated client
   ```
+  The `.csproj` bundles `../arc56/**/*.json` into the nupkg's `contentFiles/`.
 - **Shared assets**: `clients/_template/` holds `Project.csproj.template`,
   `README.md.template`, and `icon.png` (one shared package icon reused by every project,
   so all Arc56Registry-generated packages are visually recognizable together - see it at

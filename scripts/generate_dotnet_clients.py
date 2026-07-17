@@ -5,7 +5,9 @@ For every *active* row in arc56.links.csv, this script:
 
   1. Downloads the ARC-56 JSON spec (rate-limited: at least DOWNLOAD_DELAY_SECONDS
      between downloads, so we don't hammer raw.githubusercontent.com).
-  2. Copies it into clients/<owner>/<repo>/dotnet/arc56/<file_slug>_<hash8>.arc56.json.
+  2. Copies it into clients/<owner>/<repo>/arc56/<file_slug>_<hash8>.arc56.json - at the
+     repo level, not under dotnet/, since it's shared across every ecosystem's generated
+     client for that repo (.NET today, npm/Python planned).
   3. If its content changed (or the generator docker image changed, or it's new),
      regenerates the C# client via the scholtz2/dotnet-avm-generated-client docker
      image into clients/<owner>/<repo>/dotnet/src/<file_slug>_<hash8>.cs, in a
@@ -409,8 +411,9 @@ def process_project(
 ) -> bool:
     owner_slug = sanitize_path_segment(owner)
     repo_slug = sanitize_path_segment(repo)
-    project_dir = os.path.join(CLIENTS_DIR, owner_slug, repo_slug, "dotnet")
-    arc56_dir = os.path.join(project_dir, "arc56")
+    repo_dir = os.path.join(CLIENTS_DIR, owner_slug, repo_slug)
+    project_dir = os.path.join(repo_dir, "dotnet")
+    arc56_dir = os.path.join(repo_dir, "arc56")
     src_dir = os.path.join(project_dir, "src")
     state_path = os.path.join(project_dir, "state.json")
     os.makedirs(arc56_dir, exist_ok=True)
