@@ -1,0 +1,1 @@
+from . import IrishVehicleRegistry_31d46f86 as IrishVehicleRegistry_31d46f86
