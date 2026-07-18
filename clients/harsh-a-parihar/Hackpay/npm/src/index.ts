@@ -1,0 +1,9 @@
+export * as BatchDistributionContract_337398d1 from './BatchDistributionContract_337398d1';
+export * as ComplianceOracleContract_437d0a2e from './ComplianceOracleContract_437d0a2e';
+export * as EmergencyRecoveryContract_3ad7816e from './EmergencyRecoveryContract_3ad7816e';
+export * as MultiSigWalletContract_21df8993 from './MultiSigWalletContract_21df8993';
+export * as PlatformFeeManagerContract_322b43ec from './PlatformFeeManagerContract_322b43ec';
+export * as ReputationSystemContract_0ecb1d6c from './ReputationSystemContract_0ecb1d6c';
+export * as SimplePrizeDistribution_6048770e from './SimplePrizeDistribution_6048770e';
+export * as TaxComplianceContract_7adedc87 from './TaxComplianceContract_7adedc87';
+export * as SimplePrizeDistribution_3e6d91ef from './SimplePrizeDistribution_3e6d91ef';
