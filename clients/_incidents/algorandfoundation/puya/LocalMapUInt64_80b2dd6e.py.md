@@ -2,7 +2,7 @@
 
 - **Repo**: [algorandfoundation/puya](https://github.com/algorandfoundation/puya)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/puya/HEAD/test_cases/local_map/out/LocalMapUInt64.arc56.json](https://raw.githubusercontent.com/algorandfoundation/puya/HEAD/test_cases/local_map/out/LocalMapUInt64.arc56.json)
-- **Detected**: 2026-07-18T15:54:17.598481+00:00
+- **Detected**: 2026-07-18T17:43:22.717128+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
@@ -16,7 +16,7 @@ algokitgen-py -a application.json -o client.generated.py -m minimal
 ## Error
 
 ```
-  File "/home/runner/work/ARC56Registry/ARC56Registry/clients/algorandfoundation/puya/python/src/arc56_generated_algorandfoundation_puya/LocalMapUInt64_80b2dd6e.py", line 196
+  File "/home/runner/work/ARC56Registry/ARC56Registry/clients/algorandfoundation/puya/python/src/arc56_generated_algor_ae3945ab/LocalMapUInt64_80b2dd6e.py", line 196
     def in(
         ^^
 SyntaxError: invalid syntax
