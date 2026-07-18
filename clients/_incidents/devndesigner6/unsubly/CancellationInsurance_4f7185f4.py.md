@@ -2,7 +2,7 @@
 
 - **Repo**: [devndesigner6/unsubly](https://github.com/devndesigner6/unsubly)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/devndesigner6/unsubly/HEAD/smart_contracts/artifacts/CancellationInsurance/CancellationInsurance.arc56.json](https://raw.githubusercontent.com/devndesigner6/unsubly/HEAD/smart_contracts/artifacts/CancellationInsurance/CancellationInsurance.arc56.json)
-- **Detected**: 2026-07-18T15:58:41.161168+00:00
+- **Detected**: 2026-07-18T17:48:04.925555+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce

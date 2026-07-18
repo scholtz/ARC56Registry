@@ -2,7 +2,7 @@
 
 - **Repo**: [devndesigner6/unsubly](https://github.com/devndesigner6/unsubly)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/devndesigner6/unsubly/HEAD/smart_contracts/artifacts/AgentEscrowVault/AgentEscrowVault.arc56.json](https://raw.githubusercontent.com/devndesigner6/unsubly/HEAD/smart_contracts/artifacts/AgentEscrowVault/AgentEscrowVault.arc56.json)
-- **Detected**: 2026-07-18T15:58:40.280203+00:00
+- **Detected**: 2026-07-18T17:48:03.891743+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
