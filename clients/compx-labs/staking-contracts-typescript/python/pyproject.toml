@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "arc56-generated-compx-labs-staking-contracts-typescript"
+version = "1.1.2026071815"
+description = "Generated ARC-56 Algorand smart-contract clients for compx-labs/staking-contracts-typescript."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "compx-labs" }]
+keywords = ["algorand", "arc56", "avm", "smart-contract", "generated-client", "compx-labs", "staking-contracts-typescript"]
+dependencies = [
+    "algokit-utils>=4.2.3,<5.0.0",
+    "py-algorand-sdk>=2.11.1,<3.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/scholtz/Arc56Registry"
+Repository = "https://github.com/scholtz/Arc56Registry"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/arc56_generated_compx_labs_staking_contracts_typescript"]
