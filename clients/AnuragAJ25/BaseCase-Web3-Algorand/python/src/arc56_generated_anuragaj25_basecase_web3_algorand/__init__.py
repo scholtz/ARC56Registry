@@ -1,0 +1,1 @@
+from . import BountyEscrowContract_0ac88497 as BountyEscrowContract_0ac88497
