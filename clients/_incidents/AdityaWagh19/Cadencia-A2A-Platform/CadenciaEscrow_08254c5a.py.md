@@ -2,7 +2,7 @@
 
 - **Repo**: [AdityaWagh19/Cadencia-A2A-Platform](https://github.com/AdityaWagh19/Cadencia-A2A-Platform)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/AdityaWagh19/Cadencia-A2A-Platform/HEAD/backend/artifacts/CadenciaEscrow.arc56.json](https://raw.githubusercontent.com/AdityaWagh19/Cadencia-A2A-Platform/HEAD/backend/artifacts/CadenciaEscrow.arc56.json)
-- **Detected**: 2026-07-18T14:30:59.589759+00:00
+- **Detected**: 2026-07-18T16:43:37.502232+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
