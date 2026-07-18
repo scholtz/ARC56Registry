@@ -1,0 +1,1 @@
+from . import DocumentRegistry_2b8aefae as DocumentRegistry_2b8aefae
