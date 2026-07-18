@@ -2,7 +2,7 @@
 
 - **Repo**: [Premkumar1845/CipherTrust](https://github.com/Premkumar1845/CipherTrust)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Premkumar1845/CipherTrust/HEAD/contracts/arc56/CipherTrustProofVerifier.arc56.json](https://raw.githubusercontent.com/Premkumar1845/CipherTrust/HEAD/contracts/arc56/CipherTrustProofVerifier.arc56.json)
-- **Detected**: 2026-07-18T15:48:49.209285+00:00
+- **Detected**: 2026-07-18T17:37:48.062581+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
