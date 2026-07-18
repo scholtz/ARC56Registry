@@ -2,7 +2,7 @@
 
 - **Repo**: [manuelmauro/algonaut](https://github.com/manuelmauro/algonaut)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/manuelmauro/algonaut/HEAD/algonaut_abi_model/tests/fixtures/full.arc56.json](https://raw.githubusercontent.com/manuelmauro/algonaut/HEAD/algonaut_abi_model/tests/fixtures/full.arc56.json)
-- **Detected**: 2026-07-18T16:01:16.026911+00:00
+- **Detected**: 2026-07-18T17:50:41.224299+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
