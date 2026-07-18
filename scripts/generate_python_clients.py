@@ -81,6 +81,17 @@ PYPI_JSON_URL = "https://pypi.org/pypi/{package}/json"
 # checkpointing (see maybe_checkpoint_commit() below and
 # docs/python-client-pipeline.md).
 PERIODIC_COMMIT_INTERVAL_SECONDS = 300
+# `algokitgen-py` has been observed to hang indefinitely on at least one malformed
+# ARC-56 fixture (a test-suite artifact, not a real deployed contract) rather than
+# exiting with a nonzero code - without a timeout, that single contract blocks the
+# entire run forever, eventually killed only by the CI job's own multi-hour timeout
+# (which loses everything generated since the last checkpoint, not just that one
+# contract). GENERATOR_TIMEOUT_SECONDS turns that hang into an ordinary, per-contract
+# `generator_error` (see run_generator()) so one bad spec can never take down the rest
+# of the run. 120s is generous - a real generation normally takes well under a second.
+GENERATOR_TIMEOUT_SECONDS = 120
+PIP_TIMEOUT_SECONDS = 300  # one-time per run, not per-contract, but still guarded
+URLOPEN_TIMEOUT_SECONDS = 30
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -171,7 +182,7 @@ def get_generator_version() -> str:
         PYPI_JSON_URL.format(package=GENERATOR_PACKAGE),
         headers={"User-Agent": "arc56-python-generator"},
     )
-    with urllib.request.urlopen(req) as resp:
+    with urllib.request.urlopen(req, timeout=URLOPEN_TIMEOUT_SECONDS) as resp:
         data = json.load(resp)
     version = data.get("info", {}).get("version")
     if not version:
@@ -185,7 +196,7 @@ def ensure_generator_installed(version: str) -> None:
     result = subprocess.run(
         [sys.executable, "-c",
          f"import importlib.metadata as m; print(m.version('{GENERATOR_PACKAGE}'))"],
-        capture_output=True, text=True,
+        capture_output=True, text=True, timeout=PIP_TIMEOUT_SECONDS,
     )
     installed_version = result.stdout.strip() if result.returncode == 0 else None
     if installed_version == version:
@@ -193,7 +204,7 @@ def ensure_generator_installed(version: str) -> None:
     log(f"Installing {GENERATOR_PACKAGE}=={version} (currently installed: {installed_version or 'none'})")
     subprocess.run(
         [PIP_EXE, "install", "--quiet", f"{GENERATOR_PACKAGE}=={version}"],
-        check=True,
+        check=True, timeout=PIP_TIMEOUT_SECONDS,
     )
 
 
@@ -227,9 +238,24 @@ def run_generator(arc56_path: str, py_path: str, mode: str = "minimal") -> None:
     scripts/generate_typescript_clients.py) for the identical reason: this registry's
     job is decoding/calling contracts that are already deployed, not deploying new
     ones, and "full" mode's extra deployment metadata/helpers are pure bloat for that
-    use case."""
+    use case.
+
+    Runs under GENERATOR_TIMEOUT_SECONDS: algokitgen-py has been observed to hang
+    (rather than crash) on at least one malformed ARC-56 fixture, and a hang here would
+    otherwise block every contract after it for the rest of the run - see the
+    GENERATOR_TIMEOUT_SECONDS comment above. A timeout is raised as a RuntimeError so
+    it's handled by the caller exactly like any other generator failure: recorded as
+    that one contract's generator_error, then move on to the next one."""
     cmd = [ALGOKITGEN_EXE, "-a", arc56_path, "-o", py_path, "-m", mode]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    try:
+        result = subprocess.run(
+            cmd, capture_output=True, text=True, timeout=GENERATOR_TIMEOUT_SECONDS,
+        )
+    except subprocess.TimeoutExpired as exc:
+        raise RuntimeError(
+            f"algokitgen-py did not finish within {GENERATOR_TIMEOUT_SECONDS}s (killed)\n"
+            f"--- stdout so far ---\n{exc.stdout or ''}\n--- stderr so far ---\n{exc.stderr or ''}"
+        ) from exc
     if result.returncode != 0:
         raise RuntimeError(
             f"algokitgen-py exited with code {result.returncode}\n"
