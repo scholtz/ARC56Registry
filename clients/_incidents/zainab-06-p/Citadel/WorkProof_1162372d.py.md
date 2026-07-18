@@ -2,7 +2,7 @@
 
 - **Repo**: [zainab-06-p/Citadel](https://github.com/zainab-06-p/Citadel)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/zainab-06-p/Citadel/HEAD/projects/contracts/smart_contracts/artifacts/workproof/WorkProof.arc56.json](https://raw.githubusercontent.com/zainab-06-p/Citadel/HEAD/projects/contracts/smart_contracts/artifacts/workproof/WorkProof.arc56.json)
-- **Detected**: 2026-07-18T16:05:31.540475+00:00
+- **Detected**: 2026-07-18T17:54:47.058839+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
