@@ -13,8 +13,8 @@ cover.
   by default, since its own `*.arc56.json` files are examples/fixtures, not real specs
   meant to be registered; add more `owner/repo` lines there to blacklist others).
 - `scripts/validate_arc56_links.py` - PR check enforcing the CSV's rules.
-- **Client generation is a 3-stage pipeline, run twice (once per ecosystem) - download
-  is shared, generate/publish are per-ecosystem:**
+- **Client generation is a 3-stage pipeline, run three times (once per ecosystem) -
+  download is shared, generate/publish are per-ecosystem:**
   - `scripts/download_arc56_specs.py` - stage 1 (shared): downloads every active ARC-56
     spec into `clients/<owner>/<repo>/arc56/`.
   - `scripts/generate_dotnet_clients.py` - stage 2 (.NET): reads local specs, generates
@@ -26,14 +26,23 @@ cover.
     network, no publish.
   - `scripts/publish_npm_packages.py` - stage 3 (TypeScript): lists the npm registry's
     actually-published versions, builds+publishes only what's missing.
-  - See [docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md) and
-    [docs/typescript-client-pipeline.md](docs/typescript-client-pipeline.md).
+  - `scripts/generate_python_clients.py` - stage 2 (Python): reads local specs,
+    generates Python source via `algokitgen-py` (the `algokit-client-generator` PyPI
+    package's console script), no network beyond a once-per-run PyPI version check +
+    `pip install` of the generator itself, no publish.
+  - `scripts/publish_python_packages.py` - stage 3 (Python): lists PyPI's actually-
+    published versions, builds (`python -m build`) + publishes (`twine`) only what's
+    missing.
+  - See [docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md),
+    [docs/typescript-client-pipeline.md](docs/typescript-client-pipeline.md), and
+    [docs/python-client-pipeline.md](docs/python-client-pipeline.md).
 - `clients/<owner>/<repo>/arc56/` - downloaded ARC-56 specs, shared across every
-  ecosystem's generated client for that repo. `clients/<owner>/<repo>/dotnet/` and
-  `clients/<owner>/<repo>/npm/` are the per-ecosystem generated packages; a `python/`
-  sibling is planned.
+  ecosystem's generated client for that repo. `clients/<owner>/<repo>/dotnet/`,
+  `clients/<owner>/<repo>/npm/`, and `clients/<owner>/<repo>/python/` are the
+  per-ecosystem generated packages.
 - `clients/_template/` - shared .NET csproj/README templates + shared package icon.
 - `clients/_template_npm/` - shared npm package.json/tsconfig.json/README templates.
+- `clients/_template_python/` - shared pyproject.toml/README templates.
 - `scripts/generate_hash_registry.py` - builds `approval-programs/` and
   `clear-programs/`, lookups from SHA-256(approval program) / SHA-256(clear program)
   to a durable URL of the matching ARC-56 spec. Lets a wallet that only has a
@@ -52,6 +61,7 @@ cover.
 - `docs/dotnet-client-pipeline.md` - full detail on the .NET client pipeline.
 - `docs/typescript-client-pipeline.md` - full detail on the TypeScript client pipeline.
 - `docs/npm-publishing-setup.md` - one-time `NPM_TOKEN` secret setup for npm publishing.
+- `docs/pypi-publishing-setup.md` - one-time `PYPI_TOKEN` secret setup for PyPI publishing.
 - `docs/hash-registry.md` - full detail on the hash registry + GitHub Pages pipeline.
 
 ## Hard rules - do not violate these
@@ -77,23 +87,25 @@ cover.
      actual page fullness instead (see `partition_and_collect` in that script).
    - Raw file downloads (`raw.githubusercontent.com`) - `download_arc56_specs.py`
      enforces 7s between downloads for the same reason. This is the *only* script that
-     downloads ARC-56 specs; the generate/publish scripts for both ecosystems never
-     touch the network for a spec (see the 3-stage pipeline above).
+     downloads ARC-56 specs; the generate/publish scripts for all three ecosystems
+     never touch the network for a spec (see the 3-stage pipeline above).
 4. **CSV must stay valid CSV per GitHub's rendering rules** (RFC 4180 quoting via
    Python's `csv` module, not manual string joins) so it renders as a table on GitHub.
-5. **One package per GitHub repo, not per contract** - for both ecosystems.
-   Per-contract uniqueness comes from the namespace/export
+5. **One package per GitHub repo, not per contract** - for all three ecosystems.
+   Per-contract uniqueness comes from the namespace/export/module
    (`Arc56.Generated.<owner>.<repo>.<file_slug>_<hash8>` for .NET,
-   `export * as <file_slug>_<hash8>` for TypeScript), not from splitting into more
+   `export * as <file_slug>_<hash8>` for TypeScript,
+   `from . import <file_slug>_<hash8>` for Python), not from splitting into more
    packages.
 6. **Never commit changes unless asked.** This applies doubly to `git push` and to
-   anything that would trigger a NuGet or npm publish.
-7. **Publishing (nuget.org and npm) is rate-limited and list-then-publish, never
-   blind-push.** `publish_dotnet_packages.py`/`publish_npm_packages.py` query the
-   registry's own live list of published versions before deciding what to publish
-   (never a locally-cached flag), and wait at least 5s between successive pushes. Don't
-   reintroduce delay into the generate scripts - only download and publish are
-   rate-limited; generation deliberately has none.
+   anything that would trigger a NuGet, npm, or PyPI publish.
+7. **Publishing (nuget.org, npm, and PyPI) is rate-limited and list-then-publish,
+   never blind-push.** `publish_dotnet_packages.py`/`publish_npm_packages.py`/
+   `publish_python_packages.py` query the registry's own live list of published
+   versions before deciding what to publish (never a locally-cached flag), and wait at
+   least 5s (20s for PyPI) between successive pushes. Don't reintroduce delay into the
+   generate scripts - only download and publish are rate-limited; generation
+   deliberately has none.
 8. **`deploy-hash-registry-pages.yml` needs a one-time manual repo setting** (Settings
    > Pages > Source: "GitHub Actions") that no workflow file can set. If Pages
    deployment ever fails with a permissions/source error, that setting - not the
@@ -110,7 +122,8 @@ Never run `scripts/download_arc56_specs.py` unscoped locally - it processes thou
 of URLs at 7s+ each. Always use `--only-repo owner/repo` or `--limit-projects N` for
 local runs; see docs/dotnet-client-pipeline.md. The generate/publish scripts
 (`generate_dotnet_clients.py`, `publish_dotnet_packages.py`,
-`generate_typescript_clients.py`, `publish_npm_packages.py`) have no download delay of
+`generate_typescript_clients.py`, `publish_npm_packages.py`,
+`generate_python_clients.py`, `publish_python_packages.py`) have no download delay of
 their own, but still support the same scoping flags and are worth scoping locally too,
 simply because a full run touches every repo in the registry (thousands).
 
@@ -124,6 +137,19 @@ been observed to break across algokit-utils versions) and why
 ranges must track the generator's own current peer dependencies (`npm view
 @algorandfoundation/algokit-client-generator peerDependencies`) - a stale pin there
 reproducibly breaks every generated package's type-check, not just one.
+
+The Python pipeline needs no Docker either - `algokitgen-py` (from the
+`algokit-client-generator` PyPI package) is a plain `pip`-installable CLI tool.
+`generate_python_clients.py` installs/upgrades it itself at the start of a run (a
+one-time PyPI metadata + wheel fetch, not per-contract) and also uses `minimal` mode
+for the same reason as TypeScript. `clients/_template_python/pyproject.toml.template`'s
+`algokit-utils`/`py-algorand-sdk` version ranges must similarly track the generator's
+own PyPI dependency pin (`pip show algokit-client-generator`) - see
+docs/python-client-pipeline.md. Unlike TypeScript's whole-project `tsc --noEmit` pass,
+Python quarantining is a per-file `py_compile` syntax check done immediately after each
+file is generated - no multi-attempt retry loop, because generated Python modules never
+import each other. There's deliberately no `mypy`/`pyright` type-check step - see
+"Known limitations" in docs/python-client-pipeline.md for why.
 
 The generator Docker image (`scholtz2/dotnet-avm-generated-client`) can crash on some
 ARC-56 specs (seen: `NullReferenceException` in `ABITypeToCSType`). Separately, some
@@ -143,7 +169,8 @@ pins those separately from the package `<Version>`. Don't "simplify" that away.
 
 - Every pipeline script (`download_arc56_specs.py`, `generate_dotnet_clients.py`,
   `publish_dotnet_packages.py`, `generate_typescript_clients.py`,
-  `publish_npm_packages.py`) defines its own local `log(message)` helper that prefixes
+  `publish_npm_packages.py`, `generate_python_clients.py`, `publish_python_packages.py`)
+  defines its own local `log(message)` helper that prefixes
   a UTC timestamp and writes to stderr - use it for anything that's genuinely a log
   line. The one exception is each publish script's `--dry-run` "would pack + push ..."
   / "would build + publish ..." preview line, which stays a plain `print()` to stdout
@@ -159,11 +186,13 @@ pins those separately from the package `<Version>`. Don't "simplify" that away.
   Don't revert this back to "commit once per finished project only".
 - .NET versioning is the 4-part legacy scheme `1.0.<increment>.<yyyyMMddHH>` - matches
   what `Algorand4` (the runtime dependency of every generated client) already uses.
-  TypeScript versioning is `1.<increment>.<yyyyMMddHH>` (3-part, valid semver - npm
-  rejects the .NET pipeline's 4-part scheme) - same information, shifted to fit.
-- No LICENSE file exists yet, so generated `.csproj`/`package.json` files intentionally
-  omit `PackageLicenseExpression`/`license`. Don't add one without the user deciding on
-  a license first.
+  TypeScript and Python versioning both share the exact same `1.<increment>.<yyyyMMddHH>`
+  string (3-part, valid semver *and* valid PEP 440 - npm rejects the .NET pipeline's
+  4-part scheme, and this 3-part one happens to satisfy both ecosystems at once, so
+  there's no separate Python-specific scheme).
+- No LICENSE file exists yet, so generated `.csproj`/`package.json`/`pyproject.toml`
+  files intentionally omit `PackageLicenseExpression`/`license`. Don't add one without
+  the user deciding on a license first.
 - `dotnet nuget push` to nuget.org is wired up via **Trusted Publishing** (OIDC,
   `NuGet/login@v1`), not a long-lived API key - see
   [docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md#publishing-to-nugetorg).
@@ -179,10 +208,19 @@ pins those separately from the package `<Version>`. Don't "simplify" that away.
   [docs/npm-publishing-setup.md](docs/npm-publishing-setup.md) for the full reasoning
   and setup steps. Don't "upgrade" this to OIDC trusted publishing without checking
   whether npm has since added an account/org-wide policy option.
-- Both publish scripts (`publish_dotnet_packages.py`, `publish_npm_packages.py`) decide
-  what to publish by **querying the registry's own live list of published versions**
-  (nuget.org's flat-container index / the npm registry's package metadata), never by
-  trusting a locally-recorded `published_version` flag - that field is written back
-  only as an informational cache after a successful publish. Don't change this to
-  trust the local flag as the source of truth; it's what makes a partially-failed
-  previous run self-heal on the next one without extra retry bookkeeping.
+- `twine upload` to PyPI deliberately uses a classic **account-scoped API token**
+  (`PYPI_TOKEN` repo secret), not PyPI's own OIDC Trusted Publishing, for the same
+  reason as npm above - and PyPI's version is even stricter: a project must already
+  exist on PyPI before Trusted Publishing can be configured for it at all, which is
+  incompatible with this pipeline auto-creating brand-new packages - see
+  [docs/pypi-publishing-setup.md](docs/pypi-publishing-setup.md). Don't "upgrade" this
+  without checking whether PyPI has since added a way to pre-authorize unpublished
+  project names.
+- All three publish scripts (`publish_dotnet_packages.py`, `publish_npm_packages.py`,
+  `publish_python_packages.py`) decide what to publish by **querying the registry's own
+  live list of published versions** (nuget.org's flat-container index / the npm
+  registry's package metadata / PyPI's JSON API), never by trusting a locally-recorded
+  `published_version` flag - that field is written back only as an informational cache
+  after a successful publish. Don't change this to trust the local flag as the source
+  of truth; it's what makes a partially-failed previous run self-heal on the next one
+  without extra retry bookkeeping.

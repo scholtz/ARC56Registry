@@ -1,0 +1,690 @@
+#!/usr/bin/env python3
+"""Generate/update the per-repository Python packages of ARC-56 clients.
+
+Mirrors scripts/generate_typescript_clients.py, but for Python instead of TypeScript,
+using the ARC-56/ARC-32 client generator from
+[algorandfoundation/algokit-client-generator-py](https://github.com/algorandfoundation/algokit-client-generator-py)
+(the `algokit-client-generator` PyPI package, whose console-script entry point is
+`algokitgen-py`).
+
+This is the second of three stages in the Python pipeline (download -> generate ->
+publish; see scripts/download_arc56_specs.py and scripts/publish_python_packages.py).
+It makes no network requests for ARC-56 specs and applies no rate-limiting delay of
+its own - it only reads specs already downloaded by scripts/download_arc56_specs.py
+into clients/<owner>/<repo>/arc56/, and does not publish anything to PyPI (that's
+scripts/publish_python_packages.py's job). This script does query the PyPI JSON API
+once per run (not per contract) to resolve the generator's current version and, if
+necessary, `pip install`s it - the Python equivalent of `npx` fetching the TypeScript
+generator package on first use, not the per-contract ARC-56 rate limiting this
+pipeline cares about.
+
+For every *active* row in arc56.links.csv whose spec has already been downloaded,
+this script:
+
+  1. Reads the local copy of the ARC-56 JSON spec from
+     clients/<owner>/<repo>/arc56/<file_slug>_<hash8>.arc56.json.
+  2. If its content changed (or the generator's PyPI package version changed, or it's
+     new), regenerates the Python client via `algokitgen-py -a <spec> -o <out> -m
+     minimal` into clients/<owner>/<repo>/python/src/<import_pkg>/<file_slug>_<hash8>.py,
+     re-exported from that package's src/<import_pkg>/__init__.py
+     (`from . import <file_slug>_<hash8> as <file_slug>_<hash8>`).
+  3. Byte-compiles the freshly generated file (`py_compile`) to catch and quarantine
+     any contract whose generated code has a syntax error, so one broken contract
+     doesn't block every other contract in the same package. Unlike the TypeScript
+     pipeline's `tsc --noEmit`, this happens per-file right after generation rather
+     than as a whole-project retry loop: generated Python modules never import each
+     other (each is self-contained, importing only the stdlib, algosdk, and
+     algokit_utils), so there is no cross-file breakage a project-wide recheck could
+     ever surface that a single file's own compile step wouldn't already catch.
+
+One PyPI package is produced per GitHub repository (owner/repo), matching the
+.NET/TypeScript pipelines' one-package-per-repo convention. A repo's package version
+is only bumped when at least one of its contracts actually changed content, the
+generator's PyPI package version changed (forces every package to regenerate), or the
+pyproject.toml/README templates under clients/_template_python/ changed. Version
+format: `1.<increment>.<yyyyMMddHH>` - the same valid-semver/PEP 440-compatible scheme
+the TypeScript pipeline uses (see docs/python-client-pipeline.md). Building (`python -m
+build`) and publishing to PyPI are handled entirely by
+scripts/publish_python_packages.py, run as its own separate pipeline stage.
+
+Existing rows/files are never deleted, matching the rest of this repo's "never remove,
+only deactivate" convention (see docs/arc56-links-pipeline.md).
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import datetime
+import hashlib
+import json
+import os
+import py_compile
+import re
+import shutil
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.request
+
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CSV_PATH = os.path.join(REPO_ROOT, "arc56.links.csv")
+CLIENTS_DIR = os.path.join(REPO_ROOT, "clients")
+TEMPLATE_DIR = os.path.join(CLIENTS_DIR, "_template_python")
+INCIDENTS_DIR = os.path.join(CLIENTS_DIR, "_incidents")
+
+REGISTRY_REPO_URL = "https://github.com/scholtz/Arc56Registry"
+GENERATOR_PACKAGE = "algokit-client-generator"
+PYPI_JSON_URL = "https://pypi.org/pypi/{package}/json"
+# Commit (and push) at least this often - checked both between projects and *during* a
+# single large project's contract loop, mirroring the TypeScript pipeline's own
+# checkpointing (see maybe_checkpoint_commit() below and
+# docs/python-client-pipeline.md).
+PERIODIC_COMMIT_INTERVAL_SECONDS = 300
+
+RAW_URL_RE = re.compile(
+    r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
+)
+FILENAME_SUFFIX = ".arc56.json"
+# The algokitgen-py console script is a real executable (a Python entry-point shim),
+# not a node .cmd wrapper, so subprocess.run() can launch it directly cross-platform -
+# no WinError 2 dance like the TypeScript pipeline needs for npm/npx.
+ALGOKITGEN_EXE = shutil.which("algokitgen-py") or "algokitgen-py"
+PIP_EXE = shutil.which("pip") or "pip"
+# Prefers the "...Client" class as the one worth naming in READMEs/state - falls back
+# to the first exported class found if no "...Client"-suffixed one matches. Mirrors
+# CLIENT_CLASS_RE in scripts/generate_typescript_clients.py.
+CLIENT_CLASS_RE = re.compile(r"^class (\w*Client)\b", re.MULTILINE)
+ANY_CLASS_RE = re.compile(r"^class (\w+)\b", re.MULTILINE)
+
+
+def log(message: str) -> None:
+    """Every log line is prefixed with a UTC timestamp, so a multi-hour CI run's output
+    can be correlated with wall-clock time."""
+    timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    print(f"{timestamp} {message}", file=sys.stderr)
+
+
+def sanitize_path_segment(name: str) -> str:
+    return re.sub(r"[^A-Za-z0-9_.-]", "-", name)
+
+
+def sanitize_identifier(name: str) -> str:
+    slug = re.sub(r"[^A-Za-z0-9_]", "_", name)
+    if not slug or slug[0].isdigit():
+        slug = f"_{slug}"
+    return slug
+
+
+def sanitize_dist_segment(name: str) -> str:
+    """PyPI distribution names are compared case-insensitively with '-', '_', and '.'
+    all treated as equivalent (PEP 503 normalization), so - exactly like
+    sanitize_npm_segment() in scripts/generate_typescript_clients.py - this lowercases
+    and collapses runs of invalid characters into a single '-' rather than replacing
+    each one individually, and strips leading/trailing '-'."""
+    slug = re.sub(r"[^a-z0-9-]+", "-", name.lower()).strip("-")
+    return slug or "x"
+
+
+def sha256_hex(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def url_hash8(url: str) -> str:
+    return hashlib.sha256(url.encode("utf-8")).hexdigest()[:8]
+
+
+def parse_raw_url(url: str) -> tuple[str, str, str]:
+    m = RAW_URL_RE.match(url)
+    if not m:
+        raise ValueError(f"URL is not a raw.githubusercontent.com URL: {url}")
+    return m.group("owner"), m.group("repo"), m.group("path")
+
+
+def load_active_rows() -> list[dict[str, str]]:
+    today = datetime.date.today().isoformat()
+    rows = []
+    with open(CSV_PATH, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            active_from = row.get("ActiveFrom") or ""
+            active_until = row.get("ActiveUntil") or ""
+            if active_from and active_from > today:
+                continue
+            if active_until and active_until <= today:
+                continue
+            rows.append(row)
+    return rows
+
+
+def render_template(text: str, mapping: dict[str, str]) -> str:
+    for key, value in mapping.items():
+        text = text.replace("{{" + key + "}}", value)
+    return text
+
+
+def get_generator_version() -> str:
+    """Always contacts the PyPI JSON API for GENERATOR_PACKAGE's current version, so a
+    fresh publish of the generator is picked up on the very next run - mirrors
+    get_generator_version() in scripts/generate_typescript_clients.py (which uses `npm
+    view` for the same purpose)."""
+    req = urllib.request.Request(
+        PYPI_JSON_URL.format(package=GENERATOR_PACKAGE),
+        headers={"User-Agent": "arc56-python-generator"},
+    )
+    with urllib.request.urlopen(req) as resp:
+        data = json.load(resp)
+    version = data.get("info", {}).get("version")
+    if not version:
+        raise RuntimeError(f"Could not resolve a version for {GENERATOR_PACKAGE} from PyPI")
+    return version
+
+
+def ensure_generator_installed(version: str) -> None:
+    """Installs GENERATOR_PACKAGE at exactly `version` unless it's already installed at
+    that version - a one-time (per run), not per-contract, network operation."""
+    result = subprocess.run(
+        [sys.executable, "-c",
+         f"import importlib.metadata as m; print(m.version('{GENERATOR_PACKAGE}'))"],
+        capture_output=True, text=True,
+    )
+    installed_version = result.stdout.strip() if result.returncode == 0 else None
+    if installed_version == version:
+        return
+    log(f"Installing {GENERATOR_PACKAGE}=={version} (currently installed: {installed_version or 'none'})")
+    subprocess.run(
+        [PIP_EXE, "install", "--quiet", f"{GENERATOR_PACKAGE}=={version}"],
+        check=True,
+    )
+
+
+def get_template_hash() -> str:
+    """Hashes the templates that write_project_files() renders into each project's
+    pyproject.toml/README.md (but NOT the generated .py code)."""
+    parts = []
+    for name in ("pyproject.toml.template", "README.md.template"):
+        with open(os.path.join(TEMPLATE_DIR, name), "rb") as f:
+            parts.append(f.read())
+    return sha256_hex(b"\x00".join(parts))
+
+
+def load_project_state(path: str) -> dict:
+    if not os.path.exists(path):
+        return {"increment": 0, "version": None, "contracts": {}}
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_project_state(path: str, state: dict) -> None:
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(state, f, indent=2, sort_keys=True)
+        f.write("\n")
+
+
+def run_generator(arc56_path: str, py_path: str, mode: str = "minimal") -> None:
+    """mode="minimal" (rather than the generator's own "full" default) drops the
+    deploy/create Factory class and keeps only the typed Client - mirrors the
+    TypeScript pipeline's identical choice (see run_generator() in
+    scripts/generate_typescript_clients.py) for the identical reason: this registry's
+    job is decoding/calling contracts that are already deployed, not deploying new
+    ones, and "full" mode's extra deployment metadata/helpers are pure bloat for that
+    use case."""
+    cmd = [ALGOKITGEN_EXE, "-a", arc56_path, "-o", py_path, "-m", mode]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"algokitgen-py exited with code {result.returncode}\n"
+            f"--- stdout ---\n{result.stdout}\n--- stderr ---\n{result.stderr}"
+        )
+    if not os.path.isfile(py_path):
+        raise RuntimeError(f"algokitgen-py did not produce {py_path}")
+
+
+FAILURE_LABELS = {
+    "generator_error": "Generator crash",
+    "py_compile_error": "Generated code fails to compile",
+}
+
+
+def repro_command(arc56_url: str) -> str:
+    return (
+        f"pip install {GENERATOR_PACKAGE}\n"
+        f'curl -sL {arc56_url} -o application.json\n'
+        f'algokitgen-py -a application.json -o client.generated.py -m minimal'
+    )
+
+
+def write_incident_report(
+    owner: str,
+    repo: str,
+    url: str,
+    contract_id: str,
+    failure_type: str,
+    error_text: str,
+    generator_version: str,
+) -> str:
+    incident_dir = os.path.join(INCIDENTS_DIR, sanitize_path_segment(owner), sanitize_path_segment(repo))
+    os.makedirs(incident_dir, exist_ok=True)
+    report_path = os.path.join(incident_dir, f"{contract_id}.py.md")
+
+    kind_label = FAILURE_LABELS.get(failure_type, failure_type)
+    detected_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    repro_cmd = repro_command(url)
+
+    report = f"""# {kind_label}: {contract_id} (Python)
+
+- **Repo**: [{owner}/{repo}](https://github.com/{owner}/{repo})
+- **Source ARC-56 spec**: [{url}]({url})
+- **Detected**: {detected_at}
+- **Generator package**: `{GENERATOR_PACKAGE}=={generator_version}`
+
+## Reproduce
+
+```bash
+{repro_cmd}
+```
+
+## Error
+
+```
+{error_text}
+```
+"""
+    with open(report_path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(report)
+    return report_path
+
+
+def contract_id_for(contract: dict) -> str:
+    return f"{contract['file_slug']}_{contract['hash8']}"
+
+
+def extract_client_class_name(py_path: str) -> str:
+    with open(py_path, encoding="utf-8") as f:
+        text = f.read()
+    m = CLIENT_CLASS_RE.search(text)
+    if m:
+        return m.group(1)
+    m = ANY_CLASS_RE.search(text)
+    return m.group(1) if m else "(unknown)"
+
+
+def compile_check(py_path: str) -> str | None:
+    """Byte-compiles a single generated file to catch syntax errors - the Python
+    equivalent of the TypeScript pipeline's per-file `tsc` error, but checked
+    immediately after generation rather than as a whole-project pass (see the module
+    docstring for why that's safe here). Returns an error string, or None if it
+    compiled cleanly."""
+    try:
+        py_compile.compile(py_path, doraise=True, quiet=2)
+        return None
+    except py_compile.PyCompileError as exc:
+        return str(exc)
+
+
+def process_project(
+    owner: str,
+    repo: str,
+    rows: list[dict[str, str]],
+    generator_version: str,
+    template_hash: str,
+    progress: list[int],
+    commit_enabled: bool,
+) -> bool:
+    owner_slug = sanitize_path_segment(owner)
+    repo_slug = sanitize_path_segment(repo)
+    repo_dir = os.path.join(CLIENTS_DIR, owner_slug, repo_slug)
+    project_dir = os.path.join(repo_dir, "python")
+    arc56_dir = os.path.join(repo_dir, "arc56")
+    dist_name = f"arc56-generated-{sanitize_dist_segment(owner_slug)}-{sanitize_dist_segment(repo_slug)}"
+    import_pkg = sanitize_identifier(dist_name.replace("-", "_"))
+    src_dir = os.path.join(project_dir, "src", import_pkg)
+    state_path = os.path.join(project_dir, "state.json")
+    os.makedirs(src_dir, exist_ok=True)
+
+    state = load_project_state(state_path)
+    contracts_state: dict = state.setdefault("contracts", {})
+    force_regen = state.get("generator_version") != generator_version
+    state_dirty = False
+    code_changed = False
+
+    for row in rows:
+        url = row["ARC56URL"]
+        progress[0] += 1
+        log(f"[{progress[0]}/{progress[1]}] {owner}/{repo}: {url}")
+        # Checked on every row, mirroring the TypeScript pipeline's identical
+        # per-row checkpoint - see maybe_checkpoint_commit().
+        maybe_checkpoint_commit(owner, repo, commit_enabled)
+        try:
+            _, _, path = parse_raw_url(url)
+        except ValueError as exc:
+            log(f"WARNING: skipping unparseable URL {url}: {exc}")
+            continue
+        filename = path.rsplit("/", 1)[-1]
+        if not filename.endswith(FILENAME_SUFFIX):
+            log(f"WARNING: skipping non-ARC56 URL {url}")
+            continue
+        file_slug = sanitize_identifier(filename[: -len(FILENAME_SUFFIX)])
+        hash8 = url_hash8(url)
+        contract_id = f"{file_slug}_{hash8}"
+        existing = contracts_state.get(url)
+
+        arc56_path = os.path.join(arc56_dir, f"{contract_id}.arc56.json")
+        if not os.path.isfile(arc56_path):
+            continue  # not downloaded yet - scripts/download_arc56_specs.py will produce it later
+
+        with open(arc56_path, "rb") as f:
+            content = f.read()
+        content_hash = sha256_hex(content)
+        needs_regen = (
+            force_regen
+            or existing is None
+            or existing.get("content_sha256") != content_hash
+        )
+        if not needs_regen:
+            continue
+
+        py_path = os.path.join(src_dir, f"{contract_id}.py")
+        log(f"Generating Python client for {url} -> {py_path}")
+        try:
+            run_generator(arc56_path, py_path)
+        except Exception as exc:  # noqa: BLE001 - a single bad contract must never abort the whole run
+            log(f"WARNING: generator failed for {url}: {exc}")
+            contracts_state[url] = {
+                **{k: v for k, v in (existing or {}).items() if k != "content_sha256"},
+                "content_sha256": content_hash,
+                "file_slug": file_slug,
+                "hash8": hash8,
+                "generator_error": str(exc),
+            }
+            write_incident_report(owner, repo, url, contract_id, "generator_error", str(exc), generator_version)
+            state_dirty = True
+            continue
+
+        compile_error = compile_check(py_path)
+        if compile_error is not None:
+            log(f"WARNING: quarantining {contract_id} - fails to compile")
+            contracts_state[url] = {
+                **{k: v for k, v in (existing or {}).items() if k != "content_sha256"},
+                "content_sha256": content_hash,
+                "file_slug": file_slug,
+                "hash8": hash8,
+                "py_compile_error": "generated code fails to compile",
+            }
+            write_incident_report(owner, repo, url, contract_id, "py_compile_error", compile_error, generator_version)
+            state_dirty = True
+            continue
+
+        class_name = extract_client_class_name(py_path)
+        with open(py_path, "rb") as f:
+            py_hash = sha256_hex(f.read())
+
+        previous_py_hash = (existing or {}).get("py_sha256")
+        if previous_py_hash is not None and previous_py_hash == py_hash:
+            contracts_state[url] = {
+                **{k: v for k, v in (existing or {}).items()
+                   if k not in ("generator_error", "py_compile_error", "content_sha256", "py_sha256", "class_name")},
+                "content_sha256": content_hash,
+                "py_sha256": py_hash,
+                "file_slug": file_slug,
+                "hash8": hash8,
+                "class_name": class_name,
+            }
+            state_dirty = True
+            log(f"Regenerated {url} - identical code, not counted as a change")
+        else:
+            contracts_state[url] = {
+                "content_sha256": content_hash,
+                "py_sha256": py_hash,
+                "file_slug": file_slug,
+                "hash8": hash8,
+                "class_name": class_name,
+                "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            }
+            code_changed = True
+
+    template_changed = state.get("template_hash") != template_hash
+    needs_version_bump = code_changed or template_changed
+
+    if not (state_dirty or needs_version_bump):
+        return False
+
+    excluded_contract_ids = {
+        contract_id_for(c) for c in contracts_state.values()
+        if "file_slug" in c and ("py_compile_error" in c or "generator_error" in c)
+    }
+
+    if not needs_version_bump:
+        state["generator_version"] = generator_version
+        state["template_hash"] = template_hash
+        save_project_state(state_path, state)
+        log(f"Project clients/{owner}/{repo}/python: recorded failure state only, no generated-code "
+              f"changes - version not bumped")
+        return False
+
+    increment = state.get("increment", 0) + 1
+    version = f"1.{increment}.{datetime.datetime.now(datetime.timezone.utc):%Y%m%d%H}"
+    state["increment"] = increment
+    state["version"] = version
+    state["generator_version"] = generator_version
+    state["template_hash"] = template_hash
+
+    write_project_files(
+        project_dir, owner, repo, dist_name, import_pkg, contracts_state, excluded_contract_ids, version=version,
+    )
+    save_project_state(state_path, state)
+
+    log(f"Project clients/{owner}/{repo}/python -> version {version} ({len(contracts_state)} contract(s), "
+          f"{len(excluded_contract_ids)} quarantined)")
+    return True
+
+
+def write_project_files(
+    project_dir: str,
+    owner: str,
+    repo: str,
+    dist_name: str,
+    import_pkg: str,
+    contracts_state: dict,
+    excluded_contract_ids: set[str] = frozenset(),
+    version: str | None = None,
+) -> None:
+    with open(os.path.join(TEMPLATE_DIR, "pyproject.toml.template"), encoding="utf-8") as f:
+        pyproject_template = f.read()
+    with open(os.path.join(TEMPLATE_DIR, "README.md.template"), encoding="utf-8") as f:
+        readme_template = f.read()
+
+    description = f"Generated ARC-56 Algorand smart-contract clients for {owner}/{repo}."
+    pyproject = render_template(pyproject_template, {
+        "DIST_NAME": dist_name,
+        "IMPORT_PACKAGE": import_pkg,
+        "VERSION": version or "0.0.0",
+        "OWNER": owner,
+        "REPO": repo,
+        "DESCRIPTION": description,
+        "REGISTRY_REPO_URL": REGISTRY_REPO_URL,
+    })
+    with open(os.path.join(project_dir, "pyproject.toml"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(pyproject)
+
+    sorted_urls = sorted(contracts_state.keys(), key=str.lower)
+    table_rows = []
+    index_lines = []
+    for url in sorted_urls:
+        c = contracts_state[url]
+        if "file_slug" not in c:
+            continue
+        contract_id = contract_id_for(c)
+        if "generator_error" in c:
+            table_rows.append(f"| `{contract_id}` | _(generation failed - see state.json)_ | [{url}]({url}) |")
+        elif "py_compile_error" in c:
+            table_rows.append(f"| `{contract_id}` | _(fails to compile - excluded, see state.json)_ | [{url}]({url}) |")
+        else:
+            table_rows.append(f"| `{contract_id}` | `{c.get('class_name', '(unknown)')}` | [{url}]({url}) |")
+            index_lines.append(f"from . import {contract_id} as {contract_id}")
+    contracts_table = "\n".join(table_rows) if table_rows else "| _(none yet)_ | | |"
+
+    src_dir = os.path.join(project_dir, "src", import_pkg)
+    os.makedirs(src_dir, exist_ok=True)
+    init_content = "\n".join(index_lines) + "\n" if index_lines else "# no contracts generated yet\n"
+    with open(os.path.join(src_dir, "__init__.py"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(init_content)
+
+    # Remove quarantined/failed contract files from the importable package so a
+    # broken generated file can never accidentally be imported (it's still recorded
+    # in state.json and listed in the README, just not shipped in src/).
+    for contract_id in excluded_contract_ids:
+        stale_path = os.path.join(src_dir, f"{contract_id}.py")
+        if os.path.isfile(stale_path):
+            os.remove(stale_path)
+
+    first_contract_id = None
+    first_class_name = None
+    for url in sorted_urls:
+        c = contracts_state[url]
+        if "file_slug" in c and "generator_error" not in c and "py_compile_error" not in c:
+            first_contract_id = contract_id_for(c)
+            first_class_name = c.get("class_name")
+            break
+    readme = render_template(readme_template, {
+        "DIST_NAME": dist_name,
+        "IMPORT_PACKAGE": import_pkg,
+        "OWNER": owner,
+        "REPO": repo,
+        "CONTRACTS_TABLE": contracts_table,
+        "FIRST_CONTRACT_MODULE": first_contract_id or "contract_name_hash",
+        "FIRST_CONTRACT_CLASS": first_class_name or "ContractClient",
+    })
+    with open(os.path.join(project_dir, "README.md"), "w", encoding="utf-8", newline="\n") as f:
+        f.write(readme)
+
+
+def push_commits() -> None:
+    """Pushes whatever local commits exist so far. Never raises: a push failure here
+    just means the next checkpoint (or the workflow's own final push step) retries it."""
+    result = subprocess.run(["git", "push"], cwd=REPO_ROOT, capture_output=True, text=True)
+    if result.returncode != 0:
+        log(f"WARNING: git push failed (will retry later): {result.stdout}\n{result.stderr}")
+
+
+def configure_git_identity() -> None:
+    subprocess.run(["git", "config", "user.name", "github-actions[bot]"], cwd=REPO_ROOT, check=True)
+    subprocess.run(
+        ["git", "config", "user.email", "github-actions[bot]@users.noreply.github.com"],
+        cwd=REPO_ROOT, check=True,
+    )
+
+
+def commit_project_changes(owner: str, repo: str) -> None:
+    paths = [
+        os.path.join("clients", sanitize_path_segment(owner), sanitize_path_segment(repo), "python"),
+        os.path.join("clients", "_incidents"),
+    ]
+    subprocess.run(["git", "add", "--", *paths], cwd=REPO_ROOT, check=True)
+    diff = subprocess.run(["git", "diff", "--cached", "--quiet", "--", *paths], cwd=REPO_ROOT)
+    if diff.returncode == 0:
+        return
+    subprocess.run(
+        ["git", "commit", "-m", f"chore: regenerate Python ARC-56 client for {owner}/{repo}"],
+        cwd=REPO_ROOT, check=True,
+    )
+    log(f"Committed changes for {owner}/{repo}")
+
+
+_last_checkpoint_at: float | None = None
+
+
+def maybe_checkpoint_commit(owner: str, repo: str, commit_enabled: bool, force: bool = False) -> None:
+    """Mirrors maybe_checkpoint_commit() in scripts/generate_typescript_clients.py:
+    commits and pushes whatever's changed under this project's python/ dir so far, at
+    most once every PERIODIC_COMMIT_INTERVAL_SECONDS unless force=True."""
+    global _last_checkpoint_at
+    if not commit_enabled:
+        return
+    now = time.monotonic()
+    if not force and _last_checkpoint_at is not None and now - _last_checkpoint_at < PERIODIC_COMMIT_INTERVAL_SECONDS:
+        return
+    commit_project_changes(owner, repo)
+    push_commits()
+    _last_checkpoint_at = now
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--limit-projects", type=int, default=None,
+                         help="Only process the first N owner/repo projects (for local testing).")
+    parser.add_argument("--only-repo", action="append", default=[],
+                         help="Only process owner/repo (exact match, can be passed multiple times).")
+    parser.add_argument("--filter", action="append", default=[],
+                         help="Only process owner/repo pairs whose \"owner/repo\" string contains this "
+                              "substring, case-insensitive. Can be passed multiple times (OR'd together). "
+                              "If --only-repo is also given, a project must satisfy both.")
+    parser.add_argument("--commit", action="store_true",
+                         help="Git-commit each project's changes (including version bumps) as soon as "
+                              "that project finishes.")
+    args = parser.parse_args()
+
+    if not os.path.isdir(CLIENTS_DIR):
+        log(f"ERROR: {CLIENTS_DIR} does not exist")
+        return 1
+
+    try:
+        generator_version = get_generator_version()
+        ensure_generator_installed(generator_version)
+    except Exception as exc:  # noqa: BLE001
+        log(f"ERROR: could not resolve/install {GENERATOR_PACKAGE}: {exc}")
+        return 1
+    log(f"Generator package version: {GENERATOR_PACKAGE}=={generator_version}")
+    template_hash = get_template_hash()
+
+    rows = load_active_rows()
+    grouped: dict[tuple[str, str], list[dict[str, str]]] = {}
+    for row in rows:
+        try:
+            owner, repo, _ = parse_raw_url(row["ARC56URL"])
+        except ValueError as exc:
+            log(f"WARNING: {exc}")
+            continue
+        grouped.setdefault((owner, repo), []).append(row)
+
+    selected = sorted(grouped.items())
+    if args.only_repo:
+        wanted = {tuple(r.split("/", 1)) for r in args.only_repo}
+        selected = [item for item in selected if item[0] in wanted]
+    if args.filter:
+        keywords = [f.lower() for f in args.filter]
+        selected = [
+            item for item in selected
+            if any(kw in f"{item[0][0]}/{item[0][1]}".lower() for kw in keywords)
+        ]
+    if args.limit_projects is not None:
+        selected = selected[: args.limit_projects]
+
+    if args.commit:
+        configure_git_identity()
+
+    total_rows = sum(len(project_rows) for _, project_rows in selected)
+    progress = [0, total_rows]  # [rows processed so far, total rows selected this run]
+
+    changed_projects = 0
+    failed_projects = 0
+    for (owner, repo), project_rows in selected:
+        try:
+            if process_project(owner, repo, project_rows, generator_version, template_hash, progress, args.commit):
+                changed_projects += 1
+            maybe_checkpoint_commit(owner, repo, args.commit, force=True)
+        except Exception as exc:  # noqa: BLE001 - one project must never take down the whole run
+            failed_projects += 1
+            log(f"ERROR: unexpected failure processing {owner}/{repo}, skipping and "
+                  f"continuing with the next project: {exc}")
+            continue
+
+    if args.commit:
+        push_commits()
+
+    log(f"Done: {len(selected)}/{len(grouped)} project(s) scanned, "
+          f"{changed_projects} regenerated/bumped, {failed_projects} failed unexpectedly")
+    return 1 if failed_projects else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

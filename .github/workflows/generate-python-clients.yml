@@ -1,0 +1,79 @@
+name: Generate Python ARC-56 clients
+
+# Second stage of the Python pipeline (download -> generate -> publish; see
+# download-arc56-specs.yml and publish-python-packages.yml). Only reads ARC-56 specs
+# already downloaded by that first stage and regenerates/commits Python client source
+# - it never touches the network for a spec (resolving/installing the generator
+# package itself from PyPI is a one-time, small metadata + wheel request per run, not
+# per-contract) and never publishes to PyPI. See docs/python-client-pipeline.md.
+
+on:
+  workflow_run:
+    workflows: ["Download ARC-56 specs"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      only_repo:
+        description: "Optional: only process owner/repo, exact match (can be a comma-separated list)"
+        required: false
+        type: string
+      filter:
+        description: "Optional: only process owner/repo pairs containing this keyword, case-insensitive
+          (e.g. 'scholtz' or 'scholtz/Biatec'; can be a comma-separated list of keywords, OR'd together)"
+        required: false
+        type: string
+  push:
+    paths:
+      - "clients/_template_python/**"
+  schedule:
+    - cron: "0 7 * * *" # daily fallback at 07:00 UTC, in case the workflow_run trigger is ever missed
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-python-clients
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate/update Python clients (commits each project as it's ready)
+        run: |
+          ARGS=()
+          if [ -n "${{ inputs.only_repo }}" ]; then
+            IFS=',' read -ra REPOS <<< "${{ inputs.only_repo }}"
+            for r in "${REPOS[@]}"; do
+              ARGS+=(--only-repo "$r")
+            done
+          fi
+          if [ -n "${{ inputs.filter }}" ]; then
+            IFS=',' read -ra KEYWORDS <<< "${{ inputs.filter }}"
+            for k in "${KEYWORDS[@]}"; do
+              ARGS+=(--filter "$k")
+            done
+          fi
+          python scripts/generate_python_clients.py --commit "${ARGS[@]}"
+
+      - name: Commit any remaining changes and push
+        if: always()
+        run: |
+          CLIENT_PATHS=(clients/*/*/python clients/_template_python clients/_incidents)
+          if ! git diff --quiet -- "${CLIENT_PATHS[@]}" || ! git diff --quiet --cached -- "${CLIENT_PATHS[@]}"; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add "${CLIENT_PATHS[@]}"
+            git commit -m "chore: regenerate Python ARC-56 clients"
+          fi
+          git push

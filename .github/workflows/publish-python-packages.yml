@@ -1,0 +1,92 @@
+name: Publish Python packages
+
+# Third stage of the Python pipeline (download -> generate -> publish; see
+# download-arc56-specs.yml and generate-python-clients.yml). Only builds and publishes
+# already-generated, already-committed projects - it never downloads a spec or
+# regenerates any Python code. See docs/python-client-pipeline.md and
+# docs/pypi-publishing-setup.md for the one-time PYPI_TOKEN secret setup this needs.
+
+on:
+  workflow_run:
+    workflows: ["Generate Python ARC-56 clients"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      only_repo:
+        description: "Optional: only consider owner/repo, exact match (can be a comma-separated list)"
+        required: false
+        type: string
+      filter:
+        description: "Optional: only consider owner/repo pairs containing this keyword, case-insensitive
+          (e.g. 'scholtz' or 'scholtz/Biatec'; can be a comma-separated list of keywords, OR'd together)"
+        required: false
+        type: string
+  schedule:
+    - cron: "0 9 * * *" # daily fallback at 09:00 UTC, in case the workflow_run trigger is ever missed
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-python-packages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      # `secrets` can't be referenced directly in a step's `if:` - route it through a
+      # job-level env var instead.
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build tooling
+        run: python -m pip install --quiet --upgrade pip build twine
+
+      - name: List published versions and publish anything missing
+        if: ${{ env.PYPI_TOKEN != '' }}
+        env:
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          ARGS=()
+          if [ -n "${{ inputs.only_repo }}" ]; then
+            IFS=',' read -ra REPOS <<< "${{ inputs.only_repo }}"
+            for r in "${REPOS[@]}"; do
+              ARGS+=(--only-repo "$r")
+            done
+          fi
+          if [ -n "${{ inputs.filter }}" ]; then
+            IFS=',' read -ra KEYWORDS <<< "${{ inputs.filter }}"
+            for k in "${KEYWORDS[@]}"; do
+              ARGS+=(--filter "$k")
+            done
+          fi
+          python scripts/publish_python_packages.py "${ARGS[@]}"
+
+      - name: Skip publish (PYPI_TOKEN not configured yet)
+        if: ${{ env.PYPI_TOKEN == '' }}
+        run: |
+          echo "PYPI_TOKEN repo secret not set - see docs/pypi-publishing-setup.md. Skipping publish."
+
+      # publish_python_packages.py records published_version in each project's
+      # python/state.json right after a successful publish - commit that bookkeeping
+      # so the next run's registry query and this local record agree.
+      - name: Commit published_version bookkeeping and push
+        if: always()
+        run: |
+          if ! git diff --quiet -- clients/*/*/python/state.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add clients/*/*/python/state.json
+            git commit -m "chore: record published Python package versions"
+            git push
+          fi

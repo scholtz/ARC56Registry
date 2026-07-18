@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "{{DIST_NAME}}"
+version = "{{VERSION}}"
+description = "{{DESCRIPTION}}"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "{{OWNER}}" }]
+keywords = ["algorand", "arc56", "avm", "smart-contract", "generated-client", "{{OWNER}}", "{{REPO}}"]
+dependencies = [
+    "algokit-utils>=4.0.1,<5.0.0",
+    "py-algorand-sdk>=2.0.0",
+]
+
+[project.urls]
+Homepage = "{{REGISTRY_REPO_URL}}"
+Repository = "{{REGISTRY_REPO_URL}}"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/{{IMPORT_PACKAGE}}"]
