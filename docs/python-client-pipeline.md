@@ -189,13 +189,33 @@ pipelines' publish stages. For every generated
    flag. Same "ask the registry, not a local record" principle as the other two
    pipelines.
 3. If the project's current version isn't in that list, builds it (`python -m build`,
-   producing an sdist + wheel into `dist/`) and publishes it (`twine upload dist/*`),
-   waiting at least 20 seconds between publishes.
+   producing an sdist + wheel into `dist/`) and publishes it (`twine upload --verbose
+   dist/*`), waiting at least 20 seconds between publishes, plus an extra 60 seconds
+   before the *first-ever* publish of a given package name specifically (see
+   "Rate limiting" below).
 
 See [docs/pypi-publishing-setup.md](pypi-publishing-setup.md) for the one-time
 `PYPI_TOKEN` secret setup this needs, and why this pipeline uses a classic API token
 rather than PyPI's newer OIDC Trusted Publishing (the same reasoning the npm pipeline's
 own doc gives for `NPM_TOKEN`).
+
+### Rate limiting
+
+PyPI's upload endpoint (`https://upload.pypi.org/legacy/` - the name is a historical
+artifact of PyPI's API history, not a sign it's deprecated; it's PyPI's real, current,
+and only upload API) applies materially stricter abuse-prevention to **creating a new
+project** than to publishing a new version of one that already exists - and every
+package this pipeline creates is, by definition, brand new. Seen in practice: a run hit
+HTTP 429 on the very first real publish attempt it made, with every project before it
+in that run already up to date (no network publish call at all before that point) - so
+`PUBLISH_DELAY_SECONDS`'s steady-state pacing between successive publishes never even
+had a chance to apply. `NEW_PACKAGE_DELAY_SECONDS` (60s) adds an extra wait specifically
+before a package name's first-ever publish, on top of the normal 20s pacing - mirroring
+`NEW_PACKAGE_DELAY_SECONDS` in the TypeScript pipeline's own npm publisher, which
+documents the same npm-side behavior. `twine upload` is also run with `--verbose`, so a
+future rate-limit or other failure shows PyPI's actual response detail (by default,
+twine swallows it and just suggests re-running with `--verbose` - too late, since this
+script doesn't get a second attempt at the same request).
 
 ### Committing
 

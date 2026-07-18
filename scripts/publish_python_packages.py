@@ -16,9 +16,13 @@ For every `clients/<owner>/<repo>/python/pyproject.toml` project, this script:
      "published_version" flag - which versions of that package name are already
      published: `GET https://pypi.org/pypi/<package-name>/json`.
   3. If the project's current version isn't in that list, builds it (`python -m build`,
-     producing an sdist + wheel in dist/) and publishes it (`twine upload dist/*`),
-     waiting at least PUBLISH_DELAY_SECONDS between publishes so this script doesn't
-     hammer the PyPI registry.
+     producing an sdist + wheel in dist/) and publishes it (`twine upload --verbose
+     dist/*`), waiting at least PUBLISH_DELAY_SECONDS between publishes - plus an extra
+     NEW_PACKAGE_DELAY_SECONDS specifically before the *first-ever* publish of a given
+     package name, since PyPI (like npm) has been observed to rate-limit new-project
+     creation more aggressively than publishing a new version of an existing project,
+     and every package this pipeline creates is by definition brand new - so this
+     script doesn't hammer the PyPI registry.
 
 Querying the PyPI registry for each package's published versions (rather than trusting
 a locally-recorded flag) means a partially-failed previous publish run, or a manual
@@ -57,6 +61,17 @@ PUBLISH_DELAY_SECONDS = 20  # minimum time between successive `twine upload` cal
 # quota like nuget.org's 350/hour, but every project here is a brand-new package name, so a
 # conservative fixed delay is kept for the same reason the npm pipeline keeps one.
 LIST_DELAY_SECONDS = 1  # minimum time between successive "list published versions" lookups
+NEW_PACKAGE_DELAY_SECONDS = 60  # extra wait before the *first-ever* publish of a package name
+# (published_versions is empty) - mirrors NEW_PACKAGE_DELAY_SECONDS in
+# scripts/publish_npm_packages.py. Seen in practice: a run hit HTTP 429 on the very *first*
+# real publish attempt it made (every project before it in that run was already
+# up-to-date and never made a network publish call at all) - i.e. this pipeline can get
+# rate-limited before PUBLISH_DELAY_SECONDS's steady-state pacing between successive
+# publishes ever even applies. PyPI (like npm) has been observed to apply materially
+# stricter abuse-prevention to *creating a new project* than to publishing a new version
+# of one that already exists, and this pipeline creates a brand-new project on every
+# single publish by design - so this delay applies specifically to that first-ever case,
+# on top of (not instead of) the steady-state PUBLISH_DELAY_SECONDS pacing.
 
 _last_push_at: float | None = None
 _last_list_at: float | None = None
@@ -159,15 +174,26 @@ class RateLimited(Exception):
     PyPI's own version list confirms it."""
 
 
-def publish_to_pypi(project_dir: str, pypi_token: str) -> bool:
+def publish_to_pypi(project_dir: str, pypi_token: str, is_new_package: bool) -> bool:
     global _last_push_at
     _last_push_at = _rate_limit(_last_push_at, PUBLISH_DELAY_SECONDS)
+    if is_new_package:
+        log(f"first-ever publish of this package name - waiting an extra "
+            f"{NEW_PACKAGE_DELAY_SECONDS}s before publishing")
+        time.sleep(NEW_PACKAGE_DELAY_SECONDS)
     dist_dir = os.path.join(project_dir, "dist")
     env = dict(os.environ)
     env["TWINE_USERNAME"] = "__token__"
     env["TWINE_PASSWORD"] = pypi_token
     result = subprocess.run(
-        [TWINE_EXE, "upload", "--non-interactive", os.path.join(dist_dir, "*")],
+        # --verbose: without it, twine swallows the actual response body/headers on
+        # failure and just prints "Retry with the --verbose option for more details" -
+        # seen in practice on a 429, where the default output gave no way to tell a
+        # plain rate limit apart from PyPI's stricter new-project-creation limit (see
+        # NEW_PACKAGE_DELAY_SECONDS above) or anything else PyPI might report (e.g. a
+        # Retry-After header). Always-on, not just on retry, since we don't get a
+        # second chance to capture it - this run's failure is next run's history.
+        [TWINE_EXE, "upload", "--non-interactive", "--verbose", os.path.join(dist_dir, "*")],
         cwd=project_dir, capture_output=True, text=True, env=env, shell=False,
     )
     if result.returncode != 0:
@@ -253,7 +279,7 @@ def main() -> int:
             continue
 
         try:
-            pushed = publish_to_pypi(project_dir, pypi_token)
+            pushed = publish_to_pypi(project_dir, pypi_token, is_new_package=not published_versions)
         except RateLimited as exc:
             log(f"PyPI rate limit hit - stopping this run early instead of retrying "
                 f"the remaining {total - i + 1} project(s), which would likely all fail the "
