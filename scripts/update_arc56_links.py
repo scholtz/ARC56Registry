@@ -66,6 +66,8 @@ REQUEST_DELAY_SECONDS = 7  # code search is limited to 10 requests/minute, so st
 REPO_VERIFY_DELAY_SECONDS = 1
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_PATH = os.path.join(REPO_ROOT, "arc56.links.csv")
+# Repos to never add links for - see that file's comments for why/how to add more.
+REPO_BLACKLIST_PATH = os.path.join(REPO_ROOT, "scripts", "repo_blacklist.txt")
 URL_COLUMN = "ARC56URL"
 ACTIVE_FROM_COLUMN = "ActiveFrom"
 ACTIVE_UNTIL_COLUMN = "ActiveUntil"
@@ -84,6 +86,23 @@ GIT_COMMIT_AUTHOR_EMAIL = "github-actions[bot]@users.noreply.github.com"
 # already be present on origin during a later flush).
 _pending_urls: set[str] = set()
 _branch: str | None = None
+
+
+def load_repo_blacklist(path: str) -> set[str]:
+    """Load the "owner/repo" blacklist (one per line, "#" comments, blank lines ok).
+
+    Missing file just means an empty blacklist - it's not an error condition.
+    """
+    if not os.path.exists(path):
+        return set()
+    blacklist: set[str] = set()
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            blacklist.add(line.lower())
+    return blacklist
 
 
 def build_request(query: str, page: int, token: str) -> tuple[urllib.request.Request, str]:
@@ -153,13 +172,22 @@ def path_to_url(repo_full_name: str, path: str) -> str:
     return f"https://raw.githubusercontent.com/{repo_full_name}/HEAD/{encoded_path}"
 
 
-def add_matching_items(items: list[dict], urls: set[str], repos: set[str]) -> set[str]:
-    """Add matching items to urls/repos, returning only the URLs that were new."""
+def add_matching_items(
+    items: list[dict], urls: set[str], repos: set[str], blacklist: set[str]
+) -> set[str]:
+    """Add matching items to urls/repos, returning only the URLs that were new.
+
+    Blacklisted repos (see repo_blacklist.txt) are skipped entirely - not added
+    to `repos` either, so they're also excluded from the full-tree verification
+    pass below.
+    """
     added: set[str] = set()
     for item in items:
         path = item["path"]
         if path.endswith(FILENAME_SUFFIX):
             repo_full_name = item["repository"]["full_name"]
+            if repo_full_name.lower() in blacklist:
+                continue
             repos.add(repo_full_name)
             url = path_to_url(repo_full_name, path)
             if url not in urls:
@@ -292,7 +320,9 @@ def flush_pending(source: str) -> None:
           f"of the run", file=sys.stderr)
 
 
-def partition_and_collect(lo: int, hi: int, token: str, urls: set[str], repos: set[str], depth: int = 0) -> None:
+def partition_and_collect(
+    lo: int, hi: int, token: str, urls: set[str], repos: set[str], blacklist: set[str], depth: int = 0
+) -> None:
     # Deciding whether to split based on the API's reported total_count doesn't work:
     # GitHub explicitly documents total_count as only an approximation once a query
     # has more than 1,000 matches, and in practice it fluctuates wildly (e.g. a narrow
@@ -316,14 +346,14 @@ def partition_and_collect(lo: int, hi: int, token: str, urls: set[str], repos: s
     if hit_pagination_cap:
         if lo < hi and depth < MAX_SHARD_DEPTH:
             mid = (lo + hi) // 2
-            partition_and_collect(lo, mid, token, urls, repos, depth + 1)
-            partition_and_collect(mid + 1, hi, token, urls, repos, depth + 1)
+            partition_and_collect(lo, mid, token, urls, repos, blacklist, depth + 1)
+            partition_and_collect(mid + 1, hi, token, urls, repos, blacklist, depth + 1)
             return
         print(f"WARNING: size range {lo}..{hi} still hits the {MAX_RESULTS_PER_QUERY}-result "
               f"pagination cap at max shard depth or cannot be split further; some results in "
               f"this range may be missing", file=sys.stderr)
 
-    new_urls = add_matching_items(items_collected, urls, repos)
+    new_urls = add_matching_items(items_collected, urls, repos, blacklist)
     queue_new_urls(new_urls, f"code search size:{lo}..{hi}")
 
 
@@ -411,9 +441,14 @@ def verify_repo_full_tree(repo_full_name: str, token: str, urls: set[str]) -> No
 
 
 def collect_urls(token: str) -> set[str]:
+    blacklist = load_repo_blacklist(REPO_BLACKLIST_PATH)
+    if blacklist:
+        print(f"Ignoring {len(blacklist)} blacklisted repo(s) from {REPO_BLACKLIST_PATH}: "
+              f"{', '.join(sorted(blacklist))}", file=sys.stderr)
+
     urls: set[str] = set()
     repos: set[str] = set()
-    partition_and_collect(0, MAX_FILE_SIZE_BYTES, token, urls, repos)
+    partition_and_collect(0, MAX_FILE_SIZE_BYTES, token, urls, repos, blacklist)
 
     print(f"Code search found {len(urls)} ARC-56 file(s) across {len(repos)} repo(s); "
           f"double-checking each repo's full file tree for anything code search missed",

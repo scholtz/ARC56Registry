@@ -9,6 +9,9 @@ cover.
 
 - `arc56.links.csv` - the registry. Columns: `ARC56URL,ActiveFrom,ActiveUntil`.
 - `scripts/update_arc56_links.py` - finds new ARC-56 files on GitHub, merges into the CSV.
+  Skips any repo listed in `scripts/repo_blacklist.txt` (this repo itself is blacklisted
+  by default, since its own `*.arc56.json` files are examples/fixtures, not real specs
+  meant to be registered; add more `owner/repo` lines there to blacklist others).
 - `scripts/validate_arc56_links.py` - PR check enforcing the CSV's rules.
 - **Client generation is a 3-stage pipeline, run twice (once per ecosystem) - download
   is shared, generate/publish are per-ecosystem:**
