@@ -228,15 +228,22 @@ always comparing against PyPI's own live list rather than a local flag.
 - **`minimal` generator mode**: no deploy/create `Factory` class is generated (see
   "Naming and packaging conventions" above) - these packages are for decoding/calling
   existing deployed contracts, not deploying new ones.
-- **algokit-utils/algosdk version pins**: `clients/_template_python/pyproject.toml.template`
-  pins `algokit-utils` and `py-algorand-sdk` to ranges matching the generator's *own*
-  PyPI dependency declaration (`algokit-utils>=4.0.1,<5.0.0`, from the generator
-  package's own metadata - `pip show algokit-client-generator`). If a future generator
-  release changes that requirement, the template's pinned range needs a matching manual
-  update, exactly the same maintenance burden the TypeScript pipeline's doc describes
-  for `@algorandfoundation/algokit-utils`. Because a template edit bumps and
-  regenerates every project on the next run (see "Versioning" above), fixing the
-  template once fixes every package.
+- **algokit-utils/py-algorand-sdk version pins**: `clients/_template_python/pyproject.toml.template`
+  pins `algokit-utils>=4.2.3,<5.0.0` and `py-algorand-sdk>=2.11.1,<3.0.0` - floors at
+  the latest release of each verified to generate/build/install cleanly, ceilings
+  matching what the generator itself tolerates: `algokit-client-generator`'s own PyPI
+  metadata declares `algokit-utils (>=4.0.1,<5.0.0)` (`pip show
+  algokit-client-generator`), and `algokit-utils`'s own metadata in turn declares
+  `py-algorand-sdk (>=2.11.0,<3.0.0)` (`pip show algokit-utils`) - so neither ceiling
+  can silently resolve to an untested future major. If a future generator or
+  algokit-utils release changes either requirement, the template's pinned range needs a
+  matching manual update, exactly the same maintenance burden the TypeScript pipeline's
+  doc describes for `@algorandfoundation/algokit-utils`/`algosdk`. Because a template
+  edit bumps and regenerates every project on the next run (see "Versioning" above),
+  fixing the template once fixes every package. Verified end-to-end at these pins: a
+  generated project builds (`python -m build`), passes `twine check`, and installs and
+  imports cleanly in a clean virtualenv with `python -W error` (all warnings promoted
+  to errors) - zero errors or warnings at any step.
 - **`HEAD`-pinned sources**: like the links CSV itself, ARC-56 URLs point at `HEAD`.
 - **No license metadata**: generated `pyproject.toml` files don't set a `license`
   field, matching the .NET and TypeScript pipelines' reasoning (no LICENSE file in this
