@@ -2,7 +2,7 @@
 
 - **Repo**: [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/WIP/examples/sushiswap-v2/out/UniswapV2PairTest/UniswapV2Pair.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/WIP/examples/sushiswap-v2/out/UniswapV2PairTest/UniswapV2Pair.arc56.json)
-- **Detected**: 2026-07-18T15:45:24.890325+00:00
+- **Detected**: 2026-07-18T17:34:27.584704+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
@@ -16,7 +16,7 @@ algokitgen-py -a application.json -o client.generated.py -m minimal
 ## Error
 
 ```
-  File "/home/runner/work/ARC56Registry/ARC56Registry/clients/Argimirodelpozo/puya-sol/python/src/arc56_generated_argimirodelpozo_puya_sol/UniswapV2Pair_e9ea371d.py", line 153
+  File "/home/runner/work/ARC56Registry/ARC56Registry/clients/Argimirodelpozo/puya-sol/python/src/arc56_generated_argim_ff1f8b0b/UniswapV2Pair_e9ea371d.py", line 153
     from: str
         ^
 SyntaxError: invalid syntax

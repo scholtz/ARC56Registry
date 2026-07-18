@@ -2,7 +2,7 @@
 
 - **Repo**: [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/WIP/examples/openzeppelin/out/ERC1155SupplyTest/ERC1155SupplyTest.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/WIP/examples/openzeppelin/out/ERC1155SupplyTest/ERC1155SupplyTest.arc56.json)
-- **Detected**: 2026-07-18T15:43:41.587172+00:00
+- **Detected**: 2026-07-18T17:32:28.810825+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
@@ -16,7 +16,7 @@ algokitgen-py -a application.json -o client.generated.py -m minimal
 ## Error
 
 ```
-  File "/home/runner/work/ARC56Registry/ARC56Registry/clients/Argimirodelpozo/puya-sol/python/src/arc56_generated_argimirodelpozo_puya_sol/ERC1155SupplyTest_36b139fe.py", line 100
+  File "/home/runner/work/ARC56Registry/ARC56Registry/clients/Argimirodelpozo/puya-sol/python/src/arc56_generated_argim_ff1f8b0b/ERC1155SupplyTest_36b139fe.py", line 100
     from: str
         ^
 SyntaxError: invalid syntax
