@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "arc56-generated-udith-creates-algofetch"
+version = "1.1.2026071815"
+description = "Generated ARC-56 Algorand smart-contract clients for Udith-creates/AlgoFetch."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Udith-creates" }]
+keywords = ["algorand", "arc56", "avm", "smart-contract", "generated-client", "Udith-creates", "AlgoFetch"]
+dependencies = [
+    "algokit-utils>=4.2.3,<5.0.0",
+    "py-algorand-sdk>=2.11.1,<3.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/scholtz/Arc56Registry"
+Repository = "https://github.com/scholtz/Arc56Registry"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/arc56_generated_udith_creates_algofetch"]
