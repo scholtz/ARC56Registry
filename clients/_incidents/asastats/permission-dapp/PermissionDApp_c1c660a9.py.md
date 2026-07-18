@@ -2,7 +2,7 @@
 
 - **Repo**: [asastats/permission-dapp](https://github.com/asastats/permission-dapp)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/asastats/permission-dapp/HEAD/dapp/artifacts/PermissionDApp.arc56.json](https://raw.githubusercontent.com/asastats/permission-dapp/HEAD/dapp/artifacts/PermissionDApp.arc56.json)
-- **Detected**: 2026-07-18T15:57:15.820874+00:00
+- **Detected**: 2026-07-18T17:46:42.880311+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
