@@ -58,7 +58,6 @@ import datetime
 import hashlib
 import json
 import os
-import py_compile
 import re
 import shutil
 import subprocess
@@ -92,6 +91,12 @@ PERIODIC_COMMIT_INTERVAL_SECONDS = 300
 GENERATOR_TIMEOUT_SECONDS = 120
 PIP_TIMEOUT_SECONDS = 300  # one-time per run, not per-contract, but still guarded
 URLOPEN_TIMEOUT_SECONDS = 30
+# compile_check() runs py_compile out-of-process (see its docstring) specifically so it
+# can be bounded by a timeout too - a generator bug that produces syntactically valid
+# but pathological Python (e.g. a huge literal built from a runaway loop) could in
+# principle make even byte-compiling it slow, and an in-process call can't be safely
+# killed after a timeout the way a subprocess can.
+COMPILE_TIMEOUT_SECONDS = 30
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -339,12 +344,26 @@ def compile_check(py_path: str) -> str | None:
     equivalent of the TypeScript pipeline's per-file `tsc` error, but checked
     immediately after generation rather than as a whole-project pass (see the module
     docstring for why that's safe here). Returns an error string, or None if it
-    compiled cleanly."""
+    compiled cleanly.
+
+    Runs `py_compile` in a subprocess (bounded by COMPILE_TIMEOUT_SECONDS) rather than
+    calling `py_compile.compile()` in-process, for the same reason run_generator() runs
+    algokitgen-py with a timeout: a subprocess can be killed outright on timeout, while
+    an in-process call has no safe way to be interrupted after the fact - see the
+    COMPILE_TIMEOUT_SECONDS comment above."""
     try:
-        py_compile.compile(py_path, doraise=True, quiet=2)
-        return None
-    except py_compile.PyCompileError as exc:
-        return str(exc)
+        result = subprocess.run(
+            [sys.executable, "-m", "py_compile", py_path],
+            capture_output=True, text=True, timeout=COMPILE_TIMEOUT_SECONDS,
+        )
+    except subprocess.TimeoutExpired as exc:
+        return (
+            f"py_compile did not finish within {COMPILE_TIMEOUT_SECONDS}s (killed)\n"
+            f"--- stdout so far ---\n{exc.stdout or ''}\n--- stderr so far ---\n{exc.stderr or ''}"
+        )
+    if result.returncode != 0:
+        return result.stdout + result.stderr
+    return None
 
 
 def process_project(
