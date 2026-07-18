@@ -2,7 +2,7 @@
 
 - **Repo**: [asastats/rewards-suite](https://github.com/asastats/rewards-suite)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/asastats/rewards-suite/HEAD/rewardsweb/contract/artifacts/Rewards.arc56.json](https://raw.githubusercontent.com/asastats/rewards-suite/HEAD/rewardsweb/contract/artifacts/Rewards.arc56.json)
-- **Detected**: 2026-07-18T15:57:17.288007+00:00
+- **Detected**: 2026-07-18T17:46:44.211842+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
