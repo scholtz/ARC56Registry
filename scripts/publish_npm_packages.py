@@ -54,8 +54,16 @@ NPM_REGISTRY = "https://registry.npmjs.org"
 # shim on Windows, which subprocess.run() can't launch directly without shell=True.
 NPM_EXE = shutil.which("npm") or "npm"
 
-PUBLISH_DELAY_SECONDS = 5  # minimum time between successive `npm publish` calls
+PUBLISH_DELAY_SECONDS = 20  # minimum time between successive `npm publish` calls: npm has no
+# published numeric quota for this (unlike nuget.org's documented 350/hour), but every project
+# here is a brand-new package name, and real-world reports (npm/cli#8507, changesets#1574) show
+# npm's abuse-prevention limiter is much stricter for new-package creation than for publishing a
+# new version of an existing package, and that even large fixed delays don't help once you keep
+# retrying through a 429 - see RateLimited below, which stops the run instead of doing that.
 LIST_DELAY_SECONDS = 1  # minimum time between successive "list published versions" lookups
+NEW_PACKAGE_DELAY_SECONDS = 60  # extra wait before the *first-ever* publish of a package name
+# (published_versions is empty) - this is the specific case npm's abuse-prevention limiter has
+# been reported to hit hardest, since this pipeline creates a brand-new package on every run.
 
 _last_push_at: float | None = None
 _last_list_at: float | None = None
@@ -137,9 +145,24 @@ def npm_build(project_dir: str) -> None:
         raise RuntimeError(f"npm run build failed in {project_dir}\n{result.stdout}\n{result.stderr}")
 
 
-def publish_to_npm(project_dir: str, npmrc_path: str | None) -> bool:
+class RateLimited(Exception):
+    """Raised when npm's registry responds E429 "rate limited exceeded" to a publish.
+    Once this happens, every subsequent publish in the same run is likely to hit the
+    same limiter - especially here, where each project is a brand-new package name,
+    which npm's abuse-prevention treats more strictly than publishing a new version of
+    an existing package - so the caller should stop publishing entirely for this run
+    rather than burning through the rest of the project list on doomed retries. The
+    next scheduled run picks up exactly where this one left off, since nothing here is
+    trusted as published until the npm registry's own version list confirms it."""
+
+
+def publish_to_npm(project_dir: str, npmrc_path: str | None, is_new_package: bool) -> bool:
     global _last_push_at
     _last_push_at = _rate_limit(_last_push_at, PUBLISH_DELAY_SECONDS)
+    if is_new_package:
+        log(f"first-ever publish of this package name - waiting an extra "
+            f"{NEW_PACKAGE_DELAY_SECONDS}s before publishing")
+        time.sleep(NEW_PACKAGE_DELAY_SECONDS)
     env = dict(os.environ)
     if npmrc_path:
         env["NPM_CONFIG_USERCONFIG"] = npmrc_path
@@ -148,6 +171,9 @@ def publish_to_npm(project_dir: str, npmrc_path: str | None) -> bool:
         cwd=project_dir, capture_output=True, text=True, env=env,
     )
     if result.returncode != 0:
+        combined = result.stdout + result.stderr
+        if "E429" in combined or "rate limited exceeded" in combined:
+            raise RateLimited(combined)
         log(f"WARNING: npm publish failed for {project_dir} (will retry next run):\n"
             f"{result.stdout}\n{result.stderr}")
         return False
@@ -243,7 +269,21 @@ def main() -> int:
                 failed_count += 1
                 continue
 
-            if publish_to_npm(project_dir, npmrc_path):
+            try:
+                pushed = publish_to_npm(project_dir, npmrc_path, is_new_package=not published_versions)
+            except RateLimited as exc:
+                log(f"npm registry rate limit hit - stopping this run early instead of retrying "
+                    f"the remaining {total - i + 1} project(s), which would likely all fail the "
+                    f"same way until the limiter resets; they'll be picked up by the next "
+                    f"scheduled run:\n{exc}")
+                remaining_skipped = total - i + 1
+                verb = "Would publish" if args.dry_run else "Published"
+                log(f"Done: {total} project(s) checked, {published_count} {verb.lower()}, "
+                    f"{up_to_date_count} already up to date, {no_version_count} with no version yet, "
+                    f"{failed_count} failed, {remaining_skipped} skipped due to rate limit")
+                return 1
+
+            if pushed:
                 state["published_version"] = version
                 save_json(state_path, state)
                 log(f"Published {package_name} {version} to npm")
