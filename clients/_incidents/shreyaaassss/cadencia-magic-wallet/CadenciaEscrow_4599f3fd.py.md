@@ -2,7 +2,7 @@
 
 - **Repo**: [shreyaaassss/cadencia-magic-wallet](https://github.com/shreyaaassss/cadencia-magic-wallet)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/shreyaaassss/cadencia-magic-wallet/HEAD/backend/artifacts/CadenciaEscrow.arc56.json](https://raw.githubusercontent.com/shreyaaassss/cadencia-magic-wallet/HEAD/backend/artifacts/CadenciaEscrow.arc56.json)
-- **Detected**: 2026-07-18T16:04:27.333277+00:00
+- **Detected**: 2026-07-18T17:53:47.471796+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
