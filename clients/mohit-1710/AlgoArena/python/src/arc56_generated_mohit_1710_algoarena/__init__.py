@@ -1,0 +1,2 @@
+from . import PredictionMarketContract_0d5736c1 as PredictionMarketContract_0d5736c1
+from . import PredictionMarketContract_7dc203a7 as PredictionMarketContract_7dc203a7
