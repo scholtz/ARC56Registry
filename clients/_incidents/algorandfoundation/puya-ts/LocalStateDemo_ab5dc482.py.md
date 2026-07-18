@@ -2,7 +2,7 @@
 
 - **Repo**: [algorandfoundation/puya-ts](https://github.com/algorandfoundation/puya-ts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/puya-ts/HEAD/tests/approvals/out/unoptimized/local-state/LocalStateDemo.arc56.json](https://raw.githubusercontent.com/algorandfoundation/puya-ts/HEAD/tests/approvals/out/unoptimized/local-state/LocalStateDemo.arc56.json)
-- **Detected**: 2026-07-18T15:56:07.239055+00:00
+- **Detected**: 2026-07-18T17:45:29.955446+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
