@@ -1,4 +1,4 @@
-# arc56-generated-atsoc1993-populate-app-resources-bug-example-algokit-utils-python-library
+# arc56-generated-atsoc_0e34f1e8
 
 Auto-generated typed Algorand smart-contract clients for **[atsoc1993/Populate-App-Resources-Bug-Example-algokit_utils-python-library](https://github.com/atsoc1993/Populate-App-Resources-Bug-Example-algokit_utils-python-library)**,
 built from the [ARC-56](https://github.com/algorandfoundation/ARCs/blob/main/ARCs/arc-0056.md)
@@ -12,7 +12,7 @@ automatically whenever the source ARC-56 spec changes.
 ## Install
 
 ```bash
-pip install arc56-generated-atsoc1993-populate-app-resources-bug-example-algokit-utils-python-library
+pip install arc56-generated-atsoc_0e34f1e8
 ```
 
 ## Basic usage
@@ -25,7 +25,7 @@ instance of that contract. Generated in the client generator's `minimal` mode - 
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_atsoc1993_populate_app_resources_bug_example_algokit_utils_python_library import TestPopResources_95a87b69
+from arc56_generated_atsoc_0e34f1e8 import TestPopResources_95a87b69
 
 algorand = AlgorandClient.mainnet()
 client = TestPopResources_95a87b69.TestPopResourcesClient(

@@ -118,6 +118,17 @@ COMPILE_TIMEOUT_SECONDS = 30
 # all - see spec_has_oversized_array().
 MAX_SANE_FIXED_ARRAY_LENGTH = 1_000_000
 FIXED_ARRAY_LENGTH_RE = re.compile(rb"\[(\d{7,})\]")
+# See shorten_identifier() for why: keeps clients/<owner>/<repo>/python/src/<import_pkg>/
+# safely short regardless of how long owner/repo get. Kept well under what would merely
+# "just fit" a 260-char Windows MAX_PATH budget for the worst-case owner (39 chars) +
+# repo (100 chars) combination, since that budget also has to cover the caller's own
+# local clone path (e.g. C:\Users\...\ARC56Registry\), which this script has no way to
+# know in advance.
+MAX_DIST_NAME_LENGTH = 30
+# Applied to a contract's file_slug (derived from the ARC-56 filename, which - like
+# owner/repo - comes from an arbitrary GitHub repo and isn't otherwise bounded) for the
+# same path-length reason.
+MAX_FILE_SLUG_LENGTH = 30
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -167,6 +178,31 @@ def sanitize_dist_segment(name: str) -> str:
     each one individually, and strips leading/trailing '-'."""
     slug = re.sub(r"[^a-z0-9-]+", "-", name.lower()).strip("-")
     return slug or "x"
+
+
+def shorten_identifier(name: str, max_length: int) -> str:
+    """Deterministically truncates `name` to at most `max_length` characters, appending
+    an 8-hex-char SHA-256 digest of the *full, untruncated* name so two different long
+    names that happen to share a prefix can never collide after shortening. A no-op if
+    `name` already fits.
+
+    Unlike the TypeScript/`.NET` pipelines, the Python pipeline's on-disk layout embeds
+    the whole distribution name a second time as a nested directory
+    (clients/<owner>/<repo>/python/src/<import_pkg>/<contract>.py) - for a long
+    owner/repo combination (GitHub allows up to 39 + 100 characters) that doubling can
+    push the full path past Windows' legacy 260-character MAX_PATH limit, breaking a
+    plain `git clone`/`git pull` for anyone without `core.longpaths` enabled (seen in
+    practice: `atsoc1993/Populate-App-Resources-Bug-Example-algokit_utils-python-library`
+    produced a 211-character relative path on its own, before even prepending the local
+    clone's own directory). Capping the distribution/import-package name specifically
+    (not the shared clients/<owner>/<repo>/ prefix, which every ecosystem uses
+    identically and isn't the source of the doubling) keeps every future path safely
+    short regardless of how long a GitHub owner/repo name gets."""
+    if len(name) <= max_length:
+        return name
+    digest = hashlib.sha256(name.encode("utf-8")).hexdigest()[:8]
+    keep = max_length - len(digest) - 1
+    return f"{name[:keep]}_{digest}"
 
 
 def sha256_hex(data: bytes) -> str:
@@ -428,6 +464,7 @@ def process_project(
     project_dir = os.path.join(repo_dir, "python")
     arc56_dir = os.path.join(repo_dir, "arc56")
     dist_name = f"arc56-generated-{sanitize_dist_segment(owner_slug)}-{sanitize_dist_segment(repo_slug)}"
+    dist_name = shorten_identifier(dist_name, MAX_DIST_NAME_LENGTH)
     import_pkg = sanitize_identifier(dist_name.replace("-", "_"))
     src_dir = os.path.join(project_dir, "src", import_pkg)
     state_path = os.path.join(project_dir, "state.json")
@@ -435,9 +472,20 @@ def process_project(
 
     state = load_project_state(state_path)
     contracts_state: dict = state.setdefault("contracts", {})
-    force_regen = state.get("generator_version") != generator_version
+    # dist_name/import_pkg are recomputed fresh from owner/repo on every run, never
+    # cached - so if shorten_identifier()'s output (or the naming scheme generally)
+    # ever changes, an *already-generated* project whose ARC-56 content hasn't changed
+    # would otherwise never notice: every contract's needs_regen check below only looks
+    # at content_sha256, so nothing would re-trigger write_project_files() and the
+    # project would stay stuck on its old (possibly Windows-path-breaking) directory
+    # name forever. Comparing against the dist_name actually used last time turns a
+    # naming-scheme change into the same kind of forced regen as a generator/template
+    # version bump, but scoped to only the specific project(s) whose computed name
+    # actually changed - not a full-registry regeneration.
+    naming_changed = state.get("dist_name") != dist_name
+    force_regen = state.get("generator_version") != generator_version or naming_changed
     state_dirty = False
-    code_changed = False
+    code_changed = naming_changed and state.get("dist_name") is not None
 
     for row in rows:
         url = row["ARC56URL"]
@@ -455,7 +503,7 @@ def process_project(
         if not filename.endswith(FILENAME_SUFFIX):
             log(f"WARNING: skipping non-ARC56 URL {url}")
             continue
-        file_slug = sanitize_identifier(filename[: -len(FILENAME_SUFFIX)])
+        file_slug = shorten_identifier(sanitize_identifier(filename[: -len(FILENAME_SUFFIX)]), MAX_FILE_SLUG_LENGTH)
         hash8 = url_hash8(url)
         contract_id = f"{file_slug}_{hash8}"
         existing = contracts_state.get(url)
@@ -567,6 +615,7 @@ def process_project(
     if not needs_version_bump:
         state["generator_version"] = generator_version
         state["template_hash"] = template_hash
+        state["dist_name"] = dist_name
         save_project_state(state_path, state)
         log(f"Project clients/{owner}/{repo}/python: recorded failure state only, no generated-code "
               f"changes - version not bumped")
@@ -578,6 +627,7 @@ def process_project(
     state["version"] = version
     state["generator_version"] = generator_version
     state["template_hash"] = template_hash
+    state["dist_name"] = dist_name
 
     write_project_files(
         project_dir, owner, repo, dist_name, import_pkg, contracts_state, excluded_contract_ids, version=version,
