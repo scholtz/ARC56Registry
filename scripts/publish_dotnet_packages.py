@@ -45,7 +45,10 @@ NUPKG_OUTPUT_DIR = os.path.join(REPO_ROOT, "artifacts", "nupkgs")
 NUGET_SOURCE = "https://api.nuget.org/v3/index.json"
 FLAT_CONTAINER_BASE = "https://api.nuget.org/v3-flatcontainer"
 
-PUBLISH_DELAY_SECONDS = 5  # minimum time between successive `dotnet nuget push` calls
+PUBLISH_DELAY_SECONDS = 15  # minimum time between successive `dotnet nuget push` calls: nuget.org
+# documents a 350/hour-per-API-key push quota (https://learn.microsoft.com/en-us/nuget/api/rate-limits);
+# 15s/push caps us at 240/hour, with margin, since real-world enforcement has been reported stricter
+# than the documented figure.
 LIST_DELAY_SECONDS = 1  # minimum time between successive "list published versions" lookups
 
 _last_push_at: float | None = None
@@ -135,6 +138,16 @@ def pack_project(project_dir: str, package_id: str, version: str) -> str:
     return os.path.join(NUPKG_OUTPUT_DIR, f"{package_id}.{version}.nupkg")
 
 
+class QuotaExceeded(Exception):
+    """Raised when nuget.org's push quota (350/hour per API key, documented at
+    https://learn.microsoft.com/en-us/nuget/api/rate-limits) has been hit. Once this
+    happens, every subsequent push in the same run will also 403 until the quota
+    window resets, so the caller should stop pushing entirely rather than burning
+    through the rest of the project list on doomed retries - the next scheduled run
+    picks up exactly where this one left off, since nothing here is trusted as
+    published until nuget.org's own version list confirms it."""
+
+
 def push_to_nuget(nupkg_path: str, api_key: str) -> bool:
     global _last_push_at
     _last_push_at = _rate_limit(_last_push_at, PUBLISH_DELAY_SECONDS)
@@ -144,6 +157,9 @@ def push_to_nuget(nupkg_path: str, api_key: str) -> bool:
         capture_output=True, text=True,
     )
     if result.returncode != 0:
+        combined = result.stdout + result.stderr
+        if "Quota Exceeded" in combined or "Quota exceeded" in combined:
+            raise QuotaExceeded(combined)
         log(f"WARNING: nuget push failed for {nupkg_path} (will retry next run):\n"
             f"{result.stdout}\n{result.stderr}")
         return False
@@ -219,7 +235,21 @@ def main() -> int:
             failed_count += 1
             continue
 
-        if push_to_nuget(nupkg_path, api_key):
+        try:
+            pushed = push_to_nuget(nupkg_path, api_key)
+        except QuotaExceeded as exc:
+            log(f"nuget.org push quota exceeded - stopping this run early instead of retrying "
+                f"the remaining {total - i + 1} project(s), which would all fail the same way "
+                f"until the quota window resets; they'll be picked up by the next scheduled run:\n"
+                f"{exc}")
+            remaining_skipped = total - i + 1
+            verb = "Would publish" if args.dry_run else "Published"
+            log(f"Done: {total} project(s) checked, {published_count} {verb.lower()}, "
+                f"{up_to_date_count} already up to date, {no_version_count} with no version yet, "
+                f"{failed_count} failed, {remaining_skipped} skipped due to quota")
+            return 1
+
+        if pushed:
             state["published_version"] = version
             save_state(state_path, state)
             log(f"Published {package_id} {version} to nuget.org")

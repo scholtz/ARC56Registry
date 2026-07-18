@@ -9,7 +9,7 @@ and its own GitHub Actions workflow, chained together with `workflow_run` trigge
 | --- | --- | --- | --- | --- |
 | 1. Download | [`scripts/download_arc56_specs.py`](../scripts/download_arc56_specs.py) | [`download-arc56-specs.yml`](../.github/workflows/download-arc56-specs.yml) | Fetches every active ARC-56 spec into `clients/<owner>/<repo>/arc56/` | Rate-limited, 7s+ between downloads |
 | 2. Generate | [`scripts/generate_dotnet_clients.py`](../scripts/generate_dotnet_clients.py) | [`generate-dotnet-clients.yml`](../.github/workflows/generate-dotnet-clients.yml) | Regenerates C# source + bumps versions from the locally-downloaded specs | None - reads local files only |
-| 3. Publish | [`scripts/publish_dotnet_packages.py`](../scripts/publish_dotnet_packages.py) | [`publish-dotnet-packages.yml`](../.github/workflows/publish-dotnet-packages.yml) | Packs and pushes to nuget.org whatever nuget.org doesn't already have | Rate-limited, 5s+ between pushes |
+| 3. Publish | [`scripts/publish_dotnet_packages.py`](../scripts/publish_dotnet_packages.py) | [`publish-dotnet-packages.yml`](../.github/workflows/publish-dotnet-packages.yml) | Packs and pushes to nuget.org whatever nuget.org doesn't already have | Rate-limited, 15s+ between pushes |
 
 **Why split it up:** the previous single script/workflow did all three in one pass, so
 a project's `dotnet build` (fast, no network) was gated behind the same 7-second-per-URL
@@ -311,6 +311,18 @@ about an hour) simply leaves that version out of nuget.org's own index. The **ne
 run's listing call sees that and retries the pack+push before doing anything else for
 that project - no separate "retry" logic or flag needed; it falls out of always
 comparing against the live source of truth.
+
+**nuget.org's push quota** (documented at 350/hour per API key, see
+[Rate Limits, NuGet API](https://learn.microsoft.com/en-us/nuget/api/rate-limits); in
+practice can be enforced more strictly than that) is why `PUBLISH_DELAY_SECONDS` in
+`publish_dotnet_packages.py` is 15s, not the 5s used elsewhere - a large catch-up run
+publishing hundreds of new package IDs can still exceed it. If nuget.org responds `403
+Quota Exceeded`, the script stops pushing immediately (rather than retrying every
+remaining project only to get the same 403) and exits nonzero; nothing is lost, since
+the same self-healing listing logic above means the next scheduled run just resumes
+where this one stopped. Don't "fix" a quota-exceeded failure by lowering
+`PUBLISH_DELAY_SECONDS` further or retrying in a tight loop within the same run - it
+only makes the quota window reset later.
 
 ### Committing
 
