@@ -2,7 +2,7 @@
 
 - **Repo**: [Shivanikinagi/KINETIC](https://github.com/Shivanikinagi/KINETIC)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Shivanikinagi/KINETIC/HEAD/contracts/contracts/artifacts/EscrowContract.arc56.json](https://raw.githubusercontent.com/Shivanikinagi/KINETIC/HEAD/contracts/contracts/artifacts/EscrowContract.arc56.json)
-- **Detected**: 2026-07-18T15:49:31.538618+00:00
+- **Detected**: 2026-07-18T17:38:27.402004+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
