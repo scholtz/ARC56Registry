@@ -1,0 +1,1 @@
+from . import GuestbookAppContract_f6c91757 as GuestbookAppContract_f6c91757
