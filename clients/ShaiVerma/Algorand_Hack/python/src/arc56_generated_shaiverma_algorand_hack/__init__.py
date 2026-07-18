@@ -1,0 +1,1 @@
+from . import DecentralizedAiContract_3ab4156a as DecentralizedAiContract_3ab4156a
