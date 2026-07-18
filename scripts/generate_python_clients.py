@@ -87,8 +87,16 @@ PERIODIC_COMMIT_INTERVAL_SECONDS = 300
 # (which loses everything generated since the last checkpoint, not just that one
 # contract). GENERATOR_TIMEOUT_SECONDS turns that hang into an ordinary, per-contract
 # `generator_error` (see run_generator()) so one bad spec can never take down the rest
-# of the run. 120s is generous - a real generation normally takes well under a second.
-GENERATOR_TIMEOUT_SECONDS = 120
+# of the run. Kept short (not the generous 120s first tried): a real generation
+# normally finishes in well under a second (it's a single-file, no-network, no-I/O
+# operation), and a repo can contain more than one hanging spec (a compiler
+# test-fixture repo, in particular, may have several boundary-value fixtures that each
+# individually hang) - a large per-file timeout multiplies against every one of them
+# and can still exhaust the job's overall time budget even though no single file blocks
+# forever. spec_has_oversized_array() catches the specific known "absurd fixed-array
+# length" pathology before ever reaching this timeout at all; this timeout remains as
+# the backstop for any other, not-yet-seen kind of hang.
+GENERATOR_TIMEOUT_SECONDS = 20
 PIP_TIMEOUT_SECONDS = 300  # one-time per run, not per-contract, but still guarded
 URLOPEN_TIMEOUT_SECONDS = 30
 # compile_check() runs py_compile out-of-process (see its docstring) specifically so it
@@ -97,6 +105,19 @@ URLOPEN_TIMEOUT_SECONDS = 30
 # principle make even byte-compiling it slow, and an in-process call can't be safely
 # killed after a timeout the way a subprocess can.
 COMPILE_TIMEOUT_SECONDS = 30
+# ARC-56 specs are meant to describe real, deployable AVM contracts, where a single box
+# value already tops out at 32,768 bytes (the AVM's own per-box size limit) - so no
+# legitimate fixed-array type in a spec can ever declare more elements than that. Seen
+# in practice: compiler-test-suite repos (e.g. boundary-value fixtures for a Solidity
+# compatibility layer) emit ARC-56 specs with types like `uint8[9223372036854775807]`
+# (INT64_MAX) to exercise a language edge case, not to describe a real contract -
+# algokit-client-generator has been observed to hang indefinitely trying to process
+# one. GENERATOR_TIMEOUT_SECONDS bounds the damage from any single such file, but a
+# repo can contain several, and each one still costs a full timeout; this check catches
+# the known pattern up front, in microseconds, before ever spawning the generator at
+# all - see spec_has_oversized_array().
+MAX_SANE_FIXED_ARRAY_LENGTH = 1_000_000
+FIXED_ARRAY_LENGTH_RE = re.compile(rb"\[(\d{7,})\]")
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -116,9 +137,15 @@ ANY_CLASS_RE = re.compile(r"^class (\w+)\b", re.MULTILINE)
 
 def log(message: str) -> None:
     """Every log line is prefixed with a UTC timestamp, so a multi-hour CI run's output
-    can be correlated with wall-clock time."""
+    can be correlated with wall-clock time. Explicitly flushed: stderr is only
+    line-buffered when attached to a terminal - piped into a CI log collector (as
+    every workflow here does), Python fully block-buffers it, so without this the
+    visible log can lag far behind actual execution, and any lines written just before
+    a crash/kill can be lost entirely, making the true point of failure look earlier
+    than it really was. Cheap enough to do unconditionally (one flush per log line, not
+    per contract-processing step)."""
     timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    print(f"{timestamp} {message}", file=sys.stderr)
+    print(f"{timestamp} {message}", file=sys.stderr, flush=True)
 
 
 def sanitize_path_segment(name: str) -> str:
@@ -211,6 +238,26 @@ def ensure_generator_installed(version: str) -> None:
         [PIP_EXE, "install", "--quiet", f"{GENERATOR_PACKAGE}=={version}"],
         check=True, timeout=PIP_TIMEOUT_SECONDS,
     )
+
+
+def spec_has_oversized_array(content: bytes) -> int | None:
+    """Scans a raw ARC-56 spec's JSON bytes for a fixed-array type declaration
+    (`<type>[<length>]`, e.g. `uint8[32]` for a real one or `uint8[9223372036854775807]`
+    for a pathological test fixture) whose length exceeds MAX_SANE_FIXED_ARRAY_LENGTH.
+    Returns the offending length, or None if the spec looks sane. Deliberately a plain
+    regex over the raw bytes rather than a structured walk of the parsed JSON (methods'
+    arg/return types, struct fields, state key/map valueType/keyType) - every one of
+    those is a `type` *string* using the same `[<length>]` suffix syntax, so a single
+    regex over the whole file catches all of them at once, and false positives are a
+    non-issue (a 7+ digit number appearing anywhere in a real spec's box/global/local
+    values, source maps, or bytecode is already implausible, and even if one somehow
+    did, the worst outcome is one contract skipped with a clear error rather than a
+    hung generator)."""
+    m = FIXED_ARRAY_LENGTH_RE.search(content)
+    if not m:
+        return None
+    length = int(m.group(1))
+    return length if length > MAX_SANE_FIXED_ARRAY_LENGTH else None
 
 
 def get_template_hash() -> str:
@@ -426,6 +473,25 @@ def process_project(
             or existing.get("content_sha256") != content_hash
         )
         if not needs_regen:
+            continue
+
+        oversized_length = spec_has_oversized_array(content)
+        if oversized_length is not None:
+            error = (
+                f"spec declares a fixed-array type of length {oversized_length}, "
+                f"exceeding MAX_SANE_FIXED_ARRAY_LENGTH ({MAX_SANE_FIXED_ARRAY_LENGTH}) "
+                f"- skipped without invoking the generator (see spec_has_oversized_array())"
+            )
+            log(f"WARNING: skipping {contract_id} - {error}")
+            contracts_state[url] = {
+                **{k: v for k, v in (existing or {}).items() if k != "content_sha256"},
+                "content_sha256": content_hash,
+                "file_slug": file_slug,
+                "hash8": hash8,
+                "generator_error": error,
+            }
+            write_incident_report(owner, repo, url, contract_id, "generator_error", error, generator_version)
+            state_dirty = True
             continue
 
         py_path = os.path.join(src_dir, f"{contract_id}.py")
