@@ -2,7 +2,7 @@
 
 - **Repo**: [PriyanshuXPRT/BLISS](https://github.com/PriyanshuXPRT/BLISS)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/PriyanshuXPRT/BLISS/HEAD/smart_contracts/artifacts/CancellationInsurance/CancellationInsurance.arc56.json](https://raw.githubusercontent.com/PriyanshuXPRT/BLISS/HEAD/smart_contracts/artifacts/CancellationInsurance/CancellationInsurance.arc56.json)
-- **Detected**: 2026-07-18T15:48:53.225938+00:00
+- **Detected**: 2026-07-18T17:37:51.804663+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
