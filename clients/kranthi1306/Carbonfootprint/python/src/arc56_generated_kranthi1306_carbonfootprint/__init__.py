@@ -1,0 +1,1 @@
+from . import CarbonFootprintContract_e78b7b91 as CarbonFootprintContract_e78b7b91
