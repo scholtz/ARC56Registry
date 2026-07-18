@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "arc56-generated-algorand-developer-retreat-abel"
+version = "1.1.2026071814"
+description = "Generated ARC-56 Algorand smart-contract clients for Algorand-Developer-Retreat/abel."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Algorand-Developer-Retreat" }]
+keywords = ["algorand", "arc56", "avm", "smart-contract", "generated-client", "Algorand-Developer-Retreat", "abel"]
+dependencies = [
+    "algokit-utils>=4.0.1,<5.0.0",
+    "py-algorand-sdk>=2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/scholtz/Arc56Registry"
+Repository = "https://github.com/scholtz/Arc56Registry"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/arc56_generated_algorand_developer_retreat_abel"]
