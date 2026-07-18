@@ -2,7 +2,7 @@
 
 - **Repo**: [scholtz/AVMTypes](https://github.com/scholtz/AVMTypes)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/scholtz/AVMTypes/HEAD/projects/AVMTypes/smart_contracts/artifacts/avm_types/AvmTypes.arc56.json](https://raw.githubusercontent.com/scholtz/AVMTypes/HEAD/projects/AVMTypes/smart_contracts/artifacts/avm_types/AvmTypes.arc56.json)
-- **Detected**: 2026-07-18T16:04:06.192957+00:00
+- **Detected**: 2026-07-18T17:53:26.500506+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
