@@ -2,7 +2,7 @@
 
 - **Repo**: [shreyaaassss/cadencia-working-fine](https://github.com/shreyaaassss/cadencia-working-fine)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/shreyaaassss/cadencia-working-fine/HEAD/backend/artifacts/CadenciaEscrow.arc56.json](https://raw.githubusercontent.com/shreyaaassss/cadencia-working-fine/HEAD/backend/artifacts/CadenciaEscrow.arc56.json)
-- **Detected**: 2026-07-18T16:04:28.751529+00:00
+- **Detected**: 2026-07-18T17:53:48.855200+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
