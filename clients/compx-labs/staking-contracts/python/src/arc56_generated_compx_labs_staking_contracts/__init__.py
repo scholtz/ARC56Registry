@@ -1,0 +1,3 @@
+from . import InjectedRewardsPool_1b86a45d as InjectedRewardsPool_1b86a45d
+from . import InjectedRewardsPoolConsensus_8d4b8545 as InjectedRewardsPoolConsensus_8d4b8545
+from . import InjectedRewardsPoolFluxGated_985a71df as InjectedRewardsPoolFluxGated_985a71df
