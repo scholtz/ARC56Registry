@@ -2,7 +2,7 @@
 
 - **Repo**: [Shirishatejavath/Algorand-hack-3](https://github.com/Shirishatejavath/Algorand-hack-3)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Shirishatejavath/Algorand-hack-3/HEAD/Algorand-hack-3/contracts/artifacts/RiskRegistry.arc56.json](https://raw.githubusercontent.com/Shirishatejavath/Algorand-hack-3/HEAD/Algorand-hack-3/contracts/artifacts/RiskRegistry.arc56.json)
-- **Detected**: 2026-07-18T15:49:28.058402+00:00
+- **Detected**: 2026-07-18T17:38:23.954217+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce
