@@ -85,6 +85,22 @@ jobs:
             scholtz2/arc56-registry:${{ steps.tag.outputs.date }}
             scholtz2/arc56-registry:latest
 
+      # Keeps the Docker Hub repo page's "Overview" tab in sync with
+      # docker/hash-registry/README.md - otherwise it permanently shows "No overview
+      # available" since `docker push` never uploads a README, only image layers.
+      # Needs the same DOCKERHUB_TOKEN, but that token must have "Read & Write" scope
+      # (not "Read-only") for this API call to succeed - see
+      # docs/dockerhub-publishing-setup.md.
+      - name: Sync Docker Hub repository description
+        if: ${{ env.DOCKERHUB_USERNAME != '' && env.DOCKERHUB_TOKEN != '' }}
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: scholtz2/arc56-registry
+          short-description: "Self-hosted ARC-56 program hash + ABI signature registry (unprivileged nginx, port 8080)."
+          readme-filepath: docker/hash-registry/README.md
+
       - name: Skip publish (Docker Hub credentials not configured yet)
         if: ${{ env.DOCKERHUB_USERNAME == '' || env.DOCKERHUB_TOKEN == '' }}
         run: |

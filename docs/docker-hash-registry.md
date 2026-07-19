@@ -42,6 +42,18 @@ Both tags are pushed together on every publish, from the same build - see the
 "Build and push" step in
 [`publish-docker-hash-registry.yml`](../.github/workflows/publish-docker-hash-registry.yml).
 
+## Docker Hub repository description
+
+Right after pushing, the workflow's "Sync Docker Hub repository description" step
+(`peter-evans/dockerhub-description`) uploads
+[`docker/hash-registry/README.md`](../docker/hash-registry/README.md) as the
+repository's Docker Hub **Overview** tab content, and sets a short description.
+`docker push` itself never touches this - it's pure image-layer transfer - so without
+this step the Overview tab would permanently read "No overview available" regardless
+of how good the README in this repo is. Gated behind the same
+`DOCKERHUB_USERNAME`/`DOCKERHUB_TOKEN` secrets as the push itself; see
+[docs/dockerhub-publishing-setup.md](dockerhub-publishing-setup.md).
+
 ## Trigger and cadence
 
 Runs after every successful

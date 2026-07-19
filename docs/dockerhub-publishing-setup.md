@@ -2,8 +2,13 @@
 
 [`publish-docker-hash-registry.yml`](../.github/workflows/publish-docker-hash-registry.yml)
 (see [docker-hash-registry.md](docker-hash-registry.md)) needs credentials to push the
-`scholtz2/arc56-registry` image to Docker Hub. This is a one-time, manual setup -
-nothing in the workflow can create the account or the secrets for you.
+`scholtz2/arc56-registry` image to Docker Hub, and to keep the repository's Docker Hub
+**Overview** tab synced with
+[`docker/hash-registry/README.md`](../docker/hash-registry/README.md) (via
+`peter-evans/dockerhub-description`) - `docker push` alone only uploads image layers,
+never a README, so without this the Overview tab permanently shows "No overview
+available". This is a one-time, manual setup - nothing in the workflow can create the
+account or the secrets for you.
 
 ## Why a classic access token instead of OIDC
 
@@ -30,7 +35,8 @@ Docker Hub adds an OIDC option later, revisit this choice.
    - Log into [hub.docker.com](https://hub.docker.com) with the account from step 1.
    - Go to **Account Settings > Security > Access Tokens > New Access Token**.
    - Description: something identifying this repo, e.g. `ARC56Registry publish-docker-hash-registry.yml`.
-   - Permissions: **Read & Write** (push requires write; read-only tokens can't publish).
+   - Permissions: **Read & Write** (push requires write; read-only tokens can't publish
+     images *or* update the repository description/README - both need write access).
    - Copy the token value immediately - Docker Hub shows it only once.
 
 4. **Add two repo secrets.** In this repo's **Settings > Secrets and variables >
@@ -43,9 +49,15 @@ Docker Hub adds an OIDC option later, revisit this choice.
 
 That's the entire setup. No workflow YAML changes are needed -
 `publish-docker-hash-registry.yml` already reads
-`secrets.DOCKERHUB_USERNAME`/`secrets.DOCKERHUB_TOKEN` and skips the build-and-push
-step (without failing the job) if either is unset, so the pipeline runs safely before
-these secrets exist; it just won't publish anything until you add them.
+`secrets.DOCKERHUB_USERNAME`/`secrets.DOCKERHUB_TOKEN` and skips both the
+build-and-push step and the README-sync step (without failing the job) if either is
+unset, so the pipeline runs safely before these secrets exist; it just won't publish
+anything - or touch the Overview tab - until you add them.
+
+If the repository already exists with an image pushed by hand or by an earlier run of
+this workflow (i.e. before the README-sync step existed) and its Overview tab still
+says "No overview available", nothing further is needed on your end - the next
+successful `publish-docker-hash-registry.yml` run syncs it automatically.
 
 ## Rotating or revoking the token
 
