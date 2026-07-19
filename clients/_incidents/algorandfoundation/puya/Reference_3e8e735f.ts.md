@@ -2,7 +2,7 @@
 
 - **Repo**: [algorandfoundation/puya](https://github.com/algorandfoundation/puya)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/puya/HEAD/test_cases/abi_routing/out/Reference.arc56.json](https://raw.githubusercontent.com/algorandfoundation/puya/HEAD/test_cases/abi_routing/out/Reference.arc56.json)
-- **Detected**: 2026-07-19T08:46:45.921438+00:00
+- **Detected**: 2026-07-19T19:19:11.474207+00:00
 - **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
 
 ## Reproduce
