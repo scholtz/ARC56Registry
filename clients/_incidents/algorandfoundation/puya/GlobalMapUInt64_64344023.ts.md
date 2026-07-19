@@ -2,7 +2,7 @@
 
 - **Repo**: [algorandfoundation/puya](https://github.com/algorandfoundation/puya)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/puya/HEAD/test_cases/global_map/out/GlobalMapUInt64.arc56.json](https://raw.githubusercontent.com/algorandfoundation/puya/HEAD/test_cases/global_map/out/GlobalMapUInt64.arc56.json)
-- **Detected**: 2026-07-18T08:38:27.955860+00:00
+- **Detected**: 2026-07-19T08:48:22.486659+00:00
 - **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
 
 ## Reproduce
