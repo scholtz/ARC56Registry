@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.algorandfoundation.arc89.AsaMetadataRegistry_295a41b6;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new AsaMetadataRegistryProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
