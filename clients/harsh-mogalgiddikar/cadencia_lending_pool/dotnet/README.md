@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.harsh_mogalgiddikar.cadencia_lending_pool.CreditScore_cc0b8b89;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new CreditScoreProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
