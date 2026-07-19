@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.G30TR1X.Tracer.SupplyChainTracer_0f5ab3de;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new SupplyChainTracerProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
