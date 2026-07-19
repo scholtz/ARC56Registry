@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.CompsciiNikhil.GenMark_AI_Content_Origin_Misuse_Detection.GenMark_003b90ec;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new GenMarkProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
