@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.algorandfoundation.arc20.Arc89SmartAsa_2d1fd6fc;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new Arc89SmartAsaProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
