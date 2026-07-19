@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.IrfanChairurrachman.RantaiAdil.RantaiAdil_c197d60f;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new RantaiAdilProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
