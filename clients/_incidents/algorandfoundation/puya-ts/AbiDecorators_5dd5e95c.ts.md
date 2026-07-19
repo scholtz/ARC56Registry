@@ -2,7 +2,7 @@
 
 - **Repo**: [algorandfoundation/puya-ts](https://github.com/algorandfoundation/puya-ts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/puya-ts/HEAD/tests/approvals/out/o2/abi-decorators/AbiDecorators.arc56.json](https://raw.githubusercontent.com/algorandfoundation/puya-ts/HEAD/tests/approvals/out/o2/abi-decorators/AbiDecorators.arc56.json)
-- **Detected**: 2026-07-19T08:49:48.012385+00:00
+- **Detected**: 2026-07-19T19:22:23.611568+00:00
 - **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
 
 ## Reproduce
