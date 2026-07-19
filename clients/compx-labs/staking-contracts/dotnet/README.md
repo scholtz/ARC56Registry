@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.compx_labs.staking_contracts.InjectedRewardsPool_1b86a45d;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new InjectedRewardsPoolProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
