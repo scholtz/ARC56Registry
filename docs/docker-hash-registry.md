@@ -1,9 +1,10 @@
 # Docker Hub hash registry image
 
 In addition to the [GitHub Pages site](hash-registry.md#github-pages-site), the
-program hash + ABI signature registry is also published as a self-hosted webserver
-image, [`scholtz2/arc56-registry`](https://hub.docker.com/r/scholtz2/arc56-registry),
-via
+program hash + ABI signature registry - plus the raw
+[`arc56.links.csv`](../arc56.links.csv) registry itself - is also published as a
+self-hosted webserver image,
+[`scholtz2/arc56-registry`](https://hub.docker.com/r/scholtz2/arc56-registry), via
 [`publish-docker-hash-registry.yml`](../.github/workflows/publish-docker-hash-registry.yml)
 and [`docker/hash-registry/Dockerfile`](../docker/hash-registry/Dockerfile).
 
@@ -25,12 +26,17 @@ the container needs no special privileges to run), serving:
 /approval-programs/**   # same content as approval-programs/ in this repo
 /clear-programs/**      # same content as clear-programs/ in this repo
 /abi-signatures/**      # same content as abi-signatures/ in this repo
+/arc56.links.csv        # same content as arc56.links.csv in this repo
 /README.md              # usage guide - also served as human-readable text
 /                        # landing page, same content as pages/index.html
 ```
 
-See [`hash-registry.md`](hash-registry.md) for the full description of these three
-tables (layout, tie-breaking rules, freshness).
+See [`hash-registry.md`](hash-registry.md) for the full description of the three hash
+tables (layout, tie-breaking rules, freshness), and
+[`arc56-links-pipeline.md`](arc56-links-pipeline.md) for `arc56.links.csv`'s columns
+and active/inactive lifecycle rules. Unlike the three hash-table folders,
+`arc56.links.csv` is **not** part of the GitHub Pages site - this Docker image is
+currently the only place it's published outside the source repo itself.
 
 ## Tags
 
@@ -57,13 +63,14 @@ of how good the README in this repo is. Gated behind the same
 ## Trigger and cadence
 
 Runs after every successful
-[`generate-hash-registry.yml`](../.github/workflows/generate-hash-registry.yml) run
-(via a `workflow_run` trigger - the same pattern
+[`generate-hash-registry.yml`](../.github/workflows/generate-hash-registry.yml) *or*
+[`update-arc56-links.yml`](../.github/workflows/update-arc56-links.yml) run (via a
+`workflow_run` trigger listing both workflows - the same pattern
 [`deploy-hash-registry-pages.yml`](../.github/workflows/deploy-hash-registry-pages.yml)
-uses), so the image tracks the daily hash-registry regeneration. Also runs on
-`workflow_dispatch` and on any push touching `docker/hash-registry/**` (Dockerfile,
-README, or landing-page changes, so a documentation-only fix doesn't have to wait for
-the next scheduled regeneration).
+uses for the hash-registry side), so the image tracks whichever of its two source
+datasets changed most recently. Also runs on `workflow_dispatch` and on any push
+touching `docker/hash-registry/**` (Dockerfile, README, or landing-page changes, so a
+documentation-only fix doesn't have to wait for the next scheduled regeneration).
 
 ## One-time setup
 
@@ -99,8 +106,9 @@ docker rm -f arc56-registry-local
 ```
 
 Build context is the repo root (not `docker/hash-registry/`), since the Dockerfile
-`COPY`s `approval-programs/`, `clear-programs/`, and `abi-signatures/` from the repo
-root - keep that in mind if you ever move the Dockerfile.
+`COPY`s `approval-programs/`, `clear-programs/`, `abi-signatures/`, and
+`arc56.links.csv` from the repo root - keep that in mind if you ever move the
+Dockerfile.
 
 `publish-docker-hash-registry.yml` runs the same build-run-curl smoke test on every
 workflow run, *before* attempting to log in or push - a broken Dockerfile or nginx

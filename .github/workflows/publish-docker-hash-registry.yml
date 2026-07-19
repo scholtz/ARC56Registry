@@ -1,16 +1,22 @@
 name: Publish Docker Hub hash registry image
 
-# Packages approval-programs/, clear-programs/, abi-signatures/, and a landing page as
-# an unprivileged nginx webserver image (scholtz2/arc56-registry) and pushes it to
-# Docker Hub, tagged with today's UTC date (YYYY-MM-DD) and `latest`. This lets a
-# wallet run its own local mirror of the hash registry, served over plain HTTP,
+# Packages approval-programs/, clear-programs/, abi-signatures/, arc56.links.csv, and
+# a landing page as an unprivileged nginx webserver image (scholtz2/arc56-registry)
+# and pushes it to Docker Hub, tagged with today's UTC date (YYYY-MM-DD) and `latest`.
+# This lets a wallet run its own local mirror of the registry, served over plain HTTP,
 # instead of depending on scholtz.github.io/ARC56Registry being reachable at call
 # time. See docs/docker-hash-registry.md and docs/dockerhub-publishing-setup.md for
 # the one-time DOCKERHUB_USERNAME/DOCKERHUB_TOKEN secret setup this needs.
 
 on:
   workflow_run:
-    workflows: ["Generate hash registry"]
+    # Rebuilds after either source changes: the hash/ABI tables (Generate hash
+    # registry) or the raw link list (Update ARC-56 links) - both are now bundled
+    # into this image, and automated-commit pushes from those workflows don't trigger
+    # this workflow's own `push` filter below (GITHUB_TOKEN-authored commits don't
+    # fire other workflows' push triggers), so workflow_run is the only way to chain
+    # off them.
+    workflows: ["Generate hash registry", "Update ARC-56 links"]
     types: [completed]
   workflow_dispatch: {}
   push:

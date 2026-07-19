@@ -110,6 +110,7 @@ curl http://localhost:8080/README.md
     <tr><td>Clear-state program hash - full spec</td><td><code>/clear-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.arc56.json</code></td></tr>
     <tr><td>ABI method selector - signature</td><td><code>/abi-signatures/&lt;selector[:2]&gt;/&lt;selector&gt;.txt</code></td></tr>
     <tr><td>ABI method selector - signature + apps</td><td><code>/abi-signatures/&lt;selector[:2]&gt;/&lt;selector&gt;.json</code></td></tr>
+    <tr><td>Full registry - every discovered spec URL</td><td><code>/arc56.links.csv</code></td></tr>
   </table>
   <p>
     Each program-hash <code>.txt</code> file contains exactly one line: a
@@ -174,11 +175,27 @@ except urllib.error.HTTPError:
     </li>
   </ol>
 
+  <h2>The full registry: arc56.links.csv</h2>
+  <p>
+    The hash and selector lookups above only cover specs whose compiled programs have
+    already been hashed. <code>/arc56.links.csv</code> is the underlying source list
+    this whole project is built from: every discovered <code>*.arc56.json</code> file
+    on GitHub, one row per spec, with <code>ActiveFrom</code>/<code>ActiveUntil</code>
+    columns marking whether it's currently active (rows are never deleted - a retired
+    spec is deactivated, not removed). Useful for enumerating every known spec
+    directly instead of looking one up by hash or selector. See
+    <a href="https://github.com/scholtz/ARC56Registry/blob/main/docs/arc56-links-pipeline.md">docs/arc56-links-pipeline.md</a>
+    for the full column/lifecycle rules. This file isn't part of the GitHub Pages
+    site - it's only published here and in the source repo itself.
+  </p>
+
   <h2>Freshness</h2>
   <p>
-    This image is rebuilt and republished daily, right after
-    <a href="https://github.com/scholtz/ARC56Registry/blob/main/.github/workflows/generate-hash-registry.yml">generate-hash-registry.yml</a>
-    regenerates the underlying tables - see
+    The hash/ABI tables are rebuilt daily by
+    <a href="https://github.com/scholtz/ARC56Registry/blob/main/.github/workflows/generate-hash-registry.yml">generate-hash-registry.yml</a>,
+    and <code>arc56.links.csv</code> separately by
+    <a href="https://github.com/scholtz/ARC56Registry/blob/main/.github/workflows/update-arc56-links.yml">update-arc56-links.yml</a>.
+    This image is rebuilt and republished after either one finishes - see
     <a href="https://github.com/scholtz/ARC56Registry/blob/main/.github/workflows/publish-docker-hash-registry.yml">publish-docker-hash-registry.yml</a>.
     Re-pull <code>scholtz2/arc56-registry:latest</code> (or a newer dated tag) and
     restart the container to pick up the newest snapshot. If two indexed specs compile

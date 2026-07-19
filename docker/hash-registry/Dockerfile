@@ -8,8 +8,8 @@
 # "run as non-root" Kubernetes/PodSecurity policy.
 #
 # The point: a wallet/indexer can `docker run` this image and query
-# http://<host>:8080/approval-programs/..., /clear-programs/..., and
-# /abi-signatures/... directly over HTTP, getting its own private mirror of the
+# http://<host>:8080/approval-programs/..., /clear-programs/..., /abi-signatures/...,
+# and /arc56.links.csv directly over HTTP, getting its own private mirror of the
 # registry instead of depending on scholtz.github.io/ARC56Registry being reachable.
 #
 # Built from the repo root as build context - see
@@ -36,6 +36,7 @@ USER 101
 COPY approval-programs /usr/share/nginx/html/approval-programs
 COPY clear-programs /usr/share/nginx/html/clear-programs
 COPY abi-signatures /usr/share/nginx/html/abi-signatures
+COPY arc56.links.csv /usr/share/nginx/html/arc56.links.csv
 COPY docker/hash-registry/README.md /usr/share/nginx/html/README.md
 COPY docker/hash-registry/index.html /usr/share/nginx/html/index.html
 

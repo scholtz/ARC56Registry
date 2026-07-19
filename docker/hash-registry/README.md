@@ -63,13 +63,15 @@ floating on `latest`.
 /usr/share/nginx/html/clear-programs/<hash[:3]>/<hash>.arc56.json     # keyed by sha256(byteCode.clear)
 /usr/share/nginx/html/abi-signatures/<selector[:2]>/<selector>.txt    # keyed by the method's ARC-4 selector
 /usr/share/nginx/html/abi-signatures/<selector[:2]>/<selector>.json   # keyed by the method's ARC-4 selector
+/usr/share/nginx/html/arc56.links.csv                                 # the full registry: every discovered ARC-56 spec URL
 /usr/share/nginx/html/README.md                                      # this file
 /usr/share/nginx/html/index.html                                     # the landing page served at /
 ```
 
 nginx serves all of the above at the container's document root, so from outside the
 container every path above is just `http://<host>:8080/approval-programs/...`,
-`/clear-programs/...`, `/abi-signatures/...`, `/README.md`, or `/`.
+`/clear-programs/...`, `/abi-signatures/...`, `/arc56.links.csv`, `/README.md`, or
+`/`.
 
 Splitting on the hash's/selector's first few hex characters keeps any one folder from
 holding thousands of files. Each program-hash `.txt` file contains exactly one line: a
@@ -145,6 +147,31 @@ except urllib.error.HTTPError:
     print("No ABI method indexed for this selector yet")
 ```
 
+## Browsing the full registry (arc56.links.csv)
+
+The three lookups above only cover ARC-56 specs whose *compiled* programs have been
+successfully hashed. `arc56.links.csv` is the underlying source list this whole
+project is built from: every `*.arc56.json` file discovered on GitHub, one row per
+spec, with `ActiveFrom`/`ActiveUntil` columns marking whether it's currently
+considered active (rows are never deleted - a retired spec is deactivated by setting
+`ActiveUntil`, not removed). Useful if you want to enumerate every known spec
+directly, independent of the hash tables:
+
+```bash
+curl -s http://localhost:8080/arc56.links.csv | head
+```
+
+```csv
+ARC56URL,ActiveFrom,ActiveUntil
+https://raw.githubusercontent.com/<owner>/<repo>/HEAD/path/to/spec.arc56.json,2026-07-16,
+```
+
+A row is active when `ActiveFrom <= today` and (`ActiveUntil` is empty or in the
+future). See
+[docs/arc56-links-pipeline.md](https://github.com/scholtz/ARC56Registry/blob/main/docs/arc56-links-pipeline.md)
+for the full column/lifecycle rules. Note this file is **not** part of the GitHub
+Pages site - it's only published here and in the source repo itself.
+
 ## Getting the raw files onto disk instead
 
 If you'd rather have the folders as plain files (e.g. to bundle into another image's
@@ -156,6 +183,7 @@ id=$(docker create scholtz2/arc56-registry:latest)
 docker cp "$id":/usr/share/nginx/html/approval-programs ./approval-programs
 docker cp "$id":/usr/share/nginx/html/clear-programs ./clear-programs
 docker cp "$id":/usr/share/nginx/html/abi-signatures ./abi-signatures
+docker cp "$id":/usr/share/nginx/html/arc56.links.csv ./arc56.links.csv
 docker rm "$id"
 ```
 
@@ -167,15 +195,19 @@ FROM your-wallet-base-image
 COPY --from=registry /usr/share/nginx/html/approval-programs /data/approval-programs
 COPY --from=registry /usr/share/nginx/html/clear-programs /data/clear-programs
 COPY --from=registry /usr/share/nginx/html/abi-signatures /data/abi-signatures
+COPY --from=registry /usr/share/nginx/html/arc56.links.csv /data/arc56.links.csv
 ```
 
 ## Freshness
 
 Both program-hash tables and the ABI signature registry are regenerated daily by
 [generate-hash-registry.yml](https://github.com/scholtz/ARC56Registry/blob/main/.github/workflows/generate-hash-registry.yml),
-and this image is rebuilt and republished right after by
+and `arc56.links.csv` is separately updated daily by
+[update-arc56-links.yml](https://github.com/scholtz/ARC56Registry/blob/main/.github/workflows/update-arc56-links.yml).
+This image is rebuilt and republished after either one finishes, by
 [publish-docker-hash-registry.yml](https://github.com/scholtz/ARC56Registry/blob/main/.github/workflows/publish-docker-hash-registry.yml)
-- the same underlying data as the [GitHub Pages site](https://scholtz.github.io/ARC56Registry/),
+- the same underlying data as the [GitHub Pages site](https://scholtz.github.io/ARC56Registry/)
+for the hash/ABI tables (plus `arc56.links.csv`, which the Pages site doesn't publish),
 just served from your own container instead. Re-pull `latest` (or a newer dated tag)
 and restart the container to pick up the newest snapshot. If two indexed specs
 compile to the same program bytes, the hash points at whichever spec file is larger

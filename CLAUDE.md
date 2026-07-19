@@ -66,11 +66,14 @@ cover.
 - `docker/hash-registry/Dockerfile` + `docker/hash-registry/README.md` +
   `docker/hash-registry/index.html` - builds the `scholtz2/arc56-registry` Docker Hub
   image: an unprivileged (non-root) nginx webserver on port 8080 serving
-  `approval-programs/`, `clear-programs/`, and `abi-signatures/` over plain HTTP, plus
-  a landing page and README, so a wallet can run its own local mirror of the hash
-  registry instead of depending on GitHub Pages at call time. Published by
+  `approval-programs/`, `clear-programs/`, `abi-signatures/`, and `arc56.links.csv`
+  over plain HTTP, plus a landing page and README, so a wallet can run its own local
+  mirror of the whole registry instead of depending on GitHub Pages at call time (note
+  `arc56.links.csv` isn't part of the GitHub Pages site - this image is the only place
+  it's published outside the source repo). Published by
   `publish-docker-hash-registry.yml`, tagged with both the current UTC date
-  (`YYYY-MM-DD`) and `latest`.
+  (`YYYY-MM-DD`) and `latest`; triggered after either `generate-hash-registry.yml` or
+  `update-arc56-links.yml` completes, since it now bundles both of their outputs.
 - `docs/arc56-links-pipeline.md` - full detail on the CSV pipeline.
 - `docs/dotnet-client-pipeline.md` - full detail on the .NET client pipeline.
 - `docs/typescript-client-pipeline.md` - full detail on the TypeScript client pipeline.
