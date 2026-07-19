@@ -22,6 +22,17 @@
 # this forever, since it's the main source of any CVEs reported against this image.
 FROM nginxinc/nginx-unprivileged:1.29-alpine-slim
 
+# Alpine base, not Debian - apk, not apt. Applies any package security fixes released
+# since the base image was built, then removes the package index/cache so it doesn't
+# linger as unnecessary bytes (and stale metadata) in the final image layer. The base
+# image already sets USER 101 (nginx-unprivileged's whole point), but apk needs root
+# to write /var/cache/apk and friends - switch to root only for this step, then back
+# to the image's own non-root default before COPYing any files, so nothing later runs
+# as root.
+USER root
+RUN apk update && apk upgrade --no-cache && rm -rf /var/cache/apk/*
+USER 101
+
 COPY approval-programs /usr/share/nginx/html/approval-programs
 COPY clear-programs /usr/share/nginx/html/clear-programs
 COPY abi-signatures /usr/share/nginx/html/abi-signatures

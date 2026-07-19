@@ -117,3 +117,15 @@ source of CVEs in this image. `-alpine-slim` bundles fewer packages than plain
 pin periodically to the current mainline release rather than leaving it indefinitely;
 see the comment above the `FROM` line in
 [`docker/hash-registry/Dockerfile`](../docker/hash-registry/Dockerfile).
+
+On top of that pin, the Dockerfile also runs `apk update && apk upgrade --no-cache`
+(as root, then switches back to the image's own non-root `USER 101` before copying any
+files) right after `FROM`, so every build picks up whatever Alpine security patches
+have shipped since that base tag was last published - not just whatever was current
+the day the tag was built. `rm -rf /var/cache/apk/*` immediately after removes the
+package index/cache apk downloads to do the upgrade, so it doesn't linger as dead
+weight (or stale, now-inaccurate metadata) in the final image. This is the Alpine/`apk`
+equivalent of the classic Debian/`apt` pattern
+(`apt update && apt dist-upgrade -y && apt-get clean && rm -rf /var/lib/apt/lists/*`) -
+same goal (patch, then leave no package-manager residue behind), different tool
+because this base image is Alpine, not Debian.
