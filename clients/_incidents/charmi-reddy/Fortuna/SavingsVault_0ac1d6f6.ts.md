@@ -2,7 +2,7 @@
 
 - **Repo**: [charmi-reddy/Fortuna](https://github.com/charmi-reddy/Fortuna)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/charmi-reddy/Fortuna/HEAD/backend/savings_vault/smart_contracts/artifacts/savings_vault/SavingsVault.arc56.json](https://raw.githubusercontent.com/charmi-reddy/Fortuna/HEAD/backend/savings_vault/smart_contracts/artifacts/savings_vault/SavingsVault.arc56.json)
-- **Detected**: 2026-07-19T08:53:03.949076+00:00
+- **Detected**: 2026-07-19T19:27:39.375997+00:00
 - **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
 
 ## Reproduce
