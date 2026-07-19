@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.RgbGuy_Yx.Kudos.KudosEscrowContract_f747ce88;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new KudosEscrowContractProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
