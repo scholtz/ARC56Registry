@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.mitchhall16._2birds_open.ConfidentialAsset_bb1d9d0f;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new ConfidentialAssetProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
