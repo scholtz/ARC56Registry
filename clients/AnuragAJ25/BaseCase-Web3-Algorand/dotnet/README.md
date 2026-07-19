@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.AnuragAJ25.BaseCase_Web3_Algorand.BountyEscrowContract_0ac88497;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new BountyEscrowContractProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
