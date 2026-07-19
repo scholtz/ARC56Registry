@@ -2,7 +2,7 @@
 
 - **Repo**: [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/WIP/examples/aave-v4/out/SpokeInstance/__uros_split/chunk_6/SpokeInstance__chunk_6.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/WIP/examples/aave-v4/out/SpokeInstance/__uros_split/chunk_6/SpokeInstance__chunk_6.arc56.json)
-- **Detected**: 2026-07-19T08:35:21.089027+00:00
+- **Detected**: 2026-07-19T18:55:36.851659+00:00
 - **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
 
 ## Reproduce
