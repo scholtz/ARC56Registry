@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.Sayangenri.algorand_guestbook.GuestbookAppContract_f6c91757;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new GuestbookAppContractProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
