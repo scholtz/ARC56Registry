@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.lathi_aayush.pay_per_usage_ai_api_access_system_using_algorand.SentinelContract_677d7a81;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new SentinelContractProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
