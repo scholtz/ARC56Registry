@@ -144,16 +144,24 @@ def configure_git_identity() -> None:
 
 def push_commits(force: bool = False) -> None:
     """Mirrors the throttled-push behavior of scripts/generate_dotnet_clients.py - see
-    that script's push_commits() for the full rationale."""
+    that script's push_commits() for the full rationale, including the pull-before-push
+    and up-to-3-attempts retry."""
     global _last_push_at
     now = time.monotonic()
     if not force and _last_push_at is not None and now - _last_push_at < PUSH_INTERVAL_SECONDS:
         return
-    result = subprocess.run(["git", "push"], cwd=REPO_ROOT, capture_output=True, text=True)
-    if result.returncode != 0:
-        log(f"WARNING: git push failed (will retry later): {result.stdout}\n{result.stderr}")
-        return
-    _last_push_at = now
+    max_attempts = 3
+    for attempt in range(1, max_attempts + 1):
+        pull = subprocess.run(["git", "pull", "--rebase"], cwd=REPO_ROOT, capture_output=True, text=True)
+        if pull.returncode != 0:
+            log(f"WARNING: git pull --rebase failed (attempt {attempt}/{max_attempts}): "
+                f"{pull.stdout}\n{pull.stderr}")
+        result = subprocess.run(["git", "push"], cwd=REPO_ROOT, capture_output=True, text=True)
+        if result.returncode == 0:
+            _last_push_at = now
+            return
+        log(f"WARNING: git push failed (attempt {attempt}/{max_attempts}): {result.stdout}\n{result.stderr}")
+    log(f"WARNING: git push still failing after {max_attempts} attempts - will retry at next checkpoint")
 
 
 def commit_project_changes(owner: str, repo: str) -> None:

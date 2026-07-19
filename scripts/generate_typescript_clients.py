@@ -597,11 +597,23 @@ def write_project_files(
 
 
 def push_commits() -> None:
-    """Pushes whatever local commits exist so far. Never raises: a push failure here
+    """Pushes whatever local commits exist so far. Always pulls (rebasing our local
+    commits on top) immediately before pushing, since other pipeline runs can move
+    origin/main in between - and retries the pull+push cycle up to 3 times total
+    before giving up for this checkpoint, since a rejected push usually just means the
+    remote moved again between our pull and push. Never raises: a push failure here
     just means the next checkpoint (or the workflow's own final push step) retries it."""
-    result = subprocess.run(["git", "push"], cwd=REPO_ROOT, capture_output=True, text=True)
-    if result.returncode != 0:
-        log(f"WARNING: git push failed (will retry later): {result.stdout}\n{result.stderr}")
+    max_attempts = 3
+    for attempt in range(1, max_attempts + 1):
+        pull = subprocess.run(["git", "pull", "--rebase"], cwd=REPO_ROOT, capture_output=True, text=True)
+        if pull.returncode != 0:
+            log(f"WARNING: git pull --rebase failed (attempt {attempt}/{max_attempts}): "
+                f"{pull.stdout}\n{pull.stderr}")
+        result = subprocess.run(["git", "push"], cwd=REPO_ROOT, capture_output=True, text=True)
+        if result.returncode == 0:
+            return
+        log(f"WARNING: git push failed (attempt {attempt}/{max_attempts}): {result.stdout}\n{result.stderr}")
+    log(f"WARNING: git push still failing after {max_attempts} attempts - will retry at next checkpoint")
 
 
 def configure_git_identity() -> None:
