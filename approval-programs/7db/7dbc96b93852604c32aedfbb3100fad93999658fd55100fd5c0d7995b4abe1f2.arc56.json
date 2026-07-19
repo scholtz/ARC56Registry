@@ -1,0 +1,1836 @@
+{
+  "name": "TossUp",
+  "desc": "",
+  "methods": [
+    {
+      "name": "createApplication",
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [
+          "NoOp"
+        ],
+        "call": []
+      }
+    },
+    {
+      "name": "register",
+      "args": [
+        {
+          "name": "payment",
+          "type": "pay"
+        },
+        {
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "returns": {
+        "type": "address"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "play",
+      "args": [
+        {
+          "name": "payment",
+          "type": "pay"
+        },
+        {
+          "name": "player",
+          "type": "address"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "DeleteApplication"
+        ]
+      }
+    }
+  ],
+  "arcs": [
+    4,
+    56
+  ],
+  "structs": {},
+  "state": {
+    "schema": {
+      "global": {
+        "bytes": 1,
+        "ints": 1
+      },
+      "local": {
+        "bytes": 0,
+        "ints": 0
+      }
+    },
+    "keys": {
+      "global": {
+        "owner": {
+          "key": "b3duZXI=",
+          "keyType": "AVMBytes",
+          "valueType": "address"
+        },
+        "amount": {
+          "key": "YW1vdW50",
+          "keyType": "AVMBytes",
+          "valueType": "uint64"
+        }
+      },
+      "local": {},
+      "box": {}
+    },
+    "maps": {
+      "global": {},
+      "local": {},
+      "box": {}
+    }
+  },
+  "bareActions": {
+    "create": [],
+    "call": []
+  },
+  "sourceInfo": {
+    "approval": {
+      "sourceInfo": [
+        {
+          "teal": 1,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            0
+          ]
+        },
+        {
+          "teal": 2,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ]
+        },
+        {
+          "teal": 3,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33
+          ]
+        },
+        {
+          "teal": 15,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            34,
+            35
+          ]
+        },
+        {
+          "teal": 16,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            36
+          ]
+        },
+        {
+          "teal": 17,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            37,
+            38
+          ]
+        },
+        {
+          "teal": 18,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            39
+          ]
+        },
+        {
+          "teal": 19,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            40,
+            41
+          ]
+        },
+        {
+          "teal": 20,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            42
+          ]
+        },
+        {
+          "teal": 21,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68
+          ]
+        },
+        {
+          "teal": 25,
+          "source": "contracts/TossUp.algo.ts:3",
+          "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?",
+          "pc": [
+            69
+          ]
+        },
+        {
+          "teal": 30,
+          "source": "contracts/TossUp.algo.ts:10",
+          "pc": [
+            70,
+            71,
+            72
+          ]
+        },
+        {
+          "teal": 31,
+          "source": "contracts/TossUp.algo.ts:10",
+          "pc": [
+            73
+          ]
+        },
+        {
+          "teal": 32,
+          "source": "contracts/TossUp.algo.ts:10",
+          "pc": [
+            74
+          ]
+        },
+        {
+          "teal": 36,
+          "source": "contracts/TossUp.algo.ts:10",
+          "pc": [
+            75,
+            76,
+            77
+          ]
+        },
+        {
+          "teal": 37,
+          "source": "contracts/TossUp.algo.ts:10",
+          "pc": [
+            78
+          ]
+        },
+        {
+          "teal": 42,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            79
+          ]
+        },
+        {
+          "teal": 45,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            80,
+            81,
+            82
+          ]
+        },
+        {
+          "teal": 46,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            83
+          ]
+        },
+        {
+          "teal": 47,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            84
+          ]
+        },
+        {
+          "teal": 48,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            85,
+            86
+          ]
+        },
+        {
+          "teal": 49,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            87
+          ]
+        },
+        {
+          "teal": 52,
+          "source": "contracts/TossUp.algo.ts:12",
+          "errorMessage": "argument 0 (owner) for register must be a address",
+          "pc": [
+            88
+          ]
+        },
+        {
+          "teal": 55,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            89,
+            90
+          ]
+        },
+        {
+          "teal": 56,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            91
+          ]
+        },
+        {
+          "teal": 57,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            92
+          ]
+        },
+        {
+          "teal": 58,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            93
+          ]
+        },
+        {
+          "teal": 59,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            94,
+            95
+          ]
+        },
+        {
+          "teal": 60,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            96
+          ]
+        },
+        {
+          "teal": 61,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            97
+          ]
+        },
+        {
+          "teal": 64,
+          "source": "contracts/TossUp.algo.ts:12",
+          "errorMessage": "argument 1 (payment) for register must be a pay transaction",
+          "pc": [
+            98
+          ]
+        },
+        {
+          "teal": 67,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            99,
+            100,
+            101
+          ]
+        },
+        {
+          "teal": 68,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            102
+          ]
+        },
+        {
+          "teal": 69,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            103
+          ]
+        },
+        {
+          "teal": 70,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            104
+          ]
+        },
+        {
+          "teal": 71,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            105
+          ]
+        },
+        {
+          "teal": 75,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            106,
+            107,
+            108
+          ]
+        },
+        {
+          "teal": 80,
+          "source": "contracts/TossUp.algo.ts:13",
+          "pc": [
+            109,
+            110
+          ]
+        },
+        {
+          "teal": 81,
+          "source": "contracts/TossUp.algo.ts:13",
+          "pc": [
+            111,
+            112
+          ]
+        },
+        {
+          "teal": 82,
+          "source": "contracts/TossUp.algo.ts:13",
+          "pc": [
+            113
+          ]
+        },
+        {
+          "teal": 83,
+          "source": "contracts/TossUp.algo.ts:13",
+          "pc": [
+            114
+          ]
+        },
+        {
+          "teal": 86,
+          "source": "contracts/TossUp.algo.ts:13",
+          "errorMessage": "transaction verification failed: {\"txn\":\"payment\",\"field\":\"amount\",\"condition\":\"greaterThan\",\"expected\":\">0\"}",
+          "pc": [
+            115
+          ]
+        },
+        {
+          "teal": 90,
+          "source": "contracts/TossUp.algo.ts:14",
+          "pc": [
+            116
+          ]
+        },
+        {
+          "teal": 91,
+          "source": "contracts/TossUp.algo.ts:14",
+          "pc": [
+            117,
+            118
+          ]
+        },
+        {
+          "teal": 92,
+          "source": "contracts/TossUp.algo.ts:14",
+          "pc": [
+            119
+          ]
+        },
+        {
+          "teal": 96,
+          "source": "contracts/TossUp.algo.ts:15",
+          "pc": [
+            120
+          ]
+        },
+        {
+          "teal": 97,
+          "source": "contracts/TossUp.algo.ts:15",
+          "pc": [
+            121,
+            122
+          ]
+        },
+        {
+          "teal": 98,
+          "source": "contracts/TossUp.algo.ts:15",
+          "pc": [
+            123,
+            124
+          ]
+        },
+        {
+          "teal": 99,
+          "source": "contracts/TossUp.algo.ts:15",
+          "pc": [
+            125
+          ]
+        },
+        {
+          "teal": 103,
+          "source": "contracts/TossUp.algo.ts:16",
+          "pc": [
+            126
+          ]
+        },
+        {
+          "teal": 104,
+          "source": "contracts/TossUp.algo.ts:16",
+          "pc": [
+            127
+          ]
+        },
+        {
+          "teal": 105,
+          "source": "contracts/TossUp.algo.ts:12",
+          "pc": [
+            128
+          ]
+        },
+        {
+          "teal": 109,
+          "source": "contracts/TossUp.algo.ts:19",
+          "pc": [
+            129,
+            130,
+            131
+          ]
+        },
+        {
+          "teal": 112,
+          "source": "contracts/TossUp.algo.ts:19",
+          "pc": [
+            132
+          ]
+        },
+        {
+          "teal": 113,
+          "source": "contracts/TossUp.algo.ts:19",
+          "pc": [
+            133,
+            134
+          ]
+        },
+        {
+          "teal": 118,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            135,
+            136
+          ]
+        },
+        {
+          "teal": 119,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            137
+          ]
+        },
+        {
+          "teal": 120,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            138
+          ]
+        },
+        {
+          "teal": 121,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            139,
+            140
+          ]
+        },
+        {
+          "teal": 122,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            141,
+            142
+          ]
+        },
+        {
+          "teal": 123,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            143
+          ]
+        },
+        {
+          "teal": 124,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            144
+          ]
+        },
+        {
+          "teal": 125,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            145,
+            146
+          ]
+        },
+        {
+          "teal": 126,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            147
+          ]
+        },
+        {
+          "teal": 127,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            148
+          ]
+        },
+        {
+          "teal": 128,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            149
+          ]
+        },
+        {
+          "teal": 129,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            150
+          ]
+        },
+        {
+          "teal": 130,
+          "source": "contracts/TossUp.algo.ts:23",
+          "pc": [
+            151
+          ]
+        },
+        {
+          "teal": 131,
+          "source": "contracts/TossUp.algo.ts:22",
+          "pc": [
+            152,
+            153
+          ]
+        },
+        {
+          "teal": 135,
+          "source": "contracts/TossUp.algo.ts:25",
+          "pc": [
+            154,
+            155
+          ]
+        },
+        {
+          "teal": 136,
+          "source": "contracts/TossUp.algo.ts:25",
+          "pc": [
+            156
+          ]
+        },
+        {
+          "teal": 137,
+          "source": "contracts/TossUp.algo.ts:25",
+          "pc": [
+            157
+          ]
+        },
+        {
+          "teal": 138,
+          "source": "contracts/TossUp.algo.ts:25",
+          "pc": [
+            158,
+            159
+          ]
+        },
+        {
+          "teal": 139,
+          "source": "contracts/TossUp.algo.ts:25",
+          "pc": [
+            160,
+            161
+          ]
+        },
+        {
+          "teal": 143,
+          "source": "contracts/TossUp.algo.ts:33",
+          "pc": [
+            162,
+            163
+          ]
+        },
+        {
+          "teal": 144,
+          "source": "contracts/TossUp.algo.ts:33",
+          "pc": [
+            164,
+            165
+          ]
+        },
+        {
+          "teal": 145,
+          "source": "contracts/TossUp.algo.ts:33",
+          "pc": [
+            166
+          ]
+        },
+        {
+          "teal": 146,
+          "source": "contracts/TossUp.algo.ts:33",
+          "pc": [
+            167
+          ]
+        },
+        {
+          "teal": 147,
+          "source": "contracts/TossUp.algo.ts:33",
+          "pc": [
+            168
+          ]
+        },
+        {
+          "teal": 148,
+          "source": "contracts/TossUp.algo.ts:33",
+          "pc": [
+            169,
+            170
+          ]
+        },
+        {
+          "teal": 152,
+          "source": "contracts/TossUp.algo.ts:35",
+          "pc": [
+            171
+          ]
+        },
+        {
+          "teal": 153,
+          "source": "contracts/TossUp.algo.ts:35",
+          "pc": [
+            172
+          ]
+        },
+        {
+          "teal": 154,
+          "source": "contracts/TossUp.algo.ts:35",
+          "pc": [
+            173,
+            174
+          ]
+        },
+        {
+          "teal": 155,
+          "source": "contracts/TossUp.algo.ts:35",
+          "pc": [
+            175
+          ]
+        },
+        {
+          "teal": 156,
+          "source": "contracts/TossUp.algo.ts:35",
+          "pc": [
+            176
+          ]
+        },
+        {
+          "teal": 157,
+          "source": "contracts/TossUp.algo.ts:35",
+          "pc": [
+            177
+          ]
+        },
+        {
+          "teal": 158,
+          "source": "contracts/TossUp.algo.ts:35",
+          "pc": [
+            178,
+            179
+          ]
+        },
+        {
+          "teal": 162,
+          "source": "contracts/TossUp.algo.ts:37",
+          "pc": [
+            180,
+            181
+          ]
+        },
+        {
+          "teal": 163,
+          "source": "contracts/TossUp.algo.ts:37",
+          "pc": [
+            182,
+            183
+          ]
+        },
+        {
+          "teal": 164,
+          "source": "contracts/TossUp.algo.ts:37",
+          "pc": [
+            184
+          ]
+        },
+        {
+          "teal": 165,
+          "source": "contracts/TossUp.algo.ts:37",
+          "pc": [
+            185
+          ]
+        },
+        {
+          "teal": 166,
+          "source": "contracts/TossUp.algo.ts:37",
+          "pc": [
+            186
+          ]
+        },
+        {
+          "teal": 167,
+          "source": "contracts/TossUp.algo.ts:37",
+          "pc": [
+            187,
+            188
+          ]
+        },
+        {
+          "teal": 172,
+          "source": "contracts/TossUp.algo.ts:39",
+          "pc": [
+            189,
+            190
+          ]
+        },
+        {
+          "teal": 173,
+          "source": "contracts/TossUp.algo.ts:39",
+          "pc": [
+            191,
+            192
+          ]
+        },
+        {
+          "teal": 174,
+          "source": "contracts/TossUp.algo.ts:39",
+          "pc": [
+            193
+          ]
+        },
+        {
+          "teal": 175,
+          "source": "contracts/TossUp.algo.ts:39",
+          "pc": [
+            194,
+            195,
+            196
+          ]
+        },
+        {
+          "teal": 180,
+          "source": "contracts/TossUp.algo.ts:41",
+          "pc": [
+            197,
+            198
+          ]
+        },
+        {
+          "teal": 181,
+          "source": "contracts/TossUp.algo.ts:41",
+          "pc": [
+            199,
+            200
+          ]
+        },
+        {
+          "teal": 182,
+          "source": "contracts/TossUp.algo.ts:41",
+          "pc": [
+            201
+          ]
+        },
+        {
+          "teal": 183,
+          "source": "contracts/TossUp.algo.ts:41",
+          "pc": [
+            202,
+            203
+          ]
+        },
+        {
+          "teal": 184,
+          "source": "contracts/TossUp.algo.ts:39",
+          "pc": [
+            204,
+            205,
+            206
+          ]
+        },
+        {
+          "teal": 189,
+          "source": "contracts/TossUp.algo.ts:43",
+          "pc": [
+            207,
+            208
+          ]
+        },
+        {
+          "teal": 190,
+          "source": "contracts/TossUp.algo.ts:43",
+          "pc": [
+            209,
+            210
+          ]
+        },
+        {
+          "teal": 191,
+          "source": "contracts/TossUp.algo.ts:43",
+          "pc": [
+            211
+          ]
+        },
+        {
+          "teal": 192,
+          "source": "contracts/TossUp.algo.ts:43",
+          "pc": [
+            212,
+            213
+          ]
+        },
+        {
+          "teal": 197,
+          "source": "contracts/TossUp.algo.ts:46",
+          "pc": [
+            214,
+            215
+          ]
+        },
+        {
+          "teal": 200,
+          "source": "contracts/TossUp.algo.ts:19",
+          "pc": [
+            216,
+            217
+          ]
+        },
+        {
+          "teal": 203,
+          "source": "contracts/TossUp.algo.ts:19",
+          "pc": [
+            218,
+            219
+          ]
+        },
+        {
+          "teal": 204,
+          "source": "contracts/TossUp.algo.ts:19",
+          "pc": [
+            220
+          ]
+        },
+        {
+          "teal": 209,
+          "source": "contracts/TossUp.algo.ts:49",
+          "pc": [
+            221
+          ]
+        },
+        {
+          "teal": 212,
+          "source": "contracts/TossUp.algo.ts:50",
+          "pc": [
+            222,
+            223,
+            224
+          ]
+        },
+        {
+          "teal": 213,
+          "source": "contracts/TossUp.algo.ts:50",
+          "pc": [
+            225
+          ]
+        },
+        {
+          "teal": 214,
+          "source": "contracts/TossUp.algo.ts:50",
+          "pc": [
+            226
+          ]
+        },
+        {
+          "teal": 215,
+          "source": "contracts/TossUp.algo.ts:50",
+          "pc": [
+            227,
+            228
+          ]
+        },
+        {
+          "teal": 216,
+          "source": "contracts/TossUp.algo.ts:50",
+          "pc": [
+            229
+          ]
+        },
+        {
+          "teal": 219,
+          "source": "contracts/TossUp.algo.ts:50",
+          "errorMessage": "argument 0 (player) for play must be a address",
+          "pc": [
+            230
+          ]
+        },
+        {
+          "teal": 222,
+          "source": "contracts/TossUp.algo.ts:50",
+          "pc": [
+            231,
+            232
+          ]
+        },
+        {
+          "teal": 223,
+          "source": "contracts/TossUp.algo.ts:50",
+          "pc": [
+            233
+          ]
+        },
+        {
+          "teal": 224,
+          "source": "contracts/TossUp.algo.ts:50",
+          "pc": [
+            234
+          ]
+        },
+        {
+          "teal": 225,
+          "source": "contracts/TossUp.algo.ts:50",
+          "pc": [
+            235
+          ]
+        },
+        {
+          "teal": 226,
+          "source": "contracts/TossUp.algo.ts:50",
+          "pc": [
+            236,
+            237
+          ]
+        },
+        {
+          "teal": 227,
+          "source": "contracts/TossUp.algo.ts:50",
+          "pc": [
+            238
+          ]
+        },
+        {
+          "teal": 228,
+          "source": "contracts/TossUp.algo.ts:50",
+          "pc": [
+            239
+          ]
+        },
+        {
+          "teal": 231,
+          "source": "contracts/TossUp.algo.ts:50",
+          "errorMessage": "argument 1 (payment) for play must be a pay transaction",
+          "pc": [
+            240
+          ]
+        },
+        {
+          "teal": 234,
+          "source": "contracts/TossUp.algo.ts:49",
+          "pc": [
+            241,
+            242,
+            243
+          ]
+        },
+        {
+          "teal": 235,
+          "source": "contracts/TossUp.algo.ts:49",
+          "pc": [
+            244
+          ]
+        },
+        {
+          "teal": 236,
+          "source": "contracts/TossUp.algo.ts:49",
+          "pc": [
+            245
+          ]
+        },
+        {
+          "teal": 237,
+          "source": "contracts/TossUp.algo.ts:49",
+          "pc": [
+            246
+          ]
+        },
+        {
+          "teal": 238,
+          "source": "contracts/TossUp.algo.ts:49",
+          "pc": [
+            247
+          ]
+        },
+        {
+          "teal": 239,
+          "source": "contracts/TossUp.algo.ts:49",
+          "pc": [
+            248
+          ]
+        },
+        {
+          "teal": 243,
+          "source": "contracts/TossUp.algo.ts:49",
+          "pc": [
+            249,
+            250,
+            251
+          ]
+        },
+        {
+          "teal": 246,
+          "source": "contracts/TossUp.algo.ts:49",
+          "pc": [
+            252
+          ]
+        },
+        {
+          "teal": 250,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            253,
+            254
+          ]
+        },
+        {
+          "teal": 251,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            255
+          ]
+        },
+        {
+          "teal": 252,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            256
+          ]
+        },
+        {
+          "teal": 253,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            257
+          ]
+        },
+        {
+          "teal": 256,
+          "source": "contracts/TossUp.algo.ts:51",
+          "errorMessage": "asserts failed: asserts(player !== this.owner.value, this.amount.value === payment.amount, this.txn.sender === this.app.creator)",
+          "pc": [
+            258
+          ]
+        },
+        {
+          "teal": 257,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            259
+          ]
+        },
+        {
+          "teal": 258,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            260
+          ]
+        },
+        {
+          "teal": 259,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            261,
+            262
+          ]
+        },
+        {
+          "teal": 260,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            263,
+            264
+          ]
+        },
+        {
+          "teal": 261,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            265
+          ]
+        },
+        {
+          "teal": 264,
+          "source": "contracts/TossUp.algo.ts:51",
+          "errorMessage": "asserts failed: asserts(player !== this.owner.value, this.amount.value === payment.amount, this.txn.sender === this.app.creator)",
+          "pc": [
+            266
+          ]
+        },
+        {
+          "teal": 265,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            267,
+            268
+          ]
+        },
+        {
+          "teal": 266,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            269,
+            270,
+            271
+          ]
+        },
+        {
+          "teal": 267,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            272,
+            273
+          ]
+        },
+        {
+          "teal": 268,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            274
+          ]
+        },
+        {
+          "teal": 269,
+          "source": "contracts/TossUp.algo.ts:51",
+          "pc": [
+            275
+          ]
+        },
+        {
+          "teal": 272,
+          "source": "contracts/TossUp.algo.ts:51",
+          "errorMessage": "asserts failed: asserts(player !== this.owner.value, this.amount.value === payment.amount, this.txn.sender === this.app.creator)",
+          "pc": [
+            276
+          ]
+        },
+        {
+          "teal": 276,
+          "source": "contracts/TossUp.algo.ts:53",
+          "pc": [
+            277,
+            278
+          ]
+        },
+        {
+          "teal": 277,
+          "source": "contracts/TossUp.algo.ts:53",
+          "pc": [
+            279,
+            280,
+            281
+          ]
+        },
+        {
+          "teal": 278,
+          "source": "contracts/TossUp.algo.ts:53",
+          "pc": [
+            282,
+            283
+          ]
+        },
+        {
+          "teal": 283,
+          "source": "contracts/TossUp.algo.ts:55",
+          "pc": [
+            284,
+            285
+          ]
+        },
+        {
+          "teal": 284,
+          "source": "contracts/TossUp.algo.ts:55",
+          "pc": [
+            286,
+            287
+          ]
+        },
+        {
+          "teal": 285,
+          "source": "contracts/TossUp.algo.ts:55",
+          "pc": [
+            288
+          ]
+        },
+        {
+          "teal": 286,
+          "source": "contracts/TossUp.algo.ts:55",
+          "pc": [
+            289
+          ]
+        },
+        {
+          "teal": 287,
+          "source": "contracts/TossUp.algo.ts:55",
+          "pc": [
+            290
+          ]
+        },
+        {
+          "teal": 288,
+          "source": "contracts/TossUp.algo.ts:55",
+          "pc": [
+            291,
+            292,
+            293
+          ]
+        },
+        {
+          "teal": 293,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            294
+          ]
+        },
+        {
+          "teal": 294,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            295
+          ]
+        },
+        {
+          "teal": 295,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            296,
+            297
+          ]
+        },
+        {
+          "teal": 299,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            298
+          ]
+        },
+        {
+          "teal": 300,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            299
+          ]
+        },
+        {
+          "teal": 301,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            300,
+            301
+          ]
+        },
+        {
+          "teal": 305,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            302
+          ]
+        },
+        {
+          "teal": 306,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            303
+          ]
+        },
+        {
+          "teal": 307,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            304,
+            305
+          ]
+        },
+        {
+          "teal": 308,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            306,
+            307
+          ]
+        },
+        {
+          "teal": 309,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            308
+          ]
+        },
+        {
+          "teal": 310,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            309,
+            310
+          ]
+        },
+        {
+          "teal": 313,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            311
+          ]
+        },
+        {
+          "teal": 314,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            312,
+            313
+          ]
+        },
+        {
+          "teal": 317,
+          "source": "contracts/TossUp.algo.ts:56",
+          "pc": [
+            314
+          ]
+        },
+        {
+          "teal": 318,
+          "source": "contracts/TossUp.algo.ts:55",
+          "pc": [
+            315,
+            316,
+            317
+          ]
+        },
+        {
+          "teal": 323,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            318
+          ]
+        },
+        {
+          "teal": 324,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            319
+          ]
+        },
+        {
+          "teal": 325,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            320,
+            321
+          ]
+        },
+        {
+          "teal": 329,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            322,
+            323
+          ]
+        },
+        {
+          "teal": 330,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            324,
+            325
+          ]
+        },
+        {
+          "teal": 334,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            326
+          ]
+        },
+        {
+          "teal": 335,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            327
+          ]
+        },
+        {
+          "teal": 336,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            328,
+            329
+          ]
+        },
+        {
+          "teal": 337,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            330,
+            331
+          ]
+        },
+        {
+          "teal": 338,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            332
+          ]
+        },
+        {
+          "teal": 339,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            333,
+            334
+          ]
+        },
+        {
+          "teal": 342,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            335
+          ]
+        },
+        {
+          "teal": 343,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            336,
+            337
+          ]
+        },
+        {
+          "teal": 346,
+          "source": "contracts/TossUp.algo.ts:58",
+          "pc": [
+            338
+          ]
+        },
+        {
+          "teal": 351,
+          "source": "contracts/TossUp.algo.ts:61",
+          "pc": [
+            339
+          ]
+        },
+        {
+          "teal": 352,
+          "source": "contracts/TossUp.algo.ts:61",
+          "pc": [
+            340
+          ]
+        },
+        {
+          "teal": 353,
+          "source": "contracts/TossUp.algo.ts:61",
+          "pc": [
+            341,
+            342
+          ]
+        },
+        {
+          "teal": 357,
+          "source": "contracts/TossUp.algo.ts:61",
+          "pc": [
+            343
+          ]
+        },
+        {
+          "teal": 358,
+          "source": "contracts/TossUp.algo.ts:61",
+          "pc": [
+            344
+          ]
+        },
+        {
+          "teal": 359,
+          "source": "contracts/TossUp.algo.ts:61",
+          "pc": [
+            345,
+            346
+          ]
+        },
+        {
+          "teal": 362,
+          "source": "contracts/TossUp.algo.ts:61",
+          "pc": [
+            347
+          ]
+        },
+        {
+          "teal": 363,
+          "source": "contracts/TossUp.algo.ts:61",
+          "pc": [
+            348,
+            349
+          ]
+        },
+        {
+          "teal": 366,
+          "source": "contracts/TossUp.algo.ts:61",
+          "pc": [
+            350
+          ]
+        },
+        {
+          "teal": 370,
+          "source": "contracts/TossUp.algo.ts:62",
+          "pc": [
+            351,
+            352
+          ]
+        },
+        {
+          "teal": 371,
+          "source": "contracts/TossUp.algo.ts:62",
+          "pc": [
+            353,
+            354
+          ]
+        },
+        {
+          "teal": 372,
+          "source": "contracts/TossUp.algo.ts:62",
+          "pc": [
+            355
+          ]
+        },
+        {
+          "teal": 375,
+          "source": "contracts/TossUp.algo.ts:49",
+          "pc": [
+            356,
+            357
+          ]
+        },
+        {
+          "teal": 376,
+          "source": "contracts/TossUp.algo.ts:49",
+          "pc": [
+            358
+          ]
+        },
+        {
+          "teal": 379,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            359,
+            360,
+            361,
+            362,
+            363,
+            364
+          ]
+        },
+        {
+          "teal": 380,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            365,
+            366,
+            367
+          ]
+        },
+        {
+          "teal": 381,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            368,
+            369,
+            370,
+            371
+          ]
+        },
+        {
+          "teal": 384,
+          "source": "contracts/TossUp.algo.ts:3",
+          "errorMessage": "this contract does not implement the given ABI method for create NoOp",
+          "pc": [
+            372
+          ]
+        },
+        {
+          "teal": 387,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            373,
+            374,
+            375,
+            376,
+            377,
+            378
+          ]
+        },
+        {
+          "teal": 388,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            379,
+            380,
+            381
+          ]
+        },
+        {
+          "teal": 389,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            382,
+            383,
+            384,
+            385
+          ]
+        },
+        {
+          "teal": 392,
+          "source": "contracts/TossUp.algo.ts:3",
+          "errorMessage": "this contract does not implement the given ABI method for call NoOp",
+          "pc": [
+            386
+          ]
+        },
+        {
+          "teal": 395,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            387,
+            388,
+            389,
+            390,
+            391,
+            392
+          ]
+        },
+        {
+          "teal": 396,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            393,
+            394,
+            395
+          ]
+        },
+        {
+          "teal": 397,
+          "source": "contracts/TossUp.algo.ts:3",
+          "pc": [
+            396,
+            397,
+            398,
+            399
+          ]
+        },
+        {
+          "teal": 400,
+          "source": "contracts/TossUp.algo.ts:3",
+          "errorMessage": "this contract does not implement the given ABI method for call DeleteApplication",
+          "pc": [
+            400
+          ]
+        }
+      ],
+      "pcOffsetMethod": "none"
+    },
+    "clear": {
+      "sourceInfo": [],
+      "pcOffsetMethod": "none"
+    }
+  },
+  "source": {
+    "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCmludGNibG9jayAxIDAgMjQgNDI5NDk2NzI5NSAyIDMyCmJ5dGVjYmxvY2sgMHggMHg2Zjc3NmU2NTcyIDB4NjE2ZDZmNzU2ZTc0IDB4MTUxZjdjNzUKCi8vIFRoaXMgVEVBTCB3YXMgZ2VuZXJhdGVkIGJ5IFRFQUxTY3JpcHQgdjAuMTA2LjIKLy8gaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9URUFMU2NyaXB0CgovLyBUaGlzIGNvbnRyYWN0IGlzIGNvbXBsaWFudCB3aXRoIGFuZC9vciBpbXBsZW1lbnRzIHRoZSBmb2xsb3dpbmcgQVJDczogWyBBUkM0IF0KCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCnB1c2hpbnQgNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpjYWxsX0RlbGV0ZUFwcGxpY2F0aW9uICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCS8vIGV4ZWN1dGUgY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKCWNhbGxzdWIgY3JlYXRlQXBwbGljYXRpb24KCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKCk6IHZvaWQKY3JlYXRlQXBwbGljYXRpb246Cglwcm90byAwIDAKCXJldHN1YgoKLy8gcmVnaXN0ZXIocGF5LGFkZHJlc3MpYWRkcmVzcwoqYWJpX3JvdXRlX3JlZ2lzdGVyOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAzIC8vIDB4MTUxZjdjNzUKCgkvLyBvd25lcjogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgNSAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChvd25lcikgZm9yIHJlZ2lzdGVyIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBwYXltZW50OiBwYXkKCXR4biBHcm91cEluZGV4CglpbnRjIDAgLy8gMQoJLQoJZHVwCglndHhucyBUeXBlRW51bQoJaW50YyAwIC8vICBwYXkKCT09CgoJLy8gYXJndW1lbnQgMSAocGF5bWVudCkgZm9yIHJlZ2lzdGVyIG11c3QgYmUgYSBwYXkgdHJhbnNhY3Rpb24KCWFzc2VydAoKCS8vIGV4ZWN1dGUgcmVnaXN0ZXIocGF5LGFkZHJlc3MpYWRkcmVzcwoJY2FsbHN1YiByZWdpc3RlcgoJY29uY2F0Cglsb2cKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHJlZ2lzdGVyKHBheW1lbnQ6IFBheVR4biwgb3duZXI6IEFkZHJlc3MpOiBBZGRyZXNzCnJlZ2lzdGVyOgoJcHJvdG8gMiAxCgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjEzCgkvLyB2ZXJpZnlQYXlUeG4ocGF5bWVudCwgeyBhbW91bnQ6IHsgZ3JlYXRlclRoYW46IDAgfSB9KQoJLy8gdmVyaWZ5IGFtb3VudAoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CglpbnRjIDEgLy8gMAoJPgoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoicGF5bWVudCIsImZpZWxkIjoiYW1vdW50IiwiY29uZGl0aW9uIjoiZ3JlYXRlclRoYW4iLCJleHBlY3RlZCI6Ij4wIn0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czoxNAoJLy8gdGhpcy5vd25lci52YWx1ZSA9IG93bmVyCglieXRlYyAxIC8vICAib3duZXIiCglmcmFtZV9kaWcgLTIgLy8gb3duZXI6IEFkZHJlc3MKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjE1CgkvLyB0aGlzLmFtb3VudC52YWx1ZSA9IHBheW1lbnQuYW1vdW50CglieXRlYyAyIC8vICAiYW1vdW50IgoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czoxNgoJLy8gcmV0dXJuIHRoaXMub3duZXIudmFsdWU7CglieXRlYyAxIC8vICAib3duZXIiCglhcHBfZ2xvYmFsX2dldAoJcmV0c3ViCgovLyBnZXRSYW5kb20ocGxheWVyOiBBZGRyZXNzKTogdWludDY0CmdldFJhbmRvbToKCXByb3RvIDEgMQoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAwIC8vIDB4CglkdXBuIDUKCgkvLyBjb250cmFjdHMvVG9zc1VwLmFsZ28udHM6MjIKCS8vIGJsb2NrU2VlZCA9CgkvLyAgICAgICBleHRyYWN0VWludDY0KGJsb2Nrc1t0aGlzLnR4bi5maXJzdFZhbGlkIC0gMV0uc2VlZCwgYmxvY2tzW3RoaXMudHhuLmZpcnN0VmFsaWQgLSAxXS50aW1lc3RhbXAgJSAyNCkgJSAyNAoJdHhuIEZpcnN0VmFsaWQKCWludGMgMCAvLyAxCgktCglibG9jayBCbGtTZWVkCgl0eG4gRmlyc3RWYWxpZAoJaW50YyAwIC8vIDEKCS0KCWJsb2NrIEJsa1RpbWVzdGFtcAoJaW50YyAyIC8vIDI0CgklCglleHRyYWN0X3VpbnQ2NAoJaW50YyAyIC8vIDI0CgklCglmcmFtZV9idXJ5IDEgLy8gYmxvY2tTZWVkOiB1aW50NjQKCgkvLyBjb250cmFjdHMvVG9zc1VwLmFsZ28udHM6MjUKCS8vIHByb3Bvc2VyID0gYmxvY2tzW3RoaXMudHhuLmZpcnN0VmFsaWQgLSAxXS5wcm9wb3NlcgoJdHhuIEZpcnN0VmFsaWQKCWludGMgMCAvLyAxCgktCglibG9jayBCbGtQcm9wb3NlcgoJZnJhbWVfYnVyeSAyIC8vIHByb3Bvc2VyOiBhZGRyZXNzCgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjMzCgkvLyBwbGF5ZXJTZWVkID0gZXh0cmFjdFVpbnQ2NChwbGF5ZXIsIGJsb2NrU2VlZCkgJSBtYXhTZWVkCglmcmFtZV9kaWcgLTEgLy8gcGxheWVyOiBBZGRyZXNzCglmcmFtZV9kaWcgMSAvLyBibG9ja1NlZWQ6IHVpbnQ2NAoJZXh0cmFjdF91aW50NjQKCWludGMgMyAvLyA0Mjk0OTY3Mjk1CgklCglmcmFtZV9idXJ5IDMgLy8gcGxheWVyU2VlZDogdWludDY0CgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjM1CgkvLyBvd25lclNlZWQgPSBleHRyYWN0VWludDY0KHRoaXMub3duZXIudmFsdWUsIGJsb2NrU2VlZCkgJSBtYXhTZWVkCglieXRlYyAxIC8vICAib3duZXIiCglhcHBfZ2xvYmFsX2dldAoJZnJhbWVfZGlnIDEgLy8gYmxvY2tTZWVkOiB1aW50NjQKCWV4dHJhY3RfdWludDY0CglpbnRjIDMgLy8gNDI5NDk2NzI5NQoJJQoJZnJhbWVfYnVyeSA0IC8vIG93bmVyU2VlZDogdWludDY0CgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjM3CgkvLyBpbnRyYVJvdW5kUmFuZG9tbmVzcyA9IChwbGF5ZXJTZWVkICogb3duZXJTZWVkKSAlIDI0CglmcmFtZV9kaWcgMyAvLyBwbGF5ZXJTZWVkOiB1aW50NjQKCWZyYW1lX2RpZyA0IC8vIG93bmVyU2VlZDogdWludDY0CgkqCglpbnRjIDIgLy8gMjQKCSUKCWZyYW1lX2J1cnkgNSAvLyBpbnRyYVJvdW5kUmFuZG9tbmVzczogdWludDY0CgoJLy8gKmlmMF9jb25kaXRpb24KCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czozOQoJLy8gcHJvcG9zZXIgPT09IGdsb2JhbHMuemVyb0FkZHJlc3MKCWZyYW1lX2RpZyAyIC8vIHByb3Bvc2VyOiBhZGRyZXNzCglnbG9iYWwgWmVyb0FkZHJlc3MKCT09CglieiAqaWYwX2Vsc2UKCgkvLyAqaWYwX2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czo0MQoJLy8gc2VlZCA9IGV4dHJhY3RVaW50NjQocGxheWVyLCBpbnRyYVJvdW5kUmFuZG9tbmVzcykKCWZyYW1lX2RpZyAtMSAvLyBwbGF5ZXI6IEFkZHJlc3MKCWZyYW1lX2RpZyA1IC8vIGludHJhUm91bmRSYW5kb21uZXNzOiB1aW50NjQKCWV4dHJhY3RfdWludDY0CglmcmFtZV9idXJ5IDAgLy8gc2VlZDogdWludDY0CgliICppZjBfZW5kCgoqaWYwX2Vsc2U6CgkvLyBjb250cmFjdHMvVG9zc1VwLmFsZ28udHM6NDMKCS8vIHNlZWQgPSBleHRyYWN0VWludDY0KHByb3Bvc2VyLCBpbnRyYVJvdW5kUmFuZG9tbmVzcykKCWZyYW1lX2RpZyAyIC8vIHByb3Bvc2VyOiBhZGRyZXNzCglmcmFtZV9kaWcgNSAvLyBpbnRyYVJvdW5kUmFuZG9tbmVzczogdWludDY0CglleHRyYWN0X3VpbnQ2NAoJZnJhbWVfYnVyeSAwIC8vIHNlZWQ6IHVpbnQ2NAoKKmlmMF9lbmQ6CgkvLyBjb250cmFjdHMvVG9zc1VwLmFsZ28udHM6NDYKCS8vIHJldHVybiBzZWVkOwoJZnJhbWVfZGlnIDAgLy8gc2VlZDogdWludDY0CgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCgoJLy8gcG9wIGFsbCBsb2NhbCB2YXJpYWJsZXMgZnJvbSB0aGUgc3RhY2sKCXBvcG4gNQoJcmV0c3ViCgovLyBwbGF5KHBheSxhZGRyZXNzKXVpbnQ2NAoqYWJpX3JvdXRlX3BsYXk6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDMgLy8gMHgxNTFmN2M3NQoKCS8vIHBsYXllcjogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgNSAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChwbGF5ZXIpIGZvciBwbGF5IG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBwYXltZW50OiBwYXkKCXR4biBHcm91cEluZGV4CglpbnRjIDAgLy8gMQoJLQoJZHVwCglndHhucyBUeXBlRW51bQoJaW50YyAwIC8vICBwYXkKCT09CgoJLy8gYXJndW1lbnQgMSAocGF5bWVudCkgZm9yIHBsYXkgbXVzdCBiZSBhIHBheSB0cmFuc2FjdGlvbgoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBwbGF5KHBheSxhZGRyZXNzKXVpbnQ2NAoJY2FsbHN1YiBwbGF5CglpdG9iCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gcGxheShwYXltZW50OiBQYXlUeG4sIHBsYXllcjogQWRkcmVzcyk6IHVpbnQ2NApwbGF5OgoJcHJvdG8gMiAxCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCgkvLyBjb250cmFjdHMvVG9zc1VwLmFsZ28udHM6NTEKCS8vIGFzc2VydHMocGxheWVyICE9PSB0aGlzLm93bmVyLnZhbHVlLCB0aGlzLmFtb3VudC52YWx1ZSA9PT0gcGF5bWVudC5hbW91bnQsIHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5hcHAuY3JlYXRvcikKCWZyYW1lX2RpZyAtMiAvLyBwbGF5ZXI6IEFkZHJlc3MKCWJ5dGVjIDEgLy8gICJvd25lciIKCWFwcF9nbG9iYWxfZ2V0CgkhPQoKCS8vIGFzc2VydHMgZmFpbGVkOiBhc3NlcnRzKHBsYXllciAhPT0gdGhpcy5vd25lci52YWx1ZSwgdGhpcy5hbW91bnQudmFsdWUgPT09IHBheW1lbnQuYW1vdW50LCB0aGlzLnR4bi5zZW5kZXIgPT09IHRoaXMuYXBwLmNyZWF0b3IpCglhc3NlcnQKCWJ5dGVjIDIgLy8gICJhbW91bnQiCglhcHBfZ2xvYmFsX2dldAoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50Cgk9PQoKCS8vIGFzc2VydHMgZmFpbGVkOiBhc3NlcnRzKHBsYXllciAhPT0gdGhpcy5vd25lci52YWx1ZSwgdGhpcy5hbW91bnQudmFsdWUgPT09IHBheW1lbnQuYW1vdW50LCB0aGlzLnR4bi5zZW5kZXIgPT09IHRoaXMuYXBwLmNyZWF0b3IpCglhc3NlcnQKCXR4biBTZW5kZXIKCXR4bmEgQXBwbGljYXRpb25zIDAKCWFwcF9wYXJhbXNfZ2V0IEFwcENyZWF0b3IKCXBvcAoJPT0KCgkvLyBhc3NlcnRzIGZhaWxlZDogYXNzZXJ0cyhwbGF5ZXIgIT09IHRoaXMub3duZXIudmFsdWUsIHRoaXMuYW1vdW50LnZhbHVlID09PSBwYXltZW50LmFtb3VudCwgdGhpcy50eG4uc2VuZGVyID09PSB0aGlzLmFwcC5jcmVhdG9yKQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjUzCgkvLyBzZWVkID0gdGhpcy5nZXRSYW5kb20ocGxheWVyKQoJZnJhbWVfZGlnIC0yIC8vIHBsYXllcjogQWRkcmVzcwoJY2FsbHN1YiBnZXRSYW5kb20KCWZyYW1lX2J1cnkgMCAvLyBzZWVkOiB1aW50NjQKCgkvLyAqaWYxX2NvbmRpdGlvbgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjU1CgkvLyBzZWVkICUgMiA9PT0gMAoJZnJhbWVfZGlnIDAgLy8gc2VlZDogdWludDY0CglpbnRjIDQgLy8gMgoJJQoJaW50YyAxIC8vIDAKCT09CglieiAqaWYxX2Vsc2UKCgkvLyAqaWYxX2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czo1NgoJLy8gc2VuZFBheW1lbnQoeyByZWNlaXZlcjogdGhpcy5vd25lci52YWx1ZSwgYW1vdW50OiB0aGlzLmFtb3VudC52YWx1ZSArIHBheW1lbnQuYW1vdW50IH0pCglpdHhuX2JlZ2luCglpbnRjIDAgLy8gIHBheQoJaXR4bl9maWVsZCBUeXBlRW51bQoKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czo1NgoJLy8gcmVjZWl2ZXI6IHRoaXMub3duZXIudmFsdWUKCWJ5dGVjIDEgLy8gICJvd25lciIKCWFwcF9nbG9iYWxfZ2V0CglpdHhuX2ZpZWxkIFJlY2VpdmVyCgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjU2CgkvLyBhbW91bnQ6IHRoaXMuYW1vdW50LnZhbHVlICsgcGF5bWVudC5hbW91bnQKCWJ5dGVjIDIgLy8gICJhbW91bnQiCglhcHBfZ2xvYmFsX2dldAoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CgkrCglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIEZlZSBmaWVsZCBub3Qgc2V0LCBkZWZhdWx0aW5nIHRvIDAKCWludGMgMSAvLyAwCglpdHhuX2ZpZWxkIEZlZQoKCS8vIFN1Ym1pdCBpbm5lciB0cmFuc2FjdGlvbgoJaXR4bl9zdWJtaXQKCWIgKmlmMV9lbmQKCippZjFfZWxzZToKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czo1OAoJLy8gc2VuZFBheW1lbnQoeyByZWNlaXZlcjogcGxheWVyLCBhbW91bnQ6IHRoaXMuYW1vdW50LnZhbHVlICsgcGF5bWVudC5hbW91bnQgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjU4CgkvLyByZWNlaXZlcjogcGxheWVyCglmcmFtZV9kaWcgLTIgLy8gcGxheWVyOiBBZGRyZXNzCglpdHhuX2ZpZWxkIFJlY2VpdmVyCgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjU4CgkvLyBhbW91bnQ6IHRoaXMuYW1vdW50LnZhbHVlICsgcGF5bWVudC5hbW91bnQKCWJ5dGVjIDIgLy8gICJhbW91bnQiCglhcHBfZ2xvYmFsX2dldAoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CgkrCglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIEZlZSBmaWVsZCBub3Qgc2V0LCBkZWZhdWx0aW5nIHRvIDAKCWludGMgMSAvLyAwCglpdHhuX2ZpZWxkIEZlZQoKCS8vIFN1Ym1pdCBpbm5lciB0cmFuc2FjdGlvbgoJaXR4bl9zdWJtaXQKCippZjFfZW5kOgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjYxCgkvLyBzZW5kUGF5bWVudCh7IGNsb3NlUmVtYWluZGVyVG86IHRoaXMub3duZXIudmFsdWUgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjYxCgkvLyBjbG9zZVJlbWFpbmRlclRvOiB0aGlzLm93bmVyLnZhbHVlCglieXRlYyAxIC8vICAib3duZXIiCglhcHBfZ2xvYmFsX2dldAoJaXR4bl9maWVsZCBDbG9zZVJlbWFpbmRlclRvCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czo2MgoJLy8gcmV0dXJuIHNlZWQgJSAyOwoJZnJhbWVfZGlnIDAgLy8gc2VlZDogdWludDY0CglpbnRjIDQgLy8gMgoJJQoKCS8vIHNldCB0aGUgc3Vicm91dGluZSByZXR1cm4gdmFsdWUKCWZyYW1lX2J1cnkgMAoJcmV0c3ViCgoqY3JlYXRlX05vT3A6CglwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjcmVhdGUgTm9PcAoJZXJyCgoqY2FsbF9Ob09wOgoJcHVzaGJ5dGVzIDB4ZTZkNmQ5ZTYgLy8gbWV0aG9kICJyZWdpc3RlcihwYXksYWRkcmVzcylhZGRyZXNzIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9yZWdpc3RlcgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKKmNhbGxfRGVsZXRlQXBwbGljYXRpb246CglwdXNoYnl0ZXMgMHgxNTVjZWZmYSAvLyBtZXRob2QgInBsYXkocGF5LGFkZHJlc3MpdWludDY0IgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9wbGF5CgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgRGVsZXRlQXBwbGljYXRpb24KCWVycg==",
+    "clear": "I3ByYWdtYSB2ZXJzaW9uIDEx"
+  },
+  "byteCode": {
+    "approval": "CyAGAQAY/////w8CICYEAAVvd25lcgZhbW91bnQEFR98dTEYFIEGCzEZCI0MATAAAAAAAAAAAAE+ASIAAAAAAAAAAAAAAIgAAiJDigAAiSs2GgFJFSEFEkQxFiIJSTgQIhJEiAAEULAiQ4oCAYv/OAgjDUQpi/5nKov/OAhnKWSJigEBKEcFMQIiCdEAMQIiCdEBJBhbJBiMATECIgnRAowCi/+LAVslGIwDKWSLAVslGIwEiwOLBAskGIwFiwIyAxJBAAqL/4sFW4wAQgAHiwKLBVuMAIsAjABGBYkrNhoBSRUhBRJEMRYiCUk4ECISRIgABRZQsCJDigIBKIv+KWQTRCpki/84CBJEMQA2MgByB0gSRIv+iP9njACLACEEGCMSQQAYsSKyEClksgcqZIv/OAgIsggjsgGzQgAVsSKyEIv+sgcqZIv/OAgIsggjsgGzsSKyEClksgkjsgGziwAhBBiMAImABLhEezY2GgCOAf7SAIAE5tbZ5jYaAI4B/s0AgAQVXO/6NhoAjgH/TQA=",
+    "clear": "Cw=="
+  },
+  "compilerInfo": {
+    "compiler": "algod",
+    "compilerVersion": {
+      "major": 4,
+      "minor": 0,
+      "patch": 2,
+      "commitHash": "6b940281"
+    }
+  }
+}

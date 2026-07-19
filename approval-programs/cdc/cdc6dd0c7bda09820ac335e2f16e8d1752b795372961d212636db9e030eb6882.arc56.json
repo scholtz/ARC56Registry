@@ -1,0 +1,178 @@
+{
+    "name": "CreatorVerifier",
+    "structs": {},
+    "methods": [
+        {
+            "name": "createApplication",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [
+                    "NoOp"
+                ],
+                "call": []
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "allowOptInsFrom",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "creator"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Allow anyone to use the lsig to opt in the txn sender into an asset created by the creator",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "disableOptInsFrom",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "creator"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Disable opt-ins for ASAs from the given creator",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "verifyCreator",
+            "args": [
+                {
+                    "type": "axfer",
+                    "name": "optIn"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "allowedCreators": {
+                    "keyType": "(address,address)",
+                    "valueType": "bool",
+                    "desc": "Mapping of [user,creator] to determine which creators the user will allow opt-ins from",
+                    "prefix": ""
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        104
+                    ],
+                    "errorMessage": "Box must have value"
+                },
+                {
+                    "pc": [
+                        7
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp"
+                },
+                {
+                    "pc": [
+                        101
+                    ],
+                    "errorMessage": "asset exists"
+                },
+                {
+                    "pc": [
+                        92
+                    ],
+                    "errorMessage": "transaction type is axfer"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMQogICAgLy8gY29udHJhY3RzL2xzaWctd2l0aC1hcHAvbHNpZy13aXRoLWFwcC5hbGdvLnRzOjUwCiAgICAvLyBleHBvcnQgY2xhc3MgQ3JlYXRvclZlcmlmaWVyIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDcKICAgIHB1c2hieXRlc3MgMHhmMWJmMmNhOCAweGJjMjhhYzJiIDB4OGQ1YWE3MjcgLy8gbWV0aG9kICJhbGxvd09wdEluc0Zyb20oYWRkcmVzcyl2b2lkIiwgbWV0aG9kICJkaXNhYmxlT3B0SW5zRnJvbShhZGRyZXNzKXZvaWQiLCBtZXRob2QgInZlcmlmeUNyZWF0b3IoYXhmZXIpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGFsbG93T3B0SW5zRnJvbSBkaXNhYmxlT3B0SW5zRnJvbSB2ZXJpZnlDcmVhdG9yCiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BANzoKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo1MAogICAgLy8gZXhwb3J0IGNsYXNzIENyZWF0b3JWZXJpZmllciBleHRlbmRzIENvbnRyYWN0IHsKICAgIHB1c2hieXRlcyAweGI4NDQ3YjM2IC8vIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2NyZWF0ZUFwcGxpY2F0aW9uX3JvdXRlQDgKICAgIGVycgoKbWFpbl9jcmVhdGVBcHBsaWNhdGlvbl9yb3V0ZUA4OgogICAgLy8gY29udHJhY3RzL2xzaWctd2l0aC1hcHAvbHNpZy13aXRoLWFwcC5hbGdvLnRzOjUxCiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICJyZXF1aXJlIiB9KQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo6Q3JlYXRvclZlcmlmaWVyLmFsbG93T3B0SW5zRnJvbVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmFsbG93T3B0SW5zRnJvbToKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo2MQogICAgLy8gdGhpcy5hbGxvd2VkQ3JlYXRvcnMoW1R4bi5zZW5kZXIsIGNyZWF0b3IubmF0aXZlXSkudmFsdWUgPSBuZXcgQm9vbCh0cnVlKTsKICAgIHR4biBTZW5kZXIKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo2MAogICAgLy8gYWxsb3dPcHRJbnNGcm9tKGNyZWF0b3I6IEFkZHJlc3MpOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo2MQogICAgLy8gdGhpcy5hbGxvd2VkQ3JlYXRvcnMoW1R4bi5zZW5kZXIsIGNyZWF0b3IubmF0aXZlXSkudmFsdWUgPSBuZXcgQm9vbCh0cnVlKTsKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4ODAKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo2MAogICAgLy8gYWxsb3dPcHRJbnNGcm9tKGNyZWF0b3I6IEFkZHJlc3MpOiB2b2lkIHsKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBjb250cmFjdHMvbHNpZy13aXRoLWFwcC9sc2lnLXdpdGgtYXBwLmFsZ28udHM6OkNyZWF0b3JWZXJpZmllci5kaXNhYmxlT3B0SW5zRnJvbVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmRpc2FibGVPcHRJbnNGcm9tOgogICAgLy8gY29udHJhY3RzL2xzaWctd2l0aC1hcHAvbHNpZy13aXRoLWFwcC5hbGdvLnRzOjY2CiAgICAvLyB0aGlzLmFsbG93ZWRDcmVhdG9ycyhbVHhuLnNlbmRlciwgY3JlYXRvci5uYXRpdmVdKS52YWx1ZSA9IG5ldyBCb29sKGZhbHNlKTsKICAgIHR4biBTZW5kZXIKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo2NQogICAgLy8gZGlzYWJsZU9wdEluc0Zyb20oY3JlYXRvcjogQWRkcmVzcyk6IHZvaWQgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgLy8gY29udHJhY3RzL2xzaWctd2l0aC1hcHAvbHNpZy13aXRoLWFwcC5hbGdvLnRzOjY2CiAgICAvLyB0aGlzLmFsbG93ZWRDcmVhdG9ycyhbVHhuLnNlbmRlciwgY3JlYXRvci5uYXRpdmVdKS52YWx1ZSA9IG5ldyBCb29sKGZhbHNlKTsKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo2NQogICAgLy8gZGlzYWJsZU9wdEluc0Zyb20oY3JlYXRvcjogQWRkcmVzcyk6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo6Q3JlYXRvclZlcmlmaWVyLnZlcmlmeUNyZWF0b3Jbcm91dGluZ10oKSAtPiB2b2lkOgp2ZXJpZnlDcmVhdG9yOgogICAgLy8gY29udHJhY3RzL2xzaWctd2l0aC1hcHAvbHNpZy13aXRoLWFwcC5hbGdvLnRzOjcwCiAgICAvLyB2ZXJpZnlDcmVhdG9yKG9wdEluOiBndHhuLkFzc2V0VHJhbnNmZXJUeG4pOiB2b2lkIHsKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgcHVzaGludCA0IC8vIGF4ZmVyCiAgICA9PQogICAgYXNzZXJ0IC8vIHRyYW5zYWN0aW9uIHR5cGUgaXMgYXhmZXIKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo3MwogICAgLy8gdGhpcy5hbGxvd2VkQ3JlYXRvcnMoW29wdEluLnNlbmRlciwgb3B0SW4ueGZlckFzc2V0LmNyZWF0b3JdKS52YWx1ZQogICAgZHVwCiAgICBndHhucyBTZW5kZXIKICAgIHN3YXAKICAgIGd0eG5zIFhmZXJBc3NldAogICAgYXNzZXRfcGFyYW1zX2dldCBBc3NldENyZWF0b3IKICAgIGFzc2VydCAvLyBhc3NldCBleGlzdHMKICAgIGNvbmNhdAogICAgYm94X2dldAogICAgYXNzZXJ0IC8vIEJveCBtdXN0IGhhdmUgdmFsdWUKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo3NAogICAgLy8gLm5hdGl2ZSwKICAgIHB1c2hpbnQgMCAvLyAwCiAgICBnZXRiaXQKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo3MAogICAgLy8gdmVyaWZ5Q3JlYXRvcihvcHRJbjogZ3R4bi5Bc3NldFRyYW5zZmVyVHhuKTogdm9pZCB7CiAgICByZXR1cm4K",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiABATEZFEQxGEEAHYIDBPG/LKgEvCisKwSNWqcnNhoAjgMAEQAdACkAgAS4RHs2NhoAjgEAAQAiQzEANhoBUIABgL8iQzEANhoBUIABAL8iQzEWIglJOBCBBBJESTgATDgRcQtEUL5EgQBTQw==",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 0,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

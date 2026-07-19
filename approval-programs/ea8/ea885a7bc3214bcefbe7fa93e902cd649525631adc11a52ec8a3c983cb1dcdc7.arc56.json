@@ -1,0 +1,336 @@
+{
+    "name": "LifebuoyWrapper",
+    "structs": {},
+    "methods": [
+        {
+            "name": "ping",
+            "args": [],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "rescueETH",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "to"
+                },
+                {
+                    "type": "uint256",
+                    "name": "amount"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@dev Sends `amount` (in wei) ETH from the current contract to `to`.\n Reverts upon failure.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "rescueERC20",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "token"
+                },
+                {
+                    "type": "address",
+                    "name": "to"
+                },
+                {
+                    "type": "uint256",
+                    "name": "amount"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@dev Sends `amount` of ERC20 `token` from the current contract to `to`.\n Does not check for existence of token or return data. Reverts upon failure.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "rescueERC721",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "token"
+                },
+                {
+                    "type": "address",
+                    "name": "to"
+                },
+                {
+                    "type": "uint256",
+                    "name": "id"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@dev Sends `id` of ERC721 `token` from the current contract to `to`.\n Does not check for existence of token or return data. Reverts upon failure.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "rescueERC1155",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "token"
+                },
+                {
+                    "type": "address",
+                    "name": "to"
+                },
+                {
+                    "type": "uint256",
+                    "name": "id"
+                },
+                {
+                    "type": "uint256",
+                    "name": "amount"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "data"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@dev Sends `amount` of `id` of ERC1155 `token` from the current contract to `to`.\n Does not check for existence of token or return data. Reverts upon failure.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "rescueERC6909",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "token"
+                },
+                {
+                    "type": "address",
+                    "name": "to"
+                },
+                {
+                    "type": "uint256",
+                    "name": "id"
+                },
+                {
+                    "type": "uint256",
+                    "name": "amount"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@dev Sends `amount` of `id` of ERC6909 `token` from the current contract to `to`.\n Does not check for existence of token or return data. Reverts upon failure.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "rescueLocked",
+            "args": [],
+            "returns": {
+                "type": "uint256"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "@dev Returns the flags denoting whether access to rescue functions\n (including `lockRescue`) is locked.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "lockRescue",
+            "args": [
+                {
+                    "type": "uint256",
+                    "name": "locksToSet"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "@dev Locks (i.e. permanently removes) access to rescue functions (including `lockRescue`).",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "_lifebuoyDeployerHash": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMBytes",
+                    "key": "X2xpZmVidW95RGVwbG95ZXJIYXNo"
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        445
+                    ],
+                    "errorMessage": "check _lifebuoyDeployerHash exists"
+                },
+                {
+                    "pc": [
+                        370
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        377
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"
+                },
+                {
+                    "pc": [
+                        264,
+                        286,
+                        293,
+                        315,
+                        322,
+                        343,
+                        350,
+                        392,
+                        399
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        271,
+                        300,
+                        329,
+                        357,
+                        364,
+                        406,
+                        413,
+                        429
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint256"
+                },
+                {
+                    "pc": [
+                        531
+                    ],
+                    "errorMessage": "revert"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc29sYWR5L2F1eC13cmFwcGVycy10by1kZXBsb3kvTGlmZWJ1b3lXcmFwcGVyLnNvbC5MaWZlYnVveVdyYXBwZXIuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAzMiAxIDAKICAgIGJ5dGVjYmxvY2sgMHggMHgwMSAiX2xpZmVidW95RGVwbG95ZXJIYXNoIiAweDAxMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgdHhuIFNlbmRlcgogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIGludGNfMCAvLyAzMgogICAgYnplcm8KICAgIGR1cAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgIC0KICAgIGludGNfMCAvLyAzMgogICAgZXh0cmFjdDMKICAgIHN3YXAKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICAtCiAgICBpbnRjXzAgLy8gMzIKICAgIGV4dHJhY3QzCiAgICBjb25jYXQKICAgIGtlY2NhazI1NgogICAgYnl0ZWNfMiAvLyAiX2xpZmVidW95RGVwbG95ZXJIYXNoIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4YmVhNDg0ZmQgMHg4NjY4ZmZkOCAweGNlMTk3N2FmIDB4MTA5MWQ2NWUgMHg2Zjk3NDA2NCAweDk5YjVkNTY5IDB4YjJiNzIxZjggMHg2MTM4ZWQyYyAvLyBtZXRob2QgInBpbmcoKXVpbnQyNTYiLCBtZXRob2QgInJlc2N1ZUVUSChhZGRyZXNzLHVpbnQyNTYpdm9pZCIsIG1ldGhvZCAicmVzY3VlRVJDMjAoYWRkcmVzcyxhZGRyZXNzLHVpbnQyNTYpdm9pZCIsIG1ldGhvZCAicmVzY3VlRVJDNzIxKGFkZHJlc3MsYWRkcmVzcyx1aW50MjU2KXZvaWQiLCBtZXRob2QgInJlc2N1ZUVSQzExNTUoYWRkcmVzcyxhZGRyZXNzLHVpbnQyNTYsdWludDI1NixieXRlW10pdm9pZCIsIG1ldGhvZCAicmVzY3VlRVJDNjkwOShhZGRyZXNzLGFkZHJlc3MsdWludDI1Nix1aW50MjU2KXZvaWQiLCBtZXRob2QgInJlc2N1ZUxvY2tlZCgpdWludDI1NiIsIG1ldGhvZCAibG9ja1Jlc2N1ZSh1aW50MjU2KXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3Bpbmdfcm91dGVANSByZXNjdWVFVEggcmVzY3VlRVJDMjAgcmVzY3VlRVJDNzIxIHJlc2N1ZUVSQzExNTUgcmVzY3VlRVJDNjkwOSBtYWluX3Jlc2N1ZUxvY2tlZF9yb3V0ZUAxMSBsb2NrUmVzY3VlCiAgICBlcnIKCm1haW5fcmVzY3VlTG9ja2VkX3JvdXRlQDExOgogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fcGluZ19yb3V0ZUA1OgogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDJhCiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc29sYWR5L2F1eC13cmFwcGVycy10by1kZXBsb3kvTGlmZWJ1b3lXcmFwcGVyLnNvbC5MaWZlYnVveVdyYXBwZXIucmVzY3VlRVRIW3JvdXRpbmddKCkgLT4gdm9pZDoKcmVzY3VlRVRIOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDI1NgogICAgcHVzaGludCA4CiAgICBpdG9iCiAgICBjYWxsc3ViIF9jaGVja1Jlc2N1ZXIKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc29sYWR5L2F1eC13cmFwcGVycy10by1kZXBsb3kvTGlmZWJ1b3lXcmFwcGVyLnNvbC5MaWZlYnVveVdyYXBwZXIucmVzY3VlRVJDMjBbcm91dGluZ10oKSAtPiB2b2lkOgpyZXNjdWVFUkMyMDoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHB1c2hpbnQgMTYKICAgIGl0b2IKICAgIGNhbGxzdWIgX2NoZWNrUmVzY3VlcgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9zb2xhZHkvYXV4LXdyYXBwZXJzLXRvLWRlcGxveS9MaWZlYnVveVdyYXBwZXIuc29sLkxpZmVidW95V3JhcHBlci5yZXNjdWVFUkM3MjFbcm91dGluZ10oKSAtPiB2b2lkOgpyZXNjdWVFUkM3MjE6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICBpbnRjXzAgLy8gMzIKICAgIGl0b2IKICAgIGNhbGxzdWIgX2NoZWNrUmVzY3VlcgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9zb2xhZHkvYXV4LXdyYXBwZXJzLXRvLWRlcGxveS9MaWZlYnVveVdyYXBwZXIuc29sLkxpZmVidW95V3JhcHBlci5yZXNjdWVFUkMxMTU1W3JvdXRpbmddKCkgLT4gdm9pZDoKcmVzY3VlRVJDMTE1NToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDQKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDUKICAgIGR1cAogICAgaW50Y18yIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMgogICAgKwogICAgc3dhcAogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIHB1c2hpbnQgNjQKICAgIGl0b2IKICAgIGNhbGxzdWIgX2NoZWNrUmVzY3VlcgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9zb2xhZHkvYXV4LXdyYXBwZXJzLXRvLWRlcGxveS9MaWZlYnVveVdyYXBwZXIuc29sLkxpZmVidW95V3JhcHBlci5yZXNjdWVFUkM2OTA5W3JvdXRpbmddKCkgLT4gdm9pZDoKcmVzY3VlRVJDNjkwOToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDQKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQyNTYKICAgIHB1c2hpbnQgMTI4CiAgICBpdG9iCiAgICBjYWxsc3ViIF9jaGVja1Jlc2N1ZXIKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc29sYWR5L2F1eC13cmFwcGVycy10by1kZXBsb3kvTGlmZWJ1b3lXcmFwcGVyLnNvbC5MaWZlYnVveVdyYXBwZXIubG9ja1Jlc2N1ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmxvY2tSZXNjdWU6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50MjU2CiAgICBwdXNoaW50IDQKICAgIGl0b2IKICAgIGNhbGxzdWIgX2NoZWNrUmVzY3VlcgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9zb2xhZHkvYXV4LXdyYXBwZXJzLXRvLWRlcGxveS9MaWZlYnVveVdyYXBwZXIuc29sLkxpZmVidW95V3JhcHBlci5fY2hlY2tSZXNjdWVyKG1vZGVMb2NrOiBieXRlcykgLT4gdm9pZDoKX2NoZWNrUmVzY3VlcjoKICAgIHByb3RvIDEgMAogICAgaW50Y18yIC8vIDAKICAgIGR1cAogICAgYnl0ZWNfMiAvLyAiX2xpZmVidW95RGVwbG95ZXJIYXNoIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBfbGlmZWJ1b3lEZXBsb3llckhhc2ggZXhpc3RzCiAgICBmcmFtZV9kaWcgLTEKICAgIGJ5dGVjXzAgLy8gMHgKICAgIGImCiAgICBieXRlY18wIC8vIDB4CiAgICBiPT0KICAgICEKICAgIGJ5dGVjXzAgLy8gMHgKICAgIGJ5dGVjXzEgLy8gMHgwMQogICAgdW5jb3ZlciAyCiAgICBzZWxlY3QKICAgIGJ5dGVjXzMgLy8gMHgwMTAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIHN3YXAKICAgIGItCiAgICBieXRlY18zIC8vIDB4MDEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCiAgICBiJQogICAgYnl0ZWNfMCAvLyAweAogICAgYnwKICAgIHN3YXAKICAgIHB1c2hieXRlcyAweGFkMzIyOGI2NzZmN2QzY2Q0Mjg0YTU0NDNmMTdmMTk2MmIzNmU0OTFiMzBhNDBiMjQwNTg0OWU1OTdiYTVmYjUKICAgIGI9PQogICAgYm56IF9jaGVja1Jlc2N1ZXJfYWZ0ZXJfd2hpbGVANwogICAgZnJhbWVfZGlnIDEKICAgIHB1c2hieXRlcyAweDAyCiAgICBiJgogICAgZnJhbWVfZGlnIDAKICAgIGJ5dGVjXzAgLy8gMHgKICAgIGI9PQogICAgYnl0ZWNfMCAvLyAweAogICAgYnl0ZWNfMSAvLyAweDAxCiAgICB1bmNvdmVyIDIKICAgIHNlbGVjdAogICAgYnl0ZWNfMCAvLyAweAogICAgYiYKICAgIGI8CiAgICBieXRlY18wIC8vIDB4CiAgICBieXRlY18xIC8vIDB4MDEKICAgIHVuY292ZXIgMgogICAgc2VsZWN0CiAgICBieXRlY18xIC8vIDB4MDEKICAgIGImCiAgICBieXRlY18wIC8vIDB4CiAgICBiIT0KICAgIGFzc2VydCAvLyByZXZlcnQKCl9jaGVja1Jlc2N1ZXJfYWZ0ZXJfd2hpbGVANzoKICAgIHJldHN1Ygo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvc29sYWR5L2F1eC13cmFwcGVycy10by1kZXBsb3kvTGlmZWJ1b3lXcmFwcGVyLnNvbC5MaWZlYnVveVdyYXBwZXIuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiADIAEAJgQAAQEVX2xpZmVidW95RGVwbG95ZXJIYXNoIQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADEYQAAhMQAyCiKvSU8CUEkVIgkiWExPAlBJFSIJIlhQAipMZyNDMRkURDEYRIIIBL6khP0Ehmj/2ATOGXevBBCR1l4Eb5dAZASZtdVpBLK3IfgEYTjtLDYaAI4IACoAUwBpAIYAogDTAAEA+ACAJBUffHUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALAjQ4AkFR98dQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqsCNDNhoBFSISRDYaAhUiEkSBCBaIAKAjQzYaARUiEkQ2GgIVIhJENhoDFSISRIEQFogAgyNDNhoBFSISRDYaAhUiEkQ2GgMVIhJEIhaIAGcjQzYaARUiEkQ2GgIVIhJENhoDFSISRDYaBBUiEkQ2GgVJJFmBAghMFRJEgUAWiAA2I0M2GgEVIhJENhoCFSISRDYaAxUiEkQ2GgQVIhJEgYABFogAESNDNhoBFSISRIEEFogAAiNDigEAJEkqZUSL/yisKKgUKClPAk0rTKErqiirTIAgrTIotnb3081ChKVEPxfxlis25JGzCkCyQFhJ5Ze6X7WoQAAciwGAAQKsiwAoqCgpTwJNKKykKClPAk0prCipRIk=",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

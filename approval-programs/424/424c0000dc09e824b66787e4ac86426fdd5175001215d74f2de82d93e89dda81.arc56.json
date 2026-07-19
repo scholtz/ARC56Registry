@@ -1,0 +1,81 @@
+{
+    "name": "VerifierContract",
+    "structs": {},
+    "methods": [
+        {
+            "name": "verify",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": ["NoOp"]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [22, 28],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": ["NoOp"],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [56],
+                    "errorMessage": "Txn must be pay"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIC8vIHRlc3RzL2FydGlmYWN0cy9EeW5hbWljSVR4bkdyb3VwL3ZlcmlmaWVyLnB5OjExCiAgICAvLyBjbGFzcyBWZXJpZmllckNvbnRyYWN0KEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA1CiAgICBwdXNoYnl0ZXMgMHg2NWE5YWVjYyAvLyBtZXRob2QgInZlcmlmeSgpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdmVyaWZ5X3JvdXRlQDMKICAgIGVycgoKbWFpbl92ZXJpZnlfcm91dGVAMzoKICAgIC8vIHRlc3RzL2FydGlmYWN0cy9EeW5hbWljSVR4bkdyb3VwL3ZlcmlmaWVyLnB5OjEyCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0CiAgICBiIHZlcmlmeQoKbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA1OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0cy5hcnRpZmFjdHMuRHluYW1pY0lUeG5Hcm91cC52ZXJpZmllci5WZXJpZmllckNvbnRyYWN0LnZlcmlmeVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnZlcmlmeToKICAgIC8vIHRlc3RzL2FydGlmYWN0cy9EeW5hbWljSVR4bkdyb3VwL3ZlcmlmaWVyLnB5OjE0CiAgICAvLyBmb3IgaSBpbiB1cmFuZ2UoVHhuLmdyb3VwX2luZGV4KToKICAgIHR4biBHcm91cEluZGV4CiAgICBwdXNoaW50IDAKCnZlcmlmeV9mb3JfaGVhZGVyQDI6CiAgICAvLyB0ZXN0cy9hcnRpZmFjdHMvRHluYW1pY0lUeG5Hcm91cC92ZXJpZmllci5weToxNAogICAgLy8gZm9yIGkgaW4gdXJhbmdlKFR4bi5ncm91cF9pbmRleCk6CiAgICBkdXAKICAgIGRpZyAyCiAgICA8CiAgICBieiB2ZXJpZnlfYWZ0ZXJfZm9yQDUKICAgIC8vIHRlc3RzL2FydGlmYWN0cy9EeW5hbWljSVR4bkdyb3VwL3ZlcmlmaWVyLnB5OjE2CiAgICAvLyBhc3NlcnQgdHhuLnR5cGUgPT0gVHJhbnNhY3Rpb25UeXBlLlBheW1lbnQsICJUeG4gbXVzdCBiZSBwYXkiCiAgICBkdXBuIDIKICAgIGd0eG5zIFR5cGVFbnVtCiAgICBwdXNoaW50IDEgLy8gcGF5CiAgICA9PQogICAgYXNzZXJ0IC8vIFR4biBtdXN0IGJlIHBheQogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL0R5bmFtaWNJVHhuR3JvdXAvdmVyaWZpZXIucHk6MTQKICAgIC8vIGZvciBpIGluIHVyYW5nZShUeG4uZ3JvdXBfaW5kZXgpOgogICAgcHVzaGludCAxCiAgICArCiAgICBidXJ5IDEKICAgIGIgdmVyaWZ5X2Zvcl9oZWFkZXJAMgoKdmVyaWZ5X2FmdGVyX2ZvckA1OgogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL0R5bmFtaWNJVHhuR3JvdXAvdmVyaWZpZXIucHk6MTIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgcHVzaGludCAxCiAgICByZXR1cm4K",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CzEbQQAYgARlqa7MNhoAjgEAAQAxGRQxGBBEQgAIMRkUMRgUEEMxFoEASUsCDEEAEEcCOBCBARJEgQEIRQFC/+mBAUM=",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 8,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

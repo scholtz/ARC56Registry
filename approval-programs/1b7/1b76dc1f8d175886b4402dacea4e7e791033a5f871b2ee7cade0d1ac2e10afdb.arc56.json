@@ -1,0 +1,232 @@
+{
+    "name": "Owned",
+    "structs": {},
+    "methods": [
+        {
+            "name": "nominateNewOwner",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "_owner"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [
+                {
+                    "name": "OwnerNominated",
+                    "args": [
+                        {
+                            "type": "uint8[32]",
+                            "name": "newOwner"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "acceptOwnership",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [
+                {
+                    "name": "OwnerChanged",
+                    "args": [
+                        {
+                            "type": "uint8[32]",
+                            "name": "oldOwner"
+                        },
+                        {
+                            "type": "uint8[32]",
+                            "name": "newOwner"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "owner",
+            "args": [],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "nominatedOwner",
+            "args": [],
+            "returns": {
+                "type": "address"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 2
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "owner": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "b3duZXI="
+                },
+                "nominatedOwner": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "bm9taW5hdGVkT3duZXI="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        190
+                    ],
+                    "errorMessage": "Only the contract owner may perform this action"
+                },
+                {
+                    "pc": [
+                        83
+                    ],
+                    "errorMessage": "Owner address cannot be 0"
+                },
+                {
+                    "pc": [
+                        216
+                    ],
+                    "errorMessage": "You must be nominated before you can accept ownership"
+                },
+                {
+                    "pc": [
+                        211,
+                        254
+                    ],
+                    "errorMessage": "check nominatedOwner exists"
+                },
+                {
+                    "pc": [
+                        188,
+                        220,
+                        244
+                    ],
+                    "errorMessage": "check owner exists"
+                },
+                {
+                    "pc": [
+                        182
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRnJheC5zb2wuT3duZWQuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAKICAgIGJ5dGVjYmxvY2sgIm93bmVyIiAibm9taW5hdGVkT3duZXIiIGJhc2UzMihBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBKSAweDE1MWY3Yzc1CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICBieXRlY18wIC8vICJvd25lciIKICAgIGJ5dGVjXzIgLy8gYWRkciBBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBWTVIRktRCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgYnl0ZWNfMSAvLyAibm9taW5hdGVkT3duZXIiCiAgICBieXRlY18yIC8vIGFkZHIgQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQVk1SEZLUQogICAgYXBwX2dsb2JhbF9wdXQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIGR1cAogICAgYnl0ZWNfMiAvLyBhZGRyIEFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFZNUhGS1EKICAgICE9CiAgICBhc3NlcnQgLy8gT3duZXIgYWRkcmVzcyBjYW5ub3QgYmUgMAogICAgYnl0ZWNfMCAvLyAib3duZXIiCiAgICBkaWcgMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIHB1c2hieXRlcyBiYXNlMzIoMkxHUEZFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQSkKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDNhZDNhMTAzIDB4ZDUyMWQ2MDQgMHhiMWJiYjBhOCAweDdkMmYzNTVjIC8vIG1ldGhvZCAibm9taW5hdGVOZXdPd25lcihhZGRyZXNzKXZvaWQiLCBtZXRob2QgImFjY2VwdE93bmVyc2hpcCgpdm9pZCIsIG1ldGhvZCAib3duZXIoKWFkZHJlc3MiLCBtZXRob2QgIm5vbWluYXRlZE93bmVyKClhZGRyZXNzIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbm9taW5hdGVOZXdPd25lciBhY2NlcHRPd25lcnNoaXAgb3duZXIgbm9taW5hdGVkT3duZXIKICAgIGVycgoKCi8vIC9ob21lL2FyZ2kvQWxnb3JhbmRGb3VuZGF0aW9uL1NpZGVQcm9qZWN0cy9wdXlhLXNvbC9wdXlhLXNvbC9leGFtcGxlcy9mcmF4L2NvbnRyYWN0cy9GcmF4LnNvbC5Pd25lZC5ub21pbmF0ZU5ld093bmVyW3JvdXRpbmddKCkgLT4gdm9pZDoKbm9taW5hdGVOZXdPd25lcjoKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4biBTZW5kZXIKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18wIC8vICJvd25lciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgb3duZXIgZXhpc3RzCiAgICA9PQogICAgYXNzZXJ0IC8vIE9ubHkgdGhlIGNvbnRyYWN0IG93bmVyIG1heSBwZXJmb3JtIHRoaXMgYWN0aW9uCiAgICBieXRlY18xIC8vICJub21pbmF0ZWRPd25lciIKICAgIGRpZyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgcHVzaGJ5dGVzIDB4YjI4MTIxOGEgLy8gbWV0aG9kICJPd25lck5vbWluYXRlZChhZGRyZXNzKSIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0ZyYXguc29sLk93bmVkLmFjY2VwdE93bmVyc2hpcFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmFjY2VwdE93bmVyc2hpcDoKICAgIHR4biBTZW5kZXIKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18xIC8vICJub21pbmF0ZWRPd25lciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgbm9taW5hdGVkT3duZXIgZXhpc3RzCiAgICBzd2FwCiAgICBkaWcgMQogICAgPT0KICAgIGFzc2VydCAvLyBZb3UgbXVzdCBiZSBub21pbmF0ZWQgYmVmb3JlIHlvdSBjYW4gYWNjZXB0IG93bmVyc2hpcAogICAgaW50Y18xIC8vIDAKICAgIGJ5dGVjXzAgLy8gIm93bmVyIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBvd25lciBleGlzdHMKICAgIGRpZyAxCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweGQyY2NmMjkwIC8vIG1ldGhvZCAiT3duZXJDaGFuZ2VkKGFkZHJlc3MsYWRkcmVzcykiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgYnl0ZWNfMCAvLyAib3duZXIiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgYnl0ZWNfMSAvLyAibm9taW5hdGVkT3duZXIiCiAgICBieXRlY18yIC8vIGFkZHIgQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQVk1SEZLUQogICAgYXBwX2dsb2JhbF9wdXQKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRnJheC5zb2wuT3duZWQub3duZXJbcm91dGluZ10oKSAtPiB2b2lkOgpvd25lcjoKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18wIC8vICJvd25lciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgb3duZXIgZXhpc3RzCiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gL2hvbWUvYXJnaS9BbGdvcmFuZEZvdW5kYXRpb24vU2lkZVByb2plY3RzL3B1eWEtc29sL3B1eWEtc29sL2V4YW1wbGVzL2ZyYXgvY29udHJhY3RzL0ZyYXguc29sLk93bmVkLm5vbWluYXRlZE93bmVyW3JvdXRpbmddKCkgLT4gdm9pZDoKbm9taW5hdGVkT3duZXI6CiAgICBpbnRjXzEgLy8gMAogICAgYnl0ZWNfMSAvLyAibm9taW5hdGVkT3duZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIG5vbWluYXRlZE93bmVyIGV4aXN0cwogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyAvaG9tZS9hcmdpL0FsZ29yYW5kRm91bmRhdGlvbi9TaWRlUHJvamVjdHMvcHV5YS1zb2wvcHV5YS1zb2wvZXhhbXBsZXMvZnJheC9jb250cmFjdHMvRnJheC5zb2wuT3duZWQuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiACAQAmBAVvd25lcg5ub21pbmF0ZWRPd25lciAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQVH3x1MRhAADwoKmcpKmc2GgBJKhNEKEsBZ4Ak0szykAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATFCwIkMxGRREMRhEggQEOtOhAwTVIdYEBLG7sKgEfS81XDYaAI4EAAEAIQBEAE4ANhoBSRWBIBJEMQAjKGVEEkQpSwFngASygSGKTFCwIkMxACMpZURMSwESRCMoZURLAVCABNLM8pBMULAoTGcpKmciQyMoZUQrTFCwIkMjKWVEK0xQsCJD",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [
+        {
+            "name": "OwnerNominated",
+            "args": [
+                {
+                    "type": "uint8[32]",
+                    "name": "newOwner"
+                }
+            ]
+        },
+        {
+            "name": "OwnerChanged",
+            "args": [
+                {
+                    "type": "uint8[32]",
+                    "name": "oldOwner"
+                },
+                {
+                    "type": "uint8[32]",
+                    "name": "newOwner"
+                }
+            ]
+        }
+    ],
+    "templateVariables": {}
+}

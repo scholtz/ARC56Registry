@@ -1,0 +1,203 @@
+{
+    "name": "GovernanceToken",
+    "structs": {},
+    "methods": [
+        {
+            "name": "create_proposal",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "title"
+                },
+                {
+                    "type": "string",
+                    "name": "description"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Create a new governance proposal",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "vote_on_proposal",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "proposal_id"
+                },
+                {
+                    "type": "uint64",
+                    "name": "vote_for"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Vote on a governance proposal",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_proposal_votes",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "proposal_id"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Get total votes for a proposal",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_total_supply",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Get total token supply",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_min_proposal_tokens",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Get minimum tokens required to create proposal",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "Minimal production-ready smart contract for governance token and voting",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        57,
+                        81,
+                        105,
+                        129,
+                        160
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        195
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        60,
+                        84,
+                        108,
+                        132,
+                        163
+                    ],
+                    "errorMessage": "can only call when not creating"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ292ZXJuYW5jZV90b2tlbi9jb250cmFjdC5weTo1CiAgICAvLyBjbGFzcyBHb3Zlcm5hbmNlVG9rZW4oQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0AxMAogICAgcHVzaGJ5dGVzcyAweGJkZmJkZWI1IDB4OGI2YmNlZGMgMHhkOGRjNWE2ZiAweDQ2OTA5MzU1IDB4NDVlMTFjOGMgLy8gbWV0aG9kICJjcmVhdGVfcHJvcG9zYWwoc3RyaW5nLHN0cmluZylzdHJpbmciLCBtZXRob2QgInZvdGVfb25fcHJvcG9zYWwoc3RyaW5nLHVpbnQ2NClzdHJpbmciLCBtZXRob2QgImdldF9wcm9wb3NhbF92b3RlcyhzdHJpbmcpdWludDY0IiwgbWV0aG9kICJnZXRfdG90YWxfc3VwcGx5KCl1aW50NjQiLCBtZXRob2QgImdldF9taW5fcHJvcG9zYWxfdG9rZW5zKCl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2NyZWF0ZV9wcm9wb3NhbF9yb3V0ZUAzIG1haW5fdm90ZV9vbl9wcm9wb3NhbF9yb3V0ZUA0IG1haW5fZ2V0X3Byb3Bvc2FsX3ZvdGVzX3JvdXRlQDUgbWFpbl9nZXRfdG90YWxfc3VwcGx5X3JvdXRlQDYgbWFpbl9nZXRfbWluX3Byb3Bvc2FsX3Rva2Vuc19yb3V0ZUA3CgptYWluX2FmdGVyX2lmX2Vsc2VAMTQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ292ZXJuYW5jZV90b2tlbi9jb250cmFjdC5weTo1CiAgICAvLyBjbGFzcyBHb3Zlcm5hbmNlVG9rZW4oQVJDNENvbnRyYWN0KToKICAgIHB1c2hpbnQgMCAvLyAwCiAgICByZXR1cm4KCm1haW5fZ2V0X21pbl9wcm9wb3NhbF90b2tlbnNfcm91dGVANzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nb3Zlcm5hbmNlX3Rva2VuL2NvbnRyYWN0LnB5OjM5CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAyNzEwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0X3RvdGFsX3N1cHBseV9yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL2dvdmVybmFuY2VfdG9rZW4vY29udHJhY3QucHk6MzQKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDAwMDAwM2I5YWNhMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRfcHJvcG9zYWxfdm90ZXNfcm91dGVANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nb3Zlcm5hbmNlX3Rva2VuL2NvbnRyYWN0LnB5OjI5CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwM2U4CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fdm90ZV9vbl9wcm9wb3NhbF9yb3V0ZUA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2dvdmVybmFuY2VfdG9rZW4vY29udHJhY3QucHk6MTkKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMGQ3NjZmNzQ2NTVmNzI2NTYzNmY3MjY0NjU2NAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2NyZWF0ZV9wcm9wb3NhbF9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dvdmVybmFuY2VfdG9rZW4vY29udHJhY3QucHk6OAogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwYzcwNzI2ZjcwNWY2MzcyNjU2MTc0NjU2NAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0AxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nb3Zlcm5hbmNlX3Rva2VuL2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIEdvdmVybmFuY2VUb2tlbihBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxNAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4K",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiABATEbQQCyggUEvfvetQSLa87cBNjcWm8ERpCTVQRF4RyMNhoAjgUAagBLADMAGwADgQBDMRkURDEYRIAMFR98dQAAAAAAACcQsCJDMRkURDEYRIAMFR98dQAAAAA7msoAsCJDMRkURDEYRIAMFR98dQAAAAAAAAPosCJDMRkURDEYRIATFR98dQANdm90ZV9yZWNvcmRlZLAiQzEZFEQxGESAEhUffHUADHByb3BfY3JlYXRlZLAiQzEZQP9zMRgURCJD",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 4,
+            "minor": 10,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

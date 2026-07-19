@@ -1,0 +1,157 @@
+{
+    "name": "RealmTreasury",
+    "structs": {},
+    "methods": [
+        {
+            "name": "setupWeDevTreasury",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "projectAppId"
+                },
+                {
+                    "type": "uint64",
+                    "name": "reserveTokenId"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "depositToTreasury",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 2,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "MANAGER_ADDRESS": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "TUFOQUdFUl9BRERSRVNT"
+                },
+                "DEV_TREASURY": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "REVWX1RSRUFTVVJZ"
+                },
+                "COMMUNITY_TREASURY": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "Q09NTVVOSVRZX1RSRUFTVVJZ"
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        54,
+                        63
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        101
+                    ],
+                    "errorMessage": "WeDevTreasury already setup"
+                },
+                {
+                    "pc": [
+                        88
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        57,
+                        66
+                    ],
+                    "errorMessage": "can only call when not creating"
+                },
+                {
+                    "pc": [
+                        97
+                    ],
+                    "errorMessage": "check GlobalState exists"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwCiAgICBieXRlY2Jsb2NrICJNQU5BR0VSX0FERFJFU1MiCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVhbG1fdHJlYXN1cnkvY29udHJhY3QuYWxnby50czozCiAgICAvLyBleHBvcnQgY2xhc3MgUmVhbG1UcmVhc3VyeSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0A3CiAgICBwdXNoYnl0ZXNzIDB4ZjQ3ZmMyOTYgMHhlYjRhNzllNiAvLyBtZXRob2QgInNldHVwV2VEZXZUcmVhc3VyeSh1aW50NjQsdWludDY0KXZvaWQiLCBtZXRob2QgImRlcG9zaXRUb1RyZWFzdXJ5KCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9zZXR1cFdlRGV2VHJlYXN1cnlfcm91dGVAMyBtYWluX2RlcG9zaXRUb1RyZWFzdXJ5X3JvdXRlQDQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWFsbV90cmVhc3VyeS9jb250cmFjdC5hbGdvLnRzOjMKICAgIC8vIGV4cG9ydCBjbGFzcyBSZWFsbVRyZWFzdXJ5IGV4dGVuZHMgQ29udHJhY3QgewogICAgaW50Y18xIC8vIDAKICAgIHJldHVybgoKbWFpbl9kZXBvc2l0VG9UcmVhc3VyeV9yb3V0ZUA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlYWxtX3RyZWFzdXJ5L2NvbnRyYWN0LmFsZ28udHM6MTUKICAgIC8vIHB1YmxpYyBkZXBvc2l0VG9UcmVhc3VyeSgpOiB2b2lkIHt9CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fc2V0dXBXZURldlRyZWFzdXJ5X3JvdXRlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVhbG1fdHJlYXN1cnkvY29udHJhY3QuYWxnby50czo4CiAgICAvLyBwdWJsaWMgc2V0dXBXZURldlRyZWFzdXJ5KHByb2plY3RBcHBJZDogdWludDY0LCByZXNlcnZlVG9rZW5JZDogdWludDY0KTogdm9pZCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWFsbV90cmVhc3VyeS9jb250cmFjdC5hbGdvLnRzOjMKICAgIC8vIGV4cG9ydCBjbGFzcyBSZWFsbVRyZWFzdXJ5IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL3JlYWxtX3RyZWFzdXJ5L2NvbnRyYWN0LmFsZ28udHM6OAogICAgLy8gcHVibGljIHNldHVwV2VEZXZUcmVhc3VyeShwcm9qZWN0QXBwSWQ6IHVpbnQ2NCwgcmVzZXJ2ZVRva2VuSWQ6IHVpbnQ2NCk6IHZvaWQgewogICAgY2FsbHN1YiBzZXR1cFdlRGV2VHJlYXN1cnkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYmFyZV9yb3V0aW5nQDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVhbG1fdHJlYXN1cnkvY29udHJhY3QuYWxnby50czozCiAgICAvLyBleHBvcnQgY2xhc3MgUmVhbG1UcmVhc3VyeSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3JlYWxtX3RyZWFzdXJ5L2NvbnRyYWN0LmFsZ28udHM6OlJlYWxtVHJlYXN1cnkuc2V0dXBXZURldlRyZWFzdXJ5KHByb2plY3RBcHBJZDogdWludDY0LCByZXNlcnZlVG9rZW5JZDogdWludDY0KSAtPiB2b2lkOgpzZXR1cFdlRGV2VHJlYXN1cnk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVhbG1fdHJlYXN1cnkvY29udHJhY3QuYWxnby50czo4CiAgICAvLyBwdWJsaWMgc2V0dXBXZURldlRyZWFzdXJ5KHByb2plY3RBcHBJZDogdWludDY0LCByZXNlcnZlVG9rZW5JZDogdWludDY0KTogdm9pZCB7CiAgICBwcm90byAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWFsbV90cmVhc3VyeS9jb250cmFjdC5hbGdvLnRzOjQKICAgIC8vIE1BTkFHRVJfQUREUkVTUyA9IEdsb2JhbFN0YXRlPGFyYzQuQWRkcmVzcz4oKQogICAgaW50Y18xIC8vIDAKICAgIGJ5dGVjXzAgLy8gIk1BTkFHRVJfQUREUkVTUyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVhbG1fdHJlYXN1cnkvY29udHJhY3QuYWxnby50czo5CiAgICAvLyBhc3NlcnQodGhpcy5NQU5BR0VSX0FERFJFU1MudmFsdWUubmF0aXZlICE9PSBHbG9iYWwuemVyb0FkZHJlc3MsICdXZURldlRyZWFzdXJ5IGFscmVhZHkgc2V0dXAnKQogICAgZ2xvYmFsIFplcm9BZGRyZXNzCiAgICAhPQogICAgYXNzZXJ0IC8vIFdlRGV2VHJlYXN1cnkgYWxyZWFkeSBzZXR1cAogICAgLy8gc21hcnRfY29udHJhY3RzL3JlYWxtX3RyZWFzdXJ5L2NvbnRyYWN0LmFsZ28udHM6NAogICAgLy8gTUFOQUdFUl9BRERSRVNTID0gR2xvYmFsU3RhdGU8YXJjNC5BZGRyZXNzPigpCiAgICBieXRlY18wIC8vICJNQU5BR0VSX0FERFJFU1MiCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVhbG1fdHJlYXN1cnkvY29udHJhY3QuYWxnby50czoxMAogICAgLy8gdGhpcy5NQU5BR0VSX0FERFJFU1MudmFsdWUgPSBuZXcgYXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpCiAgICB0eG4gU2VuZGVyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3JlYWxtX3RyZWFzdXJ5L2NvbnRyYWN0LmFsZ28udHM6NQogICAgLy8gREVWX1RSRUFTVVJZID0gR2xvYmFsU3RhdGU8dWludDY0PigpCiAgICBwdXNoYnl0ZXMgIkRFVl9UUkVBU1VSWSIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWFsbV90cmVhc3VyeS9jb250cmFjdC5hbGdvLnRzOjExCiAgICAvLyB0aGlzLkRFVl9UUkVBU1VSWS52YWx1ZSA9IDgwCiAgICBwdXNoaW50IDgwIC8vIDgwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3JlYWxtX3RyZWFzdXJ5L2NvbnRyYWN0LmFsZ28udHM6NgogICAgLy8gQ09NTVVOSVRZX1RSRUFTVVJZID0gR2xvYmFsU3RhdGU8dWludDY0PigpCiAgICBwdXNoYnl0ZXMgIkNPTU1VTklUWV9UUkVBU1VSWSIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWFsbV90cmVhc3VyeS9jb250cmFjdC5hbGdvLnRzOjEyCiAgICAvLyB0aGlzLkNPTU1VTklUWV9UUkVBU1VSWS52YWx1ZSA9IDIwCiAgICBwdXNoaW50IDIwIC8vIDIwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgcmV0c3ViCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiACAQAmAQ9NQU5BR0VSX0FERFJFU1MxG0EANIICBPR/wpYE60p55jYaAI4CAAsAAiNDMRkURDEYRCJDMRkURDEYRDYaARc2GgIXiAANIkMxGUD/3DEYFEQiQ4oCACMoZUQyAxNEKDEAZ4AMREVWX1RSRUFTVVJZgVBngBJDT01NVU5JVFlfVFJFQVNVUlmBFGeJ",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 4,
+            "minor": 7,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

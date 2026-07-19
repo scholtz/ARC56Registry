@@ -1,0 +1,152 @@
+{
+    "name": "SecureContract",
+    "structs": {},
+    "methods": [
+        {
+            "name": "updateApplication",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "UpdateApplication"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "deleteApplication",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "DeleteApplication"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "doSomething",
+            "args": [],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        55
+                    ],
+                    "errorMessage": "OnCompletion must be DeleteApplication && can only call when not creating"
+                },
+                {
+                    "pc": [
+                        78
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp && can only call when creating"
+                },
+                {
+                    "pc": [
+                        44
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp && can only call when not creating"
+                },
+                {
+                    "pc": [
+                        67
+                    ],
+                    "errorMessage": "OnCompletion must be UpdateApplication && can only call when not creating"
+                },
+                {
+                    "pc": [
+                        94
+                    ],
+                    "errorMessage": "Only creator can delete"
+                },
+                {
+                    "pc": [
+                        86
+                    ],
+                    "errorMessage": "Only creator can update"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMQogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvYWNjZXNzLWNvbnRyb2wuYWxnby50czoxOAogICAgLy8gZXhwb3J0IGNsYXNzIFNlY3VyZUNvbnRyYWN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDcKICAgIHB1c2hieXRlc3MgMHg0NmY3NjUzMyAweDI0ODdjMzJjIDB4NzlhOWZkNTAgLy8gbWV0aG9kICJ1cGRhdGVBcHBsaWNhdGlvbigpdm9pZCIsIG1ldGhvZCAiZGVsZXRlQXBwbGljYXRpb24oKXZvaWQiLCBtZXRob2QgImRvU29tZXRoaW5nKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl91cGRhdGVBcHBsaWNhdGlvbl9yb3V0ZUAzIG1haW5fZGVsZXRlQXBwbGljYXRpb25fcm91dGVANCBtYWluX2RvU29tZXRoaW5nX3JvdXRlQDUKICAgIGVycgoKbWFpbl9kb1NvbWV0aGluZ19yb3V0ZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvYWNjZXNzLWNvbnRyb2wuYWxnby50czoyNwogICAgLy8gcHVibGljIGRvU29tZXRoaW5nKCk6IHZvaWQgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcCAmJiBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2RlbGV0ZUFwcGxpY2F0aW9uX3JvdXRlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9hY2Nlc3MtY29udHJvbC5hbGdvLnRzOjIzCiAgICAvLyBwdWJsaWMgZGVsZXRlQXBwbGljYXRpb24oKTogdm9pZCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDUgLy8gRGVsZXRlQXBwbGljYXRpb24KICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBEZWxldGVBcHBsaWNhdGlvbiAmJiBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBiIGRlbGV0ZUFwcGxpY2F0aW9uCgptYWluX3VwZGF0ZUFwcGxpY2F0aW9uX3JvdXRlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9hY2Nlc3MtY29udHJvbC5hbGdvLnRzOjE5CiAgICAvLyBwdWJsaWMgdXBkYXRlQXBwbGljYXRpb24oKTogdm9pZCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDQgLy8gVXBkYXRlQXBwbGljYXRpb24KICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBVcGRhdGVBcHBsaWNhdGlvbiAmJiBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBiIHVwZGF0ZUFwcGxpY2F0aW9uCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA3OgogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvYWNjZXNzLWNvbnRyb2wuYWxnby50czoxOAogICAgLy8gZXhwb3J0IGNsYXNzIFNlY3VyZUNvbnRyYWN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcCAmJiBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9hY2Nlc3MtY29udHJvbC5hbGdvLnRzOjpTZWN1cmVDb250cmFjdC51cGRhdGVBcHBsaWNhdGlvbltyb3V0aW5nXSgpIC0+IHZvaWQ6CnVwZGF0ZUFwcGxpY2F0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvYWNjZXNzLWNvbnRyb2wuYWxnby50czoyMAogICAgLy8gYXNzZXJ0KFR4bi5zZW5kZXIgPT09IEdsb2JhbC5jcmVhdG9yQWRkcmVzcywgJ09ubHkgY3JlYXRvciBjYW4gdXBkYXRlJykKICAgIHR4biBTZW5kZXIKICAgIGdsb2JhbCBDcmVhdG9yQWRkcmVzcwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3IgY2FuIHVwZGF0ZQogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvYWNjZXNzLWNvbnRyb2wuYWxnby50czoxOQogICAgLy8gcHVibGljIHVwZGF0ZUFwcGxpY2F0aW9uKCk6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL2FjY2Vzcy1jb250cm9sLmFsZ28udHM6OlNlY3VyZUNvbnRyYWN0LmRlbGV0ZUFwcGxpY2F0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKZGVsZXRlQXBwbGljYXRpb246CiAgICAvLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9hY2Nlc3MtY29udHJvbC5hbGdvLnRzOjI0CiAgICAvLyBhc3NlcnQoVHhuLnNlbmRlciA9PT0gR2xvYmFsLmNyZWF0b3JBZGRyZXNzLCAnT25seSBjcmVhdG9yIGNhbiBkZWxldGUnKQogICAgdHhuIFNlbmRlcgogICAgZ2xvYmFsIENyZWF0b3JBZGRyZXNzCiAgICA9PQogICAgYXNzZXJ0IC8vIE9ubHkgY3JlYXRvciBjYW4gZGVsZXRlCiAgICAvLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9hY2Nlc3MtY29udHJvbC5hbGdvLnRzOjIzCiAgICAvLyBwdWJsaWMgZGVsZXRlQXBwbGljYXRpb24oKTogdm9pZCB7CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CyABATEbQQA+ggMERvdlMwQkh8MsBHmp/VA2GgCOAwAWAAoAAQAxGRQxGBBEIkMxGYEFEjEYEERCAB4xGYEEEjEYEERCAAoxGRQxGBQQRCJDMQAyCRJEIkMxADIJEkQiQw==",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 3,
+            "patch": 2
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

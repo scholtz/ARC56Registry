@@ -1,0 +1,527 @@
+{
+    "name": "FeeConfig",
+    "structs": {},
+    "methods": [
+        {
+            "name": "create",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "initial_fee_rate_bps"
+                },
+                {
+                    "type": "address",
+                    "name": "treasury"
+                },
+                {
+                    "type": "uint64",
+                    "name": "usdc_id"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [
+                    "NoOp"
+                ],
+                "call": []
+            },
+            "readonly": false,
+            "events": [
+                {
+                    "name": "FeeConfigCreated",
+                    "args": [
+                        {
+                            "type": "address",
+                            "name": "field1"
+                        },
+                        {
+                            "type": "uint64",
+                            "name": "field2"
+                        },
+                        {
+                            "type": "address",
+                            "name": "field3"
+                        },
+                        {
+                            "type": "uint64",
+                            "name": "field4"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "calculate_fee",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "amount_micro_usdc",
+                    "desc": "amount in microUSDC (USDC has 6 decimals)"
+                }
+            ],
+            "returns": {
+                "type": "uint64",
+                "desc": "fee in microUSDC with minimum 1 for non-zero amounts at non-zero rates"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Calculates fee for a given USDC amount using integer arithmetic.\nFormula: fee = (amount * rate_bps) / 10000\nApplies 1 microUSDC minimum fee for any non-zero amount when rate > 0 to prevent zero-value USDC transfers which some Algorand nodes reject. Does NOT apply minimum when fee rate is legitimately 0%.\nExample (rate = 250 bps = 2.5%): - 500000 microUSDC \u2192 fee = 12500 microUSDC - 100000 microUSDC \u2192 fee = 2500 microUSDC - 39 microUSDC \u2192 fee = 1 microUSDC (minimum floor for dust) - 0 microUSDC \u2192 fee = 0 microUSDC\nEdge case (rate = 0 bps): - 100000 microUSDC \u2192 fee = 0 microUSDC (no minimum floor when rate is 0%)",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "calculate_seller_payout",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "amount_micro_usdc",
+                    "desc": "amount in microUSDC"
+                }
+            ],
+            "returns": {
+                "type": "uint64",
+                "desc": "seller_payout = amount - fee"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Convenience method: calculates seller payout as amount minus fee.\nThis allows Escrow to fetch both fee and payout in one call rather than calculating the subtraction on the backend.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "set_fee_rate",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "new_rate_bps",
+                    "desc": "new fee rate in basis points (0-1000)"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Owner-only method to update the fee rate.\nValidation: 1. Caller must be owner (checked first, fails fast before state reads) 2. New rate must be <= 1000 (10% hard cap; enforced on-chain)\nEmits event with old and new rates for indexers.",
+            "events": [
+                {
+                    "name": "FeeRateUpdated",
+                    "args": [
+                        {
+                            "type": "uint64",
+                            "name": "field1"
+                        },
+                        {
+                            "type": "uint64",
+                            "name": "field2"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "set_treasury",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "new_treasury",
+                    "desc": "new treasury address"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Owner-only method to update the treasury address.\nValidation: 1. Caller must be owner (checked first)\nEmits event with old and new treasury addresses.",
+            "events": [
+                {
+                    "name": "TreasuryUpdated",
+                    "args": [
+                        {
+                            "type": "address",
+                            "name": "field1"
+                        },
+                        {
+                            "type": "address",
+                            "name": "field2"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "set_escrow_app",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "escrow_app_id",
+                    "desc": "Application ID of the Escrow contract"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Owner-only method to register the Escrow application ID.\nCalled once after Escrow is deployed to establish the approved caller. Only the Escrow contract can then call record_fee_collected.",
+            "events": [
+                {
+                    "name": "EscrowAppSet",
+                    "args": [
+                        {
+                            "type": "uint64",
+                            "name": "field1"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "record_fee_collected",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "fee_amount_micro_usdc",
+                    "desc": "Fee amount in microUSDC to add to running total"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Records collected fee amount to the running total.\nCalled by Escrow after successful fee transfer to update total_fees_collected.\nCaller Guard: Only the Escrow contract (identified by escrow_app_id) may call this. This prevents unauthorized callers from inflating the revenue counter.\nImplementation: Checks that either: 1. Caller is the current application (self-call), OR 2. Caller app ID matches registered escrow_app_id",
+            "events": [
+                {
+                    "name": "FeeCollected",
+                    "args": [
+                        {
+                            "type": "uint64",
+                            "name": "field1"
+                        },
+                        {
+                            "type": "uint64",
+                            "name": "field2"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "get_config",
+            "args": [],
+            "returns": {
+                "type": "(uint64,address,uint64,uint64)",
+                "desc": "Tuple of (fee_rate_bps, treasury_address, total_fees_collected, usdc_asset_id)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Returns current FeeConfig state for Operations dashboard.\nCalled frequently (e.g., every 10 seconds) to display: - Current fee rate - Treasury address - Cumulative fees collected (platform revenue to date) - USDC asset ID (confirms network)",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "\n    FeeConfig contract manages USDC fee collection for the Mercator insight marketplace.\n    \n    Stores:\n    - owner: deployer address (only wallet allowed to update fee parameters)\n    - fee_rate_bps: fee rate in basis points (1 bps = 0.01%, range 0-1000)\n    - treasury_address: wallet receiving all collected fees\n    - total_fees_collected: running total of fees collected in microUSDC\n    - usdc_asset_id: USDC ASA ID (TestNet=10458941, MainNet=31566704)\n    \n    Methods:\n    - calculate_fee: pure read-only; returns fee with 1 microUSDC minimum for non-zero amounts\n    - calculate_seller_payout: convenience method returning amount - fee\n    - set_fee_rate: owner-only; validates rate <= 1000 (10% hard cap)\n    - set_treasury: owner-only; updates treasury address\n    - get_config: returns current fee_rate_bps, treasury_address, total_fees_collected, usdc_asset_id\n    ",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 1,
+                "bytes": 5
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "owner": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "b3duZXI="
+                },
+                "fee_rate_bps": {
+                    "keyType": "AVMString",
+                    "valueType": "uint64",
+                    "key": "ZmVlX3JhdGVfYnBz"
+                },
+                "treasury_address": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "dHJlYXN1cnlfYWRkcmVzcw=="
+                },
+                "total_fees_collected": {
+                    "keyType": "AVMString",
+                    "valueType": "uint64",
+                    "key": "dG90YWxfZmVlc19jb2xsZWN0ZWQ="
+                },
+                "usdc_asset_id": {
+                    "keyType": "AVMString",
+                    "valueType": "uint64",
+                    "key": "dXNkY19hc3NldF9pZA=="
+                },
+                "escrow_app_id": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "ZXNjcm93X2FwcF9pZA=="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        514
+                    ],
+                    "errorMessage": "Fee accumulator overflow"
+                },
+                {
+                    "pc": [
+                        257,
+                        368
+                    ],
+                    "errorMessage": "Fee rate cannot exceed 10% (1000 basis points)"
+                },
+                {
+                    "pc": [
+                        501
+                    ],
+                    "errorMessage": "Only the Escrow contract can record fees"
+                },
+                {
+                    "pc": [
+                        444
+                    ],
+                    "errorMessage": "Only the contract owner can set the Escrow app ID"
+                },
+                {
+                    "pc": [
+                        361
+                    ],
+                    "errorMessage": "Only the contract owner can update the fee rate"
+                },
+                {
+                    "pc": [
+                        405
+                    ],
+                    "errorMessage": "Only the contract owner can update the treasury address"
+                },
+                {
+                    "pc": [
+                        476
+                    ],
+                    "errorMessage": "check self.escrow_app_id exists"
+                },
+                {
+                    "pc": [
+                        372,
+                        539,
+                        582
+                    ],
+                    "errorMessage": "check self.fee_rate_bps exists"
+                },
+                {
+                    "pc": [
+                        359,
+                        403,
+                        442
+                    ],
+                    "errorMessage": "check self.owner exists"
+                },
+                {
+                    "pc": [
+                        509,
+                        547
+                    ],
+                    "errorMessage": "check self.total_fees_collected exists"
+                },
+                {
+                    "pc": [
+                        409,
+                        543
+                    ],
+                    "errorMessage": "check self.treasury_address exists"
+                },
+                {
+                    "pc": [
+                        552
+                    ],
+                    "errorMessage": "check self.usdc_asset_id exists"
+                },
+                {
+                    "pc": [
+                        241,
+                        397
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        233,
+                        249,
+                        311,
+                        329,
+                        353,
+                        434,
+                        467
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint64"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgOCAzMgogICAgYnl0ZWNibG9jayAiZmVlX3JhdGVfYnBzIiAib3duZXIiICJ0cmVhc3VyeV9hZGRyZXNzIiAidG90YWxfZmVlc19jb2xsZWN0ZWQiIDB4MDAwMDAwMDAwMDAwMDAwMCAiZXNjcm93X2FwcF9pZCIgInVzZGNfYXNzZXRfaWQiIDB4MTUxZjdjNzUKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIGZlZV9jb25maWcucHk6NDcKICAgIC8vIHNlbGYub3duZXIudmFsdWUgPSBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlcikKICAgIGJ5dGVjXzEgLy8gIm93bmVyIgogICAgdHhuIFNlbmRlcgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGZlZV9jb25maWcucHk6NDgKICAgIC8vIHNlbGYuZmVlX3JhdGVfYnBzLnZhbHVlID0gYXJjNC5VSW50NjQoMjUwKQogICAgYnl0ZWNfMCAvLyAiZmVlX3JhdGVfYnBzIgogICAgcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDBmYQogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGZlZV9jb25maWcucHk6NDkKICAgIC8vIHNlbGYudHJlYXN1cnlfYWRkcmVzcy52YWx1ZSA9IGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKQogICAgYnl0ZWNfMiAvLyAidHJlYXN1cnlfYWRkcmVzcyIKICAgIHR4biBTZW5kZXIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBmZWVfY29uZmlnLnB5OjUwCiAgICAvLyBzZWxmLnVzZGNfYXNzZXRfaWQudmFsdWUgPSBhcmM0LlVJbnQ2NCgwKQogICAgYnl0ZWMgNiAvLyAidXNkY19hc3NldF9pZCIKICAgIGJ5dGVjIDQgLy8gMHgwMDAwMDAwMDAwMDAwMDAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gZmVlX2NvbmZpZy5weTo1MQogICAgLy8gc2VsZi50b3RhbF9mZWVzX2NvbGxlY3RlZC52YWx1ZSA9IGFyYzQuVUludDY0KDApCiAgICBieXRlY18zIC8vICJ0b3RhbF9mZWVzX2NvbGxlY3RlZCIKICAgIGJ5dGVjIDQgLy8gMHgwMDAwMDAwMDAwMDAwMDAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gZmVlX2NvbmZpZy5weTo1MgogICAgLy8gc2VsZi5lc2Nyb3dfYXBwX2lkLnZhbHVlID0gVUludDY0KDApCiAgICBieXRlYyA1IC8vICJlc2Nyb3dfYXBwX2lkIgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIGZlZV9jb25maWcucHk6NAogICAgLy8gY2xhc3MgRmVlQ29uZmlnKEFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDEzCiAgICBwdXNoYnl0ZXNzIDB4MTRkNzI1NjIgMHg1N2NiZmQ2MiAweGMwNTA5ZDFjIDB4ZmNkOGNhYWYgMHg0ZTA4MWViYSAweDdjN2NjNTcyIDB4YThhOGYzNjYgLy8gbWV0aG9kICJjYWxjdWxhdGVfZmVlKHVpbnQ2NCl1aW50NjQiLCBtZXRob2QgImNhbGN1bGF0ZV9zZWxsZXJfcGF5b3V0KHVpbnQ2NCl1aW50NjQiLCBtZXRob2QgInNldF9mZWVfcmF0ZSh1aW50NjQpdm9pZCIsIG1ldGhvZCAic2V0X3RyZWFzdXJ5KGFkZHJlc3Mpdm9pZCIsIG1ldGhvZCAic2V0X2VzY3Jvd19hcHAodWludDY0KXZvaWQiLCBtZXRob2QgInJlY29yZF9mZWVfY29sbGVjdGVkKHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJnZXRfY29uZmlnKCkodWludDY0LGFkZHJlc3MsdWludDY0LHVpbnQ2NCkiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjYWxjdWxhdGVfZmVlIGNhbGN1bGF0ZV9zZWxsZXJfcGF5b3V0IHNldF9mZWVfcmF0ZSBzZXRfdHJlYXN1cnkgc2V0X2VzY3Jvd19hcHAgcmVjb3JkX2ZlZV9jb2xsZWN0ZWQgZ2V0X2NvbmZpZwogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDEzOgogICAgLy8gZmVlX2NvbmZpZy5weTo0CiAgICAvLyBjbGFzcyBGZWVDb25maWcoQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweDRkNWI2MmY4IC8vIG1ldGhvZCAiY3JlYXRlKHVpbnQ2NCxhZGRyZXNzLHVpbnQ2NCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlCiAgICBlcnIKCgovLyBmZWVfY29uZmlnLkZlZUNvbmZpZy5jcmVhdGVbcm91dGluZ10oKSAtPiB2b2lkOgpjcmVhdGU6CiAgICAvLyBmZWVfY29uZmlnLnB5OjU0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIiwgYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gZmVlX2NvbmZpZy5weTo2MwogICAgLy8gaW5pdGlhbF9mZWVfcmF0ZV9icHMuYXNfdWludDY0KCkgPD0gMTAwMAogICAgZGlnIDIKICAgIGJ0b2kKICAgIHB1c2hpbnQgMTAwMAogICAgPD0KICAgIC8vIGZlZV9jb25maWcucHk6NjEtNjQKICAgIC8vICMgVmFsaWRhdGUgaW5pdGlhbCBmZWUgcmF0ZTogbXVzdCBiZSBiZXR3ZWVuIDAlIGFuZCAxMCUgKDEwMDAgYnBzKQogICAgLy8gYXNzZXJ0ICgKICAgIC8vICAgICBpbml0aWFsX2ZlZV9yYXRlX2Jwcy5hc191aW50NjQoKSA8PSAxMDAwCiAgICAvLyApLCAiRmVlIHJhdGUgY2Fubm90IGV4Y2VlZCAxMCUgKDEwMDAgYmFzaXMgcG9pbnRzKSIKICAgIGFzc2VydCAvLyBGZWUgcmF0ZSBjYW5ub3QgZXhjZWVkIDEwJSAoMTAwMCBiYXNpcyBwb2ludHMpCiAgICAvLyBmZWVfY29uZmlnLnB5OjY2LTY3CiAgICAvLyAjIFNldCBkZXBsb3llciBhcyBvd25lcgogICAgLy8gc2VsZi5vd25lci52YWx1ZSA9IGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKQogICAgYnl0ZWNfMSAvLyAib3duZXIiCiAgICB0eG4gU2VuZGVyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gZmVlX2NvbmZpZy5weTo2OS03MAogICAgLy8gIyBJbml0aWFsaXplIGdsb2JhbCBzdGF0ZQogICAgLy8gc2VsZi5mZWVfcmF0ZV9icHMudmFsdWUgPSBpbml0aWFsX2ZlZV9yYXRlX2JwcwogICAgYnl0ZWNfMCAvLyAiZmVlX3JhdGVfYnBzIgogICAgZGlnIDMKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBmZWVfY29uZmlnLnB5OjcxCiAgICAvLyBzZWxmLnRyZWFzdXJ5X2FkZHJlc3MudmFsdWUgPSB0cmVhc3VyeQogICAgYnl0ZWNfMiAvLyAidHJlYXN1cnlfYWRkcmVzcyIKICAgIGRpZyAyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gZmVlX2NvbmZpZy5weTo3MgogICAgLy8gc2VsZi51c2RjX2Fzc2V0X2lkLnZhbHVlID0gdXNkY19pZAogICAgYnl0ZWMgNiAvLyAidXNkY19hc3NldF9pZCIKICAgIGRpZyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gZmVlX2NvbmZpZy5weTo3MwogICAgLy8gc2VsZi50b3RhbF9mZWVzX2NvbGxlY3RlZC52YWx1ZSA9IGFyYzQuVUludDY0KDApCiAgICBieXRlY18zIC8vICJ0b3RhbF9mZWVzX2NvbGxlY3RlZCIKICAgIGJ5dGVjIDQgLy8gMHgwMDAwMDAwMDAwMDAwMDAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gZmVlX2NvbmZpZy5weTo3NAogICAgLy8gc2VsZi5lc2Nyb3dfYXBwX2lkLnZhbHVlID0gVUludDY0KDApICAjIFNldCB0byAwIHVudGlsIEVzY3JvdyBpcyBkZXBsb3llZAogICAgYnl0ZWMgNSAvLyAiZXNjcm93X2FwcF9pZCIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gZmVlX2NvbmZpZy5weTo3OQogICAgLy8gYXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpLAogICAgdHhuIFNlbmRlcgogICAgLy8gZmVlX2NvbmZpZy5weTo3Ni04MwogICAgLy8gIyBFbWl0IGNyZWF0aW9uIGV2ZW50IGZvciBpbmRleGVycwogICAgLy8gYXJjNC5lbWl0KAogICAgLy8gICAgICJGZWVDb25maWdDcmVhdGVkIiwKICAgIC8vICAgICBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlciksCiAgICAvLyAgICAgaW5pdGlhbF9mZWVfcmF0ZV9icHMsCiAgICAvLyAgICAgdHJlYXN1cnksCiAgICAvLyAgICAgdXNkY19pZCwKICAgIC8vICkKICAgIHVuY292ZXIgMwogICAgY29uY2F0CiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHg2YjBjZWY4OCAvLyBtZXRob2QgIkZlZUNvbmZpZ0NyZWF0ZWQoYWRkcmVzcyx1aW50NjQsYWRkcmVzcyx1aW50NjQpIgogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIGZlZV9jb25maWcucHk6NTQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChjcmVhdGU9InJlcXVpcmUiLCBhbGxvd19hY3Rpb25zPVsiTm9PcCJdKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIGZlZV9jb25maWcuRmVlQ29uZmlnLmNhbGN1bGF0ZV9mZWVbcm91dGluZ10oKSAtPiB2b2lkOgpjYWxjdWxhdGVfZmVlOgogICAgLy8gZmVlX2NvbmZpZy5weTo4NQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUsIGFsbG93X2FjdGlvbnM9WyJOb09wIl0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBjYWxsc3ViIGZlZV9jb25maWcuRmVlQ29uZmlnLmNhbGN1bGF0ZV9mZWUKICAgIGJ5dGVjIDcgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBmZWVfY29uZmlnLkZlZUNvbmZpZy5jYWxjdWxhdGVfc2VsbGVyX3BheW91dFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNhbGN1bGF0ZV9zZWxsZXJfcGF5b3V0OgogICAgLy8gZmVlX2NvbmZpZy5weToxMzIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlLCBhbGxvd19hY3Rpb25zPVsiTm9PcCJdKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gZmVlX2NvbmZpZy5weToxNDYKICAgIC8vIGFtb3VudCA9IGFtb3VudF9taWNyb191c2RjLmFzX3VpbnQ2NCgpCiAgICBkdXAKICAgIGJ0b2kKICAgIC8vIGZlZV9jb25maWcucHk6MTQ3CiAgICAvLyBmZWUgPSBzZWxmLmNhbGN1bGF0ZV9mZWUoYW1vdW50X21pY3JvX3VzZGMpLmFzX3VpbnQ2NCgpCiAgICBzd2FwCiAgICBjYWxsc3ViIGZlZV9jb25maWcuRmVlQ29uZmlnLmNhbGN1bGF0ZV9mZWUKICAgIGJ0b2kKICAgIC8vIGZlZV9jb25maWcucHk6MTQ4CiAgICAvLyByZXR1cm4gYXJjNC5VSW50NjQoYW1vdW50IC0gZmVlKQogICAgLQogICAgaXRvYgogICAgLy8gZmVlX2NvbmZpZy5weToxMzIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlLCBhbGxvd19hY3Rpb25zPVsiTm9PcCJdKQogICAgYnl0ZWMgNyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIGZlZV9jb25maWcuRmVlQ29uZmlnLnNldF9mZWVfcmF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnNldF9mZWVfcmF0ZToKICAgIC8vIGZlZV9jb25maWcucHk6MTUwCiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIC8vIGZlZV9jb25maWcucHk6MTY2CiAgICAvLyBUeG4uc2VuZGVyID09IHNlbGYub3duZXIudmFsdWUubmF0aXZlCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAib3duZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYub3duZXIgZXhpc3RzCiAgICA9PQogICAgLy8gZmVlX2NvbmZpZy5weToxNjQtMTY3CiAgICAvLyAjIE93bmVyIGNoZWNrIEZJUlNUOiBtdXN0IGZhaWwgaW1tZWRpYXRlbHkgZm9yIHVuYXV0aG9yaXplZCBjYWxsZXJzCiAgICAvLyBhc3NlcnQgKAogICAgLy8gICAgIFR4bi5zZW5kZXIgPT0gc2VsZi5vd25lci52YWx1ZS5uYXRpdmUKICAgIC8vICksICJPbmx5IHRoZSBjb250cmFjdCBvd25lciBjYW4gdXBkYXRlIHRoZSBmZWUgcmF0ZSIKICAgIGFzc2VydCAvLyBPbmx5IHRoZSBjb250cmFjdCBvd25lciBjYW4gdXBkYXRlIHRoZSBmZWUgcmF0ZQogICAgLy8gZmVlX2NvbmZpZy5weToxNzEKICAgIC8vIG5ld19yYXRlX2Jwcy5hc191aW50NjQoKSA8PSAxMDAwCiAgICBkdXAKICAgIGJ0b2kKICAgIHB1c2hpbnQgMTAwMAogICAgPD0KICAgIC8vIGZlZV9jb25maWcucHk6MTY5LTE3MgogICAgLy8gIyBSYW5nZSBjaGVjazogaGFyZCBjYXAgYXQgMTAlICgxMDAwIGJwcykgZW5mb3JjZWQgb24tY2hhaW4KICAgIC8vIGFzc2VydCAoCiAgICAvLyAgICAgbmV3X3JhdGVfYnBzLmFzX3VpbnQ2NCgpIDw9IDEwMDAKICAgIC8vICksICJGZWUgcmF0ZSBjYW5ub3QgZXhjZWVkIDEwJSAoMTAwMCBiYXNpcyBwb2ludHMpIgogICAgYXNzZXJ0IC8vIEZlZSByYXRlIGNhbm5vdCBleGNlZWQgMTAlICgxMDAwIGJhc2lzIHBvaW50cykKICAgIC8vIGZlZV9jb25maWcucHk6MTc0CiAgICAvLyBvbGRfcmF0ZSA9IHNlbGYuZmVlX3JhdGVfYnBzLnZhbHVlCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAiZmVlX3JhdGVfYnBzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmZlZV9yYXRlX2JwcyBleGlzdHMKICAgIC8vIGZlZV9jb25maWcucHk6MTc1CiAgICAvLyBzZWxmLmZlZV9yYXRlX2Jwcy52YWx1ZSA9IG5ld19yYXRlX2JwcwogICAgYnl0ZWNfMCAvLyAiZmVlX3JhdGVfYnBzIgogICAgZGlnIDIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBmZWVfY29uZmlnLnB5OjE3Ny0xNzgKICAgIC8vICMgRW1pdCBldmVudCBmb3IgT3BlcmF0aW9ucyBkYXNoYm9hcmQgLyBpbmRleGVycwogICAgLy8gYXJjNC5lbWl0KCJGZWVSYXRlVXBkYXRlZCIsIG9sZF9yYXRlLCBuZXdfcmF0ZV9icHMpCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweGQ4ZjdhNmM4IC8vIG1ldGhvZCAiRmVlUmF0ZVVwZGF0ZWQodWludDY0LHVpbnQ2NCkiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgLy8gZmVlX2NvbmZpZy5weToxNTAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiTm9PcCJdKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIGZlZV9jb25maWcuRmVlQ29uZmlnLnNldF90cmVhc3VyeVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnNldF90cmVhc3VyeToKICAgIC8vIGZlZV9jb25maWcucHk6MTgwCiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gZmVlX2NvbmZpZy5weToxOTUKICAgIC8vIFR4bi5zZW5kZXIgPT0gc2VsZi5vd25lci52YWx1ZS5uYXRpdmUKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJvd25lciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5vd25lciBleGlzdHMKICAgID09CiAgICAvLyBmZWVfY29uZmlnLnB5OjE5My0xOTYKICAgIC8vICMgT3duZXIgY2hlY2sgRklSU1QKICAgIC8vIGFzc2VydCAoCiAgICAvLyAgICAgVHhuLnNlbmRlciA9PSBzZWxmLm93bmVyLnZhbHVlLm5hdGl2ZQogICAgLy8gKSwgIk9ubHkgdGhlIGNvbnRyYWN0IG93bmVyIGNhbiB1cGRhdGUgdGhlIHRyZWFzdXJ5IGFkZHJlc3MiCiAgICBhc3NlcnQgLy8gT25seSB0aGUgY29udHJhY3Qgb3duZXIgY2FuIHVwZGF0ZSB0aGUgdHJlYXN1cnkgYWRkcmVzcwogICAgLy8gZmVlX2NvbmZpZy5weToxOTgKICAgIC8vIG9sZF90cmVhc3VyeSA9IHNlbGYudHJlYXN1cnlfYWRkcmVzcy52YWx1ZQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzIgLy8gInRyZWFzdXJ5X2FkZHJlc3MiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudHJlYXN1cnlfYWRkcmVzcyBleGlzdHMKICAgIC8vIGZlZV9jb25maWcucHk6MTk5CiAgICAvLyBzZWxmLnRyZWFzdXJ5X2FkZHJlc3MudmFsdWUgPSBuZXdfdHJlYXN1cnkKICAgIGJ5dGVjXzIgLy8gInRyZWFzdXJ5X2FkZHJlc3MiCiAgICBkaWcgMgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGZlZV9jb25maWcucHk6MjAxLTIwMgogICAgLy8gIyBFbWl0IGV2ZW50IGZvciBpbmRleGVycwogICAgLy8gYXJjNC5lbWl0KCJUcmVhc3VyeVVwZGF0ZWQiLCBvbGRfdHJlYXN1cnksIG5ld190cmVhc3VyeSkKICAgIHN3YXAKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MTRlOGU2ODEgLy8gbWV0aG9kICJUcmVhc3VyeVVwZGF0ZWQoYWRkcmVzcyxhZGRyZXNzKSIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICAvLyBmZWVfY29uZmlnLnB5OjE4MAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0pCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gZmVlX2NvbmZpZy5GZWVDb25maWcuc2V0X2VzY3Jvd19hcHBbcm91dGluZ10oKSAtPiB2b2lkOgpzZXRfZXNjcm93X2FwcDoKICAgIC8vIGZlZV9jb25maWcucHk6MjA0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGR1cAogICAgYnRvaQogICAgLy8gZmVlX2NvbmZpZy5weToyMTcKICAgIC8vIFR4bi5zZW5kZXIgPT0gc2VsZi5vd25lci52YWx1ZS5uYXRpdmUKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJvd25lciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5vd25lciBleGlzdHMKICAgID09CiAgICAvLyBmZWVfY29uZmlnLnB5OjIxNS0yMTgKICAgIC8vICMgT3duZXIgY2hlY2sgRklSU1QKICAgIC8vIGFzc2VydCAoCiAgICAvLyAgICAgVHhuLnNlbmRlciA9PSBzZWxmLm93bmVyLnZhbHVlLm5hdGl2ZQogICAgLy8gKSwgIk9ubHkgdGhlIGNvbnRyYWN0IG93bmVyIGNhbiBzZXQgdGhlIEVzY3JvdyBhcHAgSUQiCiAgICBhc3NlcnQgLy8gT25seSB0aGUgY29udHJhY3Qgb3duZXIgY2FuIHNldCB0aGUgRXNjcm93IGFwcCBJRAogICAgLy8gZmVlX2NvbmZpZy5weToyMjAKICAgIC8vIHNlbGYuZXNjcm93X2FwcF9pZC52YWx1ZSA9IGVzY3Jvd19hcHBfaWQKICAgIGJ5dGVjIDUgLy8gImVzY3Jvd19hcHBfaWQiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gZmVlX2NvbmZpZy5weToyMjItMjIzCiAgICAvLyAjIEVtaXQgZXZlbnQgZm9yIGluZGV4ZXJzCiAgICAvLyBhcmM0LmVtaXQoIkVzY3Jvd0FwcFNldCIsIGVzY3Jvd19hcHBfaWQpCiAgICBwdXNoYnl0ZXMgMHg5NjViZmZmYiAvLyBtZXRob2QgIkVzY3Jvd0FwcFNldCh1aW50NjQpIgogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIGZlZV9jb25maWcucHk6MjA0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBmZWVfY29uZmlnLkZlZUNvbmZpZy5yZWNvcmRfZmVlX2NvbGxlY3RlZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlY29yZF9mZWVfY29sbGVjdGVkOgogICAgLy8gZmVlX2NvbmZpZy5weToyMjUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiTm9PcCJdKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gZmVlX2NvbmZpZy5weToyNDItMjQzCiAgICAvLyAjIENhbGxlciB2ZXJpZmljYXRpb246IG9ubHkgRXNjcm93IGNvbnRyYWN0IGNhbiByZWNvcmQgZmVlcwogICAgLy8gZXNjcm93X2lkID0gc2VsZi5lc2Nyb3dfYXBwX2lkLnZhbHVlCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWMgNSAvLyAiZXNjcm93X2FwcF9pZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBzd2FwCiAgICBkdXAKICAgIHVuY292ZXIgMgogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuZXNjcm93X2FwcF9pZCBleGlzdHMKICAgIC8vIGZlZV9jb25maWcucHk6MjQ0CiAgICAvLyBjYWxsZXJfYXBwX2lkID0gR2xvYmFsLmNhbGxlcl9hcHBsaWNhdGlvbl9pZAogICAgZ2xvYmFsIENhbGxlckFwcGxpY2F0aW9uSUQKICAgIHN3YXAKICAgIC8vIGZlZV9jb25maWcucHk6MjQ2LTI0NwogICAgLy8gIyBBbGxvdyBzZWxmLWNhbGxzIG9yIGNhbGxzIGZyb20gcmVnaXN0ZXJlZCBFc2Nyb3cgYXBwCiAgICAvLyBpc19zZWxmX2NhbGwgPSBUeG4uc2VuZGVyID09IEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MKICAgIHR4biBTZW5kZXIKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICA9PQogICAgc3dhcAogICAgLy8gZmVlX2NvbmZpZy5weToyNDgKICAgIC8vIGlzX2VzY3Jvd19jYWxsID0gZXNjcm93X2lkICE9IFVJbnQ2NCgwKSBhbmQgY2FsbGVyX2FwcF9pZCA9PSBlc2Nyb3dfaWQKICAgIGJ6IHJlY29yZF9mZWVfY29sbGVjdGVkX2Jvb2xfZmFsc2VANAogICAgZGlnIDEKICAgIGRpZyAzCiAgICA9PQogICAgYnogcmVjb3JkX2ZlZV9jb2xsZWN0ZWRfYm9vbF9mYWxzZUA0CiAgICBpbnRjXzEgLy8gMQoKcmVjb3JkX2ZlZV9jb2xsZWN0ZWRfYm9vbF9tZXJnZUA1OgogICAgLy8gZmVlX2NvbmZpZy5weToyNTEKICAgIC8vIGlzX3NlbGZfY2FsbCBvciBpc19lc2Nyb3dfY2FsbAogICAgZGlnIDEKICAgIHx8CiAgICAvLyBmZWVfY29uZmlnLnB5OjI1MC0yNTIKICAgIC8vIGFzc2VydCAoCiAgICAvLyAgICAgaXNfc2VsZl9jYWxsIG9yIGlzX2VzY3Jvd19jYWxsCiAgICAvLyApLCAiT25seSB0aGUgRXNjcm93IGNvbnRyYWN0IGNhbiByZWNvcmQgZmVlcyIKICAgIGFzc2VydCAvLyBPbmx5IHRoZSBFc2Nyb3cgY29udHJhY3QgY2FuIHJlY29yZCBmZWVzCiAgICAvLyBmZWVfY29uZmlnLnB5OjI1NC0yNTUKICAgIC8vICMgQWRkIGZlZSB0byBydW5uaW5nIHRvdGFsIHVzaW5nIGNoZWNrZWQgYWRkdyBzZW1hbnRpY3MuCiAgICAvLyBmZWVfYW1vdW50ID0gZmVlX2Ftb3VudF9taWNyb191c2RjLmFzX3VpbnQ2NCgpCiAgICBkaWcgMwogICAgZHVwCiAgICBidG9pCiAgICAvLyBmZWVfY29uZmlnLnB5OjI1NgogICAgLy8gY3VycmVudF90b3RhbCA9IHNlbGYudG90YWxfZmVlc19jb2xsZWN0ZWQudmFsdWUuYXNfdWludDY0KCkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18zIC8vICJ0b3RhbF9mZWVzX2NvbGxlY3RlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF9mZWVzX2NvbGxlY3RlZCBleGlzdHMKICAgIGJ0b2kKICAgIC8vIGZlZV9jb25maWcucHk6MjU3CiAgICAvLyBjYXJyeSwgbmV3X3RvdGFsID0gb3AuYWRkdyhjdXJyZW50X3RvdGFsLCBmZWVfYW1vdW50KQogICAgYWRkdwogICAgLy8gZmVlX2NvbmZpZy5weToyNTgKICAgIC8vIGFzc2VydCBjYXJyeSA9PSBVSW50NjQoMCksICJGZWUgYWNjdW11bGF0b3Igb3ZlcmZsb3ciCiAgICBzd2FwCiAgICAhCiAgICBhc3NlcnQgLy8gRmVlIGFjY3VtdWxhdG9yIG92ZXJmbG93CiAgICAvLyBmZWVfY29uZmlnLnB5OjI2MAogICAgLy8gc2VsZi50b3RhbF9mZWVzX2NvbGxlY3RlZC52YWx1ZSA9IGFyYzQuVUludDY0KG5ld190b3RhbCkKICAgIGl0b2IKICAgIGJ5dGVjXzMgLy8gInRvdGFsX2ZlZXNfY29sbGVjdGVkIgogICAgZGlnIDEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBmZWVfY29uZmlnLnB5OjI2Mi0yNjMKICAgIC8vICMgRW1pdCBldmVudCB3aXRoIGZlZSBhbW91bnQgYW5kIG5ldyB0b3RhbCBmb3IgaW5kZXhlcnMKICAgIC8vIGFyYzQuZW1pdCgiRmVlQ29sbGVjdGVkIiwgZmVlX2Ftb3VudF9taWNyb191c2RjLCBhcmM0LlVJbnQ2NChuZXdfdG90YWwpKQogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHg2MzY3YmM5MyAvLyBtZXRob2QgIkZlZUNvbGxlY3RlZCh1aW50NjQsdWludDY0KSIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICAvLyBmZWVfY29uZmlnLnB5OjIyNQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0pCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgpyZWNvcmRfZmVlX2NvbGxlY3RlZF9ib29sX2ZhbHNlQDQ6CiAgICBpbnRjXzAgLy8gMAogICAgYiByZWNvcmRfZmVlX2NvbGxlY3RlZF9ib29sX21lcmdlQDUKCgovLyBmZWVfY29uZmlnLkZlZUNvbmZpZy5nZXRfY29uZmlnW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X2NvbmZpZzoKICAgIC8vIGZlZV9jb25maWcucHk6MjgzCiAgICAvLyBzZWxmLmZlZV9yYXRlX2Jwcy52YWx1ZSwKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJmZWVfcmF0ZV9icHMiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuZmVlX3JhdGVfYnBzIGV4aXN0cwogICAgLy8gZmVlX2NvbmZpZy5weToyODQKICAgIC8vIHNlbGYudHJlYXN1cnlfYWRkcmVzcy52YWx1ZSwKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18yIC8vICJ0cmVhc3VyeV9hZGRyZXNzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRyZWFzdXJ5X2FkZHJlc3MgZXhpc3RzCiAgICAvLyBmZWVfY29uZmlnLnB5OjI4NQogICAgLy8gc2VsZi50b3RhbF9mZWVzX2NvbGxlY3RlZC52YWx1ZSwKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18zIC8vICJ0b3RhbF9mZWVzX2NvbGxlY3RlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF9mZWVzX2NvbGxlY3RlZCBleGlzdHMKICAgIC8vIGZlZV9jb25maWcucHk6Mjg2CiAgICAvLyBzZWxmLnVzZGNfYXNzZXRfaWQudmFsdWUsCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWMgNiAvLyAidXNkY19hc3NldF9pZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi51c2RjX2Fzc2V0X2lkIGV4aXN0cwogICAgLy8gZmVlX2NvbmZpZy5weToyODEtMjg4CiAgICAvLyByZXR1cm4gYXJjNC5UdXBsZSgKICAgIC8vICAgICAoCiAgICAvLyAgICAgICAgIHNlbGYuZmVlX3JhdGVfYnBzLnZhbHVlLAogICAgLy8gICAgICAgICBzZWxmLnRyZWFzdXJ5X2FkZHJlc3MudmFsdWUsCiAgICAvLyAgICAgICAgIHNlbGYudG90YWxfZmVlc19jb2xsZWN0ZWQudmFsdWUsCiAgICAvLyAgICAgICAgIHNlbGYudXNkY19hc3NldF9pZC52YWx1ZSwKICAgIC8vICAgICApCiAgICAvLyApCiAgICB1bmNvdmVyIDMKICAgIHVuY292ZXIgMwogICAgY29uY2F0CiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyBmZWVfY29uZmlnLnB5OjI2NQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUsIGFsbG93X2FjdGlvbnM9WyJOb09wIl0pCiAgICBieXRlYyA3IC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gZmVlX2NvbmZpZy5GZWVDb25maWcuY2FsY3VsYXRlX2ZlZShhbW91bnRfbWljcm9fdXNkYzogYnl0ZXMpIC0+IGJ5dGVzOgpmZWVfY29uZmlnLkZlZUNvbmZpZy5jYWxjdWxhdGVfZmVlOgogICAgLy8gZmVlX2NvbmZpZy5weTo4NS04NgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUsIGFsbG93X2FjdGlvbnM9WyJOb09wIl0pCiAgICAvLyBkZWYgY2FsY3VsYXRlX2ZlZShzZWxmLCBhbW91bnRfbWljcm9fdXNkYzogYXJjNC5VSW50NjQpIC0+IGFyYzQuVUludDY0OgogICAgcHJvdG8gMSAxCiAgICBwdXNoYnl0ZXMgIiIKICAgIC8vIGZlZV9jb25maWcucHk6MTExCiAgICAvLyBhbW91bnQgPSBhbW91bnRfbWljcm9fdXNkYy5hc191aW50NjQoKQogICAgZnJhbWVfZGlnIC0xCiAgICBidG9pCiAgICBkdXAKICAgIC8vIGZlZV9jb25maWcucHk6MTEyCiAgICAvLyByYXRlID0gc2VsZi5mZWVfcmF0ZV9icHMudmFsdWUuYXNfdWludDY0KCkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJmZWVfcmF0ZV9icHMiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuZmVlX3JhdGVfYnBzIGV4aXN0cwogICAgYnRvaQogICAgc3dhcAogICAgLy8gZmVlX2NvbmZpZy5weToxMTQKICAgIC8vIGlmIGFtb3VudCA9PSAwOgogICAgYm56IGZlZV9jb25maWcuRmVlQ29uZmlnLmNhbGN1bGF0ZV9mZWVfYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyBmZWVfY29uZmlnLnB5OjExNQogICAgLy8gcmV0dXJuIGFyYzQuVUludDY0KDApCiAgICBieXRlYyA0IC8vIDB4MDAwMDAwMDAwMDAwMDAwMAogICAgZnJhbWVfYnVyeSAwCiAgICByZXRzdWIKCmZlZV9jb25maWcuRmVlQ29uZmlnLmNhbGN1bGF0ZV9mZWVfYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gZmVlX2NvbmZpZy5weToxMTctMTE4CiAgICAvLyAjIFVzZSB3aWRlIG1hdGggZm9yIGF1ZGl0LXNhZmUgMTI4LWJpdCBtdWx0aXBsaWNhdGlvbiBhbmQgZGl2aXNpb24uCiAgICAvLyBwcm9kdWN0X2hpZ2gsIHByb2R1Y3RfbG93ID0gb3AubXVsdyhhbW91bnQsIHJhdGUpCiAgICBmcmFtZV9kaWcgMQogICAgZnJhbWVfZGlnIDIKICAgIG11bHcKICAgIC8vIGZlZV9jb25maWcucHk6MTIwCiAgICAvLyBwcm9kdWN0X2hpZ2gsIHByb2R1Y3RfbG93LCBVSW50NjQoMCksIFVJbnQ2NCgxMDAwMCkKICAgIGludGNfMCAvLyAwCiAgICBwdXNoaW50IDEwMDAwCiAgICAvLyBmZWVfY29uZmlnLnB5OjExOS0xMjEKICAgIC8vIHF1b3RpZW50X2hpZ2gsIGNhbGN1bGF0ZWRfZmVlLCByZW1haW5kZXJfaGlnaCwgcmVtYWluZGVyX2xvdyA9IG9wLmRpdm1vZHcoCiAgICAvLyAgICAgcHJvZHVjdF9oaWdoLCBwcm9kdWN0X2xvdywgVUludDY0KDApLCBVSW50NjQoMTAwMDApCiAgICAvLyApCiAgICBkaXZtb2R3CiAgICBwb3BuIDIKICAgIGR1cAogICAgY292ZXIgMgogICAgZnJhbWVfYnVyeSAwCiAgICBwb3AKICAgIC8vIGZlZV9jb25maWcucHk6MTIzLTEyNwogICAgLy8gIyBBcHBseSBtaW5pbXVtIGZlZSBmbG9vciBPTkxZIHdoZW4gcmF0ZSA+IDA6CiAgICAvLyAjIER1c3QgYW1vdW50cyBhdCBub24temVybyByYXRlcyBwcm9kdWNlIDAgZmVlIGR1ZSB0byBpbnRlZ2VyIGRpdmlzaW9uLAogICAgLy8gIyBidXQgemVyby12YWx1ZSBVU0RDIHRyYW5zZmVycyBhcmUgcmVqZWN0ZWQgYnkgc29tZSBub2Rlcywgc28gZW5mb3JjZSBtaW5pbXVtIDEuCiAgICAvLyAjIFdoZW4gcmF0ZSBpcyAwJSwgYWxsb3cgbGVnaXRpbWF0ZSB6ZXJvIGZlZS4KICAgIC8vIGlmIGNhbGN1bGF0ZWRfZmVlID09IDAgYW5kIHJhdGUgPiAwOgogICAgYm56IGZlZV9jb25maWcuRmVlQ29uZmlnLmNhbGN1bGF0ZV9mZWVfYWZ0ZXJfaWZfZWxzZUA1CiAgICBmcmFtZV9kaWcgMgogICAgYnogZmVlX2NvbmZpZy5GZWVDb25maWcuY2FsY3VsYXRlX2ZlZV9hZnRlcl9pZl9lbHNlQDUKICAgIC8vIGZlZV9jb25maWcucHk6MTI4CiAgICAvLyByZXR1cm4gYXJjNC5VSW50NjQoMSkKICAgIHB1c2hieXRlcyAweDAwMDAwMDAwMDAwMDAwMDEKICAgIGZyYW1lX2J1cnkgMAogICAgcmV0c3ViCgpmZWVfY29uZmlnLkZlZUNvbmZpZy5jYWxjdWxhdGVfZmVlX2FmdGVyX2lmX2Vsc2VANToKICAgIC8vIGZlZV9jb25maWcucHk6MTMwCiAgICAvLyByZXR1cm4gYXJjNC5VSW50NjQoY2FsY3VsYXRlZF9mZWUpCiAgICBmcmFtZV9kaWcgMAogICAgaXRvYgogICAgZnJhbWVfYnVyeSAwCiAgICByZXRzdWIK",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CyAEAAEIICYIDGZlZV9yYXRlX2JwcwVvd25lchB0cmVhc3VyeV9hZGRyZXNzFHRvdGFsX2ZlZXNfY29sbGVjdGVkCAAAAAAAAAAADWVzY3Jvd19hcHBfaWQNdXNkY19hc3NldF9pZAQVH3x1MRhAACEpMQBnKIAIAAAAAAAAAPpnKjEAZycGJwRnKycEZycFImcxGRREMRhBADmCBwQU1yViBFfL/WIEwFCdHAT82MqvBE4IHroEfHzFcgSoqPNmNhoAjgcAXQBvAIcAswDYAPkBRQCABE1bYvg2GgCOAQABADYaAUkVJBJENhoCSRUlEkQ2GgNJFSQSREsCF4HoBw5EKTEAZyhLA2cqSwJnJwZLAWcrJwRnJwUiZzEATwNQTwJQTFCABGsM74hMULAjQzYaAUkVJBJEiAD/JwdMULAjQzYaAUkVJBJESRdMiADqFwkWJwdMULAjQzYaAUkVJBJEMQAiKWVEEkRJF4HoBw5EIihlRChLAmdMUIAE2PemyExQsCNDNhoBSRUlEkQxACIpZUQSRCIqZUQqSwJnTFCABBTo5oFMULAjQzYaAUkVJBJESRcxACIpZUQSRCcFTGeABJZb//tMULAjQzYaAUkVJBJEIicFZUxJTwJEMg1MMQAyChJMQQArSwFLAxJBACMjSwERREsDSRciK2VEFx5MFEQWK0sBZ1CABGNnvJNMULAjQyJC/9oiKGVEIiplRCIrZUQiJwZlRE8DTwNQTwJQTFAnB0xQsCNDigEBgACL/xdJIihlRBdMQAAFJwSMAImLAYsCHSKBkE4fRgJJTgKMAEhAABKLAkEADYAIAAAAAAAAAAGMAImLABaMAIk=",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 8,
+            "patch": 1
+        }
+    },
+    "events": [
+        {
+            "name": "FeeConfigCreated",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "field1"
+                },
+                {
+                    "type": "uint64",
+                    "name": "field2"
+                },
+                {
+                    "type": "address",
+                    "name": "field3"
+                },
+                {
+                    "type": "uint64",
+                    "name": "field4"
+                }
+            ]
+        },
+        {
+            "name": "FeeRateUpdated",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "field1"
+                },
+                {
+                    "type": "uint64",
+                    "name": "field2"
+                }
+            ]
+        },
+        {
+            "name": "TreasuryUpdated",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "field1"
+                },
+                {
+                    "type": "address",
+                    "name": "field2"
+                }
+            ]
+        },
+        {
+            "name": "EscrowAppSet",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "field1"
+                }
+            ]
+        },
+        {
+            "name": "FeeCollected",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "field1"
+                },
+                {
+                    "type": "uint64",
+                    "name": "field2"
+                }
+            ]
+        }
+    ],
+    "templateVariables": {}
+}

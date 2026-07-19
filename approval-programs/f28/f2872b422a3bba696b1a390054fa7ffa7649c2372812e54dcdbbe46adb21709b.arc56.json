@@ -1,0 +1,111 @@
+{
+    "name": "MockRandomnessBeacon",
+    "structs": {},
+    "methods": [
+        {
+            "name": "must_get",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "_round"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "data"
+                }
+            ],
+            "returns": {
+                "type": "byte[]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        25
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        70
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        28
+                    ],
+                    "errorMessage": "can only call when not creating"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyBzbWFydF9jb250cmFjdHMvcm91bGV0dGUvbGlicy9yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjE3CiAgICAvLyBleHBvcnQgY2xhc3MgTW9ja1JhbmRvbW5lc3NCZWFjb24gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdANgogICAgcHVzaGJ5dGVzIDB4NDdjMjBjMjMgLy8gbWV0aG9kICJtdXN0X2dldCh1aW50NjQsYnl0ZVtdKWJ5dGVbXSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fbXVzdF9nZXRfcm91dGVAMwoKbWFpbl9hZnRlcl9pZl9lbHNlQDEwOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoxNwogICAgLy8gZXhwb3J0IGNsYXNzIE1vY2tSYW5kb21uZXNzQmVhY29uIGV4dGVuZHMgQ29udHJhY3QgewogICAgcHVzaGludCAwIC8vIDAKICAgIHJldHVybgoKbWFpbl9tdXN0X2dldF9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoxOAogICAgLy8gbXVzdF9nZXQoX3JvdW5kOiB1aW50NjQsIGRhdGE6IGJ5dGVzKTogYnl0ZXMgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvcm91bGV0dGUvbGlicy9yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjE3CiAgICAvLyBleHBvcnQgY2xhc3MgTW9ja1JhbmRvbW5lc3NCZWFjb24gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoxOAogICAgLy8gbXVzdF9nZXQoX3JvdW5kOiB1aW50NjQsIGRhdGE6IGJ5dGVzKTogYnl0ZXMgewogICAgY2FsbHN1YiBtdXN0X2dldAogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgcHVzaGludCAxIC8vIDEKICAgIHJldHVybgoKbWFpbl9iYXJlX3JvdXRpbmdANjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yb3VsZXR0ZS9saWJzL3JhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6MTcKICAgIC8vIGV4cG9ydCBjbGFzcyBNb2NrUmFuZG9tbmVzc0JlYWNvbiBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTAKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czo6TW9ja1JhbmRvbW5lc3NCZWFjb24ubXVzdF9nZXQoX3JvdW5kOiB1aW50NjQsIGRhdGE6IGJ5dGVzKSAtPiBieXRlczoKbXVzdF9nZXQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcm91bGV0dGUvbGlicy9yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjE4CiAgICAvLyBtdXN0X2dldChfcm91bmQ6IHVpbnQ2NCwgZGF0YTogYnl0ZXMpOiBieXRlcyB7CiAgICBwcm90byAyIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yb3VsZXR0ZS9saWJzL3JhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6MTkKICAgIC8vIHJldHVybiBvcC5zaGEyNTYob3AuY29uY2F0KGRhdGEsIG9wLml0b2IoR2xvYmFsLnJvdW5kKSkpIGFzIGJ5dGVzCiAgICBnbG9iYWwgUm91bmQKICAgIGl0b2IKICAgIGZyYW1lX2RpZyAtMQogICAgc3dhcAogICAgY29uY2F0CiAgICBzaGEyNTYKICAgIHJldHN1Ygo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CjEbQQA4gARHwgwjNhoAjgEAA4EAQzEZFEQxGEQ2GgEXNhoCVwIAiAAgSRUWVwYCTFCABBUffHVMULCBAUMxGUD/0DEYFESBAUOKAgEyBhaL/0xQAYk=",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 4,
+            "minor": 5,
+            "patch": 3
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

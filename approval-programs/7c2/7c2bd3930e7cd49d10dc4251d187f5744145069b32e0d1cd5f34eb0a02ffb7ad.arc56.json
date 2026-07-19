@@ -1,0 +1,302 @@
+{
+    "name": "XgovRegistryMock",
+    "structs": {
+        "XGovBoxValue": [
+            {
+                "name": "voting_address",
+                "type": "address"
+            },
+            {
+                "name": "voted_proposals",
+                "type": "uint64"
+            },
+            {
+                "name": "last_vote_timestamp",
+                "type": "uint64"
+            },
+            {
+                "name": "subscription_round",
+                "type": "uint64"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "create_proposal",
+            "args": [],
+            "returns": {
+                "type": "uint64",
+                "desc": "The ID of the created proposal."
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Create an empty proposal.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "vote_proposal",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "proposal_id",
+                    "desc": "The application ID of the Proposal app being voted on"
+                },
+                {
+                    "type": "address",
+                    "name": "xgov_address",
+                    "desc": "(arc4.Address): The address of the xGov being voted on behalf of"
+                },
+                {
+                    "type": "uint64",
+                    "name": "approval_votes",
+                    "desc": "(arc4.UInt64): The number of approvals votes allocated"
+                },
+                {
+                    "type": "uint64",
+                    "name": "rejection_votes",
+                    "desc": "(arc4.UInt64): The number of rejections votes allocated"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Vote on a proposal",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "set_voting_account",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "xgov_address",
+                    "desc": "The xGov address delegating voting power"
+                },
+                {
+                    "type": "address",
+                    "name": "voting_address",
+                    "desc": "The voting account address to delegate voting power to"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Sets the Voting Address for the xGov.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_xgov_box",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "xgov_address",
+                    "desc": "The address of the xGov"
+                }
+            ],
+            "returns": {
+                "type": "((address,uint64,uint64,uint64),bool)",
+                "desc": "The xGov box value bool: `True` if xGov box exists, else `False`"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Returns the xGov box for the given address.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "set_xgov_box",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "xgov_address",
+                    "desc": "The address of the xGov."
+                },
+                {
+                    "type": "(address,uint64,uint64,uint64)",
+                    "struct": "XGovBoxValue",
+                    "name": "xgov_box",
+                    "desc": "The xgov box content."
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Sets the xGov box for the given address.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "del_xgov_box",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "xgov_address",
+                    "desc": "The address of the xGov."
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Deletes the xGov box for the given address.",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "xgov_box": {
+                    "keyType": "address",
+                    "valueType": "XGovBoxValue",
+                    "prefix": "eA=="
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        24
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp"
+                },
+                {
+                    "pc": [
+                        85
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp && can only call when creating"
+                },
+                {
+                    "pc": [
+                        461
+                    ],
+                    "errorMessage": "application exists"
+                },
+                {
+                    "pc": [
+                        596
+                    ],
+                    "errorMessage": "check self.xgov_box entry exists"
+                },
+                {
+                    "pc": [
+                        497,
+                        554,
+                        562,
+                        580,
+                        679,
+                        704
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        489,
+                        505,
+                        513
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint64"
+                },
+                {
+                    "pc": [
+                        688
+                    ],
+                    "errorMessage": "invalid number of bytes for smart_contracts.common.abi_types.XGovBoxValue"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDMyIDAgOAogICAgYnl0ZWNibG9jayAweDc4IDB4MTUxZjdjNzUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6MTkKICAgIC8vIGNsYXNzIFhnb3ZSZWdpc3RyeU1vY2soQVJDNENvbnRyYWN0LCBhdm1fdmVyc2lvbj0xMCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxNQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHhhMWNkNzYyMSAweDE1OGY4ZGQ2IDB4MGRhMjc4ODUgMHgyNzYzMGQ2NSAweGI4ZmFjZGYzIDB4YTU5MTc2NzEgLy8gbWV0aG9kICJjcmVhdGVfcHJvcG9zYWwoKXVpbnQ2NCIsIG1ldGhvZCAidm90ZV9wcm9wb3NhbCh1aW50NjQsYWRkcmVzcyx1aW50NjQsdWludDY0KXZvaWQiLCBtZXRob2QgInNldF92b3RpbmdfYWNjb3VudChhZGRyZXNzLGFkZHJlc3Mpdm9pZCIsIG1ldGhvZCAiZ2V0X3hnb3ZfYm94KGFkZHJlc3MpKChhZGRyZXNzLHVpbnQ2NCx1aW50NjQsdWludDY0KSxib29sKSIsIG1ldGhvZCAic2V0X3hnb3ZfYm94KGFkZHJlc3MsKGFkZHJlc3MsdWludDY0LHVpbnQ2NCx1aW50NjQpKXZvaWQiLCBtZXRob2QgImRlbF94Z292X2JveChhZGRyZXNzKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGVfcHJvcG9zYWwgdm90ZV9wcm9wb3NhbCBzZXRfdm90aW5nX2FjY291bnQgZ2V0X3hnb3ZfYm94IHNldF94Z292X2JveCBkZWxfeGdvdl9ib3gKICAgIGVycgoKbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxNToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AgJiYgY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnhnb3ZfcmVnaXN0cnlfbW9jay5jb250cmFjdC5YZ292UmVnaXN0cnlNb2NrLmNyZWF0ZV9wcm9wb3NhbFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZV9wcm9wb3NhbDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6MzgtNDAKICAgIC8vIHJlcyA9IGFyYzQuYXJjNF9jcmVhdGUoCiAgICAvLyAgICAgUHJvcG9zYWxNb2NrLAogICAgLy8gKQogICAgaXR4bl9iZWdpbgogICAgcHVzaGludCA0IC8vIDQKICAgIGl0eG5fZmllbGQgR2xvYmFsTnVtVWludAogICAgcHVzaGJ5dGVzIGJhc2U2NChDb0VCUXc9PSkKICAgIGl0eG5fZmllbGQgQ2xlYXJTdGF0ZVByb2dyYW1QYWdlcwogICAgcHVzaGJ5dGVzIGJhc2U2NChDaUFFQVFBSUlDWUZBVllQY21WbmFYTjBjbmxmWVhCd1gybGtCbk4wWVhSMWN4WjJiM1JsWDI5d1pXNXBibWRmZEdsdFpYTjBZVzF3RDNadmRHbHVaMTlrZFhKaGRHbHZiakVZUUFBTktTTm5LaU5uS3lObkp3UWpaekVaRkVReEdFRUFPWUlIQkJPVXpEd0VybHJCRHdTMDlQbXBCTHVPSFdnRTh3Lzd1Z1JkaDBjMkJDUmhYNUEyR2dDT0J3QVZBQ01BTVFCQUFGY0FjUUNBQUlBRVRGeGh1allhQUk0QkFBRUFLVElOWnlKRE5ob0JTUlVrRWtRWEtreG5Ja00yR2dGSkZTUVNSQmNyVEdjaVF6WWFBVWtWSkJKRUZ5Y0VUR2NpUXpZYUFSVWxFa1EyR2dJVkpCSkVOaG9ERlNRU1JDSkROaG9CU1JVbEVrUTJHZ0pKRlNRU1JCY29Ud0pRVEJhL0lrTTJHZ0ZKRlNVU1JDaE1VTHhJSWtNMkdnRkpGU1VTUkNoTVVFbTlTVThDU0VFQUdVc0J2a1FYRm9BQkFDTkxBMVJRZ0FRVkgzeDFURkN3SWtNalF2L28pCiAgICBpdHhuX2ZpZWxkIEFwcHJvdmFsUHJvZ3JhbVBhZ2VzCiAgICAvLyBzbWFydF9jb250cmFjdHMveGdvdl9yZWdpc3RyeV9tb2NrL2NvbnRyYWN0LnB5OjM5CiAgICAvLyBQcm9wb3NhbE1vY2ssCiAgICBwdXNoYnl0ZXMgMHg0YzVjNjFiYSAvLyBtZXRob2QgImNyZWF0ZSgpdm9pZCIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICAvLyBzbWFydF9jb250cmFjdHMveGdvdl9yZWdpc3RyeV9tb2NrL2NvbnRyYWN0LnB5OjM4LTQwCiAgICAvLyByZXMgPSBhcmM0LmFyYzRfY3JlYXRlKAogICAgLy8gICAgIFByb3Bvc2FsTW9jaywKICAgIC8vICkKICAgIHB1c2hpbnQgNiAvLyBhcHBsCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzIgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIGl0eG5fc3VibWl0CiAgICBpdHhuIENyZWF0ZWRBcHBsaWNhdGlvbklECiAgICAvLyBzbWFydF9jb250cmFjdHMveGdvdl9yZWdpc3RyeV9tb2NrL2NvbnRyYWN0LnB5OjQyLTQ1CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9cmVzLmNyZWF0ZWRfYXBwLmFkZHJlc3MsCiAgICAvLyAgICAgYW1vdW50PUdsb2JhbC5taW5fYmFsYW5jZSwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6NDMKICAgIC8vIHJlY2VpdmVyPXJlcy5jcmVhdGVkX2FwcC5hZGRyZXNzLAogICAgZHVwCiAgICBhcHBfcGFyYW1zX2dldCBBcHBBZGRyZXNzCiAgICBhc3NlcnQgLy8gYXBwbGljYXRpb24gZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMveGdvdl9yZWdpc3RyeV9tb2NrL2NvbnRyYWN0LnB5OjQ0CiAgICAvLyBhbW91bnQ9R2xvYmFsLm1pbl9iYWxhbmNlLAogICAgZ2xvYmFsIE1pbkJhbGFuY2UKICAgIGl0eG5fZmllbGQgQW1vdW50CiAgICBpdHhuX2ZpZWxkIFJlY2VpdmVyCiAgICAvLyBzbWFydF9jb250cmFjdHMveGdvdl9yZWdpc3RyeV9tb2NrL2NvbnRyYWN0LnB5OjQyCiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICBpbnRjXzAgLy8gcGF5CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzIgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6NDItNDUKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1yZXMuY3JlYXRlZF9hcHAuYWRkcmVzcywKICAgIC8vICAgICBhbW91bnQ9R2xvYmFsLm1pbl9iYWxhbmNlLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6MjcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBpdG9iCiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnhnb3ZfcmVnaXN0cnlfbW9jay5jb250cmFjdC5YZ292UmVnaXN0cnlNb2NrLnZvdGVfcHJvcG9zYWxbcm91dGluZ10oKSAtPiB2b2lkOgp2b3RlX3Byb3Bvc2FsOgogICAgLy8gc21hcnRfY29udHJhY3RzL3hnb3ZfcmVnaXN0cnlfbW9jay9jb250cmFjdC5weTo0OQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gc21hcnRfY29udHJhY3RzL3hnb3ZfcmVnaXN0cnlfbW9jay9jb250cmFjdC5weTo2Ni03MgogICAgLy8gYXJjNC5hYmlfY2FsbCgKICAgIC8vICAgICBQcm9wb3NhbE1vY2sudm90ZSwKICAgIC8vICAgICB4Z292X2FkZHJlc3MsCiAgICAvLyAgICAgYXBwcm92YWxfdm90ZXMsCiAgICAvLyAgICAgcmVqZWN0aW9uX3ZvdGVzLAogICAgLy8gICAgIGFwcF9pZD1wcm9wb3NhbF9pZC5hc191aW50NjQoKSwKICAgIC8vICkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6NzEKICAgIC8vIGFwcF9pZD1wcm9wb3NhbF9pZC5hc191aW50NjQoKSwKICAgIHVuY292ZXIgMwogICAgYnRvaQogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICAvLyBzbWFydF9jb250cmFjdHMveGdvdl9yZWdpc3RyeV9tb2NrL2NvbnRyYWN0LnB5OjY2LTcyCiAgICAvLyBhcmM0LmFiaV9jYWxsKAogICAgLy8gICAgIFByb3Bvc2FsTW9jay52b3RlLAogICAgLy8gICAgIHhnb3ZfYWRkcmVzcywKICAgIC8vICAgICBhcHByb3ZhbF92b3RlcywKICAgIC8vICAgICByZWplY3Rpb25fdm90ZXMsCiAgICAvLyAgICAgYXBwX2lkPXByb3Bvc2FsX2lkLmFzX3VpbnQ2NCgpLAogICAgLy8gKQogICAgcHVzaGJ5dGVzIDB4YmI4ZTFkNjggLy8gbWV0aG9kICJ2b3RlKGFkZHJlc3MsdWludDY0LHVpbnQ2NCl2b2lkIgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIHVuY292ZXIgMgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIHN3YXAKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgcHVzaGludCA2IC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMiAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6NDkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnhnb3ZfcmVnaXN0cnlfbW9jay5jb250cmFjdC5YZ292UmVnaXN0cnlNb2NrLnNldF92b3RpbmdfYWNjb3VudFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnNldF92b3RpbmdfYWNjb3VudDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6NzQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gc21hcnRfY29udHJhY3RzL3hnb3ZfcmVnaXN0cnlfbW9jay9jb250cmFjdC5weTo4NQogICAgLy8gc2VsZi54Z292X2JveFt4Z292X2FkZHJlc3MubmF0aXZlXS52b3RpbmdfYWRkcmVzcyA9IHZvdGluZ19hZGRyZXNzCiAgICBieXRlY18wIC8vIDB4NzgKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBpbnRjXzIgLy8gMAogICAgdW5jb3ZlciAyCiAgICBib3hfcmVwbGFjZQogICAgLy8gc21hcnRfY29udHJhY3RzL3hnb3ZfcmVnaXN0cnlfbW9jay9jb250cmFjdC5weTo3NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMueGdvdl9yZWdpc3RyeV9tb2NrLmNvbnRyYWN0Llhnb3ZSZWdpc3RyeU1vY2suZ2V0X3hnb3ZfYm94W3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X3hnb3ZfYm94OgogICAgLy8gc21hcnRfY29udHJhY3RzL3hnb3ZfcmVnaXN0cnlfbW9jay9jb250cmFjdC5weTo4OQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6MTAxCiAgICAvLyBleGlzdHMgPSB4Z292X2FkZHJlc3MubmF0aXZlIGluIHNlbGYueGdvdl9ib3gKICAgIGJ5dGVjXzAgLy8gMHg3OAogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9sZW4KICAgIGR1cAogICAgdW5jb3ZlciAyCiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6MTAyCiAgICAvLyBpZiBleGlzdHM6CiAgICBieiBnZXRfeGdvdl9ib3hfZWxzZV9ib2R5QDMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6MTAzCiAgICAvLyB2YWwgPSBzZWxmLnhnb3ZfYm94W3hnb3ZfYWRkcmVzcy5uYXRpdmVdLmNvcHkoKQogICAgZGlnIDEKICAgIGJveF9nZXQKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnhnb3ZfYm94IGVudHJ5IGV4aXN0cwoKZ2V0X3hnb3ZfYm94X2FmdGVyX2lmX2Vsc2VANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6ODkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGludGNfMiAvLyAwCiAgICBkaWcgMwogICAgc2V0Yml0CiAgICBjb25jYXQKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCmdldF94Z292X2JveF9lbHNlX2JvZHlAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6MTA1LTExMAogICAgLy8gdmFsID0gdHlwLlhHb3ZCb3hWYWx1ZSgKICAgIC8vICAgICB2b3RpbmdfYWRkcmVzcz1hcmM0LkFkZHJlc3MoKSwKICAgIC8vICAgICB2b3RlZF9wcm9wb3NhbHM9YXJjNC5VSW50NjQoMCksCiAgICAvLyAgICAgbGFzdF92b3RlX3RpbWVzdGFtcD1hcmM0LlVJbnQ2NCgwKSwKICAgIC8vICAgICBzdWJzY3JpcHRpb25fcm91bmQ9YXJjNC5VSW50NjQoMCksCiAgICAvLyApCiAgICBwdXNoYnl0ZXMgYmFzZTMyKEFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQSkKICAgIGIgZ2V0X3hnb3ZfYm94X2FmdGVyX2lmX2Vsc2VANAoKCi8vIHNtYXJ0X2NvbnRyYWN0cy54Z292X3JlZ2lzdHJ5X21vY2suY29udHJhY3QuWGdvdlJlZ2lzdHJ5TW9jay5zZXRfeGdvdl9ib3hbcm91dGluZ10oKSAtPiB2b2lkOgpzZXRfeGdvdl9ib3g6CiAgICAvLyBzbWFydF9jb250cmFjdHMveGdvdl9yZWdpc3RyeV9tb2NrL2NvbnRyYWN0LnB5OjExNAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgNTYgLy8gNTYKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIHNtYXJ0X2NvbnRyYWN0cy5jb21tb24uYWJpX3R5cGVzLlhHb3ZCb3hWYWx1ZQogICAgLy8gc21hcnRfY29udHJhY3RzL3hnb3ZfcmVnaXN0cnlfbW9jay9jb250cmFjdC5weToxMjcKICAgIC8vIHNlbGYueGdvdl9ib3hbeGdvdl9hZGRyZXNzLm5hdGl2ZV0gPSB4Z292X2JveC5jb3B5KCkKICAgIGJ5dGVjXzAgLy8gMHg3OAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGJveF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy94Z292X3JlZ2lzdHJ5X21vY2svY29udHJhY3QucHk6MTE0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy54Z292X3JlZ2lzdHJ5X21vY2suY29udHJhY3QuWGdvdlJlZ2lzdHJ5TW9jay5kZWxfeGdvdl9ib3hbcm91dGluZ10oKSAtPiB2b2lkOgpkZWxfeGdvdl9ib3g6CiAgICAvLyBzbWFydF9jb250cmFjdHMveGdvdl9yZWdpc3RyeV9tb2NrL2NvbnRyYWN0LnB5OjEzMQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gc21hcnRfY29udHJhY3RzL3hnb3ZfcmVnaXN0cnlfbW9jay9jb250cmFjdC5weToxNDIKICAgIC8vIGRlbCBzZWxmLnhnb3ZfYm94W3hnb3ZfYWRkcmVzcy5uYXRpdmVdCiAgICBieXRlY18wIC8vIDB4NzgKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYm94X2RlbAogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMveGdvdl9yZWdpc3RyeV9tb2NrL2NvbnRyYWN0LnB5OjEzMQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4K",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"
+    },
+    "byteCode": {
+        "approval": "CiAEASAACCYCAXgEFR98dTEbQQA5MRkURDEYRIIGBKHNdiEEFY+N1gQNoniFBCdjDWUEuPrN8wSlkXZxNhoAjgYACwGVAdYB8AJTAmwAMRkUMRgUEEQiQ7GBBLI0gAQKgQFDskKAzQIKIAQBAAggJgUBVg9yZWdpc3RyeV9hcHBfaWQGc3RhdHVzFnZvdGVfb3BlbmluZ190aW1lc3RhbXAPdm90aW5nX2R1cmF0aW9uMRhAAA0pI2cqI2crI2cnBCNnMRkURDEYQQA5ggcEE5TMPASuWsEPBLT0+akEu44daATzD/u6BF2HRzYEJGFfkDYaAI4HABUAIwAxAEAAVwBxAIAAgARMXGG6NhoAjgEAAQApMg1nIkM2GgFJFSQSRBcqTGciQzYaAUkVJBJEFytMZyJDNhoBSRUkEkQXJwRMZyJDNhoBFSUSRDYaAhUkEkQ2GgMVJBJEIkM2GgFJFSUSRDYaAkkVJBJEFyhPAlBMFr8iQzYaAUkVJRJEKExQvEgiQzYaAUkVJRJEKExQSb1JTwJIQQAZSwG+RBcWgAEAI0sDVFCABBUffHVMULAiQyNC/+iyQIAETFxhurIagQayECSyAbO0PbFJcghEMgGyCLIHIrIQJLIBsxYpTFCwIkM2GgFJFSUSRDYaAkkVIxJENhoDSRUlEkQ2GgRJFSUSRLFPAxeyGIAEu44daLIaTwKyGkyyGrIagQayECSyAbMiQzYaAUkVIxJENhoCSRUjEkQoTwJQJE8CuyJDNhoBSRUjEkQoTFBJvUlPAkhBABJLAb5EgAEAJEsDVFApTFCwIkOAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQv+1NhoBSRUjEkQ2GgJJFYE4EkQoTwJQTL8iQzYaAUkVIxJEKExQvEgiQw==",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 4,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

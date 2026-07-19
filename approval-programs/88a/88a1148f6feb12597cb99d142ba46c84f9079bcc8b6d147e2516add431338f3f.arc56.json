@@ -1,0 +1,121 @@
+{
+    "name": "ProcurementEscrow",
+    "structs": {},
+    "methods": [
+        {
+            "name": "release_payment",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "supplier"
+                },
+                {
+                    "type": "uint64",
+                    "name": "amount"
+                },
+                {
+                    "type": "bool",
+                    "name": "qr_is_genuine"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        71
+                    ],
+                    "errorMessage": "Payment Locked: QR scan failed!"
+                },
+                {
+                    "pc": [
+                        68
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.bool"
+                },
+                {
+                    "pc": [
+                        50
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        59
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint64"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAKICAgIC8vIFByb2N1cmVtZW50RXNjcm93LnB5OjMKICAgIC8vIGNsYXNzIFByb2N1cmVtZW50RXNjcm93KEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA1CiAgICBwdXNoYnl0ZXMgMHgyMzVlMDM2ZCAvLyBtZXRob2QgInJlbGVhc2VfcGF5bWVudChhZGRyZXNzLHVpbnQ2NCxib29sKXN0cmluZyIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fcmVsZWFzZV9wYXltZW50X3JvdXRlQDMKICAgIGVycgoKbWFpbl9yZWxlYXNlX3BheW1lbnRfcm91dGVAMzoKICAgIC8vIFByb2N1cmVtZW50RXNjcm93LnB5OjQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgcmVsZWFzZV9wYXltZW50CgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDU6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgoKCi8vIFByb2N1cmVtZW50RXNjcm93LlByb2N1cmVtZW50RXNjcm93LnJlbGVhc2VfcGF5bWVudFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlbGVhc2VfcGF5bWVudDoKICAgIC8vIFByb2N1cmVtZW50RXNjcm93LnB5OjQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5ib29sCiAgICBpbnRjXzEgLy8gMAogICAgZ2V0Yml0CiAgICAvLyBQcm9jdXJlbWVudEVzY3Jvdy5weTo2CiAgICAvLyBhc3NlcnQgcXJfaXNfZ2VudWluZSwgIlBheW1lbnQgTG9ja2VkOiBRUiBzY2FuIGZhaWxlZCEiCiAgICBhc3NlcnQgLy8gUGF5bWVudCBMb2NrZWQ6IFFSIHNjYW4gZmFpbGVkIQogICAgLy8gUHJvY3VyZW1lbnRFc2Nyb3cucHk6Ny0xMQogICAgLy8gaXR4bi5QYXltZW50KAogICAgLy8gICAgIHJlY2VpdmVyPXN1cHBsaWVyLAogICAgLy8gICAgIGFtb3VudD1hbW91bnQsCiAgICAvLyAgICAgZmVlPVVJbnQ2NCgwKQogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIC8vIFByb2N1cmVtZW50RXNjcm93LnB5OjcKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIGludGNfMCAvLyBwYXkKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIC8vIFByb2N1cmVtZW50RXNjcm93LnB5OjEwCiAgICAvLyBmZWU9VUludDY0KDApCiAgICBpbnRjXzEgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIFByb2N1cmVtZW50RXNjcm93LnB5OjctMTEKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1zdXBwbGllciwKICAgIC8vICAgICBhbW91bnQ9YW1vdW50LAogICAgLy8gICAgIGZlZT1VSW50NjQoMCkKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICAvLyBQcm9jdXJlbWVudEVzY3Jvdy5weTo0CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAyNjUzNzU2MzYzNjU3MzczM2EyMDUwNjE3OTZkNjU2ZTc0MjA3MjY1NmM2NTYxNzM2NTY0MjA3NDZmMjA3Mzc1NzA3MDZjNjk2NTcyMmUKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CyACAQAxG0EAGIAEI14DbTYaAI4BAAEAMRkUMRgQREIACDEZFDEYFBBDNhoBSRWBIBJENhoCSRWBCBJEFzYaA0kVIhJEI1NEsbIIsgcishAjsgGzgCwVH3x1ACZTdWNjZXNzOiBQYXltZW50IHJlbGVhc2VkIHRvIHN1cHBsaWVyLrAiQw==",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 7,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}

@@ -1,0 +1,3241 @@
+{
+  "name": "ARC200",
+  "desc": "",
+  "methods": [
+    {
+      "name": "createApplication",
+      "args": [
+        {
+          "name": "name",
+          "type": "byte[32]"
+        },
+        {
+          "name": "symbol",
+          "type": "byte[8]"
+        },
+        {
+          "name": "decimals",
+          "type": "uint8"
+        },
+        {
+          "name": "total",
+          "type": "uint256"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [
+          "NoOp"
+        ],
+        "call": []
+      }
+    },
+    {
+      "name": "arc200_name",
+      "args": [],
+      "returns": {
+        "type": "byte[32]"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "arc200_symbol",
+      "args": [],
+      "returns": {
+        "type": "byte[8]"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "arc200_decimals",
+      "args": [],
+      "returns": {
+        "type": "uint8"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "arc200_totalSupply",
+      "args": [],
+      "returns": {
+        "type": "uint256"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "arc200_balanceOf",
+      "args": [
+        {
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "returns": {
+        "type": "uint256"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "arc200_transferFrom",
+      "args": [
+        {
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "arc200_transfer",
+      "args": [
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "arc200_approve",
+      "args": [
+        {
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "arc200_allowance",
+      "args": [
+        {
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "returns": {
+        "type": "uint256"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "arc200_Transfer",
+      "args": [
+        {
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "desc": ""
+    },
+    {
+      "name": "arc200_Approval",
+      "args": [
+        {
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "desc": ""
+    }
+  ],
+  "arcs": [
+    4,
+    56
+  ],
+  "structs": {
+    "Approval": [
+      {
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "name": "spender",
+        "type": "address"
+      }
+    ]
+  },
+  "state": {
+    "schema": {
+      "global": {
+        "bytes": 4,
+        "ints": 0
+      },
+      "local": {
+        "bytes": 0,
+        "ints": 0
+      }
+    },
+    "keys": {
+      "global": {
+        "name": {
+          "key": "bmFtZQ==",
+          "keyType": "AVMBytes",
+          "valueType": "byte[32]"
+        },
+        "symbol": {
+          "key": "c3ltYm9s",
+          "keyType": "AVMBytes",
+          "valueType": "byte[8]"
+        },
+        "decimals": {
+          "key": "ZGVjaW1hbHM=",
+          "keyType": "AVMBytes",
+          "valueType": "uint8"
+        },
+        "totalSupply": {
+          "key": "dG90YWxTdXBwbHk=",
+          "keyType": "AVMBytes",
+          "valueType": "uint256"
+        }
+      },
+      "local": {},
+      "box": {}
+    },
+    "maps": {
+      "global": {},
+      "local": {},
+      "box": {
+        "balances": {
+          "keyType": "address",
+          "valueType": "uint256"
+        },
+        "allowances": {
+          "keyType": "Approval",
+          "valueType": "uint256"
+        }
+      }
+    }
+  },
+  "bareActions": {
+    "create": [],
+    "call": []
+  },
+  "sourceInfo": {
+    "approval": {
+      "sourceInfo": [
+        {
+          "teal": 1,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            0
+          ]
+        },
+        {
+          "teal": 2,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ]
+        },
+        {
+          "teal": 3,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84
+          ]
+        },
+        {
+          "teal": 15,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            85,
+            86
+          ]
+        },
+        {
+          "teal": 16,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            87
+          ]
+        },
+        {
+          "teal": 17,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            88,
+            89
+          ]
+        },
+        {
+          "teal": 18,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            90
+          ]
+        },
+        {
+          "teal": 19,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            91,
+            92
+          ]
+        },
+        {
+          "teal": 20,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            93
+          ]
+        },
+        {
+          "teal": 21,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119
+          ]
+        },
+        {
+          "teal": 25,
+          "source": "contracts/ARC200.algo.ts:8",
+          "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?",
+          "pc": [
+            120
+          ]
+        },
+        {
+          "teal": 30,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            121,
+            122,
+            123
+          ]
+        },
+        {
+          "teal": 31,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            124
+          ]
+        },
+        {
+          "teal": 32,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            125
+          ]
+        },
+        {
+          "teal": 33,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            126
+          ]
+        },
+        {
+          "teal": 34,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            127
+          ]
+        },
+        {
+          "teal": 37,
+          "source": "contracts/ARC200.algo.ts:33",
+          "errorMessage": "argument 0 (total) for createApplication must be a uint256",
+          "pc": [
+            128
+          ]
+        },
+        {
+          "teal": 40,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            129,
+            130,
+            131
+          ]
+        },
+        {
+          "teal": 41,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            132
+          ]
+        },
+        {
+          "teal": 42,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            133
+          ]
+        },
+        {
+          "teal": 43,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            134
+          ]
+        },
+        {
+          "teal": 44,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            135
+          ]
+        },
+        {
+          "teal": 47,
+          "source": "contracts/ARC200.algo.ts:33",
+          "errorMessage": "argument 1 (decimals) for createApplication must be a uint8",
+          "pc": [
+            136
+          ]
+        },
+        {
+          "teal": 48,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            137
+          ]
+        },
+        {
+          "teal": 51,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            138,
+            139,
+            140
+          ]
+        },
+        {
+          "teal": 52,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            141
+          ]
+        },
+        {
+          "teal": 53,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            142
+          ]
+        },
+        {
+          "teal": 54,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            143,
+            144
+          ]
+        },
+        {
+          "teal": 55,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            145
+          ]
+        },
+        {
+          "teal": 58,
+          "source": "contracts/ARC200.algo.ts:33",
+          "errorMessage": "argument 2 (symbol) for createApplication must be a byte[8]",
+          "pc": [
+            146
+          ]
+        },
+        {
+          "teal": 61,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            147,
+            148,
+            149
+          ]
+        },
+        {
+          "teal": 62,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            150
+          ]
+        },
+        {
+          "teal": 63,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            151
+          ]
+        },
+        {
+          "teal": 64,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            152
+          ]
+        },
+        {
+          "teal": 65,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            153
+          ]
+        },
+        {
+          "teal": 68,
+          "source": "contracts/ARC200.algo.ts:33",
+          "errorMessage": "argument 3 (name) for createApplication must be a byte[32]",
+          "pc": [
+            154
+          ]
+        },
+        {
+          "teal": 71,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            155,
+            156,
+            157
+          ]
+        },
+        {
+          "teal": 72,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            158
+          ]
+        },
+        {
+          "teal": 73,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            159
+          ]
+        },
+        {
+          "teal": 77,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            160,
+            161,
+            162
+          ]
+        },
+        {
+          "teal": 81,
+          "source": "contracts/ARC200.algo.ts:34",
+          "pc": [
+            163,
+            164
+          ]
+        },
+        {
+          "teal": 82,
+          "source": "contracts/ARC200.algo.ts:34",
+          "pc": [
+            165,
+            166
+          ]
+        },
+        {
+          "teal": 83,
+          "source": "contracts/ARC200.algo.ts:34",
+          "pc": [
+            167
+          ]
+        },
+        {
+          "teal": 87,
+          "source": "contracts/ARC200.algo.ts:35",
+          "pc": [
+            168,
+            169
+          ]
+        },
+        {
+          "teal": 88,
+          "source": "contracts/ARC200.algo.ts:35",
+          "pc": [
+            170,
+            171
+          ]
+        },
+        {
+          "teal": 89,
+          "source": "contracts/ARC200.algo.ts:35",
+          "pc": [
+            172
+          ]
+        },
+        {
+          "teal": 93,
+          "source": "contracts/ARC200.algo.ts:36",
+          "pc": [
+            173,
+            174
+          ]
+        },
+        {
+          "teal": 94,
+          "source": "contracts/ARC200.algo.ts:36",
+          "pc": [
+            175,
+            176
+          ]
+        },
+        {
+          "teal": 95,
+          "source": "contracts/ARC200.algo.ts:36",
+          "pc": [
+            177
+          ]
+        },
+        {
+          "teal": 96,
+          "source": "contracts/ARC200.algo.ts:36",
+          "pc": [
+            178,
+            179,
+            180
+          ]
+        },
+        {
+          "teal": 97,
+          "source": "contracts/ARC200.algo.ts:36",
+          "pc": [
+            181
+          ]
+        },
+        {
+          "teal": 101,
+          "source": "contracts/ARC200.algo.ts:37",
+          "pc": [
+            182
+          ]
+        },
+        {
+          "teal": 102,
+          "source": "contracts/ARC200.algo.ts:37",
+          "pc": [
+            183,
+            184
+          ]
+        },
+        {
+          "teal": 103,
+          "source": "contracts/ARC200.algo.ts:37",
+          "pc": [
+            185
+          ]
+        },
+        {
+          "teal": 107,
+          "source": "contracts/ARC200.algo.ts:38",
+          "pc": [
+            186,
+            187
+          ]
+        },
+        {
+          "teal": 108,
+          "source": "contracts/ARC200.algo.ts:38",
+          "pc": [
+            188,
+            189
+          ]
+        },
+        {
+          "teal": 109,
+          "source": "contracts/ARC200.algo.ts:38",
+          "pc": [
+            190
+          ]
+        },
+        {
+          "teal": 110,
+          "source": "contracts/ARC200.algo.ts:33",
+          "pc": [
+            191
+          ]
+        },
+        {
+          "teal": 115,
+          "source": "contracts/ARC200.algo.ts:41",
+          "pc": [
+            192
+          ]
+        },
+        {
+          "teal": 118,
+          "source": "contracts/ARC200.algo.ts:41",
+          "pc": [
+            193,
+            194,
+            195
+          ]
+        },
+        {
+          "teal": 119,
+          "source": "contracts/ARC200.algo.ts:41",
+          "pc": [
+            196
+          ]
+        },
+        {
+          "teal": 120,
+          "source": "contracts/ARC200.algo.ts:41",
+          "pc": [
+            197
+          ]
+        },
+        {
+          "teal": 121,
+          "source": "contracts/ARC200.algo.ts:41",
+          "pc": [
+            198
+          ]
+        },
+        {
+          "teal": 122,
+          "source": "contracts/ARC200.algo.ts:41",
+          "pc": [
+            199
+          ]
+        },
+        {
+          "teal": 126,
+          "source": "contracts/ARC200.algo.ts:41",
+          "pc": [
+            200,
+            201,
+            202
+          ]
+        },
+        {
+          "teal": 130,
+          "source": "contracts/ARC200.algo.ts:42",
+          "pc": [
+            203,
+            204
+          ]
+        },
+        {
+          "teal": 131,
+          "source": "contracts/ARC200.algo.ts:42",
+          "pc": [
+            205
+          ]
+        },
+        {
+          "teal": 132,
+          "source": "contracts/ARC200.algo.ts:41",
+          "pc": [
+            206
+          ]
+        },
+        {
+          "teal": 137,
+          "source": "contracts/ARC200.algo.ts:45",
+          "pc": [
+            207
+          ]
+        },
+        {
+          "teal": 140,
+          "source": "contracts/ARC200.algo.ts:45",
+          "pc": [
+            208,
+            209,
+            210
+          ]
+        },
+        {
+          "teal": 141,
+          "source": "contracts/ARC200.algo.ts:45",
+          "pc": [
+            211
+          ]
+        },
+        {
+          "teal": 142,
+          "source": "contracts/ARC200.algo.ts:45",
+          "pc": [
+            212
+          ]
+        },
+        {
+          "teal": 143,
+          "source": "contracts/ARC200.algo.ts:45",
+          "pc": [
+            213
+          ]
+        },
+        {
+          "teal": 144,
+          "source": "contracts/ARC200.algo.ts:45",
+          "pc": [
+            214
+          ]
+        },
+        {
+          "teal": 148,
+          "source": "contracts/ARC200.algo.ts:45",
+          "pc": [
+            215,
+            216,
+            217
+          ]
+        },
+        {
+          "teal": 152,
+          "source": "contracts/ARC200.algo.ts:46",
+          "pc": [
+            218,
+            219
+          ]
+        },
+        {
+          "teal": 153,
+          "source": "contracts/ARC200.algo.ts:46",
+          "pc": [
+            220
+          ]
+        },
+        {
+          "teal": 154,
+          "source": "contracts/ARC200.algo.ts:45",
+          "pc": [
+            221
+          ]
+        },
+        {
+          "teal": 159,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            222
+          ]
+        },
+        {
+          "teal": 162,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            223,
+            224,
+            225
+          ]
+        },
+        {
+          "teal": 163,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            226
+          ]
+        },
+        {
+          "teal": 164,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            227
+          ]
+        },
+        {
+          "teal": 165,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            228
+          ]
+        },
+        {
+          "teal": 166,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            229,
+            230
+          ]
+        },
+        {
+          "teal": 167,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            231
+          ]
+        },
+        {
+          "teal": 170,
+          "source": "contracts/ARC200.algo.ts:49",
+          "errorMessage": "arc200_decimals return value overflowed 8 bits",
+          "pc": [
+            232
+          ]
+        },
+        {
+          "teal": 171,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            233,
+            234,
+            235
+          ]
+        },
+        {
+          "teal": 172,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            236
+          ]
+        },
+        {
+          "teal": 173,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            237
+          ]
+        },
+        {
+          "teal": 174,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            238
+          ]
+        },
+        {
+          "teal": 175,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            239
+          ]
+        },
+        {
+          "teal": 179,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            240,
+            241,
+            242
+          ]
+        },
+        {
+          "teal": 183,
+          "source": "contracts/ARC200.algo.ts:50",
+          "pc": [
+            243,
+            244
+          ]
+        },
+        {
+          "teal": 184,
+          "source": "contracts/ARC200.algo.ts:50",
+          "pc": [
+            245
+          ]
+        },
+        {
+          "teal": 185,
+          "source": "contracts/ARC200.algo.ts:50",
+          "pc": [
+            246
+          ]
+        },
+        {
+          "teal": 186,
+          "source": "contracts/ARC200.algo.ts:49",
+          "pc": [
+            247
+          ]
+        },
+        {
+          "teal": 191,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            248
+          ]
+        },
+        {
+          "teal": 194,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            249,
+            250,
+            251
+          ]
+        },
+        {
+          "teal": 195,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            252
+          ]
+        },
+        {
+          "teal": 196,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            253
+          ]
+        },
+        {
+          "teal": 197,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            254
+          ]
+        },
+        {
+          "teal": 198,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            255
+          ]
+        },
+        {
+          "teal": 201,
+          "source": "contracts/ARC200.algo.ts:53",
+          "errorMessage": "arc200_totalSupply return value overflowed 256 bits",
+          "pc": [
+            256
+          ]
+        },
+        {
+          "teal": 202,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            257
+          ]
+        },
+        {
+          "teal": 203,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            258
+          ]
+        },
+        {
+          "teal": 204,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            259
+          ]
+        },
+        {
+          "teal": 205,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            260
+          ]
+        },
+        {
+          "teal": 206,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            261
+          ]
+        },
+        {
+          "teal": 207,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            262
+          ]
+        },
+        {
+          "teal": 208,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            263
+          ]
+        },
+        {
+          "teal": 209,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            264
+          ]
+        },
+        {
+          "teal": 210,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            265
+          ]
+        },
+        {
+          "teal": 211,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            266
+          ]
+        },
+        {
+          "teal": 212,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            267
+          ]
+        },
+        {
+          "teal": 213,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            268
+          ]
+        },
+        {
+          "teal": 214,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            269
+          ]
+        },
+        {
+          "teal": 218,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            270,
+            271,
+            272
+          ]
+        },
+        {
+          "teal": 222,
+          "source": "contracts/ARC200.algo.ts:54",
+          "pc": [
+            273
+          ]
+        },
+        {
+          "teal": 223,
+          "source": "contracts/ARC200.algo.ts:54",
+          "pc": [
+            274
+          ]
+        },
+        {
+          "teal": 224,
+          "source": "contracts/ARC200.algo.ts:53",
+          "pc": [
+            275
+          ]
+        },
+        {
+          "teal": 229,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            276
+          ]
+        },
+        {
+          "teal": 232,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            277,
+            278,
+            279
+          ]
+        },
+        {
+          "teal": 233,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            280
+          ]
+        },
+        {
+          "teal": 234,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            281
+          ]
+        },
+        {
+          "teal": 235,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            282
+          ]
+        },
+        {
+          "teal": 236,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            283
+          ]
+        },
+        {
+          "teal": 239,
+          "source": "contracts/ARC200.algo.ts:57",
+          "errorMessage": "argument 0 (account) for arc200_balanceOf must be a address",
+          "pc": [
+            284
+          ]
+        },
+        {
+          "teal": 242,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            285,
+            286,
+            287
+          ]
+        },
+        {
+          "teal": 243,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            288
+          ]
+        },
+        {
+          "teal": 244,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            289
+          ]
+        },
+        {
+          "teal": 245,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            290
+          ]
+        },
+        {
+          "teal": 246,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            291
+          ]
+        },
+        {
+          "teal": 249,
+          "source": "contracts/ARC200.algo.ts:57",
+          "errorMessage": "arc200_balanceOf return value overflowed 256 bits",
+          "pc": [
+            292
+          ]
+        },
+        {
+          "teal": 250,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            293
+          ]
+        },
+        {
+          "teal": 251,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            294
+          ]
+        },
+        {
+          "teal": 252,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            295
+          ]
+        },
+        {
+          "teal": 253,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            296
+          ]
+        },
+        {
+          "teal": 254,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            297
+          ]
+        },
+        {
+          "teal": 255,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            298
+          ]
+        },
+        {
+          "teal": 256,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            299
+          ]
+        },
+        {
+          "teal": 257,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            300
+          ]
+        },
+        {
+          "teal": 258,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            301
+          ]
+        },
+        {
+          "teal": 259,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            302
+          ]
+        },
+        {
+          "teal": 260,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            303
+          ]
+        },
+        {
+          "teal": 261,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            304
+          ]
+        },
+        {
+          "teal": 262,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            305
+          ]
+        },
+        {
+          "teal": 266,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            306,
+            307,
+            308
+          ]
+        },
+        {
+          "teal": 270,
+          "source": "contracts/ARC200.algo.ts:58",
+          "pc": [
+            309,
+            310
+          ]
+        },
+        {
+          "teal": 271,
+          "source": "contracts/ARC200.algo.ts:58",
+          "pc": [
+            311
+          ]
+        },
+        {
+          "teal": 274,
+          "source": "contracts/ARC200.algo.ts:58",
+          "errorMessage": "box value does not exist: this.balances(account).value",
+          "pc": [
+            312
+          ]
+        },
+        {
+          "teal": 275,
+          "source": "contracts/ARC200.algo.ts:57",
+          "pc": [
+            313
+          ]
+        },
+        {
+          "teal": 279,
+          "source": "contracts/ARC200.algo.ts:61",
+          "pc": [
+            314,
+            315,
+            316
+          ]
+        },
+        {
+          "teal": 283,
+          "source": "contracts/ARC200.algo.ts:62",
+          "pc": [
+            317,
+            318
+          ]
+        },
+        {
+          "teal": 284,
+          "source": "contracts/ARC200.algo.ts:62",
+          "pc": [
+            319
+          ]
+        },
+        {
+          "teal": 287,
+          "source": "contracts/ARC200.algo.ts:62",
+          "errorMessage": "box value does not exist: this.balances(from).value",
+          "pc": [
+            320
+          ]
+        },
+        {
+          "teal": 288,
+          "source": "contracts/ARC200.algo.ts:62",
+          "pc": [
+            321,
+            322
+          ]
+        },
+        {
+          "teal": 289,
+          "source": "contracts/ARC200.algo.ts:62",
+          "pc": [
+            323
+          ]
+        },
+        {
+          "teal": 290,
+          "source": "contracts/ARC200.algo.ts:62",
+          "pc": [
+            324,
+            325
+          ]
+        },
+        {
+          "teal": 291,
+          "source": "contracts/ARC200.algo.ts:62",
+          "pc": [
+            326
+          ]
+        },
+        {
+          "teal": 292,
+          "source": "contracts/ARC200.algo.ts:62",
+          "pc": [
+            327
+          ]
+        },
+        {
+          "teal": 296,
+          "source": "contracts/ARC200.algo.ts:63",
+          "pc": [
+            328,
+            329
+          ]
+        },
+        {
+          "teal": 297,
+          "source": "contracts/ARC200.algo.ts:63",
+          "pc": [
+            330
+          ]
+        },
+        {
+          "teal": 300,
+          "source": "contracts/ARC200.algo.ts:63",
+          "errorMessage": "box value does not exist: this.balances(to).value",
+          "pc": [
+            331
+          ]
+        },
+        {
+          "teal": 301,
+          "source": "contracts/ARC200.algo.ts:63",
+          "pc": [
+            332,
+            333
+          ]
+        },
+        {
+          "teal": 302,
+          "source": "contracts/ARC200.algo.ts:63",
+          "pc": [
+            334
+          ]
+        },
+        {
+          "teal": 303,
+          "source": "contracts/ARC200.algo.ts:63",
+          "pc": [
+            335,
+            336
+          ]
+        },
+        {
+          "teal": 304,
+          "source": "contracts/ARC200.algo.ts:63",
+          "pc": [
+            337
+          ]
+        },
+        {
+          "teal": 305,
+          "source": "contracts/ARC200.algo.ts:63",
+          "pc": [
+            338
+          ]
+        },
+        {
+          "teal": 309,
+          "source": "contracts/ARC200.algo.ts:64",
+          "pc": [
+            339,
+            340,
+            341,
+            342,
+            343,
+            344
+          ]
+        },
+        {
+          "teal": 310,
+          "source": "contracts/ARC200.algo.ts:64",
+          "pc": [
+            345,
+            346
+          ]
+        },
+        {
+          "teal": 311,
+          "source": "contracts/ARC200.algo.ts:64",
+          "pc": [
+            347,
+            348
+          ]
+        },
+        {
+          "teal": 312,
+          "source": "contracts/ARC200.algo.ts:64",
+          "pc": [
+            349
+          ]
+        },
+        {
+          "teal": 313,
+          "source": "contracts/ARC200.algo.ts:64",
+          "pc": [
+            350,
+            351
+          ]
+        },
+        {
+          "teal": 314,
+          "source": "contracts/ARC200.algo.ts:64",
+          "pc": [
+            352
+          ]
+        },
+        {
+          "teal": 315,
+          "source": "contracts/ARC200.algo.ts:64",
+          "pc": [
+            353
+          ]
+        },
+        {
+          "teal": 316,
+          "source": "contracts/ARC200.algo.ts:64",
+          "pc": [
+            354
+          ]
+        },
+        {
+          "teal": 320,
+          "source": "contracts/ARC200.algo.ts:66",
+          "pc": [
+            355
+          ]
+        },
+        {
+          "teal": 321,
+          "source": "contracts/ARC200.algo.ts:61",
+          "pc": [
+            356
+          ]
+        },
+        {
+          "teal": 326,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            357
+          ]
+        },
+        {
+          "teal": 329,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            358,
+            359,
+            360
+          ]
+        },
+        {
+          "teal": 330,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            361
+          ]
+        },
+        {
+          "teal": 331,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            362
+          ]
+        },
+        {
+          "teal": 332,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            363
+          ]
+        },
+        {
+          "teal": 333,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            364
+          ]
+        },
+        {
+          "teal": 336,
+          "source": "contracts/ARC200.algo.ts:69",
+          "errorMessage": "argument 0 (amount) for arc200_transferFrom must be a uint256",
+          "pc": [
+            365
+          ]
+        },
+        {
+          "teal": 339,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            366,
+            367,
+            368
+          ]
+        },
+        {
+          "teal": 340,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            369
+          ]
+        },
+        {
+          "teal": 341,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            370
+          ]
+        },
+        {
+          "teal": 342,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            371
+          ]
+        },
+        {
+          "teal": 343,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            372
+          ]
+        },
+        {
+          "teal": 346,
+          "source": "contracts/ARC200.algo.ts:69",
+          "errorMessage": "argument 1 (to) for arc200_transferFrom must be a address",
+          "pc": [
+            373
+          ]
+        },
+        {
+          "teal": 349,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            374,
+            375,
+            376
+          ]
+        },
+        {
+          "teal": 350,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            377
+          ]
+        },
+        {
+          "teal": 351,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            378
+          ]
+        },
+        {
+          "teal": 352,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            379
+          ]
+        },
+        {
+          "teal": 353,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            380
+          ]
+        },
+        {
+          "teal": 356,
+          "source": "contracts/ARC200.algo.ts:69",
+          "errorMessage": "argument 2 (from) for arc200_transferFrom must be a address",
+          "pc": [
+            381
+          ]
+        },
+        {
+          "teal": 359,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            382,
+            383,
+            384
+          ]
+        },
+        {
+          "teal": 360,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            385
+          ]
+        },
+        {
+          "teal": 361,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            386
+          ]
+        },
+        {
+          "teal": 362,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            387,
+            388
+          ]
+        },
+        {
+          "teal": 363,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            389
+          ]
+        },
+        {
+          "teal": 364,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            390
+          ]
+        },
+        {
+          "teal": 365,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            391
+          ]
+        },
+        {
+          "teal": 366,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            392
+          ]
+        },
+        {
+          "teal": 367,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            393
+          ]
+        },
+        {
+          "teal": 371,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            394,
+            395,
+            396
+          ]
+        },
+        {
+          "teal": 374,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            397,
+            398
+          ]
+        },
+        {
+          "teal": 378,
+          "source": "contracts/ARC200.algo.ts:70",
+          "pc": [
+            399,
+            400
+          ]
+        },
+        {
+          "teal": 379,
+          "source": "contracts/ARC200.algo.ts:70",
+          "pc": [
+            401,
+            402
+          ]
+        },
+        {
+          "teal": 380,
+          "source": "contracts/ARC200.algo.ts:70",
+          "pc": [
+            403
+          ]
+        },
+        {
+          "teal": 381,
+          "source": "contracts/ARC200.algo.ts:70",
+          "pc": [
+            404,
+            405
+          ]
+        },
+        {
+          "teal": 385,
+          "source": "contracts/ARC200.algo.ts:72",
+          "pc": [
+            406,
+            407
+          ]
+        },
+        {
+          "teal": 386,
+          "source": "contracts/ARC200.algo.ts:72",
+          "pc": [
+            408
+          ]
+        },
+        {
+          "teal": 389,
+          "source": "contracts/ARC200.algo.ts:72",
+          "errorMessage": "box value does not exist: this.allowances(approval).value",
+          "pc": [
+            409
+          ]
+        },
+        {
+          "teal": 390,
+          "source": "contracts/ARC200.algo.ts:72",
+          "pc": [
+            410,
+            411
+          ]
+        },
+        {
+          "teal": 391,
+          "source": "contracts/ARC200.algo.ts:72",
+          "pc": [
+            412
+          ]
+        },
+        {
+          "teal": 392,
+          "source": "contracts/ARC200.algo.ts:72",
+          "pc": [
+            413
+          ]
+        },
+        {
+          "teal": 396,
+          "source": "contracts/ARC200.algo.ts:73",
+          "pc": [
+            414,
+            415
+          ]
+        },
+        {
+          "teal": 397,
+          "source": "contracts/ARC200.algo.ts:73",
+          "pc": [
+            416
+          ]
+        },
+        {
+          "teal": 400,
+          "source": "contracts/ARC200.algo.ts:73",
+          "errorMessage": "box value does not exist: this.allowances(approval).value",
+          "pc": [
+            417
+          ]
+        },
+        {
+          "teal": 401,
+          "source": "contracts/ARC200.algo.ts:73",
+          "pc": [
+            418,
+            419
+          ]
+        },
+        {
+          "teal": 402,
+          "source": "contracts/ARC200.algo.ts:73",
+          "pc": [
+            420
+          ]
+        },
+        {
+          "teal": 403,
+          "source": "contracts/ARC200.algo.ts:73",
+          "pc": [
+            421,
+            422
+          ]
+        },
+        {
+          "teal": 404,
+          "source": "contracts/ARC200.algo.ts:73",
+          "pc": [
+            423
+          ]
+        },
+        {
+          "teal": 405,
+          "source": "contracts/ARC200.algo.ts:73",
+          "pc": [
+            424
+          ]
+        },
+        {
+          "teal": 409,
+          "source": "contracts/ARC200.algo.ts:75",
+          "pc": [
+            425,
+            426
+          ]
+        },
+        {
+          "teal": 410,
+          "source": "contracts/ARC200.algo.ts:75",
+          "pc": [
+            427,
+            428
+          ]
+        },
+        {
+          "teal": 411,
+          "source": "contracts/ARC200.algo.ts:75",
+          "pc": [
+            429,
+            430
+          ]
+        },
+        {
+          "teal": 412,
+          "source": "contracts/ARC200.algo.ts:75",
+          "pc": [
+            431,
+            432,
+            433
+          ]
+        },
+        {
+          "teal": 415,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            434,
+            435
+          ]
+        },
+        {
+          "teal": 416,
+          "source": "contracts/ARC200.algo.ts:69",
+          "pc": [
+            436
+          ]
+        },
+        {
+          "teal": 421,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            437
+          ]
+        },
+        {
+          "teal": 424,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            438,
+            439,
+            440
+          ]
+        },
+        {
+          "teal": 425,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            441
+          ]
+        },
+        {
+          "teal": 426,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            442
+          ]
+        },
+        {
+          "teal": 427,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            443
+          ]
+        },
+        {
+          "teal": 428,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            444
+          ]
+        },
+        {
+          "teal": 431,
+          "source": "contracts/ARC200.algo.ts:78",
+          "errorMessage": "argument 0 (amount) for arc200_transfer must be a uint256",
+          "pc": [
+            445
+          ]
+        },
+        {
+          "teal": 434,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            446,
+            447,
+            448
+          ]
+        },
+        {
+          "teal": 435,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            449
+          ]
+        },
+        {
+          "teal": 436,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            450
+          ]
+        },
+        {
+          "teal": 437,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            451
+          ]
+        },
+        {
+          "teal": 438,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            452
+          ]
+        },
+        {
+          "teal": 441,
+          "source": "contracts/ARC200.algo.ts:78",
+          "errorMessage": "argument 1 (to) for arc200_transfer must be a address",
+          "pc": [
+            453
+          ]
+        },
+        {
+          "teal": 444,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            454,
+            455,
+            456
+          ]
+        },
+        {
+          "teal": 445,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            457
+          ]
+        },
+        {
+          "teal": 446,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            458
+          ]
+        },
+        {
+          "teal": 447,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            459,
+            460
+          ]
+        },
+        {
+          "teal": 448,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            461
+          ]
+        },
+        {
+          "teal": 449,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            462
+          ]
+        },
+        {
+          "teal": 450,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            463
+          ]
+        },
+        {
+          "teal": 451,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            464
+          ]
+        },
+        {
+          "teal": 452,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            465
+          ]
+        },
+        {
+          "teal": 456,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            466,
+            467,
+            468
+          ]
+        },
+        {
+          "teal": 460,
+          "source": "contracts/ARC200.algo.ts:79",
+          "pc": [
+            469,
+            470
+          ]
+        },
+        {
+          "teal": 461,
+          "source": "contracts/ARC200.algo.ts:79",
+          "pc": [
+            471,
+            472
+          ]
+        },
+        {
+          "teal": 462,
+          "source": "contracts/ARC200.algo.ts:79",
+          "pc": [
+            473,
+            474
+          ]
+        },
+        {
+          "teal": 463,
+          "source": "contracts/ARC200.algo.ts:79",
+          "pc": [
+            475,
+            476,
+            477
+          ]
+        },
+        {
+          "teal": 464,
+          "source": "contracts/ARC200.algo.ts:78",
+          "pc": [
+            478
+          ]
+        },
+        {
+          "teal": 469,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            479
+          ]
+        },
+        {
+          "teal": 472,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            480,
+            481,
+            482
+          ]
+        },
+        {
+          "teal": 473,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            483
+          ]
+        },
+        {
+          "teal": 474,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            484
+          ]
+        },
+        {
+          "teal": 475,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            485
+          ]
+        },
+        {
+          "teal": 476,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            486
+          ]
+        },
+        {
+          "teal": 479,
+          "source": "contracts/ARC200.algo.ts:82",
+          "errorMessage": "argument 0 (value) for arc200_approve must be a uint256",
+          "pc": [
+            487
+          ]
+        },
+        {
+          "teal": 482,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            488,
+            489,
+            490
+          ]
+        },
+        {
+          "teal": 483,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            491
+          ]
+        },
+        {
+          "teal": 484,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            492
+          ]
+        },
+        {
+          "teal": 485,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            493
+          ]
+        },
+        {
+          "teal": 486,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            494
+          ]
+        },
+        {
+          "teal": 489,
+          "source": "contracts/ARC200.algo.ts:82",
+          "errorMessage": "argument 1 (spender) for arc200_approve must be a address",
+          "pc": [
+            495
+          ]
+        },
+        {
+          "teal": 492,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            496,
+            497,
+            498
+          ]
+        },
+        {
+          "teal": 493,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            499
+          ]
+        },
+        {
+          "teal": 494,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            500
+          ]
+        },
+        {
+          "teal": 495,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            501,
+            502
+          ]
+        },
+        {
+          "teal": 496,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            503
+          ]
+        },
+        {
+          "teal": 497,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            504
+          ]
+        },
+        {
+          "teal": 498,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            505
+          ]
+        },
+        {
+          "teal": 499,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            506
+          ]
+        },
+        {
+          "teal": 500,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            507
+          ]
+        },
+        {
+          "teal": 504,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            508,
+            509,
+            510
+          ]
+        },
+        {
+          "teal": 507,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            511,
+            512
+          ]
+        },
+        {
+          "teal": 511,
+          "source": "contracts/ARC200.algo.ts:83",
+          "pc": [
+            513,
+            514
+          ]
+        },
+        {
+          "teal": 512,
+          "source": "contracts/ARC200.algo.ts:83",
+          "pc": [
+            515,
+            516
+          ]
+        },
+        {
+          "teal": 513,
+          "source": "contracts/ARC200.algo.ts:83",
+          "pc": [
+            517
+          ]
+        },
+        {
+          "teal": 514,
+          "source": "contracts/ARC200.algo.ts:83",
+          "pc": [
+            518,
+            519
+          ]
+        },
+        {
+          "teal": 519,
+          "source": "contracts/ARC200.algo.ts:84",
+          "pc": [
+            520,
+            521
+          ]
+        },
+        {
+          "teal": 520,
+          "source": "contracts/ARC200.algo.ts:84",
+          "pc": [
+            522
+          ]
+        },
+        {
+          "teal": 521,
+          "source": "contracts/ARC200.algo.ts:84",
+          "pc": [
+            523
+          ]
+        },
+        {
+          "teal": 522,
+          "source": "contracts/ARC200.algo.ts:84",
+          "pc": [
+            524
+          ]
+        },
+        {
+          "teal": 523,
+          "source": "contracts/ARC200.algo.ts:84",
+          "pc": [
+            525
+          ]
+        },
+        {
+          "teal": 524,
+          "source": "contracts/ARC200.algo.ts:84",
+          "pc": [
+            526,
+            527,
+            528
+          ]
+        },
+        {
+          "teal": 529,
+          "source": "contracts/ARC200.algo.ts:85",
+          "pc": [
+            529,
+            530
+          ]
+        },
+        {
+          "teal": 530,
+          "source": "contracts/ARC200.algo.ts:85",
+          "pc": [
+            531,
+            532
+          ]
+        },
+        {
+          "teal": 531,
+          "source": "contracts/ARC200.algo.ts:85",
+          "pc": [
+            533
+          ]
+        },
+        {
+          "teal": 532,
+          "source": "contracts/ARC200.algo.ts:84",
+          "pc": [
+            534,
+            535,
+            536
+          ]
+        },
+        {
+          "teal": 537,
+          "source": "contracts/ARC200.algo.ts:87",
+          "pc": [
+            537,
+            538
+          ]
+        },
+        {
+          "teal": 538,
+          "source": "contracts/ARC200.algo.ts:87",
+          "pc": [
+            539
+          ]
+        },
+        {
+          "teal": 541,
+          "source": "contracts/ARC200.algo.ts:87",
+          "errorMessage": "box value does not exist: this.allowances(approval).value",
+          "pc": [
+            540
+          ]
+        },
+        {
+          "teal": 542,
+          "source": "contracts/ARC200.algo.ts:87",
+          "pc": [
+            541,
+            542
+          ]
+        },
+        {
+          "teal": 543,
+          "source": "contracts/ARC200.algo.ts:87",
+          "pc": [
+            543
+          ]
+        },
+        {
+          "teal": 544,
+          "source": "contracts/ARC200.algo.ts:87",
+          "pc": [
+            544,
+            545
+          ]
+        },
+        {
+          "teal": 545,
+          "source": "contracts/ARC200.algo.ts:87",
+          "pc": [
+            546
+          ]
+        },
+        {
+          "teal": 546,
+          "source": "contracts/ARC200.algo.ts:87",
+          "pc": [
+            547
+          ]
+        },
+        {
+          "teal": 551,
+          "source": "contracts/ARC200.algo.ts:90",
+          "pc": [
+            548
+          ]
+        },
+        {
+          "teal": 554,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            549,
+            550
+          ]
+        },
+        {
+          "teal": 555,
+          "source": "contracts/ARC200.algo.ts:82",
+          "pc": [
+            551
+          ]
+        },
+        {
+          "teal": 560,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            552
+          ]
+        },
+        {
+          "teal": 563,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            553,
+            554,
+            555
+          ]
+        },
+        {
+          "teal": 564,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            556
+          ]
+        },
+        {
+          "teal": 565,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            557
+          ]
+        },
+        {
+          "teal": 566,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            558
+          ]
+        },
+        {
+          "teal": 567,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            559
+          ]
+        },
+        {
+          "teal": 570,
+          "source": "contracts/ARC200.algo.ts:93",
+          "errorMessage": "argument 0 (sender) for arc200_allowance must be a address",
+          "pc": [
+            560
+          ]
+        },
+        {
+          "teal": 573,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            561,
+            562,
+            563
+          ]
+        },
+        {
+          "teal": 574,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            564
+          ]
+        },
+        {
+          "teal": 575,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            565
+          ]
+        },
+        {
+          "teal": 576,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            566
+          ]
+        },
+        {
+          "teal": 577,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            567
+          ]
+        },
+        {
+          "teal": 580,
+          "source": "contracts/ARC200.algo.ts:93",
+          "errorMessage": "argument 1 (owner) for arc200_allowance must be a address",
+          "pc": [
+            568
+          ]
+        },
+        {
+          "teal": 583,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            569,
+            570,
+            571
+          ]
+        },
+        {
+          "teal": 584,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            572
+          ]
+        },
+        {
+          "teal": 585,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            573
+          ]
+        },
+        {
+          "teal": 586,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            574
+          ]
+        },
+        {
+          "teal": 587,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            575
+          ]
+        },
+        {
+          "teal": 590,
+          "source": "contracts/ARC200.algo.ts:93",
+          "errorMessage": "arc200_allowance return value overflowed 256 bits",
+          "pc": [
+            576
+          ]
+        },
+        {
+          "teal": 591,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            577
+          ]
+        },
+        {
+          "teal": 592,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            578
+          ]
+        },
+        {
+          "teal": 593,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            579
+          ]
+        },
+        {
+          "teal": 594,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            580
+          ]
+        },
+        {
+          "teal": 595,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            581
+          ]
+        },
+        {
+          "teal": 596,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            582
+          ]
+        },
+        {
+          "teal": 597,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            583
+          ]
+        },
+        {
+          "teal": 598,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            584
+          ]
+        },
+        {
+          "teal": 599,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            585
+          ]
+        },
+        {
+          "teal": 600,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            586
+          ]
+        },
+        {
+          "teal": 601,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            587
+          ]
+        },
+        {
+          "teal": 602,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            588
+          ]
+        },
+        {
+          "teal": 603,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            589
+          ]
+        },
+        {
+          "teal": 607,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            590,
+            591,
+            592
+          ]
+        },
+        {
+          "teal": 611,
+          "source": "contracts/ARC200.algo.ts:94",
+          "pc": [
+            593,
+            594
+          ]
+        },
+        {
+          "teal": 612,
+          "source": "contracts/ARC200.algo.ts:94",
+          "pc": [
+            595,
+            596
+          ]
+        },
+        {
+          "teal": 613,
+          "source": "contracts/ARC200.algo.ts:94",
+          "pc": [
+            597
+          ]
+        },
+        {
+          "teal": 614,
+          "source": "contracts/ARC200.algo.ts:94",
+          "pc": [
+            598
+          ]
+        },
+        {
+          "teal": 617,
+          "source": "contracts/ARC200.algo.ts:94",
+          "errorMessage": "box value does not exist: this.allowances({ owner: owner, spender: sender }).value",
+          "pc": [
+            599
+          ]
+        },
+        {
+          "teal": 618,
+          "source": "contracts/ARC200.algo.ts:93",
+          "pc": [
+            600
+          ]
+        },
+        {
+          "teal": 621,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            601,
+            602,
+            603,
+            604,
+            605,
+            606
+          ]
+        },
+        {
+          "teal": 622,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            607,
+            608,
+            609
+          ]
+        },
+        {
+          "teal": 623,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            610,
+            611,
+            612,
+            613
+          ]
+        },
+        {
+          "teal": 626,
+          "source": "contracts/ARC200.algo.ts:8",
+          "errorMessage": "this contract does not implement the given ABI method for create NoOp",
+          "pc": [
+            614
+          ]
+        },
+        {
+          "teal": 629,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            615,
+            616,
+            617,
+            618,
+            619,
+            620
+          ]
+        },
+        {
+          "teal": 630,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            621,
+            622,
+            623,
+            624,
+            625,
+            626
+          ]
+        },
+        {
+          "teal": 631,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            627,
+            628,
+            629,
+            630,
+            631,
+            632
+          ]
+        },
+        {
+          "teal": 632,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            633,
+            634,
+            635,
+            636,
+            637,
+            638
+          ]
+        },
+        {
+          "teal": 633,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            639,
+            640,
+            641,
+            642,
+            643,
+            644
+          ]
+        },
+        {
+          "teal": 634,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            645,
+            646,
+            647,
+            648,
+            649,
+            650
+          ]
+        },
+        {
+          "teal": 635,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            651,
+            652,
+            653,
+            654,
+            655,
+            656
+          ]
+        },
+        {
+          "teal": 636,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            657,
+            658,
+            659,
+            660,
+            661,
+            662
+          ]
+        },
+        {
+          "teal": 637,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            663,
+            664,
+            665,
+            666,
+            667,
+            668
+          ]
+        },
+        {
+          "teal": 638,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            669,
+            670,
+            671
+          ]
+        },
+        {
+          "teal": 639,
+          "source": "contracts/ARC200.algo.ts:8",
+          "pc": [
+            672,
+            673,
+            674,
+            675,
+            676,
+            677,
+            678,
+            679,
+            680,
+            681,
+            682,
+            683,
+            684,
+            685,
+            686,
+            687,
+            688,
+            689,
+            690,
+            691
+          ]
+        },
+        {
+          "teal": 642,
+          "source": "contracts/ARC200.algo.ts:8",
+          "errorMessage": "this contract does not implement the given ABI method for call NoOp",
+          "pc": [
+            692
+          ]
+        }
+      ],
+      "pcOffsetMethod": "none"
+    },
+    "clear": {
+      "sourceInfo": [],
+      "pcOffsetMethod": "none"
+    }
+  },
+  "source": {
+    "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAzMiAxIDI1NiAwIDgKYnl0ZWNibG9jayAweDE1MWY3Yzc1IDB4RkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRiAweDAwIDB4NzQ2Zjc0NjE2YzUzNzU3MDcwNmM3OSAweDY0NjU2MzY5NmQ2MTZjNzMgMHg3Mzc5NmQ2MjZmNmMgMHg2ZTYxNmQ2NSAweAoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDYuMwovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKcHVzaGludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKGJ5dGVbMzJdLGJ5dGVbOF0sdWludDgsdWludDI1Nil2b2lkCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CgkvLyB0b3RhbDogdWludDI1NgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNAoJZHVwCglsZW4KCWludGMgMCAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwICh0b3RhbCkgZm9yIGNyZWF0ZUFwcGxpY2F0aW9uIG11c3QgYmUgYSB1aW50MjU2Cglhc3NlcnQKCgkvLyBkZWNpbWFsczogdWludDgKCXR4bmEgQXBwbGljYXRpb25BcmdzIDMKCWR1cAoJbGVuCglpbnRjIDEgLy8gMQoJPT0KCgkvLyBhcmd1bWVudCAxIChkZWNpbWFscykgZm9yIGNyZWF0ZUFwcGxpY2F0aW9uIG11c3QgYmUgYSB1aW50OAoJYXNzZXJ0CglidG9pCgoJLy8gc3ltYm9sOiBieXRlWzhdCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglkdXAKCWxlbgoJaW50YyA0IC8vIDgKCT09CgoJLy8gYXJndW1lbnQgMiAoc3ltYm9sKSBmb3IgY3JlYXRlQXBwbGljYXRpb24gbXVzdCBiZSBhIGJ5dGVbOF0KCWFzc2VydAoKCS8vIG5hbWU6IGJ5dGVbMzJdCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyAwIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDMgKG5hbWUpIGZvciBjcmVhdGVBcHBsaWNhdGlvbiBtdXN0IGJlIGEgYnl0ZVszMl0KCWFzc2VydAoKCS8vIGV4ZWN1dGUgY3JlYXRlQXBwbGljYXRpb24oYnl0ZVszMl0sYnl0ZVs4XSx1aW50OCx1aW50MjU2KXZvaWQKCWNhbGxzdWIgY3JlYXRlQXBwbGljYXRpb24KCWludGMgMSAvLyAxCglyZXR1cm4KCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKG5hbWU6IGJ5dGVzPDMyPiwgc3ltYm9sOiBieXRlczw4PiwgZGVjaW1hbHM6IHVpbnQ4LCB0b3RhbDogdWludDI1Nik6IHZvaWQKY3JlYXRlQXBwbGljYXRpb246Cglwcm90byA0IDAKCgkvLyBjb250cmFjdHMvQVJDMjAwLmFsZ28udHM6MzQKCS8vIHRoaXMubmFtZS52YWx1ZSA9IG5hbWUKCWJ5dGVjIDYgLy8gICJuYW1lIgoJZnJhbWVfZGlnIC0xIC8vIG5hbWU6IGJ5dGVzPDMyPgoJYXBwX2dsb2JhbF9wdXQKCgkvLyBjb250cmFjdHMvQVJDMjAwLmFsZ28udHM6MzUKCS8vIHRoaXMuc3ltYm9sLnZhbHVlID0gc3ltYm9sCglieXRlYyA1IC8vICAic3ltYm9sIgoJZnJhbWVfZGlnIC0yIC8vIHN5bWJvbDogYnl0ZXM8OD4KCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzL0FSQzIwMC5hbGdvLnRzOjM2CgkvLyB0aGlzLmRlY2ltYWxzLnZhbHVlID0gZGVjaW1hbHMKCWJ5dGVjIDQgLy8gICJkZWNpbWFscyIKCWZyYW1lX2RpZyAtMyAvLyBkZWNpbWFsczogdWludDgKCWl0b2IKCWV4dHJhY3QgNyAxCglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0cy9BUkMyMDAuYWxnby50czozNwoJLy8gdGhpcy50b3RhbFN1cHBseS52YWx1ZSA9IHRvdGFsCglieXRlYyAzIC8vICAidG90YWxTdXBwbHkiCglmcmFtZV9kaWcgLTQgLy8gdG90YWw6IHVpbnQyNTYKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzL0FSQzIwMC5hbGdvLnRzOjM4CgkvLyB0aGlzLmJhbGFuY2VzKHRoaXMudHhuLnNlbmRlcikudmFsdWUgPSB0b3RhbAoJdHhuIFNlbmRlcgoJZnJhbWVfZGlnIC00IC8vIHRvdGFsOiB1aW50MjU2Cglib3hfcHV0CglyZXRzdWIKCi8vIGFyYzIwMF9uYW1lKClieXRlWzMyXQoqYWJpX3JvdXRlX2FyYzIwMF9uYW1lOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAwIC8vIDB4MTUxZjdjNzUKCgkvLyBleGVjdXRlIGFyYzIwMF9uYW1lKClieXRlWzMyXQoJY2FsbHN1YiBhcmMyMDBfbmFtZQoJY29uY2F0Cglsb2cKCWludGMgMSAvLyAxCglyZXR1cm4KCi8vIGFyYzIwMF9uYW1lKCk6IGJ5dGVzPDMyPgphcmMyMDBfbmFtZToKCXByb3RvIDAgMQoKCS8vIGNvbnRyYWN0cy9BUkMyMDAuYWxnby50czo0MgoJLy8gcmV0dXJuIHRoaXMubmFtZS52YWx1ZTsKCWJ5dGVjIDYgLy8gICJuYW1lIgoJYXBwX2dsb2JhbF9nZXQKCXJldHN1YgoKLy8gYXJjMjAwX3N5bWJvbCgpYnl0ZVs4XQoqYWJpX3JvdXRlX2FyYzIwMF9zeW1ib2w6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDAgLy8gMHgxNTFmN2M3NQoKCS8vIGV4ZWN1dGUgYXJjMjAwX3N5bWJvbCgpYnl0ZVs4XQoJY2FsbHN1YiBhcmMyMDBfc3ltYm9sCgljb25jYXQKCWxvZwoJaW50YyAxIC8vIDEKCXJldHVybgoKLy8gYXJjMjAwX3N5bWJvbCgpOiBieXRlczw4PgphcmMyMDBfc3ltYm9sOgoJcHJvdG8gMCAxCgoJLy8gY29udHJhY3RzL0FSQzIwMC5hbGdvLnRzOjQ2CgkvLyByZXR1cm4gdGhpcy5zeW1ib2wudmFsdWU7CglieXRlYyA1IC8vICAic3ltYm9sIgoJYXBwX2dsb2JhbF9nZXQKCXJldHN1YgoKLy8gYXJjMjAwX2RlY2ltYWxzKCl1aW50OAoqYWJpX3JvdXRlX2FyYzIwMF9kZWNpbWFsczoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMCAvLyAweDE1MWY3Yzc1CgoJLy8gZXhlY3V0ZSBhcmMyMDBfZGVjaW1hbHMoKXVpbnQ4CgljYWxsc3ViIGFyYzIwMF9kZWNpbWFscwoJaXRvYgoJZHVwCgliaXRsZW4KCWludGMgNCAvLyA4Cgk8PQoKCS8vIGFyYzIwMF9kZWNpbWFscyByZXR1cm4gdmFsdWUgb3ZlcmZsb3dlZCA4IGJpdHMKCWFzc2VydAoJZXh0cmFjdCA3IDEKCWNvbmNhdAoJbG9nCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBhcmMyMDBfZGVjaW1hbHMoKTogdWludDgKYXJjMjAwX2RlY2ltYWxzOgoJcHJvdG8gMCAxCgoJLy8gY29udHJhY3RzL0FSQzIwMC5hbGdvLnRzOjUwCgkvLyByZXR1cm4gdGhpcy5kZWNpbWFscy52YWx1ZTsKCWJ5dGVjIDQgLy8gICJkZWNpbWFscyIKCWFwcF9nbG9iYWxfZ2V0CglidG9pCglyZXRzdWIKCi8vIGFyYzIwMF90b3RhbFN1cHBseSgpdWludDI1NgoqYWJpX3JvdXRlX2FyYzIwMF90b3RhbFN1cHBseToKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMCAvLyAweDE1MWY3Yzc1CgoJLy8gZXhlY3V0ZSBhcmMyMDBfdG90YWxTdXBwbHkoKXVpbnQyNTYKCWNhbGxzdWIgYXJjMjAwX3RvdGFsU3VwcGx5CglkdXAKCWJpdGxlbgoJaW50YyAyIC8vIDI1NgoJPD0KCgkvLyBhcmMyMDBfdG90YWxTdXBwbHkgcmV0dXJuIHZhbHVlIG92ZXJmbG93ZWQgMjU2IGJpdHMKCWFzc2VydAoJYnl0ZWMgMSAvLyAweEZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkYKCWImCglkdXAKCWxlbgoJZHVwCglpbnRjIDAgLy8gMzIKCS0KCXN3YXAKCXN1YnN0cmluZzMKCWNvbmNhdAoJbG9nCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBhcmMyMDBfdG90YWxTdXBwbHkoKTogdWludDI1NgphcmMyMDBfdG90YWxTdXBwbHk6Cglwcm90byAwIDEKCgkvLyBjb250cmFjdHMvQVJDMjAwLmFsZ28udHM6NTQKCS8vIHJldHVybiB0aGlzLnRvdGFsU3VwcGx5LnZhbHVlOwoJYnl0ZWMgMyAvLyAgInRvdGFsU3VwcGx5IgoJYXBwX2dsb2JhbF9nZXQKCXJldHN1YgoKLy8gYXJjMjAwX2JhbGFuY2VPZihhZGRyZXNzKXVpbnQyNTYKKmFiaV9yb3V0ZV9hcmMyMDBfYmFsYW5jZU9mOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAwIC8vIDB4MTUxZjdjNzUKCgkvLyBhY2NvdW50OiBhZGRyZXNzCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyAwIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDAgKGFjY291bnQpIGZvciBhcmMyMDBfYmFsYW5jZU9mIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBleGVjdXRlIGFyYzIwMF9iYWxhbmNlT2YoYWRkcmVzcyl1aW50MjU2CgljYWxsc3ViIGFyYzIwMF9iYWxhbmNlT2YKCWR1cAoJYml0bGVuCglpbnRjIDIgLy8gMjU2Cgk8PQoKCS8vIGFyYzIwMF9iYWxhbmNlT2YgcmV0dXJuIHZhbHVlIG92ZXJmbG93ZWQgMjU2IGJpdHMKCWFzc2VydAoJYnl0ZWMgMSAvLyAweEZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkYKCWImCglkdXAKCWxlbgoJZHVwCglpbnRjIDAgLy8gMzIKCS0KCXN3YXAKCXN1YnN0cmluZzMKCWNvbmNhdAoJbG9nCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBhcmMyMDBfYmFsYW5jZU9mKGFjY291bnQ6IEFkZHJlc3MpOiB1aW50MjU2CmFyYzIwMF9iYWxhbmNlT2Y6Cglwcm90byAxIDEKCgkvLyBjb250cmFjdHMvQVJDMjAwLmFsZ28udHM6NTgKCS8vIHJldHVybiB0aGlzLmJhbGFuY2VzKGFjY291bnQpLnZhbHVlOwoJZnJhbWVfZGlnIC0xIC8vIGFjY291bnQ6IEFkZHJlc3MKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMuYmFsYW5jZXMoYWNjb3VudCkudmFsdWUKCWFzc2VydAoJcmV0c3ViCgovLyB0cmFuc2Zlcihmcm9tOiBBZGRyZXNzLCB0bzogQWRkcmVzcywgYW1vdW50OiB1aW50MjU2KTogYm9vbGVhbgp0cmFuc2ZlcjoKCXByb3RvIDMgMQoKCS8vIGNvbnRyYWN0cy9BUkMyMDAuYWxnby50czo2MgoJLy8gdGhpcy5iYWxhbmNlcyhmcm9tKS52YWx1ZSAtPSBhbW91bnQKCWZyYW1lX2RpZyAtMSAvLyBmcm9tOiBBZGRyZXNzCglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmJhbGFuY2VzKGZyb20pLnZhbHVlCglhc3NlcnQKCWZyYW1lX2RpZyAtMyAvLyBhbW91bnQ6IHVpbnQyNTYKCWItCglmcmFtZV9kaWcgLTEgLy8gZnJvbTogQWRkcmVzcwoJc3dhcAoJYm94X3B1dAoKCS8vIGNvbnRyYWN0cy9BUkMyMDAuYWxnby50czo2MwoJLy8gdGhpcy5iYWxhbmNlcyh0bykudmFsdWUgKz0gYW1vdW50CglmcmFtZV9kaWcgLTIgLy8gdG86IEFkZHJlc3MKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMuYmFsYW5jZXModG8pLnZhbHVlCglhc3NlcnQKCWZyYW1lX2RpZyAtMyAvLyBhbW91bnQ6IHVpbnQyNTYKCWIrCglmcmFtZV9kaWcgLTIgLy8gdG86IEFkZHJlc3MKCXN3YXAKCWJveF9wdXQKCgkvLyBjb250cmFjdHMvQVJDMjAwLmFsZ28udHM6NjQKCS8vIHRoaXMuYXJjMjAwX1RyYW5zZmVyLmxvZyh7IGZyb206IGZyb20sIHRvOiB0bywgdmFsdWU6IGFtb3VudCB9KQoJcHVzaGJ5dGVzIDB4Nzk4M2MzNWMgLy8gYXJjMjAwX1RyYW5zZmVyKGFkZHJlc3MsYWRkcmVzcyx1aW50MjU2KQoJZnJhbWVfZGlnIC0xIC8vIGZyb206IEFkZHJlc3MKCWZyYW1lX2RpZyAtMiAvLyB0bzogQWRkcmVzcwoJY29uY2F0CglmcmFtZV9kaWcgLTMgLy8gYW1vdW50OiB1aW50MjU2Cgljb25jYXQKCWNvbmNhdAoJbG9nCgoJLy8gY29udHJhY3RzL0FSQzIwMC5hbGdvLnRzOjY2CgkvLyByZXR1cm4gdHJ1ZTsKCWludGMgMSAvLyAxCglyZXRzdWIKCi8vIGFyYzIwMF90cmFuc2ZlckZyb20oYWRkcmVzcyxhZGRyZXNzLHVpbnQyNTYpYm9vbAoqYWJpX3JvdXRlX2FyYzIwMF90cmFuc2ZlckZyb206CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDAgLy8gMHgxNTFmN2M3NQoKCS8vIGFtb3VudDogdWludDI1NgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwoJZHVwCglsZW4KCWludGMgMCAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChhbW91bnQpIGZvciBhcmMyMDBfdHJhbnNmZXJGcm9tIG11c3QgYmUgYSB1aW50MjU2Cglhc3NlcnQKCgkvLyB0bzogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJZHVwCglsZW4KCWludGMgMCAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAxICh0bykgZm9yIGFyYzIwMF90cmFuc2ZlckZyb20gbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIGZyb206IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDAgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMiAoZnJvbSkgZm9yIGFyYzIwMF90cmFuc2ZlckZyb20gbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIGV4ZWN1dGUgYXJjMjAwX3RyYW5zZmVyRnJvbShhZGRyZXNzLGFkZHJlc3MsdWludDI1Nilib29sCgljYWxsc3ViIGFyYzIwMF90cmFuc2ZlckZyb20KCWJ5dGVjIDIgLy8gMHgwMAoJaW50YyAzIC8vIDAKCXVuY292ZXIgMgoJc2V0Yml0Cgljb25jYXQKCWxvZwoJaW50YyAxIC8vIDEKCXJldHVybgoKLy8gYXJjMjAwX3RyYW5zZmVyRnJvbShmcm9tOiBBZGRyZXNzLCB0bzogQWRkcmVzcywgYW1vdW50OiB1aW50MjU2KTogYm9vbGVhbgphcmMyMDBfdHJhbnNmZXJGcm9tOgoJcHJvdG8gMyAxCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDcgLy8gMHgKCgkvLyBjb250cmFjdHMvQVJDMjAwLmFsZ28udHM6NzAKCS8vIGFwcHJvdmFsOiBBcHByb3ZhbCA9IHsgb3duZXI6IGZyb20sIHNwZW5kZXI6IHRoaXMudHhuLnNlbmRlciB9CglmcmFtZV9kaWcgLTEgLy8gZnJvbTogQWRkcmVzcwoJdHhuIFNlbmRlcgoJY29uY2F0CglmcmFtZV9idXJ5IDAgLy8gYXBwcm92YWw6IEFwcHJvdmFsCgoJLy8gY29udHJhY3RzL0FSQzIwMC5hbGdvLnRzOjcyCgkvLyBhc3NlcnQodGhpcy5hbGxvd2FuY2VzKGFwcHJvdmFsKS52YWx1ZSA+PSBhbW91bnQpCglmcmFtZV9kaWcgMCAvLyBhcHByb3ZhbDogQXBwcm92YWwKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMuYWxsb3dhbmNlcyhhcHByb3ZhbCkudmFsdWUKCWFzc2VydAoJZnJhbWVfZGlnIC0zIC8vIGFtb3VudDogdWludDI1NgoJYj49Cglhc3NlcnQKCgkvLyBjb250cmFjdHMvQVJDMjAwLmFsZ28udHM6NzMKCS8vIHRoaXMuYWxsb3dhbmNlcyhhcHByb3ZhbCkudmFsdWUgLT0gYW1vdW50CglmcmFtZV9kaWcgMCAvLyBhcHByb3ZhbDogQXBwcm92YWwKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMuYWxsb3dhbmNlcyhhcHByb3ZhbCkudmFsdWUKCWFzc2VydAoJZnJhbWVfZGlnIC0zIC8vIGFtb3VudDogdWludDI1NgoJYi0KCWZyYW1lX2RpZyAwIC8vIGFwcHJvdmFsOiBBcHByb3ZhbAoJc3dhcAoJYm94X3B1dAoKCS8vIGNvbnRyYWN0cy9BUkMyMDAuYWxnby50czo3NQoJLy8gcmV0dXJuIHRoaXMudHJhbnNmZXIoZnJvbSwgdG8sIGFtb3VudCk7CglmcmFtZV9kaWcgLTMgLy8gYW1vdW50OiB1aW50MjU2CglmcmFtZV9kaWcgLTIgLy8gdG86IEFkZHJlc3MKCWZyYW1lX2RpZyAtMSAvLyBmcm9tOiBBZGRyZXNzCgljYWxsc3ViIHRyYW5zZmVyCgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCglyZXRzdWIKCi8vIGFyYzIwMF90cmFuc2ZlcihhZGRyZXNzLHVpbnQyNTYpYm9vbAoqYWJpX3JvdXRlX2FyYzIwMF90cmFuc2ZlcjoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMCAvLyAweDE1MWY3Yzc1CgoJLy8gYW1vdW50OiB1aW50MjU2Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglkdXAKCWxlbgoJaW50YyAwIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDAgKGFtb3VudCkgZm9yIGFyYzIwMF90cmFuc2ZlciBtdXN0IGJlIGEgdWludDI1NgoJYXNzZXJ0CgoJLy8gdG86IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDAgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMSAodG8pIGZvciBhcmMyMDBfdHJhbnNmZXIgbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIGV4ZWN1dGUgYXJjMjAwX3RyYW5zZmVyKGFkZHJlc3MsdWludDI1Nilib29sCgljYWxsc3ViIGFyYzIwMF90cmFuc2ZlcgoJYnl0ZWMgMiAvLyAweDAwCglpbnRjIDMgLy8gMAoJdW5jb3ZlciAyCglzZXRiaXQKCWNvbmNhdAoJbG9nCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBhcmMyMDBfdHJhbnNmZXIodG86IEFkZHJlc3MsIGFtb3VudDogdWludDI1Nik6IGJvb2xlYW4KYXJjMjAwX3RyYW5zZmVyOgoJcHJvdG8gMiAxCgoJLy8gY29udHJhY3RzL0FSQzIwMC5hbGdvLnRzOjc5CgkvLyByZXR1cm4gdGhpcy50cmFuc2Zlcih0aGlzLnR4bi5zZW5kZXIsIHRvLCBhbW91bnQpOwoJZnJhbWVfZGlnIC0yIC8vIGFtb3VudDogdWludDI1NgoJZnJhbWVfZGlnIC0xIC8vIHRvOiBBZGRyZXNzCgl0eG4gU2VuZGVyCgljYWxsc3ViIHRyYW5zZmVyCglyZXRzdWIKCi8vIGFyYzIwMF9hcHByb3ZlKGFkZHJlc3MsdWludDI1Nilib29sCiphYmlfcm91dGVfYXJjMjAwX2FwcHJvdmU6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDAgLy8gMHgxNTFmN2M3NQoKCS8vIHZhbHVlOiB1aW50MjU2Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglkdXAKCWxlbgoJaW50YyAwIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDAgKHZhbHVlKSBmb3IgYXJjMjAwX2FwcHJvdmUgbXVzdCBiZSBhIHVpbnQyNTYKCWFzc2VydAoKCS8vIHNwZW5kZXI6IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDAgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMSAoc3BlbmRlcikgZm9yIGFyYzIwMF9hcHByb3ZlIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBleGVjdXRlIGFyYzIwMF9hcHByb3ZlKGFkZHJlc3MsdWludDI1Nilib29sCgljYWxsc3ViIGFyYzIwMF9hcHByb3ZlCglieXRlYyAyIC8vIDB4MDAKCWludGMgMyAvLyAwCgl1bmNvdmVyIDIKCXNldGJpdAoJY29uY2F0Cglsb2cKCWludGMgMSAvLyAxCglyZXR1cm4KCi8vIGFyYzIwMF9hcHByb3ZlKHNwZW5kZXI6IEFkZHJlc3MsIHZhbHVlOiB1aW50MjU2KTogYm9vbGVhbgphcmMyMDBfYXBwcm92ZToKCXByb3RvIDIgMQoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyA3IC8vIDB4CgoJLy8gY29udHJhY3RzL0FSQzIwMC5hbGdvLnRzOjgzCgkvLyBhcHByb3ZhbDogQXBwcm92YWwgPSB7IG93bmVyOiB0aGlzLnR4bi5zZW5kZXIsIHNwZW5kZXI6IHNwZW5kZXIgfQoJdHhuIFNlbmRlcgoJZnJhbWVfZGlnIC0xIC8vIHNwZW5kZXI6IEFkZHJlc3MKCWNvbmNhdAoJZnJhbWVfYnVyeSAwIC8vIGFwcHJvdmFsOiBBcHByb3ZhbAoKCS8vICppZjBfY29uZGl0aW9uCgkvLyBjb250cmFjdHMvQVJDMjAwLmFsZ28udHM6ODQKCS8vICF0aGlzLmFsbG93YW5jZXMoYXBwcm92YWwpLmV4aXN0cwoJZnJhbWVfZGlnIDAgLy8gYXBwcm92YWw6IEFwcHJvdmFsCglib3hfbGVuCglzd2FwCglwb3AKCSEKCWJ6ICppZjBfZWxzZQoKCS8vICppZjBfY29uc2VxdWVudAoJLy8gY29udHJhY3RzL0FSQzIwMC5hbGdvLnRzOjg1CgkvLyB0aGlzLmFsbG93YW5jZXMoYXBwcm92YWwpLnZhbHVlID0gdmFsdWUKCWZyYW1lX2RpZyAwIC8vIGFwcHJvdmFsOiBBcHByb3ZhbAoJZnJhbWVfZGlnIC0yIC8vIHZhbHVlOiB1aW50MjU2Cglib3hfcHV0CgliICppZjBfZW5kCgoqaWYwX2Vsc2U6CgkvLyBjb250cmFjdHMvQVJDMjAwLmFsZ28udHM6ODcKCS8vIHRoaXMuYWxsb3dhbmNlcyhhcHByb3ZhbCkudmFsdWUgKz0gdmFsdWUKCWZyYW1lX2RpZyAwIC8vIGFwcHJvdmFsOiBBcHByb3ZhbAoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5hbGxvd2FuY2VzKGFwcHJvdmFsKS52YWx1ZQoJYXNzZXJ0CglmcmFtZV9kaWcgLTIgLy8gdmFsdWU6IHVpbnQyNTYKCWIrCglmcmFtZV9kaWcgMCAvLyBhcHByb3ZhbDogQXBwcm92YWwKCXN3YXAKCWJveF9wdXQKCippZjBfZW5kOgoJLy8gY29udHJhY3RzL0FSQzIwMC5hbGdvLnRzOjkwCgkvLyByZXR1cm4gdHJ1ZTsKCWludGMgMSAvLyAxCgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCglyZXRzdWIKCi8vIGFyYzIwMF9hbGxvd2FuY2UoYWRkcmVzcyxhZGRyZXNzKXVpbnQyNTYKKmFiaV9yb3V0ZV9hcmMyMDBfYWxsb3dhbmNlOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAwIC8vIDB4MTUxZjdjNzUKCgkvLyBzZW5kZXI6IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWR1cAoJbGVuCglpbnRjIDAgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMCAoc2VuZGVyKSBmb3IgYXJjMjAwX2FsbG93YW5jZSBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gb3duZXI6IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDAgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMSAob3duZXIpIGZvciBhcmMyMDBfYWxsb3dhbmNlIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBleGVjdXRlIGFyYzIwMF9hbGxvd2FuY2UoYWRkcmVzcyxhZGRyZXNzKXVpbnQyNTYKCWNhbGxzdWIgYXJjMjAwX2FsbG93YW5jZQoJZHVwCgliaXRsZW4KCWludGMgMiAvLyAyNTYKCTw9CgoJLy8gYXJjMjAwX2FsbG93YW5jZSByZXR1cm4gdmFsdWUgb3ZlcmZsb3dlZCAyNTYgYml0cwoJYXNzZXJ0CglieXRlYyAxIC8vIDB4RkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRgoJYiYKCWR1cAoJbGVuCglkdXAKCWludGMgMCAvLyAzMgoJLQoJc3dhcAoJc3Vic3RyaW5nMwoJY29uY2F0Cglsb2cKCWludGMgMSAvLyAxCglyZXR1cm4KCi8vIGFyYzIwMF9hbGxvd2FuY2Uob3duZXI6IEFkZHJlc3MsIHNlbmRlcjogQWRkcmVzcyk6IHVpbnQyNTYKYXJjMjAwX2FsbG93YW5jZToKCXByb3RvIDIgMQoKCS8vIGNvbnRyYWN0cy9BUkMyMDAuYWxnby50czo5NAoJLy8gcmV0dXJuIHRoaXMuYWxsb3dhbmNlcyh7IG93bmVyOiBvd25lciwgc3BlbmRlcjogc2VuZGVyIH0pLnZhbHVlOwoJZnJhbWVfZGlnIC0xIC8vIG93bmVyOiBBZGRyZXNzCglmcmFtZV9kaWcgLTIgLy8gc2VuZGVyOiBBZGRyZXNzCgljb25jYXQKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMuYWxsb3dhbmNlcyh7IG93bmVyOiBvd25lciwgc3BlbmRlcjogc2VuZGVyIH0pLnZhbHVlCglhc3NlcnQKCXJldHN1YgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4ODUyOWY3ODMgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbihieXRlWzMyXSxieXRlWzhdLHVpbnQ4LHVpbnQyNTYpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweDY1N2QxM2VjIC8vIG1ldGhvZCAiYXJjMjAwX25hbWUoKWJ5dGVbMzJdIgoJcHVzaGJ5dGVzIDB4YjZhZTFhMjUgLy8gbWV0aG9kICJhcmMyMDBfc3ltYm9sKClieXRlWzhdIgoJcHVzaGJ5dGVzIDB4ODRlYzEzZDUgLy8gbWV0aG9kICJhcmMyMDBfZGVjaW1hbHMoKXVpbnQ4IgoJcHVzaGJ5dGVzIDB4ZWM5OTYwNDEgLy8gbWV0aG9kICJhcmMyMDBfdG90YWxTdXBwbHkoKXVpbnQyNTYiCglwdXNoYnl0ZXMgMHg4MmU1NzNjNCAvLyBtZXRob2QgImFyYzIwMF9iYWxhbmNlT2YoYWRkcmVzcyl1aW50MjU2IgoJcHVzaGJ5dGVzIDB4NGE5NjhmOGYgLy8gbWV0aG9kICJhcmMyMDBfdHJhbnNmZXJGcm9tKGFkZHJlc3MsYWRkcmVzcyx1aW50MjU2KWJvb2wiCglwdXNoYnl0ZXMgMHhkYTcwMjViOSAvLyBtZXRob2QgImFyYzIwMF90cmFuc2ZlcihhZGRyZXNzLHVpbnQyNTYpYm9vbCIKCXB1c2hieXRlcyAweGI1NDIyMTI1IC8vIG1ldGhvZCAiYXJjMjAwX2FwcHJvdmUoYWRkcmVzcyx1aW50MjU2KWJvb2wiCglwdXNoYnl0ZXMgMHhiYmIzMTlmMyAvLyBtZXRob2QgImFyYzIwMF9hbGxvd2FuY2UoYWRkcmVzcyxhZGRyZXNzKXVpbnQyNTYiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2FyYzIwMF9uYW1lICphYmlfcm91dGVfYXJjMjAwX3N5bWJvbCAqYWJpX3JvdXRlX2FyYzIwMF9kZWNpbWFscyAqYWJpX3JvdXRlX2FyYzIwMF90b3RhbFN1cHBseSAqYWJpX3JvdXRlX2FyYzIwMF9iYWxhbmNlT2YgKmFiaV9yb3V0ZV9hcmMyMDBfdHJhbnNmZXJGcm9tICphYmlfcm91dGVfYXJjMjAwX3RyYW5zZmVyICphYmlfcm91dGVfYXJjMjAwX2FwcHJvdmUgKmFiaV9yb3V0ZV9hcmMyMDBfYWxsb3dhbmNlCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgTm9PcAoJZXJy",
+    "clear": "I3ByYWdtYSB2ZXJzaW9uIDEw"
+  },
+  "byteCode": {
+    "approval": "CiAFIAGAAgAIJggEFR98dSD//////////////////////////////////////////wEAC3RvdGFsU3VwcGx5CGRlY2ltYWxzBnN5bWJvbARuYW1lADEYFIEGCzEZCI0MAe8AAAAAAAAAAAAAAeEAAAAAAAAAAAAAADYaBEkVIhJENhoDSRUjEkQXNhoCSRUhBBJENhoBSRUiEkSIAAIjQ4oEACcGi/9nJwWL/mcnBIv9FlcHAWcri/xnMQCL/L+JKIgABFCwI0OKAAEnBmSJKIgABFCwI0OKAAEnBWSJKIgADhZJkyEEDkRXBwFQsCNDigABJwRkF4koiAASSZMkDkQprEkVSSIJTFJQsCNDigABK2SJKDYaAUkVIhJEiAASSZMkDkQprEkVSSIJTFJQsCNDigEBi/++RImKAwGL/75Ei/2hi/9Mv4v+vkSL/aCL/ky/gAR5g8Nci/+L/lCL/VBQsCOJKDYaA0kVIhJENhoCSRUiEkQ2GgFJFSISRIgACSolTwJUULAjQ4oDAScHi/8xAFCMAIsAvkSL/adEiwC+RIv9oYsATL+L/Yv+i/+I/4iMAIkoNhoCSRUiEkQ2GgFJFSISRIgACSolTwJUULAjQ4oCAYv+i/8xAIj/XIkoNhoCSRUiEkQ2GgFJFSISRIgACSolTwJUULAjQ4oCAScHMQCL/1CMAIsAvUxIFEEACIsAi/6/QgALiwC+RIv+oIsATL8jjACJKDYaAkkVIhJENhoBSRUiEkSIABJJkyQORCmsSRVJIglMUlCwI0OKAgGL/4v+UL5EiYAEhSn3gzYaAI4B/hMAgARlfRPsgAS2rholgASE7BPVgATsmWBBgASC5XPEgARKlo+PgATacCW5gAS1QiElgAS7sxnzNhoAjgn+DP4b/ir+RP5g/rH/Af8r/3QA",
+    "clear": "Cg=="
+  },
+  "compilerInfo": {
+    "compiler": "algod",
+    "compilerVersion": {
+      "major": 4,
+      "minor": 4,
+      "patch": 1,
+      "commitHash": "7b607ce4"
+    }
+  }
+}

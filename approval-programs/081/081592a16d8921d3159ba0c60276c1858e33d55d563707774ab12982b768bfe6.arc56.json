@@ -1,0 +1,3204 @@
+{
+  "name": "DeclarationRegistry",
+  "desc": "",
+  "methods": [
+    {
+      "name": "declare",
+      "desc": "Declare the given ARC84 token for the given address. If an approval app has been defined for the address, that app is called to ensure the\ndeclaration is allowed. If an approval app has not be defined, the transaction sender must match the declaration address",
+      "args": [
+        {
+          "name": "addrToken",
+          "type": "(address,uint64,uint64)",
+          "struct": "AddressToken"
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "request",
+      "desc": "Declare the given ARC84 token for the given address. If an approval app has been added for the user, that app is called to ensure the\ndeclaration is allowed",
+      "args": [
+        {
+          "name": "addrToken",
+          "type": "(address,uint64,uint64)",
+          "struct": "AddressToken"
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "removeDeclaration",
+      "args": [
+        {
+          "name": "addrToken",
+          "type": "(address,uint64,uint64)",
+          "struct": "AddressToken"
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "removeRequest",
+      "args": [
+        {
+          "name": "addrToken",
+          "type": "(address,uint64,uint64)",
+          "struct": "AddressToken"
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "isRequested",
+      "args": [
+        {
+          "name": "addrToken",
+          "type": "(address,uint64,uint64)",
+          "struct": "AddressToken"
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "isDeclared",
+      "args": [
+        {
+          "name": "addrToken",
+          "type": "(address,uint64,uint64)",
+          "struct": "AddressToken"
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      }
+    },
+    {
+      "name": "createApplication",
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [
+          "NoOp"
+        ],
+        "call": []
+      }
+    }
+  ],
+  "arcs": [
+    4,
+    56
+  ],
+  "structs": {
+    "AddressToken": [
+      {
+        "name": "addr",
+        "type": "address"
+      },
+      {
+        "name": "app",
+        "type": "uint64"
+      },
+      {
+        "name": "id",
+        "type": "uint64"
+      }
+    ]
+  },
+  "state": {
+    "schema": {
+      "global": {
+        "bytes": 0,
+        "ints": 0
+      },
+      "local": {
+        "bytes": 0,
+        "ints": 0
+      }
+    },
+    "keys": {
+      "global": {},
+      "local": {},
+      "box": {}
+    },
+    "maps": {
+      "global": {},
+      "local": {},
+      "box": {
+        "declarations": {
+          "keyType": "AddressToken",
+          "valueType": "byte[0]"
+        },
+        "requests": {
+          "keyType": "AddressToken",
+          "valueType": "byte[0]",
+          "prefix": "cg=="
+        },
+        "approvalApps": {
+          "keyType": "AddressToken",
+          "valueType": "uint64",
+          "prefix": "YQ=="
+        }
+      }
+    }
+  },
+  "bareActions": {
+    "create": [],
+    "call": []
+  },
+  "sourceInfo": {
+    "approval": {
+      "sourceInfo": [
+        {
+          "teal": 1,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            0
+          ]
+        },
+        {
+          "teal": 2,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "teal": 3,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ]
+        },
+        {
+          "teal": 15,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            21,
+            22
+          ]
+        },
+        {
+          "teal": 16,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            23
+          ]
+        },
+        {
+          "teal": 17,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            24
+          ]
+        },
+        {
+          "teal": 18,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            25
+          ]
+        },
+        {
+          "teal": 19,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            26,
+            27
+          ]
+        },
+        {
+          "teal": 20,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            28
+          ]
+        },
+        {
+          "teal": 21,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54
+          ]
+        },
+        {
+          "teal": 25,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?",
+          "pc": [
+            55
+          ]
+        },
+        {
+          "teal": 30,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            56
+          ]
+        },
+        {
+          "teal": 33,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            57,
+            58,
+            59
+          ]
+        },
+        {
+          "teal": 34,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            60
+          ]
+        },
+        {
+          "teal": 35,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            61
+          ]
+        },
+        {
+          "teal": 36,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            62
+          ]
+        },
+        {
+          "teal": 37,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            63
+          ]
+        },
+        {
+          "teal": 40,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "errorMessage": "argument 0 (addrToken) for declare must be a (address,uint64,uint64)",
+          "pc": [
+            64
+          ]
+        },
+        {
+          "teal": 43,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            65,
+            66,
+            67
+          ]
+        },
+        {
+          "teal": 44,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            68
+          ]
+        },
+        {
+          "teal": 45,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            69
+          ]
+        },
+        {
+          "teal": 46,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            70,
+            71
+          ]
+        },
+        {
+          "teal": 47,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            72
+          ]
+        },
+        {
+          "teal": 48,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            73
+          ]
+        },
+        {
+          "teal": 49,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            74
+          ]
+        },
+        {
+          "teal": 50,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            75
+          ]
+        },
+        {
+          "teal": 51,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            76
+          ]
+        },
+        {
+          "teal": 58,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            77,
+            78,
+            79
+          ]
+        },
+        {
+          "teal": 61,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            80,
+            81
+          ]
+        },
+        {
+          "teal": 66,
+          "source": "contracts/DeclarationRegistry.algo.ts:46",
+          "pc": [
+            82,
+            83
+          ]
+        },
+        {
+          "teal": 67,
+          "source": "contracts/DeclarationRegistry.algo.ts:46",
+          "pc": [
+            84
+          ]
+        },
+        {
+          "teal": 68,
+          "source": "contracts/DeclarationRegistry.algo.ts:46",
+          "pc": [
+            85
+          ]
+        },
+        {
+          "teal": 69,
+          "source": "contracts/DeclarationRegistry.algo.ts:46",
+          "pc": [
+            86
+          ]
+        },
+        {
+          "teal": 70,
+          "source": "contracts/DeclarationRegistry.algo.ts:46",
+          "pc": [
+            87,
+            88,
+            89
+          ]
+        },
+        {
+          "teal": 75,
+          "source": "contracts/DeclarationRegistry.algo.ts:47",
+          "pc": [
+            90
+          ]
+        },
+        {
+          "teal": 76,
+          "source": "contracts/DeclarationRegistry.algo.ts:47",
+          "pc": [
+            91,
+            92,
+            93
+          ]
+        },
+        {
+          "teal": 82,
+          "source": "contracts/DeclarationRegistry.algo.ts:51",
+          "pc": [
+            94
+          ]
+        },
+        {
+          "teal": 83,
+          "source": "contracts/DeclarationRegistry.algo.ts:51",
+          "pc": [
+            95,
+            96
+          ]
+        },
+        {
+          "teal": 84,
+          "source": "contracts/DeclarationRegistry.algo.ts:51",
+          "pc": [
+            97
+          ]
+        },
+        {
+          "teal": 85,
+          "source": "contracts/DeclarationRegistry.algo.ts:51",
+          "pc": [
+            98
+          ]
+        },
+        {
+          "teal": 86,
+          "source": "contracts/DeclarationRegistry.algo.ts:51",
+          "pc": [
+            99
+          ]
+        },
+        {
+          "teal": 87,
+          "source": "contracts/DeclarationRegistry.algo.ts:51",
+          "pc": [
+            100
+          ]
+        },
+        {
+          "teal": 88,
+          "source": "contracts/DeclarationRegistry.algo.ts:51",
+          "pc": [
+            101,
+            102,
+            103
+          ]
+        },
+        {
+          "teal": 96,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            104
+          ]
+        },
+        {
+          "teal": 97,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            105
+          ]
+        },
+        {
+          "teal": 98,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            106,
+            107
+          ]
+        },
+        {
+          "teal": 99,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            108,
+            109,
+            110,
+            111,
+            112,
+            113
+          ]
+        },
+        {
+          "teal": 100,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            114,
+            115
+          ]
+        },
+        {
+          "teal": 104,
+          "source": "contracts/DeclarationRegistry.algo.ts:53",
+          "pc": [
+            116
+          ]
+        },
+        {
+          "teal": 105,
+          "source": "contracts/DeclarationRegistry.algo.ts:53",
+          "pc": [
+            117,
+            118
+          ]
+        },
+        {
+          "teal": 106,
+          "source": "contracts/DeclarationRegistry.algo.ts:53",
+          "pc": [
+            119
+          ]
+        },
+        {
+          "teal": 107,
+          "source": "contracts/DeclarationRegistry.algo.ts:53",
+          "pc": [
+            120
+          ]
+        },
+        {
+          "teal": 110,
+          "source": "contracts/DeclarationRegistry.algo.ts:53",
+          "errorMessage": "box value does not exist: this.approvalApps(addrToken).value",
+          "pc": [
+            121
+          ]
+        },
+        {
+          "teal": 111,
+          "source": "contracts/DeclarationRegistry.algo.ts:53",
+          "pc": [
+            122
+          ]
+        },
+        {
+          "teal": 112,
+          "source": "contracts/DeclarationRegistry.algo.ts:53",
+          "pc": [
+            123,
+            124
+          ]
+        },
+        {
+          "teal": 116,
+          "source": "contracts/DeclarationRegistry.algo.ts:54",
+          "pc": [
+            125,
+            126
+          ]
+        },
+        {
+          "teal": 117,
+          "source": "contracts/DeclarationRegistry.algo.ts:54",
+          "pc": [
+            127,
+            128
+          ]
+        },
+        {
+          "teal": 118,
+          "source": "contracts/DeclarationRegistry.algo.ts:54",
+          "pc": [
+            129,
+            130
+          ]
+        },
+        {
+          "teal": 119,
+          "source": "contracts/DeclarationRegistry.algo.ts:54",
+          "pc": [
+            131,
+            132
+          ]
+        },
+        {
+          "teal": 122,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            133
+          ]
+        },
+        {
+          "teal": 123,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            134,
+            135
+          ]
+        },
+        {
+          "teal": 126,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            136
+          ]
+        },
+        {
+          "teal": 127,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            137,
+            138
+          ]
+        },
+        {
+          "teal": 128,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            139
+          ]
+        },
+        {
+          "teal": 129,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            140
+          ]
+        },
+        {
+          "teal": 130,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            141,
+            142
+          ]
+        },
+        {
+          "teal": 131,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            143,
+            144,
+            145
+          ]
+        },
+        {
+          "teal": 132,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            146
+          ]
+        },
+        {
+          "teal": 133,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            147
+          ]
+        },
+        {
+          "teal": 134,
+          "source": "contracts/DeclarationRegistry.algo.ts:52",
+          "pc": [
+            148,
+            149
+          ]
+        },
+        {
+          "teal": 135,
+          "source": "contracts/DeclarationRegistry.algo.ts:51",
+          "pc": [
+            150,
+            151,
+            152
+          ]
+        },
+        {
+          "teal": 140,
+          "source": "contracts/DeclarationRegistry.algo.ts:57",
+          "pc": [
+            153,
+            154
+          ]
+        },
+        {
+          "teal": 141,
+          "source": "contracts/DeclarationRegistry.algo.ts:57",
+          "pc": [
+            155,
+            156
+          ]
+        },
+        {
+          "teal": 142,
+          "source": "contracts/DeclarationRegistry.algo.ts:57",
+          "pc": [
+            157,
+            158,
+            159
+          ]
+        },
+        {
+          "teal": 143,
+          "source": "contracts/DeclarationRegistry.algo.ts:57",
+          "pc": [
+            160
+          ]
+        },
+        {
+          "teal": 144,
+          "source": "contracts/DeclarationRegistry.algo.ts:57",
+          "pc": [
+            161,
+            162
+          ]
+        },
+        {
+          "teal": 150,
+          "source": "contracts/DeclarationRegistry.algo.ts:60",
+          "pc": [
+            163,
+            164
+          ]
+        },
+        {
+          "teal": 151,
+          "source": "contracts/DeclarationRegistry.algo.ts:60",
+          "pc": [
+            165
+          ]
+        },
+        {
+          "teal": 152,
+          "source": "contracts/DeclarationRegistry.algo.ts:60",
+          "pc": [
+            166,
+            167,
+            168
+          ]
+        },
+        {
+          "teal": 157,
+          "source": "contracts/DeclarationRegistry.algo.ts:60",
+          "pc": [
+            169
+          ]
+        },
+        {
+          "teal": 158,
+          "source": "contracts/DeclarationRegistry.algo.ts:60",
+          "pc": [
+            170,
+            171,
+            172
+          ]
+        },
+        {
+          "teal": 163,
+          "source": "contracts/DeclarationRegistry.algo.ts:62",
+          "pc": [
+            173,
+            174
+          ]
+        },
+        {
+          "teal": 164,
+          "source": "contracts/DeclarationRegistry.algo.ts:62",
+          "pc": [
+            175,
+            176
+          ]
+        },
+        {
+          "teal": 165,
+          "source": "contracts/DeclarationRegistry.algo.ts:62",
+          "pc": [
+            177
+          ]
+        },
+        {
+          "teal": 169,
+          "source": "contracts/DeclarationRegistry.algo.ts:64",
+          "pc": [
+            178
+          ]
+        },
+        {
+          "teal": 173,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            179,
+            180
+          ]
+        },
+        {
+          "teal": 174,
+          "source": "contracts/DeclarationRegistry.algo.ts:45",
+          "pc": [
+            181
+          ]
+        },
+        {
+          "teal": 179,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            182
+          ]
+        },
+        {
+          "teal": 182,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            183,
+            184,
+            185
+          ]
+        },
+        {
+          "teal": 183,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            186
+          ]
+        },
+        {
+          "teal": 184,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            187
+          ]
+        },
+        {
+          "teal": 185,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            188
+          ]
+        },
+        {
+          "teal": 186,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            189
+          ]
+        },
+        {
+          "teal": 189,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "errorMessage": "argument 0 (addrToken) for request must be a (address,uint64,uint64)",
+          "pc": [
+            190
+          ]
+        },
+        {
+          "teal": 192,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            191,
+            192,
+            193
+          ]
+        },
+        {
+          "teal": 193,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            194
+          ]
+        },
+        {
+          "teal": 194,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            195
+          ]
+        },
+        {
+          "teal": 195,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            196,
+            197
+          ]
+        },
+        {
+          "teal": 196,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            198
+          ]
+        },
+        {
+          "teal": 197,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            199
+          ]
+        },
+        {
+          "teal": 198,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            200
+          ]
+        },
+        {
+          "teal": 199,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            201
+          ]
+        },
+        {
+          "teal": 200,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            202
+          ]
+        },
+        {
+          "teal": 207,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            203,
+            204,
+            205
+          ]
+        },
+        {
+          "teal": 210,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            206,
+            207
+          ]
+        },
+        {
+          "teal": 215,
+          "source": "contracts/DeclarationRegistry.algo.ts:70",
+          "pc": [
+            208
+          ]
+        },
+        {
+          "teal": 216,
+          "source": "contracts/DeclarationRegistry.algo.ts:70",
+          "pc": [
+            209,
+            210
+          ]
+        },
+        {
+          "teal": 217,
+          "source": "contracts/DeclarationRegistry.algo.ts:70",
+          "pc": [
+            211
+          ]
+        },
+        {
+          "teal": 218,
+          "source": "contracts/DeclarationRegistry.algo.ts:70",
+          "pc": [
+            212
+          ]
+        },
+        {
+          "teal": 219,
+          "source": "contracts/DeclarationRegistry.algo.ts:70",
+          "pc": [
+            213
+          ]
+        },
+        {
+          "teal": 220,
+          "source": "contracts/DeclarationRegistry.algo.ts:70",
+          "pc": [
+            214
+          ]
+        },
+        {
+          "teal": 221,
+          "source": "contracts/DeclarationRegistry.algo.ts:70",
+          "pc": [
+            215,
+            216,
+            217
+          ]
+        },
+        {
+          "teal": 226,
+          "source": "contracts/DeclarationRegistry.algo.ts:71",
+          "pc": [
+            218
+          ]
+        },
+        {
+          "teal": 227,
+          "source": "contracts/DeclarationRegistry.algo.ts:71",
+          "pc": [
+            219,
+            220,
+            221
+          ]
+        },
+        {
+          "teal": 233,
+          "source": "contracts/DeclarationRegistry.algo.ts:74",
+          "pc": [
+            222
+          ]
+        },
+        {
+          "teal": 234,
+          "source": "contracts/DeclarationRegistry.algo.ts:74",
+          "pc": [
+            223,
+            224
+          ]
+        },
+        {
+          "teal": 235,
+          "source": "contracts/DeclarationRegistry.algo.ts:74",
+          "pc": [
+            225
+          ]
+        },
+        {
+          "teal": 236,
+          "source": "contracts/DeclarationRegistry.algo.ts:74",
+          "pc": [
+            226
+          ]
+        },
+        {
+          "teal": 237,
+          "source": "contracts/DeclarationRegistry.algo.ts:74",
+          "pc": [
+            227
+          ]
+        },
+        {
+          "teal": 238,
+          "source": "contracts/DeclarationRegistry.algo.ts:74",
+          "pc": [
+            228
+          ]
+        },
+        {
+          "teal": 239,
+          "source": "contracts/DeclarationRegistry.algo.ts:74",
+          "pc": [
+            229,
+            230,
+            231
+          ]
+        },
+        {
+          "teal": 247,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            232
+          ]
+        },
+        {
+          "teal": 248,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            233
+          ]
+        },
+        {
+          "teal": 249,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            234,
+            235
+          ]
+        },
+        {
+          "teal": 250,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            236,
+            237,
+            238,
+            239,
+            240,
+            241
+          ]
+        },
+        {
+          "teal": 251,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            242,
+            243
+          ]
+        },
+        {
+          "teal": 255,
+          "source": "contracts/DeclarationRegistry.algo.ts:76",
+          "pc": [
+            244
+          ]
+        },
+        {
+          "teal": 256,
+          "source": "contracts/DeclarationRegistry.algo.ts:76",
+          "pc": [
+            245,
+            246
+          ]
+        },
+        {
+          "teal": 257,
+          "source": "contracts/DeclarationRegistry.algo.ts:76",
+          "pc": [
+            247
+          ]
+        },
+        {
+          "teal": 258,
+          "source": "contracts/DeclarationRegistry.algo.ts:76",
+          "pc": [
+            248
+          ]
+        },
+        {
+          "teal": 261,
+          "source": "contracts/DeclarationRegistry.algo.ts:76",
+          "errorMessage": "box value does not exist: this.approvalApps(addrToken).value",
+          "pc": [
+            249
+          ]
+        },
+        {
+          "teal": 262,
+          "source": "contracts/DeclarationRegistry.algo.ts:76",
+          "pc": [
+            250
+          ]
+        },
+        {
+          "teal": 263,
+          "source": "contracts/DeclarationRegistry.algo.ts:76",
+          "pc": [
+            251,
+            252
+          ]
+        },
+        {
+          "teal": 267,
+          "source": "contracts/DeclarationRegistry.algo.ts:77",
+          "pc": [
+            253,
+            254
+          ]
+        },
+        {
+          "teal": 268,
+          "source": "contracts/DeclarationRegistry.algo.ts:77",
+          "pc": [
+            255,
+            256
+          ]
+        },
+        {
+          "teal": 269,
+          "source": "contracts/DeclarationRegistry.algo.ts:77",
+          "pc": [
+            257,
+            258
+          ]
+        },
+        {
+          "teal": 270,
+          "source": "contracts/DeclarationRegistry.algo.ts:77",
+          "pc": [
+            259,
+            260
+          ]
+        },
+        {
+          "teal": 273,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            261
+          ]
+        },
+        {
+          "teal": 274,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            262,
+            263
+          ]
+        },
+        {
+          "teal": 277,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            264
+          ]
+        },
+        {
+          "teal": 278,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            265,
+            266
+          ]
+        },
+        {
+          "teal": 279,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            267
+          ]
+        },
+        {
+          "teal": 280,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            268
+          ]
+        },
+        {
+          "teal": 281,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            269,
+            270
+          ]
+        },
+        {
+          "teal": 282,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            271,
+            272,
+            273
+          ]
+        },
+        {
+          "teal": 283,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            274
+          ]
+        },
+        {
+          "teal": 284,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            275
+          ]
+        },
+        {
+          "teal": 285,
+          "source": "contracts/DeclarationRegistry.algo.ts:75",
+          "pc": [
+            276,
+            277
+          ]
+        },
+        {
+          "teal": 290,
+          "source": "contracts/DeclarationRegistry.algo.ts:80",
+          "pc": [
+            278,
+            279
+          ]
+        },
+        {
+          "teal": 291,
+          "source": "contracts/DeclarationRegistry.algo.ts:80",
+          "pc": [
+            280
+          ]
+        },
+        {
+          "teal": 292,
+          "source": "contracts/DeclarationRegistry.algo.ts:80",
+          "pc": [
+            281,
+            282,
+            283
+          ]
+        },
+        {
+          "teal": 297,
+          "source": "contracts/DeclarationRegistry.algo.ts:80",
+          "pc": [
+            284
+          ]
+        },
+        {
+          "teal": 298,
+          "source": "contracts/DeclarationRegistry.algo.ts:80",
+          "pc": [
+            285,
+            286,
+            287
+          ]
+        },
+        {
+          "teal": 305,
+          "source": "contracts/DeclarationRegistry.algo.ts:83",
+          "pc": [
+            288
+          ]
+        },
+        {
+          "teal": 306,
+          "source": "contracts/DeclarationRegistry.algo.ts:83",
+          "pc": [
+            289,
+            290
+          ]
+        },
+        {
+          "teal": 307,
+          "source": "contracts/DeclarationRegistry.algo.ts:83",
+          "pc": [
+            291
+          ]
+        },
+        {
+          "teal": 308,
+          "source": "contracts/DeclarationRegistry.algo.ts:83",
+          "pc": [
+            292,
+            293
+          ]
+        },
+        {
+          "teal": 309,
+          "source": "contracts/DeclarationRegistry.algo.ts:83",
+          "pc": [
+            294
+          ]
+        },
+        {
+          "teal": 313,
+          "source": "contracts/DeclarationRegistry.algo.ts:85",
+          "pc": [
+            295
+          ]
+        },
+        {
+          "teal": 317,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            296,
+            297
+          ]
+        },
+        {
+          "teal": 318,
+          "source": "contracts/DeclarationRegistry.algo.ts:69",
+          "pc": [
+            298
+          ]
+        },
+        {
+          "teal": 323,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            299
+          ]
+        },
+        {
+          "teal": 326,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            300,
+            301,
+            302
+          ]
+        },
+        {
+          "teal": 327,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            303
+          ]
+        },
+        {
+          "teal": 328,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            304
+          ]
+        },
+        {
+          "teal": 329,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            305
+          ]
+        },
+        {
+          "teal": 330,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            306
+          ]
+        },
+        {
+          "teal": 333,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "errorMessage": "argument 0 (addrToken) for removeDeclaration must be a (address,uint64,uint64)",
+          "pc": [
+            307
+          ]
+        },
+        {
+          "teal": 336,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            308,
+            309,
+            310
+          ]
+        },
+        {
+          "teal": 337,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            311
+          ]
+        },
+        {
+          "teal": 338,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            312
+          ]
+        },
+        {
+          "teal": 339,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            313,
+            314
+          ]
+        },
+        {
+          "teal": 340,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            315
+          ]
+        },
+        {
+          "teal": 341,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            316
+          ]
+        },
+        {
+          "teal": 342,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            317
+          ]
+        },
+        {
+          "teal": 343,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            318
+          ]
+        },
+        {
+          "teal": 344,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            319
+          ]
+        },
+        {
+          "teal": 348,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            320,
+            321,
+            322
+          ]
+        },
+        {
+          "teal": 351,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            323,
+            324
+          ]
+        },
+        {
+          "teal": 356,
+          "source": "contracts/DeclarationRegistry.algo.ts:89",
+          "pc": [
+            325,
+            326
+          ]
+        },
+        {
+          "teal": 357,
+          "source": "contracts/DeclarationRegistry.algo.ts:89",
+          "pc": [
+            327
+          ]
+        },
+        {
+          "teal": 358,
+          "source": "contracts/DeclarationRegistry.algo.ts:89",
+          "pc": [
+            328
+          ]
+        },
+        {
+          "teal": 359,
+          "source": "contracts/DeclarationRegistry.algo.ts:89",
+          "pc": [
+            329
+          ]
+        },
+        {
+          "teal": 360,
+          "source": "contracts/DeclarationRegistry.algo.ts:89",
+          "pc": [
+            330
+          ]
+        },
+        {
+          "teal": 361,
+          "source": "contracts/DeclarationRegistry.algo.ts:89",
+          "pc": [
+            331,
+            332,
+            333
+          ]
+        },
+        {
+          "teal": 366,
+          "source": "contracts/DeclarationRegistry.algo.ts:90",
+          "pc": [
+            334
+          ]
+        },
+        {
+          "teal": 367,
+          "source": "contracts/DeclarationRegistry.algo.ts:90",
+          "pc": [
+            335,
+            336,
+            337
+          ]
+        },
+        {
+          "teal": 373,
+          "source": "contracts/DeclarationRegistry.algo.ts:95",
+          "pc": [
+            338
+          ]
+        },
+        {
+          "teal": 374,
+          "source": "contracts/DeclarationRegistry.algo.ts:95",
+          "pc": [
+            339,
+            340
+          ]
+        },
+        {
+          "teal": 375,
+          "source": "contracts/DeclarationRegistry.algo.ts:95",
+          "pc": [
+            341
+          ]
+        },
+        {
+          "teal": 376,
+          "source": "contracts/DeclarationRegistry.algo.ts:95",
+          "pc": [
+            342
+          ]
+        },
+        {
+          "teal": 377,
+          "source": "contracts/DeclarationRegistry.algo.ts:95",
+          "pc": [
+            343
+          ]
+        },
+        {
+          "teal": 378,
+          "source": "contracts/DeclarationRegistry.algo.ts:95",
+          "pc": [
+            344
+          ]
+        },
+        {
+          "teal": 379,
+          "source": "contracts/DeclarationRegistry.algo.ts:95",
+          "pc": [
+            345,
+            346,
+            347
+          ]
+        },
+        {
+          "teal": 387,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            348
+          ]
+        },
+        {
+          "teal": 388,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            349
+          ]
+        },
+        {
+          "teal": 389,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            350,
+            351
+          ]
+        },
+        {
+          "teal": 390,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            352,
+            353,
+            354,
+            355,
+            356,
+            357
+          ]
+        },
+        {
+          "teal": 391,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            358,
+            359
+          ]
+        },
+        {
+          "teal": 395,
+          "source": "contracts/DeclarationRegistry.algo.ts:97",
+          "pc": [
+            360
+          ]
+        },
+        {
+          "teal": 396,
+          "source": "contracts/DeclarationRegistry.algo.ts:97",
+          "pc": [
+            361,
+            362
+          ]
+        },
+        {
+          "teal": 397,
+          "source": "contracts/DeclarationRegistry.algo.ts:97",
+          "pc": [
+            363
+          ]
+        },
+        {
+          "teal": 398,
+          "source": "contracts/DeclarationRegistry.algo.ts:97",
+          "pc": [
+            364
+          ]
+        },
+        {
+          "teal": 401,
+          "source": "contracts/DeclarationRegistry.algo.ts:97",
+          "errorMessage": "box value does not exist: this.approvalApps(addrToken).value",
+          "pc": [
+            365
+          ]
+        },
+        {
+          "teal": 402,
+          "source": "contracts/DeclarationRegistry.algo.ts:97",
+          "pc": [
+            366
+          ]
+        },
+        {
+          "teal": 403,
+          "source": "contracts/DeclarationRegistry.algo.ts:97",
+          "pc": [
+            367,
+            368
+          ]
+        },
+        {
+          "teal": 407,
+          "source": "contracts/DeclarationRegistry.algo.ts:98",
+          "pc": [
+            369,
+            370
+          ]
+        },
+        {
+          "teal": 408,
+          "source": "contracts/DeclarationRegistry.algo.ts:98",
+          "pc": [
+            371,
+            372
+          ]
+        },
+        {
+          "teal": 409,
+          "source": "contracts/DeclarationRegistry.algo.ts:98",
+          "pc": [
+            373,
+            374
+          ]
+        },
+        {
+          "teal": 410,
+          "source": "contracts/DeclarationRegistry.algo.ts:98",
+          "pc": [
+            375,
+            376
+          ]
+        },
+        {
+          "teal": 413,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            377
+          ]
+        },
+        {
+          "teal": 414,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            378,
+            379
+          ]
+        },
+        {
+          "teal": 417,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            380
+          ]
+        },
+        {
+          "teal": 418,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            381,
+            382
+          ]
+        },
+        {
+          "teal": 419,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            383
+          ]
+        },
+        {
+          "teal": 420,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            384
+          ]
+        },
+        {
+          "teal": 421,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            385,
+            386
+          ]
+        },
+        {
+          "teal": 422,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            387,
+            388,
+            389
+          ]
+        },
+        {
+          "teal": 423,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            390
+          ]
+        },
+        {
+          "teal": 424,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            391
+          ]
+        },
+        {
+          "teal": 425,
+          "source": "contracts/DeclarationRegistry.algo.ts:96",
+          "pc": [
+            392,
+            393
+          ]
+        },
+        {
+          "teal": 426,
+          "source": "contracts/DeclarationRegistry.algo.ts:95",
+          "pc": [
+            394,
+            395,
+            396
+          ]
+        },
+        {
+          "teal": 431,
+          "source": "contracts/DeclarationRegistry.algo.ts:101",
+          "pc": [
+            397,
+            398
+          ]
+        },
+        {
+          "teal": 432,
+          "source": "contracts/DeclarationRegistry.algo.ts:101",
+          "pc": [
+            399,
+            400
+          ]
+        },
+        {
+          "teal": 433,
+          "source": "contracts/DeclarationRegistry.algo.ts:101",
+          "pc": [
+            401,
+            402,
+            403
+          ]
+        },
+        {
+          "teal": 434,
+          "source": "contracts/DeclarationRegistry.algo.ts:101",
+          "pc": [
+            404
+          ]
+        },
+        {
+          "teal": 435,
+          "source": "contracts/DeclarationRegistry.algo.ts:101",
+          "pc": [
+            405,
+            406
+          ]
+        },
+        {
+          "teal": 441,
+          "source": "contracts/DeclarationRegistry.algo.ts:104",
+          "pc": [
+            407,
+            408
+          ]
+        },
+        {
+          "teal": 442,
+          "source": "contracts/DeclarationRegistry.algo.ts:104",
+          "pc": [
+            409
+          ]
+        },
+        {
+          "teal": 443,
+          "source": "contracts/DeclarationRegistry.algo.ts:104",
+          "pc": [
+            410,
+            411,
+            412
+          ]
+        },
+        {
+          "teal": 448,
+          "source": "contracts/DeclarationRegistry.algo.ts:104",
+          "pc": [
+            413
+          ]
+        },
+        {
+          "teal": 449,
+          "source": "contracts/DeclarationRegistry.algo.ts:104",
+          "pc": [
+            414,
+            415,
+            416
+          ]
+        },
+        {
+          "teal": 454,
+          "source": "contracts/DeclarationRegistry.algo.ts:105",
+          "pc": [
+            417,
+            418
+          ]
+        },
+        {
+          "teal": 455,
+          "source": "contracts/DeclarationRegistry.algo.ts:105",
+          "pc": [
+            419
+          ]
+        },
+        {
+          "teal": 459,
+          "source": "contracts/DeclarationRegistry.algo.ts:106",
+          "pc": [
+            420
+          ]
+        },
+        {
+          "teal": 463,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            421,
+            422
+          ]
+        },
+        {
+          "teal": 464,
+          "source": "contracts/DeclarationRegistry.algo.ts:88",
+          "pc": [
+            423
+          ]
+        },
+        {
+          "teal": 469,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            424
+          ]
+        },
+        {
+          "teal": 472,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            425,
+            426,
+            427
+          ]
+        },
+        {
+          "teal": 473,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            428
+          ]
+        },
+        {
+          "teal": 474,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            429
+          ]
+        },
+        {
+          "teal": 475,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            430
+          ]
+        },
+        {
+          "teal": 476,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            431
+          ]
+        },
+        {
+          "teal": 479,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "errorMessage": "argument 0 (addrToken) for removeRequest must be a (address,uint64,uint64)",
+          "pc": [
+            432
+          ]
+        },
+        {
+          "teal": 482,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            433,
+            434,
+            435
+          ]
+        },
+        {
+          "teal": 483,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            436
+          ]
+        },
+        {
+          "teal": 484,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            437
+          ]
+        },
+        {
+          "teal": 485,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            438,
+            439
+          ]
+        },
+        {
+          "teal": 486,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            440
+          ]
+        },
+        {
+          "teal": 487,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            441
+          ]
+        },
+        {
+          "teal": 488,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            442
+          ]
+        },
+        {
+          "teal": 489,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            443
+          ]
+        },
+        {
+          "teal": 490,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            444
+          ]
+        },
+        {
+          "teal": 494,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            445,
+            446,
+            447
+          ]
+        },
+        {
+          "teal": 497,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            448,
+            449
+          ]
+        },
+        {
+          "teal": 502,
+          "source": "contracts/DeclarationRegistry.algo.ts:110",
+          "pc": [
+            450
+          ]
+        },
+        {
+          "teal": 503,
+          "source": "contracts/DeclarationRegistry.algo.ts:110",
+          "pc": [
+            451,
+            452
+          ]
+        },
+        {
+          "teal": 504,
+          "source": "contracts/DeclarationRegistry.algo.ts:110",
+          "pc": [
+            453
+          ]
+        },
+        {
+          "teal": 505,
+          "source": "contracts/DeclarationRegistry.algo.ts:110",
+          "pc": [
+            454
+          ]
+        },
+        {
+          "teal": 506,
+          "source": "contracts/DeclarationRegistry.algo.ts:110",
+          "pc": [
+            455
+          ]
+        },
+        {
+          "teal": 507,
+          "source": "contracts/DeclarationRegistry.algo.ts:110",
+          "pc": [
+            456
+          ]
+        },
+        {
+          "teal": 508,
+          "source": "contracts/DeclarationRegistry.algo.ts:110",
+          "pc": [
+            457
+          ]
+        },
+        {
+          "teal": 509,
+          "source": "contracts/DeclarationRegistry.algo.ts:110",
+          "pc": [
+            458,
+            459,
+            460
+          ]
+        },
+        {
+          "teal": 514,
+          "source": "contracts/DeclarationRegistry.algo.ts:111",
+          "pc": [
+            461
+          ]
+        },
+        {
+          "teal": 515,
+          "source": "contracts/DeclarationRegistry.algo.ts:111",
+          "pc": [
+            462,
+            463,
+            464
+          ]
+        },
+        {
+          "teal": 521,
+          "source": "contracts/DeclarationRegistry.algo.ts:115",
+          "pc": [
+            465
+          ]
+        },
+        {
+          "teal": 522,
+          "source": "contracts/DeclarationRegistry.algo.ts:115",
+          "pc": [
+            466,
+            467
+          ]
+        },
+        {
+          "teal": 523,
+          "source": "contracts/DeclarationRegistry.algo.ts:115",
+          "pc": [
+            468
+          ]
+        },
+        {
+          "teal": 524,
+          "source": "contracts/DeclarationRegistry.algo.ts:115",
+          "pc": [
+            469
+          ]
+        },
+        {
+          "teal": 525,
+          "source": "contracts/DeclarationRegistry.algo.ts:115",
+          "pc": [
+            470
+          ]
+        },
+        {
+          "teal": 526,
+          "source": "contracts/DeclarationRegistry.algo.ts:115",
+          "pc": [
+            471
+          ]
+        },
+        {
+          "teal": 527,
+          "source": "contracts/DeclarationRegistry.algo.ts:115",
+          "pc": [
+            472,
+            473,
+            474
+          ]
+        },
+        {
+          "teal": 535,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            475
+          ]
+        },
+        {
+          "teal": 536,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            476
+          ]
+        },
+        {
+          "teal": 537,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            477,
+            478
+          ]
+        },
+        {
+          "teal": 538,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            479,
+            480,
+            481,
+            482,
+            483,
+            484
+          ]
+        },
+        {
+          "teal": 539,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            485,
+            486
+          ]
+        },
+        {
+          "teal": 543,
+          "source": "contracts/DeclarationRegistry.algo.ts:117",
+          "pc": [
+            487
+          ]
+        },
+        {
+          "teal": 544,
+          "source": "contracts/DeclarationRegistry.algo.ts:117",
+          "pc": [
+            488,
+            489
+          ]
+        },
+        {
+          "teal": 545,
+          "source": "contracts/DeclarationRegistry.algo.ts:117",
+          "pc": [
+            490
+          ]
+        },
+        {
+          "teal": 546,
+          "source": "contracts/DeclarationRegistry.algo.ts:117",
+          "pc": [
+            491
+          ]
+        },
+        {
+          "teal": 549,
+          "source": "contracts/DeclarationRegistry.algo.ts:117",
+          "errorMessage": "box value does not exist: this.approvalApps(addrToken).value",
+          "pc": [
+            492
+          ]
+        },
+        {
+          "teal": 550,
+          "source": "contracts/DeclarationRegistry.algo.ts:117",
+          "pc": [
+            493
+          ]
+        },
+        {
+          "teal": 551,
+          "source": "contracts/DeclarationRegistry.algo.ts:117",
+          "pc": [
+            494,
+            495
+          ]
+        },
+        {
+          "teal": 555,
+          "source": "contracts/DeclarationRegistry.algo.ts:118",
+          "pc": [
+            496,
+            497
+          ]
+        },
+        {
+          "teal": 556,
+          "source": "contracts/DeclarationRegistry.algo.ts:118",
+          "pc": [
+            498,
+            499
+          ]
+        },
+        {
+          "teal": 557,
+          "source": "contracts/DeclarationRegistry.algo.ts:118",
+          "pc": [
+            500,
+            501
+          ]
+        },
+        {
+          "teal": 558,
+          "source": "contracts/DeclarationRegistry.algo.ts:118",
+          "pc": [
+            502,
+            503
+          ]
+        },
+        {
+          "teal": 561,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            504
+          ]
+        },
+        {
+          "teal": 562,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            505,
+            506
+          ]
+        },
+        {
+          "teal": 565,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            507
+          ]
+        },
+        {
+          "teal": 566,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            508,
+            509
+          ]
+        },
+        {
+          "teal": 567,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            510
+          ]
+        },
+        {
+          "teal": 568,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            511
+          ]
+        },
+        {
+          "teal": 569,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            512,
+            513
+          ]
+        },
+        {
+          "teal": 570,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            514,
+            515,
+            516
+          ]
+        },
+        {
+          "teal": 571,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            517
+          ]
+        },
+        {
+          "teal": 572,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            518
+          ]
+        },
+        {
+          "teal": 573,
+          "source": "contracts/DeclarationRegistry.algo.ts:116",
+          "pc": [
+            519,
+            520
+          ]
+        },
+        {
+          "teal": 574,
+          "source": "contracts/DeclarationRegistry.algo.ts:115",
+          "pc": [
+            521,
+            522,
+            523
+          ]
+        },
+        {
+          "teal": 579,
+          "source": "contracts/DeclarationRegistry.algo.ts:121",
+          "pc": [
+            524,
+            525
+          ]
+        },
+        {
+          "teal": 580,
+          "source": "contracts/DeclarationRegistry.algo.ts:121",
+          "pc": [
+            526,
+            527
+          ]
+        },
+        {
+          "teal": 581,
+          "source": "contracts/DeclarationRegistry.algo.ts:121",
+          "pc": [
+            528,
+            529,
+            530
+          ]
+        },
+        {
+          "teal": 582,
+          "source": "contracts/DeclarationRegistry.algo.ts:121",
+          "pc": [
+            531
+          ]
+        },
+        {
+          "teal": 583,
+          "source": "contracts/DeclarationRegistry.algo.ts:121",
+          "pc": [
+            532,
+            533
+          ]
+        },
+        {
+          "teal": 589,
+          "source": "contracts/DeclarationRegistry.algo.ts:124",
+          "pc": [
+            534,
+            535
+          ]
+        },
+        {
+          "teal": 590,
+          "source": "contracts/DeclarationRegistry.algo.ts:124",
+          "pc": [
+            536
+          ]
+        },
+        {
+          "teal": 591,
+          "source": "contracts/DeclarationRegistry.algo.ts:124",
+          "pc": [
+            537,
+            538,
+            539
+          ]
+        },
+        {
+          "teal": 596,
+          "source": "contracts/DeclarationRegistry.algo.ts:124",
+          "pc": [
+            540
+          ]
+        },
+        {
+          "teal": 597,
+          "source": "contracts/DeclarationRegistry.algo.ts:124",
+          "pc": [
+            541,
+            542,
+            543
+          ]
+        },
+        {
+          "teal": 602,
+          "source": "contracts/DeclarationRegistry.algo.ts:125",
+          "pc": [
+            544
+          ]
+        },
+        {
+          "teal": 603,
+          "source": "contracts/DeclarationRegistry.algo.ts:125",
+          "pc": [
+            545,
+            546
+          ]
+        },
+        {
+          "teal": 604,
+          "source": "contracts/DeclarationRegistry.algo.ts:125",
+          "pc": [
+            547
+          ]
+        },
+        {
+          "teal": 605,
+          "source": "contracts/DeclarationRegistry.algo.ts:125",
+          "pc": [
+            548
+          ]
+        },
+        {
+          "teal": 609,
+          "source": "contracts/DeclarationRegistry.algo.ts:126",
+          "pc": [
+            549
+          ]
+        },
+        {
+          "teal": 613,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            550,
+            551
+          ]
+        },
+        {
+          "teal": 614,
+          "source": "contracts/DeclarationRegistry.algo.ts:109",
+          "pc": [
+            552
+          ]
+        },
+        {
+          "teal": 619,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            553
+          ]
+        },
+        {
+          "teal": 622,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            554,
+            555,
+            556
+          ]
+        },
+        {
+          "teal": 623,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            557
+          ]
+        },
+        {
+          "teal": 624,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            558
+          ]
+        },
+        {
+          "teal": 625,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            559
+          ]
+        },
+        {
+          "teal": 626,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            560
+          ]
+        },
+        {
+          "teal": 629,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "errorMessage": "argument 0 (addrToken) for isRequested must be a (address,uint64,uint64)",
+          "pc": [
+            561
+          ]
+        },
+        {
+          "teal": 632,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            562,
+            563,
+            564
+          ]
+        },
+        {
+          "teal": 633,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            565
+          ]
+        },
+        {
+          "teal": 634,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            566
+          ]
+        },
+        {
+          "teal": 635,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            567,
+            568
+          ]
+        },
+        {
+          "teal": 636,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            569
+          ]
+        },
+        {
+          "teal": 637,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            570
+          ]
+        },
+        {
+          "teal": 638,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            571
+          ]
+        },
+        {
+          "teal": 639,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            572
+          ]
+        },
+        {
+          "teal": 640,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            573
+          ]
+        },
+        {
+          "teal": 644,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            574,
+            575,
+            576
+          ]
+        },
+        {
+          "teal": 648,
+          "source": "contracts/DeclarationRegistry.algo.ts:130",
+          "pc": [
+            577
+          ]
+        },
+        {
+          "teal": 649,
+          "source": "contracts/DeclarationRegistry.algo.ts:130",
+          "pc": [
+            578,
+            579
+          ]
+        },
+        {
+          "teal": 650,
+          "source": "contracts/DeclarationRegistry.algo.ts:130",
+          "pc": [
+            580
+          ]
+        },
+        {
+          "teal": 651,
+          "source": "contracts/DeclarationRegistry.algo.ts:130",
+          "pc": [
+            581
+          ]
+        },
+        {
+          "teal": 652,
+          "source": "contracts/DeclarationRegistry.algo.ts:130",
+          "pc": [
+            582
+          ]
+        },
+        {
+          "teal": 653,
+          "source": "contracts/DeclarationRegistry.algo.ts:130",
+          "pc": [
+            583
+          ]
+        },
+        {
+          "teal": 654,
+          "source": "contracts/DeclarationRegistry.algo.ts:129",
+          "pc": [
+            584
+          ]
+        },
+        {
+          "teal": 659,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            585
+          ]
+        },
+        {
+          "teal": 662,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            586,
+            587,
+            588
+          ]
+        },
+        {
+          "teal": 663,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            589
+          ]
+        },
+        {
+          "teal": 664,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            590
+          ]
+        },
+        {
+          "teal": 665,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            591
+          ]
+        },
+        {
+          "teal": 666,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            592
+          ]
+        },
+        {
+          "teal": 669,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "errorMessage": "argument 0 (addrToken) for isDeclared must be a (address,uint64,uint64)",
+          "pc": [
+            593
+          ]
+        },
+        {
+          "teal": 672,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            594,
+            595,
+            596
+          ]
+        },
+        {
+          "teal": 673,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            597
+          ]
+        },
+        {
+          "teal": 674,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            598
+          ]
+        },
+        {
+          "teal": 675,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            599,
+            600
+          ]
+        },
+        {
+          "teal": 676,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            601
+          ]
+        },
+        {
+          "teal": 677,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            602
+          ]
+        },
+        {
+          "teal": 678,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            603
+          ]
+        },
+        {
+          "teal": 679,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            604
+          ]
+        },
+        {
+          "teal": 680,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            605
+          ]
+        },
+        {
+          "teal": 684,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            606,
+            607,
+            608
+          ]
+        },
+        {
+          "teal": 688,
+          "source": "contracts/DeclarationRegistry.algo.ts:134",
+          "pc": [
+            609
+          ]
+        },
+        {
+          "teal": 689,
+          "source": "contracts/DeclarationRegistry.algo.ts:134",
+          "pc": [
+            610,
+            611
+          ]
+        },
+        {
+          "teal": 690,
+          "source": "contracts/DeclarationRegistry.algo.ts:134",
+          "pc": [
+            612
+          ]
+        },
+        {
+          "teal": 691,
+          "source": "contracts/DeclarationRegistry.algo.ts:134",
+          "pc": [
+            613
+          ]
+        },
+        {
+          "teal": 692,
+          "source": "contracts/DeclarationRegistry.algo.ts:134",
+          "pc": [
+            614
+          ]
+        },
+        {
+          "teal": 693,
+          "source": "contracts/DeclarationRegistry.algo.ts:134",
+          "pc": [
+            615
+          ]
+        },
+        {
+          "teal": 694,
+          "source": "contracts/DeclarationRegistry.algo.ts:133",
+          "pc": [
+            616
+          ]
+        },
+        {
+          "teal": 697,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            617
+          ]
+        },
+        {
+          "teal": 698,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            618
+          ]
+        },
+        {
+          "teal": 701,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            619,
+            620,
+            621,
+            622,
+            623,
+            624
+          ]
+        },
+        {
+          "teal": 702,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            625,
+            626,
+            627
+          ]
+        },
+        {
+          "teal": 703,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            628,
+            629,
+            630,
+            631
+          ]
+        },
+        {
+          "teal": 706,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "errorMessage": "this contract does not implement the given ABI method for create NoOp",
+          "pc": [
+            632
+          ]
+        },
+        {
+          "teal": 709,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            633,
+            634,
+            635,
+            636,
+            637,
+            638
+          ]
+        },
+        {
+          "teal": 710,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            639,
+            640,
+            641,
+            642,
+            643,
+            644
+          ]
+        },
+        {
+          "teal": 711,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            645,
+            646,
+            647,
+            648,
+            649,
+            650
+          ]
+        },
+        {
+          "teal": 712,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            651,
+            652,
+            653,
+            654,
+            655,
+            656
+          ]
+        },
+        {
+          "teal": 713,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            657,
+            658,
+            659,
+            660,
+            661,
+            662
+          ]
+        },
+        {
+          "teal": 714,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            663,
+            664,
+            665,
+            666,
+            667,
+            668
+          ]
+        },
+        {
+          "teal": 715,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            669,
+            670,
+            671
+          ]
+        },
+        {
+          "teal": 716,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "pc": [
+            672,
+            673,
+            674,
+            675,
+            676,
+            677,
+            678,
+            679,
+            680,
+            681,
+            682,
+            683,
+            684,
+            685
+          ]
+        },
+        {
+          "teal": 719,
+          "source": "contracts/DeclarationRegistry.algo.ts:31",
+          "errorMessage": "this contract does not implement the given ABI method for call NoOp",
+          "pc": [
+            686
+          ]
+        }
+      ],
+      "pcOffsetMethod": "none"
+    },
+    "clear": {
+      "sourceInfo": [],
+      "pcOffsetMethod": "none"
+    }
+  },
+  "source": {
+    "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDAgNDggNgpieXRlY2Jsb2NrIDB4NjEgMHgxNTFmN2M3NSAweDAwIDB4NzIgMHgKCi8vIFRoaXMgVEVBTCB3YXMgZ2VuZXJhdGVkIGJ5IFRFQUxTY3JpcHQgdjAuMTA2LjMKLy8gaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9URUFMU2NyaXB0CgovLyBUaGlzIGNvbnRyYWN0IGlzIGNvbXBsaWFudCB3aXRoIGFuZC9vciBpbXBsZW1lbnRzIHRoZSBmb2xsb3dpbmcgQVJDczogWyBBUkM0IF0KCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCmludGMgMyAvLyA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIGRlY2xhcmUoKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkpYm9vbAoqYWJpX3JvdXRlX2RlY2xhcmU6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDEgLy8gMHgxNTFmN2M3NQoKCS8vIGFkZHJUb2tlbjogKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDIgLy8gNDgKCT09CgoJLy8gYXJndW1lbnQgMCAoYWRkclRva2VuKSBmb3IgZGVjbGFyZSBtdXN0IGJlIGEgKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkKCWFzc2VydAoKCS8vIGV4ZWN1dGUgZGVjbGFyZSgoYWRkcmVzcyx1aW50NjQsdWludDY0KSlib29sCgljYWxsc3ViIGRlY2xhcmUKCWJ5dGVjIDIgLy8gMHgwMAoJaW50YyAxIC8vIDAKCXVuY292ZXIgMgoJc2V0Yml0Cgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gZGVjbGFyZShhZGRyVG9rZW46IEFkZHJlc3NUb2tlbik6IGJvb2xlYW4KLy8KLy8gRGVjbGFyZSB0aGUgZ2l2ZW4gQVJDODQgdG9rZW4gZm9yIHRoZSBnaXZlbiBhZGRyZXNzLiBJZiBhbiBhcHByb3ZhbCBhcHAgaGFzIGJlZW4gZGVmaW5lZCBmb3IgdGhlIGFkZHJlc3MsIHRoYXQgYXBwIGlzIGNhbGxlZCB0byBlbnN1cmUgdGhlCi8vIGRlY2xhcmF0aW9uIGlzIGFsbG93ZWQuIElmIGFuIGFwcHJvdmFsIGFwcCBoYXMgbm90IGJlIGRlZmluZWQsIHRoZSB0cmFuc2FjdGlvbiBzZW5kZXIgbXVzdCBtYXRjaCB0aGUgZGVjbGFyYXRpb24gYWRkcmVzcwpkZWNsYXJlOgoJcHJvdG8gMSAxCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDQgLy8gMHgKCgkvLyAqaWYwX2NvbmRpdGlvbgoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czo0NgoJLy8gdGhpcy5kZWNsYXJhdGlvbnMoYWRkclRva2VuKS5leGlzdHMKCWZyYW1lX2RpZyAtMSAvLyBhZGRyVG9rZW46IEFkZHJlc3NUb2tlbgoJYm94X2xlbgoJc3dhcAoJcG9wCglieiAqaWYwX2VuZAoKCS8vICppZjBfY29uc2VxdWVudAoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czo0NwoJLy8gcmV0dXJuIHRydWU7CglpbnRjIDAgLy8gMQoJYiAqZGVjbGFyZSpyZXR1cm4KCippZjBfZW5kOgoJLy8gKmlmMV9jb25kaXRpb24KCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6NTEKCS8vIHRoaXMuYXBwcm92YWxBcHBzKGFkZHJUb2tlbikuZXhpc3RzCglieXRlYyAwIC8vICAiYSIKCWZyYW1lX2RpZyAtMSAvLyBhZGRyVG9rZW46IEFkZHJlc3NUb2tlbgoJY29uY2F0Cglib3hfbGVuCglzd2FwCglwb3AKCWJ6ICppZjFfZWxzZQoKCS8vICppZjFfY29uc2VxdWVudAoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czo1MgoJLy8gYXBwcm92ZWQgPSBzZW5kTWV0aG9kQ2FsbDx0eXBlb2YgQXBwcm92YWxBcHAucHJvdG90eXBlLmFwcHJvdmVEZWNsYXJhdGlvbj4oewoJLy8gICAgICAgICBhcHBsaWNhdGlvbklEOiB0aGlzLmFwcHJvdmFsQXBwcyhhZGRyVG9rZW4pLnZhbHVlLAoJLy8gICAgICAgICBtZXRob2RBcmdzOiBbdGhpcy50eG4uc2VuZGVyLCBhZGRyVG9rZW5dLAoJLy8gICAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMyAvLyAgYXBwbAoJaXR4bl9maWVsZCBUeXBlRW51bQoJcHVzaGJ5dGVzIDB4ZTM4YTY5YjggLy8gbWV0aG9kICJhcHByb3ZlRGVjbGFyYXRpb24oYWRkcmVzcywoYWRkcmVzcyx1aW50NjQsdWludDY0KSlib29sIgoJaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKCgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjUzCgkvLyBhcHBsaWNhdGlvbklEOiB0aGlzLmFwcHJvdmFsQXBwcyhhZGRyVG9rZW4pLnZhbHVlCglieXRlYyAwIC8vICAiYSIKCWZyYW1lX2RpZyAtMSAvLyBhZGRyVG9rZW46IEFkZHJlc3NUb2tlbgoJY29uY2F0Cglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmFwcHJvdmFsQXBwcyhhZGRyVG9rZW4pLnZhbHVlCglhc3NlcnQKCWJ0b2kKCWl0eG5fZmllbGQgQXBwbGljYXRpb25JRAoKCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6NTQKCS8vIG1ldGhvZEFyZ3M6IFt0aGlzLnR4bi5zZW5kZXIsIGFkZHJUb2tlbl0KCXR4biBTZW5kZXIKCWl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCglmcmFtZV9kaWcgLTEgLy8gYWRkclRva2VuOiBBZGRyZXNzVG9rZW4KCWl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoJaXR4biBOdW1Mb2dzCglpbnRjIDAgLy8gMQoJLQoJaXR4bmFzIExvZ3MKCWV4dHJhY3QgNCAwCglpbnRjIDEgLy8gMAoJZ2V0Yml0CglmcmFtZV9idXJ5IDAgLy8gYXBwcm92ZWQ6IGJvb2xlYW4KCWIgKmlmMV9lbmQKCippZjFfZWxzZToKCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6NTcKCS8vIGFwcHJvdmVkID0gdGhpcy50eG4uc2VuZGVyID09PSBhZGRyVG9rZW4uYWRkcgoJdHhuIFNlbmRlcgoJZnJhbWVfZGlnIC0xIC8vIGFkZHJUb2tlbjogQWRkcmVzc1Rva2VuCglleHRyYWN0IDAgMzIKCT09CglmcmFtZV9idXJ5IDAgLy8gYXBwcm92ZWQ6IGJvb2xlYW4KCippZjFfZW5kOgoJLy8gKmlmMl9jb25kaXRpb24KCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6NjAKCS8vICFhcHByb3ZlZAoJZnJhbWVfZGlnIDAgLy8gYXBwcm92ZWQ6IGJvb2xlYW4KCSEKCWJ6ICppZjJfZW5kCgoJLy8gKmlmMl9jb25zZXF1ZW50CgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjYwCgkvLyByZXR1cm4gZmFsc2U7CglpbnRjIDEgLy8gMAoJYiAqZGVjbGFyZSpyZXR1cm4KCippZjJfZW5kOgoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czo2MgoJLy8gdGhpcy5kZWNsYXJhdGlvbnMoYWRkclRva2VuKS52YWx1ZSA9ICcnIGFzIGJ5dGVzPDA+CglmcmFtZV9kaWcgLTEgLy8gYWRkclRva2VuOiBBZGRyZXNzVG9rZW4KCWJ5dGVjIDQgLy8gICIiCglib3hfcHV0CgoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czo2NAoJLy8gcmV0dXJuIHRydWU7CglpbnRjIDAgLy8gMQoKKmRlY2xhcmUqcmV0dXJuOgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCglyZXRzdWIKCi8vIHJlcXVlc3QoKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkpYm9vbAoqYWJpX3JvdXRlX3JlcXVlc3Q6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDEgLy8gMHgxNTFmN2M3NQoKCS8vIGFkZHJUb2tlbjogKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDIgLy8gNDgKCT09CgoJLy8gYXJndW1lbnQgMCAoYWRkclRva2VuKSBmb3IgcmVxdWVzdCBtdXN0IGJlIGEgKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkKCWFzc2VydAoKCS8vIGV4ZWN1dGUgcmVxdWVzdCgoYWRkcmVzcyx1aW50NjQsdWludDY0KSlib29sCgljYWxsc3ViIHJlcXVlc3QKCWJ5dGVjIDIgLy8gMHgwMAoJaW50YyAxIC8vIDAKCXVuY292ZXIgMgoJc2V0Yml0Cgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gcmVxdWVzdChhZGRyVG9rZW46IEFkZHJlc3NUb2tlbik6IGJvb2xlYW4KLy8KLy8gRGVjbGFyZSB0aGUgZ2l2ZW4gQVJDODQgdG9rZW4gZm9yIHRoZSBnaXZlbiBhZGRyZXNzLiBJZiBhbiBhcHByb3ZhbCBhcHAgaGFzIGJlZW4gYWRkZWQgZm9yIHRoZSB1c2VyLCB0aGF0IGFwcCBpcyBjYWxsZWQgdG8gZW5zdXJlIHRoZQovLyBkZWNsYXJhdGlvbiBpcyBhbGxvd2VkCnJlcXVlc3Q6Cglwcm90byAxIDEKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgNCAvLyAweAoKCS8vICppZjNfY29uZGl0aW9uCgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjcwCgkvLyB0aGlzLnJlcXVlc3RzKGFkZHJUb2tlbikuZXhpc3RzCglieXRlYyAzIC8vICAiciIKCWZyYW1lX2RpZyAtMSAvLyBhZGRyVG9rZW46IEFkZHJlc3NUb2tlbgoJY29uY2F0Cglib3hfbGVuCglzd2FwCglwb3AKCWJ6ICppZjNfZW5kCgoJLy8gKmlmM19jb25zZXF1ZW50CgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjcxCgkvLyByZXR1cm4gdHJ1ZTsKCWludGMgMCAvLyAxCgliICpyZXF1ZXN0KnJldHVybgoKKmlmM19lbmQ6CgkvLyAqaWY0X2NvbmRpdGlvbgoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czo3NAoJLy8gdGhpcy5hcHByb3ZhbEFwcHMoYWRkclRva2VuKS5leGlzdHMKCWJ5dGVjIDAgLy8gICJhIgoJZnJhbWVfZGlnIC0xIC8vIGFkZHJUb2tlbjogQWRkcmVzc1Rva2VuCgljb25jYXQKCWJveF9sZW4KCXN3YXAKCXBvcAoJYnogKmlmNF9lbmQKCgkvLyAqaWY0X2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6NzUKCS8vIGFwcHJvdmVkID0gc2VuZE1ldGhvZENhbGw8dHlwZW9mIEFwcHJvdmFsQXBwLnByb3RvdHlwZS5hcHByb3ZlUmVxdWVzdD4oewoJLy8gICAgICAgICBhcHBsaWNhdGlvbklEOiB0aGlzLmFwcHJvdmFsQXBwcyhhZGRyVG9rZW4pLnZhbHVlLAoJLy8gICAgICAgICBtZXRob2RBcmdzOiBbdGhpcy50eG4uc2VuZGVyLCBhZGRyVG9rZW5dLAoJLy8gICAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMyAvLyAgYXBwbAoJaXR4bl9maWVsZCBUeXBlRW51bQoJcHVzaGJ5dGVzIDB4OTY0NzBlNDAgLy8gbWV0aG9kICJhcHByb3ZlUmVxdWVzdChhZGRyZXNzLChhZGRyZXNzLHVpbnQ2NCx1aW50NjQpKWJvb2wiCglpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwoKCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6NzYKCS8vIGFwcGxpY2F0aW9uSUQ6IHRoaXMuYXBwcm92YWxBcHBzKGFkZHJUb2tlbikudmFsdWUKCWJ5dGVjIDAgLy8gICJhIgoJZnJhbWVfZGlnIC0xIC8vIGFkZHJUb2tlbjogQWRkcmVzc1Rva2VuCgljb25jYXQKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMuYXBwcm92YWxBcHBzKGFkZHJUb2tlbikudmFsdWUKCWFzc2VydAoJYnRvaQoJaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECgoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czo3NwoJLy8gbWV0aG9kQXJnczogW3RoaXMudHhuLnNlbmRlciwgYWRkclRva2VuXQoJdHhuIFNlbmRlcgoJaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKCWZyYW1lX2RpZyAtMSAvLyBhZGRyVG9rZW46IEFkZHJlc3NUb2tlbgoJaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKCgkvLyBGZWUgZmllbGQgbm90IHNldCwgZGVmYXVsdGluZyB0byAwCglpbnRjIDEgLy8gMAoJaXR4bl9maWVsZCBGZWUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CglpdHhuIE51bUxvZ3MKCWludGMgMCAvLyAxCgktCglpdHhuYXMgTG9ncwoJZXh0cmFjdCA0IDAKCWludGMgMSAvLyAwCglnZXRiaXQKCWZyYW1lX2J1cnkgMCAvLyBhcHByb3ZlZDogYm9vbAoKCS8vICppZjVfY29uZGl0aW9uCgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjgwCgkvLyAhYXBwcm92ZWQKCWZyYW1lX2RpZyAwIC8vIGFwcHJvdmVkOiBib29sCgkhCglieiAqaWY1X2VuZAoKCS8vICppZjVfY29uc2VxdWVudAoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czo4MAoJLy8gcmV0dXJuIGZhbHNlOwoJaW50YyAxIC8vIDAKCWIgKnJlcXVlc3QqcmV0dXJuCgoqaWY1X2VuZDoKCippZjRfZW5kOgoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czo4MwoJLy8gdGhpcy5yZXF1ZXN0cyhhZGRyVG9rZW4pLnZhbHVlID0gJycgYXMgYnl0ZXM8MD4KCWJ5dGVjIDMgLy8gICJyIgoJZnJhbWVfZGlnIC0xIC8vIGFkZHJUb2tlbjogQWRkcmVzc1Rva2VuCgljb25jYXQKCWJ5dGVjIDQgLy8gICIiCglib3hfcHV0CgoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czo4NQoJLy8gcmV0dXJuIHRydWU7CglpbnRjIDAgLy8gMQoKKnJlcXVlc3QqcmV0dXJuOgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCglyZXRzdWIKCi8vIHJlbW92ZURlY2xhcmF0aW9uKChhZGRyZXNzLHVpbnQ2NCx1aW50NjQpKWJvb2wKKmFiaV9yb3V0ZV9yZW1vdmVEZWNsYXJhdGlvbjoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMSAvLyAweDE1MWY3Yzc1CgoJLy8gYWRkclRva2VuOiAoYWRkcmVzcyx1aW50NjQsdWludDY0KQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMiAvLyA0OAoJPT0KCgkvLyBhcmd1bWVudCAwIChhZGRyVG9rZW4pIGZvciByZW1vdmVEZWNsYXJhdGlvbiBtdXN0IGJlIGEgKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkKCWFzc2VydAoKCS8vIGV4ZWN1dGUgcmVtb3ZlRGVjbGFyYXRpb24oKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkpYm9vbAoJY2FsbHN1YiByZW1vdmVEZWNsYXJhdGlvbgoJYnl0ZWMgMiAvLyAweDAwCglpbnRjIDEgLy8gMAoJdW5jb3ZlciAyCglzZXRiaXQKCWNvbmNhdAoJbG9nCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyByZW1vdmVEZWNsYXJhdGlvbihhZGRyVG9rZW46IEFkZHJlc3NUb2tlbik6IGJvb2xlYW4KcmVtb3ZlRGVjbGFyYXRpb246Cglwcm90byAxIDEKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgNCAvLyAweAoKCS8vICppZjZfY29uZGl0aW9uCgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjg5CgkvLyAhdGhpcy5kZWNsYXJhdGlvbnMoYWRkclRva2VuKS5leGlzdHMKCWZyYW1lX2RpZyAtMSAvLyBhZGRyVG9rZW46IEFkZHJlc3NUb2tlbgoJYm94X2xlbgoJc3dhcAoJcG9wCgkhCglieiAqaWY2X2VuZAoKCS8vICppZjZfY29uc2VxdWVudAoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czo5MAoJLy8gcmV0dXJuIHRydWU7CglpbnRjIDAgLy8gMQoJYiAqcmVtb3ZlRGVjbGFyYXRpb24qcmV0dXJuCgoqaWY2X2VuZDoKCS8vICppZjdfY29uZGl0aW9uCgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjk1CgkvLyB0aGlzLmFwcHJvdmFsQXBwcyhhZGRyVG9rZW4pLmV4aXN0cwoJYnl0ZWMgMCAvLyAgImEiCglmcmFtZV9kaWcgLTEgLy8gYWRkclRva2VuOiBBZGRyZXNzVG9rZW4KCWNvbmNhdAoJYm94X2xlbgoJc3dhcAoJcG9wCglieiAqaWY3X2Vsc2UKCgkvLyAqaWY3X2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6OTYKCS8vIGFwcHJvdmVkID0gc2VuZE1ldGhvZENhbGw8dHlwZW9mIEFwcHJvdmFsQXBwLnByb3RvdHlwZS5hcHByb3ZlRGVjbGFyYXRpb25SZW1vdmFsPih7CgkvLyAgICAgICAgIGFwcGxpY2F0aW9uSUQ6IHRoaXMuYXBwcm92YWxBcHBzKGFkZHJUb2tlbikudmFsdWUsCgkvLyAgICAgICAgIG1ldGhvZEFyZ3M6IFt0aGlzLnR4bi5zZW5kZXIsIGFkZHJUb2tlbl0sCgkvLyAgICAgICB9KQoJaXR4bl9iZWdpbgoJaW50YyAzIC8vICBhcHBsCglpdHhuX2ZpZWxkIFR5cGVFbnVtCglwdXNoYnl0ZXMgMHgzYzcxZDUwMSAvLyBtZXRob2QgImFwcHJvdmVEZWNsYXJhdGlvblJlbW92YWwoYWRkcmVzcywoYWRkcmVzcyx1aW50NjQsdWludDY0KSlib29sIgoJaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKCgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjk3CgkvLyBhcHBsaWNhdGlvbklEOiB0aGlzLmFwcHJvdmFsQXBwcyhhZGRyVG9rZW4pLnZhbHVlCglieXRlYyAwIC8vICAiYSIKCWZyYW1lX2RpZyAtMSAvLyBhZGRyVG9rZW46IEFkZHJlc3NUb2tlbgoJY29uY2F0Cglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmFwcHJvdmFsQXBwcyhhZGRyVG9rZW4pLnZhbHVlCglhc3NlcnQKCWJ0b2kKCWl0eG5fZmllbGQgQXBwbGljYXRpb25JRAoKCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6OTgKCS8vIG1ldGhvZEFyZ3M6IFt0aGlzLnR4bi5zZW5kZXIsIGFkZHJUb2tlbl0KCXR4biBTZW5kZXIKCWl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCglmcmFtZV9kaWcgLTEgLy8gYWRkclRva2VuOiBBZGRyZXNzVG9rZW4KCWl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoJaXR4biBOdW1Mb2dzCglpbnRjIDAgLy8gMQoJLQoJaXR4bmFzIExvZ3MKCWV4dHJhY3QgNCAwCglpbnRjIDEgLy8gMAoJZ2V0Yml0CglmcmFtZV9idXJ5IDAgLy8gYXBwcm92ZWQ6IGJvb2xlYW4KCWIgKmlmN19lbmQKCippZjdfZWxzZToKCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6MTAxCgkvLyBhcHByb3ZlZCA9IHRoaXMudHhuLnNlbmRlciA9PT0gYWRkclRva2VuLmFkZHIKCXR4biBTZW5kZXIKCWZyYW1lX2RpZyAtMSAvLyBhZGRyVG9rZW46IEFkZHJlc3NUb2tlbgoJZXh0cmFjdCAwIDMyCgk9PQoJZnJhbWVfYnVyeSAwIC8vIGFwcHJvdmVkOiBib29sZWFuCgoqaWY3X2VuZDoKCS8vICppZjhfY29uZGl0aW9uCgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjEwNAoJLy8gIWFwcHJvdmVkCglmcmFtZV9kaWcgMCAvLyBhcHByb3ZlZDogYm9vbGVhbgoJIQoJYnogKmlmOF9lbmQKCgkvLyAqaWY4X2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6MTA0CgkvLyByZXR1cm4gZmFsc2U7CglpbnRjIDEgLy8gMAoJYiAqcmVtb3ZlRGVjbGFyYXRpb24qcmV0dXJuCgoqaWY4X2VuZDoKCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6MTA1CgkvLyB0aGlzLmRlY2xhcmF0aW9ucyhhZGRyVG9rZW4pLmRlbGV0ZSgpCglmcmFtZV9kaWcgLTEgLy8gYWRkclRva2VuOiBBZGRyZXNzVG9rZW4KCWJveF9kZWwKCgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjEwNgoJLy8gcmV0dXJuIHRydWU7CglpbnRjIDAgLy8gMQoKKnJlbW92ZURlY2xhcmF0aW9uKnJldHVybjoKCS8vIHNldCB0aGUgc3Vicm91dGluZSByZXR1cm4gdmFsdWUKCWZyYW1lX2J1cnkgMAoJcmV0c3ViCgovLyByZW1vdmVSZXF1ZXN0KChhZGRyZXNzLHVpbnQ2NCx1aW50NjQpKWJvb2wKKmFiaV9yb3V0ZV9yZW1vdmVSZXF1ZXN0OgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAxIC8vIDB4MTUxZjdjNzUKCgkvLyBhZGRyVG9rZW46IChhZGRyZXNzLHVpbnQ2NCx1aW50NjQpCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyAyIC8vIDQ4Cgk9PQoKCS8vIGFyZ3VtZW50IDAgKGFkZHJUb2tlbikgZm9yIHJlbW92ZVJlcXVlc3QgbXVzdCBiZSBhIChhZGRyZXNzLHVpbnQ2NCx1aW50NjQpCglhc3NlcnQKCgkvLyBleGVjdXRlIHJlbW92ZVJlcXVlc3QoKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkpYm9vbAoJY2FsbHN1YiByZW1vdmVSZXF1ZXN0CglieXRlYyAyIC8vIDB4MDAKCWludGMgMSAvLyAwCgl1bmNvdmVyIDIKCXNldGJpdAoJY29uY2F0Cglsb2cKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHJlbW92ZVJlcXVlc3QoYWRkclRva2VuOiBBZGRyZXNzVG9rZW4pOiBib29sZWFuCnJlbW92ZVJlcXVlc3Q6Cglwcm90byAxIDEKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgNCAvLyAweAoKCS8vICppZjlfY29uZGl0aW9uCgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjExMAoJLy8gIXRoaXMucmVxdWVzdHMoYWRkclRva2VuKS5leGlzdHMKCWJ5dGVjIDMgLy8gICJyIgoJZnJhbWVfZGlnIC0xIC8vIGFkZHJUb2tlbjogQWRkcmVzc1Rva2VuCgljb25jYXQKCWJveF9sZW4KCXN3YXAKCXBvcAoJIQoJYnogKmlmOV9lbmQKCgkvLyAqaWY5X2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6MTExCgkvLyByZXR1cm4gdHJ1ZTsKCWludGMgMCAvLyAxCgliICpyZW1vdmVSZXF1ZXN0KnJldHVybgoKKmlmOV9lbmQ6CgkvLyAqaWYxMF9jb25kaXRpb24KCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6MTE1CgkvLyB0aGlzLmFwcHJvdmFsQXBwcyhhZGRyVG9rZW4pLmV4aXN0cwoJYnl0ZWMgMCAvLyAgImEiCglmcmFtZV9kaWcgLTEgLy8gYWRkclRva2VuOiBBZGRyZXNzVG9rZW4KCWNvbmNhdAoJYm94X2xlbgoJc3dhcAoJcG9wCglieiAqaWYxMF9lbHNlCgoJLy8gKmlmMTBfY29uc2VxdWVudAoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czoxMTYKCS8vIGFwcHJvdmVkID0gc2VuZE1ldGhvZENhbGw8dHlwZW9mIEFwcHJvdmFsQXBwLnByb3RvdHlwZS5hcHByb3ZlUmVxdWVzdFJlbW92YWw+KHsKCS8vICAgICAgICAgYXBwbGljYXRpb25JRDogdGhpcy5hcHByb3ZhbEFwcHMoYWRkclRva2VuKS52YWx1ZSwKCS8vICAgICAgICAgbWV0aG9kQXJnczogW3RoaXMudHhuLnNlbmRlciwgYWRkclRva2VuXSwKCS8vICAgICAgIH0pCglpdHhuX2JlZ2luCglpbnRjIDMgLy8gIGFwcGwKCWl0eG5fZmllbGQgVHlwZUVudW0KCXB1c2hieXRlcyAweGY2OTc5MmQ5IC8vIG1ldGhvZCAiYXBwcm92ZVJlcXVlc3RSZW1vdmFsKGFkZHJlc3MsKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkpYm9vbCIKCWl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCgoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czoxMTcKCS8vIGFwcGxpY2F0aW9uSUQ6IHRoaXMuYXBwcm92YWxBcHBzKGFkZHJUb2tlbikudmFsdWUKCWJ5dGVjIDAgLy8gICJhIgoJZnJhbWVfZGlnIC0xIC8vIGFkZHJUb2tlbjogQWRkcmVzc1Rva2VuCgljb25jYXQKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMuYXBwcm92YWxBcHBzKGFkZHJUb2tlbikudmFsdWUKCWFzc2VydAoJYnRvaQoJaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECgoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czoxMTgKCS8vIG1ldGhvZEFyZ3M6IFt0aGlzLnR4bi5zZW5kZXIsIGFkZHJUb2tlbl0KCXR4biBTZW5kZXIKCWl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCglmcmFtZV9kaWcgLTEgLy8gYWRkclRva2VuOiBBZGRyZXNzVG9rZW4KCWl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoJaXR4biBOdW1Mb2dzCglpbnRjIDAgLy8gMQoJLQoJaXR4bmFzIExvZ3MKCWV4dHJhY3QgNCAwCglpbnRjIDEgLy8gMAoJZ2V0Yml0CglmcmFtZV9idXJ5IDAgLy8gYXBwcm92ZWQ6IGJvb2xlYW4KCWIgKmlmMTBfZW5kCgoqaWYxMF9lbHNlOgoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czoxMjEKCS8vIGFwcHJvdmVkID0gdGhpcy50eG4uc2VuZGVyID09PSBhZGRyVG9rZW4uYWRkcgoJdHhuIFNlbmRlcgoJZnJhbWVfZGlnIC0xIC8vIGFkZHJUb2tlbjogQWRkcmVzc1Rva2VuCglleHRyYWN0IDAgMzIKCT09CglmcmFtZV9idXJ5IDAgLy8gYXBwcm92ZWQ6IGJvb2xlYW4KCippZjEwX2VuZDoKCS8vICppZjExX2NvbmRpdGlvbgoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czoxMjQKCS8vICFhcHByb3ZlZAoJZnJhbWVfZGlnIDAgLy8gYXBwcm92ZWQ6IGJvb2xlYW4KCSEKCWJ6ICppZjExX2VuZAoKCS8vICppZjExX2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6MTI0CgkvLyByZXR1cm4gZmFsc2U7CglpbnRjIDEgLy8gMAoJYiAqcmVtb3ZlUmVxdWVzdCpyZXR1cm4KCippZjExX2VuZDoKCS8vIGNvbnRyYWN0cy9EZWNsYXJhdGlvblJlZ2lzdHJ5LmFsZ28udHM6MTI1CgkvLyB0aGlzLnJlcXVlc3RzKGFkZHJUb2tlbikuZGVsZXRlKCkKCWJ5dGVjIDMgLy8gICJyIgoJZnJhbWVfZGlnIC0xIC8vIGFkZHJUb2tlbjogQWRkcmVzc1Rva2VuCgljb25jYXQKCWJveF9kZWwKCgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjEyNgoJLy8gcmV0dXJuIHRydWU7CglpbnRjIDAgLy8gMQoKKnJlbW92ZVJlcXVlc3QqcmV0dXJuOgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCglyZXRzdWIKCi8vIGlzUmVxdWVzdGVkKChhZGRyZXNzLHVpbnQ2NCx1aW50NjQpKWJvb2wKKmFiaV9yb3V0ZV9pc1JlcXVlc3RlZDoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMSAvLyAweDE1MWY3Yzc1CgoJLy8gYWRkclRva2VuOiAoYWRkcmVzcyx1aW50NjQsdWludDY0KQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMiAvLyA0OAoJPT0KCgkvLyBhcmd1bWVudCAwIChhZGRyVG9rZW4pIGZvciBpc1JlcXVlc3RlZCBtdXN0IGJlIGEgKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkKCWFzc2VydAoKCS8vIGV4ZWN1dGUgaXNSZXF1ZXN0ZWQoKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkpYm9vbAoJY2FsbHN1YiBpc1JlcXVlc3RlZAoJYnl0ZWMgMiAvLyAweDAwCglpbnRjIDEgLy8gMAoJdW5jb3ZlciAyCglzZXRiaXQKCWNvbmNhdAoJbG9nCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBpc1JlcXVlc3RlZChhZGRyVG9rZW46IEFkZHJlc3NUb2tlbik6IGJvb2xlYW4KaXNSZXF1ZXN0ZWQ6Cglwcm90byAxIDEKCgkvLyBjb250cmFjdHMvRGVjbGFyYXRpb25SZWdpc3RyeS5hbGdvLnRzOjEzMAoJLy8gcmV0dXJuIHRoaXMucmVxdWVzdHMoYWRkclRva2VuKS5leGlzdHM7CglieXRlYyAzIC8vICAiciIKCWZyYW1lX2RpZyAtMSAvLyBhZGRyVG9rZW46IEFkZHJlc3NUb2tlbgoJY29uY2F0Cglib3hfbGVuCglzd2FwCglwb3AKCXJldHN1YgoKLy8gaXNEZWNsYXJlZCgoYWRkcmVzcyx1aW50NjQsdWludDY0KSlib29sCiphYmlfcm91dGVfaXNEZWNsYXJlZDoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMSAvLyAweDE1MWY3Yzc1CgoJLy8gYWRkclRva2VuOiAoYWRkcmVzcyx1aW50NjQsdWludDY0KQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMiAvLyA0OAoJPT0KCgkvLyBhcmd1bWVudCAwIChhZGRyVG9rZW4pIGZvciBpc0RlY2xhcmVkIG11c3QgYmUgYSAoYWRkcmVzcyx1aW50NjQsdWludDY0KQoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBpc0RlY2xhcmVkKChhZGRyZXNzLHVpbnQ2NCx1aW50NjQpKWJvb2wKCWNhbGxzdWIgaXNEZWNsYXJlZAoJYnl0ZWMgMiAvLyAweDAwCglpbnRjIDEgLy8gMAoJdW5jb3ZlciAyCglzZXRiaXQKCWNvbmNhdAoJbG9nCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBpc0RlY2xhcmVkKGFkZHJUb2tlbjogQWRkcmVzc1Rva2VuKTogYm9vbGVhbgppc0RlY2xhcmVkOgoJcHJvdG8gMSAxCgoJLy8gY29udHJhY3RzL0RlY2xhcmF0aW9uUmVnaXN0cnkuYWxnby50czoxMzQKCS8vIHJldHVybiB0aGlzLnJlcXVlc3RzKGFkZHJUb2tlbikuZXhpc3RzOwoJYnl0ZWMgMyAvLyAgInIiCglmcmFtZV9kaWcgLTEgLy8gYWRkclRva2VuOiBBZGRyZXNzVG9rZW4KCWNvbmNhdAoJYm94X2xlbgoJc3dhcAoJcG9wCglyZXRzdWIKCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CglpbnRjIDAgLy8gMQoJcmV0dXJuCgoqY3JlYXRlX05vT3A6CglwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjcmVhdGUgTm9PcAoJZXJyCgoqY2FsbF9Ob09wOgoJcHVzaGJ5dGVzIDB4MTU2YWZiNzUgLy8gbWV0aG9kICJkZWNsYXJlKChhZGRyZXNzLHVpbnQ2NCx1aW50NjQpKWJvb2wiCglwdXNoYnl0ZXMgMHhmZjFkZWZlOCAvLyBtZXRob2QgInJlcXVlc3QoKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkpYm9vbCIKCXB1c2hieXRlcyAweDQ0MmFkZTM3IC8vIG1ldGhvZCAicmVtb3ZlRGVjbGFyYXRpb24oKGFkZHJlc3MsdWludDY0LHVpbnQ2NCkpYm9vbCIKCXB1c2hieXRlcyAweGNkOTdlMTIzIC8vIG1ldGhvZCAicmVtb3ZlUmVxdWVzdCgoYWRkcmVzcyx1aW50NjQsdWludDY0KSlib29sIgoJcHVzaGJ5dGVzIDB4NjU4MjgxMTYgLy8gbWV0aG9kICJpc1JlcXVlc3RlZCgoYWRkcmVzcyx1aW50NjQsdWludDY0KSlib29sIgoJcHVzaGJ5dGVzIDB4MTkyNDJkZmUgLy8gbWV0aG9kICJpc0RlY2xhcmVkKChhZGRyZXNzLHVpbnQ2NCx1aW50NjQpKWJvb2wiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2RlY2xhcmUgKmFiaV9yb3V0ZV9yZXF1ZXN0ICphYmlfcm91dGVfcmVtb3ZlRGVjbGFyYXRpb24gKmFiaV9yb3V0ZV9yZW1vdmVSZXF1ZXN0ICphYmlfcm91dGVfaXNSZXF1ZXN0ZWQgKmFiaV9yb3V0ZV9pc0RlY2xhcmVkCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgTm9PcAoJZXJy",
+    "clear": "I3ByYWdtYSB2ZXJzaW9uIDEw"
+  },
+  "byteCode": {
+    "approval": "CiAEAQAwBiYFAWEEFR98dQEAAXIAMRgUJQsxGQiNDAJCAAAAAAAAAAAAAAI0AAAAAAAAAAAAAAApNhoBSRUkEkSIAAkqI08CVFCwIkOKAQEnBIv/vUxIQQAEIkIAVSiL/1C9TEhBADGxJbIQgATjimm4shooi/9QvkQXshgxALIai/+yGiOyAbO0OyIJxTpXBAAjU4wAQgAKMQCL/1cAIBKMAIsAFEEABCNCAAaL/ycEvyKMAIkpNhoBSRUkEkSIAAkqI08CVFCwIkOKAQEnBCuL/1C9TEhBAAQiQgBKKIv/UL1MSEEAOLElshCABJZHDkCyGiiL/1C+RBeyGDEAshqL/7IaI7IBs7Q7IgnFOlcEACNTjACLABRBAAQjQgAIK4v/UCcEvyKMAIkpNhoBSRUkEkSIAAkqI08CVFCwIkOKAQEnBIv/vUxIFEEABCJCAFMoi/9QvUxIQQAxsSWyEIAEPHHVAbIaKIv/UL5EF7IYMQCyGov/shojsgGztDsiCcU6VwQAI1OMAEIACjEAi/9XACASjACLABRBAAQjQgAEi/+8IowAiSk2GgFJFSQSRIgACSojTwJUULAiQ4oBAScEK4v/UL1MSBRBAAQiQgBVKIv/UL1MSEEAMbElshCABPaXktmyGiiL/1C+RBeyGDEAshqL/7IaI7IBs7Q7IgnFOlcEACNTjABCAAoxAIv/VwAgEowAiwAUQQAEI0IABiuL/1C8IowAiSk2GgFJFSQSRIgACSojTwJUULAiQ4oBASuL/1C9TEiJKTYaAUkVJBJEiAAJKiNPAlRQsCJDigEBK4v/UL1MSIkiQ4AEuER7NjYaAI4B//EAgAQVavt1gAT/He/ogAREKt43gATNl+EjgARlgoEWgAQZJC3+NhoAjgb9iv4I/n3++v97/5sA",
+    "clear": "Cg=="
+  },
+  "compilerInfo": {
+    "compiler": "algod",
+    "compilerVersion": {
+      "major": 4,
+      "minor": 4,
+      "patch": 1,
+      "commitHash": "7b607ce4"
+    }
+  }
+}

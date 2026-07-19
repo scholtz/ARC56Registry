@@ -1,0 +1,169 @@
+{
+    "name": "JSDocDemo",
+    "structs": {
+        "DemoStruct": [
+            {
+                "name": "a",
+                "type": "uint64"
+            }
+        ],
+        "DemoType": [
+            {
+                "name": "a",
+                "type": "byte[]"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "test",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "a",
+                    "desc": "This is the description of 'a'"
+                },
+                {
+                    "type": "byte[]",
+                    "name": "b",
+                    "desc": "This is the description of 'b'"
+                }
+            ],
+            "returns": {
+                "type": "(uint64)",
+                "struct": "DemoStruct",
+                "desc": "This is the description of the return value"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "This is the description of the method",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "test2",
+            "args": [
+                {
+                    "type": "byte[]",
+                    "name": "a",
+                    "desc": "This is the description of 'a'"
+                }
+            ],
+            "returns": {
+                "type": "(byte[])",
+                "struct": "DemoType",
+                "desc": "This is the description of the return value"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "This is the description of the method",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "This is the description for the contract",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 1,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "globalState": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMString",
+                    "key": "Z2xvYmFsU3RhdGU="
+                }
+            },
+            "local": {
+                "localState": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "bG9jYWxTdGF0ZQ=="
+                }
+            },
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        62,
+                        85
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        68,
+                        92
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"
+                },
+                {
+                    "pc": [
+                        56
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint64"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAyIDEKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjIwCiAgICAvLyBleHBvcnQgY2xhc3MgSlNEb2NEZW1vIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDYwZDkzYmViIDB4NjYxODcyNmEgLy8gbWV0aG9kICJ0ZXN0KHVpbnQ2NCxieXRlW10pKHVpbnQ2NCkiLCBtZXRob2QgInRlc3QyKGJ5dGVbXSkoYnl0ZVtdKSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHRlc3QgdGVzdDIKICAgIGVycgoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAOToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjIwCiAgICAvLyBleHBvcnQgY2xhc3MgSlNEb2NEZW1vIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvanNkb2MuYWxnby50czo6SlNEb2NEZW1vLnRlc3Rbcm91dGluZ10oKSAtPiB2b2lkOgp0ZXN0OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2pzZG9jLmFsZ28udHM6MzAKICAgIC8vIHRlc3QoYTogdWludDY0LCBiOiBieXRlcyk6IERlbW9TdHJ1Y3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBzd2FwCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2pzZG9jLmFsZ28udHM6OkpTRG9jRGVtby50ZXN0Mltyb3V0aW5nXSgpIC0+IHZvaWQ6CnRlc3QyOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2pzZG9jLmFsZ28udHM6MzkKICAgIC8vIHRlc3QyKGE6IGJ5dGVzKTogRGVtb1R5cGUgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjQwLTQyCiAgICAvLyByZXR1cm4gewogICAgLy8gICBhLAogICAgLy8gfQogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjM5LTQyCiAgICAvLyB0ZXN0MihhOiBieXRlcyk6IERlbW9UeXBlIHsKICAgIC8vICAgcmV0dXJuIHsKICAgIC8vICAgICBhLAogICAgLy8gICB9CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjM5CiAgICAvLyB0ZXN0MihhOiBieXRlcyk6IERlbW9UeXBlIHsKICAgIHN3YXAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjM5LTQyCiAgICAvLyB0ZXN0MihhOiBieXRlcyk6IERlbW9UeXBlIHsKICAgIC8vICAgcmV0dXJuIHsKICAgIC8vICAgICBhLAogICAgLy8gICB9CiAgICBjb25jYXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjM5CiAgICAvLyB0ZXN0MihhOiBieXRlcyk6IERlbW9UeXBlIHsKICAgIGxvZwogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgo=",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="
+    },
+    "byteCode": {
+        "approval": "CyADAAIBMRtBAB0xGRREMRhEggIEYNk76wRmGHJqNhoAjgIACQApADEZFDEYFBBDNhoBSRWBCBJENhoCSSJZIwhMFRJEgAQVH3x1TFCwJEM2GgFJIlkjCEsBFRJEVwIASRUWVwYCTFCABhUffHUAAkxQsCRD",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 9,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}
