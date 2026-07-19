@@ -2,7 +2,7 @@
 
 - **Repo**: [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/builtinFunctions/erc7201_equivalent_solidity_spec_comptime/C.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/builtinFunctions/erc7201_equivalent_solidity_spec_comptime/C.arc56.json)
-- **Detected**: 2026-07-18T07:50:33.107533+00:00
+- **Detected**: 2026-07-19T08:17:51.728178+00:00
 - **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
 
 ## Reproduce
