@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.prithvirajjadhav2266.lumaaaa.EventTicketing_948fa82c;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new EventTicketingProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
