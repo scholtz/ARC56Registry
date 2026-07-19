@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.marotipatre.Vibekit_project.ConstantProductAMM_743d4385;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new ConstantProductAMMProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
