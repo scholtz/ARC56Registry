@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.codewithyuvi.VAttend_Blockchain.AttendenceTracker_030235b2;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new AttendenceTrackerProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
