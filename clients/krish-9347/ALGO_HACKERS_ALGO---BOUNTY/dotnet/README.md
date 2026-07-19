@@ -1,4 +1,4 @@
-# Arc56.Generated.krish-9347.ALGO_HACKERS_ALGO---BOUNTY
+# Arc56.Generated.krish-9347.ALGO_HACKERS_ALGO-BOUNTY
 
 Auto-generated typed Algorand smart-contract clients for **[krish-9347/ALGO_HACKERS_ALGO---BOUNTY](https://github.com/krish-9347/ALGO_HACKERS_ALGO---BOUNTY)**,
 built from the [ARC-56](https://github.com/algorandfoundation/ARCs/blob/main/ARCs/arc-0056.md)
@@ -12,7 +12,7 @@ source ARC-56 spec changes.
 ## Install
 
 ```bash
-dotnet add package Arc56.Generated.krish-9347.ALGO_HACKERS_ALGO---BOUNTY
+dotnet add package Arc56.Generated.krish-9347.ALGO_HACKERS_ALGO-BOUNTY
 ```
 
 This package depends on [`Algorand4`](https://www.nuget.org/packages/Algorand4/) for
@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.krish_9347.ALGO_HACKERS_ALGO___BOUNTY.TaskBounty_13b9f12c;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new TaskBountyProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
