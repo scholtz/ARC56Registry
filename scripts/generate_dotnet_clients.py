@@ -663,8 +663,12 @@ def write_project_files(
             table_rows.append(f"| `{c['namespace']}` | _(generation failed - see state.json)_ | [{url}]({url}) |")
         elif "compile_error" in c:
             table_rows.append(f"| `{c['namespace']}` | _(fails to compile - excluded, see state.json)_ | [{url}]({url}) |")
-        else:
+        elif "class_name" in c:
             table_rows.append(f"| `{c['namespace']}` | `{c['class_name']}` | [{url}]({url}) |")
+        else:
+            # Never generated at all yet (e.g. the spec itself still fails to download -
+            # see arc56/state.json's own "download_error") - no class_name to show.
+            table_rows.append(f"| `{c['namespace']}` | _(not yet generated - see state.json)_ | [{url}]({url}) |")
     contracts_table = "\n".join(table_rows) if table_rows else "| _(none yet)_ | | |"
 
     successful_urls = [
@@ -811,6 +815,18 @@ def main() -> int:
             failed_projects += 1
             log(f"ERROR: unexpected failure processing {owner}/{repo}, skipping and "
                   f"continuing with the next project: {exc}")
+            # Whatever this project managed to write to disk before failing must still
+            # be committed - otherwise it's left as uncommitted changes for the rest of
+            # the run, and every later project's push_commits() then fails its
+            # `git pull --rebase` with "You have unstaged changes", silently dropping
+            # every subsequent project's commits from ever reaching origin/main.
+            if args.commit:
+                try:
+                    commit_project_changes(owner, repo)
+                    push_commits()
+                except Exception as commit_exc:  # noqa: BLE001 - must not abort the run either
+                    log(f"ERROR: could not commit partial changes for {owner}/{repo} "
+                          f"after the failure above: {commit_exc}")
             continue
 
     if args.commit:
