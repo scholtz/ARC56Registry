@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.joe_p.snarkjs_algorand.Groth16Bls12381SignalsAndProof_28247371;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new Groth16Bls12381SignalsAndProofProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
