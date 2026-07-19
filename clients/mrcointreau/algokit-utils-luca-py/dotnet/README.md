@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.mrcointreau.algokit_utils_luca_py.amm_a6050fdc;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new ConstantProductAMMProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
