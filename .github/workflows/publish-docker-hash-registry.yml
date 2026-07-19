@@ -88,12 +88,12 @@ jobs:
       # Keeps the Docker Hub repo page's "Overview" tab in sync with
       # docker/hash-registry/README.md - otherwise it permanently shows "No overview
       # available" since `docker push` never uploads a README, only image layers.
-      # Needs the same DOCKERHUB_TOKEN, but that token must have "Read & Write" scope
-      # (not "Read-only") for this API call to succeed - see
-      # docs/dockerhub-publishing-setup.md.
+      # Needs the same DOCKERHUB_TOKEN, but unlike the push step above, this API call
+      # specifically needs a token with "Read, Write, Delete" scope - "Read & Write"
+      # (enough for `docker push`) 403s here. See docs/dockerhub-publishing-setup.md.
       - name: Sync Docker Hub repository description
         if: ${{ env.DOCKERHUB_USERNAME != '' && env.DOCKERHUB_TOKEN != '' }}
-        uses: peter-evans/dockerhub-description@v4
+        uses: peter-evans/dockerhub-description@v5
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}

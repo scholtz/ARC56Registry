@@ -35,8 +35,14 @@ Docker Hub adds an OIDC option later, revisit this choice.
    - Log into [hub.docker.com](https://hub.docker.com) with the account from step 1.
    - Go to **Account Settings > Security > Access Tokens > New Access Token**.
    - Description: something identifying this repo, e.g. `ARC56Registry publish-docker-hash-registry.yml`.
-   - Permissions: **Read & Write** (push requires write; read-only tokens can't publish
-     images *or* update the repository description/README - both need write access).
+   - Permissions: **Read, Write, Delete** - not just "Read & Write". `docker push`
+     alone only needs Read & Write, but the description-sync step
+     (`peter-evans/dockerhub-description`, which updates the repo's Overview tab from
+     `docker/hash-registry/README.md`) calls a different Docker Hub API that 403s on a
+     Read & Write-scoped token and specifically requires Read, Write, Delete - see
+     [peter-evans/dockerhub-description#10](https://github.com/peter-evans/dockerhub-description/issues/10).
+     Since both steps share one `DOCKERHUB_TOKEN` secret, the token needs the higher
+     scope even though this pipeline never actually deletes anything on Docker Hub.
    - Copy the token value immediately - Docker Hub shows it only once.
 
 4. **Add two repo secrets.** In this repo's **Settings > Secrets and variables >
