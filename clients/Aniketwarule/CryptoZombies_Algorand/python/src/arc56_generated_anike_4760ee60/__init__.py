@@ -1,0 +1,2 @@
+from . import AlgoZombiesContract_0b09c6f3 as AlgoZombiesContract_0b09c6f3
+from . import ZombiesContract_c6093e7b as ZombiesContract_c6093e7b
