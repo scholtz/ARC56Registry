@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.atsoc1993.On_Chain_Petitions_V2.PetitionMaster_1be627ff;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new PetitionMasterProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
