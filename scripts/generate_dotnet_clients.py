@@ -85,6 +85,19 @@ def sanitize_path_segment(name: str) -> str:
     return re.sub(r"[^A-Za-z0-9_.-]", "-", name)
 
 
+def sanitize_nuget_id_segment(name: str) -> str:
+    """Like sanitize_path_segment, but also satisfies NuGet's PackageId regex
+    (^\\w+([_.-]\\w+)*$), which - unlike the filesystem - rejects consecutive '.'/'-'
+    separators and a leading/trailing separator. Repo/owner names on GitHub are only
+    constrained to be filesystem-safe, so e.g. 'ALGO---BOUNTY' or 'crestFlow-working-'
+    are valid repo names but invalid NuGet package ID segments; collapse/trim here so
+    the resulting `Arc56.Generated.<owner>.<repo>` PackageId is always packable."""
+    slug = sanitize_path_segment(name)
+    slug = re.sub(r"[.-]{2,}", "-", slug)
+    slug = slug.strip("-.")
+    return slug or "x"
+
+
 def sanitize_identifier(name: str) -> str:
     slug = re.sub(r"[^A-Za-z0-9_]", "_", name)
     if not slug or slug[0].isdigit():
@@ -429,13 +442,48 @@ def process_project(
 
     state = load_project_state(state_path)
     contracts_state: dict = state.setdefault("contracts", {})
-    package_id = f"Arc56.Generated.{owner_slug}.{repo_slug}"
+    package_id = f"Arc56.Generated.{sanitize_nuget_id_segment(owner_slug)}.{sanitize_nuget_id_segment(repo_slug)}"
     # Recheck everything in *this* project if the generator image has changed since the
     # last time *this* project recorded a digest - tracked per-project (not a single
     # shared file) so a large run's progress survives being interrupted.
     force_regen = state.get("generator_image_digest") != generator_digest
     state_dirty = False
     code_changed = False
+
+    # Self-heal a project whose on-disk PackageId no longer matches what this script
+    # would compute today (e.g. sanitize_nuget_id_segment() started collapsing/trimming
+    # separators that NuGet's PackageId regex rejects, after a project was already
+    # generated with the old, unsanitized id). Rename in place - never leave the
+    # invalid-id file behind as an orphan that dotnet pack will keep failing on forever,
+    # but also never regenerate content that hasn't actually changed.
+    old_package_id = state.get("package_id")
+    if old_package_id is None:
+        # First run that tracks package_id in state.json - fall back to whatever
+        # single .csproj already exists on disk (named after the id an older version
+        # of this script computed) so the migration below still fires instead of
+        # silently leaving a second, correctly-named .csproj next to the stale one.
+        existing_csprojs = [f for f in os.listdir(project_dir) if f.endswith(".csproj")] \
+            if os.path.isdir(project_dir) else []
+        if len(existing_csprojs) == 1:
+            candidate = existing_csprojs[0][: -len(".csproj")]
+            if candidate != package_id:
+                old_package_id = candidate
+    if old_package_id and old_package_id != package_id:
+        old_csproj_path = os.path.join(project_dir, f"{old_package_id}.csproj")
+        new_csproj_path = os.path.join(project_dir, f"{package_id}.csproj")
+        if os.path.isfile(old_csproj_path) and not os.path.isfile(new_csproj_path):
+            with open(old_csproj_path, encoding="utf-8") as f:
+                csproj_content = f.read()
+            csproj_content = csproj_content.replace(
+                f"<PackageId>{old_package_id}</PackageId>", f"<PackageId>{package_id}</PackageId>"
+            )
+            os.remove(old_csproj_path)
+            with open(new_csproj_path, "w", encoding="utf-8", newline="\n") as f:
+                f.write(csproj_content)
+            log(f"Renamed project id {old_package_id} -> {package_id} (invalid NuGet PackageId fix)")
+    if state.get("package_id") != package_id:
+        state["package_id"] = package_id
+        state_dirty = True
 
     for row in rows:
         url = row["ARC56URL"]
