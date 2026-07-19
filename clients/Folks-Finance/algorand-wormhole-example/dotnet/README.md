@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.Folks_Finance.algorand_wormhole_example.PingPong_cdd0fc73;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new PingPongProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
