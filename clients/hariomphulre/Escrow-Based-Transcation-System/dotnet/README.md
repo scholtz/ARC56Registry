@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.hariomphulre.Escrow_Based_Transcation_System.EscrowContract_2c4fb5ae;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new EscrowContractProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
