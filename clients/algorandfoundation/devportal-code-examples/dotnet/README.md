@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.algorandfoundation.devportal_code_examples.Arc4DynamicArray_82c0c5a1;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new Arc4DynamicArrayProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
