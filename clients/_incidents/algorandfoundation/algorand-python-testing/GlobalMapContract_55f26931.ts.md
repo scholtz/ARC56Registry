@@ -2,7 +2,7 @@
 
 - **Repo**: [algorandfoundation/algorand-python-testing](https://github.com/algorandfoundation/algorand-python-testing)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/algorand-python-testing/HEAD/tests/artifacts/StateOps/data/GlobalMapContract.arc56.json](https://raw.githubusercontent.com/algorandfoundation/algorand-python-testing/HEAD/tests/artifacts/StateOps/data/GlobalMapContract.arc56.json)
-- **Detected**: 2026-07-19T08:46:32.059982+00:00
+- **Detected**: 2026-07-19T19:18:28.172670+00:00
 - **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
 
 ## Reproduce
