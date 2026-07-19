@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.tasosbit.test_algokit_big_num_accounts.HelloWorld_3639fbac;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new HelloWorldProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
