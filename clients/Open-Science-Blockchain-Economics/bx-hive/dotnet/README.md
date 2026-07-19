@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.Open_Science_Blockchain_Economics.bx_hive.BxHiveRegistry_f2f3efda;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new BxHiveRegistryProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
