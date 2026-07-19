@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.Argimirodelpozo.puya_sol.C_4df76645;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new CProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
@@ -194,7 +195,7 @@ var client = new CProxy(algod, appId: 123456789);
 | `Arc56.Generated.Argimirodelpozo.puya_sol.C_6964ab6d` | `CProxy` | [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/create_memory_array/C.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/create_memory_array/C.arc56.json) |
 | `Arc56.Generated.Argimirodelpozo.puya_sol.C_7479b1f3` | _(fails to compile - excluded, see state.json)_ | [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/create_memory_array_too_large/C.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/create_memory_array_too_large/C.arc56.json) |
 | `Arc56.Generated.Argimirodelpozo.puya_sol.C_e85baea8` | _(fails to compile - excluded, see state.json)_ | [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/create_memory_byte_array/C.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/create_memory_byte_array/C.arc56.json) |
-| _(unfetchable)_ | _(download failed - see state.json)_ | [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/create_multiple_dynamic_arrays/C.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/create_multiple_dynamic_arrays/C.arc56.json) |
+| `Arc56.Generated.Argimirodelpozo.puya_sol.C_9fbc1be6` | _(not yet generated - see state.json)_ | [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/create_multiple_dynamic_arrays/C.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/create_multiple_dynamic_arrays/C.arc56.json) |
 | `Arc56.Generated.Argimirodelpozo.puya_sol.c_24d55461` | `cProxy` | [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/dynamic_array_cleanup/c.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/dynamic_array_cleanup/c.arc56.json) |
 | `Arc56.Generated.Argimirodelpozo.puya_sol.c_00e90a2f` | `cProxy` | [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/dynamic_arrays_in_storage/c.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/dynamic_arrays_in_storage/c.arc56.json) |
 | `Arc56.Generated.Argimirodelpozo.puya_sol.c_72f2943b` | _(fails to compile - excluded, see state.json)_ | [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/dynamic_multi_array_cleanup/c.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/array/dynamic_multi_array_cleanup/c.arc56.json) |

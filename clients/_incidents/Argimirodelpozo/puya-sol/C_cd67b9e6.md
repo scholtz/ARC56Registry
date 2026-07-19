@@ -3,8 +3,8 @@
 - **Repo**: [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/cleanup/dirty_calldata_dynamic_array/C.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/tests/solidity-semantic-tests/out/cleanup/dirty_calldata_dynamic_array/C.arc56.json)
 - **Namespace used**: `Arc56.Generated.Argimirodelpozo.puya_sol.C_cd67b9e6`
-- **Detected**: 2026-07-17T01:04:08.370795+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:76700131f07234ca74e2ca11c5eed20920edf8dcce99efcda161765d9c7af451`
+- **Detected**: 2026-07-19T22:18:33.549340+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:0093cb1562e2d8125477e45e9b2045a81c983a91f38f1a2f9b738be110520613`
 
 ## Reproduce
 
@@ -29,17 +29,17 @@ Unhandled exception. System.Exception: The ABI type is not valid int16[] : Integ
    --- End of inner exception stack trace ---
    at AVM.ClientGenerator.ABI.TypeHelpers.ABITypeToCSType(String parentStructName, String methodABITypeString, List`1 structs, Boolean isReturn) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/TypeHelpers.cs:line 360
    at AVM.ClientGenerator.ABI.TypeHelpers.GetCSType(String parentStructName, String abiType, String sourceType, List`1 structs, Boolean isReturn) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/TypeHelpers.cs:line 404
-   at Algorand.AVM.ClientGenerator.ABI.ARC56.ClientGeneratorARC56.defineArgParameter(MethodArgument p, String methodName, List`1 structs) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/ARC56/ClientGeneratorARC56.cs:line 1014
-   at Algorand.AVM.ClientGenerator.ABI.ARC56.ClientGeneratorARC56.<>c__DisplayClass17_1.<defineMethods>b__5(MethodArgument p) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/ARC56/ClientGeneratorARC56.cs:line 821
+   at Algorand.AVM.ClientGenerator.ABI.ARC56.ClientGeneratorARC56.defineArgParameter(MethodArgument p, String methodName, List`1 structs) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/ARC56/ClientGeneratorARC56.cs:line 1008
+   at Algorand.AVM.ClientGenerator.ABI.ARC56.ClientGeneratorARC56.<>c__DisplayClass17_1.<defineMethods>b__5(MethodArgument p) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/ARC56/ClientGeneratorARC56.cs:line 815
    at System.Linq.Enumerable.SelectListIterator`2.MoveNext()
    at System.Linq.Enumerable.ConcatIterator`1.MoveNext()
    at System.String.Join(String separator, IEnumerable`1 values)
-   at Algorand.AVM.ClientGenerator.ABI.ARC56.ClientGeneratorARC56.defineMethods(Code proxyBody, List`1 structs) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/ARC56/ClientGeneratorARC56.cs:line 824
-   at Algorand.AVM.ClientGenerator.ABI.ARC56.ClientGeneratorARC56.ToProxy(String namespaceName) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/ARC56/ClientGeneratorARC56.cs:line 137
-   at client_generator.Program.<>c.<<Main>b__1_1>d.MoveNext() in /src/client-generator/Program.cs:line 81
+   at Algorand.AVM.ClientGenerator.ABI.ARC56.ClientGeneratorARC56.defineMethods(Code proxyBody, List`1 structs) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/ARC56/ClientGeneratorARC56.cs:line 818
+   at Algorand.AVM.ClientGenerator.ABI.ARC56.ClientGeneratorARC56.ToProxy(String namespaceName) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/ARC56/ClientGeneratorARC56.cs:line 131
+   at client_generator.Program.<>c.<<Main>b__1_1>d.MoveNext() in /src/client-generator/Program.cs:line 78
 --- End of stack trace from previous location ---
    at CommandLine.ParserResultExtensions.WithParsedAsync[T](ParserResult`1 result, Func`2 action)
-   at client_generator.Program.Main(String[] args) in /src/client-generator/Program.cs:line 37
+   at client_generator.Program.Main(String[] args) in /src/client-generator/Program.cs:line 34
    at client_generator.Program.<Main>(String[] args)
 
 ```
