@@ -5,18 +5,25 @@ Walks every `*.arc56.json` file in the repo (in practice, everything under `clie
 decodes its `byteCode.approval` and `byteCode.clear` (base64-encoded compiled TEAL
 bytecode), and hashes each with SHA-256. For every hash it writes:
 
-    approval-programs/<hash[:3]>/<hash>.txt   (from byteCode.approval)
-    clear-programs/<hash[:3]>/<hash>.txt      (from byteCode.clear)
+    approval-programs/<hash[:3]>/<hash>.txt         (from byteCode.approval)
+    approval-programs/<hash[:3]>/<hash>.arc56.json  (from byteCode.approval)
+    clear-programs/<hash[:3]>/<hash>.txt            (from byteCode.clear)
+    clear-programs/<hash[:3]>/<hash>.arc56.json     (from byteCode.clear)
 
-containing a single line: the `raw.githubusercontent.com` URL of the winning ARC-56
-spec file, pinned to the commit that last touched that file (so the link keeps
-pointing at the exact spec whose program produced this hash, even if the source file
-is edited or replaced later - see docs/hash-registry.md).
+The `.txt` file contains a single line: the `raw.githubusercontent.com` URL of the
+winning ARC-56 spec file, pinned to the commit that last touched that file (so the
+link keeps pointing at the exact spec whose program produced this hash, even if the
+source file is edited or replaced later - see docs/hash-registry.md). The
+`.arc56.json` file sitting right next to it is an exact byte-for-byte copy of that
+same winning spec file, so a consumer that already has the hash can read the full
+ARC-56 spec straight out of this repo (or its GitHub Pages mirror) without a second
+fetch to resolve the `.txt` file's URL first.
 
 This lets a wallet or indexer that only has a deployed app's compiled approval/clear
-program compute its SHA-256, look up the matching `<hash>.txt` in this repo (or via
-its GitHub Pages mirror - see `pages/index.html`), and resolve straight to an ARC-56
-spec it can use to decode method calls.
+program compute its SHA-256, look up the matching `<hash>.arc56.json` in this repo (or
+via its GitHub Pages mirror - see `pages/index.html`), and decode method calls
+directly - the `<hash>.txt` URL remains available for consumers that want the
+durable, commit-pinned source location instead.
 
 ## ABI method-signature registry
 
@@ -24,10 +31,11 @@ Separately (and independently of the program-hash registries above), this script
 walks every method of every ARC-56 file and builds:
 
     abi-signatures/<hash[:2]>/<hash>.txt
+    abi-signatures/<hash[:2]>/<hash>.json
 
 where `<hash>` is the lowercase 8-hex-char ARC-4 method selector - the first 4 bytes of
 SHA-512/256 over the ABI method signature string `name(argtype,argtype,...)returntype`
-(the same selector Algorand uses on-chain to dispatch method calls) - and the file's
+(the same selector Algorand uses on-chain to dispatch method calls). The `.txt` file's
 content is that exact signature string, e.g. `abi-signatures/8a/8aa3b61f.txt` containing
 `add(uint64,uint64)uint128`. Struct-typed args/returns use the ABI tuple type already
 present in each arg/return's `type` field (ARC-56 specs carry both, e.g.
@@ -36,6 +44,15 @@ struct name, since the selector is computed over the ABI type. Unlike the progra
 registries, there is no "winner" to pick: the signature string is fully determined by
 the hash (barring an astronomically unlikely SHA-512/256 collision), so the first
 signature seen for a hash is written and later duplicates are just skipped.
+
+The `.json` file next to it is a pretty-printed JSON object
+`{"abi": "<signature>", "apps": ["<approval-program-hash>", ...]}` - `apps` is the
+sorted list of SHA-256 approval-program hashes (i.e. `approval-programs/` hash
+directory names) of every indexed app whose ARC-56 spec declares a method with this
+selector, letting a consumer go straight from a method selector to the set of known
+apps that expose it. Unlike the program-hash winner rule, this list is a union across
+every indexed spec (not just the largest one per hash), since the point is to name all
+apps using the method, not to pick a single "best" spec.
 
 ## Picking a winner when multiple specs share a hash
 
@@ -136,10 +153,24 @@ def abi_selector(signature: str) -> str:
     return hashlib.new("sha512_256", signature.encode("utf-8")).hexdigest()[:8]
 
 
-def build_abi_signature_registry(out_dir: str, specs: dict[str, dict], dry_run: bool) -> None:
+def compute_field_digests(field: str, specs: dict[str, dict]) -> dict[str, str]:
+    """rel_path -> SHA-256 hex digest of spec's byteCode.<field>, skipping specs without one."""
+    digests: dict[str, str] = {}
+    for rel_path, spec in specs.items():
+        digest = program_sha256(spec, field, rel_path)
+        if digest is not None:
+            digests[rel_path] = digest
+    return digests
+
+
+def build_abi_signature_registry(
+    out_dir: str, specs: dict[str, dict], approval_digests: dict[str, str], dry_run: bool
+) -> None:
     winners: dict[str, str] = {}  # selector -> signature
+    apps: dict[str, set[str]] = {}  # selector -> set of approval-program hashes
     conflicts = 0
     for rel_path, spec in specs.items():
+        approval_hash = approval_digests.get(rel_path)
         for method in spec.get("methods", []):
             try:
                 signature = method_signature(method)
@@ -157,6 +188,8 @@ def build_abi_signature_registry(out_dir: str, specs: dict[str, dict], dry_run: 
                     f"(from {rel_path}) - keeping the first one seen",
                     file=sys.stderr,
                 )
+            if approval_hash is not None:
+                apps.setdefault(selector, set()).add(approval_hash)
 
     print(
         f"[abi-signatures] {len(winners)} distinct method selectors ({conflicts} colliding signatures skipped)",
@@ -167,39 +200,49 @@ def build_abi_signature_registry(out_dir: str, specs: dict[str, dict], dry_run: 
     unchanged = 0
     for selector, signature in sorted(winners.items()):
         out_subdir = os.path.join(out_dir, selector[:2])
-        out_path = os.path.join(out_subdir, f"{selector}.txt")
+        txt_path = os.path.join(out_subdir, f"{selector}.txt")
+        json_path = os.path.join(out_subdir, f"{selector}.json")
 
         existing_content = None
-        if os.path.exists(out_path):
-            with open(out_path, encoding="utf-8") as f:
+        if os.path.exists(txt_path):
+            with open(txt_path, encoding="utf-8") as f:
                 existing_content = f.read().strip()
 
-        if existing_content == signature:
+        app_list = sorted(apps.get(selector, ()))
+        json_content = json.dumps({"abi": signature, "apps": app_list}, indent=2, ensure_ascii=False) + "\n"
+        existing_json = None
+        if os.path.exists(json_path):
+            with open(json_path, encoding="utf-8") as f:
+                existing_json = f.read()
+
+        if existing_content == signature and existing_json == json_content:
             unchanged += 1
             continue
 
         written += 1
         if dry_run:
             action = "would update" if existing_content else "would create"
-            print(f"{action} {os.path.relpath(out_path, REPO_ROOT)} -> {signature}")
+            print(f"{action} {os.path.relpath(txt_path, REPO_ROOT)} -> {signature}")
+            action = "would update" if existing_json else "would create"
+            print(f"{action} {os.path.relpath(json_path, REPO_ROOT)} -> {len(app_list)} app(s)")
             continue
 
         os.makedirs(out_subdir, exist_ok=True)
-        with open(out_path, "w", encoding="utf-8", newline="\n") as f:
-            f.write(signature + "\n")
+        if existing_content != signature:
+            with open(txt_path, "w", encoding="utf-8", newline="\n") as f:
+                f.write(signature + "\n")
+        if existing_json != json_content:
+            with open(json_path, "w", encoding="utf-8", newline="\n") as f:
+                f.write(json_content)
 
     verb = "Would write" if dry_run else "Wrote"
     print(f"[abi-signatures] {verb} {written} signature file(s), {unchanged} already up to date", file=sys.stderr)
 
 
-def build_registry(field: str, out_dir: str, specs: dict[str, dict], dry_run: bool) -> None:
+def build_registry(field: str, out_dir: str, specs: dict[str, dict], digests: dict[str, str], dry_run: bool) -> None:
     winners: dict[str, tuple[str, int]] = {}  # hash -> (rel_path, size)
-    skipped = 0
-    for rel_path, spec in specs.items():
-        digest = program_sha256(spec, field, rel_path)
-        if digest is None:
-            skipped += 1
-            continue
+    skipped = len(specs) - len(digests)
+    for rel_path, digest in digests.items():
         size = os.path.getsize(os.path.join(REPO_ROOT, rel_path))
         current = winners.get(digest)
         if current is None or size > current[1]:
@@ -220,26 +263,41 @@ def build_registry(field: str, out_dir: str, specs: dict[str, dict], dry_run: bo
         url = build_url(commit, rel_path)
 
         out_subdir = os.path.join(out_dir, digest[:3])
-        out_path = os.path.join(out_subdir, f"{digest}.txt")
+        txt_path = os.path.join(out_subdir, f"{digest}.txt")
+        json_path = os.path.join(out_subdir, f"{digest}.arc56.json")
 
         existing = None
-        if os.path.exists(out_path):
-            with open(out_path, encoding="utf-8") as f:
+        if os.path.exists(txt_path):
+            with open(txt_path, encoding="utf-8") as f:
                 existing = f.read().strip()
 
-        if existing == url:
+        abs_spec_path = os.path.join(REPO_ROOT, rel_path)
+        with open(abs_spec_path, "rb") as f:
+            spec_bytes = f.read()
+        existing_spec_bytes = None
+        if os.path.exists(json_path):
+            with open(json_path, "rb") as f:
+                existing_spec_bytes = f.read()
+
+        if existing == url and existing_spec_bytes == spec_bytes:
             unchanged += 1
             continue
 
         written += 1
         if dry_run:
             action = "would update" if existing else "would create"
-            print(f"{action} {os.path.relpath(out_path, REPO_ROOT)} -> {url}")
+            print(f"{action} {os.path.relpath(txt_path, REPO_ROOT)} -> {url}")
+            action = "would update" if existing_spec_bytes else "would create"
+            print(f"{action} {os.path.relpath(json_path, REPO_ROOT)} <- {rel_path}")
             continue
 
         os.makedirs(out_subdir, exist_ok=True)
-        with open(out_path, "w", encoding="utf-8", newline="\n") as f:
-            f.write(url + "\n")
+        if existing != url:
+            with open(txt_path, "w", encoding="utf-8", newline="\n") as f:
+                f.write(url + "\n")
+        if existing_spec_bytes != spec_bytes:
+            with open(json_path, "wb") as f:
+                f.write(spec_bytes)
 
     verb = "Would write" if dry_run else "Wrote"
     print(f"[{field}] {verb} {written} hash file(s), {unchanged} already up to date", file=sys.stderr)
@@ -263,10 +321,12 @@ def main() -> int:
         if spec is not None:
             specs[rel_path] = spec
 
-    for field, out_dir in PROGRAMS.items():
-        build_registry(field, out_dir, specs, args.dry_run)
+    field_digests = {field: compute_field_digests(field, specs) for field in PROGRAMS}
 
-    build_abi_signature_registry(ABI_SIGNATURES_DIR, specs, args.dry_run)
+    for field, out_dir in PROGRAMS.items():
+        build_registry(field, out_dir, specs, field_digests[field], args.dry_run)
+
+    build_abi_signature_registry(ABI_SIGNATURES_DIR, specs, field_digests["approval"], args.dry_run)
 
     return 0
 

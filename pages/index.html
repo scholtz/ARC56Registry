@@ -86,18 +86,26 @@
   <h2>Folder layout</h2>
   <table>
     <tr><th>Registry</th><th>Path</th></tr>
-    <tr><td>Approval program hash</td><td><code>approval-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.txt</code></td></tr>
-    <tr><td>Clear-state program hash</td><td><code>clear-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.txt</code></td></tr>
-    <tr><td>ABI method selector</td><td><code>abi-signatures/&lt;selector[:2]&gt;/&lt;selector&gt;.txt</code></td></tr>
+    <tr><td>Approval program hash - spec URL</td><td><code>approval-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.txt</code></td></tr>
+    <tr><td>Approval program hash - full spec</td><td><code>approval-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.arc56.json</code></td></tr>
+    <tr><td>Clear-state program hash - spec URL</td><td><code>clear-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.txt</code></td></tr>
+    <tr><td>Clear-state program hash - full spec</td><td><code>clear-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.arc56.json</code></td></tr>
+    <tr><td>ABI method selector - signature</td><td><code>abi-signatures/&lt;selector[:2]&gt;/&lt;selector&gt;.txt</code></td></tr>
+    <tr><td>ABI method selector - signature + apps</td><td><code>abi-signatures/&lt;selector[:2]&gt;/&lt;selector&gt;.json</code></td></tr>
   </table>
   <p>
     Splitting on the hash's first few hex characters keeps any one folder from holding
     thousands of files. Each program-hash <code>.txt</code> file contains exactly one
     line: a <code>raw.githubusercontent.com</code> URL pinned to the commit that last
     touched the matching ARC-56 spec, so it keeps resolving to the exact spec that
-    produced this hash even after the source file is edited or replaced later. Each
-    <code>abi-signatures/</code> file instead contains the plain-text ABI method
-    signature itself, e.g. <code>add(uint64,uint64)uint128</code>.
+    produced this hash even after the source file is edited or replaced later. The
+    <code>.arc56.json</code> file right next to it is a byte-for-byte copy of that same
+    spec, so you can skip resolving the URL entirely and read the full spec straight
+    from this registry. Each <code>abi-signatures/</code> <code>.txt</code> file
+    contains the plain-text ABI method signature itself, e.g.
+    <code>add(uint64,uint64)uint128</code>, and its <code>.json</code> file holds that
+    signature plus the sorted list of approval-program hashes of every indexed app
+    known to expose it.
   </p>
 
   <h2>How to look up a hash</h2>
@@ -109,15 +117,17 @@
     </li>
     <li>Compute <code>sha256(program_bytes)</code>, hex-encoded, lowercase.</li>
     <li>
-      Fetch this hash's file from this site -
-      <code>/approval-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.txt</code> or
-      <code>/clear-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.txt</code> - using a URL
+      Fetch this hash's spec from this site -
+      <code>/approval-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.arc56.json</code> or
+      <code>/clear-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.arc56.json</code> - using a URL
       relative to wherever this page is hosted. A 404 just means this registry hasn't
       indexed a spec producing that hash yet, not an error.
     </li>
     <li>
-      If found, its content is a URL to the matching ARC-56 JSON spec. Fetch that and
-      use it to decode the app's methods, argument types, and state layout.
+      If found, it's the full ARC-56 JSON spec - use it directly to decode the app's
+      methods, argument types, and state layout. (The <code>.txt</code> file at the
+      same path instead holds a durable, commit-pinned URL to the spec's source
+      location, if you want that instead of the copy.)
     </li>
   </ol>
 
@@ -129,10 +139,9 @@ info = json.load(urllib.request.urlopen(f"https://mainnet-api.algonode.cloud/v2/
 approval = base64.b64decode(info["params"]["approval-program"])
 digest = hashlib.sha256(approval).hexdigest()
 
-lookup_url = f"https://scholtz.github.io/ARC56Registry/approval-programs/{digest[:3]}/{digest}.txt"
+lookup_url = f"https://scholtz.github.io/ARC56Registry/approval-programs/{digest[:3]}/{digest}.arc56.json"
 try:
-    spec_url = urllib.request.urlopen(lookup_url).read().decode().strip()
-    spec = json.load(urllib.request.urlopen(spec_url))
+    spec = json.load(urllib.request.urlopen(lookup_url))
     print("Found spec for", spec["name"])
 except urllib.error.HTTPError:
     print("No ARC-56 spec indexed for this program yet")
@@ -149,21 +158,27 @@ except urllib.error.HTTPError:
   <ol>
     <li>Hex-encode the 4 selector bytes, lowercase, e.g. <code>8aa3b61f</code>.</li>
     <li>
-      Fetch <code>/abi-signatures/&lt;selector[:2]&gt;/&lt;selector&gt;.txt</code> -
+      Fetch <code>/abi-signatures/&lt;selector[:2]&gt;/&lt;selector&gt;.json</code> -
       relative to wherever this page is hosted. A 404 just means this registry hasn't
       indexed a method with that selector yet, not an error.
     </li>
-    <li>If found, its content is the plain-text ABI signature, e.g. <code>add(uint64,uint64)uint128</code>.</li>
+    <li>
+      If found, it's a JSON object <code>{"abi": "&lt;signature&gt;", "apps": [...]}</code>
+      - <code>abi</code> is the plain-text ABI signature, e.g.
+      <code>add(uint64,uint64)uint128</code>, and <code>apps</code> is the sorted list
+      of approval-program hashes of every indexed app known to expose it.
+    </li>
   </ol>
 
   <h2>Example: method selector to signature</h2>
-  <pre><code>import urllib.request
+  <pre><code>import urllib.request, json
 
 selector = "8aa3b61f"  # first 4 bytes of an app call's method-call arg, hex-encoded
-lookup_url = f"https://scholtz.github.io/ARC56Registry/abi-signatures/{selector[:2]}/{selector}.txt"
+lookup_url = f"https://scholtz.github.io/ARC56Registry/abi-signatures/{selector[:2]}/{selector}.json"
 try:
-    signature = urllib.request.urlopen(lookup_url).read().decode().strip()
-    print("Selector resolves to", signature)  # add(uint64,uint64)uint128
+    entry = json.load(urllib.request.urlopen(lookup_url))
+    print("Selector resolves to", entry["abi"])  # add(uint64,uint64)uint128
+    print("Known apps:", entry["apps"])
 except urllib.error.HTTPError:
     print("No ABI method indexed for this selector yet")
 </code></pre>

@@ -20,9 +20,9 @@ package, an npm package, and a PyPI package with a typed client for it.
 | [scripts/generate_typescript_clients.py](scripts/generate_typescript_clients.py), [scripts/publish_npm_packages.py](scripts/publish_npm_packages.py) | Generate the TypeScript clients, and separately publish the npm packages described below. |
 | [scripts/generate_python_clients.py](scripts/generate_python_clients.py), [scripts/publish_python_packages.py](scripts/publish_python_packages.py) | Generate the Python clients, and separately publish the PyPI packages described below. |
 | [clients/](clients/) | One folder per GitHub repo (`clients/<owner>/<repo>/`), holding the shared downloaded `arc56/` specs plus one subfolder per ecosystem's generated client package - `dotnet/`, `npm/`, and `python/`. |
-| [scripts/generate_hash_registry.py](scripts/generate_hash_registry.py) | Builds `approval-programs/`, `clear-programs/` (compiled-program SHA-256 hash to ARC-56 spec URL) and `abi-signatures/` (ARC-4 method selector to ABI method signature), described below. |
-| [approval-programs/](approval-programs/), [clear-programs/](clear-programs/) | The program hash registry: `<program>-programs/<hash[:3]>/<hash>.txt`, one file per distinct program hash. |
-| [abi-signatures/](abi-signatures/) | The ABI method-signature registry: `abi-signatures/<selector[:2]>/<selector>.txt`, one file per distinct ARC-4 method selector. |
+| [scripts/generate_hash_registry.py](scripts/generate_hash_registry.py) | Builds `approval-programs/`, `clear-programs/` (compiled-program SHA-256 hash to ARC-56 spec URL + a copy of the spec) and `abi-signatures/` (ARC-4 method selector to ABI method signature + apps using it), described below. |
+| [approval-programs/](approval-programs/), [clear-programs/](clear-programs/) | The program hash registry: `<program>-programs/<hash[:3]>/<hash>.txt` (spec URL) and `<hash>.arc56.json` (a copy of that spec), one pair per distinct program hash. |
+| [abi-signatures/](abi-signatures/) | The ABI method-signature registry: `abi-signatures/<selector[:2]>/<selector>.txt` (signature) and `<selector>.json` (signature + the apps that use it), one pair per distinct ARC-4 method selector. |
 | [pages/index.html](pages/index.html) | Landing page for the registry's GitHub Pages site, published from the folders above. |
 | [.github/workflows/](.github/workflows/) | The scheduled/triggered pipelines tying all of the above together. |
 | [docs/](docs/) | Detailed docs for each pipeline (linked below). |
@@ -104,7 +104,9 @@ every `*.arc56.json` file in the repo, hashes its compiled approval and clear-st
 programs with SHA-256, and writes `approval-programs/<hash[:3]>/<hash>.txt` and
 `clear-programs/<hash[:3]>/<hash>.txt` containing a durable URL back to the matching
 spec (pinned to the commit that last touched it, so the link survives later edits to
-the source file). [`deploy-hash-registry-pages.yml`](.github/workflows/deploy-hash-registry-pages.yml)
+the source file), plus `<hash>.arc56.json` right next to it - a byte-for-byte copy of
+that same spec, so a consumer that only has the hash can decode a call in one fetch
+instead of two. [`deploy-hash-registry-pages.yml`](.github/workflows/deploy-hash-registry-pages.yml)
 then publishes both folders, plus a developer-facing usage guide, to
 **[scholtz.github.io/ARC56Registry](https://scholtz.github.io/ARC56Registry/)**.
 
@@ -120,10 +122,14 @@ The same script and workflow also build an **ABI method-signature registry**:
 `abi-signatures/<selector[:2]>/<selector>.txt`, keyed by each ARC-56 method's ARC-4
 selector (the first 4 bytes of `SHA-512/256` over its ABI signature string), containing
 that plain-text signature - e.g. `abi-signatures/8a/8aa3b61f.txt` contains
-`add(uint64,uint64)uint128`. It's published on the same GitHub Pages site, and lets a
-wallet that only has a 4-byte method selector (decoded from an app-call transaction's
-args) recover a human-readable method signature without needing the whole ARC-56 spec
-resolved first.
+`add(uint64,uint64)uint128`. Right next to it, `<selector>.json` holds a pretty-printed
+`{"abi": "add(uint64,uint64)uint128", "apps": ["<hash1>", "<hash2>", ...]}`, where
+`apps` is the sorted list of approval-program hashes (the same hashes that key
+`approval-programs/`) of every indexed app that exposes this method. It's published on
+the same GitHub Pages site, and lets a wallet that only has a 4-byte method selector
+(decoded from an app-call transaction's args) recover a human-readable method signature
+- and the set of known apps using it - without needing the whole ARC-56 spec resolved
+first.
 
 ## Status
 
