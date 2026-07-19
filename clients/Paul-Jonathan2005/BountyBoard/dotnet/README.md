@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.Paul_Jonathan2005.BountyBoard.TaskBountyContract_aca3b7cf;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new TaskBountyContractProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
