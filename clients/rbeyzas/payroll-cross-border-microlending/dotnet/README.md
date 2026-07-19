@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.rbeyzas.payroll_cross_border_microlending.FileSharingApp_6c5cd344;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new FileSharingAppProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
