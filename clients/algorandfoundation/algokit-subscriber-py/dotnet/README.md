@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.algorandfoundation.algokit_subscriber_py.testing_app_4bf00bef;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new TestingAppProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
