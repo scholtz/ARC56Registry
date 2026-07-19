@@ -3,8 +3,8 @@
 - **Repo**: [manuelmauro/algonaut](https://github.com/manuelmauro/algonaut)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/manuelmauro/algonaut/HEAD/tests/fixtures/arc56_test.arc56.json](https://raw.githubusercontent.com/manuelmauro/algonaut/HEAD/tests/fixtures/arc56_test.arc56.json)
 - **Namespace used**: `Arc56.Generated.manuelmauro.algonaut.arc56_test_1ff6d903`
-- **Detected**: 2026-07-17T08:25:45.994546+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:76700131f07234ca74e2ca11c5eed20920edf8dcce99efcda161765d9c7af451`
+- **Detected**: 2026-07-19T23:49:25.309986+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:0093cb1562e2d8125477e45e9b2045a81c983a91f38f1a2f9b738be110520613`
 
 ## Reproduce
 
@@ -45,11 +45,11 @@ Unhandled exception. Newtonsoft.Json.JsonReaderException: Unexpected character e
    at Newtonsoft.Json.JsonSerializer.Deserialize(JsonReader reader, Type objectType)
    at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
    at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
-   at Algorand.AVM.ClientGenerator.ABI.ARC56.ClientGeneratorARC56.LoadFromByteArray(Byte[] data) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/ARC56/ClientGeneratorARC56.cs:line 39
-   at client_generator.Program.<>c.<<Main>b__1_1>d.MoveNext() in /src/client-generator/Program.cs:line 80
+   at Algorand.AVM.ClientGenerator.ABI.ARC56.ClientGeneratorARC56.LoadFromByteArray(Byte[] data) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/ARC56/ClientGeneratorARC56.cs:line 33
+   at client_generator.Program.<>c.<<Main>b__1_1>d.MoveNext() in /src/client-generator/Program.cs:line 77
 --- End of stack trace from previous location ---
    at CommandLine.ParserResultExtensions.WithParsedAsync[T](ParserResult`1 result, Func`2 action)
-   at client_generator.Program.Main(String[] args) in /src/client-generator/Program.cs:line 37
+   at client_generator.Program.Main(String[] args) in /src/client-generator/Program.cs:line 34
    at client_generator.Program.<Main>(String[] args)
 
 ```
