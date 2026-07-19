@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.rushikesh2k04.Hackseries_medicalNFT.NftTransfer_1fc9523b;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new NftTransferProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
