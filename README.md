@@ -24,6 +24,7 @@ package, an npm package, and a PyPI package with a typed client for it.
 | [approval-programs/](approval-programs/), [clear-programs/](clear-programs/) | The program hash registry: `<program>-programs/<hash[:3]>/<hash>.txt` (spec URL) and `<hash>.arc56.json` (a copy of that spec), one pair per distinct program hash. |
 | [abi-signatures/](abi-signatures/) | The ABI method-signature registry: `abi-signatures/<selector[:2]>/<selector>.txt` (signature) and `<selector>.json` (signature + the apps that use it), one pair per distinct ARC-4 method selector. |
 | [pages/index.html](pages/index.html) | Landing page for the registry's GitHub Pages site, published from the folders above. |
+| [docker/hash-registry/](docker/hash-registry/) | Dockerfile + README + landing page for the `scholtz2/arc56-registry` Docker Hub image - an unprivileged nginx webserver serving the three folders above over HTTP, for self-hosted lookups. |
 | [.github/workflows/](.github/workflows/) | The scheduled/triggered pipelines tying all of the above together. |
 | [docs/](docs/) | Detailed docs for each pipeline (linked below). |
 
@@ -131,6 +132,15 @@ the same GitHub Pages site, and lets a wallet that only has a 4-byte method sele
 - and the set of known apps using it - without needing the whole ARC-56 spec resolved
 first.
 
+The same three folders are also published as a self-hosted webserver image,
+[`scholtz2/arc56-registry`](https://hub.docker.com/r/scholtz2/arc56-registry) (an
+unprivileged nginx container listening on port 8080, tagged with today's UTC date and
+`latest`), by
+[`publish-docker-hash-registry.yml`](.github/workflows/publish-docker-hash-registry.yml),
+so a wallet can `docker run` its own local mirror instead of depending on GitHub Pages
+being reachable at call time - see
+**[docs/docker-hash-registry.md](docs/docker-hash-registry.md)**.
+
 ## Status
 
 - ✅ Registry discovery + validation (arc56.links.csv)
@@ -139,6 +149,10 @@ first.
 - ✅ Python client generation pipeline (download -> generate -> publish)
 - ✅ Program hash registry (approval-programs/, clear-programs/) + GitHub Pages site
 - ✅ ABI method-signature registry (abi-signatures/) + GitHub Pages site
+- ⏳ Docker Hub image (`scholtz2/arc56-registry`) - workflow wired up, but needs a
+  one-time Docker Hub account + `DOCKERHUB_USERNAME`/`DOCKERHUB_TOKEN` repo secrets
+  before it actually publishes (see
+  [docs/dockerhub-publishing-setup.md](docs/dockerhub-publishing-setup.md))
 - ⏳ Automated `dotnet nuget push` to nuget.org - wired up via Trusted Publishing (OIDC),
   but needs a one-time `NUGET_USER` repo secret + nuget.org policy before it actually
   publishes (see [docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md#publishing-to-nugetorg))

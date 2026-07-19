@@ -63,12 +63,23 @@ cover.
   distinct 4-byte selector, built from every method of every ARC-56 spec in the repo.
 - `pages/index.html` - the GitHub Pages landing page for the hash registry, published
   by `deploy-hash-registry-pages.yml`.
+- `docker/hash-registry/Dockerfile` + `docker/hash-registry/README.md` +
+  `docker/hash-registry/index.html` - builds the `scholtz2/arc56-registry` Docker Hub
+  image: an unprivileged (non-root) nginx webserver on port 8080 serving
+  `approval-programs/`, `clear-programs/`, and `abi-signatures/` over plain HTTP, plus
+  a landing page and README, so a wallet can run its own local mirror of the hash
+  registry instead of depending on GitHub Pages at call time. Published by
+  `publish-docker-hash-registry.yml`, tagged with both the current UTC date
+  (`YYYY-MM-DD`) and `latest`.
 - `docs/arc56-links-pipeline.md` - full detail on the CSV pipeline.
 - `docs/dotnet-client-pipeline.md` - full detail on the .NET client pipeline.
 - `docs/typescript-client-pipeline.md` - full detail on the TypeScript client pipeline.
 - `docs/npm-publishing-setup.md` - one-time `NPM_TOKEN` secret setup for npm publishing.
 - `docs/pypi-publishing-setup.md` - one-time `PYPI_TOKEN` secret setup for PyPI publishing.
 - `docs/hash-registry.md` - full detail on the hash registry + GitHub Pages pipeline.
+- `docs/docker-hash-registry.md` - full detail on the Docker Hub image pipeline.
+- `docs/dockerhub-publishing-setup.md` - one-time Docker Hub account + `DOCKERHUB_USERNAME`/
+  `DOCKERHUB_TOKEN` secret setup for publishing the image.
 
 ## Hard rules - do not violate these
 
@@ -225,6 +236,15 @@ pins those separately from the package `<Version>`. Don't "simplify" that away.
   [docs/pypi-publishing-setup.md](docs/pypi-publishing-setup.md). Don't "upgrade" this
   without checking whether PyPI has since added a way to pre-authorize unpublished
   project names.
+- `docker push` to Docker Hub uses a classic **access token** (`DOCKERHUB_TOKEN` +
+  `DOCKERHUB_USERNAME` repo secrets), same reasoning as npm/PyPI above - Docker Hub has
+  no comparable OIDC Trusted Publishing option today. Unlike the npm/PyPI/NuGet publish
+  scripts, `publish-docker-hash-registry.yml` doesn't do a "list what's published, push
+  what's missing" comparison - every run's dataset can differ from the last (the hash
+  registry is regenerated daily) and the image is always pushed under a fresh
+  `YYYY-MM-DD` UTC-date tag plus a moved `latest` tag, so there's nothing to diff
+  against. It still follows the same secret-gated pattern as the other publish steps:
+  missing `DOCKERHUB_USERNAME`/`DOCKERHUB_TOKEN` skips the push (logged, not failed).
 - All three publish scripts (`publish_dotnet_packages.py`, `publish_npm_packages.py`,
   `publish_python_packages.py`) decide what to publish by **querying the registry's own
   live list of published versions** (nuget.org's flat-container index / the npm

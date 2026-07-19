@@ -183,6 +183,28 @@ except urllib.error.HTTPError:
     print("No ABI method indexed for this selector yet")
 </code></pre>
 
+  <h2>Self-hosted use: Docker image</h2>
+  <p>
+    Everything on this page is also published as a self-hosted webserver image,
+    <a href="https://hub.docker.com/r/scholtz2/arc56-registry"><code>scholtz2/arc56-registry</code></a>
+    (an unprivileged, non-root nginx container listening on port 8080), tagged with
+    today's UTC date and <code>latest</code>. Run it to get your own HTTP endpoint
+    serving these tables, so lookups don't depend on this site being reachable at call
+    time:
+  </p>
+  <pre><code>docker run -d --name arc56-registry -p 8080:8080 scholtz2/arc56-registry:latest
+curl http://localhost:8080/approval-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.arc56.json
+</code></pre>
+  <p>
+    Prefer plain files instead of an HTTP endpoint? <code>docker cp</code> still works,
+    since it's a normal filesystem, not a data-only image - see the image's own
+    <a href="https://github.com/scholtz/ARC56Registry/blob/main/docker/hash-registry/README.md">README</a>
+    (also served at <code>/README.md</code> inside the running container) for that and
+    full usage details, and
+    <a href="https://github.com/scholtz/ARC56Registry/blob/main/docs/docker-hash-registry.md">docs/docker-hash-registry.md</a>
+    for how it's built and published.
+  </p>
+
   <h2>Freshness</h2>
   <p>
     All three tables are regenerated daily by

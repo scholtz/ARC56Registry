@@ -67,6 +67,15 @@ inside each `.txt` file) stay commit-pinned, per the durability requirement abov
 Requires a one-time, non-code repo setting: **Settings > Pages > Source: "GitHub
 Actions"**. Nothing else needs configuring; the workflow handles the rest.
 
+## Docker Hub image
+
+The same three folders are also published as a self-hosted webserver image,
+[`scholtz2/arc56-registry`](https://hub.docker.com/r/scholtz2/arc56-registry) (an
+unprivileged nginx container listening on port 8080), tagged with today's UTC date and
+`latest`, so a wallet can run its own local mirror instead of depending on the GitHub
+Pages site being reachable at call time. See
+**[docs/docker-hash-registry.md](docker-hash-registry.md)**.
+
 ## How to use it (as a consumer)
 
 1. Fetch the target app's compiled programs (e.g. via `algod`'s

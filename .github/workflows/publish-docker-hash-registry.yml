@@ -1,0 +1,91 @@
+name: Publish Docker Hub hash registry image
+
+# Packages approval-programs/, clear-programs/, abi-signatures/, and a landing page as
+# an unprivileged nginx webserver image (scholtz2/arc56-registry) and pushes it to
+# Docker Hub, tagged with today's UTC date (YYYY-MM-DD) and `latest`. This lets a
+# wallet run its own local mirror of the hash registry, served over plain HTTP,
+# instead of depending on scholtz.github.io/ARC56Registry being reachable at call
+# time. See docs/docker-hash-registry.md and docs/dockerhub-publishing-setup.md for
+# the one-time DOCKERHUB_USERNAME/DOCKERHUB_TOKEN secret setup this needs.
+
+on:
+  workflow_run:
+    workflows: ["Generate hash registry"]
+    types: [completed]
+  workflow_dispatch: {}
+  push:
+    paths:
+      - "docker/hash-registry/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-docker-hash-registry
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    env:
+      # `secrets` can't be referenced directly in a step's `if:` - route it through a
+      # job-level env var instead.
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compute date tag
+        id: tag
+        run: echo "date=$(date -u +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Build once, locally, and boot it before pushing anything - catches a broken
+      # Dockerfile/nginx config regardless of whether Docker Hub credentials are
+      # configured yet, instead of only finding out on the next real pull.
+      - name: Build image for smoke test
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/hash-registry/Dockerfile
+          load: true
+          tags: arc56-registry:smoke-test
+
+      - name: Smoke test image
+        run: |
+          set -e
+          docker run -d --name arc56-registry-smoke -p 18080:8080 arc56-registry:smoke-test
+          for i in $(seq 1 20); do
+            if curl -fsS http://localhost:18080/README.md >/dev/null; then break; fi
+            sleep 0.5
+          done
+          curl -fsS http://localhost:18080/README.md >/dev/null
+          curl -fsS http://localhost:18080/ >/dev/null
+          docker rm -f arc56-registry-smoke
+
+      - name: Log in to Docker Hub
+        if: ${{ env.DOCKERHUB_USERNAME != '' && env.DOCKERHUB_TOKEN != '' }}
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        if: ${{ env.DOCKERHUB_USERNAME != '' && env.DOCKERHUB_TOKEN != '' }}
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/hash-registry/Dockerfile
+          push: true
+          tags: |
+            scholtz2/arc56-registry:${{ steps.tag.outputs.date }}
+            scholtz2/arc56-registry:latest
+
+      - name: Skip publish (Docker Hub credentials not configured yet)
+        if: ${{ env.DOCKERHUB_USERNAME == '' || env.DOCKERHUB_TOKEN == '' }}
+        run: |
+          echo "DOCKERHUB_USERNAME/DOCKERHUB_TOKEN repo secrets not set - see docs/dockerhub-publishing-setup.md. Skipping publish."
