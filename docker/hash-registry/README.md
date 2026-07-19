@@ -100,11 +100,13 @@ list of approval-program hashes of every indexed app known to expose it.
 
 ### Example: program hash to spec
 
+**Python**
+
 ```python
 import base64, hashlib, json, urllib.request
 
 app_id = 123456789
-info = json.load(urllib.request.urlopen(f"https://mainnet-api.algonode.cloud/v2/applications/{app_id}"))
+info = json.load(urllib.request.urlopen(f"https://mainnet-api.4160.nodely.dev/v2/applications/{app_id}"))
 approval = base64.b64decode(info["params"]["approval-program"])
 digest = hashlib.sha256(approval).hexdigest()
 
@@ -114,6 +116,52 @@ try:
     print("Found spec for", spec["name"])
 except urllib.error.HTTPError:
     print("No ARC-56 spec indexed for this program yet")
+```
+
+**TypeScript** (Node.js 18+, built-in `fetch`)
+
+```typescript
+import { createHash } from "node:crypto";
+
+const appId = 123456789;
+const info = await (await fetch(`https://mainnet-api.4160.nodely.dev/v2/applications/${appId}`)).json();
+const approval = Buffer.from(info.params["approval-program"], "base64");
+const digest = createHash("sha256").update(approval).digest("hex");
+
+const lookupUrl = `http://localhost:8080/approval-programs/${digest.slice(0, 3)}/${digest}.arc56.json`;
+const res = await fetch(lookupUrl);
+if (res.ok) {
+  const spec = await res.json();
+  console.log("Found spec for", spec.name);
+} else {
+  console.log("No ARC-56 spec indexed for this program yet");
+}
+```
+
+**C#** (.NET 8+)
+
+```csharp
+using System.Net.Http.Json;
+using System.Security.Cryptography;
+using System.Text.Json;
+
+using var http = new HttpClient();
+var appId = 123456789;
+var info = await http.GetFromJsonAsync<JsonElement>($"https://mainnet-api.4160.nodely.dev/v2/applications/{appId}");
+var approval = Convert.FromBase64String(info.GetProperty("params").GetProperty("approval-program").GetString()!);
+var digest = Convert.ToHexStringLower(SHA256.HashData(approval));
+
+var lookupUrl = $"http://localhost:8080/approval-programs/{digest[..3]}/{digest}.arc56.json";
+var response = await http.GetAsync(lookupUrl);
+if (response.IsSuccessStatusCode)
+{
+    var spec = await response.Content.ReadFromJsonAsync<JsonElement>();
+    Console.WriteLine($"Found spec for {spec.GetProperty("name").GetString()}");
+}
+else
+{
+    Console.WriteLine("No ARC-56 spec indexed for this program yet");
+}
 ```
 
 ## How to look up a method selector
@@ -134,6 +182,8 @@ to a human-readable signature:
 
 ### Example: method selector to signature
 
+**Python**
+
 ```python
 import urllib.request, json
 
@@ -145,6 +195,45 @@ try:
     print("Known apps:", entry["apps"])
 except urllib.error.HTTPError:
     print("No ABI method indexed for this selector yet")
+```
+
+**TypeScript** (Node.js 18+, built-in `fetch`)
+
+```typescript
+const selector = "8aa3b61f"; // first 4 bytes of an app call's method-call arg, hex-encoded
+const lookupUrl = `http://localhost:8080/abi-signatures/${selector.slice(0, 2)}/${selector}.json`;
+const res = await fetch(lookupUrl);
+if (res.ok) {
+  const entry = await res.json();
+  console.log("Selector resolves to", entry.abi); // add(uint64,uint64)uint128
+  console.log("Known apps:", entry.apps);
+} else {
+  console.log("No ABI method indexed for this selector yet");
+}
+```
+
+**C#** (.NET 8+)
+
+```csharp
+using System.Linq;
+using System.Net.Http.Json;
+using System.Text.Json;
+
+using var http = new HttpClient();
+var selector = "8aa3b61f"; // first 4 bytes of an app call's method-call arg, hex-encoded
+var lookupUrl = $"http://localhost:8080/abi-signatures/{selector[..2]}/{selector}.json";
+var response = await http.GetAsync(lookupUrl);
+if (response.IsSuccessStatusCode)
+{
+    var entry = await response.Content.ReadFromJsonAsync<JsonElement>();
+    Console.WriteLine($"Selector resolves to {entry.GetProperty("abi").GetString()}"); // add(uint64,uint64)uint128
+    var apps = entry.GetProperty("apps").EnumerateArray().Select(a => a.GetString());
+    Console.WriteLine($"Known apps: {string.Join(", ", apps)}");
+}
+else
+{
+    Console.WriteLine("No ABI method indexed for this selector yet");
+}
 ```
 
 ## Browsing the full registry (arc56.links.csv)

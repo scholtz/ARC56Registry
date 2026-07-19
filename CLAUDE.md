@@ -256,3 +256,9 @@ pins those separately from the package `<Version>`. Don't "simplify" that away.
   after a successful publish. Don't change this to trust the local flag as the source
   of truth; it's what makes a partially-failed previous run self-heal on the next one
   without extra retry bookkeeping.
+- Code examples that call a public mainnet algod endpoint (in
+  [pages/index.html](pages/index.html), [docker/hash-registry/README.md](docker/hash-registry/README.md),
+  and [docker/hash-registry/index.html](docker/hash-registry/index.html)) use
+  `https://mainnet-api.4160.nodely.dev` - **not** `https://mainnet-api.algonode.cloud`
+  (the older Algonode endpoint these examples used before). Use nodely for any new or
+  edited example in this repo unless told otherwise.
