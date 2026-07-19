@@ -69,12 +69,14 @@ one-package-per-repo convention.
   (`[tool.hatch.build.targets.wheel] packages = ["src/<import_pkg>"]`), used purely to
   turn a plain Python package into an installable sdist/wheel - it has no bearing on
   the generated client code itself.
-- **Generator mode: `minimal`, not the generator's own default `full`**, for the same
-  reason the TypeScript pipeline picks `minimal`: `full` mode also emits a deploy/create
-  `Factory` class and deployment metadata (source, bytecode, template variables) that
-  roughly doubles output size and is only useful for deploying *new* contract instances
-  - dead weight for a registry whose job is decoding/calling contracts that are already
-  deployed.
+- **Generator mode: `full` by default, `minimal` only as a per-contract fallback** -
+  mirrors the TypeScript pipeline (see typescript-client-pipeline.md). `full` mode emits
+  both the `Client` class and a deploy/create `Factory` class plus deployment metadata
+  (source, bytecode, template variables); every contract is generated in `full` mode
+  first so its `Factory` is available. `generate_python_client()` falls back to
+  `minimal` mode (`Client` only) for a specific contract only if that contract's `full`
+  mode output fails to generate or fails to byte-compile - every other contract keeps
+  its `full`-mode `Factory`.
 
 ## Versioning
 
@@ -118,16 +120,23 @@ cost, not per-contract rate limiting.
 
 Mirrors the other two pipelines' compile-failure quarantining, adapted to Python:
 
-1. **Generator crash**: `algokitgen-py -a <spec> -o <out> -m minimal` itself can fail
-   for a given spec. Recorded as `generator_error` on that contract's `python/state.json`
+1. **Generator crash**: `algokitgen-py -a <spec> -o <out> -m full` itself can fail
+   for a given spec. `generate_python_client()` tries `full` mode first; if that fails
+   outright it retries the same contract with `-m minimal` before giving up. Only if
+   both fail is it recorded as `generator_error` on that contract's `python/state.json`
    entry; the project's README lists it as "generation failed - see state.json"; not
    retried every run.
 2. **Compile failure**: right after a contract's file is generated, the pipeline
-   byte-compiles it (`py_compile.compile(..., doraise=True)`) to catch syntax errors.
-   If it fails, the contract is recorded as `py_compile_error` on its `state.json`
-   entry, listed in the README as "fails to compile - excluded, see state.json", its
-   generated `.py` file is deleted from `src/<import_pkg>/`, and its `from . import ...`
-   line is dropped from `__init__.py`.
+   byte-compiles it (`py_compile.compile(..., doraise=True)`) to catch syntax errors. If
+   the `full`-mode output fails, `generate_python_client()` regenerates the same
+   contract with `-m minimal` and compile-checks that instead - dropping only the
+   `Factory`, not the whole contract. Only if the `minimal`-mode output *also* fails to
+   compile is the contract recorded as `py_compile_error` on its `state.json` entry,
+   listed in the README as "fails to compile - excluded, see state.json", its generated
+   `.py` file deleted from `src/<import_pkg>/`, and its `from . import ...` line dropped
+   from `__init__.py`. Every contract that succeeded via the `minimal` fallback is
+   flagged in the project README's contracts table so consumers know that one has no
+   `Factory`.
 
    Unlike the TypeScript pipeline's `tsc --noEmit`, which type-checks the whole project
    together and therefore needs a multi-attempt retry loop to isolate which of
@@ -245,9 +254,12 @@ always comparing against PyPI's own live list rather than a local flag.
   project, every run) - not worth it for this pipeline's actual goal (ship an
   importable client). A future addition could add it if generator bugs that produce
   syntactically valid but semantically broken code turn out to be a real problem.
-- **`minimal` generator mode**: no deploy/create `Factory` class is generated (see
-  "Naming and packaging conventions" above) - these packages are for decoding/calling
-  existing deployed contracts, not deploying new ones.
+- **Per-contract `minimal` fallback**: most contracts are generated in `full` mode and
+  include a working deploy/create `Factory` class, but a contract whose `full`-mode
+  output fails to generate or fails to byte-compile falls back to `minimal` mode (see
+  "Naming and packaging conventions" above), which has no `Factory` - only usable for
+  decoding/calling that specific contract's already-deployed instances, not deploying
+  new ones. The project README's contracts table flags any contract generated this way.
 - **algokit-utils/py-algorand-sdk version pins**: `clients/_template_python/pyproject.toml.template`
   pins `algokit-utils>=4.2.3,<5.0.0` and `py-algorand-sdk>=2.11.1,<3.0.0` - floors at
   the latest release of each verified to generate/build/install cleanly, ceilings

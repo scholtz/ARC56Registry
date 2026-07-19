@@ -154,8 +154,11 @@ Node.js/npm are also available in this environment and have been used successful
 the TypeScript pipeline - no Docker needed there (`npx
 @algorandfoundation/algokit-client-generator` is a plain npm CLI tool, unlike the .NET
 generator's Docker image). See docs/typescript-client-pipeline.md, including why
-generation uses the generator's `minimal` mode (its `full` mode's Factory class has
-been observed to break across algokit-utils versions) and why
+generation always tries the generator's `full` mode first (so the deploy/create
+`Factory` class is available) and falls back to `minimal` mode - dropping only the
+`Factory` - for the specific contract(s) whose `full`-mode output fails to generate or
+fails to type-check (its Factory class has been observed to break against some
+algokit-utils versions the generator doesn't pin against); and why
 `clients/_template_npm/package.json.template`'s `algokit-utils`/`algosdk` version
 ranges must track the generator's own current peer dependencies (`npm view
 @algorandfoundation/algokit-client-generator peerDependencies`) - a stale pin there
@@ -164,8 +167,8 @@ reproducibly breaks every generated package's type-check, not just one.
 The Python pipeline needs no Docker either - `algokitgen-py` (from the
 `algokit-client-generator` PyPI package) is a plain `pip`-installable CLI tool.
 `generate_python_clients.py` installs/upgrades it itself at the start of a run (a
-one-time PyPI metadata + wheel fetch, not per-contract) and also uses `minimal` mode
-for the same reason as TypeScript. `clients/_template_python/pyproject.toml.template`'s
+one-time PyPI metadata + wheel fetch, not per-contract) and uses the same `full`-first,
+`minimal`-fallback strategy as TypeScript. `clients/_template_python/pyproject.toml.template`'s
 `algokit-utils`/`py-algorand-sdk` version ranges must similarly track the generator's
 own PyPI dependency pin (`pip show algokit-client-generator`) - see
 docs/python-client-pipeline.md. Unlike TypeScript's whole-project `tsc --noEmit` pass,

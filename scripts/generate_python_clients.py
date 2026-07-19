@@ -25,17 +25,21 @@ this script:
      clients/<owner>/<repo>/arc56/<file_slug>_<hash8>.arc56.json.
   2. If its content changed (or the generator's PyPI package version changed, or it's
      new), regenerates the Python client via `algokitgen-py -a <spec> -o <out> -m
-     minimal` into clients/<owner>/<repo>/python/src/<import_pkg>/<file_slug>_<hash8>.py,
+     full` into clients/<owner>/<repo>/python/src/<import_pkg>/<file_slug>_<hash8>.py,
      re-exported from that package's src/<import_pkg>/__init__.py
-     (`from . import <file_slug>_<hash8> as <file_slug>_<hash8>`).
+     (`from . import <file_slug>_<hash8> as <file_slug>_<hash8>`). Always tries "full"
+     mode first (Client class *and* deploy/create Factory class), and falls back to
+     "minimal" (Client only, no Factory) just for the specific contract if "full" mode
+     fails to generate or fails the compile check below - see generate_python_client().
   3. Byte-compiles the freshly generated file (`py_compile`) to catch and quarantine
-     any contract whose generated code has a syntax error, so one broken contract
-     doesn't block every other contract in the same package. Unlike the TypeScript
-     pipeline's `tsc --noEmit`, this happens per-file right after generation rather
-     than as a whole-project retry loop: generated Python modules never import each
-     other (each is self-contained, importing only the stdlib, algosdk, and
-     algokit_utils), so there is no cross-file breakage a project-wide recheck could
-     ever surface that a single file's own compile step wouldn't already catch.
+     any contract whose generated code still has a syntax error after the
+     full->minimal fallback, so one broken contract doesn't block every other contract
+     in the same package. Unlike the TypeScript pipeline's `tsc --noEmit`, this happens
+     per-file right after generation rather than as a whole-project retry loop:
+     generated Python modules never import each other (each is self-contained,
+     importing only the stdlib, algosdk, and algokit_utils), so there is no cross-file
+     breakage a project-wide recheck could ever surface that a single file's own
+     compile step wouldn't already catch.
 
 One PyPI package is produced per GitHub repository (owner/repo), matching the
 .NET/TypeScript pipelines' one-package-per-repo convention. A repo's package version
@@ -319,14 +323,14 @@ def save_project_state(path: str, state: dict) -> None:
         f.write("\n")
 
 
-def run_generator(arc56_path: str, py_path: str, mode: str = "minimal") -> None:
-    """mode="minimal" (rather than the generator's own "full" default) drops the
-    deploy/create Factory class and keeps only the typed Client - mirrors the
-    TypeScript pipeline's identical choice (see run_generator() in
-    scripts/generate_typescript_clients.py) for the identical reason: this registry's
-    job is decoding/calling contracts that are already deployed, not deploying new
-    ones, and "full" mode's extra deployment metadata/helpers are pure bloat for that
-    use case.
+def run_generator(arc56_path: str, py_path: str, mode: str) -> None:
+    """Invokes the generator in the given mode ("full" or "minimal"). "full" mode emits
+    both the typed Client and the deploy/create Factory class; "minimal" drops the
+    Factory and keeps only the typed Client. Callers should always try "full" first and
+    fall back to "minimal" only for the specific contract(s) that actually fail to
+    generate/compile in full mode (see generate_python_client()) - mirrors the
+    TypeScript pipeline's identical fallback (see generate_ts_client() in
+    scripts/generate_typescript_clients.py).
 
     Runs under GENERATOR_TIMEOUT_SECONDS: algokitgen-py has been observed to hang
     (rather than crash) on at least one malformed ARC-56 fixture, and a hang here would
@@ -449,6 +453,34 @@ def compile_check(py_path: str) -> str | None:
     return None
 
 
+def generate_python_client(arc56_path: str, py_path: str) -> tuple[str, str | None, str | None]:
+    """Generates py_path in "full" mode and byte-compiles it; if generation crashes/
+    times out or the full-mode output fails to compile, regenerates in "minimal" mode
+    (dropping the Factory class, which is almost always what full mode's failures trace
+    back to) instead. Returns (mode_used, failure_type, error_text): failure_type/
+    error_text are None on success (whichever mode succeeded), otherwise failure_type is
+    "generator_error" or "py_compile_error" and error_text is the detail for the
+    incident report. Mirrors generate_ts_client() in
+    scripts/generate_typescript_clients.py, except the compile check is per-file here
+    (see compile_check()) so both the generate and verify steps happen inside this one
+    helper, rather than being split across generation time and a later aggregate pass."""
+    for mode in ("full", "minimal"):
+        try:
+            run_generator(arc56_path, py_path, mode=mode)
+        except Exception as exc:  # noqa: BLE001
+            if mode == "minimal":
+                return mode, "generator_error", str(exc)
+            log(f"WARNING: full-mode generation failed for {py_path}, falling back to minimal: {exc}")
+            continue
+        compile_error = compile_check(py_path)
+        if compile_error is None:
+            return mode, None, None
+        if mode == "minimal":
+            return mode, "py_compile_error", compile_error
+        log(f"WARNING: full-mode output for {py_path} fails to compile, falling back to minimal")
+    raise AssertionError("unreachable")
+
+
 def process_project(
     owner: str,
     repo: str,
@@ -544,32 +576,18 @@ def process_project(
 
         py_path = os.path.join(src_dir, f"{contract_id}.py")
         log(f"Generating Python client for {url} -> {py_path}")
-        try:
-            run_generator(arc56_path, py_path)
-        except Exception as exc:  # noqa: BLE001 - a single bad contract must never abort the whole run
-            log(f"WARNING: generator failed for {url}: {exc}")
+        generation_mode, failure_type, error_text = generate_python_client(arc56_path, py_path)
+        if failure_type is not None:
+            log(f"WARNING: quarantining {contract_id} - {FAILURE_LABELS.get(failure_type, failure_type)}")
             contracts_state[url] = {
                 **{k: v for k, v in (existing or {}).items() if k != "content_sha256"},
                 "content_sha256": content_hash,
                 "file_slug": file_slug,
                 "hash8": hash8,
-                "generator_error": str(exc),
+                "generation_mode": generation_mode,
+                failure_type: error_text if failure_type == "generator_error" else "generated code fails to compile",
             }
-            write_incident_report(owner, repo, url, contract_id, "generator_error", str(exc), generator_version)
-            state_dirty = True
-            continue
-
-        compile_error = compile_check(py_path)
-        if compile_error is not None:
-            log(f"WARNING: quarantining {contract_id} - fails to compile")
-            contracts_state[url] = {
-                **{k: v for k, v in (existing or {}).items() if k != "content_sha256"},
-                "content_sha256": content_hash,
-                "file_slug": file_slug,
-                "hash8": hash8,
-                "py_compile_error": "generated code fails to compile",
-            }
-            write_incident_report(owner, repo, url, contract_id, "py_compile_error", compile_error, generator_version)
+            write_incident_report(owner, repo, url, contract_id, failure_type, error_text, generator_version)
             state_dirty = True
             continue
 
@@ -581,12 +599,14 @@ def process_project(
         if previous_py_hash is not None and previous_py_hash == py_hash:
             contracts_state[url] = {
                 **{k: v for k, v in (existing or {}).items()
-                   if k not in ("generator_error", "py_compile_error", "content_sha256", "py_sha256", "class_name")},
+                   if k not in ("generator_error", "py_compile_error", "content_sha256", "py_sha256",
+                                "class_name", "generation_mode")},
                 "content_sha256": content_hash,
                 "py_sha256": py_hash,
                 "file_slug": file_slug,
                 "hash8": hash8,
                 "class_name": class_name,
+                "generation_mode": generation_mode,
             }
             state_dirty = True
             log(f"Regenerated {url} - identical code, not counted as a change")
@@ -597,6 +617,7 @@ def process_project(
                 "file_slug": file_slug,
                 "hash8": hash8,
                 "class_name": class_name,
+                "generation_mode": generation_mode,
                 "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             }
             code_changed = True
@@ -679,6 +700,12 @@ def write_project_files(
             table_rows.append(f"| `{contract_id}` | _(generation failed - see state.json)_ | [{url}]({url}) |")
         elif "py_compile_error" in c:
             table_rows.append(f"| `{contract_id}` | _(fails to compile - excluded, see state.json)_ | [{url}]({url}) |")
+        elif c.get("generation_mode") == "minimal":
+            table_rows.append(
+                f"| `{contract_id}` | `{c.get('class_name', '(unknown)')}` _(minimal mode - "
+                f"full mode failed to generate/compile for this contract)_ | [{url}]({url}) |"
+            )
+            index_lines.append(f"from . import {contract_id} as {contract_id}")
         else:
             table_rows.append(f"| `{contract_id}` | `{c.get('class_name', '(unknown)')}` | [{url}]({url}) |")
             index_lines.append(f"from . import {contract_id} as {contract_id}")

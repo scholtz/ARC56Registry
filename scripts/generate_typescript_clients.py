@@ -26,10 +26,15 @@ this script:
      `npx @algorandfoundation/algokit-client-generator generate` into
      clients/<owner>/<repo>/npm/src/<file_slug>_<hash8>.ts, re-exported from that
      package's src/index.ts under a namespace unique to that contract
-     (`export * as <file_slug>_<hash8> from './<file_slug>_<hash8>'`).
+     (`export * as <file_slug>_<hash8> from './<file_slug>_<hash8>'`). Always tries the
+     generator's "full" mode first (Client class *and* deploy/create Factory class), and
+     falls back to "minimal" (Client only, no Factory) just for the specific contract if
+     "full" mode fails to generate or fails the type-check below - see
+     generate_ts_client() and typecheck_and_quarantine().
   3. Type-checks the aggregate package (`tsc --noEmit`) to catch and quarantine any
-     contract whose generated code fails to compile, so one broken contract doesn't
-     block every other contract in the same package.
+     contract whose generated code still fails to compile after the full->minimal
+     fallback, so one broken contract doesn't block every other contract in the same
+     package.
 
 One npm package is produced per GitHub repository (owner/repo), matching the .NET
 pipeline's one-NuGet-package-per-repo convention. A repo's package version is only
@@ -80,7 +85,12 @@ FILENAME_SUFFIX = ".arc56.json"
 # Matches the file name (our contract_id) out of a `tsc` error line like:
 # src/HelloWorld_1234abcd.ts(12,5): error TS2339: ...
 COMPILE_ERROR_FILE_RE = re.compile(r"[\\/](?P<contract_id>[A-Za-z0-9_]+)\.ts\(\d+,\d+\):\s*error")
-MAX_BUILD_QUARANTINE_ATTEMPTS = 10
+# Higher than a naive "one quarantine pass per broken contract" would need, because a
+# full-mode contract that fails to type-check gets a second chance (regenerated in
+# minimal mode, see typecheck_and_quarantine()) before it's ever excluded - so a batch
+# of N full-mode failures can take up to 2 attempts to resolve (one to downgrade to
+# minimal, one to actually exclude any that still fail) instead of 1.
+MAX_BUILD_QUARANTINE_ATTEMPTS = 20
 # subprocess.run(["npm", ...]) fails with WinError 2 on Windows because npm/npx are
 # .cmd shims there, not directly-executable binaries, and CreateProcess (unlike a
 # shell) won't resolve PATHEXT on its own - shutil.which() does that resolution once
@@ -196,16 +206,18 @@ def save_project_state(path: str, state: dict) -> None:
         f.write("\n")
 
 
-def run_generator(arc56_path: str, ts_path: str, mode: str = "minimal") -> None:
-    """mode="minimal" (rather than the generator's own "full" default) deliberately
-    drops the Factory/deployment class and keeps only the typed Client - "full" mode's
-    Factory code type-checks against internal, non-exported shapes of
+def run_generator(arc56_path: str, ts_path: str, mode: str) -> None:
+    """Invokes the generator in the given mode ("full" or "minimal"). "full" mode emits
+    both the typed Client and the deploy/create Factory class; "minimal" drops the
+    Factory and keeps only the typed Client. "full" mode's Factory code has, on some
+    ARC-56 specs, been observed to type-check against internal, non-exported shapes of
     @algorandfoundation/algokit-utils's AlgorandClient (e.g. AlgorandClientInterface
-    missing private fields the concrete class has) that have been observed to break
-    across algokit-utils versions the generator itself doesn't pin against. "minimal"
-    avoids that whole class of breakage, at the cost of no generated deploy/create
-    helpers - acceptable for a registry whose job is decoding/calling existing deployed
-    contracts, not deploying new ones. See docs/typescript-client-pipeline.md."""
+    missing private fields the concrete class has) that break across algokit-utils
+    versions the generator itself doesn't pin against - so callers should always try
+    "full" first and fall back to "minimal" only for the specific contract(s) that
+    actually fail to generate/type-check in full mode (see generate_ts_client() and
+    typecheck_and_quarantine()), not skip straight to "minimal" for everything. See
+    docs/typescript-client-pipeline.md."""
     cmd = [
         NPX_EXE, "--yes", GENERATOR_PACKAGE,
         "generate", "-a", arc56_path, "-o", ts_path, "-m", mode,
@@ -218,6 +230,22 @@ def run_generator(arc56_path: str, ts_path: str, mode: str = "minimal") -> None:
         )
     if not os.path.isfile(ts_path):
         raise RuntimeError(f"algokit-client-generator did not produce {ts_path}")
+
+
+def generate_ts_client(arc56_path: str, ts_path: str) -> str:
+    """Generates ts_path in "full" mode; if that fails outright (generator crash/
+    timeout), regenerates in "minimal" mode instead. Returns the mode that actually
+    produced the file on disk. A "full" mode contract that generates fine but later
+    fails the aggregate `tsc --noEmit` pass is instead downgraded to "minimal" by
+    typecheck_and_quarantine() - not here - since that failure mode is only observable
+    after every contract in the project has been generated."""
+    try:
+        run_generator(arc56_path, ts_path, mode="full")
+        return "full"
+    except Exception as exc:  # noqa: BLE001 - fall back to minimal, don't abort the contract
+        log(f"WARNING: full-mode generation failed for {ts_path}, falling back to minimal: {exc}")
+        run_generator(arc56_path, ts_path, mode="minimal")
+        return "minimal"
 
 
 FAILURE_LABELS = {
@@ -324,6 +352,7 @@ def npm_install(project_dir: str) -> None:
 
 def typecheck_and_quarantine(
     project_dir: str,
+    arc56_dir: str,
     owner: str,
     repo: str,
     contracts_state: dict,
@@ -333,8 +362,14 @@ def typecheck_and_quarantine(
 ) -> set[str]:
     """Mirrors build_and_quarantine() in scripts/generate_dotnet_clients.py: type-checks
     the aggregate package and, on failure, attributes the failure to specific generated
-    files, excludes them (from tsconfig.json's "exclude" and src/index.ts's exports),
-    and retries until it type-checks clean or no further broken file can be attributed."""
+    files. A broken contract that was generated in "full" mode gets one extra chance
+    first: it's regenerated in "minimal" mode in place (dropping the Factory class,
+    which is almost always what full mode's type errors trace back to - see
+    run_generator()) and left in the project for the next typecheck pass, instead of
+    being excluded outright. Only a contract that's already "minimal" (or whose
+    minimal-mode regeneration itself fails) gets excluded (from tsconfig.json's
+    "exclude" and src/index.ts's exports). Retries until it type-checks clean or no
+    further broken file can be attributed."""
     contract_id_to_url = {contract_id_for(c): url for url, c in contracts_state.items() if "file_slug" in c}
 
     for _ in range(MAX_BUILD_QUARANTINE_ATTEMPTS):
@@ -349,9 +384,29 @@ def typecheck_and_quarantine(
                 f"tsc --noEmit failed for {project_dir} and no (new) broken contract file "
                 f"could be attributed from the output:\n{result.stdout[-4000:]}\n{result.stderr[-2000:]}"
             )
+        still_broken: set[str] = set()
         for contract_id in broken:
             url = contract_id_to_url.get(contract_id)
             error_text = extract_error_lines_for(contract_id, combined_output)
+            current_mode = contracts_state.get(url, {}).get("generation_mode") if url is not None else None
+
+            if url is not None and current_mode == "full":
+                ts_path = os.path.join(project_dir, "src", f"{contract_id}.ts")
+                arc56_path = os.path.join(arc56_dir, f"{contract_id}.arc56.json")
+                try:
+                    run_generator(arc56_path, ts_path, mode="minimal")
+                    class_name = extract_client_class_name(ts_path)
+                    with open(ts_path, "rb") as f:
+                        ts_hash = sha256_hex(f.read())
+                    contracts_state[url]["generation_mode"] = "minimal"
+                    contracts_state[url]["ts_sha256"] = ts_hash
+                    contracts_state[url]["class_name"] = class_name
+                    contracts_state[url].pop("ts_compile_error", None)
+                    log(f"Full mode failed to type-check for {contract_id} - regenerated in minimal mode, retrying")
+                    continue
+                except Exception as exc:  # noqa: BLE001 - fall through to quarantine below
+                    log(f"WARNING: minimal-mode fallback generation also failed for {contract_id}: {exc}")
+
             if url is not None:
                 contracts_state[url]["ts_compile_error"] = (
                     "generated code fails to type-check in the aggregate package"
@@ -360,7 +415,8 @@ def typecheck_and_quarantine(
                     owner, repo, url, contract_id, "ts_compile_error", error_text, generator_version,
                 )
             log(f"WARNING: quarantining {contract_id} - fails to type-check")
-        excluded_contract_ids |= broken
+            still_broken.add(contract_id)
+        excluded_contract_ids |= still_broken
         write_project_files(project_dir, owner, repo, contracts_state, excluded_contract_ids, version=version)
 
     raise RuntimeError(f"tsc --noEmit for {project_dir} still failing after "
@@ -433,7 +489,7 @@ def process_project(
         ts_path = os.path.join(src_dir, f"{contract_id}.ts")
         log(f"Generating TS client for {url} -> {ts_path}")
         try:
-            run_generator(arc56_path, ts_path)
+            generation_mode = generate_ts_client(arc56_path, ts_path)
             class_name = extract_client_class_name(ts_path)
             with open(ts_path, "rb") as f:
                 ts_hash = sha256_hex(f.read())
@@ -454,12 +510,13 @@ def process_project(
         if previous_ts_hash is not None and previous_ts_hash == ts_hash:
             contracts_state[url] = {
                 **{k: v for k, v in (existing or {}).items()
-                   if k not in ("generator_error", "content_sha256", "ts_sha256", "class_name")},
+                   if k not in ("generator_error", "content_sha256", "ts_sha256", "class_name", "generation_mode")},
                 "content_sha256": content_hash,
                 "ts_sha256": ts_hash,
                 "file_slug": file_slug,
                 "hash8": hash8,
                 "class_name": class_name,
+                "generation_mode": generation_mode,
             }
             state_dirty = True
             log(f"Regenerated {url} - identical code, not counted as a change")
@@ -470,6 +527,7 @@ def process_project(
                 "file_slug": file_slug,
                 "hash8": hash8,
                 "class_name": class_name,
+                "generation_mode": generation_mode,
                 "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             }
             code_changed = True
@@ -503,7 +561,7 @@ def process_project(
     try:
         npm_install(project_dir)
         excluded_contract_ids = typecheck_and_quarantine(
-            project_dir, owner, repo, contracts_state, excluded_contract_ids, generator_version, version
+            project_dir, arc56_dir, owner, repo, contracts_state, excluded_contract_ids, generator_version, version
         )
     except Exception as exc:  # noqa: BLE001 - an npm/tsc infra failure must not abort the whole run
         log(f"ERROR: npm install/typecheck failed for clients/{owner}/{repo}/npm: {exc}")
@@ -565,6 +623,12 @@ def write_project_files(
             table_rows.append(f"| `{contract_id}` | _(generation failed - see state.json)_ | [{url}]({url}) |")
         elif "ts_compile_error" in c:
             table_rows.append(f"| `{contract_id}` | _(fails to type-check - excluded, see state.json)_ | [{url}]({url}) |")
+        elif c.get("generation_mode") == "minimal":
+            table_rows.append(
+                f"| `{contract_id}` | `{c.get('class_name', '(unknown)')}` _(minimal mode - "
+                f"full mode failed to generate/type-check for this contract)_ | [{url}]({url}) |"
+            )
+            index_lines.append(f"export * as {contract_id} from './{contract_id}';")
         else:
             table_rows.append(f"| `{contract_id}` | `{c.get('class_name', '(unknown)')}` | [{url}]({url}) |")
             index_lines.append(f"export * as {contract_id} from './{contract_id}';")

@@ -54,15 +54,18 @@ package-per-repo convention.
 - **Shared assets**: `clients/_template_npm/` holds `package.json.template`,
   `tsconfig.json.template`, and `README.md.template` - the TypeScript-pipeline
   equivalent of `clients/_template/` for .NET.
-- **Generator mode: `minimal`, not the generator's own default `full`.** `full` mode
-  also emits a deploy/create `Factory` class alongside the `Client` class, but that
-  Factory code type-checks against non-exported internal shapes of
-  `@algorandfoundation/algokit-utils`'s `AlgorandClient` (observed: a
-  `type 'AlgorandClientInterface' is missing the following properties from type
-  'AlgorandClient'` error) that have broken across algokit-utils versions the generator
-  doesn't itself pin against. `minimal` mode generates only the `Client` class and
-  avoids that whole class of breakage - acceptable for a registry whose job is
-  decoding/calling contracts that are already deployed, not deploying new ones.
+- **Generator mode: `full` by default, `minimal` only as a per-contract fallback.**
+  `full` mode emits both the typed `Client` class and a deploy/create `Factory` class;
+  every contract is generated in `full` mode first so its `Factory` is available.
+  `full` mode's Factory code has, on some ARC-56 specs, been observed to type-check
+  against non-exported internal shapes of `@algorandfoundation/algokit-utils`'s
+  `AlgorandClient` (observed: a `type 'AlgorandClientInterface' is missing the
+  following properties from type 'AlgorandClient'` error) that break across
+  algokit-utils versions the generator doesn't itself pin against. When that happens
+  for a specific contract, `generate_ts_client()`/`typecheck_and_quarantine()` fall
+  back to `minimal` mode (`Client` only, no `Factory`) for **that contract only** -
+  every other contract in the project keeps its `full`-mode `Factory`. See "Generator
+  and type-check failures" below.
 
 ## Versioning
 
@@ -107,7 +110,9 @@ this pipeline cares about, so no artificial delay is added around it.
 Mirrors the .NET pipeline's compile-failure quarantining, adapted to TypeScript:
 
 1. **Generator crash**: `npx @algorandfoundation/algokit-client-generator generate`
-   itself can fail for a given spec. Recorded as `generator_error` on that contract's
+   itself can fail for a given spec. `generate_ts_client()` tries `full` mode first; if
+   that fails outright it retries the same contract in `minimal` mode before giving up.
+   Only if both fail is it recorded as `generator_error` on that contract's
    `npm/state.json` entry; the project's README lists it as "generation failed - see
    state.json"; not retried every run.
 2. **Type-check failure**: after regenerating a project's contracts, the pipeline runs
@@ -115,15 +120,25 @@ Mirrors the .NET pipeline's compile-failure quarantining, adapted to TypeScript:
    for the specific file(s) at fault (`src/<contract_id>.ts(line,col): error TSxxxx:
    ...` - `tsc`'s non-pretty output format, matching the shape the .NET pipeline's
    regex already looks for in `dotnet build` output) and for each one:
-   - excludes that file from `tsconfig.json`'s `"exclude"` array,
-   - drops its `export * as ...` line from `src/index.ts`,
-   - records `"ts_compile_error"` on that contract's `state.json` entry,
-   - lists it in the project README as "fails to type-check - excluded, see
-     state.json",
+   - if that contract is still on `full` mode, `typecheck_and_quarantine()` regenerates
+     it in `minimal` mode in place and leaves it in the project (no exclusion, no
+     `state.json` error) for the next `tsc` pass - dropping only the `Factory`, not the
+     whole contract,
+   - only if the contract is already on `minimal` mode (or the `minimal`-mode
+     regeneration itself fails) does it actually get quarantined:
+     - excluded from `tsconfig.json`'s `"exclude"` array,
+     - its `export * as ...` line dropped from `src/index.ts`,
+     - `"ts_compile_error"` recorded on that contract's `state.json` entry,
+     - listed in the project README as "fails to type-check - excluded, see
+       state.json",
 
-   then retries, up to `MAX_BUILD_QUARANTINE_ATTEMPTS` (10) times, until it type-checks
-   clean or no further broken file can be attributed - at which point the run fails
-   loudly rather than silently shipping a broken package.
+   then retries, up to `MAX_BUILD_QUARANTINE_ATTEMPTS` (20 - roughly double the number
+   of contracts a single quarantine pass could otherwise need, since a `full`-mode
+   failure costs one extra attempt to downgrade to `minimal` before it can be excluded)
+   times, until it type-checks clean or no further broken file can be attributed - at
+   which point the run fails loudly rather than silently shipping a broken package.
+   Every contract successfully generated in `minimal` mode this way is flagged in the
+   project README's contracts table so consumers know that one has no `Factory`.
 
 ## Running it locally
 
@@ -215,9 +230,12 @@ always comparing against the npm registry's own live list rather than a local fl
   limitation; a future optimization could share a single `node_modules` install (e.g.
   via a workspace or a cached install) across projects if generation time becomes a
   problem.
-- **`minimal` generator mode**: no deploy/create `Factory` class is generated (see
-  "Naming and packaging conventions" above) - these packages are for decoding/calling
-  existing deployed contracts, not deploying new ones.
+- **Per-contract `minimal` fallback**: most contracts are generated in `full` mode and
+  include a working deploy/create `Factory` class, but a contract whose `full`-mode
+  output fails to generate or fails to type-check falls back to `minimal` mode (see
+  "Naming and packaging conventions" above), which has no `Factory` - only usable for
+  decoding/calling that specific contract's already-deployed instances, not deploying
+  new ones. The project README's contracts table flags any contract generated this way.
 - **algokit-utils/algosdk version pins**: `clients/_template_npm/package.json.template`
   pins `@algorandfoundation/algokit-utils` and `algosdk` to ranges matching the
   generator's *current* peer dependencies. If a future generator upgrade changes those
