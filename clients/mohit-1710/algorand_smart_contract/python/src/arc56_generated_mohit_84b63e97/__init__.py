@@ -1,0 +1,1 @@
+from . import PredictionMarketContract_5c16b5a2 as PredictionMarketContract_5c16b5a2
