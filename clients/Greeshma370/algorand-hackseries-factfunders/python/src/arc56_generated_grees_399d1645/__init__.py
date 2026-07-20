@@ -1,0 +1,1 @@
+from . import ProposalContract_81c12b63 as ProposalContract_81c12b63

@@ -1,4 +1,4 @@
-# arc56-generated-greeshma370-algorand-hackseries-factfunders
+# arc56-generated-grees_399d1645
 
 Auto-generated typed Algorand smart-contract clients for **[Greeshma370/algorand-hackseries-factfunders](https://github.com/Greeshma370/algorand-hackseries-factfunders)**,
 built from the [ARC-56](https://github.com/algorandfoundation/ARCs/blob/main/ARCs/arc-0056.md)
@@ -12,7 +12,7 @@ automatically whenever the source ARC-56 spec changes.
 ## Install
 
 ```bash
-pip install arc56-generated-greeshma370-algorand-hackseries-factfunders
+pip install arc56-generated-grees_399d1645
 ```
 
 ## Basic usage
@@ -20,12 +20,11 @@ pip install arc56-generated-greeshma370-algorand-hackseries-factfunders
 Each contract in this package is a separate module (a hash of its source URL is
 appended to its filename to keep multiple contracts in the same repository from
 colliding), containing a typed `<Name>Client` for interacting with an already-deployed
-instance of that contract. Generated in the client generator's `minimal` mode - see
-"Why `minimal` mode" below - so there is no generated deploy/create `Factory`.
+instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_greeshma370_algorand_hackseries_factfunders import ProposalContract_81c12b63
+from arc56_generated_grees_399d1645 import ProposalContract_81c12b63
 
 algorand = AlgorandClient.mainnet()
 client = ProposalContract_81c12b63.ProposalContractClient(
@@ -37,14 +36,15 @@ client = ProposalContract_81c12b63.ProposalContractClient(
 # result = client.send.some_method(args=(...))
 ```
 
-### Why `minimal` mode
+### `full` vs `minimal` generator mode
 
-The generator's default `full` mode also emits a deploy/create `Factory` class and
-deployment metadata (source code, bytecode, template variables), which roughly doubles
-the generated file's size and is only useful for deploying *new* instances of a
-contract. `minimal` mode generates only the `Client` class - acceptable for a registry
-whose job is decoding/calling contracts that are already deployed, not deploying new
-ones.
+Contracts in this package are generated with the client generator's `full` mode by
+default, which emits both the typed `Client` and a deploy/create `Factory` class plus
+deployment metadata (source code, bytecode, template variables). For the rare contract
+whose `full`-mode output fails to generate or fails to byte-compile, this package falls
+back to `minimal` mode (`Client` only, no `Factory`) for that contract instead of
+failing outright. The contracts table below flags any contract generated this way;
+every other contract includes a working `Factory`.
 
 ## Contracts included in this package
 
