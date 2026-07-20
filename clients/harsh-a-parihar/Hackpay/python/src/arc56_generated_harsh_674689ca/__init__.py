@@ -1,0 +1,9 @@
+from . import BatchDistributionContract_337398d1 as BatchDistributionContract_337398d1
+from . import ComplianceOracleContract_437d0a2e as ComplianceOracleContract_437d0a2e
+from . import EmergencyRecoveryContract_3ad7816e as EmergencyRecoveryContract_3ad7816e
+from . import MultiSigWalletContract_21df8993 as MultiSigWalletContract_21df8993
+from . import PlatformFeeManagerContract_322b43ec as PlatformFeeManagerContract_322b43ec
+from . import ReputationSystemContract_0ecb1d6c as ReputationSystemContract_0ecb1d6c
+from . import SimplePrizeDistribution_6048770e as SimplePrizeDistribution_6048770e
+from . import TaxComplianceContract_7adedc87 as TaxComplianceContract_7adedc87
+from . import SimplePrizeDistribution_3e6d91ef as SimplePrizeDistribution_3e6d91ef
