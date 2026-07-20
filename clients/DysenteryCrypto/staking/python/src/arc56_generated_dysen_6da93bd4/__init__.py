@@ -1,0 +1,1 @@
+from . import ASAStakingContract_5e56f62b as ASAStakingContract_5e56f62b

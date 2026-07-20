@@ -1,0 +1,1 @@
+from . import AlgoCreditPlatformTestNet_bd2ac49d as AlgoCreditPlatformTestNet_bd2ac49d

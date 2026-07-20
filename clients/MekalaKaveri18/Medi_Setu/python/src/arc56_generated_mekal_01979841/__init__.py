@@ -1,0 +1,1 @@
+from . import MedicineLendingPlatform_41c1041a as MedicineLendingPlatform_41c1041a

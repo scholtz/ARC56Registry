@@ -1,0 +1,1 @@
+from . import ResponsiveDonation_1394e2ca as ResponsiveDonation_1394e2ca

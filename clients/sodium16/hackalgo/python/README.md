@@ -1,4 +1,4 @@
-# arc56-generated-sodium16-hackalgo
+# arc56-generated-sodiu_7670ba48
 
 Auto-generated typed Algorand smart-contract clients for **[sodium16/hackalgo](https://github.com/sodium16/hackalgo)**,
 built from the [ARC-56](https://github.com/algorandfoundation/ARCs/blob/main/ARCs/arc-0056.md)
@@ -12,7 +12,7 @@ automatically whenever the source ARC-56 spec changes.
 ## Install
 
 ```bash
-pip install arc56-generated-sodium16-hackalgo
+pip install arc56-generated-sodiu_7670ba48
 ```
 
 ## Basic usage
@@ -20,12 +20,11 @@ pip install arc56-generated-sodium16-hackalgo
 Each contract in this package is a separate module (a hash of its source URL is
 appended to its filename to keep multiple contracts in the same repository from
 colliding), containing a typed `<Name>Client` for interacting with an already-deployed
-instance of that contract. Generated in the client generator's `minimal` mode - see
-"Why `minimal` mode" below - so there is no generated deploy/create `Factory`.
+instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_sodium16_hackalgo import Algomint_16706bd0
+from arc56_generated_sodiu_7670ba48 import Algomint_16706bd0
 
 algorand = AlgorandClient.mainnet()
 client = Algomint_16706bd0.AlgomintClient(
@@ -37,14 +36,15 @@ client = Algomint_16706bd0.AlgomintClient(
 # result = client.send.some_method(args=(...))
 ```
 
-### Why `minimal` mode
+### `full` vs `minimal` generator mode
 
-The generator's default `full` mode also emits a deploy/create `Factory` class and
-deployment metadata (source code, bytecode, template variables), which roughly doubles
-the generated file's size and is only useful for deploying *new* instances of a
-contract. `minimal` mode generates only the `Client` class - acceptable for a registry
-whose job is decoding/calling contracts that are already deployed, not deploying new
-ones.
+Contracts in this package are generated with the client generator's `full` mode by
+default, which emits both the typed `Client` and a deploy/create `Factory` class plus
+deployment metadata (source code, bytecode, template variables). For the rare contract
+whose `full`-mode output fails to generate or fails to byte-compile, this package falls
+back to `minimal` mode (`Client` only, no `Factory`) for that contract instead of
+failing outright. The contracts table below flags any contract generated this way;
+every other contract includes a working `Factory`.
 
 ## Contracts included in this package
 
