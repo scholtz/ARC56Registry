@@ -29,6 +29,7 @@ not a long-lived secret - see docs/dotnet-client-pipeline.md.
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import datetime
 import glob
 import json
@@ -49,10 +50,14 @@ PUBLISH_DELAY_SECONDS = 15  # minimum time between successive `dotnet nuget push
 # documents a 350/hour-per-API-key push quota (https://learn.microsoft.com/en-us/nuget/api/rate-limits);
 # 15s/push caps us at 240/hour, with margin, since real-world enforcement has been reported stricter
 # than the documented figure.
-LIST_DELAY_SECONDS = 1  # minimum time between successive "list published versions" lookups
+LIST_MAX_WORKERS = 8  # the flat-container index is a public, unauthenticated, CDN-backed read with no
+# documented per-key quota (unlike push) - the 350/hour push quota above doesn't apply here, so these
+# lookups run concurrently instead of one-at-a-time. This matters because the OIDC API key obtained at
+# job start is only valid for about an hour (see docs/dotnet-client-pipeline.md#known-limitations): on a
+# run with hundreds of projects, doing every "does this need publishing?" lookup serially before any
+# pushing starts was eating minutes of that hour before a single package got pushed.
 
 _last_push_at: float | None = None
-_last_list_at: float | None = None
 
 
 def log(message: str) -> None:
@@ -109,8 +114,6 @@ def list_published_versions(package_id: str) -> set[str]:
     plain-JSON, no-auth-needed source of every version of `package_id` currently
     published - not an approximation or a search index, so a version present here is
     unambiguously already live."""
-    global _last_list_at
-    _last_list_at = _rate_limit(_last_list_at, LIST_DELAY_SECONDS)
     url = f"{FLAT_CONTAINER_BASE}/{package_id.lower()}/index.json"
     req = urllib.request.Request(url, headers={"User-Agent": "arc56-nuget-publisher"})
     try:
@@ -121,6 +124,25 @@ def list_published_versions(package_id: str) -> set[str]:
         if exc.code == 404:
             return set()  # package never published at all yet
         raise
+
+
+def list_published_versions_bulk(package_ids: list[str]) -> dict[str, "set[str] | Exception"]:
+    """Runs list_published_versions() for every package ID concurrently (bounded by
+    LIST_MAX_WORKERS) instead of one-at-a-time, since these reads carry none of the
+    push quota's rate-limiting concerns. A failed lookup is stored as the exception
+    itself rather than raised, so one bad package ID can't abort the whole batch -
+    callers check `isinstance(result, Exception)` the same way the old per-project
+    try/except did."""
+    results: dict[str, "set[str] | Exception"] = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=LIST_MAX_WORKERS) as pool:
+        future_to_id = {pool.submit(list_published_versions, pid): pid for pid in package_ids}
+        for future in concurrent.futures.as_completed(future_to_id):
+            package_id = future_to_id[future]
+            try:
+                results[package_id] = future.result()
+            except Exception as exc:  # noqa: BLE001 - stored for the caller to log/count
+                results[package_id] = exc
+    return results
 
 
 def pack_project(project_dir: str, package_id: str, version: str) -> str:
@@ -203,19 +225,32 @@ def main() -> int:
     no_version_count = 0
     failed_count = 0
 
+    # Resolve each project's target version first (pure local state.json reads), then
+    # look up every package ID's published versions on nuget.org concurrently in one
+    # batch, rather than interleaving one serial, rate-limited lookup per project into
+    # the same loop that does the (necessarily rate-limited) pushing. See
+    # LIST_MAX_WORKERS above for why this is safe to parallelize.
+    versions_by_package: dict[str, str] = {}
+    for owner, repo, project_dir, package_id in projects:
+        state = load_state(os.path.join(project_dir, "state.json"))
+        version = state.get("version")
+        if version:
+            versions_by_package[package_id] = version
+    log(f"Looking up published versions for {len(versions_by_package)} package(s) on nuget.org "
+        f"({LIST_MAX_WORKERS} concurrent)")
+    published_versions_by_package = list_published_versions_bulk(list(versions_by_package.keys()))
+
     for i, (owner, repo, project_dir, package_id) in enumerate(projects, start=1):
         log(f"[{i}/{total}] {owner}/{repo}: {package_id}")
         state_path = os.path.join(project_dir, "state.json")
-        state = load_state(state_path)
-        version = state.get("version")
+        version = versions_by_package.get(package_id)
         if not version:
             no_version_count += 1
             continue
 
-        try:
-            published_versions = list_published_versions(package_id)
-        except Exception as exc:  # noqa: BLE001 - one project's lookup must not abort the run
-            log(f"WARNING: could not list published versions for {package_id}: {exc}")
+        published_versions = published_versions_by_package[package_id]
+        if isinstance(published_versions, Exception):
+            log(f"WARNING: could not list published versions for {package_id}: {published_versions}")
             failed_count += 1
             continue
 
@@ -228,6 +263,7 @@ def main() -> int:
             print(f"would pack + push {package_id} {version}")
             continue
 
+        state = load_state(state_path)
         try:
             nupkg_path = pack_project(project_dir, package_id, version)
         except Exception as exc:  # noqa: BLE001

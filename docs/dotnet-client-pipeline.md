@@ -231,10 +231,17 @@ generated `clients/<owner>/<repo>/dotnet/*.csproj` project, it:
    cached "published_version" flag. This is the "list all published library versions
    and publish only what needs publishing" behavior: nuget.org itself is the single
    source of truth for what's live, so a partially-failed previous publish run, or a
-   manual push done outside this pipeline, is always detected correctly.
+   manual push done outside this pipeline, is always detected correctly. This lookup
+   is unauthenticated and carries none of the push quota's rate-limiting concerns, so
+   `list_published_versions_bulk()` runs it for every project concurrently
+   (`LIST_MAX_WORKERS`, currently 8) as one batch before any packing/pushing starts,
+   rather than one-at-a-time interleaved with the push loop - on a run with hundreds of
+   projects, doing this serially was itself eating minutes off the OIDC key's ~1-hour
+   lifetime (see "Known limitations" below) before a single package got pushed.
 3. If the project's current version isn't in that list, packs it (`dotnet pack`) and
-   pushes it (`dotnet nuget push --skip-duplicate`), waiting at least 5 seconds between
-   pushes so nuget.org isn't hammered on a run that has many packages to catch up on.
+   pushes it (`dotnet nuget push --skip-duplicate`), waiting at least
+   `PUBLISH_DELAY_SECONDS` (15 seconds) between pushes so nuget.org isn't hammered on a
+   run that has many packages to catch up on.
 
 `state.json`'s `published_version` field is still written after a successful push, but
 only as an informational cache for humans reading the file - it is never read back to
@@ -364,7 +371,12 @@ notices, but only after everything else has already been processed.
   is still going after that (realistically only a large initial catch-up, not a routine
   incremental one), later pushes in that same run will fail once the key expires. This
   is not silently lost - see "Retrying a failed publish" above - but it does mean
-  publishing for those later projects lags by one more scheduled run.
+  publishing for those later projects lags by one more scheduled run. The "list
+  published versions" step runs concurrently across all projects up front (see step 2
+  above) specifically so it doesn't itself burn a chunk of that hour before any pushing
+  starts, but the ~15s-per-push quota delay is fixed - a catch-up run with hundreds of
+  packages still needing their first publish can genuinely take longer than an hour to
+  push them all, and will keep spilling into subsequent scheduled runs until it catches up.
 - **`HEAD`-pinned sources**: like the links CSV itself, ARC-56 URLs point at `HEAD`, so a
   source repo rewriting its default branch could change what the next download run
   fetches.
