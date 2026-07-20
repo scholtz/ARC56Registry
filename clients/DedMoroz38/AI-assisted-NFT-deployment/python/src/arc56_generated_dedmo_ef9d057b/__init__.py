@@ -1,0 +1,2 @@
+from . import NFTPromptRegistry_26752953 as NFTPromptRegistry_26752953
+from . import NFTPromptRegistry_a25c5376 as NFTPromptRegistry_a25c5376
