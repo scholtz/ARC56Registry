@@ -1,0 +1,1 @@
+from . import KudosEscrowContract_f747ce88 as KudosEscrowContract_f747ce88
