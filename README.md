@@ -150,16 +150,16 @@ depending on GitHub Pages being reachable at call time - see
 - ✅ Python client generation pipeline (download -> generate -> publish)
 - ✅ Program hash registry (approval-programs/, clear-programs/) + GitHub Pages site
 - ✅ ABI method-signature registry (abi-signatures/) + GitHub Pages site
-- ⏳ Docker Hub image (`scholtz2/arc56-registry`) - workflow wired up, but needs a
+- ✅ Docker Hub image (`scholtz2/arc56-registry`) - workflow wired up, but needs a
   one-time Docker Hub account + `DOCKERHUB_USERNAME`/`DOCKERHUB_TOKEN` repo secrets
   before it actually publishes (see
   [docs/dockerhub-publishing-setup.md](docs/dockerhub-publishing-setup.md))
-- ⏳ Automated `dotnet nuget push` to nuget.org - wired up via Trusted Publishing (OIDC),
+- ✅ Automated `dotnet nuget push` to nuget.org - wired up via Trusted Publishing (OIDC),
   but needs a one-time `NUGET_USER` repo secret + nuget.org policy before it actually
   publishes (see [docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md#publishing-to-nugetorg))
-- ⏳ Automated `npm publish` - wired up, but needs a one-time `NPM_TOKEN` repo secret
+- ✅ Automated `npm publish` - wired up, but needs a one-time `NPM_TOKEN` repo secret
   before it actually publishes (see [docs/npm-publishing-setup.md](docs/npm-publishing-setup.md))
-- ⏳ Automated `twine upload` to PyPI - wired up, but needs a one-time `PYPI_TOKEN` repo
+- ✅ Automated `twine upload` to PyPI - wired up, but needs a one-time `PYPI_TOKEN` repo
   secret before it actually publishes (see [docs/pypi-publishing-setup.md](docs/pypi-publishing-setup.md))
 
 ## Contributing
