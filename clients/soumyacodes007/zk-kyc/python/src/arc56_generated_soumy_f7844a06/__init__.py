@@ -1,0 +1,9 @@
+from . import CredentialManager_7420da7b as CredentialManager_7420da7b
+from . import HelloWorld_77e9c640 as HelloWorld_77e9c640
+from . import KYCBoxStorage_6203a633 as KYCBoxStorage_6203a633
+from . import NullifierRegistry_3f6e5870 as NullifierRegistry_3f6e5870
+from . import SMTRegistry_0b74b057 as SMTRegistry_0b74b057
+from . import CredentialManager_2b3cbb87 as CredentialManager_2b3cbb87
+from . import KYCBoxStorage_1f73bca2 as KYCBoxStorage_1f73bca2
+from . import NullifierRegistry_c5d65279 as NullifierRegistry_c5d65279
+from . import SMTRegistry_f55bd9f2 as SMTRegistry_f55bd9f2
