@@ -20,8 +20,7 @@ npm install arc56-generated-diegocalvetti-algo-balancer @algorandfoundation/algo
 Each contract in this package is re-exported under its own namespace (a hash of its
 source URL is appended to keep multiple contracts in the same repository from
 colliding), containing a typed `<Name>Client` for interacting with an already-deployed
-instance of that contract. Generated in the client generator's `minimal` mode - see
-"Why `minimal` mode" below - so there is no generated deploy/create `Factory`.
+instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
@@ -37,15 +36,16 @@ const client = new Factory_45fe36a6.FactoryClient({
 // const result = await client.send.someMethod({ args: [...] });
 ```
 
-### Why `minimal` mode
+### `full` vs `minimal` generator mode
 
-The generator's default `full` mode also emits a deploy/create `Factory` class, but
-its generated code type-checks against non-exported internal shapes of
-`@algorandfoundation/algokit-utils`'s `AlgorandClient` that have been observed to break
-across algokit-utils versions the generator doesn't itself pin against. `minimal` mode
-avoids that failure mode entirely, at the cost of no generated deploy helpers -
-acceptable for a registry whose job is decoding/calling contracts that are already
-deployed, not deploying new ones.
+Contracts in this package are generated with the client generator's `full` mode by
+default, which emits both the typed `Client` and a deploy/create `Factory` class. A
+small number of contracts' `full`-mode output has been observed to type-check against
+non-exported internal shapes of `@algorandfoundation/algokit-utils`'s `AlgorandClient`
+that break across algokit-utils versions the generator doesn't itself pin against - for
+those specific contracts only, this package falls back to `minimal` mode (`Client`
+only, no `Factory`) instead of failing outright. The contracts table below flags any
+contract generated this way; every other contract includes a working `Factory`.
 
 ## Contracts included in this package
 
