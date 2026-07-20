@@ -1,0 +1,1 @@
+from . import AsaMetadataRegistry_295a41b6 as AsaMetadataRegistry_295a41b6
