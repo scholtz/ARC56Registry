@@ -28,7 +28,8 @@ exposes a `<Name>Proxy` class:
 using Algorand.Algod;
 using Arc56.Generated.vishal_tiwari9.Algocampus.HelloAlgocampus_69a13988;
 
-var algod = new DefaultApi(httpClient); // configure with your algod endpoint
+using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
+var algod = new AlgodClient(httpClient);
 var client = new HelloAlgocampusProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
