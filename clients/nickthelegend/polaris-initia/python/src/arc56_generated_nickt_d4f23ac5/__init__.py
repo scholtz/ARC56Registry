@@ -1,0 +1,1 @@
+from . import MainSmartContract_313d0ec7 as MainSmartContract_313d0ec7
