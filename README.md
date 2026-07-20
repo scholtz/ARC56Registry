@@ -8,6 +8,14 @@ No one has to submit anything here manually: if your public repo has an
 `*.arc56.json` file anywhere in it, this project finds it, and publishes a NuGet
 package, an npm package, and a PyPI package with a typed client for it.
 
+## Spread the word
+
+We announced this registry on X - if you find it useful, please share/retweet the
+post: [x.com/EAlgonaut/status/2079233299243757677](https://x.com/EAlgonaut/status/2079233299243757677).
+
+Need help integrating with the registry or its generated clients? Join us on
+[Discord](https://t.co/vv87GeXHrs).
+
 ## What's in this repo
 
 | Path | What it is |
