@@ -1,0 +1,1 @@
+from . import HackathonContract_6b34a24a as HackathonContract_6b34a24a
