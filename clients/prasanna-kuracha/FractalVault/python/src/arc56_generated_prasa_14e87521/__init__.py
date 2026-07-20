@@ -1,0 +1,1 @@
+from . import PropertyRegistry_e04c0649 as PropertyRegistry_e04c0649
