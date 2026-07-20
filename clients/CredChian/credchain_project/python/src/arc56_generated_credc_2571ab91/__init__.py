@@ -1,0 +1,1 @@
+from . import CredchainContract_23c62a1d as CredchainContract_23c62a1d
