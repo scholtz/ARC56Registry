@@ -52,6 +52,8 @@ every other contract includes a working `Factory`.
 | --- | --- | --- |
 | `NFDInstance_9b7fcf89` | `NfdInstanceClient` | [https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/minimal/NFDInstance.arc56.json](https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/minimal/NFDInstance.arc56.json) |
 | `NFDRegistry_7fe53358` | `NfdRegistryClient` | [https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/minimal/NFDRegistry.arc56.json](https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/minimal/NFDRegistry.arc56.json) |
+| `NFDInstance_a0f592c3` | `NfdInstanceClient` | [https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/NFDInstance.arc56.json](https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/NFDInstance.arc56.json) |
+| `NFDRegistry_d60f44d8` | `NfdRegistryClient` | [https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/NFDRegistry.arc56.json](https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/NFDRegistry.arc56.json) |
 
 ## Versioning
 
