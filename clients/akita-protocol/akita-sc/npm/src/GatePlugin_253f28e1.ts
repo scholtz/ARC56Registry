@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"GatePlugin","structs":{},"methods":[{"name":"create","args":[{"type":"uint64","name":"gateAppID"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"register","args":[{"type":"uint64","name":"wallet"},{"type":"bool","name":"rekeyBack"},{"type":"(uint64,uint64,uint8)[]","name":"filters"},{"type":"byte[][]","name":"args"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"gateAppID":{"keyType":"AVMString","valueType":"AVMUint64","key":"Z2F0ZV9hcHBfaWQ="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[261,339],"errorMessage":"Bytes has valid prefix"},{"pc":[272,350],"errorMessage":"application exists"},{"pc":[221],"errorMessage":"check GlobalState exists"},{"pc":[151],"errorMessage":"invalid array encoding"},{"pc":[105,121,165],"errorMessage":"invalid array length header"},{"pc":[96],"errorMessage":"invalid number of bytes for arc4.bool"},{"pc":[185],"errorMessage":"invalid number of bytes for arc4.dynamic_array<bytes>"},{"pc":[114],"errorMessage":"invalid number of bytes for arc4.dynamic_array<smart_contracts/gates/types.ts::GateFilter>"},{"pc":[70,87],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[266,343],"errorMessage":"invalid number of bytes for uint64"},{"pc":[159],"errorMessage":"invalid tail pointer for (len+(len+uint8[])[])"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"GatePlugin","structs":{},"methods":[{"name":"create","args":[{"type":"uint64","name":"gateAppID"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"register","args":[{"type":"uint64","name":"wallet"},{"type":"bool","name":"rekeyBack"},{"type":"(uint64,uint64,uint8)[]","name":"filters"},{"type":"byte[][]","name":"args"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"gateAppID":{"keyType":"AVMString","valueType":"AVMUint64","key":"Z2F0ZV9hcHBfaWQ="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[261,339],"errorMessage":"Bytes has valid prefix"},{"pc":[272,350],"errorMessage":"application exists"},{"pc":[221],"errorMessage":"check GlobalState exists"},{"pc":[151],"errorMessage":"invalid array encoding"},{"pc":[105,121,165],"errorMessage":"invalid array length header"},{"pc":[96],"errorMessage":"invalid number of bytes for arc4.bool"},{"pc":[185],"errorMessage":"invalid number of bytes for arc4.dynamic_array<bytes>"},{"pc":[114],"errorMessage":"invalid number of bytes for arc4.dynamic_array<smart_contracts/gates/types.ts::GateFilter>"},{"pc":[70,87],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[266,343],"errorMessage":"invalid number of bytes for uint64"},{"pc":[159],"errorMessage":"invalid tail pointer for (len+(len+uint8[])[])"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDIgOAogICAgYnl0ZWNibG9jayAiZ2F0ZV9hcHBfaWQiIDB4MTUxZjdjNzUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9wbHVnaW5zL2dhdGUvY29udHJhY3QuYWxnby50czoxMwogICAgLy8gZXhwb3J0IGNsYXNzIEdhdGVQbHVnaW4gZXh0ZW5kcyBCYXNlR2F0ZSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDUKICAgIHB1c2hieXRlcyAweDJmYTMxMjM2IC8vIG1ldGhvZCAicmVnaXN0ZXIodWludDY0LGJvb2wsKHVpbnQ2NCx1aW50NjQsdWludDgpW10sYnl0ZVtdW10pdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHJlZ2lzdGVyCiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9wbHVnaW5zL2dhdGUvY29udHJhY3QuYWxnby50czoxMwogICAgLy8gZXhwb3J0IGNsYXNzIEdhdGVQbHVnaW4gZXh0ZW5kcyBCYXNlR2F0ZSB7CiAgICBwdXNoYnl0ZXMgMHgyNDBkMmY2NyAvLyBtZXRob2QgImNyZWF0ZSh1aW50NjQpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGNyZWF0ZQogICAgZXJyCgoKLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L3BsdWdpbnMvZ2F0ZS9jb250cmFjdC5hbGdvLnRzOjpHYXRlUGx1Z2luLmNyZWF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9wbHVnaW5zL2dhdGUvY29udHJhY3QuYWxnby50czoyMQogICAgLy8gQGFiaW1ldGhvZCh7IG9uQ3JlYXRlOiAncmVxdWlyZScgfSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9wbHVnaW5zL2dhdGUvY29udHJhY3QuYWxnby50czoxNwogICAgLy8gZ2F0ZUFwcElEID0gR2xvYmFsU3RhdGU8QXBwbGljYXRpb24+KHsga2V5OiBHYXRlUGx1Z2luR2xvYmFsU3RhdGVLZXlHYXRlQXBwSUQgfSkKICAgIGJ5dGVjXzAgLy8gImdhdGVfYXBwX2lkIgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L3BsdWdpbnMvZ2F0ZS9jb250cmFjdC5hbGdvLnRzOjIzCiAgICAvLyB0aGlzLmdhdGVBcHBJRC52YWx1ZSA9IEFwcGxpY2F0aW9uKGdhdGVBcHBJRCkKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvcGx1Z2lucy9nYXRlL2NvbnRyYWN0LmFsZ28udHM6MjEKICAgIC8vIEBhYmltZXRob2QoeyBvbkNyZWF0ZTogJ3JlcXVpcmUnIH0pCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L3BsdWdpbnMvZ2F0ZS9jb250cmFjdC5hbGdvLnRzOjpHYXRlUGx1Z2luLnJlZ2lzdGVyW3JvdXRpbmddKCkgLT4gdm9pZDoKcmVnaXN0ZXI6CiAgICBpbnRjXzAgLy8gMAogICAgcHVzaGJ5dGVzICIiCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvcGx1Z2lucy9nYXRlL2NvbnRyYWN0LmFsZ28udHM6MjgtMzMKICAgIC8vIHJlZ2lzdGVyKAogICAgLy8gICB3YWxsZXQ6IEFwcGxpY2F0aW9uLAogICAgLy8gICByZWtleUJhY2s6IGJvb2xlYW4sCiAgICAvLyAgIGZpbHRlcnM6IEdhdGVGaWx0ZXJbXSwKICAgIC8vICAgYXJnczogR2F0ZUFyZ3MKICAgIC8vICk6IHZvaWQgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmJvb2wKICAgIGludGNfMCAvLyAwCiAgICBnZXRiaXQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cG4gMgogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMTcKICAgICoKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBzd2FwCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxzbWFydF9jb250cmFjdHMvZ2F0ZXMvdHlwZXMudHM6OkdhdGVGaWx0ZXI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA0CiAgICBkdXBuIDIKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGludGNfMiAvLyAyCiAgICAqCiAgICBzd2FwCiAgICBkdXAKICAgIGxlbgogICAgc3dhcAogICAgZXh0cmFjdCAyIDAKICAgIGludGNfMCAvLyAwCgpyZWdpc3Rlcl9mb3JfaGVhZGVyQDE6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvcGx1Z2lucy9nYXRlL2NvbnRyYWN0LmFsZ28udHM6MjgtMzMKICAgIC8vIHJlZ2lzdGVyKAogICAgLy8gICB3YWxsZXQ6IEFwcGxpY2F0aW9uLAogICAgLy8gICByZWtleUJhY2s6IGJvb2xlYW4sCiAgICAvLyAgIGZpbHRlcnM6IEdhdGVGaWx0ZXJbXSwKICAgIC8vICAgYXJnczogR2F0ZUFyZ3MKICAgIC8vICk6IHZvaWQgewogICAgZHVwCiAgICBkaWcgNQogICAgPAogICAgYnogcmVnaXN0ZXJfYWZ0ZXJfZm9yQDQKICAgIGR1cG4gMgogICAgaW50Y18yIC8vIDIKICAgICoKICAgIGRpZyAzCiAgICBkdXAKICAgIHVuY292ZXIgMgogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgZW5jb2RpbmcKICAgIGR1cAogICAgZGlnIDcKICAgIGR1cAogICAgY292ZXIgNAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIHRhaWwgcG9pbnRlciBmb3IgKGxlbisobGVuK3VpbnQ4W10pW10pCiAgICBkaWcgMQogICAgbGVuCiAgICBzdWJzdHJpbmczCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgICsKICAgIGJ1cnkgNQogICAgaW50Y18xIC8vIDEKICAgICsKICAgIGJ1cnkgMQogICAgYiByZWdpc3Rlcl9mb3JfaGVhZGVyQDEKCnJlZ2lzdGVyX2FmdGVyX2ZvckA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L3BsdWdpbnMvZ2F0ZS9jb250cmFjdC5hbGdvLnRzOjI4LTMzCiAgICAvLyByZWdpc3RlcigKICAgIC8vICAgd2FsbGV0OiBBcHBsaWNhdGlvbiwKICAgIC8vICAgcmVrZXlCYWNrOiBib29sZWFuLAogICAgLy8gICBmaWx0ZXJzOiBHYXRlRmlsdGVyW10sCiAgICAvLyAgIGFyZ3M6IEdhdGVBcmdzCiAgICAvLyApOiB2b2lkIHsKICAgIGRpZyAzCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDMKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxieXRlcz4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9mdW5jdGlvbnMudHM6Mjg2LTI4OQogICAgLy8gY29uc3QgW3NwZW5kaW5nQWRkcmVzc0J5dGVzXSA9IG9wLkFwcEdsb2JhbC5nZXRFeEJ5dGVzKAogICAgLy8gICB3YWxsZXQsCiAgICAvLyAgIEJ5dGVzKEFic3RyYWN0QWNjb3VudEdsb2JhbFN0YXRlS2V5c1NwZW5kaW5nQWRkcmVzcykKICAgIC8vICkKICAgIGRpZyA4CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvZnVuY3Rpb25zLnRzOjI4OAogICAgLy8gQnl0ZXMoQWJzdHJhY3RBY2NvdW50R2xvYmFsU3RhdGVLZXlzU3BlbmRpbmdBZGRyZXNzKQogICAgcHVzaGJ5dGVzICJzcGVuZGluZ19hZGRyZXNzIgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Z1bmN0aW9ucy50czoyODYtMjg5CiAgICAvLyBjb25zdCBbc3BlbmRpbmdBZGRyZXNzQnl0ZXNdID0gb3AuQXBwR2xvYmFsLmdldEV4Qnl0ZXMoCiAgICAvLyAgIHdhbGxldCwKICAgIC8vICAgQnl0ZXMoQWJzdHJhY3RBY2NvdW50R2xvYmFsU3RhdGVLZXlzU3BlbmRpbmdBZGRyZXNzKQogICAgLy8gKQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgZHVwCiAgICBidXJ5IDEyCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvcGx1Z2lucy9nYXRlL2NvbnRyYWN0LmFsZ28udHM6MzUtMzgKICAgIC8vIGNvbnN0IGFtb3VudCA9IGFiaUNhbGw8dHlwZW9mIEdhdGUucHJvdG90eXBlLmNvc3Q+KHsKICAgIC8vICAgYXBwSWQ6IHRoaXMuZ2F0ZUFwcElELnZhbHVlLAogICAgLy8gICBhcmdzOiBbZmlsdGVycywgYXJnc10sCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgaXR4bl9iZWdpbgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L3BsdWdpbnMvZ2F0ZS9jb250cmFjdC5hbGdvLnRzOjM2CiAgICAvLyBhcHBJZDogdGhpcy5nYXRlQXBwSUQudmFsdWUsCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L3BsdWdpbnMvZ2F0ZS9jb250cmFjdC5hbGdvLnRzOjE3CiAgICAvLyBnYXRlQXBwSUQgPSBHbG9iYWxTdGF0ZTxBcHBsaWNhdGlvbj4oeyBrZXk6IEdhdGVQbHVnaW5HbG9iYWxTdGF0ZUtleUdhdGVBcHBJRCB9KQogICAgYnl0ZWNfMCAvLyAiZ2F0ZV9hcHBfaWQiCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvcGx1Z2lucy9nYXRlL2NvbnRyYWN0LmFsZ28udHM6MzYKICAgIC8vIGFwcElkOiB0aGlzLmdhdGVBcHBJRC52YWx1ZSwKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBzd2FwCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGJ1cnkgMTMKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIGR1cAogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvcGx1Z2lucy9nYXRlL2NvbnRyYWN0LmFsZ28udHM6MzUtMzgKICAgIC8vIGNvbnN0IGFtb3VudCA9IGFiaUNhbGw8dHlwZW9mIEdhdGUucHJvdG90eXBlLmNvc3Q+KHsKICAgIC8vICAgYXBwSWQ6IHRoaXMuZ2F0ZUFwcElELnZhbHVlLAogICAgLy8gICBhcmdzOiBbZmlsdGVycywgYXJnc10sCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgcHVzaGJ5dGVzIDB4YzVjOTFmOGYgLy8gbWV0aG9kICJjb3N0KCh1aW50NjQsdWludDY0LHVpbnQ4KVtdLGJ5dGVbXVtdKXVpbnQ2NCIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBkaWcgOAogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGRpZyA3CiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgcHVzaGludCA2IC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGl0eG4gTGFzdExvZwogICAgZHVwCiAgICBleHRyYWN0IDQgMAogICAgc3dhcAogICAgZXh0cmFjdCAwIDQKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgPT0KICAgIGFzc2VydCAvLyBCeXRlcyBoYXMgdmFsaWQgcHJlZml4CiAgICBkdXAKICAgIGxlbgogICAgaW50Y18zIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIHVpbnQ2NAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L3BsdWdpbnMvZ2F0ZS9jb250cmFjdC5hbGdvLnRzOjQwLTUzCiAgICAvLyBhYmlDYWxsPHR5cGVvZiBHYXRlLnByb3RvdHlwZS5yZWdpc3Rlcj4oewogICAgLy8gICBzZW5kZXIsCiAgICAvLyAgIGFwcElkOiB0aGlzLmdhdGVBcHBJRC52YWx1ZSwKICAgIC8vICAgYXJnczogWwogICAgLy8gICAgIGl0eG4ucGF5bWVudCh7CiAgICAvLyAgICAgICBzZW5kZXIsCiAgICAvLyAgICAgICByZWNlaXZlcjogdGhpcy5nYXRlQXBwSUQudmFsdWUuYWRkcmVzcywKICAgIC8vICAgICAgIGFtb3VudCwKICAgIC8vICAgICB9KSwKICAgIC8vICAgICBmaWx0ZXJzLAogICAgLy8gICAgIGFyZ3MsCiAgICAvLyAgIF0sCiAgICAvLyAgIHJla2V5VG86IHJla2V5QWRkcmVzcyhyZWtleUJhY2ssIHdhbGxldCkKICAgIC8vIH0pCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvcGx1Z2lucy9nYXRlL2NvbnRyYWN0LmFsZ28udHM6NDYKICAgIC8vIHJlY2VpdmVyOiB0aGlzLmdhdGVBcHBJRC52YWx1ZS5hZGRyZXNzLAogICAgc3dhcAogICAgYXBwX3BhcmFtc19nZXQgQXBwQWRkcmVzcwogICAgYXNzZXJ0IC8vIGFwcGxpY2F0aW9uIGV4aXN0cwogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIGl0eG5fZmllbGQgU2VuZGVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvcGx1Z2lucy9nYXRlL2NvbnRyYWN0LmFsZ28udHM6NDQtNDgKICAgIC8vIGl0eG4ucGF5bWVudCh7CiAgICAvLyAgIHNlbmRlciwKICAgIC8vICAgcmVjZWl2ZXI6IHRoaXMuZ2F0ZUFwcElELnZhbHVlLmFkZHJlc3MsCiAgICAvLyAgIGFtb3VudCwKICAgIC8vIH0pLAogICAgaW50Y18xIC8vIDEKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L3BsdWdpbnMvZ2F0ZS9jb250cmFjdC5hbGdvLnRzOjQwLTUzCiAgICAvLyBhYmlDYWxsPHR5cGVvZiBHYXRlLnByb3RvdHlwZS5yZWdpc3Rlcj4oewogICAgLy8gICBzZW5kZXIsCiAgICAvLyAgIGFwcElkOiB0aGlzLmdhdGVBcHBJRC52YWx1ZSwKICAgIC8vICAgYXJnczogWwogICAgLy8gICAgIGl0eG4ucGF5bWVudCh7CiAgICAvLyAgICAgICBzZW5kZXIsCiAgICAvLyAgICAgICByZWNlaXZlcjogdGhpcy5nYXRlQXBwSUQudmFsdWUuYWRkcmVzcywKICAgIC8vICAgICAgIGFtb3VudCwKICAgIC8vICAgICB9KSwKICAgIC8vICAgICBmaWx0ZXJzLAogICAgLy8gICAgIGFyZ3MsCiAgICAvLyAgIF0sCiAgICAvLyAgIHJla2V5VG86IHJla2V5QWRkcmVzcyhyZWtleUJhY2ssIHdhbGxldCkKICAgIC8vIH0pCiAgICBpdHhuX25leHQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9mdW5jdGlvbnMudHM6MzQyCiAgICAvLyBpZiAoIXJla2V5QmFjaykgewogICAgZGlnIDcKICAgIGJueiByZWdpc3Rlcl9hZnRlcl9pZl9lbHNlQDkKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9mdW5jdGlvbnMudHM6MzQzCiAgICAvLyByZXR1cm4gR2xvYmFsLnplcm9BZGRyZXNzCiAgICBnbG9iYWwgWmVyb0FkZHJlc3MKCnJlZ2lzdGVyX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzL3V0aWxzL2Z1bmN0aW9ucy50czo6cmVrZXlBZGRyZXNzQDEwOgogICAgaXR4bl9maWVsZCBSZWtleVRvCiAgICBkaWcgOQogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICBkaWcgMTAKICAgIGl0eG5fZmllbGQgU2VuZGVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvcGx1Z2lucy9nYXRlL2NvbnRyYWN0LmFsZ28udHM6NDAtNTMKICAgIC8vIGFiaUNhbGw8dHlwZW9mIEdhdGUucHJvdG90eXBlLnJlZ2lzdGVyPih7CiAgICAvLyAgIHNlbmRlciwKICAgIC8vICAgYXBwSWQ6IHRoaXMuZ2F0ZUFwcElELnZhbHVlLAogICAgLy8gICBhcmdzOiBbCiAgICAvLyAgICAgaXR4bi5wYXltZW50KHsKICAgIC8vICAgICAgIHNlbmRlciwKICAgIC8vICAgICAgIHJlY2VpdmVyOiB0aGlzLmdhdGVBcHBJRC52YWx1ZS5hZGRyZXNzLAogICAgLy8gICAgICAgYW1vdW50LAogICAgLy8gICAgIH0pLAogICAgLy8gICAgIGZpbHRlcnMsCiAgICAvLyAgICAgYXJncywKICAgIC8vICAgXSwKICAgIC8vICAgcmVrZXlUbzogcmVrZXlBZGRyZXNzKHJla2V5QmFjaywgd2FsbGV0KQogICAgLy8gfSkKICAgIHB1c2hieXRlcyAweGMyMWM3YmEwIC8vIG1ldGhvZCAicmVnaXN0ZXIocGF5LCh1aW50NjQsdWludDY0LHVpbnQ4KVtdLGJ5dGVbXVtdKXVpbnQ2NCIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBkaWcgNgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGRpZyA1CiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgcHVzaGludCA2IC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGl0eG4gTGFzdExvZwogICAgZHVwCiAgICBleHRyYWN0IDQgMAogICAgc3dhcAogICAgZXh0cmFjdCAwIDQKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgPT0KICAgIGFzc2VydCAvLyBCeXRlcyBoYXMgdmFsaWQgcHJlZml4CiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciB1aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9wbHVnaW5zL2dhdGUvY29udHJhY3QuYWxnby50czoyOC0zMwogICAgLy8gcmVnaXN0ZXIoCiAgICAvLyAgIHdhbGxldDogQXBwbGljYXRpb24sCiAgICAvLyAgIHJla2V5QmFjazogYm9vbGVhbiwKICAgIC8vICAgZmlsdGVyczogR2F0ZUZpbHRlcltdLAogICAgLy8gICBhcmdzOiBHYXRlQXJncwogICAgLy8gKTogdm9pZCB7CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgpyZWdpc3Rlcl9hZnRlcl9pZl9lbHNlQDk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvZnVuY3Rpb25zLnRzOjM0NgogICAgLy8gcmV0dXJuIHdhbGxldC5hZGRyZXNzCiAgICBkaWcgOAogICAgYXBwX3BhcmFtc19nZXQgQXBwQWRkcmVzcwogICAgYXNzZXJ0IC8vIGFwcGxpY2F0aW9uIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L3BsdWdpbnMvZ2F0ZS9jb250cmFjdC5hbGdvLnRzOjUyCiAgICAvLyByZWtleVRvOiByZWtleUFkZHJlc3MocmVrZXlCYWNrLCB3YWxsZXQpCiAgICBiIHJlZ2lzdGVyX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzL3V0aWxzL2Z1bmN0aW9ucy50czo6cmVrZXlBZGRyZXNzQDEwCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CyAEAAECCCYCC2dhdGVfYXBwX2lkBBUffHUxGRREMRhBAA6ABC+jEjY2GgCOAQAdAIAEJA0vZzYaAI4BAAEANhoBSRUlEkQXKExnI0MigAA2GgFJFSUSRBc2GgJJFSMSRCJTNhoDRwIiWYERCyQITBUSRDYaBEcCIllJTgIkC0xJFUxXAgAiSUsFDEEAJEcCJAtLA0lPAllJSwdJTgQSREsBFVIiWSQICEUFIwhFAUL/1UsDJAhLAxJESwiAEHNwZW5kaW5nX2FkZHJlc3NlSElFDLEiKGVMSU4CRQ1ESbIYgATFyR+PshpLCLIaSweyGoEGshAisgGztD5JVwQATFcABCkSREkVJRJEF7FMcghEsgeyCLIAI7IQIrIBtksHQAA3MgOyIEsJshhLCrIAgATCHHugshpLBrIaSwWyGoEGshAisgGztD5JVwQATFcABCkSRBUlEkQjQ0sIcghEQv/D","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -157,11 +157,57 @@ export type MethodReturn<TSignature extends GatePluginSignatures> = GatePluginTy
 export type GlobalKeysState = GatePluginTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type GatePluginCreateCallParams =
+  | Expand<CallParams<GatePluginArgs['obj']['create(uint64)void'] | GatePluginArgs['tuple']['create(uint64)void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<GatePluginArgs['obj']['create(uint64)void'] | GatePluginArgs['tuple']['create(uint64)void']> & {method: 'create(uint64)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type GatePluginDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: GatePluginCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the GatePlugin smart contract
  */
 export abstract class GatePluginParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends GatePluginCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(uint64)void':
+            return GatePluginParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the GatePlugin smart contract using the create(uint64)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<GatePluginArgs['obj']['create(uint64)void'] | GatePluginArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(uint64)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.gateAppId],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the register(uint64,bool,(uint64,uint64,uint8)[],byte[][])void ABI method
    *
@@ -177,6 +223,148 @@ export abstract class GatePluginParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the GatePlugin smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class GatePluginFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `GatePluginFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new GatePluginClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new GatePluginClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the GatePlugin smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: GatePluginDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? GatePluginParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (GatePluginCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new GatePluginClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the GatePlugin smart contract using the create(uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<GatePluginArgs['obj']['create(uint64)void'] | GatePluginArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(GatePluginParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the GatePlugin smart contract using the create(uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<GatePluginArgs['obj']['create(uint64)void'] | GatePluginArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(GatePluginParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the GatePlugin smart contract using an ABI method call using the create(uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<GatePluginArgs['obj']['create(uint64)void'] | GatePluginArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(GatePluginParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | GatePluginReturns['create(uint64)void']) }, appClient: new GatePluginClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the GatePlugin smart contract
  */

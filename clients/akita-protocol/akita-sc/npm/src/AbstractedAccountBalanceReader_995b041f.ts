@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"AbstractedAccountBalanceReader","structs":{},"methods":[{"name":"create","args":[{"type":"uint64","name":"akitaDAO","desc":"The app ID of the Akita DAO used to resolve dependent apps"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"balance","args":[{"type":"address","name":"address","desc":"The address to look up balances for"},{"type":"uint64[]","name":"assets","desc":"The asset IDs to check balances for (0 for ALGO)"}],"returns":{"type":"uint64[]","desc":"The total balance for each asset (wallet + staked hard + staked lock)"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get the balance of a set of assets at the given address, including any\namounts that address has staked in the Akita staking contract.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Immutable readonly helper that reports the combined balance\n(wallet holdings + staked hard + staked lock) for an address.\n\nThis was extracted from `AbstractedAccount.balance()` to keep that logic\navailable for downstream contracts without keeping it on-chain in the\nwallet bytecode. The contract intentionally has no UpdateApplication\nhandler, so once deployed it cannot be re-keyed / upgraded and callers\ncan trust its response shape over time.\n\nA balance returned by this contract is still only as trustworthy as\nthe underlying AkitaDAO + Staking apps it queries — do not use it as\na security-critical balance source for an adversarial wallet.","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"akitaDAO":{"keyType":"AVMString","valueType":"AVMUint64","key":"YWtpdGFfZGFv","desc":"The app ID of the Akita DAO used to resolve the Staking app"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[204],"errorMessage":"Bytes has valid prefix"},{"pc":[150],"errorMessage":"account funded"},{"pc":[155],"errorMessage":"check GlobalState exists"},{"pc":[133],"errorMessage":"index access is out of bounds"},{"pc":[94,235],"errorMessage":"invalid array length header"},{"pc":[106],"errorMessage":"invalid number of bytes for arc4.dynamic_array<uint64>"},{"pc":[87],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[67],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[209],"errorMessage":"invalid number of bytes for smart_contracts/staking/types.ts::Escrow"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"AbstractedAccountBalanceReader","structs":{},"methods":[{"name":"create","args":[{"type":"uint64","name":"akitaDAO","desc":"The app ID of the Akita DAO used to resolve dependent apps"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"balance","args":[{"type":"address","name":"address"},{"type":"uint64[]","name":"assets"}],"returns":{"type":"uint64[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get balances for the supplied assets, including hard and locked stake.\nAsset ID zero represents ALGO.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Immutable readonly helper that reports the combined balance\n(wallet holdings + staked hard + staked lock) for an address.\n\nThis was extracted from `AbstractedAccount.balance()` to keep that logic\navailable for downstream contracts without keeping it on-chain in the\nwallet bytecode. The contract intentionally has no UpdateApplication\nhandler, so once deployed it cannot be re-keyed / upgraded and callers\ncan trust its response shape over time.\n\nA balance returned by this contract is still only as trustworthy as\nthe underlying AkitaDAO + Staking apps it queries — do not use it as\na security-critical balance source for an adversarial wallet.","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"akitaDAO":{"keyType":"AVMString","valueType":"AVMUint64","key":"YWtpdGFfZGFv","desc":"The app ID of the Akita DAO used to resolve the Staking app"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[204],"errorMessage":"Bytes has valid prefix"},{"pc":[150],"errorMessage":"account funded"},{"pc":[155],"errorMessage":"check GlobalState exists"},{"pc":[133],"errorMessage":"index access is out of bounds"},{"pc":[94,235],"errorMessage":"invalid array length header"},{"pc":[106],"errorMessage":"invalid number of bytes for arc4.dynamic_array<uint64>"},{"pc":[87],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[67],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[209],"errorMessage":"invalid number of bytes for smart_contracts/staking/types.ts::Escrow"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCA4IDEKICAgIGJ5dGVjYmxvY2sgImFraXRhX2RhbyIgMHgxNTFmN2M3NQogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czozMy0zNgogICAgLy8gQGNvbnRyYWN0KHsKICAgIC8vICAgc3RhdGVUb3RhbHM6IHsgZ2xvYmFsQnl0ZXM6IDEsIGdsb2JhbFVpbnRzOiAwIH0KICAgIC8vIH0pCiAgICAvLyBleHBvcnQgY2xhc3MgQWJzdHJhY3RlZEFjY291bnRCYWxhbmNlUmVhZGVyIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEA1CiAgICBwdXNoYnl0ZXMgMHhlOWM1NWQyNiAvLyBtZXRob2QgImJhbGFuY2UoYWRkcmVzcyx1aW50NjRbXSl1aW50NjRbXSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGJhbGFuY2UKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czozMy0zNgogICAgLy8gQGNvbnRyYWN0KHsKICAgIC8vICAgc3RhdGVUb3RhbHM6IHsgZ2xvYmFsQnl0ZXM6IDEsIGdsb2JhbFVpbnRzOiAwIH0KICAgIC8vIH0pCiAgICAvLyBleHBvcnQgY2xhc3MgQWJzdHJhY3RlZEFjY291bnRCYWxhbmNlUmVhZGVyIGV4dGVuZHMgQ29udHJhY3QgewogICAgcHVzaGJ5dGVzIDB4MjQwZDJmNjcgLy8gbWV0aG9kICJjcmVhdGUodWludDY0KXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGUKICAgIGVycgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6OkFic3RyYWN0ZWRBY2NvdW50QmFsYW5jZVJlYWRlci5jcmVhdGVbcm91dGluZ10oKSAtPiB2b2lkOgpjcmVhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjQzCiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czozOAogICAgLy8gYWtpdGFEQU8gPSBHbG9iYWxTdGF0ZTxBcHBsaWNhdGlvbj4oeyBrZXk6IEdsb2JhbFN0YXRlS2V5QWtpdGFEQU8gfSkKICAgIGJ5dGVjXzAgLy8gImFraXRhX2RhbyIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NDUKICAgIC8vIHRoaXMuYWtpdGFEQU8udmFsdWUgPSBBcHBsaWNhdGlvbihha2l0YURBTykKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjQzCiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6OkFic3RyYWN0ZWRBY2NvdW50QmFsYW5jZVJlYWRlci5iYWxhbmNlW3JvdXRpbmddKCkgLT4gdm9pZDoKYmFsYW5jZToKICAgIGludGNfMCAvLyAwCiAgICBwdXNoYnl0ZXMgIiIKICAgIGR1cG4gMgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czo1MgogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXBuIDIKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGludGNfMSAvLyA4CiAgICAqCiAgICBwdXNoaW50IDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PHVpbnQ2ND4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NTQKICAgIC8vIGxldCBhbW91bnRzOiB1aW50NjRbXSA9IFtdCiAgICBwdXNoYnl0ZXMgMHgwMDAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjU1CiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgYXNzZXRzLmxlbmd0aDsgaSArPSAxKSB7CiAgICBpbnRjXzAgLy8gMAoKYmFsYW5jZV93aGlsZV90b3BAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NTUKICAgIC8vIGZvciAobGV0IGk6IHVpbnQ2NCA9IDA7IGkgPCBhc3NldHMubGVuZ3RoOyBpICs9IDEpIHsKICAgIGR1cAogICAgZGlnIDMKICAgIDwKICAgIGJ6IGJhbGFuY2VfYWZ0ZXJfd2hpbGVAMTAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NTYKICAgIC8vIGxldCBhbW91bnQ6IHVpbnQ2NCA9IDAKICAgIGludGNfMCAvLyAwCiAgICBidXJ5IDgKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NTcKICAgIC8vIGNvbnN0IGFzc2V0ID0gQXNzZXQoYXNzZXRzW2ldKQogICAgZGlnIDMKICAgIGV4dHJhY3QgMiAwCiAgICBkaWcgMQogICAgaW50Y18xIC8vIDgKICAgICoKICAgIGR1cDIKICAgIGludGNfMSAvLyA4CiAgICBleHRyYWN0MyAvLyBvbiBlcnJvcjogaW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIGJ1cnkgMTEKICAgIGV4dHJhY3RfdWludDY0CiAgICBkdXAKICAgIGJ1cnkgOAogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czo1OQogICAgLy8gaWYgKGFzc2V0LmlkID09PSAwKSB7CiAgICBibnogYmFsYW5jZV9lbHNlX2JvZHlANQogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czo2MAogICAgLy8gYW1vdW50ID0gYWRkcmVzcy5iYWxhbmNlCiAgICBkaWcgNAogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBzd2FwCiAgICBidXJ5IDkKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAoKYmFsYW5jZV9hZnRlcl9pZl9lbHNlQDg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjY4LTcxCiAgICAvLyBjb25zdCBlc2Nyb3dJbmZvID0gYWJpQ2FsbDx0eXBlb2YgU3Rha2luZy5wcm90b3R5cGUuZ2V0RXNjcm93SW5mbz4oewogICAgLy8gICBhcHBJZDogZ2V0QWtpdGFBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnN0YWtpbmcsCiAgICAvLyAgIGFyZ3M6IFthZGRyZXNzLCBhc3NldC5pZF0KICAgIC8vIH0pLnJldHVyblZhbHVlCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjY5CiAgICAvLyBhcHBJZDogZ2V0QWtpdGFBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnN0YWtpbmcsCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czozOAogICAgLy8gYWtpdGFEQU8gPSBHbG9iYWxTdGF0ZTxBcHBsaWNhdGlvbj4oeyBrZXk6IEdsb2JhbFN0YXRlS2V5QWtpdGFEQU8gfSkKICAgIGJ5dGVjXzAgLy8gImFraXRhX2RhbyIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NjkKICAgIC8vIGFwcElkOiBnZXRBa2l0YUFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc3Rha2luZywKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvZnVuY3Rpb25zLnRzOjQ0CiAgICAvLyBjb25zdCBbYXBwTGlzdEJ5dGVzXSA9IG9wLkFwcEdsb2JhbC5nZXRFeEJ5dGVzKGFraXRhREFPLCBCeXRlcyhBa2l0YURBT0dsb2JhbFN0YXRlS2V5c0FraXRhQXBwTGlzdCkpCiAgICBwdXNoYnl0ZXMgImFhbCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NjkKICAgIC8vIGFwcElkOiBnZXRBa2l0YUFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc3Rha2luZywKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQ2NAogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjY4LTcxCiAgICAvLyBjb25zdCBlc2Nyb3dJbmZvID0gYWJpQ2FsbDx0eXBlb2YgU3Rha2luZy5wcm90b3R5cGUuZ2V0RXNjcm93SW5mbz4oewogICAgLy8gICBhcHBJZDogZ2V0QWtpdGFBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnN0YWtpbmcsCiAgICAvLyAgIGFyZ3M6IFthZGRyZXNzLCBhc3NldC5pZF0KICAgIC8vIH0pLnJldHVyblZhbHVlCiAgICBwdXNoYnl0ZXMgMHg0Yzg4ZWFjZSAvLyBtZXRob2QgImdldEVzY3Jvd0luZm8oYWRkcmVzcyx1aW50NjQpKHVpbnQ2NCx1aW50NjQpIgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGRpZyA0CiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgZGlnIDgKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBwdXNoaW50IDYgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBMYXN0TG9nCiAgICBkdXAKICAgIGV4dHJhY3QgNCAwCiAgICBkaWcgMQogICAgZXh0cmFjdCAwIDQKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgPT0KICAgIGFzc2VydCAvLyBCeXRlcyBoYXMgdmFsaWQgcHJlZml4CiAgICBsZW4KICAgIHB1c2hpbnQgMTYKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIHNtYXJ0X2NvbnRyYWN0cy9zdGFraW5nL3R5cGVzLnRzOjpFc2Nyb3cKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NzMKICAgIC8vIGFtb3VudHMgPSBbLi4uYW1vdW50cywgYW1vdW50ICsgZXNjcm93SW5mby5oYXJkICsgZXNjcm93SW5mby5sb2NrXQogICAgZHVwCiAgICBwdXNoaW50IDQKICAgIGV4dHJhY3RfdWludDY0CiAgICBkaWcgOQogICAgKwogICAgc3dhcAogICAgcHVzaGludCAxMgogICAgZXh0cmFjdF91aW50NjQKICAgICsKICAgIGl0b2IKICAgIHB1c2hieXRlcyAweDAwMDEKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBleHRyYWN0IDIgMAogICAgc3dhcAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGRpZyAzCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgKwogICAgaXRvYgogICAgZXh0cmFjdCA2IDAKICAgIHJlcGxhY2UyIDAKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnVyeSAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjU1CiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgYXNzZXRzLmxlbmd0aDsgaSArPSAxKSB7CiAgICBkdXAKICAgIGludGNfMiAvLyAxCiAgICArCiAgICBidXJ5IDEKICAgIGIgYmFsYW5jZV93aGlsZV90b3BAMgoKYmFsYW5jZV9lbHNlX2JvZHlANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NjIKICAgIC8vIGNvbnN0IFtob2xkaW5nQW1vdW50LCBvcHRlZEluXSA9IEFzc2V0SG9sZGluZy5hc3NldEJhbGFuY2UoYWRkcmVzcywgYXNzZXQpCiAgICBkaWcgNAogICAgZGlnIDcKICAgIGFzc2V0X2hvbGRpbmdfZ2V0IEFzc2V0QmFsYW5jZQogICAgc3dhcAogICAgYnVyeSA3CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjYzCiAgICAvLyBpZiAob3B0ZWRJbikgewogICAgYnogYmFsYW5jZV9hZnRlcl9pZl9lbHNlQDgKICAgIGRpZyA1CiAgICBidXJ5IDgKICAgIGIgYmFsYW5jZV9hZnRlcl9pZl9lbHNlQDgKCmJhbGFuY2VfYWZ0ZXJfd2hpbGVAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjUyCiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgZGlnIDIKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CyADAAgBJgIJYWtpdGFfZGFvBBUffHUxGRREMRhBAA6ABOnFXSY2GgCOAQAdAIAEJA0vZzYaAI4BAAEANhoBSRUjEkQXKExnJEMigABHAjYaAUkVgSASRDYaAkcCIllJTgIjC4ECCEwVEkSAAgAAIklLAwxBAKIiRQhLA1cCAEsBIwtKI1hFC1tJRQhAAHdLBHMATEUJRLEiKGVEgANhYWxlSCJbshiABEyI6s6yGksEshpLCLIagQayECKyAbO0PklXBABLAVcABCkSRBWBEBJESYEEW0sJCEyBDFsIFoACAAFMUElXAgBMIllLA0lOAiJZCBZXBgBcAExQRQJJJAhFAUL/aksESwdwAExFB0H/hUsFRQhC/34pSwJQsCRD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -77,13 +77,7 @@ export type AbstractedAccountBalanceReaderArgs = {
       akitaDao: bigint | number
     }
     'balance(address,uint64[])uint64[]': {
-      /**
-       * The address to look up balances for
-       */
       address: string
-      /**
-       * The asset IDs to check balances for (0 for ALGO)
-       */
       assets: bigint[] | number[]
     }
   }
@@ -120,9 +114,6 @@ export type AbstractedAccountBalanceReaderTypes = {
     & Record<'balance(address,uint64[])uint64[]' | 'balance', {
       argsObj: AbstractedAccountBalanceReaderArgs['obj']['balance(address,uint64[])uint64[]']
       argsTuple: AbstractedAccountBalanceReaderArgs['tuple']['balance(address,uint64[])uint64[]']
-      /**
-       * The total balance for each asset (wallet + staked hard + staked lock)
-       */
       returns: AbstractedAccountBalanceReaderReturns['balance(address,uint64[])uint64[]']
     }>
   /**
@@ -174,16 +165,62 @@ export type MethodReturn<TSignature extends AbstractedAccountBalanceReaderSignat
 export type GlobalKeysState = AbstractedAccountBalanceReaderTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AbstractedAccountBalanceReaderCreateCallParams =
+  | Expand<CallParams<AbstractedAccountBalanceReaderArgs['obj']['create(uint64)void'] | AbstractedAccountBalanceReaderArgs['tuple']['create(uint64)void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<AbstractedAccountBalanceReaderArgs['obj']['create(uint64)void'] | AbstractedAccountBalanceReaderArgs['tuple']['create(uint64)void']> & {method: 'create(uint64)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AbstractedAccountBalanceReaderDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AbstractedAccountBalanceReaderCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AbstractedAccountBalanceReader smart contract
  */
 export abstract class AbstractedAccountBalanceReaderParamsFactory {
   /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends AbstractedAccountBalanceReaderCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(uint64)void':
+            return AbstractedAccountBalanceReaderParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the AbstractedAccountBalanceReader smart contract using the create(uint64)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<AbstractedAccountBalanceReaderArgs['obj']['create(uint64)void'] | AbstractedAccountBalanceReaderArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(uint64)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.akitaDao],
+        }
+      },
+    }
+  }
+
+  /**
    * Constructs a no op call for the balance(address,uint64[])uint64[] ABI method
    *
-  * Get the balance of a set of assets at the given address, including any
-  amounts that address has staked in the Akita staking contract.
+  * Get balances for the supplied assets, including hard and locked stake.
+  Asset ID zero represents ALGO.
 
    *
    * @param params Parameters for the call
@@ -198,6 +235,148 @@ export abstract class AbstractedAccountBalanceReaderParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the AbstractedAccountBalanceReader smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AbstractedAccountBalanceReaderFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AbstractedAccountBalanceReaderFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AbstractedAccountBalanceReaderClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AbstractedAccountBalanceReaderClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the AbstractedAccountBalanceReader smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AbstractedAccountBalanceReaderDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? AbstractedAccountBalanceReaderParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (AbstractedAccountBalanceReaderCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new AbstractedAccountBalanceReaderClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AbstractedAccountBalanceReader smart contract using the create(uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<AbstractedAccountBalanceReaderArgs['obj']['create(uint64)void'] | AbstractedAccountBalanceReaderArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(AbstractedAccountBalanceReaderParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AbstractedAccountBalanceReader smart contract using the create(uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<AbstractedAccountBalanceReaderArgs['obj']['create(uint64)void'] | AbstractedAccountBalanceReaderArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(AbstractedAccountBalanceReaderParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AbstractedAccountBalanceReader smart contract using an ABI method call using the create(uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<AbstractedAccountBalanceReaderArgs['obj']['create(uint64)void'] | AbstractedAccountBalanceReaderArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(AbstractedAccountBalanceReaderParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | AbstractedAccountBalanceReaderReturns['create(uint64)void']) }, appClient: new AbstractedAccountBalanceReaderClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the AbstractedAccountBalanceReader smart contract
  */
@@ -300,12 +479,12 @@ export class AbstractedAccountBalanceReaderClient {
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
-    * Get the balance of a set of assets at the given address, including any
-    amounts that address has staked in the Akita staking contract.
+    * Get balances for the supplied assets, including hard and locked stake.
+    Asset ID zero represents ALGO.
 
      *
      * @param params The params for the smart contract call
-     * @returns The call params: The total balance for each asset (wallet + staked hard + staked lock)
+     * @returns The call params
      */
     balance: (params: CallParams<AbstractedAccountBalanceReaderArgs['obj']['balance(address,uint64[])uint64[]'] | AbstractedAccountBalanceReaderArgs['tuple']['balance(address,uint64[])uint64[]']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.params.call(AbstractedAccountBalanceReaderParamsFactory.balance(params))
@@ -332,12 +511,12 @@ export class AbstractedAccountBalanceReaderClient {
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
-    * Get the balance of a set of assets at the given address, including any
-    amounts that address has staked in the Akita staking contract.
+    * Get balances for the supplied assets, including hard and locked stake.
+    Asset ID zero represents ALGO.
 
      *
      * @param params The params for the smart contract call
-     * @returns The call transaction: The total balance for each asset (wallet + staked hard + staked lock)
+     * @returns The call transaction
      */
     balance: (params: CallParams<AbstractedAccountBalanceReaderArgs['obj']['balance(address,uint64[])uint64[]'] | AbstractedAccountBalanceReaderArgs['tuple']['balance(address,uint64[])uint64[]']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.createTransaction.call(AbstractedAccountBalanceReaderParamsFactory.balance(params))
@@ -364,12 +543,12 @@ export class AbstractedAccountBalanceReaderClient {
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
-    * Get the balance of a set of assets at the given address, including any
-    amounts that address has staked in the Akita staking contract.
+    * Get balances for the supplied assets, including hard and locked stake.
+    Asset ID zero represents ALGO.
 
      *
      * @param params The params for the smart contract call
-     * @returns The call result: The total balance for each asset (wallet + staked hard + staked lock)
+     * @returns The call result
      */
     balance: async (params: CallParams<AbstractedAccountBalanceReaderArgs['obj']['balance(address,uint64[])uint64[]'] | AbstractedAccountBalanceReaderArgs['tuple']['balance(address,uint64[])uint64[]']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       const result = await this.appClient.send.call(AbstractedAccountBalanceReaderParamsFactory.balance(params))
@@ -393,12 +572,12 @@ export class AbstractedAccountBalanceReaderClient {
    * 
    * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
    *
-  * Get the balance of a set of assets at the given address, including any
-  amounts that address has staked in the Akita staking contract.
+  * Get balances for the supplied assets, including hard and locked stake.
+  Asset ID zero represents ALGO.
 
    *
    * @param params The params for the smart contract call
-   * @returns The call result: The total balance for each asset (wallet + staked hard + staked lock)
+   * @returns The call result
    */
   async balance(params: CallParams<AbstractedAccountBalanceReaderArgs['obj']['balance(address,uint64[])uint64[]'] | AbstractedAccountBalanceReaderArgs['tuple']['balance(address,uint64[])uint64[]']>) {
     const result = await this.appClient.send.call(AbstractedAccountBalanceReaderParamsFactory.balance(params))
@@ -481,8 +660,8 @@ export type AbstractedAccountBalanceReaderComposer<TReturns extends [...any[]] =
   /**
    * Calls the balance(address,uint64[])uint64[] ABI method.
    *
-  * Get the balance of a set of assets at the given address, including any
-  amounts that address has staked in the Akita staking contract.
+  * Get balances for the supplied assets, including hard and locked stake.
+  Asset ID zero represents ALGO.
 
    *
    * @param args The arguments for the contract call
