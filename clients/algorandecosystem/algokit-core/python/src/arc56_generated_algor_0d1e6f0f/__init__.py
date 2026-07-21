@@ -11,6 +11,8 @@ from . import application_f63bd835 as application_f63bd835
 from . import application_6ef00234 as application_6ef00234
 from . import application_70383b91 as application_70383b91
 from . import application_ce7c1910 as application_ce7c1910
+from . import application_3c73bc9c as application_3c73bc9c
+from . import application_f99f74cb as application_f99f74cb
 from . import application_2d694643 as application_2d694643
 from . import state_9aa83f49 as state_9aa83f49
 from . import application_27be8404 as application_27be8404
