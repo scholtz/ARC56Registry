@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { ContractName_hash } from "arc56-generated-icanbenchurcat-algo-bounty";
+import { escrow_mainnet_6c2148cf } from "arc56-generated-icanbenchurcat-algo-bounty";
 
 const algorand = AlgorandClient.mainNet();
-const client = new ContractName_hash.ContractClient({
+const client = new escrow_mainnet_6c2148cf.EscrowContractClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,7 +51,11 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `escrow_mainnet_6c2148cf` | `EscrowContractClient` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/escrow_mainnet.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/escrow_mainnet.arc56.json) |
+| `escrow_testnet_d6e7ef38` | `EscrowContractClient` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/escrow_testnet.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/escrow_testnet.arc56.json) |
+| `EscrowContract_55731572` | `EscrowContractClient` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/EscrowContract.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/EscrowContract.arc56.json) |
+| `EscrowContract_2bb5f156` | `EscrowContractClient` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/EscrowContract.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/EscrowContract.arc56.json) |
+| `TestContract_526d7fbc` | `TestContractClient` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/TestContract.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/TestContract.arc56.json) |
 
 ## Versioning
 
