@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Owner.Repo.Contract_hash;
+using Arc56.Generated.VJLIVE.TrustFundX.GetFund_a08e72fd;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new ContractProxy(algod, appId: 123456789);
+var client = new GetFundProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -41,6 +41,7 @@ var client = new ContractProxy(algod, appId: 123456789);
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
 | `Arc56.Generated.VJLIVE.TrustFundX.GetFund_dc596fc4` | _(not yet generated - see state.json)_ | [https://raw.githubusercontent.com/VJLIVE/TrustFundX/HEAD/Smart Contracts/getfund/Artifacts/GetFund.arc56.json](https://raw.githubusercontent.com/VJLIVE/TrustFundX/HEAD/Smart Contracts/getfund/Artifacts/GetFund.arc56.json) |
+| `Arc56.Generated.VJLIVE.TrustFundX.GetFund_a08e72fd` | `GetFundProxy` | [https://raw.githubusercontent.com/VJLIVE/TrustFundX/HEAD/Smart%20Contracts/getfund/Artifacts/GetFund.arc56.json](https://raw.githubusercontent.com/VJLIVE/TrustFundX/HEAD/Smart%20Contracts/getfund/Artifacts/GetFund.arc56.json) |
 
 ## Versioning
 
