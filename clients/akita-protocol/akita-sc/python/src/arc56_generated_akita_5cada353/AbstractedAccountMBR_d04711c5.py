@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "appId"}, {"type": "string", "desc": "The escrow name to calculate MBR for", "name": "escrow"}, {"type": "uint64", "desc": "The number of method restrictions on the plugin", "name": "methodCount"}, {"type": "string", "desc": "The plugin name to calculate named plugin MBR for", "name": "plugin"}, {"type": "uint64", "desc": "The number of execution groups to calculate MBR for", "name": "groups"}], "name": "mbr", "returns": {"type": "(uint64,uint64,uint64,uint64,uint64,uint64,bool,uint64)", "desc": "The MBR costs for plugins, named plugins, escrows, allowances, domain keys, executions, and new escrow creation", "struct": "AbstractAccountBoxMBRData"}, "desc": "Calculate the minimum balance requirements for various box operations", "events": [], "readonly": true, "recommendations": {}}], "name": "AbstractedAccountMBR", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"AbstractAccountBoxMBRData": [{"name": "plugins", "type": "uint64"}, {"name": "namedPlugins", "type": "uint64"}, {"name": "escrows", "type": "uint64"}, {"name": "allowances", "type": "uint64"}, {"name": "executions", "type": "uint64"}, {"name": "domainKeys", "type": "uint64"}, {"name": "escrowExists", "type": "bool"}, {"name": "newEscrowMintCost", "type": "uint64"}]}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [177], "errorMessage": "Bytes has valid prefix"}, {"pc": [66, 91, 180], "errorMessage": "invalid array length header"}, {"pc": [73, 98], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [189], "errorMessage": "invalid number of bytes for arc4.dynamic_array<smart_contracts/arc58/account/types.ts::EscrowInfo>"}, {"pc": [59, 84, 109], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "appId"}, {"type": "string", "desc": "The escrow name to calculate MBR for", "name": "escrow"}, {"type": "uint64", "desc": "The number of method restrictions on the plugin", "name": "methodCount"}, {"type": "string", "desc": "The plugin name to calculate named plugin MBR for", "name": "plugin"}, {"type": "uint64", "desc": "The number of execution groups to calculate MBR for", "name": "groups"}], "name": "mbr", "returns": {"type": "(uint64,uint64,uint64,uint64,uint64,uint64,bool,uint64)", "desc": "The MBR costs for plugins, named plugins, escrows, allowances, domain keys, executions, and new escrow creation", "struct": "AbstractAccountBoxMBRData"}, "desc": "Calculate the minimum balance requirements for various box operations", "events": [], "readonly": true, "recommendations": {}}], "name": "AbstractedAccountMBR", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"AbstractAccountBoxMBRData": [{"name": "plugins", "type": "uint64"}, {"name": "namedPlugins", "type": "uint64"}, {"name": "escrows", "type": "uint64"}, {"name": "allowances", "type": "uint64"}, {"name": "executions", "type": "uint64"}, {"name": "domainKeys", "type": "uint64"}, {"name": "escrowExists", "type": "bool"}, {"name": "newEscrowMintCost", "type": "uint64"}]}, "byteCode": {"approval": "CyAEAAgCkAMmAQQVH3x1MRtBABiABBPNj2M2GgCOAQABADEZFDEYEERCAAgxGRQxGBQQQzYaAUkVIxJEFzYaAkkiWSQISwEVEkRXAgA2GgNJFSMSRBc2GgRJIlkkCEsBFRJEVwIANhoFSRUjEkQXSwMVJUsBC4HklgFLAQixSwIWVwYCTwdQgAQAAQACTFBPB7IYgAQ6solbshqyGoEGshAisgGztD5JVwQASwFXAAQoEkRJIlmBKQskCEwVEkSBFE8HC08ECCULgfSvAghPBRUlC4GUoAFLAQiBtNgBTwYIgdR6TwMITwaBgGQLgZS5AQhPBVcGKVcIIDIDEzIBgbTyCQhLBwhPBhZPBhZQTwYWUE8FFlBPAxZQTwMWUIABACJPBFRQTBZQKExQsIEBQw==", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCA4IDIgNDAwCiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L21ici5hbGdvLnRzOjEwCiAgICAvLyBleHBvcnQgY2xhc3MgQWJzdHJhY3RlZEFjY291bnRNQlIgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANQogICAgcHVzaGJ5dGVzIDB4MTNjZDhmNjMgLy8gbWV0aG9kICJtYnIodWludDY0LHN0cmluZyx1aW50NjQsc3RyaW5nLHVpbnQ2NCkodWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQsYm9vbCx1aW50NjQpIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9tYnJfcm91dGVAMwogICAgZXJyCgptYWluX21icl9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6NDkKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgbWJyCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6MTAKICAgIC8vIGV4cG9ydCBjbGFzcyBBYnN0cmFjdGVkQWNjb3VudE1CUiBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6OkFic3RyYWN0ZWRBY2NvdW50TUJSLm1icltyb3V0aW5nXSgpIC0+IHZvaWQ6Cm1icjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L21ici5hbGdvLnRzOjQ5CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA0CiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6MjUKICAgIC8vIHJldHVybiBNaW5Fc2Nyb3dzTUJSICsgdGhpcy5fY2FsY0JDUEIoQnl0ZXMoZXNjcm93KS5sZW5ndGgpCiAgICBkaWcgMwogICAgbGVuCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9tYnIuYWxnby50czoxMwogICAgLy8gcmV0dXJuIEJveENvc3RQZXJCeXRlICogbGVuCiAgICBpbnRjXzMgLy8gNDAwCiAgICBkaWcgMQogICAgKgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6MjUKICAgIC8vIHJldHVybiBNaW5Fc2Nyb3dzTUJSICsgdGhpcy5fY2FsY0JDUEIoQnl0ZXMoZXNjcm93KS5sZW5ndGgpCiAgICBwdXNoaW50IDE5MzAwCiAgICBkaWcgMQogICAgKwogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6NTktNjIKICAgIC8vIGNvbnN0IGVzY3Jvd0luZm8gPSBhYmlDYWxsPHR5cGVvZiBBYnN0cmFjdGVkQWNjb3VudC5wcm90b3R5cGUuYXJjNThfZ2V0RXNjcm93cz4oewogICAgLy8gICBhcHBJZCwKICAgIC8vICAgYXJnczogW1tlc2Nyb3ddXQogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L21ici5hbGdvLnRzOjYxCiAgICAvLyBhcmdzOiBbW2VzY3Jvd11dCiAgICBkaWcgMgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHVuY292ZXIgNwogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgwMDAxMDAwMgogICAgc3dhcAogICAgY29uY2F0CiAgICB1bmNvdmVyIDcKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25JRAogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6NTktNjIKICAgIC8vIGNvbnN0IGVzY3Jvd0luZm8gPSBhYmlDYWxsPHR5cGVvZiBBYnN0cmFjdGVkQWNjb3VudC5wcm90b3R5cGUuYXJjNThfZ2V0RXNjcm93cz4oewogICAgLy8gICBhcHBJZCwKICAgIC8vICAgYXJnczogW1tlc2Nyb3ddXQogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIHB1c2hieXRlcyAweDNhYjI4OTViIC8vIG1ldGhvZCAiYXJjNThfZ2V0RXNjcm93cyhzdHJpbmdbXSkodWludDY0LGFkZHJlc3MsYm9vbClbXSIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgcHVzaGludCA2IC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGl0eG4gTGFzdExvZwogICAgZHVwCiAgICBleHRyYWN0IDQgMAogICAgZGlnIDEKICAgIGV4dHJhY3QgMCA0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgID09CiAgICBhc3NlcnQgLy8gQnl0ZXMgaGFzIHZhbGlkIHByZWZpeAogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCA0MQogICAgKgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L3R5cGVzLnRzOjpFc2Nyb3dJbmZvPgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6MTcKICAgIC8vIHJldHVybiBNaW5QbHVnaW5NQlIgKyB0aGlzLl9jYWxjQkNQQigoTWV0aG9kUmVzdHJpY3Rpb25CeXRlTGVuZ3RoICogbWV0aG9kQ291bnQpICsgQnl0ZXMoZXNjcm93KS5sZW5ndGgpCiAgICBwdXNoaW50IDIwCiAgICB1bmNvdmVyIDcKICAgICoKICAgIHVuY292ZXIgNAogICAgKwogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6MTMKICAgIC8vIHJldHVybiBCb3hDb3N0UGVyQnl0ZSAqIGxlbgogICAgaW50Y18zIC8vIDQwMAogICAgKgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6MTcKICAgIC8vIHJldHVybiBNaW5QbHVnaW5NQlIgKyB0aGlzLl9jYWxjQkNQQigoTWV0aG9kUmVzdHJpY3Rpb25CeXRlTGVuZ3RoICogbWV0aG9kQ291bnQpICsgQnl0ZXMoZXNjcm93KS5sZW5ndGgpCiAgICBwdXNoaW50IDM4OTAwCiAgICArCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9tYnIuYWxnby50czoyMQogICAgLy8gcmV0dXJuIE1pbk5hbWVkUGx1Z2luTUJSICsgdGhpcy5fY2FsY0JDUEIoQnl0ZXMobmFtZSkubGVuZ3RoKQogICAgdW5jb3ZlciA1CiAgICBsZW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L21ici5hbGdvLnRzOjEzCiAgICAvLyByZXR1cm4gQm94Q29zdFBlckJ5dGUgKiBsZW4KICAgIGludGNfMyAvLyA0MDAKICAgICoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L21ici5hbGdvLnRzOjIxCiAgICAvLyByZXR1cm4gTWluTmFtZWRQbHVnaW5NQlIgKyB0aGlzLl9jYWxjQkNQQihCeXRlcyhuYW1lKS5sZW5ndGgpCiAgICBwdXNoaW50IDIwNTAwCiAgICBkaWcgMQogICAgKwogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6MjkKICAgIC8vIHJldHVybiBNaW5BbGxvd2FuY2VNQlIgKyB0aGlzLl9jYWxjQkNQQihCeXRlcyhlc2Nyb3cpLmxlbmd0aCkKICAgIHB1c2hpbnQgMjc3MDAKICAgIHVuY292ZXIgNgogICAgKwogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6MzcKICAgIC8vIHJldHVybiBNaW5Eb21haW5LZXlzTUJSICsgdGhpcy5fY2FsY0JDUEIoQnl0ZXMoZG9tYWluKS5sZW5ndGgpCiAgICBwdXNoaW50IDE1NzAwCiAgICB1bmNvdmVyIDMKICAgICsKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L21ici5hbGdvLnRzOjEzCiAgICAvLyByZXR1cm4gQm94Q29zdFBlckJ5dGUgKiBsZW4KICAgIHVuY292ZXIgNgogICAgcHVzaGludCAxMjgwMAogICAgKgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6MzMKICAgIC8vIHJldHVybiBNaW5FeGVjdXRpb25zTUJSICsgdGhpcy5fY2FsY0JDUEIoZ3JvdXBzICogMzIpCiAgICBwdXNoaW50IDIzNzAwCiAgICArCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9tYnIuYWxnby50czo3MQogICAgLy8gZXNjcm93RXhpc3RzOiBlc2Nyb3dJbmZvWzBdLmFkZHJlc3MgIT09IEdsb2JhbC56ZXJvQWRkcmVzcywKICAgIHVuY292ZXIgNQogICAgZXh0cmFjdCA2IDQxCiAgICBleHRyYWN0IDggMzIKICAgIGdsb2JhbCBaZXJvQWRkcmVzcwogICAgIT0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L21ici5hbGdvLnRzOjc0CiAgICAvLyBHbG9iYWwubWluQmFsYW5jZSArCiAgICBnbG9iYWwgTWluQmFsYW5jZQogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6NzMtNzUKICAgIC8vIE5ld0Nvc3RGb3JBUkM1OCArCiAgICAvLyBHbG9iYWwubWluQmFsYW5jZSArCiAgICAvLyBBUkM1OFdhbGxldElEc0J5QWNjb3VudHNNYnIgKwogICAgcHVzaGludCAxNjIxMDAKICAgICsKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L21ici5hbGdvLnRzOjczLTc2CiAgICAvLyBOZXdDb3N0Rm9yQVJDNTggKwogICAgLy8gR2xvYmFsLm1pbkJhbGFuY2UgKwogICAgLy8gQVJDNThXYWxsZXRJRHNCeUFjY291bnRzTWJyICsKICAgIC8vIGVzY3Jvd3MKICAgIGRpZyA3CiAgICArCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9tYnIuYWxnby50czo2NC03OAogICAgLy8gcmV0dXJuIHsKICAgIC8vICAgcGx1Z2luczogdGhpcy5wbHVnaW5zTWJyKGVzY3JvdywgbWV0aG9kQ291bnQpLAogICAgLy8gICBuYW1lZFBsdWdpbnM6IHRoaXMubmFtZWRQbHVnaW5zTWJyKHBsdWdpbiksCiAgICAvLyAgIGVzY3Jvd3MsCiAgICAvLyAgIGFsbG93YW5jZXM6IHRoaXMuYWxsb3dhbmNlc01icihlc2Nyb3cpLAogICAgLy8gICBkb21haW5LZXlzOiB0aGlzLmRvbWFpbktleXNNYnIocGx1Z2luKSwKICAgIC8vICAgZXhlY3V0aW9uczogdGhpcy5leGVjdXRpb25zTWJyKGdyb3VwcyksCiAgICAvLyAgIGVzY3Jvd0V4aXN0czogZXNjcm93SW5mb1swXS5hZGRyZXNzICE9PSBHbG9iYWwuemVyb0FkZHJlc3MsCiAgICAvLyAgIG5ld0VzY3Jvd01pbnRDb3N0OiAoCiAgICAvLyAgICAgTmV3Q29zdEZvckFSQzU4ICsKICAgIC8vICAgICBHbG9iYWwubWluQmFsYW5jZSArCiAgICAvLyAgICAgQVJDNThXYWxsZXRJRHNCeUFjY291bnRzTWJyICsKICAgIC8vICAgICBlc2Nyb3dzCiAgICAvLyAgICkKICAgIC8vIH0KICAgIHVuY292ZXIgNgogICAgaXRvYgogICAgdW5jb3ZlciA2CiAgICBpdG9iCiAgICBjb25jYXQKICAgIHVuY292ZXIgNgogICAgaXRvYgogICAgY29uY2F0CiAgICB1bmNvdmVyIDUKICAgIGl0b2IKICAgIGNvbmNhdAogICAgdW5jb3ZlciAzCiAgICBpdG9iCiAgICBjb25jYXQKICAgIHVuY292ZXIgMwogICAgaXRvYgogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgwMAogICAgaW50Y18wIC8vIDAKICAgIHVuY292ZXIgNAogICAgc2V0Yml0CiAgICBjb25jYXQKICAgIHN3YXAKICAgIGl0b2IKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvbWJyLmFsZ28udHM6NDkKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgcHVzaGludCAxCiAgICByZXR1cm4K", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [178], "errorMessage": "Bytes has valid prefix"}, {"pc": [66, 91, 181], "errorMessage": "invalid array length header"}, {"pc": [73, 98], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [190], "errorMessage": "invalid number of bytes for arc4.dynamic_array<smart_contracts/arc58/account/types.ts::EscrowInfo>"}, {"pc": [59, 84, 109], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -361,6 +361,271 @@ class AbstractedAccountMbrClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class AbstractedAccountMbrBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating AbstractedAccountMbr contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class AbstractedAccountMbrFactory(algokit_utils.TypedAppFactoryProtocol[AbstractedAccountMbrBareCallCreateParams, None, None]):
+    """Factory for deploying and managing AbstractedAccountMbrClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = AbstractedAccountMbrFactoryParams(self.app_factory)
+        self.create_transaction = AbstractedAccountMbrFactoryCreateTransaction(self.app_factory)
+        self.send = AbstractedAccountMbrFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: AbstractedAccountMbrBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[AbstractedAccountMbrClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return AbstractedAccountMbrClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AbstractedAccountMbrClient:
+        """Get an app client by creator address and name"""
+        return AbstractedAccountMbrClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AbstractedAccountMbrClient:
+        """Get an app client by app ID"""
+        return AbstractedAccountMbrClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class AbstractedAccountMbrFactoryParams:
+    """Parameters for creating transactions for AbstractedAccountMbr contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbstractedAccountMbrFactoryCreateParams(app_factory)
+        self.update = AbstractedAccountMbrFactoryUpdateParams(app_factory)
+        self.delete = AbstractedAccountMbrFactoryDeleteParams(app_factory)
+
+class AbstractedAccountMbrFactoryCreateParams:
+    """Parameters for 'create' operations of AbstractedAccountMbr contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def mbr(
+        self,
+        args: tuple[int, str, int, str, int] | MbrArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the mbr(uint64,string,uint64,string,uint64)(uint64,uint64,uint64,uint64,uint64,uint64,bool,uint64) ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "mbr(uint64,string,uint64,string,uint64)(uint64,uint64,uint64,uint64,uint64,uint64,bool,uint64)",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class AbstractedAccountMbrFactoryUpdateParams:
+    """Parameters for 'update' operations of AbstractedAccountMbr contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class AbstractedAccountMbrFactoryDeleteParams:
+    """Parameters for 'delete' operations of AbstractedAccountMbr contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class AbstractedAccountMbrFactoryCreateTransaction:
+    """Create transactions for AbstractedAccountMbr contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbstractedAccountMbrFactoryCreateTransactionCreate(app_factory)
+
+
+class AbstractedAccountMbrFactoryCreateTransactionCreate:
+    """Create new instances of AbstractedAccountMbr contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class AbstractedAccountMbrFactorySend:
+    """Send calls to AbstractedAccountMbr contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbstractedAccountMbrFactorySendCreate(app_factory)
+
+
+class AbstractedAccountMbrFactorySendCreate:
+    """Send create calls to AbstractedAccountMbr contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[AbstractedAccountMbrClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return AbstractedAccountMbrClient(result[0]), result[1]
 
 
 class AbstractedAccountMbrComposer:

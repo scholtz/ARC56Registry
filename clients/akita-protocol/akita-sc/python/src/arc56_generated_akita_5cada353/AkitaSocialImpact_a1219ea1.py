@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": [], "create": ["NoOp"]}, "args": [{"type": "uint64", "name": "akitaDAO"}, {"type": "string", "name": "version"}], "name": "create", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "address"}, {"type": "uint64", "name": "subscriptionIndex"}, {"type": "uint64", "name": "NFDAppID"}, {"type": "uint64", "name": "akitaAssetID"}], "name": "cacheMeta", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "pay", "name": "payment"}, {"type": "uint64", "name": "subscriptionIndex"}, {"type": "uint64", "name": "newModifier"}], "name": "updateSubscriptionStateModifier", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "address"}], "name": "getUserImpactWithoutSocial", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "address"}], "name": "getUserImpact", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "address"}, {"type": "(bool,uint64,uint64,uint64,bool)", "name": "inputs", "struct": "SocialImpactInputs"}], "name": "getUserImpactWithInputs", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(bool,uint64,uint64,uint64,bool)", "name": "inputs", "struct": "SocialImpactInputs"}], "name": "calculateSocialImpactScore", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "user"}], "name": "getMeta", "returns": {"type": "(uint64,uint64,uint64,uint64,uint64)", "struct": "ImpactMetaValue"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["UpdateApplication"], "create": []}, "args": [{"type": "string", "name": "newVersion"}], "name": "update", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "akitaDAO"}], "name": "updateAkitaDAO", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "opUp", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "AkitaSocialImpact", "state": {"keys": {"box": {}, "global": {"version": {"key": "dmVyc2lvbg==", "keyType": "AVMString", "valueType": "AVMString", "desc": "the current version of the contract"}, "akitaDAO": {"key": "YWtpdGFfZGFv", "keyType": "AVMString", "valueType": "AVMUint64", "desc": "the app ID of the Akita DAO"}}, "local": {}}, "maps": {"box": {"meta": {"keyType": "address", "valueType": "ImpactMetaValue", "desc": "A map of the meta data for each user", "prefix": "bQ=="}, "subscriptionStateModifier": {"keyType": "uint64", "valueType": "uint64", "desc": "A map of how each akita subscription affects impact calculation", "prefix": "cw=="}}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 1}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"ImpactMetaValue": [{"name": "subscriptionIndex", "type": "uint64"}, {"name": "NFD", "type": "uint64"}, {"name": "nfdTimeChanged", "type": "uint64"}, {"name": "nfdImpact", "type": "uint64"}, {"name": "akitaNFT", "type": "uint64"}], "SocialImpactInputs": [{"name": "hasMeta", "type": "bool"}, {"name": "streak", "type": "uint64"}, {"name": "startDate", "type": "uint64"}, {"name": "voteCount", "type": "uint64"}, {"name": "isNegative", "type": "bool"}]}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [1384, 1765, 1840, 1870], "errorMessage": "Box must have value"}, {"pc": [491, 563, 1556, 1715, 2203, 2574], "errorMessage": "Bytes has valid prefix"}, {"pc": [1932], "errorMessage": "ERR:CNFD"}, {"pc": [1912], "errorMessage": "ERR:INFD"}, {"pc": [1226], "errorMessage": "ERR:IPAY"}, {"pc": [1458], "errorMessage": "ERR:IUPG"}, {"pc": [1074], "errorMessage": "ERR:NANT"}, {"pc": [1183, 1426, 1494], "errorMessage": "ERR:NDAO"}, {"pc": [513], "errorMessage": "ERR:NNFD"}, {"pc": [671], "errorMessage": "ERR:NONF"}, {"pc": [1096], "errorMessage": "ERR:NONT"}, {"pc": [383, 1308, 1357], "errorMessage": "ERR:NSOC"}, {"pc": [412], "errorMessage": "ERR:NSUB"}, {"pc": [375, 1175, 1300, 1349, 1418, 1486, 1604], "errorMessage": "application exists"}, {"pc": [1056, 1966, 2005], "errorMessage": "asset exists"}, {"pc": [367, 448, 714, 1169, 1292, 1341, 1412, 1430, 1480, 1515, 1598, 1675, 1784, 1940, 2148], "errorMessage": "check GlobalState exists"}, {"pc": [2247], "errorMessage": "index access is out of bounds"}, {"pc": [298, 566, 1396, 2206, 2577], "errorMessage": "invalid array length header"}, {"pc": [305, 1403], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [2218], "errorMessage": "invalid number of bytes for arc4.dynamic_array<smart_contracts/staking/types.ts::Stake>"}, {"pc": [333, 1237, 1257, 1277, 1378], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}, {"pc": [291, 341, 351, 360, 1153, 1162, 1473], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [496], "errorMessage": "invalid number of bytes for bool"}, {"pc": [572, 2583], "errorMessage": "invalid number of bytes for bytes"}, {"pc": [1286, 1335, 1721], "errorMessage": "invalid number of bytes for smart_contracts/social/types.ts::SocialImpactInputs"}, {"pc": [1562], "errorMessage": "invalid number of bytes for smart_contracts/subscriptions/types.ts::SubscriptionInfoWithExistence"}, {"pc": [1145], "errorMessage": "transaction type is pay"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": [], "create": ["NoOp"]}, "args": [{"type": "uint64", "name": "akitaDAO"}, {"type": "string", "name": "version"}], "name": "create", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "address"}, {"type": "uint64", "name": "subscriptionIndex"}, {"type": "uint64", "name": "NFDAppID"}, {"type": "uint64", "name": "akitaAssetID"}], "name": "cacheMeta", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "pay", "name": "payment"}, {"type": "uint64", "name": "subscriptionIndex"}, {"type": "uint64", "name": "newModifier"}], "name": "updateSubscriptionStateModifier", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "pay", "name": "payment"}, {"type": "uint64", "name": "amount"}, {"type": "bool", "name": "inheritRoot"}], "name": "commitStakingImpact", "returns": {"type": "void"}, "desc": "Enrolls the caller in this application's AKTA soft-stake commitment.", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "address"}], "name": "checkpointStakingImpact", "returns": {"type": "(bool,uint64)", "struct": "StakeCheck"}, "desc": "Permissionlessly records a currently observed shortfall for social impact.", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "address"}], "name": "stakingImpactCost", "returns": {"type": "uint64"}, "desc": "Returns the MBR this application must fund to create an AKTA commitment for an account.", "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "address"}], "name": "getUserImpactWithoutSocial", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "address"}], "name": "getUserImpact", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "address"}, {"type": "(bool,uint64,uint64,uint64,bool)", "name": "inputs", "struct": "SocialImpactInputs"}], "name": "getUserImpactWithInputs", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(bool,uint64,uint64,uint64,bool)", "name": "inputs", "struct": "SocialImpactInputs"}], "name": "calculateSocialImpactScore", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "user"}], "name": "getMeta", "returns": {"type": "(uint64,uint64,uint64,uint64,uint64)", "struct": "ImpactMetaValue"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["UpdateApplication"], "create": []}, "args": [{"type": "string", "name": "newVersion"}], "name": "update", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "akitaDAO"}], "name": "updateAkitaDAO", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "opUp", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "AkitaSocialImpact", "state": {"keys": {"box": {}, "global": {"version": {"key": "dmVyc2lvbg==", "keyType": "AVMString", "valueType": "AVMString", "desc": "the current version of the contract"}, "akitaDAO": {"key": "YWtpdGFfZGFv", "keyType": "AVMString", "valueType": "AVMUint64", "desc": "the app ID of the Akita DAO"}}, "local": {}}, "maps": {"box": {"meta": {"keyType": "address", "valueType": "ImpactMetaValue", "desc": "A map of the meta data for each user", "prefix": "bQ=="}, "subscriptionStateModifier": {"keyType": "uint64", "valueType": "uint64", "desc": "A map of how each akita subscription affects impact calculation", "prefix": "cw=="}}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 1}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"ImpactMetaValue": [{"name": "subscriptionIndex", "type": "uint64"}, {"name": "NFD", "type": "uint64"}, {"name": "nfdTimeChanged", "type": "uint64"}, {"name": "nfdImpact", "type": "uint64"}, {"name": "akitaNFT", "type": "uint64"}], "SocialImpactInputs": [{"name": "hasMeta", "type": "bool"}, {"name": "streak", "type": "uint64"}, {"name": "startDate", "type": "uint64"}, {"name": "voteCount", "type": "uint64"}, {"name": "isNegative", "type": "bool"}], "StakeCheck": [{"name": "valid", "type": "bool"}, {"name": "balance", "type": "uint64"}]}, "byteCode": {"approval": "CyAJAAEIBoCglKWNHYCgt4fpBYDnhA+AyK+gJYDOiR4mEAlha2l0YV9kYW8EFR98dQNhYWwMYWtpdGFfYXNzZXRzA3NhbAZ3YWxsZXQIRVJSOk5TT0MBbQhFUlI6TkRBTwhFUlI6SVBBWQd2ZXJzaW9uA29hbARsE+3kDWkudGltZUNoYW5nZWQgAoU4jVx1m2PN5+XepbbNXne91JvslQ4U0FbykHCoOJcEoUd7c4AE6pGA3TYaAI4BAHUxGRREMRhBAF6CDAQn47tPBJ109aEEhFCeRQQCzQyKBPBFDsUE+Bx7YgTVdLsQBPJNYGMEgBREDgS27GpdBDPpLJQEhU3t4DYaAI4MAEADdAPKBH0EzgUUBSgFPAV3BaMGBQABACNDgARvmBf2NhoAjgEADQAxGYEEEjEYEERCBZs2GgFJFSQSRBc2GgJJIlmBAghLARUSRFcCACcKTGcoTGcjQyJHBYAARwM2GgFJFYEgEkQ2GgJJFSQSRBc2GgNHAhUkEkQXNhoESRUkEkQXMQAiKGVEJwRlSCJbcghEEkAABCcGsABLA0EAGEsESwSIBZoiU0AADIAIRVJSOk5TVUKwACJFByJFCEsBQQJySwGABmkubmFtZWVIsUkVFlcGAkxQIihlRCcLZUgkW7IYgARL4i/GshqyGksCsholshAisgGztD5JVwQATFcABCkSREkVIxJEIlNAAAyACEVSUjpOTkZEsACxSwGyGCcMshqADwANdi5jYUFsZ28uMC5hc7IaJbIQIrIBs7Q+SVcEAEsBVwAEKRJESSJZgQIITBUSRFcGAEUOIkUJSw0VSUUHSwkNQQIdSwhJSwdJTgMPSwFLA08CTUyBIAhJRQxJSwMPTE8DTwJNSUsCDEsCTE1LD04CUklFEDIDE0H/vUsOSwUSQf+1I0AADIAIRVJSOk5PTkawAEsBSScNZUgXRQiBMkUJgA1pLnBhcmVudEFwcElEZUxFDUEAFksLFyIoZUQnC2VIgShbEkEABIFkRQhLAYAFaS52ZXJlSEkVIksBDyJLAk8CTYECSwIPgQJPA08CTVKAAjMuE0ABFUsBSYAIdi5kb21haW6IB81LAYAJdi50d2l0dGVyiAe9SwKACXYuZGlzY29yZIgHrU8DgAp2LnRlbGVncmFtiAecSwMVFlcGAk8EUEkVJAhLBBUWVwYCTwVQSwEWVwYCgAIACExQSwEVTwMISwUVFlcGAk8GUEsBFlcGAk8DTFBLARVPAwhLBRUWVwYCTwZQTBZXBgJPAkxQTwRQTwNQTwJQTFBJIllLAYECWUsCTwJLAlJXAgBLAoEEWUsDTwNLAlJXAgBFDUsCJVlLA08CSwJSVwIARRBLAhVPA04CUlcCAEUMFUEAB0sHgQoIRQhLCRVBAAdLB4EUCEUISwwVQQAHSweBCghFCEsKFUEAB0sHgQoIRQhJQQAsSXELRCcOEkAADIAIRVJSOk5BTlSwAEsESwFwAEhAAAyACEVSUjpOT05UsABLAxZLAhZQSwcWUEsIFkxLAVBLAhZQJwdLB1BMvylMULAjQyJC/h8xFiMJSTgQIxJENhoBSRUkEkQXNhoCSRUkEkQXMQAiKGVEJwVlSHIIRBJAAAQnCLAASwEWgAFzTFBLARa/SwJJOAcyChJMOAiB1EgSEEAABCcJsAAjQzEWIwlHAjgQIxJENhoBSU4CFSQSRDYaAklOAhUjEkQiKGVESSplSCJbSU4CTgMrZUhXAAhJTgOxMQBPArIYJw+yGrIasholshAisgGztD5JVwQATFcABCkSREkVJBJEF0w4BzIKEkAABCcJsABLBTgISwESQAAEJwmwALFLAklyCERLArIIsgcjshAisgG2MQBMshiABA0DfImyGrIaSwGyGksEshpLA7IaJbIQIrIBsyNDNhoBSRWBIBJEIihlREkqZUgiW0wrZUhXAAixMggWTwKyGIAEW/3oArIashpMshqyGiWyECKyAbO0PklXBABMVwAEKRJESRWBCRJEKUxQsCNDNhoBSRWBIBJEIihlREkqZUgiW0wrZUhXAAixTLIYJw+yGkyyGrIaJbIQIrIBs7Q+SVcEAExXAAQpEkRJFSQSRClMULAjQzYaAUkVgSASRCKIAakWKUxQsCNDNhoBSRWBIBJEI4gBlRYpTFCwI0M2GgFJFYEgEkQ2GgJJFYEaEkQxACIoZUQnBGVIIltyCEQSQAAEJwawAEmIA81ISwJMiAGkFilMULAjQzYaAUkVgRoSRDEAIihlRCcEZUgiW3IIRBJAAAQnBrAASYgDm0gWKUxQsCNDNhoBSRWBIBJEJwdMUL5EKUxQsCNDNhoBSSJZgQIISwEVEkRXAgAxACIoZUQnBWVIcghEEkAABCcIsAAiKGVEgANwYWxlSIEQWzINEkAADIAIRVJSOklVUEewACcKSwFnI0M2GgFJFSQSRBcxACIoZUQnBWVIcghEEkAABCcIsAAoSwFnI0OKAgGxi/8Wi/5MUCIoZUQqZUiBIFuyGIAEJbgSp7IasholshAisgGztD5HAlcEAExXAAQpEkRJFYFpEkQiU0AAFYARAAAAAAAAAAAAAAAAAAAAAABMiYsASVcFICIoZUQnBWVIcghEEksBgSVbMgdJSwSBLVsJSwSBPVtMSwEYCAlLA4FVWwxPAksCEBBPAlddCIABACJPA1RPAhZQTFBMiYoCAYv/QQA+sSIoZUQnBGVIIluyGIAE4775Q7Iai/6yGiWyECKyAbO0PklXBABMVwAEKRJESRWBGhJEiAIuSIv+TIgABYkiQv/1igIBIkcDgABHDCJHAicHi/5QSb1FAUEAE4sUvkRJIluMEUkkW4wSgSBbjBMiKGVEK2VISVcACIwAIltAAVwijAsijAyL/osRiP7KSYwDIlNBAC2LA1cBCIABc0xQSYwBvUUBQQAaiwG+RBeLA4EJW0mMDoEMD0EBFYH6AUwKjAyLEkEBA4sUvkRJJFtLAYEQW4wKTIEYW4wISScNZUgXjA2LEhJAAAyACEVSUjpJTkZEsACLCosNEkAADIAIRVJSOkNORkSwAIsIjAkiKGVEK2VIIltJjARAAIMijAeLE0EAd4sTSXEDREkVIksBDyJLAk8CTYEDSwIPgQNPA08CTVKMAov+SwFwAEiMBnELRCcOEkEAQIsGQQA7iwKAA0FLQxJBACCBMosLiwwIi/8IiwkIiwcICEmMD0AABCOMAImLD4wAiYsCgANBT0cSQQAFgRlC/9IiQv/OIkL/yov+iwRwAEhJjAYhBwxBAAYijAdC/2qLBkkhBA8hBExNgTILIQQKjAdC/1UijAlC/z2LDoEUC0wKjAxC/uYiKGVEKmVIIluxMggWTLIYgATvGKSWshqyGov+shqLALIagAGAsholshAisgGztD5JVwQASwFXAAQpEkQVgRASREmBBFtJTgKMBYEMW4wQIQcMQAALixCBgJqeAQxBAAYijAtC/kGLBUkhBQ8hBUxNgfoBCyEFCosQSSEGDyEGTE0LIQYKQv/ZigECgABHBIv/IlNAAAgii/+MAYwAiYv/I1tJjAKBPA9BAH+BZIwBMgeL/4EJWwlJjAAhCA9BAFqLAYFLCIwBi/+BEVtJjANBAC+LA4FLC4GgjQYKSYwEgUsNQQAEgUuMBIv/gcgBU0EAHosBiwQNQQAQiwGLBAmMAYsBi/+MAYwAiSKMAUL/8YsBiwQIjAFC/+eLAIFLCyEICosBCIwBQv+diwKBZAuBPAqMAUL/eIoCAbGL/xUWVwYCi/9Qi/6yGCcMshqyGiWyECKyAbO0PklXBABLAVcABCkSREkiWYECCEwVEkRXBgCJ", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDggNiAxMDAwMDAwMDAwMDAwIDIwMDAwMDAwMDAwMCAzMTUzNjAwMCAxMDAwMDAwMDAwMCA2MzA3MjAwMAogICAgYnl0ZWNibG9jayAiYWtpdGFfZGFvIiAweDE1MWY3Yzc1ICJhYWwiICJha2l0YV9hc3NldHMiICJzYWwiICJ3YWxsZXQiICJFUlI6TlNPQyIgIm0iICJFUlI6TkRBTyIgIkVSUjpJUEFZIiAidmVyc2lvbiIgIm9hbCIgMHg2YzEzZWRlNCAiaS50aW1lQ2hhbmdlZCIgYmFzZTMyKEFLQ1RSREs0T1dOV0hUUEg0WFBLTE5XTkxaMzMzVkUzNVNLUTRGR1FLM1pKQTRGSUhDTFEpIDB4YTE0NzdiNzMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTgKICAgIC8vIGV4cG9ydCBjbGFzcyBBa2l0YVNvY2lhbEltcGFjdCBleHRlbmRzIFVwZ3JhZGVhYmxlQWtpdGFCYXNlQ29udHJhY3QgewogICAgcHVzaGJ5dGVzIDB4ZWE5MTgwZGQgLy8gbWV0aG9kICJ1cGRhdGUoc3RyaW5nKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3VwZGF0ZV9yb3V0ZUAyCgptYWluX3N3aXRjaF9jYXNlX25leHRAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTgKICAgIC8vIGV4cG9ydCBjbGFzcyBBa2l0YVNvY2lhbEltcGFjdCBleHRlbmRzIFVwZ3JhZGVhYmxlQWtpdGFCYXNlQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEAxOAogICAgcHVzaGJ5dGVzcyAweDI3ZTNiYjRmIDB4OWQ3NGY1YTEgMHg4NDUwOWU0NSAweDAyY2QwYzhhIDB4ZjA0NTBlYzUgMHhmODFjN2I2MiAweGQ1NzRiYjEwIDB4ZjI0ZDYwNjMgMHg4MDE0NDQwZSAweGI2ZWM2YTVkIDB4MzNlOTJjOTQgMHg4NTRkZWRlMCAvLyBtZXRob2QgImNhY2hlTWV0YShhZGRyZXNzLHVpbnQ2NCx1aW50NjQsdWludDY0KXVpbnQ2NCIsIG1ldGhvZCAidXBkYXRlU3Vic2NyaXB0aW9uU3RhdGVNb2RpZmllcihwYXksdWludDY0LHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJjb21taXRTdGFraW5nSW1wYWN0KHBheSx1aW50NjQsYm9vbCl2b2lkIiwgbWV0aG9kICJjaGVja3BvaW50U3Rha2luZ0ltcGFjdChhZGRyZXNzKShib29sLHVpbnQ2NCkiLCBtZXRob2QgInN0YWtpbmdJbXBhY3RDb3N0KGFkZHJlc3MpdWludDY0IiwgbWV0aG9kICJnZXRVc2VySW1wYWN0V2l0aG91dFNvY2lhbChhZGRyZXNzKXVpbnQ2NCIsIG1ldGhvZCAiZ2V0VXNlckltcGFjdChhZGRyZXNzKXVpbnQ2NCIsIG1ldGhvZCAiZ2V0VXNlckltcGFjdFdpdGhJbnB1dHMoYWRkcmVzcywoYm9vbCx1aW50NjQsdWludDY0LHVpbnQ2NCxib29sKSl1aW50NjQiLCBtZXRob2QgImNhbGN1bGF0ZVNvY2lhbEltcGFjdFNjb3JlKChib29sLHVpbnQ2NCx1aW50NjQsdWludDY0LGJvb2wpKXVpbnQ2NCIsIG1ldGhvZCAiZ2V0TWV0YShhZGRyZXNzKSh1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0KSIsIG1ldGhvZCAidXBkYXRlQWtpdGFEQU8odWludDY0KXZvaWQiLCBtZXRob2QgIm9wVXAoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjYWNoZU1ldGEgdXBkYXRlU3Vic2NyaXB0aW9uU3RhdGVNb2RpZmllciBjb21taXRTdGFraW5nSW1wYWN0IGNoZWNrcG9pbnRTdGFraW5nSW1wYWN0IHN0YWtpbmdJbXBhY3RDb3N0IGdldFVzZXJJbXBhY3RXaXRob3V0U29jaWFsIGdldFVzZXJJbXBhY3QgZ2V0VXNlckltcGFjdFdpdGhJbnB1dHMgY2FsY3VsYXRlU29jaWFsSW1wYWN0U2NvcmUgZ2V0TWV0YSB1cGRhdGVBa2l0YURBTyBtYWluX29wVXBfcm91dGVAMTYKICAgIGVycgoKbWFpbl9vcFVwX3JvdXRlQDE2OgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6NDEKICAgIC8vIG9wVXAoKTogdm9pZCB7IH0KICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fY3JlYXRlX05vT3BAMTg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjE4CiAgICAvLyBleHBvcnQgY2xhc3MgQWtpdGFTb2NpYWxJbXBhY3QgZXh0ZW5kcyBVcGdyYWRlYWJsZUFraXRhQmFzZUNvbnRyYWN0IHsKICAgIHB1c2hieXRlcyAweDZmOTgxN2Y2IC8vIG1ldGhvZCAiY3JlYXRlKHVpbnQ2NCxzdHJpbmcpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGNyZWF0ZQogICAgZXJyCgptYWluX3VwZGF0ZV9yb3V0ZUAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6NDYKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6IFsnVXBkYXRlQXBwbGljYXRpb24nXSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgcHVzaGludCA0IC8vIFVwZGF0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgdXBkYXRlCgoKLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo6QWtpdGFTb2NpYWxJbXBhY3QuY3JlYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czozNjEKICAgIC8vIEBhYmltZXRob2QoeyBvbkNyZWF0ZTogJ3JlcXVpcmUnIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjI1CiAgICAvLyB2ZXJzaW9uID0gR2xvYmFsU3RhdGU8c3RyaW5nPih7IGtleTogR2xvYmFsU3RhdGVLZXlWZXJzaW9uIH0pCiAgICBieXRlYyAxMCAvLyAidmVyc2lvbiIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzYzCiAgICAvLyB0aGlzLnZlcnNpb24udmFsdWUgPSB2ZXJzaW9uCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MjcKICAgIC8vIGFraXRhREFPID0gR2xvYmFsU3RhdGU8QXBwbGljYXRpb24+KHsga2V5OiBHbG9iYWxTdGF0ZUtleUFraXRhREFPIH0pCiAgICBieXRlY18wIC8vICJha2l0YV9kYW8iCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjM2NAogICAgLy8gdGhpcy5ha2l0YURBTy52YWx1ZSA9IEFwcGxpY2F0aW9uKGFraXRhREFPKQogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzYxCiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OkFraXRhU29jaWFsSW1wYWN0LmNhY2hlTWV0YVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNhY2hlTWV0YToKICAgIGludGNfMCAvLyAwCiAgICBkdXBuIDUKICAgIHB1c2hieXRlcyAiIgogICAgZHVwbiAzCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjM2OQogICAgLy8gY2FjaGVNZXRhKGFkZHJlc3M6IEFjY291bnQsIHN1YnNjcmlwdGlvbkluZGV4OiB1aW50NjQsIE5GREFwcElEOiB1aW50NjQsIGFraXRhQXNzZXRJRDogdWludDY0KTogdWludDY0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cG4gMgogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDQKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzcwCiAgICAvLyBsb2dnZWRBc3NlcnQoVHhuLnNlbmRlciA9PT0gQXBwbGljYXRpb24oZ2V0QWtpdGFTb2NpYWxBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnNvY2lhbCkuYWRkcmVzcywgRVJSX05PVF9TT0NJQUwpCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MjcKICAgIC8vIGFraXRhREFPID0gR2xvYmFsU3RhdGU8QXBwbGljYXRpb24+KHsga2V5OiBHbG9iYWxTdGF0ZUtleUFraXRhREFPIH0pCiAgICBieXRlY18wIC8vICJha2l0YV9kYW8iCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjM3MAogICAgLy8gbG9nZ2VkQXNzZXJ0KFR4bi5zZW5kZXIgPT09IEFwcGxpY2F0aW9uKGdldEFraXRhU29jaWFsQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zb2NpYWwpLmFkZHJlc3MsIEVSUl9OT1RfU09DSUFMKQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9mdW5jdGlvbnMudHM6NDkKICAgIC8vIGNvbnN0IFthcHBMaXN0Qnl0ZXNdID0gb3AuQXBwR2xvYmFsLmdldEV4Qnl0ZXMoYWtpdGFEQU8sIEJ5dGVzKEFraXRhREFPR2xvYmFsU3RhdGVLZXlzQWtpdGFTb2NpYWxBcHBMaXN0KSkKICAgIGJ5dGVjIDQgLy8gInNhbCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzcwCiAgICAvLyBsb2dnZWRBc3NlcnQoVHhuLnNlbmRlciA9PT0gQXBwbGljYXRpb24oZ2V0QWtpdGFTb2NpYWxBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnNvY2lhbCkuYWRkcmVzcywgRVJSX05PVF9TT0NJQUwpCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50NjQKICAgIGFwcF9wYXJhbXNfZ2V0IEFwcEFkZHJlc3MKICAgIGFzc2VydCAvLyBhcHBsaWNhdGlvbiBleGlzdHMKICAgID09CiAgICBibnogY2FjaGVNZXRhX2FmdGVyX2Fzc2VydEAzCiAgICBieXRlYyA2IC8vICJFUlI6TlNPQyIKICAgIGxvZwogICAgZXJyIC8vIEVSUjpOU09DCgpjYWNoZU1ldGFfYWZ0ZXJfYXNzZXJ0QDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjM3MgogICAgLy8gaWYgKHN1YnNjcmlwdGlvbkluZGV4ICE9PSAwKSB7CiAgICBkaWcgMwogICAgYnogY2FjaGVNZXRhX2FmdGVyX2lmX2Vsc2VANwogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czozNzMKICAgIC8vIGxvZ2dlZEFzc2VydCh0aGlzLmlzU3Vic2NyaWJlZChhZGRyZXNzLCBzdWJzY3JpcHRpb25JbmRleCkuYWN0aXZlLCBFUlJfTk9UX0FfU1VCU0NSSVBUSU9OKQogICAgZGlnIDQKICAgIGRpZyA0CiAgICBjYWxsc3ViIGlzU3Vic2NyaWJlZAogICAgaW50Y18wIC8vIDAKICAgIGdldGJpdAogICAgYm56IGNhY2hlTWV0YV9hZnRlcl9pZl9lbHNlQDcKICAgIHB1c2hieXRlcyAiRVJSOk5TVUIiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6TlNVQgoKY2FjaGVNZXRhX2FmdGVyX2lmX2Vsc2VANzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6Mzc2CiAgICAvLyBsZXQgbmZkVGltZUNoYW5nZWQ6IHVpbnQ2NCA9IDAKICAgIGludGNfMCAvLyAwCiAgICBidXJ5IDcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6Mzc3CiAgICAvLyBsZXQgbmZkSW1wYWN0OiB1aW50NjQgPSAwCiAgICBpbnRjXzAgLy8gMAogICAgYnVyeSA4CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjM3OAogICAgLy8gaWYgKE5GREFwcElEICE9PSAwKSB7CiAgICBkaWcgMQogICAgYnogY2FjaGVNZXRhX2FmdGVyX2lmX2Vsc2VAMTMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NzUKICAgIC8vIGNvbnN0IFtuZmROYW1lQnl0ZXNdID0gb3AuQXBwR2xvYmFsLmdldEV4Qnl0ZXMoTkZEQXBwLCBCeXRlcyhORkRHbG9iYWxTdGF0ZUtleXNOYW1lKSkKICAgIGRpZyAxCiAgICBwdXNoYnl0ZXMgImkubmFtZSIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NzctODAKICAgIC8vIHJldHVybiBhYmlDYWxsPHR5cGVvZiBORkRSZWdpc3RyeS5wcm90b3R5cGUuaXNWYWxpZE5mZEFwcElkPih7CiAgICAvLyAgIGFwcElkOiBnZXRPdGhlckFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkubmZkUmVnaXN0cnksCiAgICAvLyAgIGFyZ3M6IFtTdHJpbmcobmZkTmFtZUJ5dGVzKSwgTkZEQXBwLmlkXQogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NzkKICAgIC8vIGFyZ3M6IFtTdHJpbmcobmZkTmFtZUJ5dGVzKSwgTkZEQXBwLmlkXQogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NzgKICAgIC8vIGFwcElkOiBnZXRPdGhlckFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkubmZkUmVnaXN0cnksCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MjcKICAgIC8vIGFraXRhREFPID0gR2xvYmFsU3RhdGU8QXBwbGljYXRpb24+KHsga2V5OiBHbG9iYWxTdGF0ZUtleUFraXRhREFPIH0pCiAgICBieXRlY18wIC8vICJha2l0YV9kYW8iCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjc4CiAgICAvLyBhcHBJZDogZ2V0T3RoZXJBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLm5mZFJlZ2lzdHJ5LAogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9mdW5jdGlvbnMudHM6NTkKICAgIC8vIGNvbnN0IFtvdGhlckFwcExpc3RCeXRlc10gPSBvcC5BcHBHbG9iYWwuZ2V0RXhCeXRlcyhha2l0YURBTywgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNPdGhlckFwcExpc3QpKQogICAgYnl0ZWMgMTEgLy8gIm9hbCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NzgKICAgIC8vIGFwcElkOiBnZXRPdGhlckFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkubmZkUmVnaXN0cnksCiAgICBpbnRjXzIgLy8gOAogICAgZXh0cmFjdF91aW50NjQKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25JRAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo3Ny04MAogICAgLy8gcmV0dXJuIGFiaUNhbGw8dHlwZW9mIE5GRFJlZ2lzdHJ5LnByb3RvdHlwZS5pc1ZhbGlkTmZkQXBwSWQ+KHsKICAgIC8vICAgYXBwSWQ6IGdldE90aGVyQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5uZmRSZWdpc3RyeSwKICAgIC8vICAgYXJnczogW1N0cmluZyhuZmROYW1lQnl0ZXMpLCBORkRBcHAuaWRdCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgcHVzaGJ5dGVzIDB4NGJlMjJmYzYgLy8gbWV0aG9kICJpc1ZhbGlkTmZkQXBwSWQoc3RyaW5nLHVpbnQ2NClib29sIgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBkaWcgMgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGludGNfMyAvLyBhcHBsCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIGl0eG5fc3VibWl0CiAgICBpdHhuIExhc3RMb2cKICAgIGR1cAogICAgZXh0cmFjdCA0IDAKICAgIHN3YXAKICAgIGV4dHJhY3QgMCA0CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgID09CiAgICBhc3NlcnQgLy8gQnl0ZXMgaGFzIHZhbGlkIHByZWZpeAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBib29sCiAgICBpbnRjXzAgLy8gMAogICAgZ2V0Yml0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjM4MAogICAgLy8gbG9nZ2VkQXNzZXJ0KHRoaXMuaXNORkQobmZkQXBwKSwgRVJSX05PVF9BTl9ORkQpCiAgICBibnogY2FjaGVNZXRhX2FmdGVyX2Fzc2VydEAxMAogICAgcHVzaGJ5dGVzICJFUlI6Tk5GRCIKICAgIGxvZwogICAgZXJyIC8vIEVSUjpOTkZECgpjYWNoZU1ldGFfYWZ0ZXJfYXNzZXJ0QDEwOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo4NS04OAogICAgLy8gY29uc3QgY2FBbGdvRGF0YSA9IGFiaUNhbGw8dHlwZW9mIE5GRC5wcm90b3R5cGUucmVhZEZpZWxkPih7CiAgICAvLyAgIGFwcElkOiBORkRBcHAuaWQsCiAgICAvLyAgIGFyZ3M6IFtCeXRlcyhORkRNZXRhS2V5VmVyaWZpZWRBZGRyZXNzZXMpXQogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIGl0eG5fYmVnaW4KICAgIGRpZyAxCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIGJ5dGVjIDEyIC8vIG1ldGhvZCAicmVhZEZpZWxkKGJ5dGVbXSlieXRlW10iCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo4NwogICAgLy8gYXJnczogW0J5dGVzKE5GRE1ldGFLZXlWZXJpZmllZEFkZHJlc3NlcyldCiAgICBwdXNoYnl0ZXMgMHgwMDBkNzYyZTYzNjE0MTZjNjc2ZjJlMzAyZTYxNzMKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjg1LTg4CiAgICAvLyBjb25zdCBjYUFsZ29EYXRhID0gYWJpQ2FsbDx0eXBlb2YgTkZELnByb3RvdHlwZS5yZWFkRmllbGQ+KHsKICAgIC8vICAgYXBwSWQ6IE5GREFwcC5pZCwKICAgIC8vICAgYXJnczogW0J5dGVzKE5GRE1ldGFLZXlWZXJpZmllZEFkZHJlc3NlcyldCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgaW50Y18zIC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGl0eG4gTGFzdExvZwogICAgZHVwCiAgICBleHRyYWN0IDQgMAogICAgZGlnIDEKICAgIGV4dHJhY3QgMCA0CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgID09CiAgICBhc3NlcnQgLy8gQnl0ZXMgaGFzIHZhbGlkIHByZWZpeAogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAyCiAgICArCiAgICBzd2FwCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGJ5dGVzCiAgICBleHRyYWN0IDYgMAogICAgYnVyeSAxNAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo5MAogICAgLy8gZm9yIChsZXQgaTogdWludDY0ID0gMDsgaSA8IGNhQWxnb0RhdGEubGVuZ3RoOyBpICs9IDMyKSB7CiAgICBpbnRjXzAgLy8gMAogICAgYnVyeSA5CgpjYWNoZU1ldGFfd2hpbGVfdG9wQDQwOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo5MAogICAgLy8gZm9yIChsZXQgaTogdWludDY0ID0gMDsgaSA8IGNhQWxnb0RhdGEubGVuZ3RoOyBpICs9IDMyKSB7CiAgICBkaWcgMTMKICAgIGxlbgogICAgZHVwCiAgICBidXJ5IDcKICAgIGRpZyA5CiAgICA+CiAgICBieiBjYWNoZU1ldGFfYWZ0ZXJfd2hpbGVANDUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OTEKICAgIC8vIGNvbnN0IGFkZHIgPSBjYUFsZ29EYXRhLnNsaWNlKGksIGkgKyAzMikKICAgIGRpZyA4CiAgICBkdXAKICAgIGRpZyA3CiAgICBkdXAKICAgIGNvdmVyIDMKICAgID49CiAgICBkaWcgMQogICAgZGlnIDMKICAgIHVuY292ZXIgMgogICAgc2VsZWN0CiAgICBzd2FwCiAgICBwdXNoaW50IDMyCiAgICArCiAgICBkdXAKICAgIGJ1cnkgMTIKICAgIGR1cAogICAgZGlnIDMKICAgID49CiAgICBzd2FwCiAgICB1bmNvdmVyIDMKICAgIHVuY292ZXIgMgogICAgc2VsZWN0CiAgICBkdXAKICAgIGRpZyAyCiAgICA8CiAgICBkaWcgMgogICAgc3dhcAogICAgc2VsZWN0CiAgICBkaWcgMTUKICAgIGNvdmVyIDIKICAgIHN1YnN0cmluZzMKICAgIGR1cAogICAgYnVyeSAxNgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo5MgogICAgLy8gaWYgKGFkZHIgIT09IEdsb2JhbC56ZXJvQWRkcmVzcy5ieXRlcyAmJiBhZGRyID09PSBhY2NvdW50LmJ5dGVzKSB7CiAgICBnbG9iYWwgWmVyb0FkZHJlc3MKICAgICE9CiAgICBieiBjYWNoZU1ldGFfd2hpbGVfdG9wQDQwCiAgICBkaWcgMTQKICAgIGRpZyA1CiAgICA9PQogICAgYnogY2FjaGVNZXRhX3doaWxlX3RvcEA0MAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo5MwogICAgLy8gcmV0dXJuIHRydWUKICAgIGludGNfMSAvLyAxCgpjYWNoZU1ldGFfYWZ0ZXJfaW5saW5lZF9zbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjpBa2l0YVNvY2lhbEltcGFjdC5hZGRyZXNzVmVyaWZpZWRPbk5GREA0NjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzgxCiAgICAvLyBsb2dnZWRBc3NlcnQodGhpcy5hZGRyZXNzVmVyaWZpZWRPbk5GRChhZGRyZXNzLCBuZmRBcHApLCBFUlJfVVNFUl9ET0VTX05PVF9PV05fTkZEKQogICAgYm56IGNhY2hlTWV0YV9hZnRlcl9hc3NlcnRAMTIKICAgIHB1c2hieXRlcyAiRVJSOk5PTkYiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6Tk9ORgoKY2FjaGVNZXRhX2FmdGVyX2Fzc2VydEAxMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzgyCiAgICAvLyBjb25zdCBbdGltZUNoYW5nZWRCeXRlc10gPSBvcC5BcHBHbG9iYWwuZ2V0RXhCeXRlcyhuZmRBcHAsIEJ5dGVzKE5GREdsb2JhbFN0YXRlS2V5c1RpbWVDaGFuZ2VkKSkKICAgIGRpZyAxCiAgICBkdXAKICAgIGJ5dGVjIDEzIC8vICJpLnRpbWVDaGFuZ2VkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czozODMKICAgIC8vIG5mZFRpbWVDaGFuZ2VkID0gYnRvaSh0aW1lQ2hhbmdlZEJ5dGVzKQogICAgYnRvaQogICAgYnVyeSA4CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjI5NgogICAgLy8gbGV0IG5mZEltcGFjdDogdWludDY0ID0gNTAKICAgIHB1c2hpbnQgNTAKICAgIGJ1cnkgOQogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyOTgKICAgIC8vIGNvbnN0IFtwYXJlbnRBcHBJREJ5dGVzLCBwYXJlbnRBcHBJREJ5dGVzRXhpc3RdID0gb3AuQXBwR2xvYmFsLmdldEV4Qnl0ZXMoTkZEQXBwLCBCeXRlcyhORkRHbG9iYWxTdGF0ZUtleXNQYXJlbnRBcHBJRCkpCiAgICBwdXNoYnl0ZXMgImkucGFyZW50QXBwSUQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgc3dhcAogICAgYnVyeSAxMwogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czozMDAKICAgIC8vIGlmIChwYXJlbnRBcHBJREJ5dGVzRXhpc3QgJiYgYnRvaShwYXJlbnRBcHBJREJ5dGVzKSA9PT0gZ2V0T3RoZXJBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLmFraXRhTmZkKSB7CiAgICBieiBjYWNoZU1ldGFfYWZ0ZXJfaWZfZWxzZUAyNwogICAgZGlnIDExCiAgICBidG9pCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MjcKICAgIC8vIGFraXRhREFPID0gR2xvYmFsU3RhdGU8QXBwbGljYXRpb24+KHsga2V5OiBHbG9iYWxTdGF0ZUtleUFraXRhREFPIH0pCiAgICBieXRlY18wIC8vICJha2l0YV9kYW8iCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjMwMAogICAgLy8gaWYgKHBhcmVudEFwcElEQnl0ZXNFeGlzdCAmJiBidG9pKHBhcmVudEFwcElEQnl0ZXMpID09PSBnZXRPdGhlckFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuYWtpdGFOZmQpIHsKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvZnVuY3Rpb25zLnRzOjU5CiAgICAvLyBjb25zdCBbb3RoZXJBcHBMaXN0Qnl0ZXNdID0gb3AuQXBwR2xvYmFsLmdldEV4Qnl0ZXMoYWtpdGFEQU8sIEJ5dGVzKEFraXRhREFPR2xvYmFsU3RhdGVLZXlzT3RoZXJBcHBMaXN0KSkKICAgIGJ5dGVjIDExIC8vICJvYWwiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjMwMAogICAgLy8gaWYgKHBhcmVudEFwcElEQnl0ZXNFeGlzdCAmJiBidG9pKHBhcmVudEFwcElEQnl0ZXMpID09PSBnZXRPdGhlckFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuYWtpdGFOZmQpIHsKICAgIHB1c2hpbnQgNDAKICAgIGV4dHJhY3RfdWludDY0CiAgICA9PQogICAgYnogY2FjaGVNZXRhX2FmdGVyX2lmX2Vsc2VAMjcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzAxCiAgICAvLyBuZmRJbXBhY3QgKz0gNTAKICAgIHB1c2hpbnQgMTAwCiAgICBidXJ5IDgKCmNhY2hlTWV0YV9hZnRlcl9pZl9lbHNlQDI3OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czozMDQKICAgIC8vIGNvbnN0IHZlcnNpb24gPSBvcC5BcHBHbG9iYWwuZ2V0RXhCeXRlcyhORkRBcHAsIEJ5dGVzKE5GREdsb2JhbFN0YXRlS2V5c1ZlcnNpb24pKVswXS5zbGljZSgwLCAyKQogICAgZGlnIDEKICAgIHB1c2hieXRlcyAiaS52ZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgcG9wCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDAKICAgIGRpZyAxCiAgICA+PQogICAgaW50Y18wIC8vIDAKICAgIGRpZyAyCiAgICB1bmNvdmVyIDIKICAgIHNlbGVjdAogICAgcHVzaGludCAyCiAgICBkaWcgMgogICAgPj0KICAgIHB1c2hpbnQgMgogICAgdW5jb3ZlciAzCiAgICB1bmNvdmVyIDIKICAgIHNlbGVjdAogICAgc3Vic3RyaW5nMwogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czozMDYKICAgIC8vIGlmICh2ZXJzaW9uICE9PSBCeXRlcygnMy4nKSkgewogICAgcHVzaGJ5dGVzICIzLiIKICAgICE9CiAgICBibnogY2FjaGVNZXRhX2FmdGVyX2lmX2Vsc2VAMTMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6Mjg2CiAgICAvLyBjb25zdCBkb21haW4gPSB0aGlzLm5mZFJlYWRGaWVsZChORkRBcHAsIE5GRE1ldGFLZXlWZXJpZmllZERvbWFpbikKICAgIGRpZyAxCiAgICBkdXAKICAgIHB1c2hieXRlcyAidi5kb21haW4iCiAgICBjYWxsc3ViIG5mZFJlYWRGaWVsZAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyODcKICAgIC8vIGNvbnN0IHR3aXR0ZXIgPSB0aGlzLm5mZFJlYWRGaWVsZChORkRBcHAsIE5GRE1ldGFLZXlWZXJpZmllZFR3aXR0ZXIpCiAgICBkaWcgMQogICAgcHVzaGJ5dGVzICJ2LnR3aXR0ZXIiCiAgICBjYWxsc3ViIG5mZFJlYWRGaWVsZAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyODgKICAgIC8vIGNvbnN0IGRpc2NvcmQgPSB0aGlzLm5mZFJlYWRGaWVsZChORkRBcHAsIE5GRE1ldGFLZXlWZXJpZmllZERpc2NvcmQpCiAgICBkaWcgMgogICAgcHVzaGJ5dGVzICJ2LmRpc2NvcmQiCiAgICBjYWxsc3ViIG5mZFJlYWRGaWVsZAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyODkKICAgIC8vIGNvbnN0IHRlbGVncmFtID0gdGhpcy5uZmRSZWFkRmllbGQoTkZEQXBwLCBORkRNZXRhS2V5VmVyaWZpZWRUZWxlZ3JhbSkKICAgIHVuY292ZXIgMwogICAgcHVzaGJ5dGVzICJ2LnRlbGVncmFtIgogICAgY2FsbHN1YiBuZmRSZWFkRmllbGQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjkxCiAgICAvLyByZXR1cm4geyBkb21haW4sIHR3aXR0ZXIsIGRpc2NvcmQsIHRlbGVncmFtIH0KICAgIGRpZyAzCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICB1bmNvdmVyIDQKICAgIGNvbmNhdAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICArCiAgICBkaWcgNAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgdW5jb3ZlciA1CiAgICBjb25jYXQKICAgIGRpZyAxCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgcHVzaGJ5dGVzIDB4MDAwOAogICAgc3dhcAogICAgY29uY2F0CiAgICBkaWcgMQogICAgbGVuCiAgICB1bmNvdmVyIDMKICAgICsKICAgIGRpZyA1CiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICB1bmNvdmVyIDYKICAgIGNvbmNhdAogICAgZGlnIDEKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICB1bmNvdmVyIDMKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZGlnIDEKICAgIGxlbgogICAgdW5jb3ZlciAzCiAgICArCiAgICBkaWcgNQogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgdW5jb3ZlciA2CiAgICBjb25jYXQKICAgIHN3YXAKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICB1bmNvdmVyIDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgdW5jb3ZlciA0CiAgICBjb25jYXQKICAgIHVuY292ZXIgMwogICAgY29uY2F0CiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjMxMAogICAgLy8gY29uc3QgeyBkb21haW4sIHR3aXR0ZXIsIGRpc2NvcmQsIHRlbGVncmFtIH0gPSB0aGlzLmdldE5GRFNvY2lhbEZpZWxkcyhORkRBcHApCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgZGlnIDEKICAgIHB1c2hpbnQgMgogICAgZXh0cmFjdF91aW50MTYKICAgIGRpZyAyCiAgICB1bmNvdmVyIDIKICAgIGRpZyAyCiAgICBzdWJzdHJpbmczCiAgICBleHRyYWN0IDIgMAogICAgZGlnIDIKICAgIHB1c2hpbnQgNAogICAgZXh0cmFjdF91aW50MTYKICAgIGRpZyAzCiAgICB1bmNvdmVyIDMKICAgIGRpZyAyCiAgICBzdWJzdHJpbmczCiAgICBleHRyYWN0IDIgMAogICAgYnVyeSAxMwogICAgZGlnIDIKICAgIGludGNfMyAvLyA2CiAgICBleHRyYWN0X3VpbnQxNgogICAgZGlnIDMKICAgIHVuY292ZXIgMgogICAgZGlnIDIKICAgIHN1YnN0cmluZzMKICAgIGV4dHJhY3QgMiAwCiAgICBidXJ5IDE2CiAgICBkaWcgMgogICAgbGVuCiAgICB1bmNvdmVyIDMKICAgIGNvdmVyIDIKICAgIHN1YnN0cmluZzMKICAgIGV4dHJhY3QgMiAwCiAgICBidXJ5IDEyCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjMxMwogICAgLy8gaWYgKGRvbWFpbi5sZW5ndGggPiAwKSB7CiAgICBsZW4KICAgIGJ6IGNhY2hlTWV0YV9hZnRlcl9pZl9lbHNlQDMxCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjMxNAogICAgLy8gbmZkSW1wYWN0ICs9IDEwCiAgICBkaWcgNwogICAgcHVzaGludCAxMAogICAgKwogICAgYnVyeSA4CgpjYWNoZU1ldGFfYWZ0ZXJfaWZfZWxzZUAzMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzE4CiAgICAvLyBpZiAodHdpdHRlci5sZW5ndGggPiAwKSB7CiAgICBkaWcgOQogICAgbGVuCiAgICBieiBjYWNoZU1ldGFfYWZ0ZXJfaWZfZWxzZUAzMwogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czozMTkKICAgIC8vIG5mZEltcGFjdCArPSAyMAogICAgZGlnIDcKICAgIHB1c2hpbnQgMjAKICAgICsKICAgIGJ1cnkgOAoKY2FjaGVNZXRhX2FmdGVyX2lmX2Vsc2VAMzM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjMyMwogICAgLy8gaWYgKGRpc2NvcmQubGVuZ3RoID4gMCkgewogICAgZGlnIDEyCiAgICBsZW4KICAgIGJ6IGNhY2hlTWV0YV9hZnRlcl9pZl9lbHNlQDM1CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjMyNAogICAgLy8gbmZkSW1wYWN0ICs9IDEwCiAgICBkaWcgNwogICAgcHVzaGludCAxMAogICAgKwogICAgYnVyeSA4CgpjYWNoZU1ldGFfYWZ0ZXJfaWZfZWxzZUAzNToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzI4CiAgICAvLyBpZiAodGVsZWdyYW0ubGVuZ3RoID4gMCkgewogICAgZGlnIDEwCiAgICBsZW4KICAgIGJ6IGNhY2hlTWV0YV9hZnRlcl9pZl9lbHNlQDEzCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjMyOQogICAgLy8gbmZkSW1wYWN0ICs9IDEwCiAgICBkaWcgNwogICAgcHVzaGludCAxMAogICAgKwogICAgYnVyeSA4CgpjYWNoZU1ldGFfYWZ0ZXJfaWZfZWxzZUAxMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6Mzg3CiAgICAvLyBpZiAoYWtpdGFBc3NldElEICE9PSAwKSB7CiAgICBkdXAKICAgIGJ6IGNhY2hlTWV0YV9hZnRlcl9pZl9lbHNlQDE5CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjEwMQogICAgLy8gcmV0dXJuIGFraXRhTkZULmNyZWF0b3IgPT09IEFjY291bnQoQWtpdGFORlRDcmVhdG9yQWRkcmVzcykKICAgIGR1cAogICAgYXNzZXRfcGFyYW1zX2dldCBBc3NldENyZWF0b3IKICAgIGFzc2VydCAvLyBhc3NldCBleGlzdHMKICAgIGJ5dGVjIDE0IC8vIGFkZHIgQUtDVFJESzRPV05XSFRQSDRYUEtMTldOTFozMzNWRTM1U0tRNEZHUUszWkpBNEZJSENMVFJHM1BGSQogICAgPT0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6Mzg5CiAgICAvLyBsb2dnZWRBc3NlcnQodGhpcy5pc0FraXRhTkZUKGFraXRhTkZUKSwgRVJSX05PVF9BTl9BS0lUQV9ORlQpCiAgICBibnogY2FjaGVNZXRhX2FmdGVyX2Fzc2VydEAxNgogICAgcHVzaGJ5dGVzICJFUlI6TkFOVCIKICAgIGxvZwogICAgZXJyIC8vIEVSUjpOQU5UCgpjYWNoZU1ldGFfYWZ0ZXJfYXNzZXJ0QDE2OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czozNwogICAgLy8gcmV0dXJuIEFzc2V0SG9sZGluZy5hc3NldEJhbGFuY2UoYWNjb3VudCwgTkZUKVswXSA+IDAKICAgIGRpZyA0CiAgICBkaWcgMQogICAgYXNzZXRfaG9sZGluZ19nZXQgQXNzZXRCYWxhbmNlCiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzkwCiAgICAvLyBsb2dnZWRBc3NlcnQodGhpcy51c2VySG9sZHMoYWRkcmVzcywgYWtpdGFORlQpLCBFUlJfVVNFUl9ET0VTX05PVF9PV05fTkZUKQogICAgYm56IGNhY2hlTWV0YV9hZnRlcl9pZl9lbHNlQDE5CiAgICBwdXNoYnl0ZXMgIkVSUjpOT05UIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOk5PTlQKCmNhY2hlTWV0YV9hZnRlcl9pZl9lbHNlQDE5OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czozOTMtMzk5CiAgICAvLyB0aGlzLm1ldGEoYWRkcmVzcykudmFsdWUgPSB7CiAgICAvLyAgIHN1YnNjcmlwdGlvbkluZGV4LAogICAgLy8gICBORkQ6IE5GREFwcElELAogICAgLy8gICBuZmRUaW1lQ2hhbmdlZCwKICAgIC8vICAgbmZkSW1wYWN0LAogICAgLy8gICBha2l0YU5GVDogYWtpdGFBc3NldElELAogICAgLy8gfQogICAgZGlnIDMKICAgIGl0b2IKICAgIGRpZyAyCiAgICBpdG9iCiAgICBjb25jYXQKICAgIGRpZyA3CiAgICBpdG9iCiAgICBjb25jYXQKICAgIGRpZyA4CiAgICBpdG9iCiAgICBzd2FwCiAgICBkaWcgMQogICAgY29uY2F0CiAgICBkaWcgMgogICAgaXRvYgogICAgY29uY2F0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjIzCiAgICAvLyBtZXRhID0gQm94TWFwPEFjY291bnQsIEltcGFjdE1ldGFWYWx1ZT4oeyBrZXlQcmVmaXg6IEltcGFjdEJveFByZWZpeE1ldGEgfSkKICAgIGJ5dGVjIDcgLy8gIm0iCiAgICBkaWcgNwogICAgY29uY2F0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjM5My0zOTkKICAgIC8vIHRoaXMubWV0YShhZGRyZXNzKS52YWx1ZSA9IHsKICAgIC8vICAgc3Vic2NyaXB0aW9uSW5kZXgsCiAgICAvLyAgIE5GRDogTkZEQXBwSUQsCiAgICAvLyAgIG5mZFRpbWVDaGFuZ2VkLAogICAgLy8gICBuZmRJbXBhY3QsCiAgICAvLyAgIGFraXRhTkZUOiBha2l0YUFzc2V0SUQsCiAgICAvLyB9CiAgICBzd2FwCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjM2OQogICAgLy8gY2FjaGVNZXRhKGFkZHJlc3M6IEFjY291bnQsIHN1YnNjcmlwdGlvbkluZGV4OiB1aW50NjQsIE5GREFwcElEOiB1aW50NjQsIGFraXRhQXNzZXRJRDogdWludDY0KTogdWludDY0IHsKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCmNhY2hlTWV0YV9hZnRlcl93aGlsZUA0NToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OTcKICAgIC8vIHJldHVybiBmYWxzZQogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzgxCiAgICAvLyBsb2dnZWRBc3NlcnQodGhpcy5hZGRyZXNzVmVyaWZpZWRPbk5GRChhZGRyZXNzLCBuZmRBcHApLCBFUlJfVVNFUl9ET0VTX05PVF9PV05fTkZEKQogICAgYiBjYWNoZU1ldGFfYWZ0ZXJfaW5saW5lZF9zbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjpBa2l0YVNvY2lhbEltcGFjdC5hZGRyZXNzVmVyaWZpZWRPbk5GREA0NgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OkFraXRhU29jaWFsSW1wYWN0LnVwZGF0ZVN1YnNjcmlwdGlvblN0YXRlTW9kaWZpZXJbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGVTdWJzY3JpcHRpb25TdGF0ZU1vZGlmaWVyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0MDQKICAgIC8vIHVwZGF0ZVN1YnNjcmlwdGlvblN0YXRlTW9kaWZpZXIocGF5bWVudDogZ3R4bi5QYXltZW50VHhuLCBzdWJzY3JpcHRpb25JbmRleDogdWludDY0LCBuZXdNb2RpZmllcjogdWludDY0KTogdm9pZCB7CiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18xIC8vIDEKICAgIC0KICAgIGR1cAogICAgZ3R4bnMgVHlwZUVudW0KICAgIGludGNfMSAvLyBwYXkKICAgID09CiAgICBhc3NlcnQgLy8gdHJhbnNhY3Rpb24gdHlwZSBpcyBwYXkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDA1CiAgICAvLyBsb2dnZWRBc3NlcnQoVHhuLnNlbmRlciA9PT0gdGhpcy5nZXRBa2l0YURBT1dhbGxldCgpLmFkZHJlc3MsIEVSUl9OT1RfQUtJVEFfREFPKQogICAgdHhuIFNlbmRlcgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MzAKICAgIC8vIGNvbnN0IFt3YWxsZXRJRF0gPSBvcC5BcHBHbG9iYWwuZ2V0RXhVaW50NjQodGhpcy5ha2l0YURBTy52YWx1ZSwgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNXYWxsZXQpKQogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjI3CiAgICAvLyBha2l0YURBTyA9IEdsb2JhbFN0YXRlPEFwcGxpY2F0aW9uPih7IGtleTogR2xvYmFsU3RhdGVLZXlBa2l0YURBTyB9KQogICAgYnl0ZWNfMCAvLyAiYWtpdGFfZGFvIgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MzAKICAgIC8vIGNvbnN0IFt3YWxsZXRJRF0gPSBvcC5BcHBHbG9iYWwuZ2V0RXhVaW50NjQodGhpcy5ha2l0YURBTy52YWx1ZSwgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNXYWxsZXQpKQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIGJ5dGVjIDUgLy8gIndhbGxldCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDA1CiAgICAvLyBsb2dnZWRBc3NlcnQoVHhuLnNlbmRlciA9PT0gdGhpcy5nZXRBa2l0YURBT1dhbGxldCgpLmFkZHJlc3MsIEVSUl9OT1RfQUtJVEFfREFPKQogICAgYXBwX3BhcmFtc19nZXQgQXBwQWRkcmVzcwogICAgYXNzZXJ0IC8vIGFwcGxpY2F0aW9uIGV4aXN0cwogICAgPT0KICAgIGJueiB1cGRhdGVTdWJzY3JpcHRpb25TdGF0ZU1vZGlmaWVyX2FmdGVyX2Fzc2VydEAzCiAgICBieXRlYyA4IC8vICJFUlI6TkRBTyIKICAgIGxvZwogICAgZXJyIC8vIEVSUjpOREFPCgp1cGRhdGVTdWJzY3JpcHRpb25TdGF0ZU1vZGlmaWVyX2FmdGVyX2Fzc2VydEAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0MDcKICAgIC8vIHRoaXMuc3Vic2NyaXB0aW9uU3RhdGVNb2RpZmllcihzdWJzY3JpcHRpb25JbmRleCkudmFsdWUgPSBuZXdNb2RpZmllcgogICAgZGlnIDEKICAgIGl0b2IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjUKICAgIC8vIHN1YnNjcmlwdGlvblN0YXRlTW9kaWZpZXIgPSBCb3hNYXA8dWludDY0LCB1aW50NjQ+KHsga2V5UHJlZml4OiBJbXBhY3RCb3hQcmVmaXhTdWJzY3JpcHRpb25TdGF0ZU1vZGlmaWVyIH0pCiAgICBwdXNoYnl0ZXMgInMiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDA3CiAgICAvLyB0aGlzLnN1YnNjcmlwdGlvblN0YXRlTW9kaWZpZXIoc3Vic2NyaXB0aW9uSW5kZXgpLnZhbHVlID0gbmV3TW9kaWZpZXIKICAgIGRpZyAxCiAgICBpdG9iCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQxMC00MTYKICAgIC8vIG1hdGNoKAogICAgLy8gICBwYXltZW50LAogICAgLy8gICB7CiAgICAvLyAgICAgcmVjZWl2ZXI6IEdsb2JhbC5jdXJyZW50QXBwbGljYXRpb25BZGRyZXNzLAogICAgLy8gICAgIGFtb3VudDogdGhpcy5tYnIoKS5zdWJzY3JpcHRpb25TdGF0ZU1vZGlmaWVyCiAgICAvLyAgIH0KICAgIC8vICksCiAgICBkaWcgMgogICAgZHVwCiAgICBndHhucyBSZWNlaXZlcgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0MTMKICAgIC8vIHJlY2VpdmVyOiBHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcywKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQxMC00MTYKICAgIC8vIG1hdGNoKAogICAgLy8gICBwYXltZW50LAogICAgLy8gICB7CiAgICAvLyAgICAgcmVjZWl2ZXI6IEdsb2JhbC5jdXJyZW50QXBwbGljYXRpb25BZGRyZXNzLAogICAgLy8gICAgIGFtb3VudDogdGhpcy5tYnIoKS5zdWJzY3JpcHRpb25TdGF0ZU1vZGlmaWVyCiAgICAvLyAgIH0KICAgIC8vICksCiAgICA9PQogICAgc3dhcAogICAgZ3R4bnMgQW1vdW50CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQxNAogICAgLy8gYW1vdW50OiB0aGlzLm1icigpLnN1YnNjcmlwdGlvblN0YXRlTW9kaWZpZXIKICAgIHB1c2hpbnQgOTMwMAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0MTAtNDE2CiAgICAvLyBtYXRjaCgKICAgIC8vICAgcGF5bWVudCwKICAgIC8vICAgewogICAgLy8gICAgIHJlY2VpdmVyOiBHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcywKICAgIC8vICAgICBhbW91bnQ6IHRoaXMubWJyKCkuc3Vic2NyaXB0aW9uU3RhdGVNb2RpZmllcgogICAgLy8gICB9CiAgICAvLyApLAogICAgPT0KICAgICYmCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQwOS00MTgKICAgIC8vIGxvZ2dlZEFzc2VydCgKICAgIC8vICAgbWF0Y2goCiAgICAvLyAgICAgcGF5bWVudCwKICAgIC8vICAgICB7CiAgICAvLyAgICAgICByZWNlaXZlcjogR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MsCiAgICAvLyAgICAgICBhbW91bnQ6IHRoaXMubWJyKCkuc3Vic2NyaXB0aW9uU3RhdGVNb2RpZmllcgogICAgLy8gICAgIH0KICAgIC8vICAgKSwKICAgIC8vICAgRVJSX0lOVkFMSURfUEFZTUVOVAogICAgLy8gKQogICAgYm56IHVwZGF0ZVN1YnNjcmlwdGlvblN0YXRlTW9kaWZpZXJfYWZ0ZXJfYXNzZXJ0QDUKICAgIGJ5dGVjIDkgLy8gIkVSUjpJUEFZIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOklQQVkKCnVwZGF0ZVN1YnNjcmlwdGlvblN0YXRlTW9kaWZpZXJfYWZ0ZXJfYXNzZXJ0QDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQwNAogICAgLy8gdXBkYXRlU3Vic2NyaXB0aW9uU3RhdGVNb2RpZmllcihwYXltZW50OiBndHhuLlBheW1lbnRUeG4sIHN1YnNjcmlwdGlvbkluZGV4OiB1aW50NjQsIG5ld01vZGlmaWVyOiB1aW50NjQpOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjpBa2l0YVNvY2lhbEltcGFjdC5jb21taXRTdGFraW5nSW1wYWN0W3JvdXRpbmddKCkgLT4gdm9pZDoKY29tbWl0U3Rha2luZ0ltcGFjdDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDIyCiAgICAvLyBjb21taXRTdGFraW5nSW1wYWN0KHBheW1lbnQ6IGd0eG4uUGF5bWVudFR4biwgYW1vdW50OiB1aW50NjQsIGluaGVyaXRSb290OiBib29sZWFuKTogdm9pZCB7CiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18xIC8vIDEKICAgIC0KICAgIGR1cG4gMgogICAgZ3R4bnMgVHlwZUVudW0KICAgIGludGNfMSAvLyBwYXkKICAgID09CiAgICBhc3NlcnQgLy8gdHJhbnNhY3Rpb24gdHlwZSBpcyBwYXkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgY292ZXIgMgogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgY292ZXIgMgogICAgbGVuCiAgICBpbnRjXzEgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5ib29sCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQyMwogICAgLy8gY29uc3Qgc3Rha2luZyA9IEFwcGxpY2F0aW9uKGdldEFraXRhQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zdGFraW5nKQogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjI3CiAgICAvLyBha2l0YURBTyA9IEdsb2JhbFN0YXRlPEFwcGxpY2F0aW9uPih7IGtleTogR2xvYmFsU3RhdGVLZXlBa2l0YURBTyB9KQogICAgYnl0ZWNfMCAvLyAiYWtpdGFfZGFvIgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0MjMKICAgIC8vIGNvbnN0IHN0YWtpbmcgPSBBcHBsaWNhdGlvbihnZXRBa2l0YUFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc3Rha2luZykKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvZnVuY3Rpb25zLnRzOjQ0CiAgICAvLyBjb25zdCBbYXBwTGlzdEJ5dGVzXSA9IG9wLkFwcEdsb2JhbC5nZXRFeEJ5dGVzKGFraXRhREFPLCBCeXRlcyhBa2l0YURBT0dsb2JhbFN0YXRlS2V5c0FraXRhQXBwTGlzdCkpCiAgICBkdXAKICAgIGJ5dGVjXzIgLy8gImFhbCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDIzCiAgICAvLyBjb25zdCBzdGFraW5nID0gQXBwbGljYXRpb24oZ2V0QWtpdGFBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnN0YWtpbmcpCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50NjQKICAgIGR1cAogICAgY292ZXIgMgogICAgY292ZXIgMwogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Z1bmN0aW9ucy50czo5OAogICAgLy8gY29uc3QgYWtpdGFBc3NldHNCeXRlcyA9IG9wLkFwcEdsb2JhbC5nZXRFeEJ5dGVzKGFraXRhREFPLCBCeXRlcyhBa2l0YURBT0dsb2JhbFN0YXRlS2V5c0FraXRhQXNzZXRzKSlbMF0KICAgIGJ5dGVjXzMgLy8gImFraXRhX2Fzc2V0cyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDI0CiAgICAvLyBjb25zdCBha3RhID0gZ2V0QWtpdGFBc3NldHModGhpcy5ha2l0YURBTy52YWx1ZSkuYWt0YQogICAgZXh0cmFjdCAwIDgKICAgIGR1cAogICAgY292ZXIgMwogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0MjUtNDI4CiAgICAvLyBjb25zdCBjb3N0ID0gYWJpQ2FsbDx0eXBlb2YgU3Rha2luZy5wcm90b3R5cGUuYXBwU3Rha2VDb3N0Pih7CiAgICAvLyAgIGFwcElkOiBzdGFraW5nLAogICAgLy8gICBhcmdzOiBbVHhuLnNlbmRlciwgYWt0YV0sCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgaXR4bl9iZWdpbgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0MjcKICAgIC8vIGFyZ3M6IFtUeG4uc2VuZGVyLCBha3RhXSwKICAgIHR4biBTZW5kZXIKICAgIHVuY292ZXIgMgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQyNS00MjgKICAgIC8vIGNvbnN0IGNvc3QgPSBhYmlDYWxsPHR5cGVvZiBTdGFraW5nLnByb3RvdHlwZS5hcHBTdGFrZUNvc3Q+KHsKICAgIC8vICAgYXBwSWQ6IHN0YWtpbmcsCiAgICAvLyAgIGFyZ3M6IFtUeG4uc2VuZGVyLCBha3RhXSwKICAgIC8vIH0pLnJldHVyblZhbHVlCiAgICBieXRlYyAxNSAvLyBtZXRob2QgImFwcFN0YWtlQ29zdChhZGRyZXNzLHVpbnQ2NCl1aW50NjQiCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpbnRjXzMgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBMYXN0TG9nCiAgICBkdXAKICAgIGV4dHJhY3QgNCAwCiAgICBzd2FwCiAgICBleHRyYWN0IDAgNAogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICA9PQogICAgYXNzZXJ0IC8vIEJ5dGVzIGhhcyB2YWxpZCBwcmVmaXgKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgdWludDY0CiAgICBidG9pCiAgICBzd2FwCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQzMAogICAgLy8gbG9nZ2VkQXNzZXJ0KHBheW1lbnQucmVjZWl2ZXIgPT09IEdsb2JhbC5jdXJyZW50QXBwbGljYXRpb25BZGRyZXNzLCBFUlJfSU5WQUxJRF9QQVlNRU5UKQogICAgZ3R4bnMgUmVjZWl2ZXIKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICA9PQogICAgYm56IGNvbW1pdFN0YWtpbmdJbXBhY3RfYWZ0ZXJfYXNzZXJ0QDQKICAgIGJ5dGVjIDkgLy8gIkVSUjpJUEFZIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOklQQVkKCmNvbW1pdFN0YWtpbmdJbXBhY3RfYWZ0ZXJfYXNzZXJ0QDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQzMQogICAgLy8gbG9nZ2VkQXNzZXJ0KHBheW1lbnQuYW1vdW50ID09PSBjb3N0LCBFUlJfSU5WQUxJRF9QQVlNRU5UKQogICAgZGlnIDUKICAgIGd0eG5zIEFtb3VudAogICAgZGlnIDEKICAgID09CiAgICBibnogY29tbWl0U3Rha2luZ0ltcGFjdF9hZnRlcl9hc3NlcnRANgogICAgYnl0ZWMgOSAvLyAiRVJSOklQQVkiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6SVBBWQoKY29tbWl0U3Rha2luZ0ltcGFjdF9hZnRlcl9hc3NlcnRANjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDMzLTQ0MgogICAgLy8gYWJpQ2FsbDx0eXBlb2YgU3Rha2luZy5wcm90b3R5cGUuY29tbWl0QXBwU29mdFN0YWtlPih7CiAgICAvLyAgIGFwcElkOiBzdGFraW5nLAogICAgLy8gICBhcmdzOiBbCiAgICAvLyAgICAgaXR4bi5wYXltZW50KHsgcmVjZWl2ZXI6IHN0YWtpbmcuYWRkcmVzcywgYW1vdW50OiBjb3N0IH0pLAogICAgLy8gICAgIFR4bi5zZW5kZXIsCiAgICAvLyAgICAgYWt0YSwKICAgIC8vICAgICBhbW91bnQsCiAgICAvLyAgICAgaW5oZXJpdFJvb3QsCiAgICAvLyAgIF0sCiAgICAvLyB9KQogICAgaXR4bl9iZWdpbgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0MzYKICAgIC8vIGl0eG4ucGF5bWVudCh7IHJlY2VpdmVyOiBzdGFraW5nLmFkZHJlc3MsIGFtb3VudDogY29zdCB9KSwKICAgIGRpZyAyCiAgICBkdXAKICAgIGFwcF9wYXJhbXNfZ2V0IEFwcEFkZHJlc3MKICAgIGFzc2VydCAvLyBhcHBsaWNhdGlvbiBleGlzdHMKICAgIGRpZyAyCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgaW50Y18xIC8vIDEKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0MzMtNDQyCiAgICAvLyBhYmlDYWxsPHR5cGVvZiBTdGFraW5nLnByb3RvdHlwZS5jb21taXRBcHBTb2Z0U3Rha2U+KHsKICAgIC8vICAgYXBwSWQ6IHN0YWtpbmcsCiAgICAvLyAgIGFyZ3M6IFsKICAgIC8vICAgICBpdHhuLnBheW1lbnQoeyByZWNlaXZlcjogc3Rha2luZy5hZGRyZXNzLCBhbW91bnQ6IGNvc3QgfSksCiAgICAvLyAgICAgVHhuLnNlbmRlciwKICAgIC8vICAgICBha3RhLAogICAgLy8gICAgIGFtb3VudCwKICAgIC8vICAgICBpbmhlcml0Um9vdCwKICAgIC8vICAgXSwKICAgIC8vIH0pCiAgICBpdHhuX25leHQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDM3CiAgICAvLyBUeG4uc2VuZGVyLAogICAgdHhuIFNlbmRlcgogICAgc3dhcAogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQzMy00NDIKICAgIC8vIGFiaUNhbGw8dHlwZW9mIFN0YWtpbmcucHJvdG90eXBlLmNvbW1pdEFwcFNvZnRTdGFrZT4oewogICAgLy8gICBhcHBJZDogc3Rha2luZywKICAgIC8vICAgYXJnczogWwogICAgLy8gICAgIGl0eG4ucGF5bWVudCh7IHJlY2VpdmVyOiBzdGFraW5nLmFkZHJlc3MsIGFtb3VudDogY29zdCB9KSwKICAgIC8vICAgICBUeG4uc2VuZGVyLAogICAgLy8gICAgIGFrdGEsCiAgICAvLyAgICAgYW1vdW50LAogICAgLy8gICAgIGluaGVyaXRSb290LAogICAgLy8gICBdLAogICAgLy8gfSkKICAgIHB1c2hieXRlcyAweDBkMDM3Yzg5IC8vIG1ldGhvZCAiY29tbWl0QXBwU29mdFN0YWtlKHBheSxhZGRyZXNzLHVpbnQ2NCx1aW50NjQsYm9vbCl2b2lkIgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBkaWcgMQogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGRpZyA0CiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgZGlnIDMKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpbnRjXzMgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0MjIKICAgIC8vIGNvbW1pdFN0YWtpbmdJbXBhY3QocGF5bWVudDogZ3R4bi5QYXltZW50VHhuLCBhbW91bnQ6IHVpbnQ2NCwgaW5oZXJpdFJvb3Q6IGJvb2xlYW4pOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjpBa2l0YVNvY2lhbEltcGFjdC5jaGVja3BvaW50U3Rha2luZ0ltcGFjdFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNoZWNrcG9pbnRTdGFraW5nSW1wYWN0OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0NDYKICAgIC8vIGNoZWNrcG9pbnRTdGFraW5nSW1wYWN0KGFkZHJlc3M6IEFjY291bnQpOiBTdGFrZUNoZWNrIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDQ3CiAgICAvLyBjb25zdCBzdGFraW5nID0gZ2V0QWtpdGFBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnN0YWtpbmcKICAgIGludGNfMCAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvYmFzZS1jb250cmFjdHMvYmFzZS50czoyNwogICAgLy8gYWtpdGFEQU8gPSBHbG9iYWxTdGF0ZTxBcHBsaWNhdGlvbj4oeyBrZXk6IEdsb2JhbFN0YXRlS2V5QWtpdGFEQU8gfSkKICAgIGJ5dGVjXzAgLy8gImFraXRhX2RhbyIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDQ3CiAgICAvLyBjb25zdCBzdGFraW5nID0gZ2V0QWtpdGFBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnN0YWtpbmcKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvZnVuY3Rpb25zLnRzOjQ0CiAgICAvLyBjb25zdCBbYXBwTGlzdEJ5dGVzXSA9IG9wLkFwcEdsb2JhbC5nZXRFeEJ5dGVzKGFraXRhREFPLCBCeXRlcyhBa2l0YURBT0dsb2JhbFN0YXRlS2V5c0FraXRhQXBwTGlzdCkpCiAgICBkdXAKICAgIGJ5dGVjXzIgLy8gImFhbCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDQ3CiAgICAvLyBjb25zdCBzdGFraW5nID0gZ2V0QWtpdGFBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnN0YWtpbmcKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQ2NAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Z1bmN0aW9ucy50czo5OAogICAgLy8gY29uc3QgYWtpdGFBc3NldHNCeXRlcyA9IG9wLkFwcEdsb2JhbC5nZXRFeEJ5dGVzKGFraXRhREFPLCBCeXRlcyhBa2l0YURBT0dsb2JhbFN0YXRlS2V5c0FraXRhQXNzZXRzKSlbMF0KICAgIHN3YXAKICAgIGJ5dGVjXzMgLy8gImFraXRhX2Fzc2V0cyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDQ4CiAgICAvLyBjb25zdCBha3RhID0gZ2V0QWtpdGFBc3NldHModGhpcy5ha2l0YURBTy52YWx1ZSkuYWt0YQogICAgZXh0cmFjdCAwIDgKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDQ5LTQ1MgogICAgLy8gcmV0dXJuIGFiaUNhbGw8dHlwZW9mIFN0YWtpbmcucHJvdG90eXBlLmNoZWNrcG9pbnRBcHBTb2Z0U3Rha2U+KHsKICAgIC8vICAgYXBwSWQ6IHN0YWtpbmcsCiAgICAvLyAgIGFyZ3M6IFtHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uSWQuaWQsIGFkZHJlc3MsIGFrdGFdLAogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDUxCiAgICAvLyBhcmdzOiBbR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbklkLmlkLCBhZGRyZXNzLCBha3RhXSwKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25JRAogICAgaXRvYgogICAgdW5jb3ZlciAyCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDQ5LTQ1MgogICAgLy8gcmV0dXJuIGFiaUNhbGw8dHlwZW9mIFN0YWtpbmcucHJvdG90eXBlLmNoZWNrcG9pbnRBcHBTb2Z0U3Rha2U+KHsKICAgIC8vICAgYXBwSWQ6IHN0YWtpbmcsCiAgICAvLyAgIGFyZ3M6IFtHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uSWQuaWQsIGFkZHJlc3MsIGFrdGFdLAogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIHB1c2hieXRlcyAweDViZmRlODAyIC8vIG1ldGhvZCAiY2hlY2twb2ludEFwcFNvZnRTdGFrZSh1aW50NjQsYWRkcmVzcyx1aW50NjQpKGJvb2wsdWludDY0KSIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgc3dhcAogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpbnRjXzMgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBMYXN0TG9nCiAgICBkdXAKICAgIGV4dHJhY3QgNCAwCiAgICBzd2FwCiAgICBleHRyYWN0IDAgNAogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICA9PQogICAgYXNzZXJ0IC8vIEJ5dGVzIGhhcyB2YWxpZCBwcmVmaXgKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDkKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIHNtYXJ0X2NvbnRyYWN0cy9zdGFraW5nL3R5cGVzLnRzOjpTdGFrZUNoZWNrCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ0NgogICAgLy8gY2hlY2twb2ludFN0YWtpbmdJbXBhY3QoYWRkcmVzczogQWNjb3VudCk6IFN0YWtlQ2hlY2sgewogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OkFraXRhU29jaWFsSW1wYWN0LnN0YWtpbmdJbXBhY3RDb3N0W3JvdXRpbmddKCkgLT4gdm9pZDoKc3Rha2luZ0ltcGFjdENvc3Q6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ1OAogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ2MAogICAgLy8gY29uc3Qgc3Rha2luZyA9IGdldEFraXRhQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zdGFraW5nCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MjcKICAgIC8vIGFraXRhREFPID0gR2xvYmFsU3RhdGU8QXBwbGljYXRpb24+KHsga2V5OiBHbG9iYWxTdGF0ZUtleUFraXRhREFPIH0pCiAgICBieXRlY18wIC8vICJha2l0YV9kYW8iCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ2MAogICAgLy8gY29uc3Qgc3Rha2luZyA9IGdldEFraXRhQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zdGFraW5nCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Z1bmN0aW9ucy50czo0NAogICAgLy8gY29uc3QgW2FwcExpc3RCeXRlc10gPSBvcC5BcHBHbG9iYWwuZ2V0RXhCeXRlcyhha2l0YURBTywgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNBa2l0YUFwcExpc3QpKQogICAgZHVwCiAgICBieXRlY18yIC8vICJhYWwiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ2MAogICAgLy8gY29uc3Qgc3Rha2luZyA9IGdldEFraXRhQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zdGFraW5nCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9mdW5jdGlvbnMudHM6OTgKICAgIC8vIGNvbnN0IGFraXRhQXNzZXRzQnl0ZXMgPSBvcC5BcHBHbG9iYWwuZ2V0RXhCeXRlcyhha2l0YURBTywgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNBa2l0YUFzc2V0cykpWzBdCiAgICBzd2FwCiAgICBieXRlY18zIC8vICJha2l0YV9hc3NldHMiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ2MQogICAgLy8gY29uc3QgYWt0YSA9IGdldEFraXRhQXNzZXRzKHRoaXMuYWtpdGFEQU8udmFsdWUpLmFrdGEKICAgIGV4dHJhY3QgMCA4CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ2Mi00NjUKICAgIC8vIHJldHVybiBhYmlDYWxsPHR5cGVvZiBTdGFraW5nLnByb3RvdHlwZS5hcHBTdGFrZUNvc3Q+KHsKICAgIC8vICAgYXBwSWQ6IHN0YWtpbmcsCiAgICAvLyAgIGFyZ3M6IFthZGRyZXNzLCBha3RhXSwKICAgIC8vIH0pLnJldHVyblZhbHVlCiAgICBpdHhuX2JlZ2luCiAgICBzd2FwCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIGJ5dGVjIDE1IC8vIG1ldGhvZCAiYXBwU3Rha2VDb3N0KGFkZHJlc3MsdWludDY0KXVpbnQ2NCIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBzd2FwCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGludGNfMyAvLyBhcHBsCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIGl0eG5fc3VibWl0CiAgICBpdHhuIExhc3RMb2cKICAgIGR1cAogICAgZXh0cmFjdCA0IDAKICAgIHN3YXAKICAgIGV4dHJhY3QgMCA0CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgID09CiAgICBhc3NlcnQgLy8gQnl0ZXMgaGFzIHZhbGlkIHByZWZpeAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciB1aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDU4CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjpBa2l0YVNvY2lhbEltcGFjdC5nZXRVc2VySW1wYWN0V2l0aG91dFNvY2lhbFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldFVzZXJJbXBhY3RXaXRob3V0U29jaWFsOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0NjkKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0NzEKICAgIC8vIHJldHVybiB0aGlzLnVzZXJJbXBhY3QoYWRkcmVzcywgZmFsc2UpCiAgICBpbnRjXzAgLy8gMAogICAgY2FsbHN1YiB1c2VySW1wYWN0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ2OQogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICBpdG9iCiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo6QWtpdGFTb2NpYWxJbXBhY3QuZ2V0VXNlckltcGFjdFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldFVzZXJJbXBhY3Q6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ3NAogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ3NgogICAgLy8gcmV0dXJuIHRoaXMudXNlckltcGFjdChhZGRyZXNzLCB0cnVlKQogICAgaW50Y18xIC8vIDEKICAgIGNhbGxzdWIgdXNlckltcGFjdAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0NzQKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgaXRvYgogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OkFraXRhU29jaWFsSW1wYWN0LmdldFVzZXJJbXBhY3RXaXRoSW5wdXRzW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0VXNlckltcGFjdFdpdGhJbnB1dHM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ4MwogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAyNgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3Igc21hcnRfY29udHJhY3RzL3NvY2lhbC90eXBlcy50czo6U29jaWFsSW1wYWN0SW5wdXRzCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ4NgogICAgLy8gVHhuLnNlbmRlciA9PT0gQXBwbGljYXRpb24oZ2V0QWtpdGFTb2NpYWxBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnNvY2lhbCkuYWRkcmVzcywKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvYmFzZS1jb250cmFjdHMvYmFzZS50czoyNwogICAgLy8gYWtpdGFEQU8gPSBHbG9iYWxTdGF0ZTxBcHBsaWNhdGlvbj4oeyBrZXk6IEdsb2JhbFN0YXRlS2V5QWtpdGFEQU8gfSkKICAgIGJ5dGVjXzAgLy8gImFraXRhX2RhbyIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDg2CiAgICAvLyBUeG4uc2VuZGVyID09PSBBcHBsaWNhdGlvbihnZXRBa2l0YVNvY2lhbEFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc29jaWFsKS5hZGRyZXNzLAogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9mdW5jdGlvbnMudHM6NDkKICAgIC8vIGNvbnN0IFthcHBMaXN0Qnl0ZXNdID0gb3AuQXBwR2xvYmFsLmdldEV4Qnl0ZXMoYWtpdGFEQU8sIEJ5dGVzKEFraXRhREFPR2xvYmFsU3RhdGVLZXlzQWtpdGFTb2NpYWxBcHBMaXN0KSkKICAgIGJ5dGVjIDQgLy8gInNhbCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDg2CiAgICAvLyBUeG4uc2VuZGVyID09PSBBcHBsaWNhdGlvbihnZXRBa2l0YVNvY2lhbEFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc29jaWFsKS5hZGRyZXNzLAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDY0CiAgICBhcHBfcGFyYW1zX2dldCBBcHBBZGRyZXNzCiAgICBhc3NlcnQgLy8gYXBwbGljYXRpb24gZXhpc3RzCiAgICA9PQogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0ODUtNDg4CiAgICAvLyBsb2dnZWRBc3NlcnQoCiAgICAvLyAgIFR4bi5zZW5kZXIgPT09IEFwcGxpY2F0aW9uKGdldEFraXRhU29jaWFsQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zb2NpYWwpLmFkZHJlc3MsCiAgICAvLyAgIEVSUl9OT1RfU09DSUFMCiAgICAvLyApCiAgICBibnogZ2V0VXNlckltcGFjdFdpdGhJbnB1dHNfYWZ0ZXJfYXNzZXJ0QDMKICAgIGJ5dGVjIDYgLy8gIkVSUjpOU09DIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOk5TT0MKCmdldFVzZXJJbXBhY3RXaXRoSW5wdXRzX2FmdGVyX2Fzc2VydEAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0OTAKICAgIC8vIGNvbnN0IHNvY2lhbEltcGFjdCA9IHRoaXMuY2FsY3VsYXRlU29jaWFsSW1wYWN0KGlucHV0cykKICAgIGR1cAogICAgY2FsbHN1YiBjYWxjdWxhdGVTb2NpYWxJbXBhY3QKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0OTEKICAgIC8vIHJldHVybiB0aGlzLnVzZXJJbXBhY3RXaXRoU29jaWFsKGFkZHJlc3MsIHNvY2lhbEltcGFjdCkKICAgIGRpZyAyCiAgICBzd2FwCiAgICBjYWxsc3ViIHVzZXJJbXBhY3RXaXRoU29jaWFsCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ4MwogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICBpdG9iCiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo6QWtpdGFTb2NpYWxJbXBhY3QuY2FsY3VsYXRlU29jaWFsSW1wYWN0U2NvcmVbcm91dGluZ10oKSAtPiB2b2lkOgpjYWxjdWxhdGVTb2NpYWxJbXBhY3RTY29yZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDk4CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDI2CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBzbWFydF9jb250cmFjdHMvc29jaWFsL3R5cGVzLnRzOjpTb2NpYWxJbXBhY3RJbnB1dHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NTAxCiAgICAvLyBUeG4uc2VuZGVyID09PSBBcHBsaWNhdGlvbihnZXRBa2l0YVNvY2lhbEFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc29jaWFsKS5hZGRyZXNzLAogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjI3CiAgICAvLyBha2l0YURBTyA9IEdsb2JhbFN0YXRlPEFwcGxpY2F0aW9uPih7IGtleTogR2xvYmFsU3RhdGVLZXlBa2l0YURBTyB9KQogICAgYnl0ZWNfMCAvLyAiYWtpdGFfZGFvIgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo1MDEKICAgIC8vIFR4bi5zZW5kZXIgPT09IEFwcGxpY2F0aW9uKGdldEFraXRhU29jaWFsQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zb2NpYWwpLmFkZHJlc3MsCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Z1bmN0aW9ucy50czo0OQogICAgLy8gY29uc3QgW2FwcExpc3RCeXRlc10gPSBvcC5BcHBHbG9iYWwuZ2V0RXhCeXRlcyhha2l0YURBTywgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNBa2l0YVNvY2lhbEFwcExpc3QpKQogICAgYnl0ZWMgNCAvLyAic2FsIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo1MDEKICAgIC8vIFR4bi5zZW5kZXIgPT09IEFwcGxpY2F0aW9uKGdldEFraXRhU29jaWFsQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zb2NpYWwpLmFkZHJlc3MsCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50NjQKICAgIGFwcF9wYXJhbXNfZ2V0IEFwcEFkZHJlc3MKICAgIGFzc2VydCAvLyBhcHBsaWNhdGlvbiBleGlzdHMKICAgID09CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjUwMC01MDMKICAgIC8vIGxvZ2dlZEFzc2VydCgKICAgIC8vICAgVHhuLnNlbmRlciA9PT0gQXBwbGljYXRpb24oZ2V0QWtpdGFTb2NpYWxBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnNvY2lhbCkuYWRkcmVzcywKICAgIC8vICAgRVJSX05PVF9TT0NJQUwKICAgIC8vICkKICAgIGJueiBjYWxjdWxhdGVTb2NpYWxJbXBhY3RTY29yZV9hZnRlcl9hc3NlcnRAMwogICAgYnl0ZWMgNiAvLyAiRVJSOk5TT0MiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6TlNPQwoKY2FsY3VsYXRlU29jaWFsSW1wYWN0U2NvcmVfYWZ0ZXJfYXNzZXJ0QDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjUwNQogICAgLy8gcmV0dXJuIHRoaXMuY2FsY3VsYXRlU29jaWFsSW1wYWN0KGlucHV0cykKICAgIGR1cAogICAgY2FsbHN1YiBjYWxjdWxhdGVTb2NpYWxJbXBhY3QKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0OTgKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgaXRvYgogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OkFraXRhU29jaWFsSW1wYWN0LmdldE1ldGFbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRNZXRhOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo1MDgKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMwogICAgLy8gbWV0YSA9IEJveE1hcDxBY2NvdW50LCBJbXBhY3RNZXRhVmFsdWU+KHsga2V5UHJlZml4OiBJbXBhY3RCb3hQcmVmaXhNZXRhIH0pCiAgICBieXRlYyA3IC8vICJtIgogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjUxMAogICAgLy8gcmV0dXJuIHRoaXMubWV0YSh1c2VyKS52YWx1ZQogICAgYm94X2dldAogICAgYXNzZXJ0IC8vIEJveCBtdXN0IGhhdmUgdmFsdWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NTA4CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvdXRpbHMvYmFzZS1jb250cmFjdHMvYmFzZS50czo6VXBncmFkZWFibGVBa2l0YUJhc2VDb250cmFjdC51cGRhdGVbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvYmFzZS1jb250cmFjdHMvYmFzZS50czo0NgogICAgLy8gQGFiaW1ldGhvZCh7IGFsbG93QWN0aW9uczogWydVcGRhdGVBcHBsaWNhdGlvbiddIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjQ4CiAgICAvLyBsb2dnZWRBc3NlcnQoVHhuLnNlbmRlciA9PT0gdGhpcy5nZXRBa2l0YURBT1dhbGxldCgpLmFkZHJlc3MsIEVSUl9OT1RfQUtJVEFfREFPKQogICAgdHhuIFNlbmRlcgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MzAKICAgIC8vIGNvbnN0IFt3YWxsZXRJRF0gPSBvcC5BcHBHbG9iYWwuZ2V0RXhVaW50NjQodGhpcy5ha2l0YURBTy52YWx1ZSwgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNXYWxsZXQpKQogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjI3CiAgICAvLyBha2l0YURBTyA9IEdsb2JhbFN0YXRlPEFwcGxpY2F0aW9uPih7IGtleTogR2xvYmFsU3RhdGVLZXlBa2l0YURBTyB9KQogICAgYnl0ZWNfMCAvLyAiYWtpdGFfZGFvIgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MzAKICAgIC8vIGNvbnN0IFt3YWxsZXRJRF0gPSBvcC5BcHBHbG9iYWwuZ2V0RXhVaW50NjQodGhpcy5ha2l0YURBTy52YWx1ZSwgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNXYWxsZXQpKQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIGJ5dGVjIDUgLy8gIndhbGxldCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjQ4CiAgICAvLyBsb2dnZWRBc3NlcnQoVHhuLnNlbmRlciA9PT0gdGhpcy5nZXRBa2l0YURBT1dhbGxldCgpLmFkZHJlc3MsIEVSUl9OT1RfQUtJVEFfREFPKQogICAgYXBwX3BhcmFtc19nZXQgQXBwQWRkcmVzcwogICAgYXNzZXJ0IC8vIGFwcGxpY2F0aW9uIGV4aXN0cwogICAgPT0KICAgIGJueiB1cGRhdGVfYWZ0ZXJfYXNzZXJ0QDMKICAgIGJ5dGVjIDggLy8gIkVSUjpOREFPIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOk5EQU8KCnVwZGF0ZV9hZnRlcl9hc3NlcnRAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjQ5CiAgICAvLyBjb25zdCB1cGRhdGVQbHVnaW4gPSBnZXRQbHVnaW5BcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnVwZGF0ZQogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjI3CiAgICAvLyBha2l0YURBTyA9IEdsb2JhbFN0YXRlPEFwcGxpY2F0aW9uPih7IGtleTogR2xvYmFsU3RhdGVLZXlBa2l0YURBTyB9KQogICAgYnl0ZWNfMCAvLyAiYWtpdGFfZGFvIgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6NDkKICAgIC8vIGNvbnN0IHVwZGF0ZVBsdWdpbiA9IGdldFBsdWdpbkFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkudXBkYXRlCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Z1bmN0aW9ucy50czo1NAogICAgLy8gY29uc3QgW3BsdWdpbkFwcExpc3RCeXRlc10gPSBvcC5BcHBHbG9iYWwuZ2V0RXhCeXRlcyhha2l0YURBTywgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNQbHVnaW5BcHBMaXN0KSkKICAgIHB1c2hieXRlcyAicGFsIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6NDkKICAgIC8vIGNvbnN0IHVwZGF0ZVBsdWdpbiA9IGdldFBsdWdpbkFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkudXBkYXRlCiAgICBwdXNoaW50IDE2CiAgICBleHRyYWN0X3VpbnQ2NAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6NTAKICAgIC8vIGxvZ2dlZEFzc2VydChHbG9iYWwuY2FsbGVyQXBwbGljYXRpb25JZCA9PT0gdXBkYXRlUGx1Z2luLCBFUlJfSU5WQUxJRF9VUEdSQURFKQogICAgZ2xvYmFsIENhbGxlckFwcGxpY2F0aW9uSUQKICAgID09CiAgICBibnogdXBkYXRlX2FmdGVyX2Fzc2VydEA1CiAgICBwdXNoYnl0ZXMgIkVSUjpJVVBHIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOklVUEcKCnVwZGF0ZV9hZnRlcl9hc3NlcnRANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjI1CiAgICAvLyB2ZXJzaW9uID0gR2xvYmFsU3RhdGU8c3RyaW5nPih7IGtleTogR2xvYmFsU3RhdGVLZXlWZXJzaW9uIH0pCiAgICBieXRlYyAxMCAvLyAidmVyc2lvbiIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjUxCiAgICAvLyB0aGlzLnZlcnNpb24udmFsdWUgPSBuZXdWZXJzaW9uCiAgICBkaWcgMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjQ2CiAgICAvLyBAYWJpbWV0aG9kKHsgYWxsb3dBY3Rpb25zOiBbJ1VwZGF0ZUFwcGxpY2F0aW9uJ10gfSkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvdXRpbHMvYmFzZS1jb250cmFjdHMvYmFzZS50czo6QWtpdGFCYXNlQ29udHJhY3QudXBkYXRlQWtpdGFEQU9bcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGVBa2l0YURBTzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjM2CiAgICAvLyB1cGRhdGVBa2l0YURBTyhha2l0YURBTzogQXBwbGljYXRpb24pOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjM3CiAgICAvLyBsb2dnZWRBc3NlcnQoVHhuLnNlbmRlciA9PT0gdGhpcy5nZXRBa2l0YURBT1dhbGxldCgpLmFkZHJlc3MsIEVSUl9OT1RfQUtJVEFfREFPKQogICAgdHhuIFNlbmRlcgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MzAKICAgIC8vIGNvbnN0IFt3YWxsZXRJRF0gPSBvcC5BcHBHbG9iYWwuZ2V0RXhVaW50NjQodGhpcy5ha2l0YURBTy52YWx1ZSwgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNXYWxsZXQpKQogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjI3CiAgICAvLyBha2l0YURBTyA9IEdsb2JhbFN0YXRlPEFwcGxpY2F0aW9uPih7IGtleTogR2xvYmFsU3RhdGVLZXlBa2l0YURBTyB9KQogICAgYnl0ZWNfMCAvLyAiYWtpdGFfZGFvIgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MzAKICAgIC8vIGNvbnN0IFt3YWxsZXRJRF0gPSBvcC5BcHBHbG9iYWwuZ2V0RXhVaW50NjQodGhpcy5ha2l0YURBTy52YWx1ZSwgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNXYWxsZXQpKQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIGJ5dGVjIDUgLy8gIndhbGxldCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjM3CiAgICAvLyBsb2dnZWRBc3NlcnQoVHhuLnNlbmRlciA9PT0gdGhpcy5nZXRBa2l0YURBT1dhbGxldCgpLmFkZHJlc3MsIEVSUl9OT1RfQUtJVEFfREFPKQogICAgYXBwX3BhcmFtc19nZXQgQXBwQWRkcmVzcwogICAgYXNzZXJ0IC8vIGFwcGxpY2F0aW9uIGV4aXN0cwogICAgPT0KICAgIGJueiB1cGRhdGVBa2l0YURBT19hZnRlcl9hc3NlcnRAMwogICAgYnl0ZWMgOCAvLyAiRVJSOk5EQU8iCiAgICBsb2cKICAgIGVyciAvLyBFUlI6TkRBTwoKdXBkYXRlQWtpdGFEQU9fYWZ0ZXJfYXNzZXJ0QDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvYmFzZS1jb250cmFjdHMvYmFzZS50czoyNwogICAgLy8gYWtpdGFEQU8gPSBHbG9iYWxTdGF0ZTxBcHBsaWNhdGlvbj4oeyBrZXk6IEdsb2JhbFN0YXRlS2V5QWtpdGFEQU8gfSkKICAgIGJ5dGVjXzAgLy8gImFraXRhX2RhbyIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjM4CiAgICAvLyB0aGlzLmFraXRhREFPLnZhbHVlID0gYWtpdGFEQU8KICAgIGRpZyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MzYKICAgIC8vIHVwZGF0ZUFraXRhREFPKGFraXRhREFPOiBBcHBsaWNhdGlvbik6IHZvaWQgewogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OkFraXRhU29jaWFsSW1wYWN0LmlzU3Vic2NyaWJlZChhZGRyZXNzOiBieXRlcywgaWQ6IHVpbnQ2NCkgLT4gYnl0ZXM6CmlzU3Vic2NyaWJlZDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDAKICAgIC8vIHByaXZhdGUgaXNTdWJzY3JpYmVkKGFkZHJlc3M6IEFjY291bnQsIGlkOiB1aW50NjQpOiB7IGFjdGl2ZTogYm9vbGVhbjsgc2VydmljZUlEOiB1aW50NjQ7IHN0cmVhazogdWludDY0IH0gewogICAgcHJvdG8gMiAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQxLTQ0CiAgICAvLyBjb25zdCBpbmZvID0gYWJpQ2FsbDx0eXBlb2YgU3Vic2NyaXB0aW9ucy5wcm90b3R5cGUuZ2V0U3Vic2NyaXB0aW9uPih7CiAgICAvLyAgIGFwcElkOiBnZXRBa2l0YUFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc3Vic2NyaXB0aW9ucywKICAgIC8vICAgYXJnczogW3sgYWRkcmVzcywgaWQgfV0KICAgIC8vIH0pLnJldHVyblZhbHVlCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQzCiAgICAvLyBhcmdzOiBbeyBhZGRyZXNzLCBpZCB9XQogICAgZnJhbWVfZGlnIC0xCiAgICBpdG9iCiAgICBmcmFtZV9kaWcgLTIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0MgogICAgLy8gYXBwSWQ6IGdldEFraXRhQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zdWJzY3JpcHRpb25zLAogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjI3CiAgICAvLyBha2l0YURBTyA9IEdsb2JhbFN0YXRlPEFwcGxpY2F0aW9uPih7IGtleTogR2xvYmFsU3RhdGVLZXlBa2l0YURBTyB9KQogICAgYnl0ZWNfMCAvLyAiYWtpdGFfZGFvIgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo0MgogICAgLy8gYXBwSWQ6IGdldEFraXRhQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zdWJzY3JpcHRpb25zLAogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9mdW5jdGlvbnMudHM6NDQKICAgIC8vIGNvbnN0IFthcHBMaXN0Qnl0ZXNdID0gb3AuQXBwR2xvYmFsLmdldEV4Qnl0ZXMoYWtpdGFEQU8sIEJ5dGVzKEFraXRhREFPR2xvYmFsU3RhdGVLZXlzQWtpdGFBcHBMaXN0KSkKICAgIGJ5dGVjXzIgLy8gImFhbCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDIKICAgIC8vIGFwcElkOiBnZXRBa2l0YUFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc3Vic2NyaXB0aW9ucywKICAgIHB1c2hpbnQgMzIKICAgIGV4dHJhY3RfdWludDY0CiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDEtNDQKICAgIC8vIGNvbnN0IGluZm8gPSBhYmlDYWxsPHR5cGVvZiBTdWJzY3JpcHRpb25zLnByb3RvdHlwZS5nZXRTdWJzY3JpcHRpb24+KHsKICAgIC8vICAgYXBwSWQ6IGdldEFraXRhQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zdWJzY3JpcHRpb25zLAogICAgLy8gICBhcmdzOiBbeyBhZGRyZXNzLCBpZCB9XQogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIHB1c2hieXRlcyAweDI1YjgxMmE3IC8vIG1ldGhvZCAiZ2V0U3Vic2NyaXB0aW9uKChhZGRyZXNzLHVpbnQ2NCkpKGJvb2wsYWRkcmVzcyx1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCkiCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGludGNfMyAvLyBhcHBsCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIGl0eG5fc3VibWl0CiAgICBpdHhuIExhc3RMb2cKICAgIGR1cG4gMgogICAgZXh0cmFjdCA0IDAKICAgIHN3YXAKICAgIGV4dHJhY3QgMCA0CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgID09CiAgICBhc3NlcnQgLy8gQnl0ZXMgaGFzIHZhbGlkIHByZWZpeAogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgMTA1CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBzbWFydF9jb250cmFjdHMvc3Vic2NyaXB0aW9ucy90eXBlcy50czo6U3Vic2NyaXB0aW9uSW5mb1dpdGhFeGlzdGVuY2UKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NDYKICAgIC8vIGlmICghaW5mby5leGlzdHMpIHsKICAgIGludGNfMCAvLyAwCiAgICBnZXRiaXQKICAgIGJueiBpc1N1YnNjcmliZWRfYWZ0ZXJfaWZfZWxzZUAzCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjQ3LTUxCiAgICAvLyByZXR1cm4gewogICAgLy8gICBhY3RpdmU6IGZhbHNlLAogICAgLy8gICBzZXJ2aWNlSUQ6IDAsCiAgICAvLyAgIHN0cmVhazogMCwKICAgIC8vIH0KICAgIHB1c2hieXRlcyAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIHN3YXAKICAgIHJldHN1YgoKaXNTdWJzY3JpYmVkX2FmdGVyX2lmX2Vsc2VAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NTUKICAgIC8vIGNvbnN0IHRvQWtpdGEgPSBpbmZvLnJlY2lwaWVudCA9PT0gZ2V0REFPQVJDNThXYWxsZXQodGhpcy5ha2l0YURBTy52YWx1ZSkuYWRkcmVzcwogICAgZnJhbWVfZGlnIDAKICAgIGR1cAogICAgZXh0cmFjdCA1IDMyCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MjcKICAgIC8vIGFraXRhREFPID0gR2xvYmFsU3RhdGU8QXBwbGljYXRpb24+KHsga2V5OiBHbG9iYWxTdGF0ZUtleUFraXRhREFPIH0pCiAgICBieXRlY18wIC8vICJha2l0YV9kYW8iCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjU1CiAgICAvLyBjb25zdCB0b0FraXRhID0gaW5mby5yZWNpcGllbnQgPT09IGdldERBT0FSQzU4V2FsbGV0KHRoaXMuYWtpdGFEQU8udmFsdWUpLmFkZHJlc3MKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvZnVuY3Rpb25zLnRzOjM5CiAgICAvLyBjb25zdCBbd2FsbGV0SURdID0gb3AuQXBwR2xvYmFsLmdldEV4VWludDY0KGFraXRhREFPLCBCeXRlcyhBa2l0YURBT0dsb2JhbFN0YXRlS2V5c1dhbGxldCkpCiAgICBieXRlYyA1IC8vICJ3YWxsZXQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjU1CiAgICAvLyBjb25zdCB0b0FraXRhID0gaW5mby5yZWNpcGllbnQgPT09IGdldERBT0FSQzU4V2FsbGV0KHRoaXMuYWtpdGFEQU8udmFsdWUpLmFkZHJlc3MKICAgIGFwcF9wYXJhbXNfZ2V0IEFwcEFkZHJlc3MKICAgIGFzc2VydCAvLyBhcHBsaWNhdGlvbiBleGlzdHMKICAgID09CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjU5CiAgICAvLyBjb25zdCBub3REb25hdGluZyA9IGluZm8uc2VydmljZUlEICE9PSAwCiAgICBkaWcgMQogICAgcHVzaGludCAzNwogICAgZXh0cmFjdF91aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NjEKICAgIC8vIGNvbnN0IHByZXZpb3VzV2luZG93U3RhcnQ6IHVpbnQ2NCA9IEdsb2JhbC5sYXRlc3RUaW1lc3RhbXAgLSAoKChHbG9iYWwubGF0ZXN0VGltZXN0YW1wIC0gaW5mby5zdGFydERhdGUpICUgaW5mby5pbnRlcnZhbCkgKyBpbmZvLmludGVydmFsKQogICAgZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAogICAgZHVwCiAgICBkaWcgNAogICAgcHVzaGludCA0NQogICAgZXh0cmFjdF91aW50NjQKICAgIC0KICAgIGRpZyA0CiAgICBwdXNoaW50IDYxCiAgICBleHRyYWN0X3VpbnQ2NAogICAgc3dhcAogICAgZGlnIDEKICAgICUKICAgICsKICAgIC0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NjUKICAgIC8vIGNvbnN0IG5vdFN0YWxlID0gaW5mby5sYXN0UGF5bWVudCA+IHByZXZpb3VzV2luZG93U3RhcnQKICAgIGRpZyAzCiAgICBwdXNoaW50IDg1CiAgICBleHRyYWN0X3VpbnQ2NAogICAgPAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo2OAogICAgLy8gYWN0aXZlOiB0b0FraXRhICYmIG5vdERvbmF0aW5nICYmIG5vdFN0YWxlLAogICAgdW5jb3ZlciAyCiAgICBkaWcgMgogICAgJiYKICAgICYmCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjcwCiAgICAvLyBzdHJlYWs6IGluZm8uc3RyZWFrLAogICAgdW5jb3ZlciAyCiAgICBleHRyYWN0IDkzIDgKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6NjctNzEKICAgIC8vIHJldHVybiB7CiAgICAvLyAgIGFjdGl2ZTogdG9Ba2l0YSAmJiBub3REb25hdGluZyAmJiBub3RTdGFsZSwKICAgIC8vICAgc2VydmljZUlEOiBpbmZvLnNlcnZpY2VJRCwKICAgIC8vICAgc3RyZWFrOiBpbmZvLnN0cmVhaywKICAgIC8vIH0KICAgIHB1c2hieXRlcyAweDAwCiAgICBpbnRjXzAgLy8gMAogICAgdW5jb3ZlciAzCiAgICBzZXRiaXQKICAgIHVuY292ZXIgMgogICAgaXRvYgogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIHN3YXAKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OkFraXRhU29jaWFsSW1wYWN0LnVzZXJJbXBhY3QoYWNjb3VudDogYnl0ZXMsIGluY2x1ZGVTb2NpYWw6IHVpbnQ2NCkgLT4gdWludDY0Ogp1c2VySW1wYWN0OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoxMDQKICAgIC8vIHByaXZhdGUgdXNlckltcGFjdChhY2NvdW50OiBBY2NvdW50LCBpbmNsdWRlU29jaWFsOiBib29sZWFuKTogdWludDY0IHsKICAgIHByb3RvIDIgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoxMDUKICAgIC8vIGNvbnN0IHNvY2lhbEltcGFjdDogdWludDY0ID0gaW5jbHVkZVNvY2lhbCA/IHRoaXMuZ2V0U29jaWFsSW1wYWN0U2NvcmUoYWNjb3VudCkgOiAwIC8vIFNvY2lhbCBBY3Rpdml0eSB8IHVwIHRvIDI1MAogICAgZnJhbWVfZGlnIC0xCiAgICBieiB1c2VySW1wYWN0X3Rlcm5hcnlfZmFsc2VAMgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyNjgtMjcxCiAgICAvLyBjb25zdCBpbnB1dHMgPSBhYmlDYWxsPHR5cGVvZiBBa2l0YVNvY2lhbC5wcm90b3R5cGUuZ2V0U29jaWFsSW1wYWN0SW5wdXRzPih7CiAgICAvLyAgIGFwcElkOiBnZXRBa2l0YVNvY2lhbEFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc29jaWFsLAogICAgLy8gICBhcmdzOiBbYWRkcmVzc10KICAgIC8vIH0pLnJldHVyblZhbHVlCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjI2OQogICAgLy8gYXBwSWQ6IGdldEFraXRhU29jaWFsQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zb2NpYWwsCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL2Jhc2UudHM6MjcKICAgIC8vIGFraXRhREFPID0gR2xvYmFsU3RhdGU8QXBwbGljYXRpb24+KHsga2V5OiBHbG9iYWxTdGF0ZUtleUFraXRhREFPIH0pCiAgICBieXRlY18wIC8vICJha2l0YV9kYW8iCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjI2OQogICAgLy8gYXBwSWQ6IGdldEFraXRhU29jaWFsQXBwTGlzdCh0aGlzLmFraXRhREFPLnZhbHVlKS5zb2NpYWwsCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Z1bmN0aW9ucy50czo0OQogICAgLy8gY29uc3QgW2FwcExpc3RCeXRlc10gPSBvcC5BcHBHbG9iYWwuZ2V0RXhCeXRlcyhha2l0YURBTywgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNBa2l0YVNvY2lhbEFwcExpc3QpKQogICAgYnl0ZWMgNCAvLyAic2FsIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyNjkKICAgIC8vIGFwcElkOiBnZXRBa2l0YVNvY2lhbEFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc29jaWFsLAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDY0CiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjY4LTI3MQogICAgLy8gY29uc3QgaW5wdXRzID0gYWJpQ2FsbDx0eXBlb2YgQWtpdGFTb2NpYWwucHJvdG90eXBlLmdldFNvY2lhbEltcGFjdElucHV0cz4oewogICAgLy8gICBhcHBJZDogZ2V0QWtpdGFTb2NpYWxBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnNvY2lhbCwKICAgIC8vICAgYXJnczogW2FkZHJlc3NdCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgcHVzaGJ5dGVzIDB4ZTNiZWY5NDMgLy8gbWV0aG9kICJnZXRTb2NpYWxJbXBhY3RJbnB1dHMoYWRkcmVzcykoYm9vbCx1aW50NjQsdWludDY0LHVpbnQ2NCxib29sKSIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBmcmFtZV9kaWcgLTIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpbnRjXzMgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBMYXN0TG9nCiAgICBkdXAKICAgIGV4dHJhY3QgNCAwCiAgICBzd2FwCiAgICBleHRyYWN0IDAgNAogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICA9PQogICAgYXNzZXJ0IC8vIEJ5dGVzIGhhcyB2YWxpZCBwcmVmaXgKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDI2CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBzbWFydF9jb250cmFjdHMvc29jaWFsL3R5cGVzLnRzOjpTb2NpYWxJbXBhY3RJbnB1dHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjczCiAgICAvLyByZXR1cm4gdGhpcy5jYWxjdWxhdGVTb2NpYWxJbXBhY3QoaW5wdXRzKQogICAgY2FsbHN1YiBjYWxjdWxhdGVTb2NpYWxJbXBhY3QKICAgIHBvcAoKdXNlckltcGFjdF90ZXJuYXJ5X21lcmdlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjEwNgogICAgLy8gcmV0dXJuIHRoaXMudXNlckltcGFjdFdpdGhTb2NpYWwoYWNjb3VudCwgc29jaWFsSW1wYWN0KQogICAgZnJhbWVfZGlnIC0yCiAgICBzd2FwCiAgICBjYWxsc3ViIHVzZXJJbXBhY3RXaXRoU29jaWFsCiAgICByZXRzdWIKCnVzZXJJbXBhY3RfdGVybmFyeV9mYWxzZUAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoxMDUKICAgIC8vIGNvbnN0IHNvY2lhbEltcGFjdDogdWludDY0ID0gaW5jbHVkZVNvY2lhbCA/IHRoaXMuZ2V0U29jaWFsSW1wYWN0U2NvcmUoYWNjb3VudCkgOiAwIC8vIFNvY2lhbCBBY3Rpdml0eSB8IHVwIHRvIDI1MAogICAgaW50Y18wIC8vIDAKICAgIGIgdXNlckltcGFjdF90ZXJuYXJ5X21lcmdlQDMKCgovLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjpBa2l0YVNvY2lhbEltcGFjdC51c2VySW1wYWN0V2l0aFNvY2lhbChhY2NvdW50OiBieXRlcywgc29jaWFsSW1wYWN0OiB1aW50NjQpIC0+IHVpbnQ2NDoKdXNlckltcGFjdFdpdGhTb2NpYWw6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjExMgogICAgLy8gcHJpdmF0ZSB1c2VySW1wYWN0V2l0aFNvY2lhbChhY2NvdW50OiBBY2NvdW50LCBzb2NpYWxJbXBhY3Q6IHVpbnQ2NCk6IHVpbnQ2NCB7CiAgICBwcm90byAyIDEKICAgIGludGNfMCAvLyAwCiAgICBkdXBuIDMKICAgIHB1c2hieXRlcyAiIgogICAgZHVwbiAxMgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoxMTQKICAgIC8vIGxldCBzdWJzY3JpcHRpb25JbmRleDogdWludDY0ID0gMAogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTE1LTExNgogICAgLy8gbGV0IE5GRDogdWludDY0ID0gMAogICAgLy8gbGV0IGFraXRhTkZUOiB1aW50NjQgPSAwCiAgICBkdXBuIDIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjMKICAgIC8vIG1ldGEgPSBCb3hNYXA8QWNjb3VudCwgSW1wYWN0TWV0YVZhbHVlPih7IGtleVByZWZpeDogSW1wYWN0Qm94UHJlZml4TWV0YSB9KQogICAgYnl0ZWMgNyAvLyAibSIKICAgIGZyYW1lX2RpZyAtMgogICAgY29uY2F0CiAgICBkdXAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTE4CiAgICAvLyBpZiAodGhpcy5tZXRhKGFjY291bnQpLmV4aXN0cykgewogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBieiB1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTE5CiAgICAvLyBjb25zdCBtZXRhID0gY2xvbmUodGhpcy5tZXRhKGFjY291bnQpLnZhbHVlKQogICAgZnJhbWVfZGlnIDIwCiAgICBib3hfZ2V0CiAgICBhc3NlcnQgLy8gQm94IG11c3QgaGF2ZSB2YWx1ZQogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoxMjAKICAgIC8vIHN1YnNjcmlwdGlvbkluZGV4ID0gbWV0YS5zdWJzY3JpcHRpb25JbmRleAogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50NjQKICAgIGZyYW1lX2J1cnkgMTcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTIxCiAgICAvLyBORkQgPSBtZXRhLk5GRAogICAgZHVwCiAgICBpbnRjXzIgLy8gOAogICAgZXh0cmFjdF91aW50NjQKICAgIGZyYW1lX2J1cnkgMTgKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTIyCiAgICAvLyBha2l0YU5GVCA9IG1ldGEuYWtpdGFORlQKICAgIHB1c2hpbnQgMzIKICAgIGV4dHJhY3RfdWludDY0CiAgICBmcmFtZV9idXJ5IDE5Cgp1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjIwNgogICAgLy8gY29uc3QgYWt0YSA9IGdldEFraXRhQXNzZXRzKHRoaXMuYWtpdGFEQU8udmFsdWUpLmFrdGEKICAgIGludGNfMCAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvYmFzZS1jb250cmFjdHMvYmFzZS50czoyNwogICAgLy8gYWtpdGFEQU8gPSBHbG9iYWxTdGF0ZTxBcHBsaWNhdGlvbj4oeyBrZXk6IEdsb2JhbFN0YXRlS2V5QWtpdGFEQU8gfSkKICAgIGJ5dGVjXzAgLy8gImFraXRhX2RhbyIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjA2CiAgICAvLyBjb25zdCBha3RhID0gZ2V0QWtpdGFBc3NldHModGhpcy5ha2l0YURBTy52YWx1ZSkuYWt0YQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9mdW5jdGlvbnMudHM6OTgKICAgIC8vIGNvbnN0IGFraXRhQXNzZXRzQnl0ZXMgPSBvcC5BcHBHbG9iYWwuZ2V0RXhCeXRlcyhha2l0YURBTywgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNBa2l0YUFzc2V0cykpWzBdCiAgICBieXRlY18zIC8vICJha2l0YV9hc3NldHMiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjIwNgogICAgLy8gY29uc3QgYWt0YSA9IGdldEFraXRhQXNzZXRzKHRoaXMuYWtpdGFEQU8udmFsdWUpLmFrdGEKICAgIGR1cAogICAgZXh0cmFjdCAwIDgKICAgIGZyYW1lX2J1cnkgMAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDY0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjIwOQogICAgLy8gaWYgKGFrdGEgPT09IDApIHsKICAgIGJueiB1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pZl9lbHNlQDM0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjIxMAogICAgLy8gcmV0dXJuIDAKICAgIGludGNfMCAvLyAwCiAgICBmcmFtZV9idXJ5IDExCgp1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pbmxpbmVkX3NtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OkFraXRhU29jaWFsSW1wYWN0LmdldFN0YWtpbmdJbXBhY3RTY29yZUAzNjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjQzCiAgICAvLyBsZXQgc3Vic2NyaWJlckltcGFjdDogdWludDY0ID0gMAogICAgaW50Y18wIC8vIDAKICAgIGZyYW1lX2J1cnkgMTIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjQ1CiAgICAvLyBjb25zdCBzdWJzY3JpcHRpb25TdGF0ZSA9IHRoaXMuaXNTdWJzY3JpYmVkKGFjY291bnQsIHN1YnNjcmlwdGlvbkluZGV4KQogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9kaWcgMTcKICAgIGNhbGxzdWIgaXNTdWJzY3JpYmVkCiAgICBkdXAKICAgIGZyYW1lX2J1cnkgMwogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyNDcKICAgIC8vIGlmICghc3Vic2NyaXB0aW9uU3RhdGUuYWN0aXZlIHx8ICF0aGlzLnN1YnNjcmlwdGlvblN0YXRlTW9kaWZpZXIoc3Vic2NyaXB0aW9uU3RhdGUuc2VydmljZUlEKS5leGlzdHMpIHsKICAgIGludGNfMCAvLyAwCiAgICBnZXRiaXQKICAgIGJ6IHVzZXJJbXBhY3RXaXRoU29jaWFsX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo6QWtpdGFTb2NpYWxJbXBhY3QuZ2V0U3Vic2NyaWJlckltcGFjdFNjb3JlQDQ0CiAgICBmcmFtZV9kaWcgMwogICAgZXh0cmFjdCAxIDgKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjUKICAgIC8vIHN1YnNjcmlwdGlvblN0YXRlTW9kaWZpZXIgPSBCb3hNYXA8dWludDY0LCB1aW50NjQ+KHsga2V5UHJlZml4OiBJbXBhY3RCb3hQcmVmaXhTdWJzY3JpcHRpb25TdGF0ZU1vZGlmaWVyIH0pCiAgICBwdXNoYnl0ZXMgInMiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgZnJhbWVfYnVyeSAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjI0NwogICAgLy8gaWYgKCFzdWJzY3JpcHRpb25TdGF0ZS5hY3RpdmUgfHwgIXRoaXMuc3Vic2NyaXB0aW9uU3RhdGVNb2RpZmllcihzdWJzY3JpcHRpb25TdGF0ZS5zZXJ2aWNlSUQpLmV4aXN0cykgewogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBieiB1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pbmxpbmVkX3NtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OkFraXRhU29jaWFsSW1wYWN0LmdldFN1YnNjcmliZXJJbXBhY3RTY29yZUA0NAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyNTEKICAgIC8vIGNvbnN0IG1vZGlmaWVyID0gdGhpcy5zdWJzY3JpcHRpb25TdGF0ZU1vZGlmaWVyKHN1YnNjcmlwdGlvblN0YXRlLnNlcnZpY2VJRCkudmFsdWUKICAgIGZyYW1lX2RpZyAxCiAgICBib3hfZ2V0CiAgICBhc3NlcnQgLy8gQm94IG11c3QgaGF2ZSB2YWx1ZQogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyNTQKICAgIC8vIGlmIChzdWJzY3JpcHRpb25TdGF0ZS5zdHJlYWsgPj0gMTIpIHsKICAgIGZyYW1lX2RpZyAzCiAgICBwdXNoaW50IDkKICAgIGV4dHJhY3RfdWludDY0CiAgICBkdXAKICAgIGZyYW1lX2J1cnkgMTQKICAgIHB1c2hpbnQgMTIKICAgID49CiAgICBieiB1c2VySW1wYWN0V2l0aFNvY2lhbF9lbHNlX2JvZHlANDIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjU1CiAgICAvLyBzdWJzY3JpYmVySW1wYWN0ICs9IDI1MCAvIG1vZGlmaWVyCiAgICBwdXNoaW50IDI1MAogICAgc3dhcAogICAgLwogICAgZnJhbWVfYnVyeSAxMgoKdXNlckltcGFjdFdpdGhTb2NpYWxfYWZ0ZXJfaW5saW5lZF9zbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjpBa2l0YVNvY2lhbEltcGFjdC5nZXRTdWJzY3JpYmVySW1wYWN0U2NvcmVANDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjEyNwogICAgLy8gY29uc3QgbmZkU2NvcmU6IHVpbnQ2NCA9IE5GRCAhPT0gMCA/IHRoaXMuZ2V0TkZESW1wYWN0U2NvcmUoYWNjb3VudCwgQXBwbGljYXRpb24oTkZEKSkgOiAwIC8vIE5GRCB8IHVwIHRvIDE1MAogICAgZnJhbWVfZGlnIDE4CiAgICBieiB1c2VySW1wYWN0V2l0aFNvY2lhbF90ZXJuYXJ5X2ZhbHNlQDQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzM2CiAgICAvLyBjb25zdCB7IE5GRCwgbmZkVGltZUNoYW5nZWQsIG5mZEltcGFjdCB9ID0gdGhpcy5tZXRhKGFjY291bnQpLnZhbHVlCiAgICBmcmFtZV9kaWcgMjAKICAgIGJveF9nZXQKICAgIGFzc2VydCAvLyBCb3ggbXVzdCBoYXZlIHZhbHVlCiAgICBkdXAKICAgIGludGNfMiAvLyA4CiAgICBleHRyYWN0X3VpbnQ2NAogICAgZGlnIDEKICAgIHB1c2hpbnQgMTYKICAgIGV4dHJhY3RfdWludDY0CiAgICBmcmFtZV9idXJ5IDEwCiAgICBzd2FwCiAgICBwdXNoaW50IDI0CiAgICBleHRyYWN0X3VpbnQ2NAogICAgZnJhbWVfYnVyeSA4CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjMzNwogICAgLy8gY29uc3QgdGltZUNoYW5nZWQgPSBidG9pKG9wLkFwcEdsb2JhbC5nZXRFeEJ5dGVzKE5GRCwgQnl0ZXMoTkZER2xvYmFsU3RhdGVLZXlzVGltZUNoYW5nZWQpKVswXSkKICAgIGR1cAogICAgYnl0ZWMgMTMgLy8gImkudGltZUNoYW5nZWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgcG9wCiAgICBidG9pCiAgICBmcmFtZV9idXJ5IDEzCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjMzOQogICAgLy8gbG9nZ2VkQXNzZXJ0KE5GREFwcC5pZCA9PT0gQXBwbGljYXRpb24oTkZEKS5pZCwgRVJSX0lOVkFMSURfTkZEKQogICAgZnJhbWVfZGlnIDE4CiAgICA9PQogICAgYm56IHVzZXJJbXBhY3RXaXRoU29jaWFsX2FmdGVyX2Fzc2VydEAyOAogICAgcHVzaGJ5dGVzICJFUlI6SU5GRCIKICAgIGxvZwogICAgZXJyIC8vIEVSUjpJTkZECgp1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9hc3NlcnRAMjg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjM0MAogICAgLy8gbG9nZ2VkQXNzZXJ0KG5mZFRpbWVDaGFuZ2VkID09PSB0aW1lQ2hhbmdlZCwgRVJSX05GRF9DSEFOR0VEKQogICAgZnJhbWVfZGlnIDEwCiAgICBmcmFtZV9kaWcgMTMKICAgID09CiAgICBibnogdXNlckltcGFjdFdpdGhTb2NpYWxfYWZ0ZXJfYXNzZXJ0QDMwCiAgICBwdXNoYnl0ZXMgIkVSUjpDTkZEIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOkNORkQKCnVzZXJJbXBhY3RXaXRoU29jaWFsX2FmdGVyX2Fzc2VydEAzMDoKICAgIGZyYW1lX2RpZyA4CiAgICBmcmFtZV9idXJ5IDkKCnVzZXJJbXBhY3RXaXRoU29jaWFsX3Rlcm5hcnlfbWVyZ2VANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjI0CiAgICAvLyBjb25zdCBha3RhID0gZ2V0QWtpdGFBc3NldHModGhpcy5ha2l0YURBTy52YWx1ZSkuYWt0YQogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjI3CiAgICAvLyBha2l0YURBTyA9IEdsb2JhbFN0YXRlPEFwcGxpY2F0aW9uPih7IGtleTogR2xvYmFsU3RhdGVLZXlBa2l0YURBTyB9KQogICAgYnl0ZWNfMCAvLyAiYWtpdGFfZGFvIgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMjQKICAgIC8vIGNvbnN0IGFrdGEgPSBnZXRBa2l0YUFzc2V0cyh0aGlzLmFraXRhREFPLnZhbHVlKS5ha3RhCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Z1bmN0aW9ucy50czo5OAogICAgLy8gY29uc3QgYWtpdGFBc3NldHNCeXRlcyA9IG9wLkFwcEdsb2JhbC5nZXRFeEJ5dGVzKGFraXRhREFPLCBCeXRlcyhBa2l0YURBT0dsb2JhbFN0YXRlS2V5c0FraXRhQXNzZXRzKSlbMF0KICAgIGJ5dGVjXzMgLy8gImFraXRhX2Fzc2V0cyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjI0CiAgICAvLyBjb25zdCBha3RhID0gZ2V0QWtpdGFBc3NldHModGhpcy5ha2l0YURBTy52YWx1ZSkuYWt0YQogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDY0CiAgICBkdXAKICAgIGZyYW1lX2J1cnkgNAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMjcKICAgIC8vIGlmIChha3RhID09PSAwKSB7CiAgICBibnogdXNlckltcGFjdFdpdGhTb2NpYWxfYWZ0ZXJfaWZfZWxzZUAyMgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMjgKICAgIC8vIHJldHVybiAwCiAgICBpbnRjXzAgLy8gMAogICAgZnJhbWVfYnVyeSA3Cgp1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pbmxpbmVkX3NtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OkFraXRhU29jaWFsSW1wYWN0LmdldEhlbGRBa3RhSW1wYWN0U2NvcmVAMjU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjEyOQogICAgLy8gY29uc3QgbmZ0SW1wYWN0OiB1aW50NjQgPSBha2l0YU5GVCAhPT0gMCA/IHRoaXMuZ2V0TkZUSW1wYWN0U2NvcmUoYWNjb3VudCwgQXNzZXQoYWtpdGFORlQpKSA6IDAgLy8gSG9sZHMgQUtDL09tbmlnZW0gfCA1MAogICAgZnJhbWVfZGlnIDE5CiAgICBieiB1c2VySW1wYWN0V2l0aFNvY2lhbF90ZXJuYXJ5X2ZhbHNlQDcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzQ2CiAgICAvLyBjb25zdCBwcmVmaXggPSBhc3NldC51bml0TmFtZS5zbGljZSgwLCAzKQogICAgZnJhbWVfZGlnIDE5CiAgICBkdXAKICAgIGFzc2V0X3BhcmFtc19nZXQgQXNzZXRVbml0TmFtZQogICAgYXNzZXJ0IC8vIGFzc2V0IGV4aXN0cwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAwCiAgICBkaWcgMQogICAgPj0KICAgIGludGNfMCAvLyAwCiAgICBkaWcgMgogICAgdW5jb3ZlciAyCiAgICBzZWxlY3QKICAgIHB1c2hpbnQgMwogICAgZGlnIDIKICAgID49CiAgICBwdXNoaW50IDMKICAgIHVuY292ZXIgMwogICAgdW5jb3ZlciAyCiAgICBzZWxlY3QKICAgIHN1YnN0cmluZzMKICAgIGZyYW1lX2J1cnkgMgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czozNDcKICAgIC8vIGNvbnN0IGJhbGFuY2UgPSBBc3NldEhvbGRpbmcuYXNzZXRCYWxhbmNlKGFjY291bnQsIGFzc2V0KVswXQogICAgZnJhbWVfZGlnIC0yCiAgICBkaWcgMQogICAgYXNzZXRfaG9sZGluZ19nZXQgQXNzZXRCYWxhbmNlCiAgICBwb3AKICAgIGZyYW1lX2J1cnkgNgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czozNDgKICAgIC8vIGlmIChhc3NldC5jcmVhdG9yID09PSBBY2NvdW50KEFraXRhTkZUQ3JlYXRvckFkZHJlc3MpICYmIGJhbGFuY2UgPiAwKSB7CiAgICBhc3NldF9wYXJhbXNfZ2V0IEFzc2V0Q3JlYXRvcgogICAgYXNzZXJ0IC8vIGFzc2V0IGV4aXN0cwogICAgYnl0ZWMgMTQgLy8gYWRkciBBS0NUUkRLNE9XTldIVFBINFhQS0xOV05MWjMzM1ZFMzVTS1E0RkdRSzNaSkE0RklIQ0xUUkczUEZJCiAgICA9PQogICAgYnogdXNlckltcGFjdFdpdGhTb2NpYWxfYWZ0ZXJfaWZfZWxzZUAxOAogICAgZnJhbWVfZGlnIDYKICAgIGJ6IHVzZXJJbXBhY3RXaXRoU29jaWFsX2FmdGVyX2lmX2Vsc2VAMTgKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzQ5CiAgICAvLyBpZiAocHJlZml4ID09PSBCeXRlcyhBa2l0YUNvbGxlY3Rpb25zUHJlZml4QUtDKSkgewogICAgZnJhbWVfZGlnIDIKICAgIHB1c2hieXRlcyAiQUtDIgogICAgPT0KICAgIGJ6IHVzZXJJbXBhY3RXaXRoU29jaWFsX2FmdGVyX2lmX2Vsc2VAMTUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzUwCiAgICAvLyByZXR1cm4gNTAKICAgIHB1c2hpbnQgNTAKCnVzZXJJbXBhY3RXaXRoU29jaWFsX3Rlcm5hcnlfbWVyZ2VAODoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTMxCiAgICAvLyBjb25zdCB0b3RhbDogdWludDY0ID0gc3Rha2VkQWt0YUltcGFjdCArIHN1YnNjcmliZXJJbXBhY3QgKyBzb2NpYWxJbXBhY3QgKyBuZmRTY29yZSArIGhlbGRBa2l0YUltcGFjdCArIG5mdEltcGFjdAogICAgZnJhbWVfZGlnIDExCiAgICBmcmFtZV9kaWcgMTIKICAgICsKICAgIGZyYW1lX2RpZyAtMQogICAgKwogICAgZnJhbWVfZGlnIDkKICAgICsKICAgIGZyYW1lX2RpZyA3CiAgICArCiAgICArCiAgICBkdXAKICAgIGZyYW1lX2J1cnkgMTUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTMyCiAgICAvLyBpZiAodG90YWwgPT09IDApIHsKICAgIGJueiB1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pZl9lbHNlQDEwCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjEzMwogICAgLy8gcmV0dXJuIDEKICAgIGludGNfMSAvLyAxCiAgICBmcmFtZV9idXJ5IDAKICAgIHJldHN1YgoKdXNlckltcGFjdFdpdGhTb2NpYWxfYWZ0ZXJfaWZfZWxzZUAxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTM2CiAgICAvLyByZXR1cm4gdG90YWwKICAgIGZyYW1lX2RpZyAxNQogICAgZnJhbWVfYnVyeSAwCiAgICByZXRzdWIKCnVzZXJJbXBhY3RXaXRoU29jaWFsX2FmdGVyX2lmX2Vsc2VAMTU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjM1MgogICAgLy8gaWYgKHByZWZpeCA9PT0gQnl0ZXMoQWtpdGFDb2xsZWN0aW9uc1ByZWZpeEFPRykpIHsKICAgIGZyYW1lX2RpZyAyCiAgICBwdXNoYnl0ZXMgIkFPRyIKICAgID09CiAgICBieiB1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pZl9lbHNlQDE4CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjM1MwogICAgLy8gcmV0dXJuIDI1CiAgICBwdXNoaW50IDI1CiAgICBiIHVzZXJJbXBhY3RXaXRoU29jaWFsX3Rlcm5hcnlfbWVyZ2VAOAoKdXNlckltcGFjdFdpdGhTb2NpYWxfYWZ0ZXJfaWZfZWxzZUAxODoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MzU2CiAgICAvLyByZXR1cm4gMAogICAgaW50Y18wIC8vIDAKICAgIGIgdXNlckltcGFjdFdpdGhTb2NpYWxfdGVybmFyeV9tZXJnZUA4Cgp1c2VySW1wYWN0V2l0aFNvY2lhbF90ZXJuYXJ5X2ZhbHNlQDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjEyOQogICAgLy8gY29uc3QgbmZ0SW1wYWN0OiB1aW50NjQgPSBha2l0YU5GVCAhPT0gMCA/IHRoaXMuZ2V0TkZUSW1wYWN0U2NvcmUoYWNjb3VudCwgQXNzZXQoYWtpdGFORlQpKSA6IDAgLy8gSG9sZHMgQUtDL09tbmlnZW0gfCA1MAogICAgaW50Y18wIC8vIDAKICAgIGIgdXNlckltcGFjdFdpdGhTb2NpYWxfdGVybmFyeV9tZXJnZUA4Cgp1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pZl9lbHNlQDIyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMzEKICAgIC8vIGNvbnN0IGJhbGFuY2UgPSBBc3NldEhvbGRpbmcuYXNzZXRCYWxhbmNlKGFjY291bnQsIGFrdGEpWzBdCiAgICBmcmFtZV9kaWcgLTIKICAgIGZyYW1lX2RpZyA0CiAgICBhc3NldF9ob2xkaW5nX2dldCBBc3NldEJhbGFuY2UKICAgIHBvcAogICAgZHVwCiAgICBmcmFtZV9idXJ5IDYKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjM0CiAgICAvLyBpZiAoYmFsYW5jZSA8IFRFTl9USE9VU0FORF9BS0lUQSkgewogICAgaW50YyA3IC8vIDEwMDAwMDAwMDAwCiAgICA8CiAgICBieiB1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pZl9lbHNlQDI0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjIzNQogICAgLy8gcmV0dXJuIDAKICAgIGludGNfMCAvLyAwCiAgICBmcmFtZV9idXJ5IDcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTI4CiAgICAvLyBjb25zdCBoZWxkQWtpdGFJbXBhY3QgPSB0aGlzLmdldEhlbGRBa3RhSW1wYWN0U2NvcmUoYWNjb3VudCkgLy8gSGVsZCBBS1RBIHwgdXAgdG8gNTAKICAgIGIgdXNlckltcGFjdFdpdGhTb2NpYWxfYWZ0ZXJfaW5saW5lZF9zbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjpBa2l0YVNvY2lhbEltcGFjdC5nZXRIZWxkQWt0YUltcGFjdFNjb3JlQDI1Cgp1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pZl9lbHNlQDI0OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMzgKICAgIC8vIGNvbnN0IGNhcHBlZCA9IGJhbGFuY2UgPj0gT05FX01JTExJT05fQUtJVEEgPyBPTkVfTUlMTElPTl9BS0lUQSA6IGJhbGFuY2UKICAgIGZyYW1lX2RpZyA2CiAgICBkdXAKICAgIGludGMgNCAvLyAxMDAwMDAwMDAwMDAwCiAgICA+PQogICAgaW50YyA0IC8vIDEwMDAwMDAwMDAwMDAKICAgIHN3YXAKICAgIHNlbGVjdAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMzkKICAgIC8vIHJldHVybiAoY2FwcGVkICogNTApIC8gT05FX01JTExJT05fQUtJVEEKICAgIHB1c2hpbnQgNTAKICAgICoKICAgIGludGMgNCAvLyAxMDAwMDAwMDAwMDAwCiAgICAvCiAgICBmcmFtZV9idXJ5IDcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTI4CiAgICAvLyBjb25zdCBoZWxkQWtpdGFJbXBhY3QgPSB0aGlzLmdldEhlbGRBa3RhSW1wYWN0U2NvcmUoYWNjb3VudCkgLy8gSGVsZCBBS1RBIHwgdXAgdG8gNTAKICAgIGIgdXNlckltcGFjdFdpdGhTb2NpYWxfYWZ0ZXJfaW5saW5lZF9zbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjpBa2l0YVNvY2lhbEltcGFjdC5nZXRIZWxkQWt0YUltcGFjdFNjb3JlQDI1Cgp1c2VySW1wYWN0V2l0aFNvY2lhbF90ZXJuYXJ5X2ZhbHNlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjEyNwogICAgLy8gY29uc3QgbmZkU2NvcmU6IHVpbnQ2NCA9IE5GRCAhPT0gMCA/IHRoaXMuZ2V0TkZESW1wYWN0U2NvcmUoYWNjb3VudCwgQXBwbGljYXRpb24oTkZEKSkgOiAwIC8vIE5GRCB8IHVwIHRvIDE1MAogICAgaW50Y18wIC8vIDAKICAgIGZyYW1lX2J1cnkgOQogICAgYiB1c2VySW1wYWN0V2l0aFNvY2lhbF90ZXJuYXJ5X21lcmdlQDUKCnVzZXJJbXBhY3RXaXRoU29jaWFsX2Vsc2VfYm9keUA0MjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjU3CiAgICAvLyBzdWJzY3JpYmVySW1wYWN0ICs9IChzdWJzY3JpcHRpb25TdGF0ZS5zdHJlYWsgKiAyMCkgLyBtb2RpZmllcgogICAgZnJhbWVfZGlnIDE0CiAgICBwdXNoaW50IDIwCiAgICAqCiAgICBzd2FwCiAgICAvCiAgICBmcmFtZV9idXJ5IDEyCiAgICBiIHVzZXJJbXBhY3RXaXRoU29jaWFsX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo6QWtpdGFTb2NpYWxJbXBhY3QuZ2V0U3Vic2NyaWJlckltcGFjdFNjb3JlQDQ0Cgp1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pZl9lbHNlQDM0OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMTMKICAgIC8vIGNvbnN0IHN0YWtpbmcgPSBnZXRBa2l0YUFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc3Rha2luZwogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy9iYXNlLnRzOjI3CiAgICAvLyBha2l0YURBTyA9IEdsb2JhbFN0YXRlPEFwcGxpY2F0aW9uPih7IGtleTogR2xvYmFsU3RhdGVLZXlBa2l0YURBTyB9KQogICAgYnl0ZWNfMCAvLyAiYWtpdGFfZGFvIgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMTMKICAgIC8vIGNvbnN0IHN0YWtpbmcgPSBnZXRBa2l0YUFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc3Rha2luZwogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9mdW5jdGlvbnMudHM6NDQKICAgIC8vIGNvbnN0IFthcHBMaXN0Qnl0ZXNdID0gb3AuQXBwR2xvYmFsLmdldEV4Qnl0ZXMoYWtpdGFEQU8sIEJ5dGVzKEFraXRhREFPR2xvYmFsU3RhdGVLZXlzQWtpdGFBcHBMaXN0KSkKICAgIGJ5dGVjXzIgLy8gImFhbCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjEzCiAgICAvLyBjb25zdCBzdGFraW5nID0gZ2V0QWtpdGFBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnN0YWtpbmcKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQ2NAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMTUtMjE4CiAgICAvLyBjb25zdCB3ZWlnaHRlZFN0YWtlID0gYWJpQ2FsbDx0eXBlb2YgU3Rha2luZy5wcm90b3R5cGUuZ2V0QXBwV2VpZ2h0ZWRTdGFrZT4oewogICAgLy8gICBhcHBJZDogc3Rha2luZywKICAgIC8vICAgYXJnczogW0dsb2JhbC5jdXJyZW50QXBwbGljYXRpb25JZC5pZCwgYWNjb3VudCwgYWt0YSwgdHJ1ZV0KICAgIC8vIH0pLnJldHVyblZhbHVlCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjIxNwogICAgLy8gYXJnczogW0dsb2JhbC5jdXJyZW50QXBwbGljYXRpb25JZC5pZCwgYWNjb3VudCwgYWt0YSwgdHJ1ZV0KICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25JRAogICAgaXRvYgogICAgc3dhcAogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjIxNS0yMTgKICAgIC8vIGNvbnN0IHdlaWdodGVkU3Rha2UgPSBhYmlDYWxsPHR5cGVvZiBTdGFraW5nLnByb3RvdHlwZS5nZXRBcHBXZWlnaHRlZFN0YWtlPih7CiAgICAvLyAgIGFwcElkOiBzdGFraW5nLAogICAgLy8gICBhcmdzOiBbR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbklkLmlkLCBhY2NvdW50LCBha3RhLCB0cnVlXQogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIHB1c2hieXRlcyAweGVmMThhNDk2IC8vIG1ldGhvZCAiZ2V0QXBwV2VpZ2h0ZWRTdGFrZSh1aW50NjQsYWRkcmVzcyx1aW50NjQsYm9vbCkodWludDY0LHVpbnQ2NCkiCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGZyYW1lX2RpZyAtMgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGZyYW1lX2RpZyAwCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMTcKICAgIC8vIGFyZ3M6IFtHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uSWQuaWQsIGFjY291bnQsIGFrdGEsIHRydWVdCiAgICBwdXNoYnl0ZXMgMHg4MAogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjE1LTIxOAogICAgLy8gY29uc3Qgd2VpZ2h0ZWRTdGFrZSA9IGFiaUNhbGw8dHlwZW9mIFN0YWtpbmcucHJvdG90eXBlLmdldEFwcFdlaWdodGVkU3Rha2U+KHsKICAgIC8vICAgYXBwSWQ6IHN0YWtpbmcsCiAgICAvLyAgIGFyZ3M6IFtHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uSWQuaWQsIGFjY291bnQsIGFrdGEsIHRydWVdCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgaW50Y18zIC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGl0eG4gTGFzdExvZwogICAgZHVwCiAgICBleHRyYWN0IDQgMAogICAgZGlnIDEKICAgIGV4dHJhY3QgMCA0CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgID09CiAgICBhc3NlcnQgLy8gQnl0ZXMgaGFzIHZhbGlkIHByZWZpeAogICAgbGVuCiAgICBwdXNoaW50IDE2CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBzbWFydF9jb250cmFjdHMvc3Rha2luZy90eXBlcy50czo6V2VpZ2h0ZWRTdGFrZQogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMjAKICAgIC8vIHJldHVybiB0aGlzLmNhbGN1bGF0ZVN0YWtpbmdJbXBhY3RTY29yZSh3ZWlnaHRlZFN0YWtlLmFtb3VudCwgd2VpZ2h0ZWRTdGFrZS53ZWlnaHRlZEFnZSkKICAgIGR1cAogICAgcHVzaGludCA0CiAgICBleHRyYWN0X3VpbnQ2NAogICAgZHVwCiAgICBjb3ZlciAyCiAgICBmcmFtZV9idXJ5IDUKICAgIHB1c2hpbnQgMTIKICAgIGV4dHJhY3RfdWludDY0CiAgICBmcmFtZV9idXJ5IDE2CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjE4OAogICAgLy8gaWYgKGFtb3VudCA8IFRFTl9USE9VU0FORF9BS0lUQSB8fCB3ZWlnaHRlZEFnZSA8IFRISVJUWV9EQVlTKSB7CiAgICBpbnRjIDcgLy8gMTAwMDAwMDAwMDAKICAgIDwKICAgIGJueiB1c2VySW1wYWN0V2l0aFNvY2lhbF9pZl9ib2R5QDQ3CiAgICBmcmFtZV9kaWcgMTYKICAgIHB1c2hpbnQgMjU5MjAwMAogICAgPAogICAgYnogdXNlckltcGFjdFdpdGhTb2NpYWxfYWZ0ZXJfaWZfZWxzZUA0OAoKdXNlckltcGFjdFdpdGhTb2NpYWxfaWZfYm9keUA0NzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTg5CiAgICAvLyByZXR1cm4gMAogICAgaW50Y18wIC8vIDAKCnVzZXJJbXBhY3RXaXRoU29jaWFsX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo6QWtpdGFTb2NpYWxJbXBhY3QuY2FsY3VsYXRlU3Rha2luZ0ltcGFjdFNjb3JlQDQ5OgogICAgZnJhbWVfYnVyeSAxMQogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoxMjUKICAgIC8vIGNvbnN0IHN0YWtlZEFrdGFJbXBhY3QgPSB0aGlzLmdldFN0YWtpbmdJbXBhY3RTY29yZShhY2NvdW50KSAvLyBTdGFrZWQgQUtUQSB8IHVwIHRvIDI1MAogICAgYiB1c2VySW1wYWN0V2l0aFNvY2lhbF9hZnRlcl9pbmxpbmVkX3NtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6OkFraXRhU29jaWFsSW1wYWN0LmdldFN0YWtpbmdJbXBhY3RTY29yZUAzNgoKdXNlckltcGFjdFdpdGhTb2NpYWxfYWZ0ZXJfaWZfZWxzZUA0ODoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTkzCiAgICAvLyBjb25zdCBhbXRDYXBwZWQgPSBhbW91bnQgPj0gVFdPX0hVTkRSRURfVEhPVVNBTkRfQUtJVEEgPyBUV09fSFVORFJFRF9USE9VU0FORF9BS0lUQSA6IGFtb3VudAogICAgZnJhbWVfZGlnIDUKICAgIGR1cAogICAgaW50YyA1IC8vIDIwMDAwMDAwMDAwMAogICAgPj0KICAgIGludGMgNSAvLyAyMDAwMDAwMDAwMDAKICAgIHN3YXAKICAgIHNlbGVjdAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoxOTYKICAgIC8vIGNvbnN0IG1heFNjb3JlOiB1aW50NjQgPSAoYW10Q2FwcGVkICogMjUwKSAvIFRXT19IVU5EUkVEX1RIT1VTQU5EX0FLSVRBCiAgICBwdXNoaW50IDI1MAogICAgKgogICAgaW50YyA1IC8vIDIwMDAwMDAwMDAwMAogICAgLwogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoxOTkKICAgIC8vIGNvbnN0IHRpbWVDYXBwZWQgPSB3ZWlnaHRlZEFnZSA+PSBPTkVfWUVBUiA/IE9ORV9ZRUFSIDogd2VpZ2h0ZWRBZ2UKICAgIGZyYW1lX2RpZyAxNgogICAgZHVwCiAgICBpbnRjIDYgLy8gMzE1MzYwMDAKICAgID49CiAgICBpbnRjIDYgLy8gMzE1MzYwMDAKICAgIHN3YXAKICAgIHNlbGVjdAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyMDEKICAgIC8vIHJldHVybiAodGltZUNhcHBlZCAqIG1heFNjb3JlKSAvIE9ORV9ZRUFSCiAgICAqCiAgICBpbnRjIDYgLy8gMzE1MzYwMDAKICAgIC8KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MjIwCiAgICAvLyByZXR1cm4gdGhpcy5jYWxjdWxhdGVTdGFraW5nSW1wYWN0U2NvcmUod2VpZ2h0ZWRTdGFrZS5hbW91bnQsIHdlaWdodGVkU3Rha2Uud2VpZ2h0ZWRBZ2UpCiAgICBiIHVzZXJJbXBhY3RXaXRoU29jaWFsX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo6QWtpdGFTb2NpYWxJbXBhY3QuY2FsY3VsYXRlU3Rha2luZ0ltcGFjdFNjb3JlQDQ5CgoKLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czo6QWtpdGFTb2NpYWxJbXBhY3QuY2FsY3VsYXRlU29jaWFsSW1wYWN0KGlucHV0czogYnl0ZXMpIC0+IHVpbnQ2NCwgYnl0ZXM6CmNhbGN1bGF0ZVNvY2lhbEltcGFjdDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTQyCiAgICAvLyBwcml2YXRlIGNhbGN1bGF0ZVNvY2lhbEltcGFjdChpbnB1dHM6IFNvY2lhbEltcGFjdElucHV0cyk6IHVpbnQ2NCB7CiAgICBwcm90byAxIDIKICAgIHB1c2hieXRlcyAiIgogICAgZHVwbiA0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjE0MwogICAgLy8gaWYgKCFpbnB1dHMuaGFzTWV0YSkgewogICAgZnJhbWVfZGlnIC0xCiAgICBpbnRjXzAgLy8gMAogICAgZ2V0Yml0CiAgICBibnogY2FsY3VsYXRlU29jaWFsSW1wYWN0X2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoxNDQKICAgIC8vIHJldHVybiAwCiAgICBpbnRjXzAgLy8gMAogICAgZnJhbWVfZGlnIC0xCiAgICBmcmFtZV9idXJ5IDEKICAgIGZyYW1lX2J1cnkgMAogICAgcmV0c3ViCgpjYWxjdWxhdGVTb2NpYWxJbXBhY3RfYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoxNTAKICAgIC8vIGlmIChpbnB1dHMuc3RyZWFrID49IDYwKSB7CiAgICBmcmFtZV9kaWcgLTEKICAgIGludGNfMSAvLyAxCiAgICBleHRyYWN0X3VpbnQ2NAogICAgZHVwCiAgICBmcmFtZV9idXJ5IDIKICAgIHB1c2hpbnQgNjAKICAgID49CiAgICBieiBjYWxjdWxhdGVTb2NpYWxJbXBhY3RfZWxzZV9ib2R5QDQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTUxCiAgICAvLyBzb2NpYWxJbXBhY3QgKz0gMTAwCiAgICBwdXNoaW50IDEwMAogICAgZnJhbWVfYnVyeSAxCgpjYWxjdWxhdGVTb2NpYWxJbXBhY3RfYWZ0ZXJfaWZfZWxzZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoxNTcKICAgIC8vIGNvbnN0IGFjY291bnRBZ2U6IHVpbnQ2NCA9IEdsb2JhbC5sYXRlc3RUaW1lc3RhbXAgLSBpbnB1dHMuc3RhcnREYXRlCiAgICBnbG9iYWwgTGF0ZXN0VGltZXN0YW1wCiAgICBmcmFtZV9kaWcgLTEKICAgIHB1c2hpbnQgOQogICAgZXh0cmFjdF91aW50NjQKICAgIC0KICAgIGR1cAogICAgZnJhbWVfYnVyeSAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjE1OAogICAgLy8gaWYgKGFjY291bnRBZ2UgPj0gVFdPX1lFQVJTKSB7CiAgICBpbnRjIDggLy8gNjMwNzIwMDAKICAgID49CiAgICBieiBjYWxjdWxhdGVTb2NpYWxJbXBhY3RfZWxzZV9ib2R5QDcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTU5CiAgICAvLyBzb2NpYWxJbXBhY3QgKz0gNzUKICAgIGZyYW1lX2RpZyAxCiAgICBwdXNoaW50IDc1CiAgICArCiAgICBmcmFtZV9idXJ5IDEKCmNhbGN1bGF0ZVNvY2lhbEltcGFjdF9hZnRlcl9pZl9lbHNlQDg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjE2NQogICAgLy8gaWYgKGlucHV0cy52b3RlQ291bnQgPiAwKSB7CiAgICBmcmFtZV9kaWcgLTEKICAgIHB1c2hpbnQgMTcKICAgIGV4dHJhY3RfdWludDY0CiAgICBkdXAKICAgIGZyYW1lX2J1cnkgMwogICAgYnogY2FsY3VsYXRlU29jaWFsSW1wYWN0X2FmdGVyX2lmX2Vsc2VAMTgKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTY2CiAgICAvLyBsZXQgdm90ZUltcGFjdDogdWludDY0ID0gKGlucHV0cy52b3RlQ291bnQgKiA3NSkgLyAxMDBfMDAwCiAgICBmcmFtZV9kaWcgMwogICAgcHVzaGludCA3NQogICAgKgogICAgcHVzaGludCAxMDAwMDAKICAgIC8KICAgIGR1cAogICAgZnJhbWVfYnVyeSA0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjE2NwogICAgLy8gaWYgKHZvdGVJbXBhY3QgPiA3NSkgewogICAgcHVzaGludCA3NQogICAgPgogICAgYnogY2FsY3VsYXRlU29jaWFsSW1wYWN0X2FmdGVyX2lmX2Vsc2VAMTEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTY4CiAgICAvLyB2b3RlSW1wYWN0ID0gNzUKICAgIHB1c2hpbnQgNzUKICAgIGZyYW1lX2J1cnkgNAoKY2FsY3VsYXRlU29jaWFsSW1wYWN0X2FmdGVyX2lmX2Vsc2VAMTE6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjE3MQogICAgLy8gaWYgKGlucHV0cy5pc05lZ2F0aXZlKSB7CiAgICBmcmFtZV9kaWcgLTEKICAgIHB1c2hpbnQgMjAwCiAgICBnZXRiaXQKICAgIGJ6IGNhbGN1bGF0ZVNvY2lhbEltcGFjdF9lbHNlX2JvZHlAMTYKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTczCiAgICAvLyBpZiAoc29jaWFsSW1wYWN0ID4gdm90ZUltcGFjdCkgewogICAgZnJhbWVfZGlnIDEKICAgIGZyYW1lX2RpZyA0CiAgICA+CiAgICBieiBjYWxjdWxhdGVTb2NpYWxJbXBhY3RfZWxzZV9ib2R5QDE0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjE3NAogICAgLy8gc29jaWFsSW1wYWN0IC09IHZvdGVJbXBhY3QKICAgIGZyYW1lX2RpZyAxCiAgICBmcmFtZV9kaWcgNAogICAgLQogICAgZnJhbWVfYnVyeSAxCgpjYWxjdWxhdGVTb2NpYWxJbXBhY3RfYWZ0ZXJfaWZfZWxzZUAxODoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTgzCiAgICAvLyByZXR1cm4gc29jaWFsSW1wYWN0CiAgICBmcmFtZV9kaWcgMQogICAgZnJhbWVfZGlnIC0xCiAgICBmcmFtZV9idXJ5IDEKICAgIGZyYW1lX2J1cnkgMAogICAgcmV0c3ViCgpjYWxjdWxhdGVTb2NpYWxJbXBhY3RfZWxzZV9ib2R5QDE0OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoxNzYKICAgIC8vIHNvY2lhbEltcGFjdCA9IDAKICAgIGludGNfMCAvLyAwCiAgICBmcmFtZV9idXJ5IDEKICAgIGIgY2FsY3VsYXRlU29jaWFsSW1wYWN0X2FmdGVyX2lmX2Vsc2VAMTgKCmNhbGN1bGF0ZVNvY2lhbEltcGFjdF9lbHNlX2JvZHlAMTY6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjE3OQogICAgLy8gc29jaWFsSW1wYWN0ICs9IHZvdGVJbXBhY3QKICAgIGZyYW1lX2RpZyAxCiAgICBmcmFtZV9kaWcgNAogICAgKwogICAgZnJhbWVfYnVyeSAxCiAgICBiIGNhbGN1bGF0ZVNvY2lhbEltcGFjdF9hZnRlcl9pZl9lbHNlQDE4CgpjYWxjdWxhdGVTb2NpYWxJbXBhY3RfZWxzZV9ib2R5QDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjE2MQogICAgLy8gc29jaWFsSW1wYWN0ICs9IChhY2NvdW50QWdlICogNzUpIC8gVFdPX1lFQVJTCiAgICBmcmFtZV9kaWcgMAogICAgcHVzaGludCA3NQogICAgKgogICAgaW50YyA4IC8vIDYzMDcyMDAwCiAgICAvCiAgICBmcmFtZV9kaWcgMQogICAgKwogICAgZnJhbWVfYnVyeSAxCiAgICBiIGNhbGN1bGF0ZVNvY2lhbEltcGFjdF9hZnRlcl9pZl9lbHNlQDgKCmNhbGN1bGF0ZVNvY2lhbEltcGFjdF9lbHNlX2JvZHlANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6MTUzCiAgICAvLyBzb2NpYWxJbXBhY3QgKz0gKGlucHV0cy5zdHJlYWsgKiAxMDApIC8gNjAKICAgIGZyYW1lX2RpZyAyCiAgICBwdXNoaW50IDEwMAogICAgKgogICAgcHVzaGludCA2MAogICAgLwogICAgZnJhbWVfYnVyeSAxCiAgICBiIGNhbGN1bGF0ZVNvY2lhbEltcGFjdF9hZnRlcl9pZl9lbHNlQDUKCgovLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjpBa2l0YVNvY2lhbEltcGFjdC5uZmRSZWFkRmllbGQoTkZEQXBwOiB1aW50NjQsIGZpZWxkOiBieXRlcykgLT4gYnl0ZXM6Cm5mZFJlYWRGaWVsZDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6Mjc2CiAgICAvLyBwcml2YXRlIG5mZFJlYWRGaWVsZChORkRBcHA6IEFwcGxpY2F0aW9uLCBmaWVsZDogc3RyaW5nKTogYnl0ZXMgewogICAgcHJvdG8gMiAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvc29jaWFsL2ltcGFjdC5hbGdvLnRzOjI3Ny0yODAKICAgIC8vIGNvbnN0IGZpZWxkQnl0ZXMgPSBhYmlDYWxsPHR5cGVvZiBORkQucHJvdG90eXBlLnJlYWRGaWVsZD4oewogICAgLy8gICBhcHBJZDogTkZEQXBwLmlkLAogICAgLy8gICBhcmdzOiBbQnl0ZXMoZmllbGQpXQogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6Mjc5CiAgICAvLyBhcmdzOiBbQnl0ZXMoZmllbGQpXQogICAgZnJhbWVfZGlnIC0xCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgZnJhbWVfZGlnIC0yCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zb2NpYWwvaW1wYWN0LmFsZ28udHM6Mjc3LTI4MAogICAgLy8gY29uc3QgZmllbGRCeXRlcyA9IGFiaUNhbGw8dHlwZW9mIE5GRC5wcm90b3R5cGUucmVhZEZpZWxkPih7CiAgICAvLyAgIGFwcElkOiBORkRBcHAuaWQsCiAgICAvLyAgIGFyZ3M6IFtCeXRlcyhmaWVsZCldCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgYnl0ZWMgMTIgLy8gbWV0aG9kICJyZWFkRmllbGQoYnl0ZVtdKWJ5dGVbXSIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgaW50Y18zIC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGl0eG4gTGFzdExvZwogICAgZHVwCiAgICBleHRyYWN0IDQgMAogICAgZGlnIDEKICAgIGV4dHJhY3QgMCA0CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgID09CiAgICBhc3NlcnQgLy8gQnl0ZXMgaGFzIHZhbGlkIHByZWZpeAogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAyCiAgICArCiAgICBzd2FwCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGJ5dGVzCiAgICBleHRyYWN0IDYgMAogICAgLy8gc21hcnRfY29udHJhY3RzL3NvY2lhbC9pbXBhY3QuYWxnby50czoyODIKICAgIC8vIHJldHVybiBmaWVsZEJ5dGVzCiAgICByZXRzdWIK", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [1745, 2128, 2205, 2236], "errorMessage": "Box must have value"}, {"pc": [525, 596, 1347, 1505, 1576, 1918, 2078, 2569, 2865], "errorMessage": "Bytes has valid prefix"}, {"pc": [2298], "errorMessage": "ERR:CNFD"}, {"pc": [2278], "errorMessage": "ERR:INFD"}, {"pc": [1255, 1366, 1380], "errorMessage": "ERR:IPAY"}, {"pc": [1821], "errorMessage": "ERR:IUPG"}, {"pc": [1110], "errorMessage": "ERR:NANT"}, {"pc": [1220, 1789, 1858], "errorMessage": "ERR:NDAO"}, {"pc": [547], "errorMessage": "ERR:NNFD"}, {"pc": [705], "errorMessage": "ERR:NONF"}, {"pc": [1132], "errorMessage": "ERR:NONT"}, {"pc": [418, 1668, 1718], "errorMessage": "ERR:NSOC"}, {"pc": [447], "errorMessage": "ERR:NSUB"}, {"pc": [410, 1212, 1387, 1660, 1710, 1781, 1850, 1967], "errorMessage": "application exists"}, {"pc": [1092, 2331, 2370], "errorMessage": "asset exists"}, {"pc": [401, 483, 748, 1205, 1292, 1449, 1530, 1651, 1701, 1774, 1793, 1843, 1879, 1960, 2038, 2147, 2306, 2513], "errorMessage": "check GlobalState exists"}, {"pc": [331, 599, 1757, 2868], "errorMessage": "invalid array length header"}, {"pc": [1288], "errorMessage": "invalid number of bytes for arc4.bool"}, {"pc": [339, 1765], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [367, 1445, 1526, 1596, 1616, 1636, 1739], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}, {"pc": [324, 375, 385, 394, 1189, 1198, 1278, 1836], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [530], "errorMessage": "invalid number of bytes for bool"}, {"pc": [606, 2875], "errorMessage": "invalid number of bytes for bytes"}, {"pc": [1645, 1695, 2084], "errorMessage": "invalid number of bytes for smart_contracts/social/types.ts::SocialImpactInputs"}, {"pc": [1511], "errorMessage": "invalid number of bytes for smart_contracts/staking/types.ts::StakeCheck"}, {"pc": [2574], "errorMessage": "invalid number of bytes for smart_contracts/staking/types.ts::WeightedStake"}, {"pc": [1924], "errorMessage": "invalid number of bytes for smart_contracts/subscriptions/types.ts::SubscriptionInfoWithExistence"}, {"pc": [1352, 1581], "errorMessage": "invalid number of bytes for uint64"}, {"pc": [1181, 1268], "errorMessage": "transaction type is pay"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -82,6 +82,12 @@ class SocialImpactInputs:
     voteCount: int
     isNegative: bool
 
+@dataclasses.dataclass(frozen=True)
+class StakeCheck:
+    """Struct for StakeCheck"""
+    valid: bool
+    balance: int
+
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
 class CacheMetaArgs:
@@ -105,6 +111,35 @@ class UpdateSubscriptionStateModifierArgs:
     @property
     def abi_method_signature(self) -> str:
         return "updateSubscriptionStateModifier(pay,uint64,uint64)void"
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class CommitStakingImpactArgs:
+    """Dataclass for commit_staking_impact arguments"""
+    payment: algokit_utils.AppMethodCallTransactionArgument
+    amount: int
+    inheritRoot: bool
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "commitStakingImpact(pay,uint64,bool)void"
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class CheckpointStakingImpactArgs:
+    """Dataclass for checkpoint_staking_impact arguments"""
+    address: str
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "checkpointStakingImpact(address)(bool,uint64)"
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class StakingImpactCostArgs:
+    """Dataclass for staking_impact_cost arguments"""
+    address: str
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "stakingImpactCost(address)uint64"
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
 class GetUserImpactWithoutSocialArgs:
@@ -181,9 +216,33 @@ class UpdateArgs:
         return "update(string)void"
 
 
+class _AkitaSocialImpactUpdate:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppUpdateMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.params.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update(string)void",
+            "args": method_args,
+        }))
+
+
 class AkitaSocialImpactParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_AkitaSocialImpactUpdate":
+        return _AkitaSocialImpactUpdate(self.app_client)
 
     def cache_meta(
         self,
@@ -208,6 +267,45 @@ class AkitaSocialImpactParams:
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
             "method": "updateSubscriptionStateModifier(pay,uint64,uint64)void",
+            "args": method_args,
+        }))
+
+    def commit_staking_impact(
+        self,
+        args: tuple[algokit_utils.AppMethodCallTransactionArgument, int, bool] | CommitStakingImpactArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "commitStakingImpact(pay,uint64,bool)void",
+            "args": method_args,
+        }))
+
+    def checkpoint_staking_impact(
+        self,
+        args: tuple[str] | CheckpointStakingImpactArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "checkpointStakingImpact(address)(bool,uint64)",
+            "args": method_args,
+        }))
+
+    def staking_impact_cost(
+        self,
+        args: tuple[str] | StakingImpactCostArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "stakingImpactCost(address)uint64",
             "args": method_args,
         }))
 
@@ -298,6 +396,19 @@ class AkitaSocialImpactParams:
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
             "method": "opUp()void",
+        }))
+
+    def create(
+        self,
+        args: tuple[int, str] | CreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "create(uint64,string)void",
+            "args": method_args,
         }))
 
     def clear_state(
@@ -311,9 +422,33 @@ class AkitaSocialImpactParams:
         )
 
 
+class _AkitaSocialImpactUpdateTransaction:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.create_transaction.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update(string)void",
+            "args": method_args,
+        }))
+
+
 class AkitaSocialImpactCreateTransactionParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_AkitaSocialImpactUpdateTransaction":
+        return _AkitaSocialImpactUpdateTransaction(self.app_client)
 
     def cache_meta(
         self,
@@ -338,6 +473,45 @@ class AkitaSocialImpactCreateTransactionParams:
         return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
             "method": "updateSubscriptionStateModifier(pay,uint64,uint64)void",
+            "args": method_args,
+        }))
+
+    def commit_staking_impact(
+        self,
+        args: tuple[algokit_utils.AppMethodCallTransactionArgument, int, bool] | CommitStakingImpactArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "commitStakingImpact(pay,uint64,bool)void",
+            "args": method_args,
+        }))
+
+    def checkpoint_staking_impact(
+        self,
+        args: tuple[str] | CheckpointStakingImpactArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "checkpointStakingImpact(address)(bool,uint64)",
+            "args": method_args,
+        }))
+
+    def staking_impact_cost(
+        self,
+        args: tuple[str] | StakingImpactCostArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "stakingImpactCost(address)uint64",
             "args": method_args,
         }))
 
@@ -430,6 +604,19 @@ class AkitaSocialImpactCreateTransactionParams:
             "method": "opUp()void",
         }))
 
+    def create(
+        self,
+        args: tuple[int, str] | CreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "create(uint64,string)void",
+            "args": method_args,
+        }))
+
     def clear_state(
         self,
         params: algokit_utils.AppClientBareCallParams | None = None,
@@ -441,9 +628,36 @@ class AkitaSocialImpactCreateTransactionParams:
         )
 
 
+class _AkitaSocialImpactUpdateSend:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        response = self.app_client.send.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update(string)void",
+            "args": method_args,
+        }), send_params=send_params, compilation_params=compilation_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppUpdateTransactionResult[None], parsed_response)
+
+
 class AkitaSocialImpactSend:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_AkitaSocialImpactUpdateSend":
+        return _AkitaSocialImpactUpdateSend(self.app_client)
 
     def cache_meta(
         self,
@@ -476,6 +690,54 @@ class AkitaSocialImpactSend:
         }), send_params=send_params)
         parsed_response = response
         return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
+
+    def commit_staking_impact(
+        self,
+        args: tuple[algokit_utils.AppMethodCallTransactionArgument, int, bool] | CommitStakingImpactArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "commitStakingImpact(pay,uint64,bool)void",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
+
+    def checkpoint_staking_impact(
+        self,
+        args: tuple[str] | CheckpointStakingImpactArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[StakeCheck]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "checkpointStakingImpact(address)(bool,uint64)",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = dataclasses.replace(response, abi_return=_init_dataclass(StakeCheck, typing.cast(dict, response.abi_return))) # type: ignore
+        return typing.cast(algokit_utils.SendAppTransactionResult[StakeCheck], parsed_response)
+
+    def staking_impact_cost(
+        self,
+        args: tuple[str] | StakingImpactCostArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[int]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "stakingImpactCost(address)uint64",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[int], parsed_response)
 
     def get_user_impact_without_social(
         self,
@@ -583,6 +845,22 @@ class AkitaSocialImpactSend:
         response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
             "method": "opUp()void",
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
+
+    def create(
+        self,
+        args: tuple[int, str] | CreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "create(uint64,string)void",
+            "args": method_args,
         }), send_params=send_params)
         parsed_response = response
         return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
@@ -898,6 +1176,24 @@ class AkitaSocialImpactClient:
     @typing.overload
     def decode_return_value(
         self,
+        method: typing.Literal["commitStakingImpact(pay,uint64,bool)void"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
+        method: typing.Literal["checkpointStakingImpact(address)(bool,uint64)"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> StakeCheck | None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
+        method: typing.Literal["stakingImpactCost(address)uint64"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> int | None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
         method: typing.Literal["getUserImpactWithoutSocial(address)uint64"],
         return_value: algokit_utils.ABIReturn | None
     ) -> int | None: ...
@@ -960,7 +1256,7 @@ class AkitaSocialImpactClient:
         self,
         method: str,
         return_value: algokit_utils.ABIReturn | None
-    ) -> algokit_utils.ABIValue | algokit_utils.ABIStruct | ImpactMetaValue | None | int:
+    ) -> algokit_utils.ABIValue | algokit_utils.ABIStruct | ImpactMetaValue | None | StakeCheck | int:
         """Decode ABI return value for the given method."""
         if return_value is None:
             return None
@@ -979,6 +1275,626 @@ class AkitaSocialImpactClient:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class AkitaSocialImpactMethodCallCreateParams(
+    algokit_utils.AppClientCreateSchema, algokit_utils.BaseAppClientMethodCallParams[
+        CreateArgs,
+        str | None,
+    ]
+):
+    """Parameters for creating AkitaSocialImpact contract using ABI"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallCreateParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallCreateParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+@dataclasses.dataclass(frozen=True)
+class AkitaSocialImpactMethodCallUpdateParams(
+    algokit_utils.BaseAppClientMethodCallParams[
+        UpdateArgs,
+        str | None,
+    ]
+):
+    """Parameters for calling AkitaSocialImpact contract using ABI"""
+    on_complete: typing.Literal[OnComplete.UpdateApplicationOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+class AkitaSocialImpactFactory(algokit_utils.TypedAppFactoryProtocol[AkitaSocialImpactMethodCallCreateParams, AkitaSocialImpactMethodCallUpdateParams, None]):
+    """Factory for deploying and managing AkitaSocialImpactClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = AkitaSocialImpactFactoryParams(self.app_factory)
+        self.create_transaction = AkitaSocialImpactFactoryCreateTransaction(self.app_factory)
+        self.send = AkitaSocialImpactFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: AkitaSocialImpactMethodCallCreateParams | None = None,
+        update_params: AkitaSocialImpactMethodCallUpdateParams | None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[AkitaSocialImpactClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params.to_algokit_utils_params() if update_params else None,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return AkitaSocialImpactClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AkitaSocialImpactClient:
+        """Get an app client by creator address and name"""
+        return AkitaSocialImpactClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AkitaSocialImpactClient:
+        """Get an app client by app ID"""
+        return AkitaSocialImpactClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class AkitaSocialImpactFactoryParams:
+    """Parameters for creating transactions for AkitaSocialImpact contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AkitaSocialImpactFactoryCreateParams(app_factory)
+        self.update = AkitaSocialImpactFactoryUpdateParams(app_factory)
+        self.delete = AkitaSocialImpactFactoryDeleteParams(app_factory)
+
+class AkitaSocialImpactFactoryCreateParams:
+    """Parameters for 'create' operations of AkitaSocialImpact contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def cache_meta(
+        self,
+        args: tuple[str, int, int, int] | CacheMetaArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the cacheMeta(address,uint64,uint64,uint64)uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "cacheMeta(address,uint64,uint64,uint64)uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def update_subscription_state_modifier(
+        self,
+        args: tuple[algokit_utils.AppMethodCallTransactionArgument, int, int] | UpdateSubscriptionStateModifierArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the updateSubscriptionStateModifier(pay,uint64,uint64)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "updateSubscriptionStateModifier(pay,uint64,uint64)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def commit_staking_impact(
+        self,
+        args: tuple[algokit_utils.AppMethodCallTransactionArgument, int, bool] | CommitStakingImpactArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the commitStakingImpact(pay,uint64,bool)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "commitStakingImpact(pay,uint64,bool)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def checkpoint_staking_impact(
+        self,
+        args: tuple[str] | CheckpointStakingImpactArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the checkpointStakingImpact(address)(bool,uint64) ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "checkpointStakingImpact(address)(bool,uint64)",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def staking_impact_cost(
+        self,
+        args: tuple[str] | StakingImpactCostArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the stakingImpactCost(address)uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "stakingImpactCost(address)uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def get_user_impact_without_social(
+        self,
+        args: tuple[str] | GetUserImpactWithoutSocialArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the getUserImpactWithoutSocial(address)uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "getUserImpactWithoutSocial(address)uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def get_user_impact(
+        self,
+        args: tuple[str] | GetUserImpactArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the getUserImpact(address)uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "getUserImpact(address)uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def get_user_impact_with_inputs(
+        self,
+        args: tuple[str, SocialImpactInputs] | GetUserImpactWithInputsArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the getUserImpactWithInputs(address,(bool,uint64,uint64,uint64,bool))uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "getUserImpactWithInputs(address,(bool,uint64,uint64,uint64,bool))uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def calculate_social_impact_score(
+        self,
+        args: tuple[SocialImpactInputs] | CalculateSocialImpactScoreArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the calculateSocialImpactScore((bool,uint64,uint64,uint64,bool))uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "calculateSocialImpactScore((bool,uint64,uint64,uint64,bool))uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def get_meta(
+        self,
+        args: tuple[str] | GetMetaArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the getMeta(address)(uint64,uint64,uint64,uint64,uint64) ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "getMeta(address)(uint64,uint64,uint64,uint64,uint64)",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def update_akita_dao(
+        self,
+        args: tuple[int] | UpdateAkitaDaoArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the updateAkitaDAO(uint64)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "updateAkitaDAO(uint64)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def op_up(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the opUp()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "opUp()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def create(
+        self,
+        args: tuple[int, str] | CreateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the create(uint64,string)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "create(uint64,string)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the update(string)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "update(string)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class AkitaSocialImpactFactoryUpdateParams:
+    """Parameters for 'update' operations of AkitaSocialImpact contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class AkitaSocialImpactFactoryDeleteParams:
+    """Parameters for 'delete' operations of AkitaSocialImpact contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class AkitaSocialImpactFactoryCreateTransaction:
+    """Create transactions for AkitaSocialImpact contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AkitaSocialImpactFactoryCreateTransactionCreate(app_factory)
+
+
+class AkitaSocialImpactFactoryCreateTransactionCreate:
+    """Create new instances of AkitaSocialImpact contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class AkitaSocialImpactFactorySend:
+    """Send calls to AkitaSocialImpact contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AkitaSocialImpactFactorySendCreate(app_factory)
+
+
+class AkitaSocialImpactFactorySendCreate:
+    """Send create calls to AkitaSocialImpact contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[AkitaSocialImpactClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return AkitaSocialImpactClient(result[0]), result[1]
+
+    def create(
+        self,
+        args: tuple[int, str] | CreateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> tuple[AkitaSocialImpactClient, algokit_utils.AppFactoryCreateMethodCallResult[None]]:
+            """Creates and sends a transaction using the create(uint64,string)void ABI method"""
+            params = params or algokit_utils.CommonAppCallCreateParams()
+            client, result = self.app_factory.send.create(
+                algokit_utils.AppFactoryCreateMethodCallParams(
+                    **{
+                    **dataclasses.asdict(params),
+                    "method": "create(uint64,string)void",
+                    "args": _parse_abi_args(args),
+                    }
+                ),
+                send_params=send_params,
+                compilation_params=compilation_params
+            )
+            return_value = None if result.abi_return is None else typing.cast(None, result.abi_return)
+    
+            return AkitaSocialImpactClient(client), algokit_utils.AppFactoryCreateMethodCallResult[None](
+                **{
+                    **result.__dict__,
+                    "app_id": result.app_id,
+                    "abi_return": return_value,
+                    "transaction": result.transaction,
+                    "confirmation": result.confirmation,
+                    "group_id": result.group_id,
+                    "tx_ids": result.tx_ids,
+                    "transactions": result.transactions,
+                    "confirmations": result.confirmations,
+                    "app_address": result.app_address,
+                }
+            )
+
+
+class _AkitaSocialImpactUpdateComposer:
+    def __init__(self, composer: "AkitaSocialImpactComposer"):
+        self.composer = composer
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "AkitaSocialImpactComposer":
+        self.composer._composer.add_app_update_method_call(
+            self.composer.client.params.update.update(
+                args=args,
+                params=params,
+                compilation_params=compilation_params
+            )
+        )
+        self.composer._result_mappers.append(
+            lambda v: self.composer.client.decode_return_value(
+                "update(string)void", v
+            )
+        )
+        return self.composer
+
+
 class AkitaSocialImpactComposer:
     """Composer for creating transaction groups for AkitaSocialImpact contract calls"""
 
@@ -987,10 +1903,15 @@ class AkitaSocialImpactComposer:
         self._composer = client.algorand.new_group()
         self._result_mappers: list[typing.Callable[[algokit_utils.ABIReturn | None], object] | None] = []
 
+    @property
+    def update(self) -> "_AkitaSocialImpactUpdateComposer":
+        return _AkitaSocialImpactUpdateComposer(self)
+
     def cache_meta(
         self,
         args: tuple[str, int, int, int] | CacheMetaArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "AkitaSocialImpactComposer":
         self._composer.add_app_call_method_call(
             self.client.params.cache_meta(
@@ -1008,7 +1929,8 @@ class AkitaSocialImpactComposer:
     def update_subscription_state_modifier(
         self,
         args: tuple[algokit_utils.AppMethodCallTransactionArgument, int, int] | UpdateSubscriptionStateModifierArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "AkitaSocialImpactComposer":
         self._composer.add_app_call_method_call(
             self.client.params.update_subscription_state_modifier(
@@ -1023,10 +1945,68 @@ class AkitaSocialImpactComposer:
         )
         return self
 
+    def commit_staking_impact(
+        self,
+        args: tuple[algokit_utils.AppMethodCallTransactionArgument, int, bool] | CommitStakingImpactArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "AkitaSocialImpactComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.commit_staking_impact(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "commitStakingImpact(pay,uint64,bool)void", v
+            )
+        )
+        return self
+
+    def checkpoint_staking_impact(
+        self,
+        args: tuple[str] | CheckpointStakingImpactArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "AkitaSocialImpactComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.checkpoint_staking_impact(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "checkpointStakingImpact(address)(bool,uint64)", v
+            )
+        )
+        return self
+
+    def staking_impact_cost(
+        self,
+        args: tuple[str] | StakingImpactCostArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "AkitaSocialImpactComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.staking_impact_cost(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "stakingImpactCost(address)uint64", v
+            )
+        )
+        return self
+
     def get_user_impact_without_social(
         self,
         args: tuple[str] | GetUserImpactWithoutSocialArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "AkitaSocialImpactComposer":
         self._composer.add_app_call_method_call(
             self.client.params.get_user_impact_without_social(
@@ -1044,7 +2024,8 @@ class AkitaSocialImpactComposer:
     def get_user_impact(
         self,
         args: tuple[str] | GetUserImpactArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "AkitaSocialImpactComposer":
         self._composer.add_app_call_method_call(
             self.client.params.get_user_impact(
@@ -1062,7 +2043,8 @@ class AkitaSocialImpactComposer:
     def get_user_impact_with_inputs(
         self,
         args: tuple[str, SocialImpactInputs] | GetUserImpactWithInputsArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "AkitaSocialImpactComposer":
         self._composer.add_app_call_method_call(
             self.client.params.get_user_impact_with_inputs(
@@ -1080,7 +2062,8 @@ class AkitaSocialImpactComposer:
     def calculate_social_impact_score(
         self,
         args: tuple[SocialImpactInputs] | CalculateSocialImpactScoreArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "AkitaSocialImpactComposer":
         self._composer.add_app_call_method_call(
             self.client.params.calculate_social_impact_score(
@@ -1098,7 +2081,8 @@ class AkitaSocialImpactComposer:
     def get_meta(
         self,
         args: tuple[str] | GetMetaArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "AkitaSocialImpactComposer":
         self._composer.add_app_call_method_call(
             self.client.params.get_meta(
@@ -1116,7 +2100,8 @@ class AkitaSocialImpactComposer:
     def update_akita_dao(
         self,
         args: tuple[int] | UpdateAkitaDaoArgs,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "AkitaSocialImpactComposer":
         self._composer.add_app_call_method_call(
             self.client.params.update_akita_dao(
@@ -1133,7 +2118,8 @@ class AkitaSocialImpactComposer:
 
     def op_up(
         self,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "AkitaSocialImpactComposer":
         self._composer.add_app_call_method_call(
             self.client.params.op_up(
@@ -1144,6 +2130,25 @@ class AkitaSocialImpactComposer:
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
                 "opUp()void", v
+            )
+        )
+        return self
+
+    def create(
+        self,
+        args: tuple[int, str] | CreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "AkitaSocialImpactComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.create(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "create(uint64,string)void", v
             )
         )
         return self

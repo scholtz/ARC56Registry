@@ -2,7 +2,7 @@
 
 - **Repo**: [akita-protocol/akita-sc](https://github.com/akita-protocol/akita-sc)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/akita-protocol/akita-sc/HEAD/projects/akita-sc/smart_contracts/artifacts/hyper-swap/HyperSwap.arc56.json](https://raw.githubusercontent.com/akita-protocol/akita-sc/HEAD/projects/akita-sc/smart_contracts/artifacts/hyper-swap/HyperSwap.arc56.json)
-- **Detected**: 2026-07-18T17:40:19.305825+00:00
+- **Detected**: 2026-07-21T09:35:12.798006+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce

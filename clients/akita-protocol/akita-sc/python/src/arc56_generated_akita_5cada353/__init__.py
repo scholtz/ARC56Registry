@@ -1,3 +1,4 @@
+from . import AbstractedAccount_4a5a24b3 as AbstractedAccount_4a5a24b3
 from . import AbstractedAccountBalanceReader_995b041f as AbstractedAccountBalanceReader_995b041f
 from . import AbstractedAccountFactory_c69fd20b as AbstractedAccountFactory_c69fd20b
 from . import AbstractedAccountMBR_d04711c5 as AbstractedAccountMBR_d04711c5
@@ -22,6 +23,7 @@ from . import RevenueManagerPlugin_a12c9766 as RevenueManagerPlugin_a12c9766
 from . import RewardsPlugin_f312bec7 as RewardsPlugin_f312bec7
 from . import SelfOptInPlugin_bf632cbe as SelfOptInPlugin_bf632cbe
 from . import AkitaSocialImpact_9c9a237d as AkitaSocialImpact_9c9a237d
+from . import AkitaSocialPlugin_3b15db23 as AkitaSocialPlugin_3b15db23
 from . import StakingPoolPlugin_a75a34b7 as StakingPoolPlugin_a75a34b7
 from . import StakingPlugin_ff574aff as StakingPlugin_ff574aff
 from . import SubscriptionsPlugin_be0c484b as SubscriptionsPlugin_be0c484b
@@ -30,6 +32,7 @@ from . import TestCloseOutPlugin_90ef9764 as TestCloseOutPlugin_90ef9764
 from . import TestProxyRekeyPlugin_1142c363 as TestProxyRekeyPlugin_1142c363
 from . import DAOStub_e6517106 as DAOStub_e6517106
 from . import UpdateAkitaDAOPlugin_27d1d26a as UpdateAkitaDAOPlugin_27d1d26a
+from . import Auction_f32ec1c1 as Auction_f32ec1c1
 from . import AuctionFactory_96c6a201 as AuctionFactory_96c6a201
 from . import Escrow_fbf3a716 as Escrow_fbf3a716
 from . import EscrowFactory_ae247139 as EscrowFactory_ae247139
@@ -71,13 +74,17 @@ from . import Poll_5fec6ae3 as Poll_5fec6ae3
 from . import PollFactory_bf3060b6 as PollFactory_bf3060b6
 from . import PrizeBox_d9aac2be as PrizeBox_d9aac2be
 from . import PrizeBoxFactory_96d2dcd6 as PrizeBoxFactory_96d2dcd6
+from . import Raffle_f8ffa72f as Raffle_f8ffa72f
 from . import RaffleFactory_e42aa33f as RaffleFactory_e42aa33f
 from . import Rewards_57216f16 as Rewards_57216f16
+from . import AkitaSocial_4a51fe63 as AkitaSocial_4a51fe63
 from . import AkitaSocialGraph_c980df3b as AkitaSocialGraph_c980df3b
 from . import AkitaSocialImpact_a1219ea1 as AkitaSocialImpact_a1219ea1
 from . import AkitaSocialModeration_10f9ff8b as AkitaSocialModeration_10f9ff8b
+from . import StakingPool_37157391 as StakingPool_37157391
 from . import StakingPoolFactory_05372193 as StakingPoolFactory_05372193
 from . import Staking_d95ec311 as Staking_d95ec311
+from . import Subscriptions_774dcfb2 as Subscriptions_774dcfb2
 from . import AbstractedAccountUpdateStub_2d99806f as AbstractedAccountUpdateStub_2d99806f
 from . import SunsetContract_f250607f as SunsetContract_f250607f
 from . import WalletFactorySunsetContract_15e2e32d as WalletFactorySunsetContract_15e2e32d

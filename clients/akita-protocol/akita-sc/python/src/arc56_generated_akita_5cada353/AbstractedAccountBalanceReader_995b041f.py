@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": [], "create": ["NoOp"]}, "args": [{"type": "uint64", "desc": "The app ID of the Akita DAO used to resolve dependent apps", "name": "akitaDAO"}], "name": "create", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "desc": "The address to look up balances for", "name": "address"}, {"type": "uint64[]", "desc": "The asset IDs to check balances for (0 for ALGO)", "name": "assets"}], "name": "balance", "returns": {"type": "uint64[]", "desc": "The total balance for each asset (wallet + staked hard + staked lock)"}, "desc": "Get the balance of a set of assets at the given address, including any\namounts that address has staked in the Akita staking contract.", "events": [], "readonly": true, "recommendations": {}}], "name": "AbstractedAccountBalanceReader", "state": {"keys": {"box": {}, "global": {"akitaDAO": {"key": "YWtpdGFfZGFv", "keyType": "AVMString", "valueType": "AVMUint64", "desc": "The app ID of the Akita DAO used to resolve the Staking app"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "desc": "Immutable readonly helper that reports the combined balance\n(wallet holdings + staked hard + staked lock) for an address.\n\nThis was extracted from `AbstractedAccount.balance()` to keep that logic\navailable for downstream contracts without keeping it on-chain in the\nwallet bytecode. The contract intentionally has no UpdateApplication\nhandler, so once deployed it cannot be re-keyed / upgraded and callers\ncan trust its response shape over time.\n\nA balance returned by this contract is still only as trustworthy as\nthe underlying AkitaDAO + Staking apps it queries \u2014 do not use it as\na security-critical balance source for an adversarial wallet.", "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [204], "errorMessage": "Bytes has valid prefix"}, {"pc": [150], "errorMessage": "account funded"}, {"pc": [155], "errorMessage": "check GlobalState exists"}, {"pc": [133], "errorMessage": "index access is out of bounds"}, {"pc": [94, 235], "errorMessage": "invalid array length header"}, {"pc": [106], "errorMessage": "invalid number of bytes for arc4.dynamic_array<uint64>"}, {"pc": [87], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}, {"pc": [67], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [209], "errorMessage": "invalid number of bytes for smart_contracts/staking/types.ts::Escrow"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": [], "create": ["NoOp"]}, "args": [{"type": "uint64", "desc": "The app ID of the Akita DAO used to resolve dependent apps", "name": "akitaDAO"}], "name": "create", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "address"}, {"type": "uint64[]", "name": "assets"}], "name": "balance", "returns": {"type": "uint64[]"}, "desc": "Get balances for the supplied assets, including hard and locked stake.\nAsset ID zero represents ALGO.", "events": [], "readonly": true, "recommendations": {}}], "name": "AbstractedAccountBalanceReader", "state": {"keys": {"box": {}, "global": {"akitaDAO": {"key": "YWtpdGFfZGFv", "keyType": "AVMString", "valueType": "AVMUint64", "desc": "The app ID of the Akita DAO used to resolve the Staking app"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyADAAgBJgIJYWtpdGFfZGFvBBUffHUxGRREMRhBAA6ABOnFXSY2GgCOAQAdAIAEJA0vZzYaAI4BAAEANhoBSRUjEkQXKExnJEMigABHAjYaAUkVgSASRDYaAkcCIllJTgIjC4ECCEwVEkSAAgAAIklLAwxBAKIiRQhLA1cCAEsBIwtKI1hFC1tJRQhAAHdLBHMATEUJRLEiKGVEgANhYWxlSCJbshiABEyI6s6yGksEshpLCLIagQayECKyAbO0PklXBABLAVcABCkSRBWBEBJESYEEW0sJCEyBDFsIFoACAAFMUElXAgBMIllLA0lOAiJZCBZXBgBcAExQRQJJJAhFAUL/aksESwdwAExFB0H/hUsFRQhC/34pSwJQsCRD", "clear": "C4EBQw=="}, "desc": "Immutable readonly helper that reports the combined balance\n(wallet holdings + staked hard + staked lock) for an address.\n\nThis was extracted from `AbstractedAccount.balance()` to keep that logic\navailable for downstream contracts without keeping it on-chain in the\nwallet bytecode. The contract intentionally has no UpdateApplication\nhandler, so once deployed it cannot be re-keyed / upgraded and callers\ncan trust its response shape over time.\n\nA balance returned by this contract is still only as trustworthy as\nthe underlying AkitaDAO + Staking apps it queries \u2014 do not use it as\na security-critical balance source for an adversarial wallet.", "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCA4IDEKICAgIGJ5dGVjYmxvY2sgImFraXRhX2RhbyIgMHgxNTFmN2M3NQogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czozMy0zNgogICAgLy8gQGNvbnRyYWN0KHsKICAgIC8vICAgc3RhdGVUb3RhbHM6IHsgZ2xvYmFsQnl0ZXM6IDEsIGdsb2JhbFVpbnRzOiAwIH0KICAgIC8vIH0pCiAgICAvLyBleHBvcnQgY2xhc3MgQWJzdHJhY3RlZEFjY291bnRCYWxhbmNlUmVhZGVyIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEA1CiAgICBwdXNoYnl0ZXMgMHhlOWM1NWQyNiAvLyBtZXRob2QgImJhbGFuY2UoYWRkcmVzcyx1aW50NjRbXSl1aW50NjRbXSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGJhbGFuY2UKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czozMy0zNgogICAgLy8gQGNvbnRyYWN0KHsKICAgIC8vICAgc3RhdGVUb3RhbHM6IHsgZ2xvYmFsQnl0ZXM6IDEsIGdsb2JhbFVpbnRzOiAwIH0KICAgIC8vIH0pCiAgICAvLyBleHBvcnQgY2xhc3MgQWJzdHJhY3RlZEFjY291bnRCYWxhbmNlUmVhZGVyIGV4dGVuZHMgQ29udHJhY3QgewogICAgcHVzaGJ5dGVzIDB4MjQwZDJmNjcgLy8gbWV0aG9kICJjcmVhdGUodWludDY0KXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGUKICAgIGVycgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6OkFic3RyYWN0ZWRBY2NvdW50QmFsYW5jZVJlYWRlci5jcmVhdGVbcm91dGluZ10oKSAtPiB2b2lkOgpjcmVhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjQzCiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czozOAogICAgLy8gYWtpdGFEQU8gPSBHbG9iYWxTdGF0ZTxBcHBsaWNhdGlvbj4oeyBrZXk6IEdsb2JhbFN0YXRlS2V5QWtpdGFEQU8gfSkKICAgIGJ5dGVjXzAgLy8gImFraXRhX2RhbyIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NDUKICAgIC8vIHRoaXMuYWtpdGFEQU8udmFsdWUgPSBBcHBsaWNhdGlvbihha2l0YURBTykKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjQzCiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6OkFic3RyYWN0ZWRBY2NvdW50QmFsYW5jZVJlYWRlci5iYWxhbmNlW3JvdXRpbmddKCkgLT4gdm9pZDoKYmFsYW5jZToKICAgIGludGNfMCAvLyAwCiAgICBwdXNoYnl0ZXMgIiIKICAgIGR1cG4gMgogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czo1MgogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXBuIDIKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGludGNfMSAvLyA4CiAgICAqCiAgICBwdXNoaW50IDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PHVpbnQ2ND4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NTQKICAgIC8vIGxldCBhbW91bnRzOiB1aW50NjRbXSA9IFtdCiAgICBwdXNoYnl0ZXMgMHgwMDAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjU1CiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgYXNzZXRzLmxlbmd0aDsgaSArPSAxKSB7CiAgICBpbnRjXzAgLy8gMAoKYmFsYW5jZV93aGlsZV90b3BAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NTUKICAgIC8vIGZvciAobGV0IGk6IHVpbnQ2NCA9IDA7IGkgPCBhc3NldHMubGVuZ3RoOyBpICs9IDEpIHsKICAgIGR1cAogICAgZGlnIDMKICAgIDwKICAgIGJ6IGJhbGFuY2VfYWZ0ZXJfd2hpbGVAMTAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NTYKICAgIC8vIGxldCBhbW91bnQ6IHVpbnQ2NCA9IDAKICAgIGludGNfMCAvLyAwCiAgICBidXJ5IDgKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NTcKICAgIC8vIGNvbnN0IGFzc2V0ID0gQXNzZXQoYXNzZXRzW2ldKQogICAgZGlnIDMKICAgIGV4dHJhY3QgMiAwCiAgICBkaWcgMQogICAgaW50Y18xIC8vIDgKICAgICoKICAgIGR1cDIKICAgIGludGNfMSAvLyA4CiAgICBleHRyYWN0MyAvLyBvbiBlcnJvcjogaW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIGJ1cnkgMTEKICAgIGV4dHJhY3RfdWludDY0CiAgICBkdXAKICAgIGJ1cnkgOAogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czo1OQogICAgLy8gaWYgKGFzc2V0LmlkID09PSAwKSB7CiAgICBibnogYmFsYW5jZV9lbHNlX2JvZHlANQogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czo2MAogICAgLy8gYW1vdW50ID0gYWRkcmVzcy5iYWxhbmNlCiAgICBkaWcgNAogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBzd2FwCiAgICBidXJ5IDkKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAoKYmFsYW5jZV9hZnRlcl9pZl9lbHNlQDg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjY4LTcxCiAgICAvLyBjb25zdCBlc2Nyb3dJbmZvID0gYWJpQ2FsbDx0eXBlb2YgU3Rha2luZy5wcm90b3R5cGUuZ2V0RXNjcm93SW5mbz4oewogICAgLy8gICBhcHBJZDogZ2V0QWtpdGFBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnN0YWtpbmcsCiAgICAvLyAgIGFyZ3M6IFthZGRyZXNzLCBhc3NldC5pZF0KICAgIC8vIH0pLnJldHVyblZhbHVlCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjY5CiAgICAvLyBhcHBJZDogZ2V0QWtpdGFBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnN0YWtpbmcsCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzU4L2FjY291bnQvYmFsYW5jZS1yZWFkZXIuYWxnby50czozOAogICAgLy8gYWtpdGFEQU8gPSBHbG9iYWxTdGF0ZTxBcHBsaWNhdGlvbj4oeyBrZXk6IEdsb2JhbFN0YXRlS2V5QWtpdGFEQU8gfSkKICAgIGJ5dGVjXzAgLy8gImFraXRhX2RhbyIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NjkKICAgIC8vIGFwcElkOiBnZXRBa2l0YUFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc3Rha2luZywKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvZnVuY3Rpb25zLnRzOjQ0CiAgICAvLyBjb25zdCBbYXBwTGlzdEJ5dGVzXSA9IG9wLkFwcEdsb2JhbC5nZXRFeEJ5dGVzKGFraXRhREFPLCBCeXRlcyhBa2l0YURBT0dsb2JhbFN0YXRlS2V5c0FraXRhQXBwTGlzdCkpCiAgICBwdXNoYnl0ZXMgImFhbCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NjkKICAgIC8vIGFwcElkOiBnZXRBa2l0YUFwcExpc3QodGhpcy5ha2l0YURBTy52YWx1ZSkuc3Rha2luZywKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQ2NAogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjY4LTcxCiAgICAvLyBjb25zdCBlc2Nyb3dJbmZvID0gYWJpQ2FsbDx0eXBlb2YgU3Rha2luZy5wcm90b3R5cGUuZ2V0RXNjcm93SW5mbz4oewogICAgLy8gICBhcHBJZDogZ2V0QWtpdGFBcHBMaXN0KHRoaXMuYWtpdGFEQU8udmFsdWUpLnN0YWtpbmcsCiAgICAvLyAgIGFyZ3M6IFthZGRyZXNzLCBhc3NldC5pZF0KICAgIC8vIH0pLnJldHVyblZhbHVlCiAgICBwdXNoYnl0ZXMgMHg0Yzg4ZWFjZSAvLyBtZXRob2QgImdldEVzY3Jvd0luZm8oYWRkcmVzcyx1aW50NjQpKHVpbnQ2NCx1aW50NjQpIgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGRpZyA0CiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgZGlnIDgKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBwdXNoaW50IDYgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBMYXN0TG9nCiAgICBkdXAKICAgIGV4dHJhY3QgNCAwCiAgICBkaWcgMQogICAgZXh0cmFjdCAwIDQKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgPT0KICAgIGFzc2VydCAvLyBCeXRlcyBoYXMgdmFsaWQgcHJlZml4CiAgICBsZW4KICAgIHB1c2hpbnQgMTYKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIHNtYXJ0X2NvbnRyYWN0cy9zdGFraW5nL3R5cGVzLnRzOjpFc2Nyb3cKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NzMKICAgIC8vIGFtb3VudHMgPSBbLi4uYW1vdW50cywgYW1vdW50ICsgZXNjcm93SW5mby5oYXJkICsgZXNjcm93SW5mby5sb2NrXQogICAgZHVwCiAgICBwdXNoaW50IDQKICAgIGV4dHJhY3RfdWludDY0CiAgICBkaWcgOQogICAgKwogICAgc3dhcAogICAgcHVzaGludCAxMgogICAgZXh0cmFjdF91aW50NjQKICAgICsKICAgIGl0b2IKICAgIHB1c2hieXRlcyAweDAwMDEKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBleHRyYWN0IDIgMAogICAgc3dhcAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGRpZyAzCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgKwogICAgaXRvYgogICAgZXh0cmFjdCA2IDAKICAgIHJlcGxhY2UyIDAKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnVyeSAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjU1CiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgYXNzZXRzLmxlbmd0aDsgaSArPSAxKSB7CiAgICBkdXAKICAgIGludGNfMiAvLyAxCiAgICArCiAgICBidXJ5IDEKICAgIGIgYmFsYW5jZV93aGlsZV90b3BAMgoKYmFsYW5jZV9lbHNlX2JvZHlANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM1OC9hY2NvdW50L2JhbGFuY2UtcmVhZGVyLmFsZ28udHM6NjIKICAgIC8vIGNvbnN0IFtob2xkaW5nQW1vdW50LCBvcHRlZEluXSA9IEFzc2V0SG9sZGluZy5hc3NldEJhbGFuY2UoYWRkcmVzcywgYXNzZXQpCiAgICBkaWcgNAogICAgZGlnIDcKICAgIGFzc2V0X2hvbGRpbmdfZ2V0IEFzc2V0QmFsYW5jZQogICAgc3dhcAogICAgYnVyeSA3CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjYzCiAgICAvLyBpZiAob3B0ZWRJbikgewogICAgYnogYmFsYW5jZV9hZnRlcl9pZl9lbHNlQDgKICAgIGRpZyA1CiAgICBidXJ5IDgKICAgIGIgYmFsYW5jZV9hZnRlcl9pZl9lbHNlQDgKCmJhbGFuY2VfYWZ0ZXJfd2hpbGVAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNTgvYWNjb3VudC9iYWxhbmNlLXJlYWRlci5hbGdvLnRzOjUyCiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgZGlnIDIKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [204], "errorMessage": "Bytes has valid prefix"}, {"pc": [150], "errorMessage": "account funded"}, {"pc": [155], "errorMessage": "check GlobalState exists"}, {"pc": [133], "errorMessage": "index access is out of bounds"}, {"pc": [94, 235], "errorMessage": "invalid array length header"}, {"pc": [106], "errorMessage": "invalid number of bytes for arc4.dynamic_array<uint64>"}, {"pc": [87], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}, {"pc": [67], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [209], "errorMessage": "invalid number of bytes for smart_contracts/staking/types.ts::Escrow"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -101,6 +101,19 @@ class AbstractedAccountBalanceReaderParams:
             "args": method_args,
         }))
 
+    def create(
+        self,
+        args: tuple[int] | CreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "create(uint64)void",
+            "args": method_args,
+        }))
+
     def clear_state(
         self,
         params: algokit_utils.AppClientBareCallParams | None = None,
@@ -126,6 +139,19 @@ class AbstractedAccountBalanceReaderCreateTransactionParams:
         return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
             "method": "balance(address,uint64[])uint64[]",
+            "args": method_args,
+        }))
+
+    def create(
+        self,
+        args: tuple[int] | CreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "create(uint64)void",
             "args": method_args,
         }))
 
@@ -159,6 +185,22 @@ class AbstractedAccountBalanceReaderSend:
         }), send_params=send_params)
         parsed_response = response
         return typing.cast(algokit_utils.SendAppTransactionResult[list[int]], parsed_response)
+
+    def create(
+        self,
+        args: tuple[int] | CreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "create(uint64)void",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
 
     def clear_state(
         self,
@@ -404,6 +446,342 @@ class AbstractedAccountBalanceReaderClient:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class AbstractedAccountBalanceReaderMethodCallCreateParams(
+    algokit_utils.AppClientCreateSchema, algokit_utils.BaseAppClientMethodCallParams[
+        CreateArgs,
+        str | None,
+    ]
+):
+    """Parameters for creating AbstractedAccountBalanceReader contract using ABI"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallCreateParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallCreateParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+class AbstractedAccountBalanceReaderFactory(algokit_utils.TypedAppFactoryProtocol[AbstractedAccountBalanceReaderMethodCallCreateParams, None, None]):
+    """Factory for deploying and managing AbstractedAccountBalanceReaderClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = AbstractedAccountBalanceReaderFactoryParams(self.app_factory)
+        self.create_transaction = AbstractedAccountBalanceReaderFactoryCreateTransaction(self.app_factory)
+        self.send = AbstractedAccountBalanceReaderFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: AbstractedAccountBalanceReaderMethodCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[AbstractedAccountBalanceReaderClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return AbstractedAccountBalanceReaderClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AbstractedAccountBalanceReaderClient:
+        """Get an app client by creator address and name"""
+        return AbstractedAccountBalanceReaderClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AbstractedAccountBalanceReaderClient:
+        """Get an app client by app ID"""
+        return AbstractedAccountBalanceReaderClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class AbstractedAccountBalanceReaderFactoryParams:
+    """Parameters for creating transactions for AbstractedAccountBalanceReader contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbstractedAccountBalanceReaderFactoryCreateParams(app_factory)
+        self.update = AbstractedAccountBalanceReaderFactoryUpdateParams(app_factory)
+        self.delete = AbstractedAccountBalanceReaderFactoryDeleteParams(app_factory)
+
+class AbstractedAccountBalanceReaderFactoryCreateParams:
+    """Parameters for 'create' operations of AbstractedAccountBalanceReader contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def balance(
+        self,
+        args: tuple[str, list[int]] | BalanceArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the balance(address,uint64[])uint64[] ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "balance(address,uint64[])uint64[]",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def create(
+        self,
+        args: tuple[int] | CreateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the create(uint64)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "create(uint64)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class AbstractedAccountBalanceReaderFactoryUpdateParams:
+    """Parameters for 'update' operations of AbstractedAccountBalanceReader contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class AbstractedAccountBalanceReaderFactoryDeleteParams:
+    """Parameters for 'delete' operations of AbstractedAccountBalanceReader contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class AbstractedAccountBalanceReaderFactoryCreateTransaction:
+    """Create transactions for AbstractedAccountBalanceReader contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbstractedAccountBalanceReaderFactoryCreateTransactionCreate(app_factory)
+
+
+class AbstractedAccountBalanceReaderFactoryCreateTransactionCreate:
+    """Create new instances of AbstractedAccountBalanceReader contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class AbstractedAccountBalanceReaderFactorySend:
+    """Send calls to AbstractedAccountBalanceReader contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbstractedAccountBalanceReaderFactorySendCreate(app_factory)
+
+
+class AbstractedAccountBalanceReaderFactorySendCreate:
+    """Send create calls to AbstractedAccountBalanceReader contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[AbstractedAccountBalanceReaderClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return AbstractedAccountBalanceReaderClient(result[0]), result[1]
+
+    def create(
+        self,
+        args: tuple[int] | CreateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> tuple[AbstractedAccountBalanceReaderClient, algokit_utils.AppFactoryCreateMethodCallResult[None]]:
+            """Creates and sends a transaction using the create(uint64)void ABI method"""
+            params = params or algokit_utils.CommonAppCallCreateParams()
+            client, result = self.app_factory.send.create(
+                algokit_utils.AppFactoryCreateMethodCallParams(
+                    **{
+                    **dataclasses.asdict(params),
+                    "method": "create(uint64)void",
+                    "args": _parse_abi_args(args),
+                    }
+                ),
+                send_params=send_params,
+                compilation_params=compilation_params
+            )
+            return_value = None if result.abi_return is None else typing.cast(None, result.abi_return)
+    
+            return AbstractedAccountBalanceReaderClient(client), algokit_utils.AppFactoryCreateMethodCallResult[None](
+                **{
+                    **result.__dict__,
+                    "app_id": result.app_id,
+                    "abi_return": return_value,
+                    "transaction": result.transaction,
+                    "confirmation": result.confirmation,
+                    "group_id": result.group_id,
+                    "tx_ids": result.tx_ids,
+                    "transactions": result.transactions,
+                    "confirmations": result.confirmations,
+                    "app_address": result.app_address,
+                }
+            )
+
+
 class AbstractedAccountBalanceReaderComposer:
     """Composer for creating transaction groups for AbstractedAccountBalanceReader contract calls"""
 
@@ -426,6 +804,24 @@ class AbstractedAccountBalanceReaderComposer:
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
                 "balance(address,uint64[])uint64[]", v
+            )
+        )
+        return self
+
+    def create(
+        self,
+        args: tuple[int] | CreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "AbstractedAccountBalanceReaderComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.create(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "create(uint64)void", v
             )
         )
         return self
