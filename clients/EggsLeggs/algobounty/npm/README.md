@@ -52,6 +52,7 @@ contract generated this way; every other contract includes a working `Factory`.
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
 | `BountyEscrow_b97dfcf7` | `BountyEscrowClient` | [https://raw.githubusercontent.com/EggsLeggs/algobounty/HEAD/platform/projects/new-algobounty-contract/smart_contracts/artifacts/bounty_escrow/BountyEscrow.arc56.json](https://raw.githubusercontent.com/EggsLeggs/algobounty/HEAD/platform/projects/new-algobounty-contract/smart_contracts/artifacts/bounty_escrow/BountyEscrow.arc56.json) |
+| `HelloWorld_402e2c11` | `HelloWorldClient` | [https://raw.githubusercontent.com/EggsLeggs/algobounty/HEAD/temporary/quickstart-template/QuickStartTemplate/projects/QuickStartTemplate-contracts/smart_contracts/artifacts/hello_world/HelloWorld.arc56.json](https://raw.githubusercontent.com/EggsLeggs/algobounty/HEAD/temporary/quickstart-template/QuickStartTemplate/projects/QuickStartTemplate-contracts/smart_contracts/artifacts/hello_world/HelloWorld.arc56.json) |
 
 ## Versioning
 
