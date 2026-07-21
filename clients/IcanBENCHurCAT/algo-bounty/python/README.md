@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_icanb_2f233d5d import contract_name_hash
+from arc56_generated_icanb_2f233d5d import escrow_mainnet_6c2148cf
 
 algorand = AlgorandClient.mainnet()
-client = contract_name_hash.ContractClient(
+client = escrow_mainnet_6c2148cf.EscrowContractClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,7 +50,11 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `escrow_mainnet_6c2148cf` | `EscrowContractClient` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/escrow_mainnet.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/escrow_mainnet.arc56.json) |
+| `escrow_testnet_d6e7ef38` | `EscrowContractClient` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/escrow_testnet.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/escrow_testnet.arc56.json) |
+| `EscrowContract_55731572` | `EscrowContractClient` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/EscrowContract.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/EscrowContract.arc56.json) |
+| `EscrowContract_2bb5f156` | `EscrowContractClient` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/EscrowContract.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/EscrowContract.arc56.json) |
+| `TestContract_526d7fbc` | `TestContractClient` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/TestContract.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/TestContract.arc56.json) |
 
 ## Versioning
 
