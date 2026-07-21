@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.adityagavane47.CampusNexus_Hackathon.Counter_aa626670;
+using Arc56.Generated.adityagavane47.CampusNexus_Hackathon.Bank_369231d6;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new CounterProxy(algod, appId: 123456789);
+var client = new BankProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,6 +40,7 @@ var client = new CounterProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
+| `Arc56.Generated.adityagavane47.CampusNexus_Hackathon.Bank_369231d6` | `BankProxy` | [https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/bank/Bank.arc56.json](https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/bank/Bank.arc56.json) |
 | `Arc56.Generated.adityagavane47.CampusNexus_Hackathon.Counter_aa626670` | `CounterProxy` | [https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/counter/Counter.arc56.json](https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/counter/Counter.arc56.json) |
 | `Arc56.Generated.adityagavane47.CampusNexus_Hackathon.MilestoneEscrow_a4d36c8d` | `MilestoneEscrowProxy` | [https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/escrow/MilestoneEscrow.arc56.json](https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/escrow/MilestoneEscrow.arc56.json) |
 | `Arc56.Generated.adityagavane47.CampusNexus_Hackathon.HelloWorld_147342b9` | `HelloWorldProxy` | [https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/hello_world/HelloWorld.arc56.json](https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/hello_world/HelloWorld.arc56.json) |
