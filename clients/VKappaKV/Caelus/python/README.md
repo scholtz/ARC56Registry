@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_vkapp_1eed521c import Puppet_cda77e8c
+from arc56_generated_vkapp_1eed521c import Equilibrium_114f9d31
 
 algorand = AlgorandClient.mainnet()
-client = Puppet_cda77e8c.PuppetClient(
+client = Equilibrium_114f9d31.EquilibriumClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,6 +50,7 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
+| `Equilibrium_114f9d31` | `EquilibriumClient` | [https://raw.githubusercontent.com/VKappaKV/Caelus/HEAD/projects/Caelus/contracts/artifacts/Equilibrium.arc56.json](https://raw.githubusercontent.com/VKappaKV/Caelus/HEAD/projects/Caelus/contracts/artifacts/Equilibrium.arc56.json) |
 | `Puppet_cda77e8c` | `PuppetClient` | [https://raw.githubusercontent.com/VKappaKV/Caelus/HEAD/projects/Caelus/contracts/artifacts/Puppet.arc56.json](https://raw.githubusercontent.com/VKappaKV/Caelus/HEAD/projects/Caelus/contracts/artifacts/Puppet.arc56.json) |
 
 ## Versioning
