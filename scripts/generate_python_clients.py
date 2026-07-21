@@ -133,6 +133,20 @@ MAX_DIST_NAME_LENGTH = 30
 # owner/repo - comes from an arbitrary GitHub repo and isn't otherwise bounded) for the
 # same path-length reason.
 MAX_FILE_SLUG_LENGTH = 30
+# Belt-and-suspenders check on top of MAX_DIST_NAME_LENGTH/MAX_FILE_SLUG_LENGTH: those
+# cap the *variable* segments of clients/<owner>/<repo>/python/src/<import_pkg>/
+# <contract_id>.py, but owner/repo themselves are deliberately left uncapped (that
+# folder layout is shared byte-for-byte across all three ecosystems - see the 3-stage
+# pipeline note in CLAUDE.md), and GitHub allows up to 39 + 100 characters there. A
+# sufficiently long owner/repo combination can still overflow Windows' 260-char
+# MAX_PATH once the caller's own local clone path is prepended (seen in practice:
+# "unable to create file ... Filename too long" for
+# AnirudhPratapSinghYadav/Team-Bharat-SIT-Hackathon-SupplyChainAlgorand). Rather than
+# fail the whole run, check the relative path length before generating and quarantine
+# just that one contract - mirrors spec_has_oversized_array()'s "catch it before ever
+# invoking the generator" approach. 180 leaves ~80 characters of headroom for a local
+# clone's own directory prefix under the 260-char limit.
+MAX_PY_RELATIVE_PATH_LENGTH = 180
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -360,6 +374,7 @@ def run_generator(arc56_path: str, py_path: str, mode: str) -> None:
 FAILURE_LABELS = {
     "generator_error": "Generator crash",
     "py_compile_error": "Generated code fails to compile",
+    "path_too_long": "Generated file path exceeds safe length limit",
 }
 
 
@@ -574,6 +589,26 @@ def process_project(
             state_dirty = True
             continue
 
+        relative_py_path = f"clients/{owner_slug}/{repo_slug}/python/src/{import_pkg}/{contract_id}.py"
+        if len(relative_py_path) > MAX_PY_RELATIVE_PATH_LENGTH:
+            error = (
+                f"generated file path would be {len(relative_py_path)} characters "
+                f"({relative_py_path}), exceeding MAX_PY_RELATIVE_PATH_LENGTH "
+                f"({MAX_PY_RELATIVE_PATH_LENGTH}) - skipped without invoking the "
+                f"generator to avoid a 'Filename too long' OS error"
+            )
+            log(f"WARNING: skipping {contract_id} - {error}")
+            contracts_state[url] = {
+                **{k: v for k, v in (existing or {}).items() if k != "content_sha256"},
+                "content_sha256": content_hash,
+                "file_slug": file_slug,
+                "hash8": hash8,
+                "path_too_long": error,
+            }
+            write_incident_report(owner, repo, url, contract_id, "path_too_long", error, generator_version)
+            state_dirty = True
+            continue
+
         py_path = os.path.join(src_dir, f"{contract_id}.py")
         log(f"Generating Python client for {url} -> {py_path}")
         generation_mode, failure_type, error_text = generate_python_client(arc56_path, py_path)
@@ -599,8 +634,8 @@ def process_project(
         if previous_py_hash is not None and previous_py_hash == py_hash:
             contracts_state[url] = {
                 **{k: v for k, v in (existing or {}).items()
-                   if k not in ("generator_error", "py_compile_error", "content_sha256", "py_sha256",
-                                "class_name", "generation_mode")},
+                   if k not in ("generator_error", "py_compile_error", "path_too_long", "content_sha256",
+                                "py_sha256", "class_name", "generation_mode")},
                 "content_sha256": content_hash,
                 "py_sha256": py_hash,
                 "file_slug": file_slug,
@@ -630,7 +665,9 @@ def process_project(
 
     excluded_contract_ids = {
         contract_id_for(c) for c in contracts_state.values()
-        if "file_slug" in c and ("py_compile_error" in c or "generator_error" in c)
+        if "file_slug" in c and (
+            "py_compile_error" in c or "generator_error" in c or "path_too_long" in c
+        )
     }
 
     if not needs_version_bump:
@@ -696,7 +733,13 @@ def write_project_files(
         if "file_slug" not in c:
             continue
         contract_id = contract_id_for(c)
-        if "generator_error" in c:
+        if "path_too_long" in c:
+            table_rows.append(
+                f"| `{contract_id}` | _(not generated - the owner/repo name combination makes the "
+                f"generated file's path too long to safely create on all platforms; see state.json)_ "
+                f"| [{url}]({url}) |"
+            )
+        elif "generator_error" in c:
             table_rows.append(f"| `{contract_id}` | _(generation failed - see state.json)_ | [{url}]({url}) |")
         elif "py_compile_error" in c:
             table_rows.append(f"| `{contract_id}` | _(fails to compile - excluded, see state.json)_ | [{url}]({url}) |")
@@ -729,7 +772,8 @@ def write_project_files(
     first_class_name = None
     for url in sorted_urls:
         c = contracts_state[url]
-        if "file_slug" in c and "generator_error" not in c and "py_compile_error" not in c:
+        if ("file_slug" in c and "generator_error" not in c and "py_compile_error" not in c
+                and "path_too_long" not in c):
             first_contract_id = contract_id_for(c)
             first_class_name = c.get("class_name")
             break
