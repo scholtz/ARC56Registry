@@ -42,6 +42,8 @@ var client = new NFDInstanceProxy(algod, appId: 123456789);
 | --- | --- | --- |
 | `Arc56.Generated.TxnLab.nfd_sdk.NFDInstance_9b7fcf89` | `NFDInstanceProxy` | [https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/minimal/NFDInstance.arc56.json](https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/minimal/NFDInstance.arc56.json) |
 | `Arc56.Generated.TxnLab.nfd_sdk.NFDRegistry_7fe53358` | `NFDRegistryProxy` | [https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/minimal/NFDRegistry.arc56.json](https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/minimal/NFDRegistry.arc56.json) |
+| `Arc56.Generated.TxnLab.nfd_sdk.NFDInstance_a0f592c3` | `NFDInstanceProxy` | [https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/NFDInstance.arc56.json](https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/NFDInstance.arc56.json) |
+| `Arc56.Generated.TxnLab.nfd_sdk.NFDRegistry_d60f44d8` | `NFDRegistryProxy` | [https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/NFDRegistry.arc56.json](https://raw.githubusercontent.com/TxnLab/nfd-sdk/HEAD/packages/sdk/src/contracts/NFDRegistry.arc56.json) |
 
 ## Versioning
 
