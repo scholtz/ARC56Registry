@@ -17,6 +17,17 @@ list of every `*.arc56.json` file found on public GitHub, via the
    REST `search/code` endpoint and silently returns zero results, which is why
    the query is phrased as a plain substring match instead.
 
+   **Priority pass, run first**: before the exhaustive sharded search below,
+   the script runs the same query once more with `sort=indexed&order=desc` -
+   the closest thing the code search API offers to "newest changes first"
+   (there is no commit-date sort; `indexed` sorts by when GitHub's search
+   index last saw the file). This pass is capped at the API's normal
+   1,000-result/10-page limit like any single query, so it isn't exhaustive
+   on its own, but it means recently-added ARC-56 files tend to get
+   discovered - and committed - within the first few requests of a run
+   instead of waiting on whichever `size:` shard happens to contain them. See
+   `collect_recent_first()` in the script.
+
    GitHub's code search API never returns more than 1,000 results for a
    single query, no matter how many total matches exist (`total_count` can
    read e.g. 1464 while only the first 1,000 are actually paginable). To get

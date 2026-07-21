@@ -13,6 +13,17 @@ To get past that, the search is recursively sharded by file `size:` ranges
 (a supported qualifier) until every shard's total_count is <= 1000, and the
 results are unioned - see partition_and_collect().
 
+Before that exhaustive (but unordered) sharded pass, a first pass runs the
+same query with `sort=indexed&order=desc` - the closest thing the code search
+API offers to "newest changes first" (it sorts by when GitHub's index last
+saw the file, not by commit date, since the API exposes no commit-date sort)
+- and takes just its first page(s), up to the same 1,000-result cap. This
+makes freshly-added ARC-56 files show up in arc56.links.csv (and get
+committed) as early in the run as possible, rather than waiting on whichever
+size shard happens to contain them. See collect_recent_first(). It's a
+priority pass, not a substitute for the sharded pass: the sharded pass still
+runs afterwards and is what guarantees completeness.
+
 The CSV has three columns: ARC56URL, ActiveFrom, ActiveUntil. ActiveUntil
 being empty means the record is active indefinitely; a maintainer can set it
 to deactivate a record manually. This script never removes or overwrites an
@@ -105,8 +116,14 @@ def load_repo_blacklist(path: str) -> set[str]:
     return blacklist
 
 
-def build_request(query: str, page: int, token: str) -> tuple[urllib.request.Request, str]:
+def build_request(
+    query: str, page: int, token: str, sort: str | None = None, order: str | None = None
+) -> tuple[urllib.request.Request, str]:
     url = f"{API_URL}?q={urllib.parse.quote(query)}&per_page={PER_PAGE}&page={page}"
+    if sort:
+        url += f"&sort={sort}"
+    if order:
+        url += f"&order={order}"
     req = urllib.request.Request(url)
     req.add_header("Accept", "application/vnd.github+json")
     req.add_header("X-GitHub-Api-Version", "2022-11-28")
@@ -116,9 +133,16 @@ def build_request(query: str, page: int, token: str) -> tuple[urllib.request.Req
     return req, url
 
 
-def fetch_page(query: str, page: int, token: str, retries: int = 5) -> dict:
+def fetch_page(
+    query: str,
+    page: int,
+    token: str,
+    retries: int = 5,
+    sort: str | None = None,
+    order: str | None = None,
+) -> dict:
     for attempt in range(1, retries + 1):
-        req, url = build_request(query, page, token)
+        req, url = build_request(query, page, token, sort=sort, order=order)
         print(f"Calling GitHub API: GET {url} (attempt {attempt}/{retries})", file=sys.stderr)
         time.sleep(REQUEST_DELAY_SECONDS)
         try:
@@ -320,6 +344,33 @@ def flush_pending(source: str) -> None:
           f"of the run", file=sys.stderr)
 
 
+def collect_recent_first(
+    token: str, urls: set[str], repos: set[str], blacklist: set[str]
+) -> None:
+    """Priority pass: run the base query sorted newest-first, before sharding.
+
+    `sort=indexed&order=desc` is the closest the code search API gets to
+    "newest changes" - there's no commit-date sort available. This pass is
+    capped at the same 1,000-result (10-page) ceiling as any single query, so
+    it can't be exhaustive on its own; partition_and_collect() still runs
+    afterwards to guarantee completeness. Running this first just means any
+    freshly-added ARC-56 file is likely to be discovered - and committed via
+    queue_new_urls() - within the first few requests of the run, instead of
+    waiting on whichever size shard happens to contain it.
+    """
+    items_collected: list[dict] = []
+    for page in range(1, MAX_PAGES + 1):
+        items = fetch_page(SEARCH_QUERY, page, token, sort="indexed", order="desc").get("items", [])
+        if not items:
+            break
+        items_collected.extend(items)
+        if len(items) < PER_PAGE:
+            break
+
+    new_urls = add_matching_items(items_collected, urls, repos, blacklist)
+    queue_new_urls(new_urls, "code search sorted by newest changes")
+
+
 def partition_and_collect(
     lo: int, hi: int, token: str, urls: set[str], repos: set[str], blacklist: set[str], depth: int = 0
 ) -> None:
@@ -448,6 +499,12 @@ def collect_urls(token: str) -> set[str]:
 
     urls: set[str] = set()
     repos: set[str] = set()
+
+    print("Running priority search sorted by newest changes first...", file=sys.stderr)
+    collect_recent_first(token, urls, repos, blacklist)
+    print(f"Priority search found {len(urls)} ARC-56 file(s) so far; starting exhaustive "
+          f"size-sharded search", file=sys.stderr)
+
     partition_and_collect(0, MAX_FILE_SIZE_BYTES, token, urls, repos, blacklist)
 
     print(f"Code search found {len(urls)} ARC-56 file(s) across {len(repos)} repo(s); "
