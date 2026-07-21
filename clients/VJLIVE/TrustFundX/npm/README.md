@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { ContractName_hash } from "arc56-generated-vjlive-trustfundx";
+import { GetFund_a08e72fd } from "arc56-generated-vjlive-trustfundx";
 
 const algorand = AlgorandClient.mainNet();
-const client = new ContractName_hash.ContractClient({
+const client = new GetFund_a08e72fd.GetFundClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,7 +51,7 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `GetFund_a08e72fd` | `GetFundClient` | [https://raw.githubusercontent.com/VJLIVE/TrustFundX/HEAD/Smart%20Contracts/getfund/Artifacts/GetFund.arc56.json](https://raw.githubusercontent.com/VJLIVE/TrustFundX/HEAD/Smart%20Contracts/getfund/Artifacts/GetFund.arc56.json) |
 
 ## Versioning
 
