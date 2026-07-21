@@ -41,6 +41,7 @@ var client = new BountyEscrowProxy(algod, appId: 123456789);
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
 | `Arc56.Generated.EggsLeggs.algobounty.BountyEscrow_b97dfcf7` | `BountyEscrowProxy` | [https://raw.githubusercontent.com/EggsLeggs/algobounty/HEAD/platform/projects/new-algobounty-contract/smart_contracts/artifacts/bounty_escrow/BountyEscrow.arc56.json](https://raw.githubusercontent.com/EggsLeggs/algobounty/HEAD/platform/projects/new-algobounty-contract/smart_contracts/artifacts/bounty_escrow/BountyEscrow.arc56.json) |
+| `Arc56.Generated.EggsLeggs.algobounty.HelloWorld_402e2c11` | `HelloWorldProxy` | [https://raw.githubusercontent.com/EggsLeggs/algobounty/HEAD/temporary/quickstart-template/QuickStartTemplate/projects/QuickStartTemplate-contracts/smart_contracts/artifacts/hello_world/HelloWorld.arc56.json](https://raw.githubusercontent.com/EggsLeggs/algobounty/HEAD/temporary/quickstart-template/QuickStartTemplate/projects/QuickStartTemplate-contracts/smart_contracts/artifacts/hello_world/HelloWorld.arc56.json) |
 
 ## Versioning
 
