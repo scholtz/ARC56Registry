@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_vjliv_dc539964 import contract_name_hash
+from arc56_generated_vjliv_dc539964 import GetFund_a08e72fd
 
 algorand = AlgorandClient.mainnet()
-client = contract_name_hash.ContractClient(
+client = GetFund_a08e72fd.GetFundClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,7 +50,7 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `GetFund_a08e72fd` | `GetFundClient` | [https://raw.githubusercontent.com/VJLIVE/TrustFundX/HEAD/Smart%20Contracts/getfund/Artifacts/GetFund.arc56.json](https://raw.githubusercontent.com/VJLIVE/TrustFundX/HEAD/Smart%20Contracts/getfund/Artifacts/GetFund.arc56.json) |
 
 ## Versioning
 
