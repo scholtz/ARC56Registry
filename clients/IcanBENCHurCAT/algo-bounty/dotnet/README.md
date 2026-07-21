@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Owner.Repo.Contract_hash;
+using Arc56.Generated.IcanBENCHurCAT.algo_bounty.escrow_mainnet_6c2148cf;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new ContractProxy(algod, appId: 123456789);
+var client = new EscrowContractProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,7 +40,11 @@ var client = new ContractProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `Arc56.Generated.IcanBENCHurCAT.algo_bounty.escrow_mainnet_6c2148cf` | `EscrowContractProxy` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/escrow_mainnet.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/escrow_mainnet.arc56.json) |
+| `Arc56.Generated.IcanBENCHurCAT.algo_bounty.escrow_testnet_d6e7ef38` | `EscrowContractProxy` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/escrow_testnet.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/escrow_testnet.arc56.json) |
+| `Arc56.Generated.IcanBENCHurCAT.algo_bounty.EscrowContract_55731572` | `EscrowContractProxy` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/EscrowContract.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/artifacts/EscrowContract.arc56.json) |
+| `Arc56.Generated.IcanBENCHurCAT.algo_bounty.EscrowContract_2bb5f156` | `EscrowContractProxy` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/EscrowContract.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/EscrowContract.arc56.json) |
+| `Arc56.Generated.IcanBENCHurCAT.algo_bounty.TestContract_526d7fbc` | `TestContractProxy` | [https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/TestContract.arc56.json](https://raw.githubusercontent.com/IcanBENCHurCAT/algo-bounty/HEAD/TestContract.arc56.json) |
 
 ## Versioning
 
