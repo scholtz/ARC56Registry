@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { Puppet_cda77e8c } from "arc56-generated-vkappakv-caelus";
+import { Equilibrium_114f9d31 } from "arc56-generated-vkappakv-caelus";
 
 const algorand = AlgorandClient.mainNet();
-const client = new Puppet_cda77e8c.PuppetClient({
+const client = new Equilibrium_114f9d31.EquilibriumClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,6 +51,7 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
+| `Equilibrium_114f9d31` | `EquilibriumClient` | [https://raw.githubusercontent.com/VKappaKV/Caelus/HEAD/projects/Caelus/contracts/artifacts/Equilibrium.arc56.json](https://raw.githubusercontent.com/VKappaKV/Caelus/HEAD/projects/Caelus/contracts/artifacts/Equilibrium.arc56.json) |
 | `Puppet_cda77e8c` | `PuppetClient` | [https://raw.githubusercontent.com/VKappaKV/Caelus/HEAD/projects/Caelus/contracts/artifacts/Puppet.arc56.json](https://raw.githubusercontent.com/VKappaKV/Caelus/HEAD/projects/Caelus/contracts/artifacts/Puppet.arc56.json) |
 
 ## Versioning
