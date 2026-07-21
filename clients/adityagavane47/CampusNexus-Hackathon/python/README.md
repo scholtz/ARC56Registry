@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_adity_4efd6dc0 import Counter_aa626670
+from arc56_generated_adity_4efd6dc0 import Bank_369231d6
 
 algorand = AlgorandClient.mainnet()
-client = Counter_aa626670.CounterClient(
+client = Bank_369231d6.BankClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,6 +50,7 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
+| `Bank_369231d6` | `BankClient` | [https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/bank/Bank.arc56.json](https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/bank/Bank.arc56.json) |
 | `Counter_aa626670` | `CounterClient` | [https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/counter/Counter.arc56.json](https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/counter/Counter.arc56.json) |
 | `MilestoneEscrow_a4d36c8d` | `MilestoneEscrowClient` | [https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/escrow/MilestoneEscrow.arc56.json](https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/escrow/MilestoneEscrow.arc56.json) |
 | `HelloWorld_147342b9` | `HelloWorldClient` | [https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/hello_world/HelloWorld.arc56.json](https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/hello_world/HelloWorld.arc56.json) |
