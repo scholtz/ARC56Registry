@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { Counter_aa626670 } from "arc56-generated-adityagavane47-campusnexus-hackathon";
+import { Bank_369231d6 } from "arc56-generated-adityagavane47-campusnexus-hackathon";
 
 const algorand = AlgorandClient.mainNet();
-const client = new Counter_aa626670.CounterClient({
+const client = new Bank_369231d6.BankClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,6 +51,7 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
+| `Bank_369231d6` | `BankClient` | [https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/bank/Bank.arc56.json](https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/bank/Bank.arc56.json) |
 | `Counter_aa626670` | `CounterClient` | [https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/counter/Counter.arc56.json](https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/counter/Counter.arc56.json) |
 | `MilestoneEscrow_a4d36c8d` | `MilestoneEscrowClient` | [https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/escrow/MilestoneEscrow.arc56.json](https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/escrow/MilestoneEscrow.arc56.json) |
 | `HelloWorld_147342b9` | `HelloWorldClient` | [https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/hello_world/HelloWorld.arc56.json](https://raw.githubusercontent.com/adityagavane47/CampusNexus-Hackathon/HEAD/projects/contracts/smart_contracts/artifacts/hello_world/HelloWorld.arc56.json) |
