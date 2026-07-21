@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.VKappaKV.Caelus.Puppet_cda77e8c;
+using Arc56.Generated.VKappaKV.Caelus.Equilibrium_114f9d31;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new PuppetProxy(algod, appId: 123456789);
+var client = new EquilibriumProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,6 +40,7 @@ var client = new PuppetProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
+| `Arc56.Generated.VKappaKV.Caelus.Equilibrium_114f9d31` | `EquilibriumProxy` | [https://raw.githubusercontent.com/VKappaKV/Caelus/HEAD/projects/Caelus/contracts/artifacts/Equilibrium.arc56.json](https://raw.githubusercontent.com/VKappaKV/Caelus/HEAD/projects/Caelus/contracts/artifacts/Equilibrium.arc56.json) |
 | `Arc56.Generated.VKappaKV.Caelus.Puppet_cda77e8c` | `PuppetProxy` | [https://raw.githubusercontent.com/VKappaKV/Caelus/HEAD/projects/Caelus/contracts/artifacts/Puppet.arc56.json](https://raw.githubusercontent.com/VKappaKV/Caelus/HEAD/projects/Caelus/contracts/artifacts/Puppet.arc56.json) |
 
 ## Versioning
