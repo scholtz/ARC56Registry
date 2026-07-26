@@ -29,11 +29,13 @@ not a long-lived secret - see docs/dotnet-client-pipeline.md.
 from __future__ import annotations
 
 import argparse
+import csv
 import concurrent.futures
 import datetime
 import glob
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -42,6 +44,7 @@ import urllib.request
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLIENTS_DIR = os.path.join(REPO_ROOT, "clients")
+CSV_PATH = os.path.join(REPO_ROOT, "arc56.links.csv")
 NUPKG_OUTPUT_DIR = os.path.join(REPO_ROOT, "artifacts", "nupkgs")
 NUGET_SOURCE = "https://api.nuget.org/v3/index.json"
 FLAT_CONTAINER_BASE = "https://api.nuget.org/v3-flatcontainer"
@@ -77,6 +80,33 @@ def _rate_limit(last_at: float | None, delay_seconds: float) -> float:
         if wait > 0:
             time.sleep(wait)
     return time.monotonic()
+
+
+RAW_URL_RE = re.compile(
+    r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
+)
+
+
+def load_repo_priorities() -> dict[tuple[str, str], int]:
+    """Maps every (owner, repo) that appears in arc56.links.csv to its highest
+    Priority value (across all rows for that repo, active or not - Priority is a
+    property of the link itself, see docs/arc56-links-pipeline.md#priority-column),
+    so publish order matches the same Priority-descending, then-alphabetical order
+    that download_arc56_specs.py and the generate_*_clients.py scripts already use."""
+    priorities: dict[tuple[str, str], int] = {}
+    with open(CSV_PATH, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            m = RAW_URL_RE.match(row.get("ARC56URL", ""))
+            if not m:
+                continue
+            key = (m.group("owner"), m.group("repo"))
+            try:
+                priority = int(row.get("Priority") or "0")
+            except ValueError:
+                priority = 0
+            if priority > priorities.get(key, 0):
+                priorities[key] = priority
+    return priorities
 
 
 def find_dotnet_projects() -> list[tuple[str, str, str, str]]:
@@ -208,6 +238,8 @@ def main() -> int:
         return 1
 
     projects = find_dotnet_projects()
+    repo_priorities = load_repo_priorities()
+    projects.sort(key=lambda p: (-repo_priorities.get((p[0], p[1]), 0), p[0].lower(), p[1].lower()))
     if args.only_repo:
         wanted = set(args.only_repo)
         projects = [p for p in projects if f"{p[0]}/{p[1]}" in wanted]

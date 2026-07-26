@@ -110,6 +110,18 @@ into one project per `owner/repo` (see below), the project itself is ranked
 by its highest-priority row, so `--limit-projects`/`--only-repo` scoped local
 runs still process higher-priority projects first.
 
+The three **publish** scripts (`publish_dotnet_packages.py`,
+`publish_npm_packages.py`, `publish_python_packages.py`) follow the same
+ordering, even though they don't read `arc56.links.csv` for anything else —
+each discovers its already-generated packages by scanning `clients/*/*/`, then
+calls `load_repo_priorities()` to map every `owner/repo` back to its highest
+`Priority` value in the CSV (across *all* rows for that repo, active or not —
+`Priority` is a fixed property of the link, not tied to whether it's
+currently active), and sorts the discovered packages the same way: `Priority`
+descending, `owner/repo` alphabetical (case-insensitive) as the tiebreaker.
+This happens before `--only-repo`/`--filter`/`--limit-projects` narrow the
+list, so a scoped local run and the real publish run agree on ordering.
+
 `Priority` values in use:
 
 | Value | Meaning |

@@ -115,7 +115,11 @@ cover.
    - `Priority` is a non-negative integer; every active-row iteration (in
      `download_arc56_specs.py` and all three `generate_*_clients.py` scripts) is
      sorted by `Priority` descending, then `ARC56URL` alphabetically
-     (case-insensitive) as the tiebreaker - never CSV row order. `1` is reserved for
+     (case-insensitive) as the tiebreaker - never CSV row order. The three
+     `publish_*_packages.py` scripts don't otherwise read the CSV, but still sort
+     their already-generated `clients/*/*/` packages the same way, via
+     `load_repo_priorities()` (max `Priority` across all of a repo's rows, active or
+     not). `1` is reserved for
      hand-added rows (enforced by `validate_arc56_links.py`); rows added by
      `update_arc56_links.py` get the discovery-time Unix timestamp; `2000000000` and
      `2000000001` are reserved for `txnlab`/`scholtz` URLs respectively; `0` is the
