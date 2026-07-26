@@ -48,6 +48,8 @@ CLIENTS_DIR = os.path.join(REPO_ROOT, "clients")
 
 DOWNLOAD_DELAY_SECONDS = 7
 PUSH_INTERVAL_SECONDS = 60
+DOWNLOAD_ERROR_BACKOFF_SECONDS = 30
+MAX_CONSECUTIVE_DOWNLOAD_ERRORS = 10
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -56,6 +58,13 @@ FILENAME_SUFFIX = ".arc56.json"
 
 _last_download_at: float | None = None
 _last_push_at: float | None = None
+
+
+class DownloadAbortError(RuntimeError):
+    """Raised once MAX_CONSECUTIVE_DOWNLOAD_ERRORS download failures happen in a row -
+    a run-ending signal (systemic outage, e.g. raw.githubusercontent.com down) rather
+    than isolated bad URLs, so the whole pipeline should fail loudly instead of
+    silently burning through every remaining row with the same error."""
 
 
 def log(message: str) -> None:
@@ -179,6 +188,7 @@ def commit_project_changes(owner: str, repo: str) -> None:
 
 def process_project(
     owner: str, repo: str, rows: list[dict[str, str]], retry_failed: bool, progress: list[int],
+    consecutive_errors: list[int],
 ) -> bool:
     owner_slug = sanitize_path_segment(owner)
     repo_slug = sanitize_path_segment(repo)
@@ -215,14 +225,26 @@ def process_project(
             content = download_with_rate_limit(url)
         except Exception as exc:  # noqa: BLE001 - one bad row must never abort the whole run
             log(f"WARNING: download failed for {url}: {exc}")
-            contracts_state[url] = {
-                "file_slug": file_slug,
-                "hash8": hash8,
-                "download_error": str(exc),
-            }
+            entry = dict(existing) if existing else {}
+            entry["file_slug"] = file_slug
+            entry["hash8"] = hash8
+            entry["download_error"] = str(exc)
+            contracts_state[url] = entry
             dirty = True
+            consecutive_errors[0] += 1
+            if consecutive_errors[0] >= MAX_CONSECUTIVE_DOWNLOAD_ERRORS:
+                if dirty:
+                    save_state(state_path, state)
+                raise DownloadAbortError(
+                    f"{consecutive_errors[0]} consecutive download errors "
+                    f"(most recent: {url}: {exc})"
+                )
+            log(f"Backing off {DOWNLOAD_ERROR_BACKOFF_SECONDS}s after download error "
+                f"({consecutive_errors[0]}/{MAX_CONSECUTIVE_DOWNLOAD_ERRORS} consecutive)")
+            time.sleep(DOWNLOAD_ERROR_BACKOFF_SECONDS)
             continue
 
+        consecutive_errors[0] = 0
         content_hash = sha256_hex(content)
         arc56_path = os.path.join(arc56_dir, f"{contract_id}.arc56.json")
         try:
@@ -230,11 +252,11 @@ def process_project(
                 f.write(content)
         except OSError as exc:
             log(f"WARNING: could not write {arc56_path}: {exc}")
-            contracts_state[url] = {
-                "file_slug": file_slug,
-                "hash8": hash8,
-                "download_error": f"failed to write local copy: {exc}",
-            }
+            entry = dict(existing) if existing else {}
+            entry["file_slug"] = file_slug
+            entry["hash8"] = hash8
+            entry["download_error"] = f"failed to write local copy: {exc}"
+            contracts_state[url] = entry
             dirty = True
             continue
 
@@ -300,24 +322,37 @@ def main() -> int:
 
     total_rows = sum(len(project_rows) for _, project_rows in selected)
     progress = [0, total_rows]  # [rows processed so far, total rows selected this run]
+    consecutive_errors = [0]  # shared across projects - a network outage doesn't respect project boundaries
 
     changed_projects = 0
     failed_projects = 0
+    aborted = False
     for (owner, repo), project_rows in selected:
         try:
-            if process_project(owner, repo, project_rows, args.retry_failed, progress):
+            if process_project(owner, repo, project_rows, args.retry_failed, progress, consecutive_errors):
                 changed_projects += 1
             if args.commit:
                 commit_project_changes(owner, repo)
                 push_commits()
+        except DownloadAbortError as exc:
+            log(f"ERROR: aborting run - {exc}")
+            aborted = True
+            if args.commit:
+                commit_project_changes(owner, repo)
+                push_commits(force=True)
+            break
         except Exception as exc:  # noqa: BLE001 - one project must never take down the whole run
             failed_projects += 1
             log(f"ERROR: unexpected failure downloading specs for {owner}/{repo}, skipping and "
                   f"continuing with the next project: {exc}")
             continue
 
-    if args.commit:
+    if args.commit and not aborted:
         push_commits(force=True)
+
+    if aborted:
+        log(f"Done: aborted after {consecutive_errors[0]} consecutive download errors")
+        return 1
 
     log(f"Done: {len(selected)}/{len(grouped)} project(s) scanned, "
           f"{changed_projects} with new/changed downloads, {failed_projects} failed unexpectedly")
