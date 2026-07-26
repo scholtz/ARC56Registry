@@ -24,13 +24,15 @@ size shard happens to contain them. See collect_recent_first(). It's a
 priority pass, not a substitute for the sharded pass: the sharded pass still
 runs afterwards and is what guarantees completeness.
 
-The CSV has three columns: ARC56URL, ActiveFrom, ActiveUntil. ActiveUntil
-being empty means the record is active indefinitely; a maintainer can set it
-to deactivate a record manually. This script never removes or overwrites an
-existing row (so manually-set ActiveUntil values are preserved even if a
-later search run doesn't happen to find that URL again) - it only ever adds
-newly discovered URLs, with ActiveFrom set to today and ActiveUntil left
-empty.
+The CSV has five columns: ARC56URL, ActiveFrom, ActiveUntil, Priority, Hash.
+ActiveUntil being empty means the record is active indefinitely; a maintainer
+can set it to deactivate a record manually. This script never removes or
+overwrites an existing row (so manually-set ActiveUntil values are preserved
+even if a later search run doesn't happen to find that URL again) - it only
+ever adds newly discovered URLs, with ActiveFrom set to today, ActiveUntil
+left empty, Priority set to the discovery-time Unix timestamp (see
+docs/arc56-links-pipeline.md for the full priority scheme), and Hash set to
+the first 8 hex characters of SHA-256(ARC56URL).
 
 This run can take well over an hour (thousands of code-search requests plus
 a per-repo full-tree verification pass, each throttled to stay under GitHub's
@@ -50,6 +52,7 @@ from __future__ import annotations
 
 import csv
 import datetime
+import hashlib
 import json
 import os
 import subprocess
@@ -82,7 +85,14 @@ REPO_BLACKLIST_PATH = os.path.join(REPO_ROOT, "scripts", "repo_blacklist.txt")
 URL_COLUMN = "ARC56URL"
 ACTIVE_FROM_COLUMN = "ActiveFrom"
 ACTIVE_UNTIL_COLUMN = "ActiveUntil"
-FIELDNAMES = [URL_COLUMN, ACTIVE_FROM_COLUMN, ACTIVE_UNTIL_COLUMN]
+PRIORITY_COLUMN = "Priority"
+HASH_COLUMN = "Hash"
+FIELDNAMES = [URL_COLUMN, ACTIVE_FROM_COLUMN, ACTIVE_UNTIL_COLUMN, PRIORITY_COLUMN, HASH_COLUMN]
+# Rows discovered by this script get their Priority set to the Unix timestamp at
+# discovery time (see docs/arc56-links-pipeline.md for the full priority scheme:
+# scholtz/txnlab rows outrank everything, hand-added rows get Priority=1, and these
+# timestamp priorities sort newer discoveries ahead of older ones while still
+# staying below the scholtz/txnlab reserved range).
 
 # Commit/push resilience: how hard to retry when another commit (a maintainer's
 # manual edit, or - in principle - a concurrent run) landed on the branch between
@@ -186,6 +196,13 @@ def size_qualifier(lo: int, hi: int) -> str:
     return f"size:{lo}..{hi}"
 
 
+def url_hash8(url: str) -> str:
+    """Same "hash8" computed by download_arc56_specs.py and every generate_*_clients.py
+    script - the first 8 hex chars of SHA-256(url), stored here so it never needs
+    recomputing and a PR check can verify a hand-added row's value is correct."""
+    return hashlib.sha256(url.encode("utf-8")).hexdigest()[:8]
+
+
 def path_to_url(repo_full_name: str, path: str) -> str:
     # GitHub paths can contain spaces and other reserved characters (seen in
     # practice: "PICT 2.0/farmer-pay-contract/..."). Percent-encode each path
@@ -254,6 +271,8 @@ def read_existing_rows(path: str) -> dict[str, dict[str, str]]:
             rows[url] = {
                 ACTIVE_FROM_COLUMN: row.get(ACTIVE_FROM_COLUMN) or "",
                 ACTIVE_UNTIL_COLUMN: row.get(ACTIVE_UNTIL_COLUMN) or "",
+                PRIORITY_COLUMN: row.get(PRIORITY_COLUMN) or "0",
+                HASH_COLUMN: row.get(HASH_COLUMN) or url_hash8(url),
             }
     return rows
 
@@ -268,6 +287,8 @@ def write_csv(rows: dict[str, dict[str, str]]) -> None:
                 URL_COLUMN: url,
                 ACTIVE_FROM_COLUMN: row[ACTIVE_FROM_COLUMN],
                 ACTIVE_UNTIL_COLUMN: row[ACTIVE_UNTIL_COLUMN],
+                PRIORITY_COLUMN: row[PRIORITY_COLUMN],
+                HASH_COLUMN: row[HASH_COLUMN],
             })
 
 
@@ -314,8 +335,14 @@ def flush_pending(source: str) -> None:
                 _pending_urls.clear()
                 return
 
+            discovery_timestamp = str(int(time.time()))
             for url in to_add:
-                rows[url] = {ACTIVE_FROM_COLUMN: today, ACTIVE_UNTIL_COLUMN: ""}
+                rows[url] = {
+                    ACTIVE_FROM_COLUMN: today,
+                    ACTIVE_UNTIL_COLUMN: "",
+                    PRIORITY_COLUMN: discovery_timestamp,
+                    HASH_COLUMN: url_hash8(url),
+                }
             write_csv(rows)
 
             run_git(["add", OUTPUT_PATH])

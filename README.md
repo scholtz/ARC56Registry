@@ -20,7 +20,7 @@ Need help integrating with the registry or its generated clients? Join us on
 
 | Path | What it is |
 | --- | --- |
-| [arc56.links.csv](arc56.links.csv) | The registry itself: every discovered `*.arc56.json` URL, with `ActiveFrom`/`ActiveUntil` columns controlling whether it's currently included. |
+| [arc56.links.csv](arc56.links.csv) | The registry itself: every discovered `*.arc56.json` URL, with `ActiveFrom`/`ActiveUntil` columns controlling whether it's currently included, a `Priority` column controlling iteration order, and a `Hash` column (`SHA-256(ARC56URL)[:8]`) that uniquely identifies each entry across the generated client libraries. |
 | [scripts/update_arc56_links.py](scripts/update_arc56_links.py) | Finds ARC-56 files on GitHub and updates the CSV. Never removes a row. |
 | [scripts/validate_arc56_links.py](scripts/validate_arc56_links.py) | Pull-request check enforcing the CSV's schema and edit rules. |
 | [scripts/download_arc56_specs.py](scripts/download_arc56_specs.py) | Downloads every active ARC-56 spec into `clients/<owner>/<repo>/arc56/` - shared by both client-generation pipelines below. |
@@ -172,9 +172,22 @@ depending on GitHub Pages being reachable at call time - see
 
 ## Contributing
 
-- To add or fix a discovered ARC-56 URL by hand, edit `arc56.links.csv` directly - see
+- To add a discovered ARC-56 URL by hand, add a row to `arc56.links.csv` with:
+  - `ARC56URL`: the raw-content URL, ending in `.arc56.json`.
+  - `ActiveFrom`: today's date (`YYYY-MM-DD`).
+  - `ActiveUntil`: left empty.
+  - `Priority`: `1` (hand-added rows always start at the lowest non-default
+    priority - see
+    [docs/arc56-links-pipeline.md#priority-column](docs/arc56-links-pipeline.md#priority-column)).
+  - `Hash`: the first 8 hex characters of `SHA-256(ARC56URL)`, e.g.
+    `python3 -c "import hashlib,sys; print(hashlib.sha256(sys.argv[1].encode()).hexdigest()[:8])" "<url>"`
+    - see
+    [docs/arc56-links-pipeline.md#hash-column](docs/arc56-links-pipeline.md#hash-column).
+  - Keep the `ARC56URL` column sorted alphabetically (case-insensitive).
+- To fix or deactivate an existing row, edit `arc56.links.csv` directly - see
   [docs/arc56-links-pipeline.md](docs/arc56-links-pipeline.md#pull-request-validation)
-  for the exact rules the PR check enforces.
+  for the exact rules the PR check enforces (in particular, `Priority` and
+  `Hash` can never change on an existing row).
 - To change how .NET clients are generated or packaged, see
   [docs/dotnet-client-pipeline.md](docs/dotnet-client-pipeline.md) and
   `clients/_template/`.

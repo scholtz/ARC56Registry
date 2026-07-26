@@ -7,7 +7,15 @@ cover.
 
 ## Repo map
 
-- `arc56.links.csv` - the registry. Columns: `ARC56URL,ActiveFrom,ActiveUntil`.
+- `arc56.links.csv` - the registry. Columns:
+  `ARC56URL,ActiveFrom,ActiveUntil,Priority,Hash`. `Priority` (non-negative
+  integer, higher = processed earlier) and `Hash` (`SHA-256(ARC56URL)[:8]`,
+  the same `hash8` used to namespace generated client code) were backfilled
+  onto every pre-existing row by the one-time
+  `scripts/backfill_priority_and_hash.py` migration - see
+  docs/arc56-links-pipeline.md#priority-column and #hash-column for the full
+  scheme (scholtz/txnlab reserved ranges, hand-added rows get `Priority=1`,
+  automated discoveries get the discovery-time Unix timestamp).
 - `scripts/update_arc56_links.py` - finds new ARC-56 files on GitHub, merges into the CSV.
   Skips any repo listed in `scripts/repo_blacklist.txt` (this repo itself is blacklisted
   by default, since its own `*.arc56.json` files are examples/fixtures, not real specs
@@ -100,8 +108,26 @@ cover.
    still never deleted, just grown.
 2. **`ActiveFrom`/`ActiveUntil` semantics**: a row is active when `ActiveFrom <= today`
    and (`ActiveUntil` is empty or `ActiveUntil` is in the future). New rows always get
-   `ActiveFrom = today`, `ActiveUntil = ""`.
-3. **GitHub API rate limits are real and have bitten us before**:
+   `ActiveFrom = today`, `ActiveUntil = ""`. Every download/generate script skips
+   inactive rows entirely - they're never iterated over, not just deprioritized.
+3. **`Priority`/`Hash` semantics** (see docs/arc56-links-pipeline.md#priority-column
+   and #hash-column for the full detail):
+   - `Priority` is a non-negative integer; every active-row iteration (in
+     `download_arc56_specs.py` and all three `generate_*_clients.py` scripts) is
+     sorted by `Priority` descending, then `ARC56URL` alphabetically
+     (case-insensitive) as the tiebreaker - never CSV row order. `1` is reserved for
+     hand-added rows (enforced by `validate_arc56_links.py`); rows added by
+     `update_arc56_links.py` get the discovery-time Unix timestamp; `2000000000` and
+     `2000000001` are reserved for `txnlab`/`scholtz` URLs respectively; `0` is the
+     default every pre-existing row got when this column was introduced.
+   - `Hash` is always `hashlib.sha256(ARC56URL.encode()).hexdigest()[:8]` - the same
+     `hash8` value `download_arc56_specs.py`/`generate_*_clients.py` already compute
+     independently to namespace each contract's generated code. Never hand-write a
+     different value.
+   - Both columns are **immutable once set** for an existing row - a PR that changes
+     either on a pre-existing `ARC56URL` is rejected by `validate_arc56_links.py`,
+     same as the never-delete rule above.
+4. **GitHub API rate limits are real and have bitten us before**:
    - Code search (`api.github.com/search/code`) is capped at ~10 requests/minute
      (stricter than other search types) - `update_arc56_links.py` sleeps 7s between
      calls.
@@ -112,24 +138,24 @@ cover.
      enforces 7s between downloads for the same reason. This is the *only* script that
      downloads ARC-56 specs; the generate/publish scripts for all three ecosystems
      never touch the network for a spec (see the 3-stage pipeline above).
-4. **CSV must stay valid CSV per GitHub's rendering rules** (RFC 4180 quoting via
+5. **CSV must stay valid CSV per GitHub's rendering rules** (RFC 4180 quoting via
    Python's `csv` module, not manual string joins) so it renders as a table on GitHub.
-5. **One package per GitHub repo, not per contract** - for all three ecosystems.
+6. **One package per GitHub repo, not per contract** - for all three ecosystems.
    Per-contract uniqueness comes from the namespace/export/module
    (`Arc56.Generated.<owner>.<repo>.<file_slug>_<hash8>` for .NET,
    `export * as <file_slug>_<hash8>` for TypeScript,
    `from . import <file_slug>_<hash8>` for Python), not from splitting into more
    packages.
-6. **Never commit changes unless asked.** This applies doubly to `git push` and to
+7. **Never commit changes unless asked.** This applies doubly to `git push` and to
    anything that would trigger a NuGet, npm, or PyPI publish.
-7. **Publishing (nuget.org, npm, and PyPI) is rate-limited and list-then-publish,
+8. **Publishing (nuget.org, npm, and PyPI) is rate-limited and list-then-publish,
    never blind-push.** `publish_dotnet_packages.py`/`publish_npm_packages.py`/
    `publish_python_packages.py` query the registry's own live list of published
    versions before deciding what to publish (never a locally-cached flag), and wait at
    least 5s (20s for PyPI) between successive pushes. Don't reintroduce delay into the
    generate scripts - only download and publish are rate-limited; generation
    deliberately has none.
-8. **`deploy-hash-registry-pages.yml` needs a one-time manual repo setting** (Settings
+9. **`deploy-hash-registry-pages.yml` needs a one-time manual repo setting** (Settings
    > Pages > Source: "GitHub Actions") that no workflow file can set. If Pages
    deployment ever fails with a permissions/source error, that setting - not the
    workflow YAML - is the first thing to check.

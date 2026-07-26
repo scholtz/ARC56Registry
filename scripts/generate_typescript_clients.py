@@ -148,7 +148,18 @@ def parse_raw_url(url: str) -> tuple[str, str, str]:
     return m.group("owner"), m.group("repo"), m.group("path")
 
 
+def row_priority(row: dict[str, str]) -> int:
+    try:
+        return int(row.get("Priority") or "0")
+    except ValueError:
+        return 0
+
+
 def load_active_rows() -> list[dict[str, str]]:
+    """Rows with an ActiveUntil in the past (or an ActiveFrom in the future) are
+    skipped entirely - never iterated over by this script. The remaining rows are
+    sorted by Priority descending, then by ARC56URL alphabetically (case-insensitive)
+    as a tiebreaker - see docs/arc56-links-pipeline.md for the full priority scheme."""
     today = datetime.date.today().isoformat()
     rows = []
     with open(CSV_PATH, newline="", encoding="utf-8") as f:
@@ -160,6 +171,7 @@ def load_active_rows() -> list[dict[str, str]]:
             if active_until and active_until <= today:
                 continue
             rows.append(row)
+    rows.sort(key=lambda r: (-row_priority(r), r["ARC56URL"].lower()))
     return rows
 
 
@@ -764,7 +776,16 @@ def main() -> int:
             continue
         grouped.setdefault((owner, repo), []).append(row)
 
-    selected = sorted(grouped.items())
+    # Preserve row priority at the project-group level too: a project's rank is its
+    # highest-priority row's priority, with owner/repo alphabetical as the tiebreaker.
+    selected = sorted(
+        grouped.items(),
+        key=lambda item: (
+            -max(row_priority(r) for r in item[1]),
+            item[0][0].lower(),
+            item[0][1].lower(),
+        ),
+    )
     if args.only_repo:
         wanted = {tuple(r.split("/", 1)) for r in args.only_repo}
         selected = [item for item in selected if item[0] in wanted]

@@ -65,7 +65,9 @@ list of every `*.arc56.json` file found on public GitHub, via the
    [CSV format and Active columns](#csv-format-and-active-columns) below.
    Existing rows are **never removed or modified**, even if a URL isn't found
    by the current search run; only genuinely new URLs are appended, with
-   `ActiveFrom` set to today's date and `ActiveUntil` left empty.
+   `ActiveFrom` set to today's date, `ActiveUntil` left empty, `Priority` set
+   to the current Unix timestamp (see [Priority column](#priority-column)),
+   and `Hash` set to `SHA-256(ARC56URL)[:8]` (see [Hash column](#hash-column)).
 7. **Write**: the merged, alphabetically-sorted (case-insensitive) result is
    written back to `arc56.links.csv` using Python's `csv` module with RFC
    4180 quoting, so the file renders correctly as a table on GitHub (see
@@ -76,13 +78,15 @@ list of every `*.arc56.json` file found on public GitHub, via the
 
 ## CSV format and Active columns
 
-`arc56.links.csv` has three columns:
+`arc56.links.csv` has five columns:
 
 | Column        | Meaning                                                                                       |
 | ------------- | ----------------------------------------------------------------------------------------------- |
 | `ARC56URL`    | The raw-content URL of the `*.arc56.json` file.                                                |
 | `ActiveFrom`  | The date (`YYYY-MM-DD`) from which this record is considered active. Set automatically to the date the row was first added. |
 | `ActiveUntil` | The date this record stops being active, or **empty** if it's active indefinitely.             |
+| `Priority`    | A non-negative integer controlling iteration order (higher = processed earlier). See [Priority column](#priority-column) below. |
+| `Hash`        | The first 8 hex characters of `SHA-256(ARC56URL)` — the same `hash8` value the client-generation scripts use to namespace each contract's generated code. See [Hash column](#hash-column) below. |
 
 A record is active as long as today falls on or after `ActiveFrom` and
 `ActiveUntil` is either empty or in the future. New rows added by the
@@ -92,6 +96,47 @@ active by default).
 To manually deactivate a record, edit its `ActiveUntil` cell to a past or
 current date and commit that change directly — the pipeline will never
 overwrite or remove that row, so the manual edit sticks across future runs.
+
+### Priority column
+
+Every download/generate script (`download_arc56_specs.py`,
+`generate_dotnet_clients.py`, `generate_typescript_clients.py`,
+`generate_python_clients.py`) first drops any row that isn't currently active
+(an `ActiveUntil` in the past, or an `ActiveFrom` in the future, is skipped
+entirely — the row is never even considered for iteration), then processes
+the remaining rows **sorted by `Priority` descending, with `ARC56URL`
+alphabetical (case-insensitive) as the tiebreaker**. Where rows are grouped
+into one project per `owner/repo` (see below), the project itself is ranked
+by its highest-priority row, so `--limit-projects`/`--only-repo` scoped local
+runs still process higher-priority projects first.
+
+`Priority` values in use:
+
+| Value | Meaning |
+| --- | --- |
+| `2000000001` | Reserved for links whose URL contains `scholtz` (case-insensitive) — set once during the migration that introduced this column. |
+| `2000000000` | Reserved for links whose URL contains `txnlab` (case-insensitive) — set once during the same migration. |
+| Current Unix timestamp at discovery time | Rows added automatically by `update_arc56_links.py` — this naturally ranks more recently discovered links above older ones, while still staying below the reserved `scholtz`/`txnlab` range for the foreseeable future. |
+| `1` | Rows added **by hand** in a pull request — see [Pull request validation](#pull-request-validation): the check rejects any hand-added row whose `Priority` isn't exactly `1`. |
+| `0` | The default every pre-existing row got when this column was introduced, and the lowest rank in the ordering. |
+
+### Hash column
+
+`Hash` is computed as:
+
+```python
+import hashlib
+hashlib.sha256(url.encode("utf-8")).hexdigest()[:8]
+```
+
+(`url` being the exact `ARC56URL` string.) This is identical to the `hash8`
+that `download_arc56_specs.py` and every `generate_*_clients.py` script
+already compute independently to build each contract's unique identifier
+(`<file_slug>_<hash8>`) — storing it in the CSV means a contributor adding a
+row by hand doesn't need to guess it, and the PR check can verify it was
+computed correctly instead of trusting whatever value was pasted in. Once
+set, a row's `Hash` must never change (it's a pure function of `ARC56URL`,
+which itself never changes for an existing row).
 
 ## Required GitHub secrets
 
@@ -211,20 +256,30 @@ needs `permissions: contents: read`.
 It compares the PR's version of the file against the base branch's version
 and enforces:
 
-1. **Schema**: the header must be exactly `ARC56URL,ActiveFrom,ActiveUntil`.
+1. **Schema**: the header must be exactly
+   `ARC56URL,ActiveFrom,ActiveUntil,Priority,Hash`.
 2. **URL suffix**: every `ARC56URL` must end with `.arc56.json`.
 3. **No duplicate URLs**.
 4. **Valid dates**: `ActiveFrom` must be a `YYYY-MM-DD` date; `ActiveUntil`
    must be empty or a `YYYY-MM-DD` date.
-5. **Alphabetical order**: the `ARC56URL` column must be sorted
+5. **Valid Priority**: must be a non-negative integer.
+6. **Valid Hash**: must equal `SHA-256(ARC56URL)[:8]` — see
+   [Hash column](#hash-column) for exactly how to compute it. A row with the
+   right shape (8 hex chars) but the wrong value is still rejected — the
+   check recomputes the hash itself and compares.
+7. **Alphabetical order**: the `ARC56URL` column must be sorted
    alphabetically, case-insensitive.
-6. **No removed records**: every `ARC56URL` present on the base branch must
+8. **No removed records**: every `ARC56URL` present on the base branch must
    still be present in the PR (rows are deactivated, never deleted — see
    [CSV format and Active columns](#csv-format-and-active-columns)).
-7. **Per-record change rules**, comparing each existing row to its base-branch
+9. **Per-record change rules**, comparing each existing row to its base-branch
    version:
+   - **`Priority` and `Hash` may never change** on an existing record, no
+     matter what else about the row changes.
    - **New record** (URL not on the base branch): `ActiveFrom` must equal
-     today's date and `ActiveUntil` must be empty.
+     today's date, `ActiveUntil` must be empty, and `Priority` must be
+     exactly `1` (see [Priority column](#priority-column) — hand-added rows
+     always start at the lowest non-default priority).
    - **Updated record** (existing URL, `ActiveUntil` left/made empty): treated
      as a reactivation — `ActiveFrom` must equal today's date.
    - **Deleted/deactivated record** (existing URL, `ActiveUntil` set to
