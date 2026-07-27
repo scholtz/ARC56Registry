@@ -169,6 +169,7 @@ from . import ConcreteArc4Contract_a32cab02 as ConcreteArc4Contract_a32cab02
 from . import ItxnComposeAlgo_48272453 as ItxnComposeAlgo_48272453
 from . import VerifierContract_a37b0424 as VerifierContract_a37b0424
 from . import ItxnDemoContract_feb9808b as ItxnDemoContract_feb9808b
+from . import ItxnReceiver_abbdfac4 as ItxnReceiver_abbdfac4
 from . import JSDocDemo_8298490e as JSDocDemo_8298490e
 from . import LargeObjectsInStateAlgo_9fde4f29 as LargeObjectsInStateAlgo_9fde4f29
 from . import TestLocalMap_add35f04 as TestLocalMap_add35f04
@@ -181,6 +182,7 @@ from . import StoreBoth_aa69053f as StoreBoth_aa69053f
 from . import StoreString_bcdb2469 as StoreString_bcdb2469
 from . import StoreUint64_f6718697 as StoreUint64_f6718697
 from . import AbiCallMultiInheritance_90212eff as AbiCallMultiInheritance_90212eff
+from . import BaseOne_f30cab2c as BaseOne_f30cab2c
 from . import BaseTwo_5b556cff as BaseTwo_5b556cff
 from . import CommonBase_115e10b3 as CommonBase_115e10b3
 from . import MultiBases_98164840 as MultiBases_98164840

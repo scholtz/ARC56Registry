@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "stop"}], "name": "testWhile", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "DemoContract", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CzEbQQAYgAQopS1zNhoAjgEAAQAxGRQxGBBEQgAIMRkUMRgUEEM2GgFJFYEIEkQXgQBJSwIMQQAGgQEIQv/zFoAEFR98dUxQsIEBQw==", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvd2hpbGUtbG9vcHMuYWxnby50czo0CiAgICAvLyBjbGFzcyBEZW1vQ29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANQogICAgcHVzaGJ5dGVzIDB4MjhhNTJkNzMgLy8gbWV0aG9kICJ0ZXN0V2hpbGUodWludDY0KXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdGVzdFdoaWxlX3JvdXRlQDMKICAgIGVycgoKbWFpbl90ZXN0V2hpbGVfcm91dGVAMzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy93aGlsZS1sb29wcy5hbGdvLnRzOjUKICAgIC8vIHB1YmxpYyB0ZXN0V2hpbGUoc3RvcDogdWludDY0KSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgYiB0ZXN0V2hpbGUKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvd2hpbGUtbG9vcHMuYWxnby50czo0CiAgICAvLyBjbGFzcyBEZW1vQ29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy93aGlsZS1sb29wcy5hbGdvLnRzOjpEZW1vQ29udHJhY3QudGVzdFdoaWxlW3JvdXRpbmddKCkgLT4gdm9pZDoKdGVzdFdoaWxlOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3doaWxlLWxvb3BzLmFsZ28udHM6NQogICAgLy8gcHVibGljIHRlc3RXaGlsZShzdG9wOiB1aW50NjQpIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvd2hpbGUtbG9vcHMuYWxnby50czo2CiAgICAvLyBsZXQgaSA9IFVpbnQ2NCgwKQogICAgcHVzaGludCAwCgp0ZXN0V2hpbGVfd2hpbGVfdG9wQDI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvd2hpbGUtbG9vcHMuYWxnby50czo3CiAgICAvLyB3aGlsZSAoaSA8IHN0b3ApIHsKICAgIGR1cAogICAgZGlnIDIKICAgIDwKICAgIC8vIHRlc3RzL2FwcHJvdmFscy93aGlsZS1sb29wcy5hbGdvLnRzOjctOQogICAgLy8gd2hpbGUgKGkgPCBzdG9wKSB7CiAgICAvLyAgIGkgKz0gMQogICAgLy8gfQogICAgYnogdGVzdFdoaWxlX2FmdGVyX3doaWxlQDQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy93aGlsZS1sb29wcy5hbGdvLnRzOjgKICAgIC8vIGkgKz0gMQogICAgcHVzaGludCAxCiAgICArCiAgICBiIHRlc3RXaGlsZV93aGlsZV90b3BAMgoKdGVzdFdoaWxlX2FmdGVyX3doaWxlQDQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvd2hpbGUtbG9vcHMuYWxnby50czo1CiAgICAvLyBwdWJsaWMgdGVzdFdoaWxlKHN0b3A6IHVpbnQ2NCkgewogICAgaXRvYgogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEKICAgIHJldHVybgo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [46], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "methodOne", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "methodCommon", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "b2CantOverride", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}], "name": "BaseOne", "state": {"keys": {"box": {}, "global": {"stateOne": {"key": "c3RhdGVPbmU=", "keyType": "AVMString", "valueType": "AVMUint64"}, "stateCommon": {"key": "c3RhdGVDb21tb24=", "keyType": "AVMString", "valueType": "AVMUint64"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 2}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CzEYQAAdgAtzdGF0ZUNvbW1vboF7Z4AIc3RhdGVPbmWBLWcxG0EASjEZFEQxGESCAwTDJTPjBEVcjQkE+fUULDYaAI4DABMAAQABAIAMFR98dQAGY29tbW9usIEBQ4AOFR98dQAIYmFzZS1vbmWwgQFDMRkUMRgUEEM=", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvbXVsdGktaW5oZXJpdGFuY2UuYWxnby50czoxMQogICAgLy8gc3RhdGVDb21tb24gPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsgaW5pdGlhbFZhbHVlOiAxMjMgfSkKICAgIHB1c2hieXRlcyAic3RhdGVDb21tb24iCiAgICBwdXNoaW50IDEyMwogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9tdWx0aS1pbmhlcml0YW5jZS5hbGdvLnRzOjIzCiAgICAvLyBzdGF0ZU9uZSA9IEdsb2JhbFN0YXRlKHsgaW5pdGlhbFZhbHVlOiBVaW50NjQoNDUpIH0pCiAgICBwdXNoYnl0ZXMgInN0YXRlT25lIgogICAgcHVzaGludCA0NQogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL211bHRpLWluaGVyaXRhbmNlLmFsZ28udHM6MjIKICAgIC8vIGV4cG9ydCBjbGFzcyBCYXNlT25lIGV4dGVuZHMgQ29tbW9uQmFzZSB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAMTIKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweGMzMjUzM2UzIDB4NDU1YzhkMDkgMHhmOWY1MTQyYyAvLyBtZXRob2QgIm1ldGhvZE9uZSgpc3RyaW5nIiwgbWV0aG9kICJtZXRob2RDb21tb24oKXN0cmluZyIsIG1ldGhvZCAiYjJDYW50T3ZlcnJpZGUoKXN0cmluZyIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fbWV0aG9kT25lX3JvdXRlQDYgbWFpbl9tZXRob2RDb21tb25fcm91dGVANyBtYWluX21ldGhvZENvbW1vbl9yb3V0ZUA3CiAgICBlcnIKCm1haW5fbWV0aG9kQ29tbW9uX3JvdXRlQDc6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvbXVsdGktaW5oZXJpdGFuY2UuYWxnby50czoxMwogICAgLy8gbWV0aG9kQ29tbW9uKCkgewogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDA2NjM2ZjZkNmQ2ZjZlCiAgICBsb2cKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCgptYWluX21ldGhvZE9uZV9yb3V0ZUA2OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL211bHRpLWluaGVyaXRhbmNlLmFsZ28udHM6MjQKICAgIC8vIG1ldGhvZE9uZSgpIHsKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwODYyNjE3MzY1MmQ2ZjZlNjUKICAgIGxvZwogICAgcHVzaGludCAxCiAgICByZXR1cm4KCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDEyOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL211bHRpLWluaGVyaXRhbmNlLmFsZ28udHM6MjIKICAgIC8vIGV4cG9ydCBjbGFzcyBCYXNlT25lIGV4dGVuZHMgQ29tbW9uQmFzZSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -64,31 +64,41 @@ def _init_dataclass(cls: type, data: dict) -> object:
             field_values[field.name] = field_value
     return cls(**field_values)
 
-@dataclasses.dataclass(frozen=True, kw_only=True)
-class TestWhileArgs:
-    """Dataclass for test_while arguments"""
-    stop: int
-
-    @property
-    def abi_method_signature(self) -> str:
-        return "testWhile(uint64)uint64"
-
-
-class DemoContractParams:
+class BaseOneParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
-    def test_while(
+    def method_one(
         self,
-        args: tuple[int] | TestWhileArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> algokit_utils.AppCallMethodCallParams:
-        method_args = _parse_abi_args(args)
+    
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "testWhile(uint64)uint64",
-            "args": method_args,
+            "method": "methodOne()string",
+        }))
+
+    def method_common(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "methodCommon()string",
+        }))
+
+    def b2_cant_override(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "b2CantOverride()string",
         }))
 
     def clear_state(
@@ -102,21 +112,41 @@ class DemoContractParams:
         )
 
 
-class DemoContractCreateTransactionParams:
+class BaseOneCreateTransactionParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
-    def test_while(
+    def method_one(
         self,
-        args: tuple[int] | TestWhileArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> algokit_utils.BuiltTransactions:
-        method_args = _parse_abi_args(args)
+    
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "testWhile(uint64)uint64",
-            "args": method_args,
+            "method": "methodOne()string",
+        }))
+
+    def method_common(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "methodCommon()string",
+        }))
+
+    def b2_cant_override(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "b2CantOverride()string",
         }))
 
     def clear_state(
@@ -130,25 +160,51 @@ class DemoContractCreateTransactionParams:
         )
 
 
-class DemoContractSend:
+class BaseOneSend:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
-    def test_while(
+    def method_one(
         self,
-        args: tuple[int] | TestWhileArgs,
         params: algokit_utils.CommonAppCallParams | None = None,
         send_params: algokit_utils.SendParams | None = None
-    ) -> algokit_utils.SendAppTransactionResult[int]:
-        method_args = _parse_abi_args(args)
+    ) -> algokit_utils.SendAppTransactionResult[str]:
+    
         params = params or algokit_utils.CommonAppCallParams()
         response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "testWhile(uint64)uint64",
-            "args": method_args,
+            "method": "methodOne()string",
         }), send_params=send_params)
         parsed_response = response
-        return typing.cast(algokit_utils.SendAppTransactionResult[int], parsed_response)
+        return typing.cast(algokit_utils.SendAppTransactionResult[str], parsed_response)
+
+    def method_common(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[str]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "methodCommon()string",
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[str], parsed_response)
+
+    def b2_cant_override(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[str]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "b2CantOverride()string",
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[str], parsed_response)
 
     def clear_state(
         self,
@@ -161,14 +217,65 @@ class DemoContractSend:
         )
 
 
-class DemoContractState:
-    """Methods to access state for the current DemoContract app"""
+class GlobalStateValue(typing.TypedDict):
+    """Shape of global_state state key values"""
+    stateOne: int
+    stateCommon: int
+
+class BaseOneState:
+    """Methods to access state for the current BaseOne app"""
 
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
-class DemoContractClient:
-    """Client for interacting with DemoContract smart contract"""
+    @property
+    def global_state(
+        self
+    ) -> "_GlobalState":
+            """Methods to access global_state for the current app"""
+            return _GlobalState(self.app_client)
+
+class _GlobalState:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+        
+        # Pre-generated mapping of value types to their struct classes
+        self._struct_classes: dict[str, typing.Type[typing.Any]] = {}
+
+    def get_all(self) -> GlobalStateValue:
+        """Get all current keyed values from global_state state"""
+        result = self.app_client.state.global_state.get_all()
+        if not result:
+            return typing.cast(GlobalStateValue, {})
+
+        converted = {}
+        for key, value in result.items():
+            key_info = self.app_client.app_spec.state.keys.global_state.get(key)
+            struct_class = self._struct_classes.get(key_info.value_type) if key_info else None
+            converted[key] = (
+                _init_dataclass(struct_class, value) if struct_class and isinstance(value, dict)
+                else value
+            )
+        return typing.cast(GlobalStateValue, converted)
+
+    @property
+    def state_one(self) -> int:
+        """Get the current value of the stateOne key in global_state state"""
+        value = self.app_client.state.global_state.get_value("stateOne")
+        if isinstance(value, dict) and "AVMUint64" in self._struct_classes:
+            return _init_dataclass(self._struct_classes["AVMUint64"], value)  # type: ignore
+        return typing.cast(int, value)
+
+    @property
+    def state_common(self) -> int:
+        """Get the current value of the stateCommon key in global_state state"""
+        value = self.app_client.state.global_state.get_value("stateCommon")
+        if isinstance(value, dict) and "AVMUint64" in self._struct_classes:
+            return _init_dataclass(self._struct_classes["AVMUint64"], value)  # type: ignore
+        return typing.cast(int, value)
+
+class BaseOneClient:
+    """Client for interacting with BaseOne smart contract"""
 
     @typing.overload
     def __init__(self, app_client: algokit_utils.AppClient) -> None: ...
@@ -216,10 +323,10 @@ class DemoContractClient:
         else:
             raise ValueError("Either app_client or algorand and app_id must be provided")
     
-        self.params = DemoContractParams(self.app_client)
-        self.create_transaction = DemoContractCreateTransactionParams(self.app_client)
-        self.send = DemoContractSend(self.app_client)
-        self.state = DemoContractState(self.app_client)
+        self.params = BaseOneParams(self.app_client)
+        self.create_transaction = BaseOneCreateTransactionParams(self.app_client)
+        self.send = BaseOneSend(self.app_client)
+        self.state = BaseOneState(self.app_client)
 
     @staticmethod
     def from_creator_and_name(
@@ -232,8 +339,8 @@ class DemoContractClient:
         clear_source_map: SourceMap | None = None,
         ignore_cache: bool | None = None,
         app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
-    ) -> "DemoContractClient":
-        return DemoContractClient(
+    ) -> "BaseOneClient":
+        return BaseOneClient(
             algokit_utils.AppClient.from_creator_and_name(
                 creator_address=creator_address,
                 app_name=app_name,
@@ -256,8 +363,8 @@ class DemoContractClient:
         default_signer: TransactionSigner | None = None,
         approval_source_map: SourceMap | None = None,
         clear_source_map: SourceMap | None = None,
-    ) -> "DemoContractClient":
-        return DemoContractClient(
+    ) -> "BaseOneClient":
+        return BaseOneClient(
             algokit_utils.AppClient.from_network(
                 app_spec=APP_SPEC,
                 algorand=algorand,
@@ -296,8 +403,8 @@ class DemoContractClient:
         default_signer: TransactionSigner | None = None,
         approval_source_map: SourceMap | None = None,
         clear_source_map: SourceMap | None = None,
-    ) -> "DemoContractClient":
-        return DemoContractClient(
+    ) -> "BaseOneClient":
+        return BaseOneClient(
             self.app_client.clone(
                 app_name=app_name,
                 default_sender=default_sender,
@@ -307,15 +414,27 @@ class DemoContractClient:
             )
         )
 
-    def new_group(self) -> "DemoContractComposer":
-        return DemoContractComposer(self)
+    def new_group(self) -> "BaseOneComposer":
+        return BaseOneComposer(self)
 
     @typing.overload
     def decode_return_value(
         self,
-        method: typing.Literal["testWhile(uint64)uint64"],
+        method: typing.Literal["methodOne()string"],
         return_value: algokit_utils.ABIReturn | None
-    ) -> int | None: ...
+    ) -> str | None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
+        method: typing.Literal["methodCommon()string"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> str | None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
+        method: typing.Literal["b2CantOverride()string"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> str | None: ...
     @typing.overload
     def decode_return_value(
         self,
@@ -327,7 +446,7 @@ class DemoContractClient:
         self,
         method: str,
         return_value: algokit_utils.ABIReturn | None
-    ) -> algokit_utils.ABIValue | algokit_utils.ABIStruct | None | int:
+    ) -> algokit_utils.ABIValue | algokit_utils.ABIStruct | None | str:
         """Decode ABI return value for the given method."""
         if return_value is None:
             return None
@@ -347,15 +466,15 @@ class DemoContractClient:
 
 
 @dataclasses.dataclass(frozen=True)
-class DemoContractBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
-    """Parameters for creating DemoContract contract with bare calls"""
+class BaseOneBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating BaseOne contract with bare calls"""
     on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
 
     def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
         return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
 
-class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBareCallCreateParams, None, None]):
-    """Factory for deploying and managing DemoContractClient smart contracts"""
+class BaseOneFactory(algokit_utils.TypedAppFactoryProtocol[BaseOneBareCallCreateParams, None, None]):
+    """Factory for deploying and managing BaseOneClient smart contracts"""
 
     def __init__(
         self,
@@ -378,9 +497,9 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
                 compilation_params=compilation_params,
             )
         )
-        self.params = DemoContractFactoryParams(self.app_factory)
-        self.create_transaction = DemoContractFactoryCreateTransaction(self.app_factory)
-        self.send = DemoContractFactorySend(self.app_factory)
+        self.params = BaseOneFactoryParams(self.app_factory)
+        self.create_transaction = BaseOneFactoryCreateTransaction(self.app_factory)
+        self.send = BaseOneFactorySend(self.app_factory)
 
     @property
     def app_name(self) -> str:
@@ -399,7 +518,7 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
         *,
         on_update: algokit_utils.OnUpdate | None = None,
         on_schema_break: algokit_utils.OnSchemaBreak | None = None,
-        create_params: DemoContractBareCallCreateParams | None = None,
+        create_params: BaseOneBareCallCreateParams | None = None,
         update_params: None = None,
         delete_params: None = None,
         existing_deployments: algokit_utils.ApplicationLookup | None = None,
@@ -407,7 +526,7 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
         app_name: str | None = None,
         compilation_params: algokit_utils.AppClientCompilationParams | None = None,
         send_params: algokit_utils.SendParams | None = None,
-    ) -> tuple[DemoContractClient, algokit_utils.AppFactoryDeployResult]:
+    ) -> tuple[BaseOneClient, algokit_utils.AppFactoryDeployResult]:
         """Deploy the application"""
         deploy_response = self.app_factory.deploy(
             on_update=on_update,
@@ -422,7 +541,7 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
             send_params=send_params,
         )
 
-        return DemoContractClient(deploy_response[0]), deploy_response[1]
+        return BaseOneClient(deploy_response[0]), deploy_response[1]
 
     def get_app_client_by_creator_and_name(
         self,
@@ -434,9 +553,9 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
         app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
         approval_source_map: SourceMap | None = None,
         clear_source_map: SourceMap | None = None,
-    ) -> DemoContractClient:
+    ) -> BaseOneClient:
         """Get an app client by creator address and name"""
-        return DemoContractClient(
+        return BaseOneClient(
             self.app_factory.get_app_client_by_creator_and_name(
                 creator_address,
                 app_name,
@@ -457,9 +576,9 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
         default_signer: TransactionSigner | None = None,
         approval_source_map: SourceMap | None = None,
         clear_source_map: SourceMap | None = None,
-    ) -> DemoContractClient:
+    ) -> BaseOneClient:
         """Get an app client by app ID"""
-        return DemoContractClient(
+        return BaseOneClient(
             self.app_factory.get_app_client_by_id(
                 app_id,
                 app_name,
@@ -471,17 +590,17 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
         )
 
 
-class DemoContractFactoryParams:
-    """Parameters for creating transactions for DemoContract contract"""
+class BaseOneFactoryParams:
+    """Parameters for creating transactions for BaseOne contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
-        self.create = DemoContractFactoryCreateParams(app_factory)
-        self.update = DemoContractFactoryUpdateParams(app_factory)
-        self.delete = DemoContractFactoryDeleteParams(app_factory)
+        self.create = BaseOneFactoryCreateParams(app_factory)
+        self.update = BaseOneFactoryUpdateParams(app_factory)
+        self.delete = BaseOneFactoryDeleteParams(app_factory)
 
-class DemoContractFactoryCreateParams:
-    """Parameters for 'create' operations of DemoContract contract"""
+class BaseOneFactoryCreateParams:
+    """Parameters for 'create' operations of BaseOne contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -498,28 +617,65 @@ class DemoContractFactoryCreateParams:
             algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
             compilation_params=compilation_params)
 
-    def test_while(
+    def method_one(
         self,
-        args: tuple[int] | TestWhileArgs,
         *,
         params: algokit_utils.CommonAppCallCreateParams | None = None,
         compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> algokit_utils.AppCreateMethodCallParams:
-        """Creates a new instance using the testWhile(uint64)uint64 ABI method"""
+        """Creates a new instance using the methodOne()string ABI method"""
         params = params or algokit_utils.CommonAppCallCreateParams()
         return self.app_factory.params.create(
             algokit_utils.AppFactoryCreateMethodCallParams(
                 **{
                 **dataclasses.asdict(params),
-                "method": "testWhile(uint64)uint64",
-                "args": _parse_abi_args(args),
+                "method": "methodOne()string",
+                "args": None,
                 }
             ),
             compilation_params=compilation_params
         )
 
-class DemoContractFactoryUpdateParams:
-    """Parameters for 'update' operations of DemoContract contract"""
+    def method_common(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the methodCommon()string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "methodCommon()string",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def b2_cant_override(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the b2CantOverride()string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "b2CantOverride()string",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class BaseOneFactoryUpdateParams:
+    """Parameters for 'update' operations of BaseOne contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -536,8 +692,8 @@ class DemoContractFactoryUpdateParams:
             algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
             )
 
-class DemoContractFactoryDeleteParams:
-    """Parameters for 'delete' operations of DemoContract contract"""
+class BaseOneFactoryDeleteParams:
+    """Parameters for 'delete' operations of BaseOne contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -555,16 +711,16 @@ class DemoContractFactoryDeleteParams:
             )
 
 
-class DemoContractFactoryCreateTransaction:
-    """Create transactions for DemoContract contract"""
+class BaseOneFactoryCreateTransaction:
+    """Create transactions for BaseOne contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
-        self.create = DemoContractFactoryCreateTransactionCreate(app_factory)
+        self.create = BaseOneFactoryCreateTransactionCreate(app_factory)
 
 
-class DemoContractFactoryCreateTransactionCreate:
-    """Create new instances of DemoContract contract"""
+class BaseOneFactoryCreateTransactionCreate:
+    """Create new instances of BaseOne contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -580,16 +736,16 @@ class DemoContractFactoryCreateTransactionCreate:
         )
 
 
-class DemoContractFactorySend:
-    """Send calls to DemoContract contract"""
+class BaseOneFactorySend:
+    """Send calls to BaseOne contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
-        self.create = DemoContractFactorySendCreate(app_factory)
+        self.create = BaseOneFactorySendCreate(app_factory)
 
 
-class DemoContractFactorySendCreate:
-    """Send create calls to DemoContract contract"""
+class BaseOneFactorySendCreate:
+    """Send create calls to BaseOne contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -600,7 +756,7 @@ class DemoContractFactorySendCreate:
         params: algokit_utils.CommonAppCallCreateParams | None = None,
         send_params: algokit_utils.SendParams | None = None,
         compilation_params: algokit_utils.AppClientCompilationParams | None = None,
-    ) -> tuple[DemoContractClient, algokit_utils.SendAppCreateTransactionResult]:
+    ) -> tuple[BaseOneClient, algokit_utils.SendAppCreateTransactionResult]:
         """Creates a new instance using a bare call"""
         params = params or algokit_utils.CommonAppCallCreateParams()
         result = self.app_factory.send.bare.create(
@@ -608,31 +764,64 @@ class DemoContractFactorySendCreate:
             send_params=send_params,
             compilation_params=compilation_params
         )
-        return DemoContractClient(result[0]), result[1]
+        return BaseOneClient(result[0]), result[1]
 
 
-class DemoContractComposer:
-    """Composer for creating transaction groups for DemoContract contract calls"""
+class BaseOneComposer:
+    """Composer for creating transaction groups for BaseOne contract calls"""
 
-    def __init__(self, client: "DemoContractClient"):
+    def __init__(self, client: "BaseOneClient"):
         self.client = client
         self._composer = client.algorand.new_group()
         self._result_mappers: list[typing.Callable[[algokit_utils.ABIReturn | None], object] | None] = []
 
-    def test_while(
+    def method_one(
         self,
-        args: tuple[int] | TestWhileArgs,
         params: algokit_utils.CommonAppCallParams | None = None
-    ) -> "DemoContractComposer":
+    ) -> "BaseOneComposer":
         self._composer.add_app_call_method_call(
-            self.client.params.test_while(
-                args=args,
+            self.client.params.method_one(
+                
                 params=params,
             )
         )
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
-                "testWhile(uint64)uint64", v
+                "methodOne()string", v
+            )
+        )
+        return self
+
+    def method_common(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "BaseOneComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.method_common(
+                
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "methodCommon()string", v
+            )
+        )
+        return self
+
+    def b2_cant_override(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "BaseOneComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.b2_cant_override(
+                
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "b2CantOverride()string", v
             )
         )
         return self
@@ -642,7 +831,7 @@ class DemoContractComposer:
         *,
         args: list[bytes] | None = None,
         params: algokit_utils.CommonAppCallParams | None = None,
-    ) -> "DemoContractComposer":
+    ) -> "BaseOneComposer":
         params=params or algokit_utils.CommonAppCallParams()
         self._composer.add_app_call(
             self.client.params.clear_state(
@@ -658,7 +847,7 @@ class DemoContractComposer:
     
     def add_transaction(
         self, txn: Transaction, signer: TransactionSigner | None = None
-    ) -> "DemoContractComposer":
+    ) -> "BaseOneComposer":
         self._composer.add_transaction(txn, signer)
         return self
     

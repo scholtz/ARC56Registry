@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "a"}, {"type": "bool", "name": "b"}, {"type": "uint512", "name": "c"}, {"type": "byte[]", "name": "d"}, {"type": "string", "name": "e"}, {"type": "address", "name": "f"}, {"type": "byte[12]", "name": "g"}], "name": "testEncoding", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "a"}, {"type": "byte[]", "name": "a_bytes"}, {"type": "bool", "name": "b"}, {"type": "byte[]", "name": "b_bytes"}, {"type": "uint512", "name": "c"}, {"type": "byte[]", "name": "c_bytes"}, {"type": "string", "name": "d"}, {"type": "byte[]", "name": "d_bytes"}, {"type": "(uint64,byte[])", "name": "e", "struct": "TestObj"}, {"type": "byte[]", "name": "e_bytes"}, {"type": "address", "name": "f"}, {"type": "byte[]", "name": "f_bytes"}, {"type": "byte[12]", "name": "g"}, {"type": "byte[]", "name": "g_bytes"}], "name": "testDecoding", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "Arc4EncodeDecode", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"TestObj": [{"name": "a", "type": "uint64"}, {"name": "b", "type": "byte[]"}]}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [809], "errorMessage": "Array of address matches"}, {"pc": [719], "errorMessage": "Array of biguint matches"}, {"pc": [699], "errorMessage": "Array of boolean matches"}, {"pc": [751], "errorMessage": "Array of string matches"}, {"pc": [791], "errorMessage": "Array of struct matches"}, {"pc": [678], "errorMessage": "Array of uint64 matches"}, {"pc": [661], "errorMessage": "assert target is match for conditions"}, {"pc": [690, 731], "errorMessage": "index out of bounds"}, {"pc": [148, 165, 409, 435, 460, 476, 492, 526, 539, 565, 590, 668, 685, 708, 726, 758, 798], "errorMessage": "invalid array length header"}, {"pc": [129, 427], "errorMessage": "invalid number of bytes for arc4.bool"}, {"pc": [155, 172, 416, 442, 467, 483, 499, 546, 572, 597], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [191, 584], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 12>"}, {"pc": [183, 559], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}, {"pc": [141, 454], "errorMessage": "invalid number of bytes for arc4.uint512"}, {"pc": [119, 402], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [533], "errorMessage": "invalid number of bytes for tests/approvals/arc4-encode-decode.algo.ts::TestObj"}, {"pc": [517], "errorMessage": "invalid tail pointer at index 1 of (uint64,(len+uint8[]))"}, {"pc": [512], "errorMessage": "invalid tuple encoding"}, {"pc": [296], "errorMessage": "overflow"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "a"}, {"type": "bool", "name": "b"}, {"type": "uint512", "name": "c"}, {"type": "byte[]", "name": "d"}, {"type": "string", "name": "e"}, {"type": "address", "name": "f"}, {"type": "byte[12]", "name": "g"}], "name": "testEncoding", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "a"}, {"type": "byte[]", "name": "a_bytes"}, {"type": "bool", "name": "b"}, {"type": "byte[]", "name": "b_bytes"}, {"type": "uint512", "name": "c"}, {"type": "byte[]", "name": "c_bytes"}, {"type": "string", "name": "d"}, {"type": "byte[]", "name": "d_bytes"}, {"type": "(uint64,byte[])", "name": "e", "struct": "TestObj"}, {"type": "byte[]", "name": "e_bytes"}, {"type": "address", "name": "f"}, {"type": "byte[]", "name": "f_bytes"}, {"type": "byte[12]", "name": "g"}, {"type": "byte[]", "name": "g_bytes"}], "name": "testDecoding", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "Arc4EncodeDecode", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"TestObj": [{"name": "a", "type": "uint64"}, {"name": "b", "type": "byte[]"}]}, "byteCode": {"approval": "CyAEAAIBCCYFAgABBAABAAICAAIDBoEBAgAKMRtBAB0xGRREMRhEggIENLFGwQQA/SU0NhoAjgIAMwFZADEZFDEYFBBDigIBi/5XAgCL/iJZi/8jC0sCTFlLAhWL/yQISSMLSwVMWU8ETwIJTVKJNhoBRwIVJRJEFzYaAklOA0kVJBJEIlNMNhoDSU4EFUlOAoFAEkQ2GgRHAiJZIwhLARUSRFcCADYaBUlOBEkiWSMISwEVEkRXAgBOAjYaBhWBIBJENhoHFYEMEkSBggsyDA1BABaxgQayEIEFshkrsh4rsh8isgGzQv/hTwMWTEkVFlcGAkxQSwEnBFBJSwJQTwlJTgMnBFBPBklOA1BLARJETwJLAlASREsDSwISRIABACJPCVRJTwpJTgcSRE8IgUAORIFAr08JSU8Cq0lLAhJEKksGUCpLBVASRE8ISRUWVwYCTFAqSwFQKk8LSU4EUBJEKE8JUChPCFASRChPBVAoTwhQEkQoTwNQKE8EUBJEKU8EUClPBFASRClMUClPAlASRCRDNhoBSRUlEkQXNhoCSSJZIwhLARUSRFcCADYaA0kVJBJEIlM2GgRJIlkjCEsBFRJEVwIANhoFSRWBQBJENhoGSSJZIwhLARUSRFcCADYaB0kiWSMISwEVEkRXAgA2GghJIlkjCEsBFRJESVcCADYaCUkVSwElWUmBChJESwJMSwJSSSJZgQwITwISRDYaCkkiWSMISwEVEkRJVwIANhoLSRWBIBJENhoMSSJZIwhLARUSRFcCADYaDUkVgQwSRDYaDkkiWSMISwEVEkRXAgBLDxdLERJESw0iU0sPEkRLC0sNqERPCVcEAEsKEkRPBVcCCE8HVwAITEsBEksGJVlLBxVLCE4CUksIEhBEKE8OUEkiWSQSTCNbTw8SEEQoTwxQSSJZSSQSTERMgRBTTw0SEEQoTwpQSbBJIlkkEkxXAkBPC6gQRClPCFBJIllJJBJMRExXAgBJIllKWSMIWFcCAE8JEhBEKU8GUEkiWSQSSwEiiP08VwAITwMSTwIiiP0wSSVZSwEVUk8HEhAQRChPA1BJIlkkEkxXAiBPBBIQRBJEJEM=", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAyIDEgOAogICAgYnl0ZWNibG9jayAweDAwMDEgMHgwMDAxMDAwMiAweDAwMDIgMHgwNjgxMDEgMHgwMDBhCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6MjQKICAgIC8vIGV4cG9ydCBjbGFzcyBBcmM0RW5jb2RlRGVjb2RlIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDM0YjE0NmMxIDB4MDBmZDI1MzQgLy8gbWV0aG9kICJ0ZXN0RW5jb2RpbmcodWludDY0LGJvb2wsdWludDUxMixieXRlW10sc3RyaW5nLGFkZHJlc3MsYnl0ZVsxMl0pdm9pZCIsIG1ldGhvZCAidGVzdERlY29kaW5nKHVpbnQ2NCxieXRlW10sYm9vbCxieXRlW10sdWludDUxMixieXRlW10sc3RyaW5nLGJ5dGVbXSwodWludDY0LGJ5dGVbXSksYnl0ZVtdLGFkZHJlc3MsYnl0ZVtdLGJ5dGVbMTJdLGJ5dGVbXSl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggdGVzdEVuY29kaW5nIHRlc3REZWNvZGluZwogICAgZXJyCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA5OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtZW5jb2RlLWRlY29kZS5hbGdvLnRzOjI0CiAgICAvLyBleHBvcnQgY2xhc3MgQXJjNEVuY29kZURlY29kZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCgoKLy8gX3B1eWFfbGliLmFyYzQuZHluYW1pY19hcnJheV9yZWFkX2R5bmFtaWNfZWxlbWVudChhcnJheTogYnl0ZXMsIGluZGV4OiB1aW50NjQpIC0+IGJ5dGVzOgpkeW5hbWljX2FycmF5X3JlYWRfZHluYW1pY19lbGVtZW50OgogICAgcHJvdG8gMiAxCiAgICBmcmFtZV9kaWcgLTIKICAgIGV4dHJhY3QgMiAwCiAgICBmcmFtZV9kaWcgLTIKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgZnJhbWVfZGlnIC0xCiAgICBpbnRjXzEgLy8gMgogICAgKgogICAgZGlnIDIKICAgIHN3YXAKICAgIGV4dHJhY3RfdWludDE2CiAgICBkaWcgMgogICAgbGVuCiAgICBmcmFtZV9kaWcgLTEKICAgIGludGNfMiAvLyAxCiAgICArCiAgICBkdXAKICAgIGludGNfMSAvLyAyCiAgICAqCiAgICBkaWcgNQogICAgc3dhcAogICAgZXh0cmFjdF91aW50MTYKICAgIHVuY292ZXIgNAogICAgdW5jb3ZlciAyCiAgICAtCiAgICBzZWxlY3QKICAgIHN1YnN0cmluZzMKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czo6QXJjNEVuY29kZURlY29kZS50ZXN0RW5jb2Rpbmdbcm91dGluZ10oKSAtPiB2b2lkOgp0ZXN0RW5jb2Rpbmc6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6MjUKICAgIC8vIHRlc3RFbmNvZGluZyhhOiB1aW50NjQsIGI6IGJvb2xlYW4sIGM6IGJpZ3VpbnQsIGQ6IGJ5dGVzLCBlOiBzdHJpbmcsIGY6IEFkZHJlc3MsIGc6IGJ5dGVzPDEyPikgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwbiAyCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBjb3ZlciAzCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDEKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuYm9vbAogICAgaW50Y18wIC8vIDAKICAgIGdldGJpdAogICAgc3dhcAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBjb3ZlciA0CiAgICBsZW4KICAgIGR1cAogICAgY292ZXIgMgogICAgcHVzaGludCA2NAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NTEyCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA0CiAgICBkdXBuIDIKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNQogICAgZHVwCiAgICBjb3ZlciA0CiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgY292ZXIgMgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNgogICAgbGVuCiAgICBwdXNoaW50IDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDcKICAgIGxlbgogICAgcHVzaGludCAxMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMTI+Cgp0ZXN0RW5jb2Rpbmdfd2hpbGVfdG9wQDI6CiAgICBwdXNoaW50IDE0MTAKICAgIGdsb2JhbCBPcGNvZGVCdWRnZXQKICAgID4KICAgIGJ6IHRlc3RFbmNvZGluZ19hZnRlcl93aGlsZUA3CiAgICBpdHhuX2JlZ2luCiAgICBwdXNoaW50IDYgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgcHVzaGludCA1IC8vIERlbGV0ZUFwcGxpY2F0aW9uCiAgICBpdHhuX2ZpZWxkIE9uQ29tcGxldGlvbgogICAgYnl0ZWNfMyAvLyAweDA2ODEwMQogICAgaXR4bl9maWVsZCBBcHByb3ZhbFByb2dyYW0KICAgIGJ5dGVjXzMgLy8gMHgwNjgxMDEKICAgIGl0eG5fZmllbGQgQ2xlYXJTdGF0ZVByb2dyYW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGIgdGVzdEVuY29kaW5nX3doaWxlX3RvcEAyCgp0ZXN0RW5jb2RpbmdfYWZ0ZXJfd2hpbGVANzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czozMgogICAgLy8gYXNzZXJ0KGVuY29kZUFyYzQoeyBhLCBiOiBkIH0pID09PSBuZXcgVGVzdFN0cnVjdCh7IGE6IG5ldyBVaW50NjQoYSksIGI6IG5ldyBEeW5hbWljQnl0ZXMoZCkgfSkuYnl0ZXMpCiAgICB1bmNvdmVyIDMKICAgIGl0b2IKICAgIHN3YXAKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBkaWcgMQogICAgYnl0ZWMgNCAvLyAweDAwMGEKICAgIGNvbmNhdAogICAgZHVwCiAgICBkaWcgMgogICAgY29uY2F0CiAgICB1bmNvdmVyIDkKICAgIGR1cAogICAgY292ZXIgMwogICAgYnl0ZWMgNCAvLyAweDAwMGEKICAgIGNvbmNhdAogICAgdW5jb3ZlciA2CiAgICBkdXAKICAgIGNvdmVyIDMKICAgIGNvbmNhdAogICAgZGlnIDEKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czozMwogICAgLy8gYXNzZXJ0KGVuY29kZUFyYzQoeyBhLCBiOiBkIH0pID09PSBlbmNvZGVBcmM0KHsgYSwgYjogbmV3IER5bmFtaWNCeXRlcyhkKSB9KSkKICAgIHVuY292ZXIgMgogICAgZGlnIDIKICAgIGNvbmNhdAogICAgPT0KICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtZW5jb2RlLWRlY29kZS5hbGdvLnRzOjM4CiAgICAvLyBhc3NlcnQoZW5jb2RlQXJjNChbYV0pID09PSBuZXcgU3RhdGljQXJyYXkobmV3IFVpbnQ2NChhKSkuYnl0ZXMpCiAgICBkaWcgMwogICAgZGlnIDIKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czozOQogICAgLy8gYXNzZXJ0KGVuY29kZUFyYzQoW2JdKSA9PT0gbmV3IFN0YXRpY0FycmF5KG5ldyBCb29sKGIpKS5ieXRlcykKICAgIHB1c2hieXRlcyAweDAwCiAgICBpbnRjXzAgLy8gMAogICAgdW5jb3ZlciA5CiAgICBzZXRiaXQKICAgIGR1cAogICAgdW5jb3ZlciAxMAogICAgZHVwCiAgICBjb3ZlciA3CiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6NDAKICAgIC8vIGFzc2VydChlbmNvZGVBcmM0KFtjXSkgPT09IG5ldyBTdGF0aWNBcnJheShuZXcgVWludDw1MTI+KGMpKS5ieXRlcykKICAgIHVuY292ZXIgOAogICAgcHVzaGludCA2NAogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgcHVzaGludCA2NAogICAgYnplcm8KICAgIHVuY292ZXIgOQogICAgZHVwCiAgICB1bmNvdmVyIDIKICAgIGJ8CiAgICBkdXAKICAgIGRpZyAyCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6NDEKICAgIC8vIGFzc2VydChlbmNvZGVBcmM0KFtkXSkgPT09IG5ldyBTdGF0aWNBcnJheShuZXcgRHluYW1pY0J5dGVzKGQpKS5ieXRlcykKICAgIGJ5dGVjXzIgLy8gMHgwMDAyCiAgICBkaWcgNgogICAgY29uY2F0CiAgICBieXRlY18yIC8vIDB4MDAwMgogICAgZGlnIDUKICAgIGNvbmNhdAogICAgPT0KICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtZW5jb2RlLWRlY29kZS5hbGdvLnRzOjQyCiAgICAvLyBhc3NlcnQoZW5jb2RlQXJjNChbZV0pID09PSBuZXcgU3RhdGljQXJyYXkobmV3IFN0cihlKSkuYnl0ZXMpCiAgICB1bmNvdmVyIDgKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18yIC8vIDB4MDAwMgogICAgZGlnIDEKICAgIGNvbmNhdAogICAgYnl0ZWNfMiAvLyAweDAwMDIKICAgIHVuY292ZXIgMTEKICAgIGR1cAogICAgY292ZXIgNAogICAgY29uY2F0CiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6NDYKICAgIC8vIGFzc2VydChlbmNvZGVBcmM0PHVpbnQ2NFtdPihbYV0pID09PSBuZXcgRHluYW1pY0FycmF5KG5ldyBVaW50NjQoYSkpLmJ5dGVzKQogICAgYnl0ZWNfMCAvLyAweDAwMDEKICAgIHVuY292ZXIgOQogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MDAwMQogICAgdW5jb3ZlciA4CiAgICBjb25jYXQKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czo0NwogICAgLy8gYXNzZXJ0KGVuY29kZUFyYzQ8Ym9vbGVhbltdPihbYl0pID09PSBuZXcgRHluYW1pY0FycmF5KG5ldyBCb29sKGIpKS5ieXRlcykKICAgIGJ5dGVjXzAgLy8gMHgwMDAxCiAgICB1bmNvdmVyIDUKICAgIGNvbmNhdAogICAgYnl0ZWNfMCAvLyAweDAwMDEKICAgIHVuY292ZXIgOAogICAgY29uY2F0CiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6NDgKICAgIC8vIGFzc2VydChlbmNvZGVBcmM0PGJpZ3VpbnRbXT4oW2NdKSA9PT0gbmV3IER5bmFtaWNBcnJheShuZXcgVWludDw1MTI+KGMpKS5ieXRlcykKICAgIGJ5dGVjXzAgLy8gMHgwMDAxCiAgICB1bmNvdmVyIDMKICAgIGNvbmNhdAogICAgYnl0ZWNfMCAvLyAweDAwMDEKICAgIHVuY292ZXIgNAogICAgY29uY2F0CiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6NDkKICAgIC8vIGFzc2VydChlbmNvZGVBcmM0PGJ5dGVzW10+KFtkXSkgPT09IG5ldyBEeW5hbWljQXJyYXkobmV3IER5bmFtaWNCeXRlcyhkKSkuYnl0ZXMpCiAgICBieXRlY18xIC8vIDB4MDAwMTAwMDIKICAgIHVuY292ZXIgNAogICAgY29uY2F0CiAgICBieXRlY18xIC8vIDB4MDAwMTAwMDIKICAgIHVuY292ZXIgNAogICAgY29uY2F0CiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6NTAKICAgIC8vIGFzc2VydChlbmNvZGVBcmM0PHN0cmluZ1tdPihbZV0pID09PSBuZXcgRHluYW1pY0FycmF5KG5ldyBTdHIoZSkpLmJ5dGVzKQogICAgYnl0ZWNfMSAvLyAweDAwMDEwMDAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJ5dGVjXzEgLy8gMHgwMDAxMDAwMgogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czoyNQogICAgLy8gdGVzdEVuY29kaW5nKGE6IHVpbnQ2NCwgYjogYm9vbGVhbiwgYzogYmlndWludCwgZDogYnl0ZXMsIGU6IHN0cmluZywgZjogQWRkcmVzcywgZzogYnl0ZXM8MTI+KSB7CiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtZW5jb2RlLWRlY29kZS5hbGdvLnRzOjpBcmM0RW5jb2RlRGVjb2RlLnRlc3REZWNvZGluZ1tyb3V0aW5nXSgpIC0+IHZvaWQ6CnRlc3REZWNvZGluZzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czo2NS04MAogICAgLy8gdGVzdERlY29kaW5nKAogICAgLy8gICBhOiB1aW50NjQsCiAgICAvLyAgIGFfYnl0ZXM6IGJ5dGVzLAogICAgLy8gICBiOiBib29sZWFuLAogICAgLy8gICBiX2J5dGVzOiBieXRlcywKICAgIC8vICAgYzogYmlndWludCwKICAgIC8vICAgY19ieXRlczogYnl0ZXMsCiAgICAvLyAgIGQ6IHN0cmluZywKICAgIC8vICAgZF9ieXRlczogYnl0ZXMsCiAgICAvLyAgIGU6IFRlc3RPYmosCiAgICAvLyAgIGVfYnl0ZXM6IGJ5dGVzLAogICAgLy8gICBmOiBBZGRyZXNzLAogICAgLy8gICBmX2J5dGVzOiBieXRlcywKICAgIC8vICAgZzogYnl0ZXM8MTI+LAogICAgLy8gICBnX2J5dGVzOiBieXRlcywKICAgIC8vICkgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5ib29sCiAgICBpbnRjXzAgLy8gMAogICAgZ2V0Yml0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA0CiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgNjQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDUxMgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNgogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDcKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA4CiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBkdXAKICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA5CiAgICBkdXAKICAgIGxlbgogICAgZGlnIDEKICAgIGludGNfMyAvLyA4CiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCB0dXBsZSBlbmNvZGluZwogICAgZHVwCiAgICBwdXNoaW50IDEwCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgdGFpbCBwb2ludGVyIGF0IGluZGV4IDEgb2YgKHVpbnQ2NCwobGVuK3VpbnQ4W10pKQogICAgZGlnIDIKICAgIHN3YXAKICAgIGRpZyAyCiAgICBzdWJzdHJpbmczCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDEyCiAgICArCiAgICB1bmNvdmVyIDIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czo6VGVzdE9iagogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMTAKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGR1cAogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDExCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxMgogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEzCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAxMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMTI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxNAogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czo4MQogICAgLy8gYXNzZXJ0KGRlY29kZUFyYzQ8dWludDY0PihhX2J5dGVzKSA9PT0gYSkKICAgIGRpZyAxNQogICAgYnRvaQogICAgZGlnIDE3CiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6ODIKICAgIC8vIGFzc2VydChkZWNvZGVBcmM0PGJvb2xlYW4+KGJfYnl0ZXMpID09PSBiKQogICAgZGlnIDEzCiAgICBpbnRjXzAgLy8gMAogICAgZ2V0Yml0CiAgICBkaWcgMTUKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czo4MwogICAgLy8gYXNzZXJ0KGRlY29kZUFyYzQ8YmlndWludD4oY19ieXRlcykgPT09IGMpCiAgICBkaWcgMTEKICAgIGRpZyAxMwogICAgYj09CiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czo4NAogICAgLy8gYXNzZXJ0KGRlY29kZUFyYzQ8c3RyaW5nPihkX2J5dGVzKSA9PT0gZCkKICAgIHVuY292ZXIgOQogICAgZXh0cmFjdCA0IDAKICAgIGRpZyAxMAogICAgPT0KICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtZW5jb2RlLWRlY29kZS5hbGdvLnRzOjg1CiAgICAvLyBhc3NlcnRNYXRjaChkZWNvZGVBcmM0PFRlc3RPYmo+KGVfYnl0ZXMpLCBlKQogICAgdW5jb3ZlciA1CiAgICBleHRyYWN0IDIgOAogICAgdW5jb3ZlciA3CiAgICBleHRyYWN0IDAgOAogICAgc3dhcAogICAgZGlnIDEKICAgID09CiAgICBkaWcgNgogICAgaW50Y18zIC8vIDgKICAgIGV4dHJhY3RfdWludDE2CiAgICBkaWcgNwogICAgbGVuCiAgICBkaWcgOAogICAgY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgZGlnIDgKICAgID09CiAgICAmJgogICAgYXNzZXJ0IC8vIGFzc2VydCB0YXJnZXQgaXMgbWF0Y2ggZm9yIGNvbmRpdGlvbnMKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czo4NwogICAgLy8gY29uc3QgbGVuUHJlZml4ID0gaXRvYigxKS5zbGljZSg2LCA4KQogICAgYnl0ZWNfMCAvLyAweDAwMDEKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czo4OQogICAgLy8gYXNzZXJ0TWF0Y2goZGVjb2RlQXJjNDx1aW50NjRbXT4obGVuUHJlZml4LmNvbmNhdChhX2J5dGVzKSksIFthXSwgJ0FycmF5IG9mIHVpbnQ2NCBtYXRjaGVzJykKICAgIHVuY292ZXIgMTQKICAgIGNvbmNhdAogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDEKICAgID09CiAgICBzd2FwCiAgICBpbnRjXzEgLy8gMgogICAgZXh0cmFjdF91aW50NjQKICAgIHVuY292ZXIgMTUKICAgID09CiAgICAmJgogICAgYXNzZXJ0IC8vIEFycmF5IG9mIHVpbnQ2NCBtYXRjaGVzCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6ODcKICAgIC8vIGNvbnN0IGxlblByZWZpeCA9IGl0b2IoMSkuc2xpY2UoNiwgOCkKICAgIGJ5dGVjXzAgLy8gMHgwMDAxCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6OTAKICAgIC8vIGFzc2VydE1hdGNoKGRlY29kZUFyYzQ8Ym9vbGVhbltdPihsZW5QcmVmaXguY29uY2F0KGJfYnl0ZXMpKSwgW2JdLCAnQXJyYXkgb2YgYm9vbGVhbiBtYXRjaGVzJykKICAgIHVuY292ZXIgMTIKICAgIGNvbmNhdAogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgZHVwCiAgICBpbnRjXzIgLy8gMQogICAgPT0KICAgIHN3YXAKICAgIGFzc2VydCAvLyBpbmRleCBvdXQgb2YgYm91bmRzCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6OTAKICAgIC8vIGFzc2VydE1hdGNoKGRlY29kZUFyYzQ8Ym9vbGVhbltdPihsZW5QcmVmaXguY29uY2F0KGJfYnl0ZXMpKSwgW2JdLCAnQXJyYXkgb2YgYm9vbGVhbiBtYXRjaGVzJykKICAgIHN3YXAKICAgIHB1c2hpbnQgMTYKICAgIGdldGJpdAogICAgdW5jb3ZlciAxMwogICAgPT0KICAgICYmCiAgICBhc3NlcnQgLy8gQXJyYXkgb2YgYm9vbGVhbiBtYXRjaGVzCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6ODcKICAgIC8vIGNvbnN0IGxlblByZWZpeCA9IGl0b2IoMSkuc2xpY2UoNiwgOCkKICAgIGJ5dGVjXzAgLy8gMHgwMDAxCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6OTEKICAgIC8vIGxvZyhsZW5QcmVmaXguY29uY2F0KGNfYnl0ZXMpKQogICAgdW5jb3ZlciAxMAogICAgY29uY2F0CiAgICBkdXAKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtZW5jb2RlLWRlY29kZS5hbGdvLnRzOjkyCiAgICAvLyBhc3NlcnRNYXRjaChkZWNvZGVBcmM0PGJpZ3VpbnRbXT4obGVuUHJlZml4LmNvbmNhdChjX2J5dGVzKSksIFtjXSwgJ0FycmF5IG9mIGJpZ3VpbnQgbWF0Y2hlcycpCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMQogICAgPT0KICAgIHN3YXAKICAgIGV4dHJhY3QgMiA2NAogICAgdW5jb3ZlciAxMQogICAgYj09CiAgICAmJgogICAgYXNzZXJ0IC8vIEFycmF5IG9mIGJpZ3VpbnQgbWF0Y2hlcwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtZW5jb2RlLWRlY29kZS5hbGdvLnRzOjkzCiAgICAvLyBhc3NlcnRNYXRjaChkZWNvZGVBcmM0PHN0cmluZ1tdPihCeXRlc2Ake2xlblByZWZpeH0ke29mZnNldEhlYWRlcn0ke2RfYnl0ZXN9YCksIFtkXSwgJ0FycmF5IG9mIHN0cmluZyBtYXRjaGVzJykKICAgIGJ5dGVjXzEgLy8gMHgwMDAxMDAwMgogICAgdW5jb3ZlciA4CiAgICBjb25jYXQKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGR1cAogICAgaW50Y18yIC8vIDEKICAgID09CiAgICBzd2FwCiAgICBhc3NlcnQgLy8gaW5kZXggb3V0IG9mIGJvdW5kcwogICAgc3dhcAogICAgZXh0cmFjdCAyIDAKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBkdXAyCiAgICBleHRyYWN0X3VpbnQxNgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGV4dHJhY3QzCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6OTMKICAgIC8vIGFzc2VydE1hdGNoKGRlY29kZUFyYzQ8c3RyaW5nW10+KEJ5dGVzYCR7bGVuUHJlZml4fSR7b2Zmc2V0SGVhZGVyfSR7ZF9ieXRlc31gKSwgW2RdLCAnQXJyYXkgb2Ygc3RyaW5nIG1hdGNoZXMnKQogICAgZXh0cmFjdCAyIDAKICAgIHVuY292ZXIgOQogICAgPT0KICAgICYmCiAgICBhc3NlcnQgLy8gQXJyYXkgb2Ygc3RyaW5nIG1hdGNoZXMKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWVuY29kZS1kZWNvZGUuYWxnby50czo5NQogICAgLy8gYXNzZXJ0TWF0Y2goZGVjb2RlQXJjNDxUZXN0T2JqW10+KEJ5dGVzYCR7bGVuUHJlZml4fSR7b2Zmc2V0SGVhZGVyfSR7ZV9ieXRlc31gKSwgW2VdLCAnQXJyYXkgb2Ygc3RydWN0IG1hdGNoZXMnKQogICAgYnl0ZWNfMSAvLyAweDAwMDEwMDAyCiAgICB1bmNvdmVyIDYKICAgIGNvbmNhdAogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDEKICAgID09CiAgICBkaWcgMQogICAgaW50Y18wIC8vIDAKICAgIGNhbGxzdWIgZHluYW1pY19hcnJheV9yZWFkX2R5bmFtaWNfZWxlbWVudAogICAgZXh0cmFjdCAwIDgKICAgIHVuY292ZXIgMwogICAgPT0KICAgIHVuY292ZXIgMgogICAgaW50Y18wIC8vIDAKICAgIGNhbGxzdWIgZHluYW1pY19hcnJheV9yZWFkX2R5bmFtaWNfZWxlbWVudAogICAgZHVwCiAgICBpbnRjXzMgLy8gOAogICAgZXh0cmFjdF91aW50MTYKICAgIGRpZyAxCiAgICBsZW4KICAgIHN1YnN0cmluZzMKICAgIHVuY292ZXIgNwogICAgPT0KICAgICYmCiAgICAmJgogICAgYXNzZXJ0IC8vIEFycmF5IG9mIHN0cnVjdCBtYXRjaGVzCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6ODcKICAgIC8vIGNvbnN0IGxlblByZWZpeCA9IGl0b2IoMSkuc2xpY2UoNiwgOCkKICAgIGJ5dGVjXzAgLy8gMHgwMDAxCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6OTYKICAgIC8vIGFzc2VydE1hdGNoKGRlY29kZUFyYzQ8QWRkcmVzc1tdPihCeXRlc2Ake2xlblByZWZpeH0ke2ZfYnl0ZXN9YCksIFtmXSwgJ0FycmF5IG9mIGFkZHJlc3MgbWF0Y2hlcycpCiAgICB1bmNvdmVyIDMKICAgIGNvbmNhdAogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDEKICAgID09CiAgICBzd2FwCiAgICBleHRyYWN0IDIgMzIKICAgIHVuY292ZXIgNAogICAgPT0KICAgICYmCiAgICBhc3NlcnQgLy8gQXJyYXkgb2YgYWRkcmVzcyBtYXRjaGVzCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6OTgKICAgIC8vIGFzc2VydChkZWNvZGVBcmM0PGJ5dGVzPDEyPj4oZ19ieXRlcykgPT09IGcpCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1lbmNvZGUtZGVjb2RlLmFsZ28udHM6NjUtODAKICAgIC8vIHRlc3REZWNvZGluZygKICAgIC8vICAgYTogdWludDY0LAogICAgLy8gICBhX2J5dGVzOiBieXRlcywKICAgIC8vICAgYjogYm9vbGVhbiwKICAgIC8vICAgYl9ieXRlczogYnl0ZXMsCiAgICAvLyAgIGM6IGJpZ3VpbnQsCiAgICAvLyAgIGNfYnl0ZXM6IGJ5dGVzLAogICAgLy8gICBkOiBzdHJpbmcsCiAgICAvLyAgIGRfYnl0ZXM6IGJ5dGVzLAogICAgLy8gICBlOiBUZXN0T2JqLAogICAgLy8gICBlX2J5dGVzOiBieXRlcywKICAgIC8vICAgZjogQWRkcmVzcywKICAgIC8vICAgZl9ieXRlczogYnl0ZXMsCiAgICAvLyAgIGc6IGJ5dGVzPDEyPiwKICAgIC8vICAgZ19ieXRlczogYnl0ZXMsCiAgICAvLyApIHsKICAgIGludGNfMiAvLyAxCiAgICByZXR1cm4K", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [819], "errorMessage": "Array of address matches"}, {"pc": [729], "errorMessage": "Array of biguint matches"}, {"pc": [709], "errorMessage": "Array of boolean matches"}, {"pc": [761], "errorMessage": "Array of string matches"}, {"pc": [801], "errorMessage": "Array of struct matches"}, {"pc": [688], "errorMessage": "Array of uint64 matches"}, {"pc": [671], "errorMessage": "assert target is match for conditions"}, {"pc": [700, 741], "errorMessage": "index out of bounds"}, {"pc": [155, 174, 419, 445, 470, 486, 502, 536, 549, 575, 600, 678, 695, 718, 736, 768, 808], "errorMessage": "invalid array length header"}, {"pc": [131, 437], "errorMessage": "invalid number of bytes for arc4.bool"}, {"pc": [162, 181, 426, 452, 477, 493, 509, 556, 582, 607], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [202, 594], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 12>"}, {"pc": [194, 569], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}, {"pc": [148, 464], "errorMessage": "invalid number of bytes for arc4.uint512"}, {"pc": [119, 412], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [543], "errorMessage": "invalid number of bytes for tests/approvals/arc4-encode-decode.algo.ts::TestObj"}, {"pc": [527], "errorMessage": "invalid tail pointer at index 1 of (uint64,(len+uint8[]))"}, {"pc": [522], "errorMessage": "invalid tuple encoding"}, {"pc": [306], "errorMessage": "overflow"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -427,6 +427,291 @@ class Arc4EncodeDecodeClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class Arc4EncodeDecodeBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating Arc4EncodeDecode contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class Arc4EncodeDecodeFactory(algokit_utils.TypedAppFactoryProtocol[Arc4EncodeDecodeBareCallCreateParams, None, None]):
+    """Factory for deploying and managing Arc4EncodeDecodeClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = Arc4EncodeDecodeFactoryParams(self.app_factory)
+        self.create_transaction = Arc4EncodeDecodeFactoryCreateTransaction(self.app_factory)
+        self.send = Arc4EncodeDecodeFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: Arc4EncodeDecodeBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[Arc4EncodeDecodeClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return Arc4EncodeDecodeClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> Arc4EncodeDecodeClient:
+        """Get an app client by creator address and name"""
+        return Arc4EncodeDecodeClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> Arc4EncodeDecodeClient:
+        """Get an app client by app ID"""
+        return Arc4EncodeDecodeClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class Arc4EncodeDecodeFactoryParams:
+    """Parameters for creating transactions for Arc4EncodeDecode contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = Arc4EncodeDecodeFactoryCreateParams(app_factory)
+        self.update = Arc4EncodeDecodeFactoryUpdateParams(app_factory)
+        self.delete = Arc4EncodeDecodeFactoryDeleteParams(app_factory)
+
+class Arc4EncodeDecodeFactoryCreateParams:
+    """Parameters for 'create' operations of Arc4EncodeDecode contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def test_encoding(
+        self,
+        args: tuple[int, bool, int, bytes | str, str, str, bytes | str | tuple[int, int, int, int, int, int, int, int, int, int, int, int]] | TestEncodingArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testEncoding(uint64,bool,uint512,byte[],string,address,byte[12])void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testEncoding(uint64,bool,uint512,byte[],string,address,byte[12])void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def test_decoding(
+        self,
+        args: tuple[int, bytes | str, bool, bytes | str, int, bytes | str, str, bytes | str, TestObj, bytes | str, str, bytes | str, bytes | str | tuple[int, int, int, int, int, int, int, int, int, int, int, int], bytes | str] | TestDecodingArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testDecoding(uint64,byte[],bool,byte[],uint512,byte[],string,byte[],(uint64,byte[]),byte[],address,byte[],byte[12],byte[])void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testDecoding(uint64,byte[],bool,byte[],uint512,byte[],string,byte[],(uint64,byte[]),byte[],address,byte[],byte[12],byte[])void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class Arc4EncodeDecodeFactoryUpdateParams:
+    """Parameters for 'update' operations of Arc4EncodeDecode contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class Arc4EncodeDecodeFactoryDeleteParams:
+    """Parameters for 'delete' operations of Arc4EncodeDecode contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class Arc4EncodeDecodeFactoryCreateTransaction:
+    """Create transactions for Arc4EncodeDecode contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = Arc4EncodeDecodeFactoryCreateTransactionCreate(app_factory)
+
+
+class Arc4EncodeDecodeFactoryCreateTransactionCreate:
+    """Create new instances of Arc4EncodeDecode contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class Arc4EncodeDecodeFactorySend:
+    """Send calls to Arc4EncodeDecode contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = Arc4EncodeDecodeFactorySendCreate(app_factory)
+
+
+class Arc4EncodeDecodeFactorySendCreate:
+    """Send create calls to Arc4EncodeDecode contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[Arc4EncodeDecodeClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return Arc4EncodeDecodeClient(result[0]), result[1]
 
 
 class Arc4EncodeDecodeComposer:

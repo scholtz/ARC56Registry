@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "test", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "DestructuringIterators", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "test", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "DestructuringIterators", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyACAQIxG0EAGIAEp4AA3jYaAI4BAAEAMRkUMRgQREIACDEZFDEYFBBDgQBJIghMjQIADQAGgQYSRCJDI0yBA0L/6yJMI0L/5Q==", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAyCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmluZy1pdGVyYXRvcnMuYWxnby50czoxNwogICAgLy8gY2xhc3MgRGVzdHJ1Y3R1cmluZ0l0ZXJhdG9ycyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1CiAgICBwdXNoYnl0ZXMgMHhhNzgwMDBkZSAvLyBtZXRob2QgInRlc3QoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3Rlc3Rfcm91dGVAMwogICAgZXJyCgptYWluX3Rlc3Rfcm91dGVAMzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyaW5nLWl0ZXJhdG9ycy5hbGdvLnRzOjE4CiAgICAvLyB0ZXN0KCkgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgdGVzdAoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyaW5nLWl0ZXJhdG9ycy5hbGdvLnRzOjE3CiAgICAvLyBjbGFzcyBEZXN0cnVjdHVyaW5nSXRlcmF0b3JzIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmluZy1pdGVyYXRvcnMuYWxnby50czo6RGVzdHJ1Y3R1cmluZ0l0ZXJhdG9ycy50ZXN0W3JvdXRpbmddKCkgLT4gdm9pZDoKdGVzdDoKICAgIHB1c2hpbnQgMAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJpbmctaXRlcmF0b3JzLmFsZ28udHM6MTAKICAgIC8vIGxldCB0b3RhbDogdWludDY0ID0gMAogICAgZHVwCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmluZy1pdGVyYXRvcnMuYWxnby50czo2CiAgICAvLyB7IGE6IFVpbnQ2NCgxKSwgYjogVWludDY0KDIpIH0sCiAgICBpbnRjXzAgLy8gMQoKdGVzdF9mb3JfYm9keUAyOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJpbmctaXRlcmF0b3JzLmFsZ28udHM6MTIKICAgIC8vIHRvdGFsICs9IGEKICAgICsKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyaW5nLWl0ZXJhdG9ycy5hbGdvLnRzOjExCiAgICAvLyBmb3IgKGNvbnN0IHsgYSB9IG9mIGl0ZW1zKSB7CiAgICBzd2FwCiAgICBzd2l0Y2ggdGVzdF9mb3JfaGVhZGVyXzFAMyB0ZXN0X2Zvcl9oZWFkZXJfMkA0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmluZy1pdGVyYXRvcnMuYWxnby50czoxNAogICAgLy8gYXNzZXJ0KHRvdGFsID09PSA2KQogICAgcHVzaGludCA2CiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmluZy1pdGVyYXRvcnMuYWxnby50czoxOAogICAgLy8gdGVzdCgpIHsKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCnRlc3RfZm9yX2hlYWRlcl8yQDQ6CiAgICBpbnRjXzEgLy8gMgogICAgc3dhcAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJpbmctaXRlcmF0b3JzLmFsZ28udHM6OAogICAgLy8geyBhOiBVaW50NjQoMyksIGI6IFVpbnQ2NCgyKSB9LAogICAgcHVzaGludCAzCiAgICBiIHRlc3RfZm9yX2JvZHlAMgoKdGVzdF9mb3JfaGVhZGVyXzFAMzoKICAgIGludGNfMCAvLyAxCiAgICBzd2FwCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmluZy1pdGVyYXRvcnMuYWxnby50czo3CiAgICAvLyB7IGE6IFVpbnQ2NCgyKSwgYjogVWludDY0KDIpIH0sCiAgICBpbnRjXzEgLy8gMgogICAgYiB0ZXN0X2Zvcl9ib2R5QDIK", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -328,6 +328,270 @@ class DestructuringIteratorsClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class DestructuringIteratorsBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating DestructuringIterators contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class DestructuringIteratorsFactory(algokit_utils.TypedAppFactoryProtocol[DestructuringIteratorsBareCallCreateParams, None, None]):
+    """Factory for deploying and managing DestructuringIteratorsClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = DestructuringIteratorsFactoryParams(self.app_factory)
+        self.create_transaction = DestructuringIteratorsFactoryCreateTransaction(self.app_factory)
+        self.send = DestructuringIteratorsFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: DestructuringIteratorsBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[DestructuringIteratorsClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return DestructuringIteratorsClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> DestructuringIteratorsClient:
+        """Get an app client by creator address and name"""
+        return DestructuringIteratorsClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> DestructuringIteratorsClient:
+        """Get an app client by app ID"""
+        return DestructuringIteratorsClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class DestructuringIteratorsFactoryParams:
+    """Parameters for creating transactions for DestructuringIterators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = DestructuringIteratorsFactoryCreateParams(app_factory)
+        self.update = DestructuringIteratorsFactoryUpdateParams(app_factory)
+        self.delete = DestructuringIteratorsFactoryDeleteParams(app_factory)
+
+class DestructuringIteratorsFactoryCreateParams:
+    """Parameters for 'create' operations of DestructuringIterators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def test(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the test()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "test()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class DestructuringIteratorsFactoryUpdateParams:
+    """Parameters for 'update' operations of DestructuringIterators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class DestructuringIteratorsFactoryDeleteParams:
+    """Parameters for 'delete' operations of DestructuringIterators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class DestructuringIteratorsFactoryCreateTransaction:
+    """Create transactions for DestructuringIterators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = DestructuringIteratorsFactoryCreateTransactionCreate(app_factory)
+
+
+class DestructuringIteratorsFactoryCreateTransactionCreate:
+    """Create new instances of DestructuringIterators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class DestructuringIteratorsFactorySend:
+    """Send calls to DestructuringIterators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = DestructuringIteratorsFactorySendCreate(app_factory)
+
+
+class DestructuringIteratorsFactorySendCreate:
+    """Send create calls to DestructuringIterators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[DestructuringIteratorsClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return DestructuringIteratorsClient(result[0]), result[1]
 
 
 class DestructuringIteratorsComposer:

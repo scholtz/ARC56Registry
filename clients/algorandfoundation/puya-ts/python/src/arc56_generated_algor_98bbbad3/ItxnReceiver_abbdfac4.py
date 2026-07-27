@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "stop"}], "name": "testWhile", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "DemoContract", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CzEbQQAYgAQopS1zNhoAjgEAAQAxGRQxGBBEQgAIMRkUMRgUEEM2GgFJFYEIEkQXgQBJSwIMQQAGgQEIQv/zFoAEFR98dUxQsIEBQw==", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvd2hpbGUtbG9vcHMuYWxnby50czo0CiAgICAvLyBjbGFzcyBEZW1vQ29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANQogICAgcHVzaGJ5dGVzIDB4MjhhNTJkNzMgLy8gbWV0aG9kICJ0ZXN0V2hpbGUodWludDY0KXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdGVzdFdoaWxlX3JvdXRlQDMKICAgIGVycgoKbWFpbl90ZXN0V2hpbGVfcm91dGVAMzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy93aGlsZS1sb29wcy5hbGdvLnRzOjUKICAgIC8vIHB1YmxpYyB0ZXN0V2hpbGUoc3RvcDogdWludDY0KSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgYiB0ZXN0V2hpbGUKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvd2hpbGUtbG9vcHMuYWxnby50czo0CiAgICAvLyBjbGFzcyBEZW1vQ29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy93aGlsZS1sb29wcy5hbGdvLnRzOjpEZW1vQ29udHJhY3QudGVzdFdoaWxlW3JvdXRpbmddKCkgLT4gdm9pZDoKdGVzdFdoaWxlOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3doaWxlLWxvb3BzLmFsZ28udHM6NQogICAgLy8gcHVibGljIHRlc3RXaGlsZShzdG9wOiB1aW50NjQpIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvd2hpbGUtbG9vcHMuYWxnby50czo2CiAgICAvLyBsZXQgaSA9IFVpbnQ2NCgwKQogICAgcHVzaGludCAwCgp0ZXN0V2hpbGVfd2hpbGVfdG9wQDI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvd2hpbGUtbG9vcHMuYWxnby50czo3CiAgICAvLyB3aGlsZSAoaSA8IHN0b3ApIHsKICAgIGR1cAogICAgZGlnIDIKICAgIDwKICAgIC8vIHRlc3RzL2FwcHJvdmFscy93aGlsZS1sb29wcy5hbGdvLnRzOjctOQogICAgLy8gd2hpbGUgKGkgPCBzdG9wKSB7CiAgICAvLyAgIGkgKz0gMQogICAgLy8gfQogICAgYnogdGVzdFdoaWxlX2FmdGVyX3doaWxlQDQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy93aGlsZS1sb29wcy5hbGdvLnRzOjgKICAgIC8vIGkgKz0gMQogICAgcHVzaGludCAxCiAgICArCiAgICBiIHRlc3RXaGlsZV93aGlsZV90b3BAMgoKdGVzdFdoaWxlX2FmdGVyX3doaWxlQDQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvd2hpbGUtbG9vcHMuYWxnby50czo1CiAgICAvLyBwdWJsaWMgdGVzdFdoaWxlKHN0b3A6IHVpbnQ2NCkgewogICAgaXRvYgogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEKICAgIHJldHVybgo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [46], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "a"}, {"type": "pay", "name": "b"}, {"type": "string", "name": "c"}], "name": "receivePay", "returns": {"type": "(uint64,uint64,string)"}, "events": [], "readonly": false, "recommendations": {}}], "name": "ItxnReceiver", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CzEbQQBkgAQZcdGXNhoAjgEAAQAxGRQxGBBENhoBSRWBCBJEFzEWgQEJSTgQgQESRDYaAkmBAFmBAghLARUSRFcCAEw4CE8CFkwWUEsBFRZXBgJPAlBMgAIAElBMUIAEFR98dUxQsIEBQzEZFDEYFBBD", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvaXR4bi5hbGdvLnRzOjIyNgogICAgLy8gY2xhc3MgSXR4blJlY2VpdmVyIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDUKICAgIHB1c2hieXRlcyAweDE5NzFkMTk3IC8vIG1ldGhvZCAicmVjZWl2ZVBheSh1aW50NjQscGF5LHN0cmluZykodWludDY0LHVpbnQ2NCxzdHJpbmcpIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9yZWNlaXZlUGF5X3JvdXRlQDMKICAgIGVycgoKbWFpbl9yZWNlaXZlUGF5X3JvdXRlQDM6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvaXR4bi5hbGdvLnRzOjIyNwogICAgLy8gcHVibGljIHJlY2VpdmVQYXkoYTogdWludDY0LCBiOiBndHhuLlBheW1lbnRUeG4sIGM6IHN0cmluZyk6IFt1aW50NjQsIHVpbnQ2NCwgc3RyaW5nXSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4biBHcm91cEluZGV4CiAgICBwdXNoaW50IDEKICAgIC0KICAgIGR1cAogICAgZ3R4bnMgVHlwZUVudW0KICAgIHB1c2hpbnQgMSAvLyBwYXkKICAgID09CiAgICBhc3NlcnQgLy8gdHJhbnNhY3Rpb24gdHlwZSBpcyBwYXkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgcHVzaGludCAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9pdHhuLmFsZ28udHM6MjI4CiAgICAvLyByZXR1cm4gW2EsIGIuYW1vdW50LCBjXQogICAgc3dhcAogICAgZ3R4bnMgQW1vdW50CiAgICB1bmNvdmVyIDIKICAgIGl0b2IKICAgIHN3YXAKICAgIGl0b2IKICAgIGNvbmNhdAogICAgZGlnIDEKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBzd2FwCiAgICBwdXNoYnl0ZXMgMHgwMDEyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2l0eG4uYWxnby50czoyMjcKICAgIC8vIHB1YmxpYyByZWNlaXZlUGF5KGE6IHVpbnQ2NCwgYjogZ3R4bi5QYXltZW50VHhuLCBjOiBzdHJpbmcpOiBbdWludDY0LCB1aW50NjQsIHN0cmluZ10gewogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEKICAgIHJldHVybgoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9pdHhuLmFsZ28udHM6MjI2CiAgICAvLyBjbGFzcyBJdHhuUmVjZWl2ZXIgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [55], "errorMessage": "invalid array length header"}, {"pc": [63], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [35], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [48], "errorMessage": "transaction type is pay"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -65,29 +65,31 @@ def _init_dataclass(cls: type, data: dict) -> object:
     return cls(**field_values)
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
-class TestWhileArgs:
-    """Dataclass for test_while arguments"""
-    stop: int
+class ReceivePayArgs:
+    """Dataclass for receive_pay arguments"""
+    a: int
+    b: algokit_utils.AppMethodCallTransactionArgument
+    c: str
 
     @property
     def abi_method_signature(self) -> str:
-        return "testWhile(uint64)uint64"
+        return "receivePay(uint64,pay,string)(uint64,uint64,string)"
 
 
-class DemoContractParams:
+class ItxnReceiverParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
-    def test_while(
+    def receive_pay(
         self,
-        args: tuple[int] | TestWhileArgs,
+        args: tuple[int, algokit_utils.AppMethodCallTransactionArgument, str] | ReceivePayArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> algokit_utils.AppCallMethodCallParams:
         method_args = _parse_abi_args(args)
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "testWhile(uint64)uint64",
+            "method": "receivePay(uint64,pay,string)(uint64,uint64,string)",
             "args": method_args,
         }))
 
@@ -102,20 +104,20 @@ class DemoContractParams:
         )
 
 
-class DemoContractCreateTransactionParams:
+class ItxnReceiverCreateTransactionParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
-    def test_while(
+    def receive_pay(
         self,
-        args: tuple[int] | TestWhileArgs,
+        args: tuple[int, algokit_utils.AppMethodCallTransactionArgument, str] | ReceivePayArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> algokit_utils.BuiltTransactions:
         method_args = _parse_abi_args(args)
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "testWhile(uint64)uint64",
+            "method": "receivePay(uint64,pay,string)(uint64,uint64,string)",
             "args": method_args,
         }))
 
@@ -130,25 +132,25 @@ class DemoContractCreateTransactionParams:
         )
 
 
-class DemoContractSend:
+class ItxnReceiverSend:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
-    def test_while(
+    def receive_pay(
         self,
-        args: tuple[int] | TestWhileArgs,
+        args: tuple[int, algokit_utils.AppMethodCallTransactionArgument, str] | ReceivePayArgs,
         params: algokit_utils.CommonAppCallParams | None = None,
         send_params: algokit_utils.SendParams | None = None
-    ) -> algokit_utils.SendAppTransactionResult[int]:
+    ) -> algokit_utils.SendAppTransactionResult[tuple[int, int, str]]:
         method_args = _parse_abi_args(args)
         params = params or algokit_utils.CommonAppCallParams()
         response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "testWhile(uint64)uint64",
+            "method": "receivePay(uint64,pay,string)(uint64,uint64,string)",
             "args": method_args,
         }), send_params=send_params)
         parsed_response = response
-        return typing.cast(algokit_utils.SendAppTransactionResult[int], parsed_response)
+        return typing.cast(algokit_utils.SendAppTransactionResult[tuple[int, int, str]], parsed_response)
 
     def clear_state(
         self,
@@ -161,14 +163,14 @@ class DemoContractSend:
         )
 
 
-class DemoContractState:
-    """Methods to access state for the current DemoContract app"""
+class ItxnReceiverState:
+    """Methods to access state for the current ItxnReceiver app"""
 
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
-class DemoContractClient:
-    """Client for interacting with DemoContract smart contract"""
+class ItxnReceiverClient:
+    """Client for interacting with ItxnReceiver smart contract"""
 
     @typing.overload
     def __init__(self, app_client: algokit_utils.AppClient) -> None: ...
@@ -216,10 +218,10 @@ class DemoContractClient:
         else:
             raise ValueError("Either app_client or algorand and app_id must be provided")
     
-        self.params = DemoContractParams(self.app_client)
-        self.create_transaction = DemoContractCreateTransactionParams(self.app_client)
-        self.send = DemoContractSend(self.app_client)
-        self.state = DemoContractState(self.app_client)
+        self.params = ItxnReceiverParams(self.app_client)
+        self.create_transaction = ItxnReceiverCreateTransactionParams(self.app_client)
+        self.send = ItxnReceiverSend(self.app_client)
+        self.state = ItxnReceiverState(self.app_client)
 
     @staticmethod
     def from_creator_and_name(
@@ -232,8 +234,8 @@ class DemoContractClient:
         clear_source_map: SourceMap | None = None,
         ignore_cache: bool | None = None,
         app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
-    ) -> "DemoContractClient":
-        return DemoContractClient(
+    ) -> "ItxnReceiverClient":
+        return ItxnReceiverClient(
             algokit_utils.AppClient.from_creator_and_name(
                 creator_address=creator_address,
                 app_name=app_name,
@@ -256,8 +258,8 @@ class DemoContractClient:
         default_signer: TransactionSigner | None = None,
         approval_source_map: SourceMap | None = None,
         clear_source_map: SourceMap | None = None,
-    ) -> "DemoContractClient":
-        return DemoContractClient(
+    ) -> "ItxnReceiverClient":
+        return ItxnReceiverClient(
             algokit_utils.AppClient.from_network(
                 app_spec=APP_SPEC,
                 algorand=algorand,
@@ -296,8 +298,8 @@ class DemoContractClient:
         default_signer: TransactionSigner | None = None,
         approval_source_map: SourceMap | None = None,
         clear_source_map: SourceMap | None = None,
-    ) -> "DemoContractClient":
-        return DemoContractClient(
+    ) -> "ItxnReceiverClient":
+        return ItxnReceiverClient(
             self.app_client.clone(
                 app_name=app_name,
                 default_sender=default_sender,
@@ -307,15 +309,15 @@ class DemoContractClient:
             )
         )
 
-    def new_group(self) -> "DemoContractComposer":
-        return DemoContractComposer(self)
+    def new_group(self) -> "ItxnReceiverComposer":
+        return ItxnReceiverComposer(self)
 
     @typing.overload
     def decode_return_value(
         self,
-        method: typing.Literal["testWhile(uint64)uint64"],
+        method: typing.Literal["receivePay(uint64,pay,string)(uint64,uint64,string)"],
         return_value: algokit_utils.ABIReturn | None
-    ) -> int | None: ...
+    ) -> tuple[int, int, str] | None: ...
     @typing.overload
     def decode_return_value(
         self,
@@ -327,7 +329,7 @@ class DemoContractClient:
         self,
         method: str,
         return_value: algokit_utils.ABIReturn | None
-    ) -> algokit_utils.ABIValue | algokit_utils.ABIStruct | None | int:
+    ) -> algokit_utils.ABIValue | algokit_utils.ABIStruct | None | tuple[int, int, str]:
         """Decode ABI return value for the given method."""
         if return_value is None:
             return None
@@ -347,15 +349,15 @@ class DemoContractClient:
 
 
 @dataclasses.dataclass(frozen=True)
-class DemoContractBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
-    """Parameters for creating DemoContract contract with bare calls"""
+class ItxnReceiverBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating ItxnReceiver contract with bare calls"""
     on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
 
     def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
         return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
 
-class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBareCallCreateParams, None, None]):
-    """Factory for deploying and managing DemoContractClient smart contracts"""
+class ItxnReceiverFactory(algokit_utils.TypedAppFactoryProtocol[ItxnReceiverBareCallCreateParams, None, None]):
+    """Factory for deploying and managing ItxnReceiverClient smart contracts"""
 
     def __init__(
         self,
@@ -378,9 +380,9 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
                 compilation_params=compilation_params,
             )
         )
-        self.params = DemoContractFactoryParams(self.app_factory)
-        self.create_transaction = DemoContractFactoryCreateTransaction(self.app_factory)
-        self.send = DemoContractFactorySend(self.app_factory)
+        self.params = ItxnReceiverFactoryParams(self.app_factory)
+        self.create_transaction = ItxnReceiverFactoryCreateTransaction(self.app_factory)
+        self.send = ItxnReceiverFactorySend(self.app_factory)
 
     @property
     def app_name(self) -> str:
@@ -399,7 +401,7 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
         *,
         on_update: algokit_utils.OnUpdate | None = None,
         on_schema_break: algokit_utils.OnSchemaBreak | None = None,
-        create_params: DemoContractBareCallCreateParams | None = None,
+        create_params: ItxnReceiverBareCallCreateParams | None = None,
         update_params: None = None,
         delete_params: None = None,
         existing_deployments: algokit_utils.ApplicationLookup | None = None,
@@ -407,7 +409,7 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
         app_name: str | None = None,
         compilation_params: algokit_utils.AppClientCompilationParams | None = None,
         send_params: algokit_utils.SendParams | None = None,
-    ) -> tuple[DemoContractClient, algokit_utils.AppFactoryDeployResult]:
+    ) -> tuple[ItxnReceiverClient, algokit_utils.AppFactoryDeployResult]:
         """Deploy the application"""
         deploy_response = self.app_factory.deploy(
             on_update=on_update,
@@ -422,7 +424,7 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
             send_params=send_params,
         )
 
-        return DemoContractClient(deploy_response[0]), deploy_response[1]
+        return ItxnReceiverClient(deploy_response[0]), deploy_response[1]
 
     def get_app_client_by_creator_and_name(
         self,
@@ -434,9 +436,9 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
         app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
         approval_source_map: SourceMap | None = None,
         clear_source_map: SourceMap | None = None,
-    ) -> DemoContractClient:
+    ) -> ItxnReceiverClient:
         """Get an app client by creator address and name"""
-        return DemoContractClient(
+        return ItxnReceiverClient(
             self.app_factory.get_app_client_by_creator_and_name(
                 creator_address,
                 app_name,
@@ -457,9 +459,9 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
         default_signer: TransactionSigner | None = None,
         approval_source_map: SourceMap | None = None,
         clear_source_map: SourceMap | None = None,
-    ) -> DemoContractClient:
+    ) -> ItxnReceiverClient:
         """Get an app client by app ID"""
-        return DemoContractClient(
+        return ItxnReceiverClient(
             self.app_factory.get_app_client_by_id(
                 app_id,
                 app_name,
@@ -471,17 +473,17 @@ class DemoContractFactory(algokit_utils.TypedAppFactoryProtocol[DemoContractBare
         )
 
 
-class DemoContractFactoryParams:
-    """Parameters for creating transactions for DemoContract contract"""
+class ItxnReceiverFactoryParams:
+    """Parameters for creating transactions for ItxnReceiver contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
-        self.create = DemoContractFactoryCreateParams(app_factory)
-        self.update = DemoContractFactoryUpdateParams(app_factory)
-        self.delete = DemoContractFactoryDeleteParams(app_factory)
+        self.create = ItxnReceiverFactoryCreateParams(app_factory)
+        self.update = ItxnReceiverFactoryUpdateParams(app_factory)
+        self.delete = ItxnReceiverFactoryDeleteParams(app_factory)
 
-class DemoContractFactoryCreateParams:
-    """Parameters for 'create' operations of DemoContract contract"""
+class ItxnReceiverFactoryCreateParams:
+    """Parameters for 'create' operations of ItxnReceiver contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -498,28 +500,28 @@ class DemoContractFactoryCreateParams:
             algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
             compilation_params=compilation_params)
 
-    def test_while(
+    def receive_pay(
         self,
-        args: tuple[int] | TestWhileArgs,
+        args: tuple[int, algokit_utils.AppMethodCallTransactionArgument, str] | ReceivePayArgs,
         *,
         params: algokit_utils.CommonAppCallCreateParams | None = None,
         compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> algokit_utils.AppCreateMethodCallParams:
-        """Creates a new instance using the testWhile(uint64)uint64 ABI method"""
+        """Creates a new instance using the receivePay(uint64,pay,string)(uint64,uint64,string) ABI method"""
         params = params or algokit_utils.CommonAppCallCreateParams()
         return self.app_factory.params.create(
             algokit_utils.AppFactoryCreateMethodCallParams(
                 **{
                 **dataclasses.asdict(params),
-                "method": "testWhile(uint64)uint64",
+                "method": "receivePay(uint64,pay,string)(uint64,uint64,string)",
                 "args": _parse_abi_args(args),
                 }
             ),
             compilation_params=compilation_params
         )
 
-class DemoContractFactoryUpdateParams:
-    """Parameters for 'update' operations of DemoContract contract"""
+class ItxnReceiverFactoryUpdateParams:
+    """Parameters for 'update' operations of ItxnReceiver contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -536,8 +538,8 @@ class DemoContractFactoryUpdateParams:
             algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
             )
 
-class DemoContractFactoryDeleteParams:
-    """Parameters for 'delete' operations of DemoContract contract"""
+class ItxnReceiverFactoryDeleteParams:
+    """Parameters for 'delete' operations of ItxnReceiver contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -555,16 +557,16 @@ class DemoContractFactoryDeleteParams:
             )
 
 
-class DemoContractFactoryCreateTransaction:
-    """Create transactions for DemoContract contract"""
+class ItxnReceiverFactoryCreateTransaction:
+    """Create transactions for ItxnReceiver contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
-        self.create = DemoContractFactoryCreateTransactionCreate(app_factory)
+        self.create = ItxnReceiverFactoryCreateTransactionCreate(app_factory)
 
 
-class DemoContractFactoryCreateTransactionCreate:
-    """Create new instances of DemoContract contract"""
+class ItxnReceiverFactoryCreateTransactionCreate:
+    """Create new instances of ItxnReceiver contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -580,16 +582,16 @@ class DemoContractFactoryCreateTransactionCreate:
         )
 
 
-class DemoContractFactorySend:
-    """Send calls to DemoContract contract"""
+class ItxnReceiverFactorySend:
+    """Send calls to ItxnReceiver contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
-        self.create = DemoContractFactorySendCreate(app_factory)
+        self.create = ItxnReceiverFactorySendCreate(app_factory)
 
 
-class DemoContractFactorySendCreate:
-    """Send create calls to DemoContract contract"""
+class ItxnReceiverFactorySendCreate:
+    """Send create calls to ItxnReceiver contract"""
 
     def __init__(self, app_factory: algokit_utils.AppFactory):
         self.app_factory = app_factory
@@ -600,7 +602,7 @@ class DemoContractFactorySendCreate:
         params: algokit_utils.CommonAppCallCreateParams | None = None,
         send_params: algokit_utils.SendParams | None = None,
         compilation_params: algokit_utils.AppClientCompilationParams | None = None,
-    ) -> tuple[DemoContractClient, algokit_utils.SendAppCreateTransactionResult]:
+    ) -> tuple[ItxnReceiverClient, algokit_utils.SendAppCreateTransactionResult]:
         """Creates a new instance using a bare call"""
         params = params or algokit_utils.CommonAppCallCreateParams()
         result = self.app_factory.send.bare.create(
@@ -608,31 +610,31 @@ class DemoContractFactorySendCreate:
             send_params=send_params,
             compilation_params=compilation_params
         )
-        return DemoContractClient(result[0]), result[1]
+        return ItxnReceiverClient(result[0]), result[1]
 
 
-class DemoContractComposer:
-    """Composer for creating transaction groups for DemoContract contract calls"""
+class ItxnReceiverComposer:
+    """Composer for creating transaction groups for ItxnReceiver contract calls"""
 
-    def __init__(self, client: "DemoContractClient"):
+    def __init__(self, client: "ItxnReceiverClient"):
         self.client = client
         self._composer = client.algorand.new_group()
         self._result_mappers: list[typing.Callable[[algokit_utils.ABIReturn | None], object] | None] = []
 
-    def test_while(
+    def receive_pay(
         self,
-        args: tuple[int] | TestWhileArgs,
+        args: tuple[int, algokit_utils.AppMethodCallTransactionArgument, str] | ReceivePayArgs,
         params: algokit_utils.CommonAppCallParams | None = None
-    ) -> "DemoContractComposer":
+    ) -> "ItxnReceiverComposer":
         self._composer.add_app_call_method_call(
-            self.client.params.test_while(
+            self.client.params.receive_pay(
                 args=args,
                 params=params,
             )
         )
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
-                "testWhile(uint64)uint64", v
+                "receivePay(uint64,pay,string)(uint64,uint64,string)", v
             )
         )
         return self
@@ -642,7 +644,7 @@ class DemoContractComposer:
         *,
         args: list[bytes] | None = None,
         params: algokit_utils.CommonAppCallParams | None = None,
-    ) -> "DemoContractComposer":
+    ) -> "ItxnReceiverComposer":
         params=params or algokit_utils.CommonAppCallParams()
         self._composer.add_app_call(
             self.client.params.clear_state(
@@ -658,7 +660,7 @@ class DemoContractComposer:
     
     def add_transaction(
         self, txn: Transaction, signer: TransactionSigner | None = None
-    ) -> "DemoContractComposer":
+    ) -> "ItxnReceiverComposer":
         self._composer.add_transaction(txn, signer)
         return self
     
