@@ -21,6 +21,7 @@ from . import Contract_526607e6 as Contract_526607e6
 from . import ImmutableArrayContract_a05d85d0 as ImmutableArrayContract_a05d85d0
 from . import StaticSizeContract_9c599c3a as StaticSizeContract_9c599c3a
 from . import Contract_f6adb9f7 as Contract_f6adb9f7
+from . import Contract_014dc99b as Contract_014dc99b
 from . import TestContract_7a67a46d as TestContract_7a67a46d
 from . import Hello_b8890893 as Hello_b8890893
 from . import HelloBase_7b19a9ec as HelloBase_7b19a9ec
@@ -32,6 +33,7 @@ from . import LargeProgram_b0ccd223 as LargeProgram_b0ccd223
 from . import DebugContract_e0c0d673 as DebugContract_e0c0d673
 from . import Base1_bf513d3d as Base1_bf513d3d
 from . import Base2_f1c61ca2 as Base2_f1c61ca2
+from . import Derived_f011f010 as Derived_f011f010
 from . import GP_45575adb as GP_45575adb
 from . import MyContract_cc600081 as MyContract_cc600081
 from . import AppCall_40a5c896 as AppCall_40a5c896
