@@ -10,6 +10,8 @@ from . import NFTFactory_77dc5a18 as NFTFactory_77dc5a18
 from . import CreatorVerifier_9240aa5a as CreatorVerifier_9240aa5a
 from . import MerkleTree_e150cb35 as MerkleTree_e150cb35
 from . import NonABIExample_e305fb15 as NonABIExample_e305fb15
+from . import StakingPool_9685fcb0 as StakingPool_9685fcb0
+from . import ValidatorRegistry_24446b2e as ValidatorRegistry_24446b2e
 from . import Simple_e01cade0 as Simple_e01cade0
 from . import ContactsApp_59c6f760 as ContactsApp_59c6f760
 from . import A_36359300 as A_36359300
@@ -185,6 +187,7 @@ from . import ExternalContract_4041cd58 as ExternalContract_4041cd58
 from . import F_712725ac as F_712725ac
 from . import FunctionsTest_a76a9d76 as FunctionsTest_a76a9d76
 from . import G_1eb8075e as G_1eb8075e
+from . import GeneralTest_4f8027d2 as GeneralTest_4f8027d2
 from . import IfTest_0d35c0ea as IfTest_0d35c0ea
 from . import IntcblockTest_033a0a40 as IntcblockTest_033a0a40
 from . import ItxnsTest_58310760 as ItxnsTest_58310760
