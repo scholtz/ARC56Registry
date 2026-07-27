@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { ContractName_hash } from "arc56-generated-algorandfoundation-ggov";
+import { EmptyContract_e9ee4207 } from "arc56-generated-algorandfoundation-ggov";
 
 const algorand = AlgorandClient.mainNet();
-const client = new ContractName_hash.ContractClient({
+const client = new EmptyContract_e9ee4207.EmptyContractClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,7 +51,13 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `EmptyContract_e9ee4207` | `EmptyContractClient` | [https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/base/EmptyContract.arc56.json](https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/base/EmptyContract.arc56.json) |
+| `Delegator_46ba04c3` | `DelegatorClient` | [https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/delegator/Delegator.arc56.json](https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/delegator/Delegator.arc56.json) |
+| `GGovPeriod_7755d264` | `GGovPeriodClient` | [https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/ggov-period/GGovPeriod.arc56.json](https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/ggov-period/GGovPeriod.arc56.json) |
+| `GGovRegistry_4c456678` | `GGovRegistryClient` | [https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/ggov-registry/GGovRegistry.arc56.json](https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/ggov-registry/GGovRegistry.arc56.json) |
+| `GGovRegistryAccountContract_8cb7cfbc` | `GGovRegistryAccountContractClient` | [https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/ggov-registry/GGovRegistryAccountContract.arc56.json](https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/ggov-registry/GGovRegistryAccountContract.arc56.json) |
+| `XGovProposalMock_d131d396` | `XGovProposalMockClient` | [https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/xgov-proposal-mock/XGovProposalMock.arc56.json](https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/xgov-proposal-mock/XGovProposalMock.arc56.json) |
+| `XGovRegistryMock_73fe675e` | `XGovRegistryMockClient` | [https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/xgov-registry-mock/XGovRegistryMock.arc56.json](https://raw.githubusercontent.com/algorandfoundation/gGov/HEAD/projects/contracts/smart_contracts/artifacts/xgov-registry-mock/XGovRegistryMock.arc56.json) |
 
 ## Versioning
 
