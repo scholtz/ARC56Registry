@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"UrangeAlgo","structs":{},"methods":[{"name":"testSingleArg","args":[],"returns":{"type":"uint64[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"testTwoArg","args":[],"returns":{"type":"uint64[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"testThreeArg","args":[],"returns":{"type":"uint64[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[84,147,197],"errorMessage":"invalid array length header"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"UrangeAlgo","structs":{},"methods":[{"name":"testSingleArg","args":[],"returns":{"type":"uint64[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"testTwoArg","args":[],"returns":{"type":"uint64[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"testThreeArg","args":[],"returns":{"type":"uint64[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[76,131,173],"errorMessage":"invalid array length header"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDIgNQogICAgYnl0ZWNibG9jayAweDAwMDAgMHgwMDAxCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdXJhbmdlLmFsZ28udHM6NAogICAgLy8gY2xhc3MgVXJhbmdlQWxnbyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUAxMAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4MDEzMjlhMzIgMHhlYTYzZDRhYyAweGFkMmUxZjBlIC8vIG1ldGhvZCAidGVzdFNpbmdsZUFyZygpdWludDY0W10iLCBtZXRob2QgInRlc3RUd29BcmcoKXVpbnQ2NFtdIiwgbWV0aG9kICJ0ZXN0VGhyZWVBcmcoKXVpbnQ2NFtdIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl90ZXN0U2luZ2xlQXJnX3JvdXRlQDQgbWFpbl90ZXN0VHdvQXJnX3JvdXRlQDUgbWFpbl90ZXN0VGhyZWVBcmdfcm91dGVANgogICAgZXJyCgptYWluX3Rlc3RUaHJlZUFyZ19yb3V0ZUA2OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3VyYW5nZS5hbGdvLnRzOjIwCiAgICAvLyBsZXQgcmVzdWx0czogdWludDY0W10gPSBbXQogICAgYnl0ZWNfMCAvLyAweDAwMDAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy91cmFuZ2UuYWxnby50czoyMQogICAgLy8gZm9yIChjb25zdCBpIG9mIHVyYW5nZSgyLCAxMCwgMykpIHsKICAgIGludGNfMiAvLyAyCgptYWluX2Zvcl9oZWFkZXJAMTQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdXJhbmdlLmFsZ28udHM6MjEKICAgIC8vIGZvciAoY29uc3QgaSBvZiB1cmFuZ2UoMiwgMTAsIDMpKSB7CiAgICBkdXAKICAgIHB1c2hpbnQgMTAKICAgIDwKICAgIGJ6IG1haW5fYWZ0ZXJfZm9yQDI2CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdXJhbmdlLmFsZ28udHM6MjIKICAgIC8vIHJlc3VsdHMgPSBbLi4ucmVzdWx0cywgaV0KICAgIGR1cAogICAgaXRvYgogICAgYnl0ZWNfMSAvLyAweDAwMDEKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBleHRyYWN0IDIgMAogICAgc3dhcAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHVuY292ZXIgMwogICAgZHVwCiAgICBjb3ZlciAyCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgICsKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAwCiAgICByZXBsYWNlMiAwCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHN3YXAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy91cmFuZ2UuYWxnby50czoyMQogICAgLy8gZm9yIChjb25zdCBpIG9mIHVyYW5nZSgyLCAxMCwgMykpIHsKICAgIHB1c2hpbnQgMwogICAgKwogICAgYiBtYWluX2Zvcl9oZWFkZXJAMTQKCm1haW5fYWZ0ZXJfZm9yQDI2OgogICAgcG9wCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdXJhbmdlLmFsZ28udHM6NQogICAgLy8gdGVzdFNpbmdsZUFyZygpIHsKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl90ZXN0VHdvQXJnX3JvdXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdXJhbmdlLmFsZ28udHM6MTMKICAgIC8vIGxldCByZXN1bHRzOiB1aW50NjRbXSA9IFtdCiAgICBieXRlY18wIC8vIDB4MDAwMAogICAgLy8gdGVzdHMvYXBwcm92YWxzL3VyYW5nZS5hbGdvLnRzOjE0CiAgICAvLyBmb3IgKGNvbnN0IGkgb2YgdXJhbmdlKDIsIDUpKSB7CiAgICBpbnRjXzIgLy8gMgoKbWFpbl9mb3JfaGVhZGVyQDE5OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3VyYW5nZS5hbGdvLnRzOjE0CiAgICAvLyBmb3IgKGNvbnN0IGkgb2YgdXJhbmdlKDIsIDUpKSB7CiAgICBkdXAKICAgIGludGNfMyAvLyA1CiAgICA8CiAgICBieiBtYWluX2FmdGVyX2ZvckAyNgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3VyYW5nZS5hbGdvLnRzOjE1CiAgICAvLyByZXN1bHRzID0gWy4uLnJlc3VsdHMsIGldCiAgICBkdXAKICAgIGl0b2IKICAgIGJ5dGVjXzEgLy8gMHgwMDAxCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgZXh0cmFjdCAyIDAKICAgIHN3YXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICB1bmNvdmVyIDMKICAgIGR1cAogICAgY292ZXIgMgogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICArCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMAogICAgcmVwbGFjZTIgMAogICAgc3dhcAogICAgY29uY2F0CiAgICBzd2FwCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdXJhbmdlLmFsZ28udHM6MTQKICAgIC8vIGZvciAoY29uc3QgaSBvZiB1cmFuZ2UoMiwgNSkpIHsKICAgIGludGNfMSAvLyAxCiAgICArCiAgICBiIG1haW5fZm9yX2hlYWRlckAxOQoKbWFpbl90ZXN0U2luZ2xlQXJnX3JvdXRlQDQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdXJhbmdlLmFsZ28udHM6NgogICAgLy8gbGV0IHJlc3VsdHM6IHVpbnQ2NFtdID0gW10KICAgIGJ5dGVjXzAgLy8gMHgwMDAwCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdXJhbmdlLmFsZ28udHM6NwogICAgLy8gZm9yIChjb25zdCBpIG9mIHVyYW5nZSg1KSkgewogICAgaW50Y18wIC8vIDAKCm1haW5fZm9yX2hlYWRlckAyNDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy91cmFuZ2UuYWxnby50czo3CiAgICAvLyBmb3IgKGNvbnN0IGkgb2YgdXJhbmdlKDUpKSB7CiAgICBkdXAKICAgIGludGNfMyAvLyA1CiAgICA8CiAgICBieiBtYWluX2FmdGVyX2ZvckAyNgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3VyYW5nZS5hbGdvLnRzOjgKICAgIC8vIHJlc3VsdHMgPSBbLi4ucmVzdWx0cywgaV0KICAgIGR1cAogICAgaXRvYgogICAgYnl0ZWNfMSAvLyAweDAwMDEKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBleHRyYWN0IDIgMAogICAgc3dhcAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHVuY292ZXIgMwogICAgZHVwCiAgICBjb3ZlciAyCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgICsKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAwCiAgICByZXBsYWNlMiAwCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHN3YXAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy91cmFuZ2UuYWxnby50czo3CiAgICAvLyBmb3IgKGNvbnN0IGkgb2YgdXJhbmdlKDUpKSB7CiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYiBtYWluX2Zvcl9oZWFkZXJAMjQKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDEwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3VyYW5nZS5hbGdvLnRzOjQKICAgIC8vIGNsYXNzIFVyYW5nZUFsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CyAEAAECBSYCAgAAAgABMRtBALAxGRREMRhEggMEATKaMgTqY9SsBK0uHw42GgCOAwBjADkAAQAoJEmBCgxBACNJFilMUElXAgBMIllPA0lOAiJZCBZXBgBcAExQTIEDCEL/1kiABBUffHVMULAjQygkSSUMQf/sSRYpTFBJVwIATCJZTwNJTgIiWQgWVwYAXABMUEwjCEL/2CgiSSUMQf/CSRYpTFBJVwIATCJZTwNJTgIiWQgWVwYAXABMUEwjCEL/2DEZFDEYFBBD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -146,6 +146,21 @@ export type MethodArgs<TSignature extends UrangeAlgoSignatures> = UrangeAlgoType
 export type MethodReturn<TSignature extends UrangeAlgoSignatures> = UrangeAlgoTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type UrangeAlgoCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type UrangeAlgoDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: UrangeAlgoCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the UrangeAlgo smart contract
@@ -192,6 +207,147 @@ export abstract class UrangeAlgoParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the UrangeAlgo smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class UrangeAlgoFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `UrangeAlgoFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new UrangeAlgoClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new UrangeAlgoClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the UrangeAlgo smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: UrangeAlgoDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new UrangeAlgoClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the UrangeAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the UrangeAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the UrangeAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new UrangeAlgoClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the UrangeAlgo smart contract
  */

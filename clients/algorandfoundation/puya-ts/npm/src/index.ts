@@ -168,6 +168,7 @@ export * as ConcreteArc4Contract_a32cab02 from './ConcreteArc4Contract_a32cab02'
 export * as ItxnComposeAlgo_48272453 from './ItxnComposeAlgo_48272453';
 export * as VerifierContract_a37b0424 from './VerifierContract_a37b0424';
 export * as ItxnDemoContract_feb9808b from './ItxnDemoContract_feb9808b';
+export * as ItxnReceiver_abbdfac4 from './ItxnReceiver_abbdfac4';
 export * as JSDocDemo_8298490e from './JSDocDemo_8298490e';
 export * as LargeObjectsInStateAlgo_9fde4f29 from './LargeObjectsInStateAlgo_9fde4f29';
 export * as TestLocalMap_add35f04 from './TestLocalMap_add35f04';
@@ -180,6 +181,7 @@ export * as StoreBoth_aa69053f from './StoreBoth_aa69053f';
 export * as StoreString_bcdb2469 from './StoreString_bcdb2469';
 export * as StoreUint64_f6718697 from './StoreUint64_f6718697';
 export * as AbiCallMultiInheritance_90212eff from './AbiCallMultiInheritance_90212eff';
+export * as BaseOne_f30cab2c from './BaseOne_f30cab2c';
 export * as BaseTwo_5b556cff from './BaseTwo_5b556cff';
 export * as CommonBase_115e10b3 from './CommonBase_115e10b3';
 export * as MultiBases_98164840 from './MultiBases_98164840';

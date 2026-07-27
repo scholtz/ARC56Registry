@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"BoxToRefTest","structs":{},"methods":[{"name":"test","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"boxMap":{"keyType":"address","valueType":"uint8[4]","prefix":""}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[104],"errorMessage":"Box must have value"},{"pc":[114],"errorMessage":"First array item in box should be 123"},{"pc":[109],"errorMessage":"index access is out of bounds"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"BoxToRefTest","structs":{},"methods":[{"name":"test","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"boxMap":{"keyType":"address","valueType":"uint8[4]","prefix":""}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[118],"errorMessage":"Box must have value"},{"pc":[127],"errorMessage":"First array item in box should be 123"},{"pc":[123],"errorMessage":"index access is out of bounds"},{"pc":[106],"errorMessage":"overflow"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDEyMwogICAgYiBtYWluX2Jsb2NrQDAKCm1haW5fYmxvY2tAMDoKICAgIGIgbWFpbl9ibG9ja0AxCgptYWluX2Jsb2NrQDE6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMzUKICAgIC8vIGNsYXNzIEJveFRvUmVmVGVzdCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDUKICAgIGIgbWFpbl9hYmlfcm91dGluZ0AyCgptYWluX2FiaV9yb3V0aW5nQDI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMzUKICAgIC8vIGNsYXNzIEJveFRvUmVmVGVzdCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIHB1c2hieXRlcyAweGE3ODAwMGRlIC8vIG1ldGhvZCAidGVzdCgpdm9pZCIKICAgIHVuY292ZXIgMQogICAgbWF0Y2ggbWFpbl90ZXN0X3JvdXRlQDMKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDQKCm1haW5fc3dpdGNoX2Nhc2VfbmV4dEA0OgogICAgYiBtYWluX2FmdGVyX2lmX2Vsc2VANgoKbWFpbl9hZnRlcl9pZl9lbHNlQDY6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMzUKICAgIC8vIGNsYXNzIEJveFRvUmVmVGVzdCBleHRlbmRzIENvbnRyYWN0IHsKICAgIGVycgoKbWFpbl90ZXN0X3JvdXRlQDM6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMzgKICAgIC8vIHRlc3QoKSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBpbnRjXzAgLy8gTm9PcAogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgICYmCiAgICBhc3NlcnQKICAgIGNhbGxzdWIgdGVzdAogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRANAoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIzNQogICAgLy8gY2xhc3MgQm94VG9SZWZUZXN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgaW50Y18wIC8vIE5vT3AKICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18wIC8vIDAKICAgID09CiAgICAmJgogICAgYXNzZXJ0CiAgICBjYWxsc3ViIF9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjpCb3hUb1JlZlRlc3QudGVzdFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnRlc3Q6CiAgICBiIHRlc3RfYmxvY2tAMAoKdGVzdF9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjM4CiAgICAvLyB0ZXN0KCkgewogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czo6Qm94VG9SZWZUZXN0LnRlc3QKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czo6Qm94VG9SZWZUZXN0LnRlc3QoKSAtPiB2b2lkOgp0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czo6Qm94VG9SZWZUZXN0LnRlc3Q6CiAgICBiIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjpCb3hUb1JlZlRlc3QudGVzdF9ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czo6Qm94VG9SZWZUZXN0LnRlc3RfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIzOQogICAgLy8gY29uc3QgYm94Rm9yQ2FsbGVyID0gdGhpcy5ib3hNYXAoVHhuLnNlbmRlcikKICAgIHR4biBTZW5kZXIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIzNgogICAgLy8gYm94TWFwID0gQm94TWFwPEFjY291bnQsIGFyYzQuU3RhdGljQXJyYXk8YXJjNC5VaW50OCwgND4+KHsga2V5UHJlZml4OiAnJyB9KQogICAgcHVzaGJ5dGVzICIiCiAgICB1bmNvdmVyIDEKICAgIGNvbmNhdAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjQxCiAgICAvLyBib3hGb3JDYWxsZXIuY3JlYXRlKCkKICAgIGR1cAogICAgcHVzaGludCA0CiAgICBib3hfY3JlYXRlCiAgICBwb3AKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjI0MwogICAgLy8gY29uc3QgYm94UmVmID0gYm94Rm9yQ2FsbGVyCiAgICBkdXAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjI0NQogICAgLy8gYm94UmVmLnJlcGxhY2UoMCwgbmV3IGFyYzQuVWludDgoMTIzKS5ieXRlcykKICAgIGludGNfMiAvLyAxMjMKICAgIGl0b2IKICAgIGR1cAogICAgYml0bGVuCiAgICBwdXNoaW50IDgKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIHB1c2hpbnQgNwogICAgaW50Y18xIC8vIDEKICAgIGV4dHJhY3QzCiAgICB1bmNvdmVyIDEKICAgIGludGNfMCAvLyAwCiAgICB1bmNvdmVyIDIKICAgIGJveF9yZXBsYWNlCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyNDcKICAgIC8vIGFzc2VydChib3hGb3JDYWxsZXIudmFsdWVbMF0uYXNVaW50NjQoKSA9PT0gMTIzLCAnRmlyc3QgYXJyYXkgaXRlbSBpbiBib3ggc2hvdWxkIGJlIDEyMycpCiAgICBib3hfZ2V0CiAgICBhc3NlcnQgLy8gQm94IG11c3QgaGF2ZSB2YWx1ZQogICAgaW50Y18wIC8vIDAKICAgIGludGNfMSAvLyAxCiAgICAqCiAgICBpbnRjXzEgLy8gMQogICAgZXh0cmFjdDMgLy8gb24gZXJyb3I6IGluZGV4IGFjY2VzcyBpcyBvdXQgb2YgYm91bmRzCiAgICBidG9pCiAgICBpbnRjXzIgLy8gMTIzCiAgICA9PQogICAgYXNzZXJ0IC8vIEZpcnN0IGFycmF5IGl0ZW0gaW4gYm94IHNob3VsZCBiZSAxMjMKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjpCb3hUb1JlZlRlc3QuX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlKCkgLT4gdm9pZDoKX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlOgogICAgYiBfX2FsZ290c19fLmRlZmF1bHRDcmVhdGVfYmxvY2tAMAoKX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlX2Jsb2NrQDA6CiAgICByZXRzdWIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyADAAF7QgAAQgAAMRsiE0EAKUIAADYaAIAEp4AA3k8BjgEAB0IAAEIAAAAxGSISMRgiExBEiAASQv/sMRkiEjEYIhIQRIgAOCNDQgAAiAACI0NCAAAxAIAATwFQSYEEuUhJJBZJk4EIDkSBByNYTwEiTwK7vkQiIwsjWBckEkSJQgAAiQ==","clear":"C0IAAIEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -142,6 +142,21 @@ export type MethodReturn<TSignature extends BoxToRefTestSignatures> = BoxToRefTe
 export type BoxKeysState = BoxToRefTestTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type BoxToRefTestCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type BoxToRefTestDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: BoxToRefTestCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the BoxToRefTest smart contract
@@ -162,6 +177,147 @@ export abstract class BoxToRefTestParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the BoxToRefTest smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class BoxToRefTestFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `BoxToRefTestFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new BoxToRefTestClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new BoxToRefTestClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the BoxToRefTest smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: BoxToRefTestDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new BoxToRefTestClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BoxToRefTest smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BoxToRefTest smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BoxToRefTest smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new BoxToRefTestClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the BoxToRefTest smart contract
  */

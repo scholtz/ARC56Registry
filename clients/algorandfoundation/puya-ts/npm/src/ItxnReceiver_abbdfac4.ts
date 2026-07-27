@@ -23,7 +23,7 @@ import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgumen
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"DestructuringIterators","structs":{},"methods":[{"name":"test","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAyCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmluZy1pdGVyYXRvcnMuYWxnby50czoxNwogICAgLy8gY2xhc3MgRGVzdHJ1Y3R1cmluZ0l0ZXJhdG9ycyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1CiAgICBwdXNoYnl0ZXMgMHhhNzgwMDBkZSAvLyBtZXRob2QgInRlc3QoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3Rlc3Rfcm91dGVAMwogICAgZXJyCgptYWluX3Rlc3Rfcm91dGVAMzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyaW5nLWl0ZXJhdG9ycy5hbGdvLnRzOjE4CiAgICAvLyB0ZXN0KCkgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIHB1c2hpbnQgMAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJpbmctaXRlcmF0b3JzLmFsZ28udHM6MTAKICAgIC8vIGxldCB0b3RhbDogdWludDY0ID0gMAogICAgZHVwCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmluZy1pdGVyYXRvcnMuYWxnby50czo2CiAgICAvLyB7IGE6IFVpbnQ2NCgxKSwgYjogVWludDY0KDIpIH0sCiAgICBpbnRjXzAgLy8gMQoKbWFpbl9mb3JfYm9keUA3OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJpbmctaXRlcmF0b3JzLmFsZ28udHM6MTIKICAgIC8vIHRvdGFsICs9IGEKICAgICsKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyaW5nLWl0ZXJhdG9ycy5hbGdvLnRzOjExCiAgICAvLyBmb3IgKGNvbnN0IHsgYSB9IG9mIGl0ZW1zKSB7CiAgICBzd2FwCiAgICBzd2l0Y2ggbWFpbl9mb3JfaGVhZGVyXzFAOCBtYWluX2Zvcl9oZWFkZXJfMkA5CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmluZy1pdGVyYXRvcnMuYWxnby50czoxNAogICAgLy8gYXNzZXJ0KHRvdGFsID09PSA2KQogICAgcHVzaGludCA2CiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmluZy1pdGVyYXRvcnMuYWxnby50czoxOAogICAgLy8gdGVzdCgpIHsKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZm9yX2hlYWRlcl8yQDk6CiAgICBpbnRjXzEgLy8gMgogICAgc3dhcAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJpbmctaXRlcmF0b3JzLmFsZ28udHM6OAogICAgLy8geyBhOiBVaW50NjQoMyksIGI6IFVpbnQ2NCgyKSB9LAogICAgcHVzaGludCAzCiAgICBiIG1haW5fZm9yX2JvZHlANwoKbWFpbl9mb3JfaGVhZGVyXzFAODoKICAgIGludGNfMCAvLyAxCiAgICBzd2FwCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmluZy1pdGVyYXRvcnMuYWxnby50czo3CiAgICAvLyB7IGE6IFVpbnQ2NCgyKSwgYjogVWludDY0KDIpIH0sCiAgICBpbnRjXzEgLy8gMgogICAgYiBtYWluX2Zvcl9ib2R5QDcKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmluZy1pdGVyYXRvcnMuYWxnby50czoxNwogICAgLy8gY2xhc3MgRGVzdHJ1Y3R1cmluZ0l0ZXJhdG9ycyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CyACAQIxG0EANIAEp4AA3jYaAI4BAAEAMRkUMRgQRIEASSIITI0CAA0ABoEGEkQiQyNMgQNC/+siTCNC/+UxGRQxGBQQQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ItxnReceiver","structs":{},"methods":[{"name":"receivePay","args":[{"type":"uint64","name":"a"},{"type":"pay","name":"b"},{"type":"string","name":"c"}],"returns":{"type":"(uint64,uint64,string)"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[55],"errorMessage":"invalid array length header"},{"pc":[63],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[35],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[48],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvaXR4bi5hbGdvLnRzOjIyNgogICAgLy8gY2xhc3MgSXR4blJlY2VpdmVyIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDUKICAgIHB1c2hieXRlcyAweDE5NzFkMTk3IC8vIG1ldGhvZCAicmVjZWl2ZVBheSh1aW50NjQscGF5LHN0cmluZykodWludDY0LHVpbnQ2NCxzdHJpbmcpIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9yZWNlaXZlUGF5X3JvdXRlQDMKICAgIGVycgoKbWFpbl9yZWNlaXZlUGF5X3JvdXRlQDM6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvaXR4bi5hbGdvLnRzOjIyNwogICAgLy8gcHVibGljIHJlY2VpdmVQYXkoYTogdWludDY0LCBiOiBndHhuLlBheW1lbnRUeG4sIGM6IHN0cmluZyk6IFt1aW50NjQsIHVpbnQ2NCwgc3RyaW5nXSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4biBHcm91cEluZGV4CiAgICBwdXNoaW50IDEKICAgIC0KICAgIGR1cAogICAgZ3R4bnMgVHlwZUVudW0KICAgIHB1c2hpbnQgMSAvLyBwYXkKICAgID09CiAgICBhc3NlcnQgLy8gdHJhbnNhY3Rpb24gdHlwZSBpcyBwYXkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgcHVzaGludCAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9pdHhuLmFsZ28udHM6MjI4CiAgICAvLyByZXR1cm4gW2EsIGIuYW1vdW50LCBjXQogICAgc3dhcAogICAgZ3R4bnMgQW1vdW50CiAgICB1bmNvdmVyIDIKICAgIGl0b2IKICAgIHN3YXAKICAgIGl0b2IKICAgIGNvbmNhdAogICAgZGlnIDEKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBzd2FwCiAgICBwdXNoYnl0ZXMgMHgwMDEyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2l0eG4uYWxnby50czoyMjcKICAgIC8vIHB1YmxpYyByZWNlaXZlUGF5KGE6IHVpbnQ2NCwgYjogZ3R4bi5QYXltZW50VHhuLCBjOiBzdHJpbmcpOiBbdWludDY0LCB1aW50NjQsIHN0cmluZ10gewogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEKICAgIHJldHVybgoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9pdHhuLmFsZ28udHM6MjI2CiAgICAvLyBjbGFzcyBJdHhuUmVjZWl2ZXIgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CzEbQQBkgAQZcdGXNhoAjgEAAQAxGRQxGBBENhoBSRWBCBJEFzEWgQEJSTgQgQESRDYaAkmBAFmBAghLARUSRFcCAEw4CE8CFkwWUEsBFRZXBgJPAlBMgAIAElBMUIAEFR98dUxQsIEBQzEZFDEYFBBD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -63,49 +63,57 @@ export type Expand<T> = T extends (...args: infer A) => infer R
 
 
 /**
- * The argument types for the DestructuringIterators contract
+ * The argument types for the ItxnReceiver contract
  */
-export type DestructuringIteratorsArgs = {
+export type ItxnReceiverArgs = {
   /**
    * The object representation of the arguments for each method
    */
   obj: {
-    'test()void': Record<string, never>
+    'receivePay(uint64,pay,string)(uint64,uint64,string)': {
+      a: bigint | number
+      b: AppMethodCallTransactionArgument
+      c: string
+    }
   }
   /**
    * The tuple representation of the arguments for each method
    */
   tuple: {
-    'test()void': []
+    'receivePay(uint64,pay,string)(uint64,uint64,string)': [a: bigint | number, b: AppMethodCallTransactionArgument, c: string]
   }
 }
 
 /**
  * The return type for each method
  */
-export type DestructuringIteratorsReturns = {
-  'test()void': void
+export type ItxnReceiverReturns = {
+  'receivePay(uint64,pay,string)(uint64,uint64,string)': [bigint, bigint, string]
 }
 
 /**
- * Defines the types of available calls and state of the DestructuringIterators smart contract.
+ * Defines the types of available calls and state of the ItxnReceiver smart contract.
  */
-export type DestructuringIteratorsTypes = {
+export type ItxnReceiverTypes = {
   /**
    * Maps method signatures / names to their argument and return types.
    */
   methods:
-    & Record<'test()void' | 'test', {
-      argsObj: DestructuringIteratorsArgs['obj']['test()void']
-      argsTuple: DestructuringIteratorsArgs['tuple']['test()void']
-      returns: DestructuringIteratorsReturns['test()void']
+    & Record<'receivePay(uint64,pay,string)(uint64,uint64,string)' | 'receivePay', {
+      argsObj: ItxnReceiverArgs['obj']['receivePay(uint64,pay,string)(uint64,uint64,string)']
+      argsTuple: ItxnReceiverArgs['tuple']['receivePay(uint64,pay,string)(uint64,uint64,string)']
+      returns: ItxnReceiverReturns['receivePay(uint64,pay,string)(uint64,uint64,string)']
     }>
 }
 
 /**
  * Defines the possible abi call signatures.
  */
-export type DestructuringIteratorsSignatures = keyof DestructuringIteratorsTypes['methods']
+export type ItxnReceiverSignatures = keyof ItxnReceiverTypes['methods']
+/**
+ * Defines the possible abi call signatures for methods that return a non-void value.
+ */
+export type ItxnReceiverNonVoidMethodSignatures = keyof ItxnReceiverTypes['methods'] extends infer T ? T extends keyof ItxnReceiverTypes['methods'] ? MethodReturn<T> extends void ? never : T  : never : never
 /**
  * Defines an object containing all relevant parameters for a single call to the contract.
  */
@@ -117,61 +125,61 @@ export type CallParams<TArgs> = Expand<
     }
 >
 /**
- * Maps a method signature from the DestructuringIterators smart contract to the method's arguments in either tuple or struct form
+ * Maps a method signature from the ItxnReceiver smart contract to the method's arguments in either tuple or struct form
  */
-export type MethodArgs<TSignature extends DestructuringIteratorsSignatures> = DestructuringIteratorsTypes['methods'][TSignature]['argsObj' | 'argsTuple']
+export type MethodArgs<TSignature extends ItxnReceiverSignatures> = ItxnReceiverTypes['methods'][TSignature]['argsObj' | 'argsTuple']
 /**
- * Maps a method signature from the DestructuringIterators smart contract to the method's return type
+ * Maps a method signature from the ItxnReceiver smart contract to the method's return type
  */
-export type MethodReturn<TSignature extends DestructuringIteratorsSignatures> = DestructuringIteratorsTypes['methods'][TSignature]['returns']
+export type MethodReturn<TSignature extends ItxnReceiverSignatures> = ItxnReceiverTypes['methods'][TSignature]['returns']
 
 
 /**
  * Defines supported create method params for this smart contract
  */
-export type DestructuringIteratorsCreateCallParams =
+export type ItxnReceiverCreateCallParams =
   | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
 /**
  * Defines arguments required for the deploy method.
  */
-export type DestructuringIteratorsDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+export type ItxnReceiverDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
   /**
    * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
    */
-  createParams?: DestructuringIteratorsCreateCallParams
+  createParams?: ItxnReceiverCreateCallParams
 }>
 
 
 /**
- * Exposes methods for constructing `AppClient` params objects for ABI calls to the DestructuringIterators smart contract
+ * Exposes methods for constructing `AppClient` params objects for ABI calls to the ItxnReceiver smart contract
  */
-export abstract class DestructuringIteratorsParamsFactory {
+export abstract class ItxnReceiverParamsFactory {
   /**
-   * Constructs a no op call for the test()void ABI method
+   * Constructs a no op call for the receivePay(uint64,pay,string)(uint64,uint64,string) ABI method
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static test(params: CallParams<DestructuringIteratorsArgs['obj']['test()void'] | DestructuringIteratorsArgs['tuple']['test()void']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+  static receivePay(params: CallParams<ItxnReceiverArgs['obj']['receivePay(uint64,pay,string)(uint64,uint64,string)'] | ItxnReceiverArgs['tuple']['receivePay(uint64,pay,string)(uint64,uint64,string)']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
     return {
       ...params,
-      method: 'test()void' as const,
-      args: Array.isArray(params.args) ? params.args : [],
+      method: 'receivePay(uint64,pay,string)(uint64,uint64,string)' as const,
+      args: Array.isArray(params.args) ? params.args : [params.args.a, params.args.b, params.args.c],
     }
   }
 }
 
 /**
- * A factory to create and deploy one or more instance of the DestructuringIterators smart contract and to create one or more app clients to interact with those (or other) app instances
+ * A factory to create and deploy one or more instance of the ItxnReceiver smart contract and to create one or more app clients to interact with those (or other) app instances
  */
-export class DestructuringIteratorsFactory {
+export class ItxnReceiverFactory {
   /**
    * The underlying `AppFactory` for when you want to have more flexibility
    */
   public readonly appFactory: _AppFactory
 
   /**
-   * Creates a new instance of `DestructuringIteratorsFactory`
+   * Creates a new instance of `ItxnReceiverFactory`
    *
    * @param params The parameters to initialise the app factory with
    */
@@ -206,7 +214,7 @@ export class DestructuringIteratorsFactory {
    * @returns The `AppClient`
    */
   public getAppClientById(params: AppFactoryAppClientParams) {
-    return new DestructuringIteratorsClient(this.appFactory.getAppClientById(params))
+    return new ItxnReceiverClient(this.appFactory.getAppClientById(params))
   }
   
   /**
@@ -221,20 +229,20 @@ export class DestructuringIteratorsFactory {
   public async getAppClientByCreatorAndName(
     params: AppFactoryResolveAppClientByCreatorAndNameParams,
   ) {
-    return new DestructuringIteratorsClient(await this.appFactory.getAppClientByCreatorAndName(params))
+    return new ItxnReceiverClient(await this.appFactory.getAppClientByCreatorAndName(params))
   }
 
   /**
-   * Idempotently deploys the DestructuringIterators smart contract.
+   * Idempotently deploys the ItxnReceiver smart contract.
    *
    * @param params The arguments for the contract calls and any additional parameters for the call
    * @returns The deployment result
    */
-  public async deploy(params: DestructuringIteratorsDeployParams = {}) {
+  public async deploy(params: ItxnReceiverDeployParams = {}) {
     const result = await this.appFactory.deploy({
       ...params,
     })
-    return { result: result.result, appClient: new DestructuringIteratorsClient(result.appClient) }
+    return { result: result.result, appClient: new ItxnReceiverClient(result.appClient) }
   }
 
   /**
@@ -246,7 +254,7 @@ export class DestructuringIteratorsFactory {
      */
     create: {
       /**
-       * Creates a new instance of the DestructuringIterators smart contract using a bare call.
+       * Creates a new instance of the ItxnReceiver smart contract using a bare call.
        *
        * @param params The params for the bare (raw) call
        * @returns The params for a create call
@@ -267,7 +275,7 @@ export class DestructuringIteratorsFactory {
      */
     create: {
       /**
-       * Creates a new instance of the DestructuringIterators smart contract using a bare call.
+       * Creates a new instance of the ItxnReceiver smart contract using a bare call.
        *
        * @param params The params for the bare (raw) call
        * @returns The transaction for a create call
@@ -288,14 +296,14 @@ export class DestructuringIteratorsFactory {
      */
     create: {
       /**
-       * Creates a new instance of the DestructuringIterators smart contract using a bare call.
+       * Creates a new instance of the ItxnReceiver smart contract using a bare call.
        *
        * @param params The params for the bare (raw) call
        * @returns The create result
        */
       bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
         const result = await this.appFactory.send.bare.create(params)
-        return { result: result.result, appClient: new DestructuringIteratorsClient(result.appClient) }
+        return { result: result.result, appClient: new ItxnReceiverClient(result.appClient) }
       },
     },
 
@@ -303,22 +311,22 @@ export class DestructuringIteratorsFactory {
 
 }
 /**
- * A client to make calls to the DestructuringIterators smart contract
+ * A client to make calls to the ItxnReceiver smart contract
  */
-export class DestructuringIteratorsClient {
+export class ItxnReceiverClient {
   /**
    * The underlying `AppClient` for when you want to have more flexibility
    */
   public readonly appClient: _AppClient
 
   /**
-   * Creates a new instance of `DestructuringIteratorsClient`
+   * Creates a new instance of `ItxnReceiverClient`
    *
-   * @param appClient An `AppClient` instance which has been created with the DestructuringIterators app spec
+   * @param appClient An `AppClient` instance which has been created with the ItxnReceiver app spec
    */
   constructor(appClient: _AppClient)
   /**
-   * Creates a new instance of `DestructuringIteratorsClient`
+   * Creates a new instance of `ItxnReceiverClient`
    *
    * @param params The parameters to initialise the app client with
    */
@@ -331,16 +339,24 @@ export class DestructuringIteratorsClient {
   }
 
   /**
-   * Returns a new `DestructuringIteratorsClient` client, resolving the app by creator address and name
+   * Checks for decode errors on the given return value and maps the return value to the return type for the given method
+   * @returns The typed return value or undefined if there was no value
+   */
+  decodeReturnValue<TSignature extends ItxnReceiverNonVoidMethodSignatures>(method: TSignature, returnValue: ABIReturn | undefined) {
+    return returnValue !== undefined ? getArc56ReturnValue<MethodReturn<TSignature>>(returnValue, this.appClient.getABIMethod(method), APP_SPEC.structs) : undefined
+  }
+
+  /**
+   * Returns a new `ItxnReceiverClient` client, resolving the app by creator address and name
    * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
    * @param params The parameters to create the app client
    */
-  public static async fromCreatorAndName(params: Omit<ResolveAppClientByCreatorAndName, 'appSpec'>): Promise<DestructuringIteratorsClient> {
-    return new DestructuringIteratorsClient(await _AppClient.fromCreatorAndName({...params, appSpec: APP_SPEC}))
+  public static async fromCreatorAndName(params: Omit<ResolveAppClientByCreatorAndName, 'appSpec'>): Promise<ItxnReceiverClient> {
+    return new ItxnReceiverClient(await _AppClient.fromCreatorAndName({...params, appSpec: APP_SPEC}))
   }
   
   /**
-   * Returns an `DestructuringIteratorsClient` instance for the current network based on
+   * Returns an `ItxnReceiverClient` instance for the current network based on
    * pre-determined network-specific app IDs specified in the ARC-56 app spec.
    *
    * If no IDs are in the app spec or the network isn't recognised, an error is thrown.
@@ -348,8 +364,8 @@ export class DestructuringIteratorsClient {
    */
   static async fromNetwork(
     params: Omit<ResolveAppClientByNetwork, 'appSpec'>
-  ): Promise<DestructuringIteratorsClient> {
-    return new DestructuringIteratorsClient(await _AppClient.fromNetwork({...params, appSpec: APP_SPEC}))
+  ): Promise<ItxnReceiverClient> {
+    return new ItxnReceiverClient(await _AppClient.fromNetwork({...params, appSpec: APP_SPEC}))
   }
   
   /** The ID of the app instance this client is linked to. */
@@ -382,7 +398,7 @@ export class DestructuringIteratorsClient {
    */
   readonly params = {
     /**
-     * Makes a clear_state call to an existing instance of the DestructuringIterators smart contract.
+     * Makes a clear_state call to an existing instance of the ItxnReceiver smart contract.
      *
      * @param params The params for the bare (raw) call
      * @returns The clearState result
@@ -392,13 +408,13 @@ export class DestructuringIteratorsClient {
     },
 
     /**
-     * Makes a call to the DestructuringIterators smart contract using the `test()void` ABI method.
+     * Makes a call to the ItxnReceiver smart contract using the `receivePay(uint64,pay,string)(uint64,uint64,string)` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call params
      */
-    test: (params: CallParams<DestructuringIteratorsArgs['obj']['test()void'] | DestructuringIteratorsArgs['tuple']['test()void']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
-      return this.appClient.params.call(DestructuringIteratorsParamsFactory.test(params))
+    receivePay: (params: CallParams<ItxnReceiverArgs['obj']['receivePay(uint64,pay,string)(uint64,uint64,string)'] | ItxnReceiverArgs['tuple']['receivePay(uint64,pay,string)(uint64,uint64,string)']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      return this.appClient.params.call(ItxnReceiverParamsFactory.receivePay(params))
     },
 
   }
@@ -408,7 +424,7 @@ export class DestructuringIteratorsClient {
    */
   readonly createTransaction = {
     /**
-     * Makes a clear_state call to an existing instance of the DestructuringIterators smart contract.
+     * Makes a clear_state call to an existing instance of the ItxnReceiver smart contract.
      *
      * @param params The params for the bare (raw) call
      * @returns The clearState result
@@ -418,13 +434,13 @@ export class DestructuringIteratorsClient {
     },
 
     /**
-     * Makes a call to the DestructuringIterators smart contract using the `test()void` ABI method.
+     * Makes a call to the ItxnReceiver smart contract using the `receivePay(uint64,pay,string)(uint64,uint64,string)` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call transaction
      */
-    test: (params: CallParams<DestructuringIteratorsArgs['obj']['test()void'] | DestructuringIteratorsArgs['tuple']['test()void']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
-      return this.appClient.createTransaction.call(DestructuringIteratorsParamsFactory.test(params))
+    receivePay: (params: CallParams<ItxnReceiverArgs['obj']['receivePay(uint64,pay,string)(uint64,uint64,string)'] | ItxnReceiverArgs['tuple']['receivePay(uint64,pay,string)(uint64,uint64,string)']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      return this.appClient.createTransaction.call(ItxnReceiverParamsFactory.receivePay(params))
     },
 
   }
@@ -434,7 +450,7 @@ export class DestructuringIteratorsClient {
    */
   readonly send = {
     /**
-     * Makes a clear_state call to an existing instance of the DestructuringIterators smart contract.
+     * Makes a clear_state call to an existing instance of the ItxnReceiver smart contract.
      *
      * @param params The params for the bare (raw) call
      * @returns The clearState result
@@ -444,14 +460,14 @@ export class DestructuringIteratorsClient {
     },
 
     /**
-     * Makes a call to the DestructuringIterators smart contract using the `test()void` ABI method.
+     * Makes a call to the ItxnReceiver smart contract using the `receivePay(uint64,pay,string)(uint64,uint64,string)` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call result
      */
-    test: async (params: CallParams<DestructuringIteratorsArgs['obj']['test()void'] | DestructuringIteratorsArgs['tuple']['test()void']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
-      const result = await this.appClient.send.call(DestructuringIteratorsParamsFactory.test(params))
-      return {...result, return: result.return as unknown as (undefined | DestructuringIteratorsReturns['test()void'])}
+    receivePay: async (params: CallParams<ItxnReceiverArgs['obj']['receivePay(uint64,pay,string)(uint64,uint64,string)'] | ItxnReceiverArgs['tuple']['receivePay(uint64,pay,string)(uint64,uint64,string)']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      const result = await this.appClient.send.call(ItxnReceiverParamsFactory.receivePay(params))
+      return {...result, return: result.return as unknown as (undefined | ItxnReceiverReturns['receivePay(uint64,pay,string)(uint64,uint64,string)'])}
     },
 
   }
@@ -463,31 +479,31 @@ export class DestructuringIteratorsClient {
    * @returns A new app client with the altered params
    */
   public clone(params: CloneAppClientParams) {
-    return new DestructuringIteratorsClient(this.appClient.clone(params))
+    return new ItxnReceiverClient(this.appClient.clone(params))
   }
 
   /**
-   * Methods to access state for the current DestructuringIterators app
+   * Methods to access state for the current ItxnReceiver app
    */
   state = {
   }
 
-  public newGroup(): DestructuringIteratorsComposer {
+  public newGroup(): ItxnReceiverComposer {
     const client = this
     const composer = this.algorand.newGroup()
     let promiseChain:Promise<unknown> = Promise.resolve()
     const resultMappers: Array<undefined | ((x: ABIReturn | undefined) => any)> = []
     return {
       /**
-       * Add a test()void method call against the DestructuringIterators contract
+       * Add a receivePay(uint64,pay,string)(uint64,uint64,string) method call against the ItxnReceiver contract
        */
-      test(params: CallParams<DestructuringIteratorsArgs['obj']['test()void'] | DestructuringIteratorsArgs['tuple']['test()void']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
-        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.test(params)))
-        resultMappers.push(undefined)
+      receivePay(params: CallParams<ItxnReceiverArgs['obj']['receivePay(uint64,pay,string)(uint64,uint64,string)'] | ItxnReceiverArgs['tuple']['receivePay(uint64,pay,string)(uint64,uint64,string)']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.receivePay(params)))
+        resultMappers.push((v) => client.decodeReturnValue('receivePay(uint64,pay,string)(uint64,uint64,string)', v))
         return this
       },
       /**
-       * Add a clear state call to the DestructuringIterators contract
+       * Add a clear state call to the ItxnReceiver contract
        */
       clearState(params: AppClientBareCallParams) {
         promiseChain = promiseChain.then(() => composer.addAppCall(client.params.clearState(params)))
@@ -517,26 +533,26 @@ export class DestructuringIteratorsClient {
           returns: result.returns?.map((val, i) => resultMappers[i] !== undefined ? resultMappers[i]!(val) : val.returnValue)
         }
       }
-    } as unknown as DestructuringIteratorsComposer
+    } as unknown as ItxnReceiverComposer
   }
 }
-export type DestructuringIteratorsComposer<TReturns extends [...any[]] = []> = {
+export type ItxnReceiverComposer<TReturns extends [...any[]] = []> = {
   /**
-   * Calls the test()void ABI method.
+   * Calls the receivePay(uint64,pay,string)(uint64,uint64,string) ABI method.
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  test(params?: CallParams<DestructuringIteratorsArgs['obj']['test()void'] | DestructuringIteratorsArgs['tuple']['test()void']>): DestructuringIteratorsComposer<[...TReturns, DestructuringIteratorsReturns['test()void'] | undefined]>
+  receivePay(params?: CallParams<ItxnReceiverArgs['obj']['receivePay(uint64,pay,string)(uint64,uint64,string)'] | ItxnReceiverArgs['tuple']['receivePay(uint64,pay,string)(uint64,uint64,string)']>): ItxnReceiverComposer<[...TReturns, ItxnReceiverReturns['receivePay(uint64,pay,string)(uint64,uint64,string)'] | undefined]>
 
   /**
-   * Makes a clear_state call to an existing instance of the DestructuringIterators smart contract.
+   * Makes a clear_state call to an existing instance of the ItxnReceiver smart contract.
    *
    * @param args The arguments for the bare call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  clearState(params?: AppClientBareCallParams): DestructuringIteratorsComposer<[...TReturns, undefined]>
+  clearState(params?: AppClientBareCallParams): ItxnReceiverComposer<[...TReturns, undefined]>
 
   /**
    * Adds a transaction to the composer
@@ -544,7 +560,7 @@ export type DestructuringIteratorsComposer<TReturns extends [...any[]] = []> = {
    * @param txn A transaction to add to the transaction group
    * @param signer The optional signer to use when signing this transaction.
    */
-  addTransaction(txn: Transaction, signer?: TransactionSigner): DestructuringIteratorsComposer<TReturns>
+  addTransaction(txn: Transaction, signer?: TransactionSigner): ItxnReceiverComposer<TReturns>
   /**
    * Returns the underlying AtomicTransactionComposer instance
    */
@@ -552,15 +568,15 @@ export type DestructuringIteratorsComposer<TReturns extends [...any[]] = []> = {
   /**
    * Simulates the transaction group and returns the result
    */
-  simulate(): Promise<DestructuringIteratorsComposerResults<TReturns> & { simulateResponse: modelsv2.SimulateResponse }>
-  simulate(options: SkipSignaturesSimulateOptions): Promise<DestructuringIteratorsComposerResults<TReturns> & { simulateResponse: modelsv2.SimulateResponse }>
-  simulate(options: RawSimulateOptions): Promise<DestructuringIteratorsComposerResults<TReturns> & { simulateResponse: modelsv2.SimulateResponse }>
+  simulate(): Promise<ItxnReceiverComposerResults<TReturns> & { simulateResponse: modelsv2.SimulateResponse }>
+  simulate(options: SkipSignaturesSimulateOptions): Promise<ItxnReceiverComposerResults<TReturns> & { simulateResponse: modelsv2.SimulateResponse }>
+  simulate(options: RawSimulateOptions): Promise<ItxnReceiverComposerResults<TReturns> & { simulateResponse: modelsv2.SimulateResponse }>
   /**
    * Sends the transaction group to the network and returns the results
    */
-  send(params?: SendParams): Promise<DestructuringIteratorsComposerResults<TReturns>>
+  send(params?: SendParams): Promise<ItxnReceiverComposerResults<TReturns>>
 }
-export type DestructuringIteratorsComposerResults<TReturns extends [...any[]]> = Expand<SendAtomicTransactionComposerResults & {
+export type ItxnReceiverComposerResults<TReturns extends [...any[]]> = Expand<SendAtomicTransactionComposerResults & {
   returns: TReturns
 }>
 

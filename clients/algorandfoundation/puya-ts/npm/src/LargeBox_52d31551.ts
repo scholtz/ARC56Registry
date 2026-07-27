@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"LargeBox","structs":{},"methods":[{"name":"test","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{"box":{"keyType":"AVMString","valueType":"(address,uint64,uint64,uint64,uint64)[200]","key":"bGFyZ2U="}}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[113,131,136],"errorMessage":"index out of bounds"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"LargeBox","structs":{},"methods":[{"name":"test","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{"box":{"keyType":"AVMString","valueType":"(address,uint64,uint64,uint64,uint64)[200]","key":"bGFyZ2U="}}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[108,126,131],"errorMessage":"index out of bounds"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgNjQgMCAxCiAgICBieXRlY2Jsb2NrICJsYXJnZSIgMHgwNjgxMDEKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjI2NwogICAgLy8gZXhwb3J0IGNsYXNzIExhcmdlQm94IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDUKICAgIHB1c2hieXRlcyAweGE3ODAwMGRlIC8vIG1ldGhvZCAidGVzdCgpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdGVzdF9yb3V0ZUAzCiAgICBlcnIKCm1haW5fdGVzdF9yb3V0ZUAzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjcwCiAgICAvLyB0ZXN0KCkgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgdGVzdAoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjI2NwogICAgLy8gZXhwb3J0IGNsYXNzIExhcmdlQm94IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czo6TGFyZ2VCb3gudGVzdFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnRlc3Q6Cgp0ZXN0X3doaWxlX3RvcEA3OgogICAgcHVzaGludCA3MDEwCiAgICBnbG9iYWwgT3Bjb2RlQnVkZ2V0CiAgICA+CiAgICBieiB0ZXN0X2FmdGVyX3doaWxlQDEyCiAgICBpdHhuX2JlZ2luCiAgICBwdXNoaW50IDYgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgcHVzaGludCA1IC8vIERlbGV0ZUFwcGxpY2F0aW9uCiAgICBpdHhuX2ZpZWxkIE9uQ29tcGxldGlvbgogICAgYnl0ZWNfMSAvLyAweDA2ODEwMQogICAgaXR4bl9maWVsZCBBcHByb3ZhbFByb2dyYW0KICAgIGJ5dGVjXzEgLy8gMHgwNjgxMDEKICAgIGl0eG5fZmllbGQgQ2xlYXJTdGF0ZVByb2dyYW0KICAgIGludGNfMSAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGIgdGVzdF93aGlsZV90b3BANwoKdGVzdF9hZnRlcl93aGlsZUAxMjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjI2OAogICAgLy8gYm94ID0gQm94PEZpeGVkQXJyYXk8SW5mbywgMjAwPj4oeyBrZXk6ICdsYXJnZScgfSkKICAgIGJ5dGVjXzAgLy8gImxhcmdlIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjcyCiAgICAvLyB0aGlzLmJveC5jcmVhdGUoKQogICAgcHVzaGludCAxMjgwMAogICAgYm94X2NyZWF0ZQogICAgcG9wCiAgICBpbnRjXzEgLy8gMAoKdGVzdF9mb3JfaGVhZGVyQDI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyNzUKICAgIC8vIGZvciAoY29uc3QgW2luZGV4LCB2XSBvZiB0aGlzLmJveC52YWx1ZS5lbnRyaWVzKCkpIHsKICAgIGR1cAogICAgcHVzaGludCAyMDAKICAgIDwKICAgIGJ6IHRlc3RfYWZ0ZXJfZm9yQDUKICAgIGR1cAogICAgaW50Y18wIC8vIDY0CiAgICAqCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyNjgKICAgIC8vIGJveCA9IEJveDxGaXhlZEFycmF5PEluZm8sIDIwMD4+KHsga2V5OiAnbGFyZ2UnIH0pCiAgICBieXRlY18wIC8vICJsYXJnZSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjI3NQogICAgLy8gZm9yIChjb25zdCBbaW5kZXgsIHZdIG9mIHRoaXMuYm94LnZhbHVlLmVudHJpZXMoKSkgewogICAgZGlnIDEKICAgIGludGNfMCAvLyA2NAogICAgYm94X2V4dHJhY3QgLy8gb24gZXJyb3I6IGluZGV4IG91dCBvZiBib3VuZHMKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjI3OAogICAgLy8geC5iYWxhbmNlID0gaW5kZXggKyAxMAogICAgZGlnIDIKICAgIHB1c2hpbnQgMTAKICAgICsKICAgIGR1cAogICAgaXRvYgogICAgdW5jb3ZlciAyCiAgICBzd2FwCiAgICByZXBsYWNlMiAzMgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjY4CiAgICAvLyBib3ggPSBCb3g8Rml4ZWRBcnJheTxJbmZvLCAyMDA+Pih7IGtleTogJ2xhcmdlJyB9KQogICAgYnl0ZWNfMCAvLyAibGFyZ2UiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyODAKICAgIC8vIHRoaXMuYm94LnZhbHVlW2luZGV4XSA9IGNsb25lKHgpCiAgICBkaWcgMwogICAgdW5jb3ZlciAyCiAgICBib3hfcmVwbGFjZSAvLyBvbiBlcnJvcjogaW5kZXggb3V0IG9mIGJvdW5kcwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjY4CiAgICAvLyBib3ggPSBCb3g8Rml4ZWRBcnJheTxJbmZvLCAyMDA+Pih7IGtleTogJ2xhcmdlJyB9KQogICAgYnl0ZWNfMCAvLyAibGFyZ2UiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyODIKICAgIC8vIGFzc2VydCh0aGlzLmJveC52YWx1ZVtpbmRleF0uYmFsYW5jZSA9PT0gaW5kZXggKyAxMCkKICAgIHVuY292ZXIgMgogICAgaW50Y18wIC8vIDY0CiAgICBib3hfZXh0cmFjdCAvLyBvbiBlcnJvcjogaW5kZXggb3V0IG9mIGJvdW5kcwogICAgcHVzaGludCAzMgogICAgZXh0cmFjdF91aW50NjQKICAgID09CiAgICBhc3NlcnQKICAgIGludGNfMiAvLyAxCiAgICArCiAgICBiIHRlc3RfZm9yX2hlYWRlckAyCgp0ZXN0X2FmdGVyX2ZvckA1OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjcwCiAgICAvLyB0ZXN0KCkgewogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CyADQAABJgIFbGFyZ2UDBoEBMRtBABiABKeAAN42GgCOAQABADEZFDEYEERCAAgxGRQxGBQQQ4HiNjIMDUEAFrGBBrIQgQWyGSmyHimyHyOyAbNC/+EogYBkuUgjSYHIAQxBAClJIgsoSwEiuksCgQoISRZPAkxcIChLA08CuyhPAiK6gSBbEkQkCEL/zyRD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -142,6 +142,21 @@ export type MethodReturn<TSignature extends LargeBoxSignatures> = LargeBoxTypes[
 export type BoxKeysState = LargeBoxTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type LargeBoxCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type LargeBoxDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: LargeBoxCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the LargeBox smart contract
@@ -162,6 +177,147 @@ export abstract class LargeBoxParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the LargeBox smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class LargeBoxFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `LargeBoxFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new LargeBoxClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new LargeBoxClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the LargeBox smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: LargeBoxDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new LargeBoxClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the LargeBox smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the LargeBox smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the LargeBox smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new LargeBoxClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the LargeBox smart contract
  */
