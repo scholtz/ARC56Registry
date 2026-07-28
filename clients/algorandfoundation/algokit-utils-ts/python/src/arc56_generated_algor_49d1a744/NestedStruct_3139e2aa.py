@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [4, 56], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": [], "create": ["NoOp"]}, "args": [], "name": "createApplication", "returns": {"type": "void"}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "key"}, {"type": "((string))", "name": "value", "struct": "Struct2"}], "name": "setValue", "returns": {"type": "void"}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "key"}], "name": "getValue", "returns": {"type": "((string))", "struct": "Struct2"}}], "name": "NestedStruct", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {"state": {"keyType": "uint64", "valueType": "Struct2"}}, "local": {}}, "schema": {"global": {"bytes": 10, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"Struct2": [{"name": "x", "type": [{"name": "a", "type": "string"}]}]}, "desc": "", "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [39], "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?", "teal": 24}, {"pc": [109], "errorMessage": "this contract does not implement the given ABI method for create NoOp", "teal": 97}, {"pc": [131], "errorMessage": "this contract does not implement the given ABI method for call NoOp", "teal": 106}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [4, 56], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": [], "create": ["NoOp"]}, "args": [], "name": "createApplication", "returns": {"type": "void"}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "key"}, {"type": "string", "name": "value"}], "name": "setValue", "returns": {"type": "void"}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "key"}], "name": "getValue", "returns": {"type": "((string))", "struct": "Struct2"}}], "name": "NestedStruct", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {"state": {"keyType": "uint64", "valueType": "Struct2"}}, "local": {}}, "schema": {"global": {"bytes": 10, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"Struct2": [{"name": "x", "type": [{"name": "a", "type": "string"}]}]}, "byteCode": {"approval": "CiABASYCAAIAAjEYFIEGCzEZCI0MAGIAAAAAAAAAAAAAAFQAAAAAAAAAAAAAAIgAAiJDigAAiTYaAlcCADYaAReIAAIiQ4oCAIv/FigoKSgoKYv+SRUWVwYCTFCIAEZIUIgAQUhQZ4mABBUffHU2GgEXiAAEULAiQ4oBAYv/FmSJgAS4RHs2NhoAjgH/oACABOBlxHCABPRw/bY2GgCOAv+T/8QAigQDi/yL/lCM/Iv/SRWL/hcIFlcGAoz+i/1MUIz9i/yL/Yv+iQ==", "clear": "Cg=="}, "desc": "", "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxCmJ5dGVjYmxvY2sgMHggMHgwMDAyCgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwNi4zCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIHRlbiBsaW5lcyBvZiBURUFMIGhhbmRsZSBpbml0aWFsIHByb2dyYW0gZmxvdwovLyBUaGlzIHBhdHRlcm4gaXMgdXNlZCB0byBtYWtlIGl0IGVhc3kgZm9yIGFueW9uZSB0byBwYXJzZSB0aGUgc3RhcnQgb2YgdGhlIHByb2dyYW0gYW5kIGRldGVybWluZSBpZiBhIHNwZWNpZmljIGFjdGlvbiBpcyBhbGxvd2VkCi8vIEhlcmUsIGFjdGlvbiByZWZlcnMgdG8gdGhlIE9uQ29tcGxldGUgaW4gY29tYmluYXRpb24gd2l0aCB3aGV0aGVyIHRoZSBhcHAgaXMgYmVpbmcgY3JlYXRlZCBvciBjYWxsZWQKLy8gRXZlcnkgcG9zc2libGUgYWN0aW9uIGZvciB0aGlzIGNvbnRyYWN0IGlzIHJlcHJlc2VudGVkIGluIHRoZSBzd2l0Y2ggc3RhdGVtZW50Ci8vIElmIHRoZSBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoZSBjb250cmFjdCwgaXRzIHJlc3BlY3RpdmUgYnJhbmNoIHdpbGwgYmUgIipOT1RfSU1QTEVNRU5URUQiIHdoaWNoIGp1c3QgY29udGFpbnMgImVyciIKdHhuIEFwcGxpY2F0aW9uSUQKIQpwdXNoaW50IDYKKgp0eG4gT25Db21wbGV0aW9uCisKc3dpdGNoICpjYWxsX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCS8vIGV4ZWN1dGUgY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKCWNhbGxzdWIgY3JlYXRlQXBwbGljYXRpb24KCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKCk6IHZvaWQKY3JlYXRlQXBwbGljYXRpb246Cglwcm90byAwIDAKCXJldHN1YgoKLy8gc2V0VmFsdWUodWludDY0LHN0cmluZyl2b2lkCiphYmlfcm91dGVfc2V0VmFsdWU6CgkvLyB2YWx1ZTogc3RyaW5nCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglleHRyYWN0IDIgMAoKCS8vIGtleTogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBzZXRWYWx1ZSh1aW50NjQsc3RyaW5nKXZvaWQKCWNhbGxzdWIgc2V0VmFsdWUKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHNldFZhbHVlKGtleTogdWludDY0LCB2YWx1ZTogc3RyaW5nKTogdm9pZApzZXRWYWx1ZToKCXByb3RvIDIgMAoKCS8vIG5lc3RlZF9zdHJ1Y3QuYWxnby50czoxMgoJLy8gdGhpcy5zdGF0ZShrZXkpLnZhbHVlID0geyB4OiB7IGE6IHZhbHVlIH0gfQoJZnJhbWVfZGlnIC0xIC8vIGtleTogdWludDY0CglpdG9iCglieXRlYyAwIC8vICBpbml0aWFsIGhlYWQKCWJ5dGVjIDAgLy8gIGluaXRpYWwgdGFpbAoJYnl0ZWMgMSAvLyAgaW5pdGlhbCBoZWFkIG9mZnNldAoJYnl0ZWMgMCAvLyAgaW5pdGlhbCBoZWFkCglieXRlYyAwIC8vICBpbml0aWFsIHRhaWwKCWJ5dGVjIDEgLy8gIGluaXRpYWwgaGVhZCBvZmZzZXQKCWZyYW1lX2RpZyAtMiAvLyB2YWx1ZTogc3RyaW5nCglkdXAKCWxlbgoJaXRvYgoJZXh0cmFjdCA2IDIKCXN3YXAKCWNvbmNhdAoJY2FsbHN1YiAqcHJvY2Vzc19keW5hbWljX3R1cGxlX2VsZW1lbnQKCXBvcCAvLyBwb3AgaGVhZCBvZmZzZXQKCWNvbmNhdCAvLyBjb25jYXQgaGVhZCBhbmQgdGFpbAoJY2FsbHN1YiAqcHJvY2Vzc19keW5hbWljX3R1cGxlX2VsZW1lbnQKCXBvcCAvLyBwb3AgaGVhZCBvZmZzZXQKCWNvbmNhdCAvLyBjb25jYXQgaGVhZCBhbmQgdGFpbAoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKLy8gZ2V0VmFsdWUodWludDY0KSgoc3RyaW5nKSkKKmFiaV9yb3V0ZV9nZXRWYWx1ZToKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJcHVzaGJ5dGVzIDB4MTUxZjdjNzUKCgkvLyBrZXk6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGV4ZWN1dGUgZ2V0VmFsdWUodWludDY0KSgoc3RyaW5nKSkKCWNhbGxzdWIgZ2V0VmFsdWUKCWNvbmNhdAoJbG9nCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBnZXRWYWx1ZShrZXk6IHVpbnQ2NCk6IFN0cnVjdDIKZ2V0VmFsdWU6Cglwcm90byAxIDEKCgkvLyBuZXN0ZWRfc3RydWN0LmFsZ28udHM6MTYKCS8vIHJldHVybiB0aGlzLnN0YXRlKGtleSkudmFsdWUKCWZyYW1lX2RpZyAtMSAvLyBrZXk6IHVpbnQ2NAoJaXRvYgoJYXBwX2dsb2JhbF9nZXQKCXJldHN1YgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweGUwNjVjNDcwIC8vIG1ldGhvZCAic2V0VmFsdWUodWludDY0LHN0cmluZyl2b2lkIgoJcHVzaGJ5dGVzIDB4ZjQ3MGZkYjYgLy8gbWV0aG9kICJnZXRWYWx1ZSh1aW50NjQpKChzdHJpbmcpKSIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfc2V0VmFsdWUgKmFiaV9yb3V0ZV9nZXRWYWx1ZQoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKKnByb2Nlc3NfZHluYW1pY190dXBsZV9lbGVtZW50OgoJcHJvdG8gNCAzCglmcmFtZV9kaWcgLTQgLy8gdHVwbGUgaGVhZAoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0Cgljb25jYXQKCWZyYW1lX2J1cnkgLTQgLy8gdHVwbGUgaGVhZAoJZnJhbWVfZGlnIC0xIC8vIGVsZW1lbnQKCWR1cAoJbGVuCglmcmFtZV9kaWcgLTIgLy8gaGVhZCBvZmZzZXQKCWJ0b2kKCSsKCWl0b2IKCWV4dHJhY3QgNiAyCglmcmFtZV9idXJ5IC0yIC8vIGhlYWQgb2Zmc2V0CglmcmFtZV9kaWcgLTMgLy8gdHVwbGUgdGFpbAoJc3dhcAoJY29uY2F0CglmcmFtZV9idXJ5IC0zIC8vIHR1cGxlIHRhaWwKCWZyYW1lX2RpZyAtNCAvLyB0dXBsZSBoZWFkCglmcmFtZV9kaWcgLTMgLy8gdHVwbGUgdGFpbAoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0CglyZXRzdWI=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDEw"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [45], "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?", "teal": 25}, {"pc": [142], "errorMessage": "this contract does not implement the given ABI method for create NoOp", "teal": 117}, {"pc": [164], "errorMessage": "this contract does not implement the given ABI method for call NoOp", "teal": 126}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -79,11 +79,11 @@ class Struct2:
 class SetValueArgs:
     """Dataclass for set_value arguments"""
     key: int
-    value: Struct2
+    value: str
 
     @property
     def abi_method_signature(self) -> str:
-        return "setValue(uint64,((string)))void"
+        return "setValue(uint64,string)void"
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
 class GetValueArgs:
@@ -101,14 +101,14 @@ class NestedStructParams:
 
     def set_value(
         self,
-        args: tuple[int, Struct2] | SetValueArgs,
+        args: tuple[int, str] | SetValueArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> algokit_utils.AppCallMethodCallParams:
         method_args = _parse_abi_args(args)
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "setValue(uint64,((string)))void",
+            "method": "setValue(uint64,string)void",
             "args": method_args,
         }))
 
@@ -123,6 +123,17 @@ class NestedStructParams:
             **dataclasses.asdict(params),
             "method": "getValue(uint64)((string))",
             "args": method_args,
+        }))
+
+    def create_application(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "createApplication()void",
         }))
 
     def clear_state(
@@ -142,14 +153,14 @@ class NestedStructCreateTransactionParams:
 
     def set_value(
         self,
-        args: tuple[int, Struct2] | SetValueArgs,
+        args: tuple[int, str] | SetValueArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> algokit_utils.BuiltTransactions:
         method_args = _parse_abi_args(args)
         params = params or algokit_utils.CommonAppCallParams()
         return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "setValue(uint64,((string)))void",
+            "method": "setValue(uint64,string)void",
             "args": method_args,
         }))
 
@@ -164,6 +175,17 @@ class NestedStructCreateTransactionParams:
             **dataclasses.asdict(params),
             "method": "getValue(uint64)((string))",
             "args": method_args,
+        }))
+
+    def create_application(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "createApplication()void",
         }))
 
     def clear_state(
@@ -183,7 +205,7 @@ class NestedStructSend:
 
     def set_value(
         self,
-        args: tuple[int, Struct2] | SetValueArgs,
+        args: tuple[int, str] | SetValueArgs,
         params: algokit_utils.CommonAppCallParams | None = None,
         send_params: algokit_utils.SendParams | None = None
     ) -> algokit_utils.SendAppTransactionResult[None]:
@@ -191,7 +213,7 @@ class NestedStructSend:
         params = params or algokit_utils.CommonAppCallParams()
         response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
-            "method": "setValue(uint64,((string)))void",
+            "method": "setValue(uint64,string)void",
             "args": method_args,
         }), send_params=send_params)
         parsed_response = response
@@ -212,6 +234,20 @@ class NestedStructSend:
         }), send_params=send_params)
         parsed_response = dataclasses.replace(response, abi_return=_init_dataclass(Struct2, typing.cast(dict, response.abi_return))) # type: ignore
         return typing.cast(algokit_utils.SendAppTransactionResult[Struct2], parsed_response)
+
+    def create_application(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "createApplication()void",
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
 
     def clear_state(
         self,
@@ -452,7 +488,7 @@ class NestedStructClient:
     @typing.overload
     def decode_return_value(
         self,
-        method: typing.Literal["setValue(uint64,((string)))void"],
+        method: typing.Literal["setValue(uint64,string)void"],
         return_value: algokit_utils.ABIReturn | None
     ) -> None: ...
     @typing.overload
@@ -497,6 +533,360 @@ class NestedStructClient:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class NestedStructMethodCallCreateParams(
+    algokit_utils.AppClientCreateSchema, algokit_utils.BaseAppClientMethodCallParams[
+        typing.Any,
+        str | None,
+    ]
+):
+    """Parameters for creating NestedStruct contract using ABI"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallCreateParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallCreateParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+class NestedStructFactory(algokit_utils.TypedAppFactoryProtocol[NestedStructMethodCallCreateParams, None, None]):
+    """Factory for deploying and managing NestedStructClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = NestedStructFactoryParams(self.app_factory)
+        self.create_transaction = NestedStructFactoryCreateTransaction(self.app_factory)
+        self.send = NestedStructFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: NestedStructMethodCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[NestedStructClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return NestedStructClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> NestedStructClient:
+        """Get an app client by creator address and name"""
+        return NestedStructClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> NestedStructClient:
+        """Get an app client by app ID"""
+        return NestedStructClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class NestedStructFactoryParams:
+    """Parameters for creating transactions for NestedStruct contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = NestedStructFactoryCreateParams(app_factory)
+        self.update = NestedStructFactoryUpdateParams(app_factory)
+        self.delete = NestedStructFactoryDeleteParams(app_factory)
+
+class NestedStructFactoryCreateParams:
+    """Parameters for 'create' operations of NestedStruct contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def set_value(
+        self,
+        args: tuple[int, str] | SetValueArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the setValue(uint64,string)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "setValue(uint64,string)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def get_value(
+        self,
+        args: tuple[int] | GetValueArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the getValue(uint64)((string)) ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "getValue(uint64)((string))",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def create_application(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the createApplication()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "createApplication()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class NestedStructFactoryUpdateParams:
+    """Parameters for 'update' operations of NestedStruct contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class NestedStructFactoryDeleteParams:
+    """Parameters for 'delete' operations of NestedStruct contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class NestedStructFactoryCreateTransaction:
+    """Create transactions for NestedStruct contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = NestedStructFactoryCreateTransactionCreate(app_factory)
+
+
+class NestedStructFactoryCreateTransactionCreate:
+    """Create new instances of NestedStruct contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class NestedStructFactorySend:
+    """Send calls to NestedStruct contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = NestedStructFactorySendCreate(app_factory)
+
+
+class NestedStructFactorySendCreate:
+    """Send create calls to NestedStruct contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[NestedStructClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return NestedStructClient(result[0]), result[1]
+
+    def create_application(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> tuple[NestedStructClient, algokit_utils.AppFactoryCreateMethodCallResult[None]]:
+            """Creates and sends a transaction using the createApplication()void ABI method"""
+            params = params or algokit_utils.CommonAppCallCreateParams()
+            client, result = self.app_factory.send.create(
+                algokit_utils.AppFactoryCreateMethodCallParams(
+                    **{
+                    **dataclasses.asdict(params),
+                    "method": "createApplication()void",
+                    "args": None,
+                    }
+                ),
+                send_params=send_params,
+                compilation_params=compilation_params
+            )
+            return_value = None if result.abi_return is None else typing.cast(None, result.abi_return)
+    
+            return NestedStructClient(client), algokit_utils.AppFactoryCreateMethodCallResult[None](
+                **{
+                    **result.__dict__,
+                    "app_id": result.app_id,
+                    "abi_return": return_value,
+                    "transaction": result.transaction,
+                    "confirmation": result.confirmation,
+                    "group_id": result.group_id,
+                    "tx_ids": result.tx_ids,
+                    "transactions": result.transactions,
+                    "confirmations": result.confirmations,
+                    "app_address": result.app_address,
+                }
+            )
+
+
 class NestedStructComposer:
     """Composer for creating transaction groups for NestedStruct contract calls"""
 
@@ -507,7 +897,7 @@ class NestedStructComposer:
 
     def set_value(
         self,
-        args: tuple[int, Struct2] | SetValueArgs,
+        args: tuple[int, str] | SetValueArgs,
         params: algokit_utils.CommonAppCallParams | None = None
     ) -> "NestedStructComposer":
         self._composer.add_app_call_method_call(
@@ -518,7 +908,7 @@ class NestedStructComposer:
         )
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
-                "setValue(uint64,((string)))void", v
+                "setValue(uint64,string)void", v
             )
         )
         return self
@@ -537,6 +927,23 @@ class NestedStructComposer:
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
                 "getValue(uint64)((string))", v
+            )
+        )
+        return self
+
+    def create_application(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "NestedStructComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.create_application(
+                
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "createApplication()void", v
             )
         )
         return self
