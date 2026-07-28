@@ -41,6 +41,7 @@ var client = new HelloWorldProxy(algod, appId: 123456789);
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
 | `Arc56.Generated.aorumbayev.arcontextify.HelloWorld_563a5276` | `HelloWorldProxy` | [https://raw.githubusercontent.com/aorumbayev/arcontextify/HEAD/artifacts/HelloWorld.arc56.json](https://raw.githubusercontent.com/aorumbayev/arcontextify/HEAD/artifacts/HelloWorld.arc56.json) |
+| `Arc56.Generated.aorumbayev.arcontextify.Nfd_66bfbd06` | `NFDInstanceProxy` | [https://raw.githubusercontent.com/aorumbayev/arcontextify/HEAD/artifacts/Nfd.arc56.json](https://raw.githubusercontent.com/aorumbayev/arcontextify/HEAD/artifacts/Nfd.arc56.json) |
 
 ## Versioning
 
