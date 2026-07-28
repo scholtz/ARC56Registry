@@ -52,6 +52,7 @@ contract generated this way; every other contract includes a working `Factory`.
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
 | `HelloWorld_563a5276` | `HelloWorldClient` | [https://raw.githubusercontent.com/aorumbayev/arcontextify/HEAD/artifacts/HelloWorld.arc56.json](https://raw.githubusercontent.com/aorumbayev/arcontextify/HEAD/artifacts/HelloWorld.arc56.json) |
+| `Nfd_66bfbd06` | `NfdInstanceClient` | [https://raw.githubusercontent.com/aorumbayev/arcontextify/HEAD/artifacts/Nfd.arc56.json](https://raw.githubusercontent.com/aorumbayev/arcontextify/HEAD/artifacts/Nfd.arc56.json) |
 
 ## Versioning
 
