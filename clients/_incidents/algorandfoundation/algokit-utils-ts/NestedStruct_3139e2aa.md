@@ -3,7 +3,7 @@
 - **Repo**: [algorandfoundation/algokit-utils-ts](https://github.com/algorandfoundation/algokit-utils-ts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/algokit-utils-ts/HEAD/tests/example-contracts/nested_struct/artifacts/NestedStruct.arc56.json](https://raw.githubusercontent.com/algorandfoundation/algokit-utils-ts/HEAD/tests/example-contracts/nested_struct/artifacts/NestedStruct.arc56.json)
 - **Namespace used**: `Arc56.Generated.algorandfoundation.algokit_utils_ts.NestedStruct_3139e2aa`
-- **Detected**: 2026-07-19T23:22:22.722080+00:00
+- **Detected**: 2026-07-28T08:18:56.593698+00:00
 - **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:0093cb1562e2d8125477e45e9b2045a81c983a91f38f1a2f9b738be110520613`
 
 ## Reproduce
@@ -23,7 +23,7 @@ File: artifacts/NestedStruct_3139e2aa.arc56.json
 Namespace: Arc56.Generated.algorandfoundation.algokit_utils_ts.NestedStruct_3139e2aa
 
 --- stderr ---
-Unhandled exception. Newtonsoft.Json.JsonReaderException: Unexpected character encountered while parsing value: [. Path 'structs.Struct2[0].type', line 69, position 17.
+Unhandled exception. Newtonsoft.Json.JsonReaderException: Unexpected character encountered while parsing value: [. Path 'structs.Struct2[0].type', line 68, position 17.
    at Newtonsoft.Json.JsonTextReader.ReadStringValue(ReadType readType)
    at Newtonsoft.Json.JsonTextReader.ReadAsString()
    at Newtonsoft.Json.JsonReader.ReadForType(JsonContract contract, Boolean hasConverter)
