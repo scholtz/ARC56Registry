@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"NestedStruct","desc":"","methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"setValue","args":[{"name":"key","type":"uint64"},{"name":"value","type":"((string))","struct":"Struct2"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getValue","args":[{"name":"key","type":"uint64"}],"returns":{"type":"((string))","struct":"Struct2"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{"Struct2":[{"name":"x","type":[{"name":"a","type":"string"}]}]},"state":{"schema":{"global":{"bytes":10,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{"state":{"keyType":"uint64","valueType":"Struct2"}},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[39],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":24},{"pc":[109],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":97},{"pc":[131],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":106}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"NestedStruct","desc":"","methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"setValue","args":[{"name":"key","type":"uint64"},{"name":"value","type":"string"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getValue","args":[{"name":"key","type":"uint64"}],"returns":{"type":"((string))","struct":"Struct2"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{"Struct2":[{"name":"x","type":[{"name":"a","type":"string"}]}]},"state":{"schema":{"global":{"bytes":10,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{"state":{"keyType":"uint64","valueType":"Struct2"}},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[45],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[142],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":117},{"pc":[164],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":126}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxCmJ5dGVjYmxvY2sgMHggMHgwMDAyCgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwNi4zCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIHRlbiBsaW5lcyBvZiBURUFMIGhhbmRsZSBpbml0aWFsIHByb2dyYW0gZmxvdwovLyBUaGlzIHBhdHRlcm4gaXMgdXNlZCB0byBtYWtlIGl0IGVhc3kgZm9yIGFueW9uZSB0byBwYXJzZSB0aGUgc3RhcnQgb2YgdGhlIHByb2dyYW0gYW5kIGRldGVybWluZSBpZiBhIHNwZWNpZmljIGFjdGlvbiBpcyBhbGxvd2VkCi8vIEhlcmUsIGFjdGlvbiByZWZlcnMgdG8gdGhlIE9uQ29tcGxldGUgaW4gY29tYmluYXRpb24gd2l0aCB3aGV0aGVyIHRoZSBhcHAgaXMgYmVpbmcgY3JlYXRlZCBvciBjYWxsZWQKLy8gRXZlcnkgcG9zc2libGUgYWN0aW9uIGZvciB0aGlzIGNvbnRyYWN0IGlzIHJlcHJlc2VudGVkIGluIHRoZSBzd2l0Y2ggc3RhdGVtZW50Ci8vIElmIHRoZSBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoZSBjb250cmFjdCwgaXRzIHJlc3BlY3RpdmUgYnJhbmNoIHdpbGwgYmUgIipOT1RfSU1QTEVNRU5URUQiIHdoaWNoIGp1c3QgY29udGFpbnMgImVyciIKdHhuIEFwcGxpY2F0aW9uSUQKIQpwdXNoaW50IDYKKgp0eG4gT25Db21wbGV0aW9uCisKc3dpdGNoICpjYWxsX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCS8vIGV4ZWN1dGUgY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKCWNhbGxzdWIgY3JlYXRlQXBwbGljYXRpb24KCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKCk6IHZvaWQKY3JlYXRlQXBwbGljYXRpb246Cglwcm90byAwIDAKCXJldHN1YgoKLy8gc2V0VmFsdWUodWludDY0LHN0cmluZyl2b2lkCiphYmlfcm91dGVfc2V0VmFsdWU6CgkvLyB2YWx1ZTogc3RyaW5nCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglleHRyYWN0IDIgMAoKCS8vIGtleTogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBzZXRWYWx1ZSh1aW50NjQsc3RyaW5nKXZvaWQKCWNhbGxzdWIgc2V0VmFsdWUKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHNldFZhbHVlKGtleTogdWludDY0LCB2YWx1ZTogc3RyaW5nKTogdm9pZApzZXRWYWx1ZToKCXByb3RvIDIgMAoKCS8vIG5lc3RlZF9zdHJ1Y3QuYWxnby50czoxMgoJLy8gdGhpcy5zdGF0ZShrZXkpLnZhbHVlID0geyB4OiB7IGE6IHZhbHVlIH0gfQoJZnJhbWVfZGlnIC0xIC8vIGtleTogdWludDY0CglpdG9iCglieXRlYyAwIC8vICBpbml0aWFsIGhlYWQKCWJ5dGVjIDAgLy8gIGluaXRpYWwgdGFpbAoJYnl0ZWMgMSAvLyAgaW5pdGlhbCBoZWFkIG9mZnNldAoJYnl0ZWMgMCAvLyAgaW5pdGlhbCBoZWFkCglieXRlYyAwIC8vICBpbml0aWFsIHRhaWwKCWJ5dGVjIDEgLy8gIGluaXRpYWwgaGVhZCBvZmZzZXQKCWZyYW1lX2RpZyAtMiAvLyB2YWx1ZTogc3RyaW5nCglkdXAKCWxlbgoJaXRvYgoJZXh0cmFjdCA2IDIKCXN3YXAKCWNvbmNhdAoJY2FsbHN1YiAqcHJvY2Vzc19keW5hbWljX3R1cGxlX2VsZW1lbnQKCXBvcCAvLyBwb3AgaGVhZCBvZmZzZXQKCWNvbmNhdCAvLyBjb25jYXQgaGVhZCBhbmQgdGFpbAoJY2FsbHN1YiAqcHJvY2Vzc19keW5hbWljX3R1cGxlX2VsZW1lbnQKCXBvcCAvLyBwb3AgaGVhZCBvZmZzZXQKCWNvbmNhdCAvLyBjb25jYXQgaGVhZCBhbmQgdGFpbAoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKLy8gZ2V0VmFsdWUodWludDY0KSgoc3RyaW5nKSkKKmFiaV9yb3V0ZV9nZXRWYWx1ZToKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJcHVzaGJ5dGVzIDB4MTUxZjdjNzUKCgkvLyBrZXk6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGV4ZWN1dGUgZ2V0VmFsdWUodWludDY0KSgoc3RyaW5nKSkKCWNhbGxzdWIgZ2V0VmFsdWUKCWNvbmNhdAoJbG9nCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBnZXRWYWx1ZShrZXk6IHVpbnQ2NCk6IFN0cnVjdDIKZ2V0VmFsdWU6Cglwcm90byAxIDEKCgkvLyBuZXN0ZWRfc3RydWN0LmFsZ28udHM6MTYKCS8vIHJldHVybiB0aGlzLnN0YXRlKGtleSkudmFsdWUKCWZyYW1lX2RpZyAtMSAvLyBrZXk6IHVpbnQ2NAoJaXRvYgoJYXBwX2dsb2JhbF9nZXQKCXJldHN1YgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweGUwNjVjNDcwIC8vIG1ldGhvZCAic2V0VmFsdWUodWludDY0LHN0cmluZyl2b2lkIgoJcHVzaGJ5dGVzIDB4ZjQ3MGZkYjYgLy8gbWV0aG9kICJnZXRWYWx1ZSh1aW50NjQpKChzdHJpbmcpKSIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfc2V0VmFsdWUgKmFiaV9yb3V0ZV9nZXRWYWx1ZQoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKKnByb2Nlc3NfZHluYW1pY190dXBsZV9lbGVtZW50OgoJcHJvdG8gNCAzCglmcmFtZV9kaWcgLTQgLy8gdHVwbGUgaGVhZAoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0Cgljb25jYXQKCWZyYW1lX2J1cnkgLTQgLy8gdHVwbGUgaGVhZAoJZnJhbWVfZGlnIC0xIC8vIGVsZW1lbnQKCWR1cAoJbGVuCglmcmFtZV9kaWcgLTIgLy8gaGVhZCBvZmZzZXQKCWJ0b2kKCSsKCWl0b2IKCWV4dHJhY3QgNiAyCglmcmFtZV9idXJ5IC0yIC8vIGhlYWQgb2Zmc2V0CglmcmFtZV9kaWcgLTMgLy8gdHVwbGUgdGFpbAoJc3dhcAoJY29uY2F0CglmcmFtZV9idXJ5IC0zIC8vIHR1cGxlIHRhaWwKCWZyYW1lX2RpZyAtNCAvLyB0dXBsZSBoZWFkCglmcmFtZV9kaWcgLTMgLy8gdHVwbGUgdGFpbAoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0CglyZXRzdWI=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiABASYCAAIAAjEYFIEGCzEZCI0MAGIAAAAAAAAAAAAAAFQAAAAAAAAAAAAAAIgAAiJDigAAiTYaAlcCADYaAReIAAIiQ4oCAIv/FigoKSgoKYv+SRUWVwYCTFCIAEZIUIgAQUhQZ4mABBUffHU2GgEXiAAEULAiQ4oBAYv/FmSJgAS4RHs2NhoAjgH/oACABOBlxHCABPRw/bY2GgCOAv+T/8QAigQDi/yL/lCM/Iv/SRWL/hcIFlcGAoz+i/1MUIz9i/yL/Yv+iQ==","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -87,9 +87,9 @@ export type NestedStructArgs = {
    */
   obj: {
     'createApplication()void': Record<string, never>
-    'setValue(uint64,((string)))void': {
+    'setValue(uint64,string)void': {
       key: bigint | number
-      value: Struct2
+      value: string
     }
     'getValue(uint64)((string))': {
       key: bigint | number
@@ -100,7 +100,7 @@ export type NestedStructArgs = {
    */
   tuple: {
     'createApplication()void': []
-    'setValue(uint64,((string)))void': [key: bigint | number, value: Struct2]
+    'setValue(uint64,string)void': [key: bigint | number, value: string]
     'getValue(uint64)((string))': [key: bigint | number]
   }
 }
@@ -110,7 +110,7 @@ export type NestedStructArgs = {
  */
 export type NestedStructReturns = {
   'createApplication()void': void
-  'setValue(uint64,((string)))void': void
+  'setValue(uint64,string)void': void
   'getValue(uint64)((string))': Struct2
 }
 
@@ -127,10 +127,10 @@ export type NestedStructTypes = {
       argsTuple: NestedStructArgs['tuple']['createApplication()void']
       returns: NestedStructReturns['createApplication()void']
     }>
-    & Record<'setValue(uint64,((string)))void' | 'setValue', {
-      argsObj: NestedStructArgs['obj']['setValue(uint64,((string)))void']
-      argsTuple: NestedStructArgs['tuple']['setValue(uint64,((string)))void']
-      returns: NestedStructReturns['setValue(uint64,((string)))void']
+    & Record<'setValue(uint64,string)void' | 'setValue', {
+      argsObj: NestedStructArgs['obj']['setValue(uint64,string)void']
+      argsTuple: NestedStructArgs['tuple']['setValue(uint64,string)void']
+      returns: NestedStructReturns['setValue(uint64,string)void']
     }>
     & Record<'getValue(uint64)((string))' | 'getValue', {
       argsObj: NestedStructArgs['obj']['getValue(uint64)((string))']
@@ -183,21 +183,67 @@ export type MethodReturn<TSignature extends NestedStructSignatures> = NestedStru
 export type GlobalKeysState = NestedStructTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type NestedStructCreateCallParams =
+  | Expand<CallParams<NestedStructArgs['obj']['createApplication()void'] | NestedStructArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<NestedStructArgs['obj']['createApplication()void'] | NestedStructArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type NestedStructDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: NestedStructCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the NestedStruct smart contract
  */
 export abstract class NestedStructParamsFactory {
   /**
-   * Constructs a no op call for the setValue(uint64,((string)))void ABI method
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends NestedStructCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return NestedStructParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the NestedStruct smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<NestedStructArgs['obj']['createApplication()void'] | NestedStructArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Constructs a no op call for the setValue(uint64,string)void ABI method
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static setValue(params: CallParams<NestedStructArgs['obj']['setValue(uint64,((string)))void'] | NestedStructArgs['tuple']['setValue(uint64,((string)))void']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+  static setValue(params: CallParams<NestedStructArgs['obj']['setValue(uint64,string)void'] | NestedStructArgs['tuple']['setValue(uint64,string)void']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
     return {
       ...params,
-      method: 'setValue(uint64,((string)))void' as const,
+      method: 'setValue(uint64,string)void' as const,
       args: Array.isArray(params.args) ? params.args : [params.args.key, params.args.value],
     }
   }
@@ -216,6 +262,148 @@ export abstract class NestedStructParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the NestedStruct smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class NestedStructFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `NestedStructFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new NestedStructClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new NestedStructClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the NestedStruct smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: NestedStructDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? NestedStructParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (NestedStructCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new NestedStructClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NestedStruct smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<NestedStructArgs['obj']['createApplication()void'] | NestedStructArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(NestedStructParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NestedStruct smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<NestedStructArgs['obj']['createApplication()void'] | NestedStructArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(NestedStructParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NestedStruct smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<NestedStructArgs['obj']['createApplication()void'] | NestedStructArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(NestedStructParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | NestedStructReturns['createApplication()void']) }, appClient: new NestedStructClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the NestedStruct smart contract
  */
@@ -314,12 +502,12 @@ export class NestedStructClient {
     },
 
     /**
-     * Makes a call to the NestedStruct smart contract using the `setValue(uint64,((string)))void` ABI method.
+     * Makes a call to the NestedStruct smart contract using the `setValue(uint64,string)void` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call params
      */
-    setValue: (params: CallParams<NestedStructArgs['obj']['setValue(uint64,((string)))void'] | NestedStructArgs['tuple']['setValue(uint64,((string)))void']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    setValue: (params: CallParams<NestedStructArgs['obj']['setValue(uint64,string)void'] | NestedStructArgs['tuple']['setValue(uint64,string)void']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.params.call(NestedStructParamsFactory.setValue(params))
     },
 
@@ -350,12 +538,12 @@ export class NestedStructClient {
     },
 
     /**
-     * Makes a call to the NestedStruct smart contract using the `setValue(uint64,((string)))void` ABI method.
+     * Makes a call to the NestedStruct smart contract using the `setValue(uint64,string)void` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call transaction
      */
-    setValue: (params: CallParams<NestedStructArgs['obj']['setValue(uint64,((string)))void'] | NestedStructArgs['tuple']['setValue(uint64,((string)))void']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    setValue: (params: CallParams<NestedStructArgs['obj']['setValue(uint64,string)void'] | NestedStructArgs['tuple']['setValue(uint64,string)void']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.createTransaction.call(NestedStructParamsFactory.setValue(params))
     },
 
@@ -386,14 +574,14 @@ export class NestedStructClient {
     },
 
     /**
-     * Makes a call to the NestedStruct smart contract using the `setValue(uint64,((string)))void` ABI method.
+     * Makes a call to the NestedStruct smart contract using the `setValue(uint64,string)void` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call result
      */
-    setValue: async (params: CallParams<NestedStructArgs['obj']['setValue(uint64,((string)))void'] | NestedStructArgs['tuple']['setValue(uint64,((string)))void']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    setValue: async (params: CallParams<NestedStructArgs['obj']['setValue(uint64,string)void'] | NestedStructArgs['tuple']['setValue(uint64,string)void']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       const result = await this.appClient.send.call(NestedStructParamsFactory.setValue(params))
-      return {...result, return: result.return as unknown as (undefined | NestedStructReturns['setValue(uint64,((string)))void'])}
+      return {...result, return: result.return as unknown as (undefined | NestedStructReturns['setValue(uint64,string)void'])}
     },
 
     /**
@@ -458,9 +646,9 @@ export class NestedStructClient {
     const resultMappers: Array<undefined | ((x: ABIReturn | undefined) => any)> = []
     return {
       /**
-       * Add a setValue(uint64,((string)))void method call against the NestedStruct contract
+       * Add a setValue(uint64,string)void method call against the NestedStruct contract
        */
-      setValue(params: CallParams<NestedStructArgs['obj']['setValue(uint64,((string)))void'] | NestedStructArgs['tuple']['setValue(uint64,((string)))void']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+      setValue(params: CallParams<NestedStructArgs['obj']['setValue(uint64,string)void'] | NestedStructArgs['tuple']['setValue(uint64,string)void']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
         promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.setValue(params)))
         resultMappers.push(undefined)
         return this
@@ -509,13 +697,13 @@ export class NestedStructClient {
 }
 export type NestedStructComposer<TReturns extends [...any[]] = []> = {
   /**
-   * Calls the setValue(uint64,((string)))void ABI method.
+   * Calls the setValue(uint64,string)void ABI method.
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  setValue(params?: CallParams<NestedStructArgs['obj']['setValue(uint64,((string)))void'] | NestedStructArgs['tuple']['setValue(uint64,((string)))void']>): NestedStructComposer<[...TReturns, NestedStructReturns['setValue(uint64,((string)))void'] | undefined]>
+  setValue(params?: CallParams<NestedStructArgs['obj']['setValue(uint64,string)void'] | NestedStructArgs['tuple']['setValue(uint64,string)void']>): NestedStructComposer<[...TReturns, NestedStructReturns['setValue(uint64,string)void'] | undefined]>
 
   /**
    * Calls the getValue(uint64)((string)) ABI method.
