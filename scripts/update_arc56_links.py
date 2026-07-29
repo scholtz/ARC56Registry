@@ -62,6 +62,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+import registry_stats
+
 SEARCH_QUERY = "arc56.json in:path"
 FILENAME_SUFFIX = ".arc56.json"
 API_URL = "https://api.github.com/search/code"
@@ -518,6 +520,44 @@ def verify_repo_full_tree(repo_full_name: str, token: str, urls: set[str]) -> No
         queue_new_urls(new_here, f"full-tree verification of {repo_full_name}")
 
 
+def commit_stats_update() -> None:
+    """Recomputes the live registry statistics (see scripts/registry_stats.py),
+    updates README.md's Live statistics section, and appends a snapshot row to
+    arc56_stats_history.csv - then commits and pushes both files.
+
+    Runs last, once, after flush_pending("final sync") has already synced the
+    working tree to origin's tip, so this doesn't need flush_pending's
+    fetch/reset/retry loop - it's a single straightforward commit. A failure
+    here is logged but never fails the run: the links themselves are already
+    safely committed by this point (see flush_pending()), and a stale stats
+    section just gets refreshed on the next scheduled run.
+    """
+    try:
+        stats = registry_stats.compute_stats()
+        registry_stats.append_stats_history(stats)
+        registry_stats.update_readme_stats(stats)
+
+        branch = current_branch()
+        run_git(["add", registry_stats.README_PATH, registry_stats.STATS_HISTORY_PATH])
+        diff = run_git(["diff", "--cached", "--quiet"], check=False)
+        if diff.returncode == 0:
+            print("Live statistics unchanged; nothing to commit", file=sys.stderr)
+            return
+
+        run_git(["commit", "-m", "chore: update live registry statistics"])
+        push = subprocess.run(
+            ["git", "push", "origin", f"HEAD:{branch}"],
+            cwd=REPO_ROOT, capture_output=True, text=True,
+        )
+        if push.returncode != 0:
+            print(f"WARNING: failed to push live statistics update: {push.stderr.strip()}",
+                  file=sys.stderr)
+        else:
+            print(f"Committed and pushed live statistics: {stats}", file=sys.stderr)
+    except Exception as exc:  # noqa: BLE001 - a stats failure must not fail the whole run
+        print(f"WARNING: failed to update live statistics: {exc}", file=sys.stderr)
+
+
 def collect_urls(token: str) -> set[str]:
     blacklist = load_repo_blacklist(REPO_BLACKLIST_PATH)
     if blacklist:
@@ -578,6 +618,8 @@ def main() -> int:
     print(f"Done: {len(final_rows)} total row(s) in {OUTPUT_PATH}, "
           f"{len(found_urls)} link(s) found in this run "
           f"(each already committed and pushed incrementally as it was found)")
+
+    commit_stats_update()
     return 0
 
 

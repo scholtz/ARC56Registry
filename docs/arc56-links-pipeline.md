@@ -75,6 +75,46 @@ list of every `*.arc56.json` file found on public GitHub, via the
 8. **Commit**: if the file changed, the workflow commits and pushes it back to
    the default branch as `github-actions[bot]`. If nothing changed, the run
    exits without creating a commit.
+9. **Live statistics**: as its last step, the script recomputes the registry's
+   live statistics via [`scripts/registry_stats.py`](../scripts/registry_stats.py),
+   updates the `<!-- LIVE-STATS:START -->`/`<!-- LIVE-STATS:END -->` section of
+   [README.md](../README.md), appends a timestamped snapshot row to
+   [arc56_stats_history.csv](../arc56_stats_history.csv), and commits+pushes
+   both files (a separate commit from the link-discovery commits above). See
+   [Live statistics](#live-statistics) below. A failure in this step is logged
+   but never fails the run - the links themselves are already safely committed
+   by this point.
+
+## Live statistics
+
+[`scripts/registry_stats.py`](../scripts/registry_stats.py) computes five
+numbers and is called from `scripts/update_arc56_links.py`'s `main()` after
+everything else has finished:
+
+| Metric | How it's computed |
+| --- | --- |
+| ARC-56 links found | Total row count in `arc56.links.csv` (active or not - rows are never deleted, so this is a running total of every link ever found). |
+| Repositories containing ARC-56 links | Distinct `owner/repo` pairs (case-insensitive) parsed out of every `ARC56URL` in the CSV. |
+| NuGet packages published | Count of `clients/*/*/dotnet/state.json` files with a non-empty `published_version` field. |
+| npm packages published | Count of `clients/*/*/npm/state.json` files with a non-empty `published_version` field. |
+| PyPI packages published | Count of `clients/*/*/python/state.json` files with a non-empty `published_version` field. |
+
+The package-publish counts are read from the **local** `state.json` files
+already committed under `clients/`, not from a live query against
+nuget.org/npm/PyPI - `published_version` is written by the matching
+`publish_dotnet_packages.py`/`publish_npm_packages.py`/`publish_python_packages.py`
+script after a successful push (see those scripts' own docs). This keeps
+`update_arc56_links.py` network-free apart from the GitHub search itself, at
+the cost of the counts only being as fresh as the last local publish run
+recorded in this checkout - a package published since the last
+`publish_*_packages.py` run, or a partially-failed run, won't be reflected
+until that pipeline runs again and commits the updated `state.json`.
+
+`arc56_stats_history.csv` is append-only (same never-delete philosophy as
+`arc56.links.csv`) - one row per `update_arc56_links.py` run, with columns
+`Timestamp,ARC56Links,Repositories,NuGetPackagesPublished,NpmPackagesPublished,PyPIPackagesPublished`.
+It's meant to be charted later to show the Algorand ecosystem's ARC-56
+adoption growing over time.
 
 ## CSV format and Active columns
 

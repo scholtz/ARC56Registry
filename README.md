@@ -16,12 +16,34 @@ post: [x.com/EAlgonaut/status/2079233299243757677](https://x.com/EAlgonaut/statu
 Need help integrating with the registry or its generated clients? Join us on
 [Discord](https://t.co/vv87GeXHrs).
 
+## Live statistics
+
+<!-- LIVE-STATS:START -->
+| Metric | Count |
+| --- | ---: |
+| ARC-56 links found | 4,391 |
+| Repositories containing ARC-56 links | 513 |
+| NuGet packages published | 373 |
+| npm packages published | 80 |
+| PyPI packages published | 33 |
+
+_Last updated 2026-07-29 07:53 UTC by `scripts/update_arc56_links.py`. Historical snapshots (for charting growth over time): [arc56_stats_history.csv](arc56_stats_history.csv)._
+<!-- LIVE-STATS:END -->
+
+Regenerated daily as the last step of [`scripts/update_arc56_links.py`](scripts/update_arc56_links.py)
+(see [scripts/registry_stats.py](scripts/registry_stats.py)). Every run also appends a timestamped
+snapshot to [arc56_stats_history.csv](arc56_stats_history.csv), so the numbers above are just the
+latest row of a growing time series you can chart to see how the Algorand ecosystem's ARC-56 adoption
+is trending.
+
 ## What's in this repo
 
 | Path | What it is |
 | --- | --- |
 | [arc56.links.csv](arc56.links.csv) | The registry itself: every discovered `*.arc56.json` URL, with `ActiveFrom`/`ActiveUntil` columns controlling whether it's currently included, a `Priority` column controlling iteration order, and a `Hash` column (`SHA-256(ARC56URL)[:8]`) that uniquely identifies each entry across the generated client libraries. |
-| [scripts/update_arc56_links.py](scripts/update_arc56_links.py) | Finds ARC-56 files on GitHub and updates the CSV. Never removes a row. |
+| [scripts/update_arc56_links.py](scripts/update_arc56_links.py) | Finds ARC-56 files on GitHub and updates the CSV. Never removes a row. Also recomputes and commits the live statistics below as its last step. |
+| [scripts/registry_stats.py](scripts/registry_stats.py) | Computes the live statistics (links found, repositories, packages published per ecosystem), renders them into this README's [Live statistics](#live-statistics) section, and appends a snapshot to `arc56_stats_history.csv`. |
+| [arc56_stats_history.csv](arc56_stats_history.csv) | Timestamped history of the live statistics, one row per `update_arc56_links.py` run. Never rewritten or deleted - a time series for charting the registry's growth. |
 | [scripts/validate_arc56_links.py](scripts/validate_arc56_links.py) | Pull-request check enforcing the CSV's schema and edit rules. |
 | [scripts/download_arc56_specs.py](scripts/download_arc56_specs.py) | Downloads every active ARC-56 spec into `clients/<owner>/<repo>/arc56/` - shared by both client-generation pipelines below. |
 | [scripts/generate_dotnet_clients.py](scripts/generate_dotnet_clients.py), [scripts/publish_dotnet_packages.py](scripts/publish_dotnet_packages.py) | Generate the C# clients, and separately publish the NuGet packages described below. |

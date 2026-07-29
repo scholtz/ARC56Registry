@@ -19,7 +19,19 @@ cover.
 - `scripts/update_arc56_links.py` - finds new ARC-56 files on GitHub, merges into the CSV.
   Skips any repo listed in `scripts/repo_blacklist.txt` (this repo itself is blacklisted
   by default, since its own `*.arc56.json` files are examples/fixtures, not real specs
-  meant to be registered; add more `owner/repo` lines there to blacklist others).
+  meant to be registered; add more `owner/repo` lines there to blacklist others). As its
+  last step it also calls `scripts/registry_stats.py` to recompute and commit the live
+  statistics described below.
+- `scripts/registry_stats.py` - computes the registry's live statistics (ARC-56 links
+  found, repositories containing them, NuGet/npm/PyPI packages published), renders them
+  into README.md's `<!-- LIVE-STATS:START -->`/`<!-- LIVE-STATS:END -->` section, and
+  appends a timestamped snapshot row to `arc56_stats_history.csv`. Package-publish counts
+  come from the local `clients/*/*/<ecosystem>/state.json` `published_version` field
+  (written by the matching `publish_*_packages.py` script), not a live registry query -
+  see docs/arc56-links-pipeline.md#live-statistics.
+- `arc56_stats_history.csv` - append-only time series of the live statistics above, one
+  row per `update_arc56_links.py` run. Never rewritten or deleted, same as
+  `arc56.links.csv` - meant for charting the registry's growth over time.
 - `scripts/validate_arc56_links.py` - PR check enforcing the CSV's rules.
 - **Client generation is a 3-stage pipeline, run three times (once per ecosystem) -
   download is shared, generate/publish are per-ecosystem:**
@@ -105,7 +117,9 @@ cover.
    to change once written (a selector determines its signature, barring a SHA-512/256
    collision); `<selector>.json` (the signature plus its `apps` list) *can* legitimately
    be rewritten in place as newly indexed specs add more known apps for that selector -
-   still never deleted, just grown.
+   still never deleted, just grown. `arc56_stats_history.csv` follows the same rule:
+   rows (timestamped stats snapshots) are only ever appended, never edited or removed -
+   it's a time series, not a snapshot.
 2. **`ActiveFrom`/`ActiveUntil` semantics**: a row is active when `ActiveFrom <= today`
    and (`ActiveUntil` is empty or `ActiveUntil` is in the future). New rows always get
    `ActiveFrom = today`, `ActiveUntil = ""`. Every download/generate script skips
