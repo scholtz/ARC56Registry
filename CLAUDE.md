@@ -26,9 +26,11 @@ cover.
   found, repositories containing them, NuGet/npm/PyPI packages published), renders them
   into README.md's `<!-- LIVE-STATS:START -->`/`<!-- LIVE-STATS:END -->` section, and
   appends a timestamped snapshot row to `arc56_stats_history.csv`. Package-publish counts
-  come from the local `clients/*/*/<ecosystem>/state.json` `published_version` field
-  (written by the matching `publish_*_packages.py` script), not a live registry query -
-  see docs/arc56-links-pipeline.md#live-statistics.
+  come from a live, concurrent, read-only query against each registry's own package index
+  (nuget.org flat-container / npm registry / PyPI JSON API) for every generated project -
+  not the local `clients/*/*/<ecosystem>/state.json` `published_version` field, which was
+  found to undercount nuget.org's real total by ~140 packages (that field's commit-back
+  step doesn't always land for every repo) - see docs/arc56-links-pipeline.md#live-statistics.
 - `arc56_stats_history.csv` - append-only time series of the live statistics above, one
   row per `update_arc56_links.py` run. Never rewritten or deleted, same as
   `arc56.links.csv` - meant for charting the registry's growth over time.

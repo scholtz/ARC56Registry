@@ -95,20 +95,28 @@ everything else has finished:
 | --- | --- |
 | ARC-56 links found | Total row count in `arc56.links.csv` (active or not - rows are never deleted, so this is a running total of every link ever found). |
 | Repositories containing ARC-56 links | Distinct `owner/repo` pairs (case-insensitive) parsed out of every `ARC56URL` in the CSV. |
-| NuGet packages published | Count of `clients/*/*/dotnet/state.json` files with a non-empty `published_version` field. |
-| npm packages published | Count of `clients/*/*/npm/state.json` files with a non-empty `published_version` field. |
-| PyPI packages published | Count of `clients/*/*/python/state.json` files with a non-empty `published_version` field. |
+| NuGet packages published | Of every generated `clients/*/*/dotnet/*.csproj` project's package ID, how many have at least one version live on nuget.org's flat-container index (`GET https://api.nuget.org/v3-flatcontainer/<id>/index.json`). |
+| npm packages published | Of every generated `clients/*/*/npm/package.json` project's package name, how many have at least one version live on the npm registry (`GET https://registry.npmjs.org/<name>`). |
+| PyPI packages published | Of every generated `clients/*/*/python/pyproject.toml` project's distribution name, how many have at least one release live on PyPI's JSON API (`GET https://pypi.org/pypi/<name>/json`). |
 
-The package-publish counts are read from the **local** `state.json` files
-already committed under `clients/`, not from a live query against
-nuget.org/npm/PyPI - `published_version` is written by the matching
+These are live queries against each registry's own package index - the same
+"ask the registry, don't trust a local flag" principle
 `publish_dotnet_packages.py`/`publish_npm_packages.py`/`publish_python_packages.py`
-script after a successful push (see those scripts' own docs). This keeps
-`update_arc56_links.py` network-free apart from the GitHub search itself, at
-the cost of the counts only being as fresh as the last local publish run
-recorded in this checkout - a package published since the last
-`publish_*_packages.py` run, or a partially-failed run, won't be reflected
-until that pipeline runs again and commits the updated `state.json`.
+already use to decide what needs publishing. Each project's local `state.json`
+also records a `published_version` field after a successful publish, but an
+earlier version of `registry_stats.py` trusted that field directly and was
+found to undercount nuget.org's own reported total by roughly 140 packages -
+some repos' publish runs push successfully but the follow-up
+"commit `published_version` bookkeeping" step doesn't always land (a failed
+push, a missed `workflow_run` trigger, etc.), so the local flag alone isn't a
+reliable count. The live queries are read-only, unauthenticated GETs run
+concurrently per ecosystem (`LIST_MAX_WORKERS` in `registry_stats.py`, same
+reasoning as `publish_dotnet_packages.py`'s own concurrent version-listing) -
+in practice under two minutes total across all three ecosystems (500+
+packages each), not the multi-minute, rate-limited pacing that pushing a new
+version needs. This does mean `update_arc56_links.py` is no longer
+network-free apart from GitHub search - it also makes ~1,500 lightweight
+reads against nuget.org/npm/PyPI as its last step.
 
 `arc56_stats_history.csv` is append-only (same never-delete philosophy as
 `arc56.links.csv`) - one row per `update_arc56_links.py` run, with columns

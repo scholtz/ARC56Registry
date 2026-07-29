@@ -7,30 +7,53 @@ ARC-56 links have been found in total, how many distinct GitHub repositories
 they come from, and how many generated packages have actually been published
 to nuget.org/npm/PyPI so far.
 
-Package-publish counts are read from the *local* state.json files that
-generate_dotnet_clients.py / generate_typescript_clients.py /
-generate_python_clients.py write into clients/<owner>/<repo>/<ecosystem>/, and
-that the matching publish_*_packages.py script stamps with a
-"published_version" field after a successful push - not a live query against
-nuget.org/npm/PyPI. This keeps stats computation network-free (consistent
-with every part of update_arc56_links.py apart from the GitHub search itself)
-at the cost of being only as fresh as the last local publish run recorded in
-this checkout.
+Package-publish counts are obtained by **querying each registry's own live
+package index** (nuget.org's flat-container index, the npm registry's package
+metadata, PyPI's JSON API) for every generated project - the same "ask the
+registry, don't trust a local flag" principle publish_dotnet_packages.py /
+publish_npm_packages.py / publish_python_packages.py already use to decide
+what needs publishing (see those scripts' docstrings). Each project's local
+state.json also records a "published_version" field after a successful
+publish, but that field is only ever an informational cache written back by
+this pipeline's own commit-back step - if that step doesn't land for some
+repos (a failed push, a missed workflow_run trigger, etc.), the local flag
+silently undercounts real publishes. This module was originally written to
+trust that local flag and was found to undercount nuget.org's own reported
+total by ~140 packages - see the live queries below instead.
+
+These are read-only, unauthenticated GETs against public CDN-backed/JSON
+endpoints (no push quota applies, unlike actually publishing a package), run
+concurrently per ecosystem the same way publish_dotnet_packages.py already
+does for its own "list published versions" lookups (see LIST_MAX_WORKERS
+there) - a full run across all three ecosystems (500+ packages each) takes on
+the order of ten seconds per ecosystem in practice, not the multi-minute,
+rate-limited pacing that pushing a new version needs.
 """
 from __future__ import annotations
 
+import concurrent.futures
 import csv
 import datetime
 import glob
 import json
 import os
 import re
+import urllib.error
+import urllib.request
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CSV_PATH = os.path.join(REPO_ROOT, "arc56.links.csv")
 CLIENTS_DIR = os.path.join(REPO_ROOT, "clients")
 README_PATH = os.path.join(REPO_ROOT, "README.md")
 STATS_HISTORY_PATH = os.path.join(REPO_ROOT, "arc56_stats_history.csv")
+
+NUGET_FLAT_CONTAINER_BASE = "https://api.nuget.org/v3-flatcontainer"
+NPM_REGISTRY = "https://registry.npmjs.org"
+PYPI_JSON_URL = "https://pypi.org/pypi/{package}/json"
+LIST_MAX_WORKERS = 16  # matches the reasoning in publish_dotnet_packages.py's
+# LIST_MAX_WORKERS: these are public, unauthenticated, no-quota reads, unlike pushing.
+
+DIST_NAME_RE = re.compile(r'^name\s*=\s*"([^"]+)"', re.MULTILINE)
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -75,23 +98,96 @@ def count_links_and_repos(csv_path: str = CSV_PATH) -> tuple[int, int]:
     return links, len(repos)
 
 
-def _count_published_packages(ecosystem_subdir: str, state_filename: str = "state.json") -> int:
-    """Counts generated projects for one ecosystem whose local state.json
-    records a "published_version" - i.e. have been successfully published at
-    least once, per the last local publish_*_packages.py run recorded in this
-    checkout (see module docstring for why this isn't a live registry query).
-    """
-    count = 0
-    pattern = os.path.join(CLIENTS_DIR, "*", "*", ecosystem_subdir, state_filename)
-    for state_path in glob.glob(pattern):
+def _fetch_json(url: str, retries: int = 3) -> dict | None:
+    """GET a public JSON endpoint, returning None on a 404 (package/version
+    list genuinely doesn't exist yet) and retrying transient errors a few
+    times before giving up - a single flaky lookup shouldn't have to abort an
+    entire stats run."""
+    req = urllib.request.Request(url, headers={"User-Agent": "arc56-registry-stats", "Accept": "application/json"})
+    for attempt in range(1, retries + 1):
         try:
-            with open(state_path, encoding="utf-8") as f:
-                state = json.load(f)
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                return json.load(resp)
+        except urllib.error.HTTPError as exc:
+            if exc.code == 404:
+                return None
+            if attempt == retries:
+                return None
+        except (urllib.error.URLError, TimeoutError, OSError):
+            if attempt == retries:
+                return None
+    return None
+
+
+def _is_published_on_nuget(package_id: str) -> bool:
+    data = _fetch_json(f"{NUGET_FLAT_CONTAINER_BASE}/{package_id.lower()}/index.json")
+    return bool(data and data.get("versions"))
+
+
+def _is_published_on_npm(package_name: str) -> bool:
+    data = _fetch_json(f"{NPM_REGISTRY}/{package_name}")
+    return bool(data and (data.get("versions") or {}))
+
+
+def _is_published_on_pypi(package_name: str) -> bool:
+    data = _fetch_json(PYPI_JSON_URL.format(package=package_name))
+    return bool(data and (data.get("releases") or {}))
+
+
+def _count_published_bulk(identifiers: list[str], is_published) -> int:
+    """Runs `is_published` for every identifier concurrently (bounded by
+    LIST_MAX_WORKERS) and returns how many came back published - mirrors
+    publish_dotnet_packages.py's list_published_versions_bulk, but collapsed
+    to a plain count since stats doesn't need each package's actual version
+    list, only whether it has at least one."""
+    if not identifiers:
+        return 0
+    with concurrent.futures.ThreadPoolExecutor(max_workers=LIST_MAX_WORKERS) as pool:
+        results = list(pool.map(is_published, identifiers))
+    return sum(1 for r in results if r)
+
+
+def _dotnet_package_ids() -> list[str]:
+    """Package IDs for every generated .NET project, taken from the .csproj
+    filename itself - mirrors find_dotnet_projects() in
+    publish_dotnet_packages.py."""
+    pattern = os.path.join(CLIENTS_DIR, "*", "*", "dotnet", "*.csproj")
+    return [os.path.splitext(os.path.basename(p))[0] for p in glob.glob(pattern)]
+
+
+def _npm_package_names() -> list[str]:
+    """Package names for every generated TypeScript project, read from each
+    project's package.json - mirrors find_npm_projects() in
+    publish_npm_packages.py."""
+    names = []
+    pattern = os.path.join(CLIENTS_DIR, "*", "*", "npm", "package.json")
+    for package_json_path in glob.glob(pattern):
+        try:
+            with open(package_json_path, encoding="utf-8") as f:
+                data = json.load(f)
         except (OSError, json.JSONDecodeError):
             continue
-        if state.get("published_version"):
-            count += 1
-    return count
+        name = data.get("name")
+        if name:
+            names.append(name)
+    return names
+
+
+def _python_package_names() -> list[str]:
+    """Distribution names for every generated Python project, parsed out of
+    pyproject.toml - mirrors read_dist_name() in publish_python_packages.py."""
+    names = []
+    pattern = os.path.join(CLIENTS_DIR, "*", "*", "python", "pyproject.toml")
+    for pyproject_path in glob.glob(pattern):
+        try:
+            with open(pyproject_path, encoding="utf-8") as f:
+                text = f.read()
+        except OSError:
+            continue
+        m = DIST_NAME_RE.search(text)
+        if m:
+            names.append(m.group(1))
+    return names
 
 
 def compute_stats() -> dict[str, int]:
@@ -99,9 +195,9 @@ def compute_stats() -> dict[str, int]:
     return {
         "arc56_links": links,
         "repositories": repos,
-        "nuget_packages_published": _count_published_packages("dotnet"),
-        "npm_packages_published": _count_published_packages("npm"),
-        "pypi_packages_published": _count_published_packages("python"),
+        "nuget_packages_published": _count_published_bulk(_dotnet_package_ids(), _is_published_on_nuget),
+        "npm_packages_published": _count_published_bulk(_npm_package_names(), _is_published_on_npm),
+        "pypi_packages_published": _count_published_bulk(_python_package_names(), _is_published_on_pypi),
     }
 
 
