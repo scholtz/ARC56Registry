@@ -3,8 +3,8 @@
 - **Repo**: [algorandfoundation/TEALScript](https://github.com/algorandfoundation/TEALScript)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/TEALScript/HEAD/tests/contracts/artifacts/CblocksTest.arc56.json](https://raw.githubusercontent.com/algorandfoundation/TEALScript/HEAD/tests/contracts/artifacts/CblocksTest.arc56.json)
 - **Namespace used**: `Arc56.Generated.algorandfoundation.TEALScript.CblocksTest_a4482aa6`
-- **Detected**: 2026-07-28T08:19:03.771732+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:0093cb1562e2d8125477e45e9b2045a81c983a91f38f1a2f9b738be110520613`
+- **Detected**: 2026-08-05T08:48:07.937336+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:508821bfbb37c3c0d4d6f2867be89c794b766971b607e9ee5b39cde816fbb352`
 
 ## Reproduce
 
