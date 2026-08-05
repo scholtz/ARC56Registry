@@ -3,8 +3,8 @@
 - **Repo**: [KartikSharma4448/Aegiscare](https://github.com/KartikSharma4448/Aegiscare)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/KartikSharma4448/Aegiscare/HEAD/projects/aegis-frontend/src/contracts/MedicalRecords.arc56.json](https://raw.githubusercontent.com/KartikSharma4448/Aegiscare/HEAD/projects/aegis-frontend/src/contracts/MedicalRecords.arc56.json)
 - **Namespace used**: `Arc56.Generated.KartikSharma4448.Aegiscare.MedicalRecords_c959c370`
-- **Detected**: 2026-07-21T08:13:04.900509+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:0093cb1562e2d8125477e45e9b2045a81c983a91f38f1a2f9b738be110520613`
+- **Detected**: 2026-08-05T09:46:53.787556+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:508821bfbb37c3c0d4d6f2867be89c794b766971b607e9ee5b39cde816fbb352`
 
 ## Reproduce
 
