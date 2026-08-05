@@ -1,0 +1,7 @@
+from . import IdentityRegistry_5cab92d5 as IdentityRegistry_5cab92d5
+from . import ReputationRegistry_3375c68d as ReputationRegistry_3375c68d
+from . import ValidationRegistry_16b49f1e as ValidationRegistry_16b49f1e
+from . import IdentityRegistry_ba042150 as IdentityRegistry_ba042150
+from . import ReputationRegistry_78b2a8c6 as ReputationRegistry_78b2a8c6
+from . import ReputationRegistry_87dc96bd as ReputationRegistry_87dc96bd
+from . import ValidationRegistry_85cb0a36 as ValidationRegistry_85cb0a36
