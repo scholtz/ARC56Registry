@@ -3,8 +3,8 @@
 - **Repo**: [Argimirodelpozo/puya-sol](https://github.com/Argimirodelpozo/puya-sol)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/WIP/examples/aave-v4/out/Hub/__uros_split/chunk_2/Hub__chunk_2.arc56.json](https://raw.githubusercontent.com/Argimirodelpozo/puya-sol/HEAD/WIP/examples/aave-v4/out/Hub/__uros_split/chunk_2/Hub__chunk_2.arc56.json)
 - **Namespace used**: `Arc56.Generated.Argimirodelpozo.puya_sol.Hub__chunk_2_ea6a2f47`
-- **Detected**: 2026-07-19T22:45:41.283237+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:0093cb1562e2d8125477e45e9b2045a81c983a91f38f1a2f9b738be110520613`
+- **Detected**: 2026-08-05T09:24:10.310758+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:508821bfbb37c3c0d4d6f2867be89c794b766971b607e9ee5b39cde816fbb352`
 
 ## Reproduce
 
