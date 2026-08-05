@@ -3,8 +3,8 @@
 - **Repo**: [algorandfoundation/algokit-client-generator-py](https://github.com/algorandfoundation/algokit-client-generator-py)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/algokit-client-generator-py/HEAD/examples/smart_contracts/artifacts/arc56_test/Arc56Test.arc56.json](https://raw.githubusercontent.com/algorandfoundation/algokit-client-generator-py/HEAD/examples/smart_contracts/artifacts/arc56_test/Arc56Test.arc56.json)
 - **Namespace used**: `Arc56.Generated.algorandfoundation.algokit_client_generator_py.Arc56Test_45cfb5f2`
-- **Detected**: 2026-07-19T23:21:30.697682+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:0093cb1562e2d8125477e45e9b2045a81c983a91f38f1a2f9b738be110520613`
+- **Detected**: 2026-08-05T08:29:40.872237+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:508821bfbb37c3c0d4d6f2867be89c794b766971b607e9ee5b39cde816fbb352`
 
 ## Reproduce
 
