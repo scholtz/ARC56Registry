@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"State","structs":{"Input":[{"name":"name","type":"string"},{"name":"age","type":"uint64"}],"Output":[{"name":"message","type":"string"},{"name":"result","type":"uint64"}]},"methods":[{"name":"create_abi","args":[{"type":"string","name":"input"}],"returns":{"type":"string"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"update_abi","args":[{"type":"string","name":"input"}],"returns":{"type":"string"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"delete_abi","args":[{"type":"string","name":"input"}],"returns":{"type":"string"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"opt_in","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["OptIn"]},"readonly":false,"events":[],"recommendations":{}},{"name":"error","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"call_abi","args":[{"type":"string","name":"value"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"call_abi_txn","args":[{"type":"pay","name":"txn"},{"type":"string","name":"value"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"call_with_references","args":[{"type":"uint64","name":"asset"},{"type":"address","name":"account"},{"type":"uint64","name":"application"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"default_value","args":[{"type":"string","name":"arg_with_default","defaultValue":{"source":"literal","data":"AA1kZWZhdWx0IHZhbHVl","type":"string"}}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"default_value_int","args":[{"type":"uint64","name":"arg_with_default","defaultValue":{"source":"literal","data":"AAAAAAAAAHs=","type":"uint64"}}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"default_value_from_abi","args":[{"type":"string","name":"arg_with_default","defaultValue":{"source":"literal","data":"AA1kZWZhdWx0IHZhbHVl","type":"string"}}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"default_value_from_global_state","args":[{"type":"uint64","name":"arg_with_default","defaultValue":{"source":"global","data":"aW50MQ==","type":"AVMString"}}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"default_value_from_local_state","args":[{"type":"string","name":"arg_with_default","defaultValue":{"source":"local","data":"bG9jYWxfYnl0ZXMx","type":"AVMString"}}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"structs","args":[{"type":"(string,uint64)","struct":"Input","name":"name_age"}],"returns":{"type":"(string,uint64)","struct":"Output"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_global","args":[{"type":"uint64","name":"int1"},{"type":"uint64","name":"int2"},{"type":"string","name":"bytes1"},{"type":"byte[4]","name":"bytes2"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_local","args":[{"type":"uint64","name":"int1"},{"type":"uint64","name":"int2"},{"type":"string","name":"bytes1"},{"type":"byte[4]","name":"bytes2"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_box","args":[{"type":"byte[4]","name":"name"},{"type":"string","name":"value"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":3,"bytes":3},"local":{"ints":2,"bytes":3}},"keys":{"global":{"value":{"keyType":"AVMString","valueType":"AVMUint64","key":"dmFsdWU="},"bytes1":{"keyType":"AVMString","valueType":"AVMBytes","key":"Ynl0ZXMx"},"bytes2":{"keyType":"AVMString","valueType":"AVMBytes","key":"Ynl0ZXMy"},"bytesNotInSnakeCase":{"keyType":"AVMString","valueType":"AVMBytes","key":"Ynl0ZXNOb3RJblNuYWtlQ2FzZQ=="},"int1":{"keyType":"AVMString","valueType":"AVMUint64","key":"aW50MQ=="},"int2":{"keyType":"AVMString","valueType":"AVMUint64","key":"aW50Mg=="}},"local":{"local_bytes1":{"keyType":"AVMString","valueType":"AVMBytes","key":"bG9jYWxfYnl0ZXMx"},"local_bytes2":{"keyType":"AVMString","valueType":"AVMBytes","key":"bG9jYWxfYnl0ZXMy"},"localBytesNotInSnakeCase":{"keyType":"AVMString","valueType":"AVMBytes","key":"bG9jYWxCeXRlc05vdEluU25ha2VDYXNl"},"local_int1":{"keyType":"AVMString","valueType":"AVMUint64","key":"bG9jYWxfaW50MQ=="},"local_int2":{"keyType":"AVMString","valueType":"AVMUint64","key":"bG9jYWxfaW50Mg=="}},"box":{"boxNotInSnakeCase":{"keyType":"AVMBytes","valueType":"string","key":"YQ=="}}},"maps":{"global":{},"local":{},"box":{"box":{"keyType":"byte[4]","valueType":"string","prefix":""},"boxMapNotInSnakeCase":{"keyType":"byte[4]","valueType":"string","prefix":"Yg=="}}}},"bareActions":{"create":["NoOp","OptIn"],"call":["DeleteApplication","UpdateApplication"]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[210,311],"errorMessage":"Check app is deletable"},{"pc":[221,286],"errorMessage":"Check app is updatable"},{"pc":[141],"errorMessage":"Deliberate error"},{"pc":[448],"errorMessage":"account not provided"},{"pc":[449],"errorMessage":"application not provided"},{"pc":[442],"errorMessage":"asset not provided"},{"pc":[251,273,298,323,366,472,505,566,630,695,779,887],"errorMessage":"invalid array length header"},{"pc":[258,280,305,330,373,479,513,573,702,786,894],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[430],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[714,798,881],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 4>"},{"pc":[420,438,493,554,679,688,763,772],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[637],"errorMessage":"invalid number of bytes for examples.smart_contracts.state.contract.Input"},{"pc":[621],"errorMessage":"invalid tail pointer at index 0 of ((len+utf8[]),uint64)"},{"pc":[616],"errorMessage":"invalid tuple encoding"},{"pc":[360],"errorMessage":"transaction type is pay"},{"pc":[907],"errorMessage":"unauthorized"}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"State","structs":{"Input":[{"name":"name","type":"string"},{"name":"age","type":"uint64"}],"Output":[{"name":"message","type":"string"},{"name":"result","type":"uint64"}]},"methods":[{"name":"create_abi","args":[{"type":"string","name":"input"}],"returns":{"type":"string"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"update_abi","args":[{"type":"string","name":"input"}],"returns":{"type":"string"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"delete_abi","args":[{"type":"string","name":"input"}],"returns":{"type":"string"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"opt_in","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["OptIn"]},"readonly":false,"events":[],"recommendations":{}},{"name":"error","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"call_abi","args":[{"type":"string","name":"value"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"call_abi_txn","args":[{"type":"pay","name":"txn"},{"type":"string","name":"value"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"call_with_references","args":[{"type":"asset","name":"asset"},{"type":"account","name":"account"},{"type":"application","name":"application"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"default_value","args":[{"type":"string","name":"arg_with_default","defaultValue":{"source":"literal","data":"AA1kZWZhdWx0IHZhbHVl","type":"string"}}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"default_value_int","args":[{"type":"uint64","name":"arg_with_default","defaultValue":{"source":"literal","data":"AAAAAAAAAHs=","type":"uint64"}}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"default_value_from_abi","args":[{"type":"string","name":"arg_with_default","defaultValue":{"source":"literal","data":"AA1kZWZhdWx0IHZhbHVl","type":"string"}}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"default_value_from_global_state","args":[{"type":"uint64","name":"arg_with_default","defaultValue":{"source":"global","data":"aW50MQ==","type":"AVMString"}}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"default_value_from_local_state","args":[{"type":"string","name":"arg_with_default","defaultValue":{"source":"local","data":"bG9jYWxfYnl0ZXMx","type":"AVMString"}}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"structs","args":[{"type":"(string,uint64)","struct":"Input","name":"name_age"}],"returns":{"type":"(string,uint64)","struct":"Output"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_global","args":[{"type":"uint64","name":"int1"},{"type":"uint64","name":"int2"},{"type":"string","name":"bytes1"},{"type":"byte[4]","name":"bytes2"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_local","args":[{"type":"uint64","name":"int1"},{"type":"uint64","name":"int2"},{"type":"string","name":"bytes1"},{"type":"byte[4]","name":"bytes2"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_box","args":[{"type":"byte[4]","name":"name"},{"type":"string","name":"value"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":3,"bytes":3},"local":{"ints":2,"bytes":3}},"keys":{"global":{"value":{"keyType":"AVMString","valueType":"AVMUint64","key":"dmFsdWU="},"bytes1":{"keyType":"AVMString","valueType":"AVMBytes","key":"Ynl0ZXMx"},"bytes2":{"keyType":"AVMString","valueType":"AVMBytes","key":"Ynl0ZXMy"},"bytesNotInSnakeCase":{"keyType":"AVMString","valueType":"AVMBytes","key":"Ynl0ZXNOb3RJblNuYWtlQ2FzZQ=="},"int1":{"keyType":"AVMString","valueType":"AVMUint64","key":"aW50MQ=="},"int2":{"keyType":"AVMString","valueType":"AVMUint64","key":"aW50Mg=="}},"local":{"local_bytes1":{"keyType":"AVMString","valueType":"AVMBytes","key":"bG9jYWxfYnl0ZXMx"},"local_bytes2":{"keyType":"AVMString","valueType":"AVMBytes","key":"bG9jYWxfYnl0ZXMy"},"localBytesNotInSnakeCase":{"keyType":"AVMString","valueType":"AVMBytes","key":"bG9jYWxCeXRlc05vdEluU25ha2VDYXNl"},"local_int1":{"keyType":"AVMString","valueType":"AVMUint64","key":"bG9jYWxfaW50MQ=="},"local_int2":{"keyType":"AVMString","valueType":"AVMUint64","key":"bG9jYWxfaW50Mg=="}},"box":{"boxNotInSnakeCase":{"keyType":"AVMBytes","valueType":"string","key":"YQ=="}}},"maps":{"global":{},"local":{},"box":{"box":{"keyType":"byte[4]","valueType":"string","prefix":""},"boxMapNotInSnakeCase":{"keyType":"byte[4]","valueType":"string","prefix":"Yg=="}}}},"bareActions":{"create":["NoOp","OptIn"],"call":["DeleteApplication","UpdateApplication"]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[617,917],"errorMessage":"Check app is deletable"},{"pc":[606,911],"errorMessage":"Check app is updatable"},{"pc":[426],"errorMessage":"Deliberate error"},{"pc":[442],"errorMessage":"OnCompletion is not DeleteApplication"},{"pc":[136,154,183,212,231,253,268,287,302,317,352,392,422,504],"errorMessage":"OnCompletion is not NoOp"},{"pc":[431],"errorMessage":"OnCompletion is not OptIn"},{"pc":[474],"errorMessage":"OnCompletion is not UpdateApplication"},{"pc":[668],"errorMessage":"account not provided"},{"pc":[671],"errorMessage":"application not provided"},{"pc":[662],"errorMessage":"asset not provided"},{"pc":[508,570],"errorMessage":"can only call when creating"},{"pc":[139,157,186,215,234,256,271,290,305,320,355,395,425,434,445,477,553,561],"errorMessage":"can only call when not creating"},{"pc":[365],"errorMessage":"transaction type is pay"},{"pc":[927],"errorMessage":"unauthorized"}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBleGFtcGxlcy5zbWFydF9jb250cmFjdHMuc3RhdGUuY29udHJhY3QuU3RhdGUuX19hbGdvcHlfZW50cnlwb2ludF93aXRoX2luaXQoKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIFRNUExfVVBEQVRBQkxFIFRNUExfREVMRVRBQkxFIFRNUExfVkFMVUUKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NSAiSGVsbG8sICIgIiIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTozNAogICAgLy8gY2xhc3MgU3RhdGUoRXhhbXBsZUFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdAMjIKICAgIHB1c2hieXRlc3MgMHg5ZDUyMzA0MCAweDNjYTVjZWI3IDB4MjcxYjRlZTkgMHgzMGM2ZDU4YSAweDQ0ZDBkYTBkIDB4ZjE3ZTgwYTUgMHgwYTkyYTgxZSAweGZlZmRmMTFlIDB4NTc0YjU1YzggMHgzNjAzNjJlOSAweDQ2ZDIxMWEzIDB4MGNmY2JiMDAgMHhkMGYwYmFmOCAweDI0NmJlYjgzIDB4YTRjZjhkZWEgMHhjZWMyODM0YSAweGE0YjRhMjMwIC8vIG1ldGhvZCAiY3JlYXRlX2FiaShzdHJpbmcpc3RyaW5nIiwgbWV0aG9kICJ1cGRhdGVfYWJpKHN0cmluZylzdHJpbmciLCBtZXRob2QgImRlbGV0ZV9hYmkoc3RyaW5nKXN0cmluZyIsIG1ldGhvZCAib3B0X2luKCl2b2lkIiwgbWV0aG9kICJlcnJvcigpdm9pZCIsIG1ldGhvZCAiY2FsbF9hYmkoc3RyaW5nKXN0cmluZyIsIG1ldGhvZCAiY2FsbF9hYmlfdHhuKHBheSxzdHJpbmcpc3RyaW5nIiwgbWV0aG9kICJjYWxsX3dpdGhfcmVmZXJlbmNlcyhhc3NldCxhY2NvdW50LGFwcGxpY2F0aW9uKXVpbnQ2NCIsIG1ldGhvZCAiZGVmYXVsdF92YWx1ZShzdHJpbmcpc3RyaW5nIiwgbWV0aG9kICJkZWZhdWx0X3ZhbHVlX2ludCh1aW50NjQpdWludDY0IiwgbWV0aG9kICJkZWZhdWx0X3ZhbHVlX2Zyb21fYWJpKHN0cmluZylzdHJpbmciLCBtZXRob2QgImRlZmF1bHRfdmFsdWVfZnJvbV9nbG9iYWxfc3RhdGUodWludDY0KXVpbnQ2NCIsIG1ldGhvZCAiZGVmYXVsdF92YWx1ZV9mcm9tX2xvY2FsX3N0YXRlKHN0cmluZylzdHJpbmciLCBtZXRob2QgInN0cnVjdHMoKHN0cmluZyx1aW50NjQpKShzdHJpbmcsdWludDY0KSIsIG1ldGhvZCAic2V0X2dsb2JhbCh1aW50NjQsdWludDY0LHN0cmluZyxieXRlWzRdKXZvaWQiLCBtZXRob2QgInNldF9sb2NhbCh1aW50NjQsdWludDY0LHN0cmluZyxieXRlWzRdKXZvaWQiLCBtZXRob2QgInNldF9ib3goYnl0ZVs0XSxzdHJpbmcpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fY3JlYXRlX2FiaV9yb3V0ZUA1IG1haW5fdXBkYXRlX2FiaV9yb3V0ZUA2IG1haW5fZGVsZXRlX2FiaV9yb3V0ZUA3IG1haW5fb3B0X2luX3JvdXRlQDggbWFpbl9lcnJvcl9yb3V0ZUA5IG1haW5fY2FsbF9hYmlfcm91dGVAMTAgbWFpbl9jYWxsX2FiaV90eG5fcm91dGVAMTEgbWFpbl9jYWxsX3dpdGhfcmVmZXJlbmNlc19yb3V0ZUAxMiBtYWluX2RlZmF1bHRfdmFsdWVfcm91dGVAMTMgbWFpbl9kZWZhdWx0X3ZhbHVlX2ludF9yb3V0ZUAxNCBtYWluX2RlZmF1bHRfdmFsdWVfZnJvbV9hYmlfcm91dGVAMTUgbWFpbl9kZWZhdWx0X3ZhbHVlX2Zyb21fZ2xvYmFsX3N0YXRlX3JvdXRlQDE2IG1haW5fZGVmYXVsdF92YWx1ZV9mcm9tX2xvY2FsX3N0YXRlX3JvdXRlQDE3IG1haW5fc3RydWN0c19yb3V0ZUAxOCBtYWluX3NldF9nbG9iYWxfcm91dGVAMTkgbWFpbl9zZXRfbG9jYWxfcm91dGVAMjAgbWFpbl9zZXRfYm94X3JvdXRlQDIxCgptYWluX2FmdGVyX2lmX2Vsc2VAMjY6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MzQKICAgIC8vIGNsYXNzIFN0YXRlKEV4YW1wbGVBUkM0Q29udHJhY3QpOgogICAgaW50Y18xIC8vIDAKICAgIHJldHVybgoKbWFpbl9zZXRfYm94X3JvdXRlQDIxOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjE0NwogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTozNAogICAgLy8gY2xhc3MgU3RhdGUoRXhhbXBsZUFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTQ3CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGNhbGxzdWIgc2V0X2JveAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9zZXRfbG9jYWxfcm91dGVAMjA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTM4CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBjbGFzcyBTdGF0ZShFeGFtcGxlQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTM4CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGNhbGxzdWIgc2V0X2xvY2FsCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3NldF9nbG9iYWxfcm91dGVAMTk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTI5CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBjbGFzcyBTdGF0ZShFeGFtcGxlQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyA0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTI5CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGNhbGxzdWIgc2V0X2dsb2JhbAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9zdHJ1Y3RzX3JvdXRlQDE4OgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjEyNQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTozNAogICAgLy8gY2xhc3MgU3RhdGUoRXhhbXBsZUFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTI1CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGNhbGxzdWIgc3RydWN0cwogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9kZWZhdWx0X3ZhbHVlX2Zyb21fbG9jYWxfc3RhdGVfcm91dGVAMTc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTIxCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSwgZGVmYXVsdF9hcmdzPXsiYXJnX3dpdGhfZGVmYXVsdCI6ICJsb2NhbF9ieXRlczEifSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBjbGFzcyBTdGF0ZShFeGFtcGxlQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTIxCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSwgZGVmYXVsdF9hcmdzPXsiYXJnX3dpdGhfZGVmYXVsdCI6ICJsb2NhbF9ieXRlczEifSkKICAgIGNhbGxzdWIgZGVmYXVsdF92YWx1ZV9mcm9tX2xvY2FsX3N0YXRlCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2RlZmF1bHRfdmFsdWVfZnJvbV9nbG9iYWxfc3RhdGVfcm91dGVAMTY6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTE3CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSwgZGVmYXVsdF9hcmdzPXsiYXJnX3dpdGhfZGVmYXVsdCI6ICJpbnQxIn0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBjbGFzcyBTdGF0ZShFeGFtcGxlQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weToxMTcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlLCBkZWZhdWx0X2FyZ3M9eyJhcmdfd2l0aF9kZWZhdWx0IjogImludDEifSkKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2RlZmF1bHRfdmFsdWVfZnJvbV9hYmlfcm91dGVAMTU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTEzCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSwgZGVmYXVsdF9hcmdzPXsiYXJnX3dpdGhfZGVmYXVsdCI6IGFyYzQuU3RyaW5nKCJkZWZhdWx0IHZhbHVlIil9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MzQKICAgIC8vIGNsYXNzIFN0YXRlKEV4YW1wbGVBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjExMwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUsIGRlZmF1bHRfYXJncz17ImFyZ193aXRoX2RlZmF1bHQiOiBhcmM0LlN0cmluZygiZGVmYXVsdCB2YWx1ZSIpfSkKICAgIGNhbGxzdWIgZGVmYXVsdF92YWx1ZV9mcm9tX2FiaQogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9kZWZhdWx0X3ZhbHVlX2ludF9yb3V0ZUAxNDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weToxMDkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlLCBkZWZhdWx0X2FyZ3M9eyJhcmdfd2l0aF9kZWZhdWx0IjogYXJjNC5VSW50NjQoMTIzKX0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBjbGFzcyBTdGF0ZShFeGFtcGxlQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weToxMDkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlLCBkZWZhdWx0X2FyZ3M9eyJhcmdfd2l0aF9kZWZhdWx0IjogYXJjNC5VSW50NjQoMTIzKX0pCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9kZWZhdWx0X3ZhbHVlX3JvdXRlQDEzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjEwNQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUsIGRlZmF1bHRfYXJncz17ImFyZ193aXRoX2RlZmF1bHQiOiBhcmM0LlN0cmluZygiZGVmYXVsdCB2YWx1ZSIpfSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MzQKICAgIC8vIGNsYXNzIFN0YXRlKEV4YW1wbGVBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjEwNQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUsIGRlZmF1bHRfYXJncz17ImFyZ193aXRoX2RlZmF1bHQiOiBhcmM0LlN0cmluZygiZGVmYXVsdCB2YWx1ZSIpfSkKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2NhbGxfd2l0aF9yZWZlcmVuY2VzX3JvdXRlQDEyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5Ojk4CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBjbGFzcyBTdGF0ZShFeGFtcGxlQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmFzIEFzc2V0cwogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgYnRvaQogICAgdHhuYXMgQWNjb3VudHMKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGJ0b2kKICAgIHR4bmFzIEFwcGxpY2F0aW9ucwogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5Ojk4CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGNhbGxzdWIgY2FsbF93aXRoX3JlZmVyZW5jZXMKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fY2FsbF9hYmlfdHhuX3JvdXRlQDExOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5Ojk0CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBjbGFzcyBTdGF0ZShFeGFtcGxlQVJDNENvbnRyYWN0KToKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18wIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTo5NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBjYWxsc3ViIGNhbGxfYWJpX3R4bgogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fY2FsbF9hYmlfcm91dGVAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6OTAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MzQKICAgIC8vIGNsYXNzIFN0YXRlKEV4YW1wbGVBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTo5MAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBjYWxsc3ViIGNhbGxfYWJpCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9lcnJvcl9yb3V0ZUA5OgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5Ojg2CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5Ojg4CiAgICAvLyBhc3NlcnQgRmFsc2UsICJEZWxpYmVyYXRlIGVycm9yIiAgIyBub3FhOiBQVDAxNSwgQjAxMQogICAgZXJyIC8vIERlbGliZXJhdGUgZXJyb3IKCm1haW5fb3B0X2luX3JvdXRlQDg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6ODIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiT3B0SW4iXSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGludGNfMCAvLyBPcHRJbgogICAgPT0KICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE9wdEluCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZGVsZXRlX2FiaV9yb3V0ZUA3OgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5Ojc2CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIkRlbGV0ZUFwcGxpY2F0aW9uIl0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDUgLy8gRGVsZXRlQXBwbGljYXRpb24KICAgID09CiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBEZWxldGVBcHBsaWNhdGlvbgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MzQKICAgIC8vIGNsYXNzIFN0YXRlKEV4YW1wbGVBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTo3NgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJEZWxldGVBcHBsaWNhdGlvbiJdKQogICAgY2FsbHN1YiBkZWxldGVfYWJpCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl91cGRhdGVfYWJpX3JvdXRlQDY6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6NzAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiVXBkYXRlQXBwbGljYXRpb24iXSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIHB1c2hpbnQgNCAvLyBVcGRhdGVBcHBsaWNhdGlvbgogICAgPT0KICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IFVwZGF0ZUFwcGxpY2F0aW9uCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTozNAogICAgLy8gY2xhc3MgU3RhdGUoRXhhbXBsZUFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjcwCiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIlVwZGF0ZUFwcGxpY2F0aW9uIl0pCiAgICBjYWxsc3ViIHVwZGF0ZV9hYmkKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2NyZWF0ZV9hYmlfcm91dGVANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTo2NQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBjbGFzcyBTdGF0ZShFeGFtcGxlQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6NjUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChjcmVhdGU9InJlcXVpcmUiKQogICAgY2FsbHN1YiBjcmVhdGVfYWJpCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9iYXJlX3JvdXRpbmdAMjI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MzQKICAgIC8vIGNsYXNzIFN0YXRlKEV4YW1wbGVBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgc3dpdGNoIG1haW5fY3JlYXRlQDIzIG1haW5fY3JlYXRlQDIzIG1haW5fYWZ0ZXJfaWZfZWxzZUAyNiBtYWluX2FmdGVyX2lmX2Vsc2VAMjYgbWFpbl91cGRhdGVAMjQgbWFpbl9kZWxldGVAMjUKICAgIGIgbWFpbl9hZnRlcl9pZl9lbHNlQDI2CgptYWluX2RlbGV0ZUAyNToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9iYXNlL2NvbnRyYWN0LnB5OjMwCiAgICAvLyBAYXJjNC5iYXJlbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJEZWxldGVBcHBsaWNhdGlvbiJdKQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGRlbGV0ZQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl91cGRhdGVAMjQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYmFzZS9jb250cmFjdC5weToyMwogICAgLy8gQGFyYzQuYmFyZW1ldGhvZChhbGxvd19hY3Rpb25zPVsiVXBkYXRlQXBwbGljYXRpb24iXSkKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgY2FsbHN1YiB1cGRhdGUKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fY3JlYXRlQDIzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjYwCiAgICAvLyBAYXJjNC5iYXJlbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIsIGFsbG93X2FjdGlvbnM9WyJOb09wIiwgIk9wdEluIl0pCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgY2FsbHN1YiBjcmVhdGUKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBleGFtcGxlcy5zbWFydF9jb250cmFjdHMuc3RhdGUuY29udHJhY3QuU3RhdGUuY3JlYXRlKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjYyCiAgICAvLyBzZWxmLmF1dGhvcml6ZV9jcmVhdG9yKCkKICAgIGNhbGxzdWIgYXV0aG9yaXplX2NyZWF0b3IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTo2MwogICAgLy8gc2VsZi52YWx1ZSA9IFRlbXBsYXRlVmFyW1VJbnQ2NF0oVkFMVUVfVEVNUExBVEVfTkFNRSkKICAgIHB1c2hieXRlcyAidmFsdWUiCiAgICBpbnRjIDQgLy8gVE1QTF9WQUxVRQogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1YgoKCi8vIGV4YW1wbGVzLnNtYXJ0X2NvbnRyYWN0cy5zdGF0ZS5jb250cmFjdC5TdGF0ZS5jcmVhdGVfYWJpKGlucHV0OiBieXRlcykgLT4gYnl0ZXM6CmNyZWF0ZV9hYmk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6NjUtNjYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChjcmVhdGU9InJlcXVpcmUiKQogICAgLy8gZGVmIGNyZWF0ZV9hYmkoc2VsZiwgaW5wdXQ6IFN0cmluZykgLT4gU3RyaW5nOiAgIyBub3FhOiBBMDAyCiAgICBwcm90byAxIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTo2NwogICAgLy8gc2VsZi5hdXRob3JpemVfY3JlYXRvcigpCiAgICBjYWxsc3ViIGF1dGhvcml6ZV9jcmVhdG9yCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6NjgKICAgIC8vIHJldHVybiBpbnB1dAogICAgZnJhbWVfZGlnIC0xCiAgICByZXRzdWIKCgovLyBleGFtcGxlcy5zbWFydF9jb250cmFjdHMuc3RhdGUuY29udHJhY3QuU3RhdGUudXBkYXRlX2FiaShpbnB1dDogYnl0ZXMpIC0+IGJ5dGVzOgp1cGRhdGVfYWJpOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjcwLTcxCiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIlVwZGF0ZUFwcGxpY2F0aW9uIl0pCiAgICAvLyBkZWYgdXBkYXRlX2FiaShzZWxmLCBpbnB1dDogU3RyaW5nKSAtPiBTdHJpbmc6ICAjIG5vcWE6IEEwMDIKICAgIHByb3RvIDEgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjcyCiAgICAvLyBzZWxmLmF1dGhvcml6ZV9jcmVhdG9yKCkKICAgIGNhbGxzdWIgYXV0aG9yaXplX2NyZWF0b3IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTo3MwogICAgLy8gYXNzZXJ0IFRlbXBsYXRlVmFyW2Jvb2xdKFVQREFUQUJMRV9URU1QTEFURV9OQU1FKSwgIkNoZWNrIGFwcCBpcyB1cGRhdGFibGUiCiAgICBpbnRjXzIgLy8gVE1QTF9VUERBVEFCTEUKICAgIGFzc2VydCAvLyBDaGVjayBhcHAgaXMgdXBkYXRhYmxlCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6NzQKICAgIC8vIHJldHVybiBpbnB1dAogICAgZnJhbWVfZGlnIC0xCiAgICByZXRzdWIKCgovLyBleGFtcGxlcy5zbWFydF9jb250cmFjdHMuc3RhdGUuY29udHJhY3QuU3RhdGUuZGVsZXRlX2FiaShpbnB1dDogYnl0ZXMpIC0+IGJ5dGVzOgpkZWxldGVfYWJpOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5Ojc2LTc3CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIkRlbGV0ZUFwcGxpY2F0aW9uIl0pCiAgICAvLyBkZWYgZGVsZXRlX2FiaShzZWxmLCBpbnB1dDogU3RyaW5nKSAtPiBTdHJpbmc6ICAjIG5vcWE6IEEwMDIKICAgIHByb3RvIDEgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5Ojc4CiAgICAvLyBzZWxmLmF1dGhvcml6ZV9jcmVhdG9yKCkKICAgIGNhbGxzdWIgYXV0aG9yaXplX2NyZWF0b3IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTo3OQogICAgLy8gYXNzZXJ0IFRlbXBsYXRlVmFyW2Jvb2xdKERFTEVUQUJMRV9URU1QTEFURV9OQU1FKSwgIkNoZWNrIGFwcCBpcyBkZWxldGFibGUiCiAgICBpbnRjXzMgLy8gVE1QTF9ERUxFVEFCTEUKICAgIGFzc2VydCAvLyBDaGVjayBhcHAgaXMgZGVsZXRhYmxlCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6ODAKICAgIC8vIHJldHVybiBpbnB1dAogICAgZnJhbWVfZGlnIC0xCiAgICByZXRzdWIKCgovLyBleGFtcGxlcy5zbWFydF9jb250cmFjdHMuc3RhdGUuY29udHJhY3QuU3RhdGUuY2FsbF9hYmkodmFsdWU6IGJ5dGVzKSAtPiBieXRlczoKY2FsbF9hYmk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6OTAtOTEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgLy8gZGVmIGNhbGxfYWJpKHNlbGYsIHZhbHVlOiBTdHJpbmcpIC0+IFN0cmluZzoKICAgIHByb3RvIDEgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjkyCiAgICAvLyByZXR1cm4gU3RyaW5nKCJIZWxsbywgIikgKyB2YWx1ZQogICAgYnl0ZWNfMSAvLyAiSGVsbG8sICIKICAgIGZyYW1lX2RpZyAtMQogICAgY29uY2F0CiAgICByZXRzdWIKCgovLyBleGFtcGxlcy5zbWFydF9jb250cmFjdHMuc3RhdGUuY29udHJhY3QuU3RhdGUuY2FsbF9hYmlfdHhuKHR4bjogdWludDY0LCB2YWx1ZTogYnl0ZXMpIC0+IGJ5dGVzOgpjYWxsX2FiaV90eG46CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6OTQtOTUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgLy8gZGVmIGNhbGxfYWJpX3R4bihzZWxmLCB0eG46IGd0eG4uUGF5bWVudFRyYW5zYWN0aW9uLCB2YWx1ZTogU3RyaW5nKSAtPiBTdHJpbmc6CiAgICBwcm90byAyIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weTo5NgogICAgLy8gcmV0dXJuIFN0cmluZygiU2VudCAiKSArIHNlbGYuaXRvYSh0eG4uYW1vdW50KSArIFN0cmluZygiLiAiKSArIHZhbHVlCiAgICBmcmFtZV9kaWcgLTIKICAgIGd0eG5zIEFtb3VudAogICAgY2FsbHN1YiBpdG9hCiAgICBwdXNoYnl0ZXMgIlNlbnQgIgogICAgc3dhcAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgIi4gIgogICAgY29uY2F0CiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgcmV0c3ViCgoKLy8gZXhhbXBsZXMuc21hcnRfY29udHJhY3RzLnN0YXRlLmNvbnRyYWN0LlN0YXRlLmNhbGxfd2l0aF9yZWZlcmVuY2VzKGFzc2V0OiB1aW50NjQsIGFjY291bnQ6IGJ5dGVzLCBhcHBsaWNhdGlvbjogdWludDY0KSAtPiB1aW50NjQ6CmNhbGxfd2l0aF9yZWZlcmVuY2VzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5Ojk4LTk5CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIC8vIGRlZiBjYWxsX3dpdGhfcmVmZXJlbmNlcyhzZWxmLCBhc3NldDogQXNzZXQsIGFjY291bnQ6IEFjY291bnQsIGFwcGxpY2F0aW9uOiBBcHBsaWNhdGlvbikgLT4gVUludDY0OgogICAgcHJvdG8gMyAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTAwCiAgICAvLyBhc3NlcnQgYXNzZXQsICJhc3NldCBub3QgcHJvdmlkZWQiCiAgICBmcmFtZV9kaWcgLTMKICAgIGFzc2VydCAvLyBhc3NldCBub3QgcHJvdmlkZWQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weToxMDEKICAgIC8vIGFzc2VydCBhY2NvdW50LCAiYWNjb3VudCBub3QgcHJvdmlkZWQiCiAgICBmcmFtZV9kaWcgLTIKICAgIGdsb2JhbCBaZXJvQWRkcmVzcwogICAgIT0KICAgIGFzc2VydCAvLyBhY2NvdW50IG5vdCBwcm92aWRlZAogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjEwMgogICAgLy8gYXNzZXJ0IGFwcGxpY2F0aW9uLCAiYXBwbGljYXRpb24gbm90IHByb3ZpZGVkIgogICAgZnJhbWVfZGlnIC0xCiAgICBhc3NlcnQgLy8gYXBwbGljYXRpb24gbm90IHByb3ZpZGVkCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTAzCiAgICAvLyByZXR1cm4gVUludDY0KDEpCiAgICBpbnRjXzAgLy8gMQogICAgcmV0c3ViCgoKLy8gZXhhbXBsZXMuc21hcnRfY29udHJhY3RzLnN0YXRlLmNvbnRyYWN0LlN0YXRlLmRlZmF1bHRfdmFsdWVfZnJvbV9hYmkoYXJnX3dpdGhfZGVmYXVsdDogYnl0ZXMpIC0+IGJ5dGVzOgpkZWZhdWx0X3ZhbHVlX2Zyb21fYWJpOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjExMy0xMTQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlLCBkZWZhdWx0X2FyZ3M9eyJhcmdfd2l0aF9kZWZhdWx0IjogYXJjNC5TdHJpbmcoImRlZmF1bHQgdmFsdWUiKX0pCiAgICAvLyBkZWYgZGVmYXVsdF92YWx1ZV9mcm9tX2FiaShzZWxmLCBhcmdfd2l0aF9kZWZhdWx0OiBhcmM0LlN0cmluZykgLT4gYXJjNC5TdHJpbmc6CiAgICBwcm90byAxIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weToxMTUKICAgIC8vIHJldHVybiBTdHJpbmcoIkFCSSwgIikgKyBhcmdfd2l0aF9kZWZhdWx0CiAgICBmcmFtZV9kaWcgLTEKICAgIGV4dHJhY3QgMiAwCiAgICBwdXNoYnl0ZXMgMHg0MTQyNDkyYzIwCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICByZXRzdWIKCgovLyBleGFtcGxlcy5zbWFydF9jb250cmFjdHMuc3RhdGUuY29udHJhY3QuU3RhdGUuZGVmYXVsdF92YWx1ZV9mcm9tX2xvY2FsX3N0YXRlKGFyZ193aXRoX2RlZmF1bHQ6IGJ5dGVzKSAtPiBieXRlczoKZGVmYXVsdF92YWx1ZV9mcm9tX2xvY2FsX3N0YXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjEyMS0xMjIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlLCBkZWZhdWx0X2FyZ3M9eyJhcmdfd2l0aF9kZWZhdWx0IjogImxvY2FsX2J5dGVzMSJ9KQogICAgLy8gZGVmIGRlZmF1bHRfdmFsdWVfZnJvbV9sb2NhbF9zdGF0ZShzZWxmLCBhcmdfd2l0aF9kZWZhdWx0OiBTdHJpbmcpIC0+IGFyYzQuU3RyaW5nOgogICAgcHJvdG8gMSAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTIzCiAgICAvLyByZXR1cm4gYXJjNC5TdHJpbmcoU3RyaW5nKCJMb2NhbCBzdGF0ZSwgIikgKyBhcmdfd2l0aF9kZWZhdWx0KQogICAgcHVzaGJ5dGVzICJMb2NhbCBzdGF0ZSwgIgogICAgZnJhbWVfZGlnIC0xCiAgICBjb25jYXQKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICByZXRzdWIKCgovLyBleGFtcGxlcy5zbWFydF9jb250cmFjdHMuc3RhdGUuY29udHJhY3QuU3RhdGUuc3RydWN0cyhuYW1lX2FnZTogYnl0ZXMpIC0+IGJ5dGVzOgpzdHJ1Y3RzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjEyNS0xMjYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgLy8gZGVmIHN0cnVjdHMoc2VsZiwgbmFtZV9hZ2U6IElucHV0KSAtPiBPdXRwdXQ6CiAgICBwcm90byAxIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weToxMjcKICAgIC8vIHJldHVybiBPdXRwdXQoYXJjNC5TdHJpbmcoU3RyaW5nKCJIZWxsbywgIikgKyBuYW1lX2FnZS5uYW1lLm5hdGl2ZSksIGFyYzQuVUludDY0KG5hbWVfYWdlLmFnZS5uYXRpdmUgKiAyKSkKICAgIGZyYW1lX2RpZyAtMQogICAgaW50Y18xIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTEKICAgIGxlbgogICAgZnJhbWVfZGlnIC0xCiAgICBjb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBleHRyYWN0IDIgMAogICAgYnl0ZWNfMSAvLyAiSGVsbG8sICIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGZyYW1lX2RpZyAtMQogICAgcHVzaGludCAyIC8vIDIKICAgIGV4dHJhY3RfdWludDY0CiAgICBwdXNoaW50IDIgLy8gMgogICAgKgogICAgaXRvYgogICAgcHVzaGJ5dGVzIDB4MDAwYQogICAgc3dhcAogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIHJldHN1YgoKCi8vIGV4YW1wbGVzLnNtYXJ0X2NvbnRyYWN0cy5zdGF0ZS5jb250cmFjdC5TdGF0ZS5zZXRfZ2xvYmFsKGludDE6IHVpbnQ2NCwgaW50MjogdWludDY0LCBieXRlczE6IGJ5dGVzLCBieXRlczI6IGJ5dGVzKSAtPiB2b2lkOgpzZXRfZ2xvYmFsOgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjEyOS0xMzIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgLy8gZGVmIHNldF9nbG9iYWwoCiAgICAvLyAgICAgc2VsZiwgaW50MTogVUludDY0LCBpbnQyOiBVSW50NjQsIGJ5dGVzMTogU3RyaW5nLCBieXRlczI6IGFyYzQuU3RhdGljQXJyYXlbYXJjNC5CeXRlLCBMaXRlcmFsWzRdXQogICAgLy8gKSAtPiBOb25lOgogICAgcHJvdG8gNCAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTMzCiAgICAvLyBzZWxmLmludDEgPSBpbnQxCiAgICBwdXNoYnl0ZXMgImludDEiCiAgICBmcmFtZV9kaWcgLTQKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTM0CiAgICAvLyBzZWxmLmludDIgPSBpbnQyCiAgICBwdXNoYnl0ZXMgImludDIiCiAgICBmcmFtZV9kaWcgLTMKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTM1CiAgICAvLyBzZWxmLmJ5dGVzMSA9IGJ5dGVzMS5ieXRlcwogICAgcHVzaGJ5dGVzICJieXRlczEiCiAgICBmcmFtZV9kaWcgLTIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTM2CiAgICAvLyBzZWxmLmJ5dGVzMiA9IGJ5dGVzMi5ieXRlcwogICAgcHVzaGJ5dGVzICJieXRlczIiCiAgICBmcmFtZV9kaWcgLTEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICByZXRzdWIKCgovLyBleGFtcGxlcy5zbWFydF9jb250cmFjdHMuc3RhdGUuY29udHJhY3QuU3RhdGUuc2V0X2xvY2FsKGludDE6IHVpbnQ2NCwgaW50MjogdWludDY0LCBieXRlczE6IGJ5dGVzLCBieXRlczI6IGJ5dGVzKSAtPiB2b2lkOgpzZXRfbG9jYWw6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTM4LTE0MQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICAvLyBkZWYgc2V0X2xvY2FsKAogICAgLy8gICAgIHNlbGYsIGludDE6IFVJbnQ2NCwgaW50MjogVUludDY0LCBieXRlczE6IFN0cmluZywgYnl0ZXMyOiBhcmM0LlN0YXRpY0FycmF5W2FyYzQuQnl0ZSwgTGl0ZXJhbFs0XV0KICAgIC8vICkgLT4gTm9uZToKICAgIHByb3RvIDQgMAogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjE0MgogICAgLy8gc2VsZi5sb2NhbF9pbnQxW1R4bi5zZW5kZXJdID0gaW50MQogICAgdHhuIFNlbmRlcgogICAgcHVzaGJ5dGVzICJsb2NhbF9pbnQxIgogICAgZnJhbWVfZGlnIC00CiAgICBhcHBfbG9jYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3RhdGUvY29udHJhY3QucHk6MTQzCiAgICAvLyBzZWxmLmxvY2FsX2ludDJbVHhuLnNlbmRlcl0gPSBpbnQyCiAgICB0eG4gU2VuZGVyCiAgICBwdXNoYnl0ZXMgImxvY2FsX2ludDIiCiAgICBmcmFtZV9kaWcgLTMKICAgIGFwcF9sb2NhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weToxNDQKICAgIC8vIHNlbGYubG9jYWxfYnl0ZXMxW1R4bi5zZW5kZXJdID0gYnl0ZXMxLmJ5dGVzCiAgICB0eG4gU2VuZGVyCiAgICBwdXNoYnl0ZXMgImxvY2FsX2J5dGVzMSIKICAgIGZyYW1lX2RpZyAtMgogICAgYXBwX2xvY2FsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjE0NQogICAgLy8gc2VsZi5sb2NhbF9ieXRlczJbVHhuLnNlbmRlcl0gPSBieXRlczIuYnl0ZXMKICAgIHR4biBTZW5kZXIKICAgIHB1c2hieXRlcyAibG9jYWxfYnl0ZXMyIgogICAgZnJhbWVfZGlnIC0xCiAgICBhcHBfbG9jYWxfcHV0CiAgICByZXRzdWIKCgovLyBleGFtcGxlcy5zbWFydF9jb250cmFjdHMuc3RhdGUuY29udHJhY3QuU3RhdGUuc2V0X2JveChuYW1lOiBieXRlcywgdmFsdWU6IGJ5dGVzKSAtPiB2b2lkOgpzZXRfYm94OgogICAgLy8gc21hcnRfY29udHJhY3RzL3N0YXRlL2NvbnRyYWN0LnB5OjE0Ny0xNDgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgLy8gZGVmIHNldF9ib3goc2VsZiwgbmFtZTogYXJjNC5TdGF0aWNBcnJheVthcmM0LkJ5dGUsIExpdGVyYWxbNF1dLCB2YWx1ZTogYXJjNC5TdHJpbmcpIC0+IE5vbmU6CiAgICBwcm90byAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdGF0ZS9jb250cmFjdC5weToxNDkKICAgIC8vIHNlbGYuYm94W25hbWVdID0gdmFsdWUKICAgIGZyYW1lX2RpZyAtMgogICAgYm94X2RlbAogICAgcG9wCiAgICBmcmFtZV9kaWcgLTIKICAgIGZyYW1lX2RpZyAtMQogICAgYm94X3B1dAogICAgcmV0c3ViCgoKLy8gZXhhbXBsZXMuc21hcnRfY29udHJhY3RzLmJhc2UuY29udHJhY3QuSW1tdXRhYmlsaXR5Q29udHJvbEFSQzRDb250cmFjdC51cGRhdGUoKSAtPiB2b2lkOgp1cGRhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYmFzZS9jb250cmFjdC5weToyNQogICAgLy8gYXNzZXJ0IFRlbXBsYXRlVmFyW2Jvb2xdKFVQREFUQUJMRV9URU1QTEFURV9OQU1FKSwgIkNoZWNrIGFwcCBpcyB1cGRhdGFibGUiCiAgICBpbnRjXzIgLy8gVE1QTF9VUERBVEFCTEUKICAgIGFzc2VydCAvLyBDaGVjayBhcHAgaXMgdXBkYXRhYmxlCiAgICAvLyBzbWFydF9jb250cmFjdHMvYmFzZS9jb250cmFjdC5weToyNgogICAgLy8gc2VsZi5hdXRob3JpemVfY3JlYXRvcigpCiAgICBjYWxsc3ViIGF1dGhvcml6ZV9jcmVhdG9yCiAgICByZXRzdWIKCgovLyBleGFtcGxlcy5zbWFydF9jb250cmFjdHMuYmFzZS5jb250cmFjdC5QZXJtYW5lbmNlQ29udHJvbEFSQzRDb250cmFjdC5kZWxldGUoKSAtPiB2b2lkOgpkZWxldGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYmFzZS9jb250cmFjdC5weTozMgogICAgLy8gYXNzZXJ0IFRlbXBsYXRlVmFyW2Jvb2xdKERFTEVUQUJMRV9URU1QTEFURV9OQU1FKSwgIkNoZWNrIGFwcCBpcyBkZWxldGFibGUiCiAgICBpbnRjXzMgLy8gVE1QTF9ERUxFVEFCTEUKICAgIGFzc2VydCAvLyBDaGVjayBhcHAgaXMgZGVsZXRhYmxlCiAgICAvLyBzbWFydF9jb250cmFjdHMvYmFzZS9jb250cmFjdC5weTozMwogICAgLy8gc2VsZi5hdXRob3JpemVfY3JlYXRvcigpCiAgICBjYWxsc3ViIGF1dGhvcml6ZV9jcmVhdG9yCiAgICByZXRzdWIKCgovLyBleGFtcGxlcy5zbWFydF9jb250cmFjdHMuYmFzZS5jb250cmFjdC5CYXNlQVJDNENvbnRyYWN0LmF1dGhvcml6ZV9jcmVhdG9yKCkgLT4gdm9pZDoKYXV0aG9yaXplX2NyZWF0b3I6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYmFzZS9jb250cmFjdC5weToxMAogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gR2xvYmFsLmNyZWF0b3JfYWRkcmVzcywgInVuYXV0aG9yaXplZCIKICAgIHR4biBTZW5kZXIKICAgIGdsb2JhbCBDcmVhdG9yQWRkcmVzcwogICAgPT0KICAgIGFzc2VydCAvLyB1bmF1dGhvcml6ZWQKICAgIHJldHN1YgoKCi8vIGV4YW1wbGVzLnNtYXJ0X2NvbnRyYWN0cy5iYXNlLmNvbnRyYWN0LkJhc2VBUkM0Q29udHJhY3QuaXRvYShpOiB1aW50NjQpIC0+IGJ5dGVzOgppdG9hOgogICAgLy8gc21hcnRfY29udHJhY3RzL2Jhc2UvY29udHJhY3QucHk6MTItMTMKICAgIC8vIEBzdWJyb3V0aW5lCiAgICAvLyBkZWYgaXRvYShzZWxmLCBpOiBVSW50NjQpIC0+IFN0cmluZzoKICAgIHByb3RvIDEgMQogICAgYnl0ZWNfMiAvLyAiIgogICAgLy8gc21hcnRfY29udHJhY3RzL2Jhc2UvY29udHJhY3QucHk6MTQKICAgIC8vIGlmIGkgPT0gVUludDY0KDApOgogICAgZnJhbWVfZGlnIC0xCiAgICBibnogaXRvYV9lbHNlX2JvZHlAMgogICAgLy8gc21hcnRfY29udHJhY3RzL2Jhc2UvY29udHJhY3QucHk6MTUKICAgIC8vIHJldHVybiBTdHJpbmcoIjAiKQogICAgcHVzaGJ5dGVzICIwIgogICAgc3dhcAogICAgcmV0c3ViCgppdG9hX2Vsc2VfYm9keUAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2Jhc2UvY29udHJhY3QucHk6MTcKICAgIC8vIHJldHVybiAoc2VsZi5pdG9hKGkgLy8gVUludDY0KDEwKSkgaWYgKGkgLy8gVUludDY0KDEwKSkgPiBVSW50NjQoMCkgZWxzZSBTdHJpbmcoIiIpKSArIFN0cmluZy5mcm9tX2J5dGVzKAogICAgZnJhbWVfZGlnIC0xCiAgICBwdXNoaW50IDEwIC8vIDEwCiAgICAvCiAgICBkdXAKICAgIGZyYW1lX2J1cnkgMAogICAgYnogaXRvYV90ZXJuYXJ5X2ZhbHNlQDQKICAgIGZyYW1lX2RpZyAwCiAgICBjYWxsc3ViIGl0b2EKCml0b2FfdGVybmFyeV9tZXJnZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL2Jhc2UvY29udHJhY3QucHk6MTgKICAgIC8vIFN0cmluZygiMDEyMzQ1Njc4OSIpLmJ5dGVzW2kgJSBVSW50NjQoMTApXQogICAgZnJhbWVfZGlnIC0xCiAgICBwdXNoaW50IDEwIC8vIDEwCiAgICAlCiAgICBwdXNoYnl0ZXMgIjAxMjM0NTY3ODkiCiAgICBzd2FwCiAgICBpbnRjXzAgLy8gMQogICAgZXh0cmFjdDMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9iYXNlL2NvbnRyYWN0LnB5OjE3LTE5CiAgICAvLyByZXR1cm4gKHNlbGYuaXRvYShpIC8vIFVJbnQ2NCgxMCkpIGlmIChpIC8vIFVJbnQ2NCgxMCkpID4gVUludDY0KDApIGVsc2UgU3RyaW5nKCIiKSkgKyBTdHJpbmcuZnJvbV9ieXRlcygKICAgIC8vICAgICBTdHJpbmcoIjAxMjM0NTY3ODkiKS5ieXRlc1tpICUgVUludDY0KDEwKV0KICAgIC8vICkKICAgIGNvbmNhdAogICAgc3dhcAogICAgcmV0c3ViCgppdG9hX3Rlcm5hcnlfZmFsc2VANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9iYXNlL2NvbnRyYWN0LnB5OjE3CiAgICAvLyByZXR1cm4gKHNlbGYuaXRvYShpIC8vIFVJbnQ2NCgxMCkpIGlmIChpIC8vIFVJbnQ2NCgxMCkpID4gVUludDY0KDApIGVsc2UgU3RyaW5nKCIiKSkgKyBTdHJpbmcuZnJvbV9ieXRlcygKICAgIGJ5dGVjXzIgLy8gIiIKICAgIGIgaXRvYV90ZXJuYXJ5X21lcmdlQDUK","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CiAFAQAAAAAmAwQVH3x1B0hlbGxvLCAAMRtBAg+CEQSdUjBABDylzrcEJxtO6QQwxtWKBETQ2g0E8X6ApQQKkqgeBP798R4EV0tVyAQ2A2LpBEbSEaMEDPy7AATQ8Lr4BCRr64MEpM+N6gTOwoNKBKS0ojA2GgCOEQFyAVIBMgEoASABAgDaALcAqACZAIYAdwBhAE4AMQAUAAIjQzEZFEQxGEQ2GgE2GgKIAuwiQzEZFEQxGEQ2GgEXNhoCFzYaA1cCADYaBIgCgyJDMRkURDEYRDYaARc2GgIXNhoDVwIANhoEiAI6IkMxGRREMRhENhoBiAH8KExQsCJDMRkURDEYRDYaAVcCAIgByChMULAiQzEZFEQxGEQoNhoBULAiQzEZFEQxGEQ2GgGIAYwoTFCwIkMxGRREMRhEKDYaAVCwIkMxGRREMRhEKDYaAVCwIkMxGRREMRhENhoBF8AwNhoCF8AcNhoDF8AyiAE7FihMULAiQzEZFEQxGEQxFiIJSTgQIhJENhoBVwIAiAD+SRUWVwYCTFAoTFCwIkMxGRREMRhENhoBVwIAiADYSRUWVwYCTFAoTFCwIkMxGRREMRhEADEZIhJEMRhEIkMxGYEFEkQxGEQ2GgFXAgCIAJtJFRZXBgJMUChMULAiQzEZgQQSRDEYRDYaAVcCAIgAcEkVFlcGAkxQKExQsCJDMRkURDEYFEQ2GgFXAgCIAEhJFRZXBgJMUChMULAiQzEZjQYAEwAT/l/+XwALAANC/lwxGESIAWciQzEYRIgBWSJDMRgURIgAAiJDiAFXgAV2YWx1ZSEEZ4mKAQGIAUaL/4mKAQGIAT0kRIv/iYoBAYgBMiVEi/+JigEBKYv/UImKAgGL/jgIiAEigAVTZW50IExQgAIuIFCL/1CJigMBi/1Ei/4yAxNEi/9EIomKAQGL/1cCAIAFQUJJLCBMUEkVFlcGAkxQiYoBAYANTG9jYWwgc3RhdGUsIIv/UEkVFlcGAkxQiYoBAYv/I1mL/xWL/04CUlcCAClMUEkVFlcGAkxQi/+BAluBAgsWgAIACkxQTFCJigQAgARpbnQxi/xngARpbnQyi/1ngAZieXRlczGL/meABmJ5dGVzMov/Z4mKBAAxAIAKbG9jYWxfaW50MYv8ZjEAgApsb2NhbF9pbnQyi/1mMQCADGxvY2FsX2J5dGVzMYv+ZjEAgAxsb2NhbF9ieXRlczKL/2aJigIAi/68SIv+i/+/iSREiAAHiSVEiAABiTEAMgkSRImKAQEqi/9AAAWAATBMiYv/gQoKSYwAQQAciwCI/+KL/4EKGIAKMDEyMzQ1Njc4OUwiWFBMiSpC/+U=","clear":"CoEBQw=="},"events":[],"templateVariables":{"UPDATABLE":{"type":"AVMUint64"},"DELETABLE":{"type":"AVMUint64"},"VALUE":{"type":"AVMUint64"}}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -91,6 +91,15 @@ export function OutputFromTuple(abiTuple: [string, bigint]) {
 }
 
 /**
+ * Deploy-time template variables
+ */
+export type TemplateVariables = {
+  UPDATABLE: bigint,
+  DELETABLE: bigint,
+  VALUE: bigint,
+}
+
+/**
  * The argument types for the State contract
  */
 export type StateArgs = {
@@ -116,10 +125,10 @@ export type StateArgs = {
       txn: AppMethodCallTransactionArgument
       value: string
     }
-    'call_with_references(uint64,address,uint64)uint64': {
-      asset: bigint | number
-      account: string
-      application: bigint | number
+    'call_with_references(asset,account,application)uint64': {
+      asset: bigint
+      account: Uint8Array | string
+      application: bigint
     }
     'default_value(string)string': {
       argWithDefault?: string
@@ -167,7 +176,7 @@ export type StateArgs = {
     'error()void': []
     'call_abi(string)string': [value: string]
     'call_abi_txn(pay,string)string': [txn: AppMethodCallTransactionArgument, value: string]
-    'call_with_references(uint64,address,uint64)uint64': [asset: bigint | number, account: string, application: bigint | number]
+    'call_with_references(asset,account,application)uint64': [asset: bigint, account: Uint8Array | string, application: bigint]
     'default_value(string)string': [argWithDefault: string | undefined]
     'default_value_int(uint64)uint64': [argWithDefault: bigint | number | undefined]
     'default_value_from_abi(string)string': [argWithDefault: string | undefined]
@@ -191,7 +200,7 @@ export type StateReturns = {
   'error()void': void
   'call_abi(string)string': string
   'call_abi_txn(pay,string)string': string
-  'call_with_references(uint64,address,uint64)uint64': bigint
+  'call_with_references(asset,account,application)uint64': bigint
   'default_value(string)string': string
   'default_value_int(uint64)uint64': bigint
   'default_value_from_abi(string)string': string
@@ -246,10 +255,10 @@ export type StateTypes = {
       argsTuple: StateArgs['tuple']['call_abi_txn(pay,string)string']
       returns: StateReturns['call_abi_txn(pay,string)string']
     }>
-    & Record<'call_with_references(uint64,address,uint64)uint64' | 'call_with_references', {
-      argsObj: StateArgs['obj']['call_with_references(uint64,address,uint64)uint64']
-      argsTuple: StateArgs['tuple']['call_with_references(uint64,address,uint64)uint64']
-      returns: StateReturns['call_with_references(uint64,address,uint64)uint64']
+    & Record<'call_with_references(asset,account,application)uint64' | 'call_with_references', {
+      argsObj: StateArgs['obj']['call_with_references(asset,account,application)uint64']
+      argsTuple: StateArgs['tuple']['call_with_references(asset,account,application)uint64']
+      returns: StateReturns['call_with_references(asset,account,application)uint64']
     }>
     & Record<'default_value(string)string' | 'default_value', {
       argsObj: StateArgs['obj']['default_value(string)string']
@@ -376,11 +385,140 @@ export type LocalKeysState = StateTypes['state']['local']['keys']
 export type BoxKeysState = StateTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type StateCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC | OnApplicationComplete.OptInOC} & CreateSchema>
+  | Expand<CallParams<StateArgs['obj']['create_abi(string)string'] | StateArgs['tuple']['create_abi(string)string']> & {method: 'create_abi'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<StateArgs['obj']['create_abi(string)string'] | StateArgs['tuple']['create_abi(string)string']> & {method: 'create_abi(string)string'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type StateUpdateCallParams =
+  | Expand<AppClientBareCallParams> & {method?: never}
+  | Expand<CallParams<StateArgs['obj']['update_abi(string)string'] | StateArgs['tuple']['update_abi(string)string']> & {method: 'update_abi'}>
+  | Expand<CallParams<StateArgs['obj']['update_abi(string)string'] | StateArgs['tuple']['update_abi(string)string']> & {method: 'update_abi(string)string'}>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type StateDeleteCallParams =
+  | Expand<AppClientBareCallParams> & {method?: never}
+  | Expand<CallParams<StateArgs['obj']['delete_abi(string)string'] | StateArgs['tuple']['delete_abi(string)string']> & {method: 'delete_abi'}>
+  | Expand<CallParams<StateArgs['obj']['delete_abi(string)string'] | StateArgs['tuple']['delete_abi(string)string']> & {method: 'delete_abi(string)string'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type StateDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: StateCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: StateUpdateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: StateDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the State smart contract
  */
 export abstract class StateParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends StateCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create_abi':
+          case 'create_abi(string)string':
+            return StateParamsFactory.create.createAbi(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the State smart contract using the create_abi(string)string ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createAbi(params: CallParams<StateArgs['obj']['create_abi(string)string'] | StateArgs['tuple']['create_abi(string)string']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create_abi(string)string' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.input],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends StateUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'update_abi':
+          case 'update_abi(string)string':
+            return StateParamsFactory.update.updateAbi(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the State smart contract using the update_abi(string)string ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateAbi(params: CallParams<StateArgs['obj']['update_abi(string)string'] | StateArgs['tuple']['update_abi(string)string']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'update_abi(string)string' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.input],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends StateDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'delete_abi':
+          case 'delete_abi(string)string':
+            return StateParamsFactory.delete.deleteAbi(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the State smart contract using the delete_abi(string)string ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      deleteAbi(params: CallParams<StateArgs['obj']['delete_abi(string)string'] | StateArgs['tuple']['delete_abi(string)string']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'delete_abi(string)string' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.input],
+        }
+      },
+    }
+  }
+
   /**
    * Gets available optIn ABI call param factories
    */
@@ -442,15 +580,15 @@ export abstract class StateParamsFactory {
     }
   }
   /**
-   * Constructs a no op call for the call_with_references(uint64,address,uint64)uint64 ABI method
+   * Constructs a no op call for the call_with_references(asset,account,application)uint64 ABI method
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static callWithReferences(params: CallParams<StateArgs['obj']['call_with_references(uint64,address,uint64)uint64'] | StateArgs['tuple']['call_with_references(uint64,address,uint64)uint64']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+  static callWithReferences(params: CallParams<StateArgs['obj']['call_with_references(asset,account,application)uint64'] | StateArgs['tuple']['call_with_references(asset,account,application)uint64']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
     return {
       ...params,
-      method: 'call_with_references(uint64,address,uint64)uint64' as const,
+      method: 'call_with_references(asset,account,application)uint64' as const,
       args: Array.isArray(params.args) ? params.args : [params.args.asset, params.args.account, params.args.application],
     }
   }
@@ -574,6 +712,226 @@ export abstract class StateParamsFactory {
 }
 
 /**
+ * A factory to create and deploy one or more instance of the State smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class StateFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `StateFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new StateClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new StateClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the State smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: StateDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? StateParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (StateCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? StateParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (StateUpdateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? StateParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (StateDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new StateClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the State smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC | OnApplicationComplete.OptInOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+      /**
+       * Creates a new instance of the State smart contract using the create_abi(string)string ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createAbi: (params: CallParams<StateArgs['obj']['create_abi(string)string'] | StateArgs['tuple']['create_abi(string)string']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(StateParamsFactory.create.createAbi(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the State smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a deployUpdate call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appFactory.params.bare.deployUpdate(params)
+      },
+      /**
+       * Updates an existing instance of the State smart contract using the update_abi(string)string ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateAbi: (params: CallParams<StateArgs['obj']['update_abi(string)string'] | StateArgs['tuple']['update_abi(string)string']> & AppClientCompilationParams) => {
+        return this.appFactory.params.deployUpdate(StateParamsFactory.update.updateAbi(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the State smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a deployDelete call
+       */
+      bare: (params?: Expand<AppClientBareCallParams>) => {
+        return this.appFactory.params.bare.deployDelete(params)
+      },
+      /**
+       * Deletes an existing instance of the State smart contract using the delete_abi(string)string ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      deleteAbi: (params: CallParams<StateArgs['obj']['delete_abi(string)string'] | StateArgs['tuple']['delete_abi(string)string']>) => {
+        return this.appFactory.params.deployDelete(StateParamsFactory.delete.deleteAbi(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the State smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC | OnApplicationComplete.OptInOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+      /**
+       * Creates a new instance of the State smart contract using the create_abi(string)string ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createAbi: (params: CallParams<StateArgs['obj']['create_abi(string)string'] | StateArgs['tuple']['create_abi(string)string']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(StateParamsFactory.create.createAbi(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the State smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC | OnApplicationComplete.OptInOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new StateClient(result.appClient) }
+      },
+      /**
+       * Creates a new instance of the State smart contract using an ABI method call using the create_abi(string)string ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createAbi: async (params: CallParams<StateArgs['obj']['create_abi(string)string'] | StateArgs['tuple']['create_abi(string)string']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(StateParamsFactory.create.createAbi(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | StateReturns['create_abi(string)string']) }, appClient: new StateClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
+/**
  * A client to make calls to the State smart contract
  */
 export class StateClient {
@@ -661,6 +1019,56 @@ export class StateClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the State smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appClient.params.bare.update(params)
+      },
+      /**
+       * Updates an existing instance of the State smart contract using the `update_abi(string)string` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateAbi: (params: CallParams<StateArgs['obj']['update_abi(string)string'] | StateArgs['tuple']['update_abi(string)string']> & AppClientCompilationParams) => {
+        return this.appClient.params.update(StateParamsFactory.update.updateAbi(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the State smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The delete result
+       */
+      bare: (params?: Expand<AppClientBareCallParams>) => {
+        return this.appClient.params.bare.delete(params)
+      },
+      /**
+       * Deletes an existing instance of the State smart contract using the `delete_abi(string)string` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      deleteAbi: (params: CallParams<StateArgs['obj']['delete_abi(string)string'] | StateArgs['tuple']['delete_abi(string)string']>) => {
+        return this.appClient.params.delete(StateParamsFactory.delete.deleteAbi(params))
+      },
+
+    },
+
+    /**
      * Gets available optIn methods
      */
     optIn: {
@@ -723,12 +1131,12 @@ export class StateClient {
     },
 
     /**
-     * Makes a call to the State smart contract using the `call_with_references(uint64,address,uint64)uint64` ABI method.
+     * Makes a call to the State smart contract using the `call_with_references(asset,account,application)uint64` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call params
      */
-    callWithReferences: (params: CallParams<StateArgs['obj']['call_with_references(uint64,address,uint64)uint64'] | StateArgs['tuple']['call_with_references(uint64,address,uint64)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    callWithReferences: (params: CallParams<StateArgs['obj']['call_with_references(asset,account,application)uint64'] | StateArgs['tuple']['call_with_references(asset,account,application)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.params.call(StateParamsFactory.callWithReferences(params))
     },
 
@@ -839,6 +1247,56 @@ export class StateClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the State smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appClient.createTransaction.bare.update(params)
+      },
+      /**
+       * Updates an existing instance of the State smart contract using the `update_abi(string)string` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateAbi: (params: CallParams<StateArgs['obj']['update_abi(string)string'] | StateArgs['tuple']['update_abi(string)string']> & AppClientCompilationParams) => {
+        return this.appClient.createTransaction.update(StateParamsFactory.update.updateAbi(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the State smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The delete result
+       */
+      bare: (params?: Expand<AppClientBareCallParams>) => {
+        return this.appClient.createTransaction.bare.delete(params)
+      },
+      /**
+       * Deletes an existing instance of the State smart contract using the `delete_abi(string)string` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      deleteAbi: (params: CallParams<StateArgs['obj']['delete_abi(string)string'] | StateArgs['tuple']['delete_abi(string)string']>) => {
+        return this.appClient.createTransaction.delete(StateParamsFactory.delete.deleteAbi(params))
+      },
+
+    },
+
+    /**
      * Gets available optIn methods
      */
     optIn: {
@@ -901,12 +1359,12 @@ export class StateClient {
     },
 
     /**
-     * Makes a call to the State smart contract using the `call_with_references(uint64,address,uint64)uint64` ABI method.
+     * Makes a call to the State smart contract using the `call_with_references(asset,account,application)uint64` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call transaction
      */
-    callWithReferences: (params: CallParams<StateArgs['obj']['call_with_references(uint64,address,uint64)uint64'] | StateArgs['tuple']['call_with_references(uint64,address,uint64)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    callWithReferences: (params: CallParams<StateArgs['obj']['call_with_references(asset,account,application)uint64'] | StateArgs['tuple']['call_with_references(asset,account,application)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.createTransaction.call(StateParamsFactory.callWithReferences(params))
     },
 
@@ -1017,6 +1475,58 @@ export class StateClient {
    */
   readonly send = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the State smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & SendParams>) => {
+        return this.appClient.send.bare.update(params)
+      },
+      /**
+       * Updates an existing instance of the State smart contract using the `update_abi(string)string` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateAbi: async (params: CallParams<StateArgs['obj']['update_abi(string)string'] | StateArgs['tuple']['update_abi(string)string']> & AppClientCompilationParams & SendParams) => {
+        const result = await this.appClient.send.update(StateParamsFactory.update.updateAbi(params))
+        return {...result, return: result.return as unknown as (undefined | StateReturns['update_abi(string)string'])}
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the State smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The delete result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & SendParams>) => {
+        return this.appClient.send.bare.delete(params)
+      },
+      /**
+       * Deletes an existing instance of the State smart contract using the `delete_abi(string)string` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      deleteAbi: async (params: CallParams<StateArgs['obj']['delete_abi(string)string'] | StateArgs['tuple']['delete_abi(string)string']> & SendParams) => {
+        const result = await this.appClient.send.delete(StateParamsFactory.delete.deleteAbi(params))
+        return {...result, return: result.return as unknown as (undefined | StateReturns['delete_abi(string)string'])}
+      },
+
+    },
+
+    /**
      * Gets available optIn methods
      */
     optIn: {
@@ -1083,14 +1593,14 @@ export class StateClient {
     },
 
     /**
-     * Makes a call to the State smart contract using the `call_with_references(uint64,address,uint64)uint64` ABI method.
+     * Makes a call to the State smart contract using the `call_with_references(asset,account,application)uint64` ABI method.
      *
      * @param params The params for the smart contract call
      * @returns The call result
      */
-    callWithReferences: async (params: CallParams<StateArgs['obj']['call_with_references(uint64,address,uint64)uint64'] | StateArgs['tuple']['call_with_references(uint64,address,uint64)uint64']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    callWithReferences: async (params: CallParams<StateArgs['obj']['call_with_references(asset,account,application)uint64'] | StateArgs['tuple']['call_with_references(asset,account,application)uint64']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       const result = await this.appClient.send.call(StateParamsFactory.callWithReferences(params))
-      return {...result, return: result.return as unknown as (undefined | StateReturns['call_with_references(uint64,address,uint64)uint64'])}
+      return {...result, return: result.return as unknown as (undefined | StateReturns['call_with_references(asset,account,application)uint64'])}
     },
 
     /**
@@ -1483,11 +1993,11 @@ export class StateClient {
         return this
       },
       /**
-       * Add a call_with_references(uint64,address,uint64)uint64 method call against the State contract
+       * Add a call_with_references(asset,account,application)uint64 method call against the State contract
        */
-      callWithReferences(params: CallParams<StateArgs['obj']['call_with_references(uint64,address,uint64)uint64'] | StateArgs['tuple']['call_with_references(uint64,address,uint64)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+      callWithReferences(params: CallParams<StateArgs['obj']['call_with_references(asset,account,application)uint64'] | StateArgs['tuple']['call_with_references(asset,account,application)uint64']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
         promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.callWithReferences(params)))
-        resultMappers.push((v) => client.decodeReturnValue('call_with_references(uint64,address,uint64)uint64', v))
+        resultMappers.push((v) => client.decodeReturnValue('call_with_references(asset,account,application)uint64', v))
         return this
       },
       /**
@@ -1562,6 +2072,32 @@ export class StateClient {
         resultMappers.push(undefined)
         return this
       },
+      get update() {
+        return {
+          bare: (params?: AppClientBareCallParams & AppClientCompilationParams ) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdate(await client.params.update.bare(params)))
+            return this
+          },
+          updateAbi: (params: CallParams<StateArgs['obj']['update_abi(string)string'] | StateArgs['tuple']['update_abi(string)string']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateAbi(params)))
+            resultMappers.push((v) => client.decodeReturnValue('update_abi(string)string', v))
+            return this
+          },
+        }
+      },
+      get delete() {
+        return {
+          bare: (params?: AppClientBareCallParams ) => {
+            promiseChain = promiseChain.then(() => composer.addAppDelete(client.params.delete.bare(params)))
+            return this
+          },
+          deleteAbi: (params: CallParams<StateArgs['obj']['delete_abi(string)string'] | StateArgs['tuple']['delete_abi(string)string']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.deleteAbi(params)))
+            resultMappers.push((v) => client.decodeReturnValue('delete_abi(string)string', v))
+            return this
+          },
+        }
+      },
       get optIn() {
         return {
           optIn: (params: CallParams<StateArgs['obj']['opt_in()void'] | StateArgs['tuple']['opt_in()void']>) => {
@@ -1634,13 +2170,13 @@ export type StateComposer<TReturns extends [...any[]] = []> = {
   callAbiTxn(params?: CallParams<StateArgs['obj']['call_abi_txn(pay,string)string'] | StateArgs['tuple']['call_abi_txn(pay,string)string']>): StateComposer<[...TReturns, StateReturns['call_abi_txn(pay,string)string'] | undefined]>
 
   /**
-   * Calls the call_with_references(uint64,address,uint64)uint64 ABI method.
+   * Calls the call_with_references(asset,account,application)uint64 ABI method.
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  callWithReferences(params?: CallParams<StateArgs['obj']['call_with_references(uint64,address,uint64)uint64'] | StateArgs['tuple']['call_with_references(uint64,address,uint64)uint64']>): StateComposer<[...TReturns, StateReturns['call_with_references(uint64,address,uint64)uint64'] | undefined]>
+  callWithReferences(params?: CallParams<StateArgs['obj']['call_with_references(asset,account,application)uint64'] | StateArgs['tuple']['call_with_references(asset,account,application)uint64']>): StateComposer<[...TReturns, StateReturns['call_with_references(asset,account,application)uint64'] | undefined]>
 
   /**
    * Calls the default_value(string)string ABI method.
@@ -1722,6 +2258,48 @@ export type StateComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   setBox(params?: CallParams<StateArgs['obj']['set_box(byte[4],string)void'] | StateArgs['tuple']['set_box(byte[4],string)void']>): StateComposer<[...TReturns, StateReturns['set_box(byte[4],string)void'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the State smart contract using a bare call.
+     *
+     * @param args The arguments for the bare call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    bare(params?: AppClientBareCallParams ): StateComposer<[...TReturns, undefined]>
+    /**
+     * Updates an existing instance of the State smart contract using the update_abi(string)string ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateAbi(params?: CallParams<StateArgs['obj']['update_abi(string)string'] | StateArgs['tuple']['update_abi(string)string']>): StateComposer<[...TReturns, StateReturns['update_abi(string)string'] | undefined]>
+  }
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the State smart contract using a bare call.
+     *
+     * @param args The arguments for the bare call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    bare(params?: AppClientBareCallParams ): StateComposer<[...TReturns, undefined]>
+    /**
+     * Deletes an existing instance of the State smart contract using the delete_abi(string)string ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    deleteAbi(params?: CallParams<StateArgs['obj']['delete_abi(string)string'] | StateArgs['tuple']['delete_abi(string)string']>): StateComposer<[...TReturns, StateReturns['delete_abi(string)string'] | undefined]>
+  }
 
   /**
    * Gets available optIn methods
