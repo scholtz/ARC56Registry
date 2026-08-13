@@ -23,7 +23,7 @@ import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgumen
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Contract","structs":{},"methods":[{"name":"test_new_ops","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEzCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIC8vIGF2bV8xMy9jb250cmFjdC5weTo5CiAgICAvLyBjbGFzcyBDb250cmFjdChBUkM0Q29udHJhY3QsIGF2bV92ZXJzaW9uPTEzKToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDUKICAgIHB1c2hieXRlcyAweGMyYjhkZDhhIC8vIG1ldGhvZCAidGVzdF9uZXdfb3BzKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl90ZXN0X25ld19vcHNfcm91dGVAMwogICAgZXJyCgptYWluX3Rlc3RfbmV3X29wc19yb3V0ZUAzOgogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjEwCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgcmV0dXJuCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDU6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEzCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"DTEbQSqABMK43Yo2GgCOAQABADEZFDEYEEMxGRQxGBQQQw==","clear":"DYEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Contract","structs":{},"methods":[{"name":"test_new_ops","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"test_poseidon2","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"test_app_params","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"test_app_box_ops","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"test_block","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEzCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAgOCA0CiAgICBieXRlY2Jsb2NrIDB4NjI3OCAweGZmCiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6MTQKICAgIC8vIGNsYXNzIENvbnRyYWN0KEFSQzRDb250cmFjdCwgYXZtX3ZlcnNpb249MTMpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAMTIKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweGMyYjhkZDhhIDB4MGIzNDllYWQgMHhlY2RjMDVjNiAweGVjOTJiZGVkIDB4OGNmMjFkOGYgLy8gbWV0aG9kICJ0ZXN0X25ld19vcHMoKXZvaWQiLCBtZXRob2QgInRlc3RfcG9zZWlkb24yKCl2b2lkIiwgbWV0aG9kICJ0ZXN0X2FwcF9wYXJhbXMoKXZvaWQiLCBtZXRob2QgInRlc3RfYXBwX2JveF9vcHMoKXZvaWQiLCBtZXRob2QgInRlc3RfYmxvY2soKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCB0ZXN0X25ld19vcHMgdGVzdF9wb3NlaWRvbjIgdGVzdF9hcHBfcGFyYW1zIHRlc3RfYXBwX2JveF9vcHMgdGVzdF9ibG9jawogICAgZXJyCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDEyOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0X2Nhc2VzLmF2bV8xMy5jb250cmFjdC5Db250cmFjdC50ZXN0X25ld19vcHNbcm91dGluZ10oKSAtPiB2b2lkOgp0ZXN0X25ld19vcHM6CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6MTcKICAgIC8vIGFzc2VydCBvcC5zaGE1MTIoYiIiKSAhPSBvcC5zaGE1MTIoYiJhIikKICAgIHB1c2hieXRlcyAweAogICAgc2hhNTEyCiAgICBwdXNoYnl0ZXMgMHg2MQogICAgc2hhNTEyCiAgICAhPQogICAgYXNzZXJ0CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6MTUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RfY2FzZXMuYXZtXzEzLmNvbnRyYWN0LkNvbnRyYWN0LnRlc3RfcG9zZWlkb24yW3JvdXRpbmddKCkgLT4gdm9pZDoKdGVzdF9wb3NlaWRvbjI6CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6MjEKICAgIC8vIHNjYWxhciA9IG9wLmJ6ZXJvKDMyKQogICAgcHVzaGludCAzMgogICAgYnplcm8KICAgIC8vIGF2bV8xMy9jb250cmFjdC5weToyMgogICAgLy8gYm4gPSBvcC5wb3NlaWRvbjIob3AuUG9zZWlkb24yQ29uZmlndXJhdGlvbnMuQk4yNTR0Miwgc2NhbGFyKQogICAgZHVwCiAgICBwb3NlaWRvbjIgQk4yNTR0MgogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjIzCiAgICAvLyBibHMgPSBvcC5wb3NlaWRvbjIob3AuUG9zZWlkb24yQ29uZmlndXJhdGlvbnMuQkxTMTJfMzgxdDIsIHNjYWxhcikKICAgIHN3YXAKICAgIHBvc2VpZG9uMiBCTFMxMl8zODF0MgogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjI2CiAgICAvLyBhc3NlcnQgYm4gIT0gYmxzCiAgICAhPQogICAgYXNzZXJ0CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6MTkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RfY2FzZXMuYXZtXzEzLmNvbnRyYWN0LkNvbnRyYWN0LnRlc3RfYXBwX3BhcmFtc1tyb3V0aW5nXSgpIC0+IHZvaWQ6CnRlc3RfYXBwX3BhcmFtczoKICAgIC8vIGF2bV8xMy9jb250cmFjdC5weTozMAogICAgLy8gYXBwID0gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25faWQKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25JRAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjMxCiAgICAvLyBzcG9uc29yLCBleGlzdHMgPSBvcC5BcHBQYXJhbXNHZXQuYXBwX3NpemVfc3BvbnNvcihhcHApCiAgICBkdXAKICAgIGFwcF9wYXJhbXNfZ2V0IEFwcFNpemVTcG9uc29yCiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6MzIKICAgIC8vIGFzc2VydCBleGlzdHMKICAgIGFzc2VydAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjMzCiAgICAvLyBhc3NlcnQgc3BvbnNvciA9PSBHbG9iYWwuemVyb19hZGRyZXNzCiAgICBnbG9iYWwgWmVyb0FkZHJlc3MKICAgID09CiAgICBhc3NlcnQKICAgIC8vIGF2bV8xMy9jb250cmFjdC5weTozNAogICAgLy8gZmJyLCBleGlzdHMgPSBvcC5BcHBQYXJhbXNHZXQuYXBwX2ZvcmVpZ25fYm94X3JlYWRzKGFwcCkKICAgIGR1cAogICAgYXBwX3BhcmFtc19nZXQgQXBwRm9yZWlnbkJveFJlYWRzCiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6MzUKICAgIC8vIGFzc2VydCBleGlzdHMKICAgIGFzc2VydAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjM2CiAgICAvLyBhc3NlcnQgbm90IGZicgogICAgIQogICAgYXNzZXJ0CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6MzcKICAgIC8vIGZiYSwgZXhpc3RzID0gb3AuQXBwUGFyYW1zR2V0LmFwcF9mYW1pbHlfYm94X2FjY2VzcyhhcHApCiAgICBkdXAKICAgIGFwcF9wYXJhbXNfZ2V0IEFwcEZhbWlseUJveEFjY2VzcwogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjM4CiAgICAvLyBhc3NlcnQgZXhpc3RzCiAgICBhc3NlcnQKICAgIC8vIGF2bV8xMy9jb250cmFjdC5weTozOQogICAgLy8gYXNzZXJ0IG5vdCBmYmEKICAgICEKICAgIGFzc2VydAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjQwCiAgICAvLyBvcC5BcHBQYXJhbXNTZXQuYXBwX2ZvcmVpZ25fYm94X3JlYWRzKFRydWUpCiAgICBpbnRjXzAgLy8gMQogICAgYXBwX3BhcmFtc19zZXQgQXBwRm9yZWlnbkJveFJlYWRzCiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NDEKICAgIC8vIG9wLkFwcFBhcmFtc1NldC5hcHBfZmFtaWx5X2JveF9hY2Nlc3MoVHJ1ZSkKICAgIGludGNfMCAvLyAxCiAgICBhcHBfcGFyYW1zX3NldCBBcHBGYW1pbHlCb3hBY2Nlc3MKICAgIC8vIGF2bV8xMy9jb250cmFjdC5weTo0MgogICAgLy8gZmJyLCBleGlzdHMgPSBvcC5BcHBQYXJhbXNHZXQuYXBwX2ZvcmVpZ25fYm94X3JlYWRzKGFwcCkKICAgIGR1cAogICAgYXBwX3BhcmFtc19nZXQgQXBwRm9yZWlnbkJveFJlYWRzCiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NDMKICAgIC8vIGFzc2VydCBleGlzdHMKICAgIGFzc2VydAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjQ0CiAgICAvLyBhc3NlcnQgZmJyCiAgICBhc3NlcnQKICAgIC8vIGF2bV8xMy9jb250cmFjdC5weTo0NQogICAgLy8gZmJhLCBleGlzdHMgPSBvcC5BcHBQYXJhbXNHZXQuYXBwX2ZhbWlseV9ib3hfYWNjZXNzKGFwcCkKICAgIGFwcF9wYXJhbXNfZ2V0IEFwcEZhbWlseUJveEFjY2VzcwogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjQ2CiAgICAvLyBhc3NlcnQgZXhpc3RzCiAgICBhc3NlcnQKICAgIC8vIGF2bV8xMy9jb250cmFjdC5weTo0NwogICAgLy8gYXNzZXJ0IGZiYQogICAgYXNzZXJ0CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6MjgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RfY2FzZXMuYXZtXzEzLmNvbnRyYWN0LkNvbnRyYWN0LnRlc3RfYXBwX2JveF9vcHNbcm91dGluZ10oKSAtPiB2b2lkOgp0ZXN0X2FwcF9ib3hfb3BzOgogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjUxCiAgICAvLyBhcHAgPSBHbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9pZAogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbklECiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NTMKICAgIC8vIGFzc2VydCBvcC5BcHBCb3guY3JlYXRlKGFwcCwgbmFtZSwgOCkKICAgIGR1cAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjUyCiAgICAvLyBuYW1lID0gQnl0ZXMoYiJieCIpCiAgICBieXRlY18wIC8vIDB4NjI3OAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjUzCiAgICAvLyBhc3NlcnQgb3AuQXBwQm94LmNyZWF0ZShhcHAsIG5hbWUsIDgpCiAgICBpbnRjXzIgLy8gOAogICAgYXBwX2JveF9jcmVhdGUKICAgIGFzc2VydAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjU0CiAgICAvLyBvcC5BcHBCb3gucHV0KGFwcCwgbmFtZSwgb3AuYnplcm8oOCkpCiAgICBpbnRjXzIgLy8gOAogICAgYnplcm8KICAgIGRpZyAxCiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NTIKICAgIC8vIG5hbWUgPSBCeXRlcyhiImJ4IikKICAgIGJ5dGVjXzAgLy8gMHg2Mjc4CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NTQKICAgIC8vIG9wLkFwcEJveC5wdXQoYXBwLCBuYW1lLCBvcC5iemVybyg4KSkKICAgIGRpZyAyCiAgICBhcHBfYm94X3B1dAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjU1CiAgICAvLyB2YWx1ZSwgZXhpc3RzID0gb3AuQXBwQm94LmdldChhcHAsIG5hbWUpCiAgICBkaWcgMQogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjUyCiAgICAvLyBuYW1lID0gQnl0ZXMoYiJieCIpCiAgICBieXRlY18wIC8vIDB4NjI3OAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjU1CiAgICAvLyB2YWx1ZSwgZXhpc3RzID0gb3AuQXBwQm94LmdldChhcHAsIG5hbWUpCiAgICBhcHBfYm94X2dldAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjU2CiAgICAvLyBhc3NlcnQgZXhpc3RzCiAgICBhc3NlcnQKICAgIC8vIGF2bV8xMy9jb250cmFjdC5weTo1NwogICAgLy8gYXNzZXJ0IHZhbHVlID09IG9wLmJ6ZXJvKDgpCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NTgKICAgIC8vIG9wLkFwcEJveC5yZXBsYWNlKGFwcCwgbmFtZSwgMCwgYiJceGZmIikKICAgIGR1cAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjUyCiAgICAvLyBuYW1lID0gQnl0ZXMoYiJieCIpCiAgICBieXRlY18wIC8vIDB4NjI3OAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjU4CiAgICAvLyBvcC5BcHBCb3gucmVwbGFjZShhcHAsIG5hbWUsIDAsIGIiXHhmZiIpCiAgICBpbnRjXzEgLy8gMAogICAgYnl0ZWNfMSAvLyAweGZmCiAgICBhcHBfYm94X3JlcGxhY2UKICAgIC8vIGF2bV8xMy9jb250cmFjdC5weTo1OQogICAgLy8gYXNzZXJ0IG9wLkFwcEJveC5leHRyYWN0KGFwcCwgbmFtZSwgMCwgMSkgPT0gYiJceGZmIgogICAgZHVwCiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NTIKICAgIC8vIG5hbWUgPSBCeXRlcyhiImJ4IikKICAgIGJ5dGVjXzAgLy8gMHg2Mjc4CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NTkKICAgIC8vIGFzc2VydCBvcC5BcHBCb3guZXh0cmFjdChhcHAsIG5hbWUsIDAsIDEpID09IGIiXHhmZiIKICAgIGludGNfMSAvLyAwCiAgICBpbnRjXzAgLy8gMQogICAgYXBwX2JveF9leHRyYWN0CiAgICBieXRlY18xIC8vIDB4ZmYKICAgID09CiAgICBhc3NlcnQKICAgIC8vIGF2bV8xMy9jb250cmFjdC5weTo2MAogICAgLy8gb3AuQXBwQm94LnNwbGljZShhcHAsIG5hbWUsIDEsIDMsIGIiYWJjIikKICAgIGR1cAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjUyCiAgICAvLyBuYW1lID0gQnl0ZXMoYiJieCIpCiAgICBieXRlY18wIC8vIDB4NjI3OAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjYwCiAgICAvLyBvcC5BcHBCb3guc3BsaWNlKGFwcCwgbmFtZSwgMSwgMywgYiJhYmMiKQogICAgaW50Y18wIC8vIDEKICAgIHB1c2hpbnQgMwogICAgcHVzaGJ5dGVzIDB4NjE2MjYzCiAgICBhcHBfYm94X3NwbGljZQogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjYxCiAgICAvLyBvcC5BcHBCb3gucmVzaXplKGFwcCwgbmFtZSwgNCkKICAgIGR1cAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjUyCiAgICAvLyBuYW1lID0gQnl0ZXMoYiJieCIpCiAgICBieXRlY18wIC8vIDB4NjI3OAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjYxCiAgICAvLyBvcC5BcHBCb3gucmVzaXplKGFwcCwgbmFtZSwgNCkKICAgIGludGNfMyAvLyA0CiAgICBhcHBfYm94X3Jlc2l6ZQogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjYyCiAgICAvLyBsZW5ndGgsIGV4aXN0cyA9IG9wLkFwcEJveC5sZW5ndGgoYXBwLCBuYW1lKQogICAgZHVwCiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NTIKICAgIC8vIG5hbWUgPSBCeXRlcyhiImJ4IikKICAgIGJ5dGVjXzAgLy8gMHg2Mjc4CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NjIKICAgIC8vIGxlbmd0aCwgZXhpc3RzID0gb3AuQXBwQm94Lmxlbmd0aChhcHAsIG5hbWUpCiAgICBhcHBfYm94X2xlbgogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjYzCiAgICAvLyBhc3NlcnQgZXhpc3RzCiAgICBhc3NlcnQKICAgIC8vIGF2bV8xMy9jb250cmFjdC5weTo2NAogICAgLy8gYXNzZXJ0IGxlbmd0aCA9PSA0CiAgICBpbnRjXzMgLy8gNAogICAgPT0KICAgIGFzc2VydAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjUyCiAgICAvLyBuYW1lID0gQnl0ZXMoYiJieCIpCiAgICBieXRlY18wIC8vIDB4NjI3OAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjY1CiAgICAvLyBhc3NlcnQgb3AuQXBwQm94LmRlbGV0ZShhcHAsIG5hbWUpCiAgICBhcHBfYm94X2RlbAogICAgYXNzZXJ0CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NDkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RfY2FzZXMuYXZtXzEzLmNvbnRyYWN0LkNvbnRyYWN0LnRlc3RfYmxvY2tbcm91dGluZ10oKSAtPiB2b2lkOgp0ZXN0X2Jsb2NrOgogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjY5CiAgICAvLyBicmFuY2g1MTIgPSBvcC5CbG9jay5ibGtfYnJhbmNoNTEyKDApCiAgICBpbnRjXzEgLy8gMAogICAgYmxvY2sgQmxrQnJhbmNoNTEyCiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NzAKICAgIC8vIHNoYTUxMl8yNTZfY29tbWl0bWVudCA9IG9wLkJsb2NrLmJsa19zaGE1MTJfMjU2X3R4bl9jb21taXRtZW50KDApCiAgICBpbnRjXzEgLy8gMAogICAgYmxvY2sgQmxrU2hhNTEyXzI1NlR4bkNvbW1pdG1lbnQKICAgIC8vIGF2bV8xMy9jb250cmFjdC5weTo3MQogICAgLy8gc2hhMjU2X2NvbW1pdG1lbnQgPSBvcC5CbG9jay5ibGtfc2hhMjU2X3R4bl9jb21taXRtZW50KDApCiAgICBpbnRjXzEgLy8gMAogICAgYmxvY2sgQmxrU2hhMjU2VHhuQ29tbWl0bWVudAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5OjcyCiAgICAvLyBzaGE1MTJfY29tbWl0bWVudCA9IG9wLkJsb2NrLmJsa19zaGE1MTJfdHhuX2NvbW1pdG1lbnQoMCkKICAgIGludGNfMSAvLyAwCiAgICBibG9jayBCbGtTaGE1MTJUeG5Db21taXRtZW50CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NzMKICAgIC8vIGFzc2VydCBicmFuY2g1MTIgIT0gc2hhNTEyX2NvbW1pdG1lbnQKICAgIHVuY292ZXIgMwogICAgIT0KICAgIGFzc2VydAogICAgLy8gYXZtXzEzL2NvbnRyYWN0LnB5Ojc0CiAgICAvLyBhc3NlcnQgc2hhNTEyXzI1Nl9jb21taXRtZW50ICE9IHNoYTI1Nl9jb21taXRtZW50CiAgICAhPQogICAgYXNzZXJ0CiAgICAvLyBhdm1fMTMvY29udHJhY3QucHk6NjcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEzCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"DSAEAQAIBCYCAmJ4Af8xG0FkMRkURDEYRIIFBMK43YoECzSerQTs3AXGBOySve0EjPIdjzYaAI4FAAkAFAAhAEgAjwAxGRQxGBQQQ4AAh4ABYYcTRCJDgSCvSecATOcBE0QiQzIISXIKRDIDEkRJcgtEFERJcgxEFEQidgsidgxJcgtERHIMREQiQzIISSgk1AFEJK9LAShLAtQHSwEo1AZEEkRJKCMp1ANJKCMi1AIpEkRJKCKBA4ADYWJj1AhJKCXUCUko1AVEJRJEKNQERCJDI9EKI9ELI9EMI9ENTwMTRBNEIkM=","clear":"DYEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -71,12 +71,20 @@ export type ContractArgs = {
    */
   obj: {
     'test_new_ops()void': Record<string, never>
+    'test_poseidon2()void': Record<string, never>
+    'test_app_params()void': Record<string, never>
+    'test_app_box_ops()void': Record<string, never>
+    'test_block()void': Record<string, never>
   }
   /**
    * The tuple representation of the arguments for each method
    */
   tuple: {
     'test_new_ops()void': []
+    'test_poseidon2()void': []
+    'test_app_params()void': []
+    'test_app_box_ops()void': []
+    'test_block()void': []
   }
 }
 
@@ -85,6 +93,10 @@ export type ContractArgs = {
  */
 export type ContractReturns = {
   'test_new_ops()void': void
+  'test_poseidon2()void': void
+  'test_app_params()void': void
+  'test_app_box_ops()void': void
+  'test_block()void': void
 }
 
 /**
@@ -99,6 +111,26 @@ export type ContractTypes = {
       argsObj: ContractArgs['obj']['test_new_ops()void']
       argsTuple: ContractArgs['tuple']['test_new_ops()void']
       returns: ContractReturns['test_new_ops()void']
+    }>
+    & Record<'test_poseidon2()void' | 'test_poseidon2', {
+      argsObj: ContractArgs['obj']['test_poseidon2()void']
+      argsTuple: ContractArgs['tuple']['test_poseidon2()void']
+      returns: ContractReturns['test_poseidon2()void']
+    }>
+    & Record<'test_app_params()void' | 'test_app_params', {
+      argsObj: ContractArgs['obj']['test_app_params()void']
+      argsTuple: ContractArgs['tuple']['test_app_params()void']
+      returns: ContractReturns['test_app_params()void']
+    }>
+    & Record<'test_app_box_ops()void' | 'test_app_box_ops', {
+      argsObj: ContractArgs['obj']['test_app_box_ops()void']
+      argsTuple: ContractArgs['tuple']['test_app_box_ops()void']
+      returns: ContractReturns['test_app_box_ops()void']
+    }>
+    & Record<'test_block()void' | 'test_block', {
+      argsObj: ContractArgs['obj']['test_block()void']
+      argsTuple: ContractArgs['tuple']['test_block()void']
+      returns: ContractReturns['test_block()void']
     }>
 }
 
@@ -156,6 +188,58 @@ export abstract class ContractParamsFactory {
     return {
       ...params,
       method: 'test_new_ops()void' as const,
+      args: Array.isArray(params.args) ? params.args : [],
+    }
+  }
+  /**
+   * Constructs a no op call for the test_poseidon2()void ABI method
+   *
+   * @param params Parameters for the call
+   * @returns An `AppClientMethodCallParams` object for the call
+   */
+  static testPoseidon2(params: CallParams<ContractArgs['obj']['test_poseidon2()void'] | ContractArgs['tuple']['test_poseidon2()void']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+    return {
+      ...params,
+      method: 'test_poseidon2()void' as const,
+      args: Array.isArray(params.args) ? params.args : [],
+    }
+  }
+  /**
+   * Constructs a no op call for the test_app_params()void ABI method
+   *
+   * @param params Parameters for the call
+   * @returns An `AppClientMethodCallParams` object for the call
+   */
+  static testAppParams(params: CallParams<ContractArgs['obj']['test_app_params()void'] | ContractArgs['tuple']['test_app_params()void']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+    return {
+      ...params,
+      method: 'test_app_params()void' as const,
+      args: Array.isArray(params.args) ? params.args : [],
+    }
+  }
+  /**
+   * Constructs a no op call for the test_app_box_ops()void ABI method
+   *
+   * @param params Parameters for the call
+   * @returns An `AppClientMethodCallParams` object for the call
+   */
+  static testAppBoxOps(params: CallParams<ContractArgs['obj']['test_app_box_ops()void'] | ContractArgs['tuple']['test_app_box_ops()void']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+    return {
+      ...params,
+      method: 'test_app_box_ops()void' as const,
+      args: Array.isArray(params.args) ? params.args : [],
+    }
+  }
+  /**
+   * Constructs a no op call for the test_block()void ABI method
+   *
+   * @param params Parameters for the call
+   * @returns An `AppClientMethodCallParams` object for the call
+   */
+  static testBlock(params: CallParams<ContractArgs['obj']['test_block()void'] | ContractArgs['tuple']['test_block()void']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+    return {
+      ...params,
+      method: 'test_block()void' as const,
       args: Array.isArray(params.args) ? params.args : [],
     }
   }
@@ -401,6 +485,46 @@ export class ContractClient {
       return this.appClient.params.call(ContractParamsFactory.testNewOps(params))
     },
 
+    /**
+     * Makes a call to the Contract smart contract using the `test_poseidon2()void` ABI method.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call params
+     */
+    testPoseidon2: (params: CallParams<ContractArgs['obj']['test_poseidon2()void'] | ContractArgs['tuple']['test_poseidon2()void']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+      return this.appClient.params.call(ContractParamsFactory.testPoseidon2(params))
+    },
+
+    /**
+     * Makes a call to the Contract smart contract using the `test_app_params()void` ABI method.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call params
+     */
+    testAppParams: (params: CallParams<ContractArgs['obj']['test_app_params()void'] | ContractArgs['tuple']['test_app_params()void']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+      return this.appClient.params.call(ContractParamsFactory.testAppParams(params))
+    },
+
+    /**
+     * Makes a call to the Contract smart contract using the `test_app_box_ops()void` ABI method.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call params
+     */
+    testAppBoxOps: (params: CallParams<ContractArgs['obj']['test_app_box_ops()void'] | ContractArgs['tuple']['test_app_box_ops()void']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+      return this.appClient.params.call(ContractParamsFactory.testAppBoxOps(params))
+    },
+
+    /**
+     * Makes a call to the Contract smart contract using the `test_block()void` ABI method.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call params
+     */
+    testBlock: (params: CallParams<ContractArgs['obj']['test_block()void'] | ContractArgs['tuple']['test_block()void']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+      return this.appClient.params.call(ContractParamsFactory.testBlock(params))
+    },
+
   }
 
   /**
@@ -425,6 +549,46 @@ export class ContractClient {
      */
     testNewOps: (params: CallParams<ContractArgs['obj']['test_new_ops()void'] | ContractArgs['tuple']['test_new_ops()void']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
       return this.appClient.createTransaction.call(ContractParamsFactory.testNewOps(params))
+    },
+
+    /**
+     * Makes a call to the Contract smart contract using the `test_poseidon2()void` ABI method.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call transaction
+     */
+    testPoseidon2: (params: CallParams<ContractArgs['obj']['test_poseidon2()void'] | ContractArgs['tuple']['test_poseidon2()void']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+      return this.appClient.createTransaction.call(ContractParamsFactory.testPoseidon2(params))
+    },
+
+    /**
+     * Makes a call to the Contract smart contract using the `test_app_params()void` ABI method.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call transaction
+     */
+    testAppParams: (params: CallParams<ContractArgs['obj']['test_app_params()void'] | ContractArgs['tuple']['test_app_params()void']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+      return this.appClient.createTransaction.call(ContractParamsFactory.testAppParams(params))
+    },
+
+    /**
+     * Makes a call to the Contract smart contract using the `test_app_box_ops()void` ABI method.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call transaction
+     */
+    testAppBoxOps: (params: CallParams<ContractArgs['obj']['test_app_box_ops()void'] | ContractArgs['tuple']['test_app_box_ops()void']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+      return this.appClient.createTransaction.call(ContractParamsFactory.testAppBoxOps(params))
+    },
+
+    /**
+     * Makes a call to the Contract smart contract using the `test_block()void` ABI method.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call transaction
+     */
+    testBlock: (params: CallParams<ContractArgs['obj']['test_block()void'] | ContractArgs['tuple']['test_block()void']> & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+      return this.appClient.createTransaction.call(ContractParamsFactory.testBlock(params))
     },
 
   }
@@ -452,6 +616,50 @@ export class ContractClient {
     testNewOps: async (params: CallParams<ContractArgs['obj']['test_new_ops()void'] | ContractArgs['tuple']['test_new_ops()void']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
       const result = await this.appClient.send.call(ContractParamsFactory.testNewOps(params))
       return {...result, return: result.return as unknown as (undefined | ContractReturns['test_new_ops()void'])}
+    },
+
+    /**
+     * Makes a call to the Contract smart contract using the `test_poseidon2()void` ABI method.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call result
+     */
+    testPoseidon2: async (params: CallParams<ContractArgs['obj']['test_poseidon2()void'] | ContractArgs['tuple']['test_poseidon2()void']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+      const result = await this.appClient.send.call(ContractParamsFactory.testPoseidon2(params))
+      return {...result, return: result.return as unknown as (undefined | ContractReturns['test_poseidon2()void'])}
+    },
+
+    /**
+     * Makes a call to the Contract smart contract using the `test_app_params()void` ABI method.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call result
+     */
+    testAppParams: async (params: CallParams<ContractArgs['obj']['test_app_params()void'] | ContractArgs['tuple']['test_app_params()void']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+      const result = await this.appClient.send.call(ContractParamsFactory.testAppParams(params))
+      return {...result, return: result.return as unknown as (undefined | ContractReturns['test_app_params()void'])}
+    },
+
+    /**
+     * Makes a call to the Contract smart contract using the `test_app_box_ops()void` ABI method.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call result
+     */
+    testAppBoxOps: async (params: CallParams<ContractArgs['obj']['test_app_box_ops()void'] | ContractArgs['tuple']['test_app_box_ops()void']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+      const result = await this.appClient.send.call(ContractParamsFactory.testAppBoxOps(params))
+      return {...result, return: result.return as unknown as (undefined | ContractReturns['test_app_box_ops()void'])}
+    },
+
+    /**
+     * Makes a call to the Contract smart contract using the `test_block()void` ABI method.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call result
+     */
+    testBlock: async (params: CallParams<ContractArgs['obj']['test_block()void'] | ContractArgs['tuple']['test_block()void']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+      const result = await this.appClient.send.call(ContractParamsFactory.testBlock(params))
+      return {...result, return: result.return as unknown as (undefined | ContractReturns['test_block()void'])}
     },
 
   }
@@ -483,6 +691,38 @@ export class ContractClient {
        */
       testNewOps(params: CallParams<ContractArgs['obj']['test_new_ops()void'] | ContractArgs['tuple']['test_new_ops()void']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
         promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.testNewOps(params)))
+        resultMappers.push(undefined)
+        return this
+      },
+      /**
+       * Add a test_poseidon2()void method call against the Contract contract
+       */
+      testPoseidon2(params: CallParams<ContractArgs['obj']['test_poseidon2()void'] | ContractArgs['tuple']['test_poseidon2()void']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.testPoseidon2(params)))
+        resultMappers.push(undefined)
+        return this
+      },
+      /**
+       * Add a test_app_params()void method call against the Contract contract
+       */
+      testAppParams(params: CallParams<ContractArgs['obj']['test_app_params()void'] | ContractArgs['tuple']['test_app_params()void']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.testAppParams(params)))
+        resultMappers.push(undefined)
+        return this
+      },
+      /**
+       * Add a test_app_box_ops()void method call against the Contract contract
+       */
+      testAppBoxOps(params: CallParams<ContractArgs['obj']['test_app_box_ops()void'] | ContractArgs['tuple']['test_app_box_ops()void']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.testAppBoxOps(params)))
+        resultMappers.push(undefined)
+        return this
+      },
+      /**
+       * Add a test_block()void method call against the Contract contract
+       */
+      testBlock(params: CallParams<ContractArgs['obj']['test_block()void'] | ContractArgs['tuple']['test_block()void']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.testBlock(params)))
         resultMappers.push(undefined)
         return this
       },
@@ -529,6 +769,42 @@ export type ContractComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   testNewOps(params?: CallParams<ContractArgs['obj']['test_new_ops()void'] | ContractArgs['tuple']['test_new_ops()void']>): ContractComposer<[...TReturns, ContractReturns['test_new_ops()void'] | undefined]>
+
+  /**
+   * Calls the test_poseidon2()void ABI method.
+   *
+   * @param args The arguments for the contract call
+   * @param params Any additional parameters for the call
+   * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+   */
+  testPoseidon2(params?: CallParams<ContractArgs['obj']['test_poseidon2()void'] | ContractArgs['tuple']['test_poseidon2()void']>): ContractComposer<[...TReturns, ContractReturns['test_poseidon2()void'] | undefined]>
+
+  /**
+   * Calls the test_app_params()void ABI method.
+   *
+   * @param args The arguments for the contract call
+   * @param params Any additional parameters for the call
+   * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+   */
+  testAppParams(params?: CallParams<ContractArgs['obj']['test_app_params()void'] | ContractArgs['tuple']['test_app_params()void']>): ContractComposer<[...TReturns, ContractReturns['test_app_params()void'] | undefined]>
+
+  /**
+   * Calls the test_app_box_ops()void ABI method.
+   *
+   * @param args The arguments for the contract call
+   * @param params Any additional parameters for the call
+   * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+   */
+  testAppBoxOps(params?: CallParams<ContractArgs['obj']['test_app_box_ops()void'] | ContractArgs['tuple']['test_app_box_ops()void']>): ContractComposer<[...TReturns, ContractReturns['test_app_box_ops()void'] | undefined]>
+
+  /**
+   * Calls the test_block()void ABI method.
+   *
+   * @param args The arguments for the contract call
+   * @param params Any additional parameters for the call
+   * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+   */
+  testBlock(params?: CallParams<ContractArgs['obj']['test_block()void'] | ContractArgs['tuple']['test_block()void']>): ContractComposer<[...TReturns, ContractReturns['test_block()void'] | undefined]>
 
   /**
    * Makes a clear_state call to an existing instance of the Contract smart contract.
