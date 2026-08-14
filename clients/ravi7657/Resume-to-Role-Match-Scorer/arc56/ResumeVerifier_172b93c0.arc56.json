@@ -1,0 +1,325 @@
+{
+    "name": "ResumeVerifier",
+    "structs": {
+        "AttestationRecord": [
+            {
+                "name": "role_id",
+                "type": "string"
+            },
+            {
+                "name": "match_score",
+                "type": "uint64"
+            },
+            {
+                "name": "attestation_round",
+                "type": "uint64"
+            },
+            {
+                "name": "fee_paid",
+                "type": "uint64"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "bootstrap",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "min_fee",
+                    "desc": "Minimum payment required to register an attestation, in \u00b5ALGO. For the MVP this is set to 500_000 (0.5 ALGO)."
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [
+                    "NoOp"
+                ],
+                "call": []
+            },
+            "readonly": false,
+            "desc": "Initialize the contract on creation.  Must be the first call.\nCalled by deploy_config.py immediately after contract creation.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "register_attestation",
+            "args": [
+                {
+                    "type": "byte[32]",
+                    "name": "resume_hash",
+                    "desc": "SHA-256 hash of the resume file (exactly 32 bytes)."
+                },
+                {
+                    "type": "string",
+                    "name": "role_id",
+                    "desc": "Short identifier for the job role (e.g. \"backend-engineer\")."
+                },
+                {
+                    "type": "uint64",
+                    "name": "match_score",
+                    "desc": "Deterministic match score 0\u2013100 computed by the scoring engine."
+                },
+                {
+                    "type": "pay",
+                    "name": "payment",
+                    "desc": "Reference to the grouped PaymentTransaction (group index 0)."
+                }
+            ],
+            "returns": {
+                "type": "string",
+                "desc": "\"ATTESTED\" on success."
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Register a resume\u2013role match attestation on-chain.\nThis method MUST be called as part of an atomic transaction group:   Group[0]: PaymentTransaction \u2192 this contract address, \u2265 min_fee \u00b5ALGO   Group[1]: ApplicationCallTransaction \u2192 this method\nThe AVM enforces atomicity: if any assertion fails, BOTH transactions in the group are rejected and the payment is not made.\nOnly the resume SHA-256 hash (not the resume content) and attestation metadata are stored on-chain.  No PII is stored.\nA second attestation for the same (applicant, resume_hash) pair will overwrite the previous record (e.g. re-attesting after a score update).",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_attestation",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "applicant",
+                    "desc": "Wallet address of the applicant who registered the attestation."
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "resume_hash",
+                    "desc": "SHA-256 hash of the resume file (32 bytes)."
+                }
+            ],
+            "returns": {
+                "type": "(string,uint64,uint64,uint64)",
+                "struct": "AttestationRecord",
+                "desc": "The AttestationRecord: role_id, match_score, attestation_round, fee_paid."
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Retrieve the full attestation record for a given applicant and resume hash.\nCallable by anyone (employer, auditor, third party). Reverts if no attestation exists.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "verify_resume_hash",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "applicant",
+                    "desc": "Wallet address of the applicant."
+                },
+                {
+                    "type": "byte[32]",
+                    "name": "resume_hash",
+                    "desc": "SHA-256 hash of the resume file (32 bytes)."
+                }
+            ],
+            "returns": {
+                "type": "bool",
+                "desc": "True if an attestation exists, False otherwise."
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Quick existence check: does an attestation exist for this (applicant, resume_hash)?\nDoes NOT revert \u2014 returns False if not found. Useful for a simple verified / not-verified badge in the employer UI.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "withdraw_fees",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "amount",
+                    "desc": "Amount in \u00b5ALGO to withdraw from the contract account."
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Admin-only: transfer accumulated attestation fees from the contract to admin.\nSends an inner PaymentTransaction from the contract account to the admin address. Only the admin (the address set during bootstrap) may call this.",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "\n    ResumeVerifier \u2014 Resume Role Matcher on Algorand.\n\n    Contract account accumulates attestation fees (0.5 ALGO per attestation).\n    Admin (deployer) can withdraw accumulated fees via withdraw_fees().\n    ",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 1,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "admin": {
+                    "keyType": "AVMString",
+                    "valueType": "address",
+                    "key": "YWRtaW4="
+                },
+                "min_fee": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMUint64",
+                    "key": "bWluX2ZlZQ=="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "attestations": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AttestationRecord",
+                    "prefix": ""
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        168
+                    ],
+                    "errorMessage": "Match score must be between 0 and 100"
+                },
+                {
+                    "pc": [
+                        240
+                    ],
+                    "errorMessage": "No attestation found for this applicant and resume hash"
+                },
+                {
+                    "pc": [
+                        301
+                    ],
+                    "errorMessage": "Only the admin may withdraw fees"
+                },
+                {
+                    "pc": [
+                        161
+                    ],
+                    "errorMessage": "Payment amount is below the minimum attestation fee"
+                },
+                {
+                    "pc": [
+                        151
+                    ],
+                    "errorMessage": "Payment receiver must be this contract's address"
+                },
+                {
+                    "pc": [
+                        296
+                    ],
+                    "errorMessage": "check self.admin exists"
+                },
+                {
+                    "pc": [
+                        157
+                    ],
+                    "errorMessage": "check self.min_fee exists"
+                },
+                {
+                    "pc": [
+                        118
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        126
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"
+                },
+                {
+                    "pc": [
+                        112,
+                        226,
+                        234,
+                        256,
+                        264
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        94,
+                        134,
+                        289
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint64"
+                },
+                {
+                    "pc": [
+                        144
+                    ],
+                    "errorMessage": "transaction type is pay"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDMyIDAgOAogICAgYnl0ZWNibG9jayAiYWRtaW4iICJtaW5fZmVlIiAweDE1MWY3Yzc1CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVzdW1lX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjcyCiAgICAvLyBjbGFzcyBSZXN1bWVWZXJpZmllcihBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEAxMAogICAgcHVzaGJ5dGVzcyAweDFmNTIxOThlIDB4MmJmOTE0YmIgMHg4NTFlYjIyMyAweDBkMTMxNzUxIC8vIG1ldGhvZCAicmVnaXN0ZXJfYXR0ZXN0YXRpb24oYnl0ZVszMl0sc3RyaW5nLHVpbnQ2NCxwYXkpc3RyaW5nIiwgbWV0aG9kICJnZXRfYXR0ZXN0YXRpb24oYWRkcmVzcyxieXRlWzMyXSkoc3RyaW5nLHVpbnQ2NCx1aW50NjQsdWludDY0KSIsIG1ldGhvZCAidmVyaWZ5X3Jlc3VtZV9oYXNoKGFkZHJlc3MsYnl0ZVszMl0pYm9vbCIsIG1ldGhvZCAid2l0aGRyYXdfZmVlcyh1aW50NjQpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHJlZ2lzdGVyX2F0dGVzdGF0aW9uIGdldF9hdHRlc3RhdGlvbiB2ZXJpZnlfcmVzdW1lX2hhc2ggd2l0aGRyYXdfZmVlcwogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDEwOgogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weTo3MgogICAgLy8gY2xhc3MgUmVzdW1lVmVyaWZpZXIoQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweGEwY2FkZjhhIC8vIG1ldGhvZCAiYm9vdHN0cmFwKHVpbnQ2NCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggYm9vdHN0cmFwCiAgICBlcnIKCgovLyBzbWFydF9jb250cmFjdHMucmVzdW1lX3ZlcmlmaWVyLmNvbnRyYWN0LlJlc3VtZVZlcmlmaWVyLmJvb3RzdHJhcFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmJvb3RzdHJhcDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6OTUKICAgIC8vIEBhYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MTA1CiAgICAvLyBzZWxmLmFkbWluLnZhbHVlID0gVHhuLnNlbmRlcgogICAgYnl0ZWNfMCAvLyAiYWRtaW4iCiAgICB0eG4gU2VuZGVyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weToxMDYKICAgIC8vIHNlbGYubWluX2ZlZS52YWx1ZSA9IG1pbl9mZWUKICAgIGJ5dGVjXzEgLy8gIm1pbl9mZWUiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weTo5NQogICAgLy8gQGFiaW1ldGhvZChjcmVhdGU9InJlcXVpcmUiKQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5yZXN1bWVfdmVyaWZpZXIuY29udHJhY3QuUmVzdW1lVmVyaWZpZXIucmVnaXN0ZXJfYXR0ZXN0YXRpb25bcm91dGluZ10oKSAtPiB2b2lkOgpyZWdpc3Rlcl9hdHRlc3RhdGlvbjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MTEyCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzIgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18wIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weToxNTMKICAgIC8vIHBheW1lbnQucmVjZWl2ZXIgPT0gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcwogICAgZHVwCiAgICBndHhucyBSZWNlaXZlcgogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgID09CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVzdW1lX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjE1MC0xNTQKICAgIC8vICMgLS0tIFBheW1lbnQgcmVjZWl2ZXIgdmFsaWRhdGlvbiAtLS0KICAgIC8vICMgVGhlIHBheW1lbnQgTVVTVCBnbyB0byB0aGlzIHNwZWNpZmljIGNvbnRyYWN0LCBub3QgYW55IG90aGVyIGFkZHJlc3MuCiAgICAvLyBhc3NlcnQgKAogICAgLy8gICAgIHBheW1lbnQucmVjZWl2ZXIgPT0gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcwogICAgLy8gKSwgIlBheW1lbnQgcmVjZWl2ZXIgbXVzdCBiZSB0aGlzIGNvbnRyYWN0J3MgYWRkcmVzcyIKICAgIGFzc2VydCAvLyBQYXltZW50IHJlY2VpdmVyIG11c3QgYmUgdGhpcyBjb250cmFjdCdzIGFkZHJlc3MKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MTYwCiAgICAvLyBwYXltZW50LmFtb3VudCA+PSBzZWxmLm1pbl9mZWUudmFsdWUKICAgIGd0eG5zIEFtb3VudAogICAgaW50Y18yIC8vIDAKICAgIGJ5dGVjXzEgLy8gIm1pbl9mZWUiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYubWluX2ZlZSBleGlzdHMKICAgIGRpZyAxCiAgICA8PQogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weToxNTYtMTYxCiAgICAvLyAjIC0tLSBQYXltZW50IGFtb3VudCB2YWxpZGF0aW9uIC0tLQogICAgLy8gIyBUaGUgcGF5bWVudCBNVVNUIG1lZXQgdGhlIG1pbmltdW0gZmVlIHNldCBhdCBib290c3RyYXAgdGltZS4KICAgIC8vICMgZmVlX3BhaWQgc3RvcmVzIHRoZSByZWFsIGFtb3VudCBmcm9tIHRoZSBhY3R1YWwgUGF5bWVudFR4biDigJQgbm90IGEgYm9vbGVhbi4KICAgIC8vIGFzc2VydCAoCiAgICAvLyAgICAgcGF5bWVudC5hbW91bnQgPj0gc2VsZi5taW5fZmVlLnZhbHVlCiAgICAvLyApLCAiUGF5bWVudCBhbW91bnQgaXMgYmVsb3cgdGhlIG1pbmltdW0gYXR0ZXN0YXRpb24gZmVlIgogICAgYXNzZXJ0IC8vIFBheW1lbnQgYW1vdW50IGlzIGJlbG93IHRoZSBtaW5pbXVtIGF0dGVzdGF0aW9uIGZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weToxNjMtMTY0CiAgICAvLyAjIC0tLSBTY29yZSByYW5nZSB2YWxpZGF0aW9uIC0tLQogICAgLy8gYXNzZXJ0IG1hdGNoX3Njb3JlLmFzX3VpbnQ2NCgpIDw9IFVJbnQ2NCgxMDApLCAiTWF0Y2ggc2NvcmUgbXVzdCBiZSBiZXR3ZWVuIDAgYW5kIDEwMCIKICAgIGRpZyAxCiAgICBidG9pCiAgICBwdXNoaW50IDEwMAogICAgPD0KICAgIGFzc2VydCAvLyBNYXRjaCBzY29yZSBtdXN0IGJlIGJldHdlZW4gMCBhbmQgMTAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVzdW1lX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjE2Ni0xNjkKICAgIC8vICMgLS0tIENvbnN0cnVjdCBib3gga2V5IC0tLQogICAgLy8gIyBLZXkgPSBhcHBsaWNhbnQgd2FsbGV0IGFkZHJlc3MgYnl0ZXMgKDMyKSArIHJlc3VtZSBTSEEtMjU2IGhhc2ggYnl0ZXMgKDMyKSA9IDY0IGJ5dGVzCiAgICAvLyAjIFRoaXMgdW5pcXVlbHkgaWRlbnRpZmllcyBlYWNoIChhcHBsaWNhbnQsIHJlc3VtZSkgYXR0ZXN0YXRpb24uCiAgICAvLyBib3hfa2V5ID0gVHhuLnNlbmRlci5ieXRlcyArIHJlc3VtZV9oYXNoLmJ5dGVzCiAgICB0eG4gU2VuZGVyCiAgICB1bmNvdmVyIDQKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weToxNzYKICAgIC8vIGF0dGVzdGF0aW9uX3JvdW5kPWFyYzRVSW50NjQoR2xvYmFsLnJvdW5kKSwKICAgIGdsb2JhbCBSb3VuZAogICAgaXRvYgogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weToxNzcKICAgIC8vIGZlZV9wYWlkPWFyYzRVSW50NjQocGF5bWVudC5hbW91bnQpLCAgIyBSZWFsIMK1QUxHTyBmcm9tIHRoZSBQYXltZW50VHhuIOKAlCBub3QgYSBmbGFnCiAgICB1bmNvdmVyIDIKICAgIGl0b2IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MTcxLTE3OAogICAgLy8gIyAtLS0gV3JpdGUgYXR0ZXN0YXRpb24gcmVjb3JkIHRvIEJveCBTdG9yYWdlIC0tLQogICAgLy8gIyBPdmVyd3JpdGVzIGFueSBleGlzdGluZyByZWNvcmQgZm9yIHRoaXMga2V5IChzYWZlIOKAlCBhbGxvd3MgcmUtYXR0ZXN0YXRpb24pLgogICAgLy8gc2VsZi5hdHRlc3RhdGlvbnNbYm94X2tleV0gPSBBdHRlc3RhdGlvblJlY29yZCgKICAgIC8vICAgICByb2xlX2lkPXJvbGVfaWQsCiAgICAvLyAgICAgbWF0Y2hfc2NvcmU9bWF0Y2hfc2NvcmUsCiAgICAvLyAgICAgYXR0ZXN0YXRpb25fcm91bmQ9YXJjNFVJbnQ2NChHbG9iYWwucm91bmQpLAogICAgLy8gICAgIGZlZV9wYWlkPWFyYzRVSW50NjQocGF5bWVudC5hbW91bnQpLCAgIyBSZWFsIMK1QUxHTyBmcm9tIHRoZSBQYXltZW50VHhuIOKAlCBub3QgYSBmbGFnCiAgICAvLyApCiAgICBwdXNoYnl0ZXMgMHgwMDFhCiAgICB1bmNvdmVyIDQKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIGRpZyAxCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGJveF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MTEyCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwODQxNTQ1NDQ1NTM1NDQ1NDQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5yZXN1bWVfdmVyaWZpZXIuY29udHJhY3QuUmVzdW1lVmVyaWZpZXIuZ2V0X2F0dGVzdGF0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X2F0dGVzdGF0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weToxODYKICAgIC8vIEBhYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVzdW1lX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjIwNQogICAgLy8gYm94X2tleSA9IGFwcGxpY2FudC5ieXRlcyArIHJlc3VtZV9oYXNoLmJ5dGVzCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MjA3CiAgICAvLyBib3hfa2V5IGluIHNlbGYuYXR0ZXN0YXRpb25zCiAgICBkdXAKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weToyMDYtMjA4CiAgICAvLyBhc3NlcnQgKAogICAgLy8gICAgIGJveF9rZXkgaW4gc2VsZi5hdHRlc3RhdGlvbnMKICAgIC8vICksICJObyBhdHRlc3RhdGlvbiBmb3VuZCBmb3IgdGhpcyBhcHBsaWNhbnQgYW5kIHJlc3VtZSBoYXNoIgogICAgYXNzZXJ0IC8vIE5vIGF0dGVzdGF0aW9uIGZvdW5kIGZvciB0aGlzIGFwcGxpY2FudCBhbmQgcmVzdW1lIGhhc2gKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MjA5CiAgICAvLyByZXR1cm4gc2VsZi5hdHRlc3RhdGlvbnNbYm94X2tleV0uY29weSgpCiAgICBib3hfZ2V0CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MTg2CiAgICAvLyBAYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnJlc3VtZV92ZXJpZmllci5jb250cmFjdC5SZXN1bWVWZXJpZmllci52ZXJpZnlfcmVzdW1lX2hhc2hbcm91dGluZ10oKSAtPiB2b2lkOgp2ZXJpZnlfcmVzdW1lX2hhc2g6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVzdW1lX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjIxMQogICAgLy8gQGFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MjMwCiAgICAvLyBib3hfa2V5ID0gYXBwbGljYW50LmJ5dGVzICsgcmVzdW1lX2hhc2guYnl0ZXMKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weToyMzEKICAgIC8vIHJldHVybiBCb29sKGJveF9rZXkgaW4gc2VsZi5hdHRlc3RhdGlvbnMpCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIHB1c2hieXRlcyAweDAwCiAgICBpbnRjXzIgLy8gMAogICAgdW5jb3ZlciAyCiAgICBzZXRiaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MjExCiAgICAvLyBAYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnJlc3VtZV92ZXJpZmllci5jb250cmFjdC5SZXN1bWVWZXJpZmllci53aXRoZHJhd19mZWVzW3JvdXRpbmddKCkgLT4gdm9pZDoKd2l0aGRyYXdfZmVlczoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MjM3CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MjUxCiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBzZWxmLmFkbWluLnZhbHVlLCAiT25seSB0aGUgYWRtaW4gbWF5IHdpdGhkcmF3IGZlZXMiCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzIgLy8gMAogICAgYnl0ZWNfMCAvLyAiYWRtaW4iCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuYWRtaW4gZXhpc3RzCiAgICBzd2FwCiAgICBkaWcgMQogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IHRoZSBhZG1pbiBtYXkgd2l0aGRyYXcgZmVlcwogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weToyNTMtMjU4CiAgICAvLyAjIElubmVyIHRyYW5zYWN0aW9uOiBjb250cmFjdCBhY2NvdW50IOKGkiBhZG1pbgogICAgLy8gaXR4bi5QYXltZW50KAogICAgLy8gICAgIHJlY2VpdmVyPXNlbGYuYWRtaW4udmFsdWUsCiAgICAvLyAgICAgYW1vdW50PWFtb3VudCwKICAgIC8vICAgICBmZWU9R2xvYmFsLm1pbl90eG5fZmVlLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weToyNTcKICAgIC8vIGZlZT1HbG9iYWwubWluX3R4bl9mZWUsCiAgICBnbG9iYWwgTWluVHhuRmVlCiAgICB1bmNvdmVyIDIKICAgIGl0eG5fZmllbGQgQW1vdW50CiAgICBzd2FwCiAgICBpdHhuX2ZpZWxkIFJlY2VpdmVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVzdW1lX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjI1My0yNTQKICAgIC8vICMgSW5uZXIgdHJhbnNhY3Rpb246IGNvbnRyYWN0IGFjY291bnQg4oaSIGFkbWluCiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICBpbnRjXzAgLy8gcGF5CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL3Jlc3VtZV92ZXJpZmllci9jb250cmFjdC5weToyNTMtMjU4CiAgICAvLyAjIElubmVyIHRyYW5zYWN0aW9uOiBjb250cmFjdCBhY2NvdW50IOKGkiBhZG1pbgogICAgLy8gaXR4bi5QYXltZW50KAogICAgLy8gICAgIHJlY2VpdmVyPXNlbGYuYWRtaW4udmFsdWUsCiAgICAvLyAgICAgYW1vdW50PWFtb3VudCwKICAgIC8vICAgICBmZWU9R2xvYmFsLm1pbl90eG5fZmVlLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXN1bWVfdmVyaWZpZXIvY29udHJhY3QucHk6MjM3CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4K",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CyAEASAACCYDBWFkbWluB21pbl9mZWUEFR98dTEZFEQxGEEAJIIEBB9SGY4EK/kUuwSFHrIjBA0TF1E2GgCOBAAhAJMAsQDSAIAEoMrfijYaAI4BAAEANhoBSRUlEkQXKDEAZylMZyJDNhoBSRUjEkQ2GgJJJFmBAghLARUSRDYaA0kVJRJEMRYiCUk4ECISREk4BzIKEkQ4CCQpZURLAQ5ESwEXgWQORDEATwRQMgYWTwIWgAIAGk8EUE8CUExQTwJQSwG8SL+ADhUffHUACEFUVEVTVEVEsCJDNhoBSRUjEkQ2GgJJFSMSRFBJvUUBRL5IKkxQsCJDNhoBSRUjEkQ2GgJJFSMSRFC9RQGAAQAkTwJUKkxQsCJDNhoBSRUlEkQXMQAkKGVETEsBEkSxMgBPArIITLIHIrIQsgGzIkM=",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 9,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}
