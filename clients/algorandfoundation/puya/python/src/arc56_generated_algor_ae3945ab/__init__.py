@@ -29,6 +29,12 @@ from . import Contract_542e1992 as Contract_542e1992
 from . import ImmutableArrayContract_b0317cbb as ImmutableArrayContract_b0317cbb
 from . import ImmutableArrayInitContract_9f470a54 as ImmutableArrayInitContract_9f470a54
 from . import StaticSizeContract_b9fc16a2 as StaticSizeContract_b9fc16a2
+from . import DefaultContract_e1f5636d as DefaultContract_e1f5636d
+from . import DefaultContractV12_66100081 as DefaultContractV12_66100081
+from . import SaltedContract_5ae0fd39 as SaltedContract_5ae0fd39
+from . import SaltedContractV12_7200d348 as SaltedContractV12_7200d348
+from . import UnsaltedContract_e4bbfa26 as UnsaltedContract_e4bbfa26
+from . import UnsaltedContractV12_94b8e7f8 as UnsaltedContractV12_94b8e7f8
 from . import Contract_50d9eb20 as Contract_50d9eb20
 from . import Contract_60de8619 as Contract_60de8619
 from . import ContractV0_92e478a4 as ContractV0_92e478a4
