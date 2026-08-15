@@ -23,7 +23,7 @@ import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgumen
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"CaptreApp","structs":{},"methods":[{"name":"attest","args":[{"type":"byte[]","name":"content_hash"},{"type":"string","name":"author"},{"type":"byte[]","name":"metadata_json"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"revoke","args":[{"type":"byte[]","name":"content_hash"},{"type":"string","name":"author"},{"type":"byte[]","name":"updated_metadata_json"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_attestation","args":[{"type":"byte[]","name":"content_hash"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"exists","args":[{"type":"byte[]","name":"content_hash"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"attestations":{"keyType":"AVMBytes","valueType":"AVMBytes","prefix":""}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[123],"errorMessage":"ERR_ALREADY_CLAIMED"},{"pc":[130],"errorMessage":"ERR_EMPTY_AUTHOR"},{"pc":[127],"errorMessage":"ERR_EMPTY_HASH"},{"pc":[133,193],"errorMessage":"ERR_EMPTY_METADATA"},{"pc":[190],"errorMessage":"ERR_NOT_FOUND"},{"pc":[225],"errorMessage":"check self.attestations entry exists"},{"pc":[74,90,106,146,162,174,206,251],"errorMessage":"invalid array length header"},{"pc":[81,97,113,153,168,181,213,258],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDIgMQogICAgYnl0ZWNibG9jayAweDE1MWY3Yzc1CiAgICAvLyBjb250cmFjdC9jYXB0cmVfYXBwLnB5OjIwCiAgICAvLyBjbGFzcyBDYXB0cmVBcHAoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDEzCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHhiODFiMThiNCAweGU4NzEwMDk5IDB4ZTg3YTExNzQgMHg1ZWVmMWVmNSAvLyBtZXRob2QgImF0dGVzdChieXRlW10sc3RyaW5nLGJ5dGVbXSl2b2lkIiwgbWV0aG9kICJyZXZva2UoYnl0ZVtdLHN0cmluZyxieXRlW10pdm9pZCIsIG1ldGhvZCAiZ2V0X2F0dGVzdGF0aW9uKGJ5dGVbXSlieXRlW10iLCBtZXRob2QgImV4aXN0cyhieXRlW10pYm9vbCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGF0dGVzdCByZXZva2UgZ2V0X2F0dGVzdGF0aW9uIGV4aXN0cwogICAgZXJyCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDEzOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyBjYXB0cmVfYXBwLkNhcHRyZUFwcC5hdHRlc3Rbcm91dGluZ10oKSAtPiB2b2lkOgphdHRlc3Q6CiAgICAvLyBjb250cmFjdC9jYXB0cmVfYXBwLnB5OjI1CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIGNvbnRyYWN0L2NhcHRyZV9hcHAucHk6MzIKICAgIC8vIGFzc2VydCBjb250ZW50X2hhc2ggbm90IGluIHNlbGYuYXR0ZXN0YXRpb25zLCAiRVJSX0FMUkVBRFlfQ0xBSU1FRCIKICAgIGRpZyAyCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgICEKICAgIGFzc2VydCAvLyBFUlJfQUxSRUFEWV9DTEFJTUVECiAgICAvLyBjb250cmFjdC9jYXB0cmVfYXBwLnB5OjMzCiAgICAvLyBhc3NlcnQgY29udGVudF9oYXNoLmxlbmd0aCA+IFVJbnQ2NCgwKSwgIkVSUl9FTVBUWV9IQVNIIgogICAgZGlnIDIKICAgIGxlbgogICAgYXNzZXJ0IC8vIEVSUl9FTVBUWV9IQVNICiAgICAvLyBjb250cmFjdC9jYXB0cmVfYXBwLnB5OjM0CiAgICAvLyBhc3NlcnQgYXV0aG9yLmJ5dGVzLmxlbmd0aCA+IFVJbnQ2NCgwKSwgIkVSUl9FTVBUWV9BVVRIT1IiCiAgICBzd2FwCiAgICBsZW4KICAgIGFzc2VydCAvLyBFUlJfRU1QVFlfQVVUSE9SCiAgICAvLyBjb250cmFjdC9jYXB0cmVfYXBwLnB5OjM1CiAgICAvLyBhc3NlcnQgbWV0YWRhdGFfanNvbi5sZW5ndGggPiBVSW50NjQoMCksICJFUlJfRU1QVFlfTUVUQURBVEEiCiAgICBkdXAKICAgIGxlbgogICAgYXNzZXJ0IC8vIEVSUl9FTVBUWV9NRVRBREFUQQogICAgLy8gY29udHJhY3QvY2FwdHJlX2FwcC5weTozNgogICAgLy8gc2VsZi5hdHRlc3RhdGlvbnNbY29udGVudF9oYXNoXSA9IG1ldGFkYXRhX2pzb24KICAgIGRpZyAxCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0L2NhcHRyZV9hcHAucHk6MjUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgoKCi8vIGNhcHRyZV9hcHAuQ2FwdHJlQXBwLnJldm9rZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnJldm9rZToKICAgIC8vIGNvbnRyYWN0L2NhcHRyZV9hcHAucHk6MzgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBzd2FwCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIGNvbnRyYWN0L2NhcHRyZV9hcHAucHk6NDUKICAgIC8vIGFzc2VydCBjb250ZW50X2hhc2ggaW4gc2VsZi5hdHRlc3RhdGlvbnMsICJFUlJfTk9UX0ZPVU5EIgogICAgZGlnIDEKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgYXNzZXJ0IC8vIEVSUl9OT1RfRk9VTkQKICAgIC8vIGNvbnRyYWN0L2NhcHRyZV9hcHAucHk6NDYKICAgIC8vIGFzc2VydCB1cGRhdGVkX21ldGFkYXRhX2pzb24ubGVuZ3RoID4gVUludDY0KDApLCAiRVJSX0VNUFRZX01FVEFEQVRBIgogICAgZHVwCiAgICBsZW4KICAgIGFzc2VydCAvLyBFUlJfRU1QVFlfTUVUQURBVEEKICAgIC8vIGNvbnRyYWN0L2NhcHRyZV9hcHAucHk6NDcKICAgIC8vIHNlbGYuYXR0ZXN0YXRpb25zW2NvbnRlbnRfaGFzaF0gPSB1cGRhdGVkX21ldGFkYXRhX2pzb24KICAgIGRpZyAxCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0L2NhcHRyZV9hcHAucHk6MzgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgoKCi8vIGNhcHRyZV9hcHAuQ2FwdHJlQXBwLmdldF9hdHRlc3RhdGlvbltyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9hdHRlc3RhdGlvbjoKICAgIC8vIGNvbnRyYWN0L2NhcHRyZV9hcHAucHk6NDkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIGR1cAogICAgLy8gY29udHJhY3QvY2FwdHJlX2FwcC5weTo1MQogICAgLy8gaWYgY29udGVudF9oYXNoIGluIHNlbGYuYXR0ZXN0YXRpb25zOgogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBieiBnZXRfYXR0ZXN0YXRpb25fYWZ0ZXJfaWZfZWxzZUAzCiAgICAvLyBjb250cmFjdC9jYXB0cmVfYXBwLnB5OjUyCiAgICAvLyByZXR1cm4gc2VsZi5hdHRlc3RhdGlvbnNbY29udGVudF9oYXNoXQogICAgYm94X2dldAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuYXR0ZXN0YXRpb25zIGVudHJ5IGV4aXN0cwoKZ2V0X2F0dGVzdGF0aW9uX2FmdGVyX2lubGluZWRfY2FwdHJlX2FwcC5DYXB0cmVBcHAuZ2V0X2F0dGVzdGF0aW9uQDQ6CiAgICAvLyBjb250cmFjdC9jYXB0cmVfYXBwLnB5OjQ5CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgpnZXRfYXR0ZXN0YXRpb25fYWZ0ZXJfaWZfZWxzZUAzOgogICAgcG9wCiAgICAvLyBjb250cmFjdC9jYXB0cmVfYXBwLnB5OjUzCiAgICAvLyByZXR1cm4gQnl0ZXMoYiIiKQogICAgcHVzaGJ5dGVzIDB4CiAgICAvLyBjb250cmFjdC9jYXB0cmVfYXBwLnB5OjQ5CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGIgZ2V0X2F0dGVzdGF0aW9uX2FmdGVyX2lubGluZWRfY2FwdHJlX2FwcC5DYXB0cmVBcHAuZ2V0X2F0dGVzdGF0aW9uQDQKCgovLyBjYXB0cmVfYXBwLkNhcHRyZUFwcC5leGlzdHNbcm91dGluZ10oKSAtPiB2b2lkOgpleGlzdHM6CiAgICAvLyBjb250cmFjdC9jYXB0cmVfYXBwLnB5OjU1CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBjb250cmFjdC9jYXB0cmVfYXBwLnB5OjU3CiAgICAvLyByZXR1cm4gY29udGVudF9oYXNoIGluIHNlbGYuYXR0ZXN0YXRpb25zCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIC8vIGNvbnRyYWN0L2NhcHRyZV9hcHAucHk6NTUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGludGNfMCAvLyAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAAIBJgEEFR98dTEbQQArMRkURDEYRIIEBLgbGLQE6HEAmQToehF0BF7vHvU2GgCOBAAJAFEAjQC6ADEZFDEYFBBDNhoBSSJZIwhLARUSRFcCADYaAkkiWSMISwEVEkRXAgA2GgNJIlkjCEsBFRJEVwIASwK9RQEUREsCFURMFURJFURLAbxIvyRDNhoBSSJZIwhLARUSRFcCADYaAkkiWSMITBUSRDYaA0kiWSMISwEVEkRXAgBLAb1FAURJFURLAbxIvyRDNhoBSSJZIwhLARUSRFcCAEm9RQFBABC+REkVFlcGAkxQKExQsCRDSIAAQv/sNhoBSSJZIwhLARUSRFcCAL1FAYABACJPAlQoTFCwJEM=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"CaptreApp","structs":{},"methods":[{"name":"attest","args":[{"type":"byte[]","name":"content_hash_key","desc":"32-byte SHA-256 digest of the original content_hash string. Used as the ``attestations`` box key. Must not already exist — aborts with ``ERR_ALREADY_CLAIMED`` if so."},{"type":"byte[]","name":"content_hash_str","desc":"The original content_hash string (e.g. ``b\"sha256:abc123...\"``), UTF-8 encoded. Stored in ``id_index`` so callers can recover it via ``resolve_id()``."},{"type":"byte[]","name":"attestation_id","desc":"Server-generated UUID for this attestation (UTF-8 encoded). Used as the key in ``id_index``."},{"type":"string","name":"author","desc":"Algorand address of the payer (from the x402 payment payload). Stored inside ``metadata_json``; validated non-empty here."},{"type":"byte[]","name":"metadata_json","desc":"Full JSON-serialised ``Attestation`` record. Written verbatim to the ``attestations`` box."}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Write a new attestation. Fails if the ``content_hash_key`` is already claimed.","events":[],"recommendations":{}},{"name":"revoke","args":[{"type":"byte[]","name":"content_hash_key","desc":"32-byte SHA-256 digest key of the attestation box to update. Must already exist — aborts with ``ERR_NOT_FOUND`` if not."},{"type":"string","name":"author","desc":"Algorand address of the revoking payer (included for audit; not re-validated on-chain — authorization is enforced off-chain in ``revoke_attestation()`` before this call is submitted)."},{"type":"byte[]","name":"updated_metadata_json","desc":"Updated JSON blob with ``status`` set to ``\"revoked\"``."}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Overwrite an existing attestation box with updated (revoked) metadata.","events":[],"recommendations":{}},{"name":"get_attestation","args":[{"type":"byte[]","name":"content_hash_key","desc":"The 32-byte SHA-256 digest key to look up."}],"returns":{"type":"byte[]","desc":"The raw JSON metadata blob stored in the box, or ``b\"\"`` if no box exists for this key."},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Read an attestation record by ``content_hash_key``.","events":[],"recommendations":{}},{"name":"resolve_id","args":[{"type":"byte[]","name":"attestation_id","desc":"UTF-8 encoded UUID (e.g. ``b\"a00fe88e-...\"``) to look up in the ``id_index`` BoxMap."}],"returns":{"type":"byte[]","desc":"The ``content_hash`` bytes stored at this UUID key, or ``b\"\"`` if the UUID has never been attested."},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Resolve an ``attestation_id`` UUID to its ``content_hash``.","events":[],"recommendations":{}},{"name":"exists","args":[{"type":"byte[]","name":"content_hash_key","desc":"The 32-byte SHA-256 digest key to check."}],"returns":{"type":"bool","desc":"``True`` if a box exists for this key, ``False`` otherwise."},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Check whether a ``content_hash_key`` has already been attested.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    On-chain attestation registry.\n\n    Stores first-claim attestations keyed by ``content_hash`` and provides a\n    secondary index from ``attestation_id`` (UUID) to ``content_hash``.\n\n    Attributes\n    ----------\n    attestations : BoxMap[Bytes, Bytes]\n        Maps ``content_hash_key`` (32-byte SHA-256 digest of the original\n        content_hash string) → serialised JSON metadata blob.\n        Box key prefix: ``b\"a:\"``. Box name is always 34 bytes.\n    id_index : BoxMap[Bytes, Bytes]\n        Maps ``attestation_id`` → ``content_hash_str`` (the original human-\n        readable content_hash string, e.g. ``\"sha256:<hex>\"``).\n        Box key prefix: ``b\"i:\"``.\n    ","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"attestations":{"keyType":"AVMBytes","valueType":"AVMBytes","prefix":"YTo="},"id_index":{"keyType":"AVMBytes","valueType":"AVMBytes","prefix":"aTo="}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[172],"errorMessage":"ERR_ALREADY_CLAIMED"},{"pc":[188],"errorMessage":"ERR_EMPTY_AUTHOR"},{"pc":[176],"errorMessage":"ERR_EMPTY_HASH"},{"pc":[180],"errorMessage":"ERR_EMPTY_HASH_STR"},{"pc":[184],"errorMessage":"ERR_EMPTY_ID"},{"pc":[192,264],"errorMessage":"ERR_EMPTY_METADATA"},{"pc":[260],"errorMessage":"ERR_NOT_FOUND"},{"pc":[299],"errorMessage":"check self.attestations entry exists"},{"pc":[346],"errorMessage":"check self.id_index entry exists"},{"pc":[88,104,120,136,152,213,229,241,277,324,371],"errorMessage":"invalid array length header"},{"pc":[95,111,127,143,159,220,235,248,284,331,378],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDIgMQogICAgYnl0ZWNibG9jayAweDYxM2EgMHgxNTFmN2M3NSAweDY5M2EgMHgKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToyOAogICAgLy8gY2xhc3MgQ2FwdHJlQXBwKEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxNAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4Mzc4NjE3MzUgMHhlODcxMDA5OSAweGU4N2ExMTc0IDB4ODU3OGVlOTggMHg1ZWVmMWVmNSAvLyBtZXRob2QgImF0dGVzdChieXRlW10sYnl0ZVtdLGJ5dGVbXSxzdHJpbmcsYnl0ZVtdKXZvaWQiLCBtZXRob2QgInJldm9rZShieXRlW10sc3RyaW5nLGJ5dGVbXSl2b2lkIiwgbWV0aG9kICJnZXRfYXR0ZXN0YXRpb24oYnl0ZVtdKWJ5dGVbXSIsIG1ldGhvZCAicmVzb2x2ZV9pZChieXRlW10pYnl0ZVtdIiwgbWV0aG9kICJleGlzdHMoYnl0ZVtdKWJvb2wiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBhdHRlc3QgcmV2b2tlIGdldF9hdHRlc3RhdGlvbiByZXNvbHZlX2lkIGV4aXN0cwogICAgZXJyCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDE0OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyBjYXB0cmVfYXBwLkNhcHRyZUFwcC5hdHRlc3Rbcm91dGluZ10oKSAtPiB2b2lkOgphdHRlc3Q6CiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL2NhcHRyZV9hcHAucHk6NTEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNAogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDUKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL2NhcHRyZV9hcHAucHk6OTgKICAgIC8vIGFzc2VydCBjb250ZW50X2hhc2hfa2V5IG5vdCBpbiBzZWxmLmF0dGVzdGF0aW9ucywgIkVSUl9BTFJFQURZX0NMQUlNRUQiCiAgICBieXRlY18wIC8vIDB4NjEzYQogICAgZGlnIDUKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgICEKICAgIGFzc2VydCAvLyBFUlJfQUxSRUFEWV9DTEFJTUVECiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL2NhcHRyZV9hcHAucHk6OTkKICAgIC8vIGFzc2VydCBjb250ZW50X2hhc2hfa2V5Lmxlbmd0aCA+IFVJbnQ2NCgwKSwgIkVSUl9FTVBUWV9IQVNIIgogICAgdW5jb3ZlciA1CiAgICBsZW4KICAgIGFzc2VydCAvLyBFUlJfRU1QVFlfSEFTSAogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS9jYXB0cmVfYXBwLnB5OjEwMAogICAgLy8gYXNzZXJ0IGNvbnRlbnRfaGFzaF9zdHIubGVuZ3RoID4gVUludDY0KDApLCAiRVJSX0VNUFRZX0hBU0hfU1RSIgogICAgZGlnIDQKICAgIGxlbgogICAgYXNzZXJ0IC8vIEVSUl9FTVBUWV9IQVNIX1NUUgogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS9jYXB0cmVfYXBwLnB5OjEwMQogICAgLy8gYXNzZXJ0IGF0dGVzdGF0aW9uX2lkLmxlbmd0aCA+IFVJbnQ2NCgwKSwgIkVSUl9FTVBUWV9JRCIKICAgIGRpZyAzCiAgICBsZW4KICAgIGFzc2VydCAvLyBFUlJfRU1QVFlfSUQKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxMDIKICAgIC8vIGFzc2VydCBhdXRob3IuYnl0ZXMubGVuZ3RoID4gVUludDY0KDApLCAiRVJSX0VNUFRZX0FVVEhPUiIKICAgIHVuY292ZXIgMgogICAgbGVuCiAgICBhc3NlcnQgLy8gRVJSX0VNUFRZX0FVVEhPUgogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS9jYXB0cmVfYXBwLnB5OjEwMwogICAgLy8gYXNzZXJ0IG1ldGFkYXRhX2pzb24ubGVuZ3RoID4gVUludDY0KDApLCAiRVJSX0VNUFRZX01FVEFEQVRBIgogICAgZGlnIDEKICAgIGxlbgogICAgYXNzZXJ0IC8vIEVSUl9FTVBUWV9NRVRBREFUQQogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS9jYXB0cmVfYXBwLnB5OjEwNAogICAgLy8gc2VsZi5hdHRlc3RhdGlvbnNbY29udGVudF9oYXNoX2tleV0gPSBtZXRhZGF0YV9qc29uCiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAogICAgc3dhcAogICAgYm94X3B1dAogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS9jYXB0cmVfYXBwLnB5OjEwNQogICAgLy8gc2VsZi5pZF9pbmRleFthdHRlc3RhdGlvbl9pZF0gPSBjb250ZW50X2hhc2hfc3RyCiAgICBieXRlY18yIC8vIDB4NjkzYQogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAogICAgc3dhcAogICAgYm94X3B1dAogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS9jYXB0cmVfYXBwLnB5OjUxCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGludGNfMiAvLyAxCiAgICByZXR1cm4KCgovLyBjYXB0cmVfYXBwLkNhcHRyZUFwcC5yZXZva2Vbcm91dGluZ10oKSAtPiB2b2lkOgpyZXZva2U6CiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL2NhcHRyZV9hcHAucHk6MTA3CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMgogICAgKwogICAgc3dhcAogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL2NhcHRyZV9hcHAucHk6MTM2CiAgICAvLyBhc3NlcnQgY29udGVudF9oYXNoX2tleSBpbiBzZWxmLmF0dGVzdGF0aW9ucywgIkVSUl9OT1RfRk9VTkQiCiAgICBieXRlY18wIC8vIDB4NjEzYQogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBhc3NlcnQgLy8gRVJSX05PVF9GT1VORAogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS9jYXB0cmVfYXBwLnB5OjEzNwogICAgLy8gYXNzZXJ0IHVwZGF0ZWRfbWV0YWRhdGFfanNvbi5sZW5ndGggPiBVSW50NjQoMCksICJFUlJfRU1QVFlfTUVUQURBVEEiCiAgICBkaWcgMQogICAgbGVuCiAgICBhc3NlcnQgLy8gRVJSX0VNUFRZX01FVEFEQVRBCiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL2NhcHRyZV9hcHAucHk6MTM4CiAgICAvLyBzZWxmLmF0dGVzdGF0aW9uc1tjb250ZW50X2hhc2hfa2V5XSA9IHVwZGF0ZWRfbWV0YWRhdGFfanNvbgogICAgZHVwCiAgICBib3hfZGVsCiAgICBwb3AKICAgIHN3YXAKICAgIGJveF9wdXQKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxMDcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgoKCi8vIGNhcHRyZV9hcHAuQ2FwdHJlQXBwLmdldF9hdHRlc3RhdGlvbltyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9hdHRlc3RhdGlvbjoKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxNDAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxNTYKICAgIC8vIGlmIGNvbnRlbnRfaGFzaF9rZXkgaW4gc2VsZi5hdHRlc3RhdGlvbnM6CiAgICBieXRlY18wIC8vIDB4NjEzYQogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgYnogZ2V0X2F0dGVzdGF0aW9uX2FmdGVyX2lmX2Vsc2VAMwogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS9jYXB0cmVfYXBwLnB5OjE1NwogICAgLy8gcmV0dXJuIHNlbGYuYXR0ZXN0YXRpb25zW2NvbnRlbnRfaGFzaF9rZXldCiAgICBib3hfZ2V0CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5hdHRlc3RhdGlvbnMgZW50cnkgZXhpc3RzCgpnZXRfYXR0ZXN0YXRpb25fYWZ0ZXJfaW5saW5lZF9jYXB0cmVfYXBwLkNhcHRyZUFwcC5nZXRfYXR0ZXN0YXRpb25ANDoKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxNDAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMiAvLyAxCiAgICByZXR1cm4KCmdldF9hdHRlc3RhdGlvbl9hZnRlcl9pZl9lbHNlQDM6CiAgICBwb3AKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxNTgKICAgIC8vIHJldHVybiBCeXRlcyhiIiIpCiAgICBieXRlY18zIC8vIDB4CiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL2NhcHRyZV9hcHAucHk6MTQwCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGIgZ2V0X2F0dGVzdGF0aW9uX2FmdGVyX2lubGluZWRfY2FwdHJlX2FwcC5DYXB0cmVBcHAuZ2V0X2F0dGVzdGF0aW9uQDQKCgovLyBjYXB0cmVfYXBwLkNhcHRyZUFwcC5yZXNvbHZlX2lkW3JvdXRpbmddKCkgLT4gdm9pZDoKcmVzb2x2ZV9pZDoKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxNjAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxNzcKICAgIC8vIGlmIGF0dGVzdGF0aW9uX2lkIGluIHNlbGYuaWRfaW5kZXg6CiAgICBieXRlY18yIC8vIDB4NjkzYQogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgYnogcmVzb2x2ZV9pZF9hZnRlcl9pZl9lbHNlQDMKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxNzgKICAgIC8vIHJldHVybiBzZWxmLmlkX2luZGV4W2F0dGVzdGF0aW9uX2lkXQogICAgYm94X2dldAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuaWRfaW5kZXggZW50cnkgZXhpc3RzCgpyZXNvbHZlX2lkX2FmdGVyX2lubGluZWRfY2FwdHJlX2FwcC5DYXB0cmVBcHAucmVzb2x2ZV9pZEA0OgogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS9jYXB0cmVfYXBwLnB5OjE2MAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgoKcmVzb2x2ZV9pZF9hZnRlcl9pZl9lbHNlQDM6CiAgICBwb3AKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxNzkKICAgIC8vIHJldHVybiBCeXRlcyhiIiIpCiAgICBieXRlY18zIC8vIDB4CiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL2NhcHRyZV9hcHAucHk6MTYwCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGIgcmVzb2x2ZV9pZF9hZnRlcl9pbmxpbmVkX2NhcHRyZV9hcHAuQ2FwdHJlQXBwLnJlc29sdmVfaWRANAoKCi8vIGNhcHRyZV9hcHAuQ2FwdHJlQXBwLmV4aXN0c1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmV4aXN0czoKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxODEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxOTYKICAgIC8vIHJldHVybiBjb250ZW50X2hhc2hfa2V5IGluIHNlbGYuYXR0ZXN0YXRpb25zCiAgICBieXRlY18wIC8vIDB4NjEzYQogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvY2FwdHJlX2FwcC5weToxODEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGludGNfMCAvLyAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAAIBJgQCYToEFR98dQJpOgAxG0EAMjEZFEQxGESCBQQ3hhc1BOhxAJkE6HoRdASFeO6YBF7vHvU2GgCOBQAJAIYAxgD1ASQAMRkUMRgUEEM2GgFJIlkjCEsBFRJEVwIANhoCSSJZIwhLARUSRFcCADYaA0kiWSMISwEVEkRXAgA2GgRJIlkjCEsBFRJEVwIANhoFSSJZIwhLARUSRFcCAChLBVBJvUUBFERPBRVESwQVREsDFURPAhVESwEVREm8SEy/KkxQSbxITL8kQzYaAUkiWSMISwEVEkRXAgA2GgJJIlkjCEwVEkQ2GgNJIlkjCEsBFRJEVwIAKE8CUEm9RQFESwEVREm8SEy/JEM2GgFJIlkjCEsBFRJEVwIAKExQSb1FAUEAEL5ESRUWVwYCTFApTFCwJENIK0L/7TYaAUkiWSMISwEVEkRXAgAqTFBJvUUBQQAQvkRJFRZXBgJMUClMULAkQ0grQv/tNhoBSSJZIwhLARUSRFcCAChMUL1FAYABACJPAlQpTFCwJEM=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -70,31 +70,70 @@ export type CaptreAppArgs = {
    * The object representation of the arguments for each method
    */
   obj: {
-    'attest(byte[],string,byte[])void': {
-      contentHash: Uint8Array
+    'attest(byte[],byte[],byte[],string,byte[])void': {
+      /**
+       * 32-byte SHA-256 digest of the original content_hash string. Used as the ``attestations`` box key. Must not already exist — aborts with ``ERR_ALREADY_CLAIMED`` if so.
+       */
+      contentHashKey: Uint8Array
+      /**
+       * The original content_hash string (e.g. ``b"sha256:abc123..."``), UTF-8 encoded. Stored in ``id_index`` so callers can recover it via ``resolve_id()``.
+       */
+      contentHashStr: Uint8Array
+      /**
+       * Server-generated UUID for this attestation (UTF-8 encoded). Used as the key in ``id_index``.
+       */
+      attestationId: Uint8Array
+      /**
+       * Algorand address of the payer (from the x402 payment payload). Stored inside ``metadata_json``; validated non-empty here.
+       */
       author: string
+      /**
+       * Full JSON-serialised ``Attestation`` record. Written verbatim to the ``attestations`` box.
+       */
       metadataJson: Uint8Array
     }
     'revoke(byte[],string,byte[])void': {
-      contentHash: Uint8Array
+      /**
+       * 32-byte SHA-256 digest key of the attestation box to update. Must already exist — aborts with ``ERR_NOT_FOUND`` if not.
+       */
+      contentHashKey: Uint8Array
+      /**
+       * Algorand address of the revoking payer (included for audit; not re-validated on-chain — authorization is enforced off-chain in ``revoke_attestation()`` before this call is submitted).
+       */
       author: string
+      /**
+       * Updated JSON blob with ``status`` set to ``"revoked"``.
+       */
       updatedMetadataJson: Uint8Array
     }
     'get_attestation(byte[])byte[]': {
-      contentHash: Uint8Array
+      /**
+       * The 32-byte SHA-256 digest key to look up.
+       */
+      contentHashKey: Uint8Array
+    }
+    'resolve_id(byte[])byte[]': {
+      /**
+       * UTF-8 encoded UUID (e.g. ``b"a00fe88e-..."``) to look up in the ``id_index`` BoxMap.
+       */
+      attestationId: Uint8Array
     }
     'exists(byte[])bool': {
-      contentHash: Uint8Array
+      /**
+       * The 32-byte SHA-256 digest key to check.
+       */
+      contentHashKey: Uint8Array
     }
   }
   /**
    * The tuple representation of the arguments for each method
    */
   tuple: {
-    'attest(byte[],string,byte[])void': [contentHash: Uint8Array, author: string, metadataJson: Uint8Array]
-    'revoke(byte[],string,byte[])void': [contentHash: Uint8Array, author: string, updatedMetadataJson: Uint8Array]
-    'get_attestation(byte[])byte[]': [contentHash: Uint8Array]
-    'exists(byte[])bool': [contentHash: Uint8Array]
+    'attest(byte[],byte[],byte[],string,byte[])void': [contentHashKey: Uint8Array, contentHashStr: Uint8Array, attestationId: Uint8Array, author: string, metadataJson: Uint8Array]
+    'revoke(byte[],string,byte[])void': [contentHashKey: Uint8Array, author: string, updatedMetadataJson: Uint8Array]
+    'get_attestation(byte[])byte[]': [contentHashKey: Uint8Array]
+    'resolve_id(byte[])byte[]': [attestationId: Uint8Array]
+    'exists(byte[])bool': [contentHashKey: Uint8Array]
   }
 }
 
@@ -102,9 +141,10 @@ export type CaptreAppArgs = {
  * The return type for each method
  */
 export type CaptreAppReturns = {
-  'attest(byte[],string,byte[])void': void
+  'attest(byte[],byte[],byte[],string,byte[])void': void
   'revoke(byte[],string,byte[])void': void
   'get_attestation(byte[])byte[]': Uint8Array
+  'resolve_id(byte[])byte[]': Uint8Array
   'exists(byte[])bool': boolean
 }
 
@@ -116,10 +156,10 @@ export type CaptreAppTypes = {
    * Maps method signatures / names to their argument and return types.
    */
   methods:
-    & Record<'attest(byte[],string,byte[])void' | 'attest', {
-      argsObj: CaptreAppArgs['obj']['attest(byte[],string,byte[])void']
-      argsTuple: CaptreAppArgs['tuple']['attest(byte[],string,byte[])void']
-      returns: CaptreAppReturns['attest(byte[],string,byte[])void']
+    & Record<'attest(byte[],byte[],byte[],string,byte[])void' | 'attest', {
+      argsObj: CaptreAppArgs['obj']['attest(byte[],byte[],byte[],string,byte[])void']
+      argsTuple: CaptreAppArgs['tuple']['attest(byte[],byte[],byte[],string,byte[])void']
+      returns: CaptreAppReturns['attest(byte[],byte[],byte[],string,byte[])void']
     }>
     & Record<'revoke(byte[],string,byte[])void' | 'revoke', {
       argsObj: CaptreAppArgs['obj']['revoke(byte[],string,byte[])void']
@@ -129,11 +169,25 @@ export type CaptreAppTypes = {
     & Record<'get_attestation(byte[])byte[]' | 'get_attestation', {
       argsObj: CaptreAppArgs['obj']['get_attestation(byte[])byte[]']
       argsTuple: CaptreAppArgs['tuple']['get_attestation(byte[])byte[]']
+      /**
+       * The raw JSON metadata blob stored in the box, or ``b""`` if no box exists for this key.
+       */
       returns: CaptreAppReturns['get_attestation(byte[])byte[]']
+    }>
+    & Record<'resolve_id(byte[])byte[]' | 'resolve_id', {
+      argsObj: CaptreAppArgs['obj']['resolve_id(byte[])byte[]']
+      argsTuple: CaptreAppArgs['tuple']['resolve_id(byte[])byte[]']
+      /**
+       * The ``content_hash`` bytes stored at this UUID key, or ``b""`` if the UUID has never been attested.
+       */
+      returns: CaptreAppReturns['resolve_id(byte[])byte[]']
     }>
     & Record<'exists(byte[])bool' | 'exists', {
       argsObj: CaptreAppArgs['obj']['exists(byte[])bool']
       argsTuple: CaptreAppArgs['tuple']['exists(byte[])bool']
+      /**
+       * ``True`` if a box exists for this key, ``False`` otherwise.
+       */
       returns: CaptreAppReturns['exists(byte[])bool']
     }>
   /**
@@ -144,6 +198,7 @@ export type CaptreAppTypes = {
       keys: {}
       maps: {
         attestations: Map<Uint8Array | string, Uint8Array>
+        idIndex: Map<Uint8Array | string, Uint8Array>
       }
     }
   }
@@ -203,20 +258,24 @@ export type CaptreAppDeployParams = Expand<Omit<AppFactoryDeployParams, 'createP
  */
 export abstract class CaptreAppParamsFactory {
   /**
-   * Constructs a no op call for the attest(byte[],string,byte[])void ABI method
+   * Constructs a no op call for the attest(byte[],byte[],byte[],string,byte[])void ABI method
+   *
+   * Write a new attestation. Fails if the ``content_hash_key`` is already claimed.
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
    */
-  static attest(params: CallParams<CaptreAppArgs['obj']['attest(byte[],string,byte[])void'] | CaptreAppArgs['tuple']['attest(byte[],string,byte[])void']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+  static attest(params: CallParams<CaptreAppArgs['obj']['attest(byte[],byte[],byte[],string,byte[])void'] | CaptreAppArgs['tuple']['attest(byte[],byte[],byte[],string,byte[])void']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
     return {
       ...params,
-      method: 'attest(byte[],string,byte[])void' as const,
-      args: Array.isArray(params.args) ? params.args : [params.args.contentHash, params.args.author, params.args.metadataJson],
+      method: 'attest(byte[],byte[],byte[],string,byte[])void' as const,
+      args: Array.isArray(params.args) ? params.args : [params.args.contentHashKey, params.args.contentHashStr, params.args.attestationId, params.args.author, params.args.metadataJson],
     }
   }
   /**
    * Constructs a no op call for the revoke(byte[],string,byte[])void ABI method
+   *
+   * Overwrite an existing attestation box with updated (revoked) metadata.
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
@@ -225,11 +284,13 @@ export abstract class CaptreAppParamsFactory {
     return {
       ...params,
       method: 'revoke(byte[],string,byte[])void' as const,
-      args: Array.isArray(params.args) ? params.args : [params.args.contentHash, params.args.author, params.args.updatedMetadataJson],
+      args: Array.isArray(params.args) ? params.args : [params.args.contentHashKey, params.args.author, params.args.updatedMetadataJson],
     }
   }
   /**
    * Constructs a no op call for the get_attestation(byte[])byte[] ABI method
+   *
+   * Read an attestation record by ``content_hash_key``.
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
@@ -238,11 +299,28 @@ export abstract class CaptreAppParamsFactory {
     return {
       ...params,
       method: 'get_attestation(byte[])byte[]' as const,
-      args: Array.isArray(params.args) ? params.args : [params.args.contentHash],
+      args: Array.isArray(params.args) ? params.args : [params.args.contentHashKey],
+    }
+  }
+  /**
+   * Constructs a no op call for the resolve_id(byte[])byte[] ABI method
+   *
+   * Resolve an ``attestation_id`` UUID to its ``content_hash``.
+   *
+   * @param params Parameters for the call
+   * @returns An `AppClientMethodCallParams` object for the call
+   */
+  static resolveId(params: CallParams<CaptreAppArgs['obj']['resolve_id(byte[])byte[]'] | CaptreAppArgs['tuple']['resolve_id(byte[])byte[]']> & CallOnComplete): AppClientMethodCallParams & CallOnComplete {
+    return {
+      ...params,
+      method: 'resolve_id(byte[])byte[]' as const,
+      args: Array.isArray(params.args) ? params.args : [params.args.attestationId],
     }
   }
   /**
    * Constructs a no op call for the exists(byte[])bool ABI method
+   *
+   * Check whether a ``content_hash_key`` has already been attested.
    *
    * @param params Parameters for the call
    * @returns An `AppClientMethodCallParams` object for the call
@@ -251,7 +329,7 @@ export abstract class CaptreAppParamsFactory {
     return {
       ...params,
       method: 'exists(byte[])bool' as const,
-      args: Array.isArray(params.args) ? params.args : [params.args.contentHash],
+      args: Array.isArray(params.args) ? params.args : [params.args.contentHashKey],
     }
   }
 }
@@ -495,17 +573,21 @@ export class CaptreAppClient {
     },
 
     /**
-     * Makes a call to the CaptreApp smart contract using the `attest(byte[],string,byte[])void` ABI method.
+     * Makes a call to the CaptreApp smart contract using the `attest(byte[],byte[],byte[],string,byte[])void` ABI method.
+     *
+     * Write a new attestation. Fails if the ``content_hash_key`` is already claimed.
      *
      * @param params The params for the smart contract call
      * @returns The call params
      */
-    attest: (params: CallParams<CaptreAppArgs['obj']['attest(byte[],string,byte[])void'] | CaptreAppArgs['tuple']['attest(byte[],string,byte[])void']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    attest: (params: CallParams<CaptreAppArgs['obj']['attest(byte[],byte[],byte[],string,byte[])void'] | CaptreAppArgs['tuple']['attest(byte[],byte[],byte[],string,byte[])void']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.params.call(CaptreAppParamsFactory.attest(params))
     },
 
     /**
      * Makes a call to the CaptreApp smart contract using the `revoke(byte[],string,byte[])void` ABI method.
+     *
+     * Overwrite an existing attestation box with updated (revoked) metadata.
      *
      * @param params The params for the smart contract call
      * @returns The call params
@@ -519,11 +601,27 @@ export class CaptreAppClient {
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
+     * Read an attestation record by ``content_hash_key``.
+     *
      * @param params The params for the smart contract call
-     * @returns The call params
+     * @returns The call params: The raw JSON metadata blob stored in the box, or ``b""`` if no box exists for this key.
      */
     getAttestation: (params: CallParams<CaptreAppArgs['obj']['get_attestation(byte[])byte[]'] | CaptreAppArgs['tuple']['get_attestation(byte[])byte[]']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.params.call(CaptreAppParamsFactory.getAttestation(params))
+    },
+
+    /**
+     * Makes a call to the CaptreApp smart contract using the `resolve_id(byte[])byte[]` ABI method.
+     * 
+     * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
+     *
+     * Resolve an ``attestation_id`` UUID to its ``content_hash``.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call params: The ``content_hash`` bytes stored at this UUID key, or ``b""`` if the UUID has never been attested.
+     */
+    resolveId: (params: CallParams<CaptreAppArgs['obj']['resolve_id(byte[])byte[]'] | CaptreAppArgs['tuple']['resolve_id(byte[])byte[]']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      return this.appClient.params.call(CaptreAppParamsFactory.resolveId(params))
     },
 
     /**
@@ -531,8 +629,10 @@ export class CaptreAppClient {
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
+     * Check whether a ``content_hash_key`` has already been attested.
+     *
      * @param params The params for the smart contract call
-     * @returns The call params
+     * @returns The call params: ``True`` if a box exists for this key, ``False`` otherwise.
      */
     exists: (params: CallParams<CaptreAppArgs['obj']['exists(byte[])bool'] | CaptreAppArgs['tuple']['exists(byte[])bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.params.call(CaptreAppParamsFactory.exists(params))
@@ -555,17 +655,21 @@ export class CaptreAppClient {
     },
 
     /**
-     * Makes a call to the CaptreApp smart contract using the `attest(byte[],string,byte[])void` ABI method.
+     * Makes a call to the CaptreApp smart contract using the `attest(byte[],byte[],byte[],string,byte[])void` ABI method.
+     *
+     * Write a new attestation. Fails if the ``content_hash_key`` is already claimed.
      *
      * @param params The params for the smart contract call
      * @returns The call transaction
      */
-    attest: (params: CallParams<CaptreAppArgs['obj']['attest(byte[],string,byte[])void'] | CaptreAppArgs['tuple']['attest(byte[],string,byte[])void']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    attest: (params: CallParams<CaptreAppArgs['obj']['attest(byte[],byte[],byte[],string,byte[])void'] | CaptreAppArgs['tuple']['attest(byte[],byte[],byte[],string,byte[])void']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.createTransaction.call(CaptreAppParamsFactory.attest(params))
     },
 
     /**
      * Makes a call to the CaptreApp smart contract using the `revoke(byte[],string,byte[])void` ABI method.
+     *
+     * Overwrite an existing attestation box with updated (revoked) metadata.
      *
      * @param params The params for the smart contract call
      * @returns The call transaction
@@ -579,11 +683,27 @@ export class CaptreAppClient {
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
+     * Read an attestation record by ``content_hash_key``.
+     *
      * @param params The params for the smart contract call
-     * @returns The call transaction
+     * @returns The call transaction: The raw JSON metadata blob stored in the box, or ``b""`` if no box exists for this key.
      */
     getAttestation: (params: CallParams<CaptreAppArgs['obj']['get_attestation(byte[])byte[]'] | CaptreAppArgs['tuple']['get_attestation(byte[])byte[]']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.createTransaction.call(CaptreAppParamsFactory.getAttestation(params))
+    },
+
+    /**
+     * Makes a call to the CaptreApp smart contract using the `resolve_id(byte[])byte[]` ABI method.
+     * 
+     * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
+     *
+     * Resolve an ``attestation_id`` UUID to its ``content_hash``.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call transaction: The ``content_hash`` bytes stored at this UUID key, or ``b""`` if the UUID has never been attested.
+     */
+    resolveId: (params: CallParams<CaptreAppArgs['obj']['resolve_id(byte[])byte[]'] | CaptreAppArgs['tuple']['resolve_id(byte[])byte[]']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      return this.appClient.createTransaction.call(CaptreAppParamsFactory.resolveId(params))
     },
 
     /**
@@ -591,8 +711,10 @@ export class CaptreAppClient {
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
+     * Check whether a ``content_hash_key`` has already been attested.
+     *
      * @param params The params for the smart contract call
-     * @returns The call transaction
+     * @returns The call transaction: ``True`` if a box exists for this key, ``False`` otherwise.
      */
     exists: (params: CallParams<CaptreAppArgs['obj']['exists(byte[])bool'] | CaptreAppArgs['tuple']['exists(byte[])bool']> & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       return this.appClient.createTransaction.call(CaptreAppParamsFactory.exists(params))
@@ -615,18 +737,22 @@ export class CaptreAppClient {
     },
 
     /**
-     * Makes a call to the CaptreApp smart contract using the `attest(byte[],string,byte[])void` ABI method.
+     * Makes a call to the CaptreApp smart contract using the `attest(byte[],byte[],byte[],string,byte[])void` ABI method.
+     *
+     * Write a new attestation. Fails if the ``content_hash_key`` is already claimed.
      *
      * @param params The params for the smart contract call
      * @returns The call result
      */
-    attest: async (params: CallParams<CaptreAppArgs['obj']['attest(byte[],string,byte[])void'] | CaptreAppArgs['tuple']['attest(byte[],string,byte[])void']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+    attest: async (params: CallParams<CaptreAppArgs['obj']['attest(byte[],byte[],byte[],string,byte[])void'] | CaptreAppArgs['tuple']['attest(byte[],byte[],byte[],string,byte[])void']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       const result = await this.appClient.send.call(CaptreAppParamsFactory.attest(params))
-      return {...result, return: result.return as unknown as (undefined | CaptreAppReturns['attest(byte[],string,byte[])void'])}
+      return {...result, return: result.return as unknown as (undefined | CaptreAppReturns['attest(byte[],byte[],byte[],string,byte[])void'])}
     },
 
     /**
      * Makes a call to the CaptreApp smart contract using the `revoke(byte[],string,byte[])void` ABI method.
+     *
+     * Overwrite an existing attestation box with updated (revoked) metadata.
      *
      * @param params The params for the smart contract call
      * @returns The call result
@@ -641,8 +767,10 @@ export class CaptreAppClient {
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
+     * Read an attestation record by ``content_hash_key``.
+     *
      * @param params The params for the smart contract call
-     * @returns The call result
+     * @returns The call result: The raw JSON metadata blob stored in the box, or ``b""`` if no box exists for this key.
      */
     getAttestation: async (params: CallParams<CaptreAppArgs['obj']['get_attestation(byte[])byte[]'] | CaptreAppArgs['tuple']['get_attestation(byte[])byte[]']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       const result = await this.appClient.send.call(CaptreAppParamsFactory.getAttestation(params))
@@ -650,12 +778,29 @@ export class CaptreAppClient {
     },
 
     /**
+     * Makes a call to the CaptreApp smart contract using the `resolve_id(byte[])byte[]` ABI method.
+     * 
+     * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
+     *
+     * Resolve an ``attestation_id`` UUID to its ``content_hash``.
+     *
+     * @param params The params for the smart contract call
+     * @returns The call result: The ``content_hash`` bytes stored at this UUID key, or ``b""`` if the UUID has never been attested.
+     */
+    resolveId: async (params: CallParams<CaptreAppArgs['obj']['resolve_id(byte[])byte[]'] | CaptreAppArgs['tuple']['resolve_id(byte[])byte[]']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+      const result = await this.appClient.send.call(CaptreAppParamsFactory.resolveId(params))
+      return {...result, return: result.return as unknown as (undefined | CaptreAppReturns['resolve_id(byte[])byte[]'])}
+    },
+
+    /**
      * Makes a call to the CaptreApp smart contract using the `exists(byte[])bool` ABI method.
      * 
      * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
      *
+     * Check whether a ``content_hash_key`` has already been attested.
+     *
      * @param params The params for the smart contract call
-     * @returns The call result
+     * @returns The call result: ``True`` if a box exists for this key, ``False`` otherwise.
      */
     exists: async (params: CallParams<CaptreAppArgs['obj']['exists(byte[])bool'] | CaptreAppArgs['tuple']['exists(byte[])bool']> & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
       const result = await this.appClient.send.call(CaptreAppParamsFactory.exists(params))
@@ -679,8 +824,10 @@ export class CaptreAppClient {
    * 
    * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
    *
+   * Read an attestation record by ``content_hash_key``.
+   *
    * @param params The params for the smart contract call
-   * @returns The call result
+   * @returns The call result: The raw JSON metadata blob stored in the box, or ``b""`` if no box exists for this key.
    */
   async getAttestation(params: CallParams<CaptreAppArgs['obj']['get_attestation(byte[])byte[]'] | CaptreAppArgs['tuple']['get_attestation(byte[])byte[]']>) {
     const result = await this.appClient.send.call(CaptreAppParamsFactory.getAttestation(params))
@@ -688,12 +835,29 @@ export class CaptreAppClient {
   }
 
   /**
+   * Makes a readonly (simulated) call to the CaptreApp smart contract using the `resolve_id(byte[])byte[]` ABI method.
+   * 
+   * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
+   *
+   * Resolve an ``attestation_id`` UUID to its ``content_hash``.
+   *
+   * @param params The params for the smart contract call
+   * @returns The call result: The ``content_hash`` bytes stored at this UUID key, or ``b""`` if the UUID has never been attested.
+   */
+  async resolveId(params: CallParams<CaptreAppArgs['obj']['resolve_id(byte[])byte[]'] | CaptreAppArgs['tuple']['resolve_id(byte[])byte[]']>) {
+    const result = await this.appClient.send.call(CaptreAppParamsFactory.resolveId(params))
+    return result.return as unknown as CaptreAppReturns['resolve_id(byte[])byte[]']
+  }
+
+  /**
    * Makes a readonly (simulated) call to the CaptreApp smart contract using the `exists(byte[])bool` ABI method.
    * 
    * This method is a readonly method; calling it with onComplete of NoOp will result in a simulated transaction rather than a real transaction.
    *
+   * Check whether a ``content_hash_key`` has already been attested.
+   *
    * @param params The params for the smart contract call
-   * @returns The call result
+   * @returns The call result: ``True`` if a box exists for this key, ``False`` otherwise.
    */
   async exists(params: CallParams<CaptreAppArgs['obj']['exists(byte[])bool'] | CaptreAppArgs['tuple']['exists(byte[])bool']>) {
     const result = await this.appClient.send.call(CaptreAppParamsFactory.exists(params))
@@ -729,6 +893,19 @@ export class CaptreAppClient {
          */
         value: async (key: Uint8Array | string): Promise<Uint8Array | undefined> => { return await this.appClient.state.box.getMapValue("attestations", key) as Uint8Array | undefined },
       },
+      /**
+       * Get values from the id_index map in box state
+       */
+      idIndex: {
+        /**
+         * Get all current values of the id_index map in box state
+         */
+        getMap: async (): Promise<Map<Uint8Array, Uint8Array>> => { return (await this.appClient.state.box.getMap("id_index")) as Map<Uint8Array, Uint8Array> },
+        /**
+         * Get a current value of the id_index map by key from box state
+         */
+        value: async (key: Uint8Array | string): Promise<Uint8Array | undefined> => { return await this.appClient.state.box.getMapValue("id_index", key) as Uint8Array | undefined },
+      },
     },
   }
 
@@ -739,9 +916,9 @@ export class CaptreAppClient {
     const resultMappers: Array<undefined | ((x: ABIReturn | undefined) => any)> = []
     return {
       /**
-       * Add a attest(byte[],string,byte[])void method call against the CaptreApp contract
+       * Add a attest(byte[],byte[],byte[],string,byte[])void method call against the CaptreApp contract
        */
-      attest(params: CallParams<CaptreAppArgs['obj']['attest(byte[],string,byte[])void'] | CaptreAppArgs['tuple']['attest(byte[],string,byte[])void']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+      attest(params: CallParams<CaptreAppArgs['obj']['attest(byte[],byte[],byte[],string,byte[])void'] | CaptreAppArgs['tuple']['attest(byte[],byte[],byte[],string,byte[])void']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
         promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.attest(params)))
         resultMappers.push(undefined)
         return this
@@ -760,6 +937,14 @@ export class CaptreAppClient {
       getAttestation(params: CallParams<CaptreAppArgs['obj']['get_attestation(byte[])byte[]'] | CaptreAppArgs['tuple']['get_attestation(byte[])byte[]']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
         promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.getAttestation(params)))
         resultMappers.push((v) => client.decodeReturnValue('get_attestation(byte[])byte[]', v))
+        return this
+      },
+      /**
+       * Add a resolve_id(byte[])byte[] method call against the CaptreApp contract
+       */
+      resolveId(params: CallParams<CaptreAppArgs['obj']['resolve_id(byte[])byte[]'] | CaptreAppArgs['tuple']['resolve_id(byte[])byte[]']> & {onComplete?: OnApplicationComplete.NoOpOC}) {
+        promiseChain = promiseChain.then(async () => composer.addAppCallMethodCall(await client.params.resolveId(params)))
+        resultMappers.push((v) => client.decodeReturnValue('resolve_id(byte[])byte[]', v))
         return this
       },
       /**
@@ -806,16 +991,20 @@ export class CaptreAppClient {
 }
 export type CaptreAppComposer<TReturns extends [...any[]] = []> = {
   /**
-   * Calls the attest(byte[],string,byte[])void ABI method.
+   * Calls the attest(byte[],byte[],byte[],string,byte[])void ABI method.
+   *
+   * Write a new attestation. Fails if the ``content_hash_key`` is already claimed.
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
-  attest(params?: CallParams<CaptreAppArgs['obj']['attest(byte[],string,byte[])void'] | CaptreAppArgs['tuple']['attest(byte[],string,byte[])void']>): CaptreAppComposer<[...TReturns, CaptreAppReturns['attest(byte[],string,byte[])void'] | undefined]>
+  attest(params?: CallParams<CaptreAppArgs['obj']['attest(byte[],byte[],byte[],string,byte[])void'] | CaptreAppArgs['tuple']['attest(byte[],byte[],byte[],string,byte[])void']>): CaptreAppComposer<[...TReturns, CaptreAppReturns['attest(byte[],byte[],byte[],string,byte[])void'] | undefined]>
 
   /**
    * Calls the revoke(byte[],string,byte[])void ABI method.
+   *
+   * Overwrite an existing attestation box with updated (revoked) metadata.
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
@@ -826,6 +1015,8 @@ export type CaptreAppComposer<TReturns extends [...any[]] = []> = {
   /**
    * Calls the get_attestation(byte[])byte[] ABI method.
    *
+   * Read an attestation record by ``content_hash_key``.
+   *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
@@ -833,7 +1024,20 @@ export type CaptreAppComposer<TReturns extends [...any[]] = []> = {
   getAttestation(params?: CallParams<CaptreAppArgs['obj']['get_attestation(byte[])byte[]'] | CaptreAppArgs['tuple']['get_attestation(byte[])byte[]']>): CaptreAppComposer<[...TReturns, CaptreAppReturns['get_attestation(byte[])byte[]'] | undefined]>
 
   /**
+   * Calls the resolve_id(byte[])byte[] ABI method.
+   *
+   * Resolve an ``attestation_id`` UUID to its ``content_hash``.
+   *
+   * @param args The arguments for the contract call
+   * @param params Any additional parameters for the call
+   * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+   */
+  resolveId(params?: CallParams<CaptreAppArgs['obj']['resolve_id(byte[])byte[]'] | CaptreAppArgs['tuple']['resolve_id(byte[])byte[]']>): CaptreAppComposer<[...TReturns, CaptreAppReturns['resolve_id(byte[])byte[]'] | undefined]>
+
+  /**
    * Calls the exists(byte[])bool ABI method.
+   *
+   * Check whether a ``content_hash_key`` has already been attested.
    *
    * @param args The arguments for the contract call
    * @param params Any additional parameters for the call
