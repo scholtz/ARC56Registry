@@ -15,7 +15,7 @@ source ARC-56 spec changes.
 dotnet add package Arc56.Generated.Yashwanth112004.Hackseries-3.0
 ```
 
-This package depends on [`Algorand4`](https://www.nuget.org/packages/Algorand4/) for
+This package depends on [`Algorand5`](https://www.nuget.org/packages/Algorand5/) for
 ABI encoding, transaction building, and algod/indexer access.
 
 ## Basic usage
@@ -59,6 +59,7 @@ var client = new AccessControlProxy(algod, appId: 123456789);
 | `Arc56.Generated.Yashwanth112004.Hackseries_3_0.WalletMapper_0992be84` | `WalletMapperProxy` | [https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-contracts/smart_contracts/artifacts/wallet_mapper/WalletMapper.arc56.json](https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-contracts/smart_contracts/artifacts/wallet_mapper/WalletMapper.arc56.json) |
 | `Arc56.Generated.Yashwanth112004.Hackseries_3_0.WalletMapper_84ac230a` | `WalletMapperProxy` | [https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-contracts/smart_contracts/WalletMapper/WalletMapper.arc56.json](https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-contracts/smart_contracts/WalletMapper/WalletMapper.arc56.json) |
 | `Arc56.Generated.Yashwanth112004.Hackseries_3_0.HealthcareRBAC_79f513a7` | `HealthcareRBACProxy` | [https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-frontend/src/contracts/HealthcareRBAC.arc56.json](https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-frontend/src/contracts/HealthcareRBAC.arc56.json) |
+| `Arc56.Generated.Yashwanth112004.Hackseries_3_0.MedicalRecords_e4a5b094` | _(generation failed - see state.json)_ | [https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-frontend/src/contracts/MedicalRecords.arc56.json](https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-frontend/src/contracts/MedicalRecords.arc56.json) |
 
 ## Versioning
 
