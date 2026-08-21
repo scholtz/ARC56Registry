@@ -72,7 +72,7 @@ consumers add one package reference per source repo, not one per contract.
 ## Versioning
 
 Versions follow `1.0.<increment>.<yyyyMMddHH>` - the same 4-part legacy scheme the
-`Algorand4` package itself uses (e.g. `4.7.3.2026071620`), which NuGet has always
+`Algorand5` package itself uses (e.g. `5.0.0.2026081220`), which NuGet has always
 supported alongside strict 3-part SemVer.
 
 A project's version is bumped, and only that project is re-packed, when **the actual

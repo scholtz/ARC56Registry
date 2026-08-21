@@ -30,7 +30,7 @@ least one of its contracts actually changed content, the generator image changed
 (which forces every package to regenerate), or the README/csproj templates under
 clients/_template/ changed (which forces every package to re-render its docs/metadata
 and bump, even with no contract changes). Version format: 1.0.<increment>.<yyyyMMddHH>
-(matches the legacy 4-part scheme already used by the Algorand4 package this depends
+(matches the legacy 4-part scheme already used by the Algorand5 package this depends
 on). Packing (`dotnet pack`) and publishing to nuget.org are handled entirely by
 scripts/publish_dotnet_packages.py, run as its own separate pipeline stage.
 

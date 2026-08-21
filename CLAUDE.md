@@ -231,7 +231,7 @@ constructor, CS0310). Both are handled (logged, recorded in `state.json`, the of
 contract excluded/quarantined) without aborting the run or blocking other contracts in
 the same package - this is not a bug in our script if it happens again. Verified
 end-to-end locally: generation, quarantining, and `dotnet pack` all producing a working
-`.nupkg` with correct metadata (icon, README, repo link, Algorand4 dependency).
+`.nupkg` with correct metadata (icon, README, repo link, Algorand5 dependency).
 
 Also watch for: `<Version>` with a `yyyyMMddHH` segment is NOT valid as
 `AssemblyVersion`/`FileVersion` (each part must fit in 16 bits) - the csproj template
@@ -257,7 +257,7 @@ pins those separately from the package `<Version>`. Don't "simplify" that away.
   See `maybe_checkpoint_commit()` and docs/typescript-client-pipeline.md#committing-during-generation.
   Don't revert this back to "commit once per finished project only".
 - .NET versioning is the 4-part legacy scheme `1.0.<increment>.<yyyyMMddHH>` - matches
-  what `Algorand4` (the runtime dependency of every generated client) already uses.
+  what `Algorand5` (the runtime dependency of every generated client) already uses.
   TypeScript and Python versioning both share the exact same `1.<increment>.<yyyyMMddHH>`
   string (3-part, valid semver *and* valid PEP 440 - npm rejects the .NET pipeline's
   4-part scheme, and this 3-part one happens to satisfy both ecosystems at once, so
