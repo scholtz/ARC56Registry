@@ -15,7 +15,7 @@ source ARC-56 spec changes.
 dotnet add package Arc56.Generated.atsoc1993.Populate-App-Resources-Bug-Example-algokit_utils-python-library
 ```
 
-This package depends on [`Algorand4`](https://www.nuget.org/packages/Algorand4/) for
+This package depends on [`Algorand5`](https://www.nuget.org/packages/Algorand5/) for
 ABI encoding, transaction building, and algod/indexer access.
 
 ## Basic usage
