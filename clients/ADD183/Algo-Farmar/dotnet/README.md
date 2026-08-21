@@ -15,7 +15,7 @@ source ARC-56 spec changes.
 dotnet add package Arc56.Generated.ADD183.Algo-Farmar
 ```
 
-This package depends on [`Algorand4`](https://www.nuget.org/packages/Algorand4/) for
+This package depends on [`Algorand5`](https://www.nuget.org/packages/Algorand5/) for
 ABI encoding, transaction building, and algod/indexer access.
 
 ## Basic usage
@@ -40,7 +40,7 @@ var client = new FarmerContractProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(unfetchable)_ | _(download failed - see state.json)_ | [https://raw.githubusercontent.com/ADD183/Algo-Farmar/HEAD/PICT 2.0/farmer-pay-contract/projects/farmer-pay-contract/smart_contracts/artifacts/farmer_contract/FarmerContract.arc56.json](https://raw.githubusercontent.com/ADD183/Algo-Farmar/HEAD/PICT 2.0/farmer-pay-contract/projects/farmer-pay-contract/smart_contracts/artifacts/farmer_contract/FarmerContract.arc56.json) |
+| `Arc56.Generated.ADD183.Algo_Farmar.FarmerContract_2da64336` | _(not yet generated - see state.json)_ | [https://raw.githubusercontent.com/ADD183/Algo-Farmar/HEAD/PICT 2.0/farmer-pay-contract/projects/farmer-pay-contract/smart_contracts/artifacts/farmer_contract/FarmerContract.arc56.json](https://raw.githubusercontent.com/ADD183/Algo-Farmar/HEAD/PICT 2.0/farmer-pay-contract/projects/farmer-pay-contract/smart_contracts/artifacts/farmer_contract/FarmerContract.arc56.json) |
 | `Arc56.Generated.ADD183.Algo_Farmar.FarmerContract_74baae8c` | `FarmerContractProxy` | [https://raw.githubusercontent.com/ADD183/Algo-Farmar/HEAD/PICT%202.0/farmer-pay-contract/projects/farmer-pay-contract/smart_contracts/artifacts/farmer_contract/FarmerContract.arc56.json](https://raw.githubusercontent.com/ADD183/Algo-Farmar/HEAD/PICT%202.0/farmer-pay-contract/projects/farmer-pay-contract/smart_contracts/artifacts/farmer_contract/FarmerContract.arc56.json) |
 
 ## Versioning
