@@ -15,7 +15,7 @@ source ARC-56 spec changes.
 dotnet add package Arc56.Generated.KartikSharma4448.Aegiscare
 ```
 
-This package depends on [`Algorand4`](https://www.nuget.org/packages/Algorand4/) for
+This package depends on [`Algorand5`](https://www.nuget.org/packages/Algorand5/) for
 ABI encoding, transaction building, and algod/indexer access.
 
 ## Basic usage
@@ -52,6 +52,7 @@ var client = new AccessControlProxy(algod, appId: 123456789);
 | `Arc56.Generated.KartikSharma4448.Aegiscare.WalletMapper_747c7d1f` | `WalletMapperProxy` | [https://raw.githubusercontent.com/KartikSharma4448/Aegiscare/HEAD/projects/aegis-contracts/smart_contracts/artifacts/wallet_mapper/WalletMapper.arc56.json](https://raw.githubusercontent.com/KartikSharma4448/Aegiscare/HEAD/projects/aegis-contracts/smart_contracts/artifacts/wallet_mapper/WalletMapper.arc56.json) |
 | `Arc56.Generated.KartikSharma4448.Aegiscare.WalletMapper_f1060e4c` | `WalletMapperProxy` | [https://raw.githubusercontent.com/KartikSharma4448/Aegiscare/HEAD/projects/aegis-contracts/smart_contracts/WalletMapper/WalletMapper.arc56.json](https://raw.githubusercontent.com/KartikSharma4448/Aegiscare/HEAD/projects/aegis-contracts/smart_contracts/WalletMapper/WalletMapper.arc56.json) |
 | `Arc56.Generated.KartikSharma4448.Aegiscare.HealthcareRBAC_79b81a67` | `HealthcareRBACProxy` | [https://raw.githubusercontent.com/KartikSharma4448/Aegiscare/HEAD/projects/aegis-frontend/src/contracts/HealthcareRBAC.arc56.json](https://raw.githubusercontent.com/KartikSharma4448/Aegiscare/HEAD/projects/aegis-frontend/src/contracts/HealthcareRBAC.arc56.json) |
+| `Arc56.Generated.KartikSharma4448.Aegiscare.MedicalRecords_c959c370` | _(generation failed - see state.json)_ | [https://raw.githubusercontent.com/KartikSharma4448/Aegiscare/HEAD/projects/aegis-frontend/src/contracts/MedicalRecords.arc56.json](https://raw.githubusercontent.com/KartikSharma4448/Aegiscare/HEAD/projects/aegis-frontend/src/contracts/MedicalRecords.arc56.json) |
 
 ## Versioning
 
