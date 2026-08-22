@@ -246,14 +246,20 @@ always comparing against the npm registry's own live list rather than a local fl
   resolves. Because a template edit bumps and regenerates every project on the next
   run (see "Versioning" above), fixing the template once fixes every package.
 - **`typescript` devDependency version drift**: `clients/_template_npm/tsconfig.json.template`
-  pins `"moduleResolution": "node10"` with `"ignoreDeprecations": "6.0"` because
-  TypeScript 6 deprecated the old `"node"` value (renamed to `"node10"`) and turned the
-  deprecation into a hard `tsc` error by default - hit once already when
-  `package.json.template`'s `typescript` range was bumped to `^6.0.3`. If a future
-  TypeScript major actually removes `"node10"` resolution, this template needs a real
-  module-resolution strategy change (e.g. `"node16"`/`"nodenext"`), which also requires
-  adding explicit `.js` extensions to every generated file's relative imports - not a
-  one-line fix like this was.
+  used to pin `"moduleResolution": "node10"` with `"ignoreDeprecations": "6.0"`, needed
+  because TypeScript 6 deprecated the old `"node"` value (renamed to `"node10"`) and
+  turned the deprecation into a hard `tsc` error by default - hit once already when
+  `package.json.template`'s `typescript` range was bumped to `^6.0.3`. TypeScript 7
+  removed `"node10"` outright (`error TS5108: Option 'moduleResolution=node10' has been
+  removed`), so when the `typescript` range was bumped to `^7.0.2` both settings were
+  dropped from the template entirely rather than migrated to `"node16"`/`"nodenext"` -
+  with `"module": "commonjs"` and no explicit `moduleResolution`, TypeScript 7's default
+  resolution still resolves the generated files' extensionless relative imports
+  (`./AlgoSafe_<hash8>`) correctly, verified by regenerating and type-checking a
+  multi-contract project end to end. If a future TypeScript major changes that default
+  behavior, *then* this template needs a real module-resolution strategy change (e.g.
+  `"node16"`/`"nodenext"`), which also requires adding explicit `.js` extensions to
+  every generated file's relative imports - not a one-line fix like this was.
 - **`HEAD`-pinned sources**: like the links CSV itself, ARC-56 URLs point at `HEAD`.
 - **No license metadata**: generated `package.json` files don't set a `license` field,
   matching the .NET pipeline's reasoning (no LICENSE file in this repo yet).
