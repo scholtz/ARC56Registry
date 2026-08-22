@@ -70,6 +70,7 @@ contract generated this way; every other contract includes a working `Factory`.
 | `WalletMapper_0992be84` | `WalletMapperClient` | [https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-contracts/smart_contracts/artifacts/wallet_mapper/WalletMapper.arc56.json](https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-contracts/smart_contracts/artifacts/wallet_mapper/WalletMapper.arc56.json) |
 | `WalletMapper_84ac230a` | `WalletMapperClient` | [https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-contracts/smart_contracts/WalletMapper/WalletMapper.arc56.json](https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-contracts/smart_contracts/WalletMapper/WalletMapper.arc56.json) |
 | `HealthcareRBAC_79f513a7` | `HealthcareRbacClient` | [https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-frontend/src/contracts/HealthcareRBAC.arc56.json](https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-frontend/src/contracts/HealthcareRBAC.arc56.json) |
+| `MedicalRecords_e4a5b094` | _(generation failed - see state.json)_ | [https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-frontend/src/contracts/MedicalRecords.arc56.json](https://raw.githubusercontent.com/Yashwanth112004/Hackseries-3.0/HEAD/projects/ojasraksha-frontend/src/contracts/MedicalRecords.arc56.json) |
 
 ## Versioning
 
