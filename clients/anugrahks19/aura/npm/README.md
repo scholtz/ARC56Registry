@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { ContractName_hash } from "arc56-generated-anugrahks19-aura";
+import { Bank_cb5c67af } from "arc56-generated-anugrahks19-aura";
 
 const algorand = AlgorandClient.mainNet();
-const client = new ContractName_hash.ContractClient({
+const client = new Bank_cb5c67af.BankClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,7 +51,9 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `Bank_cb5c67af` | `BankClient` | [https://raw.githubusercontent.com/anugrahks19/aura/HEAD/Examples/Hackathon-QuickStart-template-main/projects/contracts/smart_contracts/artifacts/bank/Bank.arc56.json](https://raw.githubusercontent.com/anugrahks19/aura/HEAD/Examples/Hackathon-QuickStart-template-main/projects/contracts/smart_contracts/artifacts/bank/Bank.arc56.json) |
+| `Counter_d7e42fe8` | `CounterClient` | [https://raw.githubusercontent.com/anugrahks19/aura/HEAD/Examples/Hackathon-QuickStart-template-main/projects/contracts/smart_contracts/artifacts/counter/Counter.arc56.json](https://raw.githubusercontent.com/anugrahks19/aura/HEAD/Examples/Hackathon-QuickStart-template-main/projects/contracts/smart_contracts/artifacts/counter/Counter.arc56.json) |
+| `ConstantProductAMM_0ba5ee56` | `ConstantProductAmmClient` | [https://raw.githubusercontent.com/anugrahks19/aura/HEAD/Examples/Vibekit-project-main/projects/vibekit_template-contracts/smart_contracts/artifacts/amm/ConstantProductAMM.arc56.json](https://raw.githubusercontent.com/anugrahks19/aura/HEAD/Examples/Vibekit-project-main/projects/vibekit_template-contracts/smart_contracts/artifacts/amm/ConstantProductAMM.arc56.json) |
 
 ## Versioning
 
