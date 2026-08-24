@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Owner.Repo.Contract_hash;
+using Arc56.Generated.anugrahks19.aura.Bank_cb5c67af;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new ContractProxy(algod, appId: 123456789);
+var client = new BankProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,7 +40,9 @@ var client = new ContractProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `Arc56.Generated.anugrahks19.aura.Bank_cb5c67af` | `BankProxy` | [https://raw.githubusercontent.com/anugrahks19/aura/HEAD/Examples/Hackathon-QuickStart-template-main/projects/contracts/smart_contracts/artifacts/bank/Bank.arc56.json](https://raw.githubusercontent.com/anugrahks19/aura/HEAD/Examples/Hackathon-QuickStart-template-main/projects/contracts/smart_contracts/artifacts/bank/Bank.arc56.json) |
+| `Arc56.Generated.anugrahks19.aura.Counter_d7e42fe8` | `CounterProxy` | [https://raw.githubusercontent.com/anugrahks19/aura/HEAD/Examples/Hackathon-QuickStart-template-main/projects/contracts/smart_contracts/artifacts/counter/Counter.arc56.json](https://raw.githubusercontent.com/anugrahks19/aura/HEAD/Examples/Hackathon-QuickStart-template-main/projects/contracts/smart_contracts/artifacts/counter/Counter.arc56.json) |
+| `Arc56.Generated.anugrahks19.aura.ConstantProductAMM_0ba5ee56` | `ConstantProductAMMProxy` | [https://raw.githubusercontent.com/anugrahks19/aura/HEAD/Examples/Vibekit-project-main/projects/vibekit_template-contracts/smart_contracts/artifacts/amm/ConstantProductAMM.arc56.json](https://raw.githubusercontent.com/anugrahks19/aura/HEAD/Examples/Vibekit-project-main/projects/vibekit_template-contracts/smart_contracts/artifacts/amm/ConstantProductAMM.arc56.json) |
 
 ## Versioning
 
