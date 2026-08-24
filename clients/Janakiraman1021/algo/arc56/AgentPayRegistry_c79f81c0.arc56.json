@@ -1,0 +1,106 @@
+{
+  "arc56Version": "0.1.0",
+  "name": "AgentPayRegistry",
+  "desc": "On-chain Agent Marketplace and Task Settlement Registry for AgentPay",
+  "methods": [
+    {
+      "name": "register_agent",
+      "args": [
+        {
+          "name": "agent",
+          "type": "address"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "desc": "Register an AI agent on-chain"
+    },
+    {
+      "name": "register_service",
+      "args": [
+        {
+          "name": "service_name",
+          "type": "string"
+        },
+        {
+          "name": "price_micro_usdc",
+          "type": "uint64"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "desc": "Register a priced AI service"
+    },
+    {
+      "name": "record_task",
+      "args": [
+        {
+          "name": "agent",
+          "type": "address"
+        },
+        {
+          "name": "service_name",
+          "type": "string"
+        },
+        {
+          "name": "payment_amount",
+          "type": "uint64"
+        },
+        {
+          "name": "tx_ref",
+          "type": "string"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "desc": "Record a completed A2A task with verified payment proof"
+    },
+    {
+      "name": "get_agent",
+      "args": [
+        {
+          "name": "agent",
+          "type": "address"
+        }
+      ],
+      "returns": {
+        "type": "string"
+      },
+      "desc": "Retrieve registered agent name"
+    },
+    {
+      "name": "get_service",
+      "args": [
+        {
+          "name": "service_name",
+          "type": "string"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      },
+      "desc": "Retrieve service price"
+    },
+    {
+      "name": "get_stats",
+      "args": [],
+      "returns": {
+        "type": "(uint64,uint64,uint64,uint64)"
+      },
+      "desc": "Get global counters: total_agents, total_services, total_tasks, total_volume"
+    }
+  ],
+  "state": {
+    "global": {
+      "numUint": 4,
+      "numByteSlice": 0
+    }
+  }
+}
