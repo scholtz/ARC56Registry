@@ -21,13 +21,13 @@ Need help integrating with the registry or its generated clients? Join us on
 <!-- LIVE-STATS:START -->
 | Metric | Count |
 | --- | ---: |
-| ARC-56 links found | 10,356 |
-| Repositories containing ARC-56 links | 549 |
+| ARC-56 links found | 17,009 |
+| Repositories containing ARC-56 links | 551 |
 | NuGet packages published | 549 |
 | npm packages published | 533 |
-| PyPI packages published | 113 |
+| PyPI packages published | 117 |
 
-_Last updated 2026-08-25 04:42 UTC by `scripts/update_arc56_links.py`. Historical snapshots (for charting growth over time): [arc56_stats_history.csv](arc56_stats_history.csv)._
+_Last updated 2026-08-26 05:11 UTC by `scripts/update_arc56_links.py`. Historical snapshots (for charting growth over time): [arc56_stats_history.csv](arc56_stats_history.csv)._
 <!-- LIVE-STATS:END -->
 
 Regenerated daily as the last step of [`scripts/update_arc56_links.py`](scripts/update_arc56_links.py)
