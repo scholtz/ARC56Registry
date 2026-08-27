@@ -1,4 +1,5 @@
 export * as Escreg_d6d2f950 from './Escreg_d6d2f950';
+export * as TestBucketEscreg_e8418ea3 from './TestBucketEscreg_e8418ea3';
 export * as TestChild_fb6bbff1 from './TestChild_fb6bbff1';
 export * as TestLegacyEscreg_17eff998 from './TestLegacyEscreg_17eff998';
 export * as TestParent_5942ce38 from './TestParent_5942ce38';
