@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { ContractName_hash } from "arc56-generated-initlabsai-vibekit";
+import { hello_world_1608a8db } from "arc56-generated-initlabsai-vibekit";
 
 const algorand = AlgorandClient.mainNet();
-const client = new ContractName_hash.ContractClient({
+const client = new hello_world_1608a8db.HelloWorldClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,7 +51,8 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `hello_world_1608a8db` | `HelloWorldClient` | [https://raw.githubusercontent.com/initlabsai/vibekit/HEAD/packages/vibekit/test/tools/fixtures/hello-world.arc56.json](https://raw.githubusercontent.com/initlabsai/vibekit/HEAD/packages/vibekit/test/tools/fixtures/hello-world.arc56.json) |
+| `sample_b5ca483c` | _(generation failed - see state.json)_ | [https://raw.githubusercontent.com/initlabsai/vibekit/HEAD/packages/vibekit/test/tools/fixtures/sample.arc56.json](https://raw.githubusercontent.com/initlabsai/vibekit/HEAD/packages/vibekit/test/tools/fixtures/sample.arc56.json) |
 
 ## Versioning
 
