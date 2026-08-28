@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Owner.Repo.Contract_hash;
+using Arc56.Generated.initlabsai.vibekit.hello_world_1608a8db;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new ContractProxy(algod, appId: 123456789);
+var client = new HelloWorldProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,7 +40,8 @@ var client = new ContractProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `Arc56.Generated.initlabsai.vibekit.hello_world_1608a8db` | `HelloWorldProxy` | [https://raw.githubusercontent.com/initlabsai/vibekit/HEAD/packages/vibekit/test/tools/fixtures/hello-world.arc56.json](https://raw.githubusercontent.com/initlabsai/vibekit/HEAD/packages/vibekit/test/tools/fixtures/hello-world.arc56.json) |
+| `Arc56.Generated.initlabsai.vibekit.sample_b5ca483c` | `CounterProxy` | [https://raw.githubusercontent.com/initlabsai/vibekit/HEAD/packages/vibekit/test/tools/fixtures/sample.arc56.json](https://raw.githubusercontent.com/initlabsai/vibekit/HEAD/packages/vibekit/test/tools/fixtures/sample.arc56.json) |
 
 ## Versioning
 
