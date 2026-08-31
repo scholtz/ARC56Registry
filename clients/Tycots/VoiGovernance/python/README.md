@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_tycot_fc792817 import VoiGovernance_283f7421
+from arc56_generated_tycot_fc792817 import VoiGovernance_9872093a
 
 algorand = AlgorandClient.mainnet()
-client = VoiGovernance_283f7421.VoiGovernanceClient(
+client = VoiGovernance_9872093a.VoiGovernanceClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,6 +50,7 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
+| `VoiGovernance_9872093a` | `VoiGovernanceClient` | [https://raw.githubusercontent.com/Tycots/VoiGovernance/HEAD/VoiGovernance/build/VoiGovernance/VoiGovernance.arc56.json](https://raw.githubusercontent.com/Tycots/VoiGovernance/HEAD/VoiGovernance/build/VoiGovernance/VoiGovernance.arc56.json) |
 | `VoiGovernance_283f7421` | `VoiGovernanceClient` | [https://raw.githubusercontent.com/Tycots/VoiGovernance/HEAD/VoiGovernanceContract/build/VoiGovernance/VoiGovernance.arc56.json](https://raw.githubusercontent.com/Tycots/VoiGovernance/HEAD/VoiGovernanceContract/build/VoiGovernance/VoiGovernance.arc56.json) |
 
 ## Versioning
