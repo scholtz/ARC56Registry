@@ -26,7 +26,7 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Tycots.VoiGovernance.VoiGovernance_283f7421;
+using Arc56.Generated.Tycots.VoiGovernance.VoiGovernance_9872093a;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
@@ -40,6 +40,7 @@ var client = new VoiGovernanceProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
+| `Arc56.Generated.Tycots.VoiGovernance.VoiGovernance_9872093a` | `VoiGovernanceProxy` | [https://raw.githubusercontent.com/Tycots/VoiGovernance/HEAD/VoiGovernance/build/VoiGovernance/VoiGovernance.arc56.json](https://raw.githubusercontent.com/Tycots/VoiGovernance/HEAD/VoiGovernance/build/VoiGovernance/VoiGovernance.arc56.json) |
 | `Arc56.Generated.Tycots.VoiGovernance.VoiGovernance_283f7421` | `VoiGovernanceProxy` | [https://raw.githubusercontent.com/Tycots/VoiGovernance/HEAD/VoiGovernanceContract/build/VoiGovernance/VoiGovernance.arc56.json](https://raw.githubusercontent.com/Tycots/VoiGovernance/HEAD/VoiGovernanceContract/build/VoiGovernance/VoiGovernance.arc56.json) |
 
 ## Versioning
