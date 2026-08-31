@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { VoiGovernance_283f7421 } from "arc56-generated-tycots-voigovernance";
+import { VoiGovernance_9872093a } from "arc56-generated-tycots-voigovernance";
 
 const algorand = AlgorandClient.mainNet();
-const client = new VoiGovernance_283f7421.VoiGovernanceClient({
+const client = new VoiGovernance_9872093a.VoiGovernanceClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,6 +51,7 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
+| `VoiGovernance_9872093a` | `VoiGovernanceClient` | [https://raw.githubusercontent.com/Tycots/VoiGovernance/HEAD/VoiGovernance/build/VoiGovernance/VoiGovernance.arc56.json](https://raw.githubusercontent.com/Tycots/VoiGovernance/HEAD/VoiGovernance/build/VoiGovernance/VoiGovernance.arc56.json) |
 | `VoiGovernance_283f7421` | `VoiGovernanceClient` | [https://raw.githubusercontent.com/Tycots/VoiGovernance/HEAD/VoiGovernanceContract/build/VoiGovernance/VoiGovernance.arc56.json](https://raw.githubusercontent.com/Tycots/VoiGovernance/HEAD/VoiGovernanceContract/build/VoiGovernance/VoiGovernance.arc56.json) |
 
 ## Versioning
