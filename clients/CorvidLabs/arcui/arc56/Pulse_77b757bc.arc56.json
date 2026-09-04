@@ -1,0 +1,99 @@
+{
+  "name": "Pulse",
+  "structs": {},
+  "methods": [
+    {
+      "name": "tick",
+      "args": [],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "tick_with",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "beats"
+        },
+        {
+          "type": "string",
+          "name": "note"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "A hook with arguments of its own; returns the new count.\nUnreachable through an upkeep before #8, because an ARC-4 method needs its selector and each argument in an app arg of its own and Arcron could only send one.",
+      "events": [],
+      "recommendations": {}
+    }
+  ],
+  "arcs": [
+    22,
+    28
+  ],
+  "desc": "Demo upkeep target: a public heartbeat counter.\n\n    Designed to be driven by the Keeper contract. `tick` takes no arguments\n    beyond its method selector, which is the only shape Arcron could call\n    before #8; `tick_with` takes real arguments, which is the shape it can\n    call now. Permissionless by design \u2014 it is a demo, not a gate.\n    ",
+  "networks": {},
+  "state": {
+    "schema": {
+      "global": {
+        "ints": 2,
+        "bytes": 1
+      },
+      "local": {
+        "ints": 0,
+        "bytes": 0
+      }
+    },
+    "keys": {
+      "global": {
+        "beats": {
+          "keyType": "AVMString",
+          "valueType": "AVMUint64",
+          "key": "YmVhdHM="
+        },
+        "last_beat_round": {
+          "keyType": "AVMString",
+          "valueType": "AVMUint64",
+          "key": "bGFzdF9iZWF0X3JvdW5k"
+        },
+        "last_note": {
+          "keyType": "AVMString",
+          "valueType": "AVMString",
+          "key": "bGFzdF9ub3Rl"
+        }
+      },
+      "local": {},
+      "box": {}
+    },
+    "maps": {
+      "global": {},
+      "local": {},
+      "box": {}
+    }
+  },
+  "bareActions": {
+    "create": [
+      "NoOp"
+    ],
+    "call": []
+  },
+  "events": []
+}
