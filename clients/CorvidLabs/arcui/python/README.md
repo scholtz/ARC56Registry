@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_corvi_bae3df14 import contract_name_hash
+from arc56_generated_corvi_bae3df14 import Keeper_803f574e
 
 algorand = AlgorandClient.mainnet()
-client = contract_name_hash.ContractClient(
+client = Keeper_803f574e.KeeperClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,7 +50,8 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `Keeper_803f574e` | `KeeperClient` | [https://raw.githubusercontent.com/CorvidLabs/arcui/HEAD/docs/Keeper.arc56.json](https://raw.githubusercontent.com/CorvidLabs/arcui/HEAD/docs/Keeper.arc56.json) |
+| `Pulse_77b757bc` | `PulseClient` | [https://raw.githubusercontent.com/CorvidLabs/arcui/HEAD/docs/Pulse.arc56.json](https://raw.githubusercontent.com/CorvidLabs/arcui/HEAD/docs/Pulse.arc56.json) |
 
 ## Versioning
 
