@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_algor_6cc3c393 import contract_name_hash
+from arc56_generated_algor_6cc3c393 import EscrowSessionVaultManager_38df680e
 
 algorand = AlgorandClient.mainnet()
-client = contract_name_hash.ContractClient(
+client = EscrowSessionVaultManager_38df680e.EscrowSessionVaultManagerClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,7 +50,9 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `EscrowSessionVaultManager_38df680e` | `EscrowSessionVaultManagerClient` | [https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/artifacts/escrow_session_vault_manager/EscrowSessionVaultManager.arc56.json](https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/artifacts/escrow_session_vault_manager/EscrowSessionVaultManager.arc56.json) |
+| `EscrowSessionVaultHybrid_6bc9571c` | `EscrowSessionVaultHybridClient` | [https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/escrow_session_vault_hybrid_manager/out/EscrowSessionVaultHybrid.arc56.json](https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/escrow_session_vault_hybrid_manager/out/EscrowSessionVaultHybrid.arc56.json) |
+| `EscrowSessionVaultManager_75158a26` | `EscrowSessionVaultManagerClient` | [https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/escrow_session_vault_manager/out/EscrowSessionVaultManager.arc56.json](https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/escrow_session_vault_manager/out/EscrowSessionVaultManager.arc56.json) |
 
 ## Versioning
 
