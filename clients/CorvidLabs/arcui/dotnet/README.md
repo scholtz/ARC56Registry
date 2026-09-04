@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Owner.Repo.Contract_hash;
+using Arc56.Generated.CorvidLabs.arcui.Keeper_803f574e;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new ContractProxy(algod, appId: 123456789);
+var client = new KeeperProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,7 +40,8 @@ var client = new ContractProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `Arc56.Generated.CorvidLabs.arcui.Keeper_803f574e` | `KeeperProxy` | [https://raw.githubusercontent.com/CorvidLabs/arcui/HEAD/docs/Keeper.arc56.json](https://raw.githubusercontent.com/CorvidLabs/arcui/HEAD/docs/Keeper.arc56.json) |
+| `Arc56.Generated.CorvidLabs.arcui.Pulse_77b757bc` | `PulseProxy` | [https://raw.githubusercontent.com/CorvidLabs/arcui/HEAD/docs/Pulse.arc56.json](https://raw.githubusercontent.com/CorvidLabs/arcui/HEAD/docs/Pulse.arc56.json) |
 
 ## Versioning
 
