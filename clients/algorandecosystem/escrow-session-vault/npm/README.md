@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { ContractName_hash } from "arc56-generated-algorandecosystem-escrow-session-vault";
+import { EscrowSessionVaultHybridManager_c9c32e1b } from "arc56-generated-algorandecosystem-escrow-session-vault";
 
 const algorand = AlgorandClient.mainNet();
-const client = new ContractName_hash.ContractClient({
+const client = new EscrowSessionVaultHybridManager_c9c32e1b.EscrowSessionVaultHybridManagerClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,7 +51,11 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `EscrowSessionVaultHybridManager_c9c32e1b` | `EscrowSessionVaultHybridManagerClient` | [https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/artifacts/escrow_session_vault_hybrid_manager/EscrowSessionVaultHybridManager.arc56.json](https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/artifacts/escrow_session_vault_hybrid_manager/EscrowSessionVaultHybridManager.arc56.json) |
+| `EscrowSessionVaultManager_38df680e` | `EscrowSessionVaultManagerClient` | [https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/artifacts/escrow_session_vault_manager/EscrowSessionVaultManager.arc56.json](https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/artifacts/escrow_session_vault_manager/EscrowSessionVaultManager.arc56.json) |
+| `EscrowSessionVaultHybrid_6bc9571c` | `EscrowSessionVaultHybridClient` | [https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/escrow_session_vault_hybrid_manager/out/EscrowSessionVaultHybrid.arc56.json](https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/escrow_session_vault_hybrid_manager/out/EscrowSessionVaultHybrid.arc56.json) |
+| `EscrowSessionVaultHybridManager_0155e8ef` | `EscrowSessionVaultHybridManagerClient` | [https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/escrow_session_vault_hybrid_manager/out/EscrowSessionVaultHybridManager.arc56.json](https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/escrow_session_vault_hybrid_manager/out/EscrowSessionVaultHybridManager.arc56.json) |
+| `EscrowSessionVaultManager_75158a26` | `EscrowSessionVaultManagerClient` | [https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/escrow_session_vault_manager/out/EscrowSessionVaultManager.arc56.json](https://raw.githubusercontent.com/algorandecosystem/escrow-session-vault/HEAD/smart_contracts/escrow_session_vault_manager/out/EscrowSessionVaultManager.arc56.json) |
 
 ## Versioning
 
