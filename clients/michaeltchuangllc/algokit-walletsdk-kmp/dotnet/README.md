@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.michaeltchuangllc.algokit_walletsdk_kmp.EscrowSessionVaultManager_0d4ce45b;
+using Arc56.Generated.michaeltchuangllc.algokit_walletsdk_kmp.EscrowSessionVaultHybridManager_4150eed2;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new EscrowSessionVaultManagerProxy(algod, appId: 123456789);
+var client = new EscrowSessionVaultHybridManagerProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,6 +40,7 @@ var client = new EscrowSessionVaultManagerProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
+| `Arc56.Generated.michaeltchuangllc.algokit_walletsdk_kmp.EscrowSessionVaultHybridManager_4150eed2` | `EscrowSessionVaultHybridManagerProxy` | [https://raw.githubusercontent.com/michaeltchuangllc/algokit-walletsdk-kmp/HEAD/wallet-sdk-core/src/commonMain/kotlin/com/michaeltchuang/walletsdk/core/railmpp/smartcontract/EscrowSessionVaultHybridManager.arc56.json](https://raw.githubusercontent.com/michaeltchuangllc/algokit-walletsdk-kmp/HEAD/wallet-sdk-core/src/commonMain/kotlin/com/michaeltchuang/walletsdk/core/railmpp/smartcontract/EscrowSessionVaultHybridManager.arc56.json) |
 | `Arc56.Generated.michaeltchuangllc.algokit_walletsdk_kmp.EscrowSessionVaultManager_0d4ce45b` | `EscrowSessionVaultManagerProxy` | [https://raw.githubusercontent.com/michaeltchuangllc/algokit-walletsdk-kmp/HEAD/wallet-sdk-core/src/commonMain/kotlin/com/michaeltchuang/walletsdk/core/railmpp/smartcontract/EscrowSessionVaultManager.arc56.json](https://raw.githubusercontent.com/michaeltchuangllc/algokit-walletsdk-kmp/HEAD/wallet-sdk-core/src/commonMain/kotlin/com/michaeltchuang/walletsdk/core/railmpp/smartcontract/EscrowSessionVaultManager.arc56.json) |
 
 ## Versioning
