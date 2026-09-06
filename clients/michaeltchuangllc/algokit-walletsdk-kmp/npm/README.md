@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { EscrowSessionVaultManager_0d4ce45b } from "arc56-generated-michaeltchuangllc-algokit-walletsdk-kmp";
+import { EscrowSessionVaultHybridManager_4150eed2 } from "arc56-generated-michaeltchuangllc-algokit-walletsdk-kmp";
 
 const algorand = AlgorandClient.mainNet();
-const client = new EscrowSessionVaultManager_0d4ce45b.EscrowSessionVaultManagerClient({
+const client = new EscrowSessionVaultHybridManager_4150eed2.EscrowSessionVaultHybridManagerClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,6 +51,7 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
+| `EscrowSessionVaultHybridManager_4150eed2` | `EscrowSessionVaultHybridManagerClient` | [https://raw.githubusercontent.com/michaeltchuangllc/algokit-walletsdk-kmp/HEAD/wallet-sdk-core/src/commonMain/kotlin/com/michaeltchuang/walletsdk/core/railmpp/smartcontract/EscrowSessionVaultHybridManager.arc56.json](https://raw.githubusercontent.com/michaeltchuangllc/algokit-walletsdk-kmp/HEAD/wallet-sdk-core/src/commonMain/kotlin/com/michaeltchuang/walletsdk/core/railmpp/smartcontract/EscrowSessionVaultHybridManager.arc56.json) |
 | `EscrowSessionVaultManager_0d4ce45b` | `EscrowSessionVaultManagerClient` | [https://raw.githubusercontent.com/michaeltchuangllc/algokit-walletsdk-kmp/HEAD/wallet-sdk-core/src/commonMain/kotlin/com/michaeltchuang/walletsdk/core/railmpp/smartcontract/EscrowSessionVaultManager.arc56.json](https://raw.githubusercontent.com/michaeltchuangllc/algokit-walletsdk-kmp/HEAD/wallet-sdk-core/src/commonMain/kotlin/com/michaeltchuang/walletsdk/core/railmpp/smartcontract/EscrowSessionVaultManager.arc56.json) |
 
 ## Versioning
