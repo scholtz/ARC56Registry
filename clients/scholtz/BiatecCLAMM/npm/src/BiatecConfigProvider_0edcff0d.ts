@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"BiatecConfigProvider","desc":"","methods":[{"name":"createApplication","desc":"Initial setup","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"updateApplication","desc":"addressUdpater from global biatec configuration is allowed to update application","args":[{"name":"newVersion","type":"byte[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]}},{"name":"bootstrap","desc":"Setup the contract","args":[{"name":"biatecFee","type":"uint256","desc":"Biatec fees"},{"name":"appBiatecIdentityProvider","type":"uint64"},{"name":"appBiatecPoolProvider","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setAddressUdpater","desc":"Top secret account with which it is possible update contracts or identity provider","args":[{"name":"a","type":"address","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setPaused","desc":"Kill switch. In the extreme case all services (deposit, trading, withdrawal, identity modifications and more) can be suspended.","args":[{"name":"a","type":"uint64","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setAddressGov","desc":"Execution address with which it is possible to opt in for governance","args":[{"name":"a","type":"address","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setAddressExecutive","desc":"Execution address with which it is possible to change global biatec fees","args":[{"name":"a","type":"address","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setAddressExecutiveFee","desc":"Execution fee address is address which can take fees from pools.","args":[{"name":"a","type":"address","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setBiatecIdentity","desc":"App identity setter","args":[{"name":"a","type":"uint64","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setBiatecPool","desc":"App identity setter","args":[{"name":"a","type":"uint64","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setBiatecFee","desc":"Fees in 9 decimals. 1_000_000_000 = 100%\nFees in 9 decimals. 10_000_000 = 1%\nFees in 9 decimals. 100_000 = 0,01%\n\n\nFees are respectful from the all fees taken to the LP providers. If LPs charge 1% fee, and biatec charges 10% fee, LP will receive 0.09% fee and biatec 0.01% fee","args":[{"name":"biatecFee","type":"uint256","desc":"Fee"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"sendOnlineKeyRegistration","desc":"addressExecutiveFee can perfom key registration for this LP pool\n\n\nOnly addressExecutiveFee is allowed to execute this method.","args":[{"name":"votePK","type":"byte[]"},{"name":"selectionPK","type":"byte[]"},{"name":"stateProofPK","type":"byte[]"},{"name":"voteFirst","type":"uint64"},{"name":"voteLast","type":"uint64"},{"name":"voteKeyDilution","type":"uint64"},{"name":"fee","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"withdrawExcessAssets","desc":"If someone deposits excess assets to this smart contract biatec can use them.\n\n\nOnly addressExecutiveFee is allowed to execute this method.","args":[{"name":"asset","type":"uint64","desc":"Asset to withdraw. If native token, then zero"},{"name":"amount","type":"uint64","desc":"Amount of the asset to be withdrawn"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":6,"ints":3},"local":{"bytes":0,"ints":0}},"keys":{"global":{"addressUdpater":{"key":"dQ==","keyType":"AVMBytes","valueType":"address"},"addressGov":{"key":"Zw==","keyType":"AVMBytes","valueType":"address"},"addressExecutive":{"key":"ZQ==","keyType":"AVMBytes","valueType":"address"},"addressExecutiveFee":{"key":"ZWY=","keyType":"AVMBytes","valueType":"address"},"appBiatecIdentityProvider":{"key":"aQ==","keyType":"AVMBytes","valueType":"uint64"},"appBiatecPoolProvider":{"key":"cA==","keyType":"AVMBytes","valueType":"uint64"},"suspended":{"key":"cw==","keyType":"AVMBytes","valueType":"uint64"},"biatecFee":{"key":"Zg==","keyType":"AVMBytes","valueType":"uint256"},"version":{"key":"c2N2ZXI=","keyType":"AVMBytes","valueType":"AVMBytes"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[155],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[210],"errorMessage":"Only addressUdpater setup in the config can update application","teal":102},{"pc":[238],"errorMessage":"argument 2 (biatecFee) for bootstrap must be a uint256","teal":139},{"pc":[252],"errorMessage":"Only updater can call bootstrap method","teal":161},{"pc":[260],"errorMessage":"Biatec cannot set fees higher then 50% of lp fees","teal":172},{"pc":[284],"errorMessage":"argument 0 (a) for setAddressUdpater must be a address","teal":203},{"pc":[298],"errorMessage":"Only updater can change updater address","teal":226},{"pc":[321],"errorMessage":"Only updater can pause and unpause the biatec services","teal":262},{"pc":[335],"errorMessage":"argument 0 (a) for setAddressGov must be a address","teal":281},{"pc":[349],"errorMessage":"Only updater can change gov address","teal":304},{"pc":[363],"errorMessage":"argument 0 (a) for setAddressExecutive must be a address","teal":323},{"pc":[377],"errorMessage":"Only updater can change addressExecutive","teal":346},{"pc":[390],"errorMessage":"argument 0 (a) for setAddressExecutiveFee must be a address","teal":365},{"pc":[404],"errorMessage":"Only addressExecutive can change fee executor address","teal":388},{"pc":[427],"errorMessage":"Only updater can change appIdentityProvider","teal":424},{"pc":[451],"errorMessage":"Only updater can change appPoolProvider","teal":460},{"pc":[465],"errorMessage":"argument 0 (biatecFee) for setBiatecFee must be a uint256","teal":479},{"pc":[479],"errorMessage":"Only executive address can change fees","teal":506},{"pc":[487],"errorMessage":"Biatec cannot set fees higher then 50% of lp fees","teal":517},{"pc":[541],"errorMessage":"Only fee executor setup in the config can take the collected fees","teal":577},{"pc":[607],"errorMessage":"Only fee executor setup in the config can take the collected fees","teal":672},{"pc":[684],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":777},{"pc":[778],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":795},{"pc":[792],"errorMessage":"this contract does not implement the given ABI method for call UpdateApplication","teal":803}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"BiatecConfigProvider","desc":"","methods":[{"name":"createApplication","desc":"Initial setup","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"updateApplication","desc":"addressUdpater from global biatec configuration is allowed to update application","args":[{"name":"newVersion","type":"byte[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]}},{"name":"bootstrap","desc":"Setup the contract","args":[{"name":"biatecFee","type":"uint256","desc":"Biatec fees"},{"name":"appBiatecIdentityProvider","type":"uint64"},{"name":"appBiatecPoolProvider","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setAddressUdpater","desc":"Top secret account with which it is possible update contracts or identity provider","args":[{"name":"a","type":"address","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setPaused","desc":"Kill switch. In the extreme case all services (deposit, trading, withdrawal, identity modifications and more) can be suspended.","args":[{"name":"a","type":"uint64","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setAddressGov","desc":"Execution address with which it is possible to opt in for governance","args":[{"name":"a","type":"address","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setAddressExecutive","desc":"Execution address with which it is possible to change global biatec fees","args":[{"name":"a","type":"address","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setAddressExecutiveFee","desc":"Execution fee address is address which can take fees from pools.","args":[{"name":"a","type":"address","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setBiatecIdentity","desc":"App identity setter","args":[{"name":"a","type":"uint64","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setBiatecPool","desc":"App identity setter","args":[{"name":"a","type":"uint64","desc":"Address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setBiatecFee","desc":"Fees in 9 decimals. 1_000_000_000 = 100%\nFees in 9 decimals. 10_000_000 = 1%\nFees in 9 decimals. 100_000 = 0,01%\n\n\nFees are respectful from the all fees taken to the LP providers. If LPs charge 1% fee, and biatec charges 10% fee, LP will receive 0.09% fee and biatec 0.01% fee","args":[{"name":"biatecFee","type":"uint256","desc":"Fee"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"sendOnlineKeyRegistration","desc":"addressExecutiveFee can perfom key registration for this LP pool\n\n\nOnly addressExecutiveFee is allowed to execute this method.","args":[{"name":"votePK","type":"byte[]"},{"name":"selectionPK","type":"byte[]"},{"name":"stateProofPK","type":"byte[]"},{"name":"voteFirst","type":"uint64"},{"name":"voteLast","type":"uint64"},{"name":"voteKeyDilution","type":"uint64"},{"name":"fee","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"withdrawExcessAssets","desc":"If someone deposits excess assets to this smart contract biatec can use them.\n\n\nOnly addressExecutiveFee is allowed to execute this method.","args":[{"name":"asset","type":"uint64","desc":"Asset to withdraw. If native token, then zero"},{"name":"amount","type":"uint64","desc":"Amount of the asset to be withdrawn"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":6,"ints":3},"local":{"bytes":0,"ints":0}},"keys":{"global":{"addressUdpater":{"key":"dQ==","keyType":"AVMBytes","valueType":"address"},"addressGov":{"key":"Zw==","keyType":"AVMBytes","valueType":"address"},"addressExecutive":{"key":"ZQ==","keyType":"AVMBytes","valueType":"address"},"addressExecutiveFee":{"key":"ZWY=","keyType":"AVMBytes","valueType":"address"},"appBiatecIdentityProvider":{"key":"aQ==","keyType":"AVMBytes","valueType":"uint64"},"appBiatecPoolProvider":{"key":"cA==","keyType":"AVMBytes","valueType":"uint64"},"suspended":{"key":"cw==","keyType":"AVMBytes","valueType":"uint64"},"biatecFee":{"key":"Zg==","keyType":"AVMBytes","valueType":"uint256"},"version":{"key":"c2N2ZXI=","keyType":"AVMBytes","valueType":"AVMBytes"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[155],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[210],"errorMessage":"Only addressUdpater setup in the config can update application","teal":102},{"pc":[238],"errorMessage":"argument 2 (biatecFee) for bootstrap must be a uint256","teal":139},{"pc":[252],"errorMessage":"Only updater can call bootstrap method","teal":161},{"pc":[260],"errorMessage":"Biatec cannot set fees higher then 50% of lp fees","teal":172},{"pc":[284],"errorMessage":"argument 0 (a) for setAddressUdpater must be a address","teal":203},{"pc":[298],"errorMessage":"Only updater can change updater address","teal":226},{"pc":[321],"errorMessage":"Only updater can pause and unpause the biatec services","teal":262},{"pc":[335],"errorMessage":"argument 0 (a) for setAddressGov must be a address","teal":281},{"pc":[349],"errorMessage":"Only updater can change gov address","teal":304},{"pc":[363],"errorMessage":"argument 0 (a) for setAddressExecutive must be a address","teal":323},{"pc":[377],"errorMessage":"Only updater can change addressExecutive","teal":346},{"pc":[390],"errorMessage":"argument 0 (a) for setAddressExecutiveFee must be a address","teal":365},{"pc":[404],"errorMessage":"Only addressExecutive can change fee executor address","teal":388},{"pc":[427],"errorMessage":"Only updater can change appIdentityProvider","teal":424},{"pc":[451],"errorMessage":"Only updater can change appPoolProvider","teal":460},{"pc":[465],"errorMessage":"argument 0 (biatecFee) for setBiatecFee must be a uint256","teal":479},{"pc":[479],"errorMessage":"Only executive address can change fees","teal":506},{"pc":[487],"errorMessage":"Biatec cannot set fees higher then 50% of lp fees","teal":517},{"pc":[541],"errorMessage":"Only fee executor setup in the config can take the collected fees","teal":577},{"pc":[607],"errorMessage":"Only fee executor setup in the config can take the collected fees","teal":672},{"pc":[684],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":777},{"pc":[778],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":795},{"pc":[792],"errorMessage":"this contract does not implement the given ABI method for call UpdateApplication","teal":803}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDMyIDAKYnl0ZWNibG9jayAweDc1IDB4NjU2NiAweDY1IDB4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAzYjlhY2EwMCAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDIgIkJJQVRFQy1DT05GSUctMDEtMDItMDEiIDB4NzM2Mzc2NjU3MiAweDY3IDB4NzMgMHg2NiAweDY5IDB4NzAKCi8vIFRoaXMgVEVBTCB3YXMgZ2VuZXJhdGVkIGJ5IFRFQUxTY3JpcHQgdjAuMTA3LjAKLy8gaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9URUFMU2NyaXB0CgovLyBUaGlzIGNvbnRyYWN0IGlzIGNvbXBsaWFudCB3aXRoIGFuZC9vciBpbXBsZW1lbnRzIHRoZSBmb2xsb3dpbmcgQVJDczogWyBBUkM0IF0KCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCnB1c2hpbnQgNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY2FsbF9VcGRhdGVBcHBsaWNhdGlvbiAqTk9UX0lNUExFTUVOVEVEICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCS8vIGV4ZWN1dGUgY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKCWNhbGxzdWIgY3JlYXRlQXBwbGljYXRpb24KCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKCk6IHZvaWQKLy8KLy8gSW5pdGlhbCBzZXR1cApjcmVhdGVBcHBsaWNhdGlvbjoKCXByb3RvIDAgMAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjYxCgkvLyB0aGlzLnZlcnNpb24udmFsdWUgPSB2ZXJzaW9uCglieXRlYyA2IC8vICAic2N2ZXIiCglieXRlYyA1IC8vICJCSUFURUMtQ09ORklHLTAxLTAyLTAxIgoJYXBwX2dsb2JhbF9wdXQKCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czo2MgoJLy8gdGhpcy5hZGRyZXNzRXhlY3V0aXZlLnZhbHVlID0gdGhpcy50eG4uc2VuZGVyCglieXRlYyAyIC8vICAiZSIKCXR4biBTZW5kZXIKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6NjMKCS8vIHRoaXMuYWRkcmVzc0dvdi52YWx1ZSA9IHRoaXMudHhuLnNlbmRlcgoJYnl0ZWMgNyAvLyAgImciCgl0eG4gU2VuZGVyCglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjY0CgkvLyB0aGlzLmFkZHJlc3NVZHBhdGVyLnZhbHVlID0gdGhpcy50eG4uc2VuZGVyCglieXRlYyAwIC8vICAidSIKCXR4biBTZW5kZXIKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6NjUKCS8vIHRoaXMuYWRkcmVzc0V4ZWN1dGl2ZUZlZS52YWx1ZSA9IHRoaXMudHhuLnNlbmRlcgoJYnl0ZWMgMSAvLyAgImVmIgoJdHhuIFNlbmRlcgoJYXBwX2dsb2JhbF9wdXQKCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czo2NgoJLy8gdGhpcy5zdXNwZW5kZWQudmFsdWUgPSAwCglieXRlYyA4IC8vICAicyIKCWludGMgMiAvLyAwCglhcHBfZ2xvYmFsX3B1dAoJcmV0c3ViCgovLyB1cGRhdGVBcHBsaWNhdGlvbihieXRlW10pdm9pZAoqYWJpX3JvdXRlX3VwZGF0ZUFwcGxpY2F0aW9uOgoJLy8gbmV3VmVyc2lvbjogYnl0ZVtdCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglleHRyYWN0IDIgMAoKCS8vIGV4ZWN1dGUgdXBkYXRlQXBwbGljYXRpb24oYnl0ZVtdKXZvaWQKCWNhbGxzdWIgdXBkYXRlQXBwbGljYXRpb24KCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHVwZGF0ZUFwcGxpY2F0aW9uKG5ld1ZlcnNpb246IGJ5dGVzKTogdm9pZAovLwovLyBhZGRyZXNzVWRwYXRlciBmcm9tIGdsb2JhbCBiaWF0ZWMgY29uZmlndXJhdGlvbiBpcyBhbGxvd2VkIHRvIHVwZGF0ZSBhcHBsaWNhdGlvbgp1cGRhdGVBcHBsaWNhdGlvbjoKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjczCgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyID09PSB0aGlzLmFkZHJlc3NVZHBhdGVyLnZhbHVlLCAnT25seSBhZGRyZXNzVWRwYXRlciBzZXR1cCBpbiB0aGUgY29uZmlnIGNhbiB1cGRhdGUgYXBwbGljYXRpb24nKQoJdHhuIFNlbmRlcgoJYnl0ZWMgMCAvLyAgInUiCglhcHBfZ2xvYmFsX2dldAoJPT0KCgkvLyBPbmx5IGFkZHJlc3NVZHBhdGVyIHNldHVwIGluIHRoZSBjb25maWcgY2FuIHVwZGF0ZSBhcHBsaWNhdGlvbgoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6NzQKCS8vIGxvZyh2ZXJzaW9uKQoJYnl0ZWMgNSAvLyAiQklBVEVDLUNPTkZJRy0wMS0wMi0wMSIKCWxvZwoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjc1CgkvLyBsb2cobmV3VmVyc2lvbikKCWZyYW1lX2RpZyAtMSAvLyBuZXdWZXJzaW9uOiBieXRlcwoJbG9nCgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6NzYKCS8vIHRoaXMudmVyc2lvbi52YWx1ZSA9IG5ld1ZlcnNpb24KCWJ5dGVjIDYgLy8gICJzY3ZlciIKCWZyYW1lX2RpZyAtMSAvLyBuZXdWZXJzaW9uOiBieXRlcwoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKLy8gYm9vdHN0cmFwKHVpbnQyNTYsdWludDY0LHVpbnQ2NCl2b2lkCiphYmlfcm91dGVfYm9vdHN0cmFwOgoJLy8gYXBwQmlhdGVjUG9vbFByb3ZpZGVyOiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDMKCWJ0b2kKCgkvLyBhcHBCaWF0ZWNJZGVudGl0eVByb3ZpZGVyOiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWJ0b2kKCgkvLyBiaWF0ZWNGZWU6IHVpbnQyNTYKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDEgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMiAoYmlhdGVjRmVlKSBmb3IgYm9vdHN0cmFwIG11c3QgYmUgYSB1aW50MjU2Cglhc3NlcnQKCgkvLyBleGVjdXRlIGJvb3RzdHJhcCh1aW50MjU2LHVpbnQ2NCx1aW50NjQpdm9pZAoJY2FsbHN1YiBib290c3RyYXAKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGJvb3RzdHJhcChiaWF0ZWNGZWU6IHVpbnQyNTYsIGFwcEJpYXRlY0lkZW50aXR5UHJvdmlkZXI6IEFwcElELCBhcHBCaWF0ZWNQb29sUHJvdmlkZXI6IEFwcElEKTogdm9pZAovLwovLyBTZXR1cCB0aGUgY29udHJhY3QKLy8gQHBhcmFtIGJpYXRlY0ZlZSBCaWF0ZWMgZmVlcwpib290c3RyYXA6Cglwcm90byAzIDAKCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czo4NAoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5hZGRyZXNzVWRwYXRlci52YWx1ZSwgJ09ubHkgdXBkYXRlciBjYW4gY2FsbCBib290c3RyYXAgbWV0aG9kJykKCXR4biBTZW5kZXIKCWJ5dGVjIDAgLy8gICJ1IgoJYXBwX2dsb2JhbF9nZXQKCT09CgoJLy8gT25seSB1cGRhdGVyIGNhbiBjYWxsIGJvb3RzdHJhcCBtZXRob2QKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjg1CgkvLyBhc3NlcnQoYmlhdGVjRmVlIDw9IChTQ0FMRSBhcyB1aW50MjU2KSAvIDIsICdCaWF0ZWMgY2Fubm90IHNldCBmZWVzIGhpZ2hlciB0aGVuIDUwJSBvZiBscCBmZWVzJykKCWZyYW1lX2RpZyAtMSAvLyBiaWF0ZWNGZWU6IHVpbnQyNTYKCWJ5dGVjIDMgLy8gMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDNiOWFjYTAwCglieXRlYyA0IC8vIDB4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMgoJYi8KCWI8PQoKCS8vIEJpYXRlYyBjYW5ub3Qgc2V0IGZlZXMgaGlnaGVyIHRoZW4gNTAlIG9mIGxwIGZlZXMKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjg2CgkvLyB0aGlzLmJpYXRlY0ZlZS52YWx1ZSA9IGJpYXRlY0ZlZQoJYnl0ZWMgOSAvLyAgImYiCglmcmFtZV9kaWcgLTEgLy8gYmlhdGVjRmVlOiB1aW50MjU2CglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjg3CgkvLyB0aGlzLmFwcEJpYXRlY0lkZW50aXR5UHJvdmlkZXIudmFsdWUgPSBhcHBCaWF0ZWNJZGVudGl0eVByb3ZpZGVyCglieXRlYyAxMCAvLyAgImkiCglmcmFtZV9kaWcgLTIgLy8gYXBwQmlhdGVjSWRlbnRpdHlQcm92aWRlcjogQXBwSUQKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6ODgKCS8vIHRoaXMuYXBwQmlhdGVjUG9vbFByb3ZpZGVyLnZhbHVlID0gYXBwQmlhdGVjUG9vbFByb3ZpZGVyCglieXRlYyAxMSAvLyAgInAiCglmcmFtZV9kaWcgLTMgLy8gYXBwQmlhdGVjUG9vbFByb3ZpZGVyOiBBcHBJRAoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKLy8gc2V0QWRkcmVzc1VkcGF0ZXIoYWRkcmVzcyl2b2lkCiphYmlfcm91dGVfc2V0QWRkcmVzc1VkcGF0ZXI6CgkvLyBhOiBhZGRyZXNzCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyAxIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDAgKGEpIGZvciBzZXRBZGRyZXNzVWRwYXRlciBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBzZXRBZGRyZXNzVWRwYXRlcihhZGRyZXNzKXZvaWQKCWNhbGxzdWIgc2V0QWRkcmVzc1VkcGF0ZXIKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHNldEFkZHJlc3NVZHBhdGVyKGE6IEFkZHJlc3MpOiB2b2lkCi8vCi8vIFRvcCBzZWNyZXQgYWNjb3VudCB3aXRoIHdoaWNoIGl0IGlzIHBvc3NpYmxlIHVwZGF0ZSBjb250cmFjdHMgb3IgaWRlbnRpdHkgcHJvdmlkZXIKLy8KLy8gQHBhcmFtIGEgQWRkcmVzcwpzZXRBZGRyZXNzVWRwYXRlcjoKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjk3CgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyID09PSB0aGlzLmFkZHJlc3NVZHBhdGVyLnZhbHVlLCAnT25seSB1cGRhdGVyIGNhbiBjaGFuZ2UgdXBkYXRlciBhZGRyZXNzJykKCXR4biBTZW5kZXIKCWJ5dGVjIDAgLy8gICJ1IgoJYXBwX2dsb2JhbF9nZXQKCT09CgoJLy8gT25seSB1cGRhdGVyIGNhbiBjaGFuZ2UgdXBkYXRlciBhZGRyZXNzCglhc3NlcnQKCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czo5OAoJLy8gdGhpcy5hZGRyZXNzVWRwYXRlci52YWx1ZSA9IGEKCWJ5dGVjIDAgLy8gICJ1IgoJZnJhbWVfZGlnIC0xIC8vIGE6IEFkZHJlc3MKCWFwcF9nbG9iYWxfcHV0CglyZXRzdWIKCi8vIHNldFBhdXNlZCh1aW50NjQpdm9pZAoqYWJpX3JvdXRlX3NldFBhdXNlZDoKCS8vIGE6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGV4ZWN1dGUgc2V0UGF1c2VkKHVpbnQ2NCl2b2lkCgljYWxsc3ViIHNldFBhdXNlZAoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gc2V0UGF1c2VkKGE6IHVpbnQ2NCk6IHZvaWQKLy8KLy8gS2lsbCBzd2l0Y2guIEluIHRoZSBleHRyZW1lIGNhc2UgYWxsIHNlcnZpY2VzIChkZXBvc2l0LCB0cmFkaW5nLCB3aXRoZHJhd2FsLCBpZGVudGl0eSBtb2RpZmljYXRpb25zIGFuZCBtb3JlKSBjYW4gYmUgc3VzcGVuZGVkLgovLwovLyBAcGFyYW0gYSBBZGRyZXNzCnNldFBhdXNlZDoKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjEwNwoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5hZGRyZXNzVWRwYXRlci52YWx1ZSwgJ09ubHkgdXBkYXRlciBjYW4gcGF1c2UgYW5kIHVucGF1c2UgdGhlIGJpYXRlYyBzZXJ2aWNlcycpCgl0eG4gU2VuZGVyCglieXRlYyAwIC8vICAidSIKCWFwcF9nbG9iYWxfZ2V0Cgk9PQoKCS8vIE9ubHkgdXBkYXRlciBjYW4gcGF1c2UgYW5kIHVucGF1c2UgdGhlIGJpYXRlYyBzZXJ2aWNlcwoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MTA4CgkvLyB0aGlzLnN1c3BlbmRlZC52YWx1ZSA9IGEKCWJ5dGVjIDggLy8gICJzIgoJZnJhbWVfZGlnIC0xIC8vIGE6IHVpbnQ2NAoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKLy8gc2V0QWRkcmVzc0dvdihhZGRyZXNzKXZvaWQKKmFiaV9yb3V0ZV9zZXRBZGRyZXNzR292OgoJLy8gYTogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMSAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChhKSBmb3Igc2V0QWRkcmVzc0dvdiBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBzZXRBZGRyZXNzR292KGFkZHJlc3Mpdm9pZAoJY2FsbHN1YiBzZXRBZGRyZXNzR292CglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBzZXRBZGRyZXNzR292KGE6IEFkZHJlc3MpOiB2b2lkCi8vCi8vIEV4ZWN1dGlvbiBhZGRyZXNzIHdpdGggd2hpY2ggaXQgaXMgcG9zc2libGUgdG8gb3B0IGluIGZvciBnb3Zlcm5hbmNlCi8vCi8vIEBwYXJhbSBhIEFkZHJlc3MKc2V0QWRkcmVzc0dvdjoKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjExNwoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5hZGRyZXNzVWRwYXRlci52YWx1ZSwgJ09ubHkgdXBkYXRlciBjYW4gY2hhbmdlIGdvdiBhZGRyZXNzJykKCXR4biBTZW5kZXIKCWJ5dGVjIDAgLy8gICJ1IgoJYXBwX2dsb2JhbF9nZXQKCT09CgoJLy8gT25seSB1cGRhdGVyIGNhbiBjaGFuZ2UgZ292IGFkZHJlc3MKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjExOAoJLy8gdGhpcy5hZGRyZXNzR292LnZhbHVlID0gYQoJYnl0ZWMgNyAvLyAgImciCglmcmFtZV9kaWcgLTEgLy8gYTogQWRkcmVzcwoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKLy8gc2V0QWRkcmVzc0V4ZWN1dGl2ZShhZGRyZXNzKXZvaWQKKmFiaV9yb3V0ZV9zZXRBZGRyZXNzRXhlY3V0aXZlOgoJLy8gYTogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMSAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChhKSBmb3Igc2V0QWRkcmVzc0V4ZWN1dGl2ZSBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBzZXRBZGRyZXNzRXhlY3V0aXZlKGFkZHJlc3Mpdm9pZAoJY2FsbHN1YiBzZXRBZGRyZXNzRXhlY3V0aXZlCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBzZXRBZGRyZXNzRXhlY3V0aXZlKGE6IEFkZHJlc3MpOiB2b2lkCi8vCi8vIEV4ZWN1dGlvbiBhZGRyZXNzIHdpdGggd2hpY2ggaXQgaXMgcG9zc2libGUgdG8gY2hhbmdlIGdsb2JhbCBiaWF0ZWMgZmVlcwovLwovLyBAcGFyYW0gYSBBZGRyZXNzCnNldEFkZHJlc3NFeGVjdXRpdmU6Cglwcm90byAxIDAKCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czoxMjcKCS8vIGFzc2VydCh0aGlzLnR4bi5zZW5kZXIgPT09IHRoaXMuYWRkcmVzc1VkcGF0ZXIudmFsdWUsICdPbmx5IHVwZGF0ZXIgY2FuIGNoYW5nZSBhZGRyZXNzRXhlY3V0aXZlJykKCXR4biBTZW5kZXIKCWJ5dGVjIDAgLy8gICJ1IgoJYXBwX2dsb2JhbF9nZXQKCT09CgoJLy8gT25seSB1cGRhdGVyIGNhbiBjaGFuZ2UgYWRkcmVzc0V4ZWN1dGl2ZQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MTI4CgkvLyB0aGlzLmFkZHJlc3NFeGVjdXRpdmUudmFsdWUgPSBhCglieXRlYyAyIC8vICAiZSIKCWZyYW1lX2RpZyAtMSAvLyBhOiBBZGRyZXNzCglhcHBfZ2xvYmFsX3B1dAoJcmV0c3ViCgovLyBzZXRBZGRyZXNzRXhlY3V0aXZlRmVlKGFkZHJlc3Mpdm9pZAoqYWJpX3JvdXRlX3NldEFkZHJlc3NFeGVjdXRpdmVGZWU6CgkvLyBhOiBhZGRyZXNzCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyAxIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDAgKGEpIGZvciBzZXRBZGRyZXNzRXhlY3V0aXZlRmVlIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBleGVjdXRlIHNldEFkZHJlc3NFeGVjdXRpdmVGZWUoYWRkcmVzcyl2b2lkCgljYWxsc3ViIHNldEFkZHJlc3NFeGVjdXRpdmVGZWUKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHNldEFkZHJlc3NFeGVjdXRpdmVGZWUoYTogQWRkcmVzcyk6IHZvaWQKLy8KLy8gRXhlY3V0aW9uIGZlZSBhZGRyZXNzIGlzIGFkZHJlc3Mgd2hpY2ggY2FuIHRha2UgZmVlcyBmcm9tIHBvb2xzLgovLwovLyBAcGFyYW0gYSBBZGRyZXNzCnNldEFkZHJlc3NFeGVjdXRpdmVGZWU6Cglwcm90byAxIDAKCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czoxMzcKCS8vIGFzc2VydCh0aGlzLnR4bi5zZW5kZXIgPT09IHRoaXMuYWRkcmVzc0V4ZWN1dGl2ZS52YWx1ZSwgJ09ubHkgYWRkcmVzc0V4ZWN1dGl2ZSBjYW4gY2hhbmdlIGZlZSBleGVjdXRvciBhZGRyZXNzJykKCXR4biBTZW5kZXIKCWJ5dGVjIDIgLy8gICJlIgoJYXBwX2dsb2JhbF9nZXQKCT09CgoJLy8gT25seSBhZGRyZXNzRXhlY3V0aXZlIGNhbiBjaGFuZ2UgZmVlIGV4ZWN1dG9yIGFkZHJlc3MKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjEzOAoJLy8gdGhpcy5hZGRyZXNzRXhlY3V0aXZlRmVlLnZhbHVlID0gYQoJYnl0ZWMgMSAvLyAgImVmIgoJZnJhbWVfZGlnIC0xIC8vIGE6IEFkZHJlc3MKCWFwcF9nbG9iYWxfcHV0CglyZXRzdWIKCi8vIHNldEJpYXRlY0lkZW50aXR5KHVpbnQ2NCl2b2lkCiphYmlfcm91dGVfc2V0QmlhdGVjSWRlbnRpdHk6CgkvLyBhOiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWJ0b2kKCgkvLyBleGVjdXRlIHNldEJpYXRlY0lkZW50aXR5KHVpbnQ2NCl2b2lkCgljYWxsc3ViIHNldEJpYXRlY0lkZW50aXR5CglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBzZXRCaWF0ZWNJZGVudGl0eShhOiBBcHBJRCk6IHZvaWQKLy8KLy8gQXBwIGlkZW50aXR5IHNldHRlcgovLwovLyBAcGFyYW0gYSBBZGRyZXNzCnNldEJpYXRlY0lkZW50aXR5OgoJcHJvdG8gMSAwCgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MTQ3CgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyID09PSB0aGlzLmFkZHJlc3NVZHBhdGVyLnZhbHVlLCAnT25seSB1cGRhdGVyIGNhbiBjaGFuZ2UgYXBwSWRlbnRpdHlQcm92aWRlcicpCgl0eG4gU2VuZGVyCglieXRlYyAwIC8vICAidSIKCWFwcF9nbG9iYWxfZ2V0Cgk9PQoKCS8vIE9ubHkgdXBkYXRlciBjYW4gY2hhbmdlIGFwcElkZW50aXR5UHJvdmlkZXIKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjE0OAoJLy8gdGhpcy5hcHBCaWF0ZWNJZGVudGl0eVByb3ZpZGVyLnZhbHVlID0gYQoJYnl0ZWMgMTAgLy8gICJpIgoJZnJhbWVfZGlnIC0xIC8vIGE6IEFwcElECglhcHBfZ2xvYmFsX3B1dAoJcmV0c3ViCgovLyBzZXRCaWF0ZWNQb29sKHVpbnQ2NCl2b2lkCiphYmlfcm91dGVfc2V0QmlhdGVjUG9vbDoKCS8vIGE6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGV4ZWN1dGUgc2V0QmlhdGVjUG9vbCh1aW50NjQpdm9pZAoJY2FsbHN1YiBzZXRCaWF0ZWNQb29sCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBzZXRCaWF0ZWNQb29sKGE6IEFwcElEKTogdm9pZAovLwovLyBBcHAgaWRlbnRpdHkgc2V0dGVyCi8vCi8vIEBwYXJhbSBhIEFkZHJlc3MKc2V0QmlhdGVjUG9vbDoKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjE1NwoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5hZGRyZXNzVWRwYXRlci52YWx1ZSwgJ09ubHkgdXBkYXRlciBjYW4gY2hhbmdlIGFwcFBvb2xQcm92aWRlcicpCgl0eG4gU2VuZGVyCglieXRlYyAwIC8vICAidSIKCWFwcF9nbG9iYWxfZ2V0Cgk9PQoKCS8vIE9ubHkgdXBkYXRlciBjYW4gY2hhbmdlIGFwcFBvb2xQcm92aWRlcgoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MTU4CgkvLyB0aGlzLmFwcEJpYXRlY1Bvb2xQcm92aWRlci52YWx1ZSA9IGEKCWJ5dGVjIDExIC8vICAicCIKCWZyYW1lX2RpZyAtMSAvLyBhOiBBcHBJRAoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKLy8gc2V0QmlhdGVjRmVlKHVpbnQyNTYpdm9pZAoqYWJpX3JvdXRlX3NldEJpYXRlY0ZlZToKCS8vIGJpYXRlY0ZlZTogdWludDI1NgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMSAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChiaWF0ZWNGZWUpIGZvciBzZXRCaWF0ZWNGZWUgbXVzdCBiZSBhIHVpbnQyNTYKCWFzc2VydAoKCS8vIGV4ZWN1dGUgc2V0QmlhdGVjRmVlKHVpbnQyNTYpdm9pZAoJY2FsbHN1YiBzZXRCaWF0ZWNGZWUKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHNldEJpYXRlY0ZlZShiaWF0ZWNGZWU6IHVpbnQyNTYpOiB2b2lkCi8vCi8vIEZlZXMgaW4gOSBkZWNpbWFscy4gMV8wMDBfMDAwXzAwMCA9IDEwMCUKLy8gRmVlcyBpbiA5IGRlY2ltYWxzLiAxMF8wMDBfMDAwID0gMSUKLy8gRmVlcyBpbiA5IGRlY2ltYWxzLiAxMDBfMDAwID0gMCwwMSUKLy8KLy8gRmVlcyBhcmUgcmVzcGVjdGZ1bCBmcm9tIHRoZSBhbGwgZmVlcyB0YWtlbiB0byB0aGUgTFAgcHJvdmlkZXJzLiBJZiBMUHMgY2hhcmdlIDElIGZlZSwgYW5kIGJpYXRlYyBjaGFyZ2VzIDEwJSBmZWUsIExQIHdpbGwgcmVjZWl2ZSAwLjA5JSBmZWUgYW5kIGJpYXRlYyAwLjAxJSBmZWUKLy8KLy8gQHBhcmFtIGJpYXRlY0ZlZSBGZWUKc2V0QmlhdGVjRmVlOgoJcHJvdG8gMSAwCgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MTcxCgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyID09PSB0aGlzLmFkZHJlc3NFeGVjdXRpdmUudmFsdWUsICdPbmx5IGV4ZWN1dGl2ZSBhZGRyZXNzIGNhbiBjaGFuZ2UgZmVlcycpCgl0eG4gU2VuZGVyCglieXRlYyAyIC8vICAiZSIKCWFwcF9nbG9iYWxfZ2V0Cgk9PQoKCS8vIE9ubHkgZXhlY3V0aXZlIGFkZHJlc3MgY2FuIGNoYW5nZSBmZWVzCglhc3NlcnQKCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czoxNzIKCS8vIGFzc2VydChiaWF0ZWNGZWUgPD0gKFNDQUxFIGFzIHVpbnQyNTYpIC8gMiwgJ0JpYXRlYyBjYW5ub3Qgc2V0IGZlZXMgaGlnaGVyIHRoZW4gNTAlIG9mIGxwIGZlZXMnKQoJZnJhbWVfZGlnIC0xIC8vIGJpYXRlY0ZlZTogdWludDI1NgoJYnl0ZWMgMyAvLyAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwM2I5YWNhMDAKCWJ5dGVjIDQgLy8gMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAyCgliLwoJYjw9CgoJLy8gQmlhdGVjIGNhbm5vdCBzZXQgZmVlcyBoaWdoZXIgdGhlbiA1MCUgb2YgbHAgZmVlcwoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MTczCgkvLyB0aGlzLmJpYXRlY0ZlZS52YWx1ZSA9IGJpYXRlY0ZlZQoJYnl0ZWMgOSAvLyAgImYiCglmcmFtZV9kaWcgLTEgLy8gYmlhdGVjRmVlOiB1aW50MjU2CglhcHBfZ2xvYmFsX3B1dAoJcmV0c3ViCgovLyBzZW5kT25saW5lS2V5UmVnaXN0cmF0aW9uKGJ5dGVbXSxieXRlW10sYnl0ZVtdLHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCl2b2lkCiphYmlfcm91dGVfc2VuZE9ubGluZUtleVJlZ2lzdHJhdGlvbjoKCS8vIGZlZTogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyA3CglidG9pCgoJLy8gdm90ZUtleURpbHV0aW9uOiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDYKCWJ0b2kKCgkvLyB2b3RlTGFzdDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyA1CglidG9pCgoJLy8gdm90ZUZpcnN0OiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDQKCWJ0b2kKCgkvLyBzdGF0ZVByb29mUEs6IGJ5dGVbXQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwoJZXh0cmFjdCAyIDAKCgkvLyBzZWxlY3Rpb25QSzogYnl0ZVtdCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglleHRyYWN0IDIgMAoKCS8vIHZvdGVQSzogYnl0ZVtdCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglleHRyYWN0IDIgMAoKCS8vIGV4ZWN1dGUgc2VuZE9ubGluZUtleVJlZ2lzdHJhdGlvbihieXRlW10sYnl0ZVtdLGJ5dGVbXSx1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQpdm9pZAoJY2FsbHN1YiBzZW5kT25saW5lS2V5UmVnaXN0cmF0aW9uCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBzZW5kT25saW5lS2V5UmVnaXN0cmF0aW9uKHZvdGVQSzogYnl0ZXMsIHNlbGVjdGlvblBLOiBieXRlcywgc3RhdGVQcm9vZlBLOiBieXRlcywgdm90ZUZpcnN0OiB1aW50NjQsIHZvdGVMYXN0OiB1aW50NjQsIHZvdGVLZXlEaWx1dGlvbjogdWludDY0LCBmZWU6IHVpbnQ2NCk6IHZvaWQKLy8KLy8gYWRkcmVzc0V4ZWN1dGl2ZUZlZSBjYW4gcGVyZm9tIGtleSByZWdpc3RyYXRpb24gZm9yIHRoaXMgTFAgcG9vbAovLwovLyBPbmx5IGFkZHJlc3NFeGVjdXRpdmVGZWUgaXMgYWxsb3dlZCB0byBleGVjdXRlIHRoaXMgbWV0aG9kLgpzZW5kT25saW5lS2V5UmVnaXN0cmF0aW9uOgoJcHJvdG8gNyAwCgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MTgyCgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyID09PSB0aGlzLmFkZHJlc3NFeGVjdXRpdmVGZWUudmFsdWUsICdPbmx5IGZlZSBleGVjdXRvciBzZXR1cCBpbiB0aGUgY29uZmlnIGNhbiB0YWtlIHRoZSBjb2xsZWN0ZWQgZmVlcycpCgl0eG4gU2VuZGVyCglieXRlYyAxIC8vICAiZWYiCglhcHBfZ2xvYmFsX2dldAoJPT0KCgkvLyBPbmx5IGZlZSBleGVjdXRvciBzZXR1cCBpbiB0aGUgY29uZmlnIGNhbiB0YWtlIHRoZSBjb2xsZWN0ZWQgZmVlcwoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MTgzCgkvLyBzZW5kT25saW5lS2V5UmVnaXN0cmF0aW9uKHsKCS8vICAgICAgIHNlbGVjdGlvblBLOiBzZWxlY3Rpb25QSywKCS8vICAgICAgIHN0YXRlUHJvb2ZQSzogc3RhdGVQcm9vZlBLLAoJLy8gICAgICAgdm90ZUZpcnN0OiB2b3RlRmlyc3QsCgkvLyAgICAgICB2b3RlS2V5RGlsdXRpb246IHZvdGVLZXlEaWx1dGlvbiwKCS8vICAgICAgIHZvdGVMYXN0OiB2b3RlTGFzdCwKCS8vICAgICAgIHZvdGVQSzogdm90ZVBLLAoJLy8gICAgICAgZmVlOiBmZWUsCgkvLyAgICAgfSkKCWl0eG5fYmVnaW4KCXB1c2hpbnQgMiAvLyBrZXlyZWcKCWl0eG5fZmllbGQgVHlwZUVudW0KCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czoxODQKCS8vIHNlbGVjdGlvblBLOiBzZWxlY3Rpb25QSwoJZnJhbWVfZGlnIC0yIC8vIHNlbGVjdGlvblBLOiBieXRlcwoJaXR4bl9maWVsZCBTZWxlY3Rpb25QSwoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjE4NQoJLy8gc3RhdGVQcm9vZlBLOiBzdGF0ZVByb29mUEsKCWZyYW1lX2RpZyAtMyAvLyBzdGF0ZVByb29mUEs6IGJ5dGVzCglpdHhuX2ZpZWxkIFN0YXRlUHJvb2ZQSwoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjE4NgoJLy8gdm90ZUZpcnN0OiB2b3RlRmlyc3QKCWZyYW1lX2RpZyAtNCAvLyB2b3RlRmlyc3Q6IHVpbnQ2NAoJaXR4bl9maWVsZCBWb3RlRmlyc3QKCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czoxODcKCS8vIHZvdGVLZXlEaWx1dGlvbjogdm90ZUtleURpbHV0aW9uCglmcmFtZV9kaWcgLTYgLy8gdm90ZUtleURpbHV0aW9uOiB1aW50NjQKCWl0eG5fZmllbGQgVm90ZUtleURpbHV0aW9uCgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MTg4CgkvLyB2b3RlTGFzdDogdm90ZUxhc3QKCWZyYW1lX2RpZyAtNSAvLyB2b3RlTGFzdDogdWludDY0CglpdHhuX2ZpZWxkIFZvdGVMYXN0CgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MTg5CgkvLyB2b3RlUEs6IHZvdGVQSwoJZnJhbWVfZGlnIC0xIC8vIHZvdGVQSzogYnl0ZXMKCWl0eG5fZmllbGQgVm90ZVBLCgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MTkwCgkvLyBmZWU6IGZlZQoJZnJhbWVfZGlnIC03IC8vIGZlZTogdWludDY0CglpdHhuX2ZpZWxkIEZlZQoKCS8vIFN1Ym1pdCBpbm5lciB0cmFuc2FjdGlvbgoJaXR4bl9zdWJtaXQKCXJldHN1YgoKLy8gd2l0aGRyYXdFeGNlc3NBc3NldHModWludDY0LHVpbnQ2NCl1aW50NjQKKmFiaV9yb3V0ZV93aXRoZHJhd0V4Y2Vzc0Fzc2V0czoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJcHVzaGJ5dGVzIDB4MTUxZjdjNzUKCgkvLyBhbW91bnQ6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJYnRvaQoKCS8vIGFzc2V0OiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWJ0b2kKCgkvLyBleGVjdXRlIHdpdGhkcmF3RXhjZXNzQXNzZXRzKHVpbnQ2NCx1aW50NjQpdWludDY0CgljYWxsc3ViIHdpdGhkcmF3RXhjZXNzQXNzZXRzCglpdG9iCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gd2l0aGRyYXdFeGNlc3NBc3NldHMoYXNzZXQ6IEFzc2V0SUQsIGFtb3VudDogdWludDY0KTogdWludDY0Ci8vCi8vIElmIHNvbWVvbmUgZGVwb3NpdHMgZXhjZXNzIGFzc2V0cyB0byB0aGlzIHNtYXJ0IGNvbnRyYWN0IGJpYXRlYyBjYW4gdXNlIHRoZW0uCi8vCi8vIE9ubHkgYWRkcmVzc0V4ZWN1dGl2ZUZlZSBpcyBhbGxvd2VkIHRvIGV4ZWN1dGUgdGhpcyBtZXRob2QuCi8vCi8vIEBwYXJhbSBhc3NldCBBc3NldCB0byB3aXRoZHJhdy4gSWYgbmF0aXZlIHRva2VuLCB0aGVuIHplcm8KLy8gQHBhcmFtIGFtb3VudCBBbW91bnQgb2YgdGhlIGFzc2V0IHRvIGJlIHdpdGhkcmF3bgp3aXRoZHJhd0V4Y2Vzc0Fzc2V0czoKCXByb3RvIDIgMQoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjIwMwoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5hZGRyZXNzRXhlY3V0aXZlRmVlLnZhbHVlLCAnT25seSBmZWUgZXhlY3V0b3Igc2V0dXAgaW4gdGhlIGNvbmZpZyBjYW4gdGFrZSB0aGUgY29sbGVjdGVkIGZlZXMnKQoJdHhuIFNlbmRlcgoJYnl0ZWMgMSAvLyAgImVmIgoJYXBwX2dsb2JhbF9nZXQKCT09CgoJLy8gT25seSBmZWUgZXhlY3V0b3Igc2V0dXAgaW4gdGhlIGNvbmZpZyBjYW4gdGFrZSB0aGUgY29sbGVjdGVkIGZlZXMKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjIwNQoJLy8gdGhpcy5kb0F4ZmVyKHRoaXMudHhuLnNlbmRlciwgYXNzZXQsIGFtb3VudCkKCWZyYW1lX2RpZyAtMiAvLyBhbW91bnQ6IHVpbnQ2NAoJZnJhbWVfZGlnIC0xIC8vIGFzc2V0OiBBc3NldElECgl0eG4gU2VuZGVyCgljYWxsc3ViIGRvQXhmZXIKCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czoyMDcKCS8vIHJldHVybiBhbW91bnQ7CglmcmFtZV9kaWcgLTIgLy8gYW1vdW50OiB1aW50NjQKCXJldHN1YgoKLy8gZG9BeGZlcihyZWNlaXZlcjogQWRkcmVzcywgYXNzZXQ6IEFzc2V0SUQsIGFtb3VudDogdWludDY0KTogdm9pZAovLwovLyBFeGVjdXRlcyB4ZmVyIG9mIHBheSBwYXltZW50IG1ldGhvZHMgdG8gc3BlY2lmaWVkIHJlY2VpdmVyIGZyb20gc21hcnQgY29udHJhY3QgYWdncmVnYXRlZCBhY2NvdW50IHdpdGggc3BlY2lmaWVkIGFzc2V0IGFuZCBhbW91bnQgaW4gdG9rZW5zIGRlY2ltYWxzCi8vIEBwYXJhbSByZWNlaXZlciBSZWNlaXZlcgovLyBAcGFyYW0gYXNzZXQgQXNzZXQuIFplcm8gZm9yIGFsZ28KLy8gQHBhcmFtIGFtb3VudCBBbW91bnQgdG8gdHJhbnNmZXIKZG9BeGZlcjoKCXByb3RvIDMgMAoKCS8vICppZjBfY29uZGl0aW9uCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czoyMTcKCS8vIGFzc2V0LmlkID09PSAwCglmcmFtZV9kaWcgLTIgLy8gYXNzZXQ6IEFzc2V0SUQKCWludGMgMiAvLyAwCgk9PQoJYnogKmlmMF9lbHNlCgoJLy8gKmlmMF9jb25zZXF1ZW50CgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czoyMTgKCS8vIHNlbmRQYXltZW50KHsKCS8vICAgICAgICAgcmVjZWl2ZXI6IHJlY2VpdmVyLAoJLy8gICAgICAgICBhbW91bnQ6IGFtb3VudCwKCS8vICAgICAgICAgZmVlOiAwLAoJLy8gICAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MjE5CgkvLyByZWNlaXZlcjogcmVjZWl2ZXIKCWZyYW1lX2RpZyAtMSAvLyByZWNlaXZlcjogQWRkcmVzcwoJaXR4bl9maWVsZCBSZWNlaXZlcgoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjIyMAoJLy8gYW1vdW50OiBhbW91bnQKCWZyYW1lX2RpZyAtMyAvLyBhbW91bnQ6IHVpbnQ2NAoJaXR4bl9maWVsZCBBbW91bnQKCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czoyMjEKCS8vIGZlZTogMAoJaW50YyAyIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoJYiAqaWYwX2VuZAoKKmlmMF9lbHNlOgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MjI0CgkvLyBzZW5kQXNzZXRUcmFuc2Zlcih7CgkvLyAgICAgICAgIGFzc2V0UmVjZWl2ZXI6IHJlY2VpdmVyLAoJLy8gICAgICAgICB4ZmVyQXNzZXQ6IGFzc2V0LAoJLy8gICAgICAgICBhc3NldEFtb3VudDogYW1vdW50LAoJLy8gICAgICAgICBmZWU6IDAsCgkvLyAgICAgICB9KQoJaXR4bl9iZWdpbgoJcHVzaGludCA0IC8vIGF4ZmVyCglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzXEJpYXRlY0NvbmZpZ1Byb3ZpZGVyLmFsZ28udHM6MjI1CgkvLyBhc3NldFJlY2VpdmVyOiByZWNlaXZlcgoJZnJhbWVfZGlnIC0xIC8vIHJlY2VpdmVyOiBBZGRyZXNzCglpdHhuX2ZpZWxkIEFzc2V0UmVjZWl2ZXIKCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czoyMjYKCS8vIHhmZXJBc3NldDogYXNzZXQKCWZyYW1lX2RpZyAtMiAvLyBhc3NldDogQXNzZXRJRAoJaXR4bl9maWVsZCBYZmVyQXNzZXQKCgkvLyBjb250cmFjdHNcQmlhdGVjQ29uZmlnUHJvdmlkZXIuYWxnby50czoyMjcKCS8vIGFzc2V0QW1vdW50OiBhbW91bnQKCWZyYW1lX2RpZyAtMyAvLyBhbW91bnQ6IHVpbnQ2NAoJaXR4bl9maWVsZCBBc3NldEFtb3VudAoKCS8vIGNvbnRyYWN0c1xCaWF0ZWNDb25maWdQcm92aWRlci5hbGdvLnRzOjIyOAoJLy8gZmVlOiAwCglpbnRjIDIgLy8gMAoJaXR4bl9maWVsZCBGZWUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CgoqaWYwX2VuZDoKCXJldHN1YgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweDQ5NWNlN2VkIC8vIG1ldGhvZCAiYm9vdHN0cmFwKHVpbnQyNTYsdWludDY0LHVpbnQ2NCl2b2lkIgoJcHVzaGJ5dGVzIDB4YmZjMjA4NjAgLy8gbWV0aG9kICJzZXRBZGRyZXNzVWRwYXRlcihhZGRyZXNzKXZvaWQiCglwdXNoYnl0ZXMgMHgwY2RjMTBmYyAvLyBtZXRob2QgInNldFBhdXNlZCh1aW50NjQpdm9pZCIKCXB1c2hieXRlcyAweDZiOTU1ZjRiIC8vIG1ldGhvZCAic2V0QWRkcmVzc0dvdihhZGRyZXNzKXZvaWQiCglwdXNoYnl0ZXMgMHg4YjE4N2IzZCAvLyBtZXRob2QgInNldEFkZHJlc3NFeGVjdXRpdmUoYWRkcmVzcyl2b2lkIgoJcHVzaGJ5dGVzIDB4NTBlMDdkODggLy8gbWV0aG9kICJzZXRBZGRyZXNzRXhlY3V0aXZlRmVlKGFkZHJlc3Mpdm9pZCIKCXB1c2hieXRlcyAweGJhYmUxZTExIC8vIG1ldGhvZCAic2V0QmlhdGVjSWRlbnRpdHkodWludDY0KXZvaWQiCglwdXNoYnl0ZXMgMHhjNThiOWRhNCAvLyBtZXRob2QgInNldEJpYXRlY1Bvb2wodWludDY0KXZvaWQiCglwdXNoYnl0ZXMgMHhjYTM0NGEzNCAvLyBtZXRob2QgInNldEJpYXRlY0ZlZSh1aW50MjU2KXZvaWQiCglwdXNoYnl0ZXMgMHg0YWU2ZTljYiAvLyBtZXRob2QgInNlbmRPbmxpbmVLZXlSZWdpc3RyYXRpb24oYnl0ZVtdLGJ5dGVbXSxieXRlW10sdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0KXZvaWQiCglwdXNoYnl0ZXMgMHg4NzI4MzczMCAvLyBtZXRob2QgIndpdGhkcmF3RXhjZXNzQXNzZXRzKHVpbnQ2NCx1aW50NjQpdWludDY0IgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9ib290c3RyYXAgKmFiaV9yb3V0ZV9zZXRBZGRyZXNzVWRwYXRlciAqYWJpX3JvdXRlX3NldFBhdXNlZCAqYWJpX3JvdXRlX3NldEFkZHJlc3NHb3YgKmFiaV9yb3V0ZV9zZXRBZGRyZXNzRXhlY3V0aXZlICphYmlfcm91dGVfc2V0QWRkcmVzc0V4ZWN1dGl2ZUZlZSAqYWJpX3JvdXRlX3NldEJpYXRlY0lkZW50aXR5ICphYmlfcm91dGVfc2V0QmlhdGVjUG9vbCAqYWJpX3JvdXRlX3NldEJpYXRlY0ZlZSAqYWJpX3JvdXRlX3NlbmRPbmxpbmVLZXlSZWdpc3RyYXRpb24gKmFiaV9yb3V0ZV93aXRoZHJhd0V4Y2Vzc0Fzc2V0cwoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKKmNhbGxfVXBkYXRlQXBwbGljYXRpb246CglwdXNoYnl0ZXMgMHg2OTM2YzYyZiAvLyBtZXRob2QgInVwZGF0ZUFwcGxpY2F0aW9uKGJ5dGVbXSl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV91cGRhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIFVwZGF0ZUFwcGxpY2F0aW9uCgllcnI=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiADASAAJgwBdQJlZgFlIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA7msoAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACFkJJQVRFQy1DT05GSUctMDEtMDItMDEFc2N2ZXIBZwFzAWYBaQFwMRgUgQYLMRkIjQwCEgAAAAAAAAJwAAACBAAAAAAAAAAAAAAAiAACIkOKAAAnBicFZyoxAGcnBzEAZygxAGcpMQBnJwgkZ4k2GgFXAgCIAAIiQ4oBADEAKGQSRCcFsIv/sCcGi/9niTYaAxc2GgIXNhoBSRUjEkSIAAIiQ4oDADEAKGQSRIv/KycEoqZEJwmL/2cnCov+ZycLi/1niTYaAUkVIxJEiAACIkOKAQAxAChkEkQoi/9niTYaAReIAAIiQ4oBADEAKGQSRCcIi/9niTYaAUkVIxJEiAACIkOKAQAxAChkEkQnB4v/Z4k2GgFJFSMSRIgAAiJDigEAMQAoZBJEKov/Z4k2GgFJFSMSRIgAAiJDigEAMQAqZBJEKYv/Z4k2GgEXiAACIkOKAQAxAChkEkQnCov/Z4k2GgEXiAACIkOKAQAxAChkEkQnC4v/Z4k2GgFJFSMSRIgAAiJDigEAMQAqZBJEi/8rJwSipkQnCYv/Z4k2GgcXNhoGFzYaBRc2GgQXNhoDVwIANhoCVwIANhoBVwIAiAACIkOKBwAxAClkEkSxgQKyEIv+sguL/bI/i/yyDIv6sg6L+7INi/+yCov5sgGziYAEFR98dTYaAhc2GgEXiAAFFlCwIkOKAgExAClkEkSL/ov/MQCIAAOL/omKAwCL/iQSQQATsSKyEIv/sgeL/bIIJLIBs0IAFbGBBLIQi/+yFIv+shGL/bISJLIBs4mABLhEezY2GgCOAf3wAIAESVzn7YAEv8IIYIAEDNwQ/IAEa5VfS4AEixh7PYAEUOB9iIAEur4eEYAExYudpIAEyjRKNIAESubpy4AEhyg3MDYaAI4L/dX+C/4m/j7+Wv51/pD+qP7A/uT/NwCABGk2xi82GgCOAf2nAA==","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -316,11 +316,97 @@ export type MethodReturn<TSignature extends BiatecConfigProviderSignatures> = Bi
 export type GlobalKeysState = BiatecConfigProviderTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type BiatecConfigProviderCreateCallParams =
+  | Expand<CallParams<BiatecConfigProviderArgs['obj']['createApplication()void'] | BiatecConfigProviderArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<BiatecConfigProviderArgs['obj']['createApplication()void'] | BiatecConfigProviderArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type BiatecConfigProviderUpdateCallParams =
+  | Expand<CallParams<BiatecConfigProviderArgs['obj']['updateApplication(byte[])void'] | BiatecConfigProviderArgs['tuple']['updateApplication(byte[])void']> & {method: 'updateApplication'}>
+  | Expand<CallParams<BiatecConfigProviderArgs['obj']['updateApplication(byte[])void'] | BiatecConfigProviderArgs['tuple']['updateApplication(byte[])void']> & {method: 'updateApplication(byte[])void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type BiatecConfigProviderDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: BiatecConfigProviderCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: BiatecConfigProviderUpdateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the BiatecConfigProvider smart contract
  */
 export abstract class BiatecConfigProviderParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends BiatecConfigProviderCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return BiatecConfigProviderParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the BiatecConfigProvider smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<BiatecConfigProviderArgs['obj']['createApplication()void'] | BiatecConfigProviderArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends BiatecConfigProviderUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'updateApplication':
+          case 'updateApplication(byte[])void':
+            return BiatecConfigProviderParamsFactory.update.updateApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the BiatecConfigProvider smart contract using the updateApplication(byte[])void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateApplication(params: CallParams<BiatecConfigProviderArgs['obj']['updateApplication(byte[])void'] | BiatecConfigProviderArgs['tuple']['updateApplication(byte[])void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'updateApplication(byte[])void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.newVersion],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the bootstrap(uint256,uint64,uint64)void ABI method
    *
@@ -503,6 +589,172 @@ export abstract class BiatecConfigProviderParamsFactory {
 }
 
 /**
+ * A factory to create and deploy one or more instance of the BiatecConfigProvider smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class BiatecConfigProviderFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `BiatecConfigProviderFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new BiatecConfigProviderClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new BiatecConfigProviderClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the BiatecConfigProvider smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: BiatecConfigProviderDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? BiatecConfigProviderParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (BiatecConfigProviderCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? BiatecConfigProviderParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (BiatecConfigProviderUpdateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new BiatecConfigProviderClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BiatecConfigProvider smart contract using the createApplication()void ABI method.
+       *
+       * Initial setup
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<BiatecConfigProviderArgs['obj']['createApplication()void'] | BiatecConfigProviderArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(BiatecConfigProviderParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the BiatecConfigProvider smart contract using the updateApplication(byte[])void ABI method.
+       *
+       * addressUdpater from global biatec configuration is allowed to update application
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateApplication: (params: CallParams<BiatecConfigProviderArgs['obj']['updateApplication(byte[])void'] | BiatecConfigProviderArgs['tuple']['updateApplication(byte[])void']> & AppClientCompilationParams) => {
+        return this.appFactory.params.deployUpdate(BiatecConfigProviderParamsFactory.update.updateApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BiatecConfigProvider smart contract using the createApplication()void ABI method.
+       *
+       * Initial setup
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<BiatecConfigProviderArgs['obj']['createApplication()void'] | BiatecConfigProviderArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(BiatecConfigProviderParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BiatecConfigProvider smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * Initial setup
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<BiatecConfigProviderArgs['obj']['createApplication()void'] | BiatecConfigProviderArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(BiatecConfigProviderParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | BiatecConfigProviderReturns['createApplication()void']) }, appClient: new BiatecConfigProviderClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
+/**
  * A client to make calls to the BiatecConfigProvider smart contract
  */
 export class BiatecConfigProviderClient {
@@ -589,6 +841,24 @@ export class BiatecConfigProviderClient {
    * Get parameters to create transactions for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
    */
   readonly params = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the BiatecConfigProvider smart contract using the `updateApplication(byte[])void` ABI method.
+       *
+       * addressUdpater from global biatec configuration is allowed to update application
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateApplication: (params: CallParams<BiatecConfigProviderArgs['obj']['updateApplication(byte[])void'] | BiatecConfigProviderArgs['tuple']['updateApplication(byte[])void']> & AppClientCompilationParams) => {
+        return this.appClient.params.update(BiatecConfigProviderParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the BiatecConfigProvider smart contract.
      *
@@ -752,6 +1022,24 @@ export class BiatecConfigProviderClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the BiatecConfigProvider smart contract using the `updateApplication(byte[])void` ABI method.
+       *
+       * addressUdpater from global biatec configuration is allowed to update application
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateApplication: (params: CallParams<BiatecConfigProviderArgs['obj']['updateApplication(byte[])void'] | BiatecConfigProviderArgs['tuple']['updateApplication(byte[])void']> & AppClientCompilationParams) => {
+        return this.appClient.createTransaction.update(BiatecConfigProviderParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the BiatecConfigProvider smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -913,6 +1201,25 @@ export class BiatecConfigProviderClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the BiatecConfigProvider smart contract using the `updateApplication(byte[])void` ABI method.
+       *
+       * addressUdpater from global biatec configuration is allowed to update application
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateApplication: async (params: CallParams<BiatecConfigProviderArgs['obj']['updateApplication(byte[])void'] | BiatecConfigProviderArgs['tuple']['updateApplication(byte[])void']> & AppClientCompilationParams & SendParams) => {
+        const result = await this.appClient.send.update(BiatecConfigProviderParamsFactory.update.updateApplication(params))
+        return {...result, return: result.return as unknown as (undefined | BiatecConfigProviderReturns['updateApplication(byte[])void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the BiatecConfigProvider smart contract.
      *
@@ -1250,6 +1557,15 @@ export class BiatecConfigProviderClient {
         resultMappers.push((v) => client.decodeReturnValue('withdrawExcessAssets(uint64,uint64)uint64', v))
         return this
       },
+      get update() {
+        return {
+          updateApplication: (params: CallParams<BiatecConfigProviderArgs['obj']['updateApplication(byte[])void'] | BiatecConfigProviderArgs['tuple']['updateApplication(byte[])void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the BiatecConfigProvider contract
        */
@@ -1419,6 +1735,20 @@ export type BiatecConfigProviderComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   withdrawExcessAssets(params?: CallParams<BiatecConfigProviderArgs['obj']['withdrawExcessAssets(uint64,uint64)uint64'] | BiatecConfigProviderArgs['tuple']['withdrawExcessAssets(uint64,uint64)uint64']>): BiatecConfigProviderComposer<[...TReturns, BiatecConfigProviderReturns['withdrawExcessAssets(uint64,uint64)uint64'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the BiatecConfigProvider smart contract using the updateApplication(byte[])void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateApplication(params?: CallParams<BiatecConfigProviderArgs['obj']['updateApplication(byte[])void'] | BiatecConfigProviderArgs['tuple']['updateApplication(byte[])void']>): BiatecConfigProviderComposer<[...TReturns, BiatecConfigProviderReturns['updateApplication(byte[])void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the BiatecConfigProvider smart contract.
