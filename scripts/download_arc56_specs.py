@@ -40,6 +40,7 @@ import re
 import subprocess
 import sys
 import time
+import urllib.error
 import urllib.request
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -50,6 +51,13 @@ DOWNLOAD_DELAY_SECONDS = 7
 PUSH_INTERVAL_SECONDS = 60
 DOWNLOAD_ERROR_BACKOFF_SECONDS = 30
 MAX_CONSECUTIVE_DOWNLOAD_ERRORS = 10
+
+URL_COLUMN = "ARC56URL"
+ACTIVE_FROM_COLUMN = "ActiveFrom"
+ACTIVE_UNTIL_COLUMN = "ActiveUntil"
+PRIORITY_COLUMN = "Priority"
+HASH_COLUMN = "Hash"
+CSV_FIELDNAMES = [URL_COLUMN, ACTIVE_FROM_COLUMN, ACTIVE_UNTIL_COLUMN, PRIORITY_COLUMN, HASH_COLUMN]
 
 RAW_URL_RE = re.compile(
     r"^https://raw\.githubusercontent\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/[^/]+/(?P<path>.+)$"
@@ -127,6 +135,42 @@ def load_active_rows() -> list[dict[str, str]]:
     return rows
 
 
+def is_permanently_missing(exc: Exception) -> bool:
+    """A confirmed HTTP 404 means the file is gone for good (renamed, deleted, branch
+    rewritten, ...) - not a transient/systemic problem. Getting any HTTP response at
+    all, even an error one, also proves raw.githubusercontent.com is reachable, so a
+    404 must never count against MAX_CONSECUTIVE_DOWNLOAD_ERRORS the way a real
+    transport failure (timeout, DNS failure, connection reset) does."""
+    return isinstance(exc, urllib.error.HTTPError) and exc.code == 404
+
+
+def load_all_rows() -> list[dict[str, str]]:
+    with open(CSV_PATH, newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def write_all_rows(rows: list[dict[str, str]]) -> None:
+    with open(CSV_PATH, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=CSV_FIELDNAMES, lineterminator="\n")
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({name: row.get(name, "") for name in CSV_FIELDNAMES})
+
+
+def deactivate_url(all_rows: list[dict[str, str]], url: str) -> bool:
+    """Sets ActiveUntil = today for every row matching url that isn't already
+    deactivated, so load_active_rows() never selects it again. Never touches Priority
+    or Hash (immutable per docs/arc56-links-pipeline.md) and never removes the row -
+    same never-delete convention as everything else in this repo."""
+    today = datetime.date.today().isoformat()
+    changed = False
+    for row in all_rows:
+        if row.get(URL_COLUMN) == url and not (row.get(ACTIVE_UNTIL_COLUMN) or ""):
+            row[ACTIVE_UNTIL_COLUMN] = today
+            changed = True
+    return changed
+
+
 def download_with_rate_limit(url: str) -> bytes:
     global _last_download_at
     if _last_download_at is not None:
@@ -185,23 +229,26 @@ def push_commits(force: bool = False) -> None:
     log(f"WARNING: git push still failing after {max_attempts} attempts - will retry at next checkpoint")
 
 
-def commit_project_changes(owner: str, repo: str) -> None:
-    path = os.path.join("clients", sanitize_path_segment(owner), sanitize_path_segment(repo), "arc56")
-    subprocess.run(["git", "add", "--", path], cwd=REPO_ROOT, check=True)
-    diff = subprocess.run(["git", "diff", "--cached", "--quiet", "--", path], cwd=REPO_ROOT)
+def commit_project_changes(owner: str, repo: str, also_deactivated: bool = False) -> None:
+    paths = [os.path.join("clients", sanitize_path_segment(owner), sanitize_path_segment(repo), "arc56")]
+    if also_deactivated:
+        paths.append(os.path.relpath(CSV_PATH, REPO_ROOT))
+    subprocess.run(["git", "add", "--", *paths], cwd=REPO_ROOT, check=True)
+    diff = subprocess.run(["git", "diff", "--cached", "--quiet", "--", *paths], cwd=REPO_ROOT)
     if diff.returncode == 0:
         return
-    subprocess.run(
-        ["git", "commit", "-m", f"chore: download ARC-56 specs for {owner}/{repo}"],
-        cwd=REPO_ROOT, check=True,
-    )
+    message = f"chore: download ARC-56 specs for {owner}/{repo}"
+    if also_deactivated:
+        message += " (deactivating 404s)"
+    subprocess.run(["git", "commit", "-m", message], cwd=REPO_ROOT, check=True)
     log(f"Committed spec downloads for {owner}/{repo}")
 
 
 def process_project(
     owner: str, repo: str, rows: list[dict[str, str]], retry_failed: bool, progress: list[int],
-    consecutive_errors: list[int],
-) -> bool:
+    consecutive_errors: list[int], csv_rows: list[dict[str, str]],
+) -> tuple[bool, bool]:
+    """Returns (state_dirty, csv_dirty)."""
     owner_slug = sanitize_path_segment(owner)
     repo_slug = sanitize_path_segment(repo)
     arc56_dir = os.path.join(CLIENTS_DIR, owner_slug, repo_slug, "arc56")
@@ -211,6 +258,7 @@ def process_project(
     state = load_state(state_path)
     contracts_state: dict = state.setdefault("contracts", {})
     dirty = False
+    csv_dirty = False
 
     for row in rows:
         url = row["ARC56URL"]
@@ -243,10 +291,23 @@ def process_project(
             entry["download_error"] = str(exc)
             contracts_state[url] = entry
             dirty = True
+            if is_permanently_missing(exc):
+                # A real HTTP 404 - the file is confirmed gone, not a systemic
+                # outage. Reset the transient-error streak (we clearly got a
+                # response, so raw.githubusercontent.com is up) and permanently
+                # deactivate the row instead of retrying it forever.
+                consecutive_errors[0] = 0
+                if deactivate_url(csv_rows, url):
+                    csv_dirty = True
+                    entry["deactivated_reason"] = "HTTP 404 Not Found"
+                    log(f"Deactivating {url} in arc56.links.csv (HTTP 404 Not Found)")
+                continue
             consecutive_errors[0] += 1
             if consecutive_errors[0] >= MAX_CONSECUTIVE_DOWNLOAD_ERRORS:
                 if dirty:
                     save_state(state_path, state)
+                if csv_dirty:
+                    write_all_rows(csv_rows)
                 raise DownloadAbortError(
                     f"{consecutive_errors[0]} consecutive download errors "
                     f"(most recent: {url}: {exc})"
@@ -286,7 +347,9 @@ def process_project(
 
     if dirty:
         save_state(state_path, state)
-    return dirty
+    if csv_dirty:
+        write_all_rows(csv_rows)
+    return dirty, csv_dirty
 
 
 def main() -> int:
@@ -344,22 +407,29 @@ def main() -> int:
     total_rows = sum(len(project_rows) for _, project_rows in selected)
     progress = [0, total_rows]  # [rows processed so far, total rows selected this run]
     consecutive_errors = [0]  # shared across projects - a network outage doesn't respect project boundaries
+    csv_rows = load_all_rows()  # shared across projects so deactivations from any repo land in one place
 
     changed_projects = 0
     failed_projects = 0
+    deactivated_projects = 0
     aborted = False
     for (owner, repo), project_rows in selected:
         try:
-            if process_project(owner, repo, project_rows, args.retry_failed, progress, consecutive_errors):
+            state_dirty, csv_dirty = process_project(
+                owner, repo, project_rows, args.retry_failed, progress, consecutive_errors, csv_rows,
+            )
+            if state_dirty:
                 changed_projects += 1
+            if csv_dirty:
+                deactivated_projects += 1
             if args.commit:
-                commit_project_changes(owner, repo)
+                commit_project_changes(owner, repo, also_deactivated=csv_dirty)
                 push_commits()
         except DownloadAbortError as exc:
             log(f"ERROR: aborting run - {exc}")
             aborted = True
             if args.commit:
-                commit_project_changes(owner, repo)
+                commit_project_changes(owner, repo, also_deactivated=True)
                 push_commits(force=True)
             break
         except Exception as exc:  # noqa: BLE001 - one project must never take down the whole run
@@ -376,7 +446,8 @@ def main() -> int:
         return 1
 
     log(f"Done: {len(selected)}/{len(grouped)} project(s) scanned, "
-          f"{changed_projects} with new/changed downloads, {failed_projects} failed unexpectedly")
+          f"{changed_projects} with new/changed downloads, {deactivated_projects} with URL(s) "
+          f"deactivated (404), {failed_projects} failed unexpectedly")
     return 1 if failed_projects else 0
 
 
