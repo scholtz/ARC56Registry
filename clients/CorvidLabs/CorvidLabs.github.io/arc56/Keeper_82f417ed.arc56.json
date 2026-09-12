@@ -1,0 +1,270 @@
+{
+  "name": "Keeper",
+  "structs": {},
+  "methods": [
+    {
+      "name": "update",
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "UpdateApplication"
+        ]
+      },
+      "readonly": false,
+      "desc": "Replace the programs. Creator only, and only before `freeze`.\nThis exists because being unable to fix a bug is expensive while nobody depends on the deployment yet. Two earlier deployments were abandoned rather than repaired, which stranded box minimum balance and made every creator cancel and re-register by hand.\nIt is also a real power: while `frozen` is 0, the creator can change the rules after funds are escrowed, and no statement of intent removes that. So it is temporary by construction, readable on-chain, and given up before the network asks anyone to rely on it.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "freeze",
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Give up the ability to update, permanently. Creator only.\nOne way. Nothing sets `frozen` back to 0, and after this the only call that could add such a path is an update, which is now refused. From here the contract is exactly as immutable as one deployed with no update path at all, and `verify_build` proves which programs it is stuck with.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "register",
+      "args": [
+        {
+          "type": "pay",
+          "name": "mbr_payment"
+        },
+        {
+          "type": "pay",
+          "name": "funding_payment"
+        },
+        {
+          "type": "uint64",
+          "name": "target_app"
+        },
+        {
+          "type": "byte[][]",
+          "name": "call_args"
+        },
+        {
+          "type": "uint64",
+          "name": "interval_rounds"
+        },
+        {
+          "type": "uint64",
+          "name": "fee_per_execution"
+        },
+        {
+          "type": "uint64",
+          "name": "policy"
+        },
+        {
+          "type": "uint64",
+          "name": "fee_cap"
+        },
+        {
+          "type": "uint64",
+          "name": "fee_asset"
+        },
+        {
+          "type": "uint64",
+          "name": "asset_fee"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Register an upkeep; returns its id.\n`call_args` is every app arg of the call, in order. `policy` is CATCH_UP or SKIP_AHEAD. `fee_cap` is the most this upkeep will ever pay for one execution in ALGO; zero means the fee never escalates. `fee_asset` and `asset_fee` add an ASA bonus on top of the ALGO fee; zero means ALGO only.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "top_up",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "upkeep_id"
+        },
+        {
+          "type": "pay",
+          "name": "funding_payment"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Add ALGO to an upkeep's escrow; returns the new balance.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "cancel",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "upkeep_id"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Cancel an upkeep (creator only); refunds escrow and box MBR.\nDeleting the box releases its minimum balance, so the creator gets back the remaining escrow *and* the MBR it paid at registration \u2014 nothing is stranded in the app account. Returns the refunded amount.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "execute",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "upkeep_id"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Execute a due upkeep (permissionless); pays the caller its fee.\nReturns the round the upkeep is next due.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "opt_in_asset",
+      "args": [
+        {
+          "type": "pay",
+          "name": "mbr_payment"
+        },
+        {
+          "type": "uint64",
+          "name": "upkeep_id"
+        },
+        {
+          "type": "uint64",
+          "name": "asset"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Let the app account hold `asset`, so an upkeep can escrow a bonus.\nPermissionless, but tied to an upkeep that actually names the asset: an app that anyone could opt in to anything would accrete junk holdings for good, since there is no opt-out. The deposit is not refundable \u2014 reference-counting it would cost a box per asset and more code than the 0.1 ALGO it would ever return.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "top_up_asset",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "upkeep_id"
+        },
+        {
+          "type": "axfer",
+          "name": "asset_funding"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Add ASA to an upkeep's bonus escrow; returns the new asset balance.\nSeparate from `register` because an asset transfer cannot be an optional member of a transaction group: folding it in would make every ALGO-only registration carry a zero-amount transfer of an asset it does not use.",
+      "events": [],
+      "recommendations": {}
+    }
+  ],
+  "arcs": [
+    22,
+    28
+  ],
+  "desc": "Permissionless keeper network.\n\n    Anyone registers an upkeep: \"call this app with this data every N rounds,\n    paying R \u00b5ALGO per execution\", escrowing ALGO in the contract. Any keeper\n    may execute a due upkeep; the contract performs the registered inner app\n    call and pays the keeper from the escrow. No owner, no protocol rake.\n    ",
+  "networks": {},
+  "state": {
+    "schema": {
+      "global": {
+        "ints": 2,
+        "bytes": 0
+      },
+      "local": {
+        "ints": 0,
+        "bytes": 0
+      }
+    },
+    "keys": {
+      "global": {
+        "next_upkeep_id": {
+          "keyType": "AVMString",
+          "valueType": "AVMUint64",
+          "key": "bmV4dF91cGtlZXBfaWQ="
+        },
+        "frozen": {
+          "keyType": "AVMString",
+          "valueType": "AVMUint64",
+          "key": "ZnJvemVu"
+        }
+      },
+      "local": {},
+      "box": {}
+    },
+    "maps": {
+      "global": {},
+      "local": {},
+      "box": {}
+    }
+  },
+  "bareActions": {
+    "create": [
+      "NoOp"
+    ],
+    "call": []
+  },
+  "events": []
+}
