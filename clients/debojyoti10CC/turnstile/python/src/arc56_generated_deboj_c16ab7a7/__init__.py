@@ -1,1 +1,2 @@
-# no contracts generated yet
+from . import X402BatchSettlement_bba126b3 as X402BatchSettlement_bba126b3
+from . import X402BatchSettlement_0807cba1 as X402BatchSettlement_0807cba1

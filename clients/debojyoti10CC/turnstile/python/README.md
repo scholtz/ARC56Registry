@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_deboj_c16ab7a7 import contract_name_hash
+from arc56_generated_deboj_c16ab7a7 import X402BatchSettlement_bba126b3
 
 algorand = AlgorandClient.mainnet()
-client = contract_name_hash.ContractClient(
+client = X402BatchSettlement_bba126b3.X402BatchSettlementClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,7 +50,8 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `X402BatchSettlement_bba126b3` | `X402BatchSettlementClient` | [https://raw.githubusercontent.com/debojyoti10CC/turnstile/HEAD/contracts/smart_contracts/x402_batch_settlement/artifacts/X402BatchSettlement.arc56.json](https://raw.githubusercontent.com/debojyoti10CC/turnstile/HEAD/contracts/smart_contracts/x402_batch_settlement/artifacts/X402BatchSettlement.arc56.json) |
+| `X402BatchSettlement_0807cba1` | `X402BatchSettlementClient` | [https://raw.githubusercontent.com/debojyoti10CC/turnstile/HEAD/packages/escrow-client/src/generated/X402BatchSettlement.arc56.json](https://raw.githubusercontent.com/debojyoti10CC/turnstile/HEAD/packages/escrow-client/src/generated/X402BatchSettlement.arc56.json) |
 
 ## Versioning
 
