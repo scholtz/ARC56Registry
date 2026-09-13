@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Owner.Repo.Contract_hash;
+using Arc56.Generated.soumyachk101.Credow.CreditFlowYieldVault_957fe179;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new ContractProxy(algod, appId: 123456789);
+var client = new CreditFlowYieldVaultProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,7 +40,8 @@ var client = new ContractProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `Arc56.Generated.soumyachk101.Credow.CreditFlowYieldVault_957fe179` | `CreditFlowYieldVaultProxy` | [https://raw.githubusercontent.com/soumyachk101/Credow/HEAD/contracts/artifacts/CreditFlowYieldVault.arc56.json](https://raw.githubusercontent.com/soumyachk101/Credow/HEAD/contracts/artifacts/CreditFlowYieldVault.arc56.json) |
+| `Arc56.Generated.soumyachk101.Credow.CreditFlowYieldVault_6fbd5755` | `CreditFlowYieldVaultProxy` | [https://raw.githubusercontent.com/soumyachk101/Credow/HEAD/contracts/src/out/CreditFlowYieldVault.arc56.json](https://raw.githubusercontent.com/soumyachk101/Credow/HEAD/contracts/src/out/CreditFlowYieldVault.arc56.json) |
 
 ## Versioning
 
