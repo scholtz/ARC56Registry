@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "methodMulti", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "methodCallsSuper", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "callB2CantOverride", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "callB2Common", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "methodOne", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "methodCommon", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "b2CantOverride", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "methodTwo", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}], "name": "MultiBases", "state": {"keys": {"box": {}, "global": {"stateMulti": {"key": "c3RhdGVNdWx0aQ==", "keyType": "AVMString", "valueType": "AVMString"}, "stateOne": {"key": "c3RhdGVPbmU=", "keyType": "AVMString", "valueType": "AVMUint64"}, "stateCommon": {"key": "c3RhdGVDb21tb24=", "keyType": "AVMString", "valueType": "AVMUint64"}, "stateTwo": {"key": "c3RhdGVUd28=", "keyType": "AVMString", "valueType": "AVMString"}}, "local": {"name": {"key": "bmFtZQ==", "keyType": "AVMString", "valueType": "AVMString"}}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 2, "ints": 2}, "local": {"bytes": 1, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "methodMulti", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "methodCallsSuper", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "callB2CantOverride", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "callB2Common", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "methodOne", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "methodCommon", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "b2CantOverride", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "methodTwo", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}], "name": "MultiBases", "state": {"keys": {"box": {}, "global": {"stateMulti": {"key": "c3RhdGVNdWx0aQ==", "keyType": "AVMString", "valueType": "AVMString"}, "stateOne": {"key": "c3RhdGVPbmU=", "keyType": "AVMString", "valueType": "AVMUint64"}, "stateCommon": {"key": "c3RhdGVDb21tb24=", "keyType": "AVMString", "valueType": "AVMUint64"}, "stateTwo": {"key": "c3RhdGVUd28=", "keyType": "AVMString", "valueType": "AVMString"}}, "local": {"name": {"key": "bmFtZQ==", "keyType": "AVMString", "valueType": "AVMString"}}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 2, "ints": 2}, "local": {"bytes": 1, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyACAXsmAw4VH3x1AAhiYXNlLXR3bwwVH3x1AAZjb21tb24Lc3RhdGVDb21tb24xGEAAOCojZ4AIc3RhdGVPbmWBLWcqI2eCAghzdGF0ZVR3bwVIZWxsb2eCAgpzdGF0ZU11bHRpBEhtbW1nMRtBAIgxGRREMRhEgggEKQ66nwSDnZb/BKl4ylYEiFR+uATDJTPjBEVcjQkE+fUULAQ2OzKeNhoAjggALAAoACQAIAANAAkABQABACiwIkMpsCJDKbAiQ4AOFR98dQAIYmFzZS1vbmWwIkMpsCJDKLAiQyiwIkOAERUffHUAC211bHRpLWJhc2VzsCJDMRkUMRgUEEM=", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAxMjMKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NTAwMDg2MjYxNzM2NTJkNzQ3NzZmIDB4MTUxZjdjNzUwMDA2NjM2ZjZkNmQ2ZjZlICJzdGF0ZUNvbW1vbiIKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9tdWx0aS1pbmhlcml0YW5jZS5hbGdvLnRzOjExCiAgICAvLyBzdGF0ZUNvbW1vbiA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBpbml0aWFsVmFsdWU6IDEyMyB9KQogICAgYnl0ZWNfMiAvLyAic3RhdGVDb21tb24iCiAgICBpbnRjXzEgLy8gMTIzCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gdGVzdHMvYXBwcm92YWxzL211bHRpLWluaGVyaXRhbmNlLmFsZ28udHM6MjMKICAgIC8vIHN0YXRlT25lID0gR2xvYmFsU3RhdGUoeyBpbml0aWFsVmFsdWU6IFVpbnQ2NCg0NSkgfSkKICAgIHB1c2hieXRlcyAic3RhdGVPbmUiCiAgICBwdXNoaW50IDQ1CiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gdGVzdHMvYXBwcm92YWxzL211bHRpLWluaGVyaXRhbmNlLmFsZ28udHM6MTEKICAgIC8vIHN0YXRlQ29tbW9uID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGluaXRpYWxWYWx1ZTogMTIzIH0pCiAgICBieXRlY18yIC8vICJzdGF0ZUNvbW1vbiIKICAgIGludGNfMSAvLyAxMjMKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvbXVsdGktaW5oZXJpdGFuY2UuYWxnby50czozMAogICAgLy8gc3RhdGVUd28gPSBHbG9iYWxTdGF0ZSh7IGluaXRpYWxWYWx1ZTogJ0hlbGxvJyB9KQogICAgcHVzaGJ5dGVzcyAic3RhdGVUd28iICJIZWxsbyIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvbXVsdGktaW5oZXJpdGFuY2UuYWxnby50czo0NgogICAgLy8gc3RhdGVNdWx0aSA9IEdsb2JhbFN0YXRlKHsgaW5pdGlhbFZhbHVlOiAnSG1tbScgfSkKICAgIHB1c2hieXRlc3MgInN0YXRlTXVsdGkiICJIbW1tIgogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL211bHRpLWluaGVyaXRhbmNlLmFsZ28udHM6NDUKICAgIC8vIGV4cG9ydCBjbGFzcyBNdWx0aUJhc2VzIGV4dGVuZHMgY2xhc3NlcyhOYW1lU3RvcmUsIEJhc2VPbmUsIEJhc2VUd28pIHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUAxNwogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4MjkwZWJhOWYgMHg4MzlkOTZmZiAweGE5NzhjYTU2IDB4ODg1NDdlYjggMHhjMzI1MzNlMyAweDQ1NWM4ZDA5IDB4ZjlmNTE0MmMgMHgzNjNiMzI5ZSAvLyBtZXRob2QgIm1ldGhvZE11bHRpKClzdHJpbmciLCBtZXRob2QgIm1ldGhvZENhbGxzU3VwZXIoKXN0cmluZyIsIG1ldGhvZCAiY2FsbEIyQ2FudE92ZXJyaWRlKClzdHJpbmciLCBtZXRob2QgImNhbGxCMkNvbW1vbigpc3RyaW5nIiwgbWV0aG9kICJtZXRob2RPbmUoKXN0cmluZyIsIG1ldGhvZCAibWV0aG9kQ29tbW9uKClzdHJpbmciLCBtZXRob2QgImIyQ2FudE92ZXJyaWRlKClzdHJpbmciLCBtZXRob2QgIm1ldGhvZFR3bygpc3RyaW5nIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9tZXRob2RNdWx0aV9yb3V0ZUA2IG1haW5fbWV0aG9kQ2FsbHNTdXBlcl9yb3V0ZUA3IG1haW5fY2FsbEIyQ2FudE92ZXJyaWRlX3JvdXRlQDggbWFpbl9jYWxsQjJDb21tb25fcm91dGVAOSBtYWluX21ldGhvZE9uZV9yb3V0ZUAxMCBtYWluX21ldGhvZENvbW1vbl9yb3V0ZUAxMSBtYWluX2IyQ2FudE92ZXJyaWRlX3JvdXRlQDEyIG1haW5fbWV0aG9kVHdvX3JvdXRlQDEzCiAgICBlcnIKCm1haW5fbWV0aG9kVHdvX3JvdXRlQDEzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL211bHRpLWluaGVyaXRhbmNlLmFsZ28udHM6MzEKICAgIC8vIG1ldGhvZFR3bygpIHsKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NTAwMDg2MjYxNzM2NTJkNzQ3NzZmCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYjJDYW50T3ZlcnJpZGVfcm91dGVAMTI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvbXVsdGktaW5oZXJpdGFuY2UuYWxnby50czoxNwogICAgLy8gYjJDYW50T3ZlcnJpZGUoKTogc3RyaW5nIHsKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NTAwMDY2MzZmNmQ2ZDZmNmUKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9tZXRob2RDb21tb25fcm91dGVAMTE6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvbXVsdGktaW5oZXJpdGFuY2UuYWxnby50czoxMwogICAgLy8gbWV0aG9kQ29tbW9uKCkgewogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1MDAwNjYzNmY2ZDZkNmY2ZQogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX21ldGhvZE9uZV9yb3V0ZUAxMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9tdWx0aS1pbmhlcml0YW5jZS5hbGdvLnRzOjI0CiAgICAvLyBtZXRob2RPbmUoKSB7CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDg2MjYxNzM2NTJkNmY2ZTY1CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fY2FsbEIyQ29tbW9uX3JvdXRlQDk6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvbXVsdGktaW5oZXJpdGFuY2UuYWxnby50czo2MAogICAgLy8gY2FsbEIyQ29tbW9uKCkgewogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1MDAwNjYzNmY2ZDZkNmY2ZQogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2NhbGxCMkNhbnRPdmVycmlkZV9yb3V0ZUA4OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL211bHRpLWluaGVyaXRhbmNlLmFsZ28udHM6NTYKICAgIC8vIGNhbGxCMkNhbnRPdmVycmlkZSgpIHsKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NTAwMDg2MjYxNzM2NTJkNzQ3NzZmCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fbWV0aG9kQ2FsbHNTdXBlcl9yb3V0ZUA3OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL211bHRpLWluaGVyaXRhbmNlLmFsZ28udHM6NTIKICAgIC8vIG1ldGhvZENhbGxzU3VwZXIoKSB7CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUwMDA4NjI2MTczNjUyZDc0Nzc2ZgogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX21ldGhvZE11bHRpX3JvdXRlQDY6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvbXVsdGktaW5oZXJpdGFuY2UuYWxnby50czo0OAogICAgLy8gbWV0aG9kTXVsdGkoKSB7CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMGI2ZDc1NmM3NDY5MmQ2MjYxNzM2NTczCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDE3OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL211bHRpLWluaGVyaXRhbmNlLmFsZ28udHM6NDUKICAgIC8vIGV4cG9ydCBjbGFzcyBNdWx0aUJhc2VzIGV4dGVuZHMgY2xhc3NlcyhOYW1lU3RvcmUsIEJhc2VPbmUsIEJhc2VUd28pIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -732,6 +732,403 @@ class MultiBasesClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class MultiBasesBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating MultiBases contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class MultiBasesFactory(algokit_utils.TypedAppFactoryProtocol[MultiBasesBareCallCreateParams, None, None]):
+    """Factory for deploying and managing MultiBasesClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = MultiBasesFactoryParams(self.app_factory)
+        self.create_transaction = MultiBasesFactoryCreateTransaction(self.app_factory)
+        self.send = MultiBasesFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: MultiBasesBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[MultiBasesClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return MultiBasesClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> MultiBasesClient:
+        """Get an app client by creator address and name"""
+        return MultiBasesClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> MultiBasesClient:
+        """Get an app client by app ID"""
+        return MultiBasesClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class MultiBasesFactoryParams:
+    """Parameters for creating transactions for MultiBases contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MultiBasesFactoryCreateParams(app_factory)
+        self.update = MultiBasesFactoryUpdateParams(app_factory)
+        self.delete = MultiBasesFactoryDeleteParams(app_factory)
+
+class MultiBasesFactoryCreateParams:
+    """Parameters for 'create' operations of MultiBases contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def method_multi(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the methodMulti()string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "methodMulti()string",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def method_calls_super(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the methodCallsSuper()string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "methodCallsSuper()string",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def call_b2_cant_override(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the callB2CantOverride()string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "callB2CantOverride()string",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def call_b2_common(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the callB2Common()string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "callB2Common()string",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def method_one(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the methodOne()string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "methodOne()string",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def method_common(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the methodCommon()string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "methodCommon()string",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def b2_cant_override(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the b2CantOverride()string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "b2CantOverride()string",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def method_two(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the methodTwo()string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "methodTwo()string",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class MultiBasesFactoryUpdateParams:
+    """Parameters for 'update' operations of MultiBases contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class MultiBasesFactoryDeleteParams:
+    """Parameters for 'delete' operations of MultiBases contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class MultiBasesFactoryCreateTransaction:
+    """Create transactions for MultiBases contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MultiBasesFactoryCreateTransactionCreate(app_factory)
+
+
+class MultiBasesFactoryCreateTransactionCreate:
+    """Create new instances of MultiBases contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class MultiBasesFactorySend:
+    """Send calls to MultiBases contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MultiBasesFactorySendCreate(app_factory)
+
+
+class MultiBasesFactorySendCreate:
+    """Send create calls to MultiBases contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[MultiBasesClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return MultiBasesClient(result[0]), result[1]
 
 
 class MultiBasesComposer:

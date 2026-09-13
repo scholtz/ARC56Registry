@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": ["UpdateApplication"], "create": ["NoOp"]}, "methods": [], "name": "NoNoOp", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": ["UpdateApplication"], "create": ["NoOp"]}, "methods": [], "name": "NoNoOp", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CzEbFESDAgAEMRmOAgAEAAEAMRhDMRgUQw==", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvaW1wbGljaXQtY3JlYXRlLmFsZ28udHM6OAogICAgLy8gZXhwb3J0IGNsYXNzIE5vTm9PcCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICAhCiAgICBhc3NlcnQKICAgIHB1c2hpbnRzIDAgNCAvLyBOb09wLCBVcGRhdGVBcHBsaWNhdGlvbgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgbWF0Y2ggbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANCBtYWluX2hhbmRsZVVwZGF0ZUA1CiAgICBlcnIKCm1haW5faGFuZGxlVXBkYXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvaW1wbGljaXQtY3JlYXRlLmFsZ28udHM6OQogICAgLy8gQGJhcmVtZXRob2QoeyBhbGxvd0FjdGlvbnM6ICdVcGRhdGVBcHBsaWNhdGlvbicgfSkKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICByZXR1cm4KCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvaW1wbGljaXQtY3JlYXRlLmFsZ28udHM6OAogICAgLy8gZXhwb3J0IGNsYXNzIE5vTm9PcCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICByZXR1cm4K", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -64,9 +64,23 @@ def _init_dataclass(cls: type, data: dict) -> object:
             field_values[field.name] = field_value
     return cls(**field_values)
 
+class _NoNoOpUpdate:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def bare(
+        self, params: algokit_utils.AppClientBareCallParams | None = None
+    ) -> algokit_utils.AppUpdateParams:
+        return self.app_client.params.bare.update(params)
+
+
 class NoNoOpParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_NoNoOpUpdate":
+        return _NoNoOpUpdate(self.app_client)
 
     def clear_state(
         self,
@@ -79,9 +93,21 @@ class NoNoOpParams:
         )
 
 
+class _NoNoOpUpdateTransaction:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def bare(self, params: algokit_utils.AppClientBareCallParams | None = None) -> Transaction:
+        return self.app_client.create_transaction.bare.update(params)
+
+
 class NoNoOpCreateTransactionParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_NoNoOpUpdateTransaction":
+        return _NoNoOpUpdateTransaction(self.app_client)
 
     def clear_state(
         self,
@@ -94,9 +120,30 @@ class NoNoOpCreateTransactionParams:
         )
 
 
+class _NoNoOpUpdateSend:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def bare(
+        self,
+        params: algokit_utils.AppClientBareCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult:
+        return self.app_client.send.bare.update(
+            params=params,
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+
+
 class NoNoOpSend:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_NoNoOpUpdateSend":
+        return _NoNoOpUpdateSend(self.app_client)
 
     def clear_state(
         self,
@@ -281,6 +328,264 @@ class NoNoOpClient:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class NoNoOpBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating NoNoOp contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+@dataclasses.dataclass(frozen=True)
+class NoNoOpBareCallUpdateParams(algokit_utils.AppClientBareCallParams):
+    """Parameters for calling NoNoOp contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.UpdateApplicationOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallParams:
+        return algokit_utils.AppClientBareCallParams(**self.__dict__)
+
+class NoNoOpFactory(algokit_utils.TypedAppFactoryProtocol[NoNoOpBareCallCreateParams, NoNoOpBareCallUpdateParams, None]):
+    """Factory for deploying and managing NoNoOpClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = NoNoOpFactoryParams(self.app_factory)
+        self.create_transaction = NoNoOpFactoryCreateTransaction(self.app_factory)
+        self.send = NoNoOpFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: NoNoOpBareCallCreateParams | None = None,
+        update_params: NoNoOpBareCallUpdateParams | None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[NoNoOpClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params.to_algokit_utils_params() if update_params else None,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return NoNoOpClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> NoNoOpClient:
+        """Get an app client by creator address and name"""
+        return NoNoOpClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> NoNoOpClient:
+        """Get an app client by app ID"""
+        return NoNoOpClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class NoNoOpFactoryParams:
+    """Parameters for creating transactions for NoNoOp contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = NoNoOpFactoryCreateParams(app_factory)
+        self.update = NoNoOpFactoryUpdateParams(app_factory)
+        self.delete = NoNoOpFactoryDeleteParams(app_factory)
+
+class NoNoOpFactoryCreateParams:
+    """Parameters for 'create' operations of NoNoOp contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+class NoNoOpFactoryUpdateParams:
+    """Parameters for 'update' operations of NoNoOp contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class NoNoOpFactoryDeleteParams:
+    """Parameters for 'delete' operations of NoNoOp contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class NoNoOpFactoryCreateTransaction:
+    """Create transactions for NoNoOp contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = NoNoOpFactoryCreateTransactionCreate(app_factory)
+
+
+class NoNoOpFactoryCreateTransactionCreate:
+    """Create new instances of NoNoOp contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class NoNoOpFactorySend:
+    """Send calls to NoNoOp contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = NoNoOpFactorySendCreate(app_factory)
+
+
+class NoNoOpFactorySendCreate:
+    """Send create calls to NoNoOp contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[NoNoOpClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return NoNoOpClient(result[0]), result[1]
+
+
+class _NoNoOpUpdateComposer:
+    def __init__(self, composer: "NoNoOpComposer"):
+        self.composer = composer
+
+
 class NoNoOpComposer:
     """Composer for creating transaction groups for NoNoOp contract calls"""
 
@@ -288,6 +593,10 @@ class NoNoOpComposer:
         self.client = client
         self._composer = client.algorand.new_group()
         self._result_mappers: list[typing.Callable[[algokit_utils.ABIReturn | None], object] | None] = []
+
+    @property
+    def update(self) -> "_NoNoOpUpdateComposer":
+        return _NoNoOpUpdateComposer(self)
 
     def clear_state(
         self,

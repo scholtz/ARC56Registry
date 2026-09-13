@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "asset"}], "name": "testAsset", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "AssetProxyAlgo", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [120, 128], "errorMessage": "account opted into asset"}, {"pc": [54, 60, 66, 72, 77, 82, 87, 92, 97, 102, 107, 112], "errorMessage": "asset exists"}, {"pc": [46], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "asset"}], "name": "testAsset", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "AssetProxyAlgo", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CzEbQQAYgATTA+xHNhoAjgEAAQAxGRQxGBBEQgAIMRkUMRgUEEM2GgFJFYEIEkQXSRawSXEARBawSXEBRBawSXECRBawSXEDRLBJcQREsElxBUSwSXEGRLBJcQdEsElxCESwSXEJRLBJcQpEsElxC0SwMQBLAXAARBawMQBMcAFEFrCBAUM=", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXQtcHJveHkuYWxnby50czo0CiAgICAvLyBleHBvcnQgY2xhc3MgQXNzZXRQcm94eUFsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANQogICAgcHVzaGJ5dGVzIDB4ZDMwM2VjNDcgLy8gbWV0aG9kICJ0ZXN0QXNzZXQodWludDY0KXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3Rlc3RBc3NldF9yb3V0ZUAzCiAgICBlcnIKCm1haW5fdGVzdEFzc2V0X3JvdXRlQDM6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXQtcHJveHkuYWxnby50czo1CiAgICAvLyB0ZXN0QXNzZXQoYXNzZXQ6IEFzc2V0KTogdm9pZCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgYiB0ZXN0QXNzZXQKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXQtcHJveHkuYWxnby50czo0CiAgICAvLyBleHBvcnQgY2xhc3MgQXNzZXRQcm94eUFsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hc3NldC1wcm94eS5hbGdvLnRzOjpBc3NldFByb3h5QWxnby50ZXN0QXNzZXRbcm91dGluZ10oKSAtPiB2b2lkOgp0ZXN0QXNzZXQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXQtcHJveHkuYWxnby50czo1CiAgICAvLyB0ZXN0QXNzZXQoYXNzZXQ6IEFzc2V0KTogdm9pZCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2V0LXByb3h5LmFsZ28udHM6NgogICAgLy8gbG9nKGFzc2V0LmlkKQogICAgZHVwCiAgICBpdG9iCiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hc3NldC1wcm94eS5hbGdvLnRzOjcKICAgIC8vIGxvZyhhc3NldC50b3RhbCkKICAgIGR1cAogICAgYXNzZXRfcGFyYW1zX2dldCBBc3NldFRvdGFsCiAgICBhc3NlcnQgLy8gYXNzZXQgZXhpc3RzCiAgICBpdG9iCiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hc3NldC1wcm94eS5hbGdvLnRzOjgKICAgIC8vIGxvZyhhc3NldC5kZWNpbWFscykKICAgIGR1cAogICAgYXNzZXRfcGFyYW1zX2dldCBBc3NldERlY2ltYWxzCiAgICBhc3NlcnQgLy8gYXNzZXQgZXhpc3RzCiAgICBpdG9iCiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hc3NldC1wcm94eS5hbGdvLnRzOjkKICAgIC8vIGxvZyhhc3NldC5kZWZhdWx0RnJvemVuKQogICAgZHVwCiAgICBhc3NldF9wYXJhbXNfZ2V0IEFzc2V0RGVmYXVsdEZyb3plbgogICAgYXNzZXJ0IC8vIGFzc2V0IGV4aXN0cwogICAgaXRvYgogICAgbG9nCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXQtcHJveHkuYWxnby50czoxMAogICAgLy8gbG9nKGFzc2V0LnVuaXROYW1lKQogICAgZHVwCiAgICBhc3NldF9wYXJhbXNfZ2V0IEFzc2V0VW5pdE5hbWUKICAgIGFzc2VydCAvLyBhc3NldCBleGlzdHMKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2V0LXByb3h5LmFsZ28udHM6MTEKICAgIC8vIGxvZyhhc3NldC5uYW1lKQogICAgZHVwCiAgICBhc3NldF9wYXJhbXNfZ2V0IEFzc2V0TmFtZQogICAgYXNzZXJ0IC8vIGFzc2V0IGV4aXN0cwogICAgbG9nCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXQtcHJveHkuYWxnby50czoxMgogICAgLy8gbG9nKGFzc2V0LnVybCkKICAgIGR1cAogICAgYXNzZXRfcGFyYW1zX2dldCBBc3NldFVSTAogICAgYXNzZXJ0IC8vIGFzc2V0IGV4aXN0cwogICAgbG9nCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXQtcHJveHkuYWxnby50czoxMwogICAgLy8gbG9nKGFzc2V0Lm1ldGFkYXRhSGFzaCkKICAgIGR1cAogICAgYXNzZXRfcGFyYW1zX2dldCBBc3NldE1ldGFkYXRhSGFzaAogICAgYXNzZXJ0IC8vIGFzc2V0IGV4aXN0cwogICAgbG9nCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXQtcHJveHkuYWxnby50czoxNAogICAgLy8gbG9nKGFzc2V0Lm1hbmFnZXIpCiAgICBkdXAKICAgIGFzc2V0X3BhcmFtc19nZXQgQXNzZXRNYW5hZ2VyCiAgICBhc3NlcnQgLy8gYXNzZXQgZXhpc3RzCiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hc3NldC1wcm94eS5hbGdvLnRzOjE1CiAgICAvLyBsb2coYXNzZXQucmVzZXJ2ZSkKICAgIGR1cAogICAgYXNzZXRfcGFyYW1zX2dldCBBc3NldFJlc2VydmUKICAgIGFzc2VydCAvLyBhc3NldCBleGlzdHMKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2V0LXByb3h5LmFsZ28udHM6MTYKICAgIC8vIGxvZyhhc3NldC5mcmVlemUpCiAgICBkdXAKICAgIGFzc2V0X3BhcmFtc19nZXQgQXNzZXRGcmVlemUKICAgIGFzc2VydCAvLyBhc3NldCBleGlzdHMKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2V0LXByb3h5LmFsZ28udHM6MTcKICAgIC8vIGxvZyhhc3NldC5jbGF3YmFjaykKICAgIGR1cAogICAgYXNzZXRfcGFyYW1zX2dldCBBc3NldENsYXdiYWNrCiAgICBhc3NlcnQgLy8gYXNzZXQgZXhpc3RzCiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hc3NldC1wcm94eS5hbGdvLnRzOjE4CiAgICAvLyBsb2coYXNzZXQuY3JlYXRvcikKICAgIGR1cAogICAgYXNzZXRfcGFyYW1zX2dldCBBc3NldENyZWF0b3IKICAgIGFzc2VydCAvLyBhc3NldCBleGlzdHMKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2V0LXByb3h5LmFsZ28udHM6MjAKICAgIC8vIGxvZyhhc3NldC5iYWxhbmNlKFR4bi5zZW5kZXIpKQogICAgdHhuIFNlbmRlcgogICAgZGlnIDEKICAgIGFzc2V0X2hvbGRpbmdfZ2V0IEFzc2V0QmFsYW5jZQogICAgYXNzZXJ0IC8vIGFjY291bnQgb3B0ZWQgaW50byBhc3NldAogICAgaXRvYgogICAgbG9nCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXQtcHJveHkuYWxnby50czoyMQogICAgLy8gbG9nKGFzc2V0LmZyb3plbihUeG4uc2VuZGVyKSkKICAgIHR4biBTZW5kZXIKICAgIHN3YXAKICAgIGFzc2V0X2hvbGRpbmdfZ2V0IEFzc2V0RnJvemVuCiAgICBhc3NlcnQgLy8gYWNjb3VudCBvcHRlZCBpbnRvIGFzc2V0CiAgICBpdG9iCiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hc3NldC1wcm94eS5hbGdvLnRzOjUKICAgIC8vIHRlc3RBc3NldChhc3NldDogQXNzZXQpOiB2b2lkIHsKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [120, 128], "errorMessage": "account opted into asset"}, {"pc": [54, 60, 66, 72, 77, 82, 87, 92, 97, 102, 107, 112], "errorMessage": "asset exists"}, {"pc": [46], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -344,6 +344,271 @@ class AssetProxyAlgoClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class AssetProxyAlgoBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating AssetProxyAlgo contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class AssetProxyAlgoFactory(algokit_utils.TypedAppFactoryProtocol[AssetProxyAlgoBareCallCreateParams, None, None]):
+    """Factory for deploying and managing AssetProxyAlgoClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = AssetProxyAlgoFactoryParams(self.app_factory)
+        self.create_transaction = AssetProxyAlgoFactoryCreateTransaction(self.app_factory)
+        self.send = AssetProxyAlgoFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: AssetProxyAlgoBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[AssetProxyAlgoClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return AssetProxyAlgoClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AssetProxyAlgoClient:
+        """Get an app client by creator address and name"""
+        return AssetProxyAlgoClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AssetProxyAlgoClient:
+        """Get an app client by app ID"""
+        return AssetProxyAlgoClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class AssetProxyAlgoFactoryParams:
+    """Parameters for creating transactions for AssetProxyAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AssetProxyAlgoFactoryCreateParams(app_factory)
+        self.update = AssetProxyAlgoFactoryUpdateParams(app_factory)
+        self.delete = AssetProxyAlgoFactoryDeleteParams(app_factory)
+
+class AssetProxyAlgoFactoryCreateParams:
+    """Parameters for 'create' operations of AssetProxyAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def test_asset(
+        self,
+        args: tuple[int] | TestAssetArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testAsset(uint64)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testAsset(uint64)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class AssetProxyAlgoFactoryUpdateParams:
+    """Parameters for 'update' operations of AssetProxyAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class AssetProxyAlgoFactoryDeleteParams:
+    """Parameters for 'delete' operations of AssetProxyAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class AssetProxyAlgoFactoryCreateTransaction:
+    """Create transactions for AssetProxyAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AssetProxyAlgoFactoryCreateTransactionCreate(app_factory)
+
+
+class AssetProxyAlgoFactoryCreateTransactionCreate:
+    """Create new instances of AssetProxyAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class AssetProxyAlgoFactorySend:
+    """Send calls to AssetProxyAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AssetProxyAlgoFactorySendCreate(app_factory)
+
+
+class AssetProxyAlgoFactorySendCreate:
+    """Send create calls to AssetProxyAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[AssetProxyAlgoClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return AssetProxyAlgoClient(result[0]), result[1]
 
 
 class AssetProxyAlgoComposer:

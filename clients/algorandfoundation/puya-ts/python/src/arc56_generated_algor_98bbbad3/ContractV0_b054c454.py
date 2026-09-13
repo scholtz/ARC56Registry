@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["UpdateApplication"], "create": []}, "args": [], "name": "update", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "ContractV0", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [34], "errorMessage": "can only update if caller expects this to be currently be v0"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["UpdateApplication"], "create": []}, "args": [], "name": "update", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "ContractV0", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "DDEbQQAggASg6BhyNhoAjgEAAQAxGYEEEjEYEEQxRIEBEkSBAUMxGRQxGBQQQw==", "clear": "DIEBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDEyCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXZtMTIuYWxnby50czo0OS01MAogICAgLy8gQGNvbnRyYWN0KHsgYXZtVmVyc2lvbjogMTIgfSkKICAgIC8vIGNsYXNzIENvbnRyYWN0VjAgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANQogICAgcHVzaGJ5dGVzIDB4YTBlODE4NzIgLy8gbWV0aG9kICJ1cGRhdGUoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3VwZGF0ZV9yb3V0ZUAzCiAgICBlcnIKCm1haW5fdXBkYXRlX3JvdXRlQDM6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXZtMTIuYWxnby50czo1MQogICAgLy8gQGFiaW1ldGhvZCh7IGFsbG93QWN0aW9uczogJ1VwZGF0ZUFwcGxpY2F0aW9uJyB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgcHVzaGludCA0IC8vIFVwZGF0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjUzCiAgICAvLyBhc3NlcnQoVHhuLnJlamVjdFZlcnNpb24gPT09IDEsICdjYW4gb25seSB1cGRhdGUgaWYgY2FsbGVyIGV4cGVjdHMgdGhpcyB0byBiZSBjdXJyZW50bHkgYmUgdjAnKQogICAgdHhuIFJlamVjdFZlcnNpb24KICAgIHB1c2hpbnQgMQogICAgPT0KICAgIGFzc2VydCAvLyBjYW4gb25seSB1cGRhdGUgaWYgY2FsbGVyIGV4cGVjdHMgdGhpcyB0byBiZSBjdXJyZW50bHkgYmUgdjAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjUxCiAgICAvLyBAYWJpbWV0aG9kKHsgYWxsb3dBY3Rpb25zOiAnVXBkYXRlQXBwbGljYXRpb24nIH0pCiAgICBwdXNoaW50IDEKICAgIHJldHVybgoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjQ5LTUwCiAgICAvLyBAY29udHJhY3QoeyBhdm1WZXJzaW9uOiAxMiB9KQogICAgLy8gY2xhc3MgQ29udHJhY3RWMCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDEyCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [34], "errorMessage": "can only update if caller expects this to be currently be v0"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -64,9 +64,31 @@ def _init_dataclass(cls: type, data: dict) -> object:
             field_values[field.name] = field_value
     return cls(**field_values)
 
+class _ContractV0Update:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppUpdateMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.params.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update()void",
+        }))
+
+
 class ContractV0Params:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_ContractV0Update":
+        return _ContractV0Update(self.app_client)
 
     def clear_state(
         self,
@@ -79,9 +101,31 @@ class ContractV0Params:
         )
 
 
+class _ContractV0UpdateTransaction:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.create_transaction.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update()void",
+        }))
+
+
 class ContractV0CreateTransactionParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_ContractV0UpdateTransaction":
+        return _ContractV0UpdateTransaction(self.app_client)
 
     def clear_state(
         self,
@@ -94,9 +138,34 @@ class ContractV0CreateTransactionParams:
         )
 
 
+class _ContractV0UpdateSend:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        response = self.app_client.send.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update()void",
+        }), send_params=send_params, compilation_params=compilation_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppUpdateTransactionResult[None], parsed_response)
+
+
 class ContractV0Send:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_ContractV0UpdateSend":
+        return _ContractV0UpdateSend(self.app_client)
 
     def clear_state(
         self,
@@ -294,6 +363,314 @@ class ContractV0Client:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class ContractV0BareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating ContractV0 contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+@dataclasses.dataclass(frozen=True)
+class ContractV0MethodCallUpdateParams(
+    algokit_utils.BaseAppClientMethodCallParams[
+        typing.Any,
+        str | None,
+    ]
+):
+    """Parameters for calling ContractV0 contract using ABI"""
+    on_complete: typing.Literal[OnComplete.UpdateApplicationOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+class ContractV0Factory(algokit_utils.TypedAppFactoryProtocol[ContractV0BareCallCreateParams, ContractV0MethodCallUpdateParams, None]):
+    """Factory for deploying and managing ContractV0Client smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = ContractV0FactoryParams(self.app_factory)
+        self.create_transaction = ContractV0FactoryCreateTransaction(self.app_factory)
+        self.send = ContractV0FactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: ContractV0BareCallCreateParams | None = None,
+        update_params: ContractV0MethodCallUpdateParams | None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[ContractV0Client, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params.to_algokit_utils_params() if update_params else None,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return ContractV0Client(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> ContractV0Client:
+        """Get an app client by creator address and name"""
+        return ContractV0Client(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> ContractV0Client:
+        """Get an app client by app ID"""
+        return ContractV0Client(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class ContractV0FactoryParams:
+    """Parameters for creating transactions for ContractV0 contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = ContractV0FactoryCreateParams(app_factory)
+        self.update = ContractV0FactoryUpdateParams(app_factory)
+        self.delete = ContractV0FactoryDeleteParams(app_factory)
+
+class ContractV0FactoryCreateParams:
+    """Parameters for 'create' operations of ContractV0 contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def update(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the update()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "update()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class ContractV0FactoryUpdateParams:
+    """Parameters for 'update' operations of ContractV0 contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class ContractV0FactoryDeleteParams:
+    """Parameters for 'delete' operations of ContractV0 contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class ContractV0FactoryCreateTransaction:
+    """Create transactions for ContractV0 contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = ContractV0FactoryCreateTransactionCreate(app_factory)
+
+
+class ContractV0FactoryCreateTransactionCreate:
+    """Create new instances of ContractV0 contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class ContractV0FactorySend:
+    """Send calls to ContractV0 contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = ContractV0FactorySendCreate(app_factory)
+
+
+class ContractV0FactorySendCreate:
+    """Send create calls to ContractV0 contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[ContractV0Client, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return ContractV0Client(result[0]), result[1]
+
+
+class _ContractV0UpdateComposer:
+    def __init__(self, composer: "ContractV0Composer"):
+        self.composer = composer
+    def update(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "ContractV0Composer":
+        self.composer._composer.add_app_update_method_call(
+            self.composer.client.params.update.update(
+                
+                params=params,
+                compilation_params=compilation_params
+            )
+        )
+        self.composer._result_mappers.append(
+            lambda v: self.composer.client.decode_return_value(
+                "update()void", v
+            )
+        )
+        return self.composer
+
+
 class ContractV0Composer:
     """Composer for creating transaction groups for ContractV0 contract calls"""
 
@@ -301,6 +678,10 @@ class ContractV0Composer:
         self.client = client
         self._composer = client.algorand.new_group()
         self._result_mappers: list[typing.Callable[[algokit_utils.ABIReturn | None], object] | None] = []
+
+    @property
+    def update(self) -> "_ContractV0UpdateComposer":
+        return _ContractV0UpdateComposer(self)
 
     def clear_state(
         self,

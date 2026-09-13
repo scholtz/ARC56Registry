@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "createBoxes", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "BoxCreate", "state": {"keys": {"box": {"boxBool": {"key": "Ym9vbA==", "keyType": "AVMString", "valueType": "uint64"}, "boxArc4Bool": {"key": "YXJjNGI=", "keyType": "AVMString", "valueType": "bool"}, "boxStr": {"key": "YQ==", "keyType": "AVMString", "valueType": "AVMString"}, "boxUint": {"key": "Yg==", "keyType": "AVMString", "valueType": "uint64"}, "boxStaticArray": {"key": "Yw==", "keyType": "AVMString", "valueType": "uint32[10]"}, "boxDynamicArray": {"key": "ZA==", "keyType": "AVMString", "valueType": "uint8[]"}, "boxTuple": {"key": "ZQ==", "keyType": "AVMString", "valueType": "(uint8,uint8,bool,bool)"}}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "createBoxes", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "BoxCreate", "state": {"keys": {"box": {"boxBool": {"key": "Ym9vbA==", "keyType": "AVMString", "valueType": "uint64"}, "boxArc4Bool": {"key": "YXJjNGI=", "keyType": "AVMString", "valueType": "bool"}, "boxStr": {"key": "YQ==", "keyType": "AVMString", "valueType": "AVMString"}, "boxUint": {"key": "Yg==", "keyType": "AVMString", "valueType": "uint64"}, "boxStaticArray": {"key": "Yw==", "keyType": "AVMString", "valueType": "uint32[10]"}, "boxDynamicArray": {"key": "ZA==", "keyType": "AVMString", "valueType": "uint8[]"}, "boxTuple": {"key": "ZQ==", "keyType": "AVMString", "valueType": "(uint8,uint8,bool,bool)"}}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyACCAExG0EATIAEkyAQwTYaAI4BAAEAMRkUMRgQRIABYYEKuUiAAWIiuUiAAWOBKLlIgAFkgQK5SIABZYEDuUiABGJvb2wiuUiABWFyYzRiI7lII0MxGRQxGBQQQw==", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgOCAxCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxMzkKICAgIC8vIGNsYXNzIEJveENyZWF0ZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1CiAgICBwdXNoYnl0ZXMgMHg5MzIwMTBjMSAvLyBtZXRob2QgImNyZWF0ZUJveGVzKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVCb3hlc19yb3V0ZUAzCiAgICBlcnIKCm1haW5fY3JlYXRlQm94ZXNfcm91dGVAMzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE0OAogICAgLy8gY3JlYXRlQm94ZXMoKSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTQyCiAgICAvLyBib3hTdHIgPSBCb3g8c3RyaW5nPih7IGtleTogJ2EnIH0pCiAgICBwdXNoYnl0ZXMgImEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNDkKICAgIC8vIHRoaXMuYm94U3RyLmNyZWF0ZSh7IHNpemU6IDEwIH0pCiAgICBwdXNoaW50IDEwCiAgICBib3hfY3JlYXRlCiAgICBwb3AKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE0MwogICAgLy8gYm94VWludCA9IEJveDx1aW50NjQ+KHsga2V5OiAnYicgfSkKICAgIHB1c2hieXRlcyAiYiIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE1MQogICAgLy8gdGhpcy5ib3hVaW50LmNyZWF0ZSgpCiAgICBpbnRjXzAgLy8gOAogICAgYm94X2NyZWF0ZQogICAgcG9wCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNDQKICAgIC8vIGJveFN0YXRpY0FycmF5ID0gQm94PGFyYzQuU3RhdGljQXJyYXk8YXJjNC5VaW50MzIsIDEwPj4oeyBrZXk6ICdjJyB9KQogICAgcHVzaGJ5dGVzICJjIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTUzCiAgICAvLyB0aGlzLmJveFN0YXRpY0FycmF5LmNyZWF0ZSgpCiAgICBwdXNoaW50IDQwCiAgICBib3hfY3JlYXRlCiAgICBwb3AKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE0NQogICAgLy8gYm94RHluYW1pY0FycmF5ID0gQm94PGFyYzQuRHluYW1pY0FycmF5PGFyYzQuVWludDg+Pih7IGtleTogJ2QnIH0pCiAgICBwdXNoYnl0ZXMgImQiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNTUKICAgIC8vIHRoaXMuYm94RHluYW1pY0FycmF5LmNyZWF0ZSh7IHNpemU6IDIgfSkKICAgIHB1c2hpbnQgMgogICAgYm94X2NyZWF0ZQogICAgcG9wCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNDYKICAgIC8vIGJveFR1cGxlID0gQm94PGFyYzQuVHVwbGU8W2FyYzQuVWludDgsIGFyYzQuVWludDgsIGFyYzQuQm9vbCwgYXJjNC5Cb29sXT4+KHsga2V5OiAnZScgfSkKICAgIHB1c2hieXRlcyAiZSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE1NwogICAgLy8gdGhpcy5ib3hUdXBsZS5jcmVhdGUoKQogICAgcHVzaGludCAzCiAgICBib3hfY3JlYXRlCiAgICBwb3AKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE0MAogICAgLy8gYm94Qm9vbCA9IEJveDxib29sZWFuPih7IGtleTogJ2Jvb2wnIH0pCiAgICBwdXNoYnl0ZXMgImJvb2wiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNTkKICAgIC8vIHRoaXMuYm94Qm9vbC5jcmVhdGUoKQogICAgaW50Y18wIC8vIDgKICAgIGJveF9jcmVhdGUKICAgIHBvcAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTQxCiAgICAvLyBib3hBcmM0Qm9vbCA9IEJveDxhcmM0LkJvb2w+KHsga2V5OiAnYXJjNGInIH0pCiAgICBwdXNoYnl0ZXMgImFyYzRiIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTYxCiAgICAvLyB0aGlzLmJveEFyYzRCb29sLmNyZWF0ZSgpCiAgICBpbnRjXzEgLy8gMQogICAgYm94X2NyZWF0ZQogICAgcG9wCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNDgKICAgIC8vIGNyZWF0ZUJveGVzKCkgewogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjEzOQogICAgLy8gY2xhc3MgQm94Q3JlYXRlIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4K", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -424,6 +424,270 @@ class BoxCreateClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class BoxCreateBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating BoxCreate contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class BoxCreateFactory(algokit_utils.TypedAppFactoryProtocol[BoxCreateBareCallCreateParams, None, None]):
+    """Factory for deploying and managing BoxCreateClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = BoxCreateFactoryParams(self.app_factory)
+        self.create_transaction = BoxCreateFactoryCreateTransaction(self.app_factory)
+        self.send = BoxCreateFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: BoxCreateBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[BoxCreateClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return BoxCreateClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> BoxCreateClient:
+        """Get an app client by creator address and name"""
+        return BoxCreateClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> BoxCreateClient:
+        """Get an app client by app ID"""
+        return BoxCreateClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class BoxCreateFactoryParams:
+    """Parameters for creating transactions for BoxCreate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = BoxCreateFactoryCreateParams(app_factory)
+        self.update = BoxCreateFactoryUpdateParams(app_factory)
+        self.delete = BoxCreateFactoryDeleteParams(app_factory)
+
+class BoxCreateFactoryCreateParams:
+    """Parameters for 'create' operations of BoxCreate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def create_boxes(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the createBoxes()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "createBoxes()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class BoxCreateFactoryUpdateParams:
+    """Parameters for 'update' operations of BoxCreate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class BoxCreateFactoryDeleteParams:
+    """Parameters for 'delete' operations of BoxCreate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class BoxCreateFactoryCreateTransaction:
+    """Create transactions for BoxCreate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = BoxCreateFactoryCreateTransactionCreate(app_factory)
+
+
+class BoxCreateFactoryCreateTransactionCreate:
+    """Create new instances of BoxCreate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class BoxCreateFactorySend:
+    """Send calls to BoxCreate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = BoxCreateFactorySendCreate(app_factory)
+
+
+class BoxCreateFactorySendCreate:
+    """Send create calls to BoxCreate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[BoxCreateClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return BoxCreateClient(result[0]), result[1]
 
 
 class BoxCreateComposer:

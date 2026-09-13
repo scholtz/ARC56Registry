@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(uint64)", "name": "a", "struct": "Object2E8A71EC"}], "name": "forward", "returns": {"type": "(uint64)", "struct": "Object2E8A71EC"}, "events": [], "readonly": false, "recommendations": {}}], "name": "FieldDocMismatchContract", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"Object2E8A71EC": [{"name": "x", "type": "uint64"}]}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(uint64)", "name": "a", "struct": "Object2E8A71EC"}], "name": "forward", "returns": {"type": "(uint64)", "struct": "Object2E8A71EC"}, "events": [], "readonly": false, "recommendations": {}}], "name": "FieldDocMismatchContract", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"Object2E8A71EC": [{"name": "x", "type": "uint64"}]}, "byteCode": {"approval": "CyACAAFCAABCAAAxGyITQQApQgAANhoAgAQKwHGYTwGOAQAHQgAAQgAAADEZIhIxGCITEESIABJC/+wxGSISMRgiEhBEiAAgI0NCAAA2GgGIAAyABBUffHVPAVCwI0OKAQFCAACL/4lCAACJ", "clear": "C0IAAIEBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgYiBtYWluX2Jsb2NrQDEKCm1haW5fYmxvY2tAMToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9vYmplY3QtcGFzc3Rocm91Z2guYWxnby50czoxOAogICAgLy8gZXhwb3J0IGNsYXNzIEZpZWxkRG9jTWlzbWF0Y2hDb250cmFjdCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDUKICAgIGIgbWFpbl9hYmlfcm91dGluZ0AyCgptYWluX2FiaV9yb3V0aW5nQDI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvb2JqZWN0LXBhc3N0aHJvdWdoLmFsZ28udHM6MTgKICAgIC8vIGV4cG9ydCBjbGFzcyBGaWVsZERvY01pc21hdGNoQ29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBwdXNoYnl0ZXMgMHgwYWMwNzE5OCAvLyBtZXRob2QgImZvcndhcmQoKHVpbnQ2NCkpKHVpbnQ2NCkiCiAgICB1bmNvdmVyIDEKICAgIG1hdGNoIG1haW5fZm9yd2FyZF9yb3V0ZUAzCiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEA0CgptYWluX3N3aXRjaF9jYXNlX25leHRANDoKICAgIGIgbWFpbl9hZnRlcl9pZl9lbHNlQDYKCm1haW5fYWZ0ZXJfaWZfZWxzZUA2OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL29iamVjdC1wYXNzdGhyb3VnaC5hbGdvLnRzOjE4CiAgICAvLyBleHBvcnQgY2xhc3MgRmllbGREb2NNaXNtYXRjaENvbnRyYWN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgZXJyCgptYWluX2ZvcndhcmRfcm91dGVAMzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9vYmplY3QtcGFzc3Rocm91Z2guYWxnby50czoxOQogICAgLy8gQGFiaW1ldGhvZCh7IHZhbGlkYXRlRW5jb2Rpbmc6ICd1bnNhZmUtZGlzYWJsZWQnIH0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBpbnRjXzAgLy8gTm9PcAogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgICYmCiAgICBhc3NlcnQKICAgIGNhbGxzdWIgZm9yd2FyZAogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRANAoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9vYmplY3QtcGFzc3Rocm91Z2guYWxnby50czoxOAogICAgLy8gZXhwb3J0IGNsYXNzIEZpZWxkRG9jTWlzbWF0Y2hDb250cmFjdCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGludGNfMCAvLyBOb09wCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGludGNfMCAvLyAwCiAgICA9PQogICAgJiYKICAgIGFzc2VydAogICAgY2FsbHN1YiBfX2FsZ290c19fLmRlZmF1bHRDcmVhdGUKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvb2JqZWN0LXBhc3N0aHJvdWdoLmFsZ28udHM6OkZpZWxkRG9jTWlzbWF0Y2hDb250cmFjdC5mb3J3YXJkW3JvdXRpbmddKCkgLT4gdm9pZDoKZm9yd2FyZDoKICAgIGIgZm9yd2FyZF9ibG9ja0AwCgpmb3J3YXJkX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvb2JqZWN0LXBhc3N0aHJvdWdoLmFsZ28udHM6MTkKICAgIC8vIEBhYmltZXRob2QoeyB2YWxpZGF0ZUVuY29kaW5nOiAndW5zYWZlLWRpc2FibGVkJyB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvb2JqZWN0LXBhc3N0aHJvdWdoLmFsZ28udHM6OkZpZWxkRG9jTWlzbWF0Y2hDb250cmFjdC5mb3J3YXJkCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NQogICAgdW5jb3ZlciAxCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9vYmplY3QtcGFzc3Rocm91Z2guYWxnby50czo6RmllbGREb2NNaXNtYXRjaENvbnRyYWN0LmZvcndhcmQoYTogYnl0ZXMpIC0+IGJ5dGVzOgp0ZXN0cy9hcHByb3ZhbHMvb2JqZWN0LXBhc3N0aHJvdWdoLmFsZ28udHM6OkZpZWxkRG9jTWlzbWF0Y2hDb250cmFjdC5mb3J3YXJkOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL29iamVjdC1wYXNzdGhyb3VnaC5hbGdvLnRzOjE5LTIwCiAgICAvLyBAYWJpbWV0aG9kKHsgdmFsaWRhdGVFbmNvZGluZzogJ3Vuc2FmZS1kaXNhYmxlZCcgfSkKICAgIC8vIGZvcndhcmQoYTogRGVzY1ByYWlzZSk6IERlc2NEaXNwYXJhZ2UgewogICAgcHJvdG8gMSAxCiAgICBiIHRlc3RzL2FwcHJvdmFscy9vYmplY3QtcGFzc3Rocm91Z2guYWxnby50czo6RmllbGREb2NNaXNtYXRjaENvbnRyYWN0LmZvcndhcmRfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL29iamVjdC1wYXNzdGhyb3VnaC5hbGdvLnRzOjpGaWVsZERvY01pc21hdGNoQ29udHJhY3QuZm9yd2FyZF9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL29iamVjdC1wYXNzdGhyb3VnaC5hbGdvLnRzOjIxCiAgICAvLyByZXR1cm4gYQogICAgZnJhbWVfZGlnIC0xCiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvb2JqZWN0LXBhc3N0aHJvdWdoLmFsZ28udHM6OkZpZWxkRG9jTWlzbWF0Y2hDb250cmFjdC5fX2FsZ290c19fLmRlZmF1bHRDcmVhdGUoKSAtPiB2b2lkOgpfX2FsZ290c19fLmRlZmF1bHRDcmVhdGU6CiAgICBiIF9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZV9ibG9ja0AwCgpfX2FsZ290c19fLmRlZmF1bHRDcmVhdGVfYmxvY2tAMDoKICAgIHJldHN1Ygo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -350,6 +350,271 @@ class FieldDocMismatchContractClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class FieldDocMismatchContractBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating FieldDocMismatchContract contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class FieldDocMismatchContractFactory(algokit_utils.TypedAppFactoryProtocol[FieldDocMismatchContractBareCallCreateParams, None, None]):
+    """Factory for deploying and managing FieldDocMismatchContractClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = FieldDocMismatchContractFactoryParams(self.app_factory)
+        self.create_transaction = FieldDocMismatchContractFactoryCreateTransaction(self.app_factory)
+        self.send = FieldDocMismatchContractFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: FieldDocMismatchContractBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[FieldDocMismatchContractClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return FieldDocMismatchContractClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> FieldDocMismatchContractClient:
+        """Get an app client by creator address and name"""
+        return FieldDocMismatchContractClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> FieldDocMismatchContractClient:
+        """Get an app client by app ID"""
+        return FieldDocMismatchContractClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class FieldDocMismatchContractFactoryParams:
+    """Parameters for creating transactions for FieldDocMismatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = FieldDocMismatchContractFactoryCreateParams(app_factory)
+        self.update = FieldDocMismatchContractFactoryUpdateParams(app_factory)
+        self.delete = FieldDocMismatchContractFactoryDeleteParams(app_factory)
+
+class FieldDocMismatchContractFactoryCreateParams:
+    """Parameters for 'create' operations of FieldDocMismatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def forward(
+        self,
+        args: tuple[Object2e8a71ec] | ForwardArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the forward((uint64))(uint64) ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "forward((uint64))(uint64)",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class FieldDocMismatchContractFactoryUpdateParams:
+    """Parameters for 'update' operations of FieldDocMismatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class FieldDocMismatchContractFactoryDeleteParams:
+    """Parameters for 'delete' operations of FieldDocMismatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class FieldDocMismatchContractFactoryCreateTransaction:
+    """Create transactions for FieldDocMismatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = FieldDocMismatchContractFactoryCreateTransactionCreate(app_factory)
+
+
+class FieldDocMismatchContractFactoryCreateTransactionCreate:
+    """Create new instances of FieldDocMismatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class FieldDocMismatchContractFactorySend:
+    """Send calls to FieldDocMismatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = FieldDocMismatchContractFactorySendCreate(app_factory)
+
+
+class FieldDocMismatchContractFactorySendCreate:
+    """Send create calls to FieldDocMismatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[FieldDocMismatchContractClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return FieldDocMismatchContractClient(result[0]), result[1]
 
 
 class FieldDocMismatchContractComposer:

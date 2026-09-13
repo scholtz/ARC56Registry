@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "someMethod", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "someOtherMethod", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["UpdateApplication"], "create": []}, "args": [], "name": "updateApplication", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "Arc4HybridAlgo", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "someMethod", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "someOtherMethod", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["UpdateApplication"], "create": []}, "args": [], "name": "updateApplication", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "Arc4HybridAlgo", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyACAAFCAACABmJlZm9yZbCIAFWABWFmdGVysENCAACIAA+JQgAAiAAaiUIAAIgAK4lCAACAC3NvbWUgbWV0aG9ksIlCAACAEXNvbWUgb3RoZXIgbWV0aG9ksIlCAACABnVwZGF0ZbCJigABgABCAABCAAAxGyITQQB4QgAANhoAgARG92UzTwGOAQBSQgAAMRkiEkQxGCITQQBAQgAANhoAgATCWEaegARprfm7TwKOAgAdABRCAABCAABCAAAijABCAACLAE8BiYj/VyOMAEL/8oj/RyOMAEL/6UL/3TEZgQQSMRgiExBEiP8+I4wAQv/SMRkiEjEYIhIQRIgABiOMAEL/v0IAAIk=", "clear": "C0IAAIAOY2xlYXJpbmcgc3RhdGWwgQFD"}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uYXBwcm92YWxQcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgaW50Y2Jsb2NrIDAgMQogICAgYiBtYWluX2Jsb2NrQDAKCm1haW5fYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjUKICAgIC8vIGxvZygnYmVmb3JlJykKICAgIHB1c2hieXRlcyAiYmVmb3JlIgogICAgbG9nCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo2CiAgICAvLyBjb25zdCByZXN1bHQgPSBzdXBlci5hcHByb3ZhbFByb2dyYW0oKQogICAgY2FsbHN1YiBhcHByb3ZhbFByb2dyYW0KICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjcKICAgIC8vIGxvZygnYWZ0ZXInKQogICAgcHVzaGJ5dGVzICJhZnRlciIKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OAogICAgLy8gcmV0dXJuIHJlc3VsdAogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnNvbWVNZXRob2Rbcm91dGluZ10oKSAtPiB2b2lkOgpzb21lTWV0aG9kOgogICAgYiBzb21lTWV0aG9kX2Jsb2NrQDAKCnNvbWVNZXRob2RfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjE2CiAgICAvLyBzb21lTWV0aG9kKCkgewogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uc29tZU1ldGhvZAogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnNvbWVPdGhlck1ldGhvZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnNvbWVPdGhlck1ldGhvZDoKICAgIGIgc29tZU90aGVyTWV0aG9kX2Jsb2NrQDAKCnNvbWVPdGhlck1ldGhvZF9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6MjAKICAgIC8vIHNvbWVPdGhlck1ldGhvZCgpIHsKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnNvbWVPdGhlck1ldGhvZAogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnVwZGF0ZUFwcGxpY2F0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKdXBkYXRlQXBwbGljYXRpb246CiAgICBiIHVwZGF0ZUFwcGxpY2F0aW9uX2Jsb2NrQDAKCnVwZGF0ZUFwcGxpY2F0aW9uX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czoyNAogICAgLy8gdXBkYXRlQXBwbGljYXRpb24oKSB7CiAgICBjYWxsc3ViIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby51cGRhdGVBcHBsaWNhdGlvbgogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnNvbWVNZXRob2QoKSAtPiB2b2lkOgp0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uc29tZU1ldGhvZDoKICAgIGIgdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnNvbWVNZXRob2RfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnNvbWVNZXRob2RfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjE3CiAgICAvLyBsb2coJ3NvbWUgbWV0aG9kJykKICAgIHB1c2hieXRlcyAic29tZSBtZXRob2QiCiAgICBsb2cKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby5zb21lT3RoZXJNZXRob2QoKSAtPiB2b2lkOgp0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uc29tZU90aGVyTWV0aG9kOgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uc29tZU90aGVyTWV0aG9kX2Jsb2NrQDAKCnRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby5zb21lT3RoZXJNZXRob2RfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjIxCiAgICAvLyBsb2coJ3NvbWUgb3RoZXIgbWV0aG9kJykKICAgIHB1c2hieXRlcyAic29tZSBvdGhlciBtZXRob2QiCiAgICBsb2cKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby51cGRhdGVBcHBsaWNhdGlvbigpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby51cGRhdGVBcHBsaWNhdGlvbjoKICAgIGIgdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnVwZGF0ZUFwcGxpY2F0aW9uX2Jsb2NrQDAKCnRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby51cGRhdGVBcHBsaWNhdGlvbl9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6MjUKICAgIC8vIGxvZygndXBkYXRlJykKICAgIHB1c2hieXRlcyAidXBkYXRlIgogICAgbG9nCiAgICByZXRzdWIKCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6CmFwcHJvdmFsUHJvZ3JhbToKICAgIHByb3RvIDAgMQogICAgcHVzaGJ5dGVzICIiCiAgICBiIGFwcHJvdmFsUHJvZ3JhbV9ibG9ja0AwCgphcHByb3ZhbFByb2dyYW1fYmxvY2tAMDoKICAgIGIgYXBwcm92YWxQcm9ncmFtX2Jsb2NrQDEKCmFwcHJvdmFsUHJvZ3JhbV9ibG9ja0AxOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6MwogICAgLy8gY2xhc3MgQXJjNEh5YnJpZEFsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgaW50Y18wIC8vIDAKICAgICE9CiAgICBieiBhcHByb3ZhbFByb2dyYW1fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDExCiAgICBiIGFwcHJvdmFsUHJvZ3JhbV9hYmlfcm91dGluZ0AyCgphcHByb3ZhbFByb2dyYW1fYWJpX3JvdXRpbmdAMjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjMKICAgIC8vIGNsYXNzIEFyYzRIeWJyaWRBbGdvIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgcHVzaGJ5dGVzIDB4NDZmNzY1MzMgLy8gbWV0aG9kICJ1cGRhdGVBcHBsaWNhdGlvbigpdm9pZCIKICAgIHVuY292ZXIgMQogICAgbWF0Y2ggYXBwcm92YWxQcm9ncmFtX3VwZGF0ZUFwcGxpY2F0aW9uX3JvdXRlQDMKICAgIGIgYXBwcm92YWxQcm9ncmFtX3N3aXRjaF9jYXNlX25leHRANAoKYXBwcm92YWxQcm9ncmFtX3N3aXRjaF9jYXNlX25leHRANDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjMKICAgIC8vIGNsYXNzIEFyYzRIeWJyaWRBbGdvIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgaW50Y18wIC8vIE5vT3AKICAgID09CiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgIGJ6IGFwcHJvdmFsUHJvZ3JhbV9jcmVhdGVfTm9PcEA5CiAgICBiIGFwcHJvdmFsUHJvZ3JhbV9jYWxsX05vT3BANQoKYXBwcm92YWxQcm9ncmFtX2NhbGxfTm9PcEA1OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6MwogICAgLy8gY2xhc3MgQXJjNEh5YnJpZEFsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBwdXNoYnl0ZXMgMHhjMjU4NDY5ZSAvLyBtZXRob2QgInNvbWVNZXRob2QoKXZvaWQiCiAgICBwdXNoYnl0ZXMgMHg2OWFkZjliYiAvLyBtZXRob2QgInNvbWVPdGhlck1ldGhvZCgpdm9pZCIKICAgIHVuY292ZXIgMgogICAgbWF0Y2ggYXBwcm92YWxQcm9ncmFtX3NvbWVNZXRob2Rfcm91dGVANiBhcHByb3ZhbFByb2dyYW1fc29tZU90aGVyTWV0aG9kX3JvdXRlQDcKICAgIGIgYXBwcm92YWxQcm9ncmFtX3N3aXRjaF9jYXNlX25leHRAOAoKYXBwcm92YWxQcm9ncmFtX3N3aXRjaF9jYXNlX25leHRAODoKICAgIGIgYXBwcm92YWxQcm9ncmFtX2FmdGVyX2lmX2Vsc2VAMTAKCmFwcHJvdmFsUHJvZ3JhbV9hZnRlcl9pZl9lbHNlQDEwOgogICAgYiBhcHByb3ZhbFByb2dyYW1fYWZ0ZXJfaWZfZWxzZUAxMgoKYXBwcm92YWxQcm9ncmFtX2FmdGVyX2lmX2Vsc2VAMTI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czozCiAgICAvLyBjbGFzcyBBcmM0SHlicmlkQWxnbyBleHRlbmRzIENvbnRyYWN0IHsKICAgIGludGNfMCAvLyAwCiAgICBmcmFtZV9idXJ5IDAKICAgIGIgYXBwcm92YWxQcm9ncmFtX2FmdGVyX2lubGluZWRfdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLl9fcHV5YV9hcmM0X3JvdXRlcl9fQDEzCgphcHByb3ZhbFByb2dyYW1fYWZ0ZXJfaW5saW5lZF90ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uX19wdXlhX2FyYzRfcm91dGVyX19AMTM6CiAgICBmcmFtZV9kaWcgMAogICAgdW5jb3ZlciAxCiAgICByZXRzdWIKCmFwcHJvdmFsUHJvZ3JhbV9zb21lT3RoZXJNZXRob2Rfcm91dGVANzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjIwCiAgICAvLyBzb21lT3RoZXJNZXRob2QoKSB7CiAgICBjYWxsc3ViIHNvbWVPdGhlck1ldGhvZAogICAgaW50Y18xIC8vIDEKICAgIGZyYW1lX2J1cnkgMAogICAgYiBhcHByb3ZhbFByb2dyYW1fYWZ0ZXJfaW5saW5lZF90ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uX19wdXlhX2FyYzRfcm91dGVyX19AMTMKCmFwcHJvdmFsUHJvZ3JhbV9zb21lTWV0aG9kX3JvdXRlQDY6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czoxNgogICAgLy8gc29tZU1ldGhvZCgpIHsKICAgIGNhbGxzdWIgc29tZU1ldGhvZAogICAgaW50Y18xIC8vIDEKICAgIGZyYW1lX2J1cnkgMAogICAgYiBhcHByb3ZhbFByb2dyYW1fYWZ0ZXJfaW5saW5lZF90ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uX19wdXlhX2FyYzRfcm91dGVyX19AMTMKCmFwcHJvdmFsUHJvZ3JhbV9jcmVhdGVfTm9PcEA5OgogICAgYiBhcHByb3ZhbFByb2dyYW1fYWZ0ZXJfaWZfZWxzZUAxMAoKYXBwcm92YWxQcm9ncmFtX3VwZGF0ZUFwcGxpY2F0aW9uX3JvdXRlQDM6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czoyNAogICAgLy8gdXBkYXRlQXBwbGljYXRpb24oKSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDQgLy8gVXBkYXRlQXBwbGljYXRpb24KICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18wIC8vIDAKICAgICE9CiAgICAmJgogICAgYXNzZXJ0CiAgICBjYWxsc3ViIHVwZGF0ZUFwcGxpY2F0aW9uCiAgICBpbnRjXzEgLy8gMQogICAgZnJhbWVfYnVyeSAwCiAgICBiIGFwcHJvdmFsUHJvZ3JhbV9hZnRlcl9pbmxpbmVkX3Rlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby5fX3B1eWFfYXJjNF9yb3V0ZXJfX0AxMwoKYXBwcm92YWxQcm9ncmFtX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUAxMToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjMKICAgIC8vIGNsYXNzIEFyYzRIeWJyaWRBbGdvIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgaW50Y18wIC8vIE5vT3AKICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18wIC8vIDAKICAgID09CiAgICAmJgogICAgYXNzZXJ0CiAgICBjYWxsc3ViIF9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZQogICAgaW50Y18xIC8vIDEKICAgIGZyYW1lX2J1cnkgMAogICAgYiBhcHByb3ZhbFByb2dyYW1fYWZ0ZXJfaW5saW5lZF90ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uX19wdXlhX2FyYzRfcm91dGVyX19AMTMKCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlKCkgLT4gdm9pZDoKX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlOgogICAgYiBfX2FsZ290c19fLmRlZmF1bHRDcmVhdGVfYmxvY2tAMAoKX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlX2Jsb2NrQDA6CiAgICByZXRzdWIK", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6MTIKICAgIC8vIGxvZygnY2xlYXJpbmcgc3RhdGUnKQogICAgcHVzaGJ5dGVzICJjbGVhcmluZyBzdGF0ZSIKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6MTMKICAgIC8vIHJldHVybiB0cnVlCiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -64,9 +64,31 @@ def _init_dataclass(cls: type, data: dict) -> object:
             field_values[field.name] = field_value
     return cls(**field_values)
 
+class _Arc4HybridAlgoUpdate:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update_application(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppUpdateMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.params.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "updateApplication()void",
+        }))
+
+
 class Arc4HybridAlgoParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_Arc4HybridAlgoUpdate":
+        return _Arc4HybridAlgoUpdate(self.app_client)
 
     def some_method(
         self,
@@ -101,9 +123,31 @@ class Arc4HybridAlgoParams:
         )
 
 
+class _Arc4HybridAlgoUpdateTransaction:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update_application(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.create_transaction.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "updateApplication()void",
+        }))
+
+
 class Arc4HybridAlgoCreateTransactionParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_Arc4HybridAlgoUpdateTransaction":
+        return _Arc4HybridAlgoUpdateTransaction(self.app_client)
 
     def some_method(
         self,
@@ -138,9 +182,34 @@ class Arc4HybridAlgoCreateTransactionParams:
         )
 
 
+class _Arc4HybridAlgoUpdateSend:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update_application(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        response = self.app_client.send.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "updateApplication()void",
+        }), send_params=send_params, compilation_params=compilation_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppUpdateTransactionResult[None], parsed_response)
+
+
 class Arc4HybridAlgoSend:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_Arc4HybridAlgoUpdateSend":
+        return _Arc4HybridAlgoUpdateSend(self.app_client)
 
     def some_method(
         self,
@@ -378,6 +447,352 @@ class Arc4HybridAlgoClient:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class Arc4HybridAlgoBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating Arc4HybridAlgo contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+@dataclasses.dataclass(frozen=True)
+class Arc4HybridAlgoMethodCallUpdateParams(
+    algokit_utils.BaseAppClientMethodCallParams[
+        typing.Any,
+        str | None,
+    ]
+):
+    """Parameters for calling Arc4HybridAlgo contract using ABI"""
+    on_complete: typing.Literal[OnComplete.UpdateApplicationOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+class Arc4HybridAlgoFactory(algokit_utils.TypedAppFactoryProtocol[Arc4HybridAlgoBareCallCreateParams, Arc4HybridAlgoMethodCallUpdateParams, None]):
+    """Factory for deploying and managing Arc4HybridAlgoClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = Arc4HybridAlgoFactoryParams(self.app_factory)
+        self.create_transaction = Arc4HybridAlgoFactoryCreateTransaction(self.app_factory)
+        self.send = Arc4HybridAlgoFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: Arc4HybridAlgoBareCallCreateParams | None = None,
+        update_params: Arc4HybridAlgoMethodCallUpdateParams | None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[Arc4HybridAlgoClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params.to_algokit_utils_params() if update_params else None,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return Arc4HybridAlgoClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> Arc4HybridAlgoClient:
+        """Get an app client by creator address and name"""
+        return Arc4HybridAlgoClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> Arc4HybridAlgoClient:
+        """Get an app client by app ID"""
+        return Arc4HybridAlgoClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class Arc4HybridAlgoFactoryParams:
+    """Parameters for creating transactions for Arc4HybridAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = Arc4HybridAlgoFactoryCreateParams(app_factory)
+        self.update = Arc4HybridAlgoFactoryUpdateParams(app_factory)
+        self.delete = Arc4HybridAlgoFactoryDeleteParams(app_factory)
+
+class Arc4HybridAlgoFactoryCreateParams:
+    """Parameters for 'create' operations of Arc4HybridAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def some_method(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the someMethod()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "someMethod()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def some_other_method(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the someOtherMethod()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "someOtherMethod()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def update_application(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the updateApplication()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "updateApplication()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class Arc4HybridAlgoFactoryUpdateParams:
+    """Parameters for 'update' operations of Arc4HybridAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class Arc4HybridAlgoFactoryDeleteParams:
+    """Parameters for 'delete' operations of Arc4HybridAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class Arc4HybridAlgoFactoryCreateTransaction:
+    """Create transactions for Arc4HybridAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = Arc4HybridAlgoFactoryCreateTransactionCreate(app_factory)
+
+
+class Arc4HybridAlgoFactoryCreateTransactionCreate:
+    """Create new instances of Arc4HybridAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class Arc4HybridAlgoFactorySend:
+    """Send calls to Arc4HybridAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = Arc4HybridAlgoFactorySendCreate(app_factory)
+
+
+class Arc4HybridAlgoFactorySendCreate:
+    """Send create calls to Arc4HybridAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[Arc4HybridAlgoClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return Arc4HybridAlgoClient(result[0]), result[1]
+
+
+class _Arc4HybridAlgoUpdateComposer:
+    def __init__(self, composer: "Arc4HybridAlgoComposer"):
+        self.composer = composer
+    def update_application(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "Arc4HybridAlgoComposer":
+        self.composer._composer.add_app_update_method_call(
+            self.composer.client.params.update.update_application(
+                
+                params=params,
+                compilation_params=compilation_params
+            )
+        )
+        self.composer._result_mappers.append(
+            lambda v: self.composer.client.decode_return_value(
+                "updateApplication()void", v
+            )
+        )
+        return self.composer
+
+
 class Arc4HybridAlgoComposer:
     """Composer for creating transaction groups for Arc4HybridAlgo contract calls"""
 
@@ -386,9 +801,14 @@ class Arc4HybridAlgoComposer:
         self._composer = client.algorand.new_group()
         self._result_mappers: list[typing.Callable[[algokit_utils.ABIReturn | None], object] | None] = []
 
+    @property
+    def update(self) -> "_Arc4HybridAlgoUpdateComposer":
+        return _Arc4HybridAlgoUpdateComposer(self)
+
     def some_method(
         self,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "Arc4HybridAlgoComposer":
         self._composer.add_app_call_method_call(
             self.client.params.some_method(
@@ -405,7 +825,8 @@ class Arc4HybridAlgoComposer:
 
     def some_other_method(
         self,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "Arc4HybridAlgoComposer":
         self._composer.add_app_call_method_call(
             self.client.params.some_other_method(

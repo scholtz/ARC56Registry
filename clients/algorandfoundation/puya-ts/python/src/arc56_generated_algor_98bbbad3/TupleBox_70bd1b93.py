@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "testBox", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "testBoxMap", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "TupleBox", "state": {"keys": {"box": {"box1": {"key": "dDE=", "keyType": "AVMString", "valueType": "(string,byte[],bool)"}, "box2": {"key": "dDI=", "keyType": "AVMString", "valueType": "ObjectB8AC7445"}}, "global": {}, "local": {}}, "maps": {"box": {"boxMap1": {"keyType": "AVMString", "valueType": "(string,byte[],bool)", "prefix": "dG0x"}, "boxMap2": {"keyType": "AVMString", "valueType": "BoxMap2", "prefix": "dG0y"}}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"ObjectB8AC7445": [{"name": "a", "type": "string"}, {"name": "b", "type": "byte[]"}, {"name": "c", "type": "bool"}], "BoxMap2": [{"name": "a", "type": "string"}, {"name": "b", "type": "byte[]"}, {"name": "c", "type": "bool"}]}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [194, 245, 358, 416], "errorMessage": "index out of bounds"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "testBox", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "testBoxMap", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "TupleBox", "state": {"keys": {"box": {"box1": {"key": "dDE=", "keyType": "AVMString", "valueType": "(string,byte[],bool)"}, "box2": {"key": "dDI=", "keyType": "AVMString", "valueType": "ObjectB8AC7445"}}, "global": {}, "local": {}}, "maps": {"box": {"boxMap1": {"keyType": "AVMString", "valueType": "(string,byte[],bool)", "prefix": "dG0x"}, "boxMap2": {"keyType": "AVMString", "valueType": "BoxMap2", "prefix": "dG0y"}}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"ObjectB8AC7445": [{"name": "a", "type": "string"}, {"name": "b", "type": "byte[]"}, {"name": "c", "type": "bool"}], "BoxMap2": [{"name": "a", "type": "string"}, {"name": "b", "type": "byte[]"}, {"name": "c", "type": "bool"}]}, "byteCode": {"approval": "CyAEAgUBBCYKBHRtMWECdDEEdG0yYQJ0MhMABQAMgAAFaGVsbG8ABXdvcmxkBWhlbGxvBXdvcmxkBHRtMWIPAAUACgAAA2FiYwADZGVmBHRtMmIxG0EBYTEZFEQxGESCAgT8GcRuBJ8fGOU2GgCOAgCsAAEAKL1FARREKr1FARREKLxIKCcEvyq8SConBL8ovUUBRCgjIroXIggoI08CulcCACcFEkQoIkm6FyhLASK6FyIIKE4CulcCACcGEkQoJSS6gQBTRCojIroXIggqI08CulcCACcFEkQqIkm6FypLASK6FyIIKk4CulcCACcGEkQqJSS6gQBTRCcHvEgnBycIvycJvEgnCScIvyi8SCi9RQEURCq8SCq9RQEURCRDKYEKuUgrgRS5SCm9SIEKEkQpvEgpJwS/KSMiuhciCCkjTwK6VwIAJwUSRCkiSboXKUsBIroXIggpTgK6VwIAJwYSRCklJLqBAFNEK7xIKycEvysjIroXIggrI08CulcCACcFEkQrIkm6FytLASK6FyIIK04CulcCACcGEkQrJSS6gQBTRCm8SCm9RQEURCu8SCu9RQEURCRDMRkUMRgUEEM=", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMiA1IDEgNAogICAgYnl0ZWNibG9jayAidG0xYSIgInQxIiAidG0yYSIgInQyIiAweDAwMDUwMDBjODAwMDA1Njg2NTZjNmM2ZjAwMDU3NzZmNzI2YzY0ICJoZWxsbyIgIndvcmxkIiAidG0xYiIgMHgwMDA1MDAwYTAwMDAwMzYxNjI2MzAwMDM2NDY1NjYgInRtMmIiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzIKICAgIC8vIGNsYXNzIFR1cGxlQm94IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweGZjMTljNDZlIDB4OWYxZjE4ZTUgLy8gbWV0aG9kICJ0ZXN0Qm94KCl2b2lkIiwgbWV0aG9kICJ0ZXN0Qm94TWFwKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl90ZXN0Qm94X3JvdXRlQDQgbWFpbl90ZXN0Qm94TWFwX3JvdXRlQDUKICAgIGVycgoKbWFpbl90ZXN0Qm94TWFwX3JvdXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzUKICAgIC8vIGJveE1hcDEgPSBCb3hNYXA8c3RyaW5nLCBbc3RyaW5nLCBieXRlcywgYm9vbGVhbl0+KHsga2V5UHJlZml4OiAndG0xJyB9KQogICAgYnl0ZWNfMCAvLyAidG0xYSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIwNQogICAgLy8gYXNzZXJ0KCF0aGlzLmJveE1hcDEoJ2EnKS5leGlzdHMpCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgICEKICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTc2CiAgICAvLyBib3hNYXAyID0gQm94TWFwPHN0cmluZywgQm94TWFwMj4oeyBrZXlQcmVmaXg6ICd0bTInIH0pCiAgICBieXRlY18yIC8vICJ0bTJhIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjA2CiAgICAvLyBhc3NlcnQoIXRoaXMuYm94TWFwMignYScpLmV4aXN0cykKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgIQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzUKICAgIC8vIGJveE1hcDEgPSBCb3hNYXA8c3RyaW5nLCBbc3RyaW5nLCBieXRlcywgYm9vbGVhbl0+KHsga2V5UHJlZml4OiAndG0xJyB9KQogICAgYnl0ZWNfMCAvLyAidG0xYSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIwOAogICAgLy8gdGhpcy5ib3hNYXAxKCdhJykudmFsdWUgPSBbJ2hlbGxvJywgQnl0ZXMoJ3dvcmxkJyksIHRydWVdCiAgICBib3hfZGVsCiAgICBwb3AKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3NQogICAgLy8gYm94TWFwMSA9IEJveE1hcDxzdHJpbmcsIFtzdHJpbmcsIGJ5dGVzLCBib29sZWFuXT4oeyBrZXlQcmVmaXg6ICd0bTEnIH0pCiAgICBieXRlY18wIC8vICJ0bTFhIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjA4CiAgICAvLyB0aGlzLmJveE1hcDEoJ2EnKS52YWx1ZSA9IFsnaGVsbG8nLCBCeXRlcygnd29ybGQnKSwgdHJ1ZV0KICAgIGJ5dGVjIDQgLy8gMHgwMDA1MDAwYzgwMDAwNTY4NjU2YzZjNmYwMDA1Nzc2ZjcyNmM2NAogICAgYm94X3B1dAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTc2CiAgICAvLyBib3hNYXAyID0gQm94TWFwPHN0cmluZywgQm94TWFwMj4oeyBrZXlQcmVmaXg6ICd0bTInIH0pCiAgICBieXRlY18yIC8vICJ0bTJhIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjA5CiAgICAvLyB0aGlzLmJveE1hcDIoJ2EnKS52YWx1ZSA9IHsgYTogJ2hlbGxvJywgYjogQnl0ZXMoJ3dvcmxkJyksIGM6IHRydWUgfQogICAgYm94X2RlbAogICAgcG9wCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzYKICAgIC8vIGJveE1hcDIgPSBCb3hNYXA8c3RyaW5nLCBCb3hNYXAyPih7IGtleVByZWZpeDogJ3RtMicgfSkKICAgIGJ5dGVjXzIgLy8gInRtMmEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMDgKICAgIC8vIHRoaXMuYm94TWFwMSgnYScpLnZhbHVlID0gWydoZWxsbycsIEJ5dGVzKCd3b3JsZCcpLCB0cnVlXQogICAgYnl0ZWMgNCAvLyAweDAwMDUwMDBjODAwMDA1Njg2NTZjNmM2ZjAwMDU3NzZmNzI2YzY0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMDkKICAgIC8vIHRoaXMuYm94TWFwMignYScpLnZhbHVlID0geyBhOiAnaGVsbG8nLCBiOiBCeXRlcygnd29ybGQnKSwgYzogdHJ1ZSB9CiAgICBib3hfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzUKICAgIC8vIGJveE1hcDEgPSBCb3hNYXA8c3RyaW5nLCBbc3RyaW5nLCBieXRlcywgYm9vbGVhbl0+KHsga2V5UHJlZml4OiAndG0xJyB9KQogICAgYnl0ZWNfMCAvLyAidG0xYSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIxMAogICAgLy8gYXNzZXJ0KHRoaXMuYm94TWFwMSgnYScpLmV4aXN0cykKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzUKICAgIC8vIGJveE1hcDEgPSBCb3hNYXA8c3RyaW5nLCBbc3RyaW5nLCBieXRlcywgYm9vbGVhbl0+KHsga2V5UHJlZml4OiAndG0xJyB9KQogICAgYnl0ZWNfMCAvLyAidG0xYSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIxMgogICAgLy8gYXNzZXJ0KHRoaXMuYm94TWFwMSgnYScpLnZhbHVlWzBdID09PSAnaGVsbG8nKQogICAgaW50Y18xIC8vIDUKICAgIGludGNfMCAvLyAyCiAgICBib3hfZXh0cmFjdAogICAgYnRvaQogICAgaW50Y18wIC8vIDIKICAgICsKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3NQogICAgLy8gYm94TWFwMSA9IEJveE1hcDxzdHJpbmcsIFtzdHJpbmcsIGJ5dGVzLCBib29sZWFuXT4oeyBrZXlQcmVmaXg6ICd0bTEnIH0pCiAgICBieXRlY18wIC8vICJ0bTFhIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjEyCiAgICAvLyBhc3NlcnQodGhpcy5ib3hNYXAxKCdhJykudmFsdWVbMF0gPT09ICdoZWxsbycpCiAgICBpbnRjXzEgLy8gNQogICAgdW5jb3ZlciAyCiAgICBib3hfZXh0cmFjdAogICAgZXh0cmFjdCAyIDAKICAgIGJ5dGVjIDUgLy8gImhlbGxvIgogICAgPT0KICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTc1CiAgICAvLyBib3hNYXAxID0gQm94TWFwPHN0cmluZywgW3N0cmluZywgYnl0ZXMsIGJvb2xlYW5dPih7IGtleVByZWZpeDogJ3RtMScgfSkKICAgIGJ5dGVjXzAgLy8gInRtMWEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMTMKICAgIC8vIGFzc2VydCh0aGlzLmJveE1hcDEoJ2EnKS52YWx1ZVsxXS5lcXVhbHMoQnl0ZXMoJ3dvcmxkJykpKQogICAgaW50Y18wIC8vIDIKICAgIGR1cAogICAgYm94X2V4dHJhY3QKICAgIGJ0b2kKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3NQogICAgLy8gYm94TWFwMSA9IEJveE1hcDxzdHJpbmcsIFtzdHJpbmcsIGJ5dGVzLCBib29sZWFuXT4oeyBrZXlQcmVmaXg6ICd0bTEnIH0pCiAgICBieXRlY18wIC8vICJ0bTFhIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjEzCiAgICAvLyBhc3NlcnQodGhpcy5ib3hNYXAxKCdhJykudmFsdWVbMV0uZXF1YWxzKEJ5dGVzKCd3b3JsZCcpKSkKICAgIGRpZyAxCiAgICBpbnRjXzAgLy8gMgogICAgYm94X2V4dHJhY3QKICAgIGJ0b2kKICAgIGludGNfMCAvLyAyCiAgICArCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzUKICAgIC8vIGJveE1hcDEgPSBCb3hNYXA8c3RyaW5nLCBbc3RyaW5nLCBieXRlcywgYm9vbGVhbl0+KHsga2V5UHJlZml4OiAndG0xJyB9KQogICAgYnl0ZWNfMCAvLyAidG0xYSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIxMwogICAgLy8gYXNzZXJ0KHRoaXMuYm94TWFwMSgnYScpLnZhbHVlWzFdLmVxdWFscyhCeXRlcygnd29ybGQnKSkpCiAgICBjb3ZlciAyCiAgICBib3hfZXh0cmFjdAogICAgZXh0cmFjdCAyIDAKICAgIGJ5dGVjIDYgLy8gIndvcmxkIgogICAgPT0KICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTc1CiAgICAvLyBib3hNYXAxID0gQm94TWFwPHN0cmluZywgW3N0cmluZywgYnl0ZXMsIGJvb2xlYW5dPih7IGtleVByZWZpeDogJ3RtMScgfSkKICAgIGJ5dGVjXzAgLy8gInRtMWEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMTQKICAgIC8vIGFzc2VydCh0aGlzLmJveE1hcDEoJ2EnKS52YWx1ZVsyXSkKICAgIGludGNfMyAvLyA0CiAgICBpbnRjXzIgLy8gMQogICAgYm94X2V4dHJhY3QgLy8gb24gZXJyb3I6IGluZGV4IG91dCBvZiBib3VuZHMKICAgIHB1c2hpbnQgMAogICAgZ2V0Yml0CiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3NgogICAgLy8gYm94TWFwMiA9IEJveE1hcDxzdHJpbmcsIEJveE1hcDI+KHsga2V5UHJlZml4OiAndG0yJyB9KQogICAgYnl0ZWNfMiAvLyAidG0yYSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIxNwogICAgLy8gYXNzZXJ0KHRoaXMuYm94TWFwMignYScpLnZhbHVlLmEgPT09ICdoZWxsbycpCiAgICBpbnRjXzEgLy8gNQogICAgaW50Y18wIC8vIDIKICAgIGJveF9leHRyYWN0CiAgICBidG9pCiAgICBpbnRjXzAgLy8gMgogICAgKwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTc2CiAgICAvLyBib3hNYXAyID0gQm94TWFwPHN0cmluZywgQm94TWFwMj4oeyBrZXlQcmVmaXg6ICd0bTInIH0pCiAgICBieXRlY18yIC8vICJ0bTJhIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjE3CiAgICAvLyBhc3NlcnQodGhpcy5ib3hNYXAyKCdhJykudmFsdWUuYSA9PT0gJ2hlbGxvJykKICAgIGludGNfMSAvLyA1CiAgICB1bmNvdmVyIDIKICAgIGJveF9leHRyYWN0CiAgICBleHRyYWN0IDIgMAogICAgYnl0ZWMgNSAvLyAiaGVsbG8iCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzYKICAgIC8vIGJveE1hcDIgPSBCb3hNYXA8c3RyaW5nLCBCb3hNYXAyPih7IGtleVByZWZpeDogJ3RtMicgfSkKICAgIGJ5dGVjXzIgLy8gInRtMmEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMTgKICAgIC8vIGFzc2VydCh0aGlzLmJveE1hcDIoJ2EnKS52YWx1ZS5iLmVxdWFscyhCeXRlcygnd29ybGQnKSkpCiAgICBpbnRjXzAgLy8gMgogICAgZHVwCiAgICBib3hfZXh0cmFjdAogICAgYnRvaQogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTc2CiAgICAvLyBib3hNYXAyID0gQm94TWFwPHN0cmluZywgQm94TWFwMj4oeyBrZXlQcmVmaXg6ICd0bTInIH0pCiAgICBieXRlY18yIC8vICJ0bTJhIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjE4CiAgICAvLyBhc3NlcnQodGhpcy5ib3hNYXAyKCdhJykudmFsdWUuYi5lcXVhbHMoQnl0ZXMoJ3dvcmxkJykpKQogICAgZGlnIDEKICAgIGludGNfMCAvLyAyCiAgICBib3hfZXh0cmFjdAogICAgYnRvaQogICAgaW50Y18wIC8vIDIKICAgICsKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3NgogICAgLy8gYm94TWFwMiA9IEJveE1hcDxzdHJpbmcsIEJveE1hcDI+KHsga2V5UHJlZml4OiAndG0yJyB9KQogICAgYnl0ZWNfMiAvLyAidG0yYSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIxOAogICAgLy8gYXNzZXJ0KHRoaXMuYm94TWFwMignYScpLnZhbHVlLmIuZXF1YWxzKEJ5dGVzKCd3b3JsZCcpKSkKICAgIGNvdmVyIDIKICAgIGJveF9leHRyYWN0CiAgICBleHRyYWN0IDIgMAogICAgYnl0ZWMgNiAvLyAid29ybGQiCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzYKICAgIC8vIGJveE1hcDIgPSBCb3hNYXA8c3RyaW5nLCBCb3hNYXAyPih7IGtleVByZWZpeDogJ3RtMicgfSkKICAgIGJ5dGVjXzIgLy8gInRtMmEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMTkKICAgIC8vIGFzc2VydCh0aGlzLmJveE1hcDIoJ2EnKS52YWx1ZS5jKQogICAgaW50Y18zIC8vIDQKICAgIGludGNfMiAvLyAxCiAgICBib3hfZXh0cmFjdCAvLyBvbiBlcnJvcjogaW5kZXggb3V0IG9mIGJvdW5kcwogICAgcHVzaGludCAwCiAgICBnZXRiaXQKICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTc1CiAgICAvLyBib3hNYXAxID0gQm94TWFwPHN0cmluZywgW3N0cmluZywgYnl0ZXMsIGJvb2xlYW5dPih7IGtleVByZWZpeDogJ3RtMScgfSkKICAgIGJ5dGVjIDcgLy8gInRtMWIiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMjEKICAgIC8vIHRoaXMuYm94TWFwMSgnYicpLnZhbHVlID0gWydhYmMnLCBCeXRlcygnZGVmJyksIGZhbHNlXQogICAgYm94X2RlbAogICAgcG9wCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzUKICAgIC8vIGJveE1hcDEgPSBCb3hNYXA8c3RyaW5nLCBbc3RyaW5nLCBieXRlcywgYm9vbGVhbl0+KHsga2V5UHJlZml4OiAndG0xJyB9KQogICAgYnl0ZWMgNyAvLyAidG0xYiIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIyMQogICAgLy8gdGhpcy5ib3hNYXAxKCdiJykudmFsdWUgPSBbJ2FiYycsIEJ5dGVzKCdkZWYnKSwgZmFsc2VdCiAgICBieXRlYyA4IC8vIDB4MDAwNTAwMGEwMDAwMDM2MTYyNjMwMDAzNjQ2NTY2CiAgICBib3hfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzYKICAgIC8vIGJveE1hcDIgPSBCb3hNYXA8c3RyaW5nLCBCb3hNYXAyPih7IGtleVByZWZpeDogJ3RtMicgfSkKICAgIGJ5dGVjIDkgLy8gInRtMmIiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMjQKICAgIC8vIHRoaXMuYm94TWFwMignYicpLnZhbHVlID0geyBhOiAnYWJjJywgYjogQnl0ZXMoJ2RlZicpLCBjOiBmYWxzZSB9CiAgICBib3hfZGVsCiAgICBwb3AKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3NgogICAgLy8gYm94TWFwMiA9IEJveE1hcDxzdHJpbmcsIEJveE1hcDI+KHsga2V5UHJlZml4OiAndG0yJyB9KQogICAgYnl0ZWMgOSAvLyAidG0yYiIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIyMQogICAgLy8gdGhpcy5ib3hNYXAxKCdiJykudmFsdWUgPSBbJ2FiYycsIEJ5dGVzKCdkZWYnKSwgZmFsc2VdCiAgICBieXRlYyA4IC8vIDB4MDAwNTAwMGEwMDAwMDM2MTYyNjMwMDAzNjQ2NTY2CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMjQKICAgIC8vIHRoaXMuYm94TWFwMignYicpLnZhbHVlID0geyBhOiAnYWJjJywgYjogQnl0ZXMoJ2RlZicpLCBjOiBmYWxzZSB9CiAgICBib3hfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzUKICAgIC8vIGJveE1hcDEgPSBCb3hNYXA8c3RyaW5nLCBbc3RyaW5nLCBieXRlcywgYm9vbGVhbl0+KHsga2V5UHJlZml4OiAndG0xJyB9KQogICAgYnl0ZWNfMCAvLyAidG0xYSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIyNwogICAgLy8gdGhpcy5ib3hNYXAxKCdhJykuZGVsZXRlKCkKICAgIGJveF9kZWwKICAgIHBvcAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTc1CiAgICAvLyBib3hNYXAxID0gQm94TWFwPHN0cmluZywgW3N0cmluZywgYnl0ZXMsIGJvb2xlYW5dPih7IGtleVByZWZpeDogJ3RtMScgfSkKICAgIGJ5dGVjXzAgLy8gInRtMWEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMjgKICAgIC8vIGFzc2VydCghdGhpcy5ib3hNYXAxKCdhJykuZXhpc3RzKQogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAhCiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3NgogICAgLy8gYm94TWFwMiA9IEJveE1hcDxzdHJpbmcsIEJveE1hcDI+KHsga2V5UHJlZml4OiAndG0yJyB9KQogICAgYnl0ZWNfMiAvLyAidG0yYSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjIzMAogICAgLy8gdGhpcy5ib3hNYXAyKCdhJykuZGVsZXRlKCkKICAgIGJveF9kZWwKICAgIHBvcAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTc2CiAgICAvLyBib3hNYXAyID0gQm94TWFwPHN0cmluZywgQm94TWFwMj4oeyBrZXlQcmVmaXg6ICd0bTInIH0pCiAgICBieXRlY18yIC8vICJ0bTJhIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjMxCiAgICAvLyBhc3NlcnQoIXRoaXMuYm94TWFwMignYScpLmV4aXN0cykKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgIQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMDQKICAgIC8vIHRlc3RCb3hNYXAoKSB7CiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgptYWluX3Rlc3RCb3hfcm91dGVANDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3MwogICAgLy8gYm94MSA9IEJveDxbc3RyaW5nLCBieXRlcywgYm9vbGVhbl0+KHsga2V5OiAndDEnIH0pCiAgICBieXRlY18xIC8vICJ0MSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3OQogICAgLy8gdGhpcy5ib3gxLmNyZWF0ZSh7IHNpemU6IDEwIH0pCiAgICBwdXNoaW50IDEwCiAgICBib3hfY3JlYXRlCiAgICBwb3AKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3NAogICAgLy8gYm94MiA9IEJveDx7IGE6IHN0cmluZzsgYjogYnl0ZXM7IGM6IGJvb2xlYW4gfT4oeyBrZXk6ICd0MicgfSkKICAgIGJ5dGVjXzMgLy8gInQyIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTgwCiAgICAvLyB0aGlzLmJveDIuY3JlYXRlKHsgc2l6ZTogMjAgfSkKICAgIHB1c2hpbnQgMjAKICAgIGJveF9jcmVhdGUKICAgIHBvcAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTczCiAgICAvLyBib3gxID0gQm94PFtzdHJpbmcsIGJ5dGVzLCBib29sZWFuXT4oeyBrZXk6ICd0MScgfSkKICAgIGJ5dGVjXzEgLy8gInQxIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTgxCiAgICAvLyBhc3NlcnQodGhpcy5ib3gxLmxlbmd0aCA9PT0gMTApCiAgICBib3hfbGVuCiAgICBwb3AKICAgIHB1c2hpbnQgMTAKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3MwogICAgLy8gYm94MSA9IEJveDxbc3RyaW5nLCBieXRlcywgYm9vbGVhbl0+KHsga2V5OiAndDEnIH0pCiAgICBieXRlY18xIC8vICJ0MSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE4NwogICAgLy8gdGhpcy5ib3gxLnZhbHVlID0gWydoZWxsbycsIEJ5dGVzKCd3b3JsZCcpLCB0cnVlXQogICAgYm94X2RlbAogICAgcG9wCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzMKICAgIC8vIGJveDEgPSBCb3g8W3N0cmluZywgYnl0ZXMsIGJvb2xlYW5dPih7IGtleTogJ3QxJyB9KQogICAgYnl0ZWNfMSAvLyAidDEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxODcKICAgIC8vIHRoaXMuYm94MS52YWx1ZSA9IFsnaGVsbG8nLCBCeXRlcygnd29ybGQnKSwgdHJ1ZV0KICAgIGJ5dGVjIDQgLy8gMHgwMDA1MDAwYzgwMDAwNTY4NjU2YzZjNmYwMDA1Nzc2ZjcyNmM2NAogICAgYm94X3B1dAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTczCiAgICAvLyBib3gxID0gQm94PFtzdHJpbmcsIGJ5dGVzLCBib29sZWFuXT4oeyBrZXk6ICd0MScgfSkKICAgIGJ5dGVjXzEgLy8gInQxIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTg4CiAgICAvLyBhc3NlcnQodGhpcy5ib3gxLnZhbHVlWzBdID09PSAnaGVsbG8nKQogICAgaW50Y18xIC8vIDUKICAgIGludGNfMCAvLyAyCiAgICBib3hfZXh0cmFjdAogICAgYnRvaQogICAgaW50Y18wIC8vIDIKICAgICsKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3MwogICAgLy8gYm94MSA9IEJveDxbc3RyaW5nLCBieXRlcywgYm9vbGVhbl0+KHsga2V5OiAndDEnIH0pCiAgICBieXRlY18xIC8vICJ0MSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE4OAogICAgLy8gYXNzZXJ0KHRoaXMuYm94MS52YWx1ZVswXSA9PT0gJ2hlbGxvJykKICAgIGludGNfMSAvLyA1CiAgICB1bmNvdmVyIDIKICAgIGJveF9leHRyYWN0CiAgICBleHRyYWN0IDIgMAogICAgYnl0ZWMgNSAvLyAiaGVsbG8iCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzMKICAgIC8vIGJveDEgPSBCb3g8W3N0cmluZywgYnl0ZXMsIGJvb2xlYW5dPih7IGtleTogJ3QxJyB9KQogICAgYnl0ZWNfMSAvLyAidDEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxODkKICAgIC8vIGFzc2VydCh0aGlzLmJveDEudmFsdWVbMV0uZXF1YWxzKEJ5dGVzKCd3b3JsZCcpKSkKICAgIGludGNfMCAvLyAyCiAgICBkdXAKICAgIGJveF9leHRyYWN0CiAgICBidG9pCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzMKICAgIC8vIGJveDEgPSBCb3g8W3N0cmluZywgYnl0ZXMsIGJvb2xlYW5dPih7IGtleTogJ3QxJyB9KQogICAgYnl0ZWNfMSAvLyAidDEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxODkKICAgIC8vIGFzc2VydCh0aGlzLmJveDEudmFsdWVbMV0uZXF1YWxzKEJ5dGVzKCd3b3JsZCcpKSkKICAgIGRpZyAxCiAgICBpbnRjXzAgLy8gMgogICAgYm94X2V4dHJhY3QKICAgIGJ0b2kKICAgIGludGNfMCAvLyAyCiAgICArCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzMKICAgIC8vIGJveDEgPSBCb3g8W3N0cmluZywgYnl0ZXMsIGJvb2xlYW5dPih7IGtleTogJ3QxJyB9KQogICAgYnl0ZWNfMSAvLyAidDEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxODkKICAgIC8vIGFzc2VydCh0aGlzLmJveDEudmFsdWVbMV0uZXF1YWxzKEJ5dGVzKCd3b3JsZCcpKSkKICAgIGNvdmVyIDIKICAgIGJveF9leHRyYWN0CiAgICBleHRyYWN0IDIgMAogICAgYnl0ZWMgNiAvLyAid29ybGQiCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzMKICAgIC8vIGJveDEgPSBCb3g8W3N0cmluZywgYnl0ZXMsIGJvb2xlYW5dPih7IGtleTogJ3QxJyB9KQogICAgYnl0ZWNfMSAvLyAidDEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxOTAKICAgIC8vIGFzc2VydCh0aGlzLmJveDEudmFsdWVbMl0pCiAgICBpbnRjXzMgLy8gNAogICAgaW50Y18yIC8vIDEKICAgIGJveF9leHRyYWN0IC8vIG9uIGVycm9yOiBpbmRleCBvdXQgb2YgYm91bmRzCiAgICBwdXNoaW50IDAKICAgIGdldGJpdAogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzQKICAgIC8vIGJveDIgPSBCb3g8eyBhOiBzdHJpbmc7IGI6IGJ5dGVzOyBjOiBib29sZWFuIH0+KHsga2V5OiAndDInIH0pCiAgICBieXRlY18zIC8vICJ0MiIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE5MgogICAgLy8gdGhpcy5ib3gyLnZhbHVlID0geyBhOiAnaGVsbG8nLCBiOiBCeXRlcygnd29ybGQnKSwgYzogdHJ1ZSB9CiAgICBib3hfZGVsCiAgICBwb3AKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3NAogICAgLy8gYm94MiA9IEJveDx7IGE6IHN0cmluZzsgYjogYnl0ZXM7IGM6IGJvb2xlYW4gfT4oeyBrZXk6ICd0MicgfSkKICAgIGJ5dGVjXzMgLy8gInQyIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTg3CiAgICAvLyB0aGlzLmJveDEudmFsdWUgPSBbJ2hlbGxvJywgQnl0ZXMoJ3dvcmxkJyksIHRydWVdCiAgICBieXRlYyA0IC8vIDB4MDAwNTAwMGM4MDAwMDU2ODY1NmM2YzZmMDAwNTc3NmY3MjZjNjQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE5MgogICAgLy8gdGhpcy5ib3gyLnZhbHVlID0geyBhOiAnaGVsbG8nLCBiOiBCeXRlcygnd29ybGQnKSwgYzogdHJ1ZSB9CiAgICBib3hfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzQKICAgIC8vIGJveDIgPSBCb3g8eyBhOiBzdHJpbmc7IGI6IGJ5dGVzOyBjOiBib29sZWFuIH0+KHsga2V5OiAndDInIH0pCiAgICBieXRlY18zIC8vICJ0MiIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE5MwogICAgLy8gYXNzZXJ0KHRoaXMuYm94Mi52YWx1ZS5hID09PSAnaGVsbG8nKQogICAgaW50Y18xIC8vIDUKICAgIGludGNfMCAvLyAyCiAgICBib3hfZXh0cmFjdAogICAgYnRvaQogICAgaW50Y18wIC8vIDIKICAgICsKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3NAogICAgLy8gYm94MiA9IEJveDx7IGE6IHN0cmluZzsgYjogYnl0ZXM7IGM6IGJvb2xlYW4gfT4oeyBrZXk6ICd0MicgfSkKICAgIGJ5dGVjXzMgLy8gInQyIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTkzCiAgICAvLyBhc3NlcnQodGhpcy5ib3gyLnZhbHVlLmEgPT09ICdoZWxsbycpCiAgICBpbnRjXzEgLy8gNQogICAgdW5jb3ZlciAyCiAgICBib3hfZXh0cmFjdAogICAgZXh0cmFjdCAyIDAKICAgIGJ5dGVjIDUgLy8gImhlbGxvIgogICAgPT0KICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTc0CiAgICAvLyBib3gyID0gQm94PHsgYTogc3RyaW5nOyBiOiBieXRlczsgYzogYm9vbGVhbiB9Pih7IGtleTogJ3QyJyB9KQogICAgYnl0ZWNfMyAvLyAidDIiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxOTQKICAgIC8vIGFzc2VydCh0aGlzLmJveDIudmFsdWUuYi5lcXVhbHMoQnl0ZXMoJ3dvcmxkJykpKQogICAgaW50Y18wIC8vIDIKICAgIGR1cAogICAgYm94X2V4dHJhY3QKICAgIGJ0b2kKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3NAogICAgLy8gYm94MiA9IEJveDx7IGE6IHN0cmluZzsgYjogYnl0ZXM7IGM6IGJvb2xlYW4gfT4oeyBrZXk6ICd0MicgfSkKICAgIGJ5dGVjXzMgLy8gInQyIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTk0CiAgICAvLyBhc3NlcnQodGhpcy5ib3gyLnZhbHVlLmIuZXF1YWxzKEJ5dGVzKCd3b3JsZCcpKSkKICAgIGRpZyAxCiAgICBpbnRjXzAgLy8gMgogICAgYm94X2V4dHJhY3QKICAgIGJ0b2kKICAgIGludGNfMCAvLyAyCiAgICArCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzQKICAgIC8vIGJveDIgPSBCb3g8eyBhOiBzdHJpbmc7IGI6IGJ5dGVzOyBjOiBib29sZWFuIH0+KHsga2V5OiAndDInIH0pCiAgICBieXRlY18zIC8vICJ0MiIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE5NAogICAgLy8gYXNzZXJ0KHRoaXMuYm94Mi52YWx1ZS5iLmVxdWFscyhCeXRlcygnd29ybGQnKSkpCiAgICBjb3ZlciAyCiAgICBib3hfZXh0cmFjdAogICAgZXh0cmFjdCAyIDAKICAgIGJ5dGVjIDYgLy8gIndvcmxkIgogICAgPT0KICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTc0CiAgICAvLyBib3gyID0gQm94PHsgYTogc3RyaW5nOyBiOiBieXRlczsgYzogYm9vbGVhbiB9Pih7IGtleTogJ3QyJyB9KQogICAgYnl0ZWNfMyAvLyAidDIiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxOTUKICAgIC8vIGFzc2VydCh0aGlzLmJveDIudmFsdWUuYykKICAgIGludGNfMyAvLyA0CiAgICBpbnRjXzIgLy8gMQogICAgYm94X2V4dHJhY3QgLy8gb24gZXJyb3I6IGluZGV4IG91dCBvZiBib3VuZHMKICAgIHB1c2hpbnQgMAogICAgZ2V0Yml0CiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3MwogICAgLy8gYm94MSA9IEJveDxbc3RyaW5nLCBieXRlcywgYm9vbGVhbl0+KHsga2V5OiAndDEnIH0pCiAgICBieXRlY18xIC8vICJ0MSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE5NwogICAgLy8gdGhpcy5ib3gxLmRlbGV0ZSgpCiAgICBib3hfZGVsCiAgICBwb3AKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3MwogICAgLy8gYm94MSA9IEJveDxbc3RyaW5nLCBieXRlcywgYm9vbGVhbl0+KHsga2V5OiAndDEnIH0pCiAgICBieXRlY18xIC8vICJ0MSIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE5OAogICAgLy8gYXNzZXJ0KCF0aGlzLmJveDEuZXhpc3RzKQogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAhCiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9ib3gtcHJveGllcy5hbGdvLnRzOjE3NAogICAgLy8gYm94MiA9IEJveDx7IGE6IHN0cmluZzsgYjogYnl0ZXM7IGM6IGJvb2xlYW4gfT4oeyBrZXk6ICd0MicgfSkKICAgIGJ5dGVjXzMgLy8gInQyIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MjAwCiAgICAvLyB0aGlzLmJveDIuZGVsZXRlKCkKICAgIGJveF9kZWwKICAgIHBvcAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTc0CiAgICAvLyBib3gyID0gQm94PHsgYTogc3RyaW5nOyBiOiBieXRlczsgYzogYm9vbGVhbiB9Pih7IGtleTogJ3QyJyB9KQogICAgYnl0ZWNfMyAvLyAidDIiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoyMDEKICAgIC8vIGFzc2VydCghdGhpcy5ib3gyLmV4aXN0cykKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgIQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYm94LXByb3hpZXMuYWxnby50czoxNzgKICAgIC8vIHRlc3RCb3goKSB7CiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA5OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2JveC1wcm94aWVzLmFsZ28udHM6MTcyCiAgICAvLyBjbGFzcyBUdXBsZUJveCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [194, 245, 358, 416], "errorMessage": "index out of bounds"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -492,6 +492,289 @@ class TupleBoxClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class TupleBoxBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating TupleBox contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class TupleBoxFactory(algokit_utils.TypedAppFactoryProtocol[TupleBoxBareCallCreateParams, None, None]):
+    """Factory for deploying and managing TupleBoxClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = TupleBoxFactoryParams(self.app_factory)
+        self.create_transaction = TupleBoxFactoryCreateTransaction(self.app_factory)
+        self.send = TupleBoxFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: TupleBoxBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[TupleBoxClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return TupleBoxClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> TupleBoxClient:
+        """Get an app client by creator address and name"""
+        return TupleBoxClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> TupleBoxClient:
+        """Get an app client by app ID"""
+        return TupleBoxClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class TupleBoxFactoryParams:
+    """Parameters for creating transactions for TupleBox contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = TupleBoxFactoryCreateParams(app_factory)
+        self.update = TupleBoxFactoryUpdateParams(app_factory)
+        self.delete = TupleBoxFactoryDeleteParams(app_factory)
+
+class TupleBoxFactoryCreateParams:
+    """Parameters for 'create' operations of TupleBox contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def test_box(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testBox()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testBox()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def test_box_map(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testBoxMap()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testBoxMap()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class TupleBoxFactoryUpdateParams:
+    """Parameters for 'update' operations of TupleBox contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class TupleBoxFactoryDeleteParams:
+    """Parameters for 'delete' operations of TupleBox contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class TupleBoxFactoryCreateTransaction:
+    """Create transactions for TupleBox contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = TupleBoxFactoryCreateTransactionCreate(app_factory)
+
+
+class TupleBoxFactoryCreateTransactionCreate:
+    """Create new instances of TupleBox contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class TupleBoxFactorySend:
+    """Send calls to TupleBox contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = TupleBoxFactorySendCreate(app_factory)
+
+
+class TupleBoxFactorySendCreate:
+    """Send create calls to TupleBox contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[TupleBoxClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return TupleBoxClient(result[0]), result[1]
 
 
 class TupleBoxComposer:

@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "testTuple", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "TestTuple", "state": {"keys": {"box": {}, "global": {"t1": {"key": "dDE=", "keyType": "AVMString", "valueType": "(string,uint64,bool)"}, "t2": {"key": "dDI=", "keyType": "AVMString", "valueType": "(string,(string,uint512,bool))"}, "t3": {"key": "dDM=", "keyType": "AVMString", "valueType": "Object3DB88FFD"}, "t4": {"key": "dDQ=", "keyType": "AVMString", "valueType": "(string,(string,uint512,bool))"}, "t5": {"key": "dDU=", "keyType": "AVMString", "valueType": "Data"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 5, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"Object3DB88FFD": [{"name": "a", "type": "string"}, {"name": "b", "type": "uint64"}, {"name": "c", "type": "bool"}], "Data": [{"name": "a", "type": "string"}, {"name": "b", "type": "uint64"}, {"name": "c", "type": "bool"}, {"name": "d", "type": "string"}]}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "testTuple", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "TestTuple", "state": {"keys": {"box": {}, "global": {"t1": {"key": "dDE=", "keyType": "AVMString", "valueType": "(string,uint64,bool)"}, "t2": {"key": "dDI=", "keyType": "AVMString", "valueType": "(string,(string,uint512,bool))"}, "t3": {"key": "dDM=", "keyType": "AVMString", "valueType": "Object3DB88FFD"}, "t4": {"key": "dDQ=", "keyType": "AVMString", "valueType": "(string,(string,uint512,bool))"}, "t5": {"key": "dDU=", "keyType": "AVMString", "valueType": "Data"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 5, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"Object3DB88FFD": [{"name": "a", "type": "string"}, {"name": "b", "type": "uint64"}, {"name": "c", "type": "bool"}], "Data": [{"name": "a", "type": "string"}, {"name": "b", "type": "uint64"}, {"name": "c", "type": "bool"}, {"name": "d", "type": "string"}]}, "byteCode": {"approval": "CyYCEgALAAAAAAAAAHuAAAVoZWxsb00ABAAHAAFhAEMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHIgAABYjEbQQBSgAQSVHf1NhoAjgEAAQAxGRQxGBBEgAJ0MShngAJ0MilngAJ0MyhngAJ0NClnggICdDUbAA0AAAAAAAAAe4AAFAAFaGVsbG8ABVdvcmxkZ4EBQzEZFDEYFBBD", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBieXRlY2Jsb2NrIDB4MDAwYjAwMDAwMDAwMDAwMDAwN2I4MDAwMDU2ODY1NmM2YzZmIDB4MDAwNDAwMDcwMDAxNjEwMDQzMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxYzg4MDAwMDE2MgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjU5CiAgICAvLyBleHBvcnQgY2xhc3MgVGVzdFR1cGxlIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDUKICAgIHB1c2hieXRlcyAweDEyNTQ3N2Y1IC8vIG1ldGhvZCAidGVzdFR1cGxlKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl90ZXN0VHVwbGVfcm91dGVAMwogICAgZXJyCgptYWluX3Rlc3RUdXBsZV9yb3V0ZUAzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjY4CiAgICAvLyB0ZXN0VHVwbGUoKSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjYwCiAgICAvLyB0MSA9IEdsb2JhbFN0YXRlPFtzdHJpbmcsIHVpbnQ2NCwgYm9vbGVhbl0+KCkKICAgIHB1c2hieXRlcyAidDEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLXN0YXRlLmFsZ28udHM6NjkKICAgIC8vIHRoaXMudDEudmFsdWUgPSBbJ2hlbGxvJywgMTIzLCB0cnVlXQogICAgYnl0ZWNfMCAvLyAweDAwMGIwMDAwMDAwMDAwMDAwMDdiODAwMDA1Njg2NTZjNmM2ZgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtc3RhdGUuYWxnby50czo2MQogICAgLy8gdDIgPSBHbG9iYWxTdGF0ZTxbc3RyaW5nLCBbc3RyaW5nLCBiaWd1aW50LCBib29sZWFuXV0+KCkKICAgIHB1c2hieXRlcyAidDIiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLXN0YXRlLmFsZ28udHM6NzQKICAgIC8vIHRoaXMudDIudmFsdWUgPSBbJ2EnLCBbJ2InLCA0NTZuLCB0cnVlXV0KICAgIGJ5dGVjXzEgLy8gMHgwMDA0MDAwNzAwMDE2MTAwNDMwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDFjODgwMDAwMTYyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjYzCiAgICAvLyB0MyA9IEdsb2JhbFN0YXRlPHsgYTogc3RyaW5nOyBiOiB1aW50NjQ7IGM6IGJvb2xlYW4gfT4oKQogICAgcHVzaGJ5dGVzICJ0MyIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtc3RhdGUuYWxnby50czo2OQogICAgLy8gdGhpcy50MS52YWx1ZSA9IFsnaGVsbG8nLCAxMjMsIHRydWVdCiAgICBieXRlY18wIC8vIDB4MDAwYjAwMDAwMDAwMDAwMDAwN2I4MDAwMDU2ODY1NmM2YzZmCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLXN0YXRlLmFsZ28udHM6ODAKICAgIC8vIHRoaXMudDMudmFsdWUgPSB7IGE6ICdoZWxsbycsIGI6IDEyMywgYzogdHJ1ZSB9CiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjY0CiAgICAvLyB0NCA9IEdsb2JhbFN0YXRlPFtzdHJpbmcsIHsgYTogc3RyaW5nOyBiOiBiaWd1aW50OyBjOiBib29sZWFuIH1dPigpCiAgICBwdXNoYnl0ZXMgInQ0IgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjc0CiAgICAvLyB0aGlzLnQyLnZhbHVlID0gWydhJywgWydiJywgNDU2biwgdHJ1ZV1dCiAgICBieXRlY18xIC8vIDB4MDAwNDAwMDcwMDAxNjEwMDQzMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxYzg4MDAwMDE2MgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjg1CiAgICAvLyB0aGlzLnQ0LnZhbHVlID0gWydhJywgeyBhOiAnYicsIGI6IDQ1Nm4sIGM6IHRydWUgfV0KICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLXN0YXRlLmFsZ28udHM6NjYKICAgIC8vIHQ1ID0gR2xvYmFsU3RhdGU8RGF0YT4oKQogICAgcHVzaGJ5dGVzcyAidDUiIDB4MDAwZDAwMDAwMDAwMDAwMDAwN2I4MDAwMTQwMDA1Njg2NTZjNmM2ZjAwMDU1NzZmNzI2YzY0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLXN0YXRlLmFsZ28udHM6OTEKICAgIC8vIHRoaXMudDUudmFsdWUgPSB7IGE6ICdoZWxsbycsIGI6IDEyMywgYzogdHJ1ZSwgZDogbmV3IGFyYzQuU3RyKCdXb3JsZCcpIH0KICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLXN0YXRlLmFsZ28udHM6NjgKICAgIC8vIHRlc3RUdXBsZSgpIHsKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjU5CiAgICAvLyBleHBvcnQgY2xhc3MgVGVzdFR1cGxlIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4K", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -425,6 +425,270 @@ class TestTupleClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class TestTupleBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating TestTuple contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class TestTupleFactory(algokit_utils.TypedAppFactoryProtocol[TestTupleBareCallCreateParams, None, None]):
+    """Factory for deploying and managing TestTupleClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = TestTupleFactoryParams(self.app_factory)
+        self.create_transaction = TestTupleFactoryCreateTransaction(self.app_factory)
+        self.send = TestTupleFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: TestTupleBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[TestTupleClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return TestTupleClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> TestTupleClient:
+        """Get an app client by creator address and name"""
+        return TestTupleClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> TestTupleClient:
+        """Get an app client by app ID"""
+        return TestTupleClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class TestTupleFactoryParams:
+    """Parameters for creating transactions for TestTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = TestTupleFactoryCreateParams(app_factory)
+        self.update = TestTupleFactoryUpdateParams(app_factory)
+        self.delete = TestTupleFactoryDeleteParams(app_factory)
+
+class TestTupleFactoryCreateParams:
+    """Parameters for 'create' operations of TestTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def test_tuple(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testTuple()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testTuple()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class TestTupleFactoryUpdateParams:
+    """Parameters for 'update' operations of TestTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class TestTupleFactoryDeleteParams:
+    """Parameters for 'delete' operations of TestTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class TestTupleFactoryCreateTransaction:
+    """Create transactions for TestTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = TestTupleFactoryCreateTransactionCreate(app_factory)
+
+
+class TestTupleFactoryCreateTransactionCreate:
+    """Create new instances of TestTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class TestTupleFactorySend:
+    """Send calls to TestTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = TestTupleFactorySendCreate(app_factory)
+
+
+class TestTupleFactorySendCreate:
+    """Send create calls to TestTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[TestTupleClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return TestTupleClient(result[0]), result[1]
 
 
 class TestTupleComposer:

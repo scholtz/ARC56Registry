@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "desc": "This is the description of 'a'", "name": "a"}, {"type": "byte[]", "desc": "This is the description of 'b'", "name": "b"}], "name": "test", "returns": {"type": "(uint64)", "desc": "This is the description of the return value", "struct": "DemoStruct"}, "desc": "This is the description of the method", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[]", "desc": "This is the description of 'a'", "name": "a"}], "name": "test2", "returns": {"type": "(byte[])", "desc": "This is the description of the return value", "struct": "DemoType"}, "desc": "This is the description of the method", "events": [], "readonly": false, "recommendations": {}}], "name": "JSDocDemo", "state": {"keys": {"box": {}, "global": {"globalState": {"key": "Z2xvYmFsU3RhdGU=", "keyType": "AVMString", "valueType": "AVMString"}}, "local": {"localState": {"key": "bG9jYWxTdGF0ZQ==", "keyType": "AVMString", "valueType": "AVMUint64"}}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 0}, "local": {"bytes": 0, "ints": 1}}}, "structs": {"DemoStruct": [{"name": "a", "type": "uint64"}], "DemoType": [{"name": "a", "type": "byte[]"}]}, "desc": "This is the description for the contract", "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [126, 157], "errorMessage": "invalid array length header"}, {"pc": [135, 166], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [119], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "desc": "This is the description of 'a'", "name": "a"}, {"type": "byte[]", "desc": "This is the description of 'b'", "name": "b"}], "name": "test", "returns": {"type": "(uint64)", "desc": "This is the description of the return value", "struct": "DemoStruct"}, "desc": "This is the description of the method", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[]", "desc": "This is the description of 'a'", "name": "a"}], "name": "test2", "returns": {"type": "(byte[])", "desc": "This is the description of the return value", "struct": "DemoType"}, "desc": "This is the description of the method", "events": [], "readonly": false, "recommendations": {}}], "name": "JSDocDemo", "state": {"keys": {"box": {}, "global": {"globalState": {"key": "Z2xvYmFsU3RhdGU=", "keyType": "AVMString", "valueType": "AVMString"}}, "local": {"localState": {"key": "bG9jYWxTdGF0ZQ==", "keyType": "AVMString", "valueType": "AVMUint64"}}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 0}, "local": {"bytes": 0, "ints": 1}}}, "structs": {"DemoStruct": [{"name": "a", "type": "uint64"}], "DemoType": [{"name": "a", "type": "byte[]"}]}, "byteCode": {"approval": "CyADAAECJgIEFR98dQBCAABCAAAxGyITQQBCQgAAMRkiEkQxGCITQQAwQgAANhoAgARg2TvrgARmGHJqTwKOAgAQAApCAABCAABCAAAAiABEQv/ziAAVQv/tQv/tMRkiEjEYIhIQRIgAdSNDQgAANhoBSRWBCBJEFzYaAkkiWSMLJAhLARUSRFcCAIgAJihPAVCwI0NCAAA2GgFJIlkjCyQISwEVEkRXAgCIABUoTwFQsCNDigIBQgAAi/4WKU8BUImKAQFCAACL/xUWVwYCi/9QJBZXBgIpTwFQTwFQiUIAAIk=", "clear": "C0IAAIEBQw=="}, "desc": "This is the description for the contract", "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDIKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NSAweAogICAgYiBtYWluX2Jsb2NrQDAKCm1haW5fYmxvY2tAMDoKICAgIGIgbWFpbl9ibG9ja0AxCgptYWluX2Jsb2NrQDE6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvanNkb2MuYWxnby50czoyMAogICAgLy8gZXhwb3J0IGNsYXNzIEpTRG9jRGVtbyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDkKICAgIGIgbWFpbl9hYmlfcm91dGluZ0AyCgptYWluX2FiaV9yb3V0aW5nQDI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvanNkb2MuYWxnby50czoyMAogICAgLy8gZXhwb3J0IGNsYXNzIEpTRG9jRGVtbyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGludGNfMCAvLyBOb09wCiAgICA9PQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18wIC8vIDAKICAgICE9CiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDcKICAgIGIgbWFpbl9jYWxsX05vT3BAMwoKbWFpbl9jYWxsX05vT3BAMzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjIwCiAgICAvLyBleHBvcnQgY2xhc3MgSlNEb2NEZW1vIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgcHVzaGJ5dGVzIDB4NjBkOTNiZWIgLy8gbWV0aG9kICJ0ZXN0KHVpbnQ2NCxieXRlW10pKHVpbnQ2NCkiCiAgICBwdXNoYnl0ZXMgMHg2NjE4NzI2YSAvLyBtZXRob2QgInRlc3QyKGJ5dGVbXSkoYnl0ZVtdKSIKICAgIHVuY292ZXIgMgogICAgbWF0Y2ggbWFpbl90ZXN0X3JvdXRlQDQgbWFpbl90ZXN0Ml9yb3V0ZUA1CiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEA2CgptYWluX3N3aXRjaF9jYXNlX25leHRANjoKICAgIGIgbWFpbl9hZnRlcl9pZl9lbHNlQDgKCm1haW5fYWZ0ZXJfaWZfZWxzZUA4OgogICAgYiBtYWluX2FmdGVyX2lmX2Vsc2VAMTAKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjIwCiAgICAvLyBleHBvcnQgY2xhc3MgSlNEb2NEZW1vIGV4dGVuZHMgQ29udHJhY3QgewogICAgZXJyCgptYWluX3Rlc3QyX3JvdXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvanNkb2MuYWxnby50czozOQogICAgLy8gdGVzdDIoYTogYnl0ZXMpOiBEZW1vVHlwZSB7CiAgICBjYWxsc3ViIHRlc3QyCiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEA2CgptYWluX3Rlc3Rfcm91dGVANDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjMwCiAgICAvLyB0ZXN0KGE6IHVpbnQ2NCwgYjogYnl0ZXMpOiBEZW1vU3RydWN0IHsKICAgIGNhbGxzdWIgdGVzdAogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRANgoKbWFpbl9jcmVhdGVfTm9PcEA3OgogICAgYiBtYWluX2FmdGVyX2lmX2Vsc2VAOAoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAOToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjIwCiAgICAvLyBleHBvcnQgY2xhc3MgSlNEb2NEZW1vIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgaW50Y18wIC8vIE5vT3AKICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18wIC8vIDAKICAgID09CiAgICAmJgogICAgYXNzZXJ0CiAgICBjYWxsc3ViIF9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjpKU0RvY0RlbW8udGVzdFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnRlc3Q6CiAgICBiIHRlc3RfYmxvY2tAMAoKdGVzdF9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2pzZG9jLmFsZ28udHM6MzAKICAgIC8vIHRlc3QoYTogdWludDY0LCBiOiBieXRlcyk6IERlbW9TdHJ1Y3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAxCiAgICAqCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvanNkb2MuYWxnby50czo6SlNEb2NEZW1vLnRlc3QKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgdW5jb3ZlciAxCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjpKU0RvY0RlbW8udGVzdDJbcm91dGluZ10oKSAtPiB2b2lkOgp0ZXN0MjoKICAgIGIgdGVzdDJfYmxvY2tAMAoKdGVzdDJfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjM5CiAgICAvLyB0ZXN0MihhOiBieXRlcyk6IERlbW9UeXBlIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAxCiAgICAqCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvanNkb2MuYWxnby50czo6SlNEb2NEZW1vLnRlc3QyCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvanNkb2MuYWxnby50czo6SlNEb2NEZW1vLnRlc3QoYTogdWludDY0LCBiOiBieXRlcykgLT4gYnl0ZXM6CnRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjpKU0RvY0RlbW8udGVzdDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjMwCiAgICAvLyB0ZXN0KGE6IHVpbnQ2NCwgYjogYnl0ZXMpOiBEZW1vU3RydWN0IHsKICAgIHByb3RvIDIgMQogICAgYiB0ZXN0cy9hcHByb3ZhbHMvanNkb2MuYWxnby50czo6SlNEb2NEZW1vLnRlc3RfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL2pzZG9jLmFsZ28udHM6OkpTRG9jRGVtby50ZXN0X2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvanNkb2MuYWxnby50czozMQogICAgLy8gcmV0dXJuIG5ldyBEZW1vU3RydWN0KHsgYTogbmV3IFVpbnQ8NjQ+KGEpIH0pCiAgICBmcmFtZV9kaWcgLTIKICAgIGl0b2IKICAgIGJ5dGVjXzEgLy8gMHgKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvanNkb2MuYWxnby50czo6SlNEb2NEZW1vLnRlc3QyKGE6IGJ5dGVzKSAtPiBieXRlczoKdGVzdHMvYXBwcm92YWxzL2pzZG9jLmFsZ28udHM6OkpTRG9jRGVtby50ZXN0MjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjM5CiAgICAvLyB0ZXN0MihhOiBieXRlcyk6IERlbW9UeXBlIHsKICAgIHByb3RvIDEgMQogICAgYiB0ZXN0cy9hcHByb3ZhbHMvanNkb2MuYWxnby50czo6SlNEb2NEZW1vLnRlc3QyX2Jsb2NrQDAKCnRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjpKU0RvY0RlbW8udGVzdDJfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjQwLTQyCiAgICAvLyByZXR1cm4gewogICAgLy8gICBhLAogICAgLy8gfQogICAgZnJhbWVfZGlnIC0xCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgaW50Y18yIC8vIDIKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBieXRlY18xIC8vIDB4CiAgICB1bmNvdmVyIDEKICAgIGNvbmNhdAogICAgdW5jb3ZlciAxCiAgICBjb25jYXQKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9qc2RvYy5hbGdvLnRzOjpKU0RvY0RlbW8uX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlKCkgLT4gdm9pZDoKX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlOgogICAgYiBfX2FsZ290c19fLmRlZmF1bHRDcmVhdGVfYmxvY2tAMAoKX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlX2Jsb2NrQDA6CiAgICByZXRzdWIK", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [126, 157], "errorMessage": "invalid array length header"}, {"pc": [135, 166], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [119], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -496,6 +496,291 @@ class JsDocDemoClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class JsDocDemoBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating JsDocDemo contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class JsDocDemoFactory(algokit_utils.TypedAppFactoryProtocol[JsDocDemoBareCallCreateParams, None, None]):
+    """Factory for deploying and managing JsDocDemoClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = JsDocDemoFactoryParams(self.app_factory)
+        self.create_transaction = JsDocDemoFactoryCreateTransaction(self.app_factory)
+        self.send = JsDocDemoFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: JsDocDemoBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[JsDocDemoClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return JsDocDemoClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> JsDocDemoClient:
+        """Get an app client by creator address and name"""
+        return JsDocDemoClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> JsDocDemoClient:
+        """Get an app client by app ID"""
+        return JsDocDemoClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class JsDocDemoFactoryParams:
+    """Parameters for creating transactions for JsDocDemo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = JsDocDemoFactoryCreateParams(app_factory)
+        self.update = JsDocDemoFactoryUpdateParams(app_factory)
+        self.delete = JsDocDemoFactoryDeleteParams(app_factory)
+
+class JsDocDemoFactoryCreateParams:
+    """Parameters for 'create' operations of JsDocDemo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def test(
+        self,
+        args: tuple[int, bytes | str] | TestArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the test(uint64,byte[])(uint64) ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "test(uint64,byte[])(uint64)",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def test2(
+        self,
+        args: tuple[bytes | str] | Test2Args,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the test2(byte[])(byte[]) ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "test2(byte[])(byte[])",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class JsDocDemoFactoryUpdateParams:
+    """Parameters for 'update' operations of JsDocDemo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class JsDocDemoFactoryDeleteParams:
+    """Parameters for 'delete' operations of JsDocDemo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class JsDocDemoFactoryCreateTransaction:
+    """Create transactions for JsDocDemo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = JsDocDemoFactoryCreateTransactionCreate(app_factory)
+
+
+class JsDocDemoFactoryCreateTransactionCreate:
+    """Create new instances of JsDocDemo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class JsDocDemoFactorySend:
+    """Send calls to JsDocDemo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = JsDocDemoFactorySendCreate(app_factory)
+
+
+class JsDocDemoFactorySendCreate:
+    """Send create calls to JsDocDemo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[JsDocDemoClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return JsDocDemoClient(result[0]), result[1]
 
 
 class JsDocDemoComposer:

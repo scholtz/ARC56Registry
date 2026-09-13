@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": [], "create": ["NoOp"]}, "args": [], "name": "create", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["DeleteApplication"], "create": []}, "args": [], "name": "delete", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["UpdateApplication"], "create": []}, "args": [], "name": "update", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "name"}], "name": "greet", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(string,string)", "name": "a", "struct": "Greeting"}], "name": "sendGreetings", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}], "name": "HelloTemplateCustomPrefix", "state": {"keys": {"box": {}, "global": {"greeting": {"key": "Z3JlZXRpbmc=", "keyType": "AVMString", "valueType": "AVMString"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"Greeting": [{"name": "name", "type": "string"}, {"name": "termination", "type": "string"}]}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "cblocks", "sourceInfo": [{"pc": [327, 347], "errorMessage": "check GlobalState exists"}, {"pc": [195, 252, 276], "errorMessage": "invalid array length header"}, {"pc": [204], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [286], "errorMessage": "invalid number of bytes for tests/approvals/precompiled-apps.algo.ts::Greeting"}, {"pc": [243], "errorMessage": "invalid tail pointer at index 0 of ((len+utf8[]),(len+utf8[]))"}, {"pc": [267], "errorMessage": "invalid tail pointer at index 1 of ((len+utf8[]),(len+utf8[]))"}, {"pc": [239, 262], "errorMessage": "invalid tuple encoding"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": [], "create": ["NoOp"]}, "args": [], "name": "create", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["DeleteApplication"], "create": []}, "args": [], "name": "delete", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["UpdateApplication"], "create": []}, "args": [], "name": "update", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "name"}], "name": "greet", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(string,string)", "name": "a", "struct": "Greeting"}], "name": "sendGreetings", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}], "name": "HelloTemplateCustomPrefix", "state": {"keys": {"box": {}, "global": {"greeting": {"key": "Z3JlZXRpbmc=", "keyType": "AVMString", "valueType": "AVMString"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"Greeting": [{"name": "name", "type": "string"}, {"name": "termination", "type": "string"}]}, "byteCode": {"approval": "CyAEAAECBCYFCGdyZWV0aW5nAAQVH3x1ASAAQgAAMRhAAAlCAACIAXpCAABCAAA2GgCABCQ3jTyABKDoGHJPAo4CAGcAV0IAADEZIhJEMRgiE0EALUIAADYaAIAE0KKCAIAEUYC6IE8CjgIADQAHQgAAQgAAAIgAhUL/9ogAV0L/8DYaAIAETFxhuk8BjgEABkIAAEL/3ogAJEL/9zEZJRIxGCITEESIACRC/5wxGYEFEjEYIhMQRIgAC0L/i0IAAIgAiSNDQgAAiACFI0NCAACIAIEjQ0IAADYaAUkiWSMLJAhLARUSRFcCAIgAa0kVFlcGAk8BUCpPAVCwI0NCAAA2GgFJFU4BSSJZSSUSREsBTwFLA1IiWSMLJAglCEsBJFlJSwISREsCTwFPBFIiWSMLJAgISwEVEkSIADBJFRZXBgJPAVAqTwFQsCNDQgAAiUIAAIlCAACJigEBQgAAIihlRClPAVArUIv/UImKAQFCAAAiKGVEKU8BUCtQi/8iWYv/JFmL/08CTwJSVwIAUIv/JFmL/xWL/08CTwJSVwIAUIlCAACIAAUoJwRniUIAAEIAAEIAACgpZ4k=", "clear": "C0IAAIEBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDIgNAogICAgYnl0ZWNibG9jayAiZ3JlZXRpbmciICIiIDB4MTUxZjdjNzUgIiAiIFBSRlhfR1JFRVRJTkcKICAgIGIgbWFpbl9ibG9ja0AwCgptYWluX2Jsb2NrQDA6CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICBiIG1haW5faWZfYm9keUAxCgptYWluX2lmX2JvZHlAMToKICAgIGNhbGxzdWIgY29uc3RydWN0b3IKICAgIGIgbWFpbl9hZnRlcl9pZl9lbHNlQDIKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgYiBtYWluX2Jsb2NrQDMKCm1haW5fYmxvY2tAMzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6NTIKICAgIC8vIGV4cG9ydCBjbGFzcyBIZWxsb1RlbXBsYXRlQ3VzdG9tUHJlZml4IGV4dGVuZHMgSGVsbG9CYXNlIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIHB1c2hieXRlcyAweDI0Mzc4ZDNjIC8vIG1ldGhvZCAiZGVsZXRlKCl2b2lkIgogICAgcHVzaGJ5dGVzIDB4YTBlODE4NzIgLy8gbWV0aG9kICJ1cGRhdGUoKXZvaWQiCiAgICB1bmNvdmVyIDIKICAgIG1hdGNoIG1haW5fZGVsZXRlX3JvdXRlQDQgbWFpbl91cGRhdGVfcm91dGVANQogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRANgoKbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDY6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjUyCiAgICAvLyBleHBvcnQgY2xhc3MgSGVsbG9UZW1wbGF0ZUN1c3RvbVByZWZpeCBleHRlbmRzIEhlbGxvQmFzZSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBpbnRjXzAgLy8gTm9PcAogICAgPT0KICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGludGNfMCAvLyAwCiAgICAhPQogICAgYnogbWFpbl9jcmVhdGVfTm9PcEAxMQogICAgYiBtYWluX2NhbGxfTm9PcEA3CgptYWluX2NhbGxfTm9PcEA3OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo1MgogICAgLy8gZXhwb3J0IGNsYXNzIEhlbGxvVGVtcGxhdGVDdXN0b21QcmVmaXggZXh0ZW5kcyBIZWxsb0Jhc2UgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgcHVzaGJ5dGVzIDB4ZDBhMjgyMDAgLy8gbWV0aG9kICJncmVldChzdHJpbmcpc3RyaW5nIgogICAgcHVzaGJ5dGVzIDB4NTE4MGJhMjAgLy8gbWV0aG9kICJzZW5kR3JlZXRpbmdzKChzdHJpbmcsc3RyaW5nKSlzdHJpbmciCiAgICB1bmNvdmVyIDIKICAgIG1hdGNoIG1haW5fZ3JlZXRfcm91dGVAOCBtYWluX3NlbmRHcmVldGluZ3Nfcm91dGVAOQogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAMTAKCm1haW5fc3dpdGNoX2Nhc2VfbmV4dEAxMDoKICAgIGIgbWFpbl9hZnRlcl9pZl9lbHNlQDE0CgptYWluX2FmdGVyX2lmX2Vsc2VAMTQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjUyCiAgICAvLyBleHBvcnQgY2xhc3MgSGVsbG9UZW1wbGF0ZUN1c3RvbVByZWZpeCBleHRlbmRzIEhlbGxvQmFzZSB7CiAgICBlcnIKCm1haW5fc2VuZEdyZWV0aW5nc19yb3V0ZUA5OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czozMAogICAgLy8gc2VuZEdyZWV0aW5ncyhhOiBHcmVldGluZyk6IHN0cmluZyB7CiAgICBjYWxsc3ViIHNlbmRHcmVldGluZ3MKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDEwCgptYWluX2dyZWV0X3JvdXRlQDg6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjI2CiAgICAvLyBncmVldChuYW1lOiBzdHJpbmcpOiBzdHJpbmcgewogICAgY2FsbHN1YiBncmVldAogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAMTAKCm1haW5fY3JlYXRlX05vT3BAMTE6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjUyCiAgICAvLyBleHBvcnQgY2xhc3MgSGVsbG9UZW1wbGF0ZUN1c3RvbVByZWZpeCBleHRlbmRzIEhlbGxvQmFzZSB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBwdXNoYnl0ZXMgMHg0YzVjNjFiYSAvLyBtZXRob2QgImNyZWF0ZSgpdm9pZCIKICAgIHVuY292ZXIgMQogICAgbWF0Y2ggbWFpbl9jcmVhdGVfcm91dGVAMTIKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDEzCgptYWluX3N3aXRjaF9jYXNlX25leHRAMTM6CiAgICBiIG1haW5fYWZ0ZXJfaWZfZWxzZUAxNAoKbWFpbl9jcmVhdGVfcm91dGVAMTI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjU4CiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgY2FsbHN1YiBjcmVhdGUKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDEzCgptYWluX3VwZGF0ZV9yb3V0ZUA1OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czoyMwogICAgLy8gQGFiaW1ldGhvZCh7IGFsbG93QWN0aW9uczogJ1VwZGF0ZUFwcGxpY2F0aW9uJyB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgaW50Y18zIC8vIFVwZGF0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGludGNfMCAvLyAwCiAgICAhPQogICAgJiYKICAgIGFzc2VydAogICAgY2FsbHN1YiB1cGRhdGUKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDYKCm1haW5fZGVsZXRlX3JvdXRlQDQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjIwCiAgICAvLyBAYWJpbWV0aG9kKHsgYWxsb3dBY3Rpb25zOiAnRGVsZXRlQXBwbGljYXRpb24nIH0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDUgLy8gRGVsZXRlQXBwbGljYXRpb24KICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18wIC8vIDAKICAgICE9CiAgICAmJgogICAgYXNzZXJ0CiAgICBjYWxsc3ViIGRlbGV0ZQogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRANgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvVGVtcGxhdGVDdXN0b21QcmVmaXguY3JlYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgYiBjcmVhdGVfYmxvY2tAMAoKY3JlYXRlX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjU4CiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb1RlbXBsYXRlQ3VzdG9tUHJlZml4LmNyZWF0ZQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5kZWxldGVbcm91dGluZ10oKSAtPiB2b2lkOgpkZWxldGU6CiAgICBiIGRlbGV0ZV9ibG9ja0AwCgpkZWxldGVfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MjAKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6ICdEZWxldGVBcHBsaWNhdGlvbicgfSkKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmRlbGV0ZQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS51cGRhdGVbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGU6CiAgICBiIHVwZGF0ZV9ibG9ja0AwCgp1cGRhdGVfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MjMKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6ICdVcGRhdGVBcHBsaWNhdGlvbicgfSkKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLnVwZGF0ZQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5ncmVldFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdyZWV0OgogICAgYiBncmVldF9ibG9ja0AwCgpncmVldF9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czoyNgogICAgLy8gZ3JlZXQobmFtZTogc3RyaW5nKTogc3RyaW5nIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAxCiAgICAqCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb0Jhc2UuZ3JlZXQKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgdW5jb3ZlciAxCiAgICBjb25jYXQKICAgIGJ5dGVjXzIgLy8gMHgxNTFmN2M3NQogICAgdW5jb3ZlciAxCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5zZW5kR3JlZXRpbmdzW3JvdXRpbmddKCkgLT4gdm9pZDoKc2VuZEdyZWV0aW5nczoKICAgIGIgc2VuZEdyZWV0aW5nc19ibG9ja0AwCgpzZW5kR3JlZXRpbmdzX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjMwCiAgICAvLyBzZW5kR3JlZXRpbmdzKGE6IEdyZWV0aW5nKTogc3RyaW5nIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBjb3ZlciAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCB0dXBsZSBlbmNvZGluZwogICAgZHVwCiAgICBpbnRjXzMgLy8gNAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIHRhaWwgcG9pbnRlciBhdCBpbmRleCAwIG9mICgobGVuK3V0ZjhbXSksKGxlbit1dGY4W10pKQogICAgZGlnIDEKICAgIHVuY292ZXIgMQogICAgZGlnIDMKICAgIHN1YnN0cmluZzMKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMQogICAgKgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGludGNfMyAvLyA0CiAgICArCiAgICBkaWcgMQogICAgaW50Y18yIC8vIDIKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIHR1cGxlIGVuY29kaW5nCiAgICBkdXAKICAgIGRpZyAyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgdGFpbCBwb2ludGVyIGF0IGluZGV4IDEgb2YgKChsZW4rdXRmOFtdKSwobGVuK3V0ZjhbXSkpCiAgICBkaWcgMgogICAgdW5jb3ZlciAxCiAgICB1bmNvdmVyIDQKICAgIHN1YnN0cmluZzMKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMQogICAgKgogICAgaW50Y18yIC8vIDIKICAgICsKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkdyZWV0aW5nCiAgICBjYWxsc3ViIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5zZW5kR3JlZXRpbmdzCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb1RlbXBsYXRlQ3VzdG9tUHJlZml4LmNyZWF0ZSgpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvVGVtcGxhdGVDdXN0b21QcmVmaXguY3JlYXRlOgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb1RlbXBsYXRlQ3VzdG9tUHJlZml4LmNyZWF0ZV9ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb1RlbXBsYXRlQ3VzdG9tUHJlZml4LmNyZWF0ZV9ibG9ja0AwOgogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmRlbGV0ZSgpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5kZWxldGU6CiAgICBiIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5kZWxldGVfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmRlbGV0ZV9ibG9ja0AwOgogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLnVwZGF0ZSgpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS51cGRhdGU6CiAgICBiIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS51cGRhdGVfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLnVwZGF0ZV9ibG9ja0AwOgogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmdyZWV0KG5hbWU6IGJ5dGVzKSAtPiBieXRlczoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmdyZWV0OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czoyNgogICAgLy8gZ3JlZXQobmFtZTogc3RyaW5nKTogc3RyaW5nIHsKICAgIHByb3RvIDEgMQogICAgYiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb0Jhc2UuZ3JlZXRfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmdyZWV0X2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjI3CiAgICAvLyByZXR1cm4gYCR7dGhpcy5ncmVldGluZy52YWx1ZX0gJHtuYW1lfWAKICAgIGludGNfMCAvLyAwCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjE4CiAgICAvLyBncmVldGluZyA9IEdsb2JhbFN0YXRlKHsgaW5pdGlhbFZhbHVlOiAnJyB9KQogICAgYnl0ZWNfMCAvLyAiZ3JlZXRpbmciCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjI3CiAgICAvLyByZXR1cm4gYCR7dGhpcy5ncmVldGluZy52YWx1ZX0gJHtuYW1lfWAKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBieXRlY18xIC8vICIiCiAgICB1bmNvdmVyIDEKICAgIGNvbmNhdAogICAgYnl0ZWNfMyAvLyAiICIKICAgIGNvbmNhdAogICAgZnJhbWVfZGlnIC0xCiAgICBjb25jYXQKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5zZW5kR3JlZXRpbmdzKGE6IGJ5dGVzKSAtPiBieXRlczoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLnNlbmRHcmVldGluZ3M6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjMwCiAgICAvLyBzZW5kR3JlZXRpbmdzKGE6IEdyZWV0aW5nKTogc3RyaW5nIHsKICAgIHByb3RvIDEgMQogICAgYiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb0Jhc2Uuc2VuZEdyZWV0aW5nc19ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb0Jhc2Uuc2VuZEdyZWV0aW5nc19ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czozMQogICAgLy8gcmV0dXJuIGAke3RoaXMuZ3JlZXRpbmcudmFsdWV9ICR7YS5uYW1lfSR7YS50ZXJtaW5hdGlvbi5uYXRpdmV9YAogICAgaW50Y18wIC8vIDAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MTgKICAgIC8vIGdyZWV0aW5nID0gR2xvYmFsU3RhdGUoeyBpbml0aWFsVmFsdWU6ICcnIH0pCiAgICBieXRlY18wIC8vICJncmVldGluZyIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MzEKICAgIC8vIHJldHVybiBgJHt0aGlzLmdyZWV0aW5nLnZhbHVlfSAke2EubmFtZX0ke2EudGVybWluYXRpb24ubmF0aXZlfWAKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBieXRlY18xIC8vICIiCiAgICB1bmNvdmVyIDEKICAgIGNvbmNhdAogICAgYnl0ZWNfMyAvLyAiICIKICAgIGNvbmNhdAogICAgZnJhbWVfZGlnIC0xCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgIGZyYW1lX2RpZyAtMQogICAgaW50Y18yIC8vIDIKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTEKICAgIHVuY292ZXIgMgogICAgdW5jb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBleHRyYWN0IDIgMAogICAgY29uY2F0CiAgICBmcmFtZV9kaWcgLTEKICAgIGludGNfMiAvLyAyCiAgICBleHRyYWN0X3VpbnQxNgogICAgZnJhbWVfZGlnIC0xCiAgICBsZW4KICAgIGZyYW1lX2RpZyAtMQogICAgdW5jb3ZlciAyCiAgICB1bmNvdmVyIDIKICAgIHN1YnN0cmluZzMKICAgIGV4dHJhY3QgMiAwCiAgICBjb25jYXQKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvVGVtcGxhdGVDdXN0b21QcmVmaXguY29uc3RydWN0b3IoKSAtPiB2b2lkOgpjb25zdHJ1Y3RvcjoKICAgIGIgY29uc3RydWN0b3JfYmxvY2tAMAoKY29uc3RydWN0b3JfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6NTQKICAgIC8vIHN1cGVyKCkKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmNvbnN0cnVjdG9yCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjE4CiAgICAvLyBncmVldGluZyA9IEdsb2JhbFN0YXRlKHsgaW5pdGlhbFZhbHVlOiAnJyB9KQogICAgYnl0ZWNfMCAvLyAiZ3JlZXRpbmciCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjU1CiAgICAvLyB0aGlzLmdyZWV0aW5nLnZhbHVlID0gVGVtcGxhdGVWYXI8c3RyaW5nPignR1JFRVRJTkcnLCAnUFJGWF8nKQogICAgYnl0ZWMgNCAvLyBQUkZYX0dSRUVUSU5HCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmNvbnN0cnVjdG9yKCkgLT4gdm9pZDoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmNvbnN0cnVjdG9yOgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb0Jhc2UuY29uc3RydWN0b3JfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmNvbnN0cnVjdG9yX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjE3CiAgICAvLyBhYnN0cmFjdCBjbGFzcyBIZWxsb0Jhc2UgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBiIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5jb25zdHJ1Y3Rvcl9ibG9ja0AxCgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb0Jhc2UuY29uc3RydWN0b3JfYmxvY2tAMToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MTcKICAgIC8vIGFic3RyYWN0IGNsYXNzIEhlbGxvQmFzZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIGIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmNvbnN0cnVjdG9yX2FmdGVyX2lubGluZWRfQGFsZ29yYW5kZm91bmRhdGlvbi9hbGdvcmFuZC10eXBlc2NyaXB0L2Jhc2UtY29udHJhY3QuZC50czo6QmFzZUNvbnRyYWN0LmNvbnN0cnVjdG9yQDIKCnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5jb25zdHJ1Y3Rvcl9hZnRlcl9pbmxpbmVkX0BhbGdvcmFuZGZvdW5kYXRpb24vYWxnb3JhbmQtdHlwZXNjcmlwdC9iYXNlLWNvbnRyYWN0LmQudHM6OkJhc2VDb250cmFjdC5jb25zdHJ1Y3RvckAyOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czoxOAogICAgLy8gZ3JlZXRpbmcgPSBHbG9iYWxTdGF0ZSh7IGluaXRpYWxWYWx1ZTogJycgfSkKICAgIGJ5dGVjXzAgLy8gImdyZWV0aW5nIgogICAgYnl0ZWNfMSAvLyAiIgogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1Ygo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "cblocks", "sourceInfo": [{"pc": [327, 347], "errorMessage": "check GlobalState exists"}, {"pc": [195, 252, 276], "errorMessage": "invalid array length header"}, {"pc": [204], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [286], "errorMessage": "invalid number of bytes for tests/approvals/precompiled-apps.algo.ts::Greeting"}, {"pc": [243], "errorMessage": "invalid tail pointer at index 0 of ((len+utf8[]),(len+utf8[]))"}, {"pc": [267], "errorMessage": "invalid tail pointer at index 1 of ((len+utf8[]),(len+utf8[]))"}, {"pc": [239, 262], "errorMessage": "invalid tuple encoding"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {"PRFX_GREETING": {"type": "AVMString"}}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -90,9 +90,51 @@ class SendGreetingsArgs:
         return "sendGreetings((string,string))string"
 
 
+class _HelloTemplateCustomPrefixUpdate:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppUpdateMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.params.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update()void",
+        }))
+
+
+class _HelloTemplateCustomPrefixDelete:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def delete(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppDeleteMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.delete(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "delete()void",
+        }))
+
+
 class HelloTemplateCustomPrefixParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_HelloTemplateCustomPrefixUpdate":
+        return _HelloTemplateCustomPrefixUpdate(self.app_client)
+
+    @property
+    def delete(self) -> "_HelloTemplateCustomPrefixDelete":
+        return _HelloTemplateCustomPrefixDelete(self.app_client)
 
     def greet(
         self,
@@ -118,6 +160,17 @@ class HelloTemplateCustomPrefixParams:
             **dataclasses.asdict(params),
             "method": "sendGreetings((string,string))string",
             "args": method_args,
+        }))
+
+    def create(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "create()void",
         }))
 
     def clear_state(
@@ -131,9 +184,51 @@ class HelloTemplateCustomPrefixParams:
         )
 
 
+class _HelloTemplateCustomPrefixUpdateTransaction:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.create_transaction.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update()void",
+        }))
+
+
+class _HelloTemplateCustomPrefixDeleteTransaction:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def delete(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.delete(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "delete()void",
+        }))
+
+
 class HelloTemplateCustomPrefixCreateTransactionParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_HelloTemplateCustomPrefixUpdateTransaction":
+        return _HelloTemplateCustomPrefixUpdateTransaction(self.app_client)
+
+    @property
+    def delete(self) -> "_HelloTemplateCustomPrefixDeleteTransaction":
+        return _HelloTemplateCustomPrefixDeleteTransaction(self.app_client)
 
     def greet(
         self,
@@ -159,6 +254,17 @@ class HelloTemplateCustomPrefixCreateTransactionParams:
             **dataclasses.asdict(params),
             "method": "sendGreetings((string,string))string",
             "args": method_args,
+        }))
+
+    def create(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "create()void",
         }))
 
     def clear_state(
@@ -172,9 +278,57 @@ class HelloTemplateCustomPrefixCreateTransactionParams:
         )
 
 
+class _HelloTemplateCustomPrefixUpdateSend:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        response = self.app_client.send.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update()void",
+        }), send_params=send_params, compilation_params=compilation_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppUpdateTransactionResult[None], parsed_response)
+
+
+class _HelloTemplateCustomPrefixDeleteSend:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def delete(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.delete(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "delete()void",
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
+
+
 class HelloTemplateCustomPrefixSend:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_HelloTemplateCustomPrefixUpdateSend":
+        return _HelloTemplateCustomPrefixUpdateSend(self.app_client)
+
+    @property
+    def delete(self) -> "_HelloTemplateCustomPrefixDeleteSend":
+        return _HelloTemplateCustomPrefixDeleteSend(self.app_client)
 
     def greet(
         self,
@@ -207,6 +361,20 @@ class HelloTemplateCustomPrefixSend:
         }), send_params=send_params)
         parsed_response = response
         return typing.cast(algokit_utils.SendAppTransactionResult[str], parsed_response)
+
+    def create(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "create()void",
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
 
     def clear_state(
         self,
@@ -470,6 +638,485 @@ class HelloTemplateCustomPrefixClient:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class HelloTemplateCustomPrefixMethodCallCreateParams(
+    algokit_utils.AppClientCreateSchema, algokit_utils.BaseAppClientMethodCallParams[
+        typing.Any,
+        str | None,
+    ]
+):
+    """Parameters for creating HelloTemplateCustomPrefix contract using ABI"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallCreateParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallCreateParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+@dataclasses.dataclass(frozen=True)
+class HelloTemplateCustomPrefixMethodCallUpdateParams(
+    algokit_utils.BaseAppClientMethodCallParams[
+        typing.Any,
+        str | None,
+    ]
+):
+    """Parameters for calling HelloTemplateCustomPrefix contract using ABI"""
+    on_complete: typing.Literal[OnComplete.UpdateApplicationOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+@dataclasses.dataclass(frozen=True)
+class HelloTemplateCustomPrefixMethodCallDeleteParams(
+    algokit_utils.BaseAppClientMethodCallParams[
+        typing.Any,
+        str | None,
+    ]
+):
+    """Parameters for calling HelloTemplateCustomPrefix contract using ABI"""
+    on_complete: typing.Literal[OnComplete.DeleteApplicationOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+class HelloTemplateCustomPrefixFactory(algokit_utils.TypedAppFactoryProtocol[HelloTemplateCustomPrefixMethodCallCreateParams, HelloTemplateCustomPrefixMethodCallUpdateParams, HelloTemplateCustomPrefixMethodCallDeleteParams]):
+    """Factory for deploying and managing HelloTemplateCustomPrefixClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = HelloTemplateCustomPrefixFactoryParams(self.app_factory)
+        self.create_transaction = HelloTemplateCustomPrefixFactoryCreateTransaction(self.app_factory)
+        self.send = HelloTemplateCustomPrefixFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: HelloTemplateCustomPrefixMethodCallCreateParams | None = None,
+        update_params: HelloTemplateCustomPrefixMethodCallUpdateParams | None = None,
+        delete_params: HelloTemplateCustomPrefixMethodCallDeleteParams | None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[HelloTemplateCustomPrefixClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params.to_algokit_utils_params() if update_params else None,
+            delete_params=delete_params.to_algokit_utils_params() if delete_params else None,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return HelloTemplateCustomPrefixClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> HelloTemplateCustomPrefixClient:
+        """Get an app client by creator address and name"""
+        return HelloTemplateCustomPrefixClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> HelloTemplateCustomPrefixClient:
+        """Get an app client by app ID"""
+        return HelloTemplateCustomPrefixClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class HelloTemplateCustomPrefixFactoryParams:
+    """Parameters for creating transactions for HelloTemplateCustomPrefix contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = HelloTemplateCustomPrefixFactoryCreateParams(app_factory)
+        self.update = HelloTemplateCustomPrefixFactoryUpdateParams(app_factory)
+        self.delete = HelloTemplateCustomPrefixFactoryDeleteParams(app_factory)
+
+class HelloTemplateCustomPrefixFactoryCreateParams:
+    """Parameters for 'create' operations of HelloTemplateCustomPrefix contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def greet(
+        self,
+        args: tuple[str] | GreetArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the greet(string)string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "greet(string)string",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def send_greetings(
+        self,
+        args: tuple[Greeting] | SendGreetingsArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the sendGreetings((string,string))string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "sendGreetings((string,string))string",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def create(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the create()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "create()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def update(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the update()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "update()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def delete(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the delete()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "delete()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class HelloTemplateCustomPrefixFactoryUpdateParams:
+    """Parameters for 'update' operations of HelloTemplateCustomPrefix contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class HelloTemplateCustomPrefixFactoryDeleteParams:
+    """Parameters for 'delete' operations of HelloTemplateCustomPrefix contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class HelloTemplateCustomPrefixFactoryCreateTransaction:
+    """Create transactions for HelloTemplateCustomPrefix contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = HelloTemplateCustomPrefixFactoryCreateTransactionCreate(app_factory)
+
+
+class HelloTemplateCustomPrefixFactoryCreateTransactionCreate:
+    """Create new instances of HelloTemplateCustomPrefix contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class HelloTemplateCustomPrefixFactorySend:
+    """Send calls to HelloTemplateCustomPrefix contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = HelloTemplateCustomPrefixFactorySendCreate(app_factory)
+
+
+class HelloTemplateCustomPrefixFactorySendCreate:
+    """Send create calls to HelloTemplateCustomPrefix contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[HelloTemplateCustomPrefixClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return HelloTemplateCustomPrefixClient(result[0]), result[1]
+
+    def create(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> tuple[HelloTemplateCustomPrefixClient, algokit_utils.AppFactoryCreateMethodCallResult[None]]:
+            """Creates and sends a transaction using the create()void ABI method"""
+            params = params or algokit_utils.CommonAppCallCreateParams()
+            client, result = self.app_factory.send.create(
+                algokit_utils.AppFactoryCreateMethodCallParams(
+                    **{
+                    **dataclasses.asdict(params),
+                    "method": "create()void",
+                    "args": None,
+                    }
+                ),
+                send_params=send_params,
+                compilation_params=compilation_params
+            )
+            return_value = None if result.abi_return is None else typing.cast(None, result.abi_return)
+    
+            return HelloTemplateCustomPrefixClient(client), algokit_utils.AppFactoryCreateMethodCallResult[None](
+                **{
+                    **result.__dict__,
+                    "app_id": result.app_id,
+                    "abi_return": return_value,
+                    "transaction": result.transaction,
+                    "confirmation": result.confirmation,
+                    "group_id": result.group_id,
+                    "tx_ids": result.tx_ids,
+                    "transactions": result.transactions,
+                    "confirmations": result.confirmations,
+                    "app_address": result.app_address,
+                }
+            )
+
+
+class _HelloTemplateCustomPrefixUpdateComposer:
+    def __init__(self, composer: "HelloTemplateCustomPrefixComposer"):
+        self.composer = composer
+    def update(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "HelloTemplateCustomPrefixComposer":
+        self.composer._composer.add_app_update_method_call(
+            self.composer.client.params.update.update(
+                
+                params=params,
+                compilation_params=compilation_params
+            )
+        )
+        self.composer._result_mappers.append(
+            lambda v: self.composer.client.decode_return_value(
+                "update()void", v
+            )
+        )
+        return self.composer
+
+
+class _HelloTemplateCustomPrefixDeleteComposer:
+    def __init__(self, composer: "HelloTemplateCustomPrefixComposer"):
+        self.composer = composer
+    def delete(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "HelloTemplateCustomPrefixComposer":
+        self.composer._composer.add_app_delete_method_call(
+            self.composer.client.params.delete.delete(
+                
+                params=params,
+                
+            )
+        )
+        self.composer._result_mappers.append(
+            lambda v: self.composer.client.decode_return_value(
+                "delete()void", v
+            )
+        )
+        return self.composer
+
+
 class HelloTemplateCustomPrefixComposer:
     """Composer for creating transaction groups for HelloTemplateCustomPrefix contract calls"""
 
@@ -477,6 +1124,14 @@ class HelloTemplateCustomPrefixComposer:
         self.client = client
         self._composer = client.algorand.new_group()
         self._result_mappers: list[typing.Callable[[algokit_utils.ABIReturn | None], object] | None] = []
+
+    @property
+    def update(self) -> "_HelloTemplateCustomPrefixUpdateComposer":
+        return _HelloTemplateCustomPrefixUpdateComposer(self)
+
+    @property
+    def delete(self) -> "_HelloTemplateCustomPrefixDeleteComposer":
+        return _HelloTemplateCustomPrefixDeleteComposer(self)
 
     def greet(
         self,
@@ -510,6 +1165,23 @@ class HelloTemplateCustomPrefixComposer:
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
                 "sendGreetings((string,string))string", v
+            )
+        )
+        return self
+
+    def create(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "HelloTemplateCustomPrefixComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.create(
+                
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "create()void", v
             )
         )
         return self

@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "getVeryImportantValue", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "a"}, {"type": "uint64", "name": "b"}], "name": "simpleAbiMethod", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "ConcreteArc4Contract", "state": {"keys": {"box": {}, "global": {"concreteState": {"key": "Y29uY3JldGVTdGF0ZQ==", "keyType": "AVMString", "valueType": "AVMString"}, "someState": {"key": "c29tZVN0YXRl", "keyType": "AVMString", "valueType": "AVMUint64"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 1}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [76, 85], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "getVeryImportantValue", "returns": {"type": "string"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "a"}, {"type": "uint64", "name": "b"}], "name": "simpleAbiMethod", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "ConcreteArc4Contract", "state": {"keys": {"box": {}, "global": {"concreteState": {"key": "Y29uY3JldGVTdGF0ZQ==", "keyType": "AVMString", "valueType": "AVMString"}, "someState": {"key": "c29tZVN0YXRl", "keyType": "AVMString", "valueType": "AVMUint64"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 1}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyACCAExGEAAGYICDWNvbmNyZXRlU3RhdGUHdGVzdGluZ2cxG0EATjEZFEQxGESCAgTHPam5BPFh3Dc2GgCOAgAgAAEANhoBSRUiEkQXNhoCSRUiEkQXCBaABBUffHVMULAjQ4ANFR98dQAHNDJoZWxsb7AjQzEZFDEYFBBD", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgOCAxCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvaW5oZXJpdGFuY2UtYi5hbGdvLnRzOjE3CiAgICAvLyBjb25jcmV0ZVN0YXRlID0gR2xvYmFsU3RhdGUoeyBpbml0aWFsVmFsdWU6ICd0ZXN0aW5nJyB9KQogICAgcHVzaGJ5dGVzcyAiY29uY3JldGVTdGF0ZSIgInRlc3RpbmciCiAgICBhcHBfZ2xvYmFsX3B1dAoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvaW5oZXJpdGFuY2UtYi5hbGdvLnRzOjE2CiAgICAvLyBleHBvcnQgY2xhc3MgQ29uY3JldGVBcmM0Q29udHJhY3QgZXh0ZW5kcyBBcmM0Q29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDExCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHhjNzNkYTliOSAweGYxNjFkYzM3IC8vIG1ldGhvZCAiZ2V0VmVyeUltcG9ydGFudFZhbHVlKClzdHJpbmciLCBtZXRob2QgInNpbXBsZUFiaU1ldGhvZCh1aW50NjQsdWludDY0KXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fZ2V0VmVyeUltcG9ydGFudFZhbHVlX3JvdXRlQDYgbWFpbl9zaW1wbGVBYmlNZXRob2Rfcm91dGVANwogICAgZXJyCgptYWluX3NpbXBsZUFiaU1ldGhvZF9yb3V0ZUA3OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2luaGVyaXRhbmNlLWEuYWxnby50czoxNwogICAgLy8gcHVibGljIHNpbXBsZUFiaU1ldGhvZChhOiB1aW50NjQsIGI6IHVpbnQ2NCk6IHVpbnQ2NCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvaW5oZXJpdGFuY2UtYS5hbGdvLnRzOjE4CiAgICAvLyByZXR1cm4gYSArIGIKICAgICsKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9pbmhlcml0YW5jZS1hLmFsZ28udHM6MTcKICAgIC8vIHB1YmxpYyBzaW1wbGVBYmlNZXRob2QoYTogdWludDY0LCBiOiB1aW50NjQpOiB1aW50NjQgewogICAgaXRvYgogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFZlcnlJbXBvcnRhbnRWYWx1ZV9yb3V0ZUA2OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2luaGVyaXRhbmNlLWIuYWxnby50czoxOAogICAgLy8gcHVibGljIGdldFZlcnlJbXBvcnRhbnRWYWx1ZSgpIHsKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwNzM0MzI2ODY1NmM2YzZmCiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDExOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2luaGVyaXRhbmNlLWIuYWxnby50czoxNgogICAgLy8gZXhwb3J0IGNsYXNzIENvbmNyZXRlQXJjNENvbnRyYWN0IGV4dGVuZHMgQXJjNENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [76, 85], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -438,6 +438,290 @@ class ConcreteArc4ContractClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class ConcreteArc4ContractBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating ConcreteArc4Contract contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class ConcreteArc4ContractFactory(algokit_utils.TypedAppFactoryProtocol[ConcreteArc4ContractBareCallCreateParams, None, None]):
+    """Factory for deploying and managing ConcreteArc4ContractClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = ConcreteArc4ContractFactoryParams(self.app_factory)
+        self.create_transaction = ConcreteArc4ContractFactoryCreateTransaction(self.app_factory)
+        self.send = ConcreteArc4ContractFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: ConcreteArc4ContractBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[ConcreteArc4ContractClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return ConcreteArc4ContractClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> ConcreteArc4ContractClient:
+        """Get an app client by creator address and name"""
+        return ConcreteArc4ContractClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> ConcreteArc4ContractClient:
+        """Get an app client by app ID"""
+        return ConcreteArc4ContractClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class ConcreteArc4ContractFactoryParams:
+    """Parameters for creating transactions for ConcreteArc4Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = ConcreteArc4ContractFactoryCreateParams(app_factory)
+        self.update = ConcreteArc4ContractFactoryUpdateParams(app_factory)
+        self.delete = ConcreteArc4ContractFactoryDeleteParams(app_factory)
+
+class ConcreteArc4ContractFactoryCreateParams:
+    """Parameters for 'create' operations of ConcreteArc4Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def get_very_important_value(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the getVeryImportantValue()string ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "getVeryImportantValue()string",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def simple_abi_method(
+        self,
+        args: tuple[int, int] | SimpleAbiMethodArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the simpleAbiMethod(uint64,uint64)uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "simpleAbiMethod(uint64,uint64)uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class ConcreteArc4ContractFactoryUpdateParams:
+    """Parameters for 'update' operations of ConcreteArc4Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class ConcreteArc4ContractFactoryDeleteParams:
+    """Parameters for 'delete' operations of ConcreteArc4Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class ConcreteArc4ContractFactoryCreateTransaction:
+    """Create transactions for ConcreteArc4Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = ConcreteArc4ContractFactoryCreateTransactionCreate(app_factory)
+
+
+class ConcreteArc4ContractFactoryCreateTransactionCreate:
+    """Create new instances of ConcreteArc4Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class ConcreteArc4ContractFactorySend:
+    """Send calls to ConcreteArc4Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = ConcreteArc4ContractFactorySendCreate(app_factory)
+
+
+class ConcreteArc4ContractFactorySendCreate:
+    """Send create calls to ConcreteArc4Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[ConcreteArc4ContractClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return ConcreteArc4ContractClient(result[0]), result[1]
 
 
 class ConcreteArc4ContractComposer:

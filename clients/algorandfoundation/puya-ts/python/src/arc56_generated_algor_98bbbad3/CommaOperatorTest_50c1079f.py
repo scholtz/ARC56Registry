@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint8", "name": "a"}, {"type": "uint8", "name": "b"}], "name": "emitEmitAdd", "returns": {"type": "uint8"}, "events": [{"args": [{"type": "uint8", "name": "v"}, {"type": "uint8", "name": "acc"}], "name": "Event"}], "readonly": false, "recommendations": {}}], "name": "CommaOperatorTest", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [{"args": [{"type": "uint8", "name": "v"}, {"type": "uint8", "name": "acc"}], "name": "Event"}], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [94, 102], "errorMessage": "invalid number of bytes for arc4.uint8"}, {"pc": [135, 161, 182], "errorMessage": "overflow"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint8", "name": "a"}, {"type": "uint8", "name": "b"}], "name": "emitEmitAdd", "returns": {"type": "uint8"}, "events": [{"args": [{"type": "uint8", "name": "v"}, {"type": "uint8", "name": "acc"}], "name": "Event"}], "readonly": false, "recommendations": {}}], "name": "CommaOperatorTest", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyAEAQAIByYCAATY34JxQgAAQgAAMRsjE0EAKUIAADYaAIAEl/LNvU8BjgEAB0IAAEIAAAAxGSMSMRgjExBEiAASQv/sMRkjEjEYIxIQRIgAaSJDQgAANhoBSRUiEkQ2GgJJFSISRIgADIAEFR98dU8BULAiQ4oCAUIAAIv+FyMISRZJkyQORCUiWCiL/lBPAVApTwFQsIv/FwhJFkmTJA5EJSJYKIv/UE8BUClPAVCwFkmTJA5EJSJYiUIAAIk=", "clear": "C0IAAIEBQw=="}, "events": [{"args": [{"type": "uint8", "name": "v"}, {"type": "uint8", "name": "acc"}], "name": "Event"}], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDggNwogICAgYnl0ZWNibG9jayAweCAweGQ4ZGY4MjcxCiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgYiBtYWluX2Jsb2NrQDEKCm1haW5fYmxvY2tAMToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9jb21tYS1vcGVyYXRvci5hbGdvLnRzOjcKICAgIC8vIGNsYXNzIENvbW1hT3BlcmF0b3JUZXN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGludGNfMSAvLyAwCiAgICAhPQogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANQogICAgYiBtYWluX2FiaV9yb3V0aW5nQDIKCm1haW5fYWJpX3JvdXRpbmdAMjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9jb21tYS1vcGVyYXRvci5hbGdvLnRzOjcKICAgIC8vIGNsYXNzIENvbW1hT3BlcmF0b3JUZXN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgcHVzaGJ5dGVzIDB4OTdmMmNkYmQgLy8gbWV0aG9kICJlbWl0RW1pdEFkZCh1aW50OCx1aW50OCl1aW50OCIKICAgIHVuY292ZXIgMQogICAgbWF0Y2ggbWFpbl9lbWl0RW1pdEFkZF9yb3V0ZUAzCiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEA0CgptYWluX3N3aXRjaF9jYXNlX25leHRANDoKICAgIGIgbWFpbl9hZnRlcl9pZl9lbHNlQDYKCm1haW5fYWZ0ZXJfaWZfZWxzZUA2OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2NvbW1hLW9wZXJhdG9yLmFsZ28udHM6NwogICAgLy8gY2xhc3MgQ29tbWFPcGVyYXRvclRlc3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBlcnIKCm1haW5fZW1pdEVtaXRBZGRfcm91dGVAMzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9jb21tYS1vcGVyYXRvci5hbGdvLnRzOjgKICAgIC8vIGVtaXRFbWl0QWRkKGE6IFVpbnQ4LCBiOiBVaW50OCk6IFVpbnQ4IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGludGNfMSAvLyBOb09wCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGludGNfMSAvLyAwCiAgICAhPQogICAgJiYKICAgIGFzc2VydAogICAgY2FsbHN1YiBlbWl0RW1pdEFkZAogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRANAoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9jb21tYS1vcGVyYXRvci5hbGdvLnRzOjcKICAgIC8vIGNsYXNzIENvbW1hT3BlcmF0b3JUZXN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgaW50Y18xIC8vIE5vT3AKICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18xIC8vIDAKICAgID09CiAgICAmJgogICAgYXNzZXJ0CiAgICBjYWxsc3ViIF9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9jb21tYS1vcGVyYXRvci5hbGdvLnRzOjpDb21tYU9wZXJhdG9yVGVzdC5lbWl0RW1pdEFkZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmVtaXRFbWl0QWRkOgogICAgYiBlbWl0RW1pdEFkZF9ibG9ja0AwCgplbWl0RW1pdEFkZF9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2NvbW1hLW9wZXJhdG9yLmFsZ28udHM6OAogICAgLy8gZW1pdEVtaXRBZGQoYTogVWludDgsIGI6IFVpbnQ4KTogVWludDggewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ4CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDEKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDgKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL2NvbW1hLW9wZXJhdG9yLmFsZ28udHM6OkNvbW1hT3BlcmF0b3JUZXN0LmVtaXRFbWl0QWRkCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NQogICAgdW5jb3ZlciAxCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9jb21tYS1vcGVyYXRvci5hbGdvLnRzOjpDb21tYU9wZXJhdG9yVGVzdC5lbWl0RW1pdEFkZChhOiBieXRlcywgYjogYnl0ZXMpIC0+IGJ5dGVzOgp0ZXN0cy9hcHByb3ZhbHMvY29tbWEtb3BlcmF0b3IuYWxnby50czo6Q29tbWFPcGVyYXRvclRlc3QuZW1pdEVtaXRBZGQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvY29tbWEtb3BlcmF0b3IuYWxnby50czo4CiAgICAvLyBlbWl0RW1pdEFkZChhOiBVaW50OCwgYjogVWludDgpOiBVaW50OCB7CiAgICBwcm90byAyIDEKICAgIGIgdGVzdHMvYXBwcm92YWxzL2NvbW1hLW9wZXJhdG9yLmFsZ28udHM6OkNvbW1hT3BlcmF0b3JUZXN0LmVtaXRFbWl0QWRkX2Jsb2NrQDAKCnRlc3RzL2FwcHJvdmFscy9jb21tYS1vcGVyYXRvci5hbGdvLnRzOjpDb21tYU9wZXJhdG9yVGVzdC5lbWl0RW1pdEFkZF9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2NvbW1hLW9wZXJhdG9yLmFsZ28udHM6MTIKICAgIC8vIGVtaXQ8RXZlbnQ+KHsgYWNjOiBuZXcgVWludDgoKHJlcyArPSBhLmFzVWludDY0KCkpKSwgdjogYSB9KSwKICAgIGZyYW1lX2RpZyAtMgogICAgYnRvaQogICAgLy8gdGVzdHMvYXBwcm92YWxzL2NvbW1hLW9wZXJhdG9yLmFsZ28udHM6OQogICAgLy8gbGV0IHJlczogdWludDY0ID0gMAogICAgaW50Y18xIC8vIDAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9jb21tYS1vcGVyYXRvci5hbGdvLnRzOjEyCiAgICAvLyBlbWl0PEV2ZW50Pih7IGFjYzogbmV3IFVpbnQ4KChyZXMgKz0gYS5hc1VpbnQ2NCgpKSksIHY6IGEgfSksCiAgICArCiAgICBkdXAKICAgIGl0b2IKICAgIGR1cAogICAgYml0bGVuCiAgICBpbnRjXzIgLy8gOAogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgaW50Y18zIC8vIDcKICAgIGludGNfMCAvLyAxCiAgICBleHRyYWN0MwogICAgYnl0ZWNfMCAvLyAweAogICAgZnJhbWVfZGlnIC0yCiAgICBjb25jYXQKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBieXRlY18xIC8vIG1ldGhvZCAiRXZlbnQodWludDgsdWludDgpIgogICAgdW5jb3ZlciAxCiAgICBjb25jYXQKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2NvbW1hLW9wZXJhdG9yLmFsZ28udHM6MTMKICAgIC8vIGVtaXQ8RXZlbnQ+KHsgYWNjOiBuZXcgVWludDgoKHJlcyArPSBiLmFzVWludDY0KCkpKSwgdjogYiB9KSwKICAgIGZyYW1lX2RpZyAtMQogICAgYnRvaQogICAgKwogICAgZHVwCiAgICBpdG9iCiAgICBkdXAKICAgIGJpdGxlbgogICAgaW50Y18yIC8vIDgKICAgIDw9CiAgICBhc3NlcnQgLy8gb3ZlcmZsb3cKICAgIGludGNfMyAvLyA3CiAgICBpbnRjXzAgLy8gMQogICAgZXh0cmFjdDMKICAgIGJ5dGVjXzAgLy8gMHgKICAgIGZyYW1lX2RpZyAtMQogICAgY29uY2F0CiAgICB1bmNvdmVyIDEKICAgIGNvbmNhdAogICAgYnl0ZWNfMSAvLyBtZXRob2QgIkV2ZW50KHVpbnQ4LHVpbnQ4KSIKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9jb21tYS1vcGVyYXRvci5hbGdvLnRzOjExLTE1CiAgICAvLyByZXR1cm4gbmV3IFVpbnQ4KCgKICAgIC8vICAgZW1pdDxFdmVudD4oeyBhY2M6IG5ldyBVaW50OCgocmVzICs9IGEuYXNVaW50NjQoKSkpLCB2OiBhIH0pLAogICAgLy8gICBlbWl0PEV2ZW50Pih7IGFjYzogbmV3IFVpbnQ4KChyZXMgKz0gYi5hc1VpbnQ2NCgpKSksIHY6IGIgfSksCiAgICAvLyAgIHJlcwogICAgLy8gKSkKICAgIGl0b2IKICAgIGR1cAogICAgYml0bGVuCiAgICBpbnRjXzIgLy8gOAogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgaW50Y18zIC8vIDcKICAgIGludGNfMCAvLyAxCiAgICBleHRyYWN0MwogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL2NvbW1hLW9wZXJhdG9yLmFsZ28udHM6OkNvbW1hT3BlcmF0b3JUZXN0Ll9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZSgpIC0+IHZvaWQ6Cl9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZToKICAgIGIgX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlX2Jsb2NrQDAKCl9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZV9ibG9ja0AwOgogICAgcmV0c3ViCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [94, 102], "errorMessage": "invalid number of bytes for arc4.uint8"}, {"pc": [135, 161, 182], "errorMessage": "overflow"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -345,6 +345,271 @@ class CommaOperatorTestClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class CommaOperatorTestBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating CommaOperatorTest contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class CommaOperatorTestFactory(algokit_utils.TypedAppFactoryProtocol[CommaOperatorTestBareCallCreateParams, None, None]):
+    """Factory for deploying and managing CommaOperatorTestClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = CommaOperatorTestFactoryParams(self.app_factory)
+        self.create_transaction = CommaOperatorTestFactoryCreateTransaction(self.app_factory)
+        self.send = CommaOperatorTestFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: CommaOperatorTestBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[CommaOperatorTestClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return CommaOperatorTestClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> CommaOperatorTestClient:
+        """Get an app client by creator address and name"""
+        return CommaOperatorTestClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> CommaOperatorTestClient:
+        """Get an app client by app ID"""
+        return CommaOperatorTestClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class CommaOperatorTestFactoryParams:
+    """Parameters for creating transactions for CommaOperatorTest contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = CommaOperatorTestFactoryCreateParams(app_factory)
+        self.update = CommaOperatorTestFactoryUpdateParams(app_factory)
+        self.delete = CommaOperatorTestFactoryDeleteParams(app_factory)
+
+class CommaOperatorTestFactoryCreateParams:
+    """Parameters for 'create' operations of CommaOperatorTest contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def emit_emit_add(
+        self,
+        args: tuple[int, int] | EmitEmitAddArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the emitEmitAdd(uint8,uint8)uint8 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "emitEmitAdd(uint8,uint8)uint8",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class CommaOperatorTestFactoryUpdateParams:
+    """Parameters for 'update' operations of CommaOperatorTest contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class CommaOperatorTestFactoryDeleteParams:
+    """Parameters for 'delete' operations of CommaOperatorTest contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class CommaOperatorTestFactoryCreateTransaction:
+    """Create transactions for CommaOperatorTest contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = CommaOperatorTestFactoryCreateTransactionCreate(app_factory)
+
+
+class CommaOperatorTestFactoryCreateTransactionCreate:
+    """Create new instances of CommaOperatorTest contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class CommaOperatorTestFactorySend:
+    """Send calls to CommaOperatorTest contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = CommaOperatorTestFactorySendCreate(app_factory)
+
+
+class CommaOperatorTestFactorySendCreate:
+    """Send create calls to CommaOperatorTest contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[CommaOperatorTestClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return CommaOperatorTestClient(result[0]), result[1]
 
 
 class CommaOperatorTestComposer:

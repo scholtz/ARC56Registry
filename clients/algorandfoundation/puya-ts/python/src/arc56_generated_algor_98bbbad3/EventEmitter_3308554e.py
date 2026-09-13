@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint8", "name": "a"}, {"type": "uint8", "name": "b"}], "name": "emitSwapped", "returns": {"type": "void"}, "events": [{"args": [{"type": "uint8", "desc": "The `a` field (native)", "name": "a"}, {"type": "uint8", "desc": "The `b` field (native)", "name": "b"}], "name": "Swapped"}, {"args": [{"type": "uint8", "desc": "The `a` field (ARC4)", "name": "a"}, {"type": "uint8", "desc": "The `b` field (ARC4)", "name": "b"}], "name": "SwappedArc4"}, {"args": [{"type": "uint8", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped4"}, {"args": [{"type": "uint8", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped5"}, {"args": [{"type": "(uint8,uint8)", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped6"}, {"args": [{"type": "uint8[]", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped7"}, {"args": [{"type": "((uint8,uint8))", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped8"}, {"args": [{"type": "uint8[][]", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped9"}, {"args": [{"type": "(uint8,uint8)[]", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped10"}, {"args": [{"type": "(uint8[])", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped11"}, {"args": [{"type": "uint64[]", "name": "field1"}, {"type": "uint64", "name": "field2"}], "name": "Swapped12"}], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "arg0"}, {"type": "bool", "name": "arg1"}], "name": "emitCustom", "returns": {"type": "void"}, "events": [{"args": [{"type": "string", "name": "field1"}, {"type": "bool", "name": "field2"}], "name": "Custom"}], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[]", "name": "x"}, {"type": "byte[]", "name": "y"}], "name": "emitDynamicBytes", "returns": {"type": "void"}, "events": [{"args": [{"type": "byte[]", "name": "field1"}, {"type": "byte[]", "name": "field2"}], "name": "DB"}], "readonly": false, "recommendations": {}}], "name": "EventEmitter", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [{"args": [{"type": "uint8", "desc": "The `a` field (native)", "name": "a"}, {"type": "uint8", "desc": "The `b` field (native)", "name": "b"}], "name": "Swapped"}, {"args": [{"type": "uint8", "desc": "The `a` field (ARC4)", "name": "a"}, {"type": "uint8", "desc": "The `b` field (ARC4)", "name": "b"}], "name": "SwappedArc4"}, {"args": [{"type": "uint8", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped4"}, {"args": [{"type": "uint8", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped5"}, {"args": [{"type": "(uint8,uint8)", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped6"}, {"args": [{"type": "uint8[]", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped7"}, {"args": [{"type": "((uint8,uint8))", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped8"}, {"args": [{"type": "uint8[][]", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped9"}, {"args": [{"type": "(uint8,uint8)[]", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped10"}, {"args": [{"type": "(uint8[])", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped11"}, {"args": [{"type": "uint64[]", "name": "field1"}, {"type": "uint64", "name": "field2"}], "name": "Swapped12"}, {"args": [{"type": "string", "name": "field1"}, {"type": "bool", "name": "field2"}], "name": "Custom"}, {"args": [{"type": "byte[]", "name": "field1"}, {"type": "byte[]", "name": "field2"}], "name": "DB"}], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [271, 310, 326], "errorMessage": "invalid array length header"}, {"pc": [286], "errorMessage": "invalid number of bytes for arc4.bool"}, {"pc": [278, 320, 333], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [70, 78], "errorMessage": "invalid number of bytes for arc4.uint8"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint8", "name": "a"}, {"type": "uint8", "name": "b"}], "name": "emitSwapped", "returns": {"type": "void"}, "events": [{"args": [{"type": "uint8", "desc": "The `a` field (native)", "name": "a"}, {"type": "uint8", "desc": "The `b` field (native)", "name": "b"}], "name": "Swapped"}, {"args": [{"type": "uint8", "desc": "The `a` field (ARC4)", "name": "a"}, {"type": "uint8", "desc": "The `b` field (ARC4)", "name": "b"}], "name": "SwappedArc4"}, {"args": [{"type": "uint8", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped4"}, {"args": [{"type": "uint8", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped5"}, {"args": [{"type": "(uint8,uint8)", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped6"}, {"args": [{"type": "uint8[]", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped7"}, {"args": [{"type": "((uint8,uint8))", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped8"}, {"args": [{"type": "uint8[][]", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped9"}, {"args": [{"type": "(uint8,uint8)[]", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped10"}, {"args": [{"type": "(uint8[])", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped11"}, {"args": [{"type": "uint64[]", "name": "field1"}, {"type": "uint64", "name": "field2"}], "name": "Swapped12"}], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "arg0"}, {"type": "bool", "name": "arg1"}], "name": "emitCustom", "returns": {"type": "void"}, "events": [{"args": [{"type": "string", "name": "field1"}, {"type": "bool", "name": "field2"}], "name": "Custom"}], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[]", "name": "x"}, {"type": "byte[]", "name": "y"}], "name": "emitDynamicBytes", "returns": {"type": "void"}, "events": [{"args": [{"type": "byte[]", "name": "field1"}, {"type": "byte[]", "name": "field2"}], "name": "DB"}], "readonly": false, "recommendations": {}}], "name": "EventEmitter", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyADAQACJgICAAICAAMxG0EAJDEZFEQxGESCAwSHabeaBPFIidcE1Ml8nDYaAI4DAAkA1AD7ADEZFDEYFBBDNhoBSRUiEkQ2GgJJFSISRElLAlCABAtjJe1LAVBJsLCABEQeLNhLAVCwgAQOchk6SwFQsIAEylntskxQsElLAVBJSwNQgATUpr0zSwFQSbCwKEsDUEsDUClLBVBJSwJQgAQltfkaTFCwgAQzH4TyTwNQsIAEAAEAAksCUEsBTFCABNzA9vtMULCAAgABTwNQSwFMUIAEm7coN0xQsChPAlBQgATztmbeTFCwTBdMFxYoSwFQTFBMFoACAApMUExQgARb8J4HTFCwIkM2GgFJI1kkCEsBFRJENhoCSRUiEkQpTFBMUIAEoxPAZkxQSbCwIkM2GgFJI1kkCEsBFUlPAhJENhoCSSNZJAhLARUSRIEETwIIFlcGAoACAARMUE8CUExQgARFJOHdTFCwIkM=", "clear": "C4EBQw=="}, "events": [{"args": [{"type": "uint8", "desc": "The `a` field (native)", "name": "a"}, {"type": "uint8", "desc": "The `b` field (native)", "name": "b"}], "name": "Swapped"}, {"args": [{"type": "uint8", "desc": "The `a` field (ARC4)", "name": "a"}, {"type": "uint8", "desc": "The `b` field (ARC4)", "name": "b"}], "name": "SwappedArc4"}, {"args": [{"type": "uint8", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped4"}, {"args": [{"type": "uint8", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped5"}, {"args": [{"type": "(uint8,uint8)", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped6"}, {"args": [{"type": "uint8[]", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped7"}, {"args": [{"type": "((uint8,uint8))", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped8"}, {"args": [{"type": "uint8[][]", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped9"}, {"args": [{"type": "(uint8,uint8)[]", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped10"}, {"args": [{"type": "(uint8[])", "name": "field1"}, {"type": "uint8", "name": "field2"}], "name": "Swapped11"}, {"args": [{"type": "uint64[]", "name": "field1"}, {"type": "uint64", "name": "field2"}], "name": "Swapped12"}, {"args": [{"type": "string", "name": "field1"}, {"type": "bool", "name": "field2"}], "name": "Custom"}, {"args": [{"type": "byte[]", "name": "field1"}, {"type": "byte[]", "name": "field2"}], "name": "DB"}], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDIKICAgIGJ5dGVjYmxvY2sgMHgwMDAyIDB4MDAwMwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYy0yOC1ldmVudHMuYWxnby50czoyMAogICAgLy8gY2xhc3MgRXZlbnRFbWl0dGVyIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDEwCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHg4NzY5Yjc5YSAweGYxNDg4OWQ3IDB4ZDRjOTdjOWMgLy8gbWV0aG9kICJlbWl0U3dhcHBlZCh1aW50OCx1aW50OCl2b2lkIiwgbWV0aG9kICJlbWl0Q3VzdG9tKHN0cmluZyxib29sKXZvaWQiLCBtZXRob2QgImVtaXREeW5hbWljQnl0ZXMoYnl0ZVtdLGJ5dGVbXSl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggZW1pdFN3YXBwZWQgZW1pdEN1c3RvbSBlbWl0RHluYW1pY0J5dGVzCiAgICBlcnIKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDEwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYy0yOC1ldmVudHMuYWxnby50czoyMAogICAgLy8gY2xhc3MgRXZlbnRFbWl0dGVyIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXJjLTI4LWV2ZW50cy5hbGdvLnRzOjpFdmVudEVtaXR0ZXIuZW1pdFN3YXBwZWRbcm91dGluZ10oKSAtPiB2b2lkOgplbWl0U3dhcHBlZDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmMtMjgtZXZlbnRzLmFsZ28udHM6MjEKICAgIC8vIGVtaXRTd2FwcGVkKGE6IFVpbnQ4LCBiOiBVaW50OCkgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ4CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDEKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDgKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmMtMjgtZXZlbnRzLmFsZ28udHM6MjIKICAgIC8vIGVtaXQ8U3dhcHBlZD4oeyBhOiBiLCBiOiBhIH0pCiAgICBkdXAKICAgIGRpZyAyCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDBiNjMyNWVkIC8vIG1ldGhvZCAiU3dhcHBlZCh1aW50OCx1aW50OCkiCiAgICBkaWcgMQogICAgY29uY2F0CiAgICBkdXAKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYy0yOC1ldmVudHMuYWxnby50czoyNQogICAgLy8gZW1pdCh4KQogICAgbG9nCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjLTI4LWV2ZW50cy5hbGdvLnRzOjMxCiAgICAvLyBlbWl0KHkpCiAgICBwdXNoYnl0ZXMgMHg0NDFlMmNkOCAvLyBtZXRob2QgIlN3YXBwZWRBcmM0KHVpbnQ4LHVpbnQ4KSIKICAgIGRpZyAxCiAgICBjb25jYXQKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYy0yOC1ldmVudHMuYWxnby50czozMwogICAgLy8gZW1pdCgnU3dhcHBlZDQnLCBiLCBhKQogICAgcHVzaGJ5dGVzIDB4MGU3MjE5M2EgLy8gbWV0aG9kICJTd2FwcGVkNCh1aW50OCx1aW50OCkiCiAgICBkaWcgMQogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmMtMjgtZXZlbnRzLmFsZ28udHM6MzUKICAgIC8vIGVtaXQoJ1N3YXBwZWQ1KHVpbnQ4LHVpbnQ4KScsIGIsIGEpCiAgICBwdXNoYnl0ZXMgMHhjYTU5ZWRiMiAvLyBtZXRob2QgIlN3YXBwZWQ1KHVpbnQ4LHVpbnQ4KSIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjLTI4LWV2ZW50cy5hbGdvLnRzOjM3CiAgICAvLyBlbWl0KCdTd2FwcGVkNigodWludDgsdWludDgpLHVpbnQ4KScsIFtiLCBiXSBhcyBjb25zdCwgYSkKICAgIGR1cAogICAgZGlnIDEKICAgIGNvbmNhdAogICAgZHVwCiAgICBkaWcgMwogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHhkNGE2YmQzMyAvLyBtZXRob2QgIlN3YXBwZWQ2KCh1aW50OCx1aW50OCksdWludDgpIgogICAgZGlnIDEKICAgIGNvbmNhdAogICAgZHVwCiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmMtMjgtZXZlbnRzLmFsZ28udHM6MzgKICAgIC8vIGVtaXQoJ1N3YXBwZWQ2KCh1aW50OCx1aW50OCksdWludDgpJywgW2IsIGJdLCBhKQogICAgbG9nCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjLTI4LWV2ZW50cy5hbGdvLnRzOjQwCiAgICAvLyBlbWl0KCdTd2FwcGVkNyh1aW50OFtdLHVpbnQ4KScsIFtiLCBiXSwgYSkKICAgIGJ5dGVjXzAgLy8gMHgwMDAyCiAgICBkaWcgMwogICAgY29uY2F0CiAgICBkaWcgMwogICAgY29uY2F0CiAgICBieXRlY18xIC8vIDB4MDAwMwogICAgZGlnIDUKICAgIGNvbmNhdAogICAgZHVwCiAgICBkaWcgMgogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgyNWI1ZjkxYSAvLyBtZXRob2QgIlN3YXBwZWQ3KHVpbnQ4W10sdWludDgpIgogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmMtMjgtZXZlbnRzLmFsZ28udHM6NDIKICAgIC8vIGVtaXQoJ1N3YXBwZWQ4KCgodWludDgsdWludDgpKSx1aW50OCknLCBbW2IsIGJdXSwgYSkKICAgIHB1c2hieXRlcyAweDMzMWY4NGYyIC8vIG1ldGhvZCAiU3dhcHBlZDgoKCh1aW50OCx1aW50OCkpLHVpbnQ4KSIKICAgIHVuY292ZXIgMwogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmMtMjgtZXZlbnRzLmFsZ28udHM6NDMKICAgIC8vIGVtaXQoJ1N3YXBwZWQ5KHVpbnQ4W11bXSx1aW50OCknLCBbW2IsIGJdXSwgYSkKICAgIHB1c2hieXRlcyAweDAwMDEwMDAyCiAgICBkaWcgMgogICAgY29uY2F0CiAgICBkaWcgMQogICAgc3dhcAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHhkY2MwZjZmYiAvLyBtZXRob2QgIlN3YXBwZWQ5KHVpbnQ4W11bXSx1aW50OCkiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYy0yOC1ldmVudHMuYWxnby50czo0NQogICAgLy8gZW1pdCgnU3dhcHBlZDEwKCh1aW50OCx1aW50OClbXSx1aW50OCknLCBbW2IsIGJdXSwgYSkKICAgIHB1c2hieXRlcyAweDAwMDEKICAgIHVuY292ZXIgMwogICAgY29uY2F0CiAgICBkaWcgMQogICAgc3dhcAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHg5YmI3MjgzNyAvLyBtZXRob2QgIlN3YXBwZWQxMCgodWludDgsdWludDgpW10sdWludDgpIgogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmMtMjgtZXZlbnRzLmFsZ28udHM6NDYKICAgIC8vIGVtaXQoJ1N3YXBwZWQxMSgodWludDhbXSksdWludDgpJywgW1tiLCBiXV0sIGEpCiAgICBieXRlY18wIC8vIDB4MDAwMgogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4ZjNiNjY2ZGUgLy8gbWV0aG9kICJTd2FwcGVkMTEoKHVpbnQ4W10pLHVpbnQ4KSIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjLTI4LWV2ZW50cy5hbGdvLnRzOjQ4CiAgICAvLyBjb25zdCBhVWludDY0ID0gYS5hc1VpbnQ2NCgpCiAgICBzd2FwCiAgICBidG9pCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjLTI4LWV2ZW50cy5hbGdvLnRzOjQ5CiAgICAvLyBjb25zdCBiVWludDY0ID0gYi5hc1VpbnQ2NCgpCiAgICBzd2FwCiAgICBidG9pCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjLTI4LWV2ZW50cy5hbGdvLnRzOjUwCiAgICAvLyBlbWl0KCdTd2FwcGVkMTIodWludDY0W10sdWludDY0KScsIFtiVWludDY0LCBiVWludDY0XSwgYVVpbnQ2NCkKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgwMDAyCiAgICBkaWcgMQogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGl0b2IKICAgIHB1c2hieXRlcyAweDAwMGEKICAgIHN3YXAKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHg1YmYwOWUwNyAvLyBtZXRob2QgIlN3YXBwZWQxMih1aW50NjRbXSx1aW50NjQpIgogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmMtMjgtZXZlbnRzLmFsZ28udHM6MjEKICAgIC8vIGVtaXRTd2FwcGVkKGE6IFVpbnQ4LCBiOiBVaW50OCkgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hcmMtMjgtZXZlbnRzLmFsZ28udHM6OkV2ZW50RW1pdHRlci5lbWl0Q3VzdG9tW3JvdXRpbmddKCkgLT4gdm9pZDoKZW1pdEN1c3RvbToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmMtMjgtZXZlbnRzLmFsZ28udHM6NTMKICAgIC8vIGVtaXRDdXN0b20oYXJnMDogc3RyaW5nLCBhcmcxOiBib29sZWFuKSB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDEKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuYm9vbAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYy0yOC1ldmVudHMuYWxnby50czo1NAogICAgLy8gZW1pdCgnQ3VzdG9tJywgYXJnMCwgYXJnMSkKICAgIGJ5dGVjXzEgLy8gMHgwMDAzCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4YTMxM2MwNjYgLy8gbWV0aG9kICJDdXN0b20oc3RyaW5nLGJvb2wpIgogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYy0yOC1ldmVudHMuYWxnby50czo1NQogICAgLy8gZW1pdCgnQ3VzdG9tKHN0cmluZyxib29sKScsIGFyZzAsIGFyZzEpCiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmMtMjgtZXZlbnRzLmFsZ28udHM6NTMKICAgIC8vIGVtaXRDdXN0b20oYXJnMDogc3RyaW5nLCBhcmcxOiBib29sZWFuKSB7CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FyYy0yOC1ldmVudHMuYWxnby50czo6RXZlbnRFbWl0dGVyLmVtaXREeW5hbWljQnl0ZXNbcm91dGluZ10oKSAtPiB2b2lkOgplbWl0RHluYW1pY0J5dGVzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYy0yOC1ldmVudHMuYWxnby50czo1OAogICAgLy8gZW1pdER5bmFtaWNCeXRlcyh4OiBieXRlcywgeTogRHluYW1pY0J5dGVzKSB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgZHVwCiAgICB1bmNvdmVyIDIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYy0yOC1ldmVudHMuYWxnby50czo2MAogICAgLy8gZW1pdCgnREIoYnl0ZVtdLGJ5dGVbXSknLCB4LCB5KQogICAgcHVzaGludCA0CiAgICB1bmNvdmVyIDIKICAgICsKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBwdXNoYnl0ZXMgMHgwMDA0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDQ1MjRlMWRkIC8vIG1ldGhvZCAiREIoYnl0ZVtdLGJ5dGVbXSkiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYy0yOC1ldmVudHMuYWxnby50czo1OAogICAgLy8gZW1pdER5bmFtaWNCeXRlcyh4OiBieXRlcywgeTogRHluYW1pY0J5dGVzKSB7CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [271, 310, 326], "errorMessage": "invalid array length header"}, {"pc": [286], "errorMessage": "invalid number of bytes for arc4.bool"}, {"pc": [278, 320, 333], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [70, 78], "errorMessage": "invalid number of bytes for arc4.uint8"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -461,6 +461,311 @@ class EventEmitterClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class EventEmitterBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating EventEmitter contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class EventEmitterFactory(algokit_utils.TypedAppFactoryProtocol[EventEmitterBareCallCreateParams, None, None]):
+    """Factory for deploying and managing EventEmitterClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = EventEmitterFactoryParams(self.app_factory)
+        self.create_transaction = EventEmitterFactoryCreateTransaction(self.app_factory)
+        self.send = EventEmitterFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: EventEmitterBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[EventEmitterClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return EventEmitterClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> EventEmitterClient:
+        """Get an app client by creator address and name"""
+        return EventEmitterClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> EventEmitterClient:
+        """Get an app client by app ID"""
+        return EventEmitterClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class EventEmitterFactoryParams:
+    """Parameters for creating transactions for EventEmitter contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = EventEmitterFactoryCreateParams(app_factory)
+        self.update = EventEmitterFactoryUpdateParams(app_factory)
+        self.delete = EventEmitterFactoryDeleteParams(app_factory)
+
+class EventEmitterFactoryCreateParams:
+    """Parameters for 'create' operations of EventEmitter contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def emit_swapped(
+        self,
+        args: tuple[int, int] | EmitSwappedArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the emitSwapped(uint8,uint8)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "emitSwapped(uint8,uint8)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def emit_custom(
+        self,
+        args: tuple[str, bool] | EmitCustomArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the emitCustom(string,bool)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "emitCustom(string,bool)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def emit_dynamic_bytes(
+        self,
+        args: tuple[bytes | str, bytes | str] | EmitDynamicBytesArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the emitDynamicBytes(byte[],byte[])void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "emitDynamicBytes(byte[],byte[])void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class EventEmitterFactoryUpdateParams:
+    """Parameters for 'update' operations of EventEmitter contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class EventEmitterFactoryDeleteParams:
+    """Parameters for 'delete' operations of EventEmitter contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class EventEmitterFactoryCreateTransaction:
+    """Create transactions for EventEmitter contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = EventEmitterFactoryCreateTransactionCreate(app_factory)
+
+
+class EventEmitterFactoryCreateTransactionCreate:
+    """Create new instances of EventEmitter contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class EventEmitterFactorySend:
+    """Send calls to EventEmitter contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = EventEmitterFactorySendCreate(app_factory)
+
+
+class EventEmitterFactorySendCreate:
+    """Send create calls to EventEmitter contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[EventEmitterClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return EventEmitterClient(result[0]), result[1]
 
 
 class EventEmitterComposer:

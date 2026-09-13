@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64[]", "name": "mutable"}], "name": "aliasing", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64[]", "name": "mutable"}], "name": "receive", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64[]", "name": "a"}], "name": "receiveReadonly", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(uint64,string,(byte[],uint8))", "name": "arg", "struct": "TopLevelStruct"}], "name": "structReturn", "returns": {"type": "(byte[],uint8)", "struct": "SharedStruct"}, "events": [], "readonly": false, "recommendations": {}}], "name": "Arc4CloneAlgo", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"SharedStruct": [{"name": "foo", "type": "byte[]"}, {"name": "bar", "type": "uint8"}], "TopLevelStruct": [{"name": "a", "type": "uint64"}, {"name": "b", "type": "string"}, {"name": "shared", "type": "SharedStruct"}]}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [148, 171, 194, 235, 276], "errorMessage": "invalid array length header"}, {"pc": [289], "errorMessage": "invalid number of bytes for TopLevelStruct"}, {"pc": [157, 180, 203], "errorMessage": "invalid number of bytes for arc4.dynamic_array<uint64>"}, {"pc": [271], "errorMessage": "invalid tail pointer at index 0 of ((len+uint8[]),uint8)"}, {"pc": [226], "errorMessage": "invalid tail pointer at index 1 of (uint64,(len+utf8[]),((len+uint8[]),uint8))"}, {"pc": [252], "errorMessage": "invalid tail pointer at index 2 of (uint64,(len+utf8[]),((len+uint8[]),uint8))"}, {"pc": [221, 247, 266], "errorMessage": "invalid tuple encoding"}, {"pc": [380], "errorMessage": "this won't error"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64[]", "name": "mutable"}], "name": "aliasing", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64[]", "name": "mutable"}], "name": "receive", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64[]", "name": "a"}], "name": "receiveReadonly", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(uint64,string,(byte[],uint8))", "name": "arg", "struct": "TopLevelStruct"}], "name": "structReturn", "returns": {"type": "(byte[],uint8)", "struct": "SharedStruct"}, "events": [], "readonly": false, "recommendations": {}}], "name": "Arc4CloneAlgo", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"SharedStruct": [{"name": "foo", "type": "byte[]"}, {"name": "bar", "type": "uint8"}], "TopLevelStruct": [{"name": "a", "type": "uint64"}, {"name": "b", "type": "string"}, {"name": "shared", "type": "SharedStruct"}]}, "byteCode": {"approval": "CyAEAAECCEIAAEIAADEbIhNBAF5CAAAxGSISRDEYIhNBAExCAAA2GgCABDmOJw2ABICsvhCABOIT9baABGPkDo1PBI4EABwAFgAQAApCAABCAABCAAAAiAB3Qv/ziABaQv/tiAA9Qv/niAAgQv/hQv/hMRkiEjEYIhIQRIgBECNDigECQgAAi/+L/4lCAAA2GgFJIlklCyQISwEVEkSIAJAjQ0IAADYaAUkiWSULJAhLARUSRIgAiiNDQgAANhoBSSJZJQskCEsBFRJEiAB8I0NCAAA2GgFJFU4BSSVZSYEMEkRLAU8BSwNSIlkjCyQIgQwISwGBCllJSwISREsCTwFPBFJJFU4BSSJZSYEDEkRPAlIiWSMLJAiBAwgISwEVEkSIAC2ABBUffHVPAVCwI0OKAQBCAACL/4gABov/iAAKiYoBAUIAAIv/iYoBAEIAAImKAQFCAACL/4EKWYv/FYv/TwJPAlKL/4EKWYv/FYv/TwJPAlKI/whOAhJEi/+BClmL/xWL/08CTwJSTwGJQgAAiQ==", "clear": "C0IAAIEBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDIgOAogICAgYiBtYWluX2Jsb2NrQDAKCm1haW5fYmxvY2tAMDoKICAgIGIgbWFpbl9ibG9ja0AxCgptYWluX2Jsb2NrQDE6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjE2CiAgICAvLyBleHBvcnQgY2xhc3MgQXJjNENsb25lQWxnbyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDExCiAgICBiIG1haW5fYWJpX3JvdXRpbmdAMgoKbWFpbl9hYmlfcm91dGluZ0AyOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czoxNgogICAgLy8gZXhwb3J0IGNsYXNzIEFyYzRDbG9uZUFsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBpbnRjXzAgLy8gTm9PcAogICAgPT0KICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGludGNfMCAvLyAwCiAgICAhPQogICAgYnogbWFpbl9jcmVhdGVfTm9PcEA5CiAgICBiIG1haW5fY2FsbF9Ob09wQDMKCm1haW5fY2FsbF9Ob09wQDM6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjE2CiAgICAvLyBleHBvcnQgY2xhc3MgQXJjNENsb25lQWxnbyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIHB1c2hieXRlcyAweDM5OGUyNzBkIC8vIG1ldGhvZCAiYWxpYXNpbmcodWludDY0W10pdm9pZCIKICAgIHB1c2hieXRlcyAweDgwYWNiZTEwIC8vIG1ldGhvZCAicmVjZWl2ZSh1aW50NjRbXSl2b2lkIgogICAgcHVzaGJ5dGVzIDB4ZTIxM2Y1YjYgLy8gbWV0aG9kICJyZWNlaXZlUmVhZG9ubHkodWludDY0W10pdm9pZCIKICAgIHB1c2hieXRlcyAweDYzZTQwZThkIC8vIG1ldGhvZCAic3RydWN0UmV0dXJuKCh1aW50NjQsc3RyaW5nLChieXRlW10sdWludDgpKSkoYnl0ZVtdLHVpbnQ4KSIKICAgIHVuY292ZXIgNAogICAgbWF0Y2ggbWFpbl9hbGlhc2luZ19yb3V0ZUA0IG1haW5fcmVjZWl2ZV9yb3V0ZUA1IG1haW5fcmVjZWl2ZVJlYWRvbmx5X3JvdXRlQDYgbWFpbl9zdHJ1Y3RSZXR1cm5fcm91dGVANwogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAOAoKbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDg6CiAgICBiIG1haW5fYWZ0ZXJfaWZfZWxzZUAxMAoKbWFpbl9hZnRlcl9pZl9lbHNlQDEwOgogICAgYiBtYWluX2FmdGVyX2lmX2Vsc2VAMTIKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWNsb25lLmFsZ28udHM6MTYKICAgIC8vIGV4cG9ydCBjbGFzcyBBcmM0Q2xvbmVBbGdvIGV4dGVuZHMgQ29udHJhY3QgewogICAgZXJyCgptYWluX3N0cnVjdFJldHVybl9yb3V0ZUA3OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czo1MwogICAgLy8gc3RydWN0UmV0dXJuKGFyZzogVG9wTGV2ZWxTdHJ1Y3QpOiBTaGFyZWRTdHJ1Y3QgewogICAgY2FsbHN1YiBzdHJ1Y3RSZXR1cm4KICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDgKCm1haW5fcmVjZWl2ZVJlYWRvbmx5X3JvdXRlQDY6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjUxCiAgICAvLyByZWNlaXZlUmVhZG9ubHkoYTogcmVhZG9ubHkgdWludDY0W10pIHt9CiAgICBjYWxsc3ViIHJlY2VpdmVSZWFkb25seQogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAOAoKbWFpbl9yZWNlaXZlX3JvdXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjQ5CiAgICAvLyByZWNlaXZlKG11dGFibGU6IHVpbnQ2NFtdKSB7fQogICAgY2FsbHN1YiByZWNlaXZlCiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEA4CgptYWluX2FsaWFzaW5nX3JvdXRlQDQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjE3CiAgICAvLyBhbGlhc2luZyhtdXRhYmxlOiB1aW50NjRbXSkgewogICAgY2FsbHN1YiBhbGlhc2luZwogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAOAoKbWFpbl9jcmVhdGVfTm9PcEA5OgogICAgYiBtYWluX2FmdGVyX2lmX2Vsc2VAMTAKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDExOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czoxNgogICAgLy8gZXhwb3J0IGNsYXNzIEFyYzRDbG9uZUFsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBpbnRjXzAgLy8gTm9PcAogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBpbnRjXzAgLy8gMAogICAgPT0KICAgICYmCiAgICBhc3NlcnQKICAgIGNhbGxzdWIgX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czo6ZWNobyhzOiBieXRlcykgLT4gYnl0ZXMsIGJ5dGVzOgplY2hvOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czo2MAogICAgLy8gZnVuY3Rpb24gZWNobyhzOiBTaGFyZWRTdHJ1Y3QpOiBTaGFyZWRTdHJ1Y3QgewogICAgcHJvdG8gMSAyCiAgICBiIGVjaG9fYmxvY2tAMAoKZWNob19ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czo2MQogICAgLy8gcmV0dXJuIHMKICAgIGZyYW1lX2RpZyAtMQogICAgZnJhbWVfZGlnIC0xCiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLmFsaWFzaW5nW3JvdXRpbmddKCkgLT4gdm9pZDoKYWxpYXNpbmc6CiAgICBiIGFsaWFzaW5nX2Jsb2NrQDAKCmFsaWFzaW5nX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjE3CiAgICAvLyBhbGlhc2luZyhtdXRhYmxlOiB1aW50NjRbXSkgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18zIC8vIDgKICAgICoKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8dWludDY0PgogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLmFsaWFzaW5nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czo6QXJjNENsb25lQWxnby5yZWNlaXZlW3JvdXRpbmddKCkgLT4gdm9pZDoKcmVjZWl2ZToKICAgIGIgcmVjZWl2ZV9ibG9ja0AwCgpyZWNlaXZlX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjQ5CiAgICAvLyByZWNlaXZlKG11dGFibGU6IHVpbnQ2NFtdKSB7fQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18zIC8vIDgKICAgICoKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8dWludDY0PgogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLnJlY2VpdmUKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLnJlY2VpdmVSZWFkb25seVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlY2VpdmVSZWFkb25seToKICAgIGIgcmVjZWl2ZVJlYWRvbmx5X2Jsb2NrQDAKCnJlY2VpdmVSZWFkb25seV9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czo1MQogICAgLy8gcmVjZWl2ZVJlYWRvbmx5KGE6IHJlYWRvbmx5IHVpbnQ2NFtdKSB7fQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18zIC8vIDgKICAgICoKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8dWludDY0PgogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLnJlY2VpdmVSZWFkb25seQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWNsb25lLmFsZ28udHM6OkFyYzRDbG9uZUFsZ28uc3RydWN0UmV0dXJuW3JvdXRpbmddKCkgLT4gdm9pZDoKc3RydWN0UmV0dXJuOgogICAgYiBzdHJ1Y3RSZXR1cm5fYmxvY2tAMAoKc3RydWN0UmV0dXJuX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjUzCiAgICAvLyBzdHJ1Y3RSZXR1cm4oYXJnOiBUb3BMZXZlbFN0cnVjdCk6IFNoYXJlZFN0cnVjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgY292ZXIgMQogICAgZHVwCiAgICBpbnRjXzMgLy8gOAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgdHVwbGUgZW5jb2RpbmcKICAgIGR1cAogICAgcHVzaGludCAxMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIHRhaWwgcG9pbnRlciBhdCBpbmRleCAxIG9mICh1aW50NjQsKGxlbit1dGY4W10pLCgobGVuK3VpbnQ4W10pLHVpbnQ4KSkKICAgIGRpZyAxCiAgICB1bmNvdmVyIDEKICAgIGRpZyAzCiAgICBzdWJzdHJpbmczCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDEKICAgICoKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBwdXNoaW50IDEyCiAgICArCiAgICBkaWcgMQogICAgcHVzaGludCAxMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgdHVwbGUgZW5jb2RpbmcKICAgIGR1cAogICAgZGlnIDIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCB0YWlsIHBvaW50ZXIgYXQgaW5kZXggMiBvZiAodWludDY0LChsZW4rdXRmOFtdKSwoKGxlbit1aW50OFtdKSx1aW50OCkpCiAgICBkaWcgMgogICAgdW5jb3ZlciAxCiAgICB1bmNvdmVyIDQKICAgIHN1YnN0cmluZzMKICAgIGR1cAogICAgbGVuCiAgICBjb3ZlciAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCB0dXBsZSBlbmNvZGluZwogICAgZHVwCiAgICBwdXNoaW50IDMKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCB0YWlsIHBvaW50ZXIgYXQgaW5kZXggMCBvZiAoKGxlbit1aW50OFtdKSx1aW50OCkKICAgIHVuY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAxCiAgICAqCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgcHVzaGludCAzCiAgICArCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBUb3BMZXZlbFN0cnVjdAogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLnN0cnVjdFJldHVybgogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLmFsaWFzaW5nKG11dGFibGU6IGJ5dGVzKSAtPiB2b2lkOgp0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLmFsaWFzaW5nOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czoxNwogICAgLy8gYWxpYXNpbmcobXV0YWJsZTogdWludDY0W10pIHsKICAgIHByb3RvIDEgMAogICAgYiB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLmFsaWFzaW5nX2Jsb2NrQDAKCnRlc3RzL2FwcHJvdmFscy9hcmM0LWNsb25lLmFsZ28udHM6OkFyYzRDbG9uZUFsZ28uYWxpYXNpbmdfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWNsb25lLmFsZ28udHM6MzAKICAgIC8vIHRoaXMucmVjZWl2ZSgoeiA9IGNsb25lKG11dGFibGUpKSkKICAgIGZyYW1lX2RpZyAtMQogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLnJlY2VpdmUKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWNsb25lLmFsZ28udHM6MzIKICAgIC8vIHRoaXMucmVjZWl2ZVJlYWRvbmx5KG11dGFibGUpCiAgICBmcmFtZV9kaWcgLTEKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czo6QXJjNENsb25lQWxnby5yZWNlaXZlUmVhZG9ubHkKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWNsb25lLmFsZ28udHM6OkFyYzRDbG9uZUFsZ28ucmVjZWl2ZShtdXRhYmxlOiBieXRlcykgLT4gYnl0ZXM6CnRlc3RzL2FwcHJvdmFscy9hcmM0LWNsb25lLmFsZ28udHM6OkFyYzRDbG9uZUFsZ28ucmVjZWl2ZToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWNsb25lLmFsZ28udHM6NDkKICAgIC8vIHJlY2VpdmUobXV0YWJsZTogdWludDY0W10pIHt9CiAgICBwcm90byAxIDEKICAgIGIgdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czo6QXJjNENsb25lQWxnby5yZWNlaXZlX2Jsb2NrQDAKCnRlc3RzL2FwcHJvdmFscy9hcmM0LWNsb25lLmFsZ28udHM6OkFyYzRDbG9uZUFsZ28ucmVjZWl2ZV9ibG9ja0AwOgogICAgZnJhbWVfZGlnIC0xCiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLnJlY2VpdmVSZWFkb25seShhOiBieXRlcykgLT4gdm9pZDoKdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czo6QXJjNENsb25lQWxnby5yZWNlaXZlUmVhZG9ubHk6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjUxCiAgICAvLyByZWNlaXZlUmVhZG9ubHkoYTogcmVhZG9ubHkgdWludDY0W10pIHt9CiAgICBwcm90byAxIDAKICAgIGIgdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czo6QXJjNENsb25lQWxnby5yZWNlaXZlUmVhZG9ubHlfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czo6QXJjNENsb25lQWxnby5yZWNlaXZlUmVhZG9ubHlfYmxvY2tAMDoKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWNsb25lLmFsZ28udHM6OkFyYzRDbG9uZUFsZ28uc3RydWN0UmV0dXJuKGFyZzogYnl0ZXMpIC0+IGJ5dGVzOgp0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLnN0cnVjdFJldHVybjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWNsb25lLmFsZ28udHM6NTMKICAgIC8vIHN0cnVjdFJldHVybihhcmc6IFRvcExldmVsU3RydWN0KTogU2hhcmVkU3RydWN0IHsKICAgIHByb3RvIDEgMQogICAgYiB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLnN0cnVjdFJldHVybl9ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLnN0cnVjdFJldHVybl9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtY2xvbmUuYWxnby50czo1NQogICAgLy8gYXNzZXJ0KGFyZy5zaGFyZWQgPT09IGVjaG8oYXJnLnNoYXJlZCksICJ0aGlzIHdvbid0IGVycm9yIikKICAgIGZyYW1lX2RpZyAtMQogICAgcHVzaGludCAxMAogICAgZXh0cmFjdF91aW50MTYKICAgIGZyYW1lX2RpZyAtMQogICAgbGVuCiAgICBmcmFtZV9kaWcgLTEKICAgIHVuY292ZXIgMgogICAgdW5jb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBmcmFtZV9kaWcgLTEKICAgIHB1c2hpbnQgMTAKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTEKICAgIGxlbgogICAgZnJhbWVfZGlnIC0xCiAgICB1bmNvdmVyIDIKICAgIHVuY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgY2FsbHN1YiBlY2hvCiAgICBjb3ZlciAyCiAgICA9PQogICAgYXNzZXJ0IC8vIHRoaXMgd29uJ3QgZXJyb3IKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWNsb25lLmFsZ28udHM6NTYKICAgIC8vIHJldHVybiBhcmcuc2hhcmVkCiAgICBmcmFtZV9kaWcgLTEKICAgIHB1c2hpbnQgMTAKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTEKICAgIGxlbgogICAgZnJhbWVfZGlnIC0xCiAgICB1bmNvdmVyIDIKICAgIHVuY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgdW5jb3ZlciAxCiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1jbG9uZS5hbGdvLnRzOjpBcmM0Q2xvbmVBbGdvLl9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZSgpIC0+IHZvaWQ6Cl9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZToKICAgIGIgX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlX2Jsb2NrQDAKCl9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZV9ibG9ja0AwOgogICAgcmV0c3ViCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [148, 171, 194, 235, 276], "errorMessage": "invalid array length header"}, {"pc": [289], "errorMessage": "invalid number of bytes for TopLevelStruct"}, {"pc": [157, 180, 203], "errorMessage": "invalid number of bytes for arc4.dynamic_array<uint64>"}, {"pc": [271], "errorMessage": "invalid tail pointer at index 0 of ((len+uint8[]),uint8)"}, {"pc": [226], "errorMessage": "invalid tail pointer at index 1 of (uint64,(len+utf8[]),((len+uint8[]),uint8))"}, {"pc": [252], "errorMessage": "invalid tail pointer at index 2 of (uint64,(len+utf8[]),((len+uint8[]),uint8))"}, {"pc": [221, 247, 266], "errorMessage": "invalid tuple encoding"}, {"pc": [380], "errorMessage": "this won't error"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -529,6 +529,331 @@ class Arc4CloneAlgoClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class Arc4CloneAlgoBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating Arc4CloneAlgo contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class Arc4CloneAlgoFactory(algokit_utils.TypedAppFactoryProtocol[Arc4CloneAlgoBareCallCreateParams, None, None]):
+    """Factory for deploying and managing Arc4CloneAlgoClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = Arc4CloneAlgoFactoryParams(self.app_factory)
+        self.create_transaction = Arc4CloneAlgoFactoryCreateTransaction(self.app_factory)
+        self.send = Arc4CloneAlgoFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: Arc4CloneAlgoBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[Arc4CloneAlgoClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return Arc4CloneAlgoClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> Arc4CloneAlgoClient:
+        """Get an app client by creator address and name"""
+        return Arc4CloneAlgoClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> Arc4CloneAlgoClient:
+        """Get an app client by app ID"""
+        return Arc4CloneAlgoClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class Arc4CloneAlgoFactoryParams:
+    """Parameters for creating transactions for Arc4CloneAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = Arc4CloneAlgoFactoryCreateParams(app_factory)
+        self.update = Arc4CloneAlgoFactoryUpdateParams(app_factory)
+        self.delete = Arc4CloneAlgoFactoryDeleteParams(app_factory)
+
+class Arc4CloneAlgoFactoryCreateParams:
+    """Parameters for 'create' operations of Arc4CloneAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def aliasing(
+        self,
+        args: tuple[list[int]] | AliasingArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the aliasing(uint64[])void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "aliasing(uint64[])void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def receive(
+        self,
+        args: tuple[list[int]] | ReceiveArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the receive(uint64[])void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "receive(uint64[])void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def receive_readonly(
+        self,
+        args: tuple[list[int]] | ReceiveReadonlyArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the receiveReadonly(uint64[])void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "receiveReadonly(uint64[])void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def struct_return(
+        self,
+        args: tuple[TopLevelStruct] | StructReturnArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the structReturn((uint64,string,(byte[],uint8)))(byte[],uint8) ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "structReturn((uint64,string,(byte[],uint8)))(byte[],uint8)",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class Arc4CloneAlgoFactoryUpdateParams:
+    """Parameters for 'update' operations of Arc4CloneAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class Arc4CloneAlgoFactoryDeleteParams:
+    """Parameters for 'delete' operations of Arc4CloneAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class Arc4CloneAlgoFactoryCreateTransaction:
+    """Create transactions for Arc4CloneAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = Arc4CloneAlgoFactoryCreateTransactionCreate(app_factory)
+
+
+class Arc4CloneAlgoFactoryCreateTransactionCreate:
+    """Create new instances of Arc4CloneAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class Arc4CloneAlgoFactorySend:
+    """Send calls to Arc4CloneAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = Arc4CloneAlgoFactorySendCreate(app_factory)
+
+
+class Arc4CloneAlgoFactorySendCreate:
+    """Send create calls to Arc4CloneAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[Arc4CloneAlgoClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return Arc4CloneAlgoClient(result[0]), result[1]
 
 
 class Arc4CloneAlgoComposer:

@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "n"}], "name": "setState", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "SubClassWithExplicitTotals", "state": {"keys": {"box": {}, "global": {"oneGlobal": {"key": "b25lR2xvYmFs", "keyType": "AVMString", "valueType": "AVMUint64"}, "twoGlobal": {"key": "dHdvR2xvYmFs", "keyType": "AVMString", "valueType": "AVMUint64"}}, "local": {"oneLocalBytes": {"key": "b25lTG9jYWxCeXRlcw==", "keyType": "AVMString", "valueType": "AVMBytes"}}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 4}, "local": {"bytes": 1, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [111], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "n"}], "name": "setState", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "SubClassWithExplicitTotals", "state": {"keys": {"box": {}, "global": {"oneGlobal": {"key": "b25lR2xvYmFs", "keyType": "AVMString", "valueType": "AVMUint64"}, "twoGlobal": {"key": "dHdvR2xvYmFs", "keyType": "AVMString", "valueType": "AVMUint64"}}, "local": {"oneLocalBytes": {"key": "b25lTG9jYWxCeXRlcw==", "keyType": "AVMString", "valueType": "AVMBytes"}}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 4}, "local": {"bytes": 1, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyACAAEmAQlvbmVHbG9iYWxCAAAxGEAACUIAAIgAdEIAAEIAADEbIhNBAClCAAA2GgCABCzZWqFPAY4BAAdCAABCAAAAMRkiEjEYIhMQRIgAEkL/7DEZIhIxGCISEESIAC0jQ0IAADYaAUkVgQgSRBeIAAIjQ4oBAEIAACiL/2eACXR3b0dsb2JhbIv/Z4lCAACJQgAAQgAAQgAAKCNniQ==", "clear": "C0IAAIEBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICBieXRlY2Jsb2NrICJvbmVHbG9iYWwiCiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgYiBtYWluX2lmX2JvZHlAMQoKbWFpbl9pZl9ib2R5QDE6CiAgICBjYWxsc3ViIGNvbnN0cnVjdG9yCiAgICBiIG1haW5fYWZ0ZXJfaWZfZWxzZUAyCgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIGIgbWFpbl9ibG9ja0AzCgptYWluX2Jsb2NrQDM6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6MjQtMjUKICAgIC8vIEBjb250cmFjdCh7IHN0YXRlVG90YWxzOiB7IGdsb2JhbFVpbnRzOiA0LCBsb2NhbFVpbnRzOiAwIH0gfSkKICAgIC8vIGV4cG9ydCBjbGFzcyBTdWJDbGFzc1dpdGhFeHBsaWNpdFRvdGFscyBleHRlbmRzIEJhc2VXaXRoU3RhdGUge30KICAgIHR4biBOdW1BcHBBcmdzCiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDcKICAgIGIgbWFpbl9hYmlfcm91dGluZ0A0CgptYWluX2FiaV9yb3V0aW5nQDQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6MjQtMjUKICAgIC8vIEBjb250cmFjdCh7IHN0YXRlVG90YWxzOiB7IGdsb2JhbFVpbnRzOiA0LCBsb2NhbFVpbnRzOiAwIH0gfSkKICAgIC8vIGV4cG9ydCBjbGFzcyBTdWJDbGFzc1dpdGhFeHBsaWNpdFRvdGFscyBleHRlbmRzIEJhc2VXaXRoU3RhdGUge30KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIHB1c2hieXRlcyAweDJjZDk1YWExIC8vIG1ldGhvZCAic2V0U3RhdGUodWludDY0KXZvaWQiCiAgICB1bmNvdmVyIDEKICAgIG1hdGNoIG1haW5fc2V0U3RhdGVfcm91dGVANQogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRANgoKbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDY6CiAgICBiIG1haW5fYWZ0ZXJfaWZfZWxzZUA4CgptYWluX2FmdGVyX2lmX2Vsc2VAODoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9zdGF0ZS10b3RhbHMuYWxnby50czoyNC0yNQogICAgLy8gQGNvbnRyYWN0KHsgc3RhdGVUb3RhbHM6IHsgZ2xvYmFsVWludHM6IDQsIGxvY2FsVWludHM6IDAgfSB9KQogICAgLy8gZXhwb3J0IGNsYXNzIFN1YkNsYXNzV2l0aEV4cGxpY2l0VG90YWxzIGV4dGVuZHMgQmFzZVdpdGhTdGF0ZSB7fQogICAgZXJyCgptYWluX3NldFN0YXRlX3JvdXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6OQogICAgLy8gc2V0U3RhdGUobjogdWludDY0KSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBpbnRjXzAgLy8gTm9PcAogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgICYmCiAgICBhc3NlcnQKICAgIGNhbGxzdWIgc2V0U3RhdGUKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDYKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDc6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6MjQtMjUKICAgIC8vIEBjb250cmFjdCh7IHN0YXRlVG90YWxzOiB7IGdsb2JhbFVpbnRzOiA0LCBsb2NhbFVpbnRzOiAwIH0gfSkKICAgIC8vIGV4cG9ydCBjbGFzcyBTdWJDbGFzc1dpdGhFeHBsaWNpdFRvdGFscyBleHRlbmRzIEJhc2VXaXRoU3RhdGUge30KICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGludGNfMCAvLyBOb09wCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGludGNfMCAvLyAwCiAgICA9PQogICAgJiYKICAgIGFzc2VydAogICAgY2FsbHN1YiBfX2FsZ290c19fLmRlZmF1bHRDcmVhdGUKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6OkJhc2VXaXRoU3RhdGUuc2V0U3RhdGVbcm91dGluZ10oKSAtPiB2b2lkOgpzZXRTdGF0ZToKICAgIGIgc2V0U3RhdGVfYmxvY2tAMAoKc2V0U3RhdGVfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9zdGF0ZS10b3RhbHMuYWxnby50czo5CiAgICAvLyBzZXRTdGF0ZShuOiB1aW50NjQpIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICBjYWxsc3ViIHRlc3RzL2FwcHJvdmFscy9zdGF0ZS10b3RhbHMuYWxnby50czo6QmFzZVdpdGhTdGF0ZS5zZXRTdGF0ZQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9zdGF0ZS10b3RhbHMuYWxnby50czo6QmFzZVdpdGhTdGF0ZS5zZXRTdGF0ZShuOiB1aW50NjQpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy9zdGF0ZS10b3RhbHMuYWxnby50czo6QmFzZVdpdGhTdGF0ZS5zZXRTdGF0ZToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9zdGF0ZS10b3RhbHMuYWxnby50czo5CiAgICAvLyBzZXRTdGF0ZShuOiB1aW50NjQpIHsKICAgIHByb3RvIDEgMAogICAgYiB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6OkJhc2VXaXRoU3RhdGUuc2V0U3RhdGVfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3N0YXRlLXRvdGFscy5hbGdvLnRzOjpCYXNlV2l0aFN0YXRlLnNldFN0YXRlX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6NQogICAgLy8gb25lR2xvYmFsID0gR2xvYmFsU3RhdGUoeyBpbml0aWFsVmFsdWU6IFVpbnQ2NCgxKSB9KQogICAgYnl0ZWNfMCAvLyAib25lR2xvYmFsIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3N0YXRlLXRvdGFscy5hbGdvLnRzOjEwCiAgICAvLyB0aGlzLm9uZUdsb2JhbC52YWx1ZSA9IG4KICAgIGZyYW1lX2RpZyAtMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9zdGF0ZS10b3RhbHMuYWxnby50czo2CiAgICAvLyB0d29HbG9iYWwgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KCkKICAgIHB1c2hieXRlcyAidHdvR2xvYmFsIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3N0YXRlLXRvdGFscy5hbGdvLnRzOjExCiAgICAvLyB0aGlzLnR3b0dsb2JhbC52YWx1ZSA9IG4KICAgIGZyYW1lX2RpZyAtMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9zdGF0ZS10b3RhbHMuYWxnby50czo6U3ViQ2xhc3NXaXRoRXhwbGljaXRUb3RhbHMuX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlKCkgLT4gdm9pZDoKX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlOgogICAgYiBfX2FsZ290c19fLmRlZmF1bHRDcmVhdGVfYmxvY2tAMAoKX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlX2Jsb2NrQDA6CiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6OkJhc2VXaXRoU3RhdGUuY29uc3RydWN0b3IoKSAtPiB2b2lkOgpjb25zdHJ1Y3RvcjoKICAgIGIgY29uc3RydWN0b3JfYmxvY2tAMAoKY29uc3RydWN0b3JfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9zdGF0ZS10b3RhbHMuYWxnby50czo0CiAgICAvLyBleHBvcnQgY2xhc3MgQmFzZVdpdGhTdGF0ZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIGIgY29uc3RydWN0b3JfYmxvY2tAMQoKY29uc3RydWN0b3JfYmxvY2tAMToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9zdGF0ZS10b3RhbHMuYWxnby50czo0CiAgICAvLyBleHBvcnQgY2xhc3MgQmFzZVdpdGhTdGF0ZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIGIgY29uc3RydWN0b3JfYWZ0ZXJfaW5saW5lZF9AYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY29uc3RydWN0b3JAMgoKY29uc3RydWN0b3JfYWZ0ZXJfaW5saW5lZF9AYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY29uc3RydWN0b3JAMjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9zdGF0ZS10b3RhbHMuYWxnby50czo1CiAgICAvLyBvbmVHbG9iYWwgPSBHbG9iYWxTdGF0ZSh7IGluaXRpYWxWYWx1ZTogVWludDY0KDEpIH0pCiAgICBieXRlY18wIC8vICJvbmVHbG9iYWwiCiAgICBpbnRjXzEgLy8gMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1Ygo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [111], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -436,6 +436,271 @@ class SubClassWithExplicitTotalsClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class SubClassWithExplicitTotalsBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating SubClassWithExplicitTotals contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class SubClassWithExplicitTotalsFactory(algokit_utils.TypedAppFactoryProtocol[SubClassWithExplicitTotalsBareCallCreateParams, None, None]):
+    """Factory for deploying and managing SubClassWithExplicitTotalsClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = SubClassWithExplicitTotalsFactoryParams(self.app_factory)
+        self.create_transaction = SubClassWithExplicitTotalsFactoryCreateTransaction(self.app_factory)
+        self.send = SubClassWithExplicitTotalsFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: SubClassWithExplicitTotalsBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[SubClassWithExplicitTotalsClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return SubClassWithExplicitTotalsClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> SubClassWithExplicitTotalsClient:
+        """Get an app client by creator address and name"""
+        return SubClassWithExplicitTotalsClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> SubClassWithExplicitTotalsClient:
+        """Get an app client by app ID"""
+        return SubClassWithExplicitTotalsClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class SubClassWithExplicitTotalsFactoryParams:
+    """Parameters for creating transactions for SubClassWithExplicitTotals contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = SubClassWithExplicitTotalsFactoryCreateParams(app_factory)
+        self.update = SubClassWithExplicitTotalsFactoryUpdateParams(app_factory)
+        self.delete = SubClassWithExplicitTotalsFactoryDeleteParams(app_factory)
+
+class SubClassWithExplicitTotalsFactoryCreateParams:
+    """Parameters for 'create' operations of SubClassWithExplicitTotals contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def set_state(
+        self,
+        args: tuple[int] | SetStateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the setState(uint64)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "setState(uint64)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class SubClassWithExplicitTotalsFactoryUpdateParams:
+    """Parameters for 'update' operations of SubClassWithExplicitTotals contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class SubClassWithExplicitTotalsFactoryDeleteParams:
+    """Parameters for 'delete' operations of SubClassWithExplicitTotals contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class SubClassWithExplicitTotalsFactoryCreateTransaction:
+    """Create transactions for SubClassWithExplicitTotals contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = SubClassWithExplicitTotalsFactoryCreateTransactionCreate(app_factory)
+
+
+class SubClassWithExplicitTotalsFactoryCreateTransactionCreate:
+    """Create new instances of SubClassWithExplicitTotals contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class SubClassWithExplicitTotalsFactorySend:
+    """Send calls to SubClassWithExplicitTotals contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = SubClassWithExplicitTotalsFactorySendCreate(app_factory)
+
+
+class SubClassWithExplicitTotalsFactorySendCreate:
+    """Send create calls to SubClassWithExplicitTotals contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[SubClassWithExplicitTotalsClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return SubClassWithExplicitTotalsClient(result[0]), result[1]
 
 
 class SubClassWithExplicitTotalsComposer:

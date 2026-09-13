@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "asset", "name": "asset"}, {"type": "application", "name": "app"}, {"type": "account", "name": "acc"}], "name": "echoResourceByIndex", "returns": {"type": "(uint64,uint64,address)"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "asset"}, {"type": "uint64", "name": "app"}, {"type": "address", "name": "acc"}], "name": "echoResourceByValue", "returns": {"type": "(uint64,uint64,address)"}, "events": [], "readonly": false, "recommendations": {}}], "name": "EchoResource", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [172], "errorMessage": "expected account to be passed by index"}, {"pc": [94], "errorMessage": "expected account to be passed by value"}, {"pc": [162], "errorMessage": "expected application to be passed by index"}, {"pc": [88], "errorMessage": "expected application to be passed by value"}, {"pc": [152], "errorMessage": "expected asset to be passed by index"}, {"pc": [80], "errorMessage": "expected asset to be passed by value"}, {"pc": [72], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}, {"pc": [53, 62], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [117, 128, 139], "errorMessage": "invalid number of bytes for arc4.uint8"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "asset", "name": "asset"}, {"type": "application", "name": "app"}, {"type": "account", "name": "acc"}], "name": "echoResourceByIndex", "returns": {"type": "(uint64,uint64,address)"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "asset"}, {"type": "uint64", "name": "app"}, {"type": "address", "name": "acc"}], "name": "echoResourceByValue", "returns": {"type": "(uint64,uint64,address)"}, "events": [], "readonly": false, "recommendations": {}}], "name": "EchoResource", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyACAQgmAQQVH3x1MRtBAKsxGRREMRhEggIEd+KNdARNNwJ2NhoAjgIAQQABADYaAUkVIxJEFzYaAkkVIxJEFzYaA0kVgSASRDYaARdLAxJENhoCF0sCEkRJNhoDEkRPAhZPAhZQTFAoTFCwIkM2GgFJFSISRBfAMDYaAkkVIhJEF8AyNhoDSRUiEkQXwBw2GgEXwDBLAxJENhoCF8AySwISRDYaAxfAHEsBEkRPAhZPAhZQTFAoTFCwIkMxGRQxGBQQQw==", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSA4CiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9yZXNvdXJjZS1lbmNvZGluZy5hbGdvLnRzOjM4CiAgICAvLyBjbGFzcyBFY2hvUmVzb3VyY2UgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAOQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4NzdlMjhkNzQgMHg0ZDM3MDI3NiAvLyBtZXRob2QgImVjaG9SZXNvdXJjZUJ5SW5kZXgoYXNzZXQsYXBwbGljYXRpb24sYWNjb3VudCkodWludDY0LHVpbnQ2NCxhZGRyZXNzKSIsIG1ldGhvZCAiZWNob1Jlc291cmNlQnlWYWx1ZSh1aW50NjQsdWludDY0LGFkZHJlc3MpKHVpbnQ2NCx1aW50NjQsYWRkcmVzcykiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2VjaG9SZXNvdXJjZUJ5SW5kZXhfcm91dGVANCBtYWluX2VjaG9SZXNvdXJjZUJ5VmFsdWVfcm91dGVANQogICAgZXJyCgptYWluX2VjaG9SZXNvdXJjZUJ5VmFsdWVfcm91dGVANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9yZXNvdXJjZS1lbmNvZGluZy5hbGdvLnRzOjUwCiAgICAvLyBAYWJpbWV0aG9kKHsgcmVzb3VyY2VFbmNvZGluZzogJ3ZhbHVlJyB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3Jlc291cmNlLWVuY29kaW5nLmFsZ28udHM6NTIKICAgIC8vIGNvbnN0IGFzc2V0SWQgPSBvcC5idG9pKFR4bi5hcHBsaWNhdGlvbkFyZ3MoMSkpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcmVzb3VyY2UtZW5jb2RpbmcuYWxnby50czo1MwogICAgLy8gYXNzZXJ0KGFzc2V0ID09PSBBc3NldChhc3NldElkKSwgJ2V4cGVjdGVkIGFzc2V0IHRvIGJlIHBhc3NlZCBieSB2YWx1ZScpCiAgICBkaWcgMwogICAgPT0KICAgIGFzc2VydCAvLyBleHBlY3RlZCBhc3NldCB0byBiZSBwYXNzZWQgYnkgdmFsdWUKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9yZXNvdXJjZS1lbmNvZGluZy5hbGdvLnRzOjU0CiAgICAvLyBjb25zdCBhcHBJZCA9IG9wLmJ0b2koVHhuLmFwcGxpY2F0aW9uQXJncygyKSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGJ0b2kKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9yZXNvdXJjZS1lbmNvZGluZy5hbGdvLnRzOjU1CiAgICAvLyBhc3NlcnQoYXBwID09PSBBcHBsaWNhdGlvbihhcHBJZCksICdleHBlY3RlZCBhcHBsaWNhdGlvbiB0byBiZSBwYXNzZWQgYnkgdmFsdWUnKQogICAgZGlnIDIKICAgID09CiAgICBhc3NlcnQgLy8gZXhwZWN0ZWQgYXBwbGljYXRpb24gdG8gYmUgcGFzc2VkIGJ5IHZhbHVlCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcmVzb3VyY2UtZW5jb2RpbmcuYWxnby50czo1NwogICAgLy8gYXNzZXJ0KGFjYyA9PT0gQWNjb3VudChhZGRyZXNzKSwgJ2V4cGVjdGVkIGFjY291bnQgdG8gYmUgcGFzc2VkIGJ5IHZhbHVlJykKICAgIGR1cAogICAgLy8gdGVzdHMvYXBwcm92YWxzL3Jlc291cmNlLWVuY29kaW5nLmFsZ28udHM6NTYKICAgIC8vIGNvbnN0IGFkZHJlc3MgPSBUeG4uYXBwbGljYXRpb25BcmdzKDMpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcmVzb3VyY2UtZW5jb2RpbmcuYWxnby50czo1NwogICAgLy8gYXNzZXJ0KGFjYyA9PT0gQWNjb3VudChhZGRyZXNzKSwgJ2V4cGVjdGVkIGFjY291bnQgdG8gYmUgcGFzc2VkIGJ5IHZhbHVlJykKICAgID09CiAgICBhc3NlcnQgLy8gZXhwZWN0ZWQgYWNjb3VudCB0byBiZSBwYXNzZWQgYnkgdmFsdWUKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9yZXNvdXJjZS1lbmNvZGluZy5hbGdvLnRzOjU4CiAgICAvLyByZXR1cm4gW2Fzc2V0LCBhcHAsIGFjY10KICAgIHVuY292ZXIgMgogICAgaXRvYgogICAgdW5jb3ZlciAyCiAgICBpdG9iCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gdGVzdHMvYXBwcm92YWxzL3Jlc291cmNlLWVuY29kaW5nLmFsZ28udHM6NTAKICAgIC8vIEBhYmltZXRob2QoeyByZXNvdXJjZUVuY29kaW5nOiAndmFsdWUnIH0pCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2VjaG9SZXNvdXJjZUJ5SW5kZXhfcm91dGVANDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9yZXNvdXJjZS1lbmNvZGluZy5hbGdvLnRzOjM5CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVzb3VyY2VFbmNvZGluZzogJ2luZGV4JyB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ4CiAgICBidG9pCiAgICB0eG5hcyBBc3NldHMKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50OAogICAgYnRvaQogICAgdHhuYXMgQXBwbGljYXRpb25zCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDEKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDgKICAgIGJ0b2kKICAgIHR4bmFzIEFjY291bnRzCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcmVzb3VyY2UtZW5jb2RpbmcuYWxnby50czo0MQogICAgLy8gY29uc3QgYXNzZXRJZHggPSBvcC5idG9pKFR4bi5hcHBsaWNhdGlvbkFyZ3MoMSkpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcmVzb3VyY2UtZW5jb2RpbmcuYWxnby50czo0MgogICAgLy8gYXNzZXJ0KGFzc2V0ID09PSBUeG4uYXNzZXRzKGFzc2V0SWR4KSwgJ2V4cGVjdGVkIGFzc2V0IHRvIGJlIHBhc3NlZCBieSBpbmRleCcpCiAgICB0eG5hcyBBc3NldHMKICAgIGRpZyAzCiAgICA9PQogICAgYXNzZXJ0IC8vIGV4cGVjdGVkIGFzc2V0IHRvIGJlIHBhc3NlZCBieSBpbmRleAogICAgLy8gdGVzdHMvYXBwcm92YWxzL3Jlc291cmNlLWVuY29kaW5nLmFsZ28udHM6NDMKICAgIC8vIGNvbnN0IGFwcElkeCA9IG9wLmJ0b2koVHhuLmFwcGxpY2F0aW9uQXJncygyKSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGJ0b2kKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9yZXNvdXJjZS1lbmNvZGluZy5hbGdvLnRzOjQ0CiAgICAvLyBhc3NlcnQoYXBwID09PSBUeG4uYXBwbGljYXRpb25zKGFwcElkeCksICdleHBlY3RlZCBhcHBsaWNhdGlvbiB0byBiZSBwYXNzZWQgYnkgaW5kZXgnKQogICAgdHhuYXMgQXBwbGljYXRpb25zCiAgICBkaWcgMgogICAgPT0KICAgIGFzc2VydCAvLyBleHBlY3RlZCBhcHBsaWNhdGlvbiB0byBiZSBwYXNzZWQgYnkgaW5kZXgKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9yZXNvdXJjZS1lbmNvZGluZy5hbGdvLnRzOjQ1CiAgICAvLyBjb25zdCBhY2NJZHggPSBvcC5idG9pKFR4bi5hcHBsaWNhdGlvbkFyZ3MoMykpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBidG9pCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcmVzb3VyY2UtZW5jb2RpbmcuYWxnby50czo0NgogICAgLy8gYXNzZXJ0KGFjYyA9PT0gVHhuLmFjY291bnRzKGFjY0lkeCksICdleHBlY3RlZCBhY2NvdW50IHRvIGJlIHBhc3NlZCBieSBpbmRleCcpCiAgICB0eG5hcyBBY2NvdW50cwogICAgZGlnIDEKICAgID09CiAgICBhc3NlcnQgLy8gZXhwZWN0ZWQgYWNjb3VudCB0byBiZSBwYXNzZWQgYnkgaW5kZXgKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9yZXNvdXJjZS1lbmNvZGluZy5hbGdvLnRzOjQ3CiAgICAvLyByZXR1cm4gW2Fzc2V0LCBhcHAsIGFjY10gYXMgY29uc3QKICAgIHVuY292ZXIgMgogICAgaXRvYgogICAgdW5jb3ZlciAyCiAgICBpdG9iCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gdGVzdHMvYXBwcm92YWxzL3Jlc291cmNlLWVuY29kaW5nLmFsZ28udHM6MzkKICAgIC8vIEBhYmltZXRob2QoeyByZXNvdXJjZUVuY29kaW5nOiAnaW5kZXgnIH0pCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA5OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3Jlc291cmNlLWVuY29kaW5nLmFsZ28udHM6MzgKICAgIC8vIGNsYXNzIEVjaG9SZXNvdXJjZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [172], "errorMessage": "expected account to be passed by index"}, {"pc": [94], "errorMessage": "expected account to be passed by value"}, {"pc": [162], "errorMessage": "expected application to be passed by index"}, {"pc": [88], "errorMessage": "expected application to be passed by value"}, {"pc": [152], "errorMessage": "expected asset to be passed by index"}, {"pc": [80], "errorMessage": "expected asset to be passed by value"}, {"pc": [72], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}, {"pc": [53, 62], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [117, 128, 139], "errorMessage": "invalid number of bytes for arc4.uint8"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -405,6 +405,291 @@ class EchoResourceClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class EchoResourceBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating EchoResource contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class EchoResourceFactory(algokit_utils.TypedAppFactoryProtocol[EchoResourceBareCallCreateParams, None, None]):
+    """Factory for deploying and managing EchoResourceClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = EchoResourceFactoryParams(self.app_factory)
+        self.create_transaction = EchoResourceFactoryCreateTransaction(self.app_factory)
+        self.send = EchoResourceFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: EchoResourceBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[EchoResourceClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return EchoResourceClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> EchoResourceClient:
+        """Get an app client by creator address and name"""
+        return EchoResourceClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> EchoResourceClient:
+        """Get an app client by app ID"""
+        return EchoResourceClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class EchoResourceFactoryParams:
+    """Parameters for creating transactions for EchoResource contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = EchoResourceFactoryCreateParams(app_factory)
+        self.update = EchoResourceFactoryUpdateParams(app_factory)
+        self.delete = EchoResourceFactoryDeleteParams(app_factory)
+
+class EchoResourceFactoryCreateParams:
+    """Parameters for 'create' operations of EchoResource contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def echo_resource_by_index(
+        self,
+        args: tuple[int, int, str | bytes] | EchoResourceByIndexArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the echoResourceByIndex(asset,application,account)(uint64,uint64,address) ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "echoResourceByIndex(asset,application,account)(uint64,uint64,address)",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def echo_resource_by_value(
+        self,
+        args: tuple[int, int, str] | EchoResourceByValueArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the echoResourceByValue(uint64,uint64,address)(uint64,uint64,address) ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "echoResourceByValue(uint64,uint64,address)(uint64,uint64,address)",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class EchoResourceFactoryUpdateParams:
+    """Parameters for 'update' operations of EchoResource contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class EchoResourceFactoryDeleteParams:
+    """Parameters for 'delete' operations of EchoResource contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class EchoResourceFactoryCreateTransaction:
+    """Create transactions for EchoResource contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = EchoResourceFactoryCreateTransactionCreate(app_factory)
+
+
+class EchoResourceFactoryCreateTransactionCreate:
+    """Create new instances of EchoResource contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class EchoResourceFactorySend:
+    """Send calls to EchoResource contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = EchoResourceFactorySendCreate(app_factory)
+
+
+class EchoResourceFactorySendCreate:
+    """Send create calls to EchoResource contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[EchoResourceClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return EchoResourceClient(result[0]), result[1]
 
 
 class EchoResourceComposer:

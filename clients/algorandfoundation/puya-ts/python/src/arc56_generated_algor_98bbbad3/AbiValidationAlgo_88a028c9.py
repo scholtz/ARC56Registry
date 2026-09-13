@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[32]", "name": "value"}], "name": "withValidation", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[32]", "name": "value"}], "name": "withoutValidation", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[32]", "name": "value"}], "name": "defaultValidation", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[32]", "name": "value"}], "name": "manualValidation", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[]", "name": "rawBytes"}], "name": "manualValidationInConvert", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[]", "name": "rawBytes"}], "name": "manualValidationAfterConvert", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "AbiValidationAlgo", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [158, 182], "errorMessage": "invalid array length header"}, {"pc": [165, 189], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [104, 130, 145, 172, 196], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[32]", "name": "value"}], "name": "withValidation", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[32]", "name": "value"}], "name": "withoutValidation", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[32]", "name": "value"}], "name": "defaultValidation", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[32]", "name": "value"}], "name": "manualValidation", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[]", "name": "rawBytes"}], "name": "manualValidationInConvert", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[]", "name": "rawBytes"}], "name": "manualValidationAfterConvert", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "AbiValidationAlgo", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyAEASAAAiYCBBUffHUMFR98dQAAAAAAAAAgMRtBADkxGRREMRhEggYEJj6cMwTg4HB0BEag0lEE5hYywQT7hrwABMDwXRA2GgCOBgAJABgAIwAyAEEAWQAxGRQxGBQQQzYaARVJIxJEFihMULAiQzYaARUWKExQsCJDNhoBFUkjEkQWKExQsCJDNhoBFUkjEkQWKExQsCJDNhoBSSRZJQhLARUSRFcCABUjEkQpsCJDNhoBSSRZJQhLARUSRFcCABUjEkQpsCJD", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAzMiAwIDIKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NSAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAyMAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS12YWxpZGF0aW9uLmFsZ28udHM6NgogICAgLy8gY2xhc3MgQWJpVmFsaWRhdGlvbkFsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAMTMKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDI2M2U5YzMzIDB4ZTBlMDcwNzQgMHg0NmEwZDI1MSAweGU2MTYzMmMxIDB4ZmI4NmJjMDAgMHhjMGYwNWQxMCAvLyBtZXRob2QgIndpdGhWYWxpZGF0aW9uKGJ5dGVbMzJdKXVpbnQ2NCIsIG1ldGhvZCAid2l0aG91dFZhbGlkYXRpb24oYnl0ZVszMl0pdWludDY0IiwgbWV0aG9kICJkZWZhdWx0VmFsaWRhdGlvbihieXRlWzMyXSl1aW50NjQiLCBtZXRob2QgIm1hbnVhbFZhbGlkYXRpb24oYnl0ZVszMl0pdWludDY0IiwgbWV0aG9kICJtYW51YWxWYWxpZGF0aW9uSW5Db252ZXJ0KGJ5dGVbXSl1aW50NjQiLCBtZXRob2QgIm1hbnVhbFZhbGlkYXRpb25BZnRlckNvbnZlcnQoYnl0ZVtdKXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHdpdGhWYWxpZGF0aW9uIHdpdGhvdXRWYWxpZGF0aW9uIGRlZmF1bHRWYWxpZGF0aW9uIG1hbnVhbFZhbGlkYXRpb24gbWFudWFsVmFsaWRhdGlvbkluQ29udmVydCBtYW51YWxWYWxpZGF0aW9uQWZ0ZXJDb252ZXJ0CiAgICBlcnIKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDEzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS12YWxpZGF0aW9uLmFsZ28udHM6NgogICAgLy8gY2xhc3MgQWJpVmFsaWRhdGlvbkFsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hYmktdmFsaWRhdGlvbi5hbGdvLnRzOjpBYmlWYWxpZGF0aW9uQWxnby53aXRoVmFsaWRhdGlvbltyb3V0aW5nXSgpIC0+IHZvaWQ6CndpdGhWYWxpZGF0aW9uOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS12YWxpZGF0aW9uLmFsZ28udHM6NwogICAgLy8gQGFiaW1ldGhvZCh7IHZhbGlkYXRlRW5jb2Rpbmc6ICdhcmdzJyB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBkdXAKICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FiaS12YWxpZGF0aW9uLmFsZ28udHM6OkFiaVZhbGlkYXRpb25BbGdvLndpdGhvdXRWYWxpZGF0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKd2l0aG91dFZhbGlkYXRpb246CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLXZhbGlkYXRpb24uYWxnby50czoxMQogICAgLy8gQGFiaW1ldGhvZCh7IHZhbGlkYXRlRW5jb2Rpbmc6ICd1bnNhZmUtZGlzYWJsZWQnIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLXZhbGlkYXRpb24uYWxnby50czoxMwogICAgLy8gcmV0dXJuIHZhbHVlLmxlbmd0aAogICAgbGVuCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLXZhbGlkYXRpb24uYWxnby50czoxMQogICAgLy8gQGFiaW1ldGhvZCh7IHZhbGlkYXRlRW5jb2Rpbmc6ICd1bnNhZmUtZGlzYWJsZWQnIH0pCiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FiaS12YWxpZGF0aW9uLmFsZ28udHM6OkFiaVZhbGlkYXRpb25BbGdvLmRlZmF1bHRWYWxpZGF0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKZGVmYXVsdFZhbGlkYXRpb246CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLXZhbGlkYXRpb24uYWxnby50czoxNgogICAgLy8gZGVmYXVsdFZhbGlkYXRpb24odmFsdWU6IGJ5dGVzPDMyPikgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBkdXAKICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FiaS12YWxpZGF0aW9uLmFsZ28udHM6OkFiaVZhbGlkYXRpb25BbGdvLm1hbnVhbFZhbGlkYXRpb25bcm91dGluZ10oKSAtPiB2b2lkOgptYW51YWxWYWxpZGF0aW9uOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS12YWxpZGF0aW9uLmFsZ28udHM6MjAKICAgIC8vIEBhYmltZXRob2QoeyB2YWxpZGF0ZUVuY29kaW5nOiAndW5zYWZlLWRpc2FibGVkJyB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS12YWxpZGF0aW9uLmFsZ28udHM6MjIKICAgIC8vIHZhbGlkYXRlRW5jb2RpbmcodmFsdWUpCiAgICBsZW4KICAgIGR1cAogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hYmktdmFsaWRhdGlvbi5hbGdvLnRzOjIwCiAgICAvLyBAYWJpbWV0aG9kKHsgdmFsaWRhdGVFbmNvZGluZzogJ3Vuc2FmZS1kaXNhYmxlZCcgfSkKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLXZhbGlkYXRpb24uYWxnby50czo6QWJpVmFsaWRhdGlvbkFsZ28ubWFudWFsVmFsaWRhdGlvbkluQ29udmVydFtyb3V0aW5nXSgpIC0+IHZvaWQ6Cm1hbnVhbFZhbGlkYXRpb25JbkNvbnZlcnQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLXZhbGlkYXRpb24uYWxnby50czoyNgogICAgLy8gbWFudWFsVmFsaWRhdGlvbkluQ29udmVydChyYXdCeXRlczogYnl0ZXMpIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18yIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMyAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLXZhbGlkYXRpb24uYWxnby50czoyNwogICAgLy8gY29uc3QgdmFsdWUgPSBjb252ZXJ0Qnl0ZXM8U3RhdGljQnl0ZXM8MzI+PihyYXdCeXRlcywgeyBzdHJhdGVneTogJ3ZhbGlkYXRlJyB9KQogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS12YWxpZGF0aW9uLmFsZ28udHM6MjYKICAgIC8vIG1hbnVhbFZhbGlkYXRpb25JbkNvbnZlcnQocmF3Qnl0ZXM6IGJ5dGVzKSB7CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDIwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLXZhbGlkYXRpb24uYWxnby50czo6QWJpVmFsaWRhdGlvbkFsZ28ubWFudWFsVmFsaWRhdGlvbkFmdGVyQ29udmVydFtyb3V0aW5nXSgpIC0+IHZvaWQ6Cm1hbnVhbFZhbGlkYXRpb25BZnRlckNvbnZlcnQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLXZhbGlkYXRpb24uYWxnby50czozMQogICAgLy8gbWFudWFsVmFsaWRhdGlvbkFmdGVyQ29udmVydChyYXdCeXRlczogYnl0ZXMpIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18yIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMyAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLXZhbGlkYXRpb24uYWxnby50czozMwogICAgLy8gdmFsaWRhdGVFbmNvZGluZyh2YWx1ZSkKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hYmktdmFsaWRhdGlvbi5hbGdvLnRzOjMxCiAgICAvLyBtYW51YWxWYWxpZGF0aW9uQWZ0ZXJDb252ZXJ0KHJhd0J5dGVzOiBieXRlcykgewogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAyMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [158, 182], "errorMessage": "invalid array length header"}, {"pc": [165, 189], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [104, 130, 145, 172, 196], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -629,6 +629,371 @@ class AbiValidationAlgoClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class AbiValidationAlgoBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating AbiValidationAlgo contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class AbiValidationAlgoFactory(algokit_utils.TypedAppFactoryProtocol[AbiValidationAlgoBareCallCreateParams, None, None]):
+    """Factory for deploying and managing AbiValidationAlgoClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = AbiValidationAlgoFactoryParams(self.app_factory)
+        self.create_transaction = AbiValidationAlgoFactoryCreateTransaction(self.app_factory)
+        self.send = AbiValidationAlgoFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: AbiValidationAlgoBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[AbiValidationAlgoClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return AbiValidationAlgoClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AbiValidationAlgoClient:
+        """Get an app client by creator address and name"""
+        return AbiValidationAlgoClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AbiValidationAlgoClient:
+        """Get an app client by app ID"""
+        return AbiValidationAlgoClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class AbiValidationAlgoFactoryParams:
+    """Parameters for creating transactions for AbiValidationAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbiValidationAlgoFactoryCreateParams(app_factory)
+        self.update = AbiValidationAlgoFactoryUpdateParams(app_factory)
+        self.delete = AbiValidationAlgoFactoryDeleteParams(app_factory)
+
+class AbiValidationAlgoFactoryCreateParams:
+    """Parameters for 'create' operations of AbiValidationAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def with_validation(
+        self,
+        args: tuple[bytes | str | tuple[int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int]] | WithValidationArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the withValidation(byte[32])uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "withValidation(byte[32])uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def without_validation(
+        self,
+        args: tuple[bytes | str | tuple[int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int]] | WithoutValidationArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the withoutValidation(byte[32])uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "withoutValidation(byte[32])uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def default_validation(
+        self,
+        args: tuple[bytes | str | tuple[int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int]] | DefaultValidationArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the defaultValidation(byte[32])uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "defaultValidation(byte[32])uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def manual_validation(
+        self,
+        args: tuple[bytes | str | tuple[int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int]] | ManualValidationArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the manualValidation(byte[32])uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "manualValidation(byte[32])uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def manual_validation_in_convert(
+        self,
+        args: tuple[bytes | str] | ManualValidationInConvertArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the manualValidationInConvert(byte[])uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "manualValidationInConvert(byte[])uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def manual_validation_after_convert(
+        self,
+        args: tuple[bytes | str] | ManualValidationAfterConvertArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the manualValidationAfterConvert(byte[])uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "manualValidationAfterConvert(byte[])uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class AbiValidationAlgoFactoryUpdateParams:
+    """Parameters for 'update' operations of AbiValidationAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class AbiValidationAlgoFactoryDeleteParams:
+    """Parameters for 'delete' operations of AbiValidationAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class AbiValidationAlgoFactoryCreateTransaction:
+    """Create transactions for AbiValidationAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbiValidationAlgoFactoryCreateTransactionCreate(app_factory)
+
+
+class AbiValidationAlgoFactoryCreateTransactionCreate:
+    """Create new instances of AbiValidationAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class AbiValidationAlgoFactorySend:
+    """Send calls to AbiValidationAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbiValidationAlgoFactorySendCreate(app_factory)
+
+
+class AbiValidationAlgoFactorySendCreate:
+    """Send create calls to AbiValidationAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[AbiValidationAlgoClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return AbiValidationAlgoClient(result[0]), result[1]
 
 
 class AbiValidationAlgoComposer:

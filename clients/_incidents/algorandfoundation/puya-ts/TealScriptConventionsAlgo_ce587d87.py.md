@@ -2,7 +2,7 @@
 
 - **Repo**: [algorandfoundation/puya-ts](https://github.com/algorandfoundation/puya-ts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/puya-ts/HEAD/tests/approvals/out/o1/teal-script-conventions/TealScriptConventionsAlgo.arc56.json](https://raw.githubusercontent.com/algorandfoundation/puya-ts/HEAD/tests/approvals/out/o1/teal-script-conventions/TealScriptConventionsAlgo.arc56.json)
-- **Detected**: 2026-07-18T17:44:24.313579+00:00
+- **Detected**: 2026-09-13T12:41:12.901669+00:00
 - **Generator package**: `algokit-client-generator==2.2.0`
 
 ## Reproduce

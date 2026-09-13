@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(uint64,byte[],bool)", "name": "p", "struct": "Object4B7314A9"}], "name": "test", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(uint64,byte[],bool)", "name": "p", "struct": "Arc4"}], "name": "testMutable", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "init", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "DestructuredParamsAlgo", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"Arc4": [{"name": "a", "type": "uint64"}, {"name": "b", "type": "byte[]"}, {"name": "c", "type": "bool"}], "Object4B7314A9": [{"name": "a", "type": "uint64"}, {"name": "b", "type": "byte[]"}, {"name": "c", "type": "bool"}]}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [114, 168], "errorMessage": "invalid array length header"}, {"pc": [121], "errorMessage": "invalid number of bytes for Arc4"}, {"pc": [173], "errorMessage": "invalid number of bytes for Object4B7314A9"}, {"pc": [105, 160], "errorMessage": "invalid tail pointer at index 1 of (uint64,(len+uint8[]),bool1)"}, {"pc": [101, 156], "errorMessage": "invalid tuple encoding"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(uint64,byte[],bool)", "name": "p", "struct": "Object4B7314A9"}], "name": "test", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(uint64,byte[],bool)", "name": "p", "struct": "Arc4"}], "name": "testMutable", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "init", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "DestructuredParamsAlgo", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"Arc4": [{"name": "a", "type": "uint64"}, {"name": "b", "type": "byte[]"}, {"name": "c", "type": "bool"}], "Object4B7314A9": [{"name": "a", "type": "uint64"}, {"name": "b", "type": "byte[]"}, {"name": "c", "type": "bool"}]}, "byteCode": {"approval": "CyAEAQgACzEbQQCoMRkURDEYRIIDBP7+p2YENDmdtASD8UdINhoAjgMAZQAuAAEAgA0AAAAAAAAByAALAAAAiAB6SIASAAAAAAAAAAIAC4AABUhlbGxviABiSCJDNhoBSRVLASNZSSUSREsCTEsCUkkkWYENCE8CEkRLAVcACE8CgVBTgAEAJE8CVExPAlBMULAiQzYaAUkVSwEjWUklEkRLAkxLAlIkWYENCBJEiAALSCJDMRkUMRgUEEOKAQGL/1cACIv/I1mL/xWL/04CUlcCAIv/gVBTTgJQTBZQsIv/iQ==", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSA4IDAgMTEKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyZWQtcGFyYW1zLmFsZ28udHM6OAogICAgLy8gZXhwb3J0IGNsYXNzIERlc3RydWN0dXJlZFBhcmFtc0FsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAMTAKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweGZlZmVhNzY2IDB4MzQzOTlkYjQgMHg4M2YxNDc0OCAvLyBtZXRob2QgInRlc3QoKHVpbnQ2NCxieXRlW10sYm9vbCkpdm9pZCIsIG1ldGhvZCAidGVzdE11dGFibGUoKHVpbnQ2NCxieXRlW10sYm9vbCkpdm9pZCIsIG1ldGhvZCAiaW5pdCgpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdGVzdF9yb3V0ZUA0IG1haW5fdGVzdE11dGFibGVfcm91dGVANSBtYWluX2luaXRfcm91dGVANgogICAgZXJyCgptYWluX2luaXRfcm91dGVANjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyZWQtcGFyYW1zLmFsZ28udHM6MTgKICAgIC8vIHRoaXMudGVzdCh7IGE6IDQ1NiwgYjogQnl0ZXMoJycpLCBjOiBmYWxzZSB9KQogICAgcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDFjODAwMGIwMDAwMDAKICAgIGNhbGxzdWIgdGVzdAogICAgcG9wCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmVkLXBhcmFtcy5hbGdvLnRzOjE5CiAgICAvLyBjb25zdCB0ZW1wID0geyBhOiBVaW50NjQoMiksIGI6IEJ5dGVzKCdIZWxsbycpLCBjOiB0cnVlIH0KICAgIHB1c2hieXRlcyAweDAwMDAwMDAwMDAwMDAwMDIwMDBiODAwMDA1NDg2NTZjNmM2ZgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJlZC1wYXJhbXMuYWxnby50czoyMAogICAgLy8gdGhpcy50ZXN0KHRlbXApCiAgICBjYWxsc3ViIHRlc3QKICAgIHBvcAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJlZC1wYXJhbXMuYWxnby50czoxNwogICAgLy8gaW5pdCgpIHsKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fdGVzdE11dGFibGVfcm91dGVANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyZWQtcGFyYW1zLmFsZ28udHM6MTMKICAgIC8vIHRlc3RNdXRhYmxlKHsgYSwgYiwgYyB9OiBBcmM0KSB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgZGlnIDEKICAgIGludGNfMSAvLyA4CiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCB0dXBsZSBlbmNvZGluZwogICAgZHVwCiAgICBpbnRjXzMgLy8gMTEKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCB0YWlsIHBvaW50ZXIgYXQgaW5kZXggMSBvZiAodWludDY0LChsZW4rdWludDhbXSksYm9vbDEpCiAgICBkaWcgMgogICAgc3dhcAogICAgZGlnIDIKICAgIHN1YnN0cmluZzMKICAgIGR1cAogICAgaW50Y18yIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMTMKICAgICsKICAgIHVuY292ZXIgMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgQXJjNAogICAgZGlnIDEKICAgIGV4dHJhY3QgMCA4CiAgICB1bmNvdmVyIDIKICAgIHB1c2hpbnQgODAKICAgIGdldGJpdAogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGludGNfMiAvLyAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJlZC1wYXJhbXMuYWxnby50czoxNAogICAgLy8gbG9nKGEsIGIsIGMpCiAgICBzd2FwCiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyZWQtcGFyYW1zLmFsZ28udHM6MTMKICAgIC8vIHRlc3RNdXRhYmxlKHsgYSwgYiwgYyB9OiBBcmM0KSB7CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3Rlc3Rfcm91dGVANDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyZWQtcGFyYW1zLmFsZ28udHM6OQogICAgLy8gdGVzdCh7IGEsIGIsIGMgfTogeyBhOiB1aW50NjQ7IGI6IGJ5dGVzOyBjOiBib29sZWFuIH0pOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBkaWcgMQogICAgaW50Y18xIC8vIDgKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIHR1cGxlIGVuY29kaW5nCiAgICBkdXAKICAgIGludGNfMyAvLyAxMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIHRhaWwgcG9pbnRlciBhdCBpbmRleCAxIG9mICh1aW50NjQsKGxlbit1aW50OFtdKSxib29sMSkKICAgIGRpZyAyCiAgICBzd2FwCiAgICBkaWcgMgogICAgc3Vic3RyaW5nMwogICAgaW50Y18yIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMTMKICAgICsKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIE9iamVjdDRCNzMxNEE5CiAgICBjYWxsc3ViIHRlc3QKICAgIHBvcAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAMTA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmVkLXBhcmFtcy5hbGdvLnRzOjgKICAgIC8vIGV4cG9ydCBjbGFzcyBEZXN0cnVjdHVyZWRQYXJhbXNBbGdvIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmVkLXBhcmFtcy5hbGdvLnRzOjpEZXN0cnVjdHVyZWRQYXJhbXNBbGdvLnRlc3QocDogYnl0ZXMpIC0+IGJ5dGVzOgp0ZXN0OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJlZC1wYXJhbXMuYWxnby50czo5CiAgICAvLyB0ZXN0KHsgYSwgYiwgYyB9OiB7IGE6IHVpbnQ2NDsgYjogYnl0ZXM7IGM6IGJvb2xlYW4gfSk6IHZvaWQgewogICAgcHJvdG8gMSAxCiAgICBmcmFtZV9kaWcgLTEKICAgIGV4dHJhY3QgMCA4CiAgICBmcmFtZV9kaWcgLTEKICAgIGludGNfMSAvLyA4CiAgICBleHRyYWN0X3VpbnQxNgogICAgZnJhbWVfZGlnIC0xCiAgICBsZW4KICAgIGZyYW1lX2RpZyAtMQogICAgY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgZXh0cmFjdCAyIDAKICAgIGZyYW1lX2RpZyAtMQogICAgcHVzaGludCA4MAogICAgZ2V0Yml0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmVkLXBhcmFtcy5hbGdvLnRzOjEwCiAgICAvLyBsb2coYSwgYiwgYykKICAgIGNvdmVyIDIKICAgIGNvbmNhdAogICAgc3dhcAogICAgaXRvYgogICAgY29uY2F0CiAgICBsb2cKICAgIGZyYW1lX2RpZyAtMQogICAgcmV0c3ViCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [114, 168], "errorMessage": "invalid array length header"}, {"pc": [121], "errorMessage": "invalid number of bytes for Arc4"}, {"pc": [173], "errorMessage": "invalid number of bytes for Object4B7314A9"}, {"pc": [105, 160], "errorMessage": "invalid tail pointer at index 1 of (uint64,(len+uint8[]),bool1)"}, {"pc": [101, 156], "errorMessage": "invalid tuple encoding"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -458,6 +458,310 @@ class DestructuredParamsAlgoClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class DestructuredParamsAlgoBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating DestructuredParamsAlgo contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class DestructuredParamsAlgoFactory(algokit_utils.TypedAppFactoryProtocol[DestructuredParamsAlgoBareCallCreateParams, None, None]):
+    """Factory for deploying and managing DestructuredParamsAlgoClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = DestructuredParamsAlgoFactoryParams(self.app_factory)
+        self.create_transaction = DestructuredParamsAlgoFactoryCreateTransaction(self.app_factory)
+        self.send = DestructuredParamsAlgoFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: DestructuredParamsAlgoBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[DestructuredParamsAlgoClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return DestructuredParamsAlgoClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> DestructuredParamsAlgoClient:
+        """Get an app client by creator address and name"""
+        return DestructuredParamsAlgoClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> DestructuredParamsAlgoClient:
+        """Get an app client by app ID"""
+        return DestructuredParamsAlgoClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class DestructuredParamsAlgoFactoryParams:
+    """Parameters for creating transactions for DestructuredParamsAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = DestructuredParamsAlgoFactoryCreateParams(app_factory)
+        self.update = DestructuredParamsAlgoFactoryUpdateParams(app_factory)
+        self.delete = DestructuredParamsAlgoFactoryDeleteParams(app_factory)
+
+class DestructuredParamsAlgoFactoryCreateParams:
+    """Parameters for 'create' operations of DestructuredParamsAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def test(
+        self,
+        args: tuple[Object4b7314a9] | TestArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the test((uint64,byte[],bool))void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "test((uint64,byte[],bool))void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def test_mutable(
+        self,
+        args: tuple[Arc4] | TestMutableArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testMutable((uint64,byte[],bool))void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testMutable((uint64,byte[],bool))void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def init(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the init()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "init()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class DestructuredParamsAlgoFactoryUpdateParams:
+    """Parameters for 'update' operations of DestructuredParamsAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class DestructuredParamsAlgoFactoryDeleteParams:
+    """Parameters for 'delete' operations of DestructuredParamsAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class DestructuredParamsAlgoFactoryCreateTransaction:
+    """Create transactions for DestructuredParamsAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = DestructuredParamsAlgoFactoryCreateTransactionCreate(app_factory)
+
+
+class DestructuredParamsAlgoFactoryCreateTransactionCreate:
+    """Create new instances of DestructuredParamsAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class DestructuredParamsAlgoFactorySend:
+    """Send calls to DestructuredParamsAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = DestructuredParamsAlgoFactorySendCreate(app_factory)
+
+
+class DestructuredParamsAlgoFactorySendCreate:
+    """Send create calls to DestructuredParamsAlgo contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[DestructuredParamsAlgoClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return DestructuredParamsAlgoClient(result[0]), result[1]
 
 
 class DestructuredParamsAlgoComposer:

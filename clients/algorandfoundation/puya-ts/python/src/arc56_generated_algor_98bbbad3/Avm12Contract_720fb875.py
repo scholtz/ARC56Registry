@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "testFalconVerify", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "testRejectVersion", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "Avm12Contract", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [116, 202], "errorMessage": "application exists"}, {"pc": [118], "errorMessage": "should be version 0"}, {"pc": [205], "errorMessage": "should be version 1"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "testFalconVerify", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "testRejectVersion", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "Avm12Contract", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "DCADAAEGJgEEDIEBQzEbQQDmMRkURDEYRIICBAL0pQEEpFO6kDYaAI4CALwAAQCxKLJCgC4MMRtBACCABKDoGHI2GgCOAQABADEZgQQSMRgQRDFEgQESRIEBQzEZFDEYFBBDskAishkkshAisgGztD1JcglEFESxKLJCgC4MMRtBACCABCQ3jTw2GgCOAQABADEZgQUSMRgQRDFEgQISRIEBQzEZFDEYFBBDskCBBLIZSbIYI7JEgASg6BhyshokshAisgGztBhyCUQjEkSxgQKyRLIYgQWyGYAEJDeNPLIaJLIQIrIBsyNDgYEOr4AASU8ChRREI0MxGRQxGBQQQw==", "clear": "DIEBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDEyCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDYKICAgIGJ5dGVjYmxvY2sgYmFzZTY0KERJRUJRdz09KQogICAgLy8gdGVzdHMvYXBwcm92YWxzL2F2bTEyLmFsZ28udHM6MTQtMTUKICAgIC8vIEBjb250cmFjdCh7IGF2bVZlcnNpb246IDEyIH0pCiAgICAvLyBjbGFzcyBBdm0xMkNvbnRyYWN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDAyZjRhNTAxIDB4YTQ1M2JhOTAgLy8gbWV0aG9kICJ0ZXN0RmFsY29uVmVyaWZ5KCl2b2lkIiwgbWV0aG9kICJ0ZXN0UmVqZWN0VmVyc2lvbigpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdGVzdEZhbGNvblZlcmlmeV9yb3V0ZUA0IG1haW5fdGVzdFJlamVjdFZlcnNpb25fcm91dGVANQogICAgZXJyCgptYWluX3Rlc3RSZWplY3RWZXJzaW9uX3JvdXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXZtMTIuYWxnby50czoyMgogICAgLy8gY29uc3QgdjBUeG4gPSBjb21waWxlZFYwLmJhcmVDcmVhdGUoKQogICAgaXR4bl9iZWdpbgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2F2bTEyLmFsZ28udHM6MjEKICAgIC8vIGNvbnN0IGNvbXBpbGVkVjAgPSBhcmM0LmNvbXBpbGVBcmM0KENvbnRyYWN0VjApCiAgICBieXRlY18wIC8vIGJhc2U2NChESUVCUXc9PSkKICAgIGl0eG5fZmllbGQgQ2xlYXJTdGF0ZVByb2dyYW1QYWdlcwogICAgcHVzaGJ5dGVzIGJhc2U2NChEREViUVFBZ2dBU2c2Qmh5TmhvQWpnRUFBUUF4R1lFRUVqRVlFRVF4UklFQkVrU0JBVU14R1JReEdCUVFRdz09KQogICAgaXR4bl9maWVsZCBBcHByb3ZhbFByb2dyYW1QYWdlcwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2F2bTEyLmFsZ28udHM6MjIKICAgIC8vIGNvbnN0IHYwVHhuID0gY29tcGlsZWRWMC5iYXJlQ3JlYXRlKCkKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIE9uQ29tcGxldGlvbgogICAgaW50Y18yIC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGl0eG4gQ3JlYXRlZEFwcGxpY2F0aW9uSUQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjI0CiAgICAvLyBhc3NlcnQoYXBwLnZlcnNpb24gPT09IDAsICdzaG91bGQgYmUgdmVyc2lvbiAwJykKICAgIGR1cAogICAgYXBwX3BhcmFtc19nZXQgQXBwVmVyc2lvbgogICAgYXNzZXJ0IC8vIGFwcGxpY2F0aW9uIGV4aXN0cwogICAgIQogICAgYXNzZXJ0IC8vIHNob3VsZCBiZSB2ZXJzaW9uIDAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjI4LTM1CiAgICAvLyBjb25zdCB2MVR4biA9IGNvbXBpbGVkVjAuY2FsbC51cGRhdGUoewogICAgLy8gICByZWplY3RWZXJzaW9uOiAxLAogICAgLy8gICBhcHBJZDogYXBwLAogICAgLy8gICBvbkNvbXBsZXRpb246IE9uQ29tcGxldGVBY3Rpb24uVXBkYXRlQXBwbGljYXRpb24sCiAgICAvLyAgIGFwcHJvdmFsUHJvZ3JhbTogY29tcGlsZWRWMS5hcHByb3ZhbFByb2dyYW0sCiAgICAvLyAgIGNsZWFyU3RhdGVQcm9ncmFtOiBjb21waWxlZFYxLmNsZWFyU3RhdGVQcm9ncmFtLAogICAgLy8gICBleHRyYVByb2dyYW1QYWdlczogY29tcGlsZWRWMS5leHRyYVByb2dyYW1QYWdlcywKICAgIC8vIH0pCiAgICBpdHhuX2JlZ2luCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXZtMTIuYWxnby50czoyNgogICAgLy8gY29uc3QgY29tcGlsZWRWMSA9IGFyYzQuY29tcGlsZUFyYzQoQ29udHJhY3RWMSkKICAgIGJ5dGVjXzAgLy8gYmFzZTY0KERJRUJRdz09KQogICAgaXR4bl9maWVsZCBDbGVhclN0YXRlUHJvZ3JhbVBhZ2VzCiAgICBwdXNoYnl0ZXMgYmFzZTY0KERERWJRUUFnZ0FRa040MDhOaG9BamdFQUFRQXhHWUVGRWpFWUVFUXhSSUVDRWtTQkFVTXhHUlF4R0JRUVF3PT0pCiAgICBpdHhuX2ZpZWxkIEFwcHJvdmFsUHJvZ3JhbVBhZ2VzCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXZtMTIuYWxnby50czozMQogICAgLy8gb25Db21wbGV0aW9uOiBPbkNvbXBsZXRlQWN0aW9uLlVwZGF0ZUFwcGxpY2F0aW9uLAogICAgcHVzaGludCA0CiAgICBpdHhuX2ZpZWxkIE9uQ29tcGxldGlvbgogICAgZHVwCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjI5CiAgICAvLyByZWplY3RWZXJzaW9uOiAxLAogICAgaW50Y18xIC8vIDEKICAgIGl0eG5fZmllbGQgUmVqZWN0VmVyc2lvbgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2F2bTEyLmFsZ28udHM6MjgtMzUKICAgIC8vIGNvbnN0IHYxVHhuID0gY29tcGlsZWRWMC5jYWxsLnVwZGF0ZSh7CiAgICAvLyAgIHJlamVjdFZlcnNpb246IDEsCiAgICAvLyAgIGFwcElkOiBhcHAsCiAgICAvLyAgIG9uQ29tcGxldGlvbjogT25Db21wbGV0ZUFjdGlvbi5VcGRhdGVBcHBsaWNhdGlvbiwKICAgIC8vICAgYXBwcm92YWxQcm9ncmFtOiBjb21waWxlZFYxLmFwcHJvdmFsUHJvZ3JhbSwKICAgIC8vICAgY2xlYXJTdGF0ZVByb2dyYW06IGNvbXBpbGVkVjEuY2xlYXJTdGF0ZVByb2dyYW0sCiAgICAvLyAgIGV4dHJhUHJvZ3JhbVBhZ2VzOiBjb21waWxlZFYxLmV4dHJhUHJvZ3JhbVBhZ2VzLAogICAgLy8gfSkKICAgIHB1c2hieXRlcyAweGEwZTgxODcyIC8vIG1ldGhvZCAidXBkYXRlKCl2b2lkIgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGludGNfMiAvLyBhcHBsCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIGl0eG5fc3VibWl0CiAgICBpdHhuIEFwcGxpY2F0aW9uSUQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjM2CiAgICAvLyBhc3NlcnQodjFUeG4uaXR4bi5hcHBJZC52ZXJzaW9uID09PSAxLCAnc2hvdWxkIGJlIHZlcnNpb24gMScpCiAgICBhcHBfcGFyYW1zX2dldCBBcHBWZXJzaW9uCiAgICBhc3NlcnQgLy8gYXBwbGljYXRpb24gZXhpc3RzCiAgICBpbnRjXzEgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBzaG91bGQgYmUgdmVyc2lvbiAxCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXZtMTIuYWxnby50czozOC00NQogICAgLy8gaXR4bgogICAgLy8gICAuYXBwbGljYXRpb25DYWxsKHsKICAgIC8vICAgICBhcHBBcmdzOiBbYXJjNC5tZXRob2RTZWxlY3RvcihDb250cmFjdFYxLnByb3RvdHlwZS5kZWxldGUpXSwKICAgIC8vICAgICBvbkNvbXBsZXRpb246IE9uQ29tcGxldGVBY3Rpb24uRGVsZXRlQXBwbGljYXRpb24sCiAgICAvLyAgICAgYXBwSWQ6IGFwcCwKICAgIC8vICAgICByZWplY3RWZXJzaW9uOiAyLAogICAgLy8gICB9KQogICAgLy8gICAuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjQzCiAgICAvLyByZWplY3RWZXJzaW9uOiAyLAogICAgcHVzaGludCAyCiAgICBpdHhuX2ZpZWxkIFJlamVjdFZlcnNpb24KICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25JRAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2F2bTEyLmFsZ28udHM6NDEKICAgIC8vIG9uQ29tcGxldGlvbjogT25Db21wbGV0ZUFjdGlvbi5EZWxldGVBcHBsaWNhdGlvbiwKICAgIHB1c2hpbnQgNQogICAgaXR4bl9maWVsZCBPbkNvbXBsZXRpb24KICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjQwCiAgICAvLyBhcHBBcmdzOiBbYXJjNC5tZXRob2RTZWxlY3RvcihDb250cmFjdFYxLnByb3RvdHlwZS5kZWxldGUpXSwKICAgIHB1c2hieXRlcyAweDI0Mzc4ZDNjIC8vIG1ldGhvZCAiZGVsZXRlKCl2b2lkIgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjM4LTQ0CiAgICAvLyBpdHhuCiAgICAvLyAgIC5hcHBsaWNhdGlvbkNhbGwoewogICAgLy8gICAgIGFwcEFyZ3M6IFthcmM0Lm1ldGhvZFNlbGVjdG9yKENvbnRyYWN0VjEucHJvdG90eXBlLmRlbGV0ZSldLAogICAgLy8gICAgIG9uQ29tcGxldGlvbjogT25Db21wbGV0ZUFjdGlvbi5EZWxldGVBcHBsaWNhdGlvbiwKICAgIC8vICAgICBhcHBJZDogYXBwLAogICAgLy8gICAgIHJlamVjdFZlcnNpb246IDIsCiAgICAvLyAgIH0pCiAgICBpbnRjXzIgLy8gNgogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXZtMTIuYWxnby50czozOC00NQogICAgLy8gaXR4bgogICAgLy8gICAuYXBwbGljYXRpb25DYWxsKHsKICAgIC8vICAgICBhcHBBcmdzOiBbYXJjNC5tZXRob2RTZWxlY3RvcihDb250cmFjdFYxLnByb3RvdHlwZS5kZWxldGUpXSwKICAgIC8vICAgICBvbkNvbXBsZXRpb246IE9uQ29tcGxldGVBY3Rpb24uRGVsZXRlQXBwbGljYXRpb24sCiAgICAvLyAgICAgYXBwSWQ6IGFwcCwKICAgIC8vICAgICByZWplY3RWZXJzaW9uOiAyLAogICAgLy8gICB9KQogICAgLy8gICAuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXZtMTIuYWxnby50czoyMAogICAgLy8gdGVzdFJlamVjdFZlcnNpb24oKSB7CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX3Rlc3RGYWxjb25WZXJpZnlfcm91dGVANDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjE3CiAgICAvLyBhc3NlcnQoIW9wLmZhbGNvblZlcmlmeShCeXRlcygpLCBCeXRlcygpLCBvcC5iemVybygxNzkzKSkpCiAgICBwdXNoaW50IDE3OTMKICAgIGJ6ZXJvCiAgICBwdXNoYnl0ZXMgMHgKICAgIGR1cAogICAgdW5jb3ZlciAyCiAgICBmYWxjb25fdmVyaWZ5CiAgICAhCiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjE2CiAgICAvLyB0ZXN0RmFsY29uVmVyaWZ5KCkgewogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAOToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hdm0xMi5hbGdvLnRzOjE0LTE1CiAgICAvLyBAY29udHJhY3QoeyBhdm1WZXJzaW9uOiAxMiB9KQogICAgLy8gY2xhc3MgQXZtMTJDb250cmFjdCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDEyCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [116, 202], "errorMessage": "application exists"}, {"pc": [118], "errorMessage": "should be version 0"}, {"pc": [205], "errorMessage": "should be version 1"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -370,6 +370,289 @@ class Avm12ContractClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class Avm12ContractBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating Avm12Contract contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class Avm12ContractFactory(algokit_utils.TypedAppFactoryProtocol[Avm12ContractBareCallCreateParams, None, None]):
+    """Factory for deploying and managing Avm12ContractClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = Avm12ContractFactoryParams(self.app_factory)
+        self.create_transaction = Avm12ContractFactoryCreateTransaction(self.app_factory)
+        self.send = Avm12ContractFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: Avm12ContractBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[Avm12ContractClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return Avm12ContractClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> Avm12ContractClient:
+        """Get an app client by creator address and name"""
+        return Avm12ContractClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> Avm12ContractClient:
+        """Get an app client by app ID"""
+        return Avm12ContractClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class Avm12ContractFactoryParams:
+    """Parameters for creating transactions for Avm12Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = Avm12ContractFactoryCreateParams(app_factory)
+        self.update = Avm12ContractFactoryUpdateParams(app_factory)
+        self.delete = Avm12ContractFactoryDeleteParams(app_factory)
+
+class Avm12ContractFactoryCreateParams:
+    """Parameters for 'create' operations of Avm12Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def test_falcon_verify(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testFalconVerify()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testFalconVerify()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def test_reject_version(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testRejectVersion()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testRejectVersion()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class Avm12ContractFactoryUpdateParams:
+    """Parameters for 'update' operations of Avm12Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class Avm12ContractFactoryDeleteParams:
+    """Parameters for 'delete' operations of Avm12Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class Avm12ContractFactoryCreateTransaction:
+    """Create transactions for Avm12Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = Avm12ContractFactoryCreateTransactionCreate(app_factory)
+
+
+class Avm12ContractFactoryCreateTransactionCreate:
+    """Create new instances of Avm12Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class Avm12ContractFactorySend:
+    """Send calls to Avm12Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = Avm12ContractFactorySendCreate(app_factory)
+
+
+class Avm12ContractFactorySendCreate:
+    """Send create calls to Avm12Contract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[Avm12ContractClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return Avm12ContractClient(result[0]), result[1]
 
 
 class Avm12ContractComposer:

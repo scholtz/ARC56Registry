@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "a"}, {"type": "uint64", "name": "b"}, {"type": "bool", "name": "c"}], "name": "testMapOfTuples", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "a"}, {"type": "uint64", "name": "b"}], "name": "testMapOfObjects", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "a"}, {"type": "uint64", "name": "b"}, {"type": "bool", "name": "c"}], "name": "testTupleMap", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "a"}, {"type": "uint64", "name": "b"}], "name": "testObjectMap", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "TestGlobalMapTuple", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {"mapOfTuples": {"keyType": "AVMString", "valueType": "(string,uint64,bool)", "prefix": "bWFwT2ZUdXBsZXM="}, "mapOfObjects": {"keyType": "AVMString", "valueType": "Object7C2C03A9", "prefix": "bWFwT2ZPYmplY3Rz"}, "tupleMap": {"keyType": "(string,uint64,bool)", "valueType": "AVMUint64", "prefix": "dHVwbGVNYXA="}, "objectMap": {"keyType": "Object7C2C03A9", "valueType": "AVMUint64", "prefix": "b2JqZWN0TWFw"}}, "local": {}}, "schema": {"global": {"bytes": 5, "ints": 5}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"Object7C2C03A9": [{"name": "a", "type": "string"}, {"name": "b", "type": "uint64"}]}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [78, 187, 273, 349], "errorMessage": "invalid array length header"}, {"pc": [105, 300], "errorMessage": "invalid number of bytes for arc4.bool"}, {"pc": [85, 194, 280, 356], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [96, 205, 291, 367], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [261], "errorMessage": "object.a should match"}, {"pc": [265], "errorMessage": "object.b should match"}, {"pc": [167], "errorMessage": "tuple[0] should match"}, {"pc": [174], "errorMessage": "tuple[1] should match"}, {"pc": [179], "errorMessage": "tuple[2] should match"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "a"}, {"type": "uint64", "name": "b"}, {"type": "bool", "name": "c"}], "name": "testMapOfTuples", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "a"}, {"type": "uint64", "name": "b"}], "name": "testMapOfObjects", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "a"}, {"type": "uint64", "name": "b"}, {"type": "bool", "name": "c"}], "name": "testTupleMap", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "a"}, {"type": "uint64", "name": "b"}], "name": "testObjectMap", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "TestGlobalMapTuple", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {"mapOfTuples": {"keyType": "AVMString", "valueType": "(string,uint64,bool)", "prefix": "bWFwT2ZUdXBsZXM="}, "mapOfObjects": {"keyType": "AVMString", "valueType": "Object7C2C03A9", "prefix": "bWFwT2ZPYmplY3Rz"}, "tupleMap": {"keyType": "(string,uint64,bool)", "valueType": "AVMUint64", "prefix": "dHVwbGVNYXA="}, "objectMap": {"keyType": "Object7C2C03A9", "valueType": "AVMUint64", "prefix": "b2JqZWN0TWFw"}}, "local": {}}, "schema": {"global": {"bytes": 5, "ints": 5}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"Object7C2C03A9": [{"name": "a", "type": "string"}, {"name": "b", "type": "uint64"}]}, "byteCode": {"approval": "CyAEAAIBCCYDAgALAQACAAoxG0EAKzEZFEQxGESCBAToUZwaBNRa4GoEW+ST/wSfANG+NhoAjgQACQB2AMwBGAAxGRQxGBQQQzYaAUkiWSMISwEVEkRXAgA2GgJJFSUSRBc2GgNJFSQSRCJTSwIVFlcGAksDUEsCFihMUCkiSwRUUExQgA1tYXBPZlR1cGxlc2sxSwFnSSJZSwEVSwJOAlJXAgBPBBJESSNbTwMSRIFQUxJEJEM2GgFJIlkjCEsBFRJEVwIANhoCSRUlEkQXSwEVFlcGAksCUEsBFipMUExQgA5tYXBPZk9iamVjdHNrMUsBZ0kiWUsBFUsCTgJSVwIATwMSRCNbEkQkQzYaAUkiWSMISwEVEkRXAgA2GgJJFSUSRBc2GgNJFSQSRCJTSwIVFlcGAk8DUE8CFihMUCkiTwRUUExQgAh0dXBsZU1hcExQgWNnJEM2GgFJIlkjCEsBFRJEVwIANhoCSRUlEkQXSwEVFlcGAk8CUEwWKkxQTFCACW9iamVjdE1hcExQgWNnJEM=", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAyIDEgOAogICAgYnl0ZWNibG9jayAweDAwMGIgMHgwMCAweDAwMGEKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtbWFwLmFsZ28udHM6NDgtNDkKICAgIC8vIEBjb250cmFjdCh7IHN0YXRlVG90YWxzOiB7IGdsb2JhbEJ5dGVzOiA1LCBnbG9iYWxVaW50czogNSB9IH0pCiAgICAvLyBleHBvcnQgY2xhc3MgVGVzdEdsb2JhbE1hcFR1cGxlIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDExCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHhlODUxOWMxYSAweGQ0NWFlMDZhIDB4NWJlNDkzZmYgMHg5ZjAwZDFiZSAvLyBtZXRob2QgInRlc3RNYXBPZlR1cGxlcyhzdHJpbmcsdWludDY0LGJvb2wpdm9pZCIsIG1ldGhvZCAidGVzdE1hcE9mT2JqZWN0cyhzdHJpbmcsdWludDY0KXZvaWQiLCBtZXRob2QgInRlc3RUdXBsZU1hcChzdHJpbmcsdWludDY0LGJvb2wpdm9pZCIsIG1ldGhvZCAidGVzdE9iamVjdE1hcChzdHJpbmcsdWludDY0KXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCB0ZXN0TWFwT2ZUdXBsZXMgdGVzdE1hcE9mT2JqZWN0cyB0ZXN0VHVwbGVNYXAgdGVzdE9iamVjdE1hcAogICAgZXJyCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUAxMToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtbWFwLmFsZ28udHM6NDgtNDkKICAgIC8vIEBjb250cmFjdCh7IHN0YXRlVG90YWxzOiB7IGdsb2JhbEJ5dGVzOiA1LCBnbG9iYWxVaW50czogNSB9IH0pCiAgICAvLyBleHBvcnQgY2xhc3MgVGVzdEdsb2JhbE1hcFR1cGxlIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLW1hcC5hbGdvLnRzOjpUZXN0R2xvYmFsTWFwVHVwbGUudGVzdE1hcE9mVHVwbGVzW3JvdXRpbmddKCkgLT4gdm9pZDoKdGVzdE1hcE9mVHVwbGVzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1tYXAuYWxnby50czo1NgogICAgLy8gdGVzdE1hcE9mVHVwbGVzKGE6IHN0cmluZywgYjogdWludDY0LCBjOiBib29sZWFuKSB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmJvb2wKICAgIGludGNfMCAvLyAwCiAgICBnZXRiaXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtbWFwLmFsZ28udHM6NTcKICAgIC8vIHRoaXMubWFwT2ZUdXBsZXMoJ2sxJykudmFsdWUgPSBbYSwgYiwgY10KICAgIGRpZyAyCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBkaWcgMwogICAgY29uY2F0CiAgICBkaWcgMgogICAgaXRvYgogICAgYnl0ZWNfMCAvLyAweDAwMGIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMSAvLyAweDAwCiAgICBpbnRjXzAgLy8gMAogICAgZGlnIDQKICAgIHNldGJpdAogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtbWFwLmFsZ28udHM6NTAKICAgIC8vIG1hcE9mVHVwbGVzID0gR2xvYmFsTWFwPHN0cmluZywgW3N0cmluZywgdWludDY0LCBib29sZWFuXT4oKQogICAgcHVzaGJ5dGVzICJtYXBPZlR1cGxlc2sxIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1tYXAuYWxnby50czo1NwogICAgLy8gdGhpcy5tYXBPZlR1cGxlcygnazEnKS52YWx1ZSA9IFthLCBiLCBjXQogICAgZGlnIDEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLW1hcC5hbGdvLnRzOjU4CiAgICAvLyBhc3NlcnQodGhpcy5tYXBPZlR1cGxlcygnazEnKS52YWx1ZVswXSA9PT0gYSwgJ3R1cGxlWzBdIHNob3VsZCBtYXRjaCcpCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgZGlnIDEKICAgIGxlbgogICAgZGlnIDIKICAgIGNvdmVyIDIKICAgIHN1YnN0cmluZzMKICAgIGV4dHJhY3QgMiAwCiAgICB1bmNvdmVyIDQKICAgID09CiAgICBhc3NlcnQgLy8gdHVwbGVbMF0gc2hvdWxkIG1hdGNoCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLW1hcC5hbGdvLnRzOjU5CiAgICAvLyBhc3NlcnQodGhpcy5tYXBPZlR1cGxlcygnazEnKS52YWx1ZVsxXSA9PT0gYiwgJ3R1cGxlWzFdIHNob3VsZCBtYXRjaCcpCiAgICBkdXAKICAgIGludGNfMSAvLyAyCiAgICBleHRyYWN0X3VpbnQ2NAogICAgdW5jb3ZlciAzCiAgICA9PQogICAgYXNzZXJ0IC8vIHR1cGxlWzFdIHNob3VsZCBtYXRjaAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1tYXAuYWxnby50czo2MAogICAgLy8gYXNzZXJ0KHRoaXMubWFwT2ZUdXBsZXMoJ2sxJykudmFsdWVbMl0gPT09IGMsICd0dXBsZVsyXSBzaG91bGQgbWF0Y2gnKQogICAgcHVzaGludCA4MAogICAgZ2V0Yml0CiAgICA9PQogICAgYXNzZXJ0IC8vIHR1cGxlWzJdIHNob3VsZCBtYXRjaAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1tYXAuYWxnby50czo1NgogICAgLy8gdGVzdE1hcE9mVHVwbGVzKGE6IHN0cmluZywgYjogdWludDY0LCBjOiBib29sZWFuKSB7CiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1tYXAuYWxnby50czo6VGVzdEdsb2JhbE1hcFR1cGxlLnRlc3RNYXBPZk9iamVjdHNbcm91dGluZ10oKSAtPiB2b2lkOgp0ZXN0TWFwT2ZPYmplY3RzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1tYXAuYWxnby50czo2MwogICAgLy8gdGVzdE1hcE9mT2JqZWN0cyhhOiBzdHJpbmcsIGI6IHVpbnQ2NCkgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtbWFwLmFsZ28udHM6NjQKICAgIC8vIHRoaXMubWFwT2ZPYmplY3RzKCdrMScpLnZhbHVlID0geyBhLCBiIH0KICAgIGRpZyAxCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBkaWcgMgogICAgY29uY2F0CiAgICBkaWcgMQogICAgaXRvYgogICAgYnl0ZWNfMiAvLyAweDAwMGEKICAgIHN3YXAKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLW1hcC5hbGdvLnRzOjUxCiAgICAvLyBtYXBPZk9iamVjdHMgPSBHbG9iYWxNYXA8c3RyaW5nLCB7IGE6IHN0cmluZzsgYjogdWludDY0IH0+KCkKICAgIHB1c2hieXRlcyAibWFwT2ZPYmplY3RzazEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLW1hcC5hbGdvLnRzOjY0CiAgICAvLyB0aGlzLm1hcE9mT2JqZWN0cygnazEnKS52YWx1ZSA9IHsgYSwgYiB9CiAgICBkaWcgMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtbWFwLmFsZ28udHM6NjUKICAgIC8vIGFzc2VydCh0aGlzLm1hcE9mT2JqZWN0cygnazEnKS52YWx1ZS5hID09PSBhLCAnb2JqZWN0LmEgc2hvdWxkIG1hdGNoJykKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBkaWcgMQogICAgbGVuCiAgICBkaWcgMgogICAgY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgZXh0cmFjdCAyIDAKICAgIHVuY292ZXIgMwogICAgPT0KICAgIGFzc2VydCAvLyBvYmplY3QuYSBzaG91bGQgbWF0Y2gKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtbWFwLmFsZ28udHM6NjYKICAgIC8vIGFzc2VydCh0aGlzLm1hcE9mT2JqZWN0cygnazEnKS52YWx1ZS5iID09PSBiLCAnb2JqZWN0LmIgc2hvdWxkIG1hdGNoJykKICAgIGludGNfMSAvLyAyCiAgICBleHRyYWN0X3VpbnQ2NAogICAgPT0KICAgIGFzc2VydCAvLyBvYmplY3QuYiBzaG91bGQgbWF0Y2gKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtbWFwLmFsZ28udHM6NjMKICAgIC8vIHRlc3RNYXBPZk9iamVjdHMoYTogc3RyaW5nLCBiOiB1aW50NjQpIHsKICAgIGludGNfMiAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLW1hcC5hbGdvLnRzOjpUZXN0R2xvYmFsTWFwVHVwbGUudGVzdFR1cGxlTWFwW3JvdXRpbmddKCkgLT4gdm9pZDoKdGVzdFR1cGxlTWFwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1tYXAuYWxnby50czo2OQogICAgLy8gdGVzdFR1cGxlTWFwKGE6IHN0cmluZywgYjogdWludDY0LCBjOiBib29sZWFuKSB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmJvb2wKICAgIGludGNfMCAvLyAwCiAgICBnZXRiaXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtbWFwLmFsZ28udHM6NzAKICAgIC8vIHRoaXMudHVwbGVNYXAoW2EsIGIsIGNdKS52YWx1ZSA9IDk5CiAgICBkaWcgMgogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgdW5jb3ZlciAzCiAgICBjb25jYXQKICAgIHVuY292ZXIgMgogICAgaXRvYgogICAgYnl0ZWNfMCAvLyAweDAwMGIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMSAvLyAweDAwCiAgICBpbnRjXzAgLy8gMAogICAgdW5jb3ZlciA0CiAgICBzZXRiaXQKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLW1hcC5hbGdvLnRzOjUzCiAgICAvLyB0dXBsZU1hcCA9IEdsb2JhbE1hcDxbc3RyaW5nLCB1aW50NjQsIGJvb2xlYW5dLCB1aW50NjQ+KCkKICAgIHB1c2hieXRlcyAidHVwbGVNYXAiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtbWFwLmFsZ28udHM6NzAKICAgIC8vIHRoaXMudHVwbGVNYXAoW2EsIGIsIGNdKS52YWx1ZSA9IDk5CiAgICBwdXNoaW50IDk5CiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1tYXAuYWxnby50czo2OQogICAgLy8gdGVzdFR1cGxlTWFwKGE6IHN0cmluZywgYjogdWludDY0LCBjOiBib29sZWFuKSB7CiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1tYXAuYWxnby50czo6VGVzdEdsb2JhbE1hcFR1cGxlLnRlc3RPYmplY3RNYXBbcm91dGluZ10oKSAtPiB2b2lkOgp0ZXN0T2JqZWN0TWFwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1tYXAuYWxnby50czo3NAogICAgLy8gdGVzdE9iamVjdE1hcChhOiBzdHJpbmcsIGI6IHVpbnQ2NCkgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtbWFwLmFsZ28udHM6NzUKICAgIC8vIHRoaXMub2JqZWN0TWFwKHsgYSwgYiB9KS52YWx1ZSA9IDk5CiAgICBkaWcgMQogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGl0b2IKICAgIGJ5dGVjXzIgLy8gMHgwMDBhCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1tYXAuYWxnby50czo1NAogICAgLy8gb2JqZWN0TWFwID0gR2xvYmFsTWFwPHsgYTogc3RyaW5nOyBiOiB1aW50NjQgfSwgdWludDY0PigpCiAgICBwdXNoYnl0ZXMgIm9iamVjdE1hcCIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1tYXAuYWxnby50czo3NQogICAgLy8gdGhpcy5vYmplY3RNYXAoeyBhLCBiIH0pLnZhbHVlID0gOTkKICAgIHB1c2hpbnQgOTkKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLW1hcC5hbGdvLnRzOjc0CiAgICAvLyB0ZXN0T2JqZWN0TWFwKGE6IHN0cmluZywgYjogdWludDY0KSB7CiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [78, 187, 273, 349], "errorMessage": "invalid array length header"}, {"pc": [105, 300], "errorMessage": "invalid number of bytes for arc4.bool"}, {"pc": [85, 194, 280, 356], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [96, 205, 291, 367], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [261], "errorMessage": "object.a should match"}, {"pc": [265], "errorMessage": "object.b should match"}, {"pc": [167], "errorMessage": "tuple[0] should match"}, {"pc": [174], "errorMessage": "tuple[1] should match"}, {"pc": [179], "errorMessage": "tuple[2] should match"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -631,6 +631,331 @@ class TestGlobalMapTupleClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class TestGlobalMapTupleBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating TestGlobalMapTuple contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class TestGlobalMapTupleFactory(algokit_utils.TypedAppFactoryProtocol[TestGlobalMapTupleBareCallCreateParams, None, None]):
+    """Factory for deploying and managing TestGlobalMapTupleClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = TestGlobalMapTupleFactoryParams(self.app_factory)
+        self.create_transaction = TestGlobalMapTupleFactoryCreateTransaction(self.app_factory)
+        self.send = TestGlobalMapTupleFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: TestGlobalMapTupleBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[TestGlobalMapTupleClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return TestGlobalMapTupleClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> TestGlobalMapTupleClient:
+        """Get an app client by creator address and name"""
+        return TestGlobalMapTupleClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> TestGlobalMapTupleClient:
+        """Get an app client by app ID"""
+        return TestGlobalMapTupleClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class TestGlobalMapTupleFactoryParams:
+    """Parameters for creating transactions for TestGlobalMapTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = TestGlobalMapTupleFactoryCreateParams(app_factory)
+        self.update = TestGlobalMapTupleFactoryUpdateParams(app_factory)
+        self.delete = TestGlobalMapTupleFactoryDeleteParams(app_factory)
+
+class TestGlobalMapTupleFactoryCreateParams:
+    """Parameters for 'create' operations of TestGlobalMapTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def test_map_of_tuples(
+        self,
+        args: tuple[str, int, bool] | TestMapOfTuplesArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testMapOfTuples(string,uint64,bool)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testMapOfTuples(string,uint64,bool)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def test_map_of_objects(
+        self,
+        args: tuple[str, int] | TestMapOfObjectsArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testMapOfObjects(string,uint64)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testMapOfObjects(string,uint64)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def test_tuple_map(
+        self,
+        args: tuple[str, int, bool] | TestTupleMapArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testTupleMap(string,uint64,bool)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testTupleMap(string,uint64,bool)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def test_object_map(
+        self,
+        args: tuple[str, int] | TestObjectMapArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testObjectMap(string,uint64)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testObjectMap(string,uint64)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class TestGlobalMapTupleFactoryUpdateParams:
+    """Parameters for 'update' operations of TestGlobalMapTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class TestGlobalMapTupleFactoryDeleteParams:
+    """Parameters for 'delete' operations of TestGlobalMapTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class TestGlobalMapTupleFactoryCreateTransaction:
+    """Create transactions for TestGlobalMapTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = TestGlobalMapTupleFactoryCreateTransactionCreate(app_factory)
+
+
+class TestGlobalMapTupleFactoryCreateTransactionCreate:
+    """Create new instances of TestGlobalMapTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class TestGlobalMapTupleFactorySend:
+    """Send calls to TestGlobalMapTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = TestGlobalMapTupleFactorySendCreate(app_factory)
+
+
+class TestGlobalMapTupleFactorySendCreate:
+    """Send create calls to TestGlobalMapTuple contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[TestGlobalMapTupleClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return TestGlobalMapTupleClient(result[0]), result[1]
 
 
 class TestGlobalMapTupleComposer:

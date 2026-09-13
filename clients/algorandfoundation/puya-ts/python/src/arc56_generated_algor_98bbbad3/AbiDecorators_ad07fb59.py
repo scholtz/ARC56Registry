@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "justNoop", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": [], "create": ["NoOp"]}, "args": [], "name": "createMethod", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp", "OptIn", "CloseOut", "DeleteApplication", "UpdateApplication"], "create": []}, "args": [], "name": "allActions", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "overrideReadonlyName", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "defaultValue": {"data": "Z2xvYmFsVmFsdWU=", "source": "global", "type": "AVMString"}, "name": "a"}, {"type": "uint64", "defaultValue": {"data": "overrideReadonlyName()uint64", "source": "method"}, "name": "b"}, {"type": "uint64", "defaultValue": {"data": "AAAAAAAAAJE=", "source": "literal", "type": "uint64"}, "name": "c"}], "name": "methodWithDefaults", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "readonlyAlt", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": ["NoOp"]}, "args": [], "name": "readonlyAlt2", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}], "name": "AbiDecorators", "state": {"keys": {"box": {}, "global": {"globalValue": {"key": "Z2xvYmFsVmFsdWU=", "keyType": "AVMString", "valueType": "AVMUint64"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 1}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [246, 255, 264], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "justNoop", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": [], "create": ["NoOp"]}, "args": [], "name": "createMethod", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp", "OptIn", "CloseOut", "DeleteApplication", "UpdateApplication"], "create": []}, "args": [], "name": "allActions", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "overrideReadonlyName", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "defaultValue": {"data": "Z2xvYmFsVmFsdWU=", "source": "global", "type": "AVMString"}, "name": "a"}, {"type": "uint64", "defaultValue": {"data": "overrideReadonlyName()uint64", "source": "method"}, "name": "b"}, {"type": "uint64", "defaultValue": {"data": "AAAAAAAAAJE=", "source": "literal", "type": "uint64"}, "name": "c"}], "name": "methodWithDefaults", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "readonlyAlt", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": ["NoOp"]}, "args": [], "name": "readonlyAlt2", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}], "name": "AbiDecorators", "state": {"keys": {"box": {}, "global": {"globalValue": {"key": "Z2xvYmFsVmFsdWU=", "keyType": "AVMString", "valueType": "AVMUint64"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 1}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyADAQAIJgEEFR98dUIAADEYQAAJQgAAiAFIQgAAQgAANhoAgARjwnq6TwGOAQCLQgAAMRkjEkQ2GgCABAmxD/1PAY4BAG5CAAAxGCMTQQBJQgAANhoAgAT5Ag1agAQU0bbqgATBNnN0gATNk8ziTwSOBAAZABMADQAHQgAAQgAAAIgAlkL/9ogAYUL/8IgATUL/6ogAL0L/5DYaAIAE4Xn51E8BjgEABkIAAEL/0ogAHEL/94gAcUL/jzEYIxNEiAATQv9tQgAAiABrIkNCAACIAGciQ0IAAIgAYyJDQgAAiABfFihPAVCwIkNCAAA2GgFJFSQSRBc2GgJJFSQSRBc2GgNJFSQSRBdPAk8CTwKIADYWKE8BULAiQ0IAAIgANxYoTwFQsCJDQgAAiAAuFihPAVCwIkNCAACJQgAAiUIAAIlCAACBBYmKAwFCAACL/Yv+C4v/CIlCAAAiiUIAAIECiUIAAEIAAEIAAIALZ2xvYmFsVmFsdWWBe2eJ", "clear": "C0IAAIEBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDgKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NQogICAgYiBtYWluX2Jsb2NrQDAKCm1haW5fYmxvY2tAMDoKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIGIgbWFpbl9pZl9ib2R5QDEKCm1haW5faWZfYm9keUAxOgogICAgY2FsbHN1YiBjb25zdHJ1Y3RvcgogICAgYiBtYWluX2FmdGVyX2lmX2Vsc2VAMgoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICBiIG1haW5fYmxvY2tAMwoKbWFpbl9ibG9ja0AzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6NAogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgQWJpRGVjb3JhdG9ycyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIHB1c2hieXRlcyAweDYzYzI3YWJhIC8vIG1ldGhvZCAiYWxsQWN0aW9ucygpdm9pZCIKICAgIHVuY292ZXIgMQogICAgbWF0Y2ggbWFpbl9hbGxBY3Rpb25zX3JvdXRlQDQKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDUKCm1haW5fc3dpdGNoX2Nhc2VfbmV4dEA1OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6NAogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgQWJpRGVjb3JhdG9ycyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGludGNfMSAvLyBOb09wCiAgICA9PQogICAgYXNzZXJ0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBwdXNoYnl0ZXMgMHgwOWIxMGZmZCAvLyBtZXRob2QgInJlYWRvbmx5QWx0MigpdWludDY0IgogICAgdW5jb3ZlciAxCiAgICBtYXRjaCBtYWluX3JlYWRvbmx5QWx0Ml9yb3V0ZUA2CiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEA3CgptYWluX3N3aXRjaF9jYXNlX25leHRANzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjQKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIEFiaURlY29yYXRvcnMgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18xIC8vIDAKICAgICE9CiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDE0CiAgICBiIG1haW5fY2FsbF9Ob09wQDgKCm1haW5fY2FsbF9Ob09wQDg6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo0CiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBBYmlEZWNvcmF0b3JzIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgcHVzaGJ5dGVzIDB4ZjkwMjBkNWEgLy8gbWV0aG9kICJqdXN0Tm9vcCgpdm9pZCIKICAgIHB1c2hieXRlcyAweDE0ZDFiNmVhIC8vIG1ldGhvZCAib3ZlcnJpZGVSZWFkb25seU5hbWUoKXVpbnQ2NCIKICAgIHB1c2hieXRlcyAweGMxMzY3Mzc0IC8vIG1ldGhvZCAibWV0aG9kV2l0aERlZmF1bHRzKHVpbnQ2NCx1aW50NjQsdWludDY0KXVpbnQ2NCIKICAgIHB1c2hieXRlcyAweGNkOTNjY2UyIC8vIG1ldGhvZCAicmVhZG9ubHlBbHQoKXVpbnQ2NCIKICAgIHVuY292ZXIgNAogICAgbWF0Y2ggbWFpbl9qdXN0Tm9vcF9yb3V0ZUA5IG1haW5fb3ZlcnJpZGVSZWFkb25seU5hbWVfcm91dGVAMTAgbWFpbl9tZXRob2RXaXRoRGVmYXVsdHNfcm91dGVAMTEgbWFpbl9yZWFkb25seUFsdF9yb3V0ZUAxMgogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAMTMKCm1haW5fc3dpdGNoX2Nhc2VfbmV4dEAxMzoKICAgIGIgbWFpbl9hZnRlcl9pZl9lbHNlQDE3CgptYWluX2FmdGVyX2lmX2Vsc2VAMTc6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo0CiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBBYmlEZWNvcmF0b3JzIGV4dGVuZHMgQ29udHJhY3QgewogICAgZXJyCgptYWluX3JlYWRvbmx5QWx0X3JvdXRlQDEyOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6MjMtMjQKICAgIC8vIEByZWFkb25seQogICAgLy8gcHVibGljIHJlYWRvbmx5QWx0KCk6IHVpbnQ2NCB7CiAgICBjYWxsc3ViIHJlYWRvbmx5QWx0CiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEAxMwoKbWFpbl9tZXRob2RXaXRoRGVmYXVsdHNfcm91dGVAMTE6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czoxOAogICAgLy8gQGFiaW1ldGhvZCh7IGRlZmF1bHRBcmd1bWVudHM6IHsgYTogeyBmcm9tOiAnZ2xvYmFsVmFsdWUnIH0sIGI6IHsgZnJvbTogJ3JlYWRvbmx5JyB9LCBjOiB7IGNvbnN0YW50OiAxNDUgfSB9IH0pCiAgICBjYWxsc3ViIG1ldGhvZFdpdGhEZWZhdWx0cwogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAMTMKCm1haW5fb3ZlcnJpZGVSZWFkb25seU5hbWVfcm91dGVAMTA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czoxMQogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlLCBuYW1lOiAnb3ZlcnJpZGVSZWFkb25seU5hbWUnIH0pCiAgICBjYWxsc3ViIHJlYWRvbmx5CiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEAxMwoKbWFpbl9qdXN0Tm9vcF9yb3V0ZUA5OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6NQogICAgLy8gQGFiaW1ldGhvZCh7IGFsbG93QWN0aW9uczogJ05vT3AnIH0pCiAgICBjYWxsc3ViIGp1c3ROb29wCiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEAxMwoKbWFpbl9jcmVhdGVfTm9PcEAxNDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjQKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIEFiaURlY29yYXRvcnMgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBwdXNoYnl0ZXMgMHhlMTc5ZjlkNCAvLyBtZXRob2QgImNyZWF0ZU1ldGhvZCgpdm9pZCIKICAgIHVuY292ZXIgMQogICAgbWF0Y2ggbWFpbl9jcmVhdGVNZXRob2Rfcm91dGVAMTUKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDE2CgptYWluX3N3aXRjaF9jYXNlX25leHRAMTY6CiAgICBiIG1haW5fYWZ0ZXJfaWZfZWxzZUAxNwoKbWFpbl9jcmVhdGVNZXRob2Rfcm91dGVAMTU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo3CiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgY2FsbHN1YiBjcmVhdGVNZXRob2QKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDE2CgptYWluX3JlYWRvbmx5QWx0Ml9yb3V0ZUA2OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6MjkKICAgIC8vIEBhYmltZXRob2QoeyBvbkNyZWF0ZTogJ2FsbG93JyB9KQogICAgY2FsbHN1YiByZWFkb25seUFsdDIKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDcKCm1haW5fYWxsQWN0aW9uc19yb3V0ZUA0OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OQogICAgLy8gQGFiaW1ldGhvZCh7IGFsbG93QWN0aW9uczogWydOb09wJywgJ09wdEluJywgJ0Nsb3NlT3V0JywgJ0RlbGV0ZUFwcGxpY2F0aW9uJywgJ1VwZGF0ZUFwcGxpY2F0aW9uJ10gfSkKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBpbnRjXzEgLy8gMAogICAgIT0KICAgIGFzc2VydAogICAgY2FsbHN1YiBhbGxBY3Rpb25zCiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEA1CgoKLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMuanVzdE5vb3Bbcm91dGluZ10oKSAtPiB2b2lkOgpqdXN0Tm9vcDoKICAgIGIganVzdE5vb3BfYmxvY2tAMAoKanVzdE5vb3BfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjUKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6ICdOb09wJyB9KQogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5qdXN0Tm9vcAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjpBYmlEZWNvcmF0b3JzLmNyZWF0ZU1ldGhvZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZU1ldGhvZDoKICAgIGIgY3JlYXRlTWV0aG9kX2Jsb2NrQDAKCmNyZWF0ZU1ldGhvZF9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6NwogICAgLy8gQGFiaW1ldGhvZCh7IG9uQ3JlYXRlOiAncmVxdWlyZScgfSkKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMuY3JlYXRlTWV0aG9kCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMuYWxsQWN0aW9uc1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmFsbEFjdGlvbnM6CiAgICBiIGFsbEFjdGlvbnNfYmxvY2tAMAoKYWxsQWN0aW9uc19ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OQogICAgLy8gQGFiaW1ldGhvZCh7IGFsbG93QWN0aW9uczogWydOb09wJywgJ09wdEluJywgJ0Nsb3NlT3V0JywgJ0RlbGV0ZUFwcGxpY2F0aW9uJywgJ1VwZGF0ZUFwcGxpY2F0aW9uJ10gfSkKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMuYWxsQWN0aW9ucwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjpBYmlEZWNvcmF0b3JzLnJlYWRvbmx5W3JvdXRpbmddKCkgLT4gdm9pZDoKcmVhZG9ubHk6CiAgICBiIHJlYWRvbmx5X2Jsb2NrQDAKCnJlYWRvbmx5X2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czoxMQogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlLCBuYW1lOiAnb3ZlcnJpZGVSZWFkb25seU5hbWUnIH0pCiAgICBjYWxsc3ViIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjpBYmlEZWNvcmF0b3JzLnJlYWRvbmx5CiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5tZXRob2RXaXRoRGVmYXVsdHNbcm91dGluZ10oKSAtPiB2b2lkOgptZXRob2RXaXRoRGVmYXVsdHM6CiAgICBiIG1ldGhvZFdpdGhEZWZhdWx0c19ibG9ja0AwCgptZXRob2RXaXRoRGVmYXVsdHNfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjE4CiAgICAvLyBAYWJpbWV0aG9kKHsgZGVmYXVsdEFyZ3VtZW50czogeyBhOiB7IGZyb206ICdnbG9iYWxWYWx1ZScgfSwgYjogeyBmcm9tOiAncmVhZG9ubHknIH0sIGM6IHsgY29uc3RhbnQ6IDE0NSB9IH0gfSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHVuY292ZXIgMgogICAgdW5jb3ZlciAyCiAgICB1bmNvdmVyIDIKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMubWV0aG9kV2l0aERlZmF1bHRzCiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5yZWFkb25seUFsdFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlYWRvbmx5QWx0OgogICAgYiByZWFkb25seUFsdF9ibG9ja0AwCgpyZWFkb25seUFsdF9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6MjMtMjQKICAgIC8vIEByZWFkb25seQogICAgLy8gcHVibGljIHJlYWRvbmx5QWx0KCk6IHVpbnQ2NCB7CiAgICBjYWxsc3ViIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjpBYmlEZWNvcmF0b3JzLnJlYWRvbmx5QWx0CiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5yZWFkb25seUFsdDJbcm91dGluZ10oKSAtPiB2b2lkOgpyZWFkb25seUFsdDI6CiAgICBiIHJlYWRvbmx5QWx0Ml9ibG9ja0AwCgpyZWFkb25seUFsdDJfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjI5CiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdhbGxvdycgfSkKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMucmVhZG9ubHlBbHQyCiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5qdXN0Tm9vcCgpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjpBYmlEZWNvcmF0b3JzLmp1c3ROb29wOgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5qdXN0Tm9vcF9ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5qdXN0Tm9vcF9ibG9ja0AwOgogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMuY3JlYXRlTWV0aG9kKCkgLT4gdm9pZDoKdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMuY3JlYXRlTWV0aG9kOgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5jcmVhdGVNZXRob2RfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMuY3JlYXRlTWV0aG9kX2Jsb2NrQDA6CiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5hbGxBY3Rpb25zKCkgLT4gdm9pZDoKdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMuYWxsQWN0aW9uczoKICAgIGIgdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMuYWxsQWN0aW9uc19ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5hbGxBY3Rpb25zX2Jsb2NrQDA6CiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5yZWFkb25seSgpIC0+IHVpbnQ2NDoKdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMucmVhZG9ubHk6CiAgICBiIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjpBYmlEZWNvcmF0b3JzLnJlYWRvbmx5X2Jsb2NrQDAKCnRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjpBYmlEZWNvcmF0b3JzLnJlYWRvbmx5X2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czoxMwogICAgLy8gcmV0dXJuIDUKICAgIHB1c2hpbnQgNQogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMubWV0aG9kV2l0aERlZmF1bHRzKGE6IHVpbnQ2NCwgYjogdWludDY0LCBjOiB1aW50NjQpIC0+IHVpbnQ2NDoKdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMubWV0aG9kV2l0aERlZmF1bHRzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6MTgtMTkKICAgIC8vIEBhYmltZXRob2QoeyBkZWZhdWx0QXJndW1lbnRzOiB7IGE6IHsgZnJvbTogJ2dsb2JhbFZhbHVlJyB9LCBiOiB7IGZyb206ICdyZWFkb25seScgfSwgYzogeyBjb25zdGFudDogMTQ1IH0gfSB9KQogICAgLy8gcHVibGljIG1ldGhvZFdpdGhEZWZhdWx0cyhhOiB1aW50NjQsIGI6IHVpbnQ2NCwgYzogdWludDY0KTogdWludDY0IHsKICAgIHByb3RvIDMgMQogICAgYiB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5tZXRob2RXaXRoRGVmYXVsdHNfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMubWV0aG9kV2l0aERlZmF1bHRzX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czoyMAogICAgLy8gcmV0dXJuIGEgKiBiICsgYwogICAgZnJhbWVfZGlnIC0zCiAgICBmcmFtZV9kaWcgLTIKICAgICoKICAgIGZyYW1lX2RpZyAtMQogICAgKwogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMucmVhZG9ubHlBbHQoKSAtPiB1aW50NjQ6CnRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjpBYmlEZWNvcmF0b3JzLnJlYWRvbmx5QWx0OgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5yZWFkb25seUFsdF9ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5yZWFkb25seUFsdF9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6MjUKICAgIC8vIHJldHVybiAxCiAgICBpbnRjXzAgLy8gMQogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6OkFiaURlY29yYXRvcnMucmVhZG9ubHlBbHQyKCkgLT4gdWludDY0Ogp0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5yZWFkb25seUFsdDI6CiAgICBiIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjpBYmlEZWNvcmF0b3JzLnJlYWRvbmx5QWx0Ml9ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5yZWFkb25seUFsdDJfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjMxCiAgICAvLyByZXR1cm4gMgogICAgcHVzaGludCAyCiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czo6QWJpRGVjb3JhdG9ycy5jb25zdHJ1Y3RvcigpIC0+IHZvaWQ6CmNvbnN0cnVjdG9yOgogICAgYiBjb25zdHJ1Y3Rvcl9ibG9ja0AwCgpjb25zdHJ1Y3Rvcl9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FiaS1kZWNvcmF0b3JzLmFsZ28udHM6NAogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgQWJpRGVjb3JhdG9ycyBleHRlbmRzIENvbnRyYWN0IHsKICAgIGIgY29uc3RydWN0b3JfYmxvY2tAMQoKY29uc3RydWN0b3JfYmxvY2tAMToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hYmktZGVjb3JhdG9ycy5hbGdvLnRzOjQKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIEFiaURlY29yYXRvcnMgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBiIGNvbnN0cnVjdG9yX2FmdGVyX2lubGluZWRfQGFsZ29yYW5kZm91bmRhdGlvbi9hbGdvcmFuZC10eXBlc2NyaXB0L2Jhc2UtY29udHJhY3QuZC50czo6QmFzZUNvbnRyYWN0LmNvbnN0cnVjdG9yQDIKCmNvbnN0cnVjdG9yX2FmdGVyX2lubGluZWRfQGFsZ29yYW5kZm91bmRhdGlvbi9hbGdvcmFuZC10eXBlc2NyaXB0L2Jhc2UtY29udHJhY3QuZC50czo6QmFzZUNvbnRyYWN0LmNvbnN0cnVjdG9yQDI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYWJpLWRlY29yYXRvcnMuYWxnby50czoxNgogICAgLy8gZ2xvYmFsVmFsdWUgPSBHbG9iYWxTdGF0ZSh7IGluaXRpYWxWYWx1ZTogVWludDY0KDEyMykgfSkKICAgIHB1c2hieXRlcyAiZ2xvYmFsVmFsdWUiCiAgICBwdXNoaW50IDEyMwogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1Ygo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [246, 255, 264], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -76,6 +76,40 @@ class MethodWithDefaultsArgs:
         return "methodWithDefaults(uint64,uint64,uint64)uint64"
 
 
+class _AbiDecoratorsUpdate:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def all_actions(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppUpdateMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.params.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "allActions()void",
+        }))
+
+
+class _AbiDecoratorsDelete:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def all_actions(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppDeleteMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.delete(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "allActions()void",
+        }))
+
+
 class _AbiDecoratorsOptIn:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
@@ -111,6 +145,14 @@ class _AbiDecoratorsCloseOut:
 class AbiDecoratorsParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_AbiDecoratorsUpdate":
+        return _AbiDecoratorsUpdate(self.app_client)
+
+    @property
+    def delete(self) -> "_AbiDecoratorsDelete":
+        return _AbiDecoratorsDelete(self.app_client)
 
     @property
     def opt_in(self) -> "_AbiDecoratorsOptIn":
@@ -188,6 +230,28 @@ class AbiDecoratorsParams:
             "method": "readonlyAlt2()uint64",
         }))
 
+    def create_method(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "createMethod()void",
+        }))
+
+    def readonly_alt_2(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "readonlyAlt2()uint64",
+        }))
+
     def clear_state(
         self,
         params: algokit_utils.AppClientBareCallParams | None = None,
@@ -197,6 +261,40 @@ class AbiDecoratorsParams:
             params,
             
         )
+
+
+class _AbiDecoratorsUpdateTransaction:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def all_actions(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.create_transaction.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "allActions()void",
+        }))
+
+
+class _AbiDecoratorsDeleteTransaction:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def all_actions(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.delete(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "allActions()void",
+        }))
 
 
 class _AbiDecoratorsOptInTransaction:
@@ -234,6 +332,14 @@ class _AbiDecoratorsCloseOutTransaction:
 class AbiDecoratorsCreateTransactionParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_AbiDecoratorsUpdateTransaction":
+        return _AbiDecoratorsUpdateTransaction(self.app_client)
+
+    @property
+    def delete(self) -> "_AbiDecoratorsDeleteTransaction":
+        return _AbiDecoratorsDeleteTransaction(self.app_client)
 
     @property
     def opt_in(self) -> "_AbiDecoratorsOptInTransaction":
@@ -311,6 +417,28 @@ class AbiDecoratorsCreateTransactionParams:
             "method": "readonlyAlt2()uint64",
         }))
 
+    def create_method(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "createMethod()void",
+        }))
+
+    def readonly_alt_2(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "readonlyAlt2()uint64",
+        }))
+
     def clear_state(
         self,
         params: algokit_utils.AppClientBareCallParams | None = None,
@@ -320,6 +448,46 @@ class AbiDecoratorsCreateTransactionParams:
             params,
             
         )
+
+
+class _AbiDecoratorsUpdateSend:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def all_actions(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        response = self.app_client.send.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "allActions()void",
+        }), send_params=send_params, compilation_params=compilation_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppUpdateTransactionResult[None], parsed_response)
+
+
+class _AbiDecoratorsDeleteSend:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def all_actions(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.delete(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "allActions()void",
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
 
 
 class _AbiDecoratorsOptInSend:
@@ -363,6 +531,14 @@ class _AbiDecoratorsCloseOutSend:
 class AbiDecoratorsSend:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_AbiDecoratorsUpdateSend":
+        return _AbiDecoratorsUpdateSend(self.app_client)
+
+    @property
+    def delete(self) -> "_AbiDecoratorsDeleteSend":
+        return _AbiDecoratorsDeleteSend(self.app_client)
 
     @property
     def opt_in(self) -> "_AbiDecoratorsOptInSend":
@@ -443,6 +619,34 @@ class AbiDecoratorsSend:
         }), send_params=send_params)
         parsed_response = response
         return typing.cast(algokit_utils.SendAppTransactionResult[int], parsed_response)
+
+    def readonly_alt_2(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[int]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "readonlyAlt2()uint64",
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[int], parsed_response)
+
+    def create_method(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "createMethod()void",
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
 
     def readonly_alt_2(
         self,
@@ -762,6 +966,654 @@ class AbiDecoratorsClient:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class AbiDecoratorsMethodCallCreateParams(
+    algokit_utils.AppClientCreateSchema, algokit_utils.BaseAppClientMethodCallParams[
+        typing.Any,
+        str | None,
+    ]
+):
+    """Parameters for creating AbiDecorators contract using ABI"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallCreateParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallCreateParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+@dataclasses.dataclass(frozen=True)
+class AbiDecoratorsMethodCallUpdateParams(
+    algokit_utils.BaseAppClientMethodCallParams[
+        typing.Any,
+        str | None,
+    ]
+):
+    """Parameters for calling AbiDecorators contract using ABI"""
+    on_complete: typing.Literal[OnComplete.UpdateApplicationOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+@dataclasses.dataclass(frozen=True)
+class AbiDecoratorsMethodCallDeleteParams(
+    algokit_utils.BaseAppClientMethodCallParams[
+        typing.Any,
+        str | None,
+    ]
+):
+    """Parameters for calling AbiDecorators contract using ABI"""
+    on_complete: typing.Literal[OnComplete.DeleteApplicationOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+class AbiDecoratorsFactory(algokit_utils.TypedAppFactoryProtocol[AbiDecoratorsMethodCallCreateParams, AbiDecoratorsMethodCallUpdateParams, AbiDecoratorsMethodCallDeleteParams]):
+    """Factory for deploying and managing AbiDecoratorsClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = AbiDecoratorsFactoryParams(self.app_factory)
+        self.create_transaction = AbiDecoratorsFactoryCreateTransaction(self.app_factory)
+        self.send = AbiDecoratorsFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: AbiDecoratorsMethodCallCreateParams | None = None,
+        update_params: AbiDecoratorsMethodCallUpdateParams | None = None,
+        delete_params: AbiDecoratorsMethodCallDeleteParams | None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[AbiDecoratorsClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params.to_algokit_utils_params() if update_params else None,
+            delete_params=delete_params.to_algokit_utils_params() if delete_params else None,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return AbiDecoratorsClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AbiDecoratorsClient:
+        """Get an app client by creator address and name"""
+        return AbiDecoratorsClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AbiDecoratorsClient:
+        """Get an app client by app ID"""
+        return AbiDecoratorsClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class AbiDecoratorsFactoryParams:
+    """Parameters for creating transactions for AbiDecorators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbiDecoratorsFactoryCreateParams(app_factory)
+        self.update = AbiDecoratorsFactoryUpdateParams(app_factory)
+        self.delete = AbiDecoratorsFactoryDeleteParams(app_factory)
+
+class AbiDecoratorsFactoryCreateParams:
+    """Parameters for 'create' operations of AbiDecorators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def just_noop(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the justNoop()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "justNoop()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def all_actions(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the allActions()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "allActions()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def override_readonly_name(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the overrideReadonlyName()uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "overrideReadonlyName()uint64",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def method_with_defaults(
+        self,
+        args: tuple[int, int, int] | MethodWithDefaultsArgs | None = None,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the methodWithDefaults(uint64,uint64,uint64)uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "methodWithDefaults(uint64,uint64,uint64)uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def readonly_alt(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the readonlyAlt()uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "readonlyAlt()uint64",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def readonly_alt_2(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the readonlyAlt2()uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "readonlyAlt2()uint64",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def create_method(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the createMethod()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "createMethod()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def readonly_alt_2(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the readonlyAlt2()uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "readonlyAlt2()uint64",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def all_actions(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the allActions()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "allActions()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def all_actions(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the allActions()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "allActions()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def all_actions(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the allActions()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "allActions()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def all_actions(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the allActions()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "allActions()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class AbiDecoratorsFactoryUpdateParams:
+    """Parameters for 'update' operations of AbiDecorators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class AbiDecoratorsFactoryDeleteParams:
+    """Parameters for 'delete' operations of AbiDecorators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class AbiDecoratorsFactoryCreateTransaction:
+    """Create transactions for AbiDecorators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbiDecoratorsFactoryCreateTransactionCreate(app_factory)
+
+
+class AbiDecoratorsFactoryCreateTransactionCreate:
+    """Create new instances of AbiDecorators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class AbiDecoratorsFactorySend:
+    """Send calls to AbiDecorators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbiDecoratorsFactorySendCreate(app_factory)
+
+
+class AbiDecoratorsFactorySendCreate:
+    """Send create calls to AbiDecorators contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[AbiDecoratorsClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return AbiDecoratorsClient(result[0]), result[1]
+
+    def create_method_void(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> tuple[AbiDecoratorsClient, algokit_utils.AppFactoryCreateMethodCallResult[None]]:
+            """Creates and sends a transaction using the createMethod()void ABI method"""
+            params = params or algokit_utils.CommonAppCallCreateParams()
+            client, result = self.app_factory.send.create(
+                algokit_utils.AppFactoryCreateMethodCallParams(
+                    **{
+                    **dataclasses.asdict(params),
+                    "method": "createMethod()void",
+                    "args": None,
+                    }
+                ),
+                send_params=send_params,
+                compilation_params=compilation_params
+            )
+            return_value = None if result.abi_return is None else typing.cast(None, result.abi_return)
+    
+            return AbiDecoratorsClient(client), algokit_utils.AppFactoryCreateMethodCallResult[None](
+                **{
+                    **result.__dict__,
+                    "app_id": result.app_id,
+                    "abi_return": return_value,
+                    "transaction": result.transaction,
+                    "confirmation": result.confirmation,
+                    "group_id": result.group_id,
+                    "tx_ids": result.tx_ids,
+                    "transactions": result.transactions,
+                    "confirmations": result.confirmations,
+                    "app_address": result.app_address,
+                }
+            )
+
+    def readonly_alt_2_uint64(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> tuple[AbiDecoratorsClient, algokit_utils.AppFactoryCreateMethodCallResult[int]]:
+            """Creates and sends a transaction using the readonlyAlt2()uint64 ABI method"""
+            params = params or algokit_utils.CommonAppCallCreateParams()
+            client, result = self.app_factory.send.create(
+                algokit_utils.AppFactoryCreateMethodCallParams(
+                    **{
+                    **dataclasses.asdict(params),
+                    "method": "readonlyAlt2()uint64",
+                    "args": None,
+                    }
+                ),
+                send_params=send_params,
+                compilation_params=compilation_params
+            )
+            return_value = None if result.abi_return is None else typing.cast(int, result.abi_return)
+    
+            return AbiDecoratorsClient(client), algokit_utils.AppFactoryCreateMethodCallResult[int](
+                **{
+                    **result.__dict__,
+                    "app_id": result.app_id,
+                    "abi_return": return_value,
+                    "transaction": result.transaction,
+                    "confirmation": result.confirmation,
+                    "group_id": result.group_id,
+                    "tx_ids": result.tx_ids,
+                    "transactions": result.transactions,
+                    "confirmations": result.confirmations,
+                    "app_address": result.app_address,
+                }
+            )
+
+
+class _AbiDecoratorsUpdateComposer:
+    def __init__(self, composer: "AbiDecoratorsComposer"):
+        self.composer = composer
+    def all_actions(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "AbiDecoratorsComposer":
+        self.composer._composer.add_app_update_method_call(
+            self.composer.client.params.update.all_actions(
+                
+                params=params,
+                compilation_params=compilation_params
+            )
+        )
+        self.composer._result_mappers.append(
+            lambda v: self.composer.client.decode_return_value(
+                "allActions()void", v
+            )
+        )
+        return self.composer
+
+
+class _AbiDecoratorsDeleteComposer:
+    def __init__(self, composer: "AbiDecoratorsComposer"):
+        self.composer = composer
+    def all_actions(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "AbiDecoratorsComposer":
+        self.composer._composer.add_app_delete_method_call(
+            self.composer.client.params.delete.all_actions(
+                
+                params=params,
+                
+            )
+        )
+        self.composer._result_mappers.append(
+            lambda v: self.composer.client.decode_return_value(
+                "allActions()void", v
+            )
+        )
+        return self.composer
+
+
 class _AbiDecoratorsOptInComposer:
     def __init__(self, composer: "AbiDecoratorsComposer"):
         self.composer = composer
@@ -813,6 +1665,14 @@ class AbiDecoratorsComposer:
         self.client = client
         self._composer = client.algorand.new_group()
         self._result_mappers: list[typing.Callable[[algokit_utils.ABIReturn | None], object] | None] = []
+
+    @property
+    def update(self) -> "_AbiDecoratorsUpdateComposer":
+        return _AbiDecoratorsUpdateComposer(self)
+
+    @property
+    def delete(self) -> "_AbiDecoratorsDeleteComposer":
+        return _AbiDecoratorsDeleteComposer(self)
 
     @property
     def opt_in(self) -> "_AbiDecoratorsOptInComposer":
@@ -904,6 +1764,40 @@ class AbiDecoratorsComposer:
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
                 "readonlyAlt()uint64", v
+            )
+        )
+        return self
+
+    def readonly_alt_2(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "AbiDecoratorsComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.readonly_alt_2(
+                
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "readonlyAlt2()uint64", v
+            )
+        )
+        return self
+
+    def create_method(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "AbiDecoratorsComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.create_method(
+                
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "createMethod()void", v
             )
         )
         return self

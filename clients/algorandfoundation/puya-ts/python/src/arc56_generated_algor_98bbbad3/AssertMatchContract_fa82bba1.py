@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "pay", "name": "pay"}], "name": "testPay", "returns": {"type": "bool"}, "events": [], "readonly": false, "recommendations": {}}], "name": "AssertMatchContract", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [53, 113], "errorMessage": "assert target is match for conditions"}, {"pc": [50], "errorMessage": "transaction type is pay"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "pay", "name": "pay"}], "name": "testPay", "returns": {"type": "bool"}, "events": [], "readonly": false, "recommendations": {}}], "name": "AssertMatchContract", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyABATEbQQAYgASP73ZoNhoAjgEAAQAxGRQxGBBEQgAIMRkUMRgUEEMxFiIJSTgQIhJEMQFESTgISYGotAYOTIGgjQYPEEsBOAAxABIQSwE4BzIKEhBLATgJMgMSEEsBOAIiDRBMOASBgICAgIAgDBBEgAUVH3x1gLAiQw==", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMQogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2VydC1tYXRjaC5hbGdvLnRzOjQKICAgIC8vIGV4cG9ydCBjbGFzcyBBc3NlcnRNYXRjaENvbnRyYWN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDUKICAgIHB1c2hieXRlcyAweDhmZWY3NjY4IC8vIG1ldGhvZCAidGVzdFBheShwYXkpYm9vbCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdGVzdFBheV9yb3V0ZUAzCiAgICBlcnIKCm1haW5fdGVzdFBheV9yb3V0ZUAzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2VydC1tYXRjaC5hbGdvLnRzOjUKICAgIC8vIHB1YmxpYyB0ZXN0UGF5KHBheTogZ3R4bi5QYXltZW50VHhuKTogYm9vbGVhbiB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgYiB0ZXN0UGF5CgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2VydC1tYXRjaC5hbGdvLnRzOjQKICAgIC8vIGV4cG9ydCBjbGFzcyBBc3NlcnRNYXRjaENvbnRyYWN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXJ0LW1hdGNoLmFsZ28udHM6OkFzc2VydE1hdGNoQ29udHJhY3QudGVzdFBheVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnRlc3RQYXk6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXJ0LW1hdGNoLmFsZ28udHM6NQogICAgLy8gcHVibGljIHRlc3RQYXkocGF5OiBndHhuLlBheW1lbnRUeG4pOiBib29sZWFuIHsKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18wIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2VydC1tYXRjaC5hbGdvLnRzOjYtOAogICAgLy8gYXNzZXJ0TWF0Y2goVHhuLCB7CiAgICAvLyAgIGZlZTogeyBncmVhdGVyVGhhbjogMCB9LAogICAgLy8gfSkKICAgIHR4biBGZWUKICAgIGFzc2VydCAvLyBhc3NlcnQgdGFyZ2V0IGlzIG1hdGNoIGZvciBjb25kaXRpb25zCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXJ0LW1hdGNoLmFsZ28udHM6MTAtMTcKICAgIC8vIGFzc2VydE1hdGNoKHBheSwgewogICAgLy8gICBhbW91bnQ6IHsgYmV0d2VlbjogWzEwMF8wMDAsIDEwNV8wMDBdIH0sCiAgICAvLyAgIHNlbmRlcjogVHhuLnNlbmRlciwKICAgIC8vICAgcmVjZWl2ZXI6IEdsb2JhbC5jdXJyZW50QXBwbGljYXRpb25BZGRyZXNzLAogICAgLy8gICBjbG9zZVJlbWFpbmRlclRvOiBHbG9iYWwuemVyb0FkZHJlc3MsCiAgICAvLyAgIGZpcnN0VmFsaWQ6IHsgZ3JlYXRlclRoYW46IDEgfSwKICAgIC8vICAgbGFzdFZhbGlkOiB7IGxlc3NUaGFuOiAyICoqIDQwIH0sCiAgICAvLyB9KQogICAgZHVwCiAgICBndHhucyBBbW91bnQKICAgIGR1cAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2VydC1tYXRjaC5hbGdvLnRzOjExCiAgICAvLyBhbW91bnQ6IHsgYmV0d2VlbjogWzEwMF8wMDAsIDEwNV8wMDBdIH0sCiAgICBwdXNoaW50IDEwNTAwMAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2VydC1tYXRjaC5hbGdvLnRzOjEwLTE3CiAgICAvLyBhc3NlcnRNYXRjaChwYXksIHsKICAgIC8vICAgYW1vdW50OiB7IGJldHdlZW46IFsxMDBfMDAwLCAxMDVfMDAwXSB9LAogICAgLy8gICBzZW5kZXI6IFR4bi5zZW5kZXIsCiAgICAvLyAgIHJlY2VpdmVyOiBHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcywKICAgIC8vICAgY2xvc2VSZW1haW5kZXJUbzogR2xvYmFsLnplcm9BZGRyZXNzLAogICAgLy8gICBmaXJzdFZhbGlkOiB7IGdyZWF0ZXJUaGFuOiAxIH0sCiAgICAvLyAgIGxhc3RWYWxpZDogeyBsZXNzVGhhbjogMiAqKiA0MCB9LAogICAgLy8gfSkKICAgIDw9CiAgICBzd2FwCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXJ0LW1hdGNoLmFsZ28udHM6MTEKICAgIC8vIGFtb3VudDogeyBiZXR3ZWVuOiBbMTAwXzAwMCwgMTA1XzAwMF0gfSwKICAgIHB1c2hpbnQgMTAwMDAwCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXJ0LW1hdGNoLmFsZ28udHM6MTAtMTcKICAgIC8vIGFzc2VydE1hdGNoKHBheSwgewogICAgLy8gICBhbW91bnQ6IHsgYmV0d2VlbjogWzEwMF8wMDAsIDEwNV8wMDBdIH0sCiAgICAvLyAgIHNlbmRlcjogVHhuLnNlbmRlciwKICAgIC8vICAgcmVjZWl2ZXI6IEdsb2JhbC5jdXJyZW50QXBwbGljYXRpb25BZGRyZXNzLAogICAgLy8gICBjbG9zZVJlbWFpbmRlclRvOiBHbG9iYWwuemVyb0FkZHJlc3MsCiAgICAvLyAgIGZpcnN0VmFsaWQ6IHsgZ3JlYXRlclRoYW46IDEgfSwKICAgIC8vICAgbGFzdFZhbGlkOiB7IGxlc3NUaGFuOiAyICoqIDQwIH0sCiAgICAvLyB9KQogICAgPj0KICAgICYmCiAgICBkaWcgMQogICAgZ3R4bnMgU2VuZGVyCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXJ0LW1hdGNoLmFsZ28udHM6MTIKICAgIC8vIHNlbmRlcjogVHhuLnNlbmRlciwKICAgIHR4biBTZW5kZXIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hc3NlcnQtbWF0Y2guYWxnby50czoxMC0xNwogICAgLy8gYXNzZXJ0TWF0Y2gocGF5LCB7CiAgICAvLyAgIGFtb3VudDogeyBiZXR3ZWVuOiBbMTAwXzAwMCwgMTA1XzAwMF0gfSwKICAgIC8vICAgc2VuZGVyOiBUeG4uc2VuZGVyLAogICAgLy8gICByZWNlaXZlcjogR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MsCiAgICAvLyAgIGNsb3NlUmVtYWluZGVyVG86IEdsb2JhbC56ZXJvQWRkcmVzcywKICAgIC8vICAgZmlyc3RWYWxpZDogeyBncmVhdGVyVGhhbjogMSB9LAogICAgLy8gICBsYXN0VmFsaWQ6IHsgbGVzc1RoYW46IDIgKiogNDAgfSwKICAgIC8vIH0pCiAgICA9PQogICAgJiYKICAgIGRpZyAxCiAgICBndHhucyBSZWNlaXZlcgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2VydC1tYXRjaC5hbGdvLnRzOjEzCiAgICAvLyByZWNlaXZlcjogR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MsCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2VydC1tYXRjaC5hbGdvLnRzOjEwLTE3CiAgICAvLyBhc3NlcnRNYXRjaChwYXksIHsKICAgIC8vICAgYW1vdW50OiB7IGJldHdlZW46IFsxMDBfMDAwLCAxMDVfMDAwXSB9LAogICAgLy8gICBzZW5kZXI6IFR4bi5zZW5kZXIsCiAgICAvLyAgIHJlY2VpdmVyOiBHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcywKICAgIC8vICAgY2xvc2VSZW1haW5kZXJUbzogR2xvYmFsLnplcm9BZGRyZXNzLAogICAgLy8gICBmaXJzdFZhbGlkOiB7IGdyZWF0ZXJUaGFuOiAxIH0sCiAgICAvLyAgIGxhc3RWYWxpZDogeyBsZXNzVGhhbjogMiAqKiA0MCB9LAogICAgLy8gfSkKICAgID09CiAgICAmJgogICAgZGlnIDEKICAgIGd0eG5zIENsb3NlUmVtYWluZGVyVG8KICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hc3NlcnQtbWF0Y2guYWxnby50czoxNAogICAgLy8gY2xvc2VSZW1haW5kZXJUbzogR2xvYmFsLnplcm9BZGRyZXNzLAogICAgZ2xvYmFsIFplcm9BZGRyZXNzCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXNzZXJ0LW1hdGNoLmFsZ28udHM6MTAtMTcKICAgIC8vIGFzc2VydE1hdGNoKHBheSwgewogICAgLy8gICBhbW91bnQ6IHsgYmV0d2VlbjogWzEwMF8wMDAsIDEwNV8wMDBdIH0sCiAgICAvLyAgIHNlbmRlcjogVHhuLnNlbmRlciwKICAgIC8vICAgcmVjZWl2ZXI6IEdsb2JhbC5jdXJyZW50QXBwbGljYXRpb25BZGRyZXNzLAogICAgLy8gICBjbG9zZVJlbWFpbmRlclRvOiBHbG9iYWwuemVyb0FkZHJlc3MsCiAgICAvLyAgIGZpcnN0VmFsaWQ6IHsgZ3JlYXRlclRoYW46IDEgfSwKICAgIC8vICAgbGFzdFZhbGlkOiB7IGxlc3NUaGFuOiAyICoqIDQwIH0sCiAgICAvLyB9KQogICAgPT0KICAgICYmCiAgICBkaWcgMQogICAgZ3R4bnMgRmlyc3RWYWxpZAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2VydC1tYXRjaC5hbGdvLnRzOjE1CiAgICAvLyBmaXJzdFZhbGlkOiB7IGdyZWF0ZXJUaGFuOiAxIH0sCiAgICBpbnRjXzAgLy8gMQogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Fzc2VydC1tYXRjaC5hbGdvLnRzOjEwLTE3CiAgICAvLyBhc3NlcnRNYXRjaChwYXksIHsKICAgIC8vICAgYW1vdW50OiB7IGJldHdlZW46IFsxMDBfMDAwLCAxMDVfMDAwXSB9LAogICAgLy8gICBzZW5kZXI6IFR4bi5zZW5kZXIsCiAgICAvLyAgIHJlY2VpdmVyOiBHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcywKICAgIC8vICAgY2xvc2VSZW1haW5kZXJUbzogR2xvYmFsLnplcm9BZGRyZXNzLAogICAgLy8gICBmaXJzdFZhbGlkOiB7IGdyZWF0ZXJUaGFuOiAxIH0sCiAgICAvLyAgIGxhc3RWYWxpZDogeyBsZXNzVGhhbjogMiAqKiA0MCB9LAogICAgLy8gfSkKICAgID4KICAgICYmCiAgICBzd2FwCiAgICBndHhucyBMYXN0VmFsaWQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hc3NlcnQtbWF0Y2guYWxnby50czoxNgogICAgLy8gbGFzdFZhbGlkOiB7IGxlc3NUaGFuOiAyICoqIDQwIH0sCiAgICBwdXNoaW50IDEwOTk1MTE2Mjc3NzYKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hc3NlcnQtbWF0Y2guYWxnby50czoxMC0xNwogICAgLy8gYXNzZXJ0TWF0Y2gocGF5LCB7CiAgICAvLyAgIGFtb3VudDogeyBiZXR3ZWVuOiBbMTAwXzAwMCwgMTA1XzAwMF0gfSwKICAgIC8vICAgc2VuZGVyOiBUeG4uc2VuZGVyLAogICAgLy8gICByZWNlaXZlcjogR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MsCiAgICAvLyAgIGNsb3NlUmVtYWluZGVyVG86IEdsb2JhbC56ZXJvQWRkcmVzcywKICAgIC8vICAgZmlyc3RWYWxpZDogeyBncmVhdGVyVGhhbjogMSB9LAogICAgLy8gICBsYXN0VmFsaWQ6IHsgbGVzc1RoYW46IDIgKiogNDAgfSwKICAgIC8vIH0pCiAgICA8CiAgICAmJgogICAgYXNzZXJ0IC8vIGFzc2VydCB0YXJnZXQgaXMgbWF0Y2ggZm9yIGNvbmRpdGlvbnMKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hc3NlcnQtbWF0Y2guYWxnby50czo1CiAgICAvLyBwdWJsaWMgdGVzdFBheShwYXk6IGd0eG4uUGF5bWVudFR4bik6IGJvb2xlYW4gewogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzU4MAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [53, 113], "errorMessage": "assert target is match for conditions"}, {"pc": [50], "errorMessage": "transaction type is pay"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -344,6 +344,271 @@ class AssertMatchContractClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class AssertMatchContractBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating AssertMatchContract contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class AssertMatchContractFactory(algokit_utils.TypedAppFactoryProtocol[AssertMatchContractBareCallCreateParams, None, None]):
+    """Factory for deploying and managing AssertMatchContractClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = AssertMatchContractFactoryParams(self.app_factory)
+        self.create_transaction = AssertMatchContractFactoryCreateTransaction(self.app_factory)
+        self.send = AssertMatchContractFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: AssertMatchContractBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[AssertMatchContractClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return AssertMatchContractClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AssertMatchContractClient:
+        """Get an app client by creator address and name"""
+        return AssertMatchContractClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AssertMatchContractClient:
+        """Get an app client by app ID"""
+        return AssertMatchContractClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class AssertMatchContractFactoryParams:
+    """Parameters for creating transactions for AssertMatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AssertMatchContractFactoryCreateParams(app_factory)
+        self.update = AssertMatchContractFactoryUpdateParams(app_factory)
+        self.delete = AssertMatchContractFactoryDeleteParams(app_factory)
+
+class AssertMatchContractFactoryCreateParams:
+    """Parameters for 'create' operations of AssertMatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def test_pay(
+        self,
+        args: tuple[algokit_utils.AppMethodCallTransactionArgument] | TestPayArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the testPay(pay)bool ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "testPay(pay)bool",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class AssertMatchContractFactoryUpdateParams:
+    """Parameters for 'update' operations of AssertMatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class AssertMatchContractFactoryDeleteParams:
+    """Parameters for 'delete' operations of AssertMatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class AssertMatchContractFactoryCreateTransaction:
+    """Create transactions for AssertMatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AssertMatchContractFactoryCreateTransactionCreate(app_factory)
+
+
+class AssertMatchContractFactoryCreateTransactionCreate:
+    """Create new instances of AssertMatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class AssertMatchContractFactorySend:
+    """Send calls to AssertMatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AssertMatchContractFactorySendCreate(app_factory)
+
+
+class AssertMatchContractFactorySendCreate:
+    """Send create calls to AssertMatchContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[AssertMatchContractClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return AssertMatchContractClient(result[0]), result[1]
 
 
 class AssertMatchContractComposer:
