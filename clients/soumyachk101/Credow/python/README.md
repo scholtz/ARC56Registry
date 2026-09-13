@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_soumy_376564a2 import contract_name_hash
+from arc56_generated_soumy_376564a2 import CreditFlowYieldVault_957fe179
 
 algorand = AlgorandClient.mainnet()
-client = contract_name_hash.ContractClient(
+client = CreditFlowYieldVault_957fe179.CreditFlowYieldVaultClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,7 +50,8 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `CreditFlowYieldVault_957fe179` | `CreditFlowYieldVaultClient` | [https://raw.githubusercontent.com/soumyachk101/Credow/HEAD/contracts/artifacts/CreditFlowYieldVault.arc56.json](https://raw.githubusercontent.com/soumyachk101/Credow/HEAD/contracts/artifacts/CreditFlowYieldVault.arc56.json) |
+| `CreditFlowYieldVault_6fbd5755` | `CreditFlowYieldVaultClient` | [https://raw.githubusercontent.com/soumyachk101/Credow/HEAD/contracts/src/out/CreditFlowYieldVault.arc56.json](https://raw.githubusercontent.com/soumyachk101/Credow/HEAD/contracts/src/out/CreditFlowYieldVault.arc56.json) |
 
 ## Versioning
 

@@ -1,1 +1,2 @@
-# no contracts generated yet
+from . import CreditFlowYieldVault_957fe179 as CreditFlowYieldVault_957fe179
+from . import CreditFlowYieldVault_6fbd5755 as CreditFlowYieldVault_6fbd5755
