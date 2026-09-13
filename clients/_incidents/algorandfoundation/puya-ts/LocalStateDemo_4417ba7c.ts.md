@@ -2,7 +2,7 @@
 
 - **Repo**: [algorandfoundation/puya-ts](https://github.com/algorandfoundation/puya-ts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/puya-ts/HEAD/tests/approvals/out/o1/local-state/LocalStateDemo.arc56.json](https://raw.githubusercontent.com/algorandfoundation/puya-ts/HEAD/tests/approvals/out/o1/local-state/LocalStateDemo.arc56.json)
-- **Detected**: 2026-07-19T19:25:14.969436+00:00
+- **Detected**: 2026-09-13T11:13:06.956106+00:00
 - **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
 
 ## Reproduce
@@ -18,7 +18,8 @@ npx --yes @algorandfoundation/algokit-client-generator generate \
 src/LocalStateDemo_4417ba7c.ts(519,5): error TS1117: An object literal cannot have multiple properties with the same name.
 src/LocalStateDemo_4417ba7c.ts(607,5): error TS1117: An object literal cannot have multiple properties with the same name.
 src/LocalStateDemo_4417ba7c.ts(698,5): error TS1117: An object literal cannot have multiple properties with the same name.
+src/LocalStateDemo_4417ba7c.ts(830,7): error TS2300: Duplicate identifier 'clearState'.
 src/LocalStateDemo_4417ba7c.ts(863,7): error TS2300: Duplicate identifier 'clearState'.
 src/LocalStateDemo_4417ba7c.ts(864,68): error TS2345: Argument of type 'Promise<AppCallMethodCall>' is not assignable to parameter of type 'AppCallParams'.
-src/LocalStateDemo_4417ba7c.ts(864,93): error TS2345: Argument of type '{ args?: Uint8Array<ArrayBufferLike>[]; signer?: TransactionSigner | TransactionSignerAccount; rekeyTo?: string | Address; ... 14 more ...; sender?: string | Address; }' is not assignable to parameter of type '{ sender?: string | Address; signer?: TransactionSigner | TransactionSignerAccount; rekeyTo?: string | Address; ... 14 more ...; args: [] | { ...; }; } & { ...; }'.
+src/LocalStateDemo_4417ba7c.ts(864,93): error TS2345: Argument of type '{ signer?: TransactionSigner | TransactionSignerAccount; rekeyTo?: string | Address; note?: string | Uint8Array<ArrayBufferLike>; ... 14 more ...; sender?: string | Address; }' is not assignable to parameter of type '{ signer?: TransactionSigner | TransactionSignerAccount; rekeyTo?: string | Address; note?: string | Uint8Array<ArrayBufferLike>; ... 14 more ...; args: { ...; } | []; } & { ...; }'.
 ```

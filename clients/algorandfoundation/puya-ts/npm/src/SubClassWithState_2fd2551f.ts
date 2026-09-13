@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"SubClassWithState","structs":{},"methods":[{"name":"setState","args":[{"type":"uint64","name":"n"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":3,"bytes":0},"local":{"ints":0,"bytes":2}},"keys":{"global":{"threeGlobal":{"keyType":"AVMString","valueType":"AVMUint64","key":"dGhyZWVHbG9iYWw="},"oneGlobal":{"keyType":"AVMString","valueType":"AVMUint64","key":"b25lR2xvYmFs"},"twoGlobal":{"keyType":"AVMString","valueType":"AVMUint64","key":"dHdvR2xvYmFs"}},"local":{"twoLocalBytes":{"keyType":"AVMString","valueType":"AVMBytes","key":"dHdvTG9jYWxCeXRlcw=="},"oneLocalBytes":{"keyType":"AVMString","valueType":"AVMBytes","key":"b25lTG9jYWxCeXRlcw=="}},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[67],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"SubClassWithState","structs":{},"methods":[{"name":"setState","args":[{"type":"uint64","name":"n"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":3,"bytes":0},"local":{"ints":0,"bytes":2}},"keys":{"global":{"threeGlobal":{"keyType":"AVMString","valueType":"AVMUint64","key":"dGhyZWVHbG9iYWw="},"oneGlobal":{"keyType":"AVMString","valueType":"AVMUint64","key":"b25lR2xvYmFs"},"twoGlobal":{"keyType":"AVMString","valueType":"AVMUint64","key":"dHdvR2xvYmFs"}},"local":{"twoLocalBytes":{"keyType":"AVMString","valueType":"AVMBytes","key":"dHdvTG9jYWxCeXRlcw=="},"oneLocalBytes":{"keyType":"AVMString","valueType":"AVMBytes","key":"b25lTG9jYWxCeXRlcw=="}},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[67],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBieXRlY2Jsb2NrICJvbmVHbG9iYWwiCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6NQogICAgLy8gb25lR2xvYmFsID0gR2xvYmFsU3RhdGUoeyBpbml0aWFsVmFsdWU6IFVpbnQ2NCgxKSB9KQogICAgYnl0ZWNfMCAvLyAib25lR2xvYmFsIgogICAgcHVzaGludCAxCiAgICBhcHBfZ2xvYmFsX3B1dAoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6MTUKICAgIC8vIGV4cG9ydCBjbGFzcyBTdWJDbGFzc1dpdGhTdGF0ZSBleHRlbmRzIEJhc2VXaXRoU3RhdGUgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDcKICAgIHB1c2hieXRlcyAweDJjZDk1YWExIC8vIG1ldGhvZCAic2V0U3RhdGUodWludDY0KXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3NldFN0YXRlX3JvdXRlQDUKICAgIGVycgoKbWFpbl9zZXRTdGF0ZV9yb3V0ZUA1OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3N0YXRlLXRvdGFscy5hbGdvLnRzOjE4CiAgICAvLyBzZXRTdGF0ZShuOiB1aW50NjQpIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0CiAgICBiIHNldFN0YXRlCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA3OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3N0YXRlLXRvdGFscy5hbGdvLnRzOjE1CiAgICAvLyBleHBvcnQgY2xhc3MgU3ViQ2xhc3NXaXRoU3RhdGUgZXh0ZW5kcyBCYXNlV2l0aFN0YXRlIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL3N0YXRlLXRvdGFscy5hbGdvLnRzOjpTdWJDbGFzc1dpdGhTdGF0ZS5zZXRTdGF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnNldFN0YXRlOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3N0YXRlLXRvdGFscy5hbGdvLnRzOjE4CiAgICAvLyBzZXRTdGF0ZShuOiB1aW50NjQpIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6NQogICAgLy8gb25lR2xvYmFsID0gR2xvYmFsU3RhdGUoeyBpbml0aWFsVmFsdWU6IFVpbnQ2NCgxKSB9KQogICAgYnl0ZWNfMCAvLyAib25lR2xvYmFsIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3N0YXRlLXRvdGFscy5hbGdvLnRzOjEwCiAgICAvLyB0aGlzLm9uZUdsb2JhbC52YWx1ZSA9IG4KICAgIGRpZyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gdGVzdHMvYXBwcm92YWxzL3N0YXRlLXRvdGFscy5hbGdvLnRzOjYKICAgIC8vIHR3b0dsb2JhbCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oKQogICAgcHVzaGJ5dGVzICJ0d29HbG9iYWwiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6MTEKICAgIC8vIHRoaXMudHdvR2xvYmFsLnZhbHVlID0gbgogICAgZGlnIDEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvc3RhdGUtdG90YWxzLmFsZ28udHM6MTYKICAgIC8vIHRocmVlR2xvYmFsID0gR2xvYmFsU3RhdGU8dWludDY0PigpCiAgICBwdXNoYnl0ZXMgInRocmVlR2xvYmFsIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3N0YXRlLXRvdGFscy5hbGdvLnRzOjIwCiAgICAvLyB0aGlzLnRocmVlR2xvYmFsLnZhbHVlID0gbgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9zdGF0ZS10b3RhbHMuYWxnby50czoxOAogICAgLy8gc2V0U3RhdGUobjogdWludDY0KSB7CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CyYBCW9uZUdsb2JhbDEYQAAEKIEBZzEbQQAYgAQs2VqhNhoAjgEAAQAxGRQxGBBEQgAIMRkUMRgUEEM2GgFJFYEIEkQXKEsBZ4AJdHdvR2xvYmFsSwFngAt0aHJlZUdsb2JhbExngQFD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -158,6 +158,21 @@ export type GlobalKeysState = SubClassWithStateTypes['state']['global']['keys']
 export type LocalKeysState = SubClassWithStateTypes['state']['local']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type SubClassWithStateCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type SubClassWithStateDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: SubClassWithStateCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the SubClassWithState smart contract
@@ -178,6 +193,147 @@ export abstract class SubClassWithStateParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the SubClassWithState smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class SubClassWithStateFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `SubClassWithStateFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new SubClassWithStateClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new SubClassWithStateClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the SubClassWithState smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: SubClassWithStateDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new SubClassWithStateClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SubClassWithState smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SubClassWithState smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SubClassWithState smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new SubClassWithStateClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the SubClassWithState smart contract
  */

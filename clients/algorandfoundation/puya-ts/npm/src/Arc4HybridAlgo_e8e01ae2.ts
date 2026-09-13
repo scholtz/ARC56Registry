@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Arc4HybridAlgo","structs":{},"methods":[{"name":"someMethod","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"someOtherMethod","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"updateApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Arc4HybridAlgo","structs":{},"methods":[{"name":"someMethod","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"someOtherMethod","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"updateApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uYXBwcm92YWxQcm9ncmFtKCkgLT4gdWludDY0OgptYWluOgogICAgaW50Y2Jsb2NrIDAgMQogICAgYiBtYWluX2Jsb2NrQDAKCm1haW5fYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjUKICAgIC8vIGxvZygnYmVmb3JlJykKICAgIHB1c2hieXRlcyAiYmVmb3JlIgogICAgbG9nCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo2CiAgICAvLyBjb25zdCByZXN1bHQgPSBzdXBlci5hcHByb3ZhbFByb2dyYW0oKQogICAgY2FsbHN1YiBhcHByb3ZhbFByb2dyYW0KICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjcKICAgIC8vIGxvZygnYWZ0ZXInKQogICAgcHVzaGJ5dGVzICJhZnRlciIKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OAogICAgLy8gcmV0dXJuIHJlc3VsdAogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnNvbWVNZXRob2Rbcm91dGluZ10oKSAtPiB2b2lkOgpzb21lTWV0aG9kOgogICAgYiBzb21lTWV0aG9kX2Jsb2NrQDAKCnNvbWVNZXRob2RfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjE2CiAgICAvLyBzb21lTWV0aG9kKCkgewogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uc29tZU1ldGhvZAogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnNvbWVPdGhlck1ldGhvZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnNvbWVPdGhlck1ldGhvZDoKICAgIGIgc29tZU90aGVyTWV0aG9kX2Jsb2NrQDAKCnNvbWVPdGhlck1ldGhvZF9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6MjAKICAgIC8vIHNvbWVPdGhlck1ldGhvZCgpIHsKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnNvbWVPdGhlck1ldGhvZAogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnVwZGF0ZUFwcGxpY2F0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKdXBkYXRlQXBwbGljYXRpb246CiAgICBiIHVwZGF0ZUFwcGxpY2F0aW9uX2Jsb2NrQDAKCnVwZGF0ZUFwcGxpY2F0aW9uX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czoyNAogICAgLy8gdXBkYXRlQXBwbGljYXRpb24oKSB7CiAgICBjYWxsc3ViIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby51cGRhdGVBcHBsaWNhdGlvbgogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnNvbWVNZXRob2QoKSAtPiB2b2lkOgp0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uc29tZU1ldGhvZDoKICAgIGIgdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnNvbWVNZXRob2RfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnNvbWVNZXRob2RfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjE3CiAgICAvLyBsb2coJ3NvbWUgbWV0aG9kJykKICAgIHB1c2hieXRlcyAic29tZSBtZXRob2QiCiAgICBsb2cKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby5zb21lT3RoZXJNZXRob2QoKSAtPiB2b2lkOgp0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uc29tZU90aGVyTWV0aG9kOgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uc29tZU90aGVyTWV0aG9kX2Jsb2NrQDAKCnRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby5zb21lT3RoZXJNZXRob2RfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjIxCiAgICAvLyBsb2coJ3NvbWUgb3RoZXIgbWV0aG9kJykKICAgIHB1c2hieXRlcyAic29tZSBvdGhlciBtZXRob2QiCiAgICBsb2cKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby51cGRhdGVBcHBsaWNhdGlvbigpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby51cGRhdGVBcHBsaWNhdGlvbjoKICAgIGIgdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLnVwZGF0ZUFwcGxpY2F0aW9uX2Jsb2NrQDAKCnRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby51cGRhdGVBcHBsaWNhdGlvbl9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6MjUKICAgIC8vIGxvZygndXBkYXRlJykKICAgIHB1c2hieXRlcyAidXBkYXRlIgogICAgbG9nCiAgICByZXRzdWIKCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6CmFwcHJvdmFsUHJvZ3JhbToKICAgIHByb3RvIDAgMQogICAgcHVzaGJ5dGVzICIiCiAgICBiIGFwcHJvdmFsUHJvZ3JhbV9ibG9ja0AwCgphcHByb3ZhbFByb2dyYW1fYmxvY2tAMDoKICAgIGIgYXBwcm92YWxQcm9ncmFtX2Jsb2NrQDEKCmFwcHJvdmFsUHJvZ3JhbV9ibG9ja0AxOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6MwogICAgLy8gY2xhc3MgQXJjNEh5YnJpZEFsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgaW50Y18wIC8vIDAKICAgICE9CiAgICBieiBhcHByb3ZhbFByb2dyYW1fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDExCiAgICBiIGFwcHJvdmFsUHJvZ3JhbV9hYmlfcm91dGluZ0AyCgphcHByb3ZhbFByb2dyYW1fYWJpX3JvdXRpbmdAMjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjMKICAgIC8vIGNsYXNzIEFyYzRIeWJyaWRBbGdvIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgcHVzaGJ5dGVzIDB4NDZmNzY1MzMgLy8gbWV0aG9kICJ1cGRhdGVBcHBsaWNhdGlvbigpdm9pZCIKICAgIHVuY292ZXIgMQogICAgbWF0Y2ggYXBwcm92YWxQcm9ncmFtX3VwZGF0ZUFwcGxpY2F0aW9uX3JvdXRlQDMKICAgIGIgYXBwcm92YWxQcm9ncmFtX3N3aXRjaF9jYXNlX25leHRANAoKYXBwcm92YWxQcm9ncmFtX3N3aXRjaF9jYXNlX25leHRANDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjMKICAgIC8vIGNsYXNzIEFyYzRIeWJyaWRBbGdvIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgaW50Y18wIC8vIE5vT3AKICAgID09CiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgIGJ6IGFwcHJvdmFsUHJvZ3JhbV9jcmVhdGVfTm9PcEA5CiAgICBiIGFwcHJvdmFsUHJvZ3JhbV9jYWxsX05vT3BANQoKYXBwcm92YWxQcm9ncmFtX2NhbGxfTm9PcEA1OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6MwogICAgLy8gY2xhc3MgQXJjNEh5YnJpZEFsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBwdXNoYnl0ZXMgMHhjMjU4NDY5ZSAvLyBtZXRob2QgInNvbWVNZXRob2QoKXZvaWQiCiAgICBwdXNoYnl0ZXMgMHg2OWFkZjliYiAvLyBtZXRob2QgInNvbWVPdGhlck1ldGhvZCgpdm9pZCIKICAgIHVuY292ZXIgMgogICAgbWF0Y2ggYXBwcm92YWxQcm9ncmFtX3NvbWVNZXRob2Rfcm91dGVANiBhcHByb3ZhbFByb2dyYW1fc29tZU90aGVyTWV0aG9kX3JvdXRlQDcKICAgIGIgYXBwcm92YWxQcm9ncmFtX3N3aXRjaF9jYXNlX25leHRAOAoKYXBwcm92YWxQcm9ncmFtX3N3aXRjaF9jYXNlX25leHRAODoKICAgIGIgYXBwcm92YWxQcm9ncmFtX2FmdGVyX2lmX2Vsc2VAMTAKCmFwcHJvdmFsUHJvZ3JhbV9hZnRlcl9pZl9lbHNlQDEwOgogICAgYiBhcHByb3ZhbFByb2dyYW1fYWZ0ZXJfaWZfZWxzZUAxMgoKYXBwcm92YWxQcm9ncmFtX2FmdGVyX2lmX2Vsc2VAMTI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czozCiAgICAvLyBjbGFzcyBBcmM0SHlicmlkQWxnbyBleHRlbmRzIENvbnRyYWN0IHsKICAgIGludGNfMCAvLyAwCiAgICBmcmFtZV9idXJ5IDAKICAgIGIgYXBwcm92YWxQcm9ncmFtX2FmdGVyX2lubGluZWRfdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6OkFyYzRIeWJyaWRBbGdvLl9fcHV5YV9hcmM0X3JvdXRlcl9fQDEzCgphcHByb3ZhbFByb2dyYW1fYWZ0ZXJfaW5saW5lZF90ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uX19wdXlhX2FyYzRfcm91dGVyX19AMTM6CiAgICBmcmFtZV9kaWcgMAogICAgdW5jb3ZlciAxCiAgICByZXRzdWIKCmFwcHJvdmFsUHJvZ3JhbV9zb21lT3RoZXJNZXRob2Rfcm91dGVANzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjIwCiAgICAvLyBzb21lT3RoZXJNZXRob2QoKSB7CiAgICBjYWxsc3ViIHNvbWVPdGhlck1ldGhvZAogICAgaW50Y18xIC8vIDEKICAgIGZyYW1lX2J1cnkgMAogICAgYiBhcHByb3ZhbFByb2dyYW1fYWZ0ZXJfaW5saW5lZF90ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uX19wdXlhX2FyYzRfcm91dGVyX19AMTMKCmFwcHJvdmFsUHJvZ3JhbV9zb21lTWV0aG9kX3JvdXRlQDY6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czoxNgogICAgLy8gc29tZU1ldGhvZCgpIHsKICAgIGNhbGxzdWIgc29tZU1ldGhvZAogICAgaW50Y18xIC8vIDEKICAgIGZyYW1lX2J1cnkgMAogICAgYiBhcHByb3ZhbFByb2dyYW1fYWZ0ZXJfaW5saW5lZF90ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uX19wdXlhX2FyYzRfcm91dGVyX19AMTMKCmFwcHJvdmFsUHJvZ3JhbV9jcmVhdGVfTm9PcEA5OgogICAgYiBhcHByb3ZhbFByb2dyYW1fYWZ0ZXJfaWZfZWxzZUAxMAoKYXBwcm92YWxQcm9ncmFtX3VwZGF0ZUFwcGxpY2F0aW9uX3JvdXRlQDM6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czoyNAogICAgLy8gdXBkYXRlQXBwbGljYXRpb24oKSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDQgLy8gVXBkYXRlQXBwbGljYXRpb24KICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18wIC8vIDAKICAgICE9CiAgICAmJgogICAgYXNzZXJ0CiAgICBjYWxsc3ViIHVwZGF0ZUFwcGxpY2F0aW9uCiAgICBpbnRjXzEgLy8gMQogICAgZnJhbWVfYnVyeSAwCiAgICBiIGFwcHJvdmFsUHJvZ3JhbV9hZnRlcl9pbmxpbmVkX3Rlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjpBcmM0SHlicmlkQWxnby5fX3B1eWFfYXJjNF9yb3V0ZXJfX0AxMwoKYXBwcm92YWxQcm9ncmFtX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUAxMToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcmM0LWh5YnJpZC5hbGdvLnRzOjMKICAgIC8vIGNsYXNzIEFyYzRIeWJyaWRBbGdvIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgaW50Y18wIC8vIE5vT3AKICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18wIC8vIDAKICAgID09CiAgICAmJgogICAgYXNzZXJ0CiAgICBjYWxsc3ViIF9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZQogICAgaW50Y18xIC8vIDEKICAgIGZyYW1lX2J1cnkgMAogICAgYiBhcHByb3ZhbFByb2dyYW1fYWZ0ZXJfaW5saW5lZF90ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uX19wdXlhX2FyYzRfcm91dGVyX19AMTMKCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlKCkgLT4gdm9pZDoKX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlOgogICAgYiBfX2FsZ290c19fLmRlZmF1bHRDcmVhdGVfYmxvY2tAMAoKX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlX2Jsb2NrQDA6CiAgICByZXRzdWIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyB0ZXN0cy9hcHByb3ZhbHMvYXJjNC1oeWJyaWQuYWxnby50czo6QXJjNEh5YnJpZEFsZ28uY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6MTIKICAgIC8vIGxvZygnY2xlYXJpbmcgc3RhdGUnKQogICAgcHVzaGJ5dGVzICJjbGVhcmluZyBzdGF0ZSIKICAgIGxvZwogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FyYzQtaHlicmlkLmFsZ28udHM6MTMKICAgIC8vIHJldHVybiB0cnVlCiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CyACAAFCAACABmJlZm9yZbCIAFWABWFmdGVysENCAACIAA+JQgAAiAAaiUIAAIgAK4lCAACAC3NvbWUgbWV0aG9ksIlCAACAEXNvbWUgb3RoZXIgbWV0aG9ksIlCAACABnVwZGF0ZbCJigABgABCAABCAAAxGyITQQB4QgAANhoAgARG92UzTwGOAQBSQgAAMRkiEkQxGCITQQBAQgAANhoAgATCWEaegARprfm7TwKOAgAdABRCAABCAABCAAAijABCAACLAE8BiYj/VyOMAEL/8oj/RyOMAEL/6UL/3TEZgQQSMRgiExBEiP8+I4wAQv/SMRkiEjEYIhIQRIgABiOMAEL/v0IAAIk=","clear":"C0IAAIAOY2xlYXJpbmcgc3RhdGWwgQFD"},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -142,11 +142,66 @@ export type MethodArgs<TSignature extends Arc4HybridAlgoSignatures> = Arc4Hybrid
 export type MethodReturn<TSignature extends Arc4HybridAlgoSignatures> = Arc4HybridAlgoTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type Arc4HybridAlgoCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type Arc4HybridAlgoUpdateCallParams =
+  | Expand<CallParams<Arc4HybridAlgoArgs['obj']['updateApplication()void'] | Arc4HybridAlgoArgs['tuple']['updateApplication()void']> & {method: 'updateApplication'}>
+  | Expand<CallParams<Arc4HybridAlgoArgs['obj']['updateApplication()void'] | Arc4HybridAlgoArgs['tuple']['updateApplication()void']> & {method: 'updateApplication()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type Arc4HybridAlgoDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: Arc4HybridAlgoCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: Arc4HybridAlgoUpdateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Arc4HybridAlgo smart contract
  */
 export abstract class Arc4HybridAlgoParamsFactory {
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends Arc4HybridAlgoUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'updateApplication':
+          case 'updateApplication()void':
+            return Arc4HybridAlgoParamsFactory.update.updateApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the Arc4HybridAlgo smart contract using the updateApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateApplication(params: CallParams<Arc4HybridAlgoArgs['obj']['updateApplication()void'] | Arc4HybridAlgoArgs['tuple']['updateApplication()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'updateApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the someMethod()void ABI method
    *
@@ -175,6 +230,163 @@ export abstract class Arc4HybridAlgoParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Arc4HybridAlgo smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class Arc4HybridAlgoFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `Arc4HybridAlgoFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new Arc4HybridAlgoClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new Arc4HybridAlgoClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Arc4HybridAlgo smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: Arc4HybridAlgoDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      updateParams: params.updateParams?.method ? Arc4HybridAlgoParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (Arc4HybridAlgoUpdateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new Arc4HybridAlgoClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Arc4HybridAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the Arc4HybridAlgo smart contract using the updateApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateApplication: (params: CallParams<Arc4HybridAlgoArgs['obj']['updateApplication()void'] | Arc4HybridAlgoArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(Arc4HybridAlgoParamsFactory.update.updateApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Arc4HybridAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Arc4HybridAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new Arc4HybridAlgoClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Arc4HybridAlgo smart contract
  */
@@ -255,6 +467,22 @@ export class Arc4HybridAlgoClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the Arc4HybridAlgo smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateApplication: (params: CallParams<Arc4HybridAlgoArgs['obj']['updateApplication()void'] | Arc4HybridAlgoArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(Arc4HybridAlgoParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the Arc4HybridAlgo smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -291,6 +519,22 @@ export class Arc4HybridAlgoClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the Arc4HybridAlgo smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateApplication: (params: CallParams<Arc4HybridAlgoArgs['obj']['updateApplication()void'] | Arc4HybridAlgoArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(Arc4HybridAlgoParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the Arc4HybridAlgo smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -326,6 +570,23 @@ export class Arc4HybridAlgoClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the Arc4HybridAlgo smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateApplication: async (params: CallParams<Arc4HybridAlgoArgs['obj']['updateApplication()void'] | Arc4HybridAlgoArgs['tuple']['updateApplication()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(Arc4HybridAlgoParamsFactory.update.updateApplication(params))
+        return {...result, return: result.return as unknown as (undefined | Arc4HybridAlgoReturns['updateApplication()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the Arc4HybridAlgo smart contract.
      *
@@ -398,6 +659,15 @@ export class Arc4HybridAlgoClient {
         resultMappers.push(undefined)
         return this
       },
+      get update() {
+        return {
+          updateApplication: (params: CallParams<Arc4HybridAlgoArgs['obj']['updateApplication()void'] | Arc4HybridAlgoArgs['tuple']['updateApplication()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the Arc4HybridAlgo contract
        */
@@ -450,6 +720,20 @@ export type Arc4HybridAlgoComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   someOtherMethod(params?: CallParams<Arc4HybridAlgoArgs['obj']['someOtherMethod()void'] | Arc4HybridAlgoArgs['tuple']['someOtherMethod()void']>): Arc4HybridAlgoComposer<[...TReturns, Arc4HybridAlgoReturns['someOtherMethod()void'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the Arc4HybridAlgo smart contract using the updateApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateApplication(params?: CallParams<Arc4HybridAlgoArgs['obj']['updateApplication()void'] | Arc4HybridAlgoArgs['tuple']['updateApplication()void']>): Arc4HybridAlgoComposer<[...TReturns, Arc4HybridAlgoReturns['updateApplication()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the Arc4HybridAlgo smart contract.

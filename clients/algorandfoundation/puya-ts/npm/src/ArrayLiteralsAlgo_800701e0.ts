@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ArrayLiteralsAlgo","structs":{},"methods":[{"name":"test","args":[{"type":"uint64","name":"a"},{"type":"uint64","name":"b"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"test2","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"test3","args":[{"type":"uint64","name":"a"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[152],"errorMessage":"invalid array length header"},{"pc":[78,85,95],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ArrayLiteralsAlgo","structs":{},"methods":[{"name":"test","args":[{"type":"uint64","name":"a"},{"type":"uint64","name":"b"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"test2","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"test3","args":[{"type":"uint64","name":"a"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[152],"errorMessage":"invalid array length header"},{"pc":[78,85,95],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgOCAxIDAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcnJheS1saXRlcmFscy5hbGdvLnRzOjE0CiAgICAvLyBjbGFzcyBBcnJheUxpdGVyYWxzQWxnbyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUAxMAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4ZTA0YWMxOWUgMHgzNDFhMzc5NCAweGRlYTVmN2ZhIC8vIG1ldGhvZCAidGVzdCh1aW50NjQsdWludDY0KXZvaWQiLCBtZXRob2QgInRlc3QyKCl1aW50NjQiLCBtZXRob2QgInRlc3QzKHVpbnQ2NCl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCB0ZXN0IG1haW5fdGVzdDJfcm91dGVANSB0ZXN0MwogICAgZXJyCgptYWluX3Rlc3QyX3JvdXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJyYXktbGl0ZXJhbHMuYWxnby50czoyNwogICAgLy8gdGVzdDIoKTogdWludDY0IHsKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMQogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUAxMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcnJheS1saXRlcmFscy5hbGdvLnRzOjE0CiAgICAvLyBjbGFzcyBBcnJheUxpdGVyYWxzQWxnbyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL2FycmF5LWxpdGVyYWxzLmFsZ28udHM6OkFycmF5TGl0ZXJhbHNBbGdvLnRlc3Rbcm91dGluZ10oKSAtPiB2b2lkOgp0ZXN0OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FycmF5LWxpdGVyYWxzLmFsZ28udHM6MTUKICAgIC8vIHRlc3QoYTogdWludDY0LCBiOiB1aW50NjQpIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIGludGNfMCAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9hcnJheS1saXRlcmFscy5hbGdvLnRzOjpBcnJheUxpdGVyYWxzQWxnby50ZXN0M1tyb3V0aW5nXSgpIC0+IHZvaWQ6CnRlc3QzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FycmF5LWxpdGVyYWxzLmFsZ28udHM6MzYKICAgIC8vIHRlc3QzKGE6IHVpbnQ2NCk6IHVpbnQ2NCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJyYXktbGl0ZXJhbHMuYWxnby50czozNy00MAogICAgLy8gY29uc3QgeDogTXVsdGlQcm9wT2JqID0gewogICAgLy8gICBjb3VudDogYSwKICAgIC8vICAgdGhpbmdzOiBbXSwKICAgIC8vIH0KICAgIGl0b2IKICAgIHB1c2hieXRlcyAweDAwMGEwMDAwCiAgICBjb25jYXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcnJheS1saXRlcmFscy5hbGdvLnRzOjQyCiAgICAvLyB4LnRoaW5ncy5wdXNoKG5ldyBVaW50MzIoMTIzKSkKICAgIGR1cAogICAgaW50Y18wIC8vIDgKICAgIGV4dHJhY3RfdWludDE2CiAgICBkaWcgMQogICAgbGVuCiAgICBkaWcgMgogICAgZGlnIDIKICAgIHVuY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgZHVwCiAgICBpbnRjXzIgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9hcnJheS1saXRlcmFscy5hbGdvLnRzOjQyCiAgICAvLyB4LnRoaW5ncy5wdXNoKG5ldyBVaW50MzIoMTIzKSkKICAgIGludGNfMSAvLyAxCiAgICArCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMAogICAgcmVwbGFjZTIgMAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FycmF5LWxpdGVyYWxzLmFsZ28udHM6NDIKICAgIC8vIHgudGhpbmdzLnB1c2gobmV3IFVpbnQzMigxMjMpKQogICAgcHVzaGJ5dGVzIDB4MDAwMDAwN2IKICAgIGNvbmNhdAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2FycmF5LWxpdGVyYWxzLmFsZ28udHM6NDIKICAgIC8vIHgudGhpbmdzLnB1c2gobmV3IFVpbnQzMigxMjMpKQogICAgdW5jb3ZlciAyCiAgICBpbnRjXzIgLy8gMAogICAgdW5jb3ZlciAzCiAgICBleHRyYWN0MwogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJyYXktbGl0ZXJhbHMuYWxnby50czo0MwogICAgLy8gcmV0dXJuIHgudGhpbmdzLmxlbmd0aAogICAgZHVwCiAgICBpbnRjXzAgLy8gOAogICAgZXh0cmFjdF91aW50MTYKICAgIGRpZyAxCiAgICBsZW4KICAgIHN1YnN0cmluZzMKICAgIGludGNfMiAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvYXJyYXktbGl0ZXJhbHMuYWxnby50czozNgogICAgLy8gdGVzdDMoYTogdWludDY0KTogdWludDY0IHsKICAgIGl0b2IKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CyADCAEAMRtBADUxGRREMRhEggME4ErBngQ0GjeUBN6l9/o2GgCOAwAaAAEAKgCADBUffHUAAAAAAAAAAbAjQzEZFDEYFBBDNhoBFSISRDYaAhUiEkQjQzYaAUkVIhJEFxaABAAKAABQSSJZSwEVSwJLAk8CUkkkWSMIFlcGAFwAgAQAAAB7UE8CJE8DWExQSSJZSwEVUiRZFoAEFR98dUxQsCND","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -151,6 +151,21 @@ export type MethodArgs<TSignature extends ArrayLiteralsAlgoSignatures> = ArrayLi
 export type MethodReturn<TSignature extends ArrayLiteralsAlgoSignatures> = ArrayLiteralsAlgoTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ArrayLiteralsAlgoCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ArrayLiteralsAlgoDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ArrayLiteralsAlgoCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ArrayLiteralsAlgo smart contract
@@ -197,6 +212,147 @@ export abstract class ArrayLiteralsAlgoParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ArrayLiteralsAlgo smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ArrayLiteralsAlgoFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ArrayLiteralsAlgoFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ArrayLiteralsAlgoClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ArrayLiteralsAlgoClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ArrayLiteralsAlgo smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ArrayLiteralsAlgoDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new ArrayLiteralsAlgoClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ArrayLiteralsAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ArrayLiteralsAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ArrayLiteralsAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new ArrayLiteralsAlgoClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ArrayLiteralsAlgo smart contract
  */

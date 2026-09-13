@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"HelloTemplateCustomPrefix","structs":{"Greeting":[{"name":"name","type":"string"},{"name":"termination","type":"string"}]},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"update","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"greet","args":[{"type":"string","name":"name"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"sendGreetings","args":[{"type":"(string,string)","struct":"Greeting","name":"a"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"greeting":{"keyType":"AVMString","valueType":"AVMString","key":"Z3JlZXRpbmc="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[327,347],"errorMessage":"check GlobalState exists"},{"pc":[195,252,276],"errorMessage":"invalid array length header"},{"pc":[204],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[286],"errorMessage":"invalid number of bytes for tests/approvals/precompiled-apps.algo.ts::Greeting"},{"pc":[243],"errorMessage":"invalid tail pointer at index 0 of ((len+utf8[]),(len+utf8[]))"},{"pc":[267],"errorMessage":"invalid tail pointer at index 1 of ((len+utf8[]),(len+utf8[]))"},{"pc":[239,262],"errorMessage":"invalid tuple encoding"}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"HelloTemplateCustomPrefix","structs":{"Greeting":[{"name":"name","type":"string"},{"name":"termination","type":"string"}]},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"update","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"greet","args":[{"type":"string","name":"name"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"sendGreetings","args":[{"type":"(string,string)","struct":"Greeting","name":"a"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"greeting":{"keyType":"AVMString","valueType":"AVMString","key":"Z3JlZXRpbmc="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[327,347],"errorMessage":"check GlobalState exists"},{"pc":[195,252,276],"errorMessage":"invalid array length header"},{"pc":[204],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[286],"errorMessage":"invalid number of bytes for tests/approvals/precompiled-apps.algo.ts::Greeting"},{"pc":[243],"errorMessage":"invalid tail pointer at index 0 of ((len+utf8[]),(len+utf8[]))"},{"pc":[267],"errorMessage":"invalid tail pointer at index 1 of ((len+utf8[]),(len+utf8[]))"},{"pc":[239,262],"errorMessage":"invalid tuple encoding"}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDIgNAogICAgYnl0ZWNibG9jayAiZ3JlZXRpbmciICIiIDB4MTUxZjdjNzUgIiAiIFBSRlhfR1JFRVRJTkcKICAgIGIgbWFpbl9ibG9ja0AwCgptYWluX2Jsb2NrQDA6CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICBiIG1haW5faWZfYm9keUAxCgptYWluX2lmX2JvZHlAMToKICAgIGNhbGxzdWIgY29uc3RydWN0b3IKICAgIGIgbWFpbl9hZnRlcl9pZl9lbHNlQDIKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgYiBtYWluX2Jsb2NrQDMKCm1haW5fYmxvY2tAMzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6NTIKICAgIC8vIGV4cG9ydCBjbGFzcyBIZWxsb1RlbXBsYXRlQ3VzdG9tUHJlZml4IGV4dGVuZHMgSGVsbG9CYXNlIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIHB1c2hieXRlcyAweDI0Mzc4ZDNjIC8vIG1ldGhvZCAiZGVsZXRlKCl2b2lkIgogICAgcHVzaGJ5dGVzIDB4YTBlODE4NzIgLy8gbWV0aG9kICJ1cGRhdGUoKXZvaWQiCiAgICB1bmNvdmVyIDIKICAgIG1hdGNoIG1haW5fZGVsZXRlX3JvdXRlQDQgbWFpbl91cGRhdGVfcm91dGVANQogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRANgoKbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDY6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjUyCiAgICAvLyBleHBvcnQgY2xhc3MgSGVsbG9UZW1wbGF0ZUN1c3RvbVByZWZpeCBleHRlbmRzIEhlbGxvQmFzZSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBpbnRjXzAgLy8gTm9PcAogICAgPT0KICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGludGNfMCAvLyAwCiAgICAhPQogICAgYnogbWFpbl9jcmVhdGVfTm9PcEAxMQogICAgYiBtYWluX2NhbGxfTm9PcEA3CgptYWluX2NhbGxfTm9PcEA3OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo1MgogICAgLy8gZXhwb3J0IGNsYXNzIEhlbGxvVGVtcGxhdGVDdXN0b21QcmVmaXggZXh0ZW5kcyBIZWxsb0Jhc2UgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgcHVzaGJ5dGVzIDB4ZDBhMjgyMDAgLy8gbWV0aG9kICJncmVldChzdHJpbmcpc3RyaW5nIgogICAgcHVzaGJ5dGVzIDB4NTE4MGJhMjAgLy8gbWV0aG9kICJzZW5kR3JlZXRpbmdzKChzdHJpbmcsc3RyaW5nKSlzdHJpbmciCiAgICB1bmNvdmVyIDIKICAgIG1hdGNoIG1haW5fZ3JlZXRfcm91dGVAOCBtYWluX3NlbmRHcmVldGluZ3Nfcm91dGVAOQogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAMTAKCm1haW5fc3dpdGNoX2Nhc2VfbmV4dEAxMDoKICAgIGIgbWFpbl9hZnRlcl9pZl9lbHNlQDE0CgptYWluX2FmdGVyX2lmX2Vsc2VAMTQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjUyCiAgICAvLyBleHBvcnQgY2xhc3MgSGVsbG9UZW1wbGF0ZUN1c3RvbVByZWZpeCBleHRlbmRzIEhlbGxvQmFzZSB7CiAgICBlcnIKCm1haW5fc2VuZEdyZWV0aW5nc19yb3V0ZUA5OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czozMAogICAgLy8gc2VuZEdyZWV0aW5ncyhhOiBHcmVldGluZyk6IHN0cmluZyB7CiAgICBjYWxsc3ViIHNlbmRHcmVldGluZ3MKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDEwCgptYWluX2dyZWV0X3JvdXRlQDg6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjI2CiAgICAvLyBncmVldChuYW1lOiBzdHJpbmcpOiBzdHJpbmcgewogICAgY2FsbHN1YiBncmVldAogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAMTAKCm1haW5fY3JlYXRlX05vT3BAMTE6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjUyCiAgICAvLyBleHBvcnQgY2xhc3MgSGVsbG9UZW1wbGF0ZUN1c3RvbVByZWZpeCBleHRlbmRzIEhlbGxvQmFzZSB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBwdXNoYnl0ZXMgMHg0YzVjNjFiYSAvLyBtZXRob2QgImNyZWF0ZSgpdm9pZCIKICAgIHVuY292ZXIgMQogICAgbWF0Y2ggbWFpbl9jcmVhdGVfcm91dGVAMTIKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDEzCgptYWluX3N3aXRjaF9jYXNlX25leHRAMTM6CiAgICBiIG1haW5fYWZ0ZXJfaWZfZWxzZUAxNAoKbWFpbl9jcmVhdGVfcm91dGVAMTI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjU4CiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgY2FsbHN1YiBjcmVhdGUKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDEzCgptYWluX3VwZGF0ZV9yb3V0ZUA1OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czoyMwogICAgLy8gQGFiaW1ldGhvZCh7IGFsbG93QWN0aW9uczogJ1VwZGF0ZUFwcGxpY2F0aW9uJyB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgaW50Y18zIC8vIFVwZGF0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGludGNfMCAvLyAwCiAgICAhPQogICAgJiYKICAgIGFzc2VydAogICAgY2FsbHN1YiB1cGRhdGUKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDYKCm1haW5fZGVsZXRlX3JvdXRlQDQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjIwCiAgICAvLyBAYWJpbWV0aG9kKHsgYWxsb3dBY3Rpb25zOiAnRGVsZXRlQXBwbGljYXRpb24nIH0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDUgLy8gRGVsZXRlQXBwbGljYXRpb24KICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18wIC8vIDAKICAgICE9CiAgICAmJgogICAgYXNzZXJ0CiAgICBjYWxsc3ViIGRlbGV0ZQogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRANgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvVGVtcGxhdGVDdXN0b21QcmVmaXguY3JlYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgYiBjcmVhdGVfYmxvY2tAMAoKY3JlYXRlX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjU4CiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb1RlbXBsYXRlQ3VzdG9tUHJlZml4LmNyZWF0ZQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5kZWxldGVbcm91dGluZ10oKSAtPiB2b2lkOgpkZWxldGU6CiAgICBiIGRlbGV0ZV9ibG9ja0AwCgpkZWxldGVfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MjAKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6ICdEZWxldGVBcHBsaWNhdGlvbicgfSkKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmRlbGV0ZQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS51cGRhdGVbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGU6CiAgICBiIHVwZGF0ZV9ibG9ja0AwCgp1cGRhdGVfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MjMKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6ICdVcGRhdGVBcHBsaWNhdGlvbicgfSkKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLnVwZGF0ZQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5ncmVldFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdyZWV0OgogICAgYiBncmVldF9ibG9ja0AwCgpncmVldF9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czoyNgogICAgLy8gZ3JlZXQobmFtZTogc3RyaW5nKTogc3RyaW5nIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAxCiAgICAqCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb0Jhc2UuZ3JlZXQKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgdW5jb3ZlciAxCiAgICBjb25jYXQKICAgIGJ5dGVjXzIgLy8gMHgxNTFmN2M3NQogICAgdW5jb3ZlciAxCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5zZW5kR3JlZXRpbmdzW3JvdXRpbmddKCkgLT4gdm9pZDoKc2VuZEdyZWV0aW5nczoKICAgIGIgc2VuZEdyZWV0aW5nc19ibG9ja0AwCgpzZW5kR3JlZXRpbmdzX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjMwCiAgICAvLyBzZW5kR3JlZXRpbmdzKGE6IEdyZWV0aW5nKTogc3RyaW5nIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBjb3ZlciAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCB0dXBsZSBlbmNvZGluZwogICAgZHVwCiAgICBpbnRjXzMgLy8gNAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIHRhaWwgcG9pbnRlciBhdCBpbmRleCAwIG9mICgobGVuK3V0ZjhbXSksKGxlbit1dGY4W10pKQogICAgZGlnIDEKICAgIHVuY292ZXIgMQogICAgZGlnIDMKICAgIHN1YnN0cmluZzMKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMQogICAgKgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGludGNfMyAvLyA0CiAgICArCiAgICBkaWcgMQogICAgaW50Y18yIC8vIDIKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIHR1cGxlIGVuY29kaW5nCiAgICBkdXAKICAgIGRpZyAyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgdGFpbCBwb2ludGVyIGF0IGluZGV4IDEgb2YgKChsZW4rdXRmOFtdKSwobGVuK3V0ZjhbXSkpCiAgICBkaWcgMgogICAgdW5jb3ZlciAxCiAgICB1bmNvdmVyIDQKICAgIHN1YnN0cmluZzMKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMQogICAgKgogICAgaW50Y18yIC8vIDIKICAgICsKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkdyZWV0aW5nCiAgICBjYWxsc3ViIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5zZW5kR3JlZXRpbmdzCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb1RlbXBsYXRlQ3VzdG9tUHJlZml4LmNyZWF0ZSgpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvVGVtcGxhdGVDdXN0b21QcmVmaXguY3JlYXRlOgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb1RlbXBsYXRlQ3VzdG9tUHJlZml4LmNyZWF0ZV9ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb1RlbXBsYXRlQ3VzdG9tUHJlZml4LmNyZWF0ZV9ibG9ja0AwOgogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmRlbGV0ZSgpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5kZWxldGU6CiAgICBiIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5kZWxldGVfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmRlbGV0ZV9ibG9ja0AwOgogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLnVwZGF0ZSgpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS51cGRhdGU6CiAgICBiIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS51cGRhdGVfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLnVwZGF0ZV9ibG9ja0AwOgogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmdyZWV0KG5hbWU6IGJ5dGVzKSAtPiBieXRlczoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmdyZWV0OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czoyNgogICAgLy8gZ3JlZXQobmFtZTogc3RyaW5nKTogc3RyaW5nIHsKICAgIHByb3RvIDEgMQogICAgYiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb0Jhc2UuZ3JlZXRfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmdyZWV0X2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjI3CiAgICAvLyByZXR1cm4gYCR7dGhpcy5ncmVldGluZy52YWx1ZX0gJHtuYW1lfWAKICAgIGludGNfMCAvLyAwCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjE4CiAgICAvLyBncmVldGluZyA9IEdsb2JhbFN0YXRlKHsgaW5pdGlhbFZhbHVlOiAnJyB9KQogICAgYnl0ZWNfMCAvLyAiZ3JlZXRpbmciCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjI3CiAgICAvLyByZXR1cm4gYCR7dGhpcy5ncmVldGluZy52YWx1ZX0gJHtuYW1lfWAKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBieXRlY18xIC8vICIiCiAgICB1bmNvdmVyIDEKICAgIGNvbmNhdAogICAgYnl0ZWNfMyAvLyAiICIKICAgIGNvbmNhdAogICAgZnJhbWVfZGlnIC0xCiAgICBjb25jYXQKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5zZW5kR3JlZXRpbmdzKGE6IGJ5dGVzKSAtPiBieXRlczoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLnNlbmRHcmVldGluZ3M6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjMwCiAgICAvLyBzZW5kR3JlZXRpbmdzKGE6IEdyZWV0aW5nKTogc3RyaW5nIHsKICAgIHByb3RvIDEgMQogICAgYiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb0Jhc2Uuc2VuZEdyZWV0aW5nc19ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb0Jhc2Uuc2VuZEdyZWV0aW5nc19ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czozMQogICAgLy8gcmV0dXJuIGAke3RoaXMuZ3JlZXRpbmcudmFsdWV9ICR7YS5uYW1lfSR7YS50ZXJtaW5hdGlvbi5uYXRpdmV9YAogICAgaW50Y18wIC8vIDAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MTgKICAgIC8vIGdyZWV0aW5nID0gR2xvYmFsU3RhdGUoeyBpbml0aWFsVmFsdWU6ICcnIH0pCiAgICBieXRlY18wIC8vICJncmVldGluZyIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MzEKICAgIC8vIHJldHVybiBgJHt0aGlzLmdyZWV0aW5nLnZhbHVlfSAke2EubmFtZX0ke2EudGVybWluYXRpb24ubmF0aXZlfWAKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBieXRlY18xIC8vICIiCiAgICB1bmNvdmVyIDEKICAgIGNvbmNhdAogICAgYnl0ZWNfMyAvLyAiICIKICAgIGNvbmNhdAogICAgZnJhbWVfZGlnIC0xCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgIGZyYW1lX2RpZyAtMQogICAgaW50Y18yIC8vIDIKICAgIGV4dHJhY3RfdWludDE2CiAgICBmcmFtZV9kaWcgLTEKICAgIHVuY292ZXIgMgogICAgdW5jb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBleHRyYWN0IDIgMAogICAgY29uY2F0CiAgICBmcmFtZV9kaWcgLTEKICAgIGludGNfMiAvLyAyCiAgICBleHRyYWN0X3VpbnQxNgogICAgZnJhbWVfZGlnIC0xCiAgICBsZW4KICAgIGZyYW1lX2RpZyAtMQogICAgdW5jb3ZlciAyCiAgICB1bmNvdmVyIDIKICAgIHN1YnN0cmluZzMKICAgIGV4dHJhY3QgMiAwCiAgICBjb25jYXQKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvVGVtcGxhdGVDdXN0b21QcmVmaXguY29uc3RydWN0b3IoKSAtPiB2b2lkOgpjb25zdHJ1Y3RvcjoKICAgIGIgY29uc3RydWN0b3JfYmxvY2tAMAoKY29uc3RydWN0b3JfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6NTQKICAgIC8vIHN1cGVyKCkKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmNvbnN0cnVjdG9yCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjE4CiAgICAvLyBncmVldGluZyA9IEdsb2JhbFN0YXRlKHsgaW5pdGlhbFZhbHVlOiAnJyB9KQogICAgYnl0ZWNfMCAvLyAiZ3JlZXRpbmciCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjU1CiAgICAvLyB0aGlzLmdyZWV0aW5nLnZhbHVlID0gVGVtcGxhdGVWYXI8c3RyaW5nPignR1JFRVRJTkcnLCAnUFJGWF8nKQogICAgYnl0ZWMgNCAvLyBQUkZYX0dSRUVUSU5HCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmNvbnN0cnVjdG9yKCkgLT4gdm9pZDoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmNvbnN0cnVjdG9yOgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb0Jhc2UuY29uc3RydWN0b3JfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmNvbnN0cnVjdG9yX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjE3CiAgICAvLyBhYnN0cmFjdCBjbGFzcyBIZWxsb0Jhc2UgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBiIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5jb25zdHJ1Y3Rvcl9ibG9ja0AxCgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpIZWxsb0Jhc2UuY29uc3RydWN0b3JfYmxvY2tAMToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MTcKICAgIC8vIGFic3RyYWN0IGNsYXNzIEhlbGxvQmFzZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIGIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6SGVsbG9CYXNlLmNvbnN0cnVjdG9yX2FmdGVyX2lubGluZWRfQGFsZ29yYW5kZm91bmRhdGlvbi9hbGdvcmFuZC10eXBlc2NyaXB0L2Jhc2UtY29udHJhY3QuZC50czo6QmFzZUNvbnRyYWN0LmNvbnN0cnVjdG9yQDIKCnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OkhlbGxvQmFzZS5jb25zdHJ1Y3Rvcl9hZnRlcl9pbmxpbmVkX0BhbGdvcmFuZGZvdW5kYXRpb24vYWxnb3JhbmQtdHlwZXNjcmlwdC9iYXNlLWNvbnRyYWN0LmQudHM6OkJhc2VDb250cmFjdC5jb25zdHJ1Y3RvckAyOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czoxOAogICAgLy8gZ3JlZXRpbmcgPSBHbG9iYWxTdGF0ZSh7IGluaXRpYWxWYWx1ZTogJycgfSkKICAgIGJ5dGVjXzAgLy8gImdyZWV0aW5nIgogICAgYnl0ZWNfMSAvLyAiIgogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyAEAAECBCYFCGdyZWV0aW5nAAQVH3x1ASAAQgAAMRhAAAlCAACIAXpCAABCAAA2GgCABCQ3jTyABKDoGHJPAo4CAGcAV0IAADEZIhJEMRgiE0EALUIAADYaAIAE0KKCAIAEUYC6IE8CjgIADQAHQgAAQgAAAIgAhUL/9ogAV0L/8DYaAIAETFxhuk8BjgEABkIAAEL/3ogAJEL/9zEZJRIxGCITEESIACRC/5wxGYEFEjEYIhMQRIgAC0L/i0IAAIgAiSNDQgAAiACFI0NCAACIAIEjQ0IAADYaAUkiWSMLJAhLARUSRFcCAIgAa0kVFlcGAk8BUCpPAVCwI0NCAAA2GgFJFU4BSSJZSSUSREsBTwFLA1IiWSMLJAglCEsBJFlJSwISREsCTwFPBFIiWSMLJAgISwEVEkSIADBJFRZXBgJPAVAqTwFQsCNDQgAAiUIAAIlCAACJigEBQgAAIihlRClPAVArUIv/UImKAQFCAAAiKGVEKU8BUCtQi/8iWYv/JFmL/08CTwJSVwIAUIv/JFmL/xWL/08CTwJSVwIAUIlCAACIAAUoJwRniUIAAEIAAEIAACgpZ4k=","clear":"C0IAAIEBQw=="},"events":[],"templateVariables":{"PRFX_GREETING":{"type":"AVMString"}}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -75,6 +75,13 @@ export type Greeting = {
  */
 export function GreetingFromTuple(abiTuple: [string, string]) {
   return getABIStructFromABITuple(abiTuple, APP_SPEC.structs.Greeting, APP_SPEC.structs) as Greeting
+}
+
+/**
+ * Deploy-time template variables
+ */
+export type TemplateVariables = {
+  PRFX_GREETING: string,
 }
 
 /**
@@ -197,11 +204,137 @@ export type MethodReturn<TSignature extends HelloTemplateCustomPrefixSignatures>
 export type GlobalKeysState = HelloTemplateCustomPrefixTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type HelloTemplateCustomPrefixCreateCallParams =
+  | Expand<CallParams<HelloTemplateCustomPrefixArgs['obj']['create()void'] | HelloTemplateCustomPrefixArgs['tuple']['create()void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<HelloTemplateCustomPrefixArgs['obj']['create()void'] | HelloTemplateCustomPrefixArgs['tuple']['create()void']> & {method: 'create()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type HelloTemplateCustomPrefixUpdateCallParams =
+  | Expand<CallParams<HelloTemplateCustomPrefixArgs['obj']['update()void'] | HelloTemplateCustomPrefixArgs['tuple']['update()void']> & {method: 'update'}>
+  | Expand<CallParams<HelloTemplateCustomPrefixArgs['obj']['update()void'] | HelloTemplateCustomPrefixArgs['tuple']['update()void']> & {method: 'update()void'}>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type HelloTemplateCustomPrefixDeleteCallParams =
+  | Expand<CallParams<HelloTemplateCustomPrefixArgs['obj']['delete()void'] | HelloTemplateCustomPrefixArgs['tuple']['delete()void']> & {method: 'delete'}>
+  | Expand<CallParams<HelloTemplateCustomPrefixArgs['obj']['delete()void'] | HelloTemplateCustomPrefixArgs['tuple']['delete()void']> & {method: 'delete()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type HelloTemplateCustomPrefixDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: HelloTemplateCustomPrefixCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: HelloTemplateCustomPrefixUpdateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: HelloTemplateCustomPrefixDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the HelloTemplateCustomPrefix smart contract
  */
 export abstract class HelloTemplateCustomPrefixParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends HelloTemplateCustomPrefixCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create()void':
+            return HelloTemplateCustomPrefixParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the HelloTemplateCustomPrefix smart contract using the create()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<HelloTemplateCustomPrefixArgs['obj']['create()void'] | HelloTemplateCustomPrefixArgs['tuple']['create()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends HelloTemplateCustomPrefixUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'update':
+          case 'update()void':
+            return HelloTemplateCustomPrefixParamsFactory.update.update(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the HelloTemplateCustomPrefix smart contract using the update()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      update(params: CallParams<HelloTemplateCustomPrefixArgs['obj']['update()void'] | HelloTemplateCustomPrefixArgs['tuple']['update()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'update()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends HelloTemplateCustomPrefixDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'delete':
+          case 'delete()void':
+            return HelloTemplateCustomPrefixParamsFactory.delete.delete(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the HelloTemplateCustomPrefix smart contract using the delete()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      delete(params: CallParams<HelloTemplateCustomPrefixArgs['obj']['delete()void'] | HelloTemplateCustomPrefixArgs['tuple']['delete()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'delete()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the greet(string)string ABI method
    *
@@ -230,6 +363,180 @@ export abstract class HelloTemplateCustomPrefixParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the HelloTemplateCustomPrefix smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class HelloTemplateCustomPrefixFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `HelloTemplateCustomPrefixFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new HelloTemplateCustomPrefixClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new HelloTemplateCustomPrefixClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the HelloTemplateCustomPrefix smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: HelloTemplateCustomPrefixDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? HelloTemplateCustomPrefixParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (HelloTemplateCustomPrefixCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? HelloTemplateCustomPrefixParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (HelloTemplateCustomPrefixUpdateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? HelloTemplateCustomPrefixParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (HelloTemplateCustomPrefixDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new HelloTemplateCustomPrefixClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HelloTemplateCustomPrefix smart contract using the create()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['create()void'] | HelloTemplateCustomPrefixArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(HelloTemplateCustomPrefixParamsFactory.create.create(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the HelloTemplateCustomPrefix smart contract using the update()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      update: (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['update()void'] | HelloTemplateCustomPrefixArgs['tuple']['update()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(HelloTemplateCustomPrefixParamsFactory.update.update(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the HelloTemplateCustomPrefix smart contract using the delete()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      delete: (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['delete()void'] | HelloTemplateCustomPrefixArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(HelloTemplateCustomPrefixParamsFactory.delete.delete(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HelloTemplateCustomPrefix smart contract using the create()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['create()void'] | HelloTemplateCustomPrefixArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(HelloTemplateCustomPrefixParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HelloTemplateCustomPrefix smart contract using an ABI method call using the create()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['create()void'] | HelloTemplateCustomPrefixArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(HelloTemplateCustomPrefixParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | HelloTemplateCustomPrefixReturns['create()void']) }, appClient: new HelloTemplateCustomPrefixClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the HelloTemplateCustomPrefix smart contract
  */
@@ -318,6 +625,38 @@ export class HelloTemplateCustomPrefixClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the HelloTemplateCustomPrefix smart contract using the `update()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      update: (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['update()void'] | HelloTemplateCustomPrefixArgs['tuple']['update()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(HelloTemplateCustomPrefixParamsFactory.update.update(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the HelloTemplateCustomPrefix smart contract using the `delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      delete: (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['delete()void'] | HelloTemplateCustomPrefixArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.params.delete(HelloTemplateCustomPrefixParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the HelloTemplateCustomPrefix smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -354,6 +693,38 @@ export class HelloTemplateCustomPrefixClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the HelloTemplateCustomPrefix smart contract using the `update()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      update: (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['update()void'] | HelloTemplateCustomPrefixArgs['tuple']['update()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(HelloTemplateCustomPrefixParamsFactory.update.update(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the HelloTemplateCustomPrefix smart contract using the `delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      delete: (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['delete()void'] | HelloTemplateCustomPrefixArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(HelloTemplateCustomPrefixParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the HelloTemplateCustomPrefix smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -389,6 +760,40 @@ export class HelloTemplateCustomPrefixClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the HelloTemplateCustomPrefix smart contract using the `update()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      update: async (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['update()void'] | HelloTemplateCustomPrefixArgs['tuple']['update()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(HelloTemplateCustomPrefixParamsFactory.update.update(params))
+        return {...result, return: result.return as unknown as (undefined | HelloTemplateCustomPrefixReturns['update()void'])}
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the HelloTemplateCustomPrefix smart contract using the `delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      delete: async (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['delete()void'] | HelloTemplateCustomPrefixArgs['tuple']['delete()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(HelloTemplateCustomPrefixParamsFactory.delete.delete(params))
+        return {...result, return: result.return as unknown as (undefined | HelloTemplateCustomPrefixReturns['delete()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the HelloTemplateCustomPrefix smart contract.
      *
@@ -479,6 +884,24 @@ export class HelloTemplateCustomPrefixClient {
         resultMappers.push((v) => client.decodeReturnValue('sendGreetings((string,string))string', v))
         return this
       },
+      get update() {
+        return {
+          update: (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['update()void'] | HelloTemplateCustomPrefixArgs['tuple']['update()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.update(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
+      get delete() {
+        return {
+          delete: (params: CallParams<HelloTemplateCustomPrefixArgs['obj']['delete()void'] | HelloTemplateCustomPrefixArgs['tuple']['delete()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.delete(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the HelloTemplateCustomPrefix contract
        */
@@ -531,6 +954,34 @@ export type HelloTemplateCustomPrefixComposer<TReturns extends [...any[]] = []> 
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   sendGreetings(params?: CallParams<HelloTemplateCustomPrefixArgs['obj']['sendGreetings((string,string))string'] | HelloTemplateCustomPrefixArgs['tuple']['sendGreetings((string,string))string']>): HelloTemplateCustomPrefixComposer<[...TReturns, HelloTemplateCustomPrefixReturns['sendGreetings((string,string))string'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the HelloTemplateCustomPrefix smart contract using the update()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    update(params?: CallParams<HelloTemplateCustomPrefixArgs['obj']['update()void'] | HelloTemplateCustomPrefixArgs['tuple']['update()void']>): HelloTemplateCustomPrefixComposer<[...TReturns, HelloTemplateCustomPrefixReturns['update()void'] | undefined]>
+  }
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the HelloTemplateCustomPrefix smart contract using the delete()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    delete(params?: CallParams<HelloTemplateCustomPrefixArgs['obj']['delete()void'] | HelloTemplateCustomPrefixArgs['tuple']['delete()void']>): HelloTemplateCustomPrefixComposer<[...TReturns, HelloTemplateCustomPrefixReturns['delete()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the HelloTemplateCustomPrefix smart contract.

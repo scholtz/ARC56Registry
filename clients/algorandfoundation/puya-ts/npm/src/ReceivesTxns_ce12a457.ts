@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ReceivesTxns","structs":{},"methods":[{"name":"getOne","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"receivesAnyTxn","args":[{"type":"txn","name":"txn"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"receivesAssetConfig","args":[{"type":"acfg","name":"assetCfg"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"receivesAssetConfigAndPay","args":[{"type":"acfg","name":"assetCfg"},{"type":"pay","name":"payTxn"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[180,213],"errorMessage":"transaction type is acfg"},{"pc":[223],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ReceivesTxns","structs":{},"methods":[{"name":"getOne","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"receivesAnyTxn","args":[{"type":"txn","name":"txn"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"receivesAssetConfig","args":[{"type":"acfg","name":"assetCfg"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"receivesAssetConfigAndPay","args":[{"type":"acfg","name":"assetCfg"},{"type":"pay","name":"payTxn"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[180,213],"errorMessage":"transaction type is acfg"},{"pc":[223],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDMKICAgIGJ5dGVjYmxvY2sgIiIgMHgxNTFmN2M3NQogICAgYiBtYWluX2Jsb2NrQDAKCm1haW5fYmxvY2tAMDoKICAgIGIgbWFpbl9ibG9ja0AxCgptYWluX2Jsb2NrQDE6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjg1CiAgICAvLyBleHBvcnQgY2xhc3MgUmVjZWl2ZXNUeG5zIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGludGNfMSAvLyAwCiAgICAhPQogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAMTEKICAgIGIgbWFpbl9hYmlfcm91dGluZ0AyCgptYWluX2FiaV9yb3V0aW5nQDI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjg1CiAgICAvLyBleHBvcnQgY2xhc3MgUmVjZWl2ZXNUeG5zIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgaW50Y18xIC8vIE5vT3AKICAgID09CiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBpbnRjXzEgLy8gMAogICAgIT0KICAgIGJ6IG1haW5fY3JlYXRlX05vT3BAOQogICAgYiBtYWluX2NhbGxfTm9PcEAzCgptYWluX2NhbGxfTm9PcEAzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo4NQogICAgLy8gZXhwb3J0IGNsYXNzIFJlY2VpdmVzVHhucyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIHB1c2hieXRlcyAweDhmNjg5MmVmIC8vIG1ldGhvZCAiZ2V0T25lKCl1aW50NjQiCiAgICBwdXNoYnl0ZXMgMHg5Y2Q4N2RlMyAvLyBtZXRob2QgInJlY2VpdmVzQW55VHhuKHR4bil1aW50NjQiCiAgICBwdXNoYnl0ZXMgMHhkMzY2Yzg2OSAvLyBtZXRob2QgInJlY2VpdmVzQXNzZXRDb25maWcoYWNmZylieXRlW10iCiAgICBwdXNoYnl0ZXMgMHg4MWI2NzM1MiAvLyBtZXRob2QgInJlY2VpdmVzQXNzZXRDb25maWdBbmRQYXkoYWNmZyxwYXkpdm9pZCIKICAgIHVuY292ZXIgNAogICAgbWF0Y2ggbWFpbl9nZXRPbmVfcm91dGVANCBtYWluX3JlY2VpdmVzQW55VHhuX3JvdXRlQDUgbWFpbl9yZWNlaXZlc0Fzc2V0Q29uZmlnX3JvdXRlQDYgbWFpbl9yZWNlaXZlc0Fzc2V0Q29uZmlnQW5kUGF5X3JvdXRlQDcKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDgKCm1haW5fc3dpdGNoX2Nhc2VfbmV4dEA4OgogICAgYiBtYWluX2FmdGVyX2lmX2Vsc2VAMTAKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMDoKICAgIGIgbWFpbl9hZnRlcl9pZl9lbHNlQDEyCgptYWluX2FmdGVyX2lmX2Vsc2VAMTI6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjg1CiAgICAvLyBleHBvcnQgY2xhc3MgUmVjZWl2ZXNUeG5zIGV4dGVuZHMgQ29udHJhY3QgewogICAgZXJyCgptYWluX3JlY2VpdmVzQXNzZXRDb25maWdBbmRQYXlfcm91dGVANzoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MTA0CiAgICAvLyByZWNlaXZlc0Fzc2V0Q29uZmlnQW5kUGF5KGFzc2V0Q2ZnOiBndHhuLkFzc2V0Q29uZmlnVHhuLCBwYXlUeG46IGd0eG4uUGF5bWVudFR4bik6IHZvaWQgewogICAgY2FsbHN1YiByZWNlaXZlc0Fzc2V0Q29uZmlnQW5kUGF5CiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEA4CgptYWluX3JlY2VpdmVzQXNzZXRDb25maWdfcm91dGVANjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MTAxCiAgICAvLyByZWNlaXZlc0Fzc2V0Q29uZmlnKGFzc2V0Q2ZnOiBndHhuLkFzc2V0Q29uZmlnVHhuKTogYnl0ZXMgewogICAgY2FsbHN1YiByZWNlaXZlc0Fzc2V0Q29uZmlnCiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEA4CgptYWluX3JlY2VpdmVzQW55VHhuX3JvdXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjkwCiAgICAvLyByZWNlaXZlc0FueVR4bih0eG46IGd0eG4uVHJhbnNhY3Rpb24pOiB1aW50NjQgewogICAgY2FsbHN1YiByZWNlaXZlc0FueVR4bgogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAOAoKbWFpbl9nZXRPbmVfcm91dGVANDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6ODYKICAgIC8vIGdldE9uZSgpOiB1aW50NjQgewogICAgY2FsbHN1YiBnZXRPbmUKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDgKCm1haW5fY3JlYXRlX05vT3BAOToKICAgIGIgbWFpbl9hZnRlcl9pZl9lbHNlQDEwCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUAxMToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6ODUKICAgIC8vIGV4cG9ydCBjbGFzcyBSZWNlaXZlc1R4bnMgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBpbnRjXzEgLy8gTm9PcAogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBpbnRjXzEgLy8gMAogICAgPT0KICAgICYmCiAgICBhc3NlcnQKICAgIGNhbGxzdWIgX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLmdldE9uZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldE9uZToKICAgIGIgZ2V0T25lX2Jsb2NrQDAKCmdldE9uZV9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo4NgogICAgLy8gZ2V0T25lKCk6IHVpbnQ2NCB7CiAgICBjYWxsc3ViIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5nZXRPbmUKICAgIGl0b2IKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgdW5jb3ZlciAxCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0FueVR4bltyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlY2VpdmVzQW55VHhuOgogICAgYiByZWNlaXZlc0FueVR4bl9ibG9ja0AwCgpyZWNlaXZlc0FueVR4bl9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo5MAogICAgLy8gcmVjZWl2ZXNBbnlUeG4odHhuOiBndHhuLlRyYW5zYWN0aW9uKTogdWludDY0IHsKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG4KICAgIGl0b2IKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgdW5jb3ZlciAxCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0Fzc2V0Q29uZmlnW3JvdXRpbmddKCkgLT4gdm9pZDoKcmVjZWl2ZXNBc3NldENvbmZpZzoKICAgIGIgcmVjZWl2ZXNBc3NldENvbmZpZ19ibG9ja0AwCgpyZWNlaXZlc0Fzc2V0Q29uZmlnX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjEwMQogICAgLy8gcmVjZWl2ZXNBc3NldENvbmZpZyhhc3NldENmZzogZ3R4bi5Bc3NldENvbmZpZ1R4bik6IGJ5dGVzIHsKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18yIC8vIGFjZmcKICAgID09CiAgICBhc3NlcnQgLy8gdHJhbnNhY3Rpb24gdHlwZSBpcyBhY2ZnCiAgICBjYWxsc3ViIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0Fzc2V0Q29uZmlnCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHVuY292ZXIgMQogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBc3NldENvbmZpZ0FuZFBheVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlY2VpdmVzQXNzZXRDb25maWdBbmRQYXk6CiAgICBiIHJlY2VpdmVzQXNzZXRDb25maWdBbmRQYXlfYmxvY2tAMAoKcmVjZWl2ZXNBc3NldENvbmZpZ0FuZFBheV9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czoxMDQKICAgIC8vIHJlY2VpdmVzQXNzZXRDb25maWdBbmRQYXkoYXNzZXRDZmc6IGd0eG4uQXNzZXRDb25maWdUeG4sIHBheVR4bjogZ3R4bi5QYXltZW50VHhuKTogdm9pZCB7CiAgICB0eG4gR3JvdXBJbmRleAogICAgcHVzaGludCAyCiAgICAtCiAgICBkdXAKICAgIGd0eG5zIFR5cGVFbnVtCiAgICBpbnRjXzIgLy8gYWNmZwogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIGFjZmcKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18wIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBc3NldENvbmZpZ0FuZFBheQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5nZXRPbmUoKSAtPiB1aW50NjQ6CnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5nZXRPbmU6CiAgICBiIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5nZXRPbmVfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLmdldE9uZV9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo4NwogICAgLy8gcmV0dXJuIDEKICAgIGludGNfMCAvLyAxCiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG4odHhuOiB1aW50NjQpIC0+IHVpbnQ2NDoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQW55VHhuOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo5MAogICAgLy8gcmVjZWl2ZXNBbnlUeG4odHhuOiBndHhuLlRyYW5zYWN0aW9uKTogdWludDY0IHsKICAgIHByb3RvIDEgMQogICAgYnl0ZWNfMCAvLyAiIgogICAgYnl0ZWNfMCAvLyAiIgogICAgYnl0ZWNfMCAvLyAiIgogICAgYnl0ZWNfMCAvLyAiIgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG5fYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQW55VHhuX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjkxCiAgICAvLyBzd2l0Y2ggKHR4bi50eXBlKSB7CiAgICBmcmFtZV9kaWcgLTEKICAgIGd0eG5zIFR5cGVFbnVtCiAgICBkdXAKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OTIKICAgIC8vIGNhc2UgVHJhbnNhY3Rpb25UeXBlLkFzc2V0Q29uZmlnOgogICAgaW50Y18yIC8vIDMKICAgID09CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjkyLTkzCiAgICAvLyBjYXNlIFRyYW5zYWN0aW9uVHlwZS5Bc3NldENvbmZpZzoKICAgIC8vICAgcmV0dXJuIHR4bi5jcmVhdGVkQXNzZXQuaWQgfHwgdHhuLmNvbmZpZ0Fzc2V0LmlkCiAgICBieiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG5fYWZ0ZXJfaWZfZWxzZUA2CiAgICBiIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0FueVR4bl9pZl9ib2R5QDEKCnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0FueVR4bl9pZl9ib2R5QDE6CiAgICBiIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0FueVR4bl9ibG9ja0AyCgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG5fYmxvY2tAMjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OTMKICAgIC8vIHJldHVybiB0eG4uY3JlYXRlZEFzc2V0LmlkIHx8IHR4bi5jb25maWdBc3NldC5pZAogICAgZnJhbWVfZGlnIC0xCiAgICBndHhucyBDcmVhdGVkQXNzZXRJRAogICAgZHVwCiAgICBmcmFtZV9idXJ5IDAKICAgIGJ6IHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0FueVR4bl90ZXJuYXJ5X2ZhbHNlQDQKICAgIGIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQW55VHhuX3Rlcm5hcnlfdHJ1ZUAzCgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG5fdGVybmFyeV90cnVlQDM6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjkzCiAgICAvLyByZXR1cm4gdHhuLmNyZWF0ZWRBc3NldC5pZCB8fCB0eG4uY29uZmlnQXNzZXQuaWQKICAgIGZyYW1lX2RpZyAwCiAgICBmcmFtZV9idXJ5IDIKICAgIGIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQW55VHhuX3Rlcm5hcnlfbWVyZ2VANQoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQW55VHhuX3Rlcm5hcnlfbWVyZ2VANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OTMKICAgIC8vIHJldHVybiB0eG4uY3JlYXRlZEFzc2V0LmlkIHx8IHR4bi5jb25maWdBc3NldC5pZAogICAgZnJhbWVfZGlnIDIKICAgIGZyYW1lX2J1cnkgMAogICAgcmV0c3ViCgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG5fdGVybmFyeV9mYWxzZUA0OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo5MwogICAgLy8gcmV0dXJuIHR4bi5jcmVhdGVkQXNzZXQuaWQgfHwgdHhuLmNvbmZpZ0Fzc2V0LmlkCiAgICBmcmFtZV9kaWcgLTEKICAgIGd0eG5zIENvbmZpZ0Fzc2V0CiAgICBmcmFtZV9idXJ5IDIKICAgIGIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQW55VHhuX3Rlcm5hcnlfbWVyZ2VANQoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQW55VHhuX2FmdGVyX2lmX2Vsc2VANjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OTQKICAgIC8vIGNhc2UgVHJhbnNhY3Rpb25UeXBlLkFwcGxpY2F0aW9uQ2FsbDoKICAgIGZyYW1lX2RpZyA0CiAgICBwdXNoaW50IDYKICAgID09CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjk0LTk1CiAgICAvLyBjYXNlIFRyYW5zYWN0aW9uVHlwZS5BcHBsaWNhdGlvbkNhbGw6CiAgICAvLyAgIHJldHVybiB0eG4uY3JlYXRlZEFwcC5pZCB8fCB0eG4uYXBwSWQuaWQKICAgIGJ6IHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0FueVR4bl9hZnRlcl9pZl9lbHNlQDEyCiAgICBiIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0FueVR4bl9pZl9ib2R5QDcKCnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0FueVR4bl9pZl9ib2R5QDc6CiAgICBiIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0FueVR4bl9ibG9ja0A4Cgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG5fYmxvY2tAODoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OTUKICAgIC8vIHJldHVybiB0eG4uY3JlYXRlZEFwcC5pZCB8fCB0eG4uYXBwSWQuaWQKICAgIGZyYW1lX2RpZyAtMQogICAgZ3R4bnMgQ3JlYXRlZEFwcGxpY2F0aW9uSUQKICAgIGR1cAogICAgZnJhbWVfYnVyeSAxCiAgICBieiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG5fdGVybmFyeV9mYWxzZUAxMAogICAgYiB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG5fdGVybmFyeV90cnVlQDkKCnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0FueVR4bl90ZXJuYXJ5X3RydWVAOToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OTUKICAgIC8vIHJldHVybiB0eG4uY3JlYXRlZEFwcC5pZCB8fCB0eG4uYXBwSWQuaWQKICAgIGZyYW1lX2RpZyAxCiAgICBmcmFtZV9idXJ5IDMKICAgIGIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQW55VHhuX3Rlcm5hcnlfbWVyZ2VAMTEKCnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0FueVR4bl90ZXJuYXJ5X21lcmdlQDExOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo5NQogICAgLy8gcmV0dXJuIHR4bi5jcmVhdGVkQXBwLmlkIHx8IHR4bi5hcHBJZC5pZAogICAgZnJhbWVfZGlnIDMKICAgIGZyYW1lX2J1cnkgMAogICAgcmV0c3ViCgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG5fdGVybmFyeV9mYWxzZUAxMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OTUKICAgIC8vIHJldHVybiB0eG4uY3JlYXRlZEFwcC5pZCB8fCB0eG4uYXBwSWQuaWQKICAgIGZyYW1lX2RpZyAtMQogICAgZ3R4bnMgQXBwbGljYXRpb25JRAogICAgZnJhbWVfYnVyeSAzCiAgICBiIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0FueVR4bl90ZXJuYXJ5X21lcmdlQDExCgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG5fYWZ0ZXJfaWZfZWxzZUAxMjoKICAgIGIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQW55VHhuX2Jsb2NrQDEzCgp0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjpSZWNlaXZlc1R4bnMucmVjZWl2ZXNBbnlUeG5fYmxvY2tAMTM6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvcHJlY29tcGlsZWQtYXBwcy5hbGdvLnRzOjk3CiAgICAvLyByZXR1cm4gMAogICAgaW50Y18xIC8vIDAKICAgIGZyYW1lX2J1cnkgMAogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQXNzZXRDb25maWcoYXNzZXRDZmc6IHVpbnQ2NCkgLT4gYnl0ZXM6CnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0Fzc2V0Q29uZmlnOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czoxMDEKICAgIC8vIHJlY2VpdmVzQXNzZXRDb25maWcoYXNzZXRDZmc6IGd0eG4uQXNzZXRDb25maWdUeG4pOiBieXRlcyB7CiAgICBwcm90byAxIDEKICAgIGIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQXNzZXRDb25maWdfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQXNzZXRDb25maWdfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MTAyCiAgICAvLyByZXR1cm4gYXNzZXRDZmcudHhuSWQKICAgIGZyYW1lX2RpZyAtMQogICAgZ3R4bnMgVHhJRAogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQXNzZXRDb25maWdBbmRQYXkoYXNzZXRDZmc6IHVpbnQ2NCwgcGF5VHhuOiB1aW50NjQpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5yZWNlaXZlc0Fzc2V0Q29uZmlnQW5kUGF5OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czoxMDQKICAgIC8vIHJlY2VpdmVzQXNzZXRDb25maWdBbmRQYXkoYXNzZXRDZmc6IGd0eG4uQXNzZXRDb25maWdUeG4sIHBheVR4bjogZ3R4bi5QYXltZW50VHhuKTogdm9pZCB7CiAgICBwcm90byAyIDAKICAgIGIgdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQXNzZXRDb25maWdBbmRQYXlfYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3ByZWNvbXBpbGVkLWFwcHMuYWxnby50czo6UmVjZWl2ZXNUeG5zLnJlY2VpdmVzQXNzZXRDb25maWdBbmRQYXlfYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MTA1CiAgICAvLyBhc3NlcnQoYXNzZXRDZmcudHlwZSA9PT0gVHJhbnNhY3Rpb25UeXBlLkFzc2V0Q29uZmlnKQogICAgZnJhbWVfZGlnIC0yCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18yIC8vIDMKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6MTA2CiAgICAvLyBhc3NlcnQocGF5VHhuLnR5cGUgPT09IFRyYW5zYWN0aW9uVHlwZS5QYXltZW50KQogICAgZnJhbWVfZGlnIC0xCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18wIC8vIDEKICAgID09CiAgICBhc3NlcnQKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy9wcmVjb21waWxlZC1hcHBzLmFsZ28udHM6OlJlY2VpdmVzVHhucy5fX2FsZ290c19fLmRlZmF1bHRDcmVhdGUoKSAtPiB2b2lkOgpfX2FsZ290c19fLmRlZmF1bHRDcmVhdGU6CiAgICBiIF9fYWxnb3RzX18uZGVmYXVsdENyZWF0ZV9ibG9ja0AwCgpfX2FsZ290c19fLmRlZmF1bHRDcmVhdGVfYmxvY2tAMDoKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyADAQADJgIABBUffHVCAABCAAAxGyMTQQBeQgAAMRkjEkQxGCMTQQBMQgAANhoAgASPaJLvgASc2H3jgATTZshpgASBtnNSTwSOBAAcABYAEAAKQgAAQgAAQgAAAIgAZ0L/84gAQUL/7YgAKUL/54gAFUL/4UL/4TEZIxIxGCMSEESIAPciQ0IAAIgAVxYpTwFQsCJDQgAAMRYiCYgAShYpTwFQsCJDQgAAMRYiCUk4ECQSRIgApUkVFlcGAk8BUClPAVCwIkNCAAAxFoECCUk4ECQSRDEWIglJOBAiEkSIAIUiQ0IAACKJigEBKCgoKEIAAIv/OBBJJBJBAChCAABCAACL/zg8SYwAQQAPQgAAiwCMAkIAAIsCjACJi/84IYwCQv/yiwSBBhJBAChCAABCAACL/zg9SYwBQQAPQgAAiwGMA0IAAIsDjACJi/84GIwDQv/yQgAAI4wAiYoBAUIAAIv/OBeJigIAQgAAi/44ECQSRIv/OBAiEkSJQgAAiQ==","clear":"C0IAAIEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -161,6 +161,21 @@ export type MethodArgs<TSignature extends ReceivesTxnsSignatures> = ReceivesTxns
 export type MethodReturn<TSignature extends ReceivesTxnsSignatures> = ReceivesTxnsTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ReceivesTxnsCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ReceivesTxnsDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ReceivesTxnsCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ReceivesTxns smart contract
@@ -220,6 +235,147 @@ export abstract class ReceivesTxnsParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ReceivesTxns smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ReceivesTxnsFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ReceivesTxnsFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ReceivesTxnsClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ReceivesTxnsClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ReceivesTxns smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ReceivesTxnsDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new ReceivesTxnsClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ReceivesTxns smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ReceivesTxns smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ReceivesTxns smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new ReceivesTxnsClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ReceivesTxns smart contract
  */

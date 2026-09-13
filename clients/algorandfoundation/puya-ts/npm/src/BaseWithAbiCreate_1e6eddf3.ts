@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"BaseWithAbiCreate","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"BaseWithAbiCreate","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgYiBtYWluX2Jsb2NrQDEKCm1haW5fYmxvY2tAMToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9pbXBsaWNpdC1jcmVhdGUuYWxnby50czoxNwogICAgLy8gY2xhc3MgQmFzZVdpdGhBYmlDcmVhdGUgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBwdXNoYnl0ZXMgMHg0YzVjNjFiYSAvLyBtZXRob2QgImNyZWF0ZSgpdm9pZCIKICAgIHVuY292ZXIgMQogICAgbWF0Y2ggbWFpbl9jcmVhdGVfcm91dGVAMgogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAMwoKbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDM6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvaW1wbGljaXQtY3JlYXRlLmFsZ28udHM6MTcKICAgIC8vIGNsYXNzIEJhc2VXaXRoQWJpQ3JlYXRlIGV4dGVuZHMgQ29udHJhY3QgewogICAgZXJyCgptYWluX2NyZWF0ZV9yb3V0ZUAyOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2ltcGxpY2l0LWNyZWF0ZS5hbGdvLnRzOjE4CiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgcHVzaGludCAwIC8vIE5vT3AKICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgcHVzaGludCAwCiAgICA9PQogICAgJiYKICAgIGFzc2VydAogICAgY2FsbHN1YiBjcmVhdGUKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDMKCgovLyB0ZXN0cy9hcHByb3ZhbHMvaW1wbGljaXQtY3JlYXRlLmFsZ28udHM6OkJhc2VXaXRoQWJpQ3JlYXRlLmNyZWF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZToKICAgIGIgY3JlYXRlX2Jsb2NrQDAKCmNyZWF0ZV9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2ltcGxpY2l0LWNyZWF0ZS5hbGdvLnRzOjE4CiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvaW1wbGljaXQtY3JlYXRlLmFsZ28udHM6OkJhc2VXaXRoQWJpQ3JlYXRlLmNyZWF0ZQogICAgcHVzaGludCAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvaW1wbGljaXQtY3JlYXRlLmFsZ28udHM6OkJhc2VXaXRoQWJpQ3JlYXRlLmNyZWF0ZSgpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy9pbXBsaWNpdC1jcmVhdGUuYWxnby50czo6QmFzZVdpdGhBYmlDcmVhdGUuY3JlYXRlOgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvaW1wbGljaXQtY3JlYXRlLmFsZ28udHM6OkJhc2VXaXRoQWJpQ3JlYXRlLmNyZWF0ZV9ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvaW1wbGljaXQtY3JlYXRlLmFsZ28udHM6OkJhc2VXaXRoQWJpQ3JlYXRlLmNyZWF0ZV9ibG9ja0AwOgogICAgcmV0c3ViCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBiIG1haW5fYmxvY2tAMAoKbWFpbl9ibG9ja0AwOgogICAgcHVzaGludCAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"C0IAAEIAADYaAIAETFxhuk8BjgEABEIAAAAxGYEAEjEYgQASEESIAANC/+1CAACIAAOBAUNCAACJ","clear":"C0IAAIEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -126,13 +126,201 @@ export type MethodArgs<TSignature extends BaseWithAbiCreateSignatures> = BaseWit
 export type MethodReturn<TSignature extends BaseWithAbiCreateSignatures> = BaseWithAbiCreateTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type BaseWithAbiCreateCreateCallParams =
+  | Expand<CallParams<BaseWithAbiCreateArgs['obj']['create()void'] | BaseWithAbiCreateArgs['tuple']['create()void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<BaseWithAbiCreateArgs['obj']['create()void'] | BaseWithAbiCreateArgs['tuple']['create()void']> & {method: 'create()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type BaseWithAbiCreateDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: BaseWithAbiCreateCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the BaseWithAbiCreate smart contract
  */
 export abstract class BaseWithAbiCreateParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends BaseWithAbiCreateCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create()void':
+            return BaseWithAbiCreateParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the BaseWithAbiCreate smart contract using the create()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<BaseWithAbiCreateArgs['obj']['create()void'] | BaseWithAbiCreateArgs['tuple']['create()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
 }
 
+/**
+ * A factory to create and deploy one or more instance of the BaseWithAbiCreate smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class BaseWithAbiCreateFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `BaseWithAbiCreateFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new BaseWithAbiCreateClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new BaseWithAbiCreateClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the BaseWithAbiCreate smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: BaseWithAbiCreateDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? BaseWithAbiCreateParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (BaseWithAbiCreateCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new BaseWithAbiCreateClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BaseWithAbiCreate smart contract using the create()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<BaseWithAbiCreateArgs['obj']['create()void'] | BaseWithAbiCreateArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(BaseWithAbiCreateParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BaseWithAbiCreate smart contract using the create()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<BaseWithAbiCreateArgs['obj']['create()void'] | BaseWithAbiCreateArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(BaseWithAbiCreateParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BaseWithAbiCreate smart contract using an ABI method call using the create()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<BaseWithAbiCreateArgs['obj']['create()void'] | BaseWithAbiCreateArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(BaseWithAbiCreateParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | BaseWithAbiCreateReturns['create()void']) }, appClient: new BaseWithAbiCreateClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the BaseWithAbiCreate smart contract
  */

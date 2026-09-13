@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"TestTuple","structs":{"Object3DB88FFD":[{"name":"a","type":"string"},{"name":"b","type":"uint64"},{"name":"c","type":"bool"}],"Data":[{"name":"a","type":"string"},{"name":"b","type":"uint64"},{"name":"c","type":"bool"},{"name":"d","type":"string"}]},"methods":[{"name":"testTuple","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":5},"local":{"ints":0,"bytes":0}},"keys":{"global":{"t1":{"keyType":"AVMString","valueType":"(string,uint64,bool)","key":"dDE="},"t2":{"keyType":"AVMString","valueType":"(string,(string,uint512,bool))","key":"dDI="},"t3":{"keyType":"AVMString","valueType":"Object3DB88FFD","key":"dDM="},"t4":{"keyType":"AVMString","valueType":"(string,(string,uint512,bool))","key":"dDQ="},"t5":{"keyType":"AVMString","valueType":"Data","key":"dDU="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"TestTuple","structs":{"Object3DB88FFD":[{"name":"a","type":"string"},{"name":"b","type":"uint64"},{"name":"c","type":"bool"}],"Data":[{"name":"a","type":"string"},{"name":"b","type":"uint64"},{"name":"c","type":"bool"},{"name":"d","type":"string"}]},"methods":[{"name":"testTuple","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":5},"local":{"ints":0,"bytes":0}},"keys":{"global":{"t1":{"keyType":"AVMString","valueType":"(string,uint64,bool)","key":"dDE="},"t2":{"keyType":"AVMString","valueType":"(string,(string,uint512,bool))","key":"dDI="},"t3":{"keyType":"AVMString","valueType":"Object3DB88FFD","key":"dDM="},"t4":{"keyType":"AVMString","valueType":"(string,(string,uint512,bool))","key":"dDQ="},"t5":{"keyType":"AVMString","valueType":"Data","key":"dDU="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBieXRlY2Jsb2NrIDB4MDAwYjAwMDAwMDAwMDAwMDAwN2I4MDAwMDU2ODY1NmM2YzZmIDB4MDAwNDAwMDcwMDAxNjEwMDQzMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxYzg4MDAwMDE2MgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjU5CiAgICAvLyBleHBvcnQgY2xhc3MgVGVzdFR1cGxlIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDUKICAgIHB1c2hieXRlcyAweDEyNTQ3N2Y1IC8vIG1ldGhvZCAidGVzdFR1cGxlKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl90ZXN0VHVwbGVfcm91dGVAMwogICAgZXJyCgptYWluX3Rlc3RUdXBsZV9yb3V0ZUAzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjY4CiAgICAvLyB0ZXN0VHVwbGUoKSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjYwCiAgICAvLyB0MSA9IEdsb2JhbFN0YXRlPFtzdHJpbmcsIHVpbnQ2NCwgYm9vbGVhbl0+KCkKICAgIHB1c2hieXRlcyAidDEiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLXN0YXRlLmFsZ28udHM6NjkKICAgIC8vIHRoaXMudDEudmFsdWUgPSBbJ2hlbGxvJywgMTIzLCB0cnVlXQogICAgYnl0ZWNfMCAvLyAweDAwMGIwMDAwMDAwMDAwMDAwMDdiODAwMDA1Njg2NTZjNmM2ZgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtc3RhdGUuYWxnby50czo2MQogICAgLy8gdDIgPSBHbG9iYWxTdGF0ZTxbc3RyaW5nLCBbc3RyaW5nLCBiaWd1aW50LCBib29sZWFuXV0+KCkKICAgIHB1c2hieXRlcyAidDIiCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLXN0YXRlLmFsZ28udHM6NzQKICAgIC8vIHRoaXMudDIudmFsdWUgPSBbJ2EnLCBbJ2InLCA0NTZuLCB0cnVlXV0KICAgIGJ5dGVjXzEgLy8gMHgwMDA0MDAwNzAwMDE2MTAwNDMwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDFjODgwMDAwMTYyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjYzCiAgICAvLyB0MyA9IEdsb2JhbFN0YXRlPHsgYTogc3RyaW5nOyBiOiB1aW50NjQ7IGM6IGJvb2xlYW4gfT4oKQogICAgcHVzaGJ5dGVzICJ0MyIKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9nbG9iYWwtc3RhdGUuYWxnby50czo2OQogICAgLy8gdGhpcy50MS52YWx1ZSA9IFsnaGVsbG8nLCAxMjMsIHRydWVdCiAgICBieXRlY18wIC8vIDB4MDAwYjAwMDAwMDAwMDAwMDAwN2I4MDAwMDU2ODY1NmM2YzZmCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLXN0YXRlLmFsZ28udHM6ODAKICAgIC8vIHRoaXMudDMudmFsdWUgPSB7IGE6ICdoZWxsbycsIGI6IDEyMywgYzogdHJ1ZSB9CiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjY0CiAgICAvLyB0NCA9IEdsb2JhbFN0YXRlPFtzdHJpbmcsIHsgYTogc3RyaW5nOyBiOiBiaWd1aW50OyBjOiBib29sZWFuIH1dPigpCiAgICBwdXNoYnl0ZXMgInQ0IgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjc0CiAgICAvLyB0aGlzLnQyLnZhbHVlID0gWydhJywgWydiJywgNDU2biwgdHJ1ZV1dCiAgICBieXRlY18xIC8vIDB4MDAwNDAwMDcwMDAxNjEwMDQzMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxYzg4MDAwMDE2MgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjg1CiAgICAvLyB0aGlzLnQ0LnZhbHVlID0gWydhJywgeyBhOiAnYicsIGI6IDQ1Nm4sIGM6IHRydWUgfV0KICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLXN0YXRlLmFsZ28udHM6NjYKICAgIC8vIHQ1ID0gR2xvYmFsU3RhdGU8RGF0YT4oKQogICAgcHVzaGJ5dGVzcyAidDUiIDB4MDAwZDAwMDAwMDAwMDAwMDAwN2I4MDAwMTQwMDA1Njg2NTZjNmM2ZjAwMDU1NzZmNzI2YzY0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLXN0YXRlLmFsZ28udHM6OTEKICAgIC8vIHRoaXMudDUudmFsdWUgPSB7IGE6ICdoZWxsbycsIGI6IDEyMywgYzogdHJ1ZSwgZDogbmV3IGFyYzQuU3RyKCdXb3JsZCcpIH0KICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZ2xvYmFsLXN0YXRlLmFsZ28udHM6NjgKICAgIC8vIHRlc3RUdXBsZSgpIHsKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2dsb2JhbC1zdGF0ZS5hbGdvLnRzOjU5CiAgICAvLyBleHBvcnQgY2xhc3MgVGVzdFR1cGxlIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CyYCEgALAAAAAAAAAHuAAAVoZWxsb00ABAAHAAFhAEMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHIgAABYjEbQQBSgAQSVHf1NhoAjgEAAQAxGRQxGBBEgAJ0MShngAJ0MilngAJ0MyhngAJ0NClnggICdDUbAA0AAAAAAAAAe4AAFAAFaGVsbG8ABVdvcmxkZ4EBQzEZFDEYFBBD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -177,6 +177,21 @@ export type MethodReturn<TSignature extends TestTupleSignatures> = TestTupleType
 export type GlobalKeysState = TestTupleTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TestTupleCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TestTupleDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TestTupleCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TestTuple smart contract
@@ -197,6 +212,147 @@ export abstract class TestTupleParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TestTuple smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TestTupleFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TestTupleFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TestTupleClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TestTupleClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TestTuple smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TestTupleDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new TestTupleClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestTuple smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestTuple smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestTuple smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new TestTupleClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TestTuple smart contract
  */

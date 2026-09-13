@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"DestructuredParamsAlgo","structs":{"Arc4":[{"name":"a","type":"uint64"},{"name":"b","type":"byte[]"},{"name":"c","type":"bool"}],"Object4B7314A9":[{"name":"a","type":"uint64"},{"name":"b","type":"byte[]"},{"name":"c","type":"bool"}]},"methods":[{"name":"test","args":[{"type":"(uint64,byte[],bool)","struct":"Object4B7314A9","name":"p"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"testMutable","args":[{"type":"(uint64,byte[],bool)","struct":"Arc4","name":"p"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"init","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[114,168],"errorMessage":"invalid array length header"},{"pc":[121],"errorMessage":"invalid number of bytes for Arc4"},{"pc":[173],"errorMessage":"invalid number of bytes for Object4B7314A9"},{"pc":[105,160],"errorMessage":"invalid tail pointer at index 1 of (uint64,(len+uint8[]),bool1)"},{"pc":[101,156],"errorMessage":"invalid tuple encoding"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"DestructuredParamsAlgo","structs":{"Arc4":[{"name":"a","type":"uint64"},{"name":"b","type":"byte[]"},{"name":"c","type":"bool"}],"Object4B7314A9":[{"name":"a","type":"uint64"},{"name":"b","type":"byte[]"},{"name":"c","type":"bool"}]},"methods":[{"name":"test","args":[{"type":"(uint64,byte[],bool)","struct":"Object4B7314A9","name":"p"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"testMutable","args":[{"type":"(uint64,byte[],bool)","struct":"Arc4","name":"p"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"init","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[114,168],"errorMessage":"invalid array length header"},{"pc":[121],"errorMessage":"invalid number of bytes for Arc4"},{"pc":[173],"errorMessage":"invalid number of bytes for Object4B7314A9"},{"pc":[105,160],"errorMessage":"invalid tail pointer at index 1 of (uint64,(len+uint8[]),bool1)"},{"pc":[101,156],"errorMessage":"invalid tuple encoding"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSA4IDAgMTEKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyZWQtcGFyYW1zLmFsZ28udHM6OAogICAgLy8gZXhwb3J0IGNsYXNzIERlc3RydWN0dXJlZFBhcmFtc0FsZ28gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAMTAKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweGZlZmVhNzY2IDB4MzQzOTlkYjQgMHg4M2YxNDc0OCAvLyBtZXRob2QgInRlc3QoKHVpbnQ2NCxieXRlW10sYm9vbCkpdm9pZCIsIG1ldGhvZCAidGVzdE11dGFibGUoKHVpbnQ2NCxieXRlW10sYm9vbCkpdm9pZCIsIG1ldGhvZCAiaW5pdCgpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdGVzdF9yb3V0ZUA0IG1haW5fdGVzdE11dGFibGVfcm91dGVANSBtYWluX2luaXRfcm91dGVANgogICAgZXJyCgptYWluX2luaXRfcm91dGVANjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyZWQtcGFyYW1zLmFsZ28udHM6MTgKICAgIC8vIHRoaXMudGVzdCh7IGE6IDQ1NiwgYjogQnl0ZXMoJycpLCBjOiBmYWxzZSB9KQogICAgcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDFjODAwMGIwMDAwMDAKICAgIGNhbGxzdWIgdGVzdAogICAgcG9wCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmVkLXBhcmFtcy5hbGdvLnRzOjE5CiAgICAvLyBjb25zdCB0ZW1wID0geyBhOiBVaW50NjQoMiksIGI6IEJ5dGVzKCdIZWxsbycpLCBjOiB0cnVlIH0KICAgIHB1c2hieXRlcyAweDAwMDAwMDAwMDAwMDAwMDIwMDBiODAwMDA1NDg2NTZjNmM2ZgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJlZC1wYXJhbXMuYWxnby50czoyMAogICAgLy8gdGhpcy50ZXN0KHRlbXApCiAgICBjYWxsc3ViIHRlc3QKICAgIHBvcAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJlZC1wYXJhbXMuYWxnby50czoxNwogICAgLy8gaW5pdCgpIHsKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fdGVzdE11dGFibGVfcm91dGVANToKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyZWQtcGFyYW1zLmFsZ28udHM6MTMKICAgIC8vIHRlc3RNdXRhYmxlKHsgYSwgYiwgYyB9OiBBcmM0KSB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgZGlnIDEKICAgIGludGNfMSAvLyA4CiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCB0dXBsZSBlbmNvZGluZwogICAgZHVwCiAgICBpbnRjXzMgLy8gMTEKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCB0YWlsIHBvaW50ZXIgYXQgaW5kZXggMSBvZiAodWludDY0LChsZW4rdWludDhbXSksYm9vbDEpCiAgICBkaWcgMgogICAgc3dhcAogICAgZGlnIDIKICAgIHN1YnN0cmluZzMKICAgIGR1cAogICAgaW50Y18yIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMTMKICAgICsKICAgIHVuY292ZXIgMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgQXJjNAogICAgZGlnIDEKICAgIGV4dHJhY3QgMCA4CiAgICB1bmNvdmVyIDIKICAgIHB1c2hpbnQgODAKICAgIGdldGJpdAogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGludGNfMiAvLyAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJlZC1wYXJhbXMuYWxnby50czoxNAogICAgLy8gbG9nKGEsIGIsIGMpCiAgICBzd2FwCiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyZWQtcGFyYW1zLmFsZ28udHM6MTMKICAgIC8vIHRlc3RNdXRhYmxlKHsgYSwgYiwgYyB9OiBBcmM0KSB7CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3Rlc3Rfcm91dGVANDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy9kZXN0cnVjdHVyZWQtcGFyYW1zLmFsZ28udHM6OQogICAgLy8gdGVzdCh7IGEsIGIsIGMgfTogeyBhOiB1aW50NjQ7IGI6IGJ5dGVzOyBjOiBib29sZWFuIH0pOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBkaWcgMQogICAgaW50Y18xIC8vIDgKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIHR1cGxlIGVuY29kaW5nCiAgICBkdXAKICAgIGludGNfMyAvLyAxMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIHRhaWwgcG9pbnRlciBhdCBpbmRleCAxIG9mICh1aW50NjQsKGxlbit1aW50OFtdKSxib29sMSkKICAgIGRpZyAyCiAgICBzd2FwCiAgICBkaWcgMgogICAgc3Vic3RyaW5nMwogICAgaW50Y18yIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMTMKICAgICsKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIE9iamVjdDRCNzMxNEE5CiAgICBjYWxsc3ViIHRlc3QKICAgIHBvcAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAMTA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmVkLXBhcmFtcy5hbGdvLnRzOjgKICAgIC8vIGV4cG9ydCBjbGFzcyBEZXN0cnVjdHVyZWRQYXJhbXNBbGdvIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmVkLXBhcmFtcy5hbGdvLnRzOjpEZXN0cnVjdHVyZWRQYXJhbXNBbGdvLnRlc3QocDogYnl0ZXMpIC0+IGJ5dGVzOgp0ZXN0OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL2Rlc3RydWN0dXJlZC1wYXJhbXMuYWxnby50czo5CiAgICAvLyB0ZXN0KHsgYSwgYiwgYyB9OiB7IGE6IHVpbnQ2NDsgYjogYnl0ZXM7IGM6IGJvb2xlYW4gfSk6IHZvaWQgewogICAgcHJvdG8gMSAxCiAgICBmcmFtZV9kaWcgLTEKICAgIGV4dHJhY3QgMCA4CiAgICBmcmFtZV9kaWcgLTEKICAgIGludGNfMSAvLyA4CiAgICBleHRyYWN0X3VpbnQxNgogICAgZnJhbWVfZGlnIC0xCiAgICBsZW4KICAgIGZyYW1lX2RpZyAtMQogICAgY292ZXIgMgogICAgc3Vic3RyaW5nMwogICAgZXh0cmFjdCAyIDAKICAgIGZyYW1lX2RpZyAtMQogICAgcHVzaGludCA4MAogICAgZ2V0Yml0CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvZGVzdHJ1Y3R1cmVkLXBhcmFtcy5hbGdvLnRzOjEwCiAgICAvLyBsb2coYSwgYiwgYykKICAgIGNvdmVyIDIKICAgIGNvbmNhdAogICAgc3dhcAogICAgaXRvYgogICAgY29uY2F0CiAgICBsb2cKICAgIGZyYW1lX2RpZyAtMQogICAgcmV0c3ViCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CyAEAQgACzEbQQCoMRkURDEYRIIDBP7+p2YENDmdtASD8UdINhoAjgMAZQAuAAEAgA0AAAAAAAAByAALAAAAiAB6SIASAAAAAAAAAAIAC4AABUhlbGxviABiSCJDNhoBSRVLASNZSSUSREsCTEsCUkkkWYENCE8CEkRLAVcACE8CgVBTgAEAJE8CVExPAlBMULAiQzYaAUkVSwEjWUklEkRLAkxLAlIkWYENCBJEiAALSCJDMRkUMRgUEEOKAQGL/1cACIv/I1mL/xWL/04CUlcCAIv/gVBTTgJQTBZQsIv/iQ==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -176,6 +176,21 @@ export type MethodArgs<TSignature extends DestructuredParamsAlgoSignatures> = De
 export type MethodReturn<TSignature extends DestructuredParamsAlgoSignatures> = DestructuredParamsAlgoTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type DestructuredParamsAlgoCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type DestructuredParamsAlgoDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: DestructuredParamsAlgoCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the DestructuredParamsAlgo smart contract
@@ -222,6 +237,147 @@ export abstract class DestructuredParamsAlgoParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the DestructuredParamsAlgo smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class DestructuredParamsAlgoFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `DestructuredParamsAlgoFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new DestructuredParamsAlgoClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new DestructuredParamsAlgoClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the DestructuredParamsAlgo smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: DestructuredParamsAlgoDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new DestructuredParamsAlgoClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DestructuredParamsAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DestructuredParamsAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DestructuredParamsAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new DestructuredParamsAlgoClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the DestructuredParamsAlgo smart contract
  */

@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"TealScriptConventionsAlgo","structs":{},"methods":[{"name":"noMoreThanks","args":[{"type":"uint64","name":"arg"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["CloseOut"]},"readonly":false,"events":[],"recommendations":{}},{"name":"createApplication","args":[{"type":"byte[]","name":"value"}],"returns":{"type":"void"},"actions":{"create":["NoOp","DeleteApplication"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"setLocal","args":[{"type":"string","name":"value"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"optInToApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["OptIn"]},"readonly":false,"events":[],"recommendations":{}},{"name":"updateApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":1}},"keys":{"global":{"global":{"keyType":"AVMString","valueType":"AVMBytes","key":"Z2xvYmFs"}},"local":{"local":{"keyType":"AVMString","valueType":"AVMString","key":"bG9jYWw="}},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":["DeleteApplication"]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[217,243],"errorMessage":"invalid array length header"},{"pc":[226,252],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[191],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"TealScriptConventionsAlgo","structs":{},"methods":[{"name":"noMoreThanks","args":[{"type":"uint64","name":"arg"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["CloseOut"]},"readonly":false,"events":[],"recommendations":{}},{"name":"createApplication","args":[{"type":"byte[]","name":"value"}],"returns":{"type":"void"},"actions":{"create":["NoOp","DeleteApplication"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"setLocal","args":[{"type":"string","name":"value"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"optInToApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["OptIn"]},"readonly":false,"events":[],"recommendations":{}},{"name":"updateApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":1}},"keys":{"global":{"global":{"keyType":"AVMString","valueType":"AVMBytes","key":"Z2xvYmFs"}},"local":{"local":{"keyType":"AVMString","valueType":"AVMString","key":"bG9jYWw="}},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":["DeleteApplication"]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[217,243],"errorMessage":"invalid array length header"},{"pc":[226,252],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[191],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDIKICAgIGIgbWFpbl9ibG9ja0AwCgptYWluX2Jsb2NrQDA6CiAgICBiIG1haW5fYmxvY2tAMQoKbWFpbl9ibG9ja0AxOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6NQogICAgLy8gZXhwb3J0IGNsYXNzIFRlYWxTY3JpcHRDb252ZW50aW9uc0FsZ28gZXh0ZW5kcyBDb250cmFjdCBpbXBsZW1lbnRzIENvbnZlbnRpb25hbFJvdXRpbmcgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGludGNfMCAvLyAwCiAgICAhPQogICAgYnogbWFpbl9kZWxldGVBcHBsaWNhdGlvbkA5CiAgICBiIG1haW5fYWJpX3JvdXRpbmdAMgoKbWFpbl9hYmlfcm91dGluZ0AyOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6NQogICAgLy8gZXhwb3J0IGNsYXNzIFRlYWxTY3JpcHRDb252ZW50aW9uc0FsZ28gZXh0ZW5kcyBDb250cmFjdCBpbXBsZW1lbnRzIENvbnZlbnRpb25hbFJvdXRpbmcgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgcHVzaGJ5dGVzIDB4NzY2YTY1N2UgLy8gbWV0aG9kICJub01vcmVUaGFua3ModWludDY0KXVpbnQ2NCIKICAgIHB1c2hieXRlcyAweDJmMmJlNTE3IC8vIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oYnl0ZVtdKXZvaWQiCiAgICBwdXNoYnl0ZXMgMHgwMWEzYTNmZiAvLyBtZXRob2QgIm9wdEluVG9BcHBsaWNhdGlvbigpdm9pZCIKICAgIHB1c2hieXRlcyAweDQ2Zjc2NTMzIC8vIG1ldGhvZCAidXBkYXRlQXBwbGljYXRpb24oKXZvaWQiCiAgICBwdXNoYnl0ZXMgMHhkZjczMDBiYiAvLyBtZXRob2QgInNldExvY2FsKHN0cmluZyl2b2lkIgogICAgdW5jb3ZlciA1CiAgICBtYXRjaCBtYWluX25vTW9yZVRoYW5rc19yb3V0ZUAzIG1haW5fY3JlYXRlQXBwbGljYXRpb25fcm91dGVANCBtYWluX29wdEluVG9BcHBsaWNhdGlvbl9yb3V0ZUA1IG1haW5fdXBkYXRlQXBwbGljYXRpb25fcm91dGVANiBtYWluX3NldExvY2FsX3JvdXRlQDcKICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDgKCm1haW5fc3dpdGNoX2Nhc2VfbmV4dEA4OgogICAgYiBtYWluX2FmdGVyX2lmX2Vsc2VAMTAKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjUKICAgIC8vIGV4cG9ydCBjbGFzcyBUZWFsU2NyaXB0Q29udmVudGlvbnNBbGdvIGV4dGVuZHMgQ29udHJhY3QgaW1wbGVtZW50cyBDb252ZW50aW9uYWxSb3V0aW5nIHsKICAgIGVycgoKbWFpbl9zZXRMb2NhbF9yb3V0ZUA3OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6MTcKICAgIC8vIHNldExvY2FsKHZhbHVlOiBzdHJpbmcpIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGludGNfMCAvLyBOb09wCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGludGNfMCAvLyAwCiAgICAhPQogICAgJiYKICAgIGFzc2VydAogICAgY2FsbHN1YiBzZXRMb2NhbAogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAOAoKbWFpbl91cGRhdGVBcHBsaWNhdGlvbl9yb3V0ZUA2OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6MjUKICAgIC8vIHVwZGF0ZUFwcGxpY2F0aW9uKCkge30KICAgIHR4biBPbkNvbXBsZXRpb24KICAgIHB1c2hpbnQgNCAvLyBVcGRhdGVBcHBsaWNhdGlvbgogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgICYmCiAgICBhc3NlcnQKICAgIGNhbGxzdWIgdXBkYXRlQXBwbGljYXRpb24KICAgIGIgbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDgKCm1haW5fb3B0SW5Ub0FwcGxpY2F0aW9uX3JvdXRlQDU6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czoyMwogICAgLy8gb3B0SW5Ub0FwcGxpY2F0aW9uKCkge30KICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGludGNfMSAvLyBPcHRJbgogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgICYmCiAgICBhc3NlcnQKICAgIGNhbGxzdWIgb3B0SW5Ub0FwcGxpY2F0aW9uCiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEA4CgptYWluX2NyZWF0ZUFwcGxpY2F0aW9uX3JvdXRlQDQ6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czoxMgogICAgLy8gQGFiaW1ldGhvZCh7IGFsbG93QWN0aW9uczogWydOb09wJywgJ0RlbGV0ZUFwcGxpY2F0aW9uJ10gfSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGludGNfMSAvLyAxCiAgICB1bmNvdmVyIDEKICAgIHNobAogICAgcHVzaGludCAzMwogICAgJgogICAgaW50Y18wIC8vIDAKICAgICE9CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18wIC8vIDAKICAgID09CiAgICAmJgogICAgYXNzZXJ0CiAgICBjYWxsc3ViIGNyZWF0ZUFwcGxpY2F0aW9uCiAgICBiIG1haW5fc3dpdGNoX2Nhc2VfbmV4dEA4CgptYWluX25vTW9yZVRoYW5rc19yb3V0ZUAzOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6OAogICAgLy8gQGFiaW1ldGhvZCh7IG5hbWU6ICdub01vcmVUaGFua3MnIH0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBpbnRjXzIgLy8gQ2xvc2VPdXQKICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgaW50Y18wIC8vIDAKICAgICE9CiAgICAmJgogICAgYXNzZXJ0CiAgICBjYWxsc3ViIGNsb3NlT3V0T2ZBcHBsaWNhdGlvbgogICAgYiBtYWluX3N3aXRjaF9jYXNlX25leHRAOAoKbWFpbl9kZWxldGVBcHBsaWNhdGlvbkA5OgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6MjAKICAgIC8vIEBiYXJlbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIHB1c2hpbnQgNSAvLyBEZWxldGVBcHBsaWNhdGlvbgogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBpbnRjXzAgLy8gMAogICAgIT0KICAgICYmCiAgICBhc3NlcnQKICAgIGNhbGxzdWIgZGVsZXRlQXBwbGljYXRpb24KICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo6VGVhbFNjcmlwdENvbnZlbnRpb25zQWxnby5jbG9zZU91dE9mQXBwbGljYXRpb25bcm91dGluZ10oKSAtPiB2b2lkOgpjbG9zZU91dE9mQXBwbGljYXRpb246CiAgICBiIGNsb3NlT3V0T2ZBcHBsaWNhdGlvbl9ibG9ja0AwCgpjbG9zZU91dE9mQXBwbGljYXRpb25fYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjgKICAgIC8vIEBhYmltZXRob2QoeyBuYW1lOiAnbm9Nb3JlVGhhbmtzJyB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6OlRlYWxTY3JpcHRDb252ZW50aW9uc0FsZ28uY2xvc2VPdXRPZkFwcGxpY2F0aW9uCiAgICBpdG9iCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NQogICAgdW5jb3ZlciAxCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjpUZWFsU2NyaXB0Q29udmVudGlvbnNBbGdvLmNyZWF0ZUFwcGxpY2F0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlQXBwbGljYXRpb246CiAgICBiIGNyZWF0ZUFwcGxpY2F0aW9uX2Jsb2NrQDAKCmNyZWF0ZUFwcGxpY2F0aW9uX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czoxMgogICAgLy8gQGFiaW1ldGhvZCh7IGFsbG93QWN0aW9uczogWydOb09wJywgJ0RlbGV0ZUFwcGxpY2F0aW9uJ10gfSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAxCiAgICAqCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgY2FsbHN1YiB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo6VGVhbFNjcmlwdENvbnZlbnRpb25zQWxnby5jcmVhdGVBcHBsaWNhdGlvbgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjpUZWFsU2NyaXB0Q29udmVudGlvbnNBbGdvLnNldExvY2FsW3JvdXRpbmddKCkgLT4gdm9pZDoKc2V0TG9jYWw6CiAgICBiIHNldExvY2FsX2Jsb2NrQDAKCnNldExvY2FsX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czoxNwogICAgLy8gc2V0TG9jYWwodmFsdWU6IHN0cmluZykgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDEKICAgICoKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICBjYWxsc3ViIHRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjpUZWFsU2NyaXB0Q29udmVudGlvbnNBbGdvLnNldExvY2FsCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6OlRlYWxTY3JpcHRDb252ZW50aW9uc0FsZ28ub3B0SW5Ub0FwcGxpY2F0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKb3B0SW5Ub0FwcGxpY2F0aW9uOgogICAgYiBvcHRJblRvQXBwbGljYXRpb25fYmxvY2tAMAoKb3B0SW5Ub0FwcGxpY2F0aW9uX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czoyMwogICAgLy8gb3B0SW5Ub0FwcGxpY2F0aW9uKCkge30KICAgIGNhbGxzdWIgdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6OlRlYWxTY3JpcHRDb252ZW50aW9uc0FsZ28ub3B0SW5Ub0FwcGxpY2F0aW9uCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6OlRlYWxTY3JpcHRDb252ZW50aW9uc0FsZ28udXBkYXRlQXBwbGljYXRpb25bcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGVBcHBsaWNhdGlvbjoKICAgIGIgdXBkYXRlQXBwbGljYXRpb25fYmxvY2tAMAoKdXBkYXRlQXBwbGljYXRpb25fYmxvY2tAMDoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjI1CiAgICAvLyB1cGRhdGVBcHBsaWNhdGlvbigpIHt9CiAgICBjYWxsc3ViIHRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjpUZWFsU2NyaXB0Q29udmVudGlvbnNBbGdvLnVwZGF0ZUFwcGxpY2F0aW9uCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6OlRlYWxTY3JpcHRDb252ZW50aW9uc0FsZ28uY2xvc2VPdXRPZkFwcGxpY2F0aW9uKGFyZzogdWludDY0KSAtPiB1aW50NjQ6CnRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjpUZWFsU2NyaXB0Q29udmVudGlvbnNBbGdvLmNsb3NlT3V0T2ZBcHBsaWNhdGlvbjoKICAgIC8vIHRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjgtOQogICAgLy8gQGFiaW1ldGhvZCh7IG5hbWU6ICdub01vcmVUaGFua3MnIH0pCiAgICAvLyBjbG9zZU91dE9mQXBwbGljYXRpb24oYXJnOiB1aW50NjQpIHsKICAgIHByb3RvIDEgMQogICAgYiB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo6VGVhbFNjcmlwdENvbnZlbnRpb25zQWxnby5jbG9zZU91dE9mQXBwbGljYXRpb25fYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6OlRlYWxTY3JpcHRDb252ZW50aW9uc0FsZ28uY2xvc2VPdXRPZkFwcGxpY2F0aW9uX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czoxMAogICAgLy8gcmV0dXJuIGFyZwogICAgZnJhbWVfZGlnIC0xCiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo6VGVhbFNjcmlwdENvbnZlbnRpb25zQWxnby5jcmVhdGVBcHBsaWNhdGlvbih2YWx1ZTogYnl0ZXMpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjpUZWFsU2NyaXB0Q29udmVudGlvbnNBbGdvLmNyZWF0ZUFwcGxpY2F0aW9uOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6MTItMTMKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6IFsnTm9PcCcsICdEZWxldGVBcHBsaWNhdGlvbiddIH0pCiAgICAvLyBjcmVhdGVBcHBsaWNhdGlvbih2YWx1ZTogYnl0ZXMpIHsKICAgIHByb3RvIDEgMAogICAgYiB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo6VGVhbFNjcmlwdENvbnZlbnRpb25zQWxnby5jcmVhdGVBcHBsaWNhdGlvbl9ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo6VGVhbFNjcmlwdENvbnZlbnRpb25zQWxnby5jcmVhdGVBcHBsaWNhdGlvbl9ibG9ja0AwOgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6NgogICAgLy8gZ2xvYmFsID0gR2xvYmFsU3RhdGU8Ynl0ZXM+KCkKICAgIHB1c2hieXRlcyAiZ2xvYmFsIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6MTQKICAgIC8vIHRoaXMuZ2xvYmFsLnZhbHVlID0gdmFsdWUKICAgIGZyYW1lX2RpZyAtMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1YgoKCi8vIHRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjpUZWFsU2NyaXB0Q29udmVudGlvbnNBbGdvLnNldExvY2FsKHZhbHVlOiBieXRlcykgLT4gdm9pZDoKdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6OlRlYWxTY3JpcHRDb252ZW50aW9uc0FsZ28uc2V0TG9jYWw6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czoxNwogICAgLy8gc2V0TG9jYWwodmFsdWU6IHN0cmluZykgewogICAgcHJvdG8gMSAwCiAgICBiIHRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjpUZWFsU2NyaXB0Q29udmVudGlvbnNBbGdvLnNldExvY2FsX2Jsb2NrQDAKCnRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjpUZWFsU2NyaXB0Q29udmVudGlvbnNBbGdvLnNldExvY2FsX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czoxOAogICAgLy8gdGhpcy5sb2NhbChUeG4uc2VuZGVyKS52YWx1ZSA9IHZhbHVlCiAgICB0eG4gU2VuZGVyCiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo3CiAgICAvLyBsb2NhbCA9IExvY2FsU3RhdGU8c3RyaW5nPigpCiAgICBwdXNoYnl0ZXMgImxvY2FsIgogICAgLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6MTgKICAgIC8vIHRoaXMubG9jYWwoVHhuLnNlbmRlcikudmFsdWUgPSB2YWx1ZQogICAgZnJhbWVfZGlnIC0xCiAgICBhcHBfbG9jYWxfcHV0CiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo6VGVhbFNjcmlwdENvbnZlbnRpb25zQWxnby5kZWxldGVBcHBsaWNhdGlvbigpIC0+IHZvaWQ6CmRlbGV0ZUFwcGxpY2F0aW9uOgogICAgYiBkZWxldGVBcHBsaWNhdGlvbl9ibG9ja0AwCgpkZWxldGVBcHBsaWNhdGlvbl9ibG9ja0AwOgogICAgcmV0c3ViCgoKLy8gdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6OlRlYWxTY3JpcHRDb252ZW50aW9uc0FsZ28ub3B0SW5Ub0FwcGxpY2F0aW9uKCkgLT4gdm9pZDoKdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6OlRlYWxTY3JpcHRDb252ZW50aW9uc0FsZ28ub3B0SW5Ub0FwcGxpY2F0aW9uOgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo6VGVhbFNjcmlwdENvbnZlbnRpb25zQWxnby5vcHRJblRvQXBwbGljYXRpb25fYmxvY2tAMAoKdGVzdHMvYXBwcm92YWxzL3RlYWwtc2NyaXB0LWNvbnZlbnRpb25zLmFsZ28udHM6OlRlYWxTY3JpcHRDb252ZW50aW9uc0FsZ28ub3B0SW5Ub0FwcGxpY2F0aW9uX2Jsb2NrQDA6CiAgICByZXRzdWIKCgovLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo6VGVhbFNjcmlwdENvbnZlbnRpb25zQWxnby51cGRhdGVBcHBsaWNhdGlvbigpIC0+IHZvaWQ6CnRlc3RzL2FwcHJvdmFscy90ZWFsLXNjcmlwdC1jb252ZW50aW9ucy5hbGdvLnRzOjpUZWFsU2NyaXB0Q29udmVudGlvbnNBbGdvLnVwZGF0ZUFwcGxpY2F0aW9uOgogICAgYiB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo6VGVhbFNjcmlwdENvbnZlbnRpb25zQWxnby51cGRhdGVBcHBsaWNhdGlvbl9ibG9ja0AwCgp0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo6VGVhbFNjcmlwdENvbnZlbnRpb25zQWxnby51cGRhdGVBcHBsaWNhdGlvbl9ibG9ja0AwOgogICAgcmV0c3ViCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czo6VGVhbFNjcmlwdENvbnZlbnRpb25zQWxnby5jbGVhclN0YXRlUHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGIgbWFpbl9ibG9ja0AwCgptYWluX2Jsb2NrQDA6CiAgICAvLyB0ZXN0cy9hcHByb3ZhbHMvdGVhbC1zY3JpcHQtY29udmVudGlvbnMuYWxnby50czoyOAogICAgLy8gcmV0dXJuIHRydWUKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAAECQgAAQgAAMRsiE0EAkUIAADYaAIAEdmplfoAELyvlF4AEAaOj/4AERvdlM4AE33MAu08FjgUATwA4ACgAFwAHQgAAQgAAADEZIhIxGCITEESIAJJC/+wxGYEEEjEYIhMQRIgAo0L/2zEZIxIxGCITEESIAItC/8sxGSNPAZCBIRoiEzEYIhIQRIgAQEL/tDEZJBIxGCITEESIABNC/6QxGYEFEjEYIhMQRIgAkSNDQgAANhoBSRWBCBJEF4gAURaABBUffHVPAVCwI0NCAAA2GgFJIlkjCyQISwEVEkRXAgCIADUjQ0IAADYaAUkiWSMLJAhLARUSRFcCAIgALSNDQgAAiAA8I0NCAACIADgjQ4oBAUIAAIv/iYoBAEIAAIAGZ2xvYmFsi/9niYoBAEIAADEAgAVsb2NhbIv/ZolCAACJQgAAiUIAAIk=","clear":"C0IAAIEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -195,11 +195,106 @@ export type GlobalKeysState = TealScriptConventionsAlgoTypes['state']['global'][
 export type LocalKeysState = TealScriptConventionsAlgoTypes['state']['local']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TealScriptConventionsAlgoCreateCallParams =
+  | Expand<CallParams<TealScriptConventionsAlgoArgs['obj']['createApplication(byte[])void'] | TealScriptConventionsAlgoArgs['tuple']['createApplication(byte[])void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC | OnApplicationComplete.DeleteApplicationOC} & CreateSchema>
+  | Expand<CallParams<TealScriptConventionsAlgoArgs['obj']['createApplication(byte[])void'] | TealScriptConventionsAlgoArgs['tuple']['createApplication(byte[])void']> & {method: 'createApplication(byte[])void'} & {onComplete?: OnApplicationComplete.NoOpOC | OnApplicationComplete.DeleteApplicationOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type TealScriptConventionsAlgoUpdateCallParams =
+  | Expand<CallParams<TealScriptConventionsAlgoArgs['obj']['updateApplication()void'] | TealScriptConventionsAlgoArgs['tuple']['updateApplication()void']> & {method: 'updateApplication'}>
+  | Expand<CallParams<TealScriptConventionsAlgoArgs['obj']['updateApplication()void'] | TealScriptConventionsAlgoArgs['tuple']['updateApplication()void']> & {method: 'updateApplication()void'}>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type TealScriptConventionsAlgoDeleteCallParams =
+  | Expand<AppClientBareCallParams> & {method?: never}
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TealScriptConventionsAlgoDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TealScriptConventionsAlgoCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: TealScriptConventionsAlgoUpdateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: TealScriptConventionsAlgoDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TealScriptConventionsAlgo smart contract
  */
 export abstract class TealScriptConventionsAlgoParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends TealScriptConventionsAlgoCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication(byte[])void':
+            return TealScriptConventionsAlgoParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the TealScriptConventionsAlgo smart contract using the createApplication(byte[])void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<TealScriptConventionsAlgoArgs['obj']['createApplication(byte[])void'] | TealScriptConventionsAlgoArgs['tuple']['createApplication(byte[])void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC | OnApplicationComplete.DeleteApplicationOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC | OnApplicationComplete.DeleteApplicationOC} {
+        return {
+          ...params,
+          method: 'createApplication(byte[])void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.value],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends TealScriptConventionsAlgoUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'updateApplication':
+          case 'updateApplication()void':
+            return TealScriptConventionsAlgoParamsFactory.update.updateApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the TealScriptConventionsAlgo smart contract using the updateApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateApplication(params: CallParams<TealScriptConventionsAlgoArgs['obj']['updateApplication()void'] | TealScriptConventionsAlgoArgs['tuple']['updateApplication()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'updateApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Gets available optIn ABI call param factories
    */
@@ -257,6 +352,179 @@ export abstract class TealScriptConventionsAlgoParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TealScriptConventionsAlgo smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TealScriptConventionsAlgoFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TealScriptConventionsAlgoFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TealScriptConventionsAlgoClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TealScriptConventionsAlgoClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TealScriptConventionsAlgo smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TealScriptConventionsAlgoDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? TealScriptConventionsAlgoParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (TealScriptConventionsAlgoCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? TealScriptConventionsAlgoParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (TealScriptConventionsAlgoUpdateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new TealScriptConventionsAlgoClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TealScriptConventionsAlgo smart contract using the createApplication(byte[])void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<TealScriptConventionsAlgoArgs['obj']['createApplication(byte[])void'] | TealScriptConventionsAlgoArgs['tuple']['createApplication(byte[])void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC | OnApplicationComplete.DeleteApplicationOC}) => {
+        return this.appFactory.params.create(TealScriptConventionsAlgoParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the TealScriptConventionsAlgo smart contract using the updateApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateApplication: (params: CallParams<TealScriptConventionsAlgoArgs['obj']['updateApplication()void'] | TealScriptConventionsAlgoArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(TealScriptConventionsAlgoParamsFactory.update.updateApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the TealScriptConventionsAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a deployDelete call
+       */
+      bare: (params?: Expand<AppClientBareCallParams>) => {
+        return this.appFactory.params.bare.deployDelete(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TealScriptConventionsAlgo smart contract using the createApplication(byte[])void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<TealScriptConventionsAlgoArgs['obj']['createApplication(byte[])void'] | TealScriptConventionsAlgoArgs['tuple']['createApplication(byte[])void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC | OnApplicationComplete.DeleteApplicationOC}) => {
+        return this.appFactory.createTransaction.create(TealScriptConventionsAlgoParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TealScriptConventionsAlgo smart contract using an ABI method call using the createApplication(byte[])void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<TealScriptConventionsAlgoArgs['obj']['createApplication(byte[])void'] | TealScriptConventionsAlgoArgs['tuple']['createApplication(byte[])void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC | OnApplicationComplete.DeleteApplicationOC}) => {
+        const result = await this.appFactory.send.create(TealScriptConventionsAlgoParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | TealScriptConventionsAlgoReturns['createApplication(byte[])void']) }, appClient: new TealScriptConventionsAlgoClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TealScriptConventionsAlgo smart contract
  */
@@ -345,6 +613,37 @@ export class TealScriptConventionsAlgoClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the TealScriptConventionsAlgo smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateApplication: (params: CallParams<TealScriptConventionsAlgoArgs['obj']['updateApplication()void'] | TealScriptConventionsAlgoArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(TealScriptConventionsAlgoParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TealScriptConventionsAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The delete result
+       */
+      bare: (params?: Expand<AppClientBareCallParams>) => {
+        return this.appClient.params.bare.delete(params)
+      },
+    },
+
+    /**
      * Gets available optIn methods
      */
     optIn: {
@@ -403,6 +702,37 @@ export class TealScriptConventionsAlgoClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the TealScriptConventionsAlgo smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateApplication: (params: CallParams<TealScriptConventionsAlgoArgs['obj']['updateApplication()void'] | TealScriptConventionsAlgoArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(TealScriptConventionsAlgoParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TealScriptConventionsAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The delete result
+       */
+      bare: (params?: Expand<AppClientBareCallParams>) => {
+        return this.appClient.createTransaction.bare.delete(params)
+      },
+    },
+
+    /**
      * Gets available optIn methods
      */
     optIn: {
@@ -460,6 +790,38 @@ export class TealScriptConventionsAlgoClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the TealScriptConventionsAlgo smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateApplication: async (params: CallParams<TealScriptConventionsAlgoArgs['obj']['updateApplication()void'] | TealScriptConventionsAlgoArgs['tuple']['updateApplication()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(TealScriptConventionsAlgoParamsFactory.update.updateApplication(params))
+        return {...result, return: result.return as unknown as (undefined | TealScriptConventionsAlgoReturns['updateApplication()void'])}
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TealScriptConventionsAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The delete result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & SendParams>) => {
+        return this.appClient.send.bare.delete(params)
+      },
+    },
+
     /**
      * Gets available optIn methods
      */
@@ -586,6 +948,23 @@ export class TealScriptConventionsAlgoClient {
         resultMappers.push(undefined)
         return this
       },
+      get update() {
+        return {
+          updateApplication: (params: CallParams<TealScriptConventionsAlgoArgs['obj']['updateApplication()void'] | TealScriptConventionsAlgoArgs['tuple']['updateApplication()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
+      get delete() {
+        return {
+          bare: (params?: AppClientBareCallParams ) => {
+            promiseChain = promiseChain.then(() => composer.addAppDelete(client.params.delete.bare(params)))
+            return this
+          },
+        }
+      },
       get optIn() {
         return {
           optInToApplication: (params: CallParams<TealScriptConventionsAlgoArgs['obj']['optInToApplication()void'] | TealScriptConventionsAlgoArgs['tuple']['optInToApplication()void']>) => {
@@ -647,6 +1026,33 @@ export type TealScriptConventionsAlgoComposer<TReturns extends [...any[]] = []> 
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   setLocal(params?: CallParams<TealScriptConventionsAlgoArgs['obj']['setLocal(string)void'] | TealScriptConventionsAlgoArgs['tuple']['setLocal(string)void']>): TealScriptConventionsAlgoComposer<[...TReturns, TealScriptConventionsAlgoReturns['setLocal(string)void'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the TealScriptConventionsAlgo smart contract using the updateApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateApplication(params?: CallParams<TealScriptConventionsAlgoArgs['obj']['updateApplication()void'] | TealScriptConventionsAlgoArgs['tuple']['updateApplication()void']>): TealScriptConventionsAlgoComposer<[...TReturns, TealScriptConventionsAlgoReturns['updateApplication()void'] | undefined]>
+  }
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the TealScriptConventionsAlgo smart contract using a bare call.
+     *
+     * @param args The arguments for the bare call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    bare(params?: AppClientBareCallParams ): TealScriptConventionsAlgoComposer<[...TReturns, undefined]>
+  }
 
   /**
    * Gets available optIn methods
