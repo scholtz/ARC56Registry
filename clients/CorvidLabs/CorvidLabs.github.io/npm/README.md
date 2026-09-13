@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { ContractName_hash } from "arc56-generated-corvidlabs-corvidlabs-github-io";
+import { Keeper_82f417ed } from "arc56-generated-corvidlabs-corvidlabs-github-io";
 
 const algorand = AlgorandClient.mainNet();
-const client = new ContractName_hash.ContractClient({
+const client = new Keeper_82f417ed.KeeperClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,7 +51,8 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `Keeper_82f417ed` | `KeeperClient` | [https://raw.githubusercontent.com/CorvidLabs/CorvidLabs.github.io/HEAD/arcui/Keeper.arc56.json](https://raw.githubusercontent.com/CorvidLabs/CorvidLabs.github.io/HEAD/arcui/Keeper.arc56.json) |
+| `Pulse_c3973405` | `PulseClient` | [https://raw.githubusercontent.com/CorvidLabs/CorvidLabs.github.io/HEAD/arcui/Pulse.arc56.json](https://raw.githubusercontent.com/CorvidLabs/CorvidLabs.github.io/HEAD/arcui/Pulse.arc56.json) |
 
 ## Versioning
 
