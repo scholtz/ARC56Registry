@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { ContractName_hash } from "arc56-generated-soumyachk101-credow";
+import { CreditFlowYieldVault_957fe179 } from "arc56-generated-soumyachk101-credow";
 
 const algorand = AlgorandClient.mainNet();
-const client = new ContractName_hash.ContractClient({
+const client = new CreditFlowYieldVault_957fe179.CreditFlowYieldVaultClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,7 +51,8 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `CreditFlowYieldVault_957fe179` | `CreditFlowYieldVaultClient` | [https://raw.githubusercontent.com/soumyachk101/Credow/HEAD/contracts/artifacts/CreditFlowYieldVault.arc56.json](https://raw.githubusercontent.com/soumyachk101/Credow/HEAD/contracts/artifacts/CreditFlowYieldVault.arc56.json) |
+| `CreditFlowYieldVault_6fbd5755` | `CreditFlowYieldVaultClient` | [https://raw.githubusercontent.com/soumyachk101/Credow/HEAD/contracts/src/out/CreditFlowYieldVault.arc56.json](https://raw.githubusercontent.com/soumyachk101/Credow/HEAD/contracts/src/out/CreditFlowYieldVault.arc56.json) |
 
 ## Versioning
 
