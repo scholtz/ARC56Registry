@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Owner.Repo.Contract_hash;
+using Arc56.Generated.CorvidLabs.CorvidLabs_github_io.Keeper_82f417ed;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new ContractProxy(algod, appId: 123456789);
+var client = new KeeperProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,7 +40,8 @@ var client = new ContractProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `Arc56.Generated.CorvidLabs.CorvidLabs_github_io.Keeper_82f417ed` | `KeeperProxy` | [https://raw.githubusercontent.com/CorvidLabs/CorvidLabs.github.io/HEAD/arcui/Keeper.arc56.json](https://raw.githubusercontent.com/CorvidLabs/CorvidLabs.github.io/HEAD/arcui/Keeper.arc56.json) |
+| `Arc56.Generated.CorvidLabs.CorvidLabs_github_io.Pulse_c3973405` | `PulseProxy` | [https://raw.githubusercontent.com/CorvidLabs/CorvidLabs.github.io/HEAD/arcui/Pulse.arc56.json](https://raw.githubusercontent.com/CorvidLabs/CorvidLabs.github.io/HEAD/arcui/Pulse.arc56.json) |
 
 ## Versioning
 
