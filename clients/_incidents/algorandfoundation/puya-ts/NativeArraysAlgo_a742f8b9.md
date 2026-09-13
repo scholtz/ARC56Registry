@@ -3,8 +3,8 @@
 - **Repo**: [algorandfoundation/puya-ts](https://github.com/algorandfoundation/puya-ts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/puya-ts/HEAD/tests/approvals/out/unoptimized/native-arrays/NativeArraysAlgo.arc56.json](https://raw.githubusercontent.com/algorandfoundation/puya-ts/HEAD/tests/approvals/out/unoptimized/native-arrays/NativeArraysAlgo.arc56.json)
 - **Namespace used**: `Arc56.Generated.algorandfoundation.puya_ts.NativeArraysAlgo_a742f8b9`
-- **Detected**: 2026-07-27T09:37:06.888704+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:0093cb1562e2d8125477e45e9b2045a81c983a91f38f1a2f9b738be110520613`
+- **Detected**: 2026-09-13T10:59:25.894778+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:373d3f7fe96a2c2c9e361a9c88d822321296511aadc0ad91910dd26077078f37`
 
 ## Reproduce
 
