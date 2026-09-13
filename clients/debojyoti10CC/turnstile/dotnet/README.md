@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Owner.Repo.Contract_hash;
+using Arc56.Generated.debojyoti10CC.turnstile.X402BatchSettlement_bba126b3;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new ContractProxy(algod, appId: 123456789);
+var client = new X402BatchSettlementProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,7 +40,8 @@ var client = new ContractProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `Arc56.Generated.debojyoti10CC.turnstile.X402BatchSettlement_bba126b3` | `X402BatchSettlementProxy` | [https://raw.githubusercontent.com/debojyoti10CC/turnstile/HEAD/contracts/smart_contracts/x402_batch_settlement/artifacts/X402BatchSettlement.arc56.json](https://raw.githubusercontent.com/debojyoti10CC/turnstile/HEAD/contracts/smart_contracts/x402_batch_settlement/artifacts/X402BatchSettlement.arc56.json) |
+| `Arc56.Generated.debojyoti10CC.turnstile.X402BatchSettlement_0807cba1` | `X402BatchSettlementProxy` | [https://raw.githubusercontent.com/debojyoti10CC/turnstile/HEAD/packages/escrow-client/src/generated/X402BatchSettlement.arc56.json](https://raw.githubusercontent.com/debojyoti10CC/turnstile/HEAD/packages/escrow-client/src/generated/X402BatchSettlement.arc56.json) |
 
 ## Versioning
 
