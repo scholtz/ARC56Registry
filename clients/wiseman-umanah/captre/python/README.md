@@ -51,6 +51,8 @@ every other contract includes a working `Factory`.
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
 | `CaptreApp_166648ce` | `CaptreAppClient` | [https://raw.githubusercontent.com/wiseman-umanah/captre/HEAD/src/captre/contract/artifacts/CaptreApp.arc56.json](https://raw.githubusercontent.com/wiseman-umanah/captre/HEAD/src/captre/contract/artifacts/CaptreApp.arc56.json) |
+| `LedgerApp_b2a29cff` | `LedgerAppClient` | [https://raw.githubusercontent.com/wiseman-umanah/captre/HEAD/src/captre/contract/artifacts/LedgerApp.arc56.json](https://raw.githubusercontent.com/wiseman-umanah/captre/HEAD/src/captre/contract/artifacts/LedgerApp.arc56.json) |
+| `TaskApp_5aeb949e` | `TaskAppClient` | [https://raw.githubusercontent.com/wiseman-umanah/captre/HEAD/src/captre/contract/artifacts/TaskApp.arc56.json](https://raw.githubusercontent.com/wiseman-umanah/captre/HEAD/src/captre/contract/artifacts/TaskApp.arc56.json) |
 
 ## Versioning
 
