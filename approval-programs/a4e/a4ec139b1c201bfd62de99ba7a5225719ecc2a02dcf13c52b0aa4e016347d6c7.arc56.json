@@ -1,0 +1,235 @@
+{
+    "name": "TaskApp",
+    "structs": {},
+    "methods": [
+        {
+            "name": "submit_task",
+            "args": [
+                {
+                    "type": "byte[]",
+                    "name": "task_hash_key",
+                    "desc": "32-byte SHA-256 digest of the task content string. Used as the ``tasks`` box key. Must not already exist \u2014 aborts with ``ERR_ALREADY_CLAIMED`` if so."
+                },
+                {
+                    "type": "byte[]",
+                    "name": "task_hash_str",
+                    "desc": "The original task content hash string (UTF-8 encoded). Stored verbatim inside ``metadata_json``; included here for parity with the ``CaptreApp`` ``attest()`` signature."
+                },
+                {
+                    "type": "byte[]",
+                    "name": "task_id",
+                    "desc": "Server-generated UUID for this task record (UTF-8 encoded)."
+                },
+                {
+                    "type": "string",
+                    "name": "author",
+                    "desc": "Algorand address of the payer. Stored inside ``metadata_json``; validated non-empty here."
+                },
+                {
+                    "type": "byte[]",
+                    "name": "metadata_json",
+                    "desc": "Full JSON-serialised ``TaskRecord``. Written verbatim to the ``tasks`` box."
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Write a new task record. Fails if ``task_hash_key`` is already claimed.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_task",
+            "args": [
+                {
+                    "type": "byte[]",
+                    "name": "task_hash_key",
+                    "desc": "The 32-byte SHA-256 digest key to look up."
+                }
+            ],
+            "returns": {
+                "type": "byte[]",
+                "desc": "The raw JSON metadata blob stored in the box, or ``b\"\"`` if no box exists for this key."
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Read a task record by ``task_hash_key``.",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "task_exists",
+            "args": [
+                {
+                    "type": "byte[]",
+                    "name": "task_hash_key",
+                    "desc": "The 32-byte SHA-256 digest key to check."
+                }
+            ],
+            "returns": {
+                "type": "bool",
+                "desc": "``True`` if a box exists for this key, ``False`` otherwise."
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "desc": "Check whether a ``task_hash_key`` has already been submitted.",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "\n    On-chain task submission registry.\n\n    Stores first-claim task records keyed by a SHA-256 digest of the task\n    content string. Supports update and deletion so stranded ALGO can always\n    be recovered.\n\n    Attributes\n    ----------\n    tasks : BoxMap[Bytes, Bytes]\n        Maps ``task_hash_key`` (32-byte SHA-256 digest of the task content\n        string) \u2192 serialised JSON metadata blob.\n        Box key prefix: ``b\"t:\"``. Box name is always 34 bytes.\n    ",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "tasks": {
+                    "keyType": "AVMBytes",
+                    "valueType": "AVMBytes",
+                    "prefix": "dDo="
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": [
+            "DeleteApplication",
+            "UpdateApplication"
+        ]
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        173
+                    ],
+                    "errorMessage": "ERR_ALREADY_CLAIMED"
+                },
+                {
+                    "pc": [
+                        189
+                    ],
+                    "errorMessage": "ERR_EMPTY_AUTHOR"
+                },
+                {
+                    "pc": [
+                        177
+                    ],
+                    "errorMessage": "ERR_EMPTY_HASH"
+                },
+                {
+                    "pc": [
+                        181
+                    ],
+                    "errorMessage": "ERR_EMPTY_HASH_STR"
+                },
+                {
+                    "pc": [
+                        185
+                    ],
+                    "errorMessage": "ERR_EMPTY_ID"
+                },
+                {
+                    "pc": [
+                        193
+                    ],
+                    "errorMessage": "ERR_EMPTY_METADATA"
+                },
+                {
+                    "pc": [
+                        228
+                    ],
+                    "errorMessage": "check self.tasks entry exists"
+                },
+                {
+                    "pc": [
+                        89,
+                        105,
+                        121,
+                        137,
+                        153,
+                        206,
+                        254
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        96,
+                        112,
+                        128,
+                        144,
+                        160,
+                        213,
+                        261
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDIgMQogICAgYnl0ZWNibG9jayAweDc0M2EgMHgxNTFmN2M3NQogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS90YXNrX2FwcC5weTozMwogICAgLy8gY2xhc3MgVGFza0FwcChBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYmFyZV9yb3V0aW5nQDEyCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHg2YWQyZmNhNyAweDUyYzQ2N2FjIDB4YjAxMzM0ZDEgLy8gbWV0aG9kICJzdWJtaXRfdGFzayhieXRlW10sYnl0ZVtdLGJ5dGVbXSxzdHJpbmcsYnl0ZVtdKXZvaWQiLCBtZXRob2QgImdldF90YXNrKGJ5dGVbXSlieXRlW10iLCBtZXRob2QgInRhc2tfZXhpc3RzKGJ5dGVbXSlib29sIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggc3VibWl0X3Rhc2sgZ2V0X3Rhc2sgdGFza19leGlzdHMKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxNzoKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvdGFza19hcHAucHk6MzMKICAgIC8vIGNsYXNzIFRhc2tBcHAoQVJDNENvbnRyYWN0KToKICAgIGVycgoKbWFpbl9iYXJlX3JvdXRpbmdAMTI6CiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL3Rhc2tfYXBwLnB5OjMzCiAgICAvLyBjbGFzcyBUYXNrQXBwKEFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBzd2l0Y2ggbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxMyBtYWluX2FmdGVyX2lmX2Vsc2VAMTcgbWFpbl9hZnRlcl9pZl9lbHNlQDE3IG1haW5fYWZ0ZXJfaWZfZWxzZUAxNyBtYWluX3VwZGF0ZUAxNCBtYWluX2RlbGV0ZUAxNQogICAgZXJyCgptYWluX2RlbGV0ZUAxNToKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvdGFza19hcHAucHk6NTYKICAgIC8vIEBhcmM0LmJhcmVtZXRob2QoYWxsb3dfYWN0aW9ucz1bIkRlbGV0ZUFwcGxpY2F0aW9uIl0pCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgcmV0dXJuCgptYWluX3VwZGF0ZUAxNDoKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvdGFza19hcHAucHk6NTIKICAgIC8vIEBhcmM0LmJhcmVtZXRob2QoYWxsb3dfYWN0aW9ucz1bIlVwZGF0ZUFwcGxpY2F0aW9uIl0pCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgcmV0dXJuCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDEzOgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIHJldHVybgoKCi8vIHRhc2tfYXBwLlRhc2tBcHAuc3VibWl0X3Rhc2tbcm91dGluZ10oKSAtPiB2b2lkOgpzdWJtaXRfdGFzazoKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvdGFza19hcHAucHk6NjAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNAogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDUKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL3Rhc2tfYXBwLnB5OjEwNgogICAgLy8gYXNzZXJ0IHRhc2tfaGFzaF9rZXkgbm90IGluIHNlbGYudGFza3MsICJFUlJfQUxSRUFEWV9DTEFJTUVEIgogICAgYnl0ZWNfMCAvLyAweDc0M2EKICAgIGRpZyA1CiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAhCiAgICBhc3NlcnQgLy8gRVJSX0FMUkVBRFlfQ0xBSU1FRAogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS90YXNrX2FwcC5weToxMDcKICAgIC8vIGFzc2VydCB0YXNrX2hhc2hfa2V5Lmxlbmd0aCA+IFVJbnQ2NCgwKSwgIkVSUl9FTVBUWV9IQVNIIgogICAgdW5jb3ZlciA1CiAgICBsZW4KICAgIGFzc2VydCAvLyBFUlJfRU1QVFlfSEFTSAogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS90YXNrX2FwcC5weToxMDgKICAgIC8vIGFzc2VydCB0YXNrX2hhc2hfc3RyLmxlbmd0aCA+IFVJbnQ2NCgwKSwgIkVSUl9FTVBUWV9IQVNIX1NUUiIKICAgIHVuY292ZXIgNAogICAgbGVuCiAgICBhc3NlcnQgLy8gRVJSX0VNUFRZX0hBU0hfU1RSCiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL3Rhc2tfYXBwLnB5OjEwOQogICAgLy8gYXNzZXJ0IHRhc2tfaWQubGVuZ3RoID4gVUludDY0KDApLCAiRVJSX0VNUFRZX0lEIgogICAgdW5jb3ZlciAzCiAgICBsZW4KICAgIGFzc2VydCAvLyBFUlJfRU1QVFlfSUQKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvdGFza19hcHAucHk6MTEwCiAgICAvLyBhc3NlcnQgYXV0aG9yLmJ5dGVzLmxlbmd0aCA+IFVJbnQ2NCgwKSwgIkVSUl9FTVBUWV9BVVRIT1IiCiAgICB1bmNvdmVyIDIKICAgIGxlbgogICAgYXNzZXJ0IC8vIEVSUl9FTVBUWV9BVVRIT1IKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvdGFza19hcHAucHk6MTExCiAgICAvLyBhc3NlcnQgbWV0YWRhdGFfanNvbi5sZW5ndGggPiBVSW50NjQoMCksICJFUlJfRU1QVFlfTUVUQURBVEEiCiAgICBkaWcgMQogICAgbGVuCiAgICBhc3NlcnQgLy8gRVJSX0VNUFRZX01FVEFEQVRBCiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL3Rhc2tfYXBwLnB5OjExMgogICAgLy8gc2VsZi50YXNrc1t0YXNrX2hhc2hfa2V5XSA9IG1ldGFkYXRhX2pzb24KICAgIGR1cAogICAgYm94X2RlbAogICAgcG9wCiAgICBzd2FwCiAgICBib3hfcHV0CiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL3Rhc2tfYXBwLnB5OjYwCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGludGNfMiAvLyAxCiAgICByZXR1cm4KCgovLyB0YXNrX2FwcC5UYXNrQXBwLmdldF90YXNrW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X3Rhc2s6CiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL3Rhc2tfYXBwLnB5OjExNAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzEgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS90YXNrX2FwcC5weToxMzAKICAgIC8vIGlmIHRhc2tfaGFzaF9rZXkgaW4gc2VsZi50YXNrczoKICAgIGJ5dGVjXzAgLy8gMHg3NDNhCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBieiBnZXRfdGFza19hZnRlcl9pZl9lbHNlQDMKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvdGFza19hcHAucHk6MTMxCiAgICAvLyByZXR1cm4gc2VsZi50YXNrc1t0YXNrX2hhc2hfa2V5XQogICAgYm94X2dldAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudGFza3MgZW50cnkgZXhpc3RzCgpnZXRfdGFza19hZnRlcl9pbmxpbmVkX3Rhc2tfYXBwLlRhc2tBcHAuZ2V0X3Rhc2tANDoKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvdGFza19hcHAucHk6MTE0CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgpnZXRfdGFza19hZnRlcl9pZl9lbHNlQDM6CiAgICBwb3AKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvdGFza19hcHAucHk6MTMyCiAgICAvLyByZXR1cm4gQnl0ZXMoYiIiKQogICAgcHVzaGJ5dGVzIDB4CiAgICAvLyAvdG1wL2NhcHRyZV9jb21waWxlL3Rhc2tfYXBwLnB5OjExNAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBiIGdldF90YXNrX2FmdGVyX2lubGluZWRfdGFza19hcHAuVGFza0FwcC5nZXRfdGFza0A0CgoKLy8gdGFza19hcHAuVGFza0FwcC50YXNrX2V4aXN0c1tyb3V0aW5nXSgpIC0+IHZvaWQ6CnRhc2tfZXhpc3RzOgogICAgLy8gL3RtcC9jYXB0cmVfY29tcGlsZS90YXNrX2FwcC5weToxMzQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvdGFza19hcHAucHk6MTQ5CiAgICAvLyByZXR1cm4gdGFza19oYXNoX2tleSBpbiBzZWxmLnRhc2tzCiAgICBieXRlY18wIC8vIDB4NzQzYQogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIC8vIC90bXAvY2FwdHJlX2NvbXBpbGUvdGFza19hcHAucHk6MTM0CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHB1c2hieXRlcyAweDAwCiAgICBpbnRjXzAgLy8gMAogICAgdW5jb3ZlciAyCiAgICBzZXRiaXQKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMiAvLyAxCiAgICByZXR1cm4K",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CyADAAIBJgICdDoEFR98dTEbQQAkMRkURDEYRIIDBGrS/KcEUsRnrASwEzTRNhoAjgMAHACRAMEAMRmNBgAH/+//7//vAAQAAQAxGEMxGEMxGBRDNhoBSSJZIwhLARUSRFcCADYaAkkiWSMISwEVEkRXAgA2GgNJIlkjCEsBFRJEVwIANhoESSJZIwhLARUSRFcCADYaBUkiWSMISwEVEkRXAgAoSwVQSb1FARRETwUVRE8EFURPAxVETwIVREsBFURJvEhMvyRDNhoBSSJZIwhLARUSRFcCAChMUEm9RQFBABC+REkVFlcGAkxQKUxQsCRDSIAAQv/sNhoBSSJZIwhLARUSRFcCAChMUL1FAYABACJPAlQpTFCwJEM=",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 10,
+            "patch": 1
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}
