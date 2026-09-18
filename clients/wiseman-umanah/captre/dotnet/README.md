@@ -41,6 +41,8 @@ var client = new CaptreAppProxy(algod, appId: 123456789);
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
 | `Arc56.Generated.wiseman_umanah.captre.CaptreApp_166648ce` | `CaptreAppProxy` | [https://raw.githubusercontent.com/wiseman-umanah/captre/HEAD/src/captre/contract/artifacts/CaptreApp.arc56.json](https://raw.githubusercontent.com/wiseman-umanah/captre/HEAD/src/captre/contract/artifacts/CaptreApp.arc56.json) |
+| `Arc56.Generated.wiseman_umanah.captre.LedgerApp_b2a29cff` | `LedgerAppProxy` | [https://raw.githubusercontent.com/wiseman-umanah/captre/HEAD/src/captre/contract/artifacts/LedgerApp.arc56.json](https://raw.githubusercontent.com/wiseman-umanah/captre/HEAD/src/captre/contract/artifacts/LedgerApp.arc56.json) |
+| `Arc56.Generated.wiseman_umanah.captre.TaskApp_5aeb949e` | `TaskAppProxy` | [https://raw.githubusercontent.com/wiseman-umanah/captre/HEAD/src/captre/contract/artifacts/TaskApp.arc56.json](https://raw.githubusercontent.com/wiseman-umanah/captre/HEAD/src/captre/contract/artifacts/TaskApp.arc56.json) |
 
 ## Versioning
 
