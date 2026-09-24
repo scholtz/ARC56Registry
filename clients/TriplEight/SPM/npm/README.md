@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { SplitRouter_838f0717 } from "arc56-generated-tripleight-spm";
+import { PaymentRouter_13dfb311 } from "arc56-generated-tripleight-spm";
 
 const algorand = AlgorandClient.mainNet();
-const client = new SplitRouter_838f0717.SplitRouterClient({
+const client = new PaymentRouter_13dfb311.PaymentRouterClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,6 +51,7 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
+| `PaymentRouter_13dfb311` | `PaymentRouterClient` | [https://raw.githubusercontent.com/TriplEight/SPM/HEAD/contracts/smart_contracts/artifacts/payment_router/PaymentRouter.arc56.json](https://raw.githubusercontent.com/TriplEight/SPM/HEAD/contracts/smart_contracts/artifacts/payment_router/PaymentRouter.arc56.json) |
 | `SplitRouter_838f0717` | `SplitRouterClient` | [https://raw.githubusercontent.com/TriplEight/SPM/HEAD/contracts/smart_contracts/artifacts/split_router/SplitRouter.arc56.json](https://raw.githubusercontent.com/TriplEight/SPM/HEAD/contracts/smart_contracts/artifacts/split_router/SplitRouter.arc56.json) |
 
 ## Versioning
