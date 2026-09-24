@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { ContractName_hash } from "arc56-generated-compx-labs-canix402";
+import { haystack_staking_5296d0a8 } from "arc56-generated-compx-labs-canix402";
 
 const algorand = AlgorandClient.mainNet();
-const client = new ContractName_hash.ContractClient({
+const client = new haystack_staking_5296d0a8.HaystackStakingClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,7 +51,8 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `haystack_staking_5296d0a8` | `HaystackStakingClient` | [https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/haystack-staking.arc56.json](https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/haystack-staking.arc56.json) |
+| `staking_7c5d07d0` | `StakingClient` | [https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/staking.arc56.json](https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/staking.arc56.json) |
 
 ## Versioning
 
