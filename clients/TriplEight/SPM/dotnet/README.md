@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.TriplEight.SPM.SplitRouter_838f0717;
+using Arc56.Generated.TriplEight.SPM.PaymentRouter_13dfb311;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new SplitRouterProxy(algod, appId: 123456789);
+var client = new PaymentRouterProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,6 +40,7 @@ var client = new SplitRouterProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
+| `Arc56.Generated.TriplEight.SPM.PaymentRouter_13dfb311` | `PaymentRouterProxy` | [https://raw.githubusercontent.com/TriplEight/SPM/HEAD/contracts/smart_contracts/artifacts/payment_router/PaymentRouter.arc56.json](https://raw.githubusercontent.com/TriplEight/SPM/HEAD/contracts/smart_contracts/artifacts/payment_router/PaymentRouter.arc56.json) |
 | `Arc56.Generated.TriplEight.SPM.SplitRouter_838f0717` | `SplitRouterProxy` | [https://raw.githubusercontent.com/TriplEight/SPM/HEAD/contracts/smart_contracts/artifacts/split_router/SplitRouter.arc56.json](https://raw.githubusercontent.com/TriplEight/SPM/HEAD/contracts/smart_contracts/artifacts/split_router/SplitRouter.arc56.json) |
 
 ## Versioning
