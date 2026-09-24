@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_compx_ec407638 import contract_name_hash
+from arc56_generated_compx_ec407638 import haystack_staking_5296d0a8
 
 algorand = AlgorandClient.mainnet()
-client = contract_name_hash.ContractClient(
+client = haystack_staking_5296d0a8.HaystackStakingClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,7 +50,8 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `haystack_staking_5296d0a8` | `HaystackStakingClient` | [https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/haystack-staking.arc56.json](https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/haystack-staking.arc56.json) |
+| `staking_7c5d07d0` | `StakingClient` | [https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/staking.arc56.json](https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/staking.arc56.json) |
 
 ## Versioning
 
