@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_tripleight_spm import SplitRouter_838f0717
+from arc56_generated_tripleight_spm import PaymentRouter_13dfb311
 
 algorand = AlgorandClient.mainnet()
-client = SplitRouter_838f0717.SplitRouterClient(
+client = PaymentRouter_13dfb311.PaymentRouterClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,6 +50,7 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
+| `PaymentRouter_13dfb311` | `PaymentRouterClient` | [https://raw.githubusercontent.com/TriplEight/SPM/HEAD/contracts/smart_contracts/artifacts/payment_router/PaymentRouter.arc56.json](https://raw.githubusercontent.com/TriplEight/SPM/HEAD/contracts/smart_contracts/artifacts/payment_router/PaymentRouter.arc56.json) |
 | `SplitRouter_838f0717` | `SplitRouterClient` | [https://raw.githubusercontent.com/TriplEight/SPM/HEAD/contracts/smart_contracts/artifacts/split_router/SplitRouter.arc56.json](https://raw.githubusercontent.com/TriplEight/SPM/HEAD/contracts/smart_contracts/artifacts/split_router/SplitRouter.arc56.json) |
 
 ## Versioning
