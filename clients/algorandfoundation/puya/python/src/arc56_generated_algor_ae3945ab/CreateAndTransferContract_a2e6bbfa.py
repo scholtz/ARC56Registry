@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "create_and_transfer", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "CreateAndTransferContract", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [86], "errorMessage": "asset exists"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "create_and_transfer", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "CreateAndTransferContract", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyACAOgHMRtBABiABEjp7Xw2GgCOAQABADEZFDEYEERCAAgxGRQxGBQQQ7EyCkmyLLIpIrIjgANUU1SyJYAEdGVzdLImI7IigQOyECKyAbO0PLFJcQtETLIRI7ISMgqyFLITgQSyECKyAbOBAUM=", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEwMDAKICAgIC8vIGlubmVyX3RyYW5zYWN0aW9ucy9hc3NldF90cmFuc2Zlci5weToxMAogICAgLy8gY2xhc3MgQ3JlYXRlQW5kVHJhbnNmZXJDb250cmFjdChBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVANQogICAgcHVzaGJ5dGVzIDB4NDhlOWVkN2MgLy8gbWV0aG9kICJjcmVhdGVfYW5kX3RyYW5zZmVyKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVfYW5kX3RyYW5zZmVyX3JvdXRlQDMKICAgIGVycgoKbWFpbl9jcmVhdGVfYW5kX3RyYW5zZmVyX3JvdXRlQDM6CiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvYXNzZXRfdHJhbnNmZXIucHk6MTEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgYiBjcmVhdGVfYW5kX3RyYW5zZmVyCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDU6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgoKCi8vIHRlc3RfY2FzZXMuaW5uZXJfdHJhbnNhY3Rpb25zLmFzc2V0X3RyYW5zZmVyLkNyZWF0ZUFuZFRyYW5zZmVyQ29udHJhY3QuY3JlYXRlX2FuZF90cmFuc2Zlcltyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZV9hbmRfdHJhbnNmZXI6CiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvYXNzZXRfdHJhbnNmZXIucHk6MTUtMjMKICAgIC8vIGl0eG4uQXNzZXRDb25maWcoCiAgICAvLyAgICAgdG90YWw9MTAwMCwKICAgIC8vICAgICBhc3NldF9uYW1lPSJ0ZXN0IiwKICAgIC8vICAgICB1bml0X25hbWU9IlRTVCIsCiAgICAvLyAgICAgZGVjaW1hbHM9MCwKICAgIC8vICAgICBtYW5hZ2VyPW9wLkdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyAgICAgY2xhd2JhY2s9b3AuR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIC8vICkKICAgIC8vIC5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgLy8gaW5uZXJfdHJhbnNhY3Rpb25zL2Fzc2V0X3RyYW5zZmVyLnB5OjIwCiAgICAvLyBtYW5hZ2VyPW9wLkdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgLy8gaW5uZXJfdHJhbnNhY3Rpb25zL2Fzc2V0X3RyYW5zZmVyLnB5OjIxCiAgICAvLyBjbGF3YmFjaz1vcC5HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgZHVwCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0Q2xhd2JhY2sKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXRNYW5hZ2VyCiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvYXNzZXRfdHJhbnNmZXIucHk6MTkKICAgIC8vIGRlY2ltYWxzPTAsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBDb25maWdBc3NldERlY2ltYWxzCiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvYXNzZXRfdHJhbnNmZXIucHk6MTgKICAgIC8vIHVuaXRfbmFtZT0iVFNUIiwKICAgIHB1c2hieXRlcyAiVFNUIgogICAgaXR4bl9maWVsZCBDb25maWdBc3NldFVuaXROYW1lCiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvYXNzZXRfdHJhbnNmZXIucHk6MTcKICAgIC8vIGFzc2V0X25hbWU9InRlc3QiLAogICAgcHVzaGJ5dGVzICJ0ZXN0IgogICAgaXR4bl9maWVsZCBDb25maWdBc3NldE5hbWUKICAgIC8vIGlubmVyX3RyYW5zYWN0aW9ucy9hc3NldF90cmFuc2Zlci5weToxNgogICAgLy8gdG90YWw9MTAwMCwKICAgIGludGNfMSAvLyAxMDAwCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0VG90YWwKICAgIC8vIGlubmVyX3RyYW5zYWN0aW9ucy9hc3NldF90cmFuc2Zlci5weToxNQogICAgLy8gaXR4bi5Bc3NldENvbmZpZygKICAgIHB1c2hpbnQgMyAvLyBhY2ZnCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIGlubmVyX3RyYW5zYWN0aW9ucy9hc3NldF90cmFuc2Zlci5weToxNS0yMwogICAgLy8gaXR4bi5Bc3NldENvbmZpZygKICAgIC8vICAgICB0b3RhbD0xMDAwLAogICAgLy8gICAgIGFzc2V0X25hbWU9InRlc3QiLAogICAgLy8gICAgIHVuaXRfbmFtZT0iVFNUIiwKICAgIC8vICAgICBkZWNpbWFscz0wLAogICAgLy8gICAgIG1hbmFnZXI9b3AuR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIC8vICAgICBjbGF3YmFjaz1vcC5HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgLy8gKQogICAgLy8gLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gaW5uZXJfdHJhbnNhY3Rpb25zL2Fzc2V0X3RyYW5zZmVyLnB5OjE1LTI0CiAgICAvLyBpdHhuLkFzc2V0Q29uZmlnKAogICAgLy8gICAgIHRvdGFsPTEwMDAsCiAgICAvLyAgICAgYXNzZXRfbmFtZT0idGVzdCIsCiAgICAvLyAgICAgdW5pdF9uYW1lPSJUU1QiLAogICAgLy8gICAgIGRlY2ltYWxzPTAsCiAgICAvLyAgICAgbWFuYWdlcj1vcC5HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgLy8gICAgIGNsYXdiYWNrPW9wLkdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyApCiAgICAvLyAuc3VibWl0KCkKICAgIC8vIC5jcmVhdGVkX2Fzc2V0CiAgICBpdHhuIENyZWF0ZWRBc3NldElECiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvYXNzZXRfdHJhbnNmZXIucHk6MjctMzMKICAgIC8vICMgdHJhbnNmZXIKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICBhc3NldF9zZW5kZXI9bmV3X2Fzc2V0LmNyZWF0b3IsCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXI9R2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIC8vICAgICBhc3NldF9hbW91bnQ9MTAwMCwKICAgIC8vICAgICB4ZmVyX2Fzc2V0PW5ld19hc3NldCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIGlubmVyX3RyYW5zYWN0aW9ucy9hc3NldF90cmFuc2Zlci5weToyOQogICAgLy8gYXNzZXRfc2VuZGVyPW5ld19hc3NldC5jcmVhdG9yLAogICAgZHVwCiAgICBhc3NldF9wYXJhbXNfZ2V0IEFzc2V0Q3JlYXRvcgogICAgYXNzZXJ0IC8vIGFzc2V0IGV4aXN0cwogICAgc3dhcAogICAgaXR4bl9maWVsZCBYZmVyQXNzZXQKICAgIC8vIGlubmVyX3RyYW5zYWN0aW9ucy9hc3NldF90cmFuc2Zlci5weTozMQogICAgLy8gYXNzZXRfYW1vdW50PTEwMDAsCiAgICBpbnRjXzEgLy8gMTAwMAogICAgaXR4bl9maWVsZCBBc3NldEFtb3VudAogICAgLy8gaW5uZXJfdHJhbnNhY3Rpb25zL2Fzc2V0X3RyYW5zZmVyLnB5OjMwCiAgICAvLyBhc3NldF9yZWNlaXZlcj1HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIGl0eG5fZmllbGQgQXNzZXRSZWNlaXZlcgogICAgaXR4bl9maWVsZCBBc3NldFNlbmRlcgogICAgLy8gaW5uZXJfdHJhbnNhY3Rpb25zL2Fzc2V0X3RyYW5zZmVyLnB5OjI3LTI4CiAgICAvLyAjIHRyYW5zZmVyCiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICBwdXNoaW50IDQgLy8gYXhmZXIKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gaW5uZXJfdHJhbnNhY3Rpb25zL2Fzc2V0X3RyYW5zZmVyLnB5OjI3LTMzCiAgICAvLyAjIHRyYW5zZmVyCiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICAvLyAgICAgYXNzZXRfc2VuZGVyPW5ld19hc3NldC5jcmVhdG9yLAogICAgLy8gICAgIGFzc2V0X3JlY2VpdmVyPUdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyAgICAgYXNzZXRfYW1vdW50PTEwMDAsCiAgICAvLyAgICAgeGZlcl9hc3NldD1uZXdfYXNzZXQsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gaW5uZXJfdHJhbnNhY3Rpb25zL2Fzc2V0X3RyYW5zZmVyLnB5OjExCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgcHVzaGludCAxCiAgICByZXR1cm4K", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [86], "errorMessage": "asset exists"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -328,6 +328,270 @@ class CreateAndTransferContractClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class CreateAndTransferContractBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating CreateAndTransferContract contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class CreateAndTransferContractFactory(algokit_utils.TypedAppFactoryProtocol[CreateAndTransferContractBareCallCreateParams, None, None]):
+    """Factory for deploying and managing CreateAndTransferContractClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = CreateAndTransferContractFactoryParams(self.app_factory)
+        self.create_transaction = CreateAndTransferContractFactoryCreateTransaction(self.app_factory)
+        self.send = CreateAndTransferContractFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: CreateAndTransferContractBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[CreateAndTransferContractClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return CreateAndTransferContractClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> CreateAndTransferContractClient:
+        """Get an app client by creator address and name"""
+        return CreateAndTransferContractClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> CreateAndTransferContractClient:
+        """Get an app client by app ID"""
+        return CreateAndTransferContractClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class CreateAndTransferContractFactoryParams:
+    """Parameters for creating transactions for CreateAndTransferContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = CreateAndTransferContractFactoryCreateParams(app_factory)
+        self.update = CreateAndTransferContractFactoryUpdateParams(app_factory)
+        self.delete = CreateAndTransferContractFactoryDeleteParams(app_factory)
+
+class CreateAndTransferContractFactoryCreateParams:
+    """Parameters for 'create' operations of CreateAndTransferContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def create_and_transfer(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the create_and_transfer()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "create_and_transfer()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class CreateAndTransferContractFactoryUpdateParams:
+    """Parameters for 'update' operations of CreateAndTransferContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class CreateAndTransferContractFactoryDeleteParams:
+    """Parameters for 'delete' operations of CreateAndTransferContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class CreateAndTransferContractFactoryCreateTransaction:
+    """Create transactions for CreateAndTransferContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = CreateAndTransferContractFactoryCreateTransactionCreate(app_factory)
+
+
+class CreateAndTransferContractFactoryCreateTransactionCreate:
+    """Create new instances of CreateAndTransferContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class CreateAndTransferContractFactorySend:
+    """Send calls to CreateAndTransferContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = CreateAndTransferContractFactorySendCreate(app_factory)
+
+
+class CreateAndTransferContractFactorySendCreate:
+    """Send create calls to CreateAndTransferContract contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[CreateAndTransferContractClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return CreateAndTransferContractClient(result[0]), result[1]
 
 
 class CreateAndTransferContractComposer:

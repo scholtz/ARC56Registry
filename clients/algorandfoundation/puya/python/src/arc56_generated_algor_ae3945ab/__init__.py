@@ -77,6 +77,7 @@ from . import DynamicOffsetLast_08a660ec as DynamicOffsetLast_08a660ec
 from . import DynamicOffsetMiddle_129d76ff as DynamicOffsetMiddle_129d76ff
 from . import NestedArrayUInt64_c3d00223 as NestedArrayUInt64_c3d00223
 from . import NestedItemArrayUInt64_d4355dec as NestedItemArrayUInt64_d4355dec
+from . import StructArrayBoolContract_ff7a806d as StructArrayBoolContract_ff7a806d
 from . import StructArrayUInt64_ba9b7e56 as StructArrayUInt64_ba9b7e56
 from . import StructMultipleArrayUInt64_11f52da0 as StructMultipleArrayUInt64_11f52da0
 from . import LoggedErrorsContract_269c7db1 as LoggedErrorsContract_269c7db1
@@ -94,6 +95,7 @@ from . import TestAbiCall_2cc157f6 as TestAbiCall_2cc157f6
 from . import TestItxnAbiCall_3c6665a6 as TestItxnAbiCall_3c6665a6
 from . import NamedTuplesContract_460b42bb as NamedTuplesContract_460b42bb
 from . import BoolOnly_bf157fa6 as BoolOnly_bf157fa6
+from . import BoxBoolArrayAppendRead_bedf85d7 as BoxBoolArrayAppendRead_bedf85d7
 from . import BoxReadBoxLenExistenceCheck_e742147d as BoxReadBoxLenExistenceCheck_e742147d
 from . import BoxReadCache_02012c7b as BoxReadCache_02012c7b
 from . import BranchElimination_481297ca as BranchElimination_481297ca
