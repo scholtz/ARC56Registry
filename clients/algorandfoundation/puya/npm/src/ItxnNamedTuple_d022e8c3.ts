@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ItxnNamedTuple","structs":{},"methods":[{"name":"named_tuple_itxn","args":[{"type":"uint64","name":"amt"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"named_tuple_itxn2","args":[{"type":"uint64","name":"amt"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"named_tuple_itxn3","args":[{"type":"uint64","name":"amt"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[62,91,120],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ItxnNamedTuple","structs":{},"methods":[{"name":"named_tuple_itxn","args":[{"type":"uint64","name":"amt"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"named_tuple_itxn2","args":[{"type":"uint64","name":"amt"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"named_tuple_itxn3","args":[{"type":"uint64","name":"amt"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[62,91,120],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDggMAogICAgLy8gaW5uZXJfdHJhbnNhY3Rpb25zL2l0eG5fdHVwbGUucHk6MTEKICAgIC8vIGNsYXNzIEl0eG5OYW1lZFR1cGxlKGFyYzQuQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDEwCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHhkZjQ3OGM2ZSAweDIwNjk0ZjdiIDB4ZDZjYTA1NzggLy8gbWV0aG9kICJuYW1lZF90dXBsZV9pdHhuKHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJuYW1lZF90dXBsZV9pdHhuMih1aW50NjQpdm9pZCIsIG1ldGhvZCAibmFtZWRfdHVwbGVfaXR4bjModWludDY0KXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBuYW1lZF90dXBsZV9pdHhuIG5hbWVkX3R1cGxlX2l0eG4yIG5hbWVkX3R1cGxlX2l0eG4zCiAgICBlcnIKCm1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAMTA6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgoKCi8vIHRlc3RfY2FzZXMuaW5uZXJfdHJhbnNhY3Rpb25zLml0eG5fdHVwbGUuSXR4bk5hbWVkVHVwbGUubmFtZWRfdHVwbGVfaXR4bltyb3V0aW5nXSgpIC0+IHZvaWQ6Cm5hbWVkX3R1cGxlX2l0eG46CiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvaXR4bl90dXBsZS5weToxMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIGlubmVyX3RyYW5zYWN0aW9ucy9pdHhuX3R1cGxlLnB5OjE0CiAgICAvLyBobW0gPSBIbW1tKGZvbz1hbXQsIGJhcj1pdHhuLlBheW1lbnQocmVjZWl2ZXI9VHhuLnNlbmRlciwgYW1vdW50PWFtdCkuc3VibWl0KCkpCiAgICBpdHhuX2JlZ2luCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgdHhuIFNlbmRlcgogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgaW50Y18wIC8vIHBheQogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18yIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBBbW91bnQKICAgIC8vIGlubmVyX3RyYW5zYWN0aW9ucy9pdHhuX3R1cGxlLnB5OjE1CiAgICAvLyBhc3NlcnQgaG1tLmJhci5hbW91bnQgPT0gMAogICAgIQogICAgYXNzZXJ0CiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvaXR4bl90dXBsZS5weToxMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0X2Nhc2VzLmlubmVyX3RyYW5zYWN0aW9ucy5pdHhuX3R1cGxlLkl0eG5OYW1lZFR1cGxlLm5hbWVkX3R1cGxlX2l0eG4yW3JvdXRpbmddKCkgLT4gdm9pZDoKbmFtZWRfdHVwbGVfaXR4bjI6CiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvaXR4bl90dXBsZS5weToxNwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIGlubmVyX3RyYW5zYWN0aW9ucy9pdHhuX3R1cGxlLnB5OjE5CiAgICAvLyB0eG4gPSBIbW1tKGZvbz1hbXQsIGJhcj1pdHhuLlBheW1lbnQocmVjZWl2ZXI9VHhuLnNlbmRlciwgYW1vdW50PWFtdCkuc3VibWl0KCkpLmJhcgogICAgaXR4bl9iZWdpbgogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIHR4biBTZW5kZXIKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIGludGNfMCAvLyBwYXkKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMiAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGl0eG4gQW1vdW50CiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvaXR4bl90dXBsZS5weToyMAogICAgLy8gYXNzZXJ0IHR4bi5hbW91bnQgPT0gMAogICAgIQogICAgYXNzZXJ0CiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvaXR4bl90dXBsZS5weToxNwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0X2Nhc2VzLmlubmVyX3RyYW5zYWN0aW9ucy5pdHhuX3R1cGxlLkl0eG5OYW1lZFR1cGxlLm5hbWVkX3R1cGxlX2l0eG4zW3JvdXRpbmddKCkgLT4gdm9pZDoKbmFtZWRfdHVwbGVfaXR4bjM6CiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvaXR4bl90dXBsZS5weToyMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIGlubmVyX3RyYW5zYWN0aW9ucy9pdHhuX3R1cGxlLnB5OjI0CiAgICAvLyBobW1tID0gSG1tbShmb289YW10LCBiYXI9aXR4bi5QYXltZW50KHJlY2VpdmVyPVR4bi5zZW5kZXIsIGFtb3VudD1hbXQpLnN1Ym1pdCgpKQogICAgaXR4bl9iZWdpbgogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIHR4biBTZW5kZXIKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIGludGNfMCAvLyBwYXkKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMiAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGl0eG4gQW1vdW50CiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvaXR4bl90dXBsZS5weToyNgogICAgLy8gYXNzZXJ0IHR4bi5hbW91bnQgPT0gMAogICAgIQogICAgYXNzZXJ0CiAgICAvLyBpbm5lcl90cmFuc2FjdGlvbnMvaXR4bl90dXBsZS5weToyMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAQgAMRtBACQxGRREMRhEggME30eMbgQgaU97BNbKBXg2GgCOAwAJACYAQwAxGRQxGBQQQzYaAUkVIxJEF7GyCDEAsgcishAksgGztAgURCJDNhoBSRUjEkQXsbIIMQCyByKyECSyAbO0CBREIkM2GgFJFSMSRBexsggxALIHIrIQJLIBs7QIFEQiQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -148,6 +148,21 @@ export type MethodArgs<TSignature extends ItxnNamedTupleSignatures> = ItxnNamedT
 export type MethodReturn<TSignature extends ItxnNamedTupleSignatures> = ItxnNamedTupleTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ItxnNamedTupleCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ItxnNamedTupleDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ItxnNamedTupleCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ItxnNamedTuple smart contract
@@ -194,6 +209,147 @@ export abstract class ItxnNamedTupleParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ItxnNamedTuple smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ItxnNamedTupleFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ItxnNamedTupleFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ItxnNamedTupleClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ItxnNamedTupleClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ItxnNamedTuple smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ItxnNamedTupleDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new ItxnNamedTupleClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ItxnNamedTuple smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ItxnNamedTuple smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ItxnNamedTuple smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new ItxnNamedTupleClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ItxnNamedTuple smart contract
  */
