@@ -368,6 +368,15 @@ def build_owner_registry(
     for rel_path, digest in digests.items():
         if digest not in committed_hashes:
             continue
+        # committed_hashes only vouches for this hash's *winning* rel_path
+        # (checked in build_registry) - a different, uncommitted rel_path
+        # can share the same digest (e.g. a spec just added to clients/ in
+        # this same working tree) and must not be attributed until it
+        # actually lands, or it would be permanently unioned into
+        # <hash>.owners.json on the strength of a file that was never
+        # actually committed.
+        if last_commit_for_path(rel_path) is None:
+            continue
         owner_repo = owner_repo_from_rel_path(rel_path)
         if owner_repo is None:
             continue
