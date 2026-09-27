@@ -387,7 +387,7 @@ def build_owner_registry(
                 existing_owners = {
                     (o["owner"], o["repo"]) for o in existing_data.get("owners", [])
                 }
-            except (OSError, ValueError, KeyError, TypeError) as exc:
+            except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
                 print(
                     f"WARNING: could not parse existing {os.path.relpath(json_path, REPO_ROOT)}: "
                     f"{exc} - rewriting from scratch",
