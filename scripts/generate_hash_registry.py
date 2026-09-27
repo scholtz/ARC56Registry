@@ -287,7 +287,14 @@ def build_abi_signature_registry(
     print(f"[abi-signatures] {verb} {written} signature file(s), {unchanged} already up to date", file=sys.stderr)
 
 
-def build_registry(field: str, out_dir: str, specs: dict[str, dict], digests: dict[str, str], dry_run: bool) -> None:
+def build_registry(
+    field: str, out_dir: str, specs: dict[str, dict], digests: dict[str, str], dry_run: bool
+) -> set[str]:
+    """Returns the set of hashes that do (or, in --dry-run, would) have a committed
+    .txt/.arc56.json pair - i.e. every hash whose winning candidate has a commit.
+    build_owner_registry() only writes a .owners.json for hashes in this set, so a
+    hash directory never ends up with owner attribution but no .txt/.arc56.json pair
+    (see docs/hash-registry.md's "GitHub owner/repo attribution" section)."""
     winners: dict[str, tuple[str, int]] = {}  # hash -> (rel_path, size)
     skipped = len(specs) - len(digests)
     for rel_path, digest in digests.items():
@@ -301,6 +308,7 @@ def build_registry(field: str, out_dir: str, specs: dict[str, dict], digests: di
         file=sys.stderr,
     )
 
+    committed_hashes: set[str] = set()
     written = 0
     unchanged = 0
     for digest, (rel_path, _size) in sorted(winners.items()):
@@ -308,6 +316,7 @@ def build_registry(field: str, out_dir: str, specs: dict[str, dict], digests: di
         if commit is None:
             print(f"WARNING: {rel_path} is not committed yet, skipping hash {digest}", file=sys.stderr)
             continue
+        committed_hashes.add(digest)
         url = build_url(commit, rel_path)
 
         out_subdir = os.path.join(out_dir, digest[:3])
@@ -349,11 +358,16 @@ def build_registry(field: str, out_dir: str, specs: dict[str, dict], digests: di
 
     verb = "Would write" if dry_run else "Wrote"
     print(f"[{field}] {verb} {written} hash file(s), {unchanged} already up to date", file=sys.stderr)
+    return committed_hashes
 
 
-def build_owner_registry(field: str, out_dir: str, digests: dict[str, str], dry_run: bool) -> None:
+def build_owner_registry(
+    field: str, out_dir: str, digests: dict[str, str], committed_hashes: set[str], dry_run: bool
+) -> None:
     owners_by_hash: dict[str, set[tuple[str, str]]] = {}
     for rel_path, digest in digests.items():
+        if digest not in committed_hashes:
+            continue
         owner_repo = owner_repo_from_rel_path(rel_path)
         if owner_repo is None:
             continue
@@ -367,9 +381,18 @@ def build_owner_registry(field: str, out_dir: str, digests: dict[str, str], dry_
 
         existing_owners: set[tuple[str, str]] = set()
         if os.path.exists(json_path):
-            with open(json_path, encoding="utf-8") as f:
-                existing_data = json.load(f)
-            existing_owners = {(o["owner"], o["repo"]) for o in existing_data.get("owners", [])}
+            try:
+                with open(json_path, encoding="utf-8") as f:
+                    existing_data = json.load(f)
+                existing_owners = {
+                    (o["owner"], o["repo"]) for o in existing_data.get("owners", [])
+                }
+            except (OSError, ValueError, KeyError, TypeError) as exc:
+                print(
+                    f"WARNING: could not parse existing {os.path.relpath(json_path, REPO_ROOT)}: "
+                    f"{exc} - rewriting from scratch",
+                    file=sys.stderr,
+                )
 
         # Union-grows only, per the repo-wide "never silently delete" convention -
         # a repo dropping out of this run's candidates (blacklisted, spec removed,
@@ -420,8 +443,8 @@ def main() -> int:
     field_digests = {field: compute_field_digests(field, specs) for field in PROGRAMS}
 
     for field, out_dir in PROGRAMS.items():
-        build_registry(field, out_dir, specs, field_digests[field], args.dry_run)
-        build_owner_registry(field, out_dir, field_digests[field], args.dry_run)
+        committed_hashes = build_registry(field, out_dir, specs, field_digests[field], args.dry_run)
+        build_owner_registry(field, out_dir, field_digests[field], committed_hashes, args.dry_run)
 
     build_abi_signature_registry(ABI_SIGNATURES_DIR, specs, field_digests["approval"], args.dry_run)
 
