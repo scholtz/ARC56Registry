@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Build lookup registries from compiled-program SHA-256 hash -> ARC-56 spec URL.
 
-Walks every `*.arc56.json` file in the repo (in practice, everything under `clients/`),
-decodes its `byteCode.approval` and `byteCode.clear` (base64-encoded compiled TEAL
-bytecode), and hashes each with SHA-256. For every hash it writes:
+Walks every `*.arc56.json` file under `clients/<owner>/<repo>/arc56/` (the downloaded,
+attributable source specs - see `find_arc56_files()`), decodes its `byteCode.approval`
+and `byteCode.clear` (base64-encoded compiled TEAL bytecode), and hashes each with
+SHA-256. For every hash it writes:
 
     approval-programs/<hash[:3]>/<hash>.txt         (from byteCode.approval)
     approval-programs/<hash[:3]>/<hash>.arc56.json  (from byteCode.approval)
@@ -24,6 +25,35 @@ program compute its SHA-256, look up the matching `<hash>.arc56.json` in this re
 via its GitHub Pages mirror - see `pages/index.html`), and decode method calls
 directly - the `<hash>.txt` URL remains available for consumers that want the
 durable, commit-pinned source location instead.
+
+## GitHub owner/repo attribution
+
+Alongside the winning `.txt`/`.arc56.json` pair, this script also writes:
+
+    approval-programs/<hash[:3]>/<hash>.owners.json  (from byteCode.approval)
+    clear-programs/<hash[:3]>/<hash>.owners.json     (from byteCode.clear)
+
+a JSON object `{"owners": [{"owner": "<github-owner>", "repo": "<github-repo>", "url":
+"https://github.com/<owner>/<repo>"}, ...]}` listing every distinct GitHub owner/repo
+whose indexed ARC-56 spec produced this program hash, sorted by (owner, repo). Unlike
+the winner-takes-one `.txt`/`.arc56.json` pair, this is a **union across every indexed
+spec sharing the hash** (same shape as `abi-signatures/<selector>.json`'s `apps` list
+below) - identical program bytes can legitimately come from more than one repo (a
+shared library, a fork, a vendored copy), and a consumer trying to judge whether a
+deployed app's code looks trustworthy wants to see every GitHub account that has
+published matching source, not just whichever spec happened to win the size tie-break
+for the bundled copy. Entries are only ever added, never removed, even if a
+contributing repo is later blacklisted or deletes its spec - the attribution was true
+at the time it was observed.
+
+Owner/repo are read directly from each spec's own `clients/<owner>/<repo>/arc56/`
+location (see `find_arc56_files()`), which is why that glob is restricted to `clients/`
+rather than the whole repo: this script's own `approval-programs/`/`clear-programs/`
+output would otherwise "attribute" hashes to itself once a byte-for-byte copy exists
+there from a previous run, and (worse) could permanently point the winning `.txt` URL
+at its own mirror commit instead of the real source repo, since that self-copy sorts
+before `clients/...` alphabetically and ties keep the earlier winner (see "Picking a
+winner" below).
 
 ## ABI method-signature registry
 
@@ -96,10 +126,28 @@ ABI_SIGNATURES_DIR = os.path.join(REPO_ROOT, "abi-signatures")
 
 
 def find_arc56_files() -> list[str]:
-    pattern = os.path.join(REPO_ROOT, "**", "*.arc56.json")
+    # Restricted to clients/<owner>/<repo>/arc56/*.arc56.json - the downloaded, truly
+    # attributable source specs - rather than a repo-wide glob. approval-programs/ and
+    # clear-programs/ contain this same script's own byte-for-byte winner copies from
+    # previous runs; including those as candidates here would let a copy out-rank (and
+    # then permanently self-reference against) its own true source once created, since
+    # a same-size later candidate never displaces the earlier winner (see "Picking a
+    # winner" above) and both owner attribution and the .txt source URL are derived
+    # from whichever rel_path wins.
+    pattern = os.path.join(REPO_ROOT, "clients", "**", "*.arc56.json")
     paths = glob.glob(pattern, recursive=True)
     rel_paths = [os.path.relpath(p, REPO_ROOT).replace(os.sep, "/") for p in paths]
     return sorted(rel_paths)
+
+
+def owner_repo_from_rel_path(rel_path: str) -> tuple[str, str] | None:
+    """clients/<owner>/<repo>/arc56/<file>.arc56.json -> (owner, repo), or None if the
+    path isn't under clients/ - defensive only, since find_arc56_files() already
+    restricts candidates to that layout."""
+    parts = rel_path.split("/")
+    if len(parts) < 3 or parts[0] != "clients":
+        return None
+    return parts[1], parts[2]
 
 
 def load_spec(rel_path: str) -> dict | None:
@@ -303,6 +351,54 @@ def build_registry(field: str, out_dir: str, specs: dict[str, dict], digests: di
     print(f"[{field}] {verb} {written} hash file(s), {unchanged} already up to date", file=sys.stderr)
 
 
+def build_owner_registry(field: str, out_dir: str, digests: dict[str, str], dry_run: bool) -> None:
+    owners_by_hash: dict[str, set[tuple[str, str]]] = {}
+    for rel_path, digest in digests.items():
+        owner_repo = owner_repo_from_rel_path(rel_path)
+        if owner_repo is None:
+            continue
+        owners_by_hash.setdefault(digest, set()).add(owner_repo)
+
+    written = 0
+    unchanged = 0
+    for digest, owners in sorted(owners_by_hash.items()):
+        out_subdir = os.path.join(out_dir, digest[:3])
+        json_path = os.path.join(out_subdir, f"{digest}.owners.json")
+
+        existing_owners: set[tuple[str, str]] = set()
+        if os.path.exists(json_path):
+            with open(json_path, encoding="utf-8") as f:
+                existing_data = json.load(f)
+            existing_owners = {(o["owner"], o["repo"]) for o in existing_data.get("owners", [])}
+
+        # Union-grows only, per the repo-wide "never silently delete" convention -
+        # a repo dropping out of this run's candidates (blacklisted, spec removed,
+        # discovery lag, ...) never removes its past attribution.
+        merged = existing_owners | owners
+        if merged == existing_owners:
+            unchanged += 1
+            continue
+
+        entries = [
+            {"owner": owner, "repo": repo, "url": f"https://github.com/{owner}/{repo}"}
+            for owner, repo in sorted(merged)
+        ]
+        json_content = json.dumps({"owners": entries}, indent=2, ensure_ascii=False) + "\n"
+
+        written += 1
+        if dry_run:
+            action = "would update" if existing_owners else "would create"
+            print(f"{action} {os.path.relpath(json_path, REPO_ROOT)} -> {len(entries)} owner(s)")
+            continue
+
+        os.makedirs(out_subdir, exist_ok=True)
+        with open(json_path, "w", encoding="utf-8", newline="\n") as f:
+            f.write(json_content)
+
+    verb = "Would write" if dry_run else "Wrote"
+    print(f"[{field}] {verb} {written} owners file(s), {unchanged} already up to date", file=sys.stderr)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument(
@@ -325,6 +421,7 @@ def main() -> int:
 
     for field, out_dir in PROGRAMS.items():
         build_registry(field, out_dir, specs, field_digests[field], args.dry_run)
+        build_owner_registry(field, out_dir, field_digests[field], args.dry_run)
 
     build_abi_signature_registry(ABI_SIGNATURES_DIR, specs, field_digests["approval"], args.dry_run)
 

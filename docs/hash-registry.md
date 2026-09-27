@@ -20,12 +20,14 @@ box/global/local state layout, instead of showing the user an opaque raw transac
 ## Layout
 
 ```
-approval-programs/<hash[:3]>/<hash>.txt         # keyed by sha256(byteCode.approval)
-approval-programs/<hash[:3]>/<hash>.arc56.json  # keyed by sha256(byteCode.approval)
-clear-programs/<hash[:3]>/<hash>.txt            # keyed by sha256(byteCode.clear)
-clear-programs/<hash[:3]>/<hash>.arc56.json     # keyed by sha256(byteCode.clear)
-abi-signatures/<selector[:2]>/<selector>.txt    # keyed by the method's ARC-4 selector
-abi-signatures/<selector[:2]>/<selector>.json   # keyed by the method's ARC-4 selector
+approval-programs/<hash[:3]>/<hash>.txt          # keyed by sha256(byteCode.approval)
+approval-programs/<hash[:3]>/<hash>.arc56.json   # keyed by sha256(byteCode.approval)
+approval-programs/<hash[:3]>/<hash>.owners.json  # keyed by sha256(byteCode.approval)
+clear-programs/<hash[:3]>/<hash>.txt             # keyed by sha256(byteCode.clear)
+clear-programs/<hash[:3]>/<hash>.arc56.json      # keyed by sha256(byteCode.clear)
+clear-programs/<hash[:3]>/<hash>.owners.json     # keyed by sha256(byteCode.clear)
+abi-signatures/<selector[:2]>/<selector>.txt     # keyed by the method's ARC-4 selector
+abi-signatures/<selector[:2]>/<selector>.json    # keyed by the method's ARC-4 selector
 ```
 
 Each `.txt` file under `approval-programs/`/`clear-programs/` contains one line: the
@@ -121,6 +123,51 @@ convention (see the main [CLAUDE.md](../CLAUDE.md)) - though unlike `arc56.links
 and `clients/**`, an existing hash file's *content* can legitimately change (to a
 longer spec for the same hash), since it's a derived pointer/copy, not a historical
 record. This applies equally to `<hash>.txt` and `<hash>.arc56.json`.
+
+Candidates for the winner-selection above are read only from
+`clients/<owner>/<repo>/arc56/*.arc56.json` - never from `approval-programs/**` or
+`clear-programs/**` themselves, even though those directories also hold
+`*.arc56.json` files (the byte-for-byte winner copies this script wrote on a previous
+run). Including them would let a copy out-rank its own true source: a self-copy is
+byte-identical (so never *strictly* larger) and its path sorts alphabetically before
+`clients/...`, so once a hash's winner copy exists under `approval-programs/`, it would
+permanently keep winning the tie against the real source on every future run -
+silently repointing the `.txt` URL at this registry's own mirror commit instead of the
+original spec's repo.
+
+## GitHub owner/repo attribution
+
+Alongside the single winning `.txt`/`.arc56.json` pair, each hash directory also gets:
+
+```
+approval-programs/<hash[:3]>/<hash>.owners.json
+clear-programs/<hash[:3]>/<hash>.owners.json
+```
+
+```json
+{
+  "owners": [
+    { "owner": "algorandfoundation", "repo": "some-contract", "url": "https://github.com/algorandfoundation/some-contract" }
+  ]
+}
+```
+
+Unlike the winner-takes-one `.txt`/`.arc56.json` pair, this is a **union across every
+indexed spec that hashes to this program**, not just the one that won the size
+tie-break - identical program bytes can legitimately come from more than one GitHub
+repo (a shared library, a fork, a vendored copy), and a consumer trying to judge
+whether a deployed app's code looks trustworthy (e.g. a wallet warning about an
+unverified app call) wants to see every GitHub account known to have published
+matching source, not just whichever spec happened to be the largest. `owner`/`repo`
+are read directly from each spec's own `clients/<owner>/<repo>/arc56/` location, sorted
+and de-duplicated. Same append-only convention as everything else here: entries are
+only ever added, never removed, even if a contributing repo is later blacklisted or
+deletes its spec.
+
+A missing `.owners.json` file for a hash that does have a `.txt`/`.arc56.json` pair
+should not happen in practice (both are built from the same `clients/**` candidates),
+but a consumer should still treat it the same as any other missing file: no
+attribution is known, not an error.
 
 ## ABI method-signature registry
 
