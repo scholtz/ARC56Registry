@@ -89,8 +89,10 @@
     <tr><th>Registry</th><th>Path</th></tr>
     <tr><td>Approval program hash - spec URL</td><td><code>approval-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.txt</code></td></tr>
     <tr><td>Approval program hash - full spec</td><td><code>approval-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.arc56.json</code></td></tr>
+    <tr><td>Approval program hash - GitHub owners</td><td><code>approval-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.owners.json</code></td></tr>
     <tr><td>Clear-state program hash - spec URL</td><td><code>clear-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.txt</code></td></tr>
     <tr><td>Clear-state program hash - full spec</td><td><code>clear-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.arc56.json</code></td></tr>
+    <tr><td>Clear-state program hash - GitHub owners</td><td><code>clear-programs/&lt;hash[:3]&gt;/&lt;hash&gt;.owners.json</code></td></tr>
     <tr><td>ABI method selector - signature</td><td><code>abi-signatures/&lt;selector[:2]&gt;/&lt;selector&gt;.txt</code></td></tr>
     <tr><td>ABI method selector - signature + apps</td><td><code>abi-signatures/&lt;selector[:2]&gt;/&lt;selector&gt;.json</code></td></tr>
   </table>
@@ -102,11 +104,15 @@
     produced this hash even after the source file is edited or replaced later. The
     <code>.arc56.json</code> file right next to it is a byte-for-byte copy of that same
     spec, so you can skip resolving the URL entirely and read the full spec straight
-    from this registry. Each <code>abi-signatures/</code> <code>.txt</code> file
-    contains the plain-text ABI method signature itself, e.g.
-    <code>add(uint64,uint64)uint128</code>, and its <code>.json</code> file holds that
-    signature plus the sorted list of approval-program hashes of every indexed app
-    known to expose it.
+    from this registry. The <code>.owners.json</code> file lists every GitHub
+    <code>{owner, repo}</code> whose indexed spec produced this hash - unlike the
+    <code>.txt</code>/<code>.arc56.json</code> pair, which only ever points at the
+    single largest matching spec, this is the full set, useful for judging whether a
+    deployed app's code has been published (or copied) by an account you recognize.
+    Each <code>abi-signatures/</code> <code>.txt</code> file contains the plain-text
+    ABI method signature itself, e.g. <code>add(uint64,uint64)uint128</code>, and its
+    <code>.json</code> file holds that signature plus the sorted list of
+    approval-program hashes of every indexed app known to expose it.
   </p>
 
   <h2>How to look up a hash</h2>

@@ -71,15 +71,23 @@ cover.
   copy of that same spec placed right next to it (`<hash>.arc56.json`), so a consumer
   that only has the hash can decode calls in one fetch instead of two. Lets a wallet
   that only has a deployed app's compiled bytecode find a spec to decode calls against
-  it. The same script also builds `abi-signatures/`, a lookup from ARC-4 method
-  selector (4-byte SHA-512/256 of the ABI method signature) to the plain-text
-  signature string (`<selector>.txt`, e.g. `add(uint64,uint64)uint128` for selector
-  `8aa3b61f`) plus a JSON file (`<selector>.json`,
-  `{"abi": "<signature>", "apps": ["<hash1>", ...]}`) listing the sorted, deduplicated
-  approval-program hashes of every indexed app that exposes that method.
-- `approval-programs/<hash[:3]>/<hash>.txt` + `<hash>.arc56.json`,
-  `clear-programs/<hash[:3]>/<hash>.txt` + `<hash>.arc56.json` - the hash registry
-  itself, one `.txt`/`.arc56.json` pair per distinct program hash.
+  it. Candidates are read only from `clients/<owner>/<repo>/arc56/*.arc56.json` -
+  never from its own `approval-programs/`/`clear-programs/` output, or a copy could
+  permanently out-rank (and self-reference against) its own true source, see
+  `find_arc56_files()` and docs/hash-registry.md#how-entries-are-chosen. The same
+  script also writes `<hash>.owners.json` next to each pair - the sorted, deduplicated
+  union of every GitHub `{owner, repo}` whose indexed spec produced that hash (unlike
+  the winner-takes-one `.txt`/`.arc56.json` pair, every contributing repo is listed,
+  not just the largest spec) - see docs/hash-registry.md#github-ownerrepo-attribution.
+  It also builds `abi-signatures/`, a lookup from ARC-4 method selector (4-byte
+  SHA-512/256 of the ABI method signature) to the plain-text signature string
+  (`<selector>.txt`, e.g. `add(uint64,uint64)uint128` for selector `8aa3b61f`) plus a
+  JSON file (`<selector>.json`, `{"abi": "<signature>", "apps": ["<hash1>", ...]}`)
+  listing the sorted, deduplicated approval-program hashes of every indexed app that
+  exposes that method.
+- `approval-programs/<hash[:3]>/<hash>.txt` + `<hash>.arc56.json` + `<hash>.owners.json`,
+  `clear-programs/<hash[:3]>/<hash>.txt` + `<hash>.arc56.json` + `<hash>.owners.json` -
+  the hash registry itself, one file trio per distinct program hash.
 - `abi-signatures/<selector[:2]>/<selector>.txt` + `<selector>.json` - ARC-4 method
   selector to ABI method signature string (and the apps using it), one pair per
   distinct 4-byte selector, built from every method of every ARC-56 spec in the repo.
