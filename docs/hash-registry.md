@@ -165,9 +165,14 @@ only ever added, never removed, even if a contributing repo is later blacklisted
 deletes its spec.
 
 A missing `.owners.json` file for a hash that does have a `.txt`/`.arc56.json` pair
-should not happen in practice (both are built from the same `clients/**` candidates),
-but a consumer should still treat it the same as any other missing file: no
-attribution is known, not an error.
+should not happen for any hash generated after this attribution feature shipped (both
+are built from the same `clients/**` candidates, gated on the same per-file commit
+check). It can still happen for a hash whose `.txt`/`.arc56.json` predates this
+feature *and* whose original `clients/**` source has since disappeared entirely (the
+source repo deleted, renamed, or blacklisted) - there's no current candidate left to
+attribute, so the pair is simply frozen in its last-known state until (if ever) a
+matching source reappears. Either way, a consumer should treat a missing file the
+same as any other missing file: no attribution is known, not an error.
 
 ## ABI method-signature registry
 
