@@ -175,7 +175,18 @@ def program_sha256(spec: dict, field: str, rel_path: str) -> str | None:
     return hashlib.sha256(program_bytes).hexdigest()
 
 
+_commit_cache: dict[str, str | None] = {}
+
+
 def last_commit_for_path(rel_path: str) -> str | None:
+    # Memoized: build_registry() looks this up once per winning path, and
+    # build_owner_registry() looks it up again per contributing path (which
+    # includes every winner's own path) - on ~3600+ distinct hashes across
+    # two fields, an unmemoized git-log subprocess spawn per lookup roughly
+    # doubles this script's total runtime for no correctness benefit, since
+    # a path's last-touched commit never changes mid-run.
+    if rel_path in _commit_cache:
+        return _commit_cache[rel_path]
     result = subprocess.run(
         ["git", "log", "-1", "--format=%H", "--", rel_path],
         cwd=REPO_ROOT,
@@ -183,8 +194,9 @@ def last_commit_for_path(rel_path: str) -> str | None:
         text=True,
         check=True,
     )
-    commit = result.stdout.strip()
-    return commit or None
+    commit = result.stdout.strip() or None
+    _commit_cache[rel_path] = commit
+    return commit
 
 
 def build_url(commit: str, rel_path: str) -> str:
@@ -384,6 +396,7 @@ def build_owner_registry(
 
     written = 0
     unchanged = 0
+    unparseable = 0
     for digest, owners in sorted(owners_by_hash.items()):
         out_subdir = os.path.join(out_dir, digest[:3])
         json_path = os.path.join(out_subdir, f"{digest}.owners.json")
@@ -397,11 +410,19 @@ def build_owner_registry(
                     (o["owner"], o["repo"]) for o in existing_data.get("owners", [])
                 }
             except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
+                # Don't fall through to rewriting with only this run's owners -
+                # that would silently drop every previously-recorded owner this
+                # run can't independently re-derive (e.g. a since-blacklisted
+                # or since-removed contributing repo), violating the
+                # union-grows-only guarantee below. Leave the file untouched
+                # and let a human fix it.
                 print(
                     f"WARNING: could not parse existing {os.path.relpath(json_path, REPO_ROOT)}: "
-                    f"{exc} - rewriting from scratch",
+                    f"{exc} - leaving it untouched this run",
                     file=sys.stderr,
                 )
+                unparseable += 1
+                continue
 
         # Union-grows only, per the repo-wide "never silently delete" convention -
         # a repo dropping out of this run's candidates (blacklisted, spec removed,
@@ -428,7 +449,11 @@ def build_owner_registry(
             f.write(json_content)
 
     verb = "Would write" if dry_run else "Wrote"
-    print(f"[{field}] {verb} {written} owners file(s), {unchanged} already up to date", file=sys.stderr)
+    print(
+        f"[{field}] {verb} {written} owners file(s), {unchanged} already up to date, "
+        f"{unparseable} left untouched (unparseable)",
+        file=sys.stderr,
+    )
 
 
 def main() -> int:
