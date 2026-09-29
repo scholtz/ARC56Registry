@@ -36,7 +36,7 @@ nothing requires manual submission, matching the rest of this registry.
    re-run only fetches it for owners that don't have one cached yet. A 404 (deleted/
    renamed account) is cached too, via `githubAccountLookupFailed: true`, so it's
    never retried either; any other failure (rate limit, network error) is treated as
-   transient and retried on the next run - see `load_cached_account_lookup()`. This is
+   transient and retried on the next run - see `cached_account_lookup()`. This is
    a plain REST call (5000 requests/hour authenticated, 60/hour unauthenticated),
    nowhere near as constrained as the code search API the rest of the pipeline has to
    work around - see [arc56-links-pipeline.md](arc56-links-pipeline.md). Either way,

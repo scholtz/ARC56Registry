@@ -12,7 +12,7 @@ computes four 0-25 component scores that sum to a 0-100 `reputationScore`:
   date never changes), so a re-run never re-fetches an owner that already has one
   cached; a 404 (deleted/renamed account) is also cached permanently, since retrying
   it forever would only waste API calls better spent on owners never looked up yet -
-  see `load_cached_account_lookup()`. Any other failure (rate limit, network error) is
+  see `cached_account_lookup()`. Any other failure (rate limit, network error) is
   treated as transient and retried on the next run.
 - **Activity** - rewards an owner who periodically adds/updates ARC-56 specs over
   distinct dates, rather than a one-time burst (many rows added the same day only
@@ -63,7 +63,6 @@ import http.client
 import io
 import json
 import os
-import re
 import sys
 import time
 import urllib.error
@@ -116,16 +115,6 @@ def log(message: str) -> None:
     print(f"[{timestamp}] {message}", file=sys.stderr)
 
 
-# Deliberately as permissive as download_arc56_specs.sanitize_path_segment() (which
-# accepts any of A-Za-z0-9_.-, since a real indexed owner directory under clients/ can
-# contain any of those - GitHub tightened username rules over time, but older accounts
-# and org names aren't retroactively renamed) rather than GitHub's exact current
-# username rules - narrower than that would silently and permanently drop a real,
-# legitimately-indexed owner from reputation scoring. This is purely a path-traversal
-# guard: excluding "/" means os.path.join(OWNERS_DIR, owner, ...) can never leave
-# OWNERS_DIR, and excluding the bare "." and ".." segments closes the one remaining gap
-# (each would otherwise resolve to OWNERS_DIR itself or its parent).
-GITHUB_USERNAME_RE = re.compile(r"^[A-Za-z0-9_.-]{1,100}$")
 _PATH_TRAVERSAL_SEGMENTS = {".", ".."}
 
 
@@ -134,12 +123,21 @@ def owner_repo_from_url(url: str) -> tuple[str, str] | None:
     or None if the URL isn't shaped that way or its owner segment isn't safe to use as a
     single filesystem path segment (see owner_json_path()). Reuses
     download_arc56_specs.parse_raw_url() - the same parser the download pipeline itself
-    uses - so the two never silently disagree on what counts as a valid ARC56URL."""
+    uses - so the two never silently disagree on what counts as a valid ARC56URL.
+
+    The safety check reuses download_arc56_specs.sanitize_path_segment() too (an owner
+    is only accepted if sanitizing it is a no-op), instead of a second, independently
+    maintained charset regex that could silently drift out of sync with what the
+    download pipeline itself already accepts for a real `clients/<owner>/...`
+    directory name. This is purely a path-traversal guard: sanitize_path_segment()
+    never produces "/", and excluding the bare "." and ".." segments closes the one
+    remaining gap (each would otherwise resolve to OWNERS_DIR itself or its parent).
+    """
     try:
         owner, repo, _path = download_arc56_specs.parse_raw_url(url)
     except ValueError:
         return None
-    if not GITHUB_USERNAME_RE.match(owner) or owner in _PATH_TRAVERSAL_SEGMENTS:
+    if download_arc56_specs.sanitize_path_segment(owner) != owner or owner in _PATH_TRAVERSAL_SEGMENTS:
         return None
     return owner, repo
 
