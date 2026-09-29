@@ -44,7 +44,11 @@ deployed app's code looks trustworthy wants to see every GitHub account that has
 published matching source, not just whichever spec happened to win the size tie-break
 for the bundled copy. Entries are only ever added, never removed, even if a
 contributing repo is later blacklisted or deletes its spec - the attribution was true
-at the time it was observed.
+at the time it was observed. `scripts/generate_reputation.py` adds extra fields
+(`reputationScore`/`riskLevel`/`banned`) to each owner entry in these files after this
+script runs; when this script later adds a new owner to a hash's entry list, every
+existing entry's extra fields are preserved as-is (only a genuinely new (owner, repo)
+pair gets the plain `{owner, repo, url}` shape) - see docs/reputation-scoring.md.
 
 Owner/repo are read directly from each spec's own `clients/<owner>/<repo>/arc56/`
 location (see `find_arc56_files()`), which is why that glob is restricted to `clients/`
@@ -402,13 +406,15 @@ def build_owner_registry(
         json_path = os.path.join(out_subdir, f"{digest}.owners.json")
 
         existing_owners: set[tuple[str, str]] = set()
+        existing_entries: dict[tuple[str, str], dict] = {}
         if os.path.exists(json_path):
             try:
                 with open(json_path, encoding="utf-8") as f:
                     existing_data = json.load(f)
-                existing_owners = {
-                    (o["owner"], o["repo"]) for o in existing_data.get("owners", [])
-                }
+                for o in existing_data.get("owners", []):
+                    key = (o["owner"], o["repo"])
+                    existing_owners.add(key)
+                    existing_entries[key] = o
             except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
                 # Don't fall through to rewriting with only this run's owners -
                 # that would silently drop every previously-recorded owner this
@@ -432,8 +438,14 @@ def build_owner_registry(
             unchanged += 1
             continue
 
+        # Keep each existing entry's extra fields (e.g. generate_reputation.py's
+        # reputationScore/riskLevel/banned) intact rather than rebuilding every entry
+        # from scratch, but still re-stamp owner/repo/url fresh from this run's own
+        # (owner, repo) tuple every time - those three fields are solely owned by this
+        # script, so a cached copy is never trusted to still be correct on its own.
         entries = [
-            {"owner": owner, "repo": repo, "url": f"https://github.com/{owner}/{repo}"}
+            {**existing_entries.get((owner, repo), {}),
+             "owner": owner, "repo": repo, "url": f"https://github.com/{owner}/{repo}"}
             for owner, repo in sorted(merged)
         ]
         json_content = json.dumps({"owners": entries}, indent=2, ensure_ascii=False) + "\n"

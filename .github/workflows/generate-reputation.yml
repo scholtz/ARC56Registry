@@ -1,0 +1,66 @@
+name: Generate owner reputation
+
+# Computes each GitHub owner's automated risk-reputation score (owners/<owner>/owner.json)
+# and enriches the existing approval-programs/**/*.owners.json and
+# clear-programs/**/*.owners.json files with it. See docs/reputation-scoring.md.
+
+on:
+  workflow_run:
+    # Chains off both source dependencies: the owner-attribution files themselves
+    # (Generate hash registry) and the raw link list this script reads owner activity
+    # from (Update ARC-56 links). Automated-commit pushes from those workflows don't
+    # fire this workflow's own `push` filter below (GITHUB_TOKEN-authored commits
+    # don't trigger other workflows' push triggers), so workflow_run is the only way
+    # to chain off them - same pattern as publish-docker-hash-registry.yml.
+    workflows: ["Generate hash registry", "Update ARC-56 links"]
+    types: [completed]
+  workflow_dispatch: {}
+  push:
+    paths:
+      - "scripts/generate_reputation.py"
+      - "scripts/owner_ban_list.csv"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-reputation
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compute owner reputation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/generate_reputation.py
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          if git diff --quiet -- owners approval-programs clear-programs && [ -z "$(git status --porcelain -- owners approval-programs clear-programs)" ]; then
+            echo "No changes to owners/, approval-programs/, or clear-programs/"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add owners approval-programs clear-programs
+          git commit -m "chore: update owner reputation scores"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # generate-hash-registry.yml commits to the same approval-programs/clear-programs
+      # paths under a different concurrency group, so it can genuinely race this job.
+      - name: Push (retrying with rebase if generate-hash-registry.yml raced us)
+        if: steps.commit.outputs.changed == 'true'
+        uses: ./.github/actions/git-push-retry
