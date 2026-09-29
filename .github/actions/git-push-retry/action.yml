@@ -1,0 +1,40 @@
+name: "Push with rebase retry"
+description: >
+  Pushes the current HEAD to origin, retrying with a rebase onto whatever landed first
+  if the push is rejected as non-fast-forward. Used by workflows that can genuinely
+  race each other over the same paths (see generate-hash-registry.yml and
+  generate-reputation.yml, both of which commit to approval-programs/clear-programs
+  under different concurrency groups).
+
+inputs:
+  attempts:
+    description: "Max push attempts before giving up."
+    required: false
+    default: "5"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Push with rebase retry
+      shell: bash
+      run: |
+        set -e
+        attempt=1
+        while [ "$attempt" -le "${{ inputs.attempts }}" ]; do
+          if git push; then
+            exit 0
+          fi
+          echo "Push rejected (attempt $attempt/${{ inputs.attempts }}), re-syncing and retrying..."
+          # Both commands are allowed to fail without killing the loop under `set -e` -
+          # a rebase conflict must lead to `git rebase --abort` and another attempt from
+          # a fresh fetch, not an immediate hard stop that skips every remaining retry.
+          git fetch origin "${GITHUB_REF_NAME}" || true
+          if ! git rebase "origin/${GITHUB_REF_NAME}"; then
+            echo "Rebase failed; aborting it and retrying from a fresh fetch next attempt"
+            git rebase --abort || true
+          fi
+          sleep $((attempt * 5))
+          attempt=$((attempt + 1))
+        done
+        echo "ERROR: failed to push after ${{ inputs.attempts }} attempts" >&2
+        exit 1

@@ -114,25 +114,30 @@ def log(message: str) -> None:
     print(f"[{timestamp}] {message}", file=sys.stderr)
 
 
-# GitHub usernames are letters/digits/hyphens, 1-39 characters, and never start or end
-# with a hyphen or contain two consecutive hyphens - this is also what keeps a parsed
-# owner safe to use as a single path segment under owners/ (see owner_json_path()): it
-# can never contain "/", "..", or any other path-traversal-relevant character.
-GITHUB_USERNAME_RE = re.compile(r"^(?!-)(?!.*--)[A-Za-z0-9-]{1,39}(?<!-)$")
+# Deliberately as permissive as download_arc56_specs.sanitize_path_segment() (which
+# accepts any of A-Za-z0-9_.-, since a real indexed owner directory under clients/ can
+# contain any of those - GitHub tightened username rules over time, but older accounts
+# and org names aren't retroactively renamed) rather than GitHub's exact current
+# username rules - narrower than that would silently and permanently drop a real,
+# legitimately-indexed owner from reputation scoring. This is purely a path-traversal
+# guard: excluding "/" means os.path.join(OWNERS_DIR, owner, ...) can never leave
+# OWNERS_DIR, and excluding the bare "." and ".." segments closes the one remaining gap
+# (each would otherwise resolve to OWNERS_DIR itself or its parent).
+GITHUB_USERNAME_RE = re.compile(r"^[A-Za-z0-9_.-]{1,100}$")
+_PATH_TRAVERSAL_SEGMENTS = {".", ".."}
 
 
 def owner_repo_from_url(url: str) -> tuple[str, str] | None:
     """https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<path> -> (owner, repo),
-    or None if the URL isn't shaped that way or its owner segment isn't a syntactically
-    valid GitHub username. Reuses download_arc56_specs.parse_raw_url() - the same parser
-    the download pipeline itself uses - so the two never silently disagree on what counts
-    as a valid ARC56URL; the username-charset check on top is defensive, keeping the
-    parsed owner safe to use as a single filesystem path segment (see owner_json_path())."""
+    or None if the URL isn't shaped that way or its owner segment isn't safe to use as a
+    single filesystem path segment (see owner_json_path()). Reuses
+    download_arc56_specs.parse_raw_url() - the same parser the download pipeline itself
+    uses - so the two never silently disagree on what counts as a valid ARC56URL."""
     try:
         owner, repo, _path = download_arc56_specs.parse_raw_url(url)
     except ValueError:
         return None
-    if not GITHUB_USERNAME_RE.match(owner):
+    if not GITHUB_USERNAME_RE.match(owner) or owner in _PATH_TRAVERSAL_SEGMENTS:
         return None
     return owner, repo
 
@@ -170,9 +175,14 @@ def load_owner_activity(path: str) -> dict[str, dict]:
 def load_ban_list(path: str) -> dict[str, dict]:
     """Owner (case-insensitive) -> {"weight": int, "reason": str, "addedDate": str}.
 
-    Missing file just means an empty ban list. Malformed rows are logged and skipped
-    rather than aborting the whole run - see scripts/validate_owner_ban_list.py for the
-    PR-time check that keeps this file well-formed in the first place.
+    Missing file just means an empty ban list. `scripts/validate_owner_ban_list.py` is
+    what normally keeps this file well-formed (on every pull request), but this loader
+    can still see a malformed row if it's ever reached some other way (a direct push, a
+    manual edit outside a PR). A malformed Weight therefore fails *closed*, not open: the
+    entry still bans its owner, at the maximum weight (100) - since this is the one
+    component in the whole scoring system meant to carry real certainty, silently
+    treating a bad row as "not banned" would be the wrong default. Only a genuinely
+    unidentifiable row (no owner at all) is skipped, since there's nothing to ban.
     """
     ban_list: dict[str, dict] = {}
     if not os.path.exists(path):
@@ -186,14 +196,13 @@ def load_ban_list(path: str) -> dict[str, dict]:
             weight_raw = (row.get(BAN_WEIGHT_COLUMN) or "").strip()
             try:
                 weight = int(weight_raw)
+                if not 1 <= weight <= 100:
+                    raise ValueError(weight_raw)
             except ValueError:
-                log(f"WARNING: owner_ban_list.csv: owner '{owner}' has non-integer Weight "
-                    f"'{weight_raw}', skipping this ban entry")
-                continue
-            if not 1 <= weight <= 100:
-                log(f"WARNING: owner_ban_list.csv: owner '{owner}' has out-of-range Weight "
-                    f"{weight} (must be 1-100), clamping to fit")
-                weight = max(1, min(100, weight))
+                log(f"WARNING: owner_ban_list.csv: owner '{owner}' has an invalid Weight "
+                    f"'{weight_raw}' (must be an integer 1-100); banning at the maximum "
+                    f"weight (100) rather than silently treating this owner as not banned")
+                weight = 100
             ban_list[owner.lower()] = {
                 "weight": weight,
                 "reason": (row.get(BAN_REASON_COLUMN) or "").strip(),
@@ -222,9 +231,9 @@ def load_cached_owner_json(owner_key: str) -> dict | None:
         return None
 
 
-def load_cached_account_lookup(owner_key: str) -> tuple[str | None, str | None, bool]:
-    """Returns (created_at, login, lookup_failed) from a previously written owner.json,
-    or (None, None, False) if there's nothing cached yet.
+def cached_account_lookup(cached: dict | None) -> tuple[str | None, str | None, bool]:
+    """Returns (created_at, login, lookup_failed) from an already-loaded owner.json dict
+    (see load_cached_owner_json()), or (None, None, False) if there's nothing cached yet.
 
     The caller (main()) should skip re-fetching whenever `created_at` is already known
     (nothing left to learn - an account's creation date never changes) or whenever
@@ -234,7 +243,6 @@ def load_cached_account_lookup(owner_key: str) -> tuple[str | None, str | None, 
     prior outcome (never looked up, or a transient failure that wasn't cached) leaves
     both False, so it's retried.
     """
-    cached = load_cached_owner_json(owner_key)
     if cached is None:
         return None, None, False
     created_at = cached.get("githubAccountCreatedAt")
@@ -389,8 +397,13 @@ def build_owner_record(
     }
 
 
-def write_owner_record(owner_key: str, record: dict, dry_run: bool) -> bool:
+def write_owner_record(owner_key: str, existing_record: dict | None, record: dict, dry_run: bool) -> bool:
     """Returns True if the file was written (or, in --dry-run, would be).
+
+    `existing_record` is whatever load_cached_owner_json(owner_key) returned earlier in
+    the same iteration (see main()) - threaded through rather than re-read here, since
+    this and cached_account_lookup() would otherwise each open and parse the same file
+    once per owner on every run for no reason.
 
     `computedAt` is excluded from the change comparison (but not from what's written)
     - otherwise, since it's a fresh timestamp on every invocation, every owner.json
@@ -398,7 +411,6 @@ def write_owner_record(owner_key: str, record: dict, dry_run: bool) -> bool:
     about the owner actually moved, defeating the whole point of this check.
     """
     path = owner_json_path(owner_key)
-    existing_record = load_cached_owner_json(owner_key)
 
     comparable_existing = {k: v for k, v in existing_record.items() if k != "computedAt"} if existing_record else None
     comparable_new = {k: v for k, v in record.items() if k != "computedAt"}
@@ -529,7 +541,8 @@ def main() -> int:
     written = 0
     for i, owner_key in enumerate(owners, start=1):
         fallback_display = min(activity_by_owner[owner_key]["spellings"])
-        cached_created_at, cached_login, cached_lookup_failed = load_cached_account_lookup(owner_key)
+        existing_record = load_cached_owner_json(owner_key)
+        cached_created_at, cached_login, cached_lookup_failed = cached_account_lookup(existing_record)
         skip_refetch = bool(cached_created_at) or cached_lookup_failed
         created_at, login, lookup_failed = cached_created_at, cached_login, cached_lookup_failed
         if not skip_refetch:
@@ -543,7 +556,7 @@ def main() -> int:
             display_owner, activity_by_owner[owner_key], ban_entry, created_at, lookup_failed, today, computed_at
         )
         records_by_owner[owner_key] = record
-        if write_owner_record(owner_key, record, args.dry_run):
+        if write_owner_record(owner_key, existing_record, record, args.dry_run):
             written += 1
 
     verb = "Would write" if args.dry_run else "Wrote"

@@ -105,6 +105,13 @@ report an owner, add a row by hand in a pull request; there's no automated disco
 for this list, deliberately - it only ever contains what a human has actually
 confirmed.
 
+`generate_reputation.py` itself fails **closed**, not open, on a malformed `Weight` it
+somehow still encounters (the PR check above is what normally prevents this, but the
+file could in principle be reached some other way, e.g. a direct push): the row still
+bans its owner, at the maximum weight, rather than silently treating a bad row as "not
+banned" - this is the one component meant to carry real certainty, so an unreadable row
+should never fail toward looking safe.
+
 ## Output files
 
 ### `owners/<owner>/owner.json`

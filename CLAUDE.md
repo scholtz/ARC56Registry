@@ -151,7 +151,11 @@ cover.
 2. **`ActiveFrom`/`ActiveUntil` semantics**: a row is active when `ActiveFrom <= today`
    and (`ActiveUntil` is empty or `ActiveUntil` is in the future). New rows always get
    `ActiveFrom = today`, `ActiveUntil = ""`. Every download/generate script skips
-   inactive rows entirely - they're never iterated over, not just deprioritized.
+   inactive rows entirely - they're never iterated over, not just deprioritized -
+   **except** `scripts/generate_reputation.py`, which deliberately reads *every* row,
+   active or not: a deactivated spec still reflects real past activity by its owner,
+   and excluding it would understate that owner's activity/longevity scores. See
+   docs/reputation-scoring.md.
 3. **`Priority`/`Hash` semantics** (see docs/arc56-links-pipeline.md#priority-column
    and #hash-column for the full detail):
    - `Priority` is a non-negative integer; every active-row iteration (in

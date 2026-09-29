@@ -440,13 +440,12 @@ def build_owner_registry(
 
         # Keep each existing entry's extra fields (e.g. generate_reputation.py's
         # reputationScore/riskLevel/banned) intact rather than rebuilding every entry
-        # from scratch as just {owner, repo, url} - only a genuinely new (owner, repo)
-        # pair not seen before gets that minimal shape, to be enriched on that script's
-        # next run.
+        # from scratch, but still re-stamp owner/repo/url fresh from this run's own
+        # (owner, repo) tuple every time - those three fields are solely owned by this
+        # script, so a cached copy is never trusted to still be correct on its own.
         entries = [
-            existing_entries.get(
-                (owner, repo), {"owner": owner, "repo": repo, "url": f"https://github.com/{owner}/{repo}"}
-            )
+            {**existing_entries.get((owner, repo), {}),
+             "owner": owner, "repo": repo, "url": f"https://github.com/{owner}/{repo}"}
             for owner, repo in sorted(merged)
         ]
         json_content = json.dumps({"owners": entries}, indent=2, ensure_ascii=False) + "\n"
