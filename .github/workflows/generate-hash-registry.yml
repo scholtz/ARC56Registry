@@ -42,4 +42,19 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add approval-programs clear-programs abi-signatures
           git commit -m "chore: update program hash registry"
-          git push
+
+          # generate-reputation.yml commits to approval-programs/clear-programs too (to
+          # add reputation fields to the *.owners.json files this job writes), under a
+          # different concurrency group, so it can genuinely race this job - retry with
+          # a rebase onto whatever landed first instead of failing outright.
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt/5), re-syncing and retrying..."
+            git fetch origin "${GITHUB_REF_NAME}"
+            git rebase "origin/${GITHUB_REF_NAME}"
+            sleep $((attempt * 5))
+          done
+          echo "ERROR: failed to push after 5 attempts" >&2
+          exit 1

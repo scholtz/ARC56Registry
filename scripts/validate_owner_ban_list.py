@@ -39,9 +39,15 @@ def parse_csv(text: str, source: str) -> list[dict[str, str]]:
 
 def load_base_csv(base_sha: str) -> str | None:
     result = subprocess.run(["git", "show", f"{base_sha}:{CSV_PATH}"], capture_output=True, text=True)
-    if result.returncode != 0:
-        return None  # file did not exist on the base branch
-    return result.stdout
+    if result.returncode == 0:
+        return result.stdout
+    # Only treat this as "the file didn't exist on the base branch" (not an error) when
+    # git itself says so - any other failure (bad SHA, corrupt repo, ...) must be raised
+    # loudly instead of silently disabling the never-delete check below by pretending
+    # the base branch had zero entries.
+    if "does not exist" in result.stderr or "exists on disk, but not in" in result.stderr:
+        return None
+    raise RuntimeError(f"git show {base_sha}:{CSV_PATH} failed unexpectedly: {result.stderr.strip()}")
 
 
 def main() -> int:
@@ -86,7 +92,11 @@ def main() -> int:
         if not DATE_RE.match(added_date):
             errors.append(f"line {i}: {ADDED_DATE_COL} must be a YYYY-MM-DD date, got '{added_date}' ({owner})")
 
-    base_text = load_base_csv(args.base_sha)
+    try:
+        base_text = load_base_csv(args.base_sha)
+    except RuntimeError as exc:
+        print(f"ERROR: {exc}")
+        return 1
     base_rows = parse_csv(base_text, "base") if base_text is not None else []
     base_owners = {row.get(OWNER_COL, "").strip().lower() for row in base_rows if row.get(OWNER_COL, "").strip()}
     head_owners = {row.get(OWNER_COL, "").strip().lower() for row in head_rows if row.get(OWNER_COL, "").strip()}

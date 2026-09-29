@@ -9,8 +9,11 @@ computes four 0-25 component scores that sum to a 0-100 `reputationScore`:
 - **Account age** - how long the owner's GitHub account has existed, via the GitHub
   Users API (`GET /users/<owner>`, `created_at`). This is fetched once per owner and
   cached forever in that owner's `owners/<owner>/owner.json` (an account's creation
-  date never changes), so a re-run never re-fetches an owner it already has cached -
-  see `load_cached_created_at()`.
+  date never changes), so a re-run never re-fetches an owner that already has one
+  cached; a 404 (deleted/renamed account) is also cached permanently, since retrying
+  it forever would only waste API calls better spent on owners never looked up yet -
+  see `load_cached_account_lookup()`. Any other failure (rate limit, network error) is
+  treated as transient and retried on the next run.
 - **Activity** - rewards an owner who periodically adds/updates ARC-56 specs over
   distinct dates, rather than a one-time burst (many rows added the same day only
   ever count as one "distinct seen date" here).
@@ -31,7 +34,10 @@ severe) - see the ban-list branch inside `build_owner_record()`.
 ## Output
 
 - `owners/<owner>/owner.json` - the canonical per-owner record (written/overwritten
-  only when its content actually changes, to keep commit diffs minimal).
+  only when its content actually changes, to keep commit diffs minimal). `<owner>` in
+  the path is always lowercased (GitHub usernames are case-insensitive) and never
+  changes once assigned; the record's own `"owner"` field carries the best-known
+  display casing instead (see `main()`).
 - Every existing `approval-programs/**/*.owners.json` and `clear-programs/**/*.owners.json`
   file (written by `generate_hash_registry.py`) gets each of its owner entries enriched
   in place with `reputationScore`/`riskLevel`/`banned`, so a consumer who already fetches
@@ -61,6 +67,8 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+
+import download_arc56_specs
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LINKS_CSV_PATH = os.path.join(REPO_ROOT, "arc56.links.csv")
@@ -114,17 +122,16 @@ GITHUB_USERNAME_RE = re.compile(r"^(?!-)(?!.*--)[A-Za-z0-9-]{1,39}(?<!-)$")
 
 
 def owner_repo_from_url(url: str) -> tuple[str, str] | None:
-    """https://raw.githubusercontent.com/<owner>/<repo>/... -> (owner, repo), or None if
-    the URL isn't shaped that way or its owner segment isn't a syntactically valid
-    GitHub username (defensive - also what keeps owner_json_path() traversal-safe)."""
-    parsed = urllib.parse.urlparse(url)
-    if parsed.netloc != "raw.githubusercontent.com":
+    """https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<path> -> (owner, repo),
+    or None if the URL isn't shaped that way or its owner segment isn't a syntactically
+    valid GitHub username. Reuses download_arc56_specs.parse_raw_url() - the same parser
+    the download pipeline itself uses - so the two never silently disagree on what counts
+    as a valid ARC56URL; the username-charset check on top is defensive, keeping the
+    parsed owner safe to use as a single filesystem path segment (see owner_json_path())."""
+    try:
+        owner, repo, _path = download_arc56_specs.parse_raw_url(url)
+    except ValueError:
         return None
-    parts = [p for p in parsed.path.split("/") if p]
-    if len(parts) < 2:
-        return None
-    owner = urllib.parse.unquote(parts[0])
-    repo = urllib.parse.unquote(parts[1])
     if not GITHUB_USERNAME_RE.match(owner):
         return None
     return owner, repo
@@ -195,28 +202,57 @@ def load_ban_list(path: str) -> dict[str, dict]:
     return ban_list
 
 
-def owner_json_path(owner: str) -> str:
-    return os.path.join(OWNERS_DIR, owner, "owner.json")
+def owner_json_path(owner_key: str) -> str:
+    """`owner_key` is always the lowercased owner (see load_owner_activity()) - the
+    directory name is intentionally decoupled from display casing (the "owner" field
+    inside the file) so it never moves even if a later run learns a different/better
+    display spelling for the same account (see build_owner_record())."""
+    return os.path.join(OWNERS_DIR, owner_key, "owner.json")
 
 
-def load_cached_created_at(owner: str) -> str | None:
-    path = owner_json_path(owner)
+def load_cached_owner_json(owner_key: str) -> dict | None:
+    path = owner_json_path(owner_key)
     if not os.path.exists(path):
         return None
     try:
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
-        return data.get("githubAccountCreatedAt")
-    except (OSError, ValueError, AttributeError):
+        return data if isinstance(data, dict) else None
+    except (OSError, ValueError):
         return None
 
 
-def fetch_account_created_at(owner: str, token: str) -> str | None:
-    """GET /users/<owner>, returning its `created_at` or None on any failure.
+def load_cached_account_lookup(owner_key: str) -> tuple[str | None, str | None, bool]:
+    """Returns (created_at, login, lookup_failed) from a previously written owner.json,
+    or (None, None, False) if there's nothing cached yet.
 
-    A failure here (404 for a deleted/renamed account, rate limit, network error) must
-    never abort the run - it just means this owner's account-age component falls back
-    to UNKNOWN_ACCOUNT_AGE_SCORE, same as never having had a token at all.
+    The caller (main()) should skip re-fetching whenever `created_at` is already known
+    (nothing left to learn - an account's creation date never changes) or whenever
+    `lookup_failed` is True (the account permanently 404'd on a previous run - a
+    deleted/renamed account isn't coming back, so retrying it forever would just waste
+    API calls that starve owners never looked up yet on a rate-limited run). Any other
+    prior outcome (never looked up, or a transient failure that wasn't cached) leaves
+    both False, so it's retried.
+    """
+    cached = load_cached_owner_json(owner_key)
+    if cached is None:
+        return None, None, False
+    created_at = cached.get("githubAccountCreatedAt")
+    login = cached.get("owner")
+    lookup_failed = bool(cached.get("githubAccountLookupFailed"))
+    return created_at, login, lookup_failed
+
+
+def fetch_account_created_at(owner: str, token: str) -> tuple[str | None, str | None, bool]:
+    """GET /users/<owner>, returning (created_at, login, permanently_failed).
+
+    `login` is the API's own authoritative casing for the account, used in preference
+    to whatever casing happened to appear in arc56.links.csv - see build_owner_record().
+    `permanently_failed` is True only for a 404 (deleted/renamed account - not coming
+    back); any other failure (rate limit, network error) is transient and leaves it
+    False so a later run retries it. No failure here may ever abort the run - it just
+    means this owner's account-age component falls back to UNKNOWN_ACCOUNT_AGE_SCORE,
+    same as never having had a token at all.
     """
     url = USERS_API_URL.format(owner=urllib.parse.quote(owner))
     req = urllib.request.Request(url)
@@ -228,16 +264,17 @@ def fetch_account_created_at(owner: str, token: str) -> str | None:
     try:
         with urllib.request.urlopen(req) as resp:
             data = json.loads(resp.read().decode("utf-8"))
-            return data.get("created_at")
+            return data.get("created_at"), data.get("login"), False
     except urllib.error.HTTPError as exc:
-        if exc.code != 404:
-            log(f"WARNING: GitHub Users API returned {exc.code} for '{owner}'; "
-                f"account age will be treated as unknown for this run")
-        return None
+        if exc.code == 404:
+            return None, None, True
+        log(f"WARNING: GitHub Users API returned {exc.code} for '{owner}'; "
+            f"account age will be treated as unknown for this run")
+        return None, None, False
     except (urllib.error.URLError, TimeoutError, ValueError) as exc:
         log(f"WARNING: could not fetch GitHub account info for '{owner}': {exc}; "
             f"account age will be treated as unknown for this run")
-        return None
+        return None, None, False
 
 
 def parse_iso_date(value: str) -> datetime.date | None:
@@ -296,6 +333,7 @@ def build_owner_record(
     activity: dict,
     ban_entry: dict | None,
     created_at: str | None,
+    lookup_failed: bool,
     today: datetime.date,
     computed_at: str,
 ) -> dict:
@@ -332,6 +370,7 @@ def build_owner_record(
         "owner": owner,
         "githubUrl": f"https://github.com/{owner}",
         "githubAccountCreatedAt": created_at,
+        "githubAccountLookupFailed": lookup_failed,
         "accountAgeDays": age_days,
         "firstArc56SeenDate": first_seen,
         "lastArc56SeenDate": last_seen,
@@ -350,7 +389,7 @@ def build_owner_record(
     }
 
 
-def write_owner_record(owner: str, record: dict, dry_run: bool) -> bool:
+def write_owner_record(owner_key: str, record: dict, dry_run: bool) -> bool:
     """Returns True if the file was written (or, in --dry-run, would be).
 
     `computedAt` is excluded from the change comparison (but not from what's written)
@@ -358,14 +397,8 @@ def write_owner_record(owner: str, record: dict, dry_run: bool) -> bool:
     would look "changed" and get rewritten/recommitted on every run even when nothing
     about the owner actually moved, defeating the whole point of this check.
     """
-    path = owner_json_path(owner)
-    existing_record = None
-    if os.path.exists(path):
-        try:
-            with open(path, encoding="utf-8") as f:
-                existing_record = json.load(f)
-        except (OSError, ValueError):
-            existing_record = None
+    path = owner_json_path(owner_key)
+    existing_record = load_cached_owner_json(owner_key)
 
     comparable_existing = {k: v for k, v in existing_record.items() if k != "computedAt"} if existing_record else None
     comparable_new = {k: v for k, v in record.items() if k != "computedAt"}
@@ -414,12 +447,17 @@ def enrich_owners_files(records_by_owner: dict[str, dict], dry_run: bool) -> Non
             log(f"WARNING: could not parse {os.path.relpath(path, REPO_ROOT)}: {exc}; leaving it untouched")
             continue
 
+        if not isinstance(data, dict):
+            log(f"WARNING: {os.path.relpath(path, REPO_ROOT)} does not contain a JSON object; leaving it untouched")
+            continue
         owners = data.get("owners")
         if not isinstance(owners, list):
             continue
 
         changed = False
         for entry in owners:
+            if not isinstance(entry, dict):
+                continue
             owner = entry.get("owner")
             record = records_by_owner.get(owner.lower()) if isinstance(owner, str) else None
             if record is None:
@@ -481,24 +519,31 @@ def main() -> int:
     computed_at = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     # owners/activity_by_owner keys are lowercased (GitHub usernames are case-insensitive
-    # - see load_owner_activity()); pick a stable display spelling per owner (the
-    # alphabetically-first original-case variant actually seen) for the directory name
-    # and the "owner"/githubUrl fields, and key records_by_owner by the same lowercase
-    # key so enrich_owners_files() can match it regardless of casing.
+    # - see load_owner_activity()), and owner.json's directory name is keyed by that same
+    # lowercase form (see owner_json_path()) so it never moves between runs. The "owner"/
+    # githubUrl display spelling prefers the GitHub API's own authoritative `login` casing
+    # once known (cached from a previous successful lookup, or freshly fetched below),
+    # falling back to the alphabetically-first original-case variant seen in
+    # arc56.links.csv only until that first successful lookup happens.
     records_by_owner: dict[str, dict] = {}
     written = 0
     for i, owner_key in enumerate(owners, start=1):
-        display_owner = min(activity_by_owner[owner_key]["spellings"])
-        log(f"[{i}/{len(owners)}] {display_owner}")
-        created_at = load_cached_created_at(display_owner)
-        if created_at is None:
+        fallback_display = min(activity_by_owner[owner_key]["spellings"])
+        cached_created_at, cached_login, cached_lookup_failed = load_cached_account_lookup(owner_key)
+        skip_refetch = bool(cached_created_at) or cached_lookup_failed
+        created_at, login, lookup_failed = cached_created_at, cached_login, cached_lookup_failed
+        if not skip_refetch:
             time.sleep(USER_API_DELAY_SECONDS)
-            created_at = fetch_account_created_at(display_owner, token)
+            created_at, login, lookup_failed = fetch_account_created_at(fallback_display, token)
+        display_owner = login or cached_login or fallback_display
+        log(f"[{i}/{len(owners)}] {display_owner}")
 
         ban_entry = ban_list.get(owner_key)
-        record = build_owner_record(display_owner, activity_by_owner[owner_key], ban_entry, created_at, today, computed_at)
+        record = build_owner_record(
+            display_owner, activity_by_owner[owner_key], ban_entry, created_at, lookup_failed, today, computed_at
+        )
         records_by_owner[owner_key] = record
-        if write_owner_record(display_owner, record, args.dry_run):
+        if write_owner_record(owner_key, record, args.dry_run):
             written += 1
 
     verb = "Would write" if args.dry_run else "Wrote"

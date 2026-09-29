@@ -33,13 +33,15 @@ nothing requires manual submission, matching the rest of this registry.
 1. **Account age** - `created_at` from the GitHub Users API (`GET /users/<owner>`).
    Fetched once per owner and cached forever in that owner's `owner.json`
    (`githubAccountCreatedAt`) - an account's creation date never changes, so a
-   re-run only fetches it for owners that don't have it cached yet (see
-   `load_cached_created_at()`). This is a plain REST call (5000 requests/hour
-   authenticated, 60/hour unauthenticated), nowhere near as constrained as the code
-   search API the rest of the pipeline has to work around - see
-   [arc56-links-pipeline.md](arc56-links-pipeline.md). If the account has been
-   deleted/renamed (404) or the API is unreachable, account age is treated as
-   **unknown**, not zero - see [scoring formula](#scoring-formula).
+   re-run only fetches it for owners that don't have one cached yet. A 404 (deleted/
+   renamed account) is cached too, via `githubAccountLookupFailed: true`, so it's
+   never retried either; any other failure (rate limit, network error) is treated as
+   transient and retried on the next run - see `load_cached_account_lookup()`. This is
+   a plain REST call (5000 requests/hour authenticated, 60/hour unauthenticated),
+   nowhere near as constrained as the code search API the rest of the pipeline has to
+   work around - see [arc56-links-pipeline.md](arc56-links-pipeline.md). Either way,
+   account age is treated as **unknown**, not zero, whenever it can't be determined -
+   see [scoring formula](#scoring-formula).
 2. **Activity pattern** - every distinct `ActiveFrom` date across *all* of that
    owner's rows in `arc56.links.csv`, active or deactivated (a deactivated spec still
    reflects real past activity). Multiple rows added the same day only ever count as
@@ -114,6 +116,7 @@ The canonical per-owner record:
   "owner": "scholtz",
   "githubUrl": "https://github.com/scholtz",
   "githubAccountCreatedAt": "2011-11-27T16:01:18Z",
+  "githubAccountLookupFailed": false,
   "accountAgeDays": 5420,
   "firstArc56SeenDate": "2026-07-16",
   "lastArc56SeenDate": "2026-08-03",
@@ -133,7 +136,11 @@ The canonical per-owner record:
 ```
 
 Only written/overwritten when its content actually changes, to keep commit diffs
-minimal on a re-run where most owners' data hasn't moved.
+minimal on a re-run where most owners' data hasn't moved. `owners/<owner>/` on disk is
+always lowercased (GitHub usernames are case-insensitive) and never changes once
+assigned; the `"owner"` field inside the file carries the best-known display casing -
+the GitHub API's own authoritative `login` once a lookup has succeeded, falling back
+to whatever casing first appeared in `arc56.links.csv` until then.
 
 ### Enriched `*.owners.json`
 

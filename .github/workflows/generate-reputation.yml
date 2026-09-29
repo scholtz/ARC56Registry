@@ -55,4 +55,18 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add owners approval-programs clear-programs
           git commit -m "chore: update owner reputation scores"
-          git push
+
+          # generate-hash-registry.yml commits to the same approval-programs/clear-programs
+          # paths under a different concurrency group, so it can genuinely race this job -
+          # retry with a rebase onto whatever landed first instead of failing outright.
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt/5), re-syncing and retrying..."
+            git fetch origin "${GITHUB_REF_NAME}"
+            git rebase "origin/${GITHUB_REF_NAME}"
+            sleep $((attempt * 5))
+          done
+          echo "ERROR: failed to push after 5 attempts" >&2
+          exit 1
