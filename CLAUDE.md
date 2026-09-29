@@ -104,6 +104,18 @@ cover.
   `publish-docker-hash-registry.yml`, tagged with both the current UTC date
   (`YYYY-MM-DD`) and `latest`; triggered after either `generate-hash-registry.yml` or
   `update-arc56-links.yml` completes, since it now bundles both of their outputs.
+- `scripts/generate_reputation.py` - computes an automated, heuristic risk-reputation
+  score per GitHub owner (account age, activity pattern, project diversity, plus a
+  manual ban-list override) into `owners/<owner>/owner.json`, and enriches every
+  existing `approval-programs/**/*.owners.json`/`clear-programs/**/*.owners.json`
+  file with the same score. See docs/reputation-scoring.md.
+- `scripts/owner_ban_list.csv` - maintainer-edited, never-deleted list of confirmed-bad
+  GitHub owners (`Owner,Weight,Reason,AddedDate`), checked by
+  `scripts/validate_owner_ban_list.py`. See docs/reputation-scoring.md#ban-list.
+- `owners/<owner>/owner.json` - the canonical per-owner reputation record produced by
+  `generate_reputation.py`.
+- `docs/reputation-scoring.md` - full detail on the reputation scoring formula, ban
+  list, and output file formats.
 - `docs/arc56-links-pipeline.md` - full detail on the CSV pipeline.
 - `docs/dotnet-client-pipeline.md` - full detail on the .NET client pipeline.
 - `docs/typescript-client-pipeline.md` - full detail on the TypeScript client pipeline.
@@ -129,7 +141,13 @@ cover.
    be rewritten in place as newly indexed specs add more known apps for that selector -
    still never deleted, just grown. `arc56_stats_history.csv` follows the same rule:
    rows (timestamped stats snapshots) are only ever appended, never edited or removed -
-   it's a time series, not a snapshot.
+   it's a time series, not a snapshot. `scripts/owner_ban_list.csv` entries are also
+   never deleted, only added or edited in place (e.g. raising `Weight` as more evidence
+   comes in) - enforced by `scripts/validate_owner_ban_list.py`. `owners/<owner>/
+   owner.json` files are recomputed in place by `generate_reputation.py` (like the hash
+   registry, safe to overwrite since it's fully derived), but the file itself is never
+   deleted once an owner has one, even if all of that owner's rows are later
+   deactivated.
 2. **`ActiveFrom`/`ActiveUntil` semantics**: a row is active when `ActiveFrom <= today`
    and (`ActiveUntil` is empty or `ActiveUntil` is in the future). New rows always get
    `ActiveFrom = today`, `ActiveUntil = ""`. Every download/generate script skips

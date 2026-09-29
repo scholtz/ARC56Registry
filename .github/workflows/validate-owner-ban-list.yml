@@ -1,0 +1,26 @@
+name: Validate owner ban list CSV
+
+on:
+  pull_request:
+    paths:
+      - "scripts/owner_ban_list.csv"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate scripts/owner_ban_list.csv
+        run: python scripts/validate_owner_ban_list.py --base-sha "${{ github.event.pull_request.base.sha }}"

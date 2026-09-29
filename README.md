@@ -55,6 +55,9 @@ is trending.
 | [abi-signatures/](abi-signatures/) | The ABI method-signature registry: `abi-signatures/<selector[:2]>/<selector>.txt` (signature) and `<selector>.json` (signature + the apps that use it), one pair per distinct ARC-4 method selector. |
 | [pages/index.html](pages/index.html) | Landing page for the registry's GitHub Pages site, published from the folders above. |
 | [docker/hash-registry/](docker/hash-registry/) | Dockerfile + README + landing page for the `scholtz2/arc56-registry` Docker Hub image - an unprivileged nginx webserver serving the three folders above plus `arc56.links.csv` over HTTP, for self-hosted lookups. |
+| [scripts/generate_reputation.py](scripts/generate_reputation.py) | Computes an automated, heuristic risk-reputation score per GitHub owner and writes `owners/<owner>/owner.json`, then enriches every `*.owners.json` file above with it. |
+| [scripts/owner_ban_list.csv](scripts/owner_ban_list.csv) | Maintainer-edited, never-deleted list of confirmed-bad GitHub owners, checked by [scripts/validate_owner_ban_list.py](scripts/validate_owner_ban_list.py). |
+| [owners/](owners/) | One `owner.json` per GitHub owner, holding their computed reputation score. |
 | [.github/workflows/](.github/workflows/) | The scheduled/triggered pipelines tying all of the above together. |
 | [docs/](docs/) | Detailed docs for each pipeline (linked below). |
 
@@ -172,6 +175,20 @@ so a wallet can `docker run` its own local mirror of the whole registry instead 
 depending on GitHub Pages being reachable at call time - see
 **[docs/docker-hash-registry.md](docs/docker-hash-registry.md)**.
 
+### 4. Owner reputation scoring
+
+[`generate-reputation.yml`](.github/workflows/generate-reputation.yml) computes an
+automated, heuristic risk score for every GitHub owner in the registry, from their
+account age, how periodically they publish/update ARC-56 specs (versus a one-time
+burst), and how many distinct repositories they've published in - plus a
+maintainer-edited ban list (`scripts/owner_ban_list.csv`) that overrides the score for
+any owner a human has actually confirmed to be a bad actor. The result is written to
+`owners/<owner>/owner.json` and also folded into every existing `*.owners.json` file
+above, so a wallet that already fetches those files for attribution gets a
+`reputationScore`/`riskLevel`/`banned` verdict in the very same fetch.
+
+Full formula, ban-list format, and limitations: **[docs/reputation-scoring.md](docs/reputation-scoring.md)**.
+
 ## Status
 
 - ✅ Registry discovery + validation (arc56.links.csv)
@@ -180,6 +197,8 @@ depending on GitHub Pages being reachable at call time - see
 - ✅ Python client generation pipeline (download -> generate -> publish)
 - ✅ Program hash registry (approval-programs/, clear-programs/) + GitHub Pages site
 - ✅ ABI method-signature registry (abi-signatures/) + GitHub Pages site
+- ✅ Automated owner reputation scoring (owners/) + ban list, folded into the
+  existing `*.owners.json` attribution files
 - ✅ Docker Hub image (`scholtz2/arc56-registry`) - workflow wired up, but needs a
   one-time Docker Hub account + `DOCKERHUB_USERNAME`/`DOCKERHUB_TOKEN` repo secrets
   before it actually publishes (see
