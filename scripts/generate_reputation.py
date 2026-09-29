@@ -26,7 +26,7 @@ See docs/reputation-scoring.md for the full formula and its rationale.
 never-deleted list (see `scripts/validate_owner_ban_list.py`) of confirmed-bad owners.
 A banned owner's `riskLevel` is always `"banned"` regardless of its computed score, and
 its `reputationScore` is capped at `100 - Weight` (Weight 1-100, higher = more certain/
-severe) - see `apply_ban_list()`.
+severe) - see the ban-list branch inside `build_owner_record()`.
 
 ## Output
 
@@ -55,6 +55,7 @@ import datetime
 import glob
 import json
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -105,20 +106,39 @@ def log(message: str) -> None:
     print(f"[{timestamp}] {message}", file=sys.stderr)
 
 
+# GitHub usernames are letters/digits/hyphens, 1-39 characters, and never start or end
+# with a hyphen or contain two consecutive hyphens - this is also what keeps a parsed
+# owner safe to use as a single path segment under owners/ (see owner_json_path()): it
+# can never contain "/", "..", or any other path-traversal-relevant character.
+GITHUB_USERNAME_RE = re.compile(r"^(?!-)(?!.*--)[A-Za-z0-9-]{1,39}(?<!-)$")
+
+
 def owner_repo_from_url(url: str) -> tuple[str, str] | None:
-    """https://raw.githubusercontent.com/<owner>/<repo>/... -> (owner, repo)."""
+    """https://raw.githubusercontent.com/<owner>/<repo>/... -> (owner, repo), or None if
+    the URL isn't shaped that way or its owner segment isn't a syntactically valid
+    GitHub username (defensive - also what keeps owner_json_path() traversal-safe)."""
     parsed = urllib.parse.urlparse(url)
     if parsed.netloc != "raw.githubusercontent.com":
         return None
     parts = [p for p in parsed.path.split("/") if p]
     if len(parts) < 2:
         return None
-    return urllib.parse.unquote(parts[0]), urllib.parse.unquote(parts[1])
+    owner = urllib.parse.unquote(parts[0])
+    repo = urllib.parse.unquote(parts[1])
+    if not GITHUB_USERNAME_RE.match(owner):
+        return None
+    return owner, repo
 
 
 def load_owner_activity(path: str) -> dict[str, dict]:
     """owner -> {"repos": set[str], "seen_dates": set[str]} across every row (active or
-    not) in arc56.links.csv - a deactivated spec still reflects real past activity."""
+    not) in arc56.links.csv - a deactivated spec still reflects real past activity.
+
+    GitHub usernames are case-insensitive (Foo and foo are the same account), so rows
+    are grouped by lowercased owner; the record's displayed "owner" spelling is the
+    alphabetically-first original-case variant seen (deterministic regardless of CSV
+    row order), tracked in each entry's "display" set alongside repos/seen_dates.
+    """
     activity: dict[str, dict] = {}
     if not os.path.exists(path):
         return activity
@@ -130,8 +150,10 @@ def load_owner_activity(path: str) -> dict[str, dict]:
             if owner_repo is None:
                 continue
             owner, repo = owner_repo
-            entry = activity.setdefault(owner, {"repos": set(), "seen_dates": set()})
+            key = owner.lower()
+            entry = activity.setdefault(key, {"repos": set(), "seen_dates": set(), "spellings": set()})
             entry["repos"].add(repo)
+            entry["spellings"].add(owner)
             active_from = row.get(FROM_COLUMN, "")
             if active_from:
                 entry["seen_dates"].add(active_from)
@@ -161,7 +183,10 @@ def load_ban_list(path: str) -> dict[str, dict]:
                 log(f"WARNING: owner_ban_list.csv: owner '{owner}' has non-integer Weight "
                     f"'{weight_raw}', skipping this ban entry")
                 continue
-            weight = max(1, min(100, weight))
+            if not 1 <= weight <= 100:
+                log(f"WARNING: owner_ban_list.csv: owner '{owner}' has out-of-range Weight "
+                    f"{weight} (must be 1-100), clamping to fit")
+                weight = max(1, min(100, weight))
             ban_list[owner.lower()] = {
                 "weight": weight,
                 "reason": (row.get(BAN_REASON_COLUMN) or "").strip(),
@@ -280,7 +305,13 @@ def build_owner_record(
     last_seen = seen_dates[-1] if seen_dates else None
     span_days = 0
     if first_seen and last_seen:
-        span_days = (parse_iso_date(last_seen) - parse_iso_date(first_seen)).days
+        # ActiveFrom is only regex-validated (YYYY-MM-DD shape) by validate_arc56_links.py,
+        # not calendar-validated, so a value like "2024-02-30" can in principle reach here -
+        # parse_iso_date() returns None for it rather than raising, so guard before subtracting.
+        first_date = parse_iso_date(first_seen)
+        last_date = parse_iso_date(last_seen)
+        if first_date is not None and last_date is not None:
+            span_days = (last_date - first_date).days
 
     age_days = account_age_days(created_at, today)
     components = compute_scores(age_days, len(seen_dates), len(repos), span_days)
@@ -320,17 +351,30 @@ def build_owner_record(
 
 
 def write_owner_record(owner: str, record: dict, dry_run: bool) -> bool:
-    """Returns True if the file was written (or, in --dry-run, would be)."""
+    """Returns True if the file was written (or, in --dry-run, would be).
+
+    `computedAt` is excluded from the change comparison (but not from what's written)
+    - otherwise, since it's a fresh timestamp on every invocation, every owner.json
+    would look "changed" and get rewritten/recommitted on every run even when nothing
+    about the owner actually moved, defeating the whole point of this check.
+    """
     path = owner_json_path(owner)
-    content = json.dumps(record, indent=2, ensure_ascii=False) + "\n"
-    existing = None
+    existing_record = None
     if os.path.exists(path):
-        with open(path, encoding="utf-8") as f:
-            existing = f.read()
-    if existing == content:
+        try:
+            with open(path, encoding="utf-8") as f:
+                existing_record = json.load(f)
+        except (OSError, ValueError):
+            existing_record = None
+
+    comparable_existing = {k: v for k, v in existing_record.items() if k != "computedAt"} if existing_record else None
+    comparable_new = {k: v for k, v in record.items() if k != "computedAt"}
+    if comparable_existing == comparable_new:
         return False
+
+    content = json.dumps(record, indent=2, ensure_ascii=False) + "\n"
     if dry_run:
-        action = "would update" if existing else "would create"
+        action = "would update" if existing_record else "would create"
         print(f"{action} {os.path.relpath(path, REPO_ROOT)} -> "
               f"reputationScore={record['reputationScore']} riskLevel={record['riskLevel']}")
         return True
@@ -351,7 +395,13 @@ def find_owners_files() -> list[str]:
 def enrich_owners_files(records_by_owner: dict[str, dict], dry_run: bool) -> None:
     """Adds/updates reputationScore/riskLevel/banned on each owner entry of every
     existing `*.owners.json` file, leaving owner/repo/url and any owner this run has
-    no record for untouched (see module docstring)."""
+    no record for untouched (see module docstring).
+
+    `records_by_owner` is keyed by lowercased owner (see main()); each `.owners.json`
+    entry's own `owner` field (sourced independently by generate_hash_registry.py from
+    the `clients/<owner>/...` directory name) is matched case-insensitively too, so a
+    casing difference between the two never causes a real match to be silently missed.
+    """
     paths = find_owners_files()
     written = 0
     unchanged = 0
@@ -371,7 +421,7 @@ def enrich_owners_files(records_by_owner: dict[str, dict], dry_run: bool) -> Non
         changed = False
         for entry in owners:
             owner = entry.get("owner")
-            record = records_by_owner.get(owner)
+            record = records_by_owner.get(owner.lower()) if isinstance(owner, str) else None
             if record is None:
                 skipped_owners += 1
                 continue
@@ -430,19 +480,25 @@ def main() -> int:
     today = datetime.date.today()
     computed_at = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
+    # owners/activity_by_owner keys are lowercased (GitHub usernames are case-insensitive
+    # - see load_owner_activity()); pick a stable display spelling per owner (the
+    # alphabetically-first original-case variant actually seen) for the directory name
+    # and the "owner"/githubUrl fields, and key records_by_owner by the same lowercase
+    # key so enrich_owners_files() can match it regardless of casing.
     records_by_owner: dict[str, dict] = {}
     written = 0
-    for i, owner in enumerate(owners, start=1):
-        log(f"[{i}/{len(owners)}] {owner}")
-        created_at = load_cached_created_at(owner)
+    for i, owner_key in enumerate(owners, start=1):
+        display_owner = min(activity_by_owner[owner_key]["spellings"])
+        log(f"[{i}/{len(owners)}] {display_owner}")
+        created_at = load_cached_created_at(display_owner)
         if created_at is None:
             time.sleep(USER_API_DELAY_SECONDS)
-            created_at = fetch_account_created_at(owner, token)
+            created_at = fetch_account_created_at(display_owner, token)
 
-        ban_entry = ban_list.get(owner.lower())
-        record = build_owner_record(owner, activity_by_owner[owner], ban_entry, created_at, today, computed_at)
-        records_by_owner[owner] = record
-        if write_owner_record(owner, record, args.dry_run):
+        ban_entry = ban_list.get(owner_key)
+        record = build_owner_record(display_owner, activity_by_owner[owner_key], ban_entry, created_at, today, computed_at)
+        records_by_owner[owner_key] = record
+        if write_owner_record(display_owner, record, args.dry_run):
             written += 1
 
     verb = "Would write" if args.dry_run else "Wrote"
