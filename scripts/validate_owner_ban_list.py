@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import io
 import re
 import subprocess
 import sys
@@ -31,7 +32,10 @@ DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
 def parse_csv(text: str, source: str) -> list[dict[str, str]]:
-    reader = csv.DictReader(text.splitlines())
+    # csv.DictReader(io.StringIO(text)), not text.splitlines() - the latter splits on
+    # every newline before csv.reader ever sees the file's quoting, so a quoted Reason
+    # field containing an embedded newline would be split into a bogus extra row.
+    reader = csv.DictReader(io.StringIO(text))
     if reader.fieldnames != FIELDNAMES:
         raise ValueError(f"{source}: header must be exactly {FIELDNAMES}, got {reader.fieldnames}")
     return list(reader)

@@ -59,6 +59,8 @@ import argparse
 import csv
 import datetime
 import glob
+import http.client
+import io
 import json
 import os
 import re
@@ -279,7 +281,12 @@ def fetch_account_created_at(owner: str, token: str) -> tuple[str | None, str | 
         log(f"WARNING: GitHub Users API returned {exc.code} for '{owner}'; "
             f"account age will be treated as unknown for this run")
         return None, None, False
-    except (urllib.error.URLError, TimeoutError, ValueError) as exc:
+    except (urllib.error.URLError, TimeoutError, ValueError, OSError, http.client.HTTPException) as exc:
+        # Broad on purpose: a dropped/reset connection or truncated read while
+        # resp.read() runs raises OSError subclasses (ConnectionResetError,
+        # BrokenPipeError) or http.client.IncompleteRead, neither of which is a
+        # urllib.error.URLError - and this function's whole contract (see docstring)
+        # is that no failure here may ever propagate and abort the run.
         log(f"WARNING: could not fetch GitHub account info for '{owner}': {exc}; "
             f"account age will be treated as unknown for this run")
         return None, None, False
