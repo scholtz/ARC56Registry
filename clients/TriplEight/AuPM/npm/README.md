@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { ContractName_hash } from "arc56-generated-tripleight-aupm";
+import { PaymentRouter_366e84cf } from "arc56-generated-tripleight-aupm";
 
 const algorand = AlgorandClient.mainNet();
-const client = new ContractName_hash.ContractClient({
+const client = new PaymentRouter_366e84cf.PaymentRouterClient({
   algorand,
   appId: 123456789n,
 });
@@ -51,7 +51,7 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `PaymentRouter_366e84cf` | `PaymentRouterClient` | [https://raw.githubusercontent.com/TriplEight/AuPM/HEAD/contracts/smart_contracts/artifacts/payment_router/PaymentRouter.arc56.json](https://raw.githubusercontent.com/TriplEight/AuPM/HEAD/contracts/smart_contracts/artifacts/payment_router/PaymentRouter.arc56.json) |
 
 ## Versioning
 
