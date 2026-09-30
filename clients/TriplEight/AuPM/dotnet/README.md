@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Owner.Repo.Contract_hash;
+using Arc56.Generated.TriplEight.AuPM.PaymentRouter_366e84cf;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new ContractProxy(algod, appId: 123456789);
+var client = new PaymentRouterProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,7 +40,7 @@ var client = new ContractProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `Arc56.Generated.TriplEight.AuPM.PaymentRouter_366e84cf` | `PaymentRouterProxy` | [https://raw.githubusercontent.com/TriplEight/AuPM/HEAD/contracts/smart_contracts/artifacts/payment_router/PaymentRouter.arc56.json](https://raw.githubusercontent.com/TriplEight/AuPM/HEAD/contracts/smart_contracts/artifacts/payment_router/PaymentRouter.arc56.json) |
 
 ## Versioning
 
