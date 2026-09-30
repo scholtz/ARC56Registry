@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_tripl_b5f30855 import contract_name_hash
+from arc56_generated_tripl_b5f30855 import PaymentRouter_366e84cf
 
 algorand = AlgorandClient.mainnet()
-client = contract_name_hash.ContractClient(
+client = PaymentRouter_366e84cf.PaymentRouterClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,7 +50,7 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| _(none yet)_ | | |
+| `PaymentRouter_366e84cf` | `PaymentRouterClient` | [https://raw.githubusercontent.com/TriplEight/AuPM/HEAD/contracts/smart_contracts/artifacts/payment_router/PaymentRouter.arc56.json](https://raw.githubusercontent.com/TriplEight/AuPM/HEAD/contracts/smart_contracts/artifacts/payment_router/PaymentRouter.arc56.json) |
 
 ## Versioning
 

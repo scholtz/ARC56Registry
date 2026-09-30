@@ -1,1 +1,1 @@
-# no contracts generated yet
+from . import PaymentRouter_366e84cf as PaymentRouter_366e84cf
