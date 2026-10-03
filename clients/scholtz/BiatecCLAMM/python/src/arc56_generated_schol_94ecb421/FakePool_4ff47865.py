@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [4, 56], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "assetA"}, {"type": "uint64", "name": "assetB"}, {"type": "uint64", "name": "verificationClass"}, {"type": "uint64", "name": "appBiatecPoolProvider"}], "name": "bootstrapStep2", "returns": {"type": "void"}, "desc": "When we know the app id of this pool, we can register it properly at the pool provider"}, {"actions": {"call": [], "create": ["NoOp"]}, "args": [], "name": "createApplication", "returns": {"type": "void"}}], "name": "FakePool", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "desc": "", "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [39], "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?", "teal": 24}, {"pc": [121], "errorMessage": "this contract does not implement the given ABI method for create NoOp", "teal": 107}, {"pc": [135], "errorMessage": "this contract does not implement the given ABI method for call NoOp", "teal": 115}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [4, 56], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "assetA"}, {"type": "uint64", "name": "assetB"}, {"type": "uint64", "name": "verificationClass"}, {"type": "uint64", "name": "appBiatecPoolProvider"}], "name": "bootstrapStep2", "returns": {"type": "void"}, "desc": "When we know the app id of this pool, we can register it properly at the pool provider"}, {"actions": {"call": [], "create": ["NoOp"]}, "args": [], "name": "createApplication", "returns": {"type": "void"}}], "name": "FakePool", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CiACAQYxGBQjCzEZCI0MAFMAAAAAAAAAAAAAAEUAAAAAAAAAAAAAADYaBBc2GgMXNhoCFzYaAReIAAIiQ4oEALEjshCABMvLvjeyGjIIFrIai/8WshqL/hayGov9FrIagQCyAYv8shiziSJDgAS4RHs2NhoAjgH/8QCABKB6D2o2GgCOAf+hAA==", "clear": "Cg=="}, "desc": "", "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDYKCi8vIFRoaXMgVEVBTCB3YXMgZ2VuZXJhdGVkIGJ5IFRFQUxTY3JpcHQgdjAuMTA3LjIKLy8gaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9URUFMU2NyaXB0CgovLyBUaGlzIGNvbnRyYWN0IGlzIGNvbXBsaWFudCB3aXRoIGFuZC9vciBpbXBsZW1lbnRzIHRoZSBmb2xsb3dpbmcgQVJDczogWyBBUkM0IF0KCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCmludGMgMSAvLyA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIGJvb3RzdHJhcFN0ZXAyKHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCl2b2lkCiphYmlfcm91dGVfYm9vdHN0cmFwU3RlcDI6CgkvLyBhcHBCaWF0ZWNQb29sUHJvdmlkZXI6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNAoJYnRvaQoKCS8vIHZlcmlmaWNhdGlvbkNsYXNzOiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDMKCWJ0b2kKCgkvLyBhc3NldEI6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJYnRvaQoKCS8vIGFzc2V0QTogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBib290c3RyYXBTdGVwMih1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQpdm9pZAoJY2FsbHN1YiBib290c3RyYXBTdGVwMgoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gYm9vdHN0cmFwU3RlcDIoYXNzZXRBOiBBc3NldElELCBhc3NldEI6IEFzc2V0SUQsIHZlcmlmaWNhdGlvbkNsYXNzOiB1aW50NjQsIGFwcEJpYXRlY1Bvb2xQcm92aWRlcjogQXBwSUQpOiB2b2lkCi8vCi8vIFdoZW4gd2Uga25vdyB0aGUgYXBwIGlkIG9mIHRoaXMgcG9vbCwgd2UgY2FuIHJlZ2lzdGVyIGl0IHByb3Blcmx5IGF0IHRoZSBwb29sIHByb3ZpZGVyCmJvb3RzdHJhcFN0ZXAyOgoJcHJvdG8gNCAwCgoJLy8gY29udHJhY3RzXEZha2VQb29sLmFsZ28udHM6OAoJLy8gc2VuZE1ldGhvZENhbGw8W0FwcElELCBBc3NldElELCBBc3NldElELCB1aW50NjRdLCB2b2lkPih7CgkvLyAgICAgICBuYW1lOiAncmVnaXN0ZXJQb29sJywKCS8vICAgICAgIG1ldGhvZEFyZ3M6IFtnbG9iYWxzLmN1cnJlbnRBcHBsaWNhdGlvbklELCBhc3NldEEsIGFzc2V0QiwgdmVyaWZpY2F0aW9uQ2xhc3NdLAoJLy8gICAgICAgZmVlOiAwLAoJLy8gICAgICAgYXBwbGljYXRpb25JRDogYXBwQmlhdGVjUG9vbFByb3ZpZGVyLAoJLy8gICAgIH0pCglpdHhuX2JlZ2luCglpbnRjIDEgLy8gIGFwcGwKCWl0eG5fZmllbGQgVHlwZUVudW0KCXB1c2hieXRlcyAweGNiY2JiZTM3IC8vIG1ldGhvZCAicmVnaXN0ZXJQb29sKHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCl2b2lkIgoJaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKCgkvLyBjb250cmFjdHNcRmFrZVBvb2wuYWxnby50czoxMAoJLy8gbWV0aG9kQXJnczogW2dsb2JhbHMuY3VycmVudEFwcGxpY2F0aW9uSUQsIGFzc2V0QSwgYXNzZXRCLCB2ZXJpZmljYXRpb25DbGFzc10KCWdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25JRAoJaXRvYgoJaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKCWZyYW1lX2RpZyAtMSAvLyBhc3NldEE6IEFzc2V0SUQKCWl0b2IKCWl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCglmcmFtZV9kaWcgLTIgLy8gYXNzZXRCOiBBc3NldElECglpdG9iCglpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwoJZnJhbWVfZGlnIC0zIC8vIHZlcmlmaWNhdGlvbkNsYXNzOiB1aW50NjQKCWl0b2IKCWl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCgoJLy8gY29udHJhY3RzXEZha2VQb29sLmFsZ28udHM6MTEKCS8vIGZlZTogMAoJcHVzaGludCAwCglpdHhuX2ZpZWxkIEZlZQoKCS8vIGNvbnRyYWN0c1xGYWtlUG9vbC5hbGdvLnRzOjEyCgkvLyBhcHBsaWNhdGlvbklEOiBhcHBCaWF0ZWNQb29sUHJvdmlkZXIKCWZyYW1lX2RpZyAtNCAvLyBhcHBCaWF0ZWNQb29sUHJvdmlkZXI6IEFwcElECglpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CglyZXRzdWIKCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CglpbnRjIDAgLy8gMQoJcmV0dXJuCgoqY3JlYXRlX05vT3A6CglwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjcmVhdGUgTm9PcAoJZXJyCgoqY2FsbF9Ob09wOgoJcHVzaGJ5dGVzIDB4YTA3YTBmNmEgLy8gbWV0aG9kICJib290c3RyYXBTdGVwMih1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfYm9vdHN0cmFwU3RlcDIKCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY2FsbCBOb09wCgllcnI=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDEw"}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [39], "errorMessage": "The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?", "teal": 24}, {"pc": [121], "errorMessage": "this contract does not implement the given ABI method for create NoOp", "teal": 107}, {"pc": [135], "errorMessage": "this contract does not implement the given ABI method for call NoOp", "teal": 115}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -94,6 +94,17 @@ class FakePoolParams:
             "args": method_args,
         }))
 
+    def create_application(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "createApplication()void",
+        }))
+
     def clear_state(
         self,
         params: algokit_utils.AppClientBareCallParams | None = None,
@@ -120,6 +131,17 @@ class FakePoolCreateTransactionParams:
             **dataclasses.asdict(params),
             "method": "bootstrapStep2(uint64,uint64,uint64,uint64)void",
             "args": method_args,
+        }))
+
+    def create_application(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "createApplication()void",
         }))
 
     def clear_state(
@@ -149,6 +171,20 @@ class FakePoolSend:
             **dataclasses.asdict(params),
             "method": "bootstrapStep2(uint64,uint64,uint64,uint64)void",
             "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
+
+    def create_application(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "createApplication()void",
         }), send_params=send_params)
         parsed_response = response
         return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
@@ -355,6 +391,340 @@ class FakePoolClient:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class FakePoolMethodCallCreateParams(
+    algokit_utils.AppClientCreateSchema, algokit_utils.BaseAppClientMethodCallParams[
+        typing.Any,
+        str | None,
+    ]
+):
+    """Parameters for creating FakePool contract using ABI"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallCreateParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallCreateParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+class FakePoolFactory(algokit_utils.TypedAppFactoryProtocol[FakePoolMethodCallCreateParams, None, None]):
+    """Factory for deploying and managing FakePoolClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = FakePoolFactoryParams(self.app_factory)
+        self.create_transaction = FakePoolFactoryCreateTransaction(self.app_factory)
+        self.send = FakePoolFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: FakePoolMethodCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[FakePoolClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return FakePoolClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> FakePoolClient:
+        """Get an app client by creator address and name"""
+        return FakePoolClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> FakePoolClient:
+        """Get an app client by app ID"""
+        return FakePoolClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class FakePoolFactoryParams:
+    """Parameters for creating transactions for FakePool contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = FakePoolFactoryCreateParams(app_factory)
+        self.update = FakePoolFactoryUpdateParams(app_factory)
+        self.delete = FakePoolFactoryDeleteParams(app_factory)
+
+class FakePoolFactoryCreateParams:
+    """Parameters for 'create' operations of FakePool contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def bootstrap_step_2(
+        self,
+        args: tuple[int, int, int, int] | BootstrapStep2Args,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the bootstrapStep2(uint64,uint64,uint64,uint64)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "bootstrapStep2(uint64,uint64,uint64,uint64)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def create_application(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the createApplication()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "createApplication()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class FakePoolFactoryUpdateParams:
+    """Parameters for 'update' operations of FakePool contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class FakePoolFactoryDeleteParams:
+    """Parameters for 'delete' operations of FakePool contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class FakePoolFactoryCreateTransaction:
+    """Create transactions for FakePool contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = FakePoolFactoryCreateTransactionCreate(app_factory)
+
+
+class FakePoolFactoryCreateTransactionCreate:
+    """Create new instances of FakePool contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class FakePoolFactorySend:
+    """Send calls to FakePool contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = FakePoolFactorySendCreate(app_factory)
+
+
+class FakePoolFactorySendCreate:
+    """Send create calls to FakePool contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[FakePoolClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return FakePoolClient(result[0]), result[1]
+
+    def create_application(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> tuple[FakePoolClient, algokit_utils.AppFactoryCreateMethodCallResult[None]]:
+            """Creates and sends a transaction using the createApplication()void ABI method"""
+            params = params or algokit_utils.CommonAppCallCreateParams()
+            client, result = self.app_factory.send.create(
+                algokit_utils.AppFactoryCreateMethodCallParams(
+                    **{
+                    **dataclasses.asdict(params),
+                    "method": "createApplication()void",
+                    "args": None,
+                    }
+                ),
+                send_params=send_params,
+                compilation_params=compilation_params
+            )
+            return_value = None if result.abi_return is None else typing.cast(None, result.abi_return)
+    
+            return FakePoolClient(client), algokit_utils.AppFactoryCreateMethodCallResult[None](
+                **{
+                    **result.__dict__,
+                    "app_id": result.app_id,
+                    "abi_return": return_value,
+                    "transaction": result.transaction,
+                    "confirmation": result.confirmation,
+                    "group_id": result.group_id,
+                    "tx_ids": result.tx_ids,
+                    "transactions": result.transactions,
+                    "confirmations": result.confirmations,
+                    "app_address": result.app_address,
+                }
+            )
+
+
 class FakePoolComposer:
     """Composer for creating transaction groups for FakePool contract calls"""
 
@@ -377,6 +747,23 @@ class FakePoolComposer:
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
                 "bootstrapStep2(uint64,uint64,uint64,uint64)void", v
+            )
+        )
+        return self
+
+    def create_application(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "FakePoolComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.create_application(
+                
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "createApplication()void", v
             )
         )
         return self
