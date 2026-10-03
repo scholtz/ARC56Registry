@@ -172,12 +172,20 @@ def is_permanently_missing(exc: Exception) -> bool:
     return isinstance(exc, urllib.error.HTTPError) and exc.code == 404
 
 
+TRANSIENT_ERROR_MARKERS = (
+    "<urlopen error",  # connection reset, DNS failure, refused, ...
+    "HTTP Error 429", "HTTP Error 5",
+    "timed out", "Remote end closed", "IncompleteRead", "Connection",
+)
+
+
 def is_permanent_error_text(error: str) -> bool:
-    """True for a recorded download_error that will never succeed on retry: a 404, or a
-    URL urllib refuses to even send (control characters). Everything else - connection
-    reset, timeout, 5xx, dropped connection - is transient and must be retried on the
-    next run instead of being stuck in state.json forever."""
-    return error.startswith("HTTP Error 404") or "can't contain control characters" in error
+    """A recorded download_error that will not succeed on retry. Allowlist of transient
+    markers (connection reset, timeout, 429, 5xx, dropped connection); everything else -
+    404 and other 4xx, malformed URLs - is permanent, so unknown errors are not retried
+    (and burn 7s + backoff) on every run. Transient errors are retried next run instead
+    of being stuck in state.json forever."""
+    return not any(error.startswith(m) or m in error for m in TRANSIENT_ERROR_MARKERS)
 
 
 def load_all_rows() -> list[dict[str, str]]:
