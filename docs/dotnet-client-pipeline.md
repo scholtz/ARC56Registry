@@ -55,7 +55,7 @@ consumers add one package reference per source repo, not one per contract.
   clients/<owner>/<repo>/
     arc56/
       <file_slug>_<hash8>.arc56.json   # copy of the source spec, shared across ecosystems
-      state.json                       # download bookkeeping: content hash / download error per URL
+      state.json                       # download bookkeeping: content hash, approval/clear program hashes, download error per URL
     dotnet/
       <PackageId>.csproj
       README.md              # per-project usage doc, includes a table of every contract
@@ -110,6 +110,17 @@ by 1 when the generated code actually changes, or when the shared templates chan
 Existing rows are never deleted from `arc56.links.csv` (see
 [arc56-links-pipeline.md](arc56-links-pipeline.md)), and this pipeline mirrors that:
 generated files and state entries are never removed, only added to or updated in place.
+
+## Program hashes in `arc56/state.json`
+
+Each successfully downloaded contract entry in `arc56/state.json` also records
+`approval_program_sha256` and `clear_program_sha256`: the SHA-256 (hex) of the
+base64-decoded `byteCode.approval` / `byteCode.clear`. These are the same hashes used
+under `approval-programs/` and `clear-programs/` (see docs/hash-registry.md), so to
+check whether a deployed app matches a spec, hash the app's on-chain approval/clear
+program and compare. The fields are omitted if the spec has no (or invalid) bytecode.
+`download_arc56_specs.py` fills them on every download (and backfills unchanged
+entries); `scripts/backfill_program_hashes.py` was the one-time offline backfill.
 
 ## Rate limiting
 

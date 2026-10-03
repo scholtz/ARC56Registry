@@ -18,7 +18,8 @@ For every *active* row, this script:
   1. Downloads the ARC-56 JSON spec (rate-limited: at least DOWNLOAD_DELAY_SECONDS
      between downloads).
   2. Writes it to clients/<owner>/<repo>/arc56/<file_slug>_<hash8>.arc56.json.
-  3. Records its SHA-256 (and, on failure, the error) in
+  3. Records its SHA-256, the SHA-256 of its decoded approval/clear programs
+     (approval_program_sha256 / clear_program_sha256), and, on failure, the error) in
      clients/<owner>/<repo>/arc56/state.json, keyed by source URL.
 
 A URL that's already known to be unfetchable (bad path encoding, 404, etc.) is not
@@ -31,6 +32,7 @@ remove, only deactivate" convention (see docs/arc56-links-pipeline.md).
 from __future__ import annotations
 
 import argparse
+import base64
 import csv
 import datetime
 import hashlib
@@ -95,6 +97,29 @@ def sanitize_identifier(name: str) -> str:
 
 def sha256_hex(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def program_hashes(content: bytes) -> dict[str, str]:
+    """SHA-256 (hex) of the decoded byteCode.approval / byteCode.clear of a spec.
+
+    Same hash definition as scripts/generate_hash_registry.py, so a value can be looked
+    up in approval-programs/ / clear-programs/ directly. A field is omitted when the
+    spec is not valid JSON, or has no (or invalid base64) bytecode for that program."""
+    try:
+        spec = json.loads(content)
+        byte_code = spec.get("byteCode") or {}
+    except (ValueError, AttributeError):
+        return {}
+    out: dict[str, str] = {}
+    for field, key in (("approval", "approval_program_sha256"), ("clear", "clear_program_sha256")):
+        program_b64 = byte_code.get(field) if isinstance(byte_code, dict) else None
+        if not program_b64 or not isinstance(program_b64, str):
+            continue
+        try:
+            out[key] = sha256_hex(base64.b64decode(program_b64, validate=True))
+        except ValueError:
+            continue
+    return out
 
 
 def url_hash8(url: str) -> str:
@@ -333,13 +358,20 @@ def process_project(
             dirty = True
             continue
 
+        hashes = program_hashes(content)
         if existing is not None and existing.get("content_sha256") == content_hash and "download_error" not in existing:
-            continue  # unchanged content - nothing to persist
+            # Unchanged content - only persist if the program hashes are new/different
+            # (backfills entries written before these fields existed).
+            if any(existing.get(k) != v for k, v in hashes.items()):
+                existing.update(hashes)
+                dirty = True
+            continue
 
         contracts_state[url] = {
             "file_slug": file_slug,
             "hash8": hash8,
             "content_sha256": content_hash,
+            **hashes,
             "downloaded_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         }
         dirty = True
