@@ -3,7 +3,7 @@
 - **Repo**: [joe-p/algokit-lite-ts](https://github.com/joe-p/algokit-lite-ts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/ARC56Test.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/ARC56Test.arc56.json)
 - **Namespace used**: `Arc56.Generated.joe_p.algokit_lite_ts.ARC56Test_2c3c693f`
-- **Detected**: 2026-09-07T11:08:43.285452+00:00
+- **Detected**: 2026-10-03T10:52:02.390021+00:00
 - **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:373d3f7fe96a2c2c9e361a9c88d822321296511aadc0ad91910dd26077078f37`
 
 ## Reproduce
