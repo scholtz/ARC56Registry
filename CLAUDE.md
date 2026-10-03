@@ -16,6 +16,9 @@ cover.
   docs/arc56-links-pipeline.md#priority-column and #hash-column for the full
   scheme (scholtz/txnlab reserved ranges, hand-added rows get `Priority=1`,
   automated discoveries get the discovery-time Unix timestamp).
+- `clients/<owner>/<repo>/arc56/state.json` entries also carry `approval_program_sha256`/
+  `clear_program_sha256` (SHA-256 of decoded bytecode, same as the hash registry), filled by
+  `download_arc56_specs.py`; `scripts/backfill_program_hashes.py` was the one-time backfill.
 - `scripts/update_arc56_links.py` - finds new ARC-56 files on GitHub, merges into the CSV.
   Skips any repo listed in `scripts/repo_blacklist.txt` (this repo itself is blacklisted
   by default, since its own `*.arc56.json` files are examples/fixtures, not real specs
