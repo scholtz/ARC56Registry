@@ -22,8 +22,9 @@ For every *active* row, this script:
      (approval_program_sha256 / clear_program_sha256), and, on failure, the error) in
      clients/<owner>/<repo>/arc56/state.json, keyed by source URL.
 
-A URL that's already known to be unfetchable (bad path encoding, 404, etc.) is not
-retried every single run - only when --retry-failed is passed - since retrying a
+A URL that's already known to be permanently unfetchable (bad path encoding, 404) is not
+retried every single run - only when --retry-failed is passed. Transient errors
+(connection reset, timeout, 5xx) are retried 3x in-run and again on every later run - since retrying a
 dead URL costs a full DOWNLOAD_DELAY_SECONDS for no benefit.
 
 Existing rows/files are never deleted, matching the rest of this repo's "never
@@ -52,6 +53,8 @@ CLIENTS_DIR = os.path.join(REPO_ROOT, "clients")
 DOWNLOAD_DELAY_SECONDS = 7
 PUSH_INTERVAL_SECONDS = 60
 DOWNLOAD_ERROR_BACKOFF_SECONDS = 30
+DOWNLOAD_ATTEMPTS = 3
+DOWNLOAD_RETRY_BACKOFF_SECONDS = 10
 MAX_CONSECUTIVE_DOWNLOAD_ERRORS = 10
 
 URL_COLUMN = "ARC56URL"
@@ -169,6 +172,22 @@ def is_permanently_missing(exc: Exception) -> bool:
     return isinstance(exc, urllib.error.HTTPError) and exc.code == 404
 
 
+TRANSIENT_ERROR_MARKERS = (
+    "<urlopen error",  # connection reset, DNS failure, refused, ...
+    "HTTP Error 429", "HTTP Error 5",
+    "timed out", "Remote end closed", "IncompleteRead", "Connection",
+)
+
+
+def is_permanent_error_text(error: str) -> bool:
+    """A recorded download_error that will not succeed on retry. Allowlist of transient
+    markers (connection reset, timeout, 429, 5xx, dropped connection); everything else -
+    404 and other 4xx, malformed URLs - is permanent, so unknown errors are not retried
+    (and burn 7s + backoff) on every run. Transient errors are retried next run instead
+    of being stuck in state.json forever."""
+    return not any(error.startswith(m) or m in error for m in TRANSIENT_ERROR_MARKERS)
+
+
 def load_all_rows() -> list[dict[str, str]]:
     with open(CSV_PATH, newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
@@ -203,10 +222,24 @@ def download_with_rate_limit(url: str) -> bytes:
         wait = DOWNLOAD_DELAY_SECONDS - elapsed
         if wait > 0:
             time.sleep(wait)
-    log(f"Downloading {url}")
     req = urllib.request.Request(url, headers={"User-Agent": "arc56-spec-downloader"})
-    with urllib.request.urlopen(req) as resp:
-        data = resp.read()
+    for attempt in range(1, DOWNLOAD_ATTEMPTS + 1):
+        log(f"Downloading {url}" + (f" (attempt {attempt}/{DOWNLOAD_ATTEMPTS})" if attempt > 1 else ""))
+        try:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                data = resp.read()
+            break
+        except Exception as exc:  # noqa: BLE001
+            # Only transport-level hiccups (connection reset, timeout, 5xx) are worth
+            # retrying; a 404 or a malformed URL fails identically every time.
+            transient = not is_permanently_missing(exc) and not isinstance(exc, ValueError) and not (
+                isinstance(exc, urllib.error.HTTPError) and 400 <= exc.code < 500 and exc.code != 429
+            )
+            if not transient or attempt == DOWNLOAD_ATTEMPTS:
+                _last_download_at = time.monotonic()
+                raise
+            log(f"WARNING: transient download error ({exc}); retrying in {DOWNLOAD_RETRY_BACKOFF_SECONDS * attempt}s")
+            time.sleep(DOWNLOAD_RETRY_BACKOFF_SECONDS * attempt)
     _last_download_at = time.monotonic()
     return data
 
@@ -303,8 +336,11 @@ def process_project(
         contract_id = f"{file_slug}_{hash8}"
         existing = contracts_state.get(url)
 
-        if existing is not None and "download_error" in existing and not retry_failed:
-            continue
+        if (
+            existing is not None and "download_error" in existing and not retry_failed
+            and (is_permanent_error_text(existing["download_error"]) or "deactivated_reason" in existing)
+        ):
+            continue  # permanent failure - transient ones are retried every run
 
         try:
             content = download_with_rate_limit(url)
