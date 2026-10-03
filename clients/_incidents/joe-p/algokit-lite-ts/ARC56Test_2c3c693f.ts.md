@@ -2,7 +2,7 @@
 
 - **Repo**: [joe-p/algokit-lite-ts](https://github.com/joe-p/algokit-lite-ts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/ARC56Test.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/ARC56Test.arc56.json)
-- **Detected**: 2026-09-07T11:39:18.054102+00:00
+- **Detected**: 2026-10-03T11:09:20.375214+00:00
 - **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
 
 ## Reproduce
