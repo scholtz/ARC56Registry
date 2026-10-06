@@ -1,0 +1,2398 @@
+{
+  "name": "HayLaunch",
+  "structs": {
+    "BondingPreview": [
+      {
+        "name": "initialPrice",
+        "type": "uint64"
+      },
+      {
+        "name": "finalPrice",
+        "type": "uint64"
+      },
+      {
+        "name": "totalBondingRequired",
+        "type": "uint64"
+      },
+      {
+        "name": "initialMarketCapUsd",
+        "type": "uint64"
+      },
+      {
+        "name": "finalMarketCapUsd",
+        "type": "uint64"
+      },
+      {
+        "name": "fdvAtLaunch",
+        "type": "uint64"
+      },
+      {
+        "name": "fdvAtBonding",
+        "type": "uint64"
+      },
+      {
+        "name": "tokensForBonding",
+        "type": "uint64"
+      },
+      {
+        "name": "tokensForLp",
+        "type": "uint64"
+      },
+      {
+        "name": "priceMultiplier",
+        "type": "uint64"
+      }
+    ],
+    "PoolFees": [
+      {
+        "name": "tokenAmount",
+        "type": "uint64"
+      },
+      {
+        "name": "bondingAmount",
+        "type": "uint64"
+      }
+    ],
+    "TokenInfo": [
+      {
+        "name": "version",
+        "type": "byte[1]"
+      },
+      {
+        "name": "tokenNum",
+        "type": "uint64"
+      },
+      {
+        "name": "tokenCreator",
+        "type": "address"
+      },
+      {
+        "name": "bondingTokenId",
+        "type": "uint64"
+      },
+      {
+        "name": "virtualTokenReserves",
+        "type": "uint64"
+      },
+      {
+        "name": "virtualBondingReserves",
+        "type": "uint64"
+      },
+      {
+        "name": "realTokenReserves",
+        "type": "uint64"
+      },
+      {
+        "name": "realBondingReserves",
+        "type": "uint64"
+      },
+      {
+        "name": "initialRealTokenReserves",
+        "type": "uint64"
+      },
+      {
+        "name": "launchQ",
+        "type": "uint64"
+      },
+      {
+        "name": "feeBpsPlatform",
+        "type": "uint64"
+      },
+      {
+        "name": "feeBpsCreator",
+        "type": "uint64"
+      },
+      {
+        "name": "bondingTargetUsd",
+        "type": "uint64"
+      },
+      {
+        "name": "tokenPriceMultiplier",
+        "type": "uint64"
+      },
+      {
+        "name": "bondingOn",
+        "type": "uint64"
+      },
+      {
+        "name": "assetId",
+        "type": "uint64"
+      },
+      {
+        "name": "symbol",
+        "type": "byte[8]"
+      },
+      {
+        "name": "name",
+        "type": "byte[32]"
+      },
+      {
+        "name": "assetUrl",
+        "type": "byte[96]"
+      },
+      {
+        "name": "description",
+        "type": "byte[1024]"
+      },
+      {
+        "name": "socialWebsite",
+        "type": "byte[256]"
+      },
+      {
+        "name": "socialX",
+        "type": "byte[64]"
+      },
+      {
+        "name": "socialTelegram",
+        "type": "byte[64]"
+      },
+      {
+        "name": "socialDiscord",
+        "type": "byte[64]"
+      },
+      {
+        "name": "poolAppId",
+        "type": "uint64"
+      },
+      {
+        "name": "lpTokenId",
+        "type": "uint64"
+      }
+    ],
+    "UserHoldingKey": [
+      {
+        "name": "address",
+        "type": "address"
+      },
+      {
+        "name": "tokenNum",
+        "type": "uint64"
+      }
+    ]
+  },
+  "methods": [
+    {
+      "name": "createApplication",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "adminToken"
+        },
+        {
+          "type": "uint64",
+          "name": "usdc"
+        },
+        {
+          "type": "uint64",
+          "name": "hay"
+        },
+        {
+          "type": "uint64",
+          "name": "oracleAppId"
+        },
+        {
+          "type": "uint64",
+          "name": "bondingUsd"
+        },
+        {
+          "type": "uint64",
+          "name": "priceMultiplier"
+        },
+        {
+          "type": "uint64",
+          "name": "createSupply"
+        },
+        {
+          "type": "uint64",
+          "name": "feeBpsPlatform"
+        },
+        {
+          "type": "uint64",
+          "name": "feeBpsCreator"
+        },
+        {
+          "type": "address",
+          "name": "platformTreasury"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [
+          "NoOp"
+        ],
+        "call": []
+      },
+      "readonly": false,
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "updateApplication",
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "UpdateApplication"
+        ]
+      },
+      "readonly": false,
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "init",
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Opts the application account into USDC, which is needed for the updateTokenMetadata\nfee regardless of which assets are supported for bonding.\n\nBonding assets - including USDC and HAY - are opted into separately via\noptInBondingAsset(), so this no longer hardcodes the supported set.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "configureApps",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "pactFactoryAppId",
+          "desc": "- The Pact V2 pool factory application ID (mainnet 3656084442), 0 = bond without a pool"
+        },
+        {
+          "type": "uint64",
+          "name": "bonfireAppId",
+          "desc": "- The ARC-54 Bonfire application ID for LP burning"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Configure Pact factory and Bonfire app IDs for pool creation.\nMust be called before any token can complete bonding.\n\nThe Pact V2 vault is not configured separately: it is read from the factory's\n`vault_app` global, the same source every pool the factory deploys trusts. A nonzero\nfactory must therefore have one - this rejects e.g. a Pact V1 factory id, which would\notherwise let launches through that could never bond.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "updateTreasury",
+      "args": [
+        {
+          "type": "address",
+          "name": "newTreasury"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "optInBondingAsset",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "asset",
+          "desc": "- The ASA to support as a bonding token."
+        },
+        {
+          "type": "pay",
+          "name": "mbrPayment",
+          "desc": "- Payment covering the 0.1 ALGO opt-in MBR."
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Opts the app into an ASA so it can be used as a bonding token.\n\nThe opt-in doubles as the allowlist: launchToken() only accepts assets this app\nholds, so there is no separate registry to maintain. The one method here open to the\nadmin NFT as well as the creator - the two halves of adding a bonding asset have to\nstay aligned, and the other half (registerAsset + setAssetPrices on the oracle) is\nadmin-gated with the same token. It is still a real risk surface - see the\nfreeze/clawback check below.\n\nThe asset must also be registered and priced in the oracle before it can be launched\nagainst; this method deliberately does not check that, so the two can be set up in\neither order.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "updateLaunchParams",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "bondingUsd"
+        },
+        {
+          "type": "uint64",
+          "name": "priceMultiplier"
+        },
+        {
+          "type": "uint64",
+          "name": "createSupply"
+        },
+        {
+          "type": "uint64",
+          "name": "feeBpsPlatform"
+        },
+        {
+          "type": "uint64",
+          "name": "feeBpsCreator"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "updateTokenMetadata",
+      "args": [
+        {
+          "type": "axfer",
+          "name": "payment"
+        },
+        {
+          "type": "uint64",
+          "name": "tokenNum"
+        },
+        {
+          "type": "string",
+          "name": "description"
+        },
+        {
+          "type": "string",
+          "name": "socialWebsite"
+        },
+        {
+          "type": "string",
+          "name": "socialX"
+        },
+        {
+          "type": "string",
+          "name": "socialTelegram"
+        },
+        {
+          "type": "string",
+          "name": "socialDiscord"
+        }
+      ],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Update token metadata (description and social fields).\nCan only be called by the contract creator or the token creator.\nRequires a 30 USDC payment (free for contract creator).",
+      "events": [
+        {
+          "name": "eventTokenMetadataUpdated",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "string",
+              "name": "description"
+            },
+            {
+              "type": "string",
+              "name": "socialWebsite"
+            },
+            {
+              "type": "string",
+              "name": "socialX"
+            },
+            {
+              "type": "string",
+              "name": "socialTelegram"
+            },
+            {
+              "type": "string",
+              "name": "socialDiscord"
+            }
+          ]
+        }
+      ],
+      "recommendations": {}
+    },
+    {
+      "name": "gas",
+      "args": [],
+      "returns": {
+        "type": "void"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "No-op method used to add extra transactions to a group for increased opcode budget.\nCallers can include multiple `gas()` calls in a transaction group when complex\noperations require more than the single-transaction opcode limit.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "mbrToLaunchToken",
+      "args": [],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "mbrToBuy",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum"
+        }
+      ],
+      "returns": {
+        "type": "uint64"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "mbrToLaunchTokenThenBuy",
+      "args": [],
+      "returns": {
+        "type": "uint64",
+        "desc": "Total MBR in microAlgos needed for launchTokenThenBuy"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Returns the MBR needed for launchTokenThenBuy.\nIncludes MBR for launch (tokenMap box, assetMap box, ASA creation) plus\nMBR for the user balance box (first buy).",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "tokensReceivedForBuyAtLaunch",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "bondingToken",
+          "desc": "- The bonding token asset (0 = ALGO)."
+        },
+        {
+          "type": "uint64",
+          "name": "bondingIn",
+          "desc": "- The amount of bonding token to spend."
+        },
+        {
+          "type": "uint64",
+          "name": "targetBondingUsd",
+          "desc": "- Custom bonding target in micro-USD (0 = use contract default)."
+        },
+        {
+          "type": "uint64",
+          "name": "priceMultiplier",
+          "desc": "- Custom price multiplier (9 digits) (0 = use contract default)."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The number of tokens that would be received (after fees)."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Calculates the tokens received for a given bonding token amount at launch-time prices.\nThis is a buy preview that mirrors launchTokenThenBuy() exactly (fees are deducted first).\n\nUses the same reserve calculation logic as launchToken() to compute what the\ninitial virtual reserves would be, then applies constant product formula.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "userHoldings",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The sequential token number assigned at launch time."
+        },
+        {
+          "type": "address",
+          "name": "address",
+          "desc": "- The address of the user whose holdings are being queried."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The amount of the specified token held by the user."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Retrieves the holdings of a specific user for a given token.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "bondingTokenPrice",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "bondingToken",
+          "desc": "- The bonding token to price. Asset id 0 means ALGO."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "Micro-USD per base unit, scaled by SCALE."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Retrieves the USD price of a bonding token from the HaystackOracle price registry.\n\nReads the oracle's `assetPrices` box directly with `app_box_get` (AVM 13) - a plain\nopcode, so this costs no inner transaction and stays usable from",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "isBondingTokenSupported",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "bondingToken",
+          "desc": "- The asset to test. Asset id 0 means ALGO."
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "desc": "True if launchToken() would accept this bonding token."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Whether a token can be launched against right now - the question a launch UI needs\nanswered, and the one the oracle cannot answer on its own.\n\nThe oracle's assetPrices boxes (readable off-chain via the generated client's\n`assetPrices.getMap()`) only say an asset is registered and priced. They do not know\nwhether THIS app is opted into it, and an asset can legitimately be priced but not\nopted in. This combines both, plus price freshness, into one non-throwing answer, so\ncallers can probe candidates without catching simulate failures.\n\nShares its predicates with the launch path deliberately - isOptedInBondingToken(),\nisInPactVault() and readOraclePrice() are the same calls launchToken() makes. If this\nreturned true while launchToken() rejected, the UI would offer launches that always fail.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "launchToken",
+      "args": [
+        {
+          "type": "pay",
+          "name": "mbrPayment",
+          "desc": "- Prior payment transaction covering MBR costs (must equal mbrToLaunchToken amount)."
+        },
+        {
+          "type": "string",
+          "name": "symbol",
+          "desc": "- The symbol of the token, represented as a fixed-length byte array."
+        },
+        {
+          "type": "string",
+          "name": "name",
+          "desc": "- The name of the token, represented as a fixed-length byte array."
+        },
+        {
+          "type": "string",
+          "name": "assetUrl",
+          "desc": "- A URL pointing to the asset's information or metadata, represented as a fixed-length byte array."
+        },
+        {
+          "type": "string",
+          "name": "description",
+          "desc": "- A textual description of the token, represented as a fixed-length byte array."
+        },
+        {
+          "type": "string",
+          "name": "socialWebsite",
+          "desc": "- The URL of the token's official website, represented as a fixed-length byte array."
+        },
+        {
+          "type": "string",
+          "name": "socialX",
+          "desc": "- The username or handle for the token's presence on \"X\" (formerly Twitter), represented as a fixed-length byte array."
+        },
+        {
+          "type": "string",
+          "name": "socialTelegram",
+          "desc": "- The username or URL for the token's Telegram group or channel, represented as a fixed-length byte array."
+        },
+        {
+          "type": "string",
+          "name": "socialDiscord",
+          "desc": "- The URL or identifier for the token's Discord server, represented as a fixed-length byte array."
+        },
+        {
+          "type": "uint64",
+          "name": "targetBondingUsd",
+          "desc": "- Custom bonding target in micro-USD (0 = use contract default). Must be >= contract minimum if specified."
+        },
+        {
+          "type": "uint64",
+          "name": "priceMultiplier",
+          "desc": "- Custom price multiplier (9 digits - 20,000,000,000 = 20x) (0 = use contract default). Must be >= contract minimum if specified."
+        },
+        {
+          "type": "uint64",
+          "name": "bondingToken",
+          "desc": "- The bonding token asset (see isBondingTokenSupported; 0 = ALGO)."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The sequential token number assigned to the newly-created token."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Launches a new token with the specified metadata and parameters.",
+      "events": [
+        {
+          "name": "eventTokenLaunched",
+          "args": [
+            {
+              "type": "address",
+              "name": "creator"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "string",
+              "name": "name"
+            },
+            {
+              "type": "string",
+              "name": "unitName"
+            },
+            {
+              "type": "uint64",
+              "name": "decimals"
+            },
+            {
+              "type": "uint64",
+              "name": "totalSupply"
+            },
+            {
+              "type": "uint64",
+              "name": "initialPrice"
+            },
+            {
+              "type": "uint64",
+              "name": "targetPrice"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTarget"
+            },
+            {
+              "type": "uint64",
+              "name": "virtualTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "virtualBondingReserves"
+            }
+          ]
+        }
+      ],
+      "recommendations": {}
+    },
+    {
+      "name": "launchTokenThenBuy",
+      "args": [
+        {
+          "type": "pay",
+          "name": "mbrPayment",
+          "desc": "- The payment transaction covering both launch and first buy MBR costs."
+        },
+        {
+          "type": "axfer",
+          "name": "buyPayment",
+          "desc": "- The asset transfer transaction object used to perform the token purchase."
+        },
+        {
+          "type": "string",
+          "name": "symbol",
+          "desc": "- The symbol of the token to be created."
+        },
+        {
+          "type": "string",
+          "name": "name",
+          "desc": "- The name of the token to be created."
+        },
+        {
+          "type": "string",
+          "name": "assetUrl",
+          "desc": "- The URL that provides additional information or metadata about the token."
+        },
+        {
+          "type": "string",
+          "name": "description",
+          "desc": "- A detailed description of the token being created."
+        },
+        {
+          "type": "string",
+          "name": "socialWebsite",
+          "desc": "- The URL of the token's official website."
+        },
+        {
+          "type": "string",
+          "name": "socialX",
+          "desc": "- The link to the token's profile or handle on platform X (e.g., Twitter)."
+        },
+        {
+          "type": "string",
+          "name": "socialTelegram",
+          "desc": "- The link to the token's official Telegram group."
+        },
+        {
+          "type": "string",
+          "name": "socialDiscord",
+          "desc": "- The link to the token's official Discord server."
+        },
+        {
+          "type": "uint64",
+          "name": "targetBondingUsd",
+          "desc": "- Custom bonding target in micro-USD (0 = use contract default). Must be >= contract minimum if specified."
+        },
+        {
+          "type": "uint64",
+          "name": "priceMultiplier",
+          "desc": "- Custom price multiplier (9 digits - 20,000,000,000 = 20x) (0 = use contract default). Must be >= contract minimum if specified."
+        },
+        {
+          "type": "uint64",
+          "name": "bondingToken",
+          "desc": "- The bonding token asset (see isBondingTokenSupported; 0 = ALGO)."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The sequential token number assigned to the newly-created token."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Launches a token with the given parameters and then performs an initial purchase of the token using the provided payment transaction.\nUse mbrToLaunchTokenThenBuy() to get the required MBR amount.",
+      "events": [
+        {
+          "name": "eventTokenLaunched",
+          "args": [
+            {
+              "type": "address",
+              "name": "creator"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "string",
+              "name": "name"
+            },
+            {
+              "type": "string",
+              "name": "unitName"
+            },
+            {
+              "type": "uint64",
+              "name": "decimals"
+            },
+            {
+              "type": "uint64",
+              "name": "totalSupply"
+            },
+            {
+              "type": "uint64",
+              "name": "initialPrice"
+            },
+            {
+              "type": "uint64",
+              "name": "targetPrice"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTarget"
+            },
+            {
+              "type": "uint64",
+              "name": "virtualTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "virtualBondingReserves"
+            }
+          ]
+        },
+        {
+          "name": "eventTokensPurchased",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "amountApplied"
+            },
+            {
+              "type": "uint64",
+              "name": "feesPaid"
+            },
+            {
+              "type": "uint64",
+              "name": "tokensReceived"
+            },
+            {
+              "type": "uint64",
+              "name": "priceBefore"
+            },
+            {
+              "type": "uint64",
+              "name": "priceAfter"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenBalance"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        },
+        {
+          "name": "eventTokenBonded",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "bondedOn"
+            },
+            {
+              "type": "uint64",
+              "name": "platformAppId"
+            },
+            {
+              "type": "address",
+              "name": "platformPoolAccount"
+            },
+            {
+              "type": "uint64",
+              "name": "lpToken"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingInLP"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        }
+      ],
+      "recommendations": {}
+    },
+    {
+      "name": "tokenInfo",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "token",
+          "desc": "- The Asset ID of the token whose information is being retrieved."
+        }
+      ],
+      "returns": {
+        "type": "(byte[1],uint64,address,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,byte[8],byte[32],byte[96],byte[1024],byte[256],byte[64],byte[64],byte[64],uint64,uint64)",
+        "struct": "TokenInfo",
+        "desc": "The information associated with the provided Asset."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Retrieves the information associated with a specific token by its Asset ID.\nNote: This only works after the first buy, when the assetMap is populated.\nUse tokenInfoByNum() for tokens that haven't been bought yet.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "tokenInfoByNum",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The sequential token number assigned at launch time."
+        }
+      ],
+      "returns": {
+        "type": "(byte[1],uint64,address,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,byte[8],byte[32],byte[96],byte[1024],byte[256],byte[64],byte[64],byte[64],uint64,uint64)",
+        "struct": "TokenInfo",
+        "desc": "The information associated with the provided tokenNum."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Retrieves the information associated with a specific token by its sequential token number.\nThis works immediately after launch, before any buys.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "getTokenNumForAsset",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "asset",
+          "desc": "- The Asset ID to look up."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The sequential token number for the asset."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Gets the token number for a given Asset ID.\nOnly works after the first buy, when the assetMap is populated.",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "price",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "token",
+          "desc": "- The Asset ID of the token to retrieve the price for."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The current price in micro-bonding-token per micro-token (scaled)."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Returns the current instantaneous price for a token (micro-bonding-token per micro-token).\nNote: Requires assetMap to be populated (after first buy). Use tokenInfoByNum for unbought tokens.\n\nPrice = virtualBondingReserves / virtualTokenReserves (scaled by SCALE)",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "costToBuy",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "token",
+          "desc": "- The Asset ID of the token to buy."
+        },
+        {
+          "type": "uint64",
+          "name": "tokensOut",
+          "desc": "- The amount of tokens to purchase."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The calculated cost in bonding tokens to buy the specified number of tokens."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Calculates the bonding token cost required to buy a specific amount of tokens.\nNote: Requires assetMap to be populated (after first buy). Use tokenInfoByNum for unbought tokens.\n\nUses constant product formula: newVirtualBonding = k / newVirtualToken\nBonding tokens needed = newVirtualBonding - currentVirtualBonding",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "tokensReceivedForBuy",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The sequential token number assigned at launch time."
+        },
+        {
+          "type": "uint64",
+          "name": "bondingIn",
+          "desc": "- The amount of bonding tokens to spend."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The number of tokens received for the specified bonding token amount (after fees)."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Returns the tokens that would be received for buying with a given amount of bonding tokens.\nThis is a buy preview that mirrors the buy() method exactly (fees are deducted first).\n\nUses constant product formula: newVirtualBonding = virtualBonding + bondingIn (after fees)\nnewVirtualToken = k / newVirtualBonding\ntokensOut = virtualToken - newVirtualToken",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "bondingReceivedForSell",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The sequential token number assigned at launch time."
+        },
+        {
+          "type": "uint64",
+          "name": "tokensToSell",
+          "desc": "- The amount of tokens to sell."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The amount of bonding tokens received (after fees)."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Returns the bonding tokens that would be received for selling a given amount of tokens.\nThis is a sell preview that mirrors the sell() method exactly.\n\nUses constant product formula: newVirtualToken = virtualToken + tokensIn\nnewVirtualBonding = k / newVirtualToken\nbondingOut = virtualBonding - newVirtualBonding (capped by realBondingReserves)",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "bondingProgress",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "token",
+          "desc": "- The Asset ID of the token."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "Bonding progress as percentage scaled by SCALE (0 to 100_000_000_000 representing 0-100%)."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Returns the bonding progress as a percentage (0-100, scaled by SCALE).\nNote: Requires assetMap to be populated (after first buy).\n\nProgress = (initialRealTokenReserves - realTokenReserves) / initialRealTokenReserves * 100 * SCALE",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "marketCap",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "token",
+          "desc": "- The Asset ID of the token."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "Market cap in micro-bonding-token."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Returns the current market cap in micro-bonding-token.\nMarketCap = currentPrice * totalSupply",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "previewBonding",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "bondingToken",
+          "desc": "- The bonding token asset (0 = ALGO)"
+        },
+        {
+          "type": "uint64",
+          "name": "targetBondingUsd",
+          "desc": "- Target bonding USD amount (0 = use contract default)"
+        },
+        {
+          "type": "uint64",
+          "name": "priceMultiplier",
+          "desc": "- Price increase factor (0 = use contract default)"
+        }
+      ],
+      "returns": {
+        "type": "(uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64)",
+        "struct": "BondingPreview",
+        "desc": "Preview of all bonding metrics"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Preview bonding metrics for given parameters.\nAllows callers to simulate \"what if I want bonding to be $X with Y bonding token price and Z multiplier?\"",
+      "events": [],
+      "recommendations": {}
+    },
+    {
+      "name": "buy",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The unique identifier of the token to purchase"
+        },
+        {
+          "type": "pay",
+          "name": "mbrPayment",
+          "desc": "- Payment covering MBR for user balance box (use mbrToBuy() to get required amount; 0 if user already has a balance)"
+        },
+        {
+          "type": "axfer",
+          "name": "payment",
+          "desc": "- The asset transfer transaction containing the bonding token payment"
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The amount of tokens purchased and transferred to the buyer, or 0 if bonding is complete or no tokens can be purchased"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Executes a token purchase using a bonding curve mechanism with constant product formula.\nValidates the payment, calculates fees and tokens to be received, updates reserves,\nhandles refunds for excess payments or completed bonding, and updates user balances.\nIf all real token reserves are depleted during the purchase, triggers bonding completion.",
+      "events": [
+        {
+          "name": "eventTokensPurchased",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "amountApplied"
+            },
+            {
+              "type": "uint64",
+              "name": "feesPaid"
+            },
+            {
+              "type": "uint64",
+              "name": "tokensReceived"
+            },
+            {
+              "type": "uint64",
+              "name": "priceBefore"
+            },
+            {
+              "type": "uint64",
+              "name": "priceAfter"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenBalance"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        },
+        {
+          "name": "eventTokenBonded",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "bondedOn"
+            },
+            {
+              "type": "uint64",
+              "name": "platformAppId"
+            },
+            {
+              "type": "address",
+              "name": "platformPoolAccount"
+            },
+            {
+              "type": "uint64",
+              "name": "lpToken"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingInLP"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        }
+      ],
+      "recommendations": {}
+    },
+    {
+      "name": "buyWithLimit",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The unique identifier of the token to purchase"
+        },
+        {
+          "type": "pay",
+          "name": "mbrPayment",
+          "desc": "- Payment covering MBR for user balance box (use mbrToBuy() to get required amount; 0 if user already has a balance)"
+        },
+        {
+          "type": "axfer",
+          "name": "payment",
+          "desc": "- The asset transfer transaction containing the bonding token payment"
+        },
+        {
+          "type": "uint64",
+          "name": "minTokensOut",
+          "desc": "- Minimum tokens expected (transaction fails if actual < min)"
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The amount of tokens purchased"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Buy tokens with slippage protection.\nFails if the tokens received is less than the specified minimum.",
+      "events": [
+        {
+          "name": "eventTokensPurchased",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "amountApplied"
+            },
+            {
+              "type": "uint64",
+              "name": "feesPaid"
+            },
+            {
+              "type": "uint64",
+              "name": "tokensReceived"
+            },
+            {
+              "type": "uint64",
+              "name": "priceBefore"
+            },
+            {
+              "type": "uint64",
+              "name": "priceAfter"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenBalance"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        },
+        {
+          "name": "eventTokenBonded",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "bondedOn"
+            },
+            {
+              "type": "uint64",
+              "name": "platformAppId"
+            },
+            {
+              "type": "address",
+              "name": "platformPoolAccount"
+            },
+            {
+              "type": "uint64",
+              "name": "lpToken"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingInLP"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        }
+      ],
+      "recommendations": {}
+    },
+    {
+      "name": "buyWithAlgo",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The unique identifier of the token to purchase"
+        },
+        {
+          "type": "pay",
+          "name": "mbrPayment",
+          "desc": "- Payment covering MBR for user balance box (use mbrToBuy() to get required amount; 0 if user already has a balance)"
+        },
+        {
+          "type": "pay",
+          "name": "payment",
+          "desc": "- The payment transaction containing the ALGO payment"
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The amount of tokens purchased"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Buy tokens using ALGO as the bonding token.\nSimilar to buy() but accepts a PaymentTxn instead of AssetTransferTxn.",
+      "events": [
+        {
+          "name": "eventTokensPurchased",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "amountApplied"
+            },
+            {
+              "type": "uint64",
+              "name": "feesPaid"
+            },
+            {
+              "type": "uint64",
+              "name": "tokensReceived"
+            },
+            {
+              "type": "uint64",
+              "name": "priceBefore"
+            },
+            {
+              "type": "uint64",
+              "name": "priceAfter"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenBalance"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        },
+        {
+          "name": "eventTokenBonded",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "bondedOn"
+            },
+            {
+              "type": "uint64",
+              "name": "platformAppId"
+            },
+            {
+              "type": "address",
+              "name": "platformPoolAccount"
+            },
+            {
+              "type": "uint64",
+              "name": "lpToken"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingInLP"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        }
+      ],
+      "recommendations": {}
+    },
+    {
+      "name": "buyWithAlgoWithLimit",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The unique identifier of the token to purchase"
+        },
+        {
+          "type": "pay",
+          "name": "mbrPayment",
+          "desc": "- Payment covering MBR for user balance box (use mbrToBuy() to get required amount; 0 if user already has a balance)"
+        },
+        {
+          "type": "pay",
+          "name": "payment",
+          "desc": "- The payment transaction containing the ALGO payment"
+        },
+        {
+          "type": "uint64",
+          "name": "minTokensOut",
+          "desc": "- Minimum tokens expected (transaction fails if actual < min)"
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The amount of tokens purchased"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Buy tokens with ALGO and slippage protection.\nFails if the tokens received is less than the specified minimum.",
+      "events": [
+        {
+          "name": "eventTokensPurchased",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "amountApplied"
+            },
+            {
+              "type": "uint64",
+              "name": "feesPaid"
+            },
+            {
+              "type": "uint64",
+              "name": "tokensReceived"
+            },
+            {
+              "type": "uint64",
+              "name": "priceBefore"
+            },
+            {
+              "type": "uint64",
+              "name": "priceAfter"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenBalance"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        },
+        {
+          "name": "eventTokenBonded",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "bondedOn"
+            },
+            {
+              "type": "uint64",
+              "name": "platformAppId"
+            },
+            {
+              "type": "address",
+              "name": "platformPoolAccount"
+            },
+            {
+              "type": "uint64",
+              "name": "lpToken"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingInLP"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        }
+      ],
+      "recommendations": {}
+    },
+    {
+      "name": "launchTokenThenBuyWithAlgo",
+      "args": [
+        {
+          "type": "pay",
+          "name": "mbrPayment",
+          "desc": "- The payment transaction covering both launch and first buy MBR costs."
+        },
+        {
+          "type": "pay",
+          "name": "buyPayment",
+          "desc": "- The payment transaction for the initial ALGO purchase."
+        },
+        {
+          "type": "string",
+          "name": "symbol",
+          "desc": "- The symbol of the token to be created."
+        },
+        {
+          "type": "string",
+          "name": "name",
+          "desc": "- The name of the token to be created."
+        },
+        {
+          "type": "string",
+          "name": "assetUrl",
+          "desc": "- The URL for the token metadata."
+        },
+        {
+          "type": "string",
+          "name": "description",
+          "desc": "- A description of the token."
+        },
+        {
+          "type": "string",
+          "name": "socialWebsite",
+          "desc": "- The token's official website URL."
+        },
+        {
+          "type": "string",
+          "name": "socialX",
+          "desc": "- The token's X (Twitter) handle."
+        },
+        {
+          "type": "string",
+          "name": "socialTelegram",
+          "desc": "- The token's Telegram link."
+        },
+        {
+          "type": "string",
+          "name": "socialDiscord",
+          "desc": "- The token's Discord link."
+        },
+        {
+          "type": "uint64",
+          "name": "targetBondingUsd",
+          "desc": "- Custom bonding target in micro-USD (0 = use contract default)."
+        },
+        {
+          "type": "uint64",
+          "name": "priceMultiplier",
+          "desc": "- Custom price multiplier (0 = use contract default)."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The sequential token number assigned to the newly-created token."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Launches a token with ALGO bonding and performs an initial purchase using ALGO.\nSimilar to launchTokenThenBuy but for ALGO pairs.",
+      "events": [
+        {
+          "name": "eventTokenLaunched",
+          "args": [
+            {
+              "type": "address",
+              "name": "creator"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "string",
+              "name": "name"
+            },
+            {
+              "type": "string",
+              "name": "unitName"
+            },
+            {
+              "type": "uint64",
+              "name": "decimals"
+            },
+            {
+              "type": "uint64",
+              "name": "totalSupply"
+            },
+            {
+              "type": "uint64",
+              "name": "initialPrice"
+            },
+            {
+              "type": "uint64",
+              "name": "targetPrice"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTarget"
+            },
+            {
+              "type": "uint64",
+              "name": "virtualTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "virtualBondingReserves"
+            }
+          ]
+        },
+        {
+          "name": "eventTokensPurchased",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "amountApplied"
+            },
+            {
+              "type": "uint64",
+              "name": "feesPaid"
+            },
+            {
+              "type": "uint64",
+              "name": "tokensReceived"
+            },
+            {
+              "type": "uint64",
+              "name": "priceBefore"
+            },
+            {
+              "type": "uint64",
+              "name": "priceAfter"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenBalance"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        },
+        {
+          "name": "eventTokenBonded",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "bondedOn"
+            },
+            {
+              "type": "uint64",
+              "name": "platformAppId"
+            },
+            {
+              "type": "address",
+              "name": "platformPoolAccount"
+            },
+            {
+              "type": "uint64",
+              "name": "lpToken"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingInLP"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        }
+      ],
+      "recommendations": {}
+    },
+    {
+      "name": "sell",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The sequential token number assigned at launch time."
+        },
+        {
+          "type": "uint64",
+          "name": "tokensToSell",
+          "desc": "- The number of tokens to be sold."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The amount of bonding tokens returned to the user (after fees deducted)."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Processes the sale of tokens using constant product AMM.\nUser sells tokens back, receives bonding token minus fees.",
+      "events": [
+        {
+          "name": "eventTokensSold",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokensSold"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenReceived"
+            },
+            {
+              "type": "uint64",
+              "name": "feesPaid"
+            },
+            {
+              "type": "uint64",
+              "name": "priceBefore"
+            },
+            {
+              "type": "uint64",
+              "name": "priceAfter"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenBalance"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        }
+      ],
+      "recommendations": {}
+    },
+    {
+      "name": "sellWithLimit",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The sequential token number assigned at launch time"
+        },
+        {
+          "type": "uint64",
+          "name": "tokensToSell",
+          "desc": "- The number of tokens to sell"
+        },
+        {
+          "type": "uint64",
+          "name": "minBondingOut",
+          "desc": "- Minimum bonding tokens expected (transaction fails if actual < min)"
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The amount of bonding tokens received (after fees)"
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Sell tokens with slippage protection.\nFails if the bonding tokens received is less than the specified minimum.",
+      "events": [
+        {
+          "name": "eventTokensSold",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokensSold"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenReceived"
+            },
+            {
+              "type": "uint64",
+              "name": "feesPaid"
+            },
+            {
+              "type": "uint64",
+              "name": "priceBefore"
+            },
+            {
+              "type": "uint64",
+              "name": "priceAfter"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenBalance"
+            },
+            {
+              "type": "uint64",
+              "name": "realTokenReserves"
+            },
+            {
+              "type": "uint64",
+              "name": "realBondingReserves"
+            }
+          ]
+        }
+      ],
+      "recommendations": {}
+    },
+    {
+      "name": "claim",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The sequential token number assigned at launch time."
+        }
+      ],
+      "returns": {
+        "type": "uint64",
+        "desc": "The amount of tokens claimed."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Claims virtual token holdings as actual ASA tokens after bonding completes.\nUsers must opt-in to the ASA before calling this method.\nThe user's balance box is deleted and the MBR is refunded.",
+      "events": [
+        {
+          "name": "eventTokensClaimed",
+          "args": [
+            {
+              "type": "address",
+              "name": "account"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "amountClaimed"
+            }
+          ]
+        }
+      ],
+      "recommendations": {}
+    },
+    {
+      "name": "claimPoolFees",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The sequential token number assigned at launch time."
+        }
+      ],
+      "returns": {
+        "type": "(uint64,uint64)",
+        "struct": "PoolFees",
+        "desc": "The amounts paid to the creator."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": false,
+      "desc": "Sweeps a bonded token's Pact V2 manager fees to its creator.\n\nThis app is every V2 pool's manager, so Pact pays the fees here (claim_fees); they are\nforwarded to tokenCreator in the same call. Callable by anyone - funds only ever go to\nthe creator, and the caller pays the fees.\n\nThe amounts forwarded are the balance deltas across claim_fees, never balances: this\naccount also custodies unclaimed buyer tokens and other tokens' ALGO reserves.\n\nIf the creator cannot receive a side with fees to pay (opted out of the token or the\nbonding asset, or a closed account below the ALGO base MBR), the whole call reverts and\nthe fees stay in the pool until they can - nobody else is entitled to them.",
+      "events": [
+        {
+          "name": "eventPoolFeesClaimed",
+          "args": [
+            {
+              "type": "address",
+              "name": "creator"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAssetId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenNum"
+            },
+            {
+              "type": "uint64",
+              "name": "poolAppId"
+            },
+            {
+              "type": "uint64",
+              "name": "tokenAmount"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingTokenId"
+            },
+            {
+              "type": "uint64",
+              "name": "bondingAmount"
+            }
+          ]
+        }
+      ],
+      "recommendations": {}
+    },
+    {
+      "name": "pendingPoolFees",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "tokenNum",
+          "desc": "- The sequential token number assigned at launch time."
+        }
+      ],
+      "returns": {
+        "type": "(uint64,uint64)",
+        "struct": "PoolFees",
+        "desc": "The pending token and bonding-token amounts."
+      },
+      "actions": {
+        "create": [],
+        "call": [
+          "NoOp"
+        ]
+      },
+      "readonly": true,
+      "desc": "Manager fees a claimPoolFees() call would pay the creator right now: the pool's own\nholdings, which is exactly what Pact's claim_fees sweeps - an ASA's whole balance,\nALGO's balance above the pool's min balance. Zero for a token without a V2 pool.",
+      "events": [],
+      "recommendations": {}
+    }
+  ]
+}
