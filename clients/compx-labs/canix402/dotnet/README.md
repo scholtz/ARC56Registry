@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.compx_labs.canix402.haystack_staking_5296d0a8;
+using Arc56.Generated.compx_labs.canix402.haystack_launch_ee122a07;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new HaystackStakingProxy(algod, appId: 123456789);
+var client = new HayLaunchProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -40,6 +40,7 @@ var client = new HaystackStakingProxy(algod, appId: 123456789);
 
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
+| `Arc56.Generated.compx_labs.canix402.haystack_launch_ee122a07` | `HayLaunchProxy` | [https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/haystack-launch.arc56.json](https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/haystack-launch.arc56.json) |
 | `Arc56.Generated.compx_labs.canix402.haystack_staking_5296d0a8` | `HaystackStakingProxy` | [https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/haystack-staking.arc56.json](https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/haystack-staking.arc56.json) |
 | `Arc56.Generated.compx_labs.canix402.staking_7c5d07d0` | `stakingProxy` | [https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/staking.arc56.json](https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/staking.arc56.json) |
 
