@@ -1,1 +1,2 @@
-# no contracts generated yet
+from . import TEALScriptTemplates_d277494f as TEALScriptTemplates_d277494f
+from . import TemplateAssert_5da57bda as TemplateAssert_5da57bda
