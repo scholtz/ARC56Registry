@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"TestParent","structs":{},"methods":[{"name":"spawn","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[41],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[30],"errorMessage":"OnCompletion must be NoOp && can only call when not creating"},{"pc":[108],"errorMessage":"application exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"TestParent","structs":{},"methods":[{"name":"spawn","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[103],"errorMessage":"application exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcmVnL3Rlc3QtcmVrZXllZC1lc2Nyb3cuYWxnby50czozCiAgICAvLyBleHBvcnQgY2xhc3MgVGVzdFBhcmVudCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1CiAgICBwdXNoYnl0ZXMgMHhhNTRmMzk2MCAvLyBtZXRob2QgInNwYXduKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9zcGF3bl9yb3V0ZUAzCiAgICBlcnIKCm1haW5fc3Bhd25fcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2NyZWcvdGVzdC1yZWtleWVkLWVzY3Jvdy5hbGdvLnRzOjQKICAgIC8vIHB1YmxpYyBzcGF3bigpIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0CiAgICBiIHNwYXduCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3JlZy90ZXN0LXJla2V5ZWQtZXNjcm93LmFsZ28udHM6MwogICAgLy8gZXhwb3J0IGNsYXNzIFRlc3RQYXJlbnQgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9lc2NyZWcvdGVzdC1yZWtleWVkLWVzY3Jvdy5hbGdvLnRzOjpUZXN0UGFyZW50LnNwYXduW3JvdXRpbmddKCkgLT4gdm9pZDoKc3Bhd246CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcmVnL3Rlc3QtcmVrZXllZC1lc2Nyb3cuYWxnby50czo3LTEzCiAgICAvLyBjb25zdCB0eG4gPSBpdHhuCiAgICAvLyAgIC5hcHBsaWNhdGlvbkNhbGwoewogICAgLy8gICAgIC8vIHdhcm5pbmc6IHNjaGVtYSBwYXJhbXMgZG8gbm90IG1hdGNoCiAgICAvLyAgICAgLy8gb2sgdG8gZG8gaGVyZSBiZWNhdXNlIG5vIHN0b3JhZ2UgaW4gdGVzdGNoaWxkCiAgICAvLyAgICAgLi4uY29tcGlsZWQsCiAgICAvLyAgIH0pCiAgICAvLyAgIC5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3JlZy90ZXN0LXJla2V5ZWQtZXNjcm93LmFsZ28udHM6NQogICAgLy8gY29uc3QgY29tcGlsZWQgPSBjb21waWxlKFRlc3RDaGlsZCkKICAgIHB1c2hieXRlcyBiYXNlNjQoQzRFQlF3PT0pCiAgICBpdHhuX2ZpZWxkIENsZWFyU3RhdGVQcm9ncmFtUGFnZXMKICAgIHB1c2hieXRlcyBiYXNlNjQoQ3pFWVFBQVJzVElPU2JJZ3NnZUJBYklRZ1FDeUFiTXhHeFJFTVJrVU1SZ1VFRU09KQogICAgaXR4bl9maWVsZCBBcHByb3ZhbFByb2dyYW1QYWdlcwogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3JlZy90ZXN0LXJla2V5ZWQtZXNjcm93LmFsZ28udHM6Ny0xMgogICAgLy8gY29uc3QgdHhuID0gaXR4bgogICAgLy8gICAuYXBwbGljYXRpb25DYWxsKHsKICAgIC8vICAgICAvLyB3YXJuaW5nOiBzY2hlbWEgcGFyYW1zIGRvIG5vdCBtYXRjaAogICAgLy8gICAgIC8vIG9rIHRvIGRvIGhlcmUgYmVjYXVzZSBubyBzdG9yYWdlIGluIHRlc3RjaGlsZAogICAgLy8gICAgIC4uLmNvbXBpbGVkLAogICAgLy8gICB9KQogICAgcHVzaGludCA2CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2NyZWcvdGVzdC1yZWtleWVkLWVzY3Jvdy5hbGdvLnRzOjctMTMKICAgIC8vIGNvbnN0IHR4biA9IGl0eG4KICAgIC8vICAgLmFwcGxpY2F0aW9uQ2FsbCh7CiAgICAvLyAgICAgLy8gd2FybmluZzogc2NoZW1hIHBhcmFtcyBkbyBub3QgbWF0Y2gKICAgIC8vICAgICAvLyBvayB0byBkbyBoZXJlIGJlY2F1c2Ugbm8gc3RvcmFnZSBpbiB0ZXN0Y2hpbGQKICAgIC8vICAgICAuLi5jb21waWxlZCwKICAgIC8vICAgfSkKICAgIC8vICAgLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBDcmVhdGVkQXBwbGljYXRpb25JRAogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3JlZy90ZXN0LXJla2V5ZWQtZXNjcm93LmFsZ28udHM6MTUtMjAKICAgIC8vIGl0eG4KICAgIC8vICAgLnBheW1lbnQoewogICAgLy8gICAgIHJlY2VpdmVyOiB0eG4uY3JlYXRlZEFwcC5hZGRyZXNzLAogICAgLy8gICAgIGFtb3VudDogMTAwMDAwLAogICAgLy8gICB9KQogICAgLy8gICAuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2NyZWcvdGVzdC1yZWtleWVkLWVzY3Jvdy5hbGdvLnRzOjE3CiAgICAvLyByZWNlaXZlcjogdHhuLmNyZWF0ZWRBcHAuYWRkcmVzcywKICAgIGFwcF9wYXJhbXNfZ2V0IEFwcEFkZHJlc3MKICAgIGFzc2VydCAvLyBhcHBsaWNhdGlvbiBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2NyZWcvdGVzdC1yZWtleWVkLWVzY3Jvdy5hbGdvLnRzOjE4CiAgICAvLyBhbW91bnQ6IDEwMDAwMCwKICAgIHB1c2hpbnQgMTAwMDAwCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3JlZy90ZXN0LXJla2V5ZWQtZXNjcm93LmFsZ28udHM6MTUtMTkKICAgIC8vIGl0eG4KICAgIC8vICAgLnBheW1lbnQoewogICAgLy8gICAgIHJlY2VpdmVyOiB0eG4uY3JlYXRlZEFwcC5hZGRyZXNzLAogICAgLy8gICAgIGFtb3VudDogMTAwMDAwLAogICAgLy8gICB9KQogICAgaW50Y18xIC8vIDEKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3JlZy90ZXN0LXJla2V5ZWQtZXNjcm93LmFsZ28udHM6MTUtMjAKICAgIC8vIGl0eG4KICAgIC8vICAgLnBheW1lbnQoewogICAgLy8gICAgIHJlY2VpdmVyOiB0eG4uY3JlYXRlZEFwcC5hZGRyZXNzLAogICAgLy8gICAgIGFtb3VudDogMTAwMDAwLAogICAgLy8gICB9KQogICAgLy8gICAuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcmVnL3Rlc3QtcmVrZXllZC1lc2Nyb3cuYWxnby50czo0CiAgICAvLyBwdWJsaWMgc3Bhd24oKSB7CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CyACAAExG0EAGIAEpU85YDYaAI4BAAEAMRkUMRgQREIACDEZFDEYFBBDsYAEC4EBQ7JCgCMLMRhAABGxMg5JsiCyB4EBshCBALIBszEbFEQxGRQxGBQQQ7JAgQayECKyAbO0PbFyCESBoI0GsgiyByOyECKyAbMjQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -126,6 +126,21 @@ export type MethodArgs<TSignature extends TestParentSignatures> = TestParentType
 export type MethodReturn<TSignature extends TestParentSignatures> = TestParentTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TestParentCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TestParentDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TestParentCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TestParent smart contract
@@ -146,6 +161,147 @@ export abstract class TestParentParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TestParent smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TestParentFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TestParentFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TestParentClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TestParentClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TestParent smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TestParentDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new TestParentClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestParent smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestParent smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestParent smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new TestParentClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TestParent smart contract
  */
