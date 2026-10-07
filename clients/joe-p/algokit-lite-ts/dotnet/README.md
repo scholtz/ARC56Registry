@@ -26,11 +26,11 @@ exposes a `<Name>Proxy` class:
 
 ```csharp
 using Algorand.Algod;
-using Arc56.Generated.Owner.Repo.Contract_hash;
+using Arc56.Generated.joe_p.algokit_lite_ts.TEALScriptTemplates_d277494f;
 
 using var httpClient = HttpClientConfigurator.ConfigureHttpClient(AlgodConfiguration.MainNet);
 var algod = new AlgodClient(httpClient);
-var client = new ContractProxy(algod, appId: 123456789);
+var client = new TemplatesProxy(algod, appId: 123456789);
 
 // call a contract method, e.g.:
 // var result = await client.SomeMethod(...);
@@ -41,6 +41,8 @@ var client = new ContractProxy(algod, appId: 123456789);
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
 | `Arc56.Generated.joe_p.algokit_lite_ts.ARC56Test_2c3c693f` | _(generation failed - see state.json)_ | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/ARC56Test.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/ARC56Test.arc56.json) |
+| `Arc56.Generated.joe_p.algokit_lite_ts.TEALScriptTemplates_d277494f` | `TemplatesProxy` | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TEALScriptTemplates.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TEALScriptTemplates.arc56.json) |
+| `Arc56.Generated.joe_p.algokit_lite_ts.TemplateAssert_5da57bda` | `TemplateAssertProxy` | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TemplateAssert.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TemplateAssert.arc56.json) |
 
 ## Versioning
 
