@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```typescript
 import { AlgorandClient } from "@algorandfoundation/algokit-utils";
-import { ContractName_hash } from "arc56-generated-joe-p-algokit-lite-ts";
+import { TEALScriptTemplates_d277494f } from "arc56-generated-joe-p-algokit-lite-ts";
 
 const algorand = AlgorandClient.mainNet();
-const client = new ContractName_hash.ContractClient({
+const client = new TEALScriptTemplates_d277494f.TemplatesClient({
   algorand,
   appId: 123456789n,
 });
@@ -52,6 +52,8 @@ contract generated this way; every other contract includes a working `Factory`.
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
 | `ARC56Test_2c3c693f` | _(generation failed - see state.json)_ | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/ARC56Test.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/ARC56Test.arc56.json) |
+| `TEALScriptTemplates_d277494f` | `TemplatesClient` | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TEALScriptTemplates.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TEALScriptTemplates.arc56.json) |
+| `TemplateAssert_5da57bda` | `TemplateAssertClient` | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TemplateAssert.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TemplateAssert.arc56.json) |
 
 ## Versioning
 
