@@ -53,6 +53,8 @@ contract generated this way; every other contract includes a working `Factory`.
 | --- | --- | --- |
 | `AgentChild_241df9a6` | `AgentChildClient` | [https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/AgentChild.arc56.json](https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/AgentChild.arc56.json) |
 | `AgentFactory_89e9570c` | `AgentFactoryClient` | [https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/AgentFactory.arc56.json](https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/AgentFactory.arc56.json) |
+| `WenPadSale_8a4670f0` | `WenPadSaleClient` | [https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/WenPadSale.arc56.json](https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/WenPadSale.arc56.json) |
+| `WenPadSaleFactory_74942e87` | `WenPadSaleFactoryClient` | [https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/WenPadSaleFactory.arc56.json](https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/WenPadSaleFactory.arc56.json) |
 
 ## Versioning
 
