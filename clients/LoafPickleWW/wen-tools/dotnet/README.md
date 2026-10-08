@@ -42,6 +42,8 @@ var client = new AgentChildProxy(algod, appId: 123456789);
 | --- | --- | --- |
 | `Arc56.Generated.LoafPickleWW.wen_tools.AgentChild_241df9a6` | `AgentChildProxy` | [https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/AgentChild.arc56.json](https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/AgentChild.arc56.json) |
 | `Arc56.Generated.LoafPickleWW.wen_tools.AgentFactory_89e9570c` | `AgentFactoryProxy` | [https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/AgentFactory.arc56.json](https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/AgentFactory.arc56.json) |
+| `Arc56.Generated.LoafPickleWW.wen_tools.WenPadSale_8a4670f0` | `WenPadSaleProxy` | [https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/WenPadSale.arc56.json](https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/WenPadSale.arc56.json) |
+| `Arc56.Generated.LoafPickleWW.wen_tools.WenPadSaleFactory_74942e87` | `WenPadSaleFactoryProxy` | [https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/WenPadSaleFactory.arc56.json](https://raw.githubusercontent.com/LoafPickleWW/wen-tools/HEAD/contracts/build/WenPadSaleFactory.arc56.json) |
 
 ## Versioning
 
