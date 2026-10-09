@@ -53,6 +53,9 @@ every other contract includes a working `Factory`.
 | `ARC56Test_2c3c693f` | _(generation failed - see state.json)_ | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/ARC56Test.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/ARC56Test.arc56.json) |
 | `TEALScriptTemplates_d277494f` | `TemplatesClient` | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TEALScriptTemplates.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TEALScriptTemplates.arc56.json) |
 | `TemplateAssert_5da57bda` | `TemplateAssertClient` | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TemplateAssert.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TemplateAssert.arc56.json) |
+| `ARC56Test_3ab4cf02` | _(generation failed - see state.json)_ | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/fixtures/ARC56Test.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/fixtures/ARC56Test.arc56.json) |
+| `TEALScriptTemplates_ed9e1c08` | `TemplatesClient` | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/fixtures/TEALScriptTemplates.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/fixtures/TEALScriptTemplates.arc56.json) |
+| `TemplateAssert_54f72c72` | `TemplateAssertClient` | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/fixtures/TemplateAssert.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/fixtures/TemplateAssert.arc56.json) |
 
 ## Versioning
 
