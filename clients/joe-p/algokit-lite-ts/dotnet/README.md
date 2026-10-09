@@ -43,6 +43,9 @@ var client = new TemplatesProxy(algod, appId: 123456789);
 | `Arc56.Generated.joe_p.algokit_lite_ts.ARC56Test_2c3c693f` | _(generation failed - see state.json)_ | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/ARC56Test.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/ARC56Test.arc56.json) |
 | `Arc56.Generated.joe_p.algokit_lite_ts.TEALScriptTemplates_d277494f` | `TemplatesProxy` | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TEALScriptTemplates.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TEALScriptTemplates.arc56.json) |
 | `Arc56.Generated.joe_p.algokit_lite_ts.TemplateAssert_5da57bda` | `TemplateAssertProxy` | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TemplateAssert.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/__test__/fixtures/TemplateAssert.arc56.json) |
+| `Arc56.Generated.joe_p.algokit_lite_ts.ARC56Test_3ab4cf02` | _(generation failed - see state.json)_ | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/fixtures/ARC56Test.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/fixtures/ARC56Test.arc56.json) |
+| `Arc56.Generated.joe_p.algokit_lite_ts.TEALScriptTemplates_ed9e1c08` | `TemplatesProxy` | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/fixtures/TEALScriptTemplates.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/fixtures/TEALScriptTemplates.arc56.json) |
+| `Arc56.Generated.joe_p.algokit_lite_ts.TemplateAssert_54f72c72` | `TemplateAssertProxy` | [https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/fixtures/TemplateAssert.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-lite-ts/HEAD/fixtures/TemplateAssert.arc56.json) |
 
 ## Versioning
 
