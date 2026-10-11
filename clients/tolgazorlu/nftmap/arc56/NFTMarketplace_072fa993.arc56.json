@@ -1,0 +1,512 @@
+{
+    "name": "NFTMarketplace",
+    "structs": {
+        "getListingInfoResult": [
+            {
+                "name": "price",
+                "type": "uint64"
+            },
+            {
+                "name": "status",
+                "type": "uint64"
+            },
+            {
+                "name": "creator",
+                "type": "string"
+            },
+            {
+                "name": "artTitle",
+                "type": "string"
+            },
+            {
+                "name": "artDescription",
+                "type": "string"
+            },
+            {
+                "name": "locationLat",
+                "type": "uint64"
+            },
+            {
+                "name": "locationLng",
+                "type": "uint64"
+            },
+            {
+                "name": "imageUrl",
+                "type": "string"
+            },
+            {
+                "name": "category",
+                "type": "string"
+            }
+        ],
+        "getMarketplaceStatsResult": [
+            {
+                "name": "totalListings",
+                "type": "uint64"
+            },
+            {
+                "name": "feePercentage",
+                "type": "uint64"
+            },
+            {
+                "name": "marketplaceOwner",
+                "type": "string"
+            },
+            {
+                "name": "feeAccount",
+                "type": "string"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "initialize",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "marketplaceOwner",
+                    "desc": "- Address of the marketplace owner"
+                },
+                {
+                    "type": "uint64",
+                    "name": "feePercentage",
+                    "desc": "- Marketplace fee percentage (0-100)"
+                },
+                {
+                    "type": "string",
+                    "name": "feeAccount",
+                    "desc": "- Account to receive marketplace fees"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Initialize the marketplace contract",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "createListing",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "assetId",
+                    "desc": "- The asset ID of the NFT"
+                },
+                {
+                    "type": "uint64",
+                    "name": "price",
+                    "desc": "- Price in microAlgos"
+                },
+                {
+                    "type": "string",
+                    "name": "artTitle",
+                    "desc": "- Title of the artwork"
+                },
+                {
+                    "type": "string",
+                    "name": "artDescription",
+                    "desc": "- Description of the artwork"
+                },
+                {
+                    "type": "uint64",
+                    "name": "locationLat",
+                    "desc": "- Latitude of the art location"
+                },
+                {
+                    "type": "uint64",
+                    "name": "locationLng",
+                    "desc": "- Longitude of the art location"
+                },
+                {
+                    "type": "string",
+                    "name": "imageUrl",
+                    "desc": "- URL of the art image"
+                },
+                {
+                    "type": "string",
+                    "name": "category",
+                    "desc": "- Category of the art"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Create a new NFT listing",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "buyNFT",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "assetId",
+                    "desc": "- The asset ID of the NFT to buy"
+                },
+                {
+                    "type": "string",
+                    "name": "seller",
+                    "desc": "- Address of the seller"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Buy an NFT from the marketplace",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "cancelListing",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "assetId",
+                    "desc": "- The asset ID of the NFT"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Cancel a listing",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "updateListingPrice",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "assetId",
+                    "desc": "- The asset ID of the NFT"
+                },
+                {
+                    "type": "uint64",
+                    "name": "newPrice",
+                    "desc": "- New price in microAlgos"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Update listing price",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getListingInfo",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "assetId",
+                    "desc": "- The asset ID of the NFT"
+                }
+            ],
+            "returns": {
+                "type": "(uint64,uint64,string,string,string,uint64,uint64,string,string)",
+                "struct": "getListingInfoResult",
+                "desc": "Listing information"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Get listing information",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "getMarketplaceStats",
+            "args": [],
+            "returns": {
+                "type": "(uint64,uint64,string,string)",
+                "struct": "getMarketplaceStatsResult",
+                "desc": "Marketplace statistics"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Get marketplace statistics",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "searchListingsByLocation",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "centerLat",
+                    "desc": "- Center latitude"
+                },
+                {
+                    "type": "uint64",
+                    "name": "centerLng",
+                    "desc": "- Center longitude"
+                },
+                {
+                    "type": "uint64",
+                    "name": "radiusKm",
+                    "desc": "- Search radius in kilometers"
+                }
+            ],
+            "returns": {
+                "type": "uint64[]",
+                "desc": "Array of asset IDs within the radius"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Search listings by location (within radius)",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "searchListingsByCategory",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "category",
+                    "desc": "- Category to search for"
+                }
+            ],
+            "returns": {
+                "type": "uint64[]",
+                "desc": "Array of asset IDs in the category"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Search listings by category",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "updateMarketplaceFee",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "newFeePercentage",
+                    "desc": "- New fee percentage (0-100)"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Update marketplace fee (only marketplace owner)",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "transferOwnership",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "newOwner",
+                    "desc": "- Address of the new owner"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Transfer marketplace ownership (only current owner)",
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "emergencyWithdraw",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "amount",
+                    "desc": "- Amount to withdraw in microAlgos"
+                },
+                {
+                    "type": "string",
+                    "name": "recipient",
+                    "desc": "- Address to receive the Algo"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "desc": "Emergency function to withdraw Algo (only marketplace owner)",
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "NFT Marketplace Contract\n\nThis contract manages an NFT marketplace where users can:\n- Create NFTs for their art\n- List NFTs for sale with Algo payments\n- Buy NFTs from other users\n- View marketplace listings\n\nFeatures:\n- Asset creation and management\n- Marketplace listings with pricing\n- Secure payment handling\n- Metadata storage for art information\n- Location-based NFT discovery",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        115,
+                        163,
+                        198,
+                        227,
+                        238,
+                        249,
+                        321,
+                        471,
+                        502,
+                        537,
+                        568,
+                        601
+                    ],
+                    "errorMessage": "OnCompletion is not NoOp"
+                },
+                {
+                    "pc": [
+                        647
+                    ],
+                    "errorMessage": "can only call when creating"
+                },
+                {
+                    "pc": [
+                        118,
+                        166,
+                        201,
+                        230,
+                        241,
+                        252,
+                        324,
+                        474,
+                        505,
+                        540,
+                        571,
+                        604
+                    ],
+                    "errorMessage": "can only call when not creating"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMQogICAgYnl0ZWNibG9jayAweDE1MWY3Yzc1MDAwMAogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9tYXJrZXRwbGFjZS9jb250cmFjdC5hbGdvLnRzOjIwCiAgICAvLyBleHBvcnQgY2xhc3MgTkZUTWFya2V0cGxhY2UgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdAMTcKICAgIHB1c2hieXRlc3MgMHhkYmM2MWExOCAweGMxZmZiMGRkIDB4M2QyNDI4OWQgMHhiNTc5OTQ2ZCAweDJkZThhMmNjIDB4MjUwNDRmZmIgMHg1NTBmZTI1NCAweDlkYWIxNWYxIDB4MzcxZGVmYzMgMHhmNGM4MTJhYyAweDcwMzc0ZjY2IDB4MWVkOTI0OTEgLy8gbWV0aG9kICJpbml0aWFsaXplKHN0cmluZyx1aW50NjQsc3RyaW5nKXN0cmluZyIsIG1ldGhvZCAiY3JlYXRlTGlzdGluZyh1aW50NjQsdWludDY0LHN0cmluZyxzdHJpbmcsdWludDY0LHVpbnQ2NCxzdHJpbmcsc3RyaW5nKXN0cmluZyIsIG1ldGhvZCAiYnV5TkZUKHVpbnQ2NCxzdHJpbmcpc3RyaW5nIiwgbWV0aG9kICJjYW5jZWxMaXN0aW5nKHVpbnQ2NClzdHJpbmciLCBtZXRob2QgInVwZGF0ZUxpc3RpbmdQcmljZSh1aW50NjQsdWludDY0KXN0cmluZyIsIG1ldGhvZCAiZ2V0TGlzdGluZ0luZm8odWludDY0KSh1aW50NjQsdWludDY0LHN0cmluZyxzdHJpbmcsc3RyaW5nLHVpbnQ2NCx1aW50NjQsc3RyaW5nLHN0cmluZykiLCBtZXRob2QgImdldE1hcmtldHBsYWNlU3RhdHMoKSh1aW50NjQsdWludDY0LHN0cmluZyxzdHJpbmcpIiwgbWV0aG9kICJzZWFyY2hMaXN0aW5nc0J5TG9jYXRpb24odWludDY0LHVpbnQ2NCx1aW50NjQpdWludDY0W10iLCBtZXRob2QgInNlYXJjaExpc3RpbmdzQnlDYXRlZ29yeShzdHJpbmcpdWludDY0W10iLCBtZXRob2QgInVwZGF0ZU1hcmtldHBsYWNlRmVlKHVpbnQ2NClzdHJpbmciLCBtZXRob2QgInRyYW5zZmVyT3duZXJzaGlwKHN0cmluZylzdHJpbmciLCBtZXRob2QgImVtZXJnZW5jeVdpdGhkcmF3KHVpbnQ2NCxzdHJpbmcpc3RyaW5nIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9pbml0aWFsaXplX3JvdXRlQDMgbWFpbl9jcmVhdGVMaXN0aW5nX3JvdXRlQDQgbWFpbl9idXlORlRfcm91dGVANSBtYWluX2NhbmNlbExpc3Rpbmdfcm91dGVANiBtYWluX3VwZGF0ZUxpc3RpbmdQcmljZV9yb3V0ZUA3IG1haW5fZ2V0TGlzdGluZ0luZm9fcm91dGVAOCBtYWluX2dldE1hcmtldHBsYWNlU3RhdHNfcm91dGVAOSBtYWluX3NlYXJjaExpc3RpbmdzQnlMb2NhdGlvbl9yb3V0ZUAxMCBtYWluX3NlYXJjaExpc3RpbmdzQnlDYXRlZ29yeV9yb3V0ZUAxMSBtYWluX3VwZGF0ZU1hcmtldHBsYWNlRmVlX3JvdXRlQDEyIG1haW5fdHJhbnNmZXJPd25lcnNoaXBfcm91dGVAMTMgbWFpbl9lbWVyZ2VuY3lXaXRoZHJhd19yb3V0ZUAxNAoKbWFpbl9hZnRlcl9pZl9lbHNlQDIxOgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9tYXJrZXRwbGFjZS9jb250cmFjdC5hbGdvLnRzOjIwCiAgICAvLyBleHBvcnQgY2xhc3MgTkZUTWFya2V0cGxhY2UgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoaW50IDAgLy8gMAogICAgcmV0dXJuCgptYWluX2VtZXJnZW5jeVdpdGhkcmF3X3JvdXRlQDE0OgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9tYXJrZXRwbGFjZS9jb250cmFjdC5hbGdvLnRzOjE5MQogICAgLy8gcHVibGljIGVtZXJnZW5jeVdpdGhkcmF3KGFtb3VudDogdWludDY0LCByZWNpcGllbnQ6IHN0cmluZyk6IHN0cmluZyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAxZTQ1NmQ2NTcyNjc2NTZlNjM3OTIwNzc2OTc0Njg2NDcyNjE3NzYxNmMyMDYzNmY2ZDcwNmM2NTc0NjU2NAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3RyYW5zZmVyT3duZXJzaGlwX3JvdXRlQDEzOgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9tYXJrZXRwbGFjZS9jb250cmFjdC5hbGdvLnRzOjE4MAogICAgLy8gcHVibGljIHRyYW5zZmVyT3duZXJzaGlwKG5ld093bmVyOiBzdHJpbmcpOiBzdHJpbmcgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X21hcmtldHBsYWNlL2NvbnRyYWN0LmFsZ28udHM6MjAKICAgIC8vIGV4cG9ydCBjbGFzcyBORlRNYXJrZXRwbGFjZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X21hcmtldHBsYWNlL2NvbnRyYWN0LmFsZ28udHM6MTgwCiAgICAvLyBwdWJsaWMgdHJhbnNmZXJPd25lcnNoaXAobmV3T3duZXI6IHN0cmluZyk6IHN0cmluZyB7CiAgICBjYWxsc3ViIHRyYW5zZmVyT3duZXJzaGlwCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3VwZGF0ZU1hcmtldHBsYWNlRmVlX3JvdXRlQDEyOgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9tYXJrZXRwbGFjZS9jb250cmFjdC5hbGdvLnRzOjE3MAogICAgLy8gcHVibGljIHVwZGF0ZU1hcmtldHBsYWNlRmVlKG5ld0ZlZVBlcmNlbnRhZ2U6IHVpbnQ2NCk6IHN0cmluZyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwYjQ2NjU2NTIwNzU3MDY0NjE3NDY1NjQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9zZWFyY2hMaXN0aW5nc0J5Q2F0ZWdvcnlfcm91dGVAMTE6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X21hcmtldHBsYWNlL2NvbnRyYWN0LmFsZ28udHM6MTYwCiAgICAvLyBwdWJsaWMgc2VhcmNoTGlzdGluZ3NCeUNhdGVnb3J5KGNhdGVnb3J5OiBzdHJpbmcpOiB1aW50NjRbXSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NTAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9zZWFyY2hMaXN0aW5nc0J5TG9jYXRpb25fcm91dGVAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X21hcmtldHBsYWNlL2NvbnRyYWN0LmFsZ28udHM6MTQ5CiAgICAvLyBwdWJsaWMgc2VhcmNoTGlzdGluZ3NCeUxvY2F0aW9uKGNlbnRlckxhdDogdWludDY0LCBjZW50ZXJMbmc6IHVpbnQ2NCwgcmFkaXVzS206IHVpbnQ2NCk6IHVpbnQ2NFtdIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1MDAwMAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldE1hcmtldHBsYWNlU3RhdHNfcm91dGVAOToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnRfbWFya2V0cGxhY2UvY29udHJhY3QuYWxnby50czoxMjYtMTMxCiAgICAvLyBwdWJsaWMgZ2V0TWFya2V0cGxhY2VTdGF0cygpOiB7CiAgICAvLyAgIHRvdGFsTGlzdGluZ3M6IHVpbnQ2NAogICAgLy8gICBmZWVQZXJjZW50YWdlOiB1aW50NjQKICAgIC8vICAgbWFya2V0cGxhY2VPd25lcjogc3RyaW5nCiAgICAvLyAgIGZlZUFjY291bnQ6IHN0cmluZwogICAgLy8gfSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDUwMDE0MDAyMzAwMGQ0ZjU3NGU0NTUyNWY0MTQ0NDQ1MjQ1NTM1MzAwMTM0NjQ1NDU1ZjQxNDM0MzRmNTU0ZTU0NWY0MTQ0NDQ1MjQ1NTM1MwogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldExpc3RpbmdJbmZvX3JvdXRlQDg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X21hcmtldHBsYWNlL2NvbnRyYWN0LmFsZ28udHM6OTYtMTA2CiAgICAvLyBwdWJsaWMgZ2V0TGlzdGluZ0luZm8oYXNzZXRJZDogdWludDY0KTogewogICAgLy8gICBwcmljZTogdWludDY0CiAgICAvLyAgIHN0YXR1czogdWludDY0CiAgICAvLyAgIGNyZWF0b3I6IHN0cmluZwogICAgLy8gICBhcnRUaXRsZTogc3RyaW5nCiAgICAvLyAgIGFydERlc2NyaXB0aW9uOiBzdHJpbmcKICAgIC8vICAgbG9jYXRpb25MYXQ6IHVpbnQ2NAogICAgLy8gICBsb2NhdGlvbkxuZzogdWludDY0CiAgICAvLyAgIGltYWdlVXJsOiBzdHJpbmcKICAgIC8vICAgY2F0ZWdvcnk6IHN0cmluZwogICAgLy8gfSB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwMDAwMDAwMDBmNDI0MDAwMDAwMDAwMDAwMDAwMDEwMDJhMDAzYjAwNDcwMDAwMDAwMDAyNmQzYTYwMDAwMDAwMDAwNDY5M2RmMDAwNWIwMDc4MDAwZjQzNTI0NTQxNTQ0ZjUyNWY0MTQ0NDQ1MjQ1NTM1MzAwMGE1MzYxNmQ3MDZjNjUyMDQxNzI3NDAwMTI1MzYxNmQ3MDZjNjUyMDY0NjU3MzYzNzI2OTcwNzQ2OTZmNmUwMDFiNjg3NDc0NzA3MzNhMmYyZjY1Nzg2MTZkNzA2YzY1MmU2MzZmNmQyZjYxNzI3NDJlNmE3MDY3MDAwYjQ0Njk2NzY5NzQ2MTZjMjA0MTcyNzQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl91cGRhdGVMaXN0aW5nUHJpY2Vfcm91dGVANzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnRfbWFya2V0cGxhY2UvY29udHJhY3QuYWxnby50czo4NQogICAgLy8gcHVibGljIHVwZGF0ZUxpc3RpbmdQcmljZShhc3NldElkOiB1aW50NjQsIG5ld1ByaWNlOiB1aW50NjQpOiBzdHJpbmcgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMGQ1MDcyNjk2MzY1MjA3NTcwNjQ2MTc0NjU2NAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2NhbmNlbExpc3Rpbmdfcm91dGVANjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnRfbWFya2V0cGxhY2UvY29udHJhY3QuYWxnby50czo3NAogICAgLy8gcHVibGljIGNhbmNlbExpc3RpbmcoYXNzZXRJZDogdWludDY0KTogc3RyaW5nIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDExNGM2OTczNzQ2OTZlNjcyMDYzNjE2ZTYzNjU2YzZjNjU2NAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2J1eU5GVF9yb3V0ZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9tYXJrZXRwbGFjZS9jb250cmFjdC5hbGdvLnRzOjY0CiAgICAvLyBwdWJsaWMgYnV5TkZUKGFzc2V0SWQ6IHVpbnQ2NCwgc2VsbGVyOiBzdHJpbmcpOiBzdHJpbmcgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMGQ0ZTQ2NTQyMDcwNzU3MjYzNjg2MTczNjU2NAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2NyZWF0ZUxpc3Rpbmdfcm91dGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnRfbWFya2V0cGxhY2UvY29udHJhY3QuYWxnby50czo0NC01MwogICAgLy8gcHVibGljIGNyZWF0ZUxpc3RpbmcoCiAgICAvLyAgIGFzc2V0SWQ6IHVpbnQ2NCwKICAgIC8vICAgcHJpY2U6IHVpbnQ2NCwKICAgIC8vICAgYXJ0VGl0bGU6IHN0cmluZywKICAgIC8vICAgYXJ0RGVzY3JpcHRpb246IHN0cmluZywKICAgIC8vICAgbG9jYXRpb25MYXQ6IHVpbnQ2NCwKICAgIC8vICAgbG9jYXRpb25Mbmc6IHVpbnQ2NCwKICAgIC8vICAgaW1hZ2VVcmw6IHN0cmluZywKICAgIC8vICAgY2F0ZWdvcnk6IHN0cmluZywKICAgIC8vICk6IHN0cmluZyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwZjRjNjk3Mzc0Njk2ZTY3MjA2MzcyNjU2MTc0NjU2NAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2luaXRpYWxpemVfcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnRfbWFya2V0cGxhY2UvY29udHJhY3QuYWxnby50czoyNwogICAgLy8gcHVibGljIGluaXRpYWxpemUobWFya2V0cGxhY2VPd25lcjogc3RyaW5nLCBmZWVQZXJjZW50YWdlOiB1aW50NjQsIGZlZUFjY291bnQ6IHN0cmluZyk6IHN0cmluZyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAxNzRkNjE3MjZiNjU3NDcwNmM2MTYzNjUyMDY5NmU2OTc0Njk2MTZjNjk3YTY1NjQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9iYXJlX3JvdXRpbmdAMTc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0X21hcmtldHBsYWNlL2NvbnRyYWN0LmFsZ28udHM6MjAKICAgIC8vIGV4cG9ydCBjbGFzcyBORlRNYXJrZXRwbGFjZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMjEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL25mdF9tYXJrZXRwbGFjZS9jb250cmFjdC5hbGdvLnRzOjpORlRNYXJrZXRwbGFjZS50cmFuc2Zlck93bmVyc2hpcChuZXdPd25lcjogYnl0ZXMpIC0+IGJ5dGVzOgp0cmFuc2Zlck93bmVyc2hpcDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnRfbWFya2V0cGxhY2UvY29udHJhY3QuYWxnby50czoxODAKICAgIC8vIHB1YmxpYyB0cmFuc2Zlck93bmVyc2hpcChuZXdPd25lcjogc3RyaW5nKTogc3RyaW5nIHsKICAgIHByb3RvIDEgMQogICAgLy8gc21hcnRfY29udHJhY3RzL25mdF9tYXJrZXRwbGFjZS9jb250cmFjdC5hbGdvLnRzOjE4MwogICAgLy8gcmV0dXJuIGBPd25lcnNoaXAgdHJhbnNmZXJyZWQgdG8gJHtuZXdPd25lcn1gCiAgICBwdXNoYnl0ZXMgIk93bmVyc2hpcCB0cmFuc2ZlcnJlZCB0byAiCiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgcmV0c3ViCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CiABASYBBhUffHUAADEbQQJtggwE28YaGATB/7DdBD0kKJ0EtXmUbQQt6KLMBCUET/sEVQ/iVASdqxXxBDcd78ME9MgSrARwN09mBB7ZJJE2GgCODAHpAcgBqQGGAWcA0QCJAH4AcwBWADMAA4EAQzEZFEQxGESAJBUffHUAHkVtZXJnZW5jeSB3aXRoZHJhd2FsIGNvbXBsZXRlZLAiQzEZFEQxGEQ2GgFXAgCIAdpJFRZXBgJMUIAEFR98dUxQsCJDMRkURDEYRIARFR98dQALRmVlIHVwZGF0ZWSwIkMxGRREMRhEKLAiQzEZFEQxGEQosCJDMRkURDEYRIA8FR98dQAAAAAAAAAAAAAAAAAAAAUAFAAjAA1PV05FUl9BRERSRVNTABNGRUVfQUNDT1VOVF9BRERSRVNTsCJDMRkURDEYRICJARUffHUAAAAAAA9CQAAAAAAAAAABACoAOwBHAAAAAAJtOmAAAAAABGk98ABbAHgAD0NSRUFUT1JfQUREUkVTUwAKU2FtcGxlIEFydAASU2FtcGxlIGRlc2NyaXB0aW9uABtodHRwczovL2V4YW1wbGUuY29tL2FydC5qcGcAC0RpZ2l0YWwgQXJ0sCJDMRkURDEYRIATFR98dQANUHJpY2UgdXBkYXRlZLAiQzEZFEQxGESAFxUffHUAEUxpc3RpbmcgY2FuY2VsbGVksCJDMRkURDEYRIATFR98dQANTkZUIHB1cmNoYXNlZLAiQzEZFEQxGESAFRUffHUAD0xpc3RpbmcgY3JlYXRlZLAiQzEZFEQxGESAHRUffHUAF01hcmtldHBsYWNlIGluaXRpYWxpemVksCJDMRlA/ekxGBREIkOKAQGAGU93bmVyc2hpcCB0cmFuc2ZlcnJlZCB0byCL/1CJ",
+        "clear": "CoEBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 4,
+            "minor": 7,
+            "patch": 0
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}
