@@ -3,8 +3,8 @@
 - **Repo**: [algorandfoundation/TEALScript](https://github.com/algorandfoundation/TEALScript)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/TEALScript/HEAD/tests/contracts/artifacts/ABITestStoragePropertyReferenceInBox.arc56.json](https://raw.githubusercontent.com/algorandfoundation/TEALScript/HEAD/tests/contracts/artifacts/ABITestStoragePropertyReferenceInBox.arc56.json)
 - **Namespace used**: `Arc56.Generated.algorandfoundation.TEALScript.ABITestStoragePropertyReferenceInBox_d0aaf8fc`
-- **Detected**: 2026-08-13T07:38:15.551887+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:373d3f7fe96a2c2c9e361a9c88d822321296511aadc0ad91910dd26077078f37`
+- **Detected**: 2026-10-12T14:16:45.129339+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:88c68c0274a5913ccebbf6dccbb503ed2caada80abbd41dbe4ecb7d267aa84c5`
 
 ## Reproduce
 
