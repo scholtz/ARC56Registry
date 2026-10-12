@@ -3,8 +3,8 @@
 - **Repo**: [mrcointreau/algokit-utils-luca-py](https://github.com/mrcointreau/algokit-utils-luca-py)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/mrcointreau/algokit-utils-luca-py/HEAD/tests/artifacts/nested_struct/nested_struct.arc56.json](https://raw.githubusercontent.com/mrcointreau/algokit-utils-luca-py/HEAD/tests/artifacts/nested_struct/nested_struct.arc56.json)
 - **Namespace used**: `Arc56.Generated.mrcointreau.algokit_utils_luca_py.nested_struct_9a6989f0`
-- **Detected**: 2026-08-13T08:40:38.177517+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:373d3f7fe96a2c2c9e361a9c88d822321296511aadc0ad91910dd26077078f37`
+- **Detected**: 2026-10-12T14:27:37.188493+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:88c68c0274a5913ccebbf6dccbb503ed2caada80abbd41dbe4ecb7d267aa84c5`
 
 ## Reproduce
 
