@@ -3,8 +3,8 @@
 - **Repo**: [compx-labs/governance-contracts](https://github.com/compx-labs/governance-contracts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/compx-labs/governance-contracts/HEAD/projects/compx-governance/contracts/artifacts/CompxGovernance.arc56.json](https://raw.githubusercontent.com/compx-labs/governance-contracts/HEAD/projects/compx-governance/contracts/artifacts/CompxGovernance.arc56.json)
 - **Namespace used**: `Arc56.Generated.compx_labs.governance_contracts.CompxGovernance_46f65b60`
-- **Detected**: 2026-08-13T08:30:55.406887+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:373d3f7fe96a2c2c9e361a9c88d822321296511aadc0ad91910dd26077078f37`
+- **Detected**: 2026-10-12T14:20:58.963175+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:88c68c0274a5913ccebbf6dccbb503ed2caada80abbd41dbe4ecb7d267aa84c5`
 
 ## Reproduce
 
