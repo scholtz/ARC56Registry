@@ -3,8 +3,8 @@
 - **Repo**: [algorandfoundation/algokit-client-generator-ts](https://github.com/algorandfoundation/algokit-client-generator-ts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/algokit-client-generator-ts/HEAD/examples/smart_contracts/artifacts/reti/Reti.arc56.json](https://raw.githubusercontent.com/algorandfoundation/algokit-client-generator-ts/HEAD/examples/smart_contracts/artifacts/reti/Reti.arc56.json)
 - **Namespace used**: `Arc56.Generated.algorandfoundation.algokit_client_generator_ts.Reti_cb1e912a`
-- **Detected**: 2026-08-13T07:22:04.403700+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:373d3f7fe96a2c2c9e361a9c88d822321296511aadc0ad91910dd26077078f37`
+- **Detected**: 2026-10-12T14:12:44.890853+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:88c68c0274a5913ccebbf6dccbb503ed2caada80abbd41dbe4ecb7d267aa84c5`
 
 ## Reproduce
 
