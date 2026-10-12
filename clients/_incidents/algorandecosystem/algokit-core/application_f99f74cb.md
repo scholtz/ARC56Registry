@@ -3,8 +3,8 @@
 - **Repo**: [algorandecosystem/algokit-core](https://github.com/algorandecosystem/algokit-core)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandecosystem/algokit-core/HEAD/crates/algokit_test_artifacts/contracts/reti/application.arc56.json](https://raw.githubusercontent.com/algorandecosystem/algokit-core/HEAD/crates/algokit_test_artifacts/contracts/reti/application.arc56.json)
 - **Namespace used**: `Arc56.Generated.algorandecosystem.algokit_core.application_f99f74cb`
-- **Detected**: 2026-08-13T07:21:34.748769+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:373d3f7fe96a2c2c9e361a9c88d822321296511aadc0ad91910dd26077078f37`
+- **Detected**: 2026-10-12T14:12:25.847428+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:88c68c0274a5913ccebbf6dccbb503ed2caada80abbd41dbe4ecb7d267aa84c5`
 
 ## Reproduce
 
