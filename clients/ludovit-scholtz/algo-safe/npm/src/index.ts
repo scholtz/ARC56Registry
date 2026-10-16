@@ -12,6 +12,7 @@ export * as AlgoSafe_78f748a1 from './AlgoSafe_78f748a1';
 export * as AlgoSafe_25bebab6 from './AlgoSafe_25bebab6';
 export * as AlgoSafe_a33acdef from './AlgoSafe_a33acdef';
 export * as AlgoSafe_66536465 from './AlgoSafe_66536465';
+export * as AlgoSafe_40278839 from './AlgoSafe_40278839';
 export * as AlgoSafe_ae7b7246 from './AlgoSafe_ae7b7246';
 export * as AlgoSafe_8748af06 from './AlgoSafe_8748af06';
 export * as AlgoSafe_2eaf3ea5 from './AlgoSafe_2eaf3ea5';
