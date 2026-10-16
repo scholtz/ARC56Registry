@@ -12,6 +12,7 @@ from . import AlgoSafe_78f748a1 as AlgoSafe_78f748a1
 from . import AlgoSafe_25bebab6 as AlgoSafe_25bebab6
 from . import AlgoSafe_a33acdef as AlgoSafe_a33acdef
 from . import AlgoSafe_66536465 as AlgoSafe_66536465
+from . import AlgoSafe_40278839 as AlgoSafe_40278839
 from . import AlgoSafe_ae7b7246 as AlgoSafe_ae7b7246
 from . import AlgoSafe_8748af06 as AlgoSafe_8748af06
 from . import AlgoSafe_2eaf3ea5 as AlgoSafe_2eaf3ea5
