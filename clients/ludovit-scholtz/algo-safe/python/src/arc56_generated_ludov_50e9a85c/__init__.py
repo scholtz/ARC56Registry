@@ -6,6 +6,7 @@ from . import AlgoSafe_67fbb4c2 as AlgoSafe_67fbb4c2
 from . import AlgoSafe_635abdeb as AlgoSafe_635abdeb
 from . import AlgoSafe_dd31e887 as AlgoSafe_dd31e887
 from . import AlgoSafe_ab264999 as AlgoSafe_ab264999
+from . import AlgoSafe_e28553fc as AlgoSafe_e28553fc
 from . import AlgoSafe_af7bfabe as AlgoSafe_af7bfabe
 from . import AlgoSafe_4d9a2318 as AlgoSafe_4d9a2318
 from . import AlgoSafe_78f748a1 as AlgoSafe_78f748a1
