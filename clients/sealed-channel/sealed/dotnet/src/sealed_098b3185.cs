@@ -15,8 +15,9 @@ using Algorand.AVM.ClientGenerator.ABI.ARC56;
 namespace Arc56.Generated.sealed_channel.sealed.sealed_098b3185
 {
 
-	
-	public class SealedProxy : ProxyBase
+
+
+    public class SealedProxy : ProxyBase
 {
     public override AppDescriptionArc56 App { get; set; }
 
