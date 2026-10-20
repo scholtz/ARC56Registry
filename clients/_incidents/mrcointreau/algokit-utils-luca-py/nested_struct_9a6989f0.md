@@ -3,8 +3,8 @@
 - **Repo**: [mrcointreau/algokit-utils-luca-py](https://github.com/mrcointreau/algokit-utils-luca-py)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/mrcointreau/algokit-utils-luca-py/HEAD/tests/artifacts/nested_struct/nested_struct.arc56.json](https://raw.githubusercontent.com/mrcointreau/algokit-utils-luca-py/HEAD/tests/artifacts/nested_struct/nested_struct.arc56.json)
 - **Namespace used**: `Arc56.Generated.mrcointreau.algokit_utils_luca_py.nested_struct_9a6989f0`
-- **Detected**: 2026-10-12T14:27:37.188493+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:88c68c0274a5913ccebbf6dccbb503ed2caada80abbd41dbe4ecb7d267aa84c5`
+- **Detected**: 2026-10-20T11:22:12.920937+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:f7aaa620d62a7a766c9f2ae99d41d7ac7dc6f7d76fecd4ebd66d057e930a575d`
 
 ## Reproduce
 
@@ -17,39 +17,12 @@ docker run --rm -v "$(pwd):/app/out" scholtz2/dotnet-avm-generated-client:latest
 ## Error
 
 ```
-docker generator exited with code 139
+docker generator exited with code 1
 --- stdout ---
 File: artifacts/nested_struct_9a6989f0.arc56.json
 Namespace: Arc56.Generated.mrcointreau.algokit_utils_luca_py.nested_struct_9a6989f0
 
 --- stderr ---
-Unhandled exception. Newtonsoft.Json.JsonReaderException: Unexpected character encountered while parsing value: [. Path 'structs.Struct2[0].type', line 68, position 17.
-   at Newtonsoft.Json.JsonTextReader.ReadStringValue(ReadType readType)
-   at Newtonsoft.Json.JsonTextReader.ReadAsString()
-   at Newtonsoft.Json.JsonReader.ReadForType(JsonContract contract, Boolean hasConverter)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateList(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty containerProperty, String id)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateList(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, Object existingValue, String id)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateDictionary(IDictionary dictionary, JsonReader reader, JsonDictionaryContract contract, JsonProperty containerProperty, String id)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
-   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
-   at Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
-   at Newtonsoft.Json.JsonSerializer.Deserialize(JsonReader reader, Type objectType)
-   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
-   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
-   at Algorand.AVM.ClientGenerator.ABI.ARC56.ClientGeneratorARC56.LoadFromByteArray(Byte[] data) in /src/dotnet-algorand-sdk/ClientGenerator/ABI/ARC56/ClientGeneratorARC56.cs:line 33
-   at client_generator.Program.<>c.<<Main>b__1_1>d.MoveNext() in /src/client-generator/Program.cs:line 77
---- End of stack trace from previous location ---
-   at CommandLine.ParserResultExtensions.WithParsedAsync[T](ParserResult`1 result, Func`2 action)
-   at client_generator.Program.Main(String[] args) in /src/client-generator/Program.cs:line 34
-   at client_generator.Program.<Main>(String[] args)
+Error: could not generate a client from the spec: Unexpected character encountered while parsing value: [. Path 'structs.Struct2[0].type', line 68, position 17.
 
 ```
