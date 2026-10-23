@@ -1,6 +1,8 @@
 export * as AgentChild_241df9a6 from './AgentChild_241df9a6';
 export * as AgentFactory_89e9570c from './AgentFactory_89e9570c';
 export * as PQCoupon_ec8aee23 from './PQCoupon_ec8aee23';
+export * as Vote_de4b98e9 from './Vote_de4b98e9';
+export * as VoteFactory_3afea912 from './VoteFactory_3afea912';
 export * as VoteRegistry_c3f893d4 from './VoteRegistry_c3f893d4';
 export * as VoterList_9fadcb56 from './VoterList_9fadcb56';
 export * as WenPadSale_8a4670f0 from './WenPadSale_8a4670f0';
