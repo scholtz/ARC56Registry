@@ -3,8 +3,8 @@
 - **Repo**: [ghoshvidip26/VoiceVaultAlgorand](https://github.com/ghoshvidip26/VoiceVaultAlgorand)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/ghoshvidip26/VoiceVaultAlgorand/HEAD/frontend/src/contracts/PaymentApp.arc56.json](https://raw.githubusercontent.com/ghoshvidip26/VoiceVaultAlgorand/HEAD/frontend/src/contracts/PaymentApp.arc56.json)
 - **Namespace used**: `Arc56.Generated.ghoshvidip26.VoiceVaultAlgorand.PaymentApp_f0e3c66a`
-- **Detected**: 2026-10-20T11:16:44.283899+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:f7aaa620d62a7a766c9f2ae99d41d7ac7dc6f7d76fecd4ebd66d057e930a575d`
+- **Detected**: 2026-10-23T11:26:48.999878+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:4c7f0b02126c7a2565338efea6e3a214b086d319bc88c43d227a9fc55b907289`
 
 ## Reproduce
 
