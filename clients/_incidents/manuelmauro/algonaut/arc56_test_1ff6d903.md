@@ -3,8 +3,8 @@
 - **Repo**: [manuelmauro/algonaut](https://github.com/manuelmauro/algonaut)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/manuelmauro/algonaut/HEAD/tests/fixtures/arc56_test.arc56.json](https://raw.githubusercontent.com/manuelmauro/algonaut/HEAD/tests/fixtures/arc56_test.arc56.json)
 - **Namespace used**: `Arc56.Generated.manuelmauro.algonaut.arc56_test_1ff6d903`
-- **Detected**: 2026-10-20T11:20:58.126989+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:f7aaa620d62a7a766c9f2ae99d41d7ac7dc6f7d76fecd4ebd66d057e930a575d`
+- **Detected**: 2026-10-23T11:31:51.844061+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:4c7f0b02126c7a2565338efea6e3a214b086d319bc88c43d227a9fc55b907289`
 
 ## Reproduce
 
