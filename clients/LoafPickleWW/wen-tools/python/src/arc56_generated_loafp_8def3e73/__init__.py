@@ -1,6 +1,8 @@
 from . import AgentChild_241df9a6 as AgentChild_241df9a6
 from . import AgentFactory_89e9570c as AgentFactory_89e9570c
 from . import PQCoupon_ec8aee23 as PQCoupon_ec8aee23
+from . import Vote_de4b98e9 as Vote_de4b98e9
+from . import VoteFactory_3afea912 as VoteFactory_3afea912
 from . import VoteRegistry_c3f893d4 as VoteRegistry_c3f893d4
 from . import VoterList_9fadcb56 as VoterList_9fadcb56
 from . import WenPadSale_8a4670f0 as WenPadSale_8a4670f0
