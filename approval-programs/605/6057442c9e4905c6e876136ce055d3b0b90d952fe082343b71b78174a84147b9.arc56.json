@@ -1,0 +1,261 @@
+{
+    "name": "Notarizer",
+    "structs": {
+        "Document": [
+            {
+                "name": "algorithm",
+                "type": "string"
+            },
+            {
+                "name": "metadata",
+                "type": "string"
+            }
+        ]
+    },
+    "methods": [
+        {
+            "name": "create",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "label"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [
+                    "NoOp"
+                ],
+                "call": []
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "mint",
+            "args": [
+                {
+                    "type": "address",
+                    "name": "recipient"
+                },
+                {
+                    "type": "string",
+                    "name": "hash"
+                },
+                {
+                    "type": "string",
+                    "name": "algorithm"
+                },
+                {
+                    "type": "string",
+                    "name": "uri"
+                }
+            ],
+            "returns": {
+                "type": "void"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [
+                {
+                    "name": "Notarized",
+                    "args": [
+                        {
+                            "type": "string",
+                            "name": "field1"
+                        }
+                    ]
+                }
+            ],
+            "recommendations": {}
+        },
+        {
+            "name": "label",
+            "args": [],
+            "returns": {
+                "type": "string"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "metadata",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "hash"
+                }
+            ],
+            "returns": {
+                "type": "(string,string,string)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "numbers",
+            "args": [],
+            "returns": {
+                "type": "(uint64,uint8,bool)"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": true,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "desc": "Notarizes document hashes. Fund the application account at deploy time: each document is stored in a box.",
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 1
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {
+                "title": {
+                    "keyType": "AVMString",
+                    "valueType": "AVMString",
+                    "key": "dGl0bGU="
+                }
+            },
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {
+                "documents": {
+                    "keyType": "AVMBytes",
+                    "valueType": "Document",
+                    "prefix": "ZA=="
+                }
+            }
+        }
+    },
+    "bareActions": {
+        "create": [],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        201
+                    ],
+                    "errorMessage": "already notarized"
+                },
+                {
+                    "pc": [
+                        243
+                    ],
+                    "errorMessage": "check self.title exists"
+                },
+                {
+                    "pc": [
+                        114,
+                        144,
+                        157,
+                        173,
+                        263
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        121,
+                        151,
+                        167,
+                        180,
+                        273
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"
+                },
+                {
+                    "pc": [
+                        138
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"
+                },
+                {
+                    "pc": [
+                        186
+                    ],
+                    "errorMessage": "wrong recipient"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAyIDAgMSA0CiAgICBieXRlY2Jsb2NrICJ0aXRsZSIgMHg2NCAweDE1MWY3Yzc1CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyB0ZXN0X2NvbnRyYWN0cy5weTo0MwogICAgLy8gc2VsZi50aXRsZSA9IFN0cmluZygpCiAgICBieXRlY18wIC8vICJ0aXRsZSIKICAgIHB1c2hieXRlcyAiIgogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gdGVzdF9jb250cmFjdHMucHk6MzkKICAgIC8vIGNsYXNzIE5vdGFyaXplcihBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEAxMAogICAgcHVzaGJ5dGVzcyAweDIxMDY1Y2Y3IDB4OGE4ZTk5ZGIgMHg5NmI0MzY5YyAweGFlNWNiNWFjIC8vIG1ldGhvZCAibWludChhZGRyZXNzLHN0cmluZyxzdHJpbmcsc3RyaW5nKXZvaWQiLCBtZXRob2QgImxhYmVsKClzdHJpbmciLCBtZXRob2QgIm1ldGFkYXRhKHN0cmluZykoc3RyaW5nLHN0cmluZyxzdHJpbmcpIiwgbWV0aG9kICJudW1iZXJzKCkodWludDY0LHVpbnQ4LGJvb2wpIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWludCBsYWJlbCBtZXRhZGF0YSBtYWluX251bWJlcnNfcm91dGVAOAogICAgZXJyCgptYWluX251bWJlcnNfcm91dGVAODoKICAgIC8vIHRlc3RfY29udHJhY3RzLnB5OjY3CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1ZmZmZmZmZmZmZmZmZmZmZmZmODAKICAgIGxvZwogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgoKbWFpbl9jcmVhdGVfTm9PcEAxMDoKICAgIC8vIHRlc3RfY29udHJhY3RzLnB5OjM5CiAgICAvLyBjbGFzcyBOb3Rhcml6ZXIoQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweDIwZGYzYTU0IC8vIG1ldGhvZCAiY3JlYXRlKHN0cmluZyl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlCiAgICBlcnIKCgovLyB0ZXN0X2NvbnRyYWN0cy5Ob3Rhcml6ZXIuY3JlYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgLy8gdGVzdF9jb250cmFjdHMucHk6NDYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChjcmVhdGU9InJlcXVpcmUiKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18wIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgLy8gdGVzdF9jb250cmFjdHMucHk6NDgKICAgIC8vIHNlbGYudGl0bGUgPSBsYWJlbC5uYXRpdmUKICAgIGV4dHJhY3QgMiAwCiAgICBieXRlY18wIC8vICJ0aXRsZSIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0X2NvbnRyYWN0cy5weTo0NgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdF9jb250cmFjdHMuTm90YXJpemVyLm1pbnRbcm91dGluZ10oKSAtPiB2b2lkOgptaW50OgogICAgLy8gdGVzdF9jb250cmFjdHMucHk6NTAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18wIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18wIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgIGR1cAogICAgdW5jb3ZlciAyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDQKICAgIGR1cAogICAgaW50Y18xIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMCAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIC8vIHRlc3RfY29udHJhY3RzLnB5OjUyCiAgICAvLyBhc3NlcnQgcmVjaXBpZW50ID09IEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsICJ3cm9uZyByZWNpcGllbnQiCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgdW5jb3ZlciA1CiAgICA9PQogICAgYXNzZXJ0IC8vIHdyb25nIHJlY2lwaWVudAogICAgLy8gdGVzdF9jb250cmFjdHMucHk6NTMKICAgIC8vIGtleSA9IG9wLnNoYTI1NihoYXNoLm5hdGl2ZS5ieXRlcykKICAgIGRpZyAzCiAgICBleHRyYWN0IDIgMAogICAgc2hhMjU2CiAgICAvLyB0ZXN0X2NvbnRyYWN0cy5weTo1NAogICAgLy8gYXNzZXJ0IGtleSBub3QgaW4gc2VsZi5kb2N1bWVudHMsICJhbHJlYWR5IG5vdGFyaXplZCIKICAgIGJ5dGVjXzEgLy8gMHg2NAogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgIQogICAgYXNzZXJ0IC8vIGFscmVhZHkgbm90YXJpemVkCiAgICAvLyB0ZXN0X2NvbnRyYWN0cy5weTo1NQogICAgLy8gc2VsZi5kb2N1bWVudHNba2V5XSA9IERvY3VtZW50KGFsZ29yaXRobSwgdXJpKQogICAgaW50Y18zIC8vIDQKICAgIHVuY292ZXIgMwogICAgKwogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHB1c2hieXRlcyAweDAwMDQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgdW5jb3ZlciAzCiAgICBjb25jYXQKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBkaWcgMQogICAgYm94X2RlbAogICAgcG9wCiAgICBib3hfcHV0CiAgICAvLyB0ZXN0X2NvbnRyYWN0cy5weTo1NgogICAgLy8gYXJjNC5lbWl0KCJOb3Rhcml6ZWQoc3RyaW5nKSIsIGhhc2gpCiAgICBwdXNoYnl0ZXMgMHgwNjM5MDE3NDAwMDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICAvLyB0ZXN0X2NvbnRyYWN0cy5weTo1MAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdF9jb250cmFjdHMuTm90YXJpemVyLmxhYmVsW3JvdXRpbmddKCkgLT4gdm9pZDoKbGFiZWw6CiAgICAvLyB0ZXN0X2NvbnRyYWN0cy5weTo2MAogICAgLy8gcmV0dXJuIGFyYzQuU3RyaW5nKHNlbGYudGl0bGUpCiAgICBpbnRjXzEgLy8gMAogICAgYnl0ZWNfMCAvLyAidGl0bGUiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudGl0bGUgZXhpc3RzCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gdGVzdF9jb250cmFjdHMucHk6NTgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18yIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RfY29udHJhY3RzLk5vdGFyaXplci5tZXRhZGF0YVtyb3V0aW5nXSgpIC0+IHZvaWQ6Cm1ldGFkYXRhOgogICAgLy8gdGVzdF9jb250cmFjdHMucHk6NjIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18wIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgIGR1cAogICAgdW5jb3ZlciAyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIC8vIHRlc3RfY29udHJhY3RzLnB5OjY0CiAgICAvLyBkb2N1bWVudCA9IHNlbGYuZG9jdW1lbnRzW29wLnNoYTI1NihoYXNoLm5hdGl2ZS5ieXRlcyldLmNvcHkoKQogICAgZGlnIDEKICAgIGV4dHJhY3QgMiAwCiAgICBzaGEyNTYKICAgIGJ5dGVjXzEgLy8gMHg2NAogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyB0ZXN0X2NvbnRyYWN0cy5weTo2NC02NQogICAgLy8gZG9jdW1lbnQgPSBzZWxmLmRvY3VtZW50c1tvcC5zaGEyNTYoaGFzaC5uYXRpdmUuYnl0ZXMpXS5jb3B5KCkKICAgIC8vIHJldHVybiBoYXNoLCBkb2N1bWVudC5hbGdvcml0aG0sIGRvY3VtZW50Lm1ldGFkYXRhCiAgICBkdXAKICAgIGludGNfMyAvLyA0CiAgICBpbnRjXzAgLy8gMgogICAgYm94X2V4dHJhY3QKICAgIGJ0b2kKICAgIGludGNfMCAvLyAyCiAgICArCiAgICBkaWcgMQogICAgaW50Y18zIC8vIDQKICAgIHVuY292ZXIgMgogICAgYm94X2V4dHJhY3QKICAgIGRpZyAxCiAgICBpbnRjXzAgLy8gMgogICAgZHVwCiAgICBib3hfZXh0cmFjdAogICAgYnRvaQogICAgZGlnIDIKICAgIGRpZyAxCiAgICBpbnRjXzAgLy8gMgogICAgYm94X2V4dHJhY3QKICAgIGJ0b2kKICAgIGludGNfMCAvLyAyCiAgICArCiAgICB1bmNvdmVyIDMKICAgIGNvdmVyIDIKICAgIGJveF9leHRyYWN0CiAgICAvLyB0ZXN0X2NvbnRyYWN0cy5weTo2MgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBwdXNoaW50IDYKICAgIHVuY292ZXIgMwogICAgKwogICAgZHVwCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgcHVzaGJ5dGVzIDB4MDAwNgogICAgc3dhcAogICAgY29uY2F0CiAgICBkaWcgMwogICAgbGVuCiAgICB1bmNvdmVyIDIKICAgICsKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBjb25jYXQKICAgIHVuY292ZXIgMwogICAgY29uY2F0CiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CyAEAgABBCYDBXRpdGxlAWQEFR98dTEYQAAEKIAAZzEZFEQxGEEAN4IEBCEGXPcEio6Z2wSWtDacBK5ctaw2GgCOBAA3AKUAtwABAIAOFR98df///////////4CwJEOABCDfOlQ2GgCOAQABADYaAUkjWSIISwEVEkRXAgAoTGckQzYaAUkVgSASRDYaAkkjWSIISwEVEkQ2GgNJI1kiCEsBFUlPAhJENhoESSNZIghLARUSRDIKTwUSREsDVwIAASlMUEm9RQEURCVPAwgWVwYCgAIABExQTwNQTwJQSwG8SL+ABgY5AXQAAkxQsCRDIyhlREkVFlcGAkxQKkxQsCRDNhoBSSNZIghLARVJTwISREsBVwIAASlMUEklIroXIghLASVPArpLASJJuhdLAksBIroXIghPA04CuoEGTwMISRZXBgKAAgAGTFBLAxVPAggWVwYCUE8DUE8CUExQKkxQsCRD",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 10,
+            "patch": 1
+        }
+    },
+    "events": [
+        {
+            "name": "Notarized",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "field1"
+                }
+            ]
+        }
+    ],
+    "templateVariables": {}
+}
