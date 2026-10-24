@@ -52,6 +52,7 @@ contract generated this way; every other contract includes a working `Factory`.
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
 | `Arc89SmartAsa_2d1fd6fc` | `Arc89SmartAsaClient` | [https://raw.githubusercontent.com/algorandfoundation/arc20/HEAD/smart_contracts/artifacts/arc89_smart_asa/Arc89SmartAsa.arc56.json](https://raw.githubusercontent.com/algorandfoundation/arc20/HEAD/smart_contracts/artifacts/arc89_smart_asa/Arc89SmartAsa.arc56.json) |
+| `CappedSmartAsa_ce288677` | `CappedSmartAsaClient` | [https://raw.githubusercontent.com/algorandfoundation/arc20/HEAD/smart_contracts/artifacts/capped_smart_asa/CappedSmartAsa.arc56.json](https://raw.githubusercontent.com/algorandfoundation/arc20/HEAD/smart_contracts/artifacts/capped_smart_asa/CappedSmartAsa.arc56.json) |
 | `SmartAsa_98047c49` | `SmartAsaClient` | [https://raw.githubusercontent.com/algorandfoundation/arc20/HEAD/smart_contracts/artifacts/smart_asa/SmartAsa.arc56.json](https://raw.githubusercontent.com/algorandfoundation/arc20/HEAD/smart_contracts/artifacts/smart_asa/SmartAsa.arc56.json) |
 
 ## Versioning
