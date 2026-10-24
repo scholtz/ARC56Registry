@@ -42,6 +42,8 @@ var client = new NotarizerProxy(algod, appId: 123456789);
 | --- | --- | --- |
 | `Arc56.Generated.colauttilorenzo.Web3Service.Notarizer_ac03a8b4` | `NotarizerProxy` | [https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/Notarizer.arc56.json](https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/Notarizer.arc56.json) |
 | `Arc56.Generated.colauttilorenzo.Web3Service.TestAssetMinter_a0a8e4d9` | `TestAssetMinterProxy` | [https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/TestAssetMinter.arc56.json](https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/TestAssetMinter.arc56.json) |
+| `Arc56.Generated.colauttilorenzo.Web3Service.TestNft_ecd779d7` | `TestNftProxy` | [https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/TestNft.arc56.json](https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/TestNft.arc56.json) |
+| `Arc56.Generated.colauttilorenzo.Web3Service.TestToken_457d5e1a` | `TestTokenProxy` | [https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/TestToken.arc56.json](https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/TestToken.arc56.json) |
 
 ## Versioning
 
