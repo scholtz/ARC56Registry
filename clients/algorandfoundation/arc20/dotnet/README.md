@@ -41,6 +41,7 @@ var client = new Arc89SmartAsaProxy(algod, appId: 123456789);
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
 | `Arc56.Generated.algorandfoundation.arc20.Arc89SmartAsa_2d1fd6fc` | `Arc89SmartAsaProxy` | [https://raw.githubusercontent.com/algorandfoundation/arc20/HEAD/smart_contracts/artifacts/arc89_smart_asa/Arc89SmartAsa.arc56.json](https://raw.githubusercontent.com/algorandfoundation/arc20/HEAD/smart_contracts/artifacts/arc89_smart_asa/Arc89SmartAsa.arc56.json) |
+| `Arc56.Generated.algorandfoundation.arc20.CappedSmartAsa_ce288677` | `CappedSmartAsaProxy` | [https://raw.githubusercontent.com/algorandfoundation/arc20/HEAD/smart_contracts/artifacts/capped_smart_asa/CappedSmartAsa.arc56.json](https://raw.githubusercontent.com/algorandfoundation/arc20/HEAD/smart_contracts/artifacts/capped_smart_asa/CappedSmartAsa.arc56.json) |
 | `Arc56.Generated.algorandfoundation.arc20.SmartAsa_98047c49` | `SmartAsaProxy` | [https://raw.githubusercontent.com/algorandfoundation/arc20/HEAD/smart_contracts/artifacts/smart_asa/SmartAsa.arc56.json](https://raw.githubusercontent.com/algorandfoundation/arc20/HEAD/smart_contracts/artifacts/smart_asa/SmartAsa.arc56.json) |
 
 ## Versioning
