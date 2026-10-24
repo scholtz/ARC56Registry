@@ -52,6 +52,8 @@ every other contract includes a working `Factory`.
 | --- | --- | --- |
 | `Notarizer_ac03a8b4` | `NotarizerClient` | [https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/Notarizer.arc56.json](https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/Notarizer.arc56.json) |
 | `TestAssetMinter_a0a8e4d9` | `TestAssetMinterClient` | [https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/TestAssetMinter.arc56.json](https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/TestAssetMinter.arc56.json) |
+| `TestNft_ecd779d7` | `TestNftClient` | [https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/TestNft.arc56.json](https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/TestNft.arc56.json) |
+| `TestToken_457d5e1a` | `TestTokenClient` | [https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/TestToken.arc56.json](https://raw.githubusercontent.com/colauttilorenzo/Web3Service/HEAD/shared/algorand/TestToken.arc56.json) |
 
 ## Versioning
 
