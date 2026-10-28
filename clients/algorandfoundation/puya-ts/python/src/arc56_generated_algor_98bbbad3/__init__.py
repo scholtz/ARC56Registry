@@ -87,6 +87,8 @@ from . import DescSameContract_a31496c9 as DescSameContract_a31496c9
 from . import FieldDocMismatchContract_d271675f as FieldDocMismatchContract_d271675f
 from . import TypeLevelDocMismatchContract_c1cc679f as TypeLevelDocMismatchContract_c1cc679f
 from . import MyContract_7bd5e2f6 as MyContract_7bd5e2f6
+from . import Leaf_2d0c87d7 as Leaf_2d0c87d7
+from . import Multiple_54472d76 as Multiple_54472d76
 from . import Hello_ae10ede5 as Hello_ae10ede5
 from . import HelloTemplate_d9df2038 as HelloTemplate_d9df2038
 from . import HelloTemplateCustomPrefix_d2948d51 as HelloTemplateCustomPrefix_d2948d51
@@ -203,6 +205,8 @@ from . import DescSameContract_a954637e as DescSameContract_a954637e
 from . import FieldDocMismatchContract_0bb1cc90 as FieldDocMismatchContract_0bb1cc90
 from . import TypeLevelDocMismatchContract_227befdb as TypeLevelDocMismatchContract_227befdb
 from . import MyContract_9c04e3e6 as MyContract_9c04e3e6
+from . import Leaf_fceb429e as Leaf_fceb429e
+from . import Multiple_ae9c28fb as Multiple_ae9c28fb
 from . import Hello_d51e02b7 as Hello_d51e02b7
 from . import HelloTemplate_926ca632 as HelloTemplate_926ca632
 from . import HelloTemplateCustomPrefix_6b9bca30 as HelloTemplateCustomPrefix_6b9bca30
@@ -319,6 +323,8 @@ from . import DescSameContract_7b3e4333 as DescSameContract_7b3e4333
 from . import FieldDocMismatchContract_668543ae as FieldDocMismatchContract_668543ae
 from . import TypeLevelDocMismatchContract_e8d55571 as TypeLevelDocMismatchContract_e8d55571
 from . import MyContract_84c524e8 as MyContract_84c524e8
+from . import Leaf_b35e0cff as Leaf_b35e0cff
+from . import Multiple_3c6aa66f as Multiple_3c6aa66f
 from . import Hello_fb01ccfd as Hello_fb01ccfd
 from . import HelloTemplate_dd7e4026 as HelloTemplate_dd7e4026
 from . import HelloTemplateCustomPrefix_9ef3262e as HelloTemplateCustomPrefix_9ef3262e
