@@ -1,5 +1,7 @@
 from . import Arc56Test_9d89aae1 as Arc56Test_9d89aae1
 from . import Nested_5bf139ec as Nested_5bf139ec
+from . import Nfd_044694b8 as Nfd_044694b8
+from . import Reti_07d892ae as Reti_07d892ae
 from . import Structs_60c64a2b as Structs_60c64a2b
 from . import Void_8f5144b4 as Void_8f5144b4
 from . import ZeroCouponBond_b0dcbc8f as ZeroCouponBond_b0dcbc8f
