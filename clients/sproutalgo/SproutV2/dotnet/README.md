@@ -41,6 +41,7 @@ var client = new CrowdfundProxy(algod, appId: 123456789);
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
 | `Arc56.Generated.sproutalgo.SproutV2.Crowdfund_a68b7771` | `CrowdfundProxy` | [https://raw.githubusercontent.com/sproutalgo/SproutV2/HEAD/contracts/Crowdfund.arc56.json](https://raw.githubusercontent.com/sproutalgo/SproutV2/HEAD/contracts/Crowdfund.arc56.json) |
+| `Arc56.Generated.sproutalgo.SproutV2.StakingEscrow_178ea977` | `StakingEscrowProxy` | [https://raw.githubusercontent.com/sproutalgo/SproutV2/HEAD/contracts/StakingEscrow.arc56.json](https://raw.githubusercontent.com/sproutalgo/SproutV2/HEAD/contracts/StakingEscrow.arc56.json) |
 
 ## Versioning
 
