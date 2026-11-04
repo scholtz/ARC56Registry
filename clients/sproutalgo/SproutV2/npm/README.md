@@ -52,6 +52,7 @@ contract generated this way; every other contract includes a working `Factory`.
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
 | `Crowdfund_a68b7771` | `CrowdfundClient` | [https://raw.githubusercontent.com/sproutalgo/SproutV2/HEAD/contracts/Crowdfund.arc56.json](https://raw.githubusercontent.com/sproutalgo/SproutV2/HEAD/contracts/Crowdfund.arc56.json) |
+| `Governance_0d5c804c` | `GovernanceClient` | [https://raw.githubusercontent.com/sproutalgo/SproutV2/HEAD/contracts/Governance.arc56.json](https://raw.githubusercontent.com/sproutalgo/SproutV2/HEAD/contracts/Governance.arc56.json) |
 | `StakingEscrow_178ea977` | `StakingEscrowClient` | [https://raw.githubusercontent.com/sproutalgo/SproutV2/HEAD/contracts/StakingEscrow.arc56.json](https://raw.githubusercontent.com/sproutalgo/SproutV2/HEAD/contracts/StakingEscrow.arc56.json) |
 
 ## Versioning
