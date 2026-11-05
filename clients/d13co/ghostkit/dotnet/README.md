@@ -41,6 +41,7 @@ var client = new GhostofavmProxy(algod, appId: 123456789);
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
 | `Arc56.Generated.d13co.ghostkit.Ghostofavm_a552bf7f` | `GhostofavmProxy` | [https://raw.githubusercontent.com/d13co/ghostkit/HEAD/examples/Ghostofavm.arc56.json](https://raw.githubusercontent.com/d13co/ghostkit/HEAD/examples/Ghostofavm.arc56.json) |
+| `Arc56.Generated.d13co.ghostkit.GhostV13_f3708ef0` | `GhostV13Proxy` | [https://raw.githubusercontent.com/d13co/ghostkit/HEAD/test/fixtures/GhostV13.arc56.json](https://raw.githubusercontent.com/d13co/ghostkit/HEAD/test/fixtures/GhostV13.arc56.json) |
 
 ## Versioning
 
