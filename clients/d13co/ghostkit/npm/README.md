@@ -52,6 +52,7 @@ contract generated this way; every other contract includes a working `Factory`.
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
 | `Ghostofavm_a552bf7f` | `GhostofavmClient` | [https://raw.githubusercontent.com/d13co/ghostkit/HEAD/examples/Ghostofavm.arc56.json](https://raw.githubusercontent.com/d13co/ghostkit/HEAD/examples/Ghostofavm.arc56.json) |
+| `GhostV13_f3708ef0` | `GhostV13Client` | [https://raw.githubusercontent.com/d13co/ghostkit/HEAD/test/fixtures/GhostV13.arc56.json](https://raw.githubusercontent.com/d13co/ghostkit/HEAD/test/fixtures/GhostV13.arc56.json) |
 
 ## Versioning
 
