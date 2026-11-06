@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Fight","desc":"","methods":[{"name":"createApplication","args":[{"name":"player1","type":"address"},{"name":"player2","type":"address"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"createBox","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"depositfunds","args":[{"name":"ftransx","type":"txn"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"sendFunds","args":[{"name":"player","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"joinGame","args":[{"name":"player","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":4,"ints":2},"local":{"bytes":0,"ints":0}},"keys":{"global":{"player1":{"key":"cGxheWVyMQ==","keyType":"AVMBytes","valueType":"address"},"player2":{"key":"cGxheWVyMg==","keyType":"AVMBytes","valueType":"address"},"depositedAmount":{"key":"ZGVwb3NpdGVkQW1vdW50","keyType":"AVMBytes","valueType":"uint64"},"maxDepositAmount":{"key":"bWF4RGVwb3NpdEFtb3VudA==","keyType":"AVMBytes","valueType":"uint64"},"winner":{"key":"d2lubmVy","keyType":"AVMBytes","valueType":"address"},"status":{"key":"c3RhdHVz","keyType":"AVMBytes","valueType":"string"}},"local":{},"box":{"player1Move":{"key":"cGxheWVyMU1vdmU=","keyType":"AVMBytes","valueType":"string"},"player2Move":{"key":"cGxheWVyMk1vdmU=","keyType":"AVMBytes","valueType":"string"}}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[77],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[85],"errorMessage":"argument 0 (player2) for createApplication must be a address","teal":37},{"pc":[93],"errorMessage":"argument 1 (player1) for createApplication must be a address","teal":47},{"pc":[224],"errorMessage":"transaction verification failed: {\"txn\":\"ftransx\",\"field\":\"typeEnum\",\"expected\":\"pay\"}","teal":169},{"pc":[232],"errorMessage":"transaction verification failed: {\"txn\":\"ftransx\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":178},{"pc":[251],"errorMessage":"argument 0 (player) for sendFunds must be a address","teal":202},{"pc":[297],"errorMessage":"argument 0 (player) for joinGame must be a address","teal":268},{"pc":[333],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":304},{"pc":[371],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":315}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Fight","desc":"","methods":[{"name":"createApplication","args":[{"name":"player1","type":"address"},{"name":"player2","type":"address"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"createBox","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"depositfunds","args":[{"name":"ftransx","type":"txn"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"sendFunds","args":[{"name":"player","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"joinGame","args":[{"name":"player","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":4,"ints":2},"local":{"bytes":0,"ints":0}},"keys":{"global":{"player1":{"key":"cGxheWVyMQ==","keyType":"AVMBytes","valueType":"address"},"player2":{"key":"cGxheWVyMg==","keyType":"AVMBytes","valueType":"address"},"depositedAmount":{"key":"ZGVwb3NpdGVkQW1vdW50","keyType":"AVMBytes","valueType":"uint64"},"maxDepositAmount":{"key":"bWF4RGVwb3NpdEFtb3VudA==","keyType":"AVMBytes","valueType":"uint64"},"winner":{"key":"d2lubmVy","keyType":"AVMBytes","valueType":"address"},"status":{"key":"c3RhdHVz","keyType":"AVMBytes","valueType":"string"}},"local":{},"box":{"player1Move":{"key":"cGxheWVyMU1vdmU=","keyType":"AVMBytes","valueType":"string"},"player2Move":{"key":"cGxheWVyMk1vdmU=","keyType":"AVMBytes","valueType":"string"}}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[77],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[85],"errorMessage":"argument 0 (player2) for createApplication must be a address","teal":37},{"pc":[93],"errorMessage":"argument 1 (player1) for createApplication must be a address","teal":47},{"pc":[224],"errorMessage":"transaction verification failed: {\"txn\":\"ftransx\",\"field\":\"typeEnum\",\"expected\":\"pay\"}","teal":169},{"pc":[232],"errorMessage":"transaction verification failed: {\"txn\":\"ftransx\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":178},{"pc":[251],"errorMessage":"argument 0 (player) for sendFunds must be a address","teal":202},{"pc":[297],"errorMessage":"argument 0 (player) for joinGame must be a address","teal":268},{"pc":[333],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":304},{"pc":[371],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":315}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDMyIDAgNDAwCmJ5dGVjYmxvY2sgMHg2NDY1NzA2ZjczNjk3NDY1NjQ0MTZkNmY3NTZlNzQgMHg3MDZjNjE3OTY1NzIzMiAweDcwNmM2MTc5NjU3MjMxCgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwNi4yCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIHRlbiBsaW5lcyBvZiBURUFMIGhhbmRsZSBpbml0aWFsIHByb2dyYW0gZmxvdwovLyBUaGlzIHBhdHRlcm4gaXMgdXNlZCB0byBtYWtlIGl0IGVhc3kgZm9yIGFueW9uZSB0byBwYXJzZSB0aGUgc3RhcnQgb2YgdGhlIHByb2dyYW0gYW5kIGRldGVybWluZSBpZiBhIHNwZWNpZmljIGFjdGlvbiBpcyBhbGxvd2VkCi8vIEhlcmUsIGFjdGlvbiByZWZlcnMgdG8gdGhlIE9uQ29tcGxldGUgaW4gY29tYmluYXRpb24gd2l0aCB3aGV0aGVyIHRoZSBhcHAgaXMgYmVpbmcgY3JlYXRlZCBvciBjYWxsZWQKLy8gRXZlcnkgcG9zc2libGUgYWN0aW9uIGZvciB0aGlzIGNvbnRyYWN0IGlzIHJlcHJlc2VudGVkIGluIHRoZSBzd2l0Y2ggc3RhdGVtZW50Ci8vIElmIHRoZSBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoZSBjb250cmFjdCwgaXRzIHJlc3BlY3RpdmUgYnJhbmNoIHdpbGwgYmUgIipOT1RfSU1QTEVNRU5URUQiIHdoaWNoIGp1c3QgY29udGFpbnMgImVyciIKdHhuIEFwcGxpY2F0aW9uSUQKIQpwdXNoaW50IDYKKgp0eG4gT25Db21wbGV0aW9uCisKc3dpdGNoICpjYWxsX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gY3JlYXRlQXBwbGljYXRpb24oYWRkcmVzcyxhZGRyZXNzKXZvaWQKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCS8vIHBsYXllcjI6IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWR1cAoJbGVuCglpbnRjIDEgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMCAocGxheWVyMikgZm9yIGNyZWF0ZUFwcGxpY2F0aW9uIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBwbGF5ZXIxOiBhZGRyZXNzCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyAxIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDEgKHBsYXllcjEpIGZvciBjcmVhdGVBcHBsaWNhdGlvbiBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBjcmVhdGVBcHBsaWNhdGlvbihhZGRyZXNzLGFkZHJlc3Mpdm9pZAoJY2FsbHN1YiBjcmVhdGVBcHBsaWNhdGlvbgoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gY3JlYXRlQXBwbGljYXRpb24ocGxheWVyMTogQWRkcmVzcywgcGxheWVyMjogQWRkcmVzcyk6IHZvaWQKY3JlYXRlQXBwbGljYXRpb246Cglwcm90byAyIDAKCgkvLyBjb250cmFjdHMvR2FtZUNvbnRyYWN0LmFsZ28udHM6MjEKCS8vIHRoaXMucGxheWVyMS52YWx1ZSA9IHBsYXllcjEKCWJ5dGVjIDIgLy8gICJwbGF5ZXIxIgoJZnJhbWVfZGlnIC0xIC8vIHBsYXllcjE6IEFkZHJlc3MKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzL0dhbWVDb250cmFjdC5hbGdvLnRzOjIyCgkvLyB0aGlzLnBsYXllcjIudmFsdWUgPSBwbGF5ZXIyCglieXRlYyAxIC8vICAicGxheWVyMiIKCWZyYW1lX2RpZyAtMiAvLyBwbGF5ZXIyOiBBZGRyZXNzCglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0cy9HYW1lQ29udHJhY3QuYWxnby50czoyMwoJLy8gdGhpcy5kZXBvc2l0ZWRBbW91bnQudmFsdWUgPSAwCglieXRlYyAwIC8vICAiZGVwb3NpdGVkQW1vdW50IgoJaW50YyAyIC8vIDAKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzL0dhbWVDb250cmFjdC5hbGdvLnRzOjI0CgkvLyB0aGlzLm1heERlcG9zaXRBbW91bnQudmFsdWUgPSA1CglwdXNoYnl0ZXMgMHg2ZDYxNzg0NDY1NzA2ZjczNjk3NDQxNmQ2Zjc1NmU3NCAvLyAibWF4RGVwb3NpdEFtb3VudCIKCXB1c2hpbnQgNQoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKLy8gY3JlYXRlQm94KCl2b2lkCiphYmlfcm91dGVfY3JlYXRlQm94OgoJLy8gZXhlY3V0ZSBjcmVhdGVCb3goKXZvaWQKCWNhbGxzdWIgY3JlYXRlQm94CglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBjcmVhdGVCb3goKTogdm9pZApjcmVhdGVCb3g6Cglwcm90byAwIDAKCgkvLyBjb250cmFjdHMvR2FtZUNvbnRyYWN0LmFsZ28udHM6MjkKCS8vIHRoaXMucGxheWVyMU1vdmUuY3JlYXRlKDQwMCkKCXB1c2hieXRlcyAweDcwNmM2MTc5NjU3MjMxNGQ2Zjc2NjUgLy8gInBsYXllcjFNb3ZlIgoJaW50YyAzIC8vIDQwMAoJYm94X2NyZWF0ZQoJcG9wCgoJLy8gY29udHJhY3RzL0dhbWVDb250cmFjdC5hbGdvLnRzOjMwCgkvLyB0aGlzLnBsYXllcjJNb3ZlLmNyZWF0ZSg0MDApCglwdXNoYnl0ZXMgMHg3MDZjNjE3OTY1NzIzMjRkNmY3NjY1IC8vICJwbGF5ZXIyTW92ZSIKCWludGMgMyAvLyA0MDAKCWJveF9jcmVhdGUKCXBvcAoJcmV0c3ViCgovLyBkZXBvc2l0ZnVuZHModHhuKXZvaWQKKmFiaV9yb3V0ZV9kZXBvc2l0ZnVuZHM6CgkvLyBmdHJhbnN4OiB0eG4KCXR4biBHcm91cEluZGV4CglpbnRjIDAgLy8gMQoJLQoKCS8vIGV4ZWN1dGUgZGVwb3NpdGZ1bmRzKHR4bil2b2lkCgljYWxsc3ViIGRlcG9zaXRmdW5kcwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gZGVwb3NpdGZ1bmRzKGZ0cmFuc3ggOiBUeG4pOiB2b2lkCmRlcG9zaXRmdW5kczoKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0cy9HYW1lQ29udHJhY3QuYWxnby50czozNQoJLy8gYXNzZXJ0KAoJLy8gICAgICAgICAgICAgdGhpcy50eG4uc2VuZGVyID09PSB0aGlzLmFwcC5jcmVhdG9yIHx8CgkvLyAgICAgICAgICAgICAgIHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5wbGF5ZXIxLnZhbHVlIHx8CgkvLyAgICAgICAgICAgICAgIHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5wbGF5ZXIyLnZhbHVlCgkvLyAgICAgICAgICAgKQoJdHhuIFNlbmRlcgoJdHhuYSBBcHBsaWNhdGlvbnMgMAoJYXBwX3BhcmFtc19nZXQgQXBwQ3JlYXRvcgoJcG9wCgk9PQoJZHVwCglibnogKnNraXBfb3IwCgl0eG4gU2VuZGVyCglieXRlYyAyIC8vICAicGxheWVyMSIKCWFwcF9nbG9iYWxfZ2V0Cgk9PQoJfHwKCipza2lwX29yMDoKCWR1cAoJYm56ICpza2lwX29yMQoJdHhuIFNlbmRlcgoJYnl0ZWMgMSAvLyAgInBsYXllcjIiCglhcHBfZ2xvYmFsX2dldAoJPT0KCXx8Cgoqc2tpcF9vcjE6Cglhc3NlcnQKCgkvLyBjb250cmFjdHMvR2FtZUNvbnRyYWN0LmFsZ28udHM6NDEKCS8vIHZlcmlmeVBheVR4bihmdHJhbnN4LCB7CgkvLyAgICAgICAgICAgICByZWNlaXZlcjogdGhpcy5hcHAuYWRkcmVzcywKCS8vCgkvLwoJLy8gICAgICAgICB9KQoJLy8gdmVyaWZ5IHBheQoJZnJhbWVfZGlnIC0xIC8vIGZ0cmFuc3g6IFR4bgoJZ3R4bnMgVHlwZUVudW0KCWludGMgMCAvLyAgcGF5Cgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoiZnRyYW5zeCIsImZpZWxkIjoidHlwZUVudW0iLCJleHBlY3RlZCI6InBheSJ9Cglhc3NlcnQKCgkvLyB2ZXJpZnkgcmVjZWl2ZXIKCWZyYW1lX2RpZyAtMSAvLyBmdHJhbnN4OiBUeG4KCWd0eG5zIFJlY2VpdmVyCglnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwoJPT0KCgkvLyB0cmFuc2FjdGlvbiB2ZXJpZmljYXRpb24gZmFpbGVkOiB7InR4biI6ImZ0cmFuc3giLCJmaWVsZCI6InJlY2VpdmVyIiwiZXhwZWN0ZWQiOiJ0aGlzLmFwcC5hZGRyZXNzIn0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9HYW1lQ29udHJhY3QuYWxnby50czo0NgoJLy8gdGhpcy5kZXBvc2l0ZWRBbW91bnQudmFsdWUgKz0gZnRyYW5zeC5hc3NldEFtb3VudAoJYnl0ZWMgMCAvLyAgImRlcG9zaXRlZEFtb3VudCIKCWFwcF9nbG9iYWxfZ2V0CglmcmFtZV9kaWcgLTEgLy8gZnRyYW5zeDogVHhuCglndHhucyBBc3NldEFtb3VudAoJKwoJYnl0ZWMgMCAvLyAgImRlcG9zaXRlZEFtb3VudCIKCXN3YXAKCWFwcF9nbG9iYWxfcHV0CglyZXRzdWIKCi8vIHNlbmRGdW5kcyhhZGRyZXNzKXZvaWQKKmFiaV9yb3V0ZV9zZW5kRnVuZHM6CgkvLyBwbGF5ZXI6IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDEgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMCAocGxheWVyKSBmb3Igc2VuZEZ1bmRzIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBleGVjdXRlIHNlbmRGdW5kcyhhZGRyZXNzKXZvaWQKCWNhbGxzdWIgc2VuZEZ1bmRzCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBzZW5kRnVuZHMocGxheWVyOiBBZGRyZXNzKTogdm9pZApzZW5kRnVuZHM6Cglwcm90byAxIDAKCgkvLyBjb250cmFjdHMvR2FtZUNvbnRyYWN0LmFsZ28udHM6NTQKCS8vIGFzc2VydCgKCS8vICAgICAgICAgICAgIHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5hcHAuY3JlYXRvcgoJLy8gICAgICAgICAgICkKCXR4biBTZW5kZXIKCXR4bmEgQXBwbGljYXRpb25zIDAKCWFwcF9wYXJhbXNfZ2V0IEFwcENyZWF0b3IKCXBvcAoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9HYW1lQ29udHJhY3QuYWxnby50czo1NwoJLy8gc2VuZFBheW1lbnQoewoJLy8gICAgICAgICAgICAgcmVjZWl2ZXI6IHBsYXllciwKCS8vICAgICAgICAgICAgIGFtb3VudDogdGhpcy5kZXBvc2l0ZWRBbW91bnQudmFsdWUsCgkvLyAgICAgICAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL0dhbWVDb250cmFjdC5hbGdvLnRzOjU4CgkvLyByZWNlaXZlcjogcGxheWVyCglmcmFtZV9kaWcgLTEgLy8gcGxheWVyOiBBZGRyZXNzCglpdHhuX2ZpZWxkIFJlY2VpdmVyCgoJLy8gY29udHJhY3RzL0dhbWVDb250cmFjdC5hbGdvLnRzOjU5CgkvLyBhbW91bnQ6IHRoaXMuZGVwb3NpdGVkQW1vdW50LnZhbHVlCglieXRlYyAwIC8vICAiZGVwb3NpdGVkQW1vdW50IgoJYXBwX2dsb2JhbF9nZXQKCWl0eG5fZmllbGQgQW1vdW50CgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAyIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoKCS8vIGNvbnRyYWN0cy9HYW1lQ29udHJhY3QuYWxnby50czo2MQoJLy8gdGhpcy5kZXBvc2l0ZWRBbW91bnQudmFsdWUgPSAwCglieXRlYyAwIC8vICAiZGVwb3NpdGVkQW1vdW50IgoJaW50YyAyIC8vIDAKCWFwcF9nbG9iYWxfcHV0CglyZXRzdWIKCi8vIGpvaW5HYW1lKGFkZHJlc3Mpdm9pZAoqYWJpX3JvdXRlX2pvaW5HYW1lOgoJLy8gcGxheWVyOiBhZGRyZXNzCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyAxIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDAgKHBsYXllcikgZm9yIGpvaW5HYW1lIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBleGVjdXRlIGpvaW5HYW1lKGFkZHJlc3Mpdm9pZAoJY2FsbHN1YiBqb2luR2FtZQoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gam9pbkdhbWUocGxheWVyOiBBZGRyZXNzKTogdm9pZApqb2luR2FtZToKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0cy9HYW1lQ29udHJhY3QuYWxnby50czo2OQoJLy8gYXNzZXJ0KAoJLy8gICAgICAgICAgICAgIXRoaXMucGxheWVyMi5leGlzdHMKCS8vICAgICAgICAgICApCgl0eG5hIEFwcGxpY2F0aW9ucyAwCglieXRlYyAxIC8vICAicGxheWVyMiIKCWFwcF9nbG9iYWxfZ2V0X2V4Cglzd2FwCglwb3AKCSEKCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9HYW1lQ29udHJhY3QuYWxnby50czo3MwoJLy8gdGhpcy5wbGF5ZXIyLnZhbHVlID1wbGF5ZXIKCWJ5dGVjIDEgLy8gICJwbGF5ZXIyIgoJZnJhbWVfZGlnIC0xIC8vIHBsYXllcjogQWRkcmVzcwoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4YjRjNzdkNzEgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbihhZGRyZXNzLGFkZHJlc3Mpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweGVhMDQ1MDM2IC8vIG1ldGhvZCAiY3JlYXRlQm94KCl2b2lkIgoJcHVzaGJ5dGVzIDB4NDg2NzU0NzAgLy8gbWV0aG9kICJkZXBvc2l0ZnVuZHModHhuKXZvaWQiCglwdXNoYnl0ZXMgMHgzYTE5ZDBkZSAvLyBtZXRob2QgInNlbmRGdW5kcyhhZGRyZXNzKXZvaWQiCglwdXNoYnl0ZXMgMHgzN2ZlOWRjYyAvLyBtZXRob2QgImpvaW5HYW1lKGFkZHJlc3Mpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQm94ICphYmlfcm91dGVfZGVwb3NpdGZ1bmRzICphYmlfcm91dGVfc2VuZEZ1bmRzICphYmlfcm91dGVfam9pbkdhbWUKCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY2FsbCBOb09wCgllcnI=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiAEASAAkAMmAw9kZXBvc2l0ZWRBbW91bnQHcGxheWVyMgdwbGF5ZXIxMRgUgQYLMRkIjQwBAQAAAAAAAAAAAAAA8wAAAAAAAAAAAAAANhoCSRUjEkQ2GgFJFSMSRIgAAiJDigIAKov/ZymL/mcoJGeAEG1heERlcG9zaXRBbW91bnSBBWeJiAACIkOKAACAC3BsYXllcjFNb3ZlJblIgAtwbGF5ZXIyTW92ZSW5SIkxFiIJiAACIkOKAQAxADYyAHIHSBJJQAAGMQAqZBIRSUAABjEAKWQSEUSL/zgQIhJEi/84BzIKEkQoZIv/OBIIKExniTYaAUkVIxJEiAACIkOKAQAxADYyAHIHSBJEsSKyEIv/sgcoZLIIJLIBsygkZ4k2GgFJFSMSRIgAAiJDigEANjIAKWVMSBREKYv/Z4mABLTHfXE2GgCOAf8BAIAE6gRQNoAESGdUcIAEOhnQ3oAEN/6dzDYaAI4E/xT/Pf+B/68A","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -200,11 +200,57 @@ export type GlobalKeysState = FightTypes['state']['global']['keys']
 export type BoxKeysState = FightTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type FightCreateCallParams =
+  | Expand<CallParams<FightArgs['obj']['createApplication(address,address)void'] | FightArgs['tuple']['createApplication(address,address)void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<FightArgs['obj']['createApplication(address,address)void'] | FightArgs['tuple']['createApplication(address,address)void']> & {method: 'createApplication(address,address)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type FightDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: FightCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Fight smart contract
  */
 export abstract class FightParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends FightCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication(address,address)void':
+            return FightParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the Fight smart contract using the createApplication(address,address)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<FightArgs['obj']['createApplication(address,address)void'] | FightArgs['tuple']['createApplication(address,address)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication(address,address)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.player1, params.args.player2],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the createBox()void ABI method
    *
@@ -259,6 +305,148 @@ export abstract class FightParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Fight smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class FightFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `FightFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new FightClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new FightClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Fight smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: FightDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? FightParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (FightCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new FightClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Fight smart contract using the createApplication(address,address)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<FightArgs['obj']['createApplication(address,address)void'] | FightArgs['tuple']['createApplication(address,address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(FightParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Fight smart contract using the createApplication(address,address)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<FightArgs['obj']['createApplication(address,address)void'] | FightArgs['tuple']['createApplication(address,address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(FightParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Fight smart contract using an ABI method call using the createApplication(address,address)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<FightArgs['obj']['createApplication(address,address)void'] | FightArgs['tuple']['createApplication(address,address)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(FightParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | FightReturns['createApplication(address,address)void']) }, appClient: new FightClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Fight smart contract
  */
