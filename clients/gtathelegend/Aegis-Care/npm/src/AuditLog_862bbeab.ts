@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"AuditLog","structs":{},"methods":[{"name":"log_consent_granted","args":[{"type":"address","name":"principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"expiry"},{"type":"string","name":"scopes"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[{"name":"ConsentGranted","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"expiry"},{"type":"string","name":"scopes"}]}],"recommendations":{}},{"name":"log_consent_revoked","args":[{"type":"address","name":"principal"},{"type":"address","name":"fiduciary"},{"type":"uint64","name":"timestamp"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[{"name":"ConsentRevoked","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"uint64","name":"timestamp"}]}],"recommendations":{}},{"name":"log_data_accessed","args":[{"type":"address","name":"principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"timestamp"},{"type":"bool","name":"is_emergency"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[{"name":"DataAccessed","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"timestamp"},{"type":"bool","name":"is_emergency"}]}],"recommendations":{}},{"name":"log_access_requested","args":[{"type":"address","name":"principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"timestamp"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[{"name":"AccessRequested","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"timestamp"}]}],"recommendations":{}},{"name":"log_erasure_requested","args":[{"type":"address","name":"principal"},{"type":"uint64","name":"timestamp"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[{"name":"ErasureRequested","args":[{"type":"address","name":"data_principal"},{"type":"uint64","name":"timestamp"}]}],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[91,116,227,301],"errorMessage":"invalid array length header"},{"pc":[251],"errorMessage":"invalid number of bytes for arc4.bool"},{"pc":[102,124,235,309],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[77,85,173,181,213,221,287,295,350],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[110,189,243,317,358],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[{"name":"ConsentGranted","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"expiry"},{"type":"string","name":"scopes"}]},{"name":"ConsentRevoked","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"uint64","name":"timestamp"}]},{"name":"DataAccessed","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"timestamp"},{"type":"bool","name":"is_emergency"}]},{"name":"AccessRequested","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"timestamp"}]},{"name":"ErasureRequested","args":[{"type":"address","name":"data_principal"},{"type":"uint64","name":"timestamp"}]}]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"AuditLog","structs":{},"methods":[{"name":"log_consent_granted","args":[{"type":"address","name":"principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"expiry"},{"type":"string","name":"scopes"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[{"name":"ConsentGranted","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"expiry"},{"type":"string","name":"scopes"}]}],"recommendations":{}},{"name":"log_consent_revoked","args":[{"type":"address","name":"principal"},{"type":"address","name":"fiduciary"},{"type":"uint64","name":"timestamp"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[{"name":"ConsentRevoked","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"uint64","name":"timestamp"}]}],"recommendations":{}},{"name":"log_data_accessed","args":[{"type":"address","name":"principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"timestamp"},{"type":"bool","name":"is_emergency"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[{"name":"DataAccessed","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"timestamp"},{"type":"bool","name":"is_emergency"}]}],"recommendations":{}},{"name":"log_access_requested","args":[{"type":"address","name":"principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"timestamp"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[{"name":"AccessRequested","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"timestamp"}]}],"recommendations":{}},{"name":"log_erasure_requested","args":[{"type":"address","name":"principal"},{"type":"uint64","name":"timestamp"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[{"name":"ErasureRequested","args":[{"type":"address","name":"data_principal"},{"type":"uint64","name":"timestamp"}]}],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[91,116,227,301],"errorMessage":"invalid array length header"},{"pc":[251],"errorMessage":"invalid number of bytes for arc4.bool"},{"pc":[102,124,235,309],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[77,85,173,181,213,221,287,295,350],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[110,189,243,317,358],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAzMiAxIDggMAogICAgLy8gc21hcnRfY29udHJhY3RzL0F1ZGl0TG9nL2NvbnRyYWN0LnB5OjQwCiAgICAvLyBjbGFzcyBBdWRpdExvZyhBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAMTIKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDY2MzA3N2FhIDB4YTI1YzFlNGMgMHhiZGUxOTkwMiAweDI1ZjJjMzE2IDB4Y2RjNzRlNDMgLy8gbWV0aG9kICJsb2dfY29uc2VudF9ncmFudGVkKGFkZHJlc3MsYWRkcmVzcyxzdHJpbmcsdWludDY0LHN0cmluZyl2b2lkIiwgbWV0aG9kICJsb2dfY29uc2VudF9yZXZva2VkKGFkZHJlc3MsYWRkcmVzcyx1aW50NjQpdm9pZCIsIG1ldGhvZCAibG9nX2RhdGFfYWNjZXNzZWQoYWRkcmVzcyxhZGRyZXNzLHN0cmluZyx1aW50NjQsYm9vbCl2b2lkIiwgbWV0aG9kICJsb2dfYWNjZXNzX3JlcXVlc3RlZChhZGRyZXNzLGFkZHJlc3Msc3RyaW5nLHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJsb2dfZXJhc3VyZV9yZXF1ZXN0ZWQoYWRkcmVzcyx1aW50NjQpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGxvZ19jb25zZW50X2dyYW50ZWQgbG9nX2NvbnNlbnRfcmV2b2tlZCBsb2dfZGF0YV9hY2Nlc3NlZCBsb2dfYWNjZXNzX3JlcXVlc3RlZCBsb2dfZXJhc3VyZV9yZXF1ZXN0ZWQKICAgIGVycgoKbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxMjoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLkF1ZGl0TG9nLmNvbnRyYWN0LkF1ZGl0TG9nLmxvZ19jb25zZW50X2dyYW50ZWRbcm91dGluZ10oKSAtPiB2b2lkOgpsb2dfY29uc2VudF9ncmFudGVkOgogICAgLy8gc21hcnRfY29udHJhY3RzL0F1ZGl0TG9nL2NvbnRyYWN0LnB5OjQyCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXAKICAgIGludGNfMyAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgIGR1cAogICAgdW5jb3ZlciAyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDQKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDUKICAgIGR1cAogICAgaW50Y18zIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICAvLyBzbWFydF9jb250cmFjdHMvQXVkaXRMb2cvY29udHJhY3QucHk6NTEKICAgIC8vIGFyYzQuZW1pdChDb25zZW50R3JhbnRlZChwcmluY2lwYWwsIGZpZHVjaWFyeSwgcHVycG9zZSwgZXhwaXJ5LCBzY29wZXMpKQogICAgdW5jb3ZlciA1CiAgICB1bmNvdmVyIDUKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MDA0YwogICAgY29uY2F0CiAgICBwdXNoaW50IDc2CiAgICB1bmNvdmVyIDQKICAgICsKICAgIHN3YXAKICAgIHVuY292ZXIgMwogICAgY29uY2F0CiAgICBzd2FwCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgY29uY2F0CiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHg0NGEyYWI2ZCAvLyBtZXRob2QgIkNvbnNlbnRHcmFudGVkKGFkZHJlc3MsYWRkcmVzcyxzdHJpbmcsdWludDY0LHN0cmluZykiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgLy8gc21hcnRfY29udHJhY3RzL0F1ZGl0TG9nL2NvbnRyYWN0LnB5OjQyCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuQXVkaXRMb2cuY29udHJhY3QuQXVkaXRMb2cubG9nX2NvbnNlbnRfcmV2b2tlZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmxvZ19jb25zZW50X3Jldm9rZWQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvQXVkaXRMb2cvY29udHJhY3QucHk6NTMKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9BdWRpdExvZy9jb250cmFjdC5weTo2MAogICAgLy8gYXJjNC5lbWl0KENvbnNlbnRSZXZva2VkKHByaW5jaXBhbCwgZmlkdWNpYXJ5LCB0aW1lc3RhbXApKQogICAgY292ZXIgMgogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDgxODA4NzMyIC8vIG1ldGhvZCAiQ29uc2VudFJldm9rZWQoYWRkcmVzcyxhZGRyZXNzLHVpbnQ2NCkiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgLy8gc21hcnRfY29udHJhY3RzL0F1ZGl0TG9nL2NvbnRyYWN0LnB5OjUzCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuQXVkaXRMb2cuY29udHJhY3QuQXVkaXRMb2cubG9nX2RhdGFfYWNjZXNzZWRbcm91dGluZ10oKSAtPiB2b2lkOgpsb2dfZGF0YV9hY2Nlc3NlZDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9BdWRpdExvZy9jb250cmFjdC5weTo2MgogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBpbnRjXzMgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDQKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDUKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5ib29sCiAgICAvLyBzbWFydF9jb250cmFjdHMvQXVkaXRMb2cvY29udHJhY3QucHk6NzEKICAgIC8vIGFyYzQuZW1pdChEYXRhQWNjZXNzZWQocHJpbmNpcGFsLCBmaWR1Y2lhcnksIHB1cnBvc2UsIHRpbWVzdGFtcCwgaXNfZW1lcmdlbmN5KSkKICAgIHVuY292ZXIgNAogICAgdW5jb3ZlciA0CiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDAwNGIKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHhhOWEyYTAyNSAvLyBtZXRob2QgIkRhdGFBY2Nlc3NlZChhZGRyZXNzLGFkZHJlc3Msc3RyaW5nLHVpbnQ2NCxib29sKSIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICAvLyBzbWFydF9jb250cmFjdHMvQXVkaXRMb2cvY29udHJhY3QucHk6NjIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5BdWRpdExvZy5jb250cmFjdC5BdWRpdExvZy5sb2dfYWNjZXNzX3JlcXVlc3RlZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmxvZ19hY2Nlc3NfcmVxdWVzdGVkOgogICAgLy8gc21hcnRfY29udHJhY3RzL0F1ZGl0TG9nL2NvbnRyYWN0LnB5OjczCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXAKICAgIGludGNfMyAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gc21hcnRfY29udHJhY3RzL0F1ZGl0TG9nL2NvbnRyYWN0LnB5OjgxCiAgICAvLyBhcmM0LmVtaXQoQWNjZXNzUmVxdWVzdGVkKHByaW5jaXBhbCwgZmlkdWNpYXJ5LCBwdXJwb3NlLCB0aW1lc3RhbXApKQogICAgdW5jb3ZlciAzCiAgICB1bmNvdmVyIDMKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MDA0YQogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4NzM0ZGRiYjYgLy8gbWV0aG9kICJBY2Nlc3NSZXF1ZXN0ZWQoYWRkcmVzcyxhZGRyZXNzLHN0cmluZyx1aW50NjQpIgogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9BdWRpdExvZy9jb250cmFjdC5weTo3MwogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLkF1ZGl0TG9nLmNvbnRyYWN0LkF1ZGl0TG9nLmxvZ19lcmFzdXJlX3JlcXVlc3RlZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmxvZ19lcmFzdXJlX3JlcXVlc3RlZDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9BdWRpdExvZy9jb250cmFjdC5weTo4MwogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18wIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9BdWRpdExvZy9jb250cmFjdC5weTo4OQogICAgLy8gYXJjNC5lbWl0KEVyYXN1cmVSZXF1ZXN0ZWQocHJpbmNpcGFsLCB0aW1lc3RhbXApKQogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHhlZTkxOTAzMiAvLyBtZXRob2QgIkVyYXN1cmVSZXF1ZXN0ZWQoYWRkcmVzcyx1aW50NjQpIgogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9BdWRpdExvZy9jb250cmFjdC5weTo4MwogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEIAEIADEbQQAyMRkURDEYRIIFBGYwd6oEolweTAS94ZkCBCXywxYEzcdOQzYaAI4FAAkAaQCRANsBGgAxGRQxGBQQQzYaAUkVIhJENhoCSRUiEkQ2GgNJJVmBAghLARVJTwISRDYaBEkVJBJENhoFSSVZgQIISwEVEkRPBU8FUIACAExQgUxPBAhMTwNQTBZXBgJQTwJQTFCABESiq21MULAjQzYaAUkVIhJENhoCSRUiEkQ2GgNJFSQSRE4CUExQgASBgIcyTFCwI0M2GgFJFSISRDYaAkkVIhJENhoDSSVZgQIISwEVEkQ2GgRJFSQSRDYaBUkVIxJETwRPBFCAAgBLUE8CUExQTFCABKmioCVMULAjQzYaAUkVIhJENhoCSRUiEkQ2GgNJJVmBAghLARUSRDYaBEkVJBJETwNPA1CAAgBKUExQTFCABHNN27ZMULAjQzYaAUkVIhJENhoCSRUkEkRQgATukZAyTFCwI0M=","clear":"C4EBQw=="},"events":[{"name":"ConsentGranted","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"expiry"},{"type":"string","name":"scopes"}]},{"name":"ConsentRevoked","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"uint64","name":"timestamp"}]},{"name":"DataAccessed","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"timestamp"},{"type":"bool","name":"is_emergency"}]},{"name":"AccessRequested","args":[{"type":"address","name":"data_principal"},{"type":"address","name":"fiduciary"},{"type":"string","name":"purpose"},{"type":"uint64","name":"timestamp"}]},{"name":"ErasureRequested","args":[{"type":"address","name":"data_principal"},{"type":"uint64","name":"timestamp"}]}],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -182,6 +182,21 @@ export type MethodArgs<TSignature extends AuditLogSignatures> = AuditLogTypes['m
 export type MethodReturn<TSignature extends AuditLogSignatures> = AuditLogTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AuditLogCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AuditLogDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AuditLogCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AuditLog smart contract
@@ -254,6 +269,147 @@ export abstract class AuditLogParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the AuditLog smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AuditLogFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AuditLogFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AuditLogClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AuditLogClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the AuditLog smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AuditLogDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new AuditLogClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AuditLog smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AuditLog smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AuditLog smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new AuditLogClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the AuditLog smart contract
  */
