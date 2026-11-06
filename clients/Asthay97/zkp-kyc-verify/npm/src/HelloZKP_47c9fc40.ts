@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"HelloZKP","desc":"","methods":[{"name":"doMath","desc":"A method that takes two numbers and does either addition or subtraction","args":[{"name":"a","type":"uint64","desc":"The first uint64"},{"name":"b","type":"uint64","desc":"The second uint64"},{"name":"operation","type":"string","desc":"The operation to perform. Can be either 'sum' or 'difference'"}],"returns":{"type":"uint64","desc":"The result of the operation"},"actions":{"create":[],"call":["NoOp"]}},{"name":"hello","desc":"A demonstration method used in the AlgoKit fullstack template.\nGreets the user by name.","args":[{"name":"name","type":"string","desc":"The name of the user to greet."}],"returns":{"type":"string","desc":"A greeting message to the user."},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[46],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[162],"errorMessage":"Invalid operation","teal":149},{"pc":[221],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":209},{"pc":[243],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":218}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"HelloZKP","desc":"","methods":[{"name":"doMath","desc":"A method that takes two numbers and does either addition or subtraction","args":[{"name":"a","type":"uint64","desc":"The first uint64"},{"name":"b","type":"uint64","desc":"The second uint64"},{"name":"operation","type":"string","desc":"The operation to perform. Can be either 'sum' or 'difference'"}],"returns":{"type":"uint64","desc":"The result of the operation"},"actions":{"create":[],"call":["NoOp"]}},{"name":"hello","desc":"A demonstration method used in the AlgoKit fullstack template.\nGreets the user by name.","args":[{"name":"name","type":"string","desc":"The name of the user to greet."}],"returns":{"type":"string","desc":"A greeting message to the user."},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[46],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[162],"errorMessage":"Invalid operation","teal":149},{"pc":[221],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":209},{"pc":[243],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":218}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxCmJ5dGVjYmxvY2sgMHgxNTFmN2M3NQoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDYuMgovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKcHVzaGludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIGdldFN1bShhOiB1aW50NjQsIGI6IHVpbnQ2NCk6IHVpbnQ2NAovLwovLyBDYWxjdWxhdGVzIHRoZSBzdW0gb2YgdHdvIG51bWJlcnMKLy8KLy8gQHBhcmFtIGEKLy8gQHBhcmFtIGIKLy8gQHJldHVybnMgVGhlIHN1bSBvZiBhIGFuZCBiCmdldFN1bToKCXByb3RvIDIgMQoKCS8vIGNvbnRyYWN0c1xIZWxsb1pLUC5hbGdvLnRzOjEyCgkvLyByZXR1cm4gYSArIGI7CglmcmFtZV9kaWcgLTEgLy8gYTogdWludDY0CglmcmFtZV9kaWcgLTIgLy8gYjogdWludDY0CgkrCglyZXRzdWIKCi8vIGdldERpZmZlcmVuY2UoYTogdWludDY0LCBiOiB1aW50NjQpOiB1aW50NjQKLy8KLy8gQ2FsY3VsYXRlcyB0aGUgZGlmZmVyZW5jZSBiZXR3ZWVuIHR3byBudW1iZXJzCi8vCi8vIEBwYXJhbSBhCi8vIEBwYXJhbSBiCi8vIEByZXR1cm5zIFRoZSBkaWZmZXJlbmNlIGJldHdlZW4gYSBhbmQgYi4KZ2V0RGlmZmVyZW5jZToKCXByb3RvIDIgMQoKCS8vIGNvbnRyYWN0c1xIZWxsb1pLUC5hbGdvLnRzOjIzCgkvLyByZXR1cm4gYSA+PSBiID8gYSAtIGIgOiBiIC0gYTsKCWZyYW1lX2RpZyAtMSAvLyBhOiB1aW50NjQKCWZyYW1lX2RpZyAtMiAvLyBiOiB1aW50NjQKCT49CglieiAqdGVybmFyeTBfZmFsc2UKCWZyYW1lX2RpZyAtMSAvLyBhOiB1aW50NjQKCWZyYW1lX2RpZyAtMiAvLyBiOiB1aW50NjQKCS0KCWIgKnRlcm5hcnkwX2VuZAoKKnRlcm5hcnkwX2ZhbHNlOgoJZnJhbWVfZGlnIC0yIC8vIGI6IHVpbnQ2NAoJZnJhbWVfZGlnIC0xIC8vIGE6IHVpbnQ2NAoJLQoKKnRlcm5hcnkwX2VuZDoKCXJldHN1YgoKLy8gZG9NYXRoKHVpbnQ2NCx1aW50NjQsc3RyaW5nKXVpbnQ2NAoqYWJpX3JvdXRlX2RvTWF0aDoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMCAvLyAweDE1MWY3Yzc1CgoJLy8gb3BlcmF0aW9uOiBzdHJpbmcKCXR4bmEgQXBwbGljYXRpb25BcmdzIDMKCWV4dHJhY3QgMiAwCgoJLy8gYjogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglidG9pCgoJLy8gYTogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBkb01hdGgodWludDY0LHVpbnQ2NCxzdHJpbmcpdWludDY0CgljYWxsc3ViIGRvTWF0aAoJaXRvYgoJY29uY2F0Cglsb2cKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGRvTWF0aChhOiB1aW50NjQsIGI6IHVpbnQ2NCwgb3BlcmF0aW9uOiBzdHJpbmcpOiB1aW50NjQKLy8KLy8gQSBtZXRob2QgdGhhdCB0YWtlcyB0d28gbnVtYmVycyBhbmQgZG9lcyBlaXRoZXIgYWRkaXRpb24gb3Igc3VidHJhY3Rpb24KLy8KLy8gQHBhcmFtIGEgVGhlIGZpcnN0IHVpbnQ2NAovLyBAcGFyYW0gYiBUaGUgc2Vjb25kIHVpbnQ2NAovLyBAcGFyYW0gb3BlcmF0aW9uIFRoZSBvcGVyYXRpb24gdG8gcGVyZm9ybS4gQ2FuIGJlIGVpdGhlciAnc3VtJyBvciAnZGlmZmVyZW5jZScKLy8KLy8gQHJldHVybnMgVGhlIHJlc3VsdCBvZiB0aGUgb3BlcmF0aW9uCmRvTWF0aDoKCXByb3RvIDMgMQoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglwdXNoYnl0ZXMgMHgKCgkvLyAqaWYwX2NvbmRpdGlvbgoJLy8gY29udHJhY3RzXEhlbGxvWktQLmFsZ28udHM6MzgKCS8vIG9wZXJhdGlvbiA9PT0gJ3N1bScKCWZyYW1lX2RpZyAtMyAvLyBvcGVyYXRpb246IHN0cmluZwoJcHVzaGJ5dGVzIDB4NzM3NTZkIC8vICJzdW0iCgk9PQoJYnogKmlmMF9lbHNlaWYxX2NvbmRpdGlvbgoKCS8vICppZjBfY29uc2VxdWVudAoJLy8gY29udHJhY3RzXEhlbGxvWktQLmFsZ28udHM6MzkKCS8vIHJlc3VsdCA9IHRoaXMuZ2V0U3VtKGEsIGIpCglmcmFtZV9kaWcgLTIgLy8gYjogdWludDY0CglmcmFtZV9kaWcgLTEgLy8gYTogdWludDY0CgljYWxsc3ViIGdldFN1bQoJZnJhbWVfYnVyeSAwIC8vIHJlc3VsdDogdWludDY0CgliICppZjBfZW5kCgoqaWYwX2Vsc2VpZjFfY29uZGl0aW9uOgoJLy8gY29udHJhY3RzXEhlbGxvWktQLmFsZ28udHM6NDAKCS8vIG9wZXJhdGlvbiA9PT0gJ2RpZmZlcmVuY2UnCglmcmFtZV9kaWcgLTMgLy8gb3BlcmF0aW9uOiBzdHJpbmcKCXB1c2hieXRlcyAweDY0Njk2NjY2NjU3MjY1NmU2MzY1IC8vICJkaWZmZXJlbmNlIgoJPT0KCWJ6ICppZjBfZWxzZQoKCS8vICppZjBfZWxzZWlmMV9jb25zZXF1ZW50CgkvLyBjb250cmFjdHNcSGVsbG9aS1AuYWxnby50czo0MQoJLy8gcmVzdWx0ID0gdGhpcy5nZXREaWZmZXJlbmNlKGEsIGIpCglmcmFtZV9kaWcgLTIgLy8gYjogdWludDY0CglmcmFtZV9kaWcgLTEgLy8gYTogdWludDY0CgljYWxsc3ViIGdldERpZmZlcmVuY2UKCWZyYW1lX2J1cnkgMCAvLyByZXN1bHQ6IHVpbnQ2NAoJYiAqaWYwX2VuZAoKKmlmMF9lbHNlOgoJLy8gSW52YWxpZCBvcGVyYXRpb24KCWVycgoKKmlmMF9lbmQ6CgkvLyBjb250cmFjdHNcSGVsbG9aS1AuYWxnby50czo0NAoJLy8gcmV0dXJuIHJlc3VsdDsKCWZyYW1lX2RpZyAwIC8vIHJlc3VsdDogdWludDY0CgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCglyZXRzdWIKCi8vIGhlbGxvKHN0cmluZylzdHJpbmcKKmFiaV9yb3V0ZV9oZWxsbzoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMCAvLyAweDE1MWY3Yzc1CgoJLy8gbmFtZTogc3RyaW5nCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglleHRyYWN0IDIgMAoKCS8vIGV4ZWN1dGUgaGVsbG8oc3RyaW5nKXN0cmluZwoJY2FsbHN1YiBoZWxsbwoJZHVwCglsZW4KCWl0b2IKCWV4dHJhY3QgNiAyCglzd2FwCgljb25jYXQKCWNvbmNhdAoJbG9nCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBoZWxsbyhuYW1lOiBzdHJpbmcpOiBzdHJpbmcKLy8KLy8gQSBkZW1vbnN0cmF0aW9uIG1ldGhvZCB1c2VkIGluIHRoZSBBbGdvS2l0IGZ1bGxzdGFjayB0ZW1wbGF0ZS4KLy8gR3JlZXRzIHRoZSB1c2VyIGJ5IG5hbWUuCi8vCi8vIEBwYXJhbSBuYW1lIFRoZSBuYW1lIG9mIHRoZSB1c2VyIHRvIGdyZWV0LgovLyBAcmV0dXJucyBBIGdyZWV0aW5nIG1lc3NhZ2UgdG8gdGhlIHVzZXIuCmhlbGxvOgoJcHJvdG8gMSAxCgoJLy8gY29udHJhY3RzXEhlbGxvWktQLmFsZ28udHM6NTUKCS8vIHJldHVybiAnSGVsbG8sICcgKyBuYW1lOwoJcHVzaGJ5dGVzIDB4NDg2NTZjNmM2ZjJjMjAgLy8gIkhlbGxvLCAiCglmcmFtZV9kaWcgLTEgLy8gbmFtZTogc3RyaW5nCgljb25jYXQKCXJldHN1YgoKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCWludGMgMCAvLyAxCglyZXR1cm4KCipjcmVhdGVfTm9PcDoKCXB1c2hieXRlcyAweGI4NDQ3YjM2IC8vIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNyZWF0ZSBOb09wCgllcnIKCipjYWxsX05vT3A6CglwdXNoYnl0ZXMgMHg3NmE3ZWYzMyAvLyBtZXRob2QgImRvTWF0aCh1aW50NjQsdWludDY0LHN0cmluZyl1aW50NjQiCglwdXNoYnl0ZXMgMHgwMmJlY2UxMSAvLyBtZXRob2QgImhlbGxvKHN0cmluZylzdHJpbmciCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2RvTWF0aCAqYWJpX3JvdXRlX2hlbGxvCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgTm9PcAoJZXJy","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiABASYBBBUffHUxGBSBBgsxGQiNDACwAAAAAAAAAAAAAACiAAAAAAAAAAAAAACKAgGL/4v+CImKAgGL/4v+D0EACIv/i/4JQgAFi/6L/wmJKDYaA1cCADYaAhc2GgEXiAAFFlCwIkOKAwGAAIv9gANzdW0SQQAMi/6L/4j/sIwAQgAfi/2ACmRpZmZlcmVuY2USQQAMi/6L/4j/m4wAQgABAIsAjACJKDYaAVcCAIgADEkVFlcGAkxQULAiQ4oBAYAHSGVsbG8sIIv/UIkiQ4AEuER7NjYaAI4B//EAgAR2p+8zgAQCvs4RNhoAjgL/Xv+1AA==","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -170,11 +170,57 @@ export type MethodArgs<TSignature extends HelloZkpSignatures> = HelloZkpTypes['m
 export type MethodReturn<TSignature extends HelloZkpSignatures> = HelloZkpTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type HelloZkpCreateCallParams =
+  | Expand<CallParams<HelloZkpArgs['obj']['createApplication()void'] | HelloZkpArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<HelloZkpArgs['obj']['createApplication()void'] | HelloZkpArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type HelloZkpDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: HelloZkpCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the HelloZkp smart contract
  */
 export abstract class HelloZkpParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends HelloZkpCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return HelloZkpParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the HelloZKP smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<HelloZkpArgs['obj']['createApplication()void'] | HelloZkpArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the doMath(uint64,uint64,string)uint64 ABI method
    *
@@ -209,6 +255,148 @@ export abstract class HelloZkpParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the HelloZKP smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class HelloZkpFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `HelloZkpFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new HelloZkpClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new HelloZkpClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the HelloZKP smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: HelloZkpDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? HelloZkpParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (HelloZkpCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new HelloZkpClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HelloZKP smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<HelloZkpArgs['obj']['createApplication()void'] | HelloZkpArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(HelloZkpParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HelloZKP smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<HelloZkpArgs['obj']['createApplication()void'] | HelloZkpArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(HelloZkpParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HelloZKP smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<HelloZkpArgs['obj']['createApplication()void'] | HelloZkpArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(HelloZkpParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | HelloZkpReturns['createApplication()void']) }, appClient: new HelloZkpClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the HelloZKP smart contract
  */

@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"AlgoDID","desc":"","methods":[{"name":"startUpload","desc":"Allocate boxes to begin data upload process","args":[{"name":"pubKey","type":"address","desc":"The pubkey of the DID"},{"name":"numBoxes","type":"uint64","desc":"The number of boxes that the data will take up"},{"name":"endBoxSize","type":"uint64","desc":"The size of the last box"},{"name":"mbrPayment","type":"pay","desc":"Payment from the uploader to cover the box MBR"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"upload","desc":"Upload data to a specific offset in a box","args":[{"name":"pubKey","type":"address","desc":"The pubkey of the DID"},{"name":"boxIndex","type":"uint64","desc":"The index of the box to upload the given chunk of data to"},{"name":"offset","type":"uint64","desc":"The offset within the box to start writing the data"},{"name":"data","type":"byte[]","desc":"The data to write"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"finishUpload","desc":"Mark uploading as false","args":[{"name":"pubKey","type":"address","desc":"The address of the DID"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"startDelete","desc":"Starts the deletion process for the data associated with a DID","args":[{"name":"pubKey","type":"address","desc":"The address of the DID"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteData","desc":"Deletes a box of data","args":[{"name":"pubKey","type":"address","desc":"The address of the DID"},{"name":"boxIndex","type":"uint64","desc":"The index of the box to delete"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateApplication","desc":"Allow the contract to be updated by the creator","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]}},{"name":"dummy","desc":"Dummy function to add extra box references for deleteData.\nBoxes are 32k, but a single app call can only include enough references to read/write 8k\nat a time. Thus when a box is deleted, we need to add additional dummy calls with box\nreferences to increase the total read/write budget to 32k.","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"Metadata":[{"name":"start","type":"uint64"},{"name":"end","type":"uint64"},{"name":"status","type":"uint8"},{"name":"endSize","type":"uint64"},{"name":"lastDeleted","type":"uint64"}]},"state":{"schema":{"global":{"bytes":0,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"currentIndex":{"key":"Y3VycmVudEluZGV4","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"dataBoxes":{"keyType":"uint64","valueType":"AVMBytes"},"metadata":{"keyType":"address","valueType":"Metadata"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[67],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[77],"errorMessage":"argument 0 (mbrPayment) for startUpload must be a pay transaction","teal":39},{"pc":[94],"errorMessage":"argument 3 (pubKey) for startUpload must be a address","teal":57},{"pc":[250],"errorMessage":"argument 3 (pubKey) for upload must be a address","teal":220},{"pc":[356],"errorMessage":"argument 0 (pubKey) for finishUpload must be a address","teal":345},{"pc":[387],"errorMessage":"argument 0 (pubKey) for startDelete must be a address","teal":386},{"pc":[436],"errorMessage":"argument 1 (pubKey) for deleteData must be a address","teal":449},{"pc":[617],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":664},{"pc":[671],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":677},{"pc":[685],"errorMessage":"this contract does not implement the given ABI method for call UpdateApplication","teal":685}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"AlgoDID","desc":"","methods":[{"name":"startUpload","desc":"Allocate boxes to begin data upload process","args":[{"name":"pubKey","type":"address","desc":"The pubkey of the DID"},{"name":"numBoxes","type":"uint64","desc":"The number of boxes that the data will take up"},{"name":"endBoxSize","type":"uint64","desc":"The size of the last box"},{"name":"mbrPayment","type":"pay","desc":"Payment from the uploader to cover the box MBR"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"upload","desc":"Upload data to a specific offset in a box","args":[{"name":"pubKey","type":"address","desc":"The pubkey of the DID"},{"name":"boxIndex","type":"uint64","desc":"The index of the box to upload the given chunk of data to"},{"name":"offset","type":"uint64","desc":"The offset within the box to start writing the data"},{"name":"data","type":"byte[]","desc":"The data to write"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"finishUpload","desc":"Mark uploading as false","args":[{"name":"pubKey","type":"address","desc":"The address of the DID"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"startDelete","desc":"Starts the deletion process for the data associated with a DID","args":[{"name":"pubKey","type":"address","desc":"The address of the DID"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteData","desc":"Deletes a box of data","args":[{"name":"pubKey","type":"address","desc":"The address of the DID"},{"name":"boxIndex","type":"uint64","desc":"The index of the box to delete"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateApplication","desc":"Allow the contract to be updated by the creator","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]}},{"name":"dummy","desc":"Dummy function to add extra box references for deleteData.\nBoxes are 32k, but a single app call can only include enough references to read/write 8k\nat a time. Thus when a box is deleted, we need to add additional dummy calls with box\nreferences to increase the total read/write budget to 32k.","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"Metadata":[{"name":"start","type":"uint64"},{"name":"end","type":"uint64"},{"name":"status","type":"uint8"},{"name":"endSize","type":"uint64"},{"name":"lastDeleted","type":"uint64"}]},"state":{"schema":{"global":{"bytes":0,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"currentIndex":{"key":"Y3VycmVudEluZGV4","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"dataBoxes":{"keyType":"uint64","valueType":"AVMBytes"},"metadata":{"keyType":"address","valueType":"Metadata"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[67],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[77],"errorMessage":"argument 0 (mbrPayment) for startUpload must be a pay transaction","teal":39},{"pc":[94],"errorMessage":"argument 3 (pubKey) for startUpload must be a address","teal":57},{"pc":[250],"errorMessage":"argument 3 (pubKey) for upload must be a address","teal":220},{"pc":[356],"errorMessage":"argument 0 (pubKey) for finishUpload must be a address","teal":345},{"pc":[387],"errorMessage":"argument 0 (pubKey) for startDelete must be a address","teal":386},{"pc":[436],"errorMessage":"argument 1 (pubKey) for deleteData must be a address","teal":449},{"pc":[617],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":664},{"pc":[671],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":677},{"pc":[685],"errorMessage":"this contract does not implement the given ABI method for call UpdateApplication","teal":685}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDggMCAxNiAzMiA0MDAgMjUwMCAzMjc2OCAyNQpieXRlY2Jsb2NrIDB4IDB4NjM3NTcyNzI2NTZlNzQ0OTZlNjQ2NTc4CgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwNi4yCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIHRlbiBsaW5lcyBvZiBURUFMIGhhbmRsZSBpbml0aWFsIHByb2dyYW0gZmxvdwovLyBUaGlzIHBhdHRlcm4gaXMgdXNlZCB0byBtYWtlIGl0IGVhc3kgZm9yIGFueW9uZSB0byBwYXJzZSB0aGUgc3RhcnQgb2YgdGhlIHByb2dyYW0gYW5kIGRldGVybWluZSBpZiBhIHNwZWNpZmljIGFjdGlvbiBpcyBhbGxvd2VkCi8vIEhlcmUsIGFjdGlvbiByZWZlcnMgdG8gdGhlIE9uQ29tcGxldGUgaW4gY29tYmluYXRpb24gd2l0aCB3aGV0aGVyIHRoZSBhcHAgaXMgYmVpbmcgY3JlYXRlZCBvciBjYWxsZWQKLy8gRXZlcnkgcG9zc2libGUgYWN0aW9uIGZvciB0aGlzIGNvbnRyYWN0IGlzIHJlcHJlc2VudGVkIGluIHRoZSBzd2l0Y2ggc3RhdGVtZW50Ci8vIElmIHRoZSBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoZSBjb250cmFjdCwgaXRzIHJlc3BlY3RpdmUgYnJhbmNoIHdpbGwgYmUgIipOT1RfSU1QTEVNRU5URUQiIHdoaWNoIGp1c3QgY29udGFpbnMgImVyciIKdHhuIEFwcGxpY2F0aW9uSUQKIQpwdXNoaW50IDYKKgp0eG4gT25Db21wbGV0aW9uCisKc3dpdGNoICpjYWxsX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKmNhbGxfVXBkYXRlQXBwbGljYXRpb24gKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIHN0YXJ0VXBsb2FkKGFkZHJlc3MsdWludDY0LHVpbnQ2NCxwYXkpdm9pZAoqYWJpX3JvdXRlX3N0YXJ0VXBsb2FkOgoJLy8gbWJyUGF5bWVudDogcGF5Cgl0eG4gR3JvdXBJbmRleAoJaW50YyAwIC8vIDEKCS0KCWR1cAoJZ3R4bnMgVHlwZUVudW0KCWludGMgMCAvLyAgcGF5Cgk9PQoKCS8vIGFyZ3VtZW50IDAgKG1iclBheW1lbnQpIGZvciBzdGFydFVwbG9hZCBtdXN0IGJlIGEgcGF5IHRyYW5zYWN0aW9uCglhc3NlcnQKCgkvLyBlbmRCb3hTaXplOiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDMKCWJ0b2kKCgkvLyBudW1Cb3hlczogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglidG9pCgoJLy8gcHViS2V5OiBhZGRyZXNzCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyA0IC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDMgKHB1YktleSkgZm9yIHN0YXJ0VXBsb2FkIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBleGVjdXRlIHN0YXJ0VXBsb2FkKGFkZHJlc3MsdWludDY0LHVpbnQ2NCxwYXkpdm9pZAoJY2FsbHN1YiBzdGFydFVwbG9hZAoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gc3RhcnRVcGxvYWQocHViS2V5OiBBZGRyZXNzLCBudW1Cb3hlczogdWludDY0LCBlbmRCb3hTaXplOiB1aW50NjQsIG1iclBheW1lbnQ6IFBheVR4bik6IHZvaWQKLy8KLy8KLy8gQWxsb2NhdGUgYm94ZXMgdG8gYmVnaW4gZGF0YSB1cGxvYWQgcHJvY2VzcwovLwovLyBAcGFyYW0gcHViS2V5IFRoZSBwdWJrZXkgb2YgdGhlIERJRAovLyBAcGFyYW0gbnVtQm94ZXMgVGhlIG51bWJlciBvZiBib3hlcyB0aGF0IHRoZSBkYXRhIHdpbGwgdGFrZSB1cAovLyBAcGFyYW0gZW5kQm94U2l6ZSBUaGUgc2l6ZSBvZiB0aGUgbGFzdCBib3gKLy8gQHBhcmFtIG1iclBheW1lbnQgUGF5bWVudCBmcm9tIHRoZSB1cGxvYWRlciB0byBjb3ZlciB0aGUgYm94IE1CUgpzdGFydFVwbG9hZDoKCXByb3RvIDQgMAoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAwIC8vIDB4CglkdXBuIDMKCgkvLyBjb250cmFjdHNcYWxnby1kaWQuYWxnby50czo2NAoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gZ2xvYmFscy5jcmVhdG9yQWRkcmVzcykKCXR4biBTZW5kZXIKCWdsb2JhbCBDcmVhdG9yQWRkcmVzcwoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjY2CgkvLyBzdGFydEJveCA9IHRoaXMuY3VycmVudEluZGV4LnZhbHVlCglieXRlYyAxIC8vICAiY3VycmVudEluZGV4IgoJYXBwX2dsb2JhbF9nZXQKCWZyYW1lX2J1cnkgMCAvLyBzdGFydEJveDogdWludDY0CgoJLy8gY29udHJhY3RzXGFsZ28tZGlkLmFsZ28udHM6NjcKCS8vIGVuZEJveCA9IHN0YXJ0Qm94ICsgbnVtQm94ZXMgLSAxCglmcmFtZV9kaWcgMCAvLyBzdGFydEJveDogdWludDY0CglmcmFtZV9kaWcgLTIgLy8gbnVtQm94ZXM6IHVpbnQ2NAoJKwoJaW50YyAwIC8vIDEKCS0KCWZyYW1lX2J1cnkgMSAvLyBlbmRCb3g6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjY5CgkvLyBtZXRhZGF0YTogTWV0YWRhdGEgPSB7CgkvLyAgICAgICBzdGFydDogc3RhcnRCb3gsCgkvLyAgICAgICBlbmQ6IGVuZEJveCwKCS8vICAgICAgIHN0YXR1czogVVBMT0FESU5HLAoJLy8gICAgICAgZW5kU2l6ZTogZW5kQm94U2l6ZSwKCS8vICAgICAgIGxhc3REZWxldGVkOiAwLAoJLy8gICAgIH0KCWZyYW1lX2RpZyAwIC8vIHN0YXJ0Qm94OiB1aW50NjQKCWl0b2IKCWZyYW1lX2RpZyAxIC8vIGVuZEJveDogdWludDY0CglpdG9iCgljb25jYXQKCXB1c2hieXRlcyAweDAwCgljb25jYXQKCWZyYW1lX2RpZyAtMyAvLyBlbmRCb3hTaXplOiB1aW50NjQKCWl0b2IKCWNvbmNhdAoJcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDAwMAoJY29uY2F0CglmcmFtZV9idXJ5IDIgLy8gbWV0YWRhdGE6IE1ldGFkYXRhCgoJLy8gY29udHJhY3RzXGFsZ28tZGlkLmFsZ28udHM6NzcKCS8vIGFzc2VydCghdGhpcy5tZXRhZGF0YShwdWJLZXkpLmV4aXN0cykKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWJveF9sZW4KCXN3YXAKCXBvcAoJIQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXGFsZ28tZGlkLmFsZ28udHM6NzkKCS8vIHRoaXMubWV0YWRhdGEocHViS2V5KS52YWx1ZSA9IG1ldGFkYXRhCglmcmFtZV9kaWcgLTEgLy8gcHViS2V5OiBBZGRyZXNzCglmcmFtZV9kaWcgMiAvLyBtZXRhZGF0YTogTWV0YWRhdGEKCWJveF9wdXQKCgkvLyBjb250cmFjdHNcYWxnby1kaWQuYWxnby50czo4MQoJLy8gdGhpcy5jdXJyZW50SW5kZXgudmFsdWUgPSBlbmRCb3ggKyAxCglieXRlYyAxIC8vICAiY3VycmVudEluZGV4IgoJZnJhbWVfZGlnIDEgLy8gZW5kQm94OiB1aW50NjQKCWludGMgMCAvLyAxCgkrCglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjgzCgkvLyB0b3RhbENvc3QgPSBudW1Cb3hlcyAqIENPU1RfUEVSX0JPWCArIC8vIGNvc3Qgb2YgZGF0YSBib3hlcwoJLy8gICAgICAgKG51bUJveGVzIC0gMSkgKiBNQVhfQk9YX1NJWkUgKiBDT1NUX1BFUl9CWVRFICsgLy8gY29zdCBvZiBkYXRhCgkvLyAgICAgICBudW1Cb3hlcyAqIDggKiBDT1NUX1BFUl9CWVRFICsgLy8gY29zdCBvZiBkYXRhIGtleXMKCS8vICAgICAgIGVuZEJveFNpemUgKiBDT1NUX1BFUl9CWVRFICsgLy8gY29zdCBvZiBsYXN0IGRhdGEgYm94CgkvLyAgICAgICBDT1NUX1BFUl9CT1ggKwoJLy8gICAgICAgKDggKyA4ICsgMSArIDggKyAzMiArIDgpICogQ09TVF9QRVJfQllURQoJZnJhbWVfZGlnIC0yIC8vIG51bUJveGVzOiB1aW50NjQKCWludGMgNiAvLyAyNTAwCgkqCglmcmFtZV9kaWcgLTIgLy8gbnVtQm94ZXM6IHVpbnQ2NAoJaW50YyAwIC8vIDEKCS0KCWludGMgNyAvLyAzMjc2OAoJKgoJaW50YyA1IC8vIDQwMAoJKgoJKwoJZnJhbWVfZGlnIC0yIC8vIG51bUJveGVzOiB1aW50NjQKCWludGMgMSAvLyA4CgkqCglpbnRjIDUgLy8gNDAwCgkqCgkrCglmcmFtZV9kaWcgLTMgLy8gZW5kQm94U2l6ZTogdWludDY0CglpbnRjIDUgLy8gNDAwCgkqCgkrCglpbnRjIDYgLy8gMjUwMAoJKwoJcHVzaGludCAyNjAwMAoJKwoJZnJhbWVfYnVyeSAzIC8vIHRvdGFsQ29zdDogdWludDY0CgoJLy8gY29udHJhY3RzXGFsZ28tZGlkLmFsZ28udHM6OTAKCS8vIGFzc2VydChtYnJQYXltZW50LmFtb3VudCA9PT0gdG90YWxDb3N0KQoJZnJhbWVfZGlnIC00IC8vIG1iclBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CglmcmFtZV9kaWcgMyAvLyB0b3RhbENvc3Q6IHVpbnQ2NAoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjkxCgkvLyBhc3NlcnQobWJyUGF5bWVudC5yZWNlaXZlciA9PT0gdGhpcy5hcHAuYWRkcmVzcykKCWZyYW1lX2RpZyAtNCAvLyBtYnJQYXltZW50OiBQYXlUeG4KCWd0eG5zIFJlY2VpdmVyCglnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwoJPT0KCWFzc2VydAoJcmV0c3ViCgovLyB1cGxvYWQoYWRkcmVzcyx1aW50NjQsdWludDY0LGJ5dGVbXSl2b2lkCiphYmlfcm91dGVfdXBsb2FkOgoJLy8gZGF0YTogYnl0ZVtdCgl0eG5hIEFwcGxpY2F0aW9uQXJncyA0CglleHRyYWN0IDIgMAoKCS8vIG9mZnNldDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAzCglidG9pCgoJLy8gYm94SW5kZXg6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJYnRvaQoKCS8vIHB1YktleTogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgNCAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAzIChwdWJLZXkpIGZvciB1cGxvYWQgbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIGV4ZWN1dGUgdXBsb2FkKGFkZHJlc3MsdWludDY0LHVpbnQ2NCxieXRlW10pdm9pZAoJY2FsbHN1YiB1cGxvYWQKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHVwbG9hZChwdWJLZXk6IEFkZHJlc3MsIGJveEluZGV4OiB1aW50NjQsIG9mZnNldDogdWludDY0LCBkYXRhOiBieXRlcyk6IHZvaWQKLy8KLy8KLy8gVXBsb2FkIGRhdGEgdG8gYSBzcGVjaWZpYyBvZmZzZXQgaW4gYSBib3gKLy8KLy8gQHBhcmFtIHB1YktleSBUaGUgcHVia2V5IG9mIHRoZSBESUQKLy8gQHBhcmFtIGJveEluZGV4IFRoZSBpbmRleCBvZiB0aGUgYm94IHRvIHVwbG9hZCB0aGUgZ2l2ZW4gY2h1bmsgb2YgZGF0YSB0bwovLyBAcGFyYW0gb2Zmc2V0IFRoZSBvZmZzZXQgd2l0aGluIHRoZSBib3ggdG8gc3RhcnQgd3JpdGluZyB0aGUgZGF0YQovLyBAcGFyYW0gZGF0YSBUaGUgZGF0YSB0byB3cml0ZQp1cGxvYWQ6Cglwcm90byA0IDAKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgMCAvLyAweAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjEwNAoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gZ2xvYmFscy5jcmVhdG9yQWRkcmVzcykKCXR4biBTZW5kZXIKCWdsb2JhbCBDcmVhdG9yQWRkcmVzcwoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjEwNgoJLy8gbWV0YWRhdGEgPSB0aGlzLm1ldGFkYXRhKHB1YktleSkudmFsdWUKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWZyYW1lX2J1cnkgMCAvLyBzdG9yYWdlIGtleS8vbWV0YWRhdGEKCgkvLyBjb250cmFjdHNcYWxnby1kaWQuYWxnby50czoxMDcKCS8vIGFzc2VydChtZXRhZGF0YS5zdGF0dXMgPT09IFVQTE9BRElORykKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWludGMgMyAvLyAgaGVhZE9mZnNldAoJaW50YyAwIC8vIDEKCWJveF9leHRyYWN0CglidG9pCglpbnRjIDIgLy8gMAoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjEwOAoJLy8gYXNzZXJ0KG1ldGFkYXRhLnN0YXJ0IDw9IGJveEluZGV4ICYmIGJveEluZGV4IDw9IG1ldGFkYXRhLmVuZCkKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWludGMgMiAvLyAwCglpbnRjIDEgLy8gOAoJYm94X2V4dHJhY3QKCWJ0b2kKCWZyYW1lX2RpZyAtMiAvLyBib3hJbmRleDogdWludDY0Cgk8PQoJZHVwCglieiAqc2tpcF9hbmQwCglmcmFtZV9kaWcgLTIgLy8gYm94SW5kZXg6IHVpbnQ2NAoJZnJhbWVfZGlnIC0xIC8vIHB1YktleTogQWRkcmVzcwoJaW50YyAxIC8vICBoZWFkT2Zmc2V0CglpbnRjIDEgLy8gOAoJYm94X2V4dHJhY3QKCWJ0b2kKCTw9CgkmJgoKKnNraXBfYW5kMDoKCWFzc2VydAoKCS8vICppZjBfY29uZGl0aW9uCgkvLyBjb250cmFjdHNcYWxnby1kaWQuYWxnby50czoxMTAKCS8vIG9mZnNldCA9PT0gMAoJZnJhbWVfZGlnIC0zIC8vIG9mZnNldDogdWludDY0CglpbnRjIDIgLy8gMAoJPT0KCWJ6ICppZjBfZW5kCgoJLy8gKmlmMF9jb25zZXF1ZW50CgkvLyBjb250cmFjdHNcYWxnby1kaWQuYWxnby50czoxMTEKCS8vIHRoaXMuZGF0YUJveGVzKGJveEluZGV4KS5jcmVhdGUoCgkvLyAgICAgICAgIGJveEluZGV4ID09PSBtZXRhZGF0YS5lbmQgPyBtZXRhZGF0YS5lbmRTaXplIDogTUFYX0JPWF9TSVpFLAoJLy8gICAgICAgKQoJZnJhbWVfZGlnIC0yIC8vIGJveEluZGV4OiB1aW50NjQKCWl0b2IKCWZyYW1lX2RpZyAtMiAvLyBib3hJbmRleDogdWludDY0CglmcmFtZV9kaWcgLTEgLy8gcHViS2V5OiBBZGRyZXNzCglpbnRjIDEgLy8gIGhlYWRPZmZzZXQKCWludGMgMSAvLyA4Cglib3hfZXh0cmFjdAoJYnRvaQoJPT0KCWJ6ICp0ZXJuYXJ5MF9mYWxzZQoJZnJhbWVfZGlnIC0xIC8vIHB1YktleTogQWRkcmVzcwoJcHVzaGludCAxNyAvLyBoZWFkT2Zmc2V0CglpbnRjIDEgLy8gOAoJYm94X2V4dHJhY3QKCWJ0b2kKCWIgKnRlcm5hcnkwX2VuZAoKKnRlcm5hcnkwX2ZhbHNlOgoJaW50YyA3IC8vIDMyNzY4CgoqdGVybmFyeTBfZW5kOgoJYm94X2NyZWF0ZQoJcG9wCgoqaWYwX2VuZDoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjExNgoJLy8gdGhpcy5kYXRhQm94ZXMoYm94SW5kZXgpLnJlcGxhY2Uob2Zmc2V0LCBkYXRhKQoJZnJhbWVfZGlnIC0yIC8vIGJveEluZGV4OiB1aW50NjQKCWl0b2IKCWZyYW1lX2RpZyAtMyAvLyBvZmZzZXQ6IHVpbnQ2NAoJZnJhbWVfZGlnIC00IC8vIGRhdGE6IGJ5dGVzCglib3hfcmVwbGFjZQoJcmV0c3ViCgovLyBmaW5pc2hVcGxvYWQoYWRkcmVzcyl2b2lkCiphYmlfcm91dGVfZmluaXNoVXBsb2FkOgoJLy8gcHViS2V5OiBhZGRyZXNzCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyA0IC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDAgKHB1YktleSkgZm9yIGZpbmlzaFVwbG9hZCBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBmaW5pc2hVcGxvYWQoYWRkcmVzcyl2b2lkCgljYWxsc3ViIGZpbmlzaFVwbG9hZAoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gZmluaXNoVXBsb2FkKHB1YktleTogQWRkcmVzcyk6IHZvaWQKLy8KLy8KLy8gTWFyayB1cGxvYWRpbmcgYXMgZmFsc2UKLy8KLy8gQHBhcmFtIHB1YktleSBUaGUgYWRkcmVzcyBvZiB0aGUgRElECmZpbmlzaFVwbG9hZDoKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjEyNgoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gZ2xvYmFscy5jcmVhdG9yQWRkcmVzcykKCXR4biBTZW5kZXIKCWdsb2JhbCBDcmVhdG9yQWRkcmVzcwoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjEyOAoJLy8gdGhpcy5tZXRhZGF0YShwdWJLZXkpLnZhbHVlLnN0YXR1cyA9IFJFQURZCglmcmFtZV9kaWcgLTEgLy8gcHViS2V5OiBBZGRyZXNzCglpbnRjIDMgLy8gIGhlYWRPZmZzZXQKCXB1c2hieXRlcyAweDAxCglib3hfcmVwbGFjZQoJcmV0c3ViCgovLyBzdGFydERlbGV0ZShhZGRyZXNzKXZvaWQKKmFiaV9yb3V0ZV9zdGFydERlbGV0ZToKCS8vIHB1YktleTogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgNCAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChwdWJLZXkpIGZvciBzdGFydERlbGV0ZSBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBzdGFydERlbGV0ZShhZGRyZXNzKXZvaWQKCWNhbGxzdWIgc3RhcnREZWxldGUKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHN0YXJ0RGVsZXRlKHB1YktleTogQWRkcmVzcyk6IHZvaWQKLy8KLy8gU3RhcnRzIHRoZSBkZWxldGlvbiBwcm9jZXNzIGZvciB0aGUgZGF0YSBhc3NvY2lhdGVkIHdpdGggYSBESUQKLy8KLy8gQHBhcmFtIHB1YktleSBUaGUgYWRkcmVzcyBvZiB0aGUgRElECnN0YXJ0RGVsZXRlOgoJcHJvdG8gMSAwCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCgkvLyBjb250cmFjdHNcYWxnby1kaWQuYWxnby50czoxMzcKCS8vIGFzc2VydCh0aGlzLnR4bi5zZW5kZXIgPT09IGdsb2JhbHMuY3JlYXRvckFkZHJlc3MpCgl0eG4gU2VuZGVyCglnbG9iYWwgQ3JlYXRvckFkZHJlc3MKCT09Cglhc3NlcnQKCgkvLyBjb250cmFjdHNcYWxnby1kaWQuYWxnby50czoxMzkKCS8vIG1ldGFkYXRhID0gdGhpcy5tZXRhZGF0YShwdWJLZXkpLnZhbHVlCglmcmFtZV9kaWcgLTEgLy8gcHViS2V5OiBBZGRyZXNzCglmcmFtZV9idXJ5IDAgLy8gc3RvcmFnZSBrZXkvL21ldGFkYXRhCgoJLy8gY29udHJhY3RzXGFsZ28tZGlkLmFsZ28udHM6MTQwCgkvLyBhc3NlcnQobWV0YWRhdGEuc3RhdHVzID09PSBSRUFEWSkKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWludGMgMyAvLyAgaGVhZE9mZnNldAoJaW50YyAwIC8vIDEKCWJveF9leHRyYWN0CglidG9pCglpbnRjIDAgLy8gMQoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjE0MgoJLy8gbWV0YWRhdGEuc3RhdHVzID0gREVMRVRJTkcKCWZyYW1lX2RpZyAwIC8vIHN0b3JhZ2Uga2V5Ly9tZXRhZGF0YQoJaW50YyAzIC8vICBoZWFkT2Zmc2V0CglwdXNoYnl0ZXMgMHgwMgoJYm94X3JlcGxhY2UKCXJldHN1YgoKLy8gZGVsZXRlRGF0YShhZGRyZXNzLHVpbnQ2NCl2b2lkCiphYmlfcm91dGVfZGVsZXRlRGF0YToKCS8vIGJveEluZGV4OiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWJ0b2kKCgkvLyBwdWJLZXk6IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDQgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMSAocHViS2V5KSBmb3IgZGVsZXRlRGF0YSBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBkZWxldGVEYXRhKGFkZHJlc3MsdWludDY0KXZvaWQKCWNhbGxzdWIgZGVsZXRlRGF0YQoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gZGVsZXRlRGF0YShwdWJLZXk6IEFkZHJlc3MsIGJveEluZGV4OiB1aW50NjQpOiB2b2lkCi8vCi8vIERlbGV0ZXMgYSBib3ggb2YgZGF0YQovLwovLyBAcGFyYW0gcHViS2V5IFRoZSBhZGRyZXNzIG9mIHRoZSBESUQKLy8gQHBhcmFtIGJveEluZGV4IFRoZSBpbmRleCBvZiB0aGUgYm94IHRvIGRlbGV0ZQpkZWxldGVEYXRhOgoJcHJvdG8gMiAwCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCWR1cAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjE1MgoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gZ2xvYmFscy5jcmVhdG9yQWRkcmVzcykKCXR4biBTZW5kZXIKCWdsb2JhbCBDcmVhdG9yQWRkcmVzcwoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjE1NAoJLy8gbWV0YWRhdGEgPSB0aGlzLm1ldGFkYXRhKHB1YktleSkudmFsdWUKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWZyYW1lX2J1cnkgMCAvLyBzdG9yYWdlIGtleS8vbWV0YWRhdGEKCgkvLyBjb250cmFjdHNcYWxnby1kaWQuYWxnby50czoxNTUKCS8vIGFzc2VydChtZXRhZGF0YS5zdGF0dXMgPT09IERFTEVUSU5HKQoJZnJhbWVfZGlnIC0xIC8vIHB1YktleTogQWRkcmVzcwoJaW50YyAzIC8vICBoZWFkT2Zmc2V0CglpbnRjIDAgLy8gMQoJYm94X2V4dHJhY3QKCWJ0b2kKCXB1c2hpbnQgMgoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjE1NgoJLy8gYXNzZXJ0KG1ldGFkYXRhLnN0YXJ0IDw9IGJveEluZGV4ICYmIGJveEluZGV4IDw9IG1ldGFkYXRhLmVuZCkKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWludGMgMiAvLyAwCglpbnRjIDEgLy8gOAoJYm94X2V4dHJhY3QKCWJ0b2kKCWZyYW1lX2RpZyAtMiAvLyBib3hJbmRleDogdWludDY0Cgk8PQoJZHVwCglieiAqc2tpcF9hbmQxCglmcmFtZV9kaWcgLTIgLy8gYm94SW5kZXg6IHVpbnQ2NAoJZnJhbWVfZGlnIC0xIC8vIHB1YktleTogQWRkcmVzcwoJaW50YyAxIC8vICBoZWFkT2Zmc2V0CglpbnRjIDEgLy8gOAoJYm94X2V4dHJhY3QKCWJ0b2kKCTw9CgkmJgoKKnNraXBfYW5kMToKCWFzc2VydAoKCS8vICppZjFfY29uZGl0aW9uCgkvLyBjb250cmFjdHNcYWxnby1kaWQuYWxnby50czoxNTgKCS8vIGJveEluZGV4ICE9PSBtZXRhZGF0YS5zdGFydAoJZnJhbWVfZGlnIC0yIC8vIGJveEluZGV4OiB1aW50NjQKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWludGMgMiAvLyAwCglpbnRjIDEgLy8gOAoJYm94X2V4dHJhY3QKCWJ0b2kKCSE9CglieiAqaWYxX2VuZAoKCS8vICppZjFfY29uc2VxdWVudAoJLy8gY29udHJhY3RzXGFsZ28tZGlkLmFsZ28udHM6MTU5CgkvLyBhc3NlcnQobWV0YWRhdGEubGFzdERlbGV0ZWQgPT09IGJveEluZGV4IC0gMSkKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWludGMgOCAvLyAgaGVhZE9mZnNldAoJaW50YyAxIC8vIDgKCWJveF9leHRyYWN0CglidG9pCglmcmFtZV9kaWcgLTIgLy8gYm94SW5kZXg6IHVpbnQ2NAoJaW50YyAwIC8vIDEKCS0KCT09Cglhc3NlcnQKCippZjFfZW5kOgoJLy8gY29udHJhY3RzXGFsZ28tZGlkLmFsZ28udHM6MTYyCgkvLyBwcmVNQlIgPSBnbG9iYWxzLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MubWluQmFsYW5jZQoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCWFjY3RfcGFyYW1zX2dldCBBY2N0TWluQmFsYW5jZQoJcG9wCglmcmFtZV9idXJ5IDEgLy8gcHJlTUJSOiB1aW50NjQKCgkvLyBjb250cmFjdHNcYWxnby1kaWQuYWxnby50czoxNjQKCS8vIHRoaXMuZGF0YUJveGVzKGJveEluZGV4KS5kZWxldGUoKQoJZnJhbWVfZGlnIC0yIC8vIGJveEluZGV4OiB1aW50NjQKCWl0b2IKCWJveF9kZWwKCgkvLyAqaWYyX2NvbmRpdGlvbgoJLy8gY29udHJhY3RzXGFsZ28tZGlkLmFsZ28udHM6MTY2CgkvLyBib3hJbmRleCA9PT0gbWV0YWRhdGEuZW5kCglmcmFtZV9kaWcgLTIgLy8gYm94SW5kZXg6IHVpbnQ2NAoJZnJhbWVfZGlnIC0xIC8vIHB1YktleTogQWRkcmVzcwoJaW50YyAxIC8vICBoZWFkT2Zmc2V0CglpbnRjIDEgLy8gOAoJYm94X2V4dHJhY3QKCWJ0b2kKCT09CglieiAqaWYyX2Vsc2UKCgkvLyAqaWYyX2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjE2NgoJLy8gdGhpcy5tZXRhZGF0YShwdWJLZXkpLmRlbGV0ZSgpCglmcmFtZV9kaWcgLTEgLy8gcHViS2V5OiBBZGRyZXNzCglib3hfZGVsCgliICppZjJfZW5kCgoqaWYyX2Vsc2U6CgkvLyBjb250cmFjdHNcYWxnby1kaWQuYWxnby50czoxNjcKCS8vIG1ldGFkYXRhLmxhc3REZWxldGVkID0gYm94SW5kZXgKCWludGMgOCAvLyAgaGVhZE9mZnNldAoJZnJhbWVfZGlnIC0yIC8vIGJveEluZGV4OiB1aW50NjQKCWl0b2IKCWZyYW1lX2RpZyAwIC8vIHN0b3JhZ2Uga2V5Ly9tZXRhZGF0YQoJY292ZXIgMgoJYm94X3JlcGxhY2UKCippZjJfZW5kOgoJLy8gY29udHJhY3RzXGFsZ28tZGlkLmFsZ28udHM6MTY5CgkvLyBzZW5kUGF5bWVudCh7CgkvLyAgICAgICBhbW91bnQ6IHByZU1CUiAtIGdsb2JhbHMuY3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcy5taW5CYWxhbmNlLAoJLy8gICAgICAgcmVjZWl2ZXI6IHRoaXMudHhuLnNlbmRlciwKCS8vICAgICB9KQoJaXR4bl9iZWdpbgoJaW50YyAwIC8vICBwYXkKCWl0eG5fZmllbGQgVHlwZUVudW0KCgkvLyBjb250cmFjdHNcYWxnby1kaWQuYWxnby50czoxNzAKCS8vIGFtb3VudDogcHJlTUJSIC0gZ2xvYmFscy5jdXJyZW50QXBwbGljYXRpb25BZGRyZXNzLm1pbkJhbGFuY2UKCWZyYW1lX2RpZyAxIC8vIHByZU1CUjogdWludDY0CglnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwoJYWNjdF9wYXJhbXNfZ2V0IEFjY3RNaW5CYWxhbmNlCglwb3AKCS0KCWl0eG5fZmllbGQgQW1vdW50CgoJLy8gY29udHJhY3RzXGFsZ28tZGlkLmFsZ28udHM6MTcxCgkvLyByZWNlaXZlcjogdGhpcy50eG4uc2VuZGVyCgl0eG4gU2VuZGVyCglpdHhuX2ZpZWxkIFJlY2VpdmVyCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAyIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoJcmV0c3ViCgovLyB1cGRhdGVBcHBsaWNhdGlvbigpdm9pZAoqYWJpX3JvdXRlX3VwZGF0ZUFwcGxpY2F0aW9uOgoJLy8gZXhlY3V0ZSB1cGRhdGVBcHBsaWNhdGlvbigpdm9pZAoJY2FsbHN1YiB1cGRhdGVBcHBsaWNhdGlvbgoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gdXBkYXRlQXBwbGljYXRpb24oKTogdm9pZAovLwovLyBBbGxvdyB0aGUgY29udHJhY3QgdG8gYmUgdXBkYXRlZCBieSB0aGUgY3JlYXRvcgp1cGRhdGVBcHBsaWNhdGlvbjoKCXByb3RvIDAgMAoKCS8vIGNvbnRyYWN0c1xhbGdvLWRpZC5hbGdvLnRzOjE3OQoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gZ2xvYmFscy5jcmVhdG9yQWRkcmVzcykKCXR4biBTZW5kZXIKCWdsb2JhbCBDcmVhdG9yQWRkcmVzcwoJPT0KCWFzc2VydAoJcmV0c3ViCgovLyBkdW1teSgpdm9pZAoqYWJpX3JvdXRlX2R1bW15OgoJLy8gZXhlY3V0ZSBkdW1teSgpdm9pZAoJY2FsbHN1YiBkdW1teQoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gZHVtbXkoKTogdm9pZAovLwovLyBEdW1teSBmdW5jdGlvbiB0byBhZGQgZXh0cmEgYm94IHJlZmVyZW5jZXMgZm9yIGRlbGV0ZURhdGEuCi8vIEJveGVzIGFyZSAzMmssIGJ1dCBhIHNpbmdsZSBhcHAgY2FsbCBjYW4gb25seSBpbmNsdWRlIGVub3VnaCByZWZlcmVuY2VzIHRvIHJlYWQvd3JpdGUgOGsKLy8gYXQgYSB0aW1lLiBUaHVzIHdoZW4gYSBib3ggaXMgZGVsZXRlZCwgd2UgbmVlZCB0byBhZGQgYWRkaXRpb25hbCBkdW1teSBjYWxscyB3aXRoIGJveAovLyByZWZlcmVuY2VzIHRvIGluY3JlYXNlIHRoZSB0b3RhbCByZWFkL3dyaXRlIGJ1ZGdldCB0byAzMmsuCmR1bW15OgoJcHJvdG8gMCAwCglyZXRzdWIKCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CglpbnRjIDAgLy8gMQoJcmV0dXJuCgoqY3JlYXRlX05vT3A6CglwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjcmVhdGUgTm9PcAoJZXJyCgoqY2FsbF9Ob09wOgoJcHVzaGJ5dGVzIDB4NTY1YzY3NWQgLy8gbWV0aG9kICJzdGFydFVwbG9hZChhZGRyZXNzLHVpbnQ2NCx1aW50NjQscGF5KXZvaWQiCglwdXNoYnl0ZXMgMHg0ZGIxYzQxOCAvLyBtZXRob2QgInVwbG9hZChhZGRyZXNzLHVpbnQ2NCx1aW50NjQsYnl0ZVtdKXZvaWQiCglwdXNoYnl0ZXMgMHgwZTc4NzI1NyAvLyBtZXRob2QgImZpbmlzaFVwbG9hZChhZGRyZXNzKXZvaWQiCglwdXNoYnl0ZXMgMHhiZDJjODRlMiAvLyBtZXRob2QgInN0YXJ0RGVsZXRlKGFkZHJlc3Mpdm9pZCIKCXB1c2hieXRlcyAweDY4OTFiYTkwIC8vIG1ldGhvZCAiZGVsZXRlRGF0YShhZGRyZXNzLHVpbnQ2NCl2b2lkIgoJcHVzaGJ5dGVzIDB4YTMwY2U3ZmYgLy8gbWV0aG9kICJkdW1teSgpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfc3RhcnRVcGxvYWQgKmFiaV9yb3V0ZV91cGxvYWQgKmFiaV9yb3V0ZV9maW5pc2hVcGxvYWQgKmFiaV9yb3V0ZV9zdGFydERlbGV0ZSAqYWJpX3JvdXRlX2RlbGV0ZURhdGEgKmFiaV9yb3V0ZV9kdW1teQoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKKmNhbGxfVXBkYXRlQXBwbGljYXRpb246CglwdXNoYnl0ZXMgMHg0NmY3NjUzMyAvLyBtZXRob2QgInVwZGF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV91cGRhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIFVwZGF0ZUFwcGxpY2F0aW9uCgllcnI=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiAJAQgAECCQA8QTgIACGSYCAAxjdXJyZW50SW5kZXgxGBSBBgsxGQiNDAInAAAAAAAAAl0AAAIZAAAAAAAAAAAAAAAxFiIJSTgQIhJENhoDFzYaAhc2GgFJFSEEEkSIAAIiQ4oEAChHAzEAMgkSRClkjACLAIv+CCIJjAGLABaLARZQgAEAUIv9FlCACAAAAAAAAAAAUIwCi/+9TEgURIv/iwK/KYsBIghni/4hBguL/iIJIQcLIQULCIv+IwshBQsIi/0hBQsIIQYIgZDLAQiMA4v8OAiLAxJEi/w4BzIKEkSJNhoEVwIANhoDFzYaAhc2GgFJFSEEEkSIAAIiQ4oEACgxADIJEkSL/4wAi/8lIroXJBJEi/8kI7oXi/4OSUEACov+i/8jI7oXDhBEi/0kEkEAHYv+Fov+i/8jI7oXEkEACov/gREjuhdCAAIhB7lIi/4Wi/2L/LuJNhoBSRUhBBJEiAACIkOKAQAxADIJEkSL/yWAAQG7iTYaAUkVIQQSRIgAAiJDigEAKDEAMgkSRIv/jACL/yUiuhciEkSLACWAAQK7iTYaAhc2GgFJFSEEEkSIAAIiQ4oCAChJMQAyCRJEi/+MAIv/JSK6F4ECEkSL/yQjuheL/g5JQQAKi/6L/yMjuhcOEESL/ov/JCO6FxNBAA2L/yEII7oXi/4iCRJEMgpzAUiMAYv+FryL/ov/IyO6FxJBAAaL/7xCAAohCIv+FosATgK7sSKyEIsBMgpzAUgJsggxALIHJLIBs4mIAAIiQ4oAADEAMgkSRImIAAIiQ4oAAIkiQ4AEuER7NjYaAI4B//EAgARWXGddgARNscQYgAQOeHJXgAS9LITigARokbqQgASjDOf/NhoAjgb9pf5F/r3+3P8J/7IAgARG92UzNhoAjgH/lQA=","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -281,11 +281,97 @@ export type GlobalKeysState = AlgoDidTypes['state']['global']['keys']
 export type BoxKeysState = AlgoDidTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AlgoDidCreateCallParams =
+  | Expand<CallParams<AlgoDidArgs['obj']['createApplication()void'] | AlgoDidArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<AlgoDidArgs['obj']['createApplication()void'] | AlgoDidArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type AlgoDidUpdateCallParams =
+  | Expand<CallParams<AlgoDidArgs['obj']['updateApplication()void'] | AlgoDidArgs['tuple']['updateApplication()void']> & {method: 'updateApplication'}>
+  | Expand<CallParams<AlgoDidArgs['obj']['updateApplication()void'] | AlgoDidArgs['tuple']['updateApplication()void']> & {method: 'updateApplication()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AlgoDidDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AlgoDidCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: AlgoDidUpdateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AlgoDid smart contract
  */
 export abstract class AlgoDidParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends AlgoDidCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return AlgoDidParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the AlgoDID smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<AlgoDidArgs['obj']['createApplication()void'] | AlgoDidArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends AlgoDidUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'updateApplication':
+          case 'updateApplication()void':
+            return AlgoDidParamsFactory.update.updateApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the AlgoDID smart contract using the updateApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateApplication(params: CallParams<AlgoDidArgs['obj']['updateApplication()void'] | AlgoDidArgs['tuple']['updateApplication()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'updateApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the startUpload(address,uint64,uint64,pay)void ABI method
    *
@@ -383,6 +469,166 @@ export abstract class AlgoDidParamsFactory {
 }
 
 /**
+ * A factory to create and deploy one or more instance of the AlgoDID smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AlgoDidFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AlgoDidFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AlgoDidClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AlgoDidClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the AlgoDID smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AlgoDidDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? AlgoDidParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (AlgoDidCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? AlgoDidParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (AlgoDidUpdateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new AlgoDidClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AlgoDID smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<AlgoDidArgs['obj']['createApplication()void'] | AlgoDidArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(AlgoDidParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the AlgoDID smart contract using the updateApplication()void ABI method.
+       *
+       * Allow the contract to be updated by the creator
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateApplication: (params: CallParams<AlgoDidArgs['obj']['updateApplication()void'] | AlgoDidArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(AlgoDidParamsFactory.update.updateApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AlgoDID smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<AlgoDidArgs['obj']['createApplication()void'] | AlgoDidArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(AlgoDidParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AlgoDID smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<AlgoDidArgs['obj']['createApplication()void'] | AlgoDidArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(AlgoDidParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | AlgoDidReturns['createApplication()void']) }, appClient: new AlgoDidClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
+/**
  * A client to make calls to the AlgoDID smart contract
  */
 export class AlgoDidClient {
@@ -461,6 +707,24 @@ export class AlgoDidClient {
    * Get parameters to create transactions for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
    */
   readonly params = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the AlgoDID smart contract using the `updateApplication()void` ABI method.
+       *
+       * Allow the contract to be updated by the creator
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateApplication: (params: CallParams<AlgoDidArgs['obj']['updateApplication()void'] | AlgoDidArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(AlgoDidParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the AlgoDID smart contract.
      *
@@ -554,6 +818,24 @@ export class AlgoDidClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the AlgoDID smart contract using the `updateApplication()void` ABI method.
+       *
+       * Allow the contract to be updated by the creator
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateApplication: (params: CallParams<AlgoDidArgs['obj']['updateApplication()void'] | AlgoDidArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(AlgoDidParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the AlgoDID smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -645,6 +927,25 @@ export class AlgoDidClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the AlgoDID smart contract using the `updateApplication()void` ABI method.
+       *
+       * Allow the contract to be updated by the creator
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateApplication: async (params: CallParams<AlgoDidArgs['obj']['updateApplication()void'] | AlgoDidArgs['tuple']['updateApplication()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(AlgoDidParamsFactory.update.updateApplication(params))
+        return {...result, return: result.return as unknown as (undefined | AlgoDidReturns['updateApplication()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the AlgoDID smart contract.
      *
@@ -866,6 +1167,15 @@ export class AlgoDidClient {
         resultMappers.push(undefined)
         return this
       },
+      get update() {
+        return {
+          updateApplication: (params: CallParams<AlgoDidArgs['obj']['updateApplication()void'] | AlgoDidArgs['tuple']['updateApplication()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the AlgoDID contract
        */
@@ -970,6 +1280,20 @@ export type AlgoDidComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   dummy(params?: CallParams<AlgoDidArgs['obj']['dummy()void'] | AlgoDidArgs['tuple']['dummy()void']>): AlgoDidComposer<[...TReturns, AlgoDidReturns['dummy()void'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the AlgoDID smart contract using the updateApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateApplication(params?: CallParams<AlgoDidArgs['obj']['updateApplication()void'] | AlgoDidArgs['tuple']['updateApplication()void']>): AlgoDidComposer<[...TReturns, AlgoDidReturns['updateApplication()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the AlgoDID smart contract.
