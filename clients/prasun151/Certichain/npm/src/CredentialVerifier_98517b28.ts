@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"CredentialVerifier","structs":{},"methods":[{"name":"create","args":[{"type":"address","name":"institution"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize the contract with the authorized institution","events":[],"recommendations":{}},{"name":"issue_credential","args":[{"type":"address","name":"student_address"},{"type":"string","name":"credential_name"},{"type":"string","name":"metadata_url"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Issue a credential to a student.\nMints an NFT and returns the Asset ID. Only the authorized institution can call this.","events":[],"recommendations":{}},{"name":"verify_credential","args":[{"type":"uint64","name":"asset_id"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Verify if a credential is valid (dummy for now)","events":[],"recommendations":{}},{"name":"get_contract_info","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get contract information","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Algorand Credential Verifier Smart Contract","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"authorized_institution":{"keyType":"AVMString","valueType":"address","key":"YXV0aG9yaXplZF9pbnN0aXR1dGlvbg=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[202],"errorMessage":"Only the authorized institution can issue credentials"},{"pc":[200],"errorMessage":"check self.authorized_institution exists"},{"pc":[168,184],"errorMessage":"invalid array length header"},{"pc":[175,191],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[149,162],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[259],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"CredentialVerifier","structs":{},"methods":[{"name":"create","args":[{"type":"address","name":"institution"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize the contract with the authorized institution","events":[],"recommendations":{}},{"name":"issue_credential","args":[{"type":"address","name":"student_address"},{"type":"string","name":"credential_name"},{"type":"string","name":"metadata_url"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Issue a credential to a student.\nMints an NFT and returns the Asset ID. Only the authorized institution can call this.","events":[],"recommendations":{}},{"name":"verify_credential","args":[{"type":"uint64","name":"asset_id"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Verify if a credential is valid (dummy for now)","events":[],"recommendations":{}},{"name":"get_contract_info","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get contract information","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Algorand Credential Verifier Smart Contract","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"authorized_institution":{"keyType":"AVMString","valueType":"address","key":"YXV0aG9yaXplZF9pbnN0aXR1dGlvbg=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[202],"errorMessage":"Only the authorized institution can issue credentials"},{"pc":[200],"errorMessage":"check self.authorized_institution exists"},{"pc":[168,184],"errorMessage":"invalid array length header"},{"pc":[175,191],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[149,162],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[259],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAgMzIgMgogICAgYnl0ZWNibG9jayAiYXV0aG9yaXplZF9pbnN0aXR1dGlvbiIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIENyZWRlbnRpYWxWZXJpZmllcihBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEA5CiAgICBwdXNoYnl0ZXNzIDB4Mzg4Y2FmZmIgMHgzMDZhMmY1MyAweDJlZWViYmI5IC8vIG1ldGhvZCAiaXNzdWVfY3JlZGVudGlhbChhZGRyZXNzLHN0cmluZyxzdHJpbmcpdWludDY0IiwgbWV0aG9kICJ2ZXJpZnlfY3JlZGVudGlhbCh1aW50NjQpc3RyaW5nIiwgbWV0aG9kICJnZXRfY29udHJhY3RfaW5mbygpc3RyaW5nIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggaXNzdWVfY3JlZGVudGlhbCB2ZXJpZnlfY3JlZGVudGlhbCBtYWluX2dldF9jb250cmFjdF9pbmZvX3JvdXRlQDcKICAgIGVycgoKbWFpbl9nZXRfY29udHJhY3RfaW5mb19yb3V0ZUA3OgogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfdmVyaWZpZXIvY29udHJhY3QucHk6NDUKICAgIC8vIEBhYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAyZjQzNzI2NTY0NjU2ZTc0Njk2MTZjNTY2NTcyNjk2NjY5NjU3MjIwMmQyMDQxNmM2NzZmNzI2MTZlNjQyMDQzNzI2NTY0NjU2ZTc0Njk2MTZjMjA1Mzc5NzM3NDY1NmQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9jcmVhdGVfTm9PcEA5OgogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfdmVyaWZpZXIvY29udHJhY3QucHk6NQogICAgLy8gY2xhc3MgQ3JlZGVudGlhbFZlcmlmaWVyKEFSQzRDb250cmFjdCk6CiAgICBwdXNoYnl0ZXMgMHhjYzY5NGVhYSAvLyBtZXRob2QgImNyZWF0ZShhZGRyZXNzKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGUKICAgIGVycgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5jcmVkZW50aWFsX3ZlcmlmaWVyLmNvbnRyYWN0LkNyZWRlbnRpYWxWZXJpZmllci5jcmVhdGVbcm91dGluZ10oKSAtPiB2b2lkOgpjcmVhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF92ZXJpZmllci9jb250cmFjdC5weToxMQogICAgLy8gQGFiaW1ldGhvZChjcmVhdGU9InJlcXVpcmUiKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF92ZXJpZmllci9jb250cmFjdC5weToxNAogICAgLy8gc2VsZi5hdXRob3JpemVkX2luc3RpdHV0aW9uLnZhbHVlID0gaW5zdGl0dXRpb24KICAgIGJ5dGVjXzAgLy8gImF1dGhvcml6ZWRfaW5zdGl0dXRpb24iCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfdmVyaWZpZXIvY29udHJhY3QucHk6MTEKICAgIC8vIEBhYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuY3JlZGVudGlhbF92ZXJpZmllci5jb250cmFjdC5DcmVkZW50aWFsVmVyaWZpZXIuaXNzdWVfY3JlZGVudGlhbFtyb3V0aW5nXSgpIC0+IHZvaWQ6Cmlzc3VlX2NyZWRlbnRpYWw6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF92ZXJpZmllci9jb250cmFjdC5weToxNgogICAgLy8gQGFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzMgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18zIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjI1CiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBzZWxmLmF1dGhvcml6ZWRfaW5zdGl0dXRpb24udmFsdWUsICJPbmx5IHRoZSBhdXRob3JpemVkIGluc3RpdHV0aW9uIGNhbiBpc3N1ZSBjcmVkZW50aWFscyIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18wIC8vICJhdXRob3JpemVkX2luc3RpdHV0aW9uIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmF1dGhvcml6ZWRfaW5zdGl0dXRpb24gZXhpc3RzCiAgICA9PQogICAgYXNzZXJ0IC8vIE9ubHkgdGhlIGF1dGhvcml6ZWQgaW5zdGl0dXRpb24gY2FuIGlzc3VlIGNyZWRlbnRpYWxzCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF92ZXJpZmllci9jb250cmFjdC5weToyNy0zNgogICAgLy8gIyBNaW50IHRoZSBORlQgdXNpbmcgYW4gaW5uZXIgdHJhbnNhY3Rpb24KICAgIC8vIGFzc2V0X2NyZWF0ZSA9IGl0eG4uQXNzZXRDb25maWcoCiAgICAvLyAgICAgdG90YWw9MSwKICAgIC8vICAgICBkZWNpbWFscz0wLAogICAgLy8gICAgIGFzc2V0X25hbWU9Y3JlZGVudGlhbF9uYW1lLAogICAgLy8gICAgIHVuaXRfbmFtZT1TdHJpbmcoIkNFUlQiKSwKICAgIC8vICAgICB1cmw9bWV0YWRhdGFfdXJsLAogICAgLy8gICAgIG1hbmFnZXI9R2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywgICMgQ29udHJhY3QgaXMgdGhlIG1hbmFnZXIKICAgIC8vICAgICByZXNlcnZlPXN0dWRlbnRfYWRkcmVzcywgIyBSZXNlcnZlIGlzIHRoZSBzdHVkZW50CiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF92ZXJpZmllci9jb250cmFjdC5weTozNAogICAgLy8gbWFuYWdlcj1HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLCAgIyBDb250cmFjdCBpcyB0aGUgbWFuYWdlcgogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIHVuY292ZXIgMwogICAgaXR4bl9maWVsZCBDb25maWdBc3NldFJlc2VydmUKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXRNYW5hZ2VyCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0VVJMCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF92ZXJpZmllci9jb250cmFjdC5weTozMgogICAgLy8gdW5pdF9uYW1lPVN0cmluZygiQ0VSVCIpLAogICAgcHVzaGJ5dGVzICJDRVJUIgogICAgaXR4bl9maWVsZCBDb25maWdBc3NldFVuaXROYW1lCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0TmFtZQogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfdmVyaWZpZXIvY29udHJhY3QucHk6MzAKICAgIC8vIGRlY2ltYWxzPTAsCiAgICBpbnRjXzEgLy8gMAogICAgaXR4bl9maWVsZCBDb25maWdBc3NldERlY2ltYWxzCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF92ZXJpZmllci9jb250cmFjdC5weToyOQogICAgLy8gdG90YWw9MSwKICAgIGludGNfMCAvLyAxCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0VG90YWwKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjI3LTI4CiAgICAvLyAjIE1pbnQgdGhlIE5GVCB1c2luZyBhbiBpbm5lciB0cmFuc2FjdGlvbgogICAgLy8gYXNzZXRfY3JlYXRlID0gaXR4bi5Bc3NldENvbmZpZygKICAgIHB1c2hpbnQgMyAvLyBhY2ZnCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzEgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjI3LTM2CiAgICAvLyAjIE1pbnQgdGhlIE5GVCB1c2luZyBhbiBpbm5lciB0cmFuc2FjdGlvbgogICAgLy8gYXNzZXRfY3JlYXRlID0gaXR4bi5Bc3NldENvbmZpZygKICAgIC8vICAgICB0b3RhbD0xLAogICAgLy8gICAgIGRlY2ltYWxzPTAsCiAgICAvLyAgICAgYXNzZXRfbmFtZT1jcmVkZW50aWFsX25hbWUsCiAgICAvLyAgICAgdW5pdF9uYW1lPVN0cmluZygiQ0VSVCIpLAogICAgLy8gICAgIHVybD1tZXRhZGF0YV91cmwsCiAgICAvLyAgICAgbWFuYWdlcj1HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLCAgIyBDb250cmFjdCBpcyB0aGUgbWFuYWdlcgogICAgLy8gICAgIHJlc2VydmU9c3R1ZGVudF9hZGRyZXNzLCAjIFJlc2VydmUgaXMgdGhlIHN0dWRlbnQKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICBpdHhuIENyZWF0ZWRBc3NldElECiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF92ZXJpZmllci9jb250cmFjdC5weToxNgogICAgLy8gQGFiaW1ldGhvZAogICAgaXRvYgogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmNyZWRlbnRpYWxfdmVyaWZpZXIuY29udHJhY3QuQ3JlZGVudGlhbFZlcmlmaWVyLnZlcmlmeV9jcmVkZW50aWFsW3JvdXRpbmddKCkgLT4gdm9pZDoKdmVyaWZ5X2NyZWRlbnRpYWw6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF92ZXJpZmllci9jb250cmFjdC5weTo0MAogICAgLy8gQGFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBwdXNoaW50IDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDg1NjY1NzI2OTY2Njk2NTY0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAQAgAiYBFmF1dGhvcml6ZWRfaW5zdGl0dXRpb24xGRREMRhBAFeCAwQ4jK/7BDBqL1MELu67uTYaAI4DAFYAtwABAIA1FR98dQAvQ3JlZGVudGlhbFZlcmlmaWVyIC0gQWxnb3JhbmQgQ3JlZGVudGlhbCBTeXN0ZW2wIkOABMxpTqo2GgCOAQABADYaAUkVJBJEKExnIkM2GgFJFSQSRDYaAkkjWSUISwEVEkRXAgA2GgNJI1klCEsBFRJEVwIAMQAjKGVEEkSxMgpPA7IqsimyJ4AEQ0VSVLIlsiYjsiMisiKBA7IQI7IBs7Q8FoAEFR98dUxQsCJDNhoBFYEIEkSADhUffHUACFZlcmlmaWVksCJD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -178,11 +178,57 @@ export type MethodReturn<TSignature extends CredentialVerifierSignatures> = Cred
 export type GlobalKeysState = CredentialVerifierTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type CredentialVerifierCreateCallParams =
+  | Expand<CallParams<CredentialVerifierArgs['obj']['create(address)void'] | CredentialVerifierArgs['tuple']['create(address)void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<CredentialVerifierArgs['obj']['create(address)void'] | CredentialVerifierArgs['tuple']['create(address)void']> & {method: 'create(address)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type CredentialVerifierDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: CredentialVerifierCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the CredentialVerifier smart contract
  */
 export abstract class CredentialVerifierParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends CredentialVerifierCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(address)void':
+            return CredentialVerifierParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the CredentialVerifier smart contract using the create(address)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<CredentialVerifierArgs['obj']['create(address)void'] | CredentialVerifierArgs['tuple']['create(address)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(address)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.institution],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the issue_credential(address,string,string)uint64 ABI method
    *
@@ -232,6 +278,154 @@ export abstract class CredentialVerifierParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the CredentialVerifier smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class CredentialVerifierFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `CredentialVerifierFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new CredentialVerifierClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new CredentialVerifierClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the CredentialVerifier smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: CredentialVerifierDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? CredentialVerifierParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (CredentialVerifierCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new CredentialVerifierClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CredentialVerifier smart contract using the create(address)void ABI method.
+       *
+       * Initialize the contract with the authorized institution
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<CredentialVerifierArgs['obj']['create(address)void'] | CredentialVerifierArgs['tuple']['create(address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(CredentialVerifierParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CredentialVerifier smart contract using the create(address)void ABI method.
+       *
+       * Initialize the contract with the authorized institution
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<CredentialVerifierArgs['obj']['create(address)void'] | CredentialVerifierArgs['tuple']['create(address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(CredentialVerifierParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CredentialVerifier smart contract using an ABI method call using the create(address)void ABI method.
+       *
+       * Initialize the contract with the authorized institution
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<CredentialVerifierArgs['obj']['create(address)void'] | CredentialVerifierArgs['tuple']['create(address)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(CredentialVerifierParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | CredentialVerifierReturns['create(address)void']) }, appClient: new CredentialVerifierClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the CredentialVerifier smart contract
  */
