@@ -2,8 +2,8 @@
 
 - **Repo**: [harsh-mogalgiddikar/cadencia-platform](https://github.com/harsh-mogalgiddikar/cadencia-platform)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/harsh-mogalgiddikar/cadencia-platform/HEAD/cadencia-a2a-phases/artifacts/CadenciaEscrow.arc56.json](https://raw.githubusercontent.com/harsh-mogalgiddikar/cadencia-platform/HEAD/cadencia-a2a-phases/artifacts/CadenciaEscrow.arc56.json)
-- **Detected**: 2026-07-18T08:51:58.873987+00:00
-- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
+- **Detected**: 2026-11-06T14:12:53.690313+00:00
+- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.2`
 
 ## Reproduce
 
