@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"HustleScore","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"string"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize the contract with creator as admin.","events":[],"recommendations":{}},{"name":"add_reputation","args":[{"type":"address","name":"student"},{"type":"uint64","name":"points"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Add reputation points to a student (admin only).","events":[],"recommendations":{}},{"name":"remove_reputation","args":[{"type":"address","name":"student"},{"type":"uint64","name":"points"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Remove reputation points (for disputes, admin only).","events":[],"recommendations":{}},{"name":"get_total_minted","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get total reputation points minted.","events":[],"recommendations":{}},{"name":"get_admin","args":[],"returns":{"type":"address"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get the admin address.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Hustle Score SBT for CampusNexus\n    \n    Features:\n    - Non-transferable (soulbound)\n    - Score increases with completed projects\n    - Admin-managed minting\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"admin":{"keyType":"AVMString","valueType":"address","key":"YWRtaW4="},"total_minted":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfbWludGVk"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[168],"errorMessage":"Only admin can add reputation"},{"pc":[225],"errorMessage":"Only admin can remove reputation"},{"pc":[166,223,269],"errorMessage":"check self.admin exists"},{"pc":[172,258],"errorMessage":"check self.total_minted exists"},{"pc":[151,210],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[159,217],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"HustleScore","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"string"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize the contract with creator as admin.","events":[],"recommendations":{}},{"name":"add_reputation","args":[{"type":"address","name":"student"},{"type":"uint64","name":"points"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Add reputation points to a student (admin only).","events":[],"recommendations":{}},{"name":"remove_reputation","args":[{"type":"address","name":"student"},{"type":"uint64","name":"points"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Remove reputation points (for disputes, admin only).","events":[],"recommendations":{}},{"name":"get_total_minted","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get total reputation points minted.","events":[],"recommendations":{}},{"name":"get_admin","args":[],"returns":{"type":"address"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get the admin address.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Hustle Score SBT for CampusNexus\n    \n    Features:\n    - Non-transferable (soulbound)\n    - Score increases with completed projects\n    - Admin-managed minting\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"admin":{"keyType":"AVMString","valueType":"address","key":"YWRtaW4="},"total_minted":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfbWludGVk"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[168],"errorMessage":"Only admin can add reputation"},{"pc":[225],"errorMessage":"Only admin can remove reputation"},{"pc":[166,223,269],"errorMessage":"check self.admin exists"},{"pc":[172,258],"errorMessage":"check self.total_minted exists"},{"pc":[151,210],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[159,217],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMzIgOAogICAgYnl0ZWNibG9jayAidG90YWxfbWludGVkIiAiYWRtaW4iIDB4MTUxZjdjNzUKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9odXN0bGVfc2NvcmUvY29udHJhY3QucHk6MjEKICAgIC8vIHNlbGYudG90YWxfbWludGVkID0gR2xvYmFsU3RhdGUoVUludDY0KDApKQogICAgYnl0ZWNfMCAvLyAidG90YWxfbWludGVkIgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9odXN0bGVfc2NvcmUvY29udHJhY3QucHk6OQogICAgLy8gY2xhc3MgSHVzdGxlU2NvcmUoQVJDNENvbnRyYWN0KToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BAMTAKICAgIHB1c2hieXRlc3MgMHg3ZDRkMzBhZCAweGNhNDZiODAzIDB4MjJlNGM1YTAgMHgzNDZiM2RiYyAvLyBtZXRob2QgImFkZF9yZXB1dGF0aW9uKGFkZHJlc3MsdWludDY0KXN0cmluZyIsIG1ldGhvZCAicmVtb3ZlX3JlcHV0YXRpb24oYWRkcmVzcyx1aW50NjQpc3RyaW5nIiwgbWV0aG9kICJnZXRfdG90YWxfbWludGVkKCl1aW50NjQiLCBtZXRob2QgImdldF9hZG1pbigpYWRkcmVzcyIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGFkZF9yZXB1dGF0aW9uIHJlbW92ZV9yZXB1dGF0aW9uIGdldF90b3RhbF9taW50ZWQgZ2V0X2FkbWluCiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaHVzdGxlX3Njb3JlL2NvbnRyYWN0LnB5OjkKICAgIC8vIGNsYXNzIEh1c3RsZVNjb3JlKEFSQzRDb250cmFjdCk6CiAgICBwdXNoYnl0ZXMgMHhkNmU4NzE0ZCAvLyBtZXRob2QgImNyZWF0ZSgpc3RyaW5nIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlCiAgICBlcnIKCgovLyBzbWFydF9jb250cmFjdHMuaHVzdGxlX3Njb3JlLmNvbnRyYWN0Lkh1c3RsZVNjb3JlLmNyZWF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9odXN0bGVfc2NvcmUvY29udHJhY3QucHk6MjYKICAgIC8vIHNlbGYuYWRtaW4udmFsdWUgPSBUeG4uc2VuZGVyCiAgICBieXRlY18xIC8vICJhZG1pbiIKICAgIHR4biBTZW5kZXIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvaHVzdGxlX3Njb3JlL2NvbnRyYWN0LnB5OjI3CiAgICAvLyBzZWxmLnRvdGFsX21pbnRlZC52YWx1ZSA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMCAvLyAidG90YWxfbWludGVkIgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvaHVzdGxlX3Njb3JlL2NvbnRyYWN0LnB5OjIzCiAgICAvLyBAYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMWI0ODc1NzM3NDZjNjU1MzYzNmY3MjY1MjA1MzQyNTQyMDY5NmU2OTc0Njk2MTZjNjk3YTY1NjQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5odXN0bGVfc2NvcmUuY29udHJhY3QuSHVzdGxlU2NvcmUuYWRkX3JlcHV0YXRpb25bcm91dGluZ10oKSAtPiB2b2lkOgphZGRfcmVwdXRhdGlvbjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9odXN0bGVfc2NvcmUvY29udHJhY3QucHk6MzAKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL2h1c3RsZV9zY29yZS9jb250cmFjdC5weTozMwogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gc2VsZi5hZG1pbi52YWx1ZSwgIk9ubHkgYWRtaW4gY2FuIGFkZCByZXB1dGF0aW9uIgogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gImFkbWluIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmFkbWluIGV4aXN0cwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGFkbWluIGNhbiBhZGQgcmVwdXRhdGlvbgogICAgLy8gc21hcnRfY29udHJhY3RzL2h1c3RsZV9zY29yZS9jb250cmFjdC5weTozNS0zNgogICAgLy8gIyBJbiBwcm9kdWN0aW9uLCBzdG9yZSBpbiBib3ggc3RvcmFnZSBwZXIgc3R1ZGVudAogICAgLy8gc2VsZi50b3RhbF9taW50ZWQudmFsdWUgPSBzZWxmLnRvdGFsX21pbnRlZC52YWx1ZSArIHBvaW50cwogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInRvdGFsX21pbnRlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF9taW50ZWQgZXhpc3RzCiAgICArCiAgICBieXRlY18wIC8vICJ0b3RhbF9taW50ZWQiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2h1c3RsZV9zY29yZS9jb250cmFjdC5weTozMAogICAgLy8gQGFiaW1ldGhvZCgpCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMTA1MjY1NzA3NTc0NjE3NDY5NmY2ZTIwNjE2NDY0NjU2NAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmh1c3RsZV9zY29yZS5jb250cmFjdC5IdXN0bGVTY29yZS5yZW1vdmVfcmVwdXRhdGlvbltyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlbW92ZV9yZXB1dGF0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzL2h1c3RsZV9zY29yZS9jb250cmFjdC5weTo0MAogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gc21hcnRfY29udHJhY3RzL2h1c3RsZV9zY29yZS9jb250cmFjdC5weTo0MwogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gc2VsZi5hZG1pbi52YWx1ZSwgIk9ubHkgYWRtaW4gY2FuIHJlbW92ZSByZXB1dGF0aW9uIgogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gImFkbWluIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmFkbWluIGV4aXN0cwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGFkbWluIGNhbiByZW1vdmUgcmVwdXRhdGlvbgogICAgLy8gc21hcnRfY29udHJhY3RzL2h1c3RsZV9zY29yZS9jb250cmFjdC5weTo0MAogICAgLy8gQGFiaW1ldGhvZCgpCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMTI1MjY1NzA3NTc0NjE3NDY5NmY2ZTIwNzI2NTZkNmY3NjY1NjQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5odXN0bGVfc2NvcmUuY29udHJhY3QuSHVzdGxlU2NvcmUuZ2V0X3RvdGFsX21pbnRlZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF90b3RhbF9taW50ZWQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaHVzdGxlX3Njb3JlL2NvbnRyYWN0LnB5OjUwCiAgICAvLyByZXR1cm4gc2VsZi50b3RhbF9taW50ZWQudmFsdWUKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJ0b3RhbF9taW50ZWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG90YWxfbWludGVkIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL2h1c3RsZV9zY29yZS9jb250cmFjdC5weTo0NwogICAgLy8gQGFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgaXRvYgogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5odXN0bGVfc2NvcmUuY29udHJhY3QuSHVzdGxlU2NvcmUuZ2V0X2FkbWluW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X2FkbWluOgogICAgLy8gc21hcnRfY29udHJhY3RzL2h1c3RsZV9zY29yZS9jb250cmFjdC5weTo1NQogICAgLy8gcmV0dXJuIHNlbGYuYWRtaW4udmFsdWUKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJhZG1pbiIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5hZG1pbiBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9odXN0bGVfc2NvcmUvY29udHJhY3QucHk6NTIKICAgIC8vIEBhYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGJ5dGVjXzIgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAAEgCCYDDHRvdGFsX21pbnRlZAVhZG1pbgQVH3x1MRhAAAMoImcxGRREMRhBACSCBAR9TTCtBMpGuAMEIuTFoAQ0az28NhoAjgQAPAB3AKoAtQCABNbocU02GgCOAQABACkxAGcoImeAIRUffHUAG0h1c3RsZVNjb3JlIFNCVCBpbml0aWFsaXplZLAjQzYaARUkEkQ2GgJJFSUSRBcxACIpZUQSRCIoZUQIKExngBYVH3x1ABBSZXB1dGF0aW9uIGFkZGVksCNDNhoBFSQSRDYaAhUlEkQxACIpZUQSRIAYFR98dQASUmVwdXRhdGlvbiByZW1vdmVksCNDIihlRBYqTFCwI0MiKWVEKkxQsCND","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -185,11 +185,57 @@ export type MethodReturn<TSignature extends HustleScoreSignatures> = HustleScore
 export type GlobalKeysState = HustleScoreTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type HustleScoreCreateCallParams =
+  | Expand<CallParams<HustleScoreArgs['obj']['create()string'] | HustleScoreArgs['tuple']['create()string']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<HustleScoreArgs['obj']['create()string'] | HustleScoreArgs['tuple']['create()string']> & {method: 'create()string'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type HustleScoreDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: HustleScoreCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the HustleScore smart contract
  */
 export abstract class HustleScoreParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends HustleScoreCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create()string':
+            return HustleScoreParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the HustleScore smart contract using the create()string ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<HustleScoreArgs['obj']['create()string'] | HustleScoreArgs['tuple']['create()string']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create()string' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the add_reputation(address,uint64)string ABI method
    *
@@ -252,6 +298,154 @@ export abstract class HustleScoreParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the HustleScore smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class HustleScoreFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `HustleScoreFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new HustleScoreClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new HustleScoreClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the HustleScore smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: HustleScoreDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? HustleScoreParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (HustleScoreCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new HustleScoreClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HustleScore smart contract using the create()string ABI method.
+       *
+       * Initialize the contract with creator as admin.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<HustleScoreArgs['obj']['create()string'] | HustleScoreArgs['tuple']['create()string']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(HustleScoreParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HustleScore smart contract using the create()string ABI method.
+       *
+       * Initialize the contract with creator as admin.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<HustleScoreArgs['obj']['create()string'] | HustleScoreArgs['tuple']['create()string']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(HustleScoreParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HustleScore smart contract using an ABI method call using the create()string ABI method.
+       *
+       * Initialize the contract with creator as admin.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<HustleScoreArgs['obj']['create()string'] | HustleScoreArgs['tuple']['create()string']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(HustleScoreParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | HustleScoreReturns['create()string']) }, appClient: new HustleScoreClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the HustleScore smart contract
  */
