@@ -2,8 +2,8 @@
 
 - **Repo**: [compx-labs/canix402](https://github.com/compx-labs/canix402)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/haystack-launch.arc56.json](https://raw.githubusercontent.com/compx-labs/canix402/HEAD/protocol/src/haystack-launch.arc56.json)
-- **Detected**: 2026-10-06T12:48:02.500873+00:00
-- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
+- **Detected**: 2026-11-06T13:51:46.463676+00:00
+- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.2`
 
 ## Reproduce
 
