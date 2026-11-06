@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ConfioAyudaHumanitaria","structs":{},"methods":[{"name":"create","args":[{"type":"uint64","name":"cusd_asset_id"},{"type":"address","name":"admin"},{"type":"address","name":"release_operator"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"opt_in_cusd","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"donate","args":[{"type":"axfer","name":"donation"},{"type":"string","name":"donation_ref"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"release","args":[{"type":"address","name":"recipient"},{"type":"uint64","name":"amount"},{"type":"string","name":"release_ref"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"pause","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"unpause","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_admin","args":[{"type":"address","name":"new_admin"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_release_operator","args":[{"type":"address","name":"new_operator"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"emergency_withdraw","args":[{"type":"address","name":"recipient"},{"type":"uint64","name":"amount"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"update","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"desc":"cUSD humanitarian aid vault.\n\n    Donations are public cUSD asset transfers into the app account. Releases are\n    admin/operator-triggered cUSD transfers to approved volunteers. Proof links\n    are intentionally off-chain and added by the backend after the volunteer has\n    bought and distributed supplies.\n    ","networks":{},"state":{"schema":{"global":{"ints":6,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"admin":{"keyType":"AVMString","valueType":"address","key":"YWRtaW4="},"release_operator":{"keyType":"AVMString","valueType":"address","key":"cmVsZWFzZV9vcGVyYXRvcg=="},"cusd_asset_id":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y3VzZF9hc3NldF9pZA=="},"total_donated":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfZG9uYXRlZA=="},"total_released":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfcmVsZWFzZWQ="},"donation_count":{"keyType":"AVMString","valueType":"AVMUint64","key":"ZG9uYXRpb25fY291bnQ="},"release_count":{"keyType":"AVMString","valueType":"AVMUint64","key":"cmVsZWFzZV9jb3VudA=="},"paused":{"keyType":"AVMString","valueType":"AVMUint64","key":"cGF1c2Vk"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[419,602],"errorMessage":"check self.admin exists"},{"pc":[292,353,449,576],"errorMessage":"check self.cusd_asset_id exists"},{"pc":[374],"errorMessage":"check self.donation_count exists"},{"pc":[285,337,439,566],"errorMessage":"check self.paused exists"},{"pc":[481],"errorMessage":"check self.release_count exists"},{"pc":[429],"errorMessage":"check self.release_operator exists"},{"pc":[364],"errorMessage":"check self.total_donated exists"},{"pc":[471],"errorMessage":"check self.total_released exists"},{"pc":[326,406],"errorMessage":"invalid array length header"},{"pc":[333,413],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[239,247,390,517,533,549],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[230,399,558],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[320],"errorMessage":"transaction type is axfer"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ConfioAyudaHumanitaria","structs":{},"methods":[{"name":"create","args":[{"type":"uint64","name":"cusd_asset_id"},{"type":"address","name":"admin"},{"type":"address","name":"release_operator"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"opt_in_cusd","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"donate","args":[{"type":"axfer","name":"donation"},{"type":"string","name":"donation_ref"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"release","args":[{"type":"address","name":"recipient"},{"type":"uint64","name":"amount"},{"type":"string","name":"release_ref"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"pause","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"unpause","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_admin","args":[{"type":"address","name":"new_admin"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_release_operator","args":[{"type":"address","name":"new_operator"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"emergency_withdraw","args":[{"type":"address","name":"recipient"},{"type":"uint64","name":"amount"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"update","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"desc":"cUSD humanitarian aid vault.\n\n    Donations are public cUSD asset transfers into the app account. Releases are\n    admin/operator-triggered cUSD transfers to approved volunteers. Proof links\n    are intentionally off-chain and added by the backend after the volunteer has\n    bought and distributed supplies.\n    ","networks":{},"state":{"schema":{"global":{"ints":6,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"admin":{"keyType":"AVMString","valueType":"address","key":"YWRtaW4="},"release_operator":{"keyType":"AVMString","valueType":"address","key":"cmVsZWFzZV9vcGVyYXRvcg=="},"cusd_asset_id":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y3VzZF9hc3NldF9pZA=="},"total_donated":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfZG9uYXRlZA=="},"total_released":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfcmVsZWFzZWQ="},"donation_count":{"keyType":"AVMString","valueType":"AVMUint64","key":"ZG9uYXRpb25fY291bnQ="},"release_count":{"keyType":"AVMString","valueType":"AVMUint64","key":"cmVsZWFzZV9jb3VudA=="},"paused":{"keyType":"AVMString","valueType":"AVMUint64","key":"cGF1c2Vk"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[419,602],"errorMessage":"check self.admin exists"},{"pc":[292,353,449,576],"errorMessage":"check self.cusd_asset_id exists"},{"pc":[374],"errorMessage":"check self.donation_count exists"},{"pc":[285,337,439,566],"errorMessage":"check self.paused exists"},{"pc":[481],"errorMessage":"check self.release_count exists"},{"pc":[429],"errorMessage":"check self.release_operator exists"},{"pc":[364],"errorMessage":"check self.total_donated exists"},{"pc":[471],"errorMessage":"check self.total_released exists"},{"pc":[326,406],"errorMessage":"invalid array length header"},{"pc":[333,413],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[239,247,390,517,533,549],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[230,399,558],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[320],"errorMessage":"transaction type is axfer"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMzIgNAogICAgYnl0ZWNibG9jayAicGF1c2VkIiAiY3VzZF9hc3NldF9pZCIgImFkbWluIiAicmVsZWFzZV9vcGVyYXRvciIgInRvdGFsX2RvbmF0ZWQiICJ0b3RhbF9yZWxlYXNlZCIgImRvbmF0aW9uX2NvdW50IiAicmVsZWFzZV9jb3VudCIKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6NAogICAgLy8gY2xhc3MgQ29uZmlvQXl1ZGFIdW1hbml0YXJpYShBUkM0Q29udHJhY3QpOgogICAgcHVzaGJ5dGVzIDB4YTBlODE4NzIgLy8gbWV0aG9kICJ1cGRhdGUoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3VwZGF0ZV9yb3V0ZUAyCgptYWluX3N3aXRjaF9jYXNlX25leHRAMzoKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6NAogICAgLy8gY2xhc3MgQ29uZmlvQXl1ZGFIdW1hbml0YXJpYShBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEAxNAogICAgcHVzaGJ5dGVzcyAweDU2YzI2YWIzIDB4YjI2MjhmZTMgMHg1N2ZjYWY2NyAweDAxNzhmOTRiIDB4MWI1MjlkZTggMHg0NGYyYzFiZSAweDZlNmM0NDliIDB4NjdhYjUzOTggLy8gbWV0aG9kICJvcHRfaW5fY3VzZCgpdm9pZCIsIG1ldGhvZCAiZG9uYXRlKGF4ZmVyLHN0cmluZyl2b2lkIiwgbWV0aG9kICJyZWxlYXNlKGFkZHJlc3MsdWludDY0LHN0cmluZyl2b2lkIiwgbWV0aG9kICJwYXVzZSgpdm9pZCIsIG1ldGhvZCAidW5wYXVzZSgpdm9pZCIsIG1ldGhvZCAic2V0X2FkbWluKGFkZHJlc3Mpdm9pZCIsIG1ldGhvZCAic2V0X3JlbGVhc2Vfb3BlcmF0b3IoYWRkcmVzcyl2b2lkIiwgbWV0aG9kICJlbWVyZ2VuY3lfd2l0aGRyYXcoYWRkcmVzcyx1aW50NjQpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG9wdF9pbl9jdXNkIGRvbmF0ZSByZWxlYXNlIHBhdXNlIHVucGF1c2Ugc2V0X2FkbWluIHNldF9yZWxlYXNlX29wZXJhdG9yIGVtZXJnZW5jeV93aXRoZHJhdwogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDE0OgogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo0CiAgICAvLyBjbGFzcyBDb25maW9BeXVkYUh1bWFuaXRhcmlhKEFSQzRDb250cmFjdCk6CiAgICBwdXNoYnl0ZXMgMHg5MDFlNzM4MiAvLyBtZXRob2QgImNyZWF0ZSh1aW50NjQsYWRkcmVzcyxhZGRyZXNzKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGUKICAgIGVycgoKbWFpbl91cGRhdGVfcm91dGVAMjoKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6OTYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiVXBkYXRlQXBwbGljYXRpb24iXSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGludGNfMyAvLyBVcGRhdGVBcHBsaWNhdGlvbgogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0CiAgICBiIHVwZGF0ZQoKCi8vIGh1bWFuaXRhcmlhbi5heXVkYV9odW1hbml0YXJpYS5Db25maW9BeXVkYUh1bWFuaXRhcmlhLmNyZWF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZToKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6MjIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChjcmVhdGU9J3JlcXVpcmUnKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjI0CiAgICAvLyBzZWxmLmFkbWluID0gYWRtaW4KICAgIGJ5dGVjXzIgLy8gImFkbWluIgogICAgdW5jb3ZlciAyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weToyNQogICAgLy8gc2VsZi5yZWxlYXNlX29wZXJhdG9yID0gcmVsZWFzZV9vcGVyYXRvcgogICAgYnl0ZWNfMyAvLyAicmVsZWFzZV9vcGVyYXRvciIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjI2CiAgICAvLyBzZWxmLmN1c2RfYXNzZXRfaWQgPSBjdXNkX2Fzc2V0X2lkCiAgICBieXRlY18xIC8vICJjdXNkX2Fzc2V0X2lkIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6MjcKICAgIC8vIHNlbGYudG90YWxfZG9uYXRlZCA9IFVJbnQ2NCgwKQogICAgYnl0ZWMgNCAvLyAidG90YWxfZG9uYXRlZCIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weToyOAogICAgLy8gc2VsZi50b3RhbF9yZWxlYXNlZCA9IFVJbnQ2NCgwKQogICAgYnl0ZWMgNSAvLyAidG90YWxfcmVsZWFzZWQiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6MjkKICAgIC8vIHNlbGYuZG9uYXRpb25fY291bnQgPSBVSW50NjQoMCkKICAgIGJ5dGVjIDYgLy8gImRvbmF0aW9uX2NvdW50IgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjMwCiAgICAvLyBzZWxmLnJlbGVhc2VfY291bnQgPSBVSW50NjQoMCkKICAgIGJ5dGVjIDcgLy8gInJlbGVhc2VfY291bnQiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6MzEKICAgIC8vIHNlbGYucGF1c2VkID0gVUludDY0KDApCiAgICBieXRlY18wIC8vICJwYXVzZWQiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6MjIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChjcmVhdGU9J3JlcXVpcmUnKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIGh1bWFuaXRhcmlhbi5heXVkYV9odW1hbml0YXJpYS5Db25maW9BeXVkYUh1bWFuaXRhcmlhLm9wdF9pbl9jdXNkW3JvdXRpbmddKCkgLT4gdm9pZDoKb3B0X2luX2N1c2Q6CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjM1CiAgICAvLyBzZWxmLl9hc3NlcnRfYWRtaW4oKQogICAgY2FsbHN1YiBfYXNzZXJ0X2FkbWluCiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjM2CiAgICAvLyBhc3NlcnQgc2VsZi5wYXVzZWQgPT0gVUludDY0KDApCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAicGF1c2VkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnBhdXNlZCBleGlzdHMKICAgICEKICAgIGFzc2VydAogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTozNy00MQogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgLy8gICAgIHhmZXJfYXNzZXQ9QXNzZXQoc2VsZi5jdXNkX2Fzc2V0X2lkKSwKICAgIC8vICAgICBhc3NldF9yZWNlaXZlcj1HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgLy8gICAgIGFzc2V0X2Ftb3VudD1VSW50NjQoMCksCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjM4CiAgICAvLyB4ZmVyX2Fzc2V0PUFzc2V0KHNlbGYuY3VzZF9hc3NldF9pZCksCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAiY3VzZF9hc3NldF9pZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jdXNkX2Fzc2V0X2lkIGV4aXN0cwogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTozOQogICAgLy8gYXNzZXRfcmVjZWl2ZXI9R2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjQwCiAgICAvLyBhc3NldF9hbW91bnQ9VUludDY0KDApLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgQXNzZXRBbW91bnQKICAgIGl0eG5fZmllbGQgQXNzZXRSZWNlaXZlcgogICAgaXR4bl9maWVsZCBYZmVyQXNzZXQKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6MzcKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIGludGNfMyAvLyBheGZlcgogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjM3LTQxCiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICAvLyAgICAgeGZlcl9hc3NldD1Bc3NldChzZWxmLmN1c2RfYXNzZXRfaWQpLAogICAgLy8gICAgIGFzc2V0X3JlY2VpdmVyPUdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyAgICAgYXNzZXRfYW1vdW50PVVJbnQ2NCgwKSwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjMzCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIGh1bWFuaXRhcmlhbi5heXVkYV9odW1hbml0YXJpYS5Db25maW9BeXVkYUh1bWFuaXRhcmlhLmRvbmF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmRvbmF0ZToKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6NDMKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18xIC8vIDEKICAgIC0KICAgIGR1cAogICAgZ3R4bnMgVHlwZUVudW0KICAgIGludGNfMyAvLyBheGZlcgogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIGF4ZmVyCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjQ1CiAgICAvLyBhc3NlcnQgc2VsZi5wYXVzZWQgPT0gVUludDY0KDApCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAicGF1c2VkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnBhdXNlZCBleGlzdHMKICAgICEKICAgIGFzc2VydAogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo0NgogICAgLy8gYXNzZXJ0IGRvbmF0aW9uLmFzc2V0X3JlY2VpdmVyID09IEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MKICAgIGR1cAogICAgZ3R4bnMgQXNzZXRSZWNlaXZlcgogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgID09CiAgICBhc3NlcnQKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6NDcKICAgIC8vIGFzc2VydCBkb25hdGlvbi54ZmVyX2Fzc2V0LmlkID09IHNlbGYuY3VzZF9hc3NldF9pZAogICAgZHVwCiAgICBndHhucyBYZmVyQXNzZXQKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJjdXNkX2Fzc2V0X2lkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmN1c2RfYXNzZXRfaWQgZXhpc3RzCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjQ4CiAgICAvLyBhc3NlcnQgZG9uYXRpb24uYXNzZXRfYW1vdW50ID4gVUludDY0KDApCiAgICBndHhucyBBc3NldEFtb3VudAogICAgZHVwCiAgICBhc3NlcnQKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6NDkKICAgIC8vIHNlbGYudG90YWxfZG9uYXRlZCArPSBkb25hdGlvbi5hc3NldF9hbW91bnQKICAgIGludGNfMCAvLyAwCiAgICBieXRlYyA0IC8vICJ0b3RhbF9kb25hdGVkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX2RvbmF0ZWQgZXhpc3RzCiAgICArCiAgICBieXRlYyA0IC8vICJ0b3RhbF9kb25hdGVkIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6NTAKICAgIC8vIHNlbGYuZG9uYXRpb25fY291bnQgKz0gVUludDY0KDEpCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWMgNiAvLyAiZG9uYXRpb25fY291bnQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuZG9uYXRpb25fY291bnQgZXhpc3RzCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYnl0ZWMgNiAvLyAiZG9uYXRpb25fY291bnQiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo0MwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBodW1hbml0YXJpYW4uYXl1ZGFfaHVtYW5pdGFyaWEuQ29uZmlvQXl1ZGFIdW1hbml0YXJpYS5yZWxlYXNlW3JvdXRpbmddKCkgLT4gdm9pZDoKcmVsZWFzZToKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6NTIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjEwNAogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gc2VsZi5hZG1pbiBvciBUeG4uc2VuZGVyID09IHNlbGYucmVsZWFzZV9vcGVyYXRvcgogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzIgLy8gImFkbWluIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmFkbWluIGV4aXN0cwogICAgPT0KICAgIGJueiByZWxlYXNlX2Jvb2xfdHJ1ZUAzCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMyAvLyAicmVsZWFzZV9vcGVyYXRvciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5yZWxlYXNlX29wZXJhdG9yIGV4aXN0cwogICAgPT0KICAgIGJ6IHJlbGVhc2VfYm9vbF9mYWxzZUA0CgpyZWxlYXNlX2Jvb2xfdHJ1ZUAzOgogICAgaW50Y18xIC8vIDEKCnJlbGVhc2VfYm9vbF9tZXJnZUA1OgogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weToxMDQKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IHNlbGYuYWRtaW4gb3IgVHhuLnNlbmRlciA9PSBzZWxmLnJlbGVhc2Vfb3BlcmF0b3IKICAgIGFzc2VydAogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo1NQogICAgLy8gYXNzZXJ0IHNlbGYucGF1c2VkID09IFVJbnQ2NCgwKQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInBhdXNlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5wYXVzZWQgZXhpc3RzCiAgICAhCiAgICBhc3NlcnQKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6NTYKICAgIC8vIGFzc2VydCBhbW91bnQgPiBVSW50NjQoMCkKICAgIGR1cG4gMgogICAgYXNzZXJ0CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjU3LTYxCiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICAvLyAgICAgeGZlcl9hc3NldD1Bc3NldChzZWxmLmN1c2RfYXNzZXRfaWQpLAogICAgLy8gICAgIGFzc2V0X3JlY2VpdmVyPXJlY2lwaWVudCwKICAgIC8vICAgICBhc3NldF9hbW91bnQ9YW1vdW50LAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo1OAogICAgLy8geGZlcl9hc3NldD1Bc3NldChzZWxmLmN1c2RfYXNzZXRfaWQpLAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gImN1c2RfYXNzZXRfaWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuY3VzZF9hc3NldF9pZCBleGlzdHMKICAgIGRpZyAxCiAgICBpdHhuX2ZpZWxkIEFzc2V0QW1vdW50CiAgICBkaWcgMwogICAgaXR4bl9maWVsZCBBc3NldFJlY2VpdmVyCiAgICBpdHhuX2ZpZWxkIFhmZXJBc3NldAogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo1NwogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgaW50Y18zIC8vIGF4ZmVyCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6NTctNjEKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICB4ZmVyX2Fzc2V0PUFzc2V0KHNlbGYuY3VzZF9hc3NldF9pZCksCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXI9cmVjaXBpZW50LAogICAgLy8gICAgIGFzc2V0X2Ftb3VudD1hbW91bnQsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo2MgogICAgLy8gc2VsZi50b3RhbF9yZWxlYXNlZCArPSBhbW91bnQKICAgIGludGNfMCAvLyAwCiAgICBieXRlYyA1IC8vICJ0b3RhbF9yZWxlYXNlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF9yZWxlYXNlZCBleGlzdHMKICAgICsKICAgIGJ5dGVjIDUgLy8gInRvdGFsX3JlbGVhc2VkIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6NjMKICAgIC8vIHNlbGYucmVsZWFzZV9jb3VudCArPSBVSW50NjQoMSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlYyA3IC8vICJyZWxlYXNlX2NvdW50IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnJlbGVhc2VfY291bnQgZXhpc3RzCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYnl0ZWMgNyAvLyAicmVsZWFzZV9jb3VudCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjUyCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKcmVsZWFzZV9ib29sX2ZhbHNlQDQ6CiAgICBpbnRjXzAgLy8gMAogICAgYiByZWxlYXNlX2Jvb2xfbWVyZ2VANQoKCi8vIGh1bWFuaXRhcmlhbi5heXVkYV9odW1hbml0YXJpYS5Db25maW9BeXVkYUh1bWFuaXRhcmlhLnBhdXNlW3JvdXRpbmddKCkgLT4gdm9pZDoKcGF1c2U6CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjY3CiAgICAvLyBzZWxmLl9hc3NlcnRfYWRtaW4oKQogICAgY2FsbHN1YiBfYXNzZXJ0X2FkbWluCiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjY4CiAgICAvLyBzZWxmLnBhdXNlZCA9IFVJbnQ2NCgxKQogICAgYnl0ZWNfMCAvLyAicGF1c2VkIgogICAgaW50Y18xIC8vIDEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjY1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIGh1bWFuaXRhcmlhbi5heXVkYV9odW1hbml0YXJpYS5Db25maW9BeXVkYUh1bWFuaXRhcmlhLnVucGF1c2Vbcm91dGluZ10oKSAtPiB2b2lkOgp1bnBhdXNlOgogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo3MgogICAgLy8gc2VsZi5fYXNzZXJ0X2FkbWluKCkKICAgIGNhbGxzdWIgX2Fzc2VydF9hZG1pbgogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo3MwogICAgLy8gc2VsZi5wYXVzZWQgPSBVSW50NjQoMCkKICAgIGJ5dGVjXzAgLy8gInBhdXNlZCIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo3MAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBodW1hbml0YXJpYW4uYXl1ZGFfaHVtYW5pdGFyaWEuQ29uZmlvQXl1ZGFIdW1hbml0YXJpYS5zZXRfYWRtaW5bcm91dGluZ10oKSAtPiB2b2lkOgpzZXRfYWRtaW46CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5Ojc1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5Ojc3CiAgICAvLyBzZWxmLl9hc3NlcnRfYWRtaW4oKQogICAgY2FsbHN1YiBfYXNzZXJ0X2FkbWluCiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5Ojc4CiAgICAvLyBzZWxmLmFkbWluID0gbmV3X2FkbWluCiAgICBieXRlY18yIC8vICJhZG1pbiIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5Ojc1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIGh1bWFuaXRhcmlhbi5heXVkYV9odW1hbml0YXJpYS5Db25maW9BeXVkYUh1bWFuaXRhcmlhLnNldF9yZWxlYXNlX29wZXJhdG9yW3JvdXRpbmddKCkgLT4gdm9pZDoKc2V0X3JlbGVhc2Vfb3BlcmF0b3I6CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjgwCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjgyCiAgICAvLyBzZWxmLl9hc3NlcnRfYWRtaW4oKQogICAgY2FsbHN1YiBfYXNzZXJ0X2FkbWluCiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjgzCiAgICAvLyBzZWxmLnJlbGVhc2Vfb3BlcmF0b3IgPSBuZXdfb3BlcmF0b3IKICAgIGJ5dGVjXzMgLy8gInJlbGVhc2Vfb3BlcmF0b3IiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo4MAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBodW1hbml0YXJpYW4uYXl1ZGFfaHVtYW5pdGFyaWEuQ29uZmlvQXl1ZGFIdW1hbml0YXJpYS5lbWVyZ2VuY3lfd2l0aGRyYXdbcm91dGluZ10oKSAtPiB2b2lkOgplbWVyZ2VuY3lfd2l0aGRyYXc6CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5Ojg1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo4NwogICAgLy8gc2VsZi5fYXNzZXJ0X2FkbWluKCkKICAgIGNhbGxzdWIgX2Fzc2VydF9hZG1pbgogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo4OAogICAgLy8gYXNzZXJ0IHNlbGYucGF1c2VkID09IFVJbnQ2NCgxKQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInBhdXNlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5wYXVzZWQgZXhpc3RzCiAgICBpbnRjXzEgLy8gMQogICAgPT0KICAgIGFzc2VydAogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo4OQogICAgLy8gYXNzZXJ0IGFtb3VudCA+IFVJbnQ2NCgwKQogICAgZHVwCiAgICBhc3NlcnQKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6OTAtOTQKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICB4ZmVyX2Fzc2V0PUFzc2V0KHNlbGYuY3VzZF9hc3NldF9pZCksCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXI9cmVjaXBpZW50LAogICAgLy8gICAgIGFzc2V0X2Ftb3VudD1hbW91bnQsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjkxCiAgICAvLyB4ZmVyX2Fzc2V0PUFzc2V0KHNlbGYuY3VzZF9hc3NldF9pZCksCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAiY3VzZF9hc3NldF9pZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jdXNkX2Fzc2V0X2lkIGV4aXN0cwogICAgaXR4bl9maWVsZCBYZmVyQXNzZXQKICAgIGl0eG5fZmllbGQgQXNzZXRBbW91bnQKICAgIGl0eG5fZmllbGQgQXNzZXRSZWNlaXZlcgogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo5MAogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgaW50Y18zIC8vIGF4ZmVyCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIGNvbnRyYWN0cy9odW1hbml0YXJpYW4vYXl1ZGFfaHVtYW5pdGFyaWEucHk6OTAtOTQKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICB4ZmVyX2Fzc2V0PUFzc2V0KHNlbGYuY3VzZF9hc3NldF9pZCksCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXI9cmVjaXBpZW50LAogICAgLy8gICAgIGFzc2V0X2Ftb3VudD1hbW91bnQsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gY29udHJhY3RzL2h1bWFuaXRhcmlhbi9heXVkYV9odW1hbml0YXJpYS5weTo4NQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBodW1hbml0YXJpYW4uYXl1ZGFfaHVtYW5pdGFyaWEuQ29uZmlvQXl1ZGFIdW1hbml0YXJpYS51cGRhdGVbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGU6CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5Ojk4CiAgICAvLyBzZWxmLl9hc3NlcnRfYWRtaW4oKQogICAgY2FsbHN1YiBfYXNzZXJ0X2FkbWluCiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5Ojk2CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIlVwZGF0ZUFwcGxpY2F0aW9uIl0pCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gaHVtYW5pdGFyaWFuLmF5dWRhX2h1bWFuaXRhcmlhLkNvbmZpb0F5dWRhSHVtYW5pdGFyaWEuX2Fzc2VydF9hZG1pbigpIC0+IHZvaWQ6Cl9hc3NlcnRfYWRtaW46CiAgICAvLyBjb250cmFjdHMvaHVtYW5pdGFyaWFuL2F5dWRhX2h1bWFuaXRhcmlhLnB5OjEwMQogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gc2VsZi5hZG1pbgogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzIgLy8gImFkbWluIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmFkbWluIGV4aXN0cwogICAgPT0KICAgIGFzc2VydAogICAgcmV0c3ViCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAAEgBCYIBnBhdXNlZA1jdXNkX2Fzc2V0X2lkBWFkbWluEHJlbGVhc2Vfb3BlcmF0b3INdG90YWxfZG9uYXRlZA50b3RhbF9yZWxlYXNlZA5kb25hdGlvbl9jb3VudA1yZWxlYXNlX2NvdW50gASg6BhyNhoAjgEAVzEZFEQxGEEAQIIIBFbCarMEsmKP4wRX/K9nBAF4+UsEG1Kd6ARE8sG+BG5sRJsEZ6tTmDYaAI4IAFMAcwC7ASoBMgE6AUoBWgCABJAec4I2GgCOAQAMADEZJRIxGBBEQgFyNhoBSRWBCBJEFzYaAkkVJBJENhoDSRUkEkQqTwJnK0xnKUxnJwQiZycFImcnBiJnJwciZygiZyNDiAE7IihlRBREsSIpZUQyCiKyErIUshElshAisgGzI0MxFiMJSTgQJRJENhoBSSJZgQIITBUSRCIoZUQUREk4FDIKEkRJOBEiKWVEEkQ4EklEIicEZUQIJwRMZyInBmVEIwgnBkxnI0M2GgFJFSQSRDYaAkkVgQgSRBc2GgNJIlmBAghMFRJEMQAiKmVEEkAACjEAIitlRBJBADgjRCIoZUQUREcCRLEiKWVESwGyEksDshSyESWyECKyAbMiJwVlRAgnBUxnIicHZUQjCCcHTGcjQyJC/8WIAGQoI2cjQ4gAXCgiZyNDNhoBSRUkEkSIAEwqTGcjQzYaAUkVJBJEiAA8K0xnI0M2GgFJFSQSRDYaAkkVgQgSRBeIACIiKGVEIxJESUSxIillRLIRshKyFCWyECKyAbMjQ4gAAiNDMQAiKmVEEkSJ","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -239,11 +239,97 @@ export type MethodReturn<TSignature extends ConfioAyudaHumanitariaSignatures> = 
 export type GlobalKeysState = ConfioAyudaHumanitariaTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ConfioAyudaHumanitariaCreateCallParams =
+  | Expand<CallParams<ConfioAyudaHumanitariaArgs['obj']['create(uint64,address,address)void'] | ConfioAyudaHumanitariaArgs['tuple']['create(uint64,address,address)void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<ConfioAyudaHumanitariaArgs['obj']['create(uint64,address,address)void'] | ConfioAyudaHumanitariaArgs['tuple']['create(uint64,address,address)void']> & {method: 'create(uint64,address,address)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type ConfioAyudaHumanitariaUpdateCallParams =
+  | Expand<CallParams<ConfioAyudaHumanitariaArgs['obj']['update()void'] | ConfioAyudaHumanitariaArgs['tuple']['update()void']> & {method: 'update'}>
+  | Expand<CallParams<ConfioAyudaHumanitariaArgs['obj']['update()void'] | ConfioAyudaHumanitariaArgs['tuple']['update()void']> & {method: 'update()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ConfioAyudaHumanitariaDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ConfioAyudaHumanitariaCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: ConfioAyudaHumanitariaUpdateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ConfioAyudaHumanitaria smart contract
  */
 export abstract class ConfioAyudaHumanitariaParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends ConfioAyudaHumanitariaCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(uint64,address,address)void':
+            return ConfioAyudaHumanitariaParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the ConfioAyudaHumanitaria smart contract using the create(uint64,address,address)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<ConfioAyudaHumanitariaArgs['obj']['create(uint64,address,address)void'] | ConfioAyudaHumanitariaArgs['tuple']['create(uint64,address,address)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(uint64,address,address)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.cusdAssetId, params.args.admin, params.args.releaseOperator],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends ConfioAyudaHumanitariaUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'update':
+          case 'update()void':
+            return ConfioAyudaHumanitariaParamsFactory.update.update(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the ConfioAyudaHumanitaria smart contract using the update()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      update(params: CallParams<ConfioAyudaHumanitariaArgs['obj']['update()void'] | ConfioAyudaHumanitariaArgs['tuple']['update()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'update()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the opt_in_cusd()void ABI method
    *
@@ -351,6 +437,164 @@ export abstract class ConfioAyudaHumanitariaParamsFactory {
 }
 
 /**
+ * A factory to create and deploy one or more instance of the ConfioAyudaHumanitaria smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ConfioAyudaHumanitariaFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ConfioAyudaHumanitariaFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ConfioAyudaHumanitariaClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ConfioAyudaHumanitariaClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ConfioAyudaHumanitaria smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ConfioAyudaHumanitariaDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? ConfioAyudaHumanitariaParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (ConfioAyudaHumanitariaCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? ConfioAyudaHumanitariaParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (ConfioAyudaHumanitariaUpdateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new ConfioAyudaHumanitariaClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ConfioAyudaHumanitaria smart contract using the create(uint64,address,address)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<ConfioAyudaHumanitariaArgs['obj']['create(uint64,address,address)void'] | ConfioAyudaHumanitariaArgs['tuple']['create(uint64,address,address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(ConfioAyudaHumanitariaParamsFactory.create.create(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the ConfioAyudaHumanitaria smart contract using the update()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      update: (params: CallParams<ConfioAyudaHumanitariaArgs['obj']['update()void'] | ConfioAyudaHumanitariaArgs['tuple']['update()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(ConfioAyudaHumanitariaParamsFactory.update.update(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ConfioAyudaHumanitaria smart contract using the create(uint64,address,address)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<ConfioAyudaHumanitariaArgs['obj']['create(uint64,address,address)void'] | ConfioAyudaHumanitariaArgs['tuple']['create(uint64,address,address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(ConfioAyudaHumanitariaParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ConfioAyudaHumanitaria smart contract using an ABI method call using the create(uint64,address,address)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<ConfioAyudaHumanitariaArgs['obj']['create(uint64,address,address)void'] | ConfioAyudaHumanitariaArgs['tuple']['create(uint64,address,address)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(ConfioAyudaHumanitariaParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | ConfioAyudaHumanitariaReturns['create(uint64,address,address)void']) }, appClient: new ConfioAyudaHumanitariaClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
+/**
  * A client to make calls to the ConfioAyudaHumanitaria smart contract
  */
 export class ConfioAyudaHumanitariaClient {
@@ -429,6 +673,22 @@ export class ConfioAyudaHumanitariaClient {
    * Get parameters to create transactions for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
    */
   readonly params = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the ConfioAyudaHumanitaria smart contract using the `update()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      update: (params: CallParams<ConfioAyudaHumanitariaArgs['obj']['update()void'] | ConfioAyudaHumanitariaArgs['tuple']['update()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(ConfioAyudaHumanitariaParamsFactory.update.update(params))
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the ConfioAyudaHumanitaria smart contract.
      *
@@ -526,6 +786,22 @@ export class ConfioAyudaHumanitariaClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the ConfioAyudaHumanitaria smart contract using the `update()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      update: (params: CallParams<ConfioAyudaHumanitariaArgs['obj']['update()void'] | ConfioAyudaHumanitariaArgs['tuple']['update()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(ConfioAyudaHumanitariaParamsFactory.update.update(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the ConfioAyudaHumanitaria smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -621,6 +897,23 @@ export class ConfioAyudaHumanitariaClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the ConfioAyudaHumanitaria smart contract using the `update()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      update: async (params: CallParams<ConfioAyudaHumanitariaArgs['obj']['update()void'] | ConfioAyudaHumanitariaArgs['tuple']['update()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(ConfioAyudaHumanitariaParamsFactory.update.update(params))
+        return {...result, return: result.return as unknown as (undefined | ConfioAyudaHumanitariaReturns['update()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the ConfioAyudaHumanitaria smart contract.
      *
@@ -860,6 +1153,15 @@ export class ConfioAyudaHumanitariaClient {
         resultMappers.push(undefined)
         return this
       },
+      get update() {
+        return {
+          update: (params: CallParams<ConfioAyudaHumanitariaArgs['obj']['update()void'] | ConfioAyudaHumanitariaArgs['tuple']['update()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.update(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the ConfioAyudaHumanitaria contract
        */
@@ -966,6 +1268,20 @@ export type ConfioAyudaHumanitariaComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   emergencyWithdraw(params?: CallParams<ConfioAyudaHumanitariaArgs['obj']['emergency_withdraw(address,uint64)void'] | ConfioAyudaHumanitariaArgs['tuple']['emergency_withdraw(address,uint64)void']>): ConfioAyudaHumanitariaComposer<[...TReturns, ConfioAyudaHumanitariaReturns['emergency_withdraw(address,uint64)void'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the ConfioAyudaHumanitaria smart contract using the update()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    update(params?: CallParams<ConfioAyudaHumanitariaArgs['obj']['update()void'] | ConfioAyudaHumanitariaArgs['tuple']['update()void']>): ConfioAyudaHumanitariaComposer<[...TReturns, ConfioAyudaHumanitariaReturns['update()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the ConfioAyudaHumanitaria smart contract.
