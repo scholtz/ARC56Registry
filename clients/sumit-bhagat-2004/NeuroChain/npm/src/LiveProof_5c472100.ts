@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"LiveProof","structs":{"ProofRecord":[{"name":"nodeId","type":"string"},{"name":"textHash","type":"string"},{"name":"embeddingHash","type":"string"},{"name":"timestamp","type":"uint64"},{"name":"creator","type":"address"}]},"methods":[{"name":"initialize","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Deploy contract. Called once by creator.","events":[],"recommendations":{}},{"name":"anchor_proof","args":[{"type":"string","name":"node_id"},{"type":"string","name":"text_hash"},{"type":"string","name":"embedding_hash"},{"type":"uint64","name":"timestamp"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Anchor a knowledge node proof on-chain.\nAnyone can anchor — the caller's address is recorded as creator. node_id must be unique.","events":[],"recommendations":{}},{"name":"get_proof","args":[{"type":"string","name":"node_id"}],"returns":{"type":"(string,string,string,uint64,address)","struct":"ProofRecord"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Fetch a proof record by node_id.\nFrontend calls this to display verification details.","events":[],"recommendations":{}},{"name":"proof_exists","args":[{"type":"string","name":"node_id"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Check if a proof exists without fetching the full record.","events":[],"recommendations":{}},{"name":"get_total_proofs","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Return total number of proofs anchored.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    LiveProof — on-chain knowledge proof anchoring.\n    Stores cryptographic fingerprints of ideas and their\n    AI semantic embeddings. Each proof is queryable by node_id.\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"total_proofs":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWw="},"owner":{"keyType":"AVMString","valueType":"address","key":"b3duZXI="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"proofs":{"keyType":"string","valueType":"ProofRecord","prefix":"cF8="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[162],"errorMessage":"Proof already anchored for this node"},{"pc":[250],"errorMessage":"Proof not found"},{"pc":[222,294],"errorMessage":"check self.total_proofs exists"},{"pc":[172],"errorMessage":"embedding_hash cannot be empty"},{"pc":[104,120,136,235,264],"errorMessage":"invalid array length header"},{"pc":[114,130,143,242,271],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[152],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[167],"errorMessage":"text_hash cannot be empty"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"LiveProof","structs":{"ProofRecord":[{"name":"nodeId","type":"string"},{"name":"textHash","type":"string"},{"name":"embeddingHash","type":"string"},{"name":"timestamp","type":"uint64"},{"name":"creator","type":"address"}]},"methods":[{"name":"initialize","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Deploy contract. Called once by creator.","events":[],"recommendations":{}},{"name":"anchor_proof","args":[{"type":"string","name":"node_id"},{"type":"string","name":"text_hash"},{"type":"string","name":"embedding_hash"},{"type":"uint64","name":"timestamp"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Anchor a knowledge node proof on-chain.\nAnyone can anchor — the caller's address is recorded as creator. node_id must be unique.","events":[],"recommendations":{}},{"name":"get_proof","args":[{"type":"string","name":"node_id"}],"returns":{"type":"(string,string,string,uint64,address)","struct":"ProofRecord"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Fetch a proof record by node_id.\nFrontend calls this to display verification details.","events":[],"recommendations":{}},{"name":"proof_exists","args":[{"type":"string","name":"node_id"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Check if a proof exists without fetching the full record.","events":[],"recommendations":{}},{"name":"get_total_proofs","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Return total number of proofs anchored.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    LiveProof — on-chain knowledge proof anchoring.\n    Stores cryptographic fingerprints of ideas and their\n    AI semantic embeddings. Each proof is queryable by node_id.\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"total_proofs":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWw="},"owner":{"keyType":"AVMString","valueType":"address","key":"b3duZXI="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"proofs":{"keyType":"string","valueType":"ProofRecord","prefix":"cF8="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[162],"errorMessage":"Proof already anchored for this node"},{"pc":[250],"errorMessage":"Proof not found"},{"pc":[222,294],"errorMessage":"check self.total_proofs exists"},{"pc":[172],"errorMessage":"embedding_hash cannot be empty"},{"pc":[104,120,136,235,264],"errorMessage":"invalid array length header"},{"pc":[114,130,143,242,271],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[152],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[167],"errorMessage":"text_hash cannot be empty"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMgogICAgYnl0ZWNibG9jayAidG90YWwiICJwXyIgMHgxNTFmN2M3NSAweDAwMDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZXVyb2NoYWluL2NvbnRyYWN0LnB5OjIwCiAgICAvLyBjbGFzcyBMaXZlUHJvb2YoQVJDNENvbnRyYWN0KToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BAMTAKICAgIHB1c2hieXRlc3MgMHhmNTk1ZWUyNiAweDdkYjg4MzViIDB4YmFmZTViMjQgMHg0NjgyZDYxMCAvLyBtZXRob2QgImFuY2hvcl9wcm9vZihzdHJpbmcsc3RyaW5nLHN0cmluZyx1aW50NjQpdm9pZCIsIG1ldGhvZCAiZ2V0X3Byb29mKHN0cmluZykoc3RyaW5nLHN0cmluZyxzdHJpbmcsdWludDY0LGFkZHJlc3MpIiwgbWV0aG9kICJwcm9vZl9leGlzdHMoc3RyaW5nKWJvb2wiLCBtZXRob2QgImdldF90b3RhbF9wcm9vZnMoKXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGFuY2hvcl9wcm9vZiBnZXRfcHJvb2YgcHJvb2ZfZXhpc3RzIGdldF90b3RhbF9wcm9vZnMKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEAxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZXVyb2NoYWluL2NvbnRyYWN0LnB5OjIwCiAgICAvLyBjbGFzcyBMaXZlUHJvb2YoQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweGZkMmM5M2NkIC8vIG1ldGhvZCAiaW5pdGlhbGl6ZSgpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGluaXRpYWxpemUKICAgIGVycgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5uZXVyb2NoYWluLmNvbnRyYWN0LkxpdmVQcm9vZi5pbml0aWFsaXplW3JvdXRpbmddKCkgLT4gdm9pZDoKaW5pdGlhbGl6ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZXVyb2NoYWluL2NvbnRyYWN0LnB5OjM1CiAgICAvLyBzZWxmLnRvdGFsX3Byb29mcy52YWx1ZSA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMCAvLyAidG90YWwiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZXVyb2NoYWluL2NvbnRyYWN0LnB5OjM2CiAgICAvLyBzZWxmLm93bmVyLnZhbHVlID0gVHhuLnNlbmRlcgogICAgcHVzaGJ5dGVzICJvd25lciIKICAgIHR4biBTZW5kZXIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmV1cm9jaGFpbi9jb250cmFjdC5weTozMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0sIGNyZWF0ZT0icmVxdWlyZSIpCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLm5ldXJvY2hhaW4uY29udHJhY3QuTGl2ZVByb29mLmFuY2hvcl9wcm9vZltyb3V0aW5nXSgpIC0+IHZvaWQ6CmFuY2hvcl9wcm9vZjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZXVyb2NoYWluL2NvbnRyYWN0LnB5OjM4CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICBkdXAKICAgIHVuY292ZXIgMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgZHVwCiAgICB1bmNvdmVyIDIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNAogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZXVyb2NoYWluL2NvbnRyYWN0LnB5OjUxCiAgICAvLyBhc3NlcnQgbm9kZV9pZCBub3QgaW4gc2VsZi5wcm9vZnMsICJQcm9vZiBhbHJlYWR5IGFuY2hvcmVkIGZvciB0aGlzIG5vZGUiCiAgICBieXRlY18xIC8vICJwXyIKICAgIGRpZyA2CiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAhCiAgICBhc3NlcnQgLy8gUHJvb2YgYWxyZWFkeSBhbmNob3JlZCBmb3IgdGhpcyBub2RlCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmV1cm9jaGFpbi9jb250cmFjdC5weTo1MgogICAgLy8gYXNzZXJ0IGFyYzQuU3RyaW5nKCIiKSAhPSB0ZXh0X2hhc2gsICJ0ZXh0X2hhc2ggY2Fubm90IGJlIGVtcHR5IgogICAgYnl0ZWNfMyAvLyAweDAwMDAKICAgIGRpZyA1CiAgICAhPQogICAgYXNzZXJ0IC8vIHRleHRfaGFzaCBjYW5ub3QgYmUgZW1wdHkKICAgIGJ5dGVjXzMgLy8gMHgwMDAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmV1cm9jaGFpbi9jb250cmFjdC5weTo1MwogICAgLy8gYXNzZXJ0IGFyYzQuU3RyaW5nKCIiKSAhPSBlbWJlZGRpbmdfaGFzaCwgImVtYmVkZGluZ19oYXNoIGNhbm5vdCBiZSBlbXB0eSIKICAgIGRpZyAzCiAgICAhPQogICAgYXNzZXJ0IC8vIGVtYmVkZGluZ19oYXNoIGNhbm5vdCBiZSBlbXB0eQogICAgLy8gc21hcnRfY29udHJhY3RzL25ldXJvY2hhaW4vY29udHJhY3QucHk6NjAKICAgIC8vIGNyZWF0b3I9YXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpLAogICAgdHhuIFNlbmRlcgogICAgLy8gc21hcnRfY29udHJhY3RzL25ldXJvY2hhaW4vY29udHJhY3QucHk6NTUtNjEKICAgIC8vIHNlbGYucHJvb2ZzW25vZGVfaWRdID0gUHJvb2ZSZWNvcmQoCiAgICAvLyAgICAgbm9kZV9pZD1ub2RlX2lkLAogICAgLy8gICAgIHRleHRfaGFzaD10ZXh0X2hhc2gsCiAgICAvLyAgICAgZW1iZWRkaW5nX2hhc2g9ZW1iZWRkaW5nX2hhc2gsCiAgICAvLyAgICAgdGltZXN0YW1wPXRpbWVzdGFtcCwKICAgIC8vICAgICBjcmVhdG9yPWFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSwKICAgIC8vICkKICAgIHB1c2hpbnQgNDYKICAgIHVuY292ZXIgNwogICAgKwogICAgZHVwCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgcHVzaGJ5dGVzIDB4MDAyZQogICAgc3dhcAogICAgY29uY2F0CiAgICBzd2FwCiAgICB1bmNvdmVyIDYKICAgICsKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBjb25jYXQKICAgIHVuY292ZXIgMwogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIHVuY292ZXIgNAogICAgY29uY2F0CiAgICB1bmNvdmVyIDMKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIGRpZyAxCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGJveF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZXVyb2NoYWluL2NvbnRyYWN0LnB5OjYzCiAgICAvLyBzZWxmLnRvdGFsX3Byb29mcy52YWx1ZSArPSBVSW50NjQoMSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJ0b3RhbCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF9wcm9vZnMgZXhpc3RzCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYnl0ZWNfMCAvLyAidG90YWwiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL25ldXJvY2hhaW4vY29udHJhY3QucHk6MzgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5uZXVyb2NoYWluLmNvbnRyYWN0LkxpdmVQcm9vZi5nZXRfcHJvb2Zbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfcHJvb2Y6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmV1cm9jaGFpbi9jb250cmFjdC5weTo2NQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmV1cm9jaGFpbi9jb250cmFjdC5weTo3MQogICAgLy8gYXNzZXJ0IG5vZGVfaWQgaW4gc2VsZi5wcm9vZnMsICJQcm9vZiBub3QgZm91bmQiCiAgICBieXRlY18xIC8vICJwXyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBQcm9vZiBub3QgZm91bmQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZXVyb2NoYWluL2NvbnRyYWN0LnB5OjcyCiAgICAvLyByZXR1cm4gc2VsZi5wcm9vZnNbbm9kZV9pZF0uY29weSgpCiAgICBib3hfZ2V0CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZXVyb2NoYWluL2NvbnRyYWN0LnB5OjY1CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGJ5dGVjXzIgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMubmV1cm9jaGFpbi5jb250cmFjdC5MaXZlUHJvb2YucHJvb2ZfZXhpc3RzW3JvdXRpbmddKCkgLT4gdm9pZDoKcHJvb2ZfZXhpc3RzOgogICAgLy8gc21hcnRfY29udHJhY3RzL25ldXJvY2hhaW4vY29udHJhY3QucHk6NzQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgLy8gc21hcnRfY29udHJhY3RzL25ldXJvY2hhaW4vY29udHJhY3QucHk6NzcKICAgIC8vIHJldHVybiBhcmM0LkJvb2wobm9kZV9pZCBpbiBzZWxmLnByb29mcykKICAgIGJ5dGVjXzEgLy8gInBfIgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIHB1c2hieXRlcyAweDAwCiAgICBpbnRjXzAgLy8gMAogICAgdW5jb3ZlciAyCiAgICBzZXRiaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZXVyb2NoYWluL2NvbnRyYWN0LnB5Ojc0CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGJ5dGVjXzIgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMubmV1cm9jaGFpbi5jb250cmFjdC5MaXZlUHJvb2YuZ2V0X3RvdGFsX3Byb29mc1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF90b3RhbF9wcm9vZnM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmV1cm9jaGFpbi9jb250cmFjdC5weTo4MgogICAgLy8gcmV0dXJuIGFyYzQuVUludDY0KHNlbGYudG90YWxfcHJvb2ZzLnZhbHVlKQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInRvdGFsIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX3Byb29mcyBleGlzdHMKICAgIGl0b2IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZXVyb2NoYWluL2NvbnRyYWN0LnB5Ojc5CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGJ5dGVjXzIgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAAECJgQFdG90YWwCcF8EFR98dQIAADEZFEQxGEEAJIIEBPWV7iYEfbiDWwS6/lskBEaC1hA2GgCOBAAeAKEAvgDeAIAE/SyTzTYaAI4BAAEAKCJngAVvd25lcjEAZyNDNhoBSSJZJAhLARVJTwISRDYaAkkiWSQISwEVSU8CEkQ2GgNJIlkkCEsBFRJENhoESRWBCBJEKUsGUEm9RQEURCtLBRNEK0sDE0QxAIEuTwcISRZXBgKAAgAuTFBMTwYIFlcGAlBPA1BMUE8EUE8DUE8CUEsBvEi/IihlRCMIKExnI0M2GgFJIlkkCEsBFRJEKUxQSb1FAUS+SCpMULAjQzYaAUkiWSQISwEVEkQpTFC9RQGAAQAiTwJUKkxQsCNDIihlRBYqTFCwI0M=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -217,11 +217,57 @@ export type GlobalKeysState = LiveProofTypes['state']['global']['keys']
 export type BoxKeysState = LiveProofTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type LiveProofCreateCallParams =
+  | Expand<CallParams<LiveProofArgs['obj']['initialize()void'] | LiveProofArgs['tuple']['initialize()void']> & {method: 'initialize'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<LiveProofArgs['obj']['initialize()void'] | LiveProofArgs['tuple']['initialize()void']> & {method: 'initialize()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type LiveProofDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: LiveProofCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the LiveProof smart contract
  */
 export abstract class LiveProofParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends LiveProofCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'initialize':
+          case 'initialize()void':
+            return LiveProofParamsFactory.create.initialize(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the LiveProof smart contract using the initialize()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      initialize(params: CallParams<LiveProofArgs['obj']['initialize()void'] | LiveProofArgs['tuple']['initialize()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'initialize()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the anchor_proof(string,string,string,uint64)void ABI method
    *
@@ -288,6 +334,154 @@ export abstract class LiveProofParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the LiveProof smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class LiveProofFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `LiveProofFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new LiveProofClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new LiveProofClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the LiveProof smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: LiveProofDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? LiveProofParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (LiveProofCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new LiveProofClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the LiveProof smart contract using the initialize()void ABI method.
+       *
+       * Deploy contract. Called once by creator.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      initialize: (params: CallParams<LiveProofArgs['obj']['initialize()void'] | LiveProofArgs['tuple']['initialize()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(LiveProofParamsFactory.create.initialize(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the LiveProof smart contract using the initialize()void ABI method.
+       *
+       * Deploy contract. Called once by creator.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      initialize: (params: CallParams<LiveProofArgs['obj']['initialize()void'] | LiveProofArgs['tuple']['initialize()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(LiveProofParamsFactory.create.initialize(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the LiveProof smart contract using an ABI method call using the initialize()void ABI method.
+       *
+       * Deploy contract. Called once by creator.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      initialize: async (params: CallParams<LiveProofArgs['obj']['initialize()void'] | LiveProofArgs['tuple']['initialize()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(LiveProofParamsFactory.create.initialize(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | LiveProofReturns['initialize()void']) }, appClient: new LiveProofClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the LiveProof smart contract
  */

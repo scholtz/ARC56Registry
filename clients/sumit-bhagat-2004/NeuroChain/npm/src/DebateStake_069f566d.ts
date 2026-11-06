@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"DebateStake","structs":{},"methods":[{"name":"initialize","args":[{"type":"string","name":"debate_id"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"stake","args":[{"type":"string","name":"stance_node_id"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"settle","args":[{"type":"string","name":"winner_node_id"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"claim","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_pool_info","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"get_winner","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":4},"local":{"ints":0,"bytes":0}},"keys":{"global":{"debate_id":{"keyType":"AVMString","valueType":"string","key":"ZGViYXRlX2lk"},"total_pool":{"keyType":"AVMString","valueType":"AVMUint64","key":"cG9vbA=="},"is_settled":{"keyType":"AVMString","valueType":"bool","key":"c2V0dGxlZA=="},"winner_node_id":{"keyType":"AVMString","valueType":"string","key":"d2lubmVy"},"owner":{"keyType":"AVMString","valueType":"address","key":"b3duZXI="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"stakes":{"keyType":"address","valueType":"uint64","prefix":"c18="},"stances":{"keyType":"address","valueType":"string","prefix":"dF8="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[317],"errorMessage":"Already claimed or zero stake"},{"pc":[264],"errorMessage":"Already settled"},{"pc":[190],"errorMessage":"Already staked"},{"pc":[177],"errorMessage":"Debate already settled"},{"pc":[208],"errorMessage":"Must send ALGO to stake"},{"pc":[293],"errorMessage":"No stake found"},{"pc":[303],"errorMessage":"No stance found"},{"pc":[281,358],"errorMessage":"Not settled yet"},{"pc":[257],"errorMessage":"Only owner can settle"},{"pc":[203],"errorMessage":"Pay must go to contract"},{"pc":[311],"errorMessage":"You backed the wrong side"},{"pc":[174,261,278,355],"errorMessage":"check self.is_settled exists"},{"pc":[255],"errorMessage":"check self.owner exists"},{"pc":[229,343],"errorMessage":"check self.total_pool exists"},{"pc":[309,362],"errorMessage":"check self.winner_node_id exists"},{"pc":[118,163,241],"errorMessage":"invalid array length header"},{"pc":[125,170,248],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[196],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"DebateStake","structs":{},"methods":[{"name":"initialize","args":[{"type":"string","name":"debate_id"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"stake","args":[{"type":"string","name":"stance_node_id"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"settle","args":[{"type":"string","name":"winner_node_id"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"claim","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_pool_info","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"get_winner","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":4},"local":{"ints":0,"bytes":0}},"keys":{"global":{"debate_id":{"keyType":"AVMString","valueType":"string","key":"ZGViYXRlX2lk"},"total_pool":{"keyType":"AVMString","valueType":"AVMUint64","key":"cG9vbA=="},"is_settled":{"keyType":"AVMString","valueType":"bool","key":"c2V0dGxlZA=="},"winner_node_id":{"keyType":"AVMString","valueType":"string","key":"d2lubmVy"},"owner":{"keyType":"AVMString","valueType":"address","key":"b3duZXI="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"stakes":{"keyType":"address","valueType":"uint64","prefix":"c18="},"stances":{"keyType":"address","valueType":"string","prefix":"dF8="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[317],"errorMessage":"Already claimed or zero stake"},{"pc":[264],"errorMessage":"Already settled"},{"pc":[190],"errorMessage":"Already staked"},{"pc":[177],"errorMessage":"Debate already settled"},{"pc":[208],"errorMessage":"Must send ALGO to stake"},{"pc":[293],"errorMessage":"No stake found"},{"pc":[303],"errorMessage":"No stance found"},{"pc":[281,358],"errorMessage":"Not settled yet"},{"pc":[257],"errorMessage":"Only owner can settle"},{"pc":[203],"errorMessage":"Pay must go to contract"},{"pc":[311],"errorMessage":"You backed the wrong side"},{"pc":[174,261,278,355],"errorMessage":"check self.is_settled exists"},{"pc":[255],"errorMessage":"check self.owner exists"},{"pc":[229,343],"errorMessage":"check self.total_pool exists"},{"pc":[309,362],"errorMessage":"check self.winner_node_id exists"},{"pc":[118,163,241],"errorMessage":"invalid array length header"},{"pc":[125,170,248],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[196],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMgogICAgYnl0ZWNibG9jayAic2V0dGxlZCIgMHgwMCAicG9vbCIgIndpbm5lciIgIm93bmVyIiAic18iICJ0XyIgMHgxNTFmN2M3NQogICAgLy8gc21hcnRfY29udHJhY3RzL2RlYmF0ZV9zdGFrZS9jb250cmFjdC5weToxNQogICAgLy8gY2xhc3MgRGViYXRlU3Rha2UoQVJDNENvbnRyYWN0KToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BAMTEKICAgIHB1c2hieXRlc3MgMHhmNWM4MTE2NiAweDYwZGZlYTUzIDB4ZjE1Nzc3MjYgMHhjNWFhNWI5ZCAweGIyZmY4YjI3IC8vIG1ldGhvZCAic3Rha2Uoc3RyaW5nKXZvaWQiLCBtZXRob2QgInNldHRsZShzdHJpbmcpdm9pZCIsIG1ldGhvZCAiY2xhaW0oKXZvaWQiLCBtZXRob2QgImdldF9wb29sX2luZm8oKXVpbnQ2NCIsIG1ldGhvZCAiZ2V0X3dpbm5lcigpc3RyaW5nIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggc3Rha2Ugc2V0dGxlIGNsYWltIGdldF9wb29sX2luZm8gZ2V0X3dpbm5lcgogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDExOgogICAgLy8gc21hcnRfY29udHJhY3RzL2RlYmF0ZV9zdGFrZS9jb250cmFjdC5weToxNQogICAgLy8gY2xhc3MgRGViYXRlU3Rha2UoQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweGVjZjMzOWU3IC8vIG1ldGhvZCAiaW5pdGlhbGl6ZShzdHJpbmcpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGluaXRpYWxpemUKICAgIGVycgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5kZWJhdGVfc3Rha2UuY29udHJhY3QuRGViYXRlU3Rha2UuaW5pdGlhbGl6ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmluaXRpYWxpemU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjI2CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSwgY3JlYXRlPSJyZXF1aXJlIikKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6MjgKICAgIC8vIHNlbGYuZGViYXRlX2lkLnZhbHVlID0gZGViYXRlX2lkCiAgICBwdXNoYnl0ZXMgImRlYmF0ZV9pZCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjI5CiAgICAvLyBzZWxmLnRvdGFsX3Bvb2wudmFsdWUgPSBVSW50NjQoMCkKICAgIGJ5dGVjXzIgLy8gInBvb2wiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6MzAKICAgIC8vIHNlbGYuaXNfc2V0dGxlZC52YWx1ZSA9IGFyYzQuQm9vbChGYWxzZSkKICAgIGJ5dGVjXzAgLy8gInNldHRsZWQiCiAgICBieXRlY18xIC8vIDB4MDAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjMxCiAgICAvLyBzZWxmLndpbm5lcl9ub2RlX2lkLnZhbHVlID0gYXJjNC5TdHJpbmcoIiIpCiAgICBieXRlY18zIC8vICJ3aW5uZXIiCiAgICBwdXNoYnl0ZXMgMHgwMDAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2RlYmF0ZV9zdGFrZS9jb250cmFjdC5weTozMgogICAgLy8gc2VsZi5vd25lci52YWx1ZSA9IFR4bi5zZW5kZXIKICAgIGJ5dGVjIDQgLy8gIm93bmVyIgogICAgdHhuIFNlbmRlcgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6MjYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiTm9PcCJdLCBjcmVhdGU9InJlcXVpcmUiKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5kZWJhdGVfc3Rha2UuY29udHJhY3QuRGViYXRlU3Rha2Uuc3Rha2Vbcm91dGluZ10oKSAtPiB2b2lkOgpzdGFrZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6MzQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgLy8gc21hcnRfY29udHJhY3RzL2RlYmF0ZV9zdGFrZS9jb250cmFjdC5weTozNgogICAgLy8gYXNzZXJ0IG5vdCBzZWxmLmlzX3NldHRsZWQudmFsdWUsICJEZWJhdGUgYWxyZWFkeSBzZXR0bGVkIgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInNldHRsZWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuaXNfc2V0dGxlZCBleGlzdHMKICAgIGJ5dGVjXzEgLy8gMHgwMAogICAgPT0KICAgIGFzc2VydCAvLyBEZWJhdGUgYWxyZWFkeSBzZXR0bGVkCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjM3CiAgICAvLyBjYWxsZXIgPSBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlcikKICAgIHR4biBTZW5kZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6MzgKICAgIC8vIGFzc2VydCBjYWxsZXIgbm90IGluIHNlbGYuc3Rha2VzLCAiQWxyZWFkeSBzdGFrZWQiCiAgICBieXRlYyA1IC8vICJzXyIKICAgIGRpZyAxCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAhCiAgICBhc3NlcnQgLy8gQWxyZWFkeSBzdGFrZWQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6MzkKICAgIC8vIHBheSA9IGd0eG4uUGF5bWVudFRyYW5zYWN0aW9uKDApCiAgICBpbnRjXzAgLy8gMAogICAgZ3R4bnMgVHlwZUVudW0KICAgIGludGNfMSAvLyBwYXkKICAgID09CiAgICBhc3NlcnQgLy8gdHJhbnNhY3Rpb24gdHlwZSBpcyBwYXkKICAgIGludGNfMCAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjQwCiAgICAvLyBhc3NlcnQgcGF5LnJlY2VpdmVyID09IEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsICJQYXkgbXVzdCBnbyB0byBjb250cmFjdCIKICAgIGd0eG5zIFJlY2VpdmVyCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgPT0KICAgIGFzc2VydCAvLyBQYXkgbXVzdCBnbyB0byBjb250cmFjdAogICAgLy8gc21hcnRfY29udHJhY3RzL2RlYmF0ZV9zdGFrZS9jb250cmFjdC5weTozOQogICAgLy8gcGF5ID0gZ3R4bi5QYXltZW50VHJhbnNhY3Rpb24oMCkKICAgIGludGNfMCAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjQxCiAgICAvLyBhc3NlcnQgcGF5LmFtb3VudCA+IFVJbnQ2NCgwKSwgIk11c3Qgc2VuZCBBTEdPIHRvIHN0YWtlIgogICAgZ3R4bnMgQW1vdW50CiAgICBkdXAKICAgIGFzc2VydCAvLyBNdXN0IHNlbmQgQUxHTyB0byBzdGFrZQogICAgLy8gc21hcnRfY29udHJhY3RzL2RlYmF0ZV9zdGFrZS9jb250cmFjdC5weTo0MgogICAgLy8gc2VsZi5zdGFrZXNbY2FsbGVyXSA9IHBheS5hbW91bnQKICAgIGR1cAogICAgaXRvYgogICAgdW5jb3ZlciAyCiAgICBzd2FwCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjQzCiAgICAvLyBzZWxmLnN0YW5jZXNbY2FsbGVyXSA9IHN0YW5jZV9ub2RlX2lkCiAgICBieXRlYyA2IC8vICJ0XyIKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAogICAgdW5jb3ZlciAyCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjQ0CiAgICAvLyBzZWxmLnRvdGFsX3Bvb2wudmFsdWUgPSBzZWxmLnRvdGFsX3Bvb2wudmFsdWUgKyBwYXkuYW1vdW50CiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMiAvLyAicG9vbCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF9wb29sIGV4aXN0cwogICAgKwogICAgYnl0ZWNfMiAvLyAicG9vbCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuZGViYXRlX3N0YWtlLmNvbnRyYWN0LkRlYmF0ZVN0YWtlLnNldHRsZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnNldHRsZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6NDYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgLy8gc21hcnRfY29udHJhY3RzL2RlYmF0ZV9zdGFrZS9jb250cmFjdC5weTo0OAogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gc2VsZi5vd25lci52YWx1ZSwgIk9ubHkgb3duZXIgY2FuIHNldHRsZSIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlYyA0IC8vICJvd25lciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5vd25lciBleGlzdHMKICAgID09CiAgICBhc3NlcnQgLy8gT25seSBvd25lciBjYW4gc2V0dGxlCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjQ5CiAgICAvLyBhc3NlcnQgbm90IHNlbGYuaXNfc2V0dGxlZC52YWx1ZSwgIkFscmVhZHkgc2V0dGxlZCIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJzZXR0bGVkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmlzX3NldHRsZWQgZXhpc3RzCiAgICBieXRlY18xIC8vIDB4MDAKICAgID09CiAgICBhc3NlcnQgLy8gQWxyZWFkeSBzZXR0bGVkCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjUwCiAgICAvLyBzZWxmLmlzX3NldHRsZWQudmFsdWUgPSBhcmM0LkJvb2woVHJ1ZSkKICAgIGJ5dGVjXzAgLy8gInNldHRsZWQiCiAgICBwdXNoYnl0ZXMgMHg4MAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6NTEKICAgIC8vIHNlbGYud2lubmVyX25vZGVfaWQudmFsdWUgPSB3aW5uZXJfbm9kZV9pZAogICAgYnl0ZWNfMyAvLyAid2lubmVyIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6NDYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5kZWJhdGVfc3Rha2UuY29udHJhY3QuRGViYXRlU3Rha2UuY2xhaW1bcm91dGluZ10oKSAtPiB2b2lkOgpjbGFpbToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6NTUKICAgIC8vIGFzc2VydCBzZWxmLmlzX3NldHRsZWQudmFsdWUsICJOb3Qgc2V0dGxlZCB5ZXQiCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAic2V0dGxlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5pc19zZXR0bGVkIGV4aXN0cwogICAgYnl0ZWNfMSAvLyAweDAwCiAgICAhPQogICAgYXNzZXJ0IC8vIE5vdCBzZXR0bGVkIHlldAogICAgLy8gc21hcnRfY29udHJhY3RzL2RlYmF0ZV9zdGFrZS9jb250cmFjdC5weTo1NgogICAgLy8gY2FsbGVyID0gYXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpCiAgICB0eG4gU2VuZGVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjU3CiAgICAvLyBhc3NlcnQgY2FsbGVyIGluIHNlbGYuc3Rha2VzLCAiTm8gc3Rha2UgZm91bmQiCiAgICBieXRlYyA1IC8vICJzXyIKICAgIGRpZyAxCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBhc3NlcnQgLy8gTm8gc3Rha2UgZm91bmQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6NTgKICAgIC8vIGFzc2VydCBjYWxsZXIgaW4gc2VsZi5zdGFuY2VzLCAiTm8gc3RhbmNlIGZvdW5kIgogICAgYnl0ZWMgNiAvLyAidF8iCiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBObyBzdGFuY2UgZm91bmQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6NTkKICAgIC8vIGNhbGxlcl9zdGFuY2VfYnl0ZXMgPSBzZWxmLnN0YW5jZXNbY2FsbGVyXS5ieXRlcwogICAgYm94X2dldAogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjYwCiAgICAvLyB3aW5uZXJfYnl0ZXMgPSBzZWxmLndpbm5lcl9ub2RlX2lkLnZhbHVlLmJ5dGVzCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMyAvLyAid2lubmVyIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLndpbm5lcl9ub2RlX2lkIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL2RlYmF0ZV9zdGFrZS9jb250cmFjdC5weTo2MQogICAgLy8gYXNzZXJ0IGNhbGxlcl9zdGFuY2VfYnl0ZXMgPT0gd2lubmVyX2J5dGVzLCAiWW91IGJhY2tlZCB0aGUgd3Jvbmcgc2lkZSIKICAgID09CiAgICBhc3NlcnQgLy8gWW91IGJhY2tlZCB0aGUgd3Jvbmcgc2lkZQogICAgLy8gc21hcnRfY29udHJhY3RzL2RlYmF0ZV9zdGFrZS9jb250cmFjdC5weTo2MgogICAgLy8gY2FsbGVyX3N0YWtlID0gc2VsZi5zdGFrZXNbY2FsbGVyXQogICAgZHVwCiAgICBib3hfZ2V0CiAgICBwb3AKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6NjMKICAgIC8vIGFzc2VydCBjYWxsZXJfc3Rha2UgPiBVSW50NjQoMCksICJBbHJlYWR5IGNsYWltZWQgb3IgemVybyBzdGFrZSIKICAgIGR1cAogICAgYXNzZXJ0IC8vIEFscmVhZHkgY2xhaW1lZCBvciB6ZXJvIHN0YWtlCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjY0CiAgICAvLyBzZWxmLnN0YWtlc1tjYWxsZXJdID0gVUludDY0KDApCiAgICBpbnRjXzAgLy8gMAogICAgaXRvYgogICAgdW5jb3ZlciAyCiAgICBzd2FwCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjY1LTY5CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9VHhuLnNlbmRlciwKICAgIC8vICAgICBhbW91bnQ9Y2FsbGVyX3N0YWtlLAogICAgLy8gICAgIGZlZT1VSW50NjQoMCksCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjY2CiAgICAvLyByZWNlaXZlcj1UeG4uc2VuZGVyLAogICAgdHhuIFNlbmRlcgogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6NjUKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIGludGNfMSAvLyBwYXkKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6NjgKICAgIC8vIGZlZT1VSW50NjQoMCksCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6NjUtNjkKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1UeG4uc2VuZGVyLAogICAgLy8gICAgIGFtb3VudD1jYWxsZXJfc3Rha2UsCiAgICAvLyAgICAgZmVlPVVJbnQ2NCgwKSwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjUzCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuZGViYXRlX3N0YWtlLmNvbnRyYWN0LkRlYmF0ZVN0YWtlLmdldF9wb29sX2luZm9bcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfcG9vbF9pbmZvOgogICAgLy8gc21hcnRfY29udHJhY3RzL2RlYmF0ZV9zdGFrZS9jb250cmFjdC5weTo3MwogICAgLy8gcmV0dXJuIGFyYzQuVUludDY0KHNlbGYudG90YWxfcG9vbC52YWx1ZSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18yIC8vICJwb29sIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX3Bvb2wgZXhpc3RzCiAgICBpdG9iCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5OjcxCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGJ5dGVjIDcgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuZGViYXRlX3N0YWtlLmNvbnRyYWN0LkRlYmF0ZVN0YWtlLmdldF93aW5uZXJbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfd2lubmVyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2RlYmF0ZV9zdGFrZS9jb250cmFjdC5weTo3NwogICAgLy8gYXNzZXJ0IHNlbGYuaXNfc2V0dGxlZC52YWx1ZSwgIk5vdCBzZXR0bGVkIHlldCIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJzZXR0bGVkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmlzX3NldHRsZWQgZXhpc3RzCiAgICBieXRlY18xIC8vIDB4MDAKICAgICE9CiAgICBhc3NlcnQgLy8gTm90IHNldHRsZWQgeWV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGViYXRlX3N0YWtlL2NvbnRyYWN0LnB5Ojc4CiAgICAvLyByZXR1cm4gYXJjNC5TdHJpbmcuZnJvbV9ieXRlcyhzZWxmLndpbm5lcl9ub2RlX2lkLnZhbHVlLmJ5dGVzKQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzMgLy8gIndpbm5lciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi53aW5uZXJfbm9kZV9pZCBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kZWJhdGVfc3Rha2UvY29udHJhY3QucHk6NzUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgYnl0ZWMgNyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAAECJggHc2V0dGxlZAEABHBvb2wGd2lubmVyBW93bmVyAnNfAnRfBBUffHUxGRREMRhBACuCBQT1yBFmBGDf6lME8Vd3JgTFqludBLL/iyc2GgCOBQA8AIoAsQDyAP4AgATs8znnNhoAjgEAAQA2GgFJIlkkCEsBFRJEgAlkZWJhdGVfaWRMZyoiZygpZyuAAgAAZycEMQBnI0M2GgFJIlkkCEsBFRJEIihlRCkSRDEAJwVLAVBJvUUBFEQiOBAjEkQiOAcyChJEIjgISURJFk8CTL8nBk8CUEm8SE8CvyIqZUQIKkxnI0M2GgFJIlkkCEsBFRJEMQAiJwRlRBJEIihlRCkSRCiAAYBnK0xnI0MiKGVEKRNEMQAnBUsBUEm9RQFEJwZPAlBJvUUBRL5IIitlRBJESb5IF0lEIhZPAky/sTEAsgeyCCOyECKyAbMjQyIqZUQWJwdMULAjQyIoZUQpE0QiK2VEJwdMULAjQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -208,11 +208,57 @@ export type GlobalKeysState = DebateStakeTypes['state']['global']['keys']
 export type BoxKeysState = DebateStakeTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type DebateStakeCreateCallParams =
+  | Expand<CallParams<DebateStakeArgs['obj']['initialize(string)void'] | DebateStakeArgs['tuple']['initialize(string)void']> & {method: 'initialize'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<DebateStakeArgs['obj']['initialize(string)void'] | DebateStakeArgs['tuple']['initialize(string)void']> & {method: 'initialize(string)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type DebateStakeDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: DebateStakeCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the DebateStake smart contract
  */
 export abstract class DebateStakeParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends DebateStakeCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'initialize':
+          case 'initialize(string)void':
+            return DebateStakeParamsFactory.create.initialize(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the DebateStake smart contract using the initialize(string)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      initialize(params: CallParams<DebateStakeArgs['obj']['initialize(string)void'] | DebateStakeArgs['tuple']['initialize(string)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'initialize(string)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.debateId],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the stake(string)void ABI method
    *
@@ -280,6 +326,148 @@ export abstract class DebateStakeParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the DebateStake smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class DebateStakeFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `DebateStakeFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new DebateStakeClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new DebateStakeClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the DebateStake smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: DebateStakeDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? DebateStakeParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (DebateStakeCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new DebateStakeClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DebateStake smart contract using the initialize(string)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      initialize: (params: CallParams<DebateStakeArgs['obj']['initialize(string)void'] | DebateStakeArgs['tuple']['initialize(string)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(DebateStakeParamsFactory.create.initialize(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DebateStake smart contract using the initialize(string)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      initialize: (params: CallParams<DebateStakeArgs['obj']['initialize(string)void'] | DebateStakeArgs['tuple']['initialize(string)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(DebateStakeParamsFactory.create.initialize(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DebateStake smart contract using an ABI method call using the initialize(string)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      initialize: async (params: CallParams<DebateStakeArgs['obj']['initialize(string)void'] | DebateStakeArgs['tuple']['initialize(string)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(DebateStakeParamsFactory.create.initialize(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | DebateStakeReturns['initialize(string)void']) }, appClient: new DebateStakeClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the DebateStake smart contract
  */
