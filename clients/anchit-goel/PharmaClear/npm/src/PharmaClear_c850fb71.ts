@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"PharmaClear","structs":{},"methods":[{"name":"hello","args":[{"type":"string","name":"name","desc":"Name to greet"}],"returns":{"type":"string","desc":"Greeting string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Greet caller by name (temporary test method).","events":[],"recommendations":{}},{"name":"submit_claim","args":[{"type":"string","name":"claim_hash"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Legacy method: Submit a claim (will be phased out).\nUse submit_claim_hash instead.","events":[],"recommendations":{}},{"name":"verify_claim","args":[{"type":"string","name":"claim_hash"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Legacy method: Verify a claim (will be phased out).\nUse get_last_claim_hash instead.","events":[],"recommendations":{}},{"name":"submit_claim_hash","args":[{"type":"string","name":"claim_hash","desc":"SHA256 hash of the complete claim text (typically 64-char hex string)"}],"returns":{"type":"uint64","desc":"Unique claim ID (proof of ingestion)"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Submit a claim fingerprint (SHA256 hash).\nFull claim text must be included in the transaction note field so that Indexer and Conduit can capture it alongside this hash.","events":[],"recommendations":{}},{"name":"get_last_claim_hash","args":[],"returns":{"type":"string","desc":"The last claim hash submitted, or empty string if none"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Retrieve the most recently submitted claim hash.","events":[],"recommendations":{}},{"name":"get_claim_count","args":[],"returns":{"type":"uint64","desc":"Total claim count"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Retrieve the total number of claims submitted so far.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    PharmaClear - A pharmaceutical supply chain contract.\n    \n    Layer 0: Claim Ingestion\n    Tracks incoming pharmaceutical claims with fingerprints (SHA256 hashes).\n    \n    This layer provides the core ABI interface for:\n    - Submitting claim hashes (SHA256 of full claim text)\n    - Retrieving claim metadata\n    \n    Full claim text is stored in transaction notes for Indexer/Conduit to capture.\n    \n    Methods:\n    - hello: Legacy test method (for backward compatibility)\n    - submit_claim & verify_claim: Legacy methods (transitioning to Layer 0)\n    - submit_claim_hash: Core Layer 0 method to submit claim fingerprint\n    - get_last_claim_hash: Core Layer 0 method (read-only)\n    - get_claim_count: Core Layer 0 method (read-only)\n    ","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[116,157,218,268],"errorMessage":"invalid array length header"},{"pc":[123,164,225,274],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"PharmaClear","structs":{},"methods":[{"name":"hello","args":[{"type":"string","name":"name","desc":"Name to greet"}],"returns":{"type":"string","desc":"Greeting string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Greet caller by name (temporary test method).","events":[],"recommendations":{}},{"name":"submit_claim","args":[{"type":"string","name":"claim_hash"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Legacy method: Submit a claim (will be phased out).\nUse submit_claim_hash instead.","events":[],"recommendations":{}},{"name":"verify_claim","args":[{"type":"string","name":"claim_hash"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Legacy method: Verify a claim (will be phased out).\nUse get_last_claim_hash instead.","events":[],"recommendations":{}},{"name":"submit_claim_hash","args":[{"type":"string","name":"claim_hash","desc":"SHA256 hash of the complete claim text (typically 64-char hex string)"}],"returns":{"type":"uint64","desc":"Unique claim ID (proof of ingestion)"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Submit a claim fingerprint (SHA256 hash).\nFull claim text must be included in the transaction note field so that Indexer and Conduit can capture it alongside this hash.","events":[],"recommendations":{}},{"name":"get_last_claim_hash","args":[],"returns":{"type":"string","desc":"The last claim hash submitted, or empty string if none"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Retrieve the most recently submitted claim hash.","events":[],"recommendations":{}},{"name":"get_claim_count","args":[],"returns":{"type":"uint64","desc":"Total claim count"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Retrieve the total number of claims submitted so far.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    PharmaClear - A pharmaceutical supply chain contract.\n    \n    Layer 0: Claim Ingestion\n    Tracks incoming pharmaceutical claims with fingerprints (SHA256 hashes).\n    \n    This layer provides the core ABI interface for:\n    - Submitting claim hashes (SHA256 of full claim text)\n    - Retrieving claim metadata\n    \n    Full claim text is stored in transaction notes for Indexer/Conduit to capture.\n    \n    Methods:\n    - hello: Legacy test method (for backward compatibility)\n    - submit_claim & verify_claim: Legacy methods (transitioning to Layer 0)\n    - submit_claim_hash: Core Layer 0 method to submit claim fingerprint\n    - get_last_claim_hash: Core Layer 0 method (read-only)\n    - get_claim_count: Core Layer 0 method (read-only)\n    ","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[116,157,218,268],"errorMessage":"invalid array length header"},{"pc":[123,164,225,274],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAgMgogICAgYnl0ZWNibG9jayAweDE1MWY3Yzc1CiAgICAvLyBzbWFydF9jb250cmFjdHMvcGhhcm1hX2NsZWFyL2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIFBoYXJtYUNsZWFyKEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxMwogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4MDJiZWNlMTEgMHg5MDcyZWNjOSAweDJhZDNhOGZmIDB4YzQ5NTY3ZDggMHg5ZTQxZjMzNyAweDUwMzJlMjhkIC8vIG1ldGhvZCAiaGVsbG8oc3RyaW5nKXN0cmluZyIsIG1ldGhvZCAic3VibWl0X2NsYWltKHN0cmluZylzdHJpbmciLCBtZXRob2QgInZlcmlmeV9jbGFpbShzdHJpbmcpc3RyaW5nIiwgbWV0aG9kICJzdWJtaXRfY2xhaW1faGFzaChzdHJpbmcpdWludDY0IiwgbWV0aG9kICJnZXRfbGFzdF9jbGFpbV9oYXNoKClzdHJpbmciLCBtZXRob2QgImdldF9jbGFpbV9jb3VudCgpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggaGVsbG8gc3VibWl0X2NsYWltIHZlcmlmeV9jbGFpbSBzdWJtaXRfY2xhaW1faGFzaCBtYWluX2dldF9sYXN0X2NsYWltX2hhc2hfcm91dGVAOCBtYWluX2dldF9jbGFpbV9jb3VudF9yb3V0ZUA5CiAgICBlcnIKCm1haW5fZ2V0X2NsYWltX2NvdW50X3JvdXRlQDk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcGhhcm1hX2NsZWFyL2NvbnRyYWN0LnB5OjkwCiAgICAvLyBAYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9nZXRfbGFzdF9jbGFpbV9oYXNoX3JvdXRlQDg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcGhhcm1hX2NsZWFyL2NvbnRyYWN0LnB5Ojc4CiAgICAvLyBAYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxMzoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnBoYXJtYV9jbGVhci5jb250cmFjdC5QaGFybWFDbGVhci5oZWxsb1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmhlbGxvOgogICAgLy8gc21hcnRfY29udHJhY3RzL3BoYXJtYV9jbGVhci9jb250cmFjdC5weToyNgogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL3BoYXJtYV9jbGVhci9jb250cmFjdC5weTozNwogICAgLy8gcmV0dXJuICJIZWxsbywgIiArIG5hbWUKICAgIHB1c2hieXRlcyAiSGVsbG8sICIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL3BoYXJtYV9jbGVhci9jb250cmFjdC5weToyNgogICAgLy8gQGFiaW1ldGhvZCgpCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5waGFybWFfY2xlYXIuY29udHJhY3QuUGhhcm1hQ2xlYXIuc3VibWl0X2NsYWltW3JvdXRpbmddKCkgLT4gdm9pZDoKc3VibWl0X2NsYWltOgogICAgLy8gc21hcnRfY29udHJhY3RzL3BoYXJtYV9jbGVhci9jb250cmFjdC5weTozOQogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL3BoYXJtYV9jbGVhci9jb250cmFjdC5weTo0NQogICAgLy8gcmV0dXJuICJDbGFpbSBzdWJtaXR0ZWQgd2l0aCBoYXNoOiAiICsgY2xhaW1faGFzaAogICAgcHVzaGJ5dGVzICJDbGFpbSBzdWJtaXR0ZWQgd2l0aCBoYXNoOiAiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9waGFybWFfY2xlYXIvY29udHJhY3QucHk6MzkKICAgIC8vIEBhYmltZXRob2QoKQogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucGhhcm1hX2NsZWFyLmNvbnRyYWN0LlBoYXJtYUNsZWFyLnZlcmlmeV9jbGFpbVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnZlcmlmeV9jbGFpbToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9waGFybWFfY2xlYXIvY29udHJhY3QucHk6NDcKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9waGFybWFfY2xlYXIvY29udHJhY3QucHk6NTMKICAgIC8vIHJldHVybiAiQ2xhaW0gdmVyaWZpZWQ6ICIgKyBjbGFpbV9oYXNoCiAgICBwdXNoYnl0ZXMgIkNsYWltIHZlcmlmaWVkOiAiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9waGFybWFfY2xlYXIvY29udHJhY3QucHk6NDcKICAgIC8vIEBhYmltZXRob2QoKQogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucGhhcm1hX2NsZWFyLmNvbnRyYWN0LlBoYXJtYUNsZWFyLnN1Ym1pdF9jbGFpbV9oYXNoW3JvdXRpbmddKCkgLT4gdm9pZDoKc3VibWl0X2NsYWltX2hhc2g6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcGhhcm1hX2NsZWFyL2NvbnRyYWN0LnB5OjU1CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18xIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBzd2FwCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAxCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAQACJgEEFR98dTEbQQBVMRkURDEYRIIGBAK+zhEEkHLsyQQq06j/BMSVZ9gEnkHzNwRQMuKNNhoAjgYAJQBOAIsAvQASAAEAgAwVH3x1AAAAAAAAAACwIkOABhUffHUAALAiQzEZFDEYFBBDNhoBSSNZJAhLARUSRFcCAIAHSGVsbG8sIExQSRUWVwYCTFAoTFCwIkM2GgFJI1kkCEsBFRJEVwIAgBtDbGFpbSBzdWJtaXR0ZWQgd2l0aCBoYXNoOiBMUEkVFlcGAkxQKExQsCJDNhoBSSNZJAhLARUSRFcCAIAQQ2xhaW0gdmVyaWZpZWQ6IExQSRUWVwYCTFAoTFCwIkM2GgFJI1kkCEwVEkSADBUffHUAAAAAAAAAAbAiQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -196,6 +196,21 @@ export type MethodArgs<TSignature extends PharmaClearSignatures> = PharmaClearTy
 export type MethodReturn<TSignature extends PharmaClearSignatures> = PharmaClearTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type PharmaClearCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type PharmaClearDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: PharmaClearCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the PharmaClear smart contract
@@ -299,6 +314,147 @@ export abstract class PharmaClearParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the PharmaClear smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class PharmaClearFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `PharmaClearFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new PharmaClearClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new PharmaClearClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the PharmaClear smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: PharmaClearDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new PharmaClearClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the PharmaClear smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the PharmaClear smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the PharmaClear smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new PharmaClearClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the PharmaClear smart contract
  */
