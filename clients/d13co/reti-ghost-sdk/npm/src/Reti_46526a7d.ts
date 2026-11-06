@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Reti","structs":{"Constraints":[{"name":"epochPayoutRoundsMin","type":"uint64"},{"name":"epochPayoutRoundsMax","type":"uint64"},{"name":"minPctToValidatorWFourDecimals","type":"uint64"},{"name":"maxPctToValidatorWFourDecimals","type":"uint64"},{"name":"minEntryStake","type":"uint64"},{"name":"maxAlgoPerPool","type":"uint64"},{"name":"maxAlgoPerValidator","type":"uint64"},{"name":"amtConsideredSaturated","type":"uint64"},{"name":"maxNodes","type":"uint64"},{"name":"maxPoolsPerNode","type":"uint64"},{"name":"maxStakersPerPool","type":"uint64"}],"MbrAmounts":[{"name":"addValidatorMbr","type":"uint64"},{"name":"addPoolMbr","type":"uint64"},{"name":"poolInitMbr","type":"uint64"},{"name":"addStakerMbr","type":"uint64"}],"NodePoolAssignmentConfig":[{"name":"nodes","type":"(uint64[3])[8]"}],"ValidatorConfig":[{"name":"id","type":"uint64"},{"name":"owner","type":"address"},{"name":"manager","type":"address"},{"name":"nfdForInfo","type":"uint64"},{"name":"entryGatingType","type":"uint8"},{"name":"entryGatingAddress","type":"address"},{"name":"entryGatingAssets","type":"uint64[4]"},{"name":"gatingAssetMinBalance","type":"uint64"},{"name":"rewardTokenId","type":"uint64"},{"name":"rewardPerPayout","type":"uint64"},{"name":"epochRoundLength","type":"uint32"},{"name":"percentToValidator","type":"uint32"},{"name":"validatorCommissionAddress","type":"address"},{"name":"minEntryStake","type":"uint64"},{"name":"maxAlgoPerPool","type":"uint64"},{"name":"poolsPerNode","type":"uint8"},{"name":"sunsettingOn","type":"uint64"},{"name":"sunsettingTo","type":"uint64"}],"ValidatorCurState":[{"name":"numPools","type":"uint16"},{"name":"totalStakers","type":"uint64"},{"name":"totalAlgoStaked","type":"uint64"},{"name":"rewardTokenHeldBack","type":"uint64"}]},"methods":[{"name":"getValidatorConfig","args":[{"type":"uint64","name":"validatorId"}],"returns":{"type":"(uint64,address,address,uint64,uint8,address,uint64[4],uint64,uint64,uint64,uint32,uint32,address,uint64,uint64,uint8,uint64,uint64)","struct":"ValidatorConfig"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getValidatorState","args":[{"type":"uint64","name":"validatorId"}],"returns":{"type":"(uint16,uint64,uint64,uint64)","struct":"ValidatorCurState"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getPools","args":[{"type":"uint64","name":"validatorId"}],"returns":{"type":"(uint64,uint16,uint64)[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getNodePoolAssignments","args":[{"type":"uint64","name":"validatorId"}],"returns":{"type":"((uint64[3])[8])","struct":"NodePoolAssignmentConfig"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getMbrAmounts","args":[],"returns":{"type":"(uint64,uint64,uint64,uint64)","struct":"MbrAmounts"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getProtocolConstraints","args":[],"returns":{"type":"(uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64)","struct":"Constraints"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[12],"errorMessage":"OnCompletion must be NoOp"},{"pc":[75],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[85,93,101,109],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[66,67,86,94,102,110],"errorMessage":"stub"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Reti","structs":{"Constraints":[{"name":"epochPayoutRoundsMin","type":"uint64"},{"name":"epochPayoutRoundsMax","type":"uint64"},{"name":"minPctToValidatorWFourDecimals","type":"uint64"},{"name":"maxPctToValidatorWFourDecimals","type":"uint64"},{"name":"minEntryStake","type":"uint64"},{"name":"maxAlgoPerPool","type":"uint64"},{"name":"maxAlgoPerValidator","type":"uint64"},{"name":"amtConsideredSaturated","type":"uint64"},{"name":"maxNodes","type":"uint64"},{"name":"maxPoolsPerNode","type":"uint64"},{"name":"maxStakersPerPool","type":"uint64"}],"MbrAmounts":[{"name":"addValidatorMbr","type":"uint64"},{"name":"addPoolMbr","type":"uint64"},{"name":"poolInitMbr","type":"uint64"},{"name":"addStakerMbr","type":"uint64"}],"NodePoolAssignmentConfig":[{"name":"nodes","type":"(uint64[3])[8]"}],"ValidatorConfig":[{"name":"id","type":"uint64"},{"name":"owner","type":"address"},{"name":"manager","type":"address"},{"name":"nfdForInfo","type":"uint64"},{"name":"entryGatingType","type":"uint8"},{"name":"entryGatingAddress","type":"address"},{"name":"entryGatingAssets","type":"uint64[4]"},{"name":"gatingAssetMinBalance","type":"uint64"},{"name":"rewardTokenId","type":"uint64"},{"name":"rewardPerPayout","type":"uint64"},{"name":"epochRoundLength","type":"uint32"},{"name":"percentToValidator","type":"uint32"},{"name":"validatorCommissionAddress","type":"address"},{"name":"minEntryStake","type":"uint64"},{"name":"maxAlgoPerPool","type":"uint64"},{"name":"poolsPerNode","type":"uint8"},{"name":"sunsettingOn","type":"uint64"},{"name":"sunsettingTo","type":"uint64"}],"ValidatorCurState":[{"name":"numPools","type":"uint16"},{"name":"totalStakers","type":"uint64"},{"name":"totalAlgoStaked","type":"uint64"},{"name":"rewardTokenHeldBack","type":"uint64"}]},"methods":[{"name":"getValidatorConfig","args":[{"type":"uint64","name":"validatorId"}],"returns":{"type":"(uint64,address,address,uint64,uint8,address,uint64[4],uint64,uint64,uint64,uint32,uint32,address,uint64,uint64,uint8,uint64,uint64)","struct":"ValidatorConfig"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getValidatorState","args":[{"type":"uint64","name":"validatorId"}],"returns":{"type":"(uint16,uint64,uint64,uint64)","struct":"ValidatorCurState"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getPools","args":[{"type":"uint64","name":"validatorId"}],"returns":{"type":"(uint64,uint16,uint64)[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getNodePoolAssignments","args":[{"type":"uint64","name":"validatorId"}],"returns":{"type":"((uint64[3])[8])","struct":"NodePoolAssignmentConfig"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getMbrAmounts","args":[],"returns":{"type":"(uint64,uint64,uint64,uint64)","struct":"MbrAmounts"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getProtocolConstraints","args":[],"returns":{"type":"(uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64)","struct":"Constraints"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[12],"errorMessage":"OnCompletion must be NoOp"},{"pc":[75],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[85,93,101,109],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[66,67,86,94,102,110],"errorMessage":"stub"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgOAogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGkvY29udHJhY3QuYWxnby50czo5CiAgICAvLyBleHBvcnQgY2xhc3MgUmV0aSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUAxMwogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHg3NWFmZjYxZCAweDFmMmYwMTA5IDB4OTEwZTk0YWMgMHg3YmJiNmM4ZCAweDhhODcxNDJkIDB4ZDEzNjZjYzMgLy8gbWV0aG9kICJnZXRWYWxpZGF0b3JDb25maWcodWludDY0KSh1aW50NjQsYWRkcmVzcyxhZGRyZXNzLHVpbnQ2NCx1aW50OCxhZGRyZXNzLHVpbnQ2NFs0XSx1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50MzIsdWludDMyLGFkZHJlc3MsdWludDY0LHVpbnQ2NCx1aW50OCx1aW50NjQsdWludDY0KSIsIG1ldGhvZCAiZ2V0VmFsaWRhdG9yU3RhdGUodWludDY0KSh1aW50MTYsdWludDY0LHVpbnQ2NCx1aW50NjQpIiwgbWV0aG9kICJnZXRQb29scyh1aW50NjQpKHVpbnQ2NCx1aW50MTYsdWludDY0KVtdIiwgbWV0aG9kICJnZXROb2RlUG9vbEFzc2lnbm1lbnRzKHVpbnQ2NCkoKHVpbnQ2NFszXSlbOF0pIiwgbWV0aG9kICJnZXRNYnJBbW91bnRzKCkodWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0KSIsIG1ldGhvZCAiZ2V0UHJvdG9jb2xDb25zdHJhaW50cygpKHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQpIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggZ2V0VmFsaWRhdG9yQ29uZmlnIGdldFZhbGlkYXRvclN0YXRlIGdldFBvb2xzIGdldE5vZGVQb29sQXNzaWdubWVudHMgbWFpbl9nZXRNYnJBbW91bnRzX3JvdXRlQDggbWFpbl9nZXRQcm90b2NvbENvbnN0cmFpbnRzX3JvdXRlQDkKICAgIGVycgoKbWFpbl9nZXRQcm90b2NvbENvbnN0cmFpbnRzX3JvdXRlQDk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aS9jb250cmFjdC5hbGdvLnRzOjM3CiAgICAvLyBlcnIoInN0dWIiKTsKICAgIGVyciAvLyBzdHViCgptYWluX2dldE1ickFtb3VudHNfcm91dGVAODoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpL2NvbnRyYWN0LmFsZ28udHM6MzIKICAgIC8vIGVycigic3R1YiIpOwogICAgZXJyIC8vIHN0dWIKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDEzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGkvY29udHJhY3QuYWxnby50czo5CiAgICAvLyBleHBvcnQgY2xhc3MgUmV0aSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AgJiYgY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3JldGkvY29udHJhY3QuYWxnby50czo6UmV0aS5nZXRWYWxpZGF0b3JDb25maWdbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRWYWxpZGF0b3JDb25maWc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aS9jb250cmFjdC5hbGdvLnRzOjEwCiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGxlbgogICAgaW50Y18wIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmV0aS9jb250cmFjdC5hbGdvLnRzOjEyCiAgICAvLyBlcnIoInN0dWIiKTsKICAgIGVyciAvLyBzdHViCgoKLy8gc21hcnRfY29udHJhY3RzL3JldGkvY29udHJhY3QuYWxnby50czo6UmV0aS5nZXRWYWxpZGF0b3JTdGF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldFZhbGlkYXRvclN0YXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGkvY29udHJhY3QuYWxnby50czoxNQogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMCAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGkvY29udHJhY3QuYWxnby50czoxNwogICAgLy8gZXJyKCJzdHViIik7CiAgICBlcnIgLy8gc3R1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpL2NvbnRyYWN0LmFsZ28udHM6OlJldGkuZ2V0UG9vbHNbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRQb29sczoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpL2NvbnRyYWN0LmFsZ28udHM6MjAKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBpbnRjXzAgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZXRpL2NvbnRyYWN0LmFsZ28udHM6MjIKICAgIC8vIGVycigic3R1YiIpOwogICAgZXJyIC8vIHN0dWIKCgovLyBzbWFydF9jb250cmFjdHMvcmV0aS9jb250cmFjdC5hbGdvLnRzOjpSZXRpLmdldE5vZGVQb29sQXNzaWdubWVudHNbcm91dGluZ10oKSAtPiB2b2lkOgpnZXROb2RlUG9vbEFzc2lnbm1lbnRzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGkvY29udHJhY3QuYWxnby50czoyNQogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIGludGNfMCAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gc21hcnRfY29udHJhY3RzL3JldGkvY29udHJhY3QuYWxnby50czoyNwogICAgLy8gZXJyKCJzdHViIik7CiAgICBlcnIgLy8gc3R1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyABCDEbQQA7MRkURDEYRIIGBHWv9h0EHy8BCQSRDpSsBHu7bI0EiocULQTRNmzDNhoAjgYADgAWAB4AJgACAAEAAAAxGRQxGBQQRIEBQzYaARUiEkQANhoBFSISRAA2GgEVIhJEADYaARUiEkQA","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -273,6 +273,21 @@ export type MethodArgs<TSignature extends RetiSignatures> = RetiTypes['methods']
 export type MethodReturn<TSignature extends RetiSignatures> = RetiTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type RetiCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type RetiDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: RetiCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Reti smart contract
@@ -358,6 +373,147 @@ export abstract class RetiParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Reti smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class RetiFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `RetiFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new RetiClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new RetiClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Reti smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: RetiDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new RetiClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Reti smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Reti smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Reti smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new RetiClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Reti smart contract
  */
