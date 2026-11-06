@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"DisputeEscrow","structs":{},"methods":[{"name":"create","args":[{"type":"address","name":"recipient"},{"type":"address","name":"arbitrator"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Deploy the vault with a designated arbitrator.","events":[],"recommendations":{}},{"name":"release","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Release funds to recipient. Callable by creator or arbitrator.","events":[],"recommendations":{}},{"name":"kill","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Reclaim funds to creator. Callable by creator or arbitrator.","events":[],"recommendations":{}},{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Delete the application after it is no longer locked.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Dispute-Resolution Escrow Vault (ARC-4 compliant).\n\n    A neutral arbitrator is designated at creation. Either the original\n    creator OR the arbitrator can call release() or kill() to resolve a\n    dispute — giving the arbitrator power to decide the outcome.\n\n    GlobalState:\n        creator     — account that deployed and funded the vault\n        recipient   — account that receives funds on release\n        arbitrator  — neutral third party with release/kill powers\n        status      — 0 = locked, 1 = released, 2 = killed\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":3},"local":{"ints":0,"bytes":0}},"keys":{"global":{"creator":{"keyType":"AVMString","valueType":"address","key":"Y3JlYXRvcg==","desc":"Vault creator"},"recipient":{"keyType":"AVMString","valueType":"address","key":"cmVjaXBpZW50","desc":"Fund recipient"},"arbitrator":{"keyType":"AVMString","valueType":"address","key":"YXJiaXRyYXRvcg==","desc":"Dispute arbitrator"},"status":{"keyType":"AVMString","valueType":"AVMUint64","key":"c3RhdHVz","desc":"0=locked 1=released 2=killed"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[256],"errorMessage":"Only creator can delete"},{"pc":[214],"errorMessage":"Only creator or arbitrator can kill"},{"pc":[163],"errorMessage":"Only creator or arbitrator can release"},{"pc":[169,220],"errorMessage":"Vault is not locked"},{"pc":[261],"errorMessage":"Vault still locked"},{"pc":[158,209],"errorMessage":"check self.arbitrator exists"},{"pc":[151,203,251],"errorMessage":"check self.creator exists"},{"pc":[181],"errorMessage":"check self.recipient exists"},{"pc":[167,218,260],"errorMessage":"check self.status exists"},{"pc":[121,129],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"DisputeEscrow","structs":{},"methods":[{"name":"create","args":[{"type":"address","name":"recipient"},{"type":"address","name":"arbitrator"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Deploy the vault with a designated arbitrator.","events":[],"recommendations":{}},{"name":"release","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Release funds to recipient. Callable by creator or arbitrator.","events":[],"recommendations":{}},{"name":"kill","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Reclaim funds to creator. Callable by creator or arbitrator.","events":[],"recommendations":{}},{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Delete the application after it is no longer locked.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Dispute-Resolution Escrow Vault (ARC-4 compliant).\n\n    A neutral arbitrator is designated at creation. Either the original\n    creator OR the arbitrator can call release() or kill() to resolve a\n    dispute — giving the arbitrator power to decide the outcome.\n\n    GlobalState:\n        creator     — account that deployed and funded the vault\n        recipient   — account that receives funds on release\n        arbitrator  — neutral third party with release/kill powers\n        status      — 0 = locked, 1 = released, 2 = killed\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":3},"local":{"ints":0,"bytes":0}},"keys":{"global":{"creator":{"keyType":"AVMString","valueType":"address","key":"Y3JlYXRvcg==","desc":"Vault creator"},"recipient":{"keyType":"AVMString","valueType":"address","key":"cmVjaXBpZW50","desc":"Fund recipient"},"arbitrator":{"keyType":"AVMString","valueType":"address","key":"YXJiaXRyYXRvcg==","desc":"Dispute arbitrator"},"status":{"keyType":"AVMString","valueType":"AVMUint64","key":"c3RhdHVz","desc":"0=locked 1=released 2=killed"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[256],"errorMessage":"Only creator can delete"},{"pc":[214],"errorMessage":"Only creator or arbitrator can kill"},{"pc":[163],"errorMessage":"Only creator or arbitrator can release"},{"pc":[169,220],"errorMessage":"Vault is not locked"},{"pc":[261],"errorMessage":"Vault still locked"},{"pc":[158,209],"errorMessage":"check self.arbitrator exists"},{"pc":[151,203,251],"errorMessage":"check self.creator exists"},{"pc":[181],"errorMessage":"check self.recipient exists"},{"pc":[167,218,260],"errorMessage":"check self.status exists"},{"pc":[121,129],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMzIKICAgIGJ5dGVjYmxvY2sgInN0YXR1cyIgImNyZWF0b3IiICJhcmJpdHJhdG9yIiAicmVjaXBpZW50IgogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6MTMKICAgIC8vIGNsYXNzIERpc3B1dGVFc2Nyb3coQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweDI0Mzc4ZDNjIC8vIG1ldGhvZCAiZGVsZXRlKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9kZWxldGVfcm91dGVANAoKbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weToxMwogICAgLy8gY2xhc3MgRGlzcHV0ZUVzY3JvdyhBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEAxMAogICAgcHVzaGJ5dGVzcyAweDA3NmJiZDRkIDB4YjljMjExNTUgLy8gbWV0aG9kICJyZWxlYXNlKCl2b2lkIiwgbWV0aG9kICJraWxsKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggcmVsZWFzZSBraWxsCiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weToxMwogICAgLy8gY2xhc3MgRGlzcHV0ZUVzY3JvdyhBUkM0Q29udHJhY3QpOgogICAgcHVzaGJ5dGVzIDB4OGE5Njk4MGUgLy8gbWV0aG9kICJjcmVhdGUoYWRkcmVzcyxhZGRyZXNzKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGUKICAgIGVycgoKbWFpbl9kZWxldGVfcm91dGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5Ojg2CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIkRlbGV0ZUFwcGxpY2F0aW9uIl0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDUgLy8gRGVsZXRlQXBwbGljYXRpb24KICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgYiBkZWxldGUKCgovLyBzbWFydF9jb250cmFjdHMuZGlzcHV0ZS5jb250cmFjdC5EaXNwdXRlRXNjcm93LmNyZWF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSwgY3JlYXRlPSJyZXF1aXJlIikKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weTozNwogICAgLy8gc2VsZi5jcmVhdG9yLnZhbHVlID0gYXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpCiAgICBieXRlY18xIC8vICJjcmVhdG9yIgogICAgdHhuIFNlbmRlcgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5OjM4CiAgICAvLyBzZWxmLnJlY2lwaWVudC52YWx1ZSA9IHJlY2lwaWVudAogICAgYnl0ZWNfMyAvLyAicmVjaXBpZW50IgogICAgdW5jb3ZlciAyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6MzkKICAgIC8vIHNlbGYuYXJiaXRyYXRvci52YWx1ZSA9IGFyYml0cmF0b3IKICAgIGJ5dGVjXzIgLy8gImFyYml0cmF0b3IiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NDAKICAgIC8vIHNlbGYuc3RhdHVzLnZhbHVlID0gVUludDY0KDApCiAgICBieXRlY18wIC8vICJzdGF0dXMiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSwgY3JlYXRlPSJyZXF1aXJlIikKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuZGlzcHV0ZS5jb250cmFjdC5EaXNwdXRlRXNjcm93LnJlbGVhc2Vbcm91dGluZ10oKSAtPiB2b2lkOgpyZWxlYXNlOgogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NDUKICAgIC8vIHNlbmRlcl9hZGRyID0gYXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpCiAgICB0eG4gU2VuZGVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weTo0NgogICAgLy8gaXNfY3JlYXRvciA9IHNlbmRlcl9hZGRyID09IHNlbGYuY3JlYXRvci52YWx1ZQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gImNyZWF0b3IiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuY3JlYXRvciBleGlzdHMKICAgIGRpZyAxCiAgICA9PQogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NDcKICAgIC8vIGlzX2FyYml0cmF0b3IgPSBzZW5kZXJfYWRkciA9PSBzZWxmLmFyYml0cmF0b3IudmFsdWUKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18yIC8vICJhcmJpdHJhdG9yIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmFyYml0cmF0b3IgZXhpc3RzCiAgICB1bmNvdmVyIDIKICAgID09CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weTo0OAogICAgLy8gYXNzZXJ0IGlzX2NyZWF0b3Igb3IgaXNfYXJiaXRyYXRvciwgIk9ubHkgY3JlYXRvciBvciBhcmJpdHJhdG9yIGNhbiByZWxlYXNlIgogICAgfHwKICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3Igb3IgYXJiaXRyYXRvciBjYW4gcmVsZWFzZQogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NDkKICAgIC8vIGFzc2VydCBzZWxmLnN0YXR1cy52YWx1ZSA9PSBVSW50NjQoMCksICJWYXVsdCBpcyBub3QgbG9ja2VkIgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInN0YXR1cyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5zdGF0dXMgZXhpc3RzCiAgICAhCiAgICBhc3NlcnQgLy8gVmF1bHQgaXMgbm90IGxvY2tlZAogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NTEKICAgIC8vIGFwcF9hZGRyID0gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcwogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5OjUyCiAgICAvLyBiYWxhbmNlID0gb3AuYmFsYW5jZShhcHBfYWRkcikKICAgIGR1cAogICAgYmFsYW5jZQogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NTMKICAgIC8vIG1pbl9iYWxhbmNlID0gb3AubWluX2JhbGFuY2UoYXBwX2FkZHIpCiAgICBzd2FwCiAgICBtaW5fYmFsYW5jZQogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NTQKICAgIC8vIHBheW91dCA9IGJhbGFuY2UgLSBtaW5fYmFsYW5jZQogICAgLQogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NTYtNjAKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1zZWxmLnJlY2lwaWVudC52YWx1ZS5uYXRpdmUsCiAgICAvLyAgICAgYW1vdW50PXBheW91dCwKICAgIC8vICAgICBmZWU9MCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5OjU3CiAgICAvLyByZWNlaXZlcj1zZWxmLnJlY2lwaWVudC52YWx1ZS5uYXRpdmUsCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMyAvLyAicmVjaXBpZW50IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnJlY2lwaWVudCBleGlzdHMKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIGl0eG5fZmllbGQgQW1vdW50CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weTo1NgogICAgLy8gaXR4bi5QYXltZW50KAogICAgaW50Y18xIC8vIHBheQogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NTkKICAgIC8vIGZlZT0wLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weTo1Ni02MAogICAgLy8gaXR4bi5QYXltZW50KAogICAgLy8gICAgIHJlY2VpdmVyPXNlbGYucmVjaXBpZW50LnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBhbW91bnQ9cGF5b3V0LAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5OjYyCiAgICAvLyBzZWxmLnN0YXR1cy52YWx1ZSA9IFVJbnQ2NCgxKQogICAgYnl0ZWNfMCAvLyAic3RhdHVzIgogICAgaW50Y18xIC8vIDEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weTo0MgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0pCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmRpc3B1dGUuY29udHJhY3QuRGlzcHV0ZUVzY3Jvdy5raWxsW3JvdXRpbmddKCkgLT4gdm9pZDoKa2lsbDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5OjY3CiAgICAvLyBzZW5kZXJfYWRkciA9IGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKQogICAgdHhuIFNlbmRlcgogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NjgKICAgIC8vIGlzX2NyZWF0b3IgPSBzZW5kZXJfYWRkciA9PSBzZWxmLmNyZWF0b3IudmFsdWUKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJjcmVhdG9yIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmNyZWF0b3IgZXhpc3RzCiAgICBkdXAyCiAgICA9PQogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NjkKICAgIC8vIGlzX2FyYml0cmF0b3IgPSBzZW5kZXJfYWRkciA9PSBzZWxmLmFyYml0cmF0b3IudmFsdWUKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18yIC8vICJhcmJpdHJhdG9yIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmFyYml0cmF0b3IgZXhpc3RzCiAgICB1bmNvdmVyIDMKICAgID09CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weTo3MAogICAgLy8gYXNzZXJ0IGlzX2NyZWF0b3Igb3IgaXNfYXJiaXRyYXRvciwgIk9ubHkgY3JlYXRvciBvciBhcmJpdHJhdG9yIGNhbiBraWxsIgogICAgfHwKICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3Igb3IgYXJiaXRyYXRvciBjYW4ga2lsbAogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NzEKICAgIC8vIGFzc2VydCBzZWxmLnN0YXR1cy52YWx1ZSA9PSBVSW50NjQoMCksICJWYXVsdCBpcyBub3QgbG9ja2VkIgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInN0YXR1cyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5zdGF0dXMgZXhpc3RzCiAgICAhCiAgICBhc3NlcnQgLy8gVmF1bHQgaXMgbm90IGxvY2tlZAogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NzMKICAgIC8vIGFwcF9hZGRyID0gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcwogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5Ojc0CiAgICAvLyBiYWxhbmNlID0gb3AuYmFsYW5jZShhcHBfYWRkcikKICAgIGR1cAogICAgYmFsYW5jZQogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NzUKICAgIC8vIG1pbl9iYWxhbmNlID0gb3AubWluX2JhbGFuY2UoYXBwX2FkZHIpCiAgICBzd2FwCiAgICBtaW5fYmFsYW5jZQogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NzYKICAgIC8vIHBheW91dCA9IGJhbGFuY2UgLSBtaW5fYmFsYW5jZQogICAgLQogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NzgtODIKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1zZWxmLmNyZWF0b3IudmFsdWUubmF0aXZlLAogICAgLy8gICAgIGFtb3VudD1wYXlvdXQsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NzgKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIGludGNfMSAvLyBwYXkKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5OjgxCiAgICAvLyBmZWU9MCwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6NzgtODIKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1zZWxmLmNyZWF0b3IudmFsdWUubmF0aXZlLAogICAgLy8gICAgIGFtb3VudD1wYXlvdXQsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6ODQKICAgIC8vIHNlbGYuc3RhdHVzLnZhbHVlID0gVUludDY0KDIpCiAgICBieXRlY18wIC8vICJzdGF0dXMiCiAgICBwdXNoaW50IDIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weTo2NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0pCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmRpc3B1dGUuY29udHJhY3QuRGlzcHV0ZUVzY3Jvdy5kZWxldGVbcm91dGluZ10oKSAtPiB2b2lkOgpkZWxldGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weTo4OQogICAgLy8gYXNzZXJ0IGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmNyZWF0b3IudmFsdWUsICJPbmx5IGNyZWF0b3IgY2FuIGRlbGV0ZSIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJjcmVhdG9yIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmNyZWF0b3IgZXhpc3RzCiAgICBzd2FwCiAgICBkaWcgMQogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3IgY2FuIGRlbGV0ZQogICAgLy8gc21hcnRfY29udHJhY3RzL2Rpc3B1dGUvY29udHJhY3QucHk6OTAKICAgIC8vIGFzc2VydCBzZWxmLnN0YXR1cy52YWx1ZSAhPSBVSW50NjQoMCksICJWYXVsdCBzdGlsbCBsb2NrZWQiCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAic3RhdHVzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnN0YXR1cyBleGlzdHMKICAgIGFzc2VydCAvLyBWYXVsdCBzdGlsbCBsb2NrZWQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5OjkyLTk3CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBhbW91bnQ9MCwKICAgIC8vICAgICBjbG9zZV9yZW1haW5kZXJfdG89c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBmZWU9MCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIGR1cAogICAgaXR4bl9maWVsZCBDbG9zZVJlbWFpbmRlclRvCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weTo5NAogICAgLy8gYW1vdW50PTAsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5OjkyCiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICBpbnRjXzEgLy8gcGF5CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weTo5NgogICAgLy8gZmVlPTAsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kaXNwdXRlL2NvbnRyYWN0LnB5OjkyLTk3CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBhbW91bnQ9MCwKICAgIC8vICAgICBjbG9zZV9yZW1haW5kZXJfdG89c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBmZWU9MCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZGlzcHV0ZS9jb250cmFjdC5weTo4NgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJEZWxldGVBcHBsaWNhdGlvbiJdKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAAEgJgQGc3RhdHVzB2NyZWF0b3IKYXJiaXRyYXRvcglyZWNpcGllbnSABCQ3jTw2GgCOAQAtMRkURDEYQQAWggIEB2u9TQS5whFVNhoAjgIAOwBvAIAEipaYDjYaAI4BAA0AMRmBBRIxGBBEQgCENhoBSRUkEkQ2GgJJFSQSRCkxAGcrTwJnKkxnKCJnI0MxACIpZURLARIiKmVETwISEUQiKGVEFEQyCklgTHgJsSIrZUSyB7III7IQIrIBsygjZyNDMQAiKWVEShIiKmVETwMSEUQiKGVEFEQyCklgTHgJsbIIsgcjshAisgGzKIECZyNDMQAiKWVETEsBEkQiKGVERLFJsgkisgiyByOyECKyAbMjQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -184,11 +184,97 @@ export type MethodReturn<TSignature extends DisputeEscrowSignatures> = DisputeEs
 export type GlobalKeysState = DisputeEscrowTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type DisputeEscrowCreateCallParams =
+  | Expand<CallParams<DisputeEscrowArgs['obj']['create(address,address)void'] | DisputeEscrowArgs['tuple']['create(address,address)void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<DisputeEscrowArgs['obj']['create(address,address)void'] | DisputeEscrowArgs['tuple']['create(address,address)void']> & {method: 'create(address,address)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type DisputeEscrowDeleteCallParams =
+  | Expand<CallParams<DisputeEscrowArgs['obj']['delete()void'] | DisputeEscrowArgs['tuple']['delete()void']> & {method: 'delete'}>
+  | Expand<CallParams<DisputeEscrowArgs['obj']['delete()void'] | DisputeEscrowArgs['tuple']['delete()void']> & {method: 'delete()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type DisputeEscrowDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: DisputeEscrowCreateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: DisputeEscrowDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the DisputeEscrow smart contract
  */
 export abstract class DisputeEscrowParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends DisputeEscrowCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(address,address)void':
+            return DisputeEscrowParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the DisputeEscrow smart contract using the create(address,address)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<DisputeEscrowArgs['obj']['create(address,address)void'] | DisputeEscrowArgs['tuple']['create(address,address)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(address,address)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.recipient, params.args.arbitrator],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends DisputeEscrowDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'delete':
+          case 'delete()void':
+            return DisputeEscrowParamsFactory.delete.delete(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the DisputeEscrow smart contract using the delete()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      delete(params: CallParams<DisputeEscrowArgs['obj']['delete()void'] | DisputeEscrowArgs['tuple']['delete()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'delete()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the release()void ABI method
    *
@@ -221,6 +307,172 @@ export abstract class DisputeEscrowParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the DisputeEscrow smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class DisputeEscrowFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `DisputeEscrowFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new DisputeEscrowClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new DisputeEscrowClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the DisputeEscrow smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: DisputeEscrowDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? DisputeEscrowParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (DisputeEscrowCreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? DisputeEscrowParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (DisputeEscrowDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new DisputeEscrowClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DisputeEscrow smart contract using the create(address,address)void ABI method.
+       *
+       * Deploy the vault with a designated arbitrator.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<DisputeEscrowArgs['obj']['create(address,address)void'] | DisputeEscrowArgs['tuple']['create(address,address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(DisputeEscrowParamsFactory.create.create(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the DisputeEscrow smart contract using the delete()void ABI method.
+       *
+       * Delete the application after it is no longer locked.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      delete: (params: CallParams<DisputeEscrowArgs['obj']['delete()void'] | DisputeEscrowArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(DisputeEscrowParamsFactory.delete.delete(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DisputeEscrow smart contract using the create(address,address)void ABI method.
+       *
+       * Deploy the vault with a designated arbitrator.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<DisputeEscrowArgs['obj']['create(address,address)void'] | DisputeEscrowArgs['tuple']['create(address,address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(DisputeEscrowParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DisputeEscrow smart contract using an ABI method call using the create(address,address)void ABI method.
+       *
+       * Deploy the vault with a designated arbitrator.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<DisputeEscrowArgs['obj']['create(address,address)void'] | DisputeEscrowArgs['tuple']['create(address,address)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(DisputeEscrowParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | DisputeEscrowReturns['create(address,address)void']) }, appClient: new DisputeEscrowClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the DisputeEscrow smart contract
  */
@@ -301,6 +553,24 @@ export class DisputeEscrowClient {
    */
   readonly params = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the DisputeEscrow smart contract using the `delete()void` ABI method.
+       *
+       * Delete the application after it is no longer locked.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      delete: (params: CallParams<DisputeEscrowArgs['obj']['delete()void'] | DisputeEscrowArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.params.delete(DisputeEscrowParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the DisputeEscrow smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -341,6 +611,24 @@ export class DisputeEscrowClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the DisputeEscrow smart contract using the `delete()void` ABI method.
+       *
+       * Delete the application after it is no longer locked.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      delete: (params: CallParams<DisputeEscrowArgs['obj']['delete()void'] | DisputeEscrowArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(DisputeEscrowParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the DisputeEscrow smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -380,6 +668,25 @@ export class DisputeEscrowClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the DisputeEscrow smart contract using the `delete()void` ABI method.
+       *
+       * Delete the application after it is no longer locked.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      delete: async (params: CallParams<DisputeEscrowArgs['obj']['delete()void'] | DisputeEscrowArgs['tuple']['delete()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(DisputeEscrowParamsFactory.delete.delete(params))
+        return {...result, return: result.return as unknown as (undefined | DisputeEscrowReturns['delete()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the DisputeEscrow smart contract.
      *
@@ -489,6 +796,15 @@ export class DisputeEscrowClient {
         resultMappers.push(undefined)
         return this
       },
+      get delete() {
+        return {
+          delete: (params: CallParams<DisputeEscrowArgs['obj']['delete()void'] | DisputeEscrowArgs['tuple']['delete()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.delete(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the DisputeEscrow contract
        */
@@ -545,6 +861,20 @@ export type DisputeEscrowComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   kill(params?: CallParams<DisputeEscrowArgs['obj']['kill()void'] | DisputeEscrowArgs['tuple']['kill()void']>): DisputeEscrowComposer<[...TReturns, DisputeEscrowReturns['kill()void'] | undefined]>
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the DisputeEscrow smart contract using the delete()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    delete(params?: CallParams<DisputeEscrowArgs['obj']['delete()void'] | DisputeEscrowArgs['tuple']['delete()void']>): DisputeEscrowComposer<[...TReturns, DisputeEscrowReturns['delete()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the DisputeEscrow smart contract.

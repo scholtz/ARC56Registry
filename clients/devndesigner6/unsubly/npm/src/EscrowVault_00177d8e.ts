@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"EscrowVault","structs":{},"methods":[{"name":"create","args":[{"type":"address","name":"recipient"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Deploy the vault and set creator + recipient.","events":[],"recommendations":{}},{"name":"release","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Release locked funds to recipient. Only callable by creator.","events":[],"recommendations":{}},{"name":"kill","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Reclaim funds back to creator. Only callable by creator.","events":[],"recommendations":{}},{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Delete the application. Only allowed after release or kill.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Standard Escrow Vault (ARC-4 compliant).\n\n    Creator locks funds for a recipient. Creator can release funds to the\n    recipient or kill the vault to reclaim them.\n\n    GlobalState:\n        creator      — account that deployed and funded the vault\n        recipient    — account that receives funds on release\n        status       — 0 = locked, 1 = released, 2 = killed\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"creator":{"keyType":"AVMString","valueType":"address","key":"Y3JlYXRvcg==","desc":"Vault creator address"},"recipient":{"keyType":"AVMString","valueType":"address","key":"cmVjaXBpZW50","desc":"Fund recipient address"},"status":{"keyType":"AVMString","valueType":"AVMUint64","key":"c3RhdHVz","desc":"0=locked 1=released 2=killed"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[217],"errorMessage":"Only creator can delete"},{"pc":[175],"errorMessage":"Only creator can kill"},{"pc":[130],"errorMessage":"Only creator can release"},{"pc":[136,181],"errorMessage":"Vault is not locked"},{"pc":[222],"errorMessage":"Vault still locked — release or kill first"},{"pc":[128,170,212],"errorMessage":"check self.creator exists"},{"pc":[148],"errorMessage":"check self.recipient exists"},{"pc":[134,179,221],"errorMessage":"check self.status exists"},{"pc":[110],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"EscrowVault","structs":{},"methods":[{"name":"create","args":[{"type":"address","name":"recipient"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Deploy the vault and set creator + recipient.","events":[],"recommendations":{}},{"name":"release","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Release locked funds to recipient. Only callable by creator.","events":[],"recommendations":{}},{"name":"kill","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Reclaim funds back to creator. Only callable by creator.","events":[],"recommendations":{}},{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Delete the application. Only allowed after release or kill.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Standard Escrow Vault (ARC-4 compliant).\n\n    Creator locks funds for a recipient. Creator can release funds to the\n    recipient or kill the vault to reclaim them.\n\n    GlobalState:\n        creator      — account that deployed and funded the vault\n        recipient    — account that receives funds on release\n        status       — 0 = locked, 1 = released, 2 = killed\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"creator":{"keyType":"AVMString","valueType":"address","key":"Y3JlYXRvcg==","desc":"Vault creator address"},"recipient":{"keyType":"AVMString","valueType":"address","key":"cmVjaXBpZW50","desc":"Fund recipient address"},"status":{"keyType":"AVMString","valueType":"AVMUint64","key":"c3RhdHVz","desc":"0=locked 1=released 2=killed"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[217],"errorMessage":"Only creator can delete"},{"pc":[175],"errorMessage":"Only creator can kill"},{"pc":[130],"errorMessage":"Only creator can release"},{"pc":[136,181],"errorMessage":"Vault is not locked"},{"pc":[222],"errorMessage":"Vault still locked — release or kill first"},{"pc":[128,170,212],"errorMessage":"check self.creator exists"},{"pc":[148],"errorMessage":"check self.recipient exists"},{"pc":[134,179,221],"errorMessage":"check self.status exists"},{"pc":[110],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEKICAgIGJ5dGVjYmxvY2sgInN0YXR1cyIgImNyZWF0b3IiICJyZWNpcGllbnQiCiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjEzCiAgICAvLyBjbGFzcyBFc2Nyb3dWYXVsdChBUkM0Q29udHJhY3QpOgogICAgcHVzaGJ5dGVzIDB4MjQzNzhkM2MgLy8gbWV0aG9kICJkZWxldGUoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2RlbGV0ZV9yb3V0ZUA0CgptYWluX3N3aXRjaF9jYXNlX25leHRANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6MTMKICAgIC8vIGNsYXNzIEVzY3Jvd1ZhdWx0KEFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDEwCiAgICBwdXNoYnl0ZXNzIDB4MDc2YmJkNGQgMHhiOWMyMTE1NSAvLyBtZXRob2QgInJlbGVhc2UoKXZvaWQiLCBtZXRob2QgImtpbGwoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCByZWxlYXNlIGtpbGwKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEAxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6MTMKICAgIC8vIGNsYXNzIEVzY3Jvd1ZhdWx0KEFSQzRDb250cmFjdCk6CiAgICBwdXNoYnl0ZXMgMHhjYzY5NGVhYSAvLyBtZXRob2QgImNyZWF0ZShhZGRyZXNzKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGUKICAgIGVycgoKbWFpbl9kZWxldGVfcm91dGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6NzYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiRGVsZXRlQXBwbGljYXRpb24iXSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIHB1c2hpbnQgNSAvLyBEZWxldGVBcHBsaWNhdGlvbgogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0CiAgICBiIGRlbGV0ZQoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5lc2Nyb3cuY29udHJhY3QuRXNjcm93VmF1bHQuY3JlYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTozMQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0sIGNyZWF0ZT0icmVxdWlyZSIpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjM0CiAgICAvLyBzZWxmLmNyZWF0b3IudmFsdWUgPSBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlcikKICAgIGJ5dGVjXzEgLy8gImNyZWF0b3IiCiAgICB0eG4gU2VuZGVyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTozNQogICAgLy8gc2VsZi5yZWNpcGllbnQudmFsdWUgPSByZWNpcGllbnQKICAgIGJ5dGVjXzIgLy8gInJlY2lwaWVudCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjM2CiAgICAvLyBzZWxmLnN0YXR1cy52YWx1ZSA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMCAvLyAic3RhdHVzIgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjMxCiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSwgY3JlYXRlPSJyZXF1aXJlIikKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuZXNjcm93LmNvbnRyYWN0LkVzY3Jvd1ZhdWx0LnJlbGVhc2Vbcm91dGluZ10oKSAtPiB2b2lkOgpyZWxlYXNlOgogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo0MQogICAgLy8gYXNzZXJ0IGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmNyZWF0b3IudmFsdWUsICJPbmx5IGNyZWF0b3IgY2FuIHJlbGVhc2UiCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAiY3JlYXRvciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jcmVhdG9yIGV4aXN0cwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3IgY2FuIHJlbGVhc2UKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6NDIKICAgIC8vIGFzc2VydCBzZWxmLnN0YXR1cy52YWx1ZSA9PSBVSW50NjQoMCksICJWYXVsdCBpcyBub3QgbG9ja2VkIgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInN0YXR1cyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5zdGF0dXMgZXhpc3RzCiAgICAhCiAgICBhc3NlcnQgLy8gVmF1bHQgaXMgbm90IGxvY2tlZAogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo0NAogICAgLy8gYXBwX2FkZHIgPSBHbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo0NQogICAgLy8gYmFsYW5jZSA9IG9wLmJhbGFuY2UoYXBwX2FkZHIpCiAgICBkdXAKICAgIGJhbGFuY2UKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6NDYKICAgIC8vIG1pbl9iYWxhbmNlID0gb3AubWluX2JhbGFuY2UoYXBwX2FkZHIpCiAgICBzd2FwCiAgICBtaW5fYmFsYW5jZQogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo0NwogICAgLy8gcGF5b3V0ID0gYmFsYW5jZSAtIG1pbl9iYWxhbmNlCiAgICAtCiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjQ5LTUzCiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5yZWNpcGllbnQudmFsdWUubmF0aXZlLAogICAgLy8gICAgIGFtb3VudD1wYXlvdXQsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjUwCiAgICAvLyByZWNlaXZlcj1zZWxmLnJlY2lwaWVudC52YWx1ZS5uYXRpdmUsCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMiAvLyAicmVjaXBpZW50IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnJlY2lwaWVudCBleGlzdHMKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIGl0eG5fZmllbGQgQW1vdW50CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjQ5CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICBpbnRjXzEgLy8gcGF5CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjUyCiAgICAvLyBmZWU9MCwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo0OS01MwogICAgLy8gaXR4bi5QYXltZW50KAogICAgLy8gICAgIHJlY2VpdmVyPXNlbGYucmVjaXBpZW50LnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBhbW91bnQ9cGF5b3V0LAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6NTUKICAgIC8vIHNlbGYuc3RhdHVzLnZhbHVlID0gVUludDY0KDEpCiAgICBieXRlY18wIC8vICJzdGF0dXMiCiAgICBpbnRjXzEgLy8gMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6MzgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiTm9PcCJdKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5lc2Nyb3cuY29udHJhY3QuRXNjcm93VmF1bHQua2lsbFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmtpbGw6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjYwCiAgICAvLyBhc3NlcnQgYXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpID09IHNlbGYuY3JlYXRvci52YWx1ZSwgIk9ubHkgY3JlYXRvciBjYW4ga2lsbCIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJjcmVhdG9yIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmNyZWF0b3IgZXhpc3RzCiAgICBzd2FwCiAgICBkaWcgMQogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3IgY2FuIGtpbGwKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6NjEKICAgIC8vIGFzc2VydCBzZWxmLnN0YXR1cy52YWx1ZSA9PSBVSW50NjQoMCksICJWYXVsdCBpcyBub3QgbG9ja2VkIgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInN0YXR1cyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5zdGF0dXMgZXhpc3RzCiAgICAhCiAgICBhc3NlcnQgLy8gVmF1bHQgaXMgbm90IGxvY2tlZAogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo2MwogICAgLy8gYXBwX2FkZHIgPSBHbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo2NAogICAgLy8gYmFsYW5jZSA9IG9wLmJhbGFuY2UoYXBwX2FkZHIpCiAgICBkdXAKICAgIGJhbGFuY2UKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6NjUKICAgIC8vIG1pbl9iYWxhbmNlID0gb3AubWluX2JhbGFuY2UoYXBwX2FkZHIpCiAgICBzd2FwCiAgICBtaW5fYmFsYW5jZQogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo2NgogICAgLy8gcGF5b3V0ID0gYmFsYW5jZSAtIG1pbl9iYWxhbmNlCiAgICAtCiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjY4LTcyCiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBhbW91bnQ9cGF5b3V0LAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6NjgKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIGludGNfMSAvLyBwYXkKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6NzEKICAgIC8vIGZlZT0wLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjY4LTcyCiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBhbW91bnQ9cGF5b3V0LAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6NzQKICAgIC8vIHNlbGYuc3RhdHVzLnZhbHVlID0gVUludDY0KDIpCiAgICBieXRlY18wIC8vICJzdGF0dXMiCiAgICBwdXNoaW50IDIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjU3CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuZXNjcm93LmNvbnRyYWN0LkVzY3Jvd1ZhdWx0LmRlbGV0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmRlbGV0ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6NzkKICAgIC8vIGFzc2VydCBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlcikgPT0gc2VsZi5jcmVhdG9yLnZhbHVlLCAiT25seSBjcmVhdG9yIGNhbiBkZWxldGUiCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAiY3JlYXRvciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jcmVhdG9yIGV4aXN0cwogICAgc3dhcAogICAgZGlnIDEKICAgID09CiAgICBhc3NlcnQgLy8gT25seSBjcmVhdG9yIGNhbiBkZWxldGUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6ODAKICAgIC8vIGFzc2VydCBzZWxmLnN0YXR1cy52YWx1ZSAhPSBVSW50NjQoMCksICJWYXVsdCBzdGlsbCBsb2NrZWQg4oCUIHJlbGVhc2Ugb3Iga2lsbCBmaXJzdCIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJzdGF0dXMiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuc3RhdHVzIGV4aXN0cwogICAgYXNzZXJ0IC8vIFZhdWx0IHN0aWxsIGxvY2tlZCDigJQgcmVsZWFzZSBvciBraWxsIGZpcnN0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjgyLTg3CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBhbW91bnQ9MCwKICAgIC8vICAgICBjbG9zZV9yZW1haW5kZXJfdG89c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBmZWU9MCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIGR1cAogICAgaXR4bl9maWVsZCBDbG9zZVJlbWFpbmRlclRvCiAgICAvLyBzbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5Ojg0CiAgICAvLyBhbW91bnQ9MCwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo4MgogICAgLy8gaXR4bi5QYXltZW50KAogICAgaW50Y18xIC8vIHBheQogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo4NgogICAgLy8gZmVlPTAsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6ODItODcKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1zZWxmLmNyZWF0b3IudmFsdWUubmF0aXZlLAogICAgLy8gICAgIGFtb3VudD0wLAogICAgLy8gICAgIGNsb3NlX3JlbWFpbmRlcl90bz1zZWxmLmNyZWF0b3IudmFsdWUubmF0aXZlLAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6NzYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiRGVsZXRlQXBwbGljYXRpb24iXSkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyACAAEmAwZzdGF0dXMHY3JlYXRvcglyZWNpcGllbnSABCQ3jTw2GgCOAQAtMRkURDEYQQAWggIEB2u9TQS5whFVNhoAjgIAMABaAIAEzGlOqjYaAI4BAA0AMRmBBRIxGBBEQgBpNhoBSRWBIBJEKTEAZypMZygiZyNDMQAiKWVEEkQiKGVEFEQyCklgTHgJsSIqZUSyB7III7IQIrIBsygjZyNDMQAiKWVETEsBEkQiKGVEFEQyCklgTHgJsbIIsgcjshAisgGzKIECZyNDMQAiKWVETEsBEkQiKGVERLFJsgkisgiyByOyECKyAbMjQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -179,11 +179,97 @@ export type MethodReturn<TSignature extends EscrowVaultSignatures> = EscrowVault
 export type GlobalKeysState = EscrowVaultTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type EscrowVaultCreateCallParams =
+  | Expand<CallParams<EscrowVaultArgs['obj']['create(address)void'] | EscrowVaultArgs['tuple']['create(address)void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<EscrowVaultArgs['obj']['create(address)void'] | EscrowVaultArgs['tuple']['create(address)void']> & {method: 'create(address)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type EscrowVaultDeleteCallParams =
+  | Expand<CallParams<EscrowVaultArgs['obj']['delete()void'] | EscrowVaultArgs['tuple']['delete()void']> & {method: 'delete'}>
+  | Expand<CallParams<EscrowVaultArgs['obj']['delete()void'] | EscrowVaultArgs['tuple']['delete()void']> & {method: 'delete()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type EscrowVaultDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: EscrowVaultCreateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: EscrowVaultDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the EscrowVault smart contract
  */
 export abstract class EscrowVaultParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends EscrowVaultCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(address)void':
+            return EscrowVaultParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the EscrowVault smart contract using the create(address)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<EscrowVaultArgs['obj']['create(address)void'] | EscrowVaultArgs['tuple']['create(address)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(address)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.recipient],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends EscrowVaultDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'delete':
+          case 'delete()void':
+            return EscrowVaultParamsFactory.delete.delete(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the EscrowVault smart contract using the delete()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      delete(params: CallParams<EscrowVaultArgs['obj']['delete()void'] | EscrowVaultArgs['tuple']['delete()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'delete()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the release()void ABI method
    *
@@ -216,6 +302,172 @@ export abstract class EscrowVaultParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the EscrowVault smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class EscrowVaultFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `EscrowVaultFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new EscrowVaultClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new EscrowVaultClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the EscrowVault smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: EscrowVaultDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? EscrowVaultParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (EscrowVaultCreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? EscrowVaultParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (EscrowVaultDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new EscrowVaultClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the EscrowVault smart contract using the create(address)void ABI method.
+       *
+       * Deploy the vault and set creator + recipient.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<EscrowVaultArgs['obj']['create(address)void'] | EscrowVaultArgs['tuple']['create(address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(EscrowVaultParamsFactory.create.create(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the EscrowVault smart contract using the delete()void ABI method.
+       *
+       * Delete the application. Only allowed after release or kill.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      delete: (params: CallParams<EscrowVaultArgs['obj']['delete()void'] | EscrowVaultArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(EscrowVaultParamsFactory.delete.delete(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the EscrowVault smart contract using the create(address)void ABI method.
+       *
+       * Deploy the vault and set creator + recipient.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<EscrowVaultArgs['obj']['create(address)void'] | EscrowVaultArgs['tuple']['create(address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(EscrowVaultParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the EscrowVault smart contract using an ABI method call using the create(address)void ABI method.
+       *
+       * Deploy the vault and set creator + recipient.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<EscrowVaultArgs['obj']['create(address)void'] | EscrowVaultArgs['tuple']['create(address)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(EscrowVaultParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | EscrowVaultReturns['create(address)void']) }, appClient: new EscrowVaultClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the EscrowVault smart contract
  */
@@ -296,6 +548,24 @@ export class EscrowVaultClient {
    */
   readonly params = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the EscrowVault smart contract using the `delete()void` ABI method.
+       *
+       * Delete the application. Only allowed after release or kill.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      delete: (params: CallParams<EscrowVaultArgs['obj']['delete()void'] | EscrowVaultArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.params.delete(EscrowVaultParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the EscrowVault smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -336,6 +606,24 @@ export class EscrowVaultClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the EscrowVault smart contract using the `delete()void` ABI method.
+       *
+       * Delete the application. Only allowed after release or kill.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      delete: (params: CallParams<EscrowVaultArgs['obj']['delete()void'] | EscrowVaultArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(EscrowVaultParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the EscrowVault smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -375,6 +663,25 @@ export class EscrowVaultClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the EscrowVault smart contract using the `delete()void` ABI method.
+       *
+       * Delete the application. Only allowed after release or kill.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      delete: async (params: CallParams<EscrowVaultArgs['obj']['delete()void'] | EscrowVaultArgs['tuple']['delete()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(EscrowVaultParamsFactory.delete.delete(params))
+        return {...result, return: result.return as unknown as (undefined | EscrowVaultReturns['delete()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the EscrowVault smart contract.
      *
@@ -479,6 +786,15 @@ export class EscrowVaultClient {
         resultMappers.push(undefined)
         return this
       },
+      get delete() {
+        return {
+          delete: (params: CallParams<EscrowVaultArgs['obj']['delete()void'] | EscrowVaultArgs['tuple']['delete()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.delete(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the EscrowVault contract
        */
@@ -535,6 +851,20 @@ export type EscrowVaultComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   kill(params?: CallParams<EscrowVaultArgs['obj']['kill()void'] | EscrowVaultArgs['tuple']['kill()void']>): EscrowVaultComposer<[...TReturns, EscrowVaultReturns['kill()void'] | undefined]>
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the EscrowVault smart contract using the delete()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    delete(params?: CallParams<EscrowVaultArgs['obj']['delete()void'] | EscrowVaultArgs['tuple']['delete()void']>): EscrowVaultComposer<[...TReturns, EscrowVaultReturns['delete()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the EscrowVault smart contract.

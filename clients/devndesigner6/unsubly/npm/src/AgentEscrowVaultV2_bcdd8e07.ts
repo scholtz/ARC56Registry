@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"AgentEscrowVaultV2","structs":{"BillingRecord":[{"name":"timestamp","type":"uint64"},{"name":"amount","type":"uint64"},{"name":"cycleIndex","type":"uint64"}]},"methods":[{"name":"create","args":[{"type":"address","name":"recipient"},{"type":"address","name":"agent"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Deploy the v2 vault.","events":[],"recommendations":{}},{"name":"release","args":[{"type":"uint64","name":"amount"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Release `amount` microalgos to recipient and append a BillingRecord.\nReturns the new cycle index. Callable by creator OR agent.","events":[],"recommendations":{}},{"name":"kill","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Refund remaining balance to creator and mark vault killed.","events":[],"recommendations":{}},{"name":"get_history","args":[{"type":"uint64","name":"cycle"}],"returns":{"type":"(uint64,uint64,uint64)","struct":"BillingRecord"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Read a single release record.","events":[],"recommendations":{}},{"name":"get_cycle_count","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Total number of releases.","events":[],"recommendations":{}},{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Delete the vault. Only after kill, only by creator.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Agent Escrow Vault v2 — A2A Autonomous Payments with on-chain billing history.\n\n    Same authorization model as v1 (creator OR agent can release), but instead\n    of clobbering one global \"status\" slot per release, every release writes a\n    BillingRecord into Box Storage keyed by the cycle index. The full payment\n    history is permanently auditable on-chain.\n\n    State:\n        GlobalState.creator     — user wallet (only one who can kill)\n        GlobalState.recipient   — service provider address\n        GlobalState.agent       — autonomous agent wallet\n        GlobalState.cycle_index — monotonic counter, incremented on each release\n        GlobalState.killed      — 0 = alive, 1 = killed by creator\n        Box \"h:<cycle_index>\"   — BillingRecord for that release\n    ","networks":{},"state":{"schema":{"global":{"ints":2,"bytes":3},"local":{"ints":0,"bytes":0}},"keys":{"global":{"creator":{"keyType":"AVMString","valueType":"address","key":"Y3JlYXRvcg==","desc":"User wallet (creator)"},"recipient":{"keyType":"AVMString","valueType":"address","key":"cmVjaXBpZW50","desc":"Payment recipient"},"agent":{"keyType":"AVMString","valueType":"address","key":"YWdlbnQ=","desc":"Autonomous release agent"},"cycle_index":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y3ljbGVfaW5kZXg=","desc":"Monotonic billing cycle"},"killed":{"keyType":"AVMString","valueType":"AVMUint64","key":"a2lsbGVk","desc":"0=alive 1=killed"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"history":{"keyType":"uint64","valueType":"BillingRecord","prefix":"aDo="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[326],"errorMessage":"Already killed"},{"pc":[367],"errorMessage":"Cycle not found"},{"pc":[247],"errorMessage":"Invalid payout amount"},{"pc":[404],"errorMessage":"Kill before delete"},{"pc":[397],"errorMessage":"Only creator can delete"},{"pc":[320],"errorMessage":"Only creator can kill"},{"pc":[220],"errorMessage":"Only creator or agent can release"},{"pc":[197],"errorMessage":"Vault is killed"},{"pc":[214],"errorMessage":"check self.agent exists"},{"pc":[203,315,392],"errorMessage":"check self.creator exists"},{"pc":[270,379],"errorMessage":"check self.cycle_index exists"},{"pc":[195,324,401],"errorMessage":"check self.killed exists"},{"pc":[253],"errorMessage":"check self.recipient exists"},{"pc":[151,159],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[191,358],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"AgentEscrowVaultV2","structs":{"BillingRecord":[{"name":"timestamp","type":"uint64"},{"name":"amount","type":"uint64"},{"name":"cycleIndex","type":"uint64"}]},"methods":[{"name":"create","args":[{"type":"address","name":"recipient"},{"type":"address","name":"agent"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Deploy the v2 vault.","events":[],"recommendations":{}},{"name":"release","args":[{"type":"uint64","name":"amount"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Release `amount` microalgos to recipient and append a BillingRecord.\nReturns the new cycle index. Callable by creator OR agent.","events":[],"recommendations":{}},{"name":"kill","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Refund remaining balance to creator and mark vault killed.","events":[],"recommendations":{}},{"name":"get_history","args":[{"type":"uint64","name":"cycle"}],"returns":{"type":"(uint64,uint64,uint64)","struct":"BillingRecord"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Read a single release record.","events":[],"recommendations":{}},{"name":"get_cycle_count","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Total number of releases.","events":[],"recommendations":{}},{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Delete the vault. Only after kill, only by creator.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Agent Escrow Vault v2 — A2A Autonomous Payments with on-chain billing history.\n\n    Same authorization model as v1 (creator OR agent can release), but instead\n    of clobbering one global \"status\" slot per release, every release writes a\n    BillingRecord into Box Storage keyed by the cycle index. The full payment\n    history is permanently auditable on-chain.\n\n    State:\n        GlobalState.creator     — user wallet (only one who can kill)\n        GlobalState.recipient   — service provider address\n        GlobalState.agent       — autonomous agent wallet\n        GlobalState.cycle_index — monotonic counter, incremented on each release\n        GlobalState.killed      — 0 = alive, 1 = killed by creator\n        Box \"h:<cycle_index>\"   — BillingRecord for that release\n    ","networks":{},"state":{"schema":{"global":{"ints":2,"bytes":3},"local":{"ints":0,"bytes":0}},"keys":{"global":{"creator":{"keyType":"AVMString","valueType":"address","key":"Y3JlYXRvcg==","desc":"User wallet (creator)"},"recipient":{"keyType":"AVMString","valueType":"address","key":"cmVjaXBpZW50","desc":"Payment recipient"},"agent":{"keyType":"AVMString","valueType":"address","key":"YWdlbnQ=","desc":"Autonomous release agent"},"cycle_index":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y3ljbGVfaW5kZXg=","desc":"Monotonic billing cycle"},"killed":{"keyType":"AVMString","valueType":"AVMUint64","key":"a2lsbGVk","desc":"0=alive 1=killed"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"history":{"keyType":"uint64","valueType":"BillingRecord","prefix":"aDo="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[326],"errorMessage":"Already killed"},{"pc":[367],"errorMessage":"Cycle not found"},{"pc":[247],"errorMessage":"Invalid payout amount"},{"pc":[404],"errorMessage":"Kill before delete"},{"pc":[397],"errorMessage":"Only creator can delete"},{"pc":[320],"errorMessage":"Only creator can kill"},{"pc":[220],"errorMessage":"Only creator or agent can release"},{"pc":[197],"errorMessage":"Vault is killed"},{"pc":[214],"errorMessage":"check self.agent exists"},{"pc":[203,315,392],"errorMessage":"check self.creator exists"},{"pc":[270,379],"errorMessage":"check self.cycle_index exists"},{"pc":[195,324,401],"errorMessage":"check self.killed exists"},{"pc":[253],"errorMessage":"check self.recipient exists"},{"pc":[151,159],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[191,358],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMzIgOAogICAgYnl0ZWNibG9jayAia2lsbGVkIiAiY3JlYXRvciIgImN5Y2xlX2luZGV4IiAweDE1MWY3Yzc1ICJyZWNpcGllbnQiICJhZ2VudCIgImg6IgogICAgLy8gY29udHJhY3QucHk6MjEKICAgIC8vIGNsYXNzIEFnZW50RXNjcm93VmF1bHRWMihBUkM0Q29udHJhY3QpOgogICAgcHVzaGJ5dGVzIDB4MjQzNzhkM2MgLy8gbWV0aG9kICJkZWxldGUoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2RlbGV0ZV9yb3V0ZUA0CgptYWluX3N3aXRjaF9jYXNlX25leHRANToKICAgIC8vIGNvbnRyYWN0LnB5OjIxCiAgICAvLyBjbGFzcyBBZ2VudEVzY3Jvd1ZhdWx0VjIoQVJDNENvbnRyYWN0KToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BAMTIKICAgIHB1c2hieXRlc3MgMHg2MTE3Y2NiOCAweGI5YzIxMTU1IDB4ZGVjYTEyYzEgMHg3OTc5ZWVjZSAvLyBtZXRob2QgInJlbGVhc2UodWludDY0KXVpbnQ2NCIsIG1ldGhvZCAia2lsbCgpdm9pZCIsIG1ldGhvZCAiZ2V0X2hpc3RvcnkodWludDY0KSh1aW50NjQsdWludDY0LHVpbnQ2NCkiLCBtZXRob2QgImdldF9jeWNsZV9jb3VudCgpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggcmVsZWFzZSBraWxsIGdldF9oaXN0b3J5IGdldF9jeWNsZV9jb3VudAogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDEyOgogICAgLy8gY29udHJhY3QucHk6MjEKICAgIC8vIGNsYXNzIEFnZW50RXNjcm93VmF1bHRWMihBUkM0Q29udHJhY3QpOgogICAgcHVzaGJ5dGVzIDB4OGE5Njk4MGUgLy8gbWV0aG9kICJjcmVhdGUoYWRkcmVzcyxhZGRyZXNzKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGUKICAgIGVycgoKbWFpbl9kZWxldGVfcm91dGVANDoKICAgIC8vIGNvbnRyYWN0LnB5OjEyMwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJEZWxldGVBcHBsaWNhdGlvbiJdKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgcHVzaGludCA1IC8vIERlbGV0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgZGVsZXRlCgoKLy8gc21hcnRfY29udHJhY3RzLmFnZW50X2VzY3Jvd192Mi5jb250cmFjdC5BZ2VudEVzY3Jvd1ZhdWx0VjIuY3JlYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgLy8gY29udHJhY3QucHk6NDcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiTm9PcCJdLCBjcmVhdGU9InJlcXVpcmUiKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIGNvbnRyYWN0LnB5OjUwCiAgICAvLyBzZWxmLmNyZWF0b3IudmFsdWUgPSBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlcikKICAgIGJ5dGVjXzEgLy8gImNyZWF0b3IiCiAgICB0eG4gU2VuZGVyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29udHJhY3QucHk6NTEKICAgIC8vIHNlbGYucmVjaXBpZW50LnZhbHVlID0gcmVjaXBpZW50CiAgICBieXRlYyA0IC8vICJyZWNpcGllbnQiCiAgICB1bmNvdmVyIDIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb250cmFjdC5weTo1MgogICAgLy8gc2VsZi5hZ2VudC52YWx1ZSA9IGFnZW50CiAgICBieXRlYyA1IC8vICJhZ2VudCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb250cmFjdC5weTo1MwogICAgLy8gc2VsZi5jeWNsZV9pbmRleC52YWx1ZSA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMiAvLyAiY3ljbGVfaW5kZXgiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0LnB5OjU0CiAgICAvLyBzZWxmLmtpbGxlZC52YWx1ZSA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMCAvLyAia2lsbGVkIgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb250cmFjdC5weTo0NwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0sIGNyZWF0ZT0icmVxdWlyZSIpCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmFnZW50X2VzY3Jvd192Mi5jb250cmFjdC5BZ2VudEVzY3Jvd1ZhdWx0VjIucmVsZWFzZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlbGVhc2U6CiAgICBwdXNoYnl0ZXMgIiIKICAgIGR1cAogICAgLy8gY29udHJhY3QucHk6NTYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18zIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICAvLyBjb250cmFjdC5weTo2MgogICAgLy8gYXNzZXJ0IHNlbGYua2lsbGVkLnZhbHVlID09IFVJbnQ2NCgwKSwgIlZhdWx0IGlzIGtpbGxlZCIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJraWxsZWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYua2lsbGVkIGV4aXN0cwogICAgIQogICAgYXNzZXJ0IC8vIFZhdWx0IGlzIGtpbGxlZAogICAgLy8gY29udHJhY3QucHk6NjQKICAgIC8vIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmNyZWF0b3IudmFsdWUKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJjcmVhdG9yIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmNyZWF0b3IgZXhpc3RzCiAgICA9PQogICAgLy8gY29udHJhY3QucHk6NjQtNjUKICAgIC8vIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmNyZWF0b3IudmFsdWUKICAgIC8vIG9yIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmFnZW50LnZhbHVlCiAgICBibnogcmVsZWFzZV9ib29sX3RydWVAMwogICAgLy8gY29udHJhY3QucHk6NjUKICAgIC8vIG9yIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmFnZW50LnZhbHVlCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWMgNSAvLyAiYWdlbnQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuYWdlbnQgZXhpc3RzCiAgICA9PQogICAgLy8gY29udHJhY3QucHk6NjQtNjUKICAgIC8vIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmNyZWF0b3IudmFsdWUKICAgIC8vIG9yIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmFnZW50LnZhbHVlCiAgICBieiByZWxlYXNlX2Jvb2xfZmFsc2VANAoKcmVsZWFzZV9ib29sX3RydWVAMzoKICAgIGludGNfMSAvLyAxCgpyZWxlYXNlX2Jvb2xfbWVyZ2VANToKICAgIC8vIGNvbnRyYWN0LnB5OjYzLTY2CiAgICAvLyBhc3NlcnQgKAogICAgLy8gICAgIGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmNyZWF0b3IudmFsdWUKICAgIC8vICAgICBvciBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlcikgPT0gc2VsZi5hZ2VudC52YWx1ZQogICAgLy8gKSwgIk9ubHkgY3JlYXRvciBvciBhZ2VudCBjYW4gcmVsZWFzZSIKICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3Igb3IgYWdlbnQgY2FuIHJlbGVhc2UKICAgIC8vIGNvbnRyYWN0LnB5OjY4CiAgICAvLyBhcHBfYWRkciA9IEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICAvLyBjb250cmFjdC5weTo2OQogICAgLy8gYmFsYW5jZSA9IG9wLmJhbGFuY2UoYXBwX2FkZHIpCiAgICBkdXAKICAgIGJhbGFuY2UKICAgIC8vIGNvbnRyYWN0LnB5OjcwCiAgICAvLyBtaW5fYmFsYW5jZSA9IG9wLm1pbl9iYWxhbmNlKGFwcF9hZGRyKQogICAgc3dhcAogICAgbWluX2JhbGFuY2UKICAgIC8vIGNvbnRyYWN0LnB5OjcxCiAgICAvLyBzcGVuZGFibGUgPSBiYWxhbmNlIC0gbWluX2JhbGFuY2UKICAgIC0KICAgIGJ1cnkgMgogICAgLy8gY29udHJhY3QucHk6NzIKICAgIC8vIHBheW91dCA9IGFtb3VudC5uYXRpdmUKICAgIGR1cAogICAgYnRvaQogICAgZHVwCiAgICBidXJ5IDQKICAgIC8vIGNvbnRyYWN0LnB5OjczCiAgICAvLyBhc3NlcnQgcGF5b3V0ID4gVUludDY0KDApIGFuZCBwYXlvdXQgPD0gc3BlbmRhYmxlLCAiSW52YWxpZCBwYXlvdXQgYW1vdW50IgogICAgYnogcmVsZWFzZV9ib29sX2ZhbHNlQDgKICAgIGRpZyAyCiAgICBkaWcgMgogICAgPD0KICAgIGJ6IHJlbGVhc2VfYm9vbF9mYWxzZUA4CiAgICBpbnRjXzEgLy8gMQoKcmVsZWFzZV9ib29sX21lcmdlQDk6CiAgICAvLyBjb250cmFjdC5weTo3MwogICAgLy8gYXNzZXJ0IHBheW91dCA+IFVJbnQ2NCgwKSBhbmQgcGF5b3V0IDw9IHNwZW5kYWJsZSwgIkludmFsaWQgcGF5b3V0IGFtb3VudCIKICAgIGFzc2VydCAvLyBJbnZhbGlkIHBheW91dCBhbW91bnQKICAgIC8vIGNvbnRyYWN0LnB5Ojc1LTc5CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5yZWNpcGllbnQudmFsdWUubmF0aXZlLAogICAgLy8gICAgIGFtb3VudD1wYXlvdXQsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBjb250cmFjdC5weTo3NgogICAgLy8gcmVjZWl2ZXI9c2VsZi5yZWNpcGllbnQudmFsdWUubmF0aXZlLAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjIDQgLy8gInJlY2lwaWVudCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5yZWNpcGllbnQgZXhpc3RzCiAgICBkaWcgMwogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIC8vIGNvbnRyYWN0LnB5Ojc1CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICBpbnRjXzEgLy8gcGF5CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICAvLyBjb250cmFjdC5weTo3OAogICAgLy8gZmVlPTAsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIGNvbnRyYWN0LnB5Ojc1LTc5CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5yZWNpcGllbnQudmFsdWUubmF0aXZlLAogICAgLy8gICAgIGFtb3VudD1wYXlvdXQsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gY29udHJhY3QucHk6ODEKICAgIC8vIG5ld19pbmRleCA9IHNlbGYuY3ljbGVfaW5kZXgudmFsdWUgKyBVSW50NjQoMSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18yIC8vICJjeWNsZV9pbmRleCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jeWNsZV9pbmRleCBleGlzdHMKICAgIGludGNfMSAvLyAxCiAgICArCiAgICAvLyBjb250cmFjdC5weTo4MgogICAgLy8gc2VsZi5jeWNsZV9pbmRleC52YWx1ZSA9IG5ld19pbmRleAogICAgYnl0ZWNfMiAvLyAiY3ljbGVfaW5kZXgiCiAgICBkaWcgMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0LnB5Ojg2CiAgICAvLyB0aW1lc3RhbXA9YXJjNC5VSW50NjQoR2xvYmFsLmxhdGVzdF90aW1lc3RhbXApLAogICAgZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAogICAgaXRvYgogICAgLy8gY29udHJhY3QucHk6ODgKICAgIC8vIGN5Y2xlX2luZGV4PWFyYzQuVUludDY0KG5ld19pbmRleCksCiAgICBzd2FwCiAgICBpdG9iCiAgICAvLyBjb250cmFjdC5weTo4NC04OQogICAgLy8gIyBBcHBlbmQgdG8gYm94LXN0b3JlZCBoaXN0b3J5CiAgICAvLyBzZWxmLmhpc3RvcnlbYXJjNC5VSW50NjQobmV3X2luZGV4KV0gPSBCaWxsaW5nUmVjb3JkKAogICAgLy8gICAgIHRpbWVzdGFtcD1hcmM0LlVJbnQ2NChHbG9iYWwubGF0ZXN0X3RpbWVzdGFtcCksCiAgICAvLyAgICAgYW1vdW50PWFyYzQuVUludDY0KHBheW91dCksCiAgICAvLyAgICAgY3ljbGVfaW5kZXg9YXJjNC5VSW50NjQobmV3X2luZGV4KSwKICAgIC8vICkKICAgIHN3YXAKICAgIGRpZyAyCiAgICBjb25jYXQKICAgIGRpZyAxCiAgICBjb25jYXQKICAgIC8vIGNvbnRyYWN0LnB5Ojg0LTg1CiAgICAvLyAjIEFwcGVuZCB0byBib3gtc3RvcmVkIGhpc3RvcnkKICAgIC8vIHNlbGYuaGlzdG9yeVthcmM0LlVJbnQ2NChuZXdfaW5kZXgpXSA9IEJpbGxpbmdSZWNvcmQoCiAgICBieXRlYyA2IC8vICJoOiIKICAgIGRpZyAyCiAgICBjb25jYXQKICAgIC8vIGNvbnRyYWN0LnB5Ojg0LTg5CiAgICAvLyAjIEFwcGVuZCB0byBib3gtc3RvcmVkIGhpc3RvcnkKICAgIC8vIHNlbGYuaGlzdG9yeVthcmM0LlVJbnQ2NChuZXdfaW5kZXgpXSA9IEJpbGxpbmdSZWNvcmQoCiAgICAvLyAgICAgdGltZXN0YW1wPWFyYzQuVUludDY0KEdsb2JhbC5sYXRlc3RfdGltZXN0YW1wKSwKICAgIC8vICAgICBhbW91bnQ9YXJjNC5VSW50NjQocGF5b3V0KSwKICAgIC8vICAgICBjeWNsZV9pbmRleD1hcmM0LlVJbnQ2NChuZXdfaW5kZXgpLAogICAgLy8gKQogICAgc3dhcAogICAgYm94X3B1dAogICAgLy8gY29udHJhY3QucHk6NTYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgpyZWxlYXNlX2Jvb2xfZmFsc2VAODoKICAgIGludGNfMCAvLyAwCiAgICBiIHJlbGVhc2VfYm9vbF9tZXJnZUA5CgpyZWxlYXNlX2Jvb2xfZmFsc2VANDoKICAgIGludGNfMCAvLyAwCiAgICBiIHJlbGVhc2VfYm9vbF9tZXJnZUA1CgoKLy8gc21hcnRfY29udHJhY3RzLmFnZW50X2VzY3Jvd192Mi5jb250cmFjdC5BZ2VudEVzY3Jvd1ZhdWx0VjIua2lsbFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmtpbGw6CiAgICAvLyBjb250cmFjdC5weTo5NgogICAgLy8gYXNzZXJ0IGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmNyZWF0b3IudmFsdWUsICJPbmx5IGNyZWF0b3IgY2FuIGtpbGwiCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAiY3JlYXRvciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jcmVhdG9yIGV4aXN0cwogICAgc3dhcAogICAgZGlnIDEKICAgID09CiAgICBhc3NlcnQgLy8gT25seSBjcmVhdG9yIGNhbiBraWxsCiAgICAvLyBjb250cmFjdC5weTo5NwogICAgLy8gYXNzZXJ0IHNlbGYua2lsbGVkLnZhbHVlID09IFVJbnQ2NCgwKSwgIkFscmVhZHkga2lsbGVkIgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gImtpbGxlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5raWxsZWQgZXhpc3RzCiAgICAhCiAgICBhc3NlcnQgLy8gQWxyZWFkeSBraWxsZWQKICAgIC8vIGNvbnRyYWN0LnB5Ojk5CiAgICAvLyBhcHBfYWRkciA9IEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICAvLyBjb250cmFjdC5weToxMDAKICAgIC8vIGJhbGFuY2UgPSBvcC5iYWxhbmNlKGFwcF9hZGRyKQogICAgZHVwCiAgICBiYWxhbmNlCiAgICAvLyBjb250cmFjdC5weToxMDEKICAgIC8vIG1pbl9iYWxhbmNlID0gb3AubWluX2JhbGFuY2UoYXBwX2FkZHIpCiAgICBzd2FwCiAgICBtaW5fYmFsYW5jZQogICAgLy8gY29udHJhY3QucHk6MTAyCiAgICAvLyBwYXlvdXQgPSBiYWxhbmNlIC0gbWluX2JhbGFuY2UKICAgIC0KICAgIC8vIGNvbnRyYWN0LnB5OjEwNC0xMDgKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1zZWxmLmNyZWF0b3IudmFsdWUubmF0aXZlLAogICAgLy8gICAgIGFtb3VudD1wYXlvdXQsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgLy8gY29udHJhY3QucHk6MTA0CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICBpbnRjXzEgLy8gcGF5CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICAvLyBjb250cmFjdC5weToxMDcKICAgIC8vIGZlZT0wLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBjb250cmFjdC5weToxMDQtMTA4CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBhbW91bnQ9cGF5b3V0LAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIGNvbnRyYWN0LnB5OjExMAogICAgLy8gc2VsZi5raWxsZWQudmFsdWUgPSBVSW50NjQoMSkKICAgIGJ5dGVjXzAgLy8gImtpbGxlZCIKICAgIGludGNfMSAvLyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29udHJhY3QucHk6OTMKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmFnZW50X2VzY3Jvd192Mi5jb250cmFjdC5BZ2VudEVzY3Jvd1ZhdWx0VjIuZ2V0X2hpc3Rvcnlbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfaGlzdG9yeToKICAgIC8vIGNvbnRyYWN0LnB5OjExMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18zIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICAvLyBjb250cmFjdC5weToxMTUKICAgIC8vIGFzc2VydCBjeWNsZSBpbiBzZWxmLmhpc3RvcnksICJDeWNsZSBub3QgZm91bmQiCiAgICBieXRlYyA2IC8vICJoOiIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBDeWNsZSBub3QgZm91bmQKICAgIC8vIGNvbnRyYWN0LnB5OjExNgogICAgLy8gcmV0dXJuIHNlbGYuaGlzdG9yeVtjeWNsZV0uY29weSgpCiAgICBib3hfZ2V0CiAgICBwb3AKICAgIC8vIGNvbnRyYWN0LnB5OjExMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmFnZW50X2VzY3Jvd192Mi5jb250cmFjdC5BZ2VudEVzY3Jvd1ZhdWx0VjIuZ2V0X2N5Y2xlX2NvdW50W3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X2N5Y2xlX2NvdW50OgogICAgLy8gY29udHJhY3QucHk6MTIxCiAgICAvLyByZXR1cm4gYXJjNC5VSW50NjQoc2VsZi5jeWNsZV9pbmRleC52YWx1ZSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18yIC8vICJjeWNsZV9pbmRleCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jeWNsZV9pbmRleCBleGlzdHMKICAgIGl0b2IKICAgIC8vIGNvbnRyYWN0LnB5OjExOAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmFnZW50X2VzY3Jvd192Mi5jb250cmFjdC5BZ2VudEVzY3Jvd1ZhdWx0VjIuZGVsZXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKZGVsZXRlOgogICAgLy8gY29udHJhY3QucHk6MTI2CiAgICAvLyBhc3NlcnQgYXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpID09IHNlbGYuY3JlYXRvci52YWx1ZSwgIk9ubHkgY3JlYXRvciBjYW4gZGVsZXRlIgogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gImNyZWF0b3IiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuY3JlYXRvciBleGlzdHMKICAgIHN3YXAKICAgIGRpZyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIE9ubHkgY3JlYXRvciBjYW4gZGVsZXRlCiAgICAvLyBjb250cmFjdC5weToxMjcKICAgIC8vIGFzc2VydCBzZWxmLmtpbGxlZC52YWx1ZSA9PSBVSW50NjQoMSksICJLaWxsIGJlZm9yZSBkZWxldGUiCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAia2lsbGVkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmtpbGxlZCBleGlzdHMKICAgIGludGNfMSAvLyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIEtpbGwgYmVmb3JlIGRlbGV0ZQogICAgLy8gY29udHJhY3QucHk6MTI5LTEzNAogICAgLy8gaXR4bi5QYXltZW50KAogICAgLy8gICAgIHJlY2VpdmVyPXNlbGYuY3JlYXRvci52YWx1ZS5uYXRpdmUsCiAgICAvLyAgICAgYW1vdW50PTAsCiAgICAvLyAgICAgY2xvc2VfcmVtYWluZGVyX3RvPXNlbGYuY3JlYXRvci52YWx1ZS5uYXRpdmUsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICBkdXAKICAgIGl0eG5fZmllbGQgQ2xvc2VSZW1haW5kZXJUbwogICAgLy8gY29udHJhY3QucHk6MTMxCiAgICAvLyBhbW91bnQ9MCwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgLy8gY29udHJhY3QucHk6MTI5CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICBpbnRjXzEgLy8gcGF5CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICAvLyBjb250cmFjdC5weToxMzMKICAgIC8vIGZlZT0wLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBjb250cmFjdC5weToxMjktMTM0CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBhbW91bnQ9MCwKICAgIC8vICAgICBjbG9zZV9yZW1haW5kZXJfdG89c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBmZWU9MCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICAvLyBjb250cmFjdC5weToxMjMKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiRGVsZXRlQXBwbGljYXRpb24iXSkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAAEgCCYHBmtpbGxlZAdjcmVhdG9yC2N5Y2xlX2luZGV4BBUffHUJcmVjaXBpZW50BWFnZW50Amg6gAQkN408NhoAjgEAOzEZFEQxGEEAJIIEBGEXzLgEucIRVQTeyhLBBHl57s42GgCOBABAAMEA6gEDAIAEipaYDjYaAI4BAA0AMRmBBRIxGBBEQgDzNhoBSRUkEkQ2GgJJFSQSRCkxAGcnBE8CZycFTGcqImcoImcjQ4AASTYaAUkVJRJEIihlRBREMQAiKWVEEkAACzEAIicFZUQSQQBXI0QyCklgTHgJRQJJF0lFBEEAQEsCSwIOQQA4I0SxIicEZURLA7IIsgcjshAisgGzIiplRCMIKksBZzIHFkwWTEsCUEsBUCcGSwJQTL8rTFCwI0MiQv/FIkL/pjEAIillRExLARJEIihlRBREMgpJYEx4CbGyCLIHI7IQIrIBsygjZyNDNhoBSRUlEkQnBkxQSb1FAUS+SCtMULAjQyIqZUQWK0xQsCNDMQAiKWVETEsBEkQiKGVEIxJEsUmyCSKyCLIHI7IQIrIBsyND","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -239,11 +239,97 @@ export type GlobalKeysState = AgentEscrowVaultV2Types['state']['global']['keys']
 export type BoxKeysState = AgentEscrowVaultV2Types['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AgentEscrowVaultV2CreateCallParams =
+  | Expand<CallParams<AgentEscrowVaultV2Args['obj']['create(address,address)void'] | AgentEscrowVaultV2Args['tuple']['create(address,address)void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<AgentEscrowVaultV2Args['obj']['create(address,address)void'] | AgentEscrowVaultV2Args['tuple']['create(address,address)void']> & {method: 'create(address,address)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type AgentEscrowVaultV2DeleteCallParams =
+  | Expand<CallParams<AgentEscrowVaultV2Args['obj']['delete()void'] | AgentEscrowVaultV2Args['tuple']['delete()void']> & {method: 'delete'}>
+  | Expand<CallParams<AgentEscrowVaultV2Args['obj']['delete()void'] | AgentEscrowVaultV2Args['tuple']['delete()void']> & {method: 'delete()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AgentEscrowVaultV2DeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AgentEscrowVaultV2CreateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: AgentEscrowVaultV2DeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AgentEscrowVaultV2 smart contract
  */
 export abstract class AgentEscrowVaultV2ParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends AgentEscrowVaultV2CreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(address,address)void':
+            return AgentEscrowVaultV2ParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the AgentEscrowVaultV2 smart contract using the create(address,address)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<AgentEscrowVaultV2Args['obj']['create(address,address)void'] | AgentEscrowVaultV2Args['tuple']['create(address,address)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(address,address)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.recipient, params.args.agent],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends AgentEscrowVaultV2DeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'delete':
+          case 'delete()void':
+            return AgentEscrowVaultV2ParamsFactory.delete.delete(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the AgentEscrowVaultV2 smart contract using the delete()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      delete(params: CallParams<AgentEscrowVaultV2Args['obj']['delete()void'] | AgentEscrowVaultV2Args['tuple']['delete()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'delete()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the release(uint64)uint64 ABI method
    *
@@ -308,6 +394,172 @@ export abstract class AgentEscrowVaultV2ParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the AgentEscrowVaultV2 smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AgentEscrowVaultV2Factory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AgentEscrowVaultV2Factory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AgentEscrowVaultV2Client(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AgentEscrowVaultV2Client(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the AgentEscrowVaultV2 smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AgentEscrowVaultV2DeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? AgentEscrowVaultV2ParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (AgentEscrowVaultV2CreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? AgentEscrowVaultV2ParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (AgentEscrowVaultV2DeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new AgentEscrowVaultV2Client(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AgentEscrowVaultV2 smart contract using the create(address,address)void ABI method.
+       *
+       * Deploy the v2 vault.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<AgentEscrowVaultV2Args['obj']['create(address,address)void'] | AgentEscrowVaultV2Args['tuple']['create(address,address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(AgentEscrowVaultV2ParamsFactory.create.create(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the AgentEscrowVaultV2 smart contract using the delete()void ABI method.
+       *
+       * Delete the vault. Only after kill, only by creator.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      delete: (params: CallParams<AgentEscrowVaultV2Args['obj']['delete()void'] | AgentEscrowVaultV2Args['tuple']['delete()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(AgentEscrowVaultV2ParamsFactory.delete.delete(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AgentEscrowVaultV2 smart contract using the create(address,address)void ABI method.
+       *
+       * Deploy the v2 vault.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<AgentEscrowVaultV2Args['obj']['create(address,address)void'] | AgentEscrowVaultV2Args['tuple']['create(address,address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(AgentEscrowVaultV2ParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AgentEscrowVaultV2 smart contract using an ABI method call using the create(address,address)void ABI method.
+       *
+       * Deploy the v2 vault.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<AgentEscrowVaultV2Args['obj']['create(address,address)void'] | AgentEscrowVaultV2Args['tuple']['create(address,address)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(AgentEscrowVaultV2ParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | AgentEscrowVaultV2Returns['create(address,address)void']) }, appClient: new AgentEscrowVaultV2Client(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the AgentEscrowVaultV2 smart contract
  */
@@ -396,6 +648,24 @@ export class AgentEscrowVaultV2Client {
    */
   readonly params = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the AgentEscrowVaultV2 smart contract using the `delete()void` ABI method.
+       *
+       * Delete the vault. Only after kill, only by creator.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      delete: (params: CallParams<AgentEscrowVaultV2Args['obj']['delete()void'] | AgentEscrowVaultV2Args['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.params.delete(AgentEscrowVaultV2ParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the AgentEscrowVaultV2 smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -466,6 +736,24 @@ export class AgentEscrowVaultV2Client {
    */
   readonly createTransaction = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the AgentEscrowVaultV2 smart contract using the `delete()void` ABI method.
+       *
+       * Delete the vault. Only after kill, only by creator.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      delete: (params: CallParams<AgentEscrowVaultV2Args['obj']['delete()void'] | AgentEscrowVaultV2Args['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(AgentEscrowVaultV2ParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the AgentEscrowVaultV2 smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -535,6 +823,25 @@ export class AgentEscrowVaultV2Client {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the AgentEscrowVaultV2 smart contract using the `delete()void` ABI method.
+       *
+       * Delete the vault. Only after kill, only by creator.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      delete: async (params: CallParams<AgentEscrowVaultV2Args['obj']['delete()void'] | AgentEscrowVaultV2Args['tuple']['delete()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(AgentEscrowVaultV2ParamsFactory.delete.delete(params))
+        return {...result, return: result.return as unknown as (undefined | AgentEscrowVaultV2Returns['delete()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the AgentEscrowVaultV2 smart contract.
      *
@@ -753,6 +1060,15 @@ export class AgentEscrowVaultV2Client {
         resultMappers.push((v) => client.decodeReturnValue('get_cycle_count()uint64', v))
         return this
       },
+      get delete() {
+        return {
+          delete: (params: CallParams<AgentEscrowVaultV2Args['obj']['delete()void'] | AgentEscrowVaultV2Args['tuple']['delete()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.delete(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the AgentEscrowVaultV2 contract
        */
@@ -833,6 +1149,20 @@ export type AgentEscrowVaultV2Composer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   getCycleCount(params?: CallParams<AgentEscrowVaultV2Args['obj']['get_cycle_count()uint64'] | AgentEscrowVaultV2Args['tuple']['get_cycle_count()uint64']>): AgentEscrowVaultV2Composer<[...TReturns, AgentEscrowVaultV2Returns['get_cycle_count()uint64'] | undefined]>
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the AgentEscrowVaultV2 smart contract using the delete()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    delete(params?: CallParams<AgentEscrowVaultV2Args['obj']['delete()void'] | AgentEscrowVaultV2Args['tuple']['delete()void']>): AgentEscrowVaultV2Composer<[...TReturns, AgentEscrowVaultV2Returns['delete()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the AgentEscrowVaultV2 smart contract.

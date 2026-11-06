@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"TimeLockEscrow","structs":{},"methods":[{"name":"create","args":[{"type":"address","name":"recipient"},{"type":"uint64","name":"unlock_time"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Deploy the vault with a time-lock.","events":[],"recommendations":{}},{"name":"release","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Release funds to recipient after time-lock expires.","events":[],"recommendations":{}},{"name":"kill","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Reclaim funds back to creator (no time restriction on kill).","events":[],"recommendations":{}},{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Delete the application after release or kill.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Time-Locked Escrow Vault (ARC-4 compliant).\n\n    Identical to standard escrow but release() is blocked until\n    Global.latest_timestamp >= unlock_time.\n\n    GlobalState:\n        creator      — account that deployed and funded the vault\n        recipient    — account that receives funds on release\n        status       — 0 = locked, 1 = released, 2 = killed\n        unlock_time  — Unix timestamp after which release is allowed\n    ","networks":{},"state":{"schema":{"global":{"ints":2,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"creator":{"keyType":"AVMString","valueType":"address","key":"Y3JlYXRvcg==","desc":"Vault creator address"},"recipient":{"keyType":"AVMString","valueType":"address","key":"cmVjaXBpZW50","desc":"Fund recipient address"},"status":{"keyType":"AVMString","valueType":"AVMUint64","key":"c3RhdHVz","desc":"0=locked 1=released 2=killed"},"unlock_time":{"keyType":"AVMString","valueType":"AVMUint64","key":"dW5sb2NrX3RpbWU=","desc":"Unix timestamp for earliest release"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[251],"errorMessage":"Only creator can delete"},{"pc":[209],"errorMessage":"Only creator can kill"},{"pc":[156],"errorMessage":"Only creator can release"},{"pc":[170],"errorMessage":"Time-lock not expired yet"},{"pc":[162,215],"errorMessage":"Vault is not locked"},{"pc":[256],"errorMessage":"Vault still locked"},{"pc":[154,204,246],"errorMessage":"check self.creator exists"},{"pc":[182],"errorMessage":"check self.recipient exists"},{"pc":[160,213,255],"errorMessage":"check self.status exists"},{"pc":[168],"errorMessage":"check self.unlock_time exists"},{"pc":[122],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[131],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"TimeLockEscrow","structs":{},"methods":[{"name":"create","args":[{"type":"address","name":"recipient"},{"type":"uint64","name":"unlock_time"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Deploy the vault with a time-lock.","events":[],"recommendations":{}},{"name":"release","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Release funds to recipient after time-lock expires.","events":[],"recommendations":{}},{"name":"kill","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Reclaim funds back to creator (no time restriction on kill).","events":[],"recommendations":{}},{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Delete the application after release or kill.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Time-Locked Escrow Vault (ARC-4 compliant).\n\n    Identical to standard escrow but release() is blocked until\n    Global.latest_timestamp >= unlock_time.\n\n    GlobalState:\n        creator      — account that deployed and funded the vault\n        recipient    — account that receives funds on release\n        status       — 0 = locked, 1 = released, 2 = killed\n        unlock_time  — Unix timestamp after which release is allowed\n    ","networks":{},"state":{"schema":{"global":{"ints":2,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"creator":{"keyType":"AVMString","valueType":"address","key":"Y3JlYXRvcg==","desc":"Vault creator address"},"recipient":{"keyType":"AVMString","valueType":"address","key":"cmVjaXBpZW50","desc":"Fund recipient address"},"status":{"keyType":"AVMString","valueType":"AVMUint64","key":"c3RhdHVz","desc":"0=locked 1=released 2=killed"},"unlock_time":{"keyType":"AVMString","valueType":"AVMUint64","key":"dW5sb2NrX3RpbWU=","desc":"Unix timestamp for earliest release"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[251],"errorMessage":"Only creator can delete"},{"pc":[209],"errorMessage":"Only creator can kill"},{"pc":[156],"errorMessage":"Only creator can release"},{"pc":[170],"errorMessage":"Time-lock not expired yet"},{"pc":[162,215],"errorMessage":"Vault is not locked"},{"pc":[256],"errorMessage":"Vault still locked"},{"pc":[154,204,246],"errorMessage":"check self.creator exists"},{"pc":[182],"errorMessage":"check self.recipient exists"},{"pc":[160,213,255],"errorMessage":"check self.status exists"},{"pc":[168],"errorMessage":"check self.unlock_time exists"},{"pc":[122],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[131],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEKICAgIGJ5dGVjYmxvY2sgInN0YXR1cyIgImNyZWF0b3IiICJyZWNpcGllbnQiICJ1bmxvY2tfdGltZSIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weToxMwogICAgLy8gY2xhc3MgVGltZUxvY2tFc2Nyb3coQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweDI0Mzc4ZDNjIC8vIG1ldGhvZCAiZGVsZXRlKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9kZWxldGVfcm91dGVANAoKbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGltZV9sb2NrZWQvY29udHJhY3QucHk6MTMKICAgIC8vIGNsYXNzIFRpbWVMb2NrRXNjcm93KEFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDEwCiAgICBwdXNoYnl0ZXNzIDB4MDc2YmJkNGQgMHhiOWMyMTE1NSAvLyBtZXRob2QgInJlbGVhc2UoKXZvaWQiLCBtZXRob2QgImtpbGwoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCByZWxlYXNlIGtpbGwKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEAxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weToxMwogICAgLy8gY2xhc3MgVGltZUxvY2tFc2Nyb3coQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweGMwYjY0MzUyIC8vIG1ldGhvZCAiY3JlYXRlKGFkZHJlc3MsdWludDY0KXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGUKICAgIGVycgoKbWFpbl9kZWxldGVfcm91dGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo4MAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJEZWxldGVBcHBsaWNhdGlvbiJdKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgcHVzaGludCA1IC8vIERlbGV0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgZGVsZXRlCgoKLy8gc21hcnRfY29udHJhY3RzLnRpbWVfbG9ja2VkLmNvbnRyYWN0LlRpbWVMb2NrRXNjcm93LmNyZWF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTozMwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0sIGNyZWF0ZT0icmVxdWlyZSIpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5OjM2CiAgICAvLyBzZWxmLmNyZWF0b3IudmFsdWUgPSBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlcikKICAgIGJ5dGVjXzEgLy8gImNyZWF0b3IiCiAgICB0eG4gU2VuZGVyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5OjM3CiAgICAvLyBzZWxmLnJlY2lwaWVudC52YWx1ZSA9IHJlY2lwaWVudAogICAgYnl0ZWNfMiAvLyAicmVjaXBpZW50IgogICAgdW5jb3ZlciAyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5OjM4CiAgICAvLyBzZWxmLnN0YXR1cy52YWx1ZSA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMCAvLyAic3RhdHVzIgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGltZV9sb2NrZWQvY29udHJhY3QucHk6MzkKICAgIC8vIHNlbGYudW5sb2NrX3RpbWUudmFsdWUgPSB1bmxvY2tfdGltZQogICAgYnl0ZWNfMyAvLyAidW5sb2NrX3RpbWUiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5OjMzCiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSwgY3JlYXRlPSJyZXF1aXJlIikKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMudGltZV9sb2NrZWQuY29udHJhY3QuVGltZUxvY2tFc2Nyb3cucmVsZWFzZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlbGVhc2U6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGltZV9sb2NrZWQvY29udHJhY3QucHk6NDQKICAgIC8vIGFzc2VydCBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlcikgPT0gc2VsZi5jcmVhdG9yLnZhbHVlLCAiT25seSBjcmVhdG9yIGNhbiByZWxlYXNlIgogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gImNyZWF0b3IiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuY3JlYXRvciBleGlzdHMKICAgID09CiAgICBhc3NlcnQgLy8gT25seSBjcmVhdG9yIGNhbiByZWxlYXNlCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGltZV9sb2NrZWQvY29udHJhY3QucHk6NDUKICAgIC8vIGFzc2VydCBzZWxmLnN0YXR1cy52YWx1ZSA9PSBVSW50NjQoMCksICJWYXVsdCBpcyBub3QgbG9ja2VkIgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInN0YXR1cyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5zdGF0dXMgZXhpc3RzCiAgICAhCiAgICBhc3NlcnQgLy8gVmF1bHQgaXMgbm90IGxvY2tlZAogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5OjQ2CiAgICAvLyBhc3NlcnQgR2xvYmFsLmxhdGVzdF90aW1lc3RhbXAgPj0gc2VsZi51bmxvY2tfdGltZS52YWx1ZSwgIlRpbWUtbG9jayBub3QgZXhwaXJlZCB5ZXQiCiAgICBnbG9iYWwgTGF0ZXN0VGltZXN0YW1wCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMyAvLyAidW5sb2NrX3RpbWUiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudW5sb2NrX3RpbWUgZXhpc3RzCiAgICA+PQogICAgYXNzZXJ0IC8vIFRpbWUtbG9jayBub3QgZXhwaXJlZCB5ZXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo0OAogICAgLy8gYXBwX2FkZHIgPSBHbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5OjQ5CiAgICAvLyBiYWxhbmNlID0gb3AuYmFsYW5jZShhcHBfYWRkcikKICAgIGR1cAogICAgYmFsYW5jZQogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5OjUwCiAgICAvLyBtaW5fYmFsYW5jZSA9IG9wLm1pbl9iYWxhbmNlKGFwcF9hZGRyKQogICAgc3dhcAogICAgbWluX2JhbGFuY2UKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo1MQogICAgLy8gcGF5b3V0ID0gYmFsYW5jZSAtIG1pbl9iYWxhbmNlCiAgICAtCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGltZV9sb2NrZWQvY29udHJhY3QucHk6NTMtNTcKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1zZWxmLnJlY2lwaWVudC52YWx1ZS5uYXRpdmUsCiAgICAvLyAgICAgYW1vdW50PXBheW91dCwKICAgIC8vICAgICBmZWU9MCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo1NAogICAgLy8gcmVjZWl2ZXI9c2VsZi5yZWNpcGllbnQudmFsdWUubmF0aXZlLAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzIgLy8gInJlY2lwaWVudCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5yZWNpcGllbnQgZXhpc3RzCiAgICBpdHhuX2ZpZWxkIFJlY2VpdmVyCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5OjUzCiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICBpbnRjXzEgLy8gcGF5CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGltZV9sb2NrZWQvY29udHJhY3QucHk6NTYKICAgIC8vIGZlZT0wLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGltZV9sb2NrZWQvY29udHJhY3QucHk6NTMtNTcKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1zZWxmLnJlY2lwaWVudC52YWx1ZS5uYXRpdmUsCiAgICAvLyAgICAgYW1vdW50PXBheW91dCwKICAgIC8vICAgICBmZWU9MCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGltZV9sb2NrZWQvY29udHJhY3QucHk6NTkKICAgIC8vIHNlbGYuc3RhdHVzLnZhbHVlID0gVUludDY0KDEpCiAgICBieXRlY18wIC8vICJzdGF0dXMiCiAgICBpbnRjXzEgLy8gMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo0MQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0pCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnRpbWVfbG9ja2VkLmNvbnRyYWN0LlRpbWVMb2NrRXNjcm93LmtpbGxbcm91dGluZ10oKSAtPiB2b2lkOgpraWxsOgogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5OjY0CiAgICAvLyBhc3NlcnQgYXJjNC5BZGRyZXNzKFR4bi5zZW5kZXIpID09IHNlbGYuY3JlYXRvci52YWx1ZSwgIk9ubHkgY3JlYXRvciBjYW4ga2lsbCIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJjcmVhdG9yIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmNyZWF0b3IgZXhpc3RzCiAgICBzd2FwCiAgICBkaWcgMQogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3IgY2FuIGtpbGwKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo2NQogICAgLy8gYXNzZXJ0IHNlbGYuc3RhdHVzLnZhbHVlID09IFVJbnQ2NCgwKSwgIlZhdWx0IGlzIG5vdCBsb2NrZWQiCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAic3RhdHVzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnN0YXR1cyBleGlzdHMKICAgICEKICAgIGFzc2VydCAvLyBWYXVsdCBpcyBub3QgbG9ja2VkCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGltZV9sb2NrZWQvY29udHJhY3QucHk6NjcKICAgIC8vIGFwcF9hZGRyID0gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcwogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo2OAogICAgLy8gYmFsYW5jZSA9IG9wLmJhbGFuY2UoYXBwX2FkZHIpCiAgICBkdXAKICAgIGJhbGFuY2UKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo2OQogICAgLy8gbWluX2JhbGFuY2UgPSBvcC5taW5fYmFsYW5jZShhcHBfYWRkcikKICAgIHN3YXAKICAgIG1pbl9iYWxhbmNlCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGltZV9sb2NrZWQvY29udHJhY3QucHk6NzAKICAgIC8vIHBheW91dCA9IGJhbGFuY2UgLSBtaW5fYmFsYW5jZQogICAgLQogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5OjcyLTc2CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBhbW91bnQ9cGF5b3V0LAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo3MgogICAgLy8gaXR4bi5QYXltZW50KAogICAgaW50Y18xIC8vIHBheQogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5Ojc1CiAgICAvLyBmZWU9MCwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5OjcyLTc2CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBhbW91bnQ9cGF5b3V0LAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo3OAogICAgLy8gc2VsZi5zdGF0dXMudmFsdWUgPSBVSW50NjQoMikKICAgIGJ5dGVjXzAgLy8gInN0YXR1cyIKICAgIHB1c2hpbnQgMgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo2MQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0pCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnRpbWVfbG9ja2VkLmNvbnRyYWN0LlRpbWVMb2NrRXNjcm93LmRlbGV0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmRlbGV0ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo4MwogICAgLy8gYXNzZXJ0IGFyYzQuQWRkcmVzcyhUeG4uc2VuZGVyKSA9PSBzZWxmLmNyZWF0b3IudmFsdWUsICJPbmx5IGNyZWF0b3IgY2FuIGRlbGV0ZSIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJjcmVhdG9yIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmNyZWF0b3IgZXhpc3RzCiAgICBzd2FwCiAgICBkaWcgMQogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3IgY2FuIGRlbGV0ZQogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5Ojg0CiAgICAvLyBhc3NlcnQgc2VsZi5zdGF0dXMudmFsdWUgIT0gVUludDY0KDApLCAiVmF1bHQgc3RpbGwgbG9ja2VkIgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInN0YXR1cyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5zdGF0dXMgZXhpc3RzCiAgICBhc3NlcnQgLy8gVmF1bHQgc3RpbGwgbG9ja2VkCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGltZV9sb2NrZWQvY29udHJhY3QucHk6ODYtOTEKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1zZWxmLmNyZWF0b3IudmFsdWUubmF0aXZlLAogICAgLy8gICAgIGFtb3VudD0wLAogICAgLy8gICAgIGNsb3NlX3JlbWFpbmRlcl90bz1zZWxmLmNyZWF0b3IudmFsdWUubmF0aXZlLAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgZHVwCiAgICBpdHhuX2ZpZWxkIENsb3NlUmVtYWluZGVyVG8KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo4OAogICAgLy8gYW1vdW50PTAsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90aW1lX2xvY2tlZC9jb250cmFjdC5weTo4NgogICAgLy8gaXR4bi5QYXltZW50KAogICAgaW50Y18xIC8vIHBheQogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5OjkwCiAgICAvLyBmZWU9MCwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL3RpbWVfbG9ja2VkL2NvbnRyYWN0LnB5Ojg2LTkxCiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBhbW91bnQ9MCwKICAgIC8vICAgICBjbG9zZV9yZW1haW5kZXJfdG89c2VsZi5jcmVhdG9yLnZhbHVlLm5hdGl2ZSwKICAgIC8vICAgICBmZWU9MCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGltZV9sb2NrZWQvY29udHJhY3QucHk6ODAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiRGVsZXRlQXBwbGljYXRpb24iXSkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyACAAEmBAZzdGF0dXMHY3JlYXRvcglyZWNpcGllbnQLdW5sb2NrX3RpbWWABCQ3jTw2GgCOAQAtMRkURDEYQQAWggIEB2u9TQS5whFVNhoAjgIAPgBwAIAEwLZDUjYaAI4BAA0AMRmBBRIxGBBEQgB/NhoBSRWBIBJENhoCSRWBCBJEFykxAGcqTwJnKCJnK0xnI0MxACIpZUQSRCIoZUQURDIHIitlRA9EMgpJYEx4CbEiKmVEsgeyCCOyECKyAbMoI2cjQzEAIillRExLARJEIihlRBREMgpJYEx4CbGyCLIHI7IQIrIBsyiBAmcjQzEAIillRExLARJEIihlRESxSbIJIrIIsgcjshAisgGzI0M=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -184,11 +184,97 @@ export type MethodReturn<TSignature extends TimeLockEscrowSignatures> = TimeLock
 export type GlobalKeysState = TimeLockEscrowTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TimeLockEscrowCreateCallParams =
+  | Expand<CallParams<TimeLockEscrowArgs['obj']['create(address,uint64)void'] | TimeLockEscrowArgs['tuple']['create(address,uint64)void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<TimeLockEscrowArgs['obj']['create(address,uint64)void'] | TimeLockEscrowArgs['tuple']['create(address,uint64)void']> & {method: 'create(address,uint64)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type TimeLockEscrowDeleteCallParams =
+  | Expand<CallParams<TimeLockEscrowArgs['obj']['delete()void'] | TimeLockEscrowArgs['tuple']['delete()void']> & {method: 'delete'}>
+  | Expand<CallParams<TimeLockEscrowArgs['obj']['delete()void'] | TimeLockEscrowArgs['tuple']['delete()void']> & {method: 'delete()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TimeLockEscrowDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TimeLockEscrowCreateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: TimeLockEscrowDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TimeLockEscrow smart contract
  */
 export abstract class TimeLockEscrowParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends TimeLockEscrowCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(address,uint64)void':
+            return TimeLockEscrowParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the TimeLockEscrow smart contract using the create(address,uint64)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<TimeLockEscrowArgs['obj']['create(address,uint64)void'] | TimeLockEscrowArgs['tuple']['create(address,uint64)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(address,uint64)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.recipient, params.args.unlockTime],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends TimeLockEscrowDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'delete':
+          case 'delete()void':
+            return TimeLockEscrowParamsFactory.delete.delete(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the TimeLockEscrow smart contract using the delete()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      delete(params: CallParams<TimeLockEscrowArgs['obj']['delete()void'] | TimeLockEscrowArgs['tuple']['delete()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'delete()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the release()void ABI method
    *
@@ -221,6 +307,172 @@ export abstract class TimeLockEscrowParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TimeLockEscrow smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TimeLockEscrowFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TimeLockEscrowFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TimeLockEscrowClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TimeLockEscrowClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TimeLockEscrow smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TimeLockEscrowDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? TimeLockEscrowParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (TimeLockEscrowCreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? TimeLockEscrowParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (TimeLockEscrowDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new TimeLockEscrowClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TimeLockEscrow smart contract using the create(address,uint64)void ABI method.
+       *
+       * Deploy the vault with a time-lock.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<TimeLockEscrowArgs['obj']['create(address,uint64)void'] | TimeLockEscrowArgs['tuple']['create(address,uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(TimeLockEscrowParamsFactory.create.create(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the TimeLockEscrow smart contract using the delete()void ABI method.
+       *
+       * Delete the application after release or kill.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      delete: (params: CallParams<TimeLockEscrowArgs['obj']['delete()void'] | TimeLockEscrowArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(TimeLockEscrowParamsFactory.delete.delete(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TimeLockEscrow smart contract using the create(address,uint64)void ABI method.
+       *
+       * Deploy the vault with a time-lock.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<TimeLockEscrowArgs['obj']['create(address,uint64)void'] | TimeLockEscrowArgs['tuple']['create(address,uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(TimeLockEscrowParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TimeLockEscrow smart contract using an ABI method call using the create(address,uint64)void ABI method.
+       *
+       * Deploy the vault with a time-lock.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<TimeLockEscrowArgs['obj']['create(address,uint64)void'] | TimeLockEscrowArgs['tuple']['create(address,uint64)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(TimeLockEscrowParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | TimeLockEscrowReturns['create(address,uint64)void']) }, appClient: new TimeLockEscrowClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TimeLockEscrow smart contract
  */
@@ -301,6 +553,24 @@ export class TimeLockEscrowClient {
    */
   readonly params = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TimeLockEscrow smart contract using the `delete()void` ABI method.
+       *
+       * Delete the application after release or kill.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      delete: (params: CallParams<TimeLockEscrowArgs['obj']['delete()void'] | TimeLockEscrowArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.params.delete(TimeLockEscrowParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the TimeLockEscrow smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -341,6 +611,24 @@ export class TimeLockEscrowClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TimeLockEscrow smart contract using the `delete()void` ABI method.
+       *
+       * Delete the application after release or kill.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      delete: (params: CallParams<TimeLockEscrowArgs['obj']['delete()void'] | TimeLockEscrowArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(TimeLockEscrowParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the TimeLockEscrow smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -380,6 +668,25 @@ export class TimeLockEscrowClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TimeLockEscrow smart contract using the `delete()void` ABI method.
+       *
+       * Delete the application after release or kill.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      delete: async (params: CallParams<TimeLockEscrowArgs['obj']['delete()void'] | TimeLockEscrowArgs['tuple']['delete()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(TimeLockEscrowParamsFactory.delete.delete(params))
+        return {...result, return: result.return as unknown as (undefined | TimeLockEscrowReturns['delete()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the TimeLockEscrow smart contract.
      *
@@ -489,6 +796,15 @@ export class TimeLockEscrowClient {
         resultMappers.push(undefined)
         return this
       },
+      get delete() {
+        return {
+          delete: (params: CallParams<TimeLockEscrowArgs['obj']['delete()void'] | TimeLockEscrowArgs['tuple']['delete()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.delete(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the TimeLockEscrow contract
        */
@@ -545,6 +861,20 @@ export type TimeLockEscrowComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   kill(params?: CallParams<TimeLockEscrowArgs['obj']['kill()void'] | TimeLockEscrowArgs['tuple']['kill()void']>): TimeLockEscrowComposer<[...TReturns, TimeLockEscrowReturns['kill()void'] | undefined]>
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the TimeLockEscrow smart contract using the delete()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    delete(params?: CallParams<TimeLockEscrowArgs['obj']['delete()void'] | TimeLockEscrowArgs['tuple']['delete()void']>): TimeLockEscrowComposer<[...TReturns, TimeLockEscrowReturns['delete()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the TimeLockEscrow smart contract.
