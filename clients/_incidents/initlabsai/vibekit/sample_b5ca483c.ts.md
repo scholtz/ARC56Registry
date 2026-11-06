@@ -2,8 +2,8 @@
 
 - **Repo**: [initlabsai/vibekit](https://github.com/initlabsai/vibekit)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/initlabsai/vibekit/HEAD/packages/vibekit/test/tools/fixtures/sample.arc56.json](https://raw.githubusercontent.com/initlabsai/vibekit/HEAD/packages/vibekit/test/tools/fixtures/sample.arc56.json)
-- **Detected**: 2026-08-28T18:14:06.359447+00:00
-- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
+- **Detected**: 2026-11-06T13:54:13.996159+00:00
+- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.2`
 
 ## Reproduce
 
