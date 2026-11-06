@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"MsigApp","structs":{},"methods":[{"name":"createApplication","args":[{"type":"address","name":"admin","desc":"Address of person responsible for calling `arc55_setup`"}],"returns":{"type":"void","desc":"Msig App Application ID"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Deploy a new On-Chain Msig App.","events":[],"recommendations":{}},{"name":"updateApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"desc":"Update the application","events":[],"recommendations":{}},{"name":"deleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Destroy the application and return funds to creator address.\nAll transactions must be removed before calling destroy.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"MsigApp - A contract that extends ARC55 functionality for multisig operations","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[53],"errorMessage":"OnCompletion must be DeleteApplication && can only call when not creating"},{"pc":[41],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[65],"errorMessage":"OnCompletion must be UpdateApplication && can only call when not creating"},{"pc":[76],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"MsigApp","structs":{},"methods":[{"name":"createApplication","args":[{"type":"address","name":"admin","desc":"Address of person responsible for calling `arc55_setup`"}],"returns":{"type":"void","desc":"Msig App Application ID"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Deploy a new On-Chain Msig App.","events":[],"recommendations":{}},{"name":"updateApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"desc":"Update the application","events":[],"recommendations":{}},{"name":"deleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Destroy the application and return funds to creator address.\nAll transactions must be removed before calling destroy.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"MsigApp - A contract that extends ARC55 functionality for multisig operations","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[53],"errorMessage":"OnCompletion must be DeleteApplication && can only call when not creating"},{"pc":[41],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[65],"errorMessage":"OnCompletion must be UpdateApplication && can only call when not creating"},{"pc":[76],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvbXVsdGlzaWcvbXNpZy5hcHAuYWxnby50czoxNAogICAgLy8gZXhwb3J0IGNsYXNzIE1zaWdBcHAgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoYnl0ZXNzIDB4NDZmNzY1MzMgMHgyNDg3YzMyYyAweGQzMjRiZWE0IC8vIG1ldGhvZCAidXBkYXRlQXBwbGljYXRpb24oKXZvaWQiLCBtZXRob2QgImRlbGV0ZUFwcGxpY2F0aW9uKCl2b2lkIiwgbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbihhZGRyZXNzKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3VwZGF0ZUFwcGxpY2F0aW9uX3JvdXRlQDIgbWFpbl9kZWxldGVBcHBsaWNhdGlvbl9yb3V0ZUAzIG1haW5fY3JlYXRlQXBwbGljYXRpb25fcm91dGVANAogICAgZXJyCgptYWluX2NyZWF0ZUFwcGxpY2F0aW9uX3JvdXRlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbXVsdGlzaWcvbXNpZy5hcHAuYWxnby50czoyMAogICAgLy8gY3JlYXRlQXBwbGljYXRpb24oYWRtaW46IEFjY291bnQpOiB2b2lkIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AgJiYgY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBiIGNyZWF0ZUFwcGxpY2F0aW9uCgptYWluX2RlbGV0ZUFwcGxpY2F0aW9uX3JvdXRlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbXVsdGlzaWcvbXNpZy5hcHAuYWxnby50czo0MAogICAgLy8gZGVsZXRlQXBwbGljYXRpb24oKTogdm9pZCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDUgLy8gRGVsZXRlQXBwbGljYXRpb24KICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBEZWxldGVBcHBsaWNhdGlvbiAmJiBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBiIGRlbGV0ZUFwcGxpY2F0aW9uCgptYWluX3VwZGF0ZUFwcGxpY2F0aW9uX3JvdXRlQDI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbXVsdGlzaWcvbXNpZy5hcHAuYWxnby50czozMgogICAgLy8gdXBkYXRlQXBwbGljYXRpb24oKTogdm9pZCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDQgLy8gVXBkYXRlQXBwbGljYXRpb24KICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBVcGRhdGVBcHBsaWNhdGlvbiAmJiBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBiIHVwZGF0ZUFwcGxpY2F0aW9uCgoKLy8gc21hcnRfY29udHJhY3RzL211bHRpc2lnL21zaWcuYXBwLmFsZ28udHM6Ok1zaWdBcHAuY3JlYXRlQXBwbGljYXRpb25bcm91dGluZ10oKSAtPiB2b2lkOgpjcmVhdGVBcHBsaWNhdGlvbjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tdWx0aXNpZy9tc2lnLmFwcC5hbGdvLnRzOjIwCiAgICAvLyBjcmVhdGVBcHBsaWNhdGlvbihhZG1pbjogQWNjb3VudCk6IHZvaWQgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBwdXNoaW50IDMyIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvbXVsdGlzaWcvbXNpZy5hcHAuYWxnby50czo6TXNpZ0FwcC51cGRhdGVBcHBsaWNhdGlvbltyb3V0aW5nXSgpIC0+IHZvaWQ6CnVwZGF0ZUFwcGxpY2F0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzL211bHRpc2lnL21zaWcuYXBwLmFsZ28udHM6MzMKICAgIC8vIHRoaXMub25seUFkbWluKCk7CiAgICBjYWxsc3ViIG9ubHlBZG1pbgogICAgLy8gc21hcnRfY29udHJhY3RzL211bHRpc2lnL21zaWcuYXBwLmFsZ28udHM6MzIKICAgIC8vIHVwZGF0ZUFwcGxpY2F0aW9uKCk6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9tdWx0aXNpZy9tc2lnLmFwcC5hbGdvLnRzOjpNc2lnQXBwLmRlbGV0ZUFwcGxpY2F0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKZGVsZXRlQXBwbGljYXRpb246CiAgICAvLyBzbWFydF9jb250cmFjdHMvbXVsdGlzaWcvbXNpZy5hcHAuYWxnby50czo0MQogICAgLy8gdGhpcy5vbmx5QWRtaW4oKTsKICAgIGNhbGxzdWIgb25seUFkbWluCiAgICAvLyBzbWFydF9jb250cmFjdHMvbXVsdGlzaWcvbXNpZy5hcHAuYWxnby50czo0NC00OQogICAgLy8gaXR4bi5wYXltZW50KHsKICAgIC8vICAgYW1vdW50OiAwLAogICAgLy8gICByZWNlaXZlcjogR2xvYmFsLmNyZWF0b3JBZGRyZXNzLAogICAgLy8gICBjbG9zZVJlbWFpbmRlclRvOiBHbG9iYWwuY3JlYXRvckFkZHJlc3MsCiAgICAvLyAgIGZlZTogMCwKICAgIC8vIH0pLnN1Ym1pdCgpOwogICAgaXR4bl9iZWdpbgogICAgLy8gc21hcnRfY29udHJhY3RzL211bHRpc2lnL21zaWcuYXBwLmFsZ28udHM6NDYKICAgIC8vIHJlY2VpdmVyOiBHbG9iYWwuY3JlYXRvckFkZHJlc3MsCiAgICBnbG9iYWwgQ3JlYXRvckFkZHJlc3MKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tdWx0aXNpZy9tc2lnLmFwcC5hbGdvLnRzOjQ3CiAgICAvLyBjbG9zZVJlbWFpbmRlclRvOiBHbG9iYWwuY3JlYXRvckFkZHJlc3MsCiAgICBkdXAKICAgIGl0eG5fZmllbGQgQ2xvc2VSZW1haW5kZXJUbwogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgLy8gc21hcnRfY29udHJhY3RzL211bHRpc2lnL21zaWcuYXBwLmFsZ28udHM6NDUKICAgIC8vIGFtb3VudDogMCwKICAgIGludGNfMSAvLyAwCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgLy8gc21hcnRfY29udHJhY3RzL211bHRpc2lnL21zaWcuYXBwLmFsZ28udHM6NDQtNDkKICAgIC8vIGl0eG4ucGF5bWVudCh7CiAgICAvLyAgIGFtb3VudDogMCwKICAgIC8vICAgcmVjZWl2ZXI6IEdsb2JhbC5jcmVhdG9yQWRkcmVzcywKICAgIC8vICAgY2xvc2VSZW1haW5kZXJUbzogR2xvYmFsLmNyZWF0b3JBZGRyZXNzLAogICAgLy8gICBmZWU6IDAsCiAgICAvLyB9KS5zdWJtaXQoKTsKICAgIGludGNfMCAvLyAxCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICAvLyBzbWFydF9jb250cmFjdHMvbXVsdGlzaWcvbXNpZy5hcHAuYWxnby50czo0OAogICAgLy8gZmVlOiAwLAogICAgaW50Y18xIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvbXVsdGlzaWcvbXNpZy5hcHAuYWxnby50czo0NC00OQogICAgLy8gaXR4bi5wYXltZW50KHsKICAgIC8vICAgYW1vdW50OiAwLAogICAgLy8gICByZWNlaXZlcjogR2xvYmFsLmNyZWF0b3JBZGRyZXNzLAogICAgLy8gICBjbG9zZVJlbWFpbmRlclRvOiBHbG9iYWwuY3JlYXRvckFkZHJlc3MsCiAgICAvLyAgIGZlZTogMCwKICAgIC8vIH0pLnN1Ym1pdCgpOwogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tdWx0aXNpZy9tc2lnLmFwcC5hbGdvLnRzOjQwCiAgICAvLyBkZWxldGVBcHBsaWNhdGlvbigpOiB2b2lkIHsKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvbXVsdGlzaWcvbXNpZy5hcHAuYWxnby50czo6TXNpZ0FwcC5vbmx5QWRtaW4oKSAtPiB2b2lkOgpvbmx5QWRtaW46CiAgICAvLyBzbWFydF9jb250cmFjdHMvbXVsdGlzaWcvbXNpZy5hcHAuYWxnby50czo1NAogICAgLy8gYXNzZXJ0KFR4bi5zZW5kZXIgPT09IEdsb2JhbC5jcmVhdG9yQWRkcmVzcyk7CiAgICB0eG4gU2VuZGVyCiAgICBnbG9iYWwgQ3JlYXRvckFkZHJlc3MKICAgID09CiAgICBhc3NlcnQKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyACAQCCAwRG92UzBCSHwywE0yS+pDYaAI4DABgADAABADEZFDEYFBBEQgAYMRmBBRIxGBBEQgAbMRmBBBIxGBBEQgAKNhoBFYEgEkQiQ4gAGSJDiAAUsTIJSbIJsgcjsggishAjsgGzIkMxADIJEkSJ","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -150,13 +150,325 @@ export type MethodArgs<TSignature extends MsigAppSignatures> = MsigAppTypes['met
 export type MethodReturn<TSignature extends MsigAppSignatures> = MsigAppTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type MsigAppCreateCallParams =
+  | Expand<CallParams<MsigAppArgs['obj']['createApplication(address)void'] | MsigAppArgs['tuple']['createApplication(address)void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<MsigAppArgs['obj']['createApplication(address)void'] | MsigAppArgs['tuple']['createApplication(address)void']> & {method: 'createApplication(address)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type MsigAppUpdateCallParams =
+  | Expand<CallParams<MsigAppArgs['obj']['updateApplication()void'] | MsigAppArgs['tuple']['updateApplication()void']> & {method: 'updateApplication'}>
+  | Expand<CallParams<MsigAppArgs['obj']['updateApplication()void'] | MsigAppArgs['tuple']['updateApplication()void']> & {method: 'updateApplication()void'}>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type MsigAppDeleteCallParams =
+  | Expand<CallParams<MsigAppArgs['obj']['deleteApplication()void'] | MsigAppArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication'}>
+  | Expand<CallParams<MsigAppArgs['obj']['deleteApplication()void'] | MsigAppArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type MsigAppDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: MsigAppCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: MsigAppUpdateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: MsigAppDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the MsigApp smart contract
  */
 export abstract class MsigAppParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends MsigAppCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication(address)void':
+            return MsigAppParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the MsigApp smart contract using the createApplication(address)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<MsigAppArgs['obj']['createApplication(address)void'] | MsigAppArgs['tuple']['createApplication(address)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication(address)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.admin],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends MsigAppUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'updateApplication':
+          case 'updateApplication()void':
+            return MsigAppParamsFactory.update.updateApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the MsigApp smart contract using the updateApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateApplication(params: CallParams<MsigAppArgs['obj']['updateApplication()void'] | MsigAppArgs['tuple']['updateApplication()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'updateApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends MsigAppDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'deleteApplication':
+          case 'deleteApplication()void':
+            return MsigAppParamsFactory.delete.deleteApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the MsigApp smart contract using the deleteApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      deleteApplication(params: CallParams<MsigAppArgs['obj']['deleteApplication()void'] | MsigAppArgs['tuple']['deleteApplication()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'deleteApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
 }
 
+/**
+ * A factory to create and deploy one or more instance of the MsigApp smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class MsigAppFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `MsigAppFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new MsigAppClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new MsigAppClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the MsigApp smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: MsigAppDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? MsigAppParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (MsigAppCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? MsigAppParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (MsigAppUpdateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? MsigAppParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (MsigAppDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new MsigAppClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MsigApp smart contract using the createApplication(address)void ABI method.
+       *
+       * Deploy a new On-Chain Msig App.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params: Msig App Application ID
+       */
+      createApplication: (params: CallParams<MsigAppArgs['obj']['createApplication(address)void'] | MsigAppArgs['tuple']['createApplication(address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(MsigAppParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the MsigApp smart contract using the updateApplication()void ABI method.
+       *
+       * Update the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateApplication: (params: CallParams<MsigAppArgs['obj']['updateApplication()void'] | MsigAppArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(MsigAppParamsFactory.update.updateApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the MsigApp smart contract using the deleteApplication()void ABI method.
+       *
+      * Destroy the application and return funds to creator address.
+      All transactions must be removed before calling destroy.
+
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      deleteApplication: (params: CallParams<MsigAppArgs['obj']['deleteApplication()void'] | MsigAppArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(MsigAppParamsFactory.delete.deleteApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MsigApp smart contract using the createApplication(address)void ABI method.
+       *
+       * Deploy a new On-Chain Msig App.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction: Msig App Application ID
+       */
+      createApplication: (params: CallParams<MsigAppArgs['obj']['createApplication(address)void'] | MsigAppArgs['tuple']['createApplication(address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(MsigAppParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MsigApp smart contract using an ABI method call using the createApplication(address)void ABI method.
+       *
+       * Deploy a new On-Chain Msig App.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result: Msig App Application ID
+       */
+      createApplication: async (params: CallParams<MsigAppArgs['obj']['createApplication(address)void'] | MsigAppArgs['tuple']['createApplication(address)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(MsigAppParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | MsigAppReturns['createApplication(address)void']) }, appClient: new MsigAppClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the MsigApp smart contract
  */
@@ -237,6 +549,44 @@ export class MsigAppClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the MsigApp smart contract using the `updateApplication()void` ABI method.
+       *
+       * Update the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateApplication: (params: CallParams<MsigAppArgs['obj']['updateApplication()void'] | MsigAppArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(MsigAppParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the MsigApp smart contract using the `deleteApplication()void` ABI method.
+       *
+      * Destroy the application and return funds to creator address.
+      All transactions must be removed before calling destroy.
+
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      deleteApplication: (params: CallParams<MsigAppArgs['obj']['deleteApplication()void'] | MsigAppArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.params.delete(MsigAppParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the MsigApp smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -253,6 +603,44 @@ export class MsigAppClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the MsigApp smart contract using the `updateApplication()void` ABI method.
+       *
+       * Update the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateApplication: (params: CallParams<MsigAppArgs['obj']['updateApplication()void'] | MsigAppArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(MsigAppParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the MsigApp smart contract using the `deleteApplication()void` ABI method.
+       *
+      * Destroy the application and return funds to creator address.
+      All transactions must be removed before calling destroy.
+
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      deleteApplication: (params: CallParams<MsigAppArgs['obj']['deleteApplication()void'] | MsigAppArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(MsigAppParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the MsigApp smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -268,6 +656,46 @@ export class MsigAppClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the MsigApp smart contract using the `updateApplication()void` ABI method.
+       *
+       * Update the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateApplication: async (params: CallParams<MsigAppArgs['obj']['updateApplication()void'] | MsigAppArgs['tuple']['updateApplication()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(MsigAppParamsFactory.update.updateApplication(params))
+        return {...result, return: result.return as unknown as (undefined | MsigAppReturns['updateApplication()void'])}
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the MsigApp smart contract using the `deleteApplication()void` ABI method.
+       *
+      * Destroy the application and return funds to creator address.
+      All transactions must be removed before calling destroy.
+
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      deleteApplication: async (params: CallParams<MsigAppArgs['obj']['deleteApplication()void'] | MsigAppArgs['tuple']['deleteApplication()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(MsigAppParamsFactory.delete.deleteApplication(params))
+        return {...result, return: result.return as unknown as (undefined | MsigAppReturns['deleteApplication()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the MsigApp smart contract.
      *
@@ -302,6 +730,24 @@ export class MsigAppClient {
     let promiseChain:Promise<unknown> = Promise.resolve()
     const resultMappers: Array<undefined | ((x: ABIReturn | undefined) => any)> = []
     return {
+      get update() {
+        return {
+          updateApplication: (params: CallParams<MsigAppArgs['obj']['updateApplication()void'] | MsigAppArgs['tuple']['updateApplication()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
+      get delete() {
+        return {
+          deleteApplication: (params: CallParams<MsigAppArgs['obj']['deleteApplication()void'] | MsigAppArgs['tuple']['deleteApplication()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.deleteApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the MsigApp contract
        */
@@ -337,6 +783,34 @@ export class MsigAppClient {
   }
 }
 export type MsigAppComposer<TReturns extends [...any[]] = []> = {
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the MsigApp smart contract using the updateApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateApplication(params?: CallParams<MsigAppArgs['obj']['updateApplication()void'] | MsigAppArgs['tuple']['updateApplication()void']>): MsigAppComposer<[...TReturns, MsigAppReturns['updateApplication()void'] | undefined]>
+  }
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the MsigApp smart contract using the deleteApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    deleteApplication(params?: CallParams<MsigAppArgs['obj']['deleteApplication()void'] | MsigAppArgs['tuple']['deleteApplication()void']>): MsigAppComposer<[...TReturns, MsigAppReturns['deleteApplication()void'] | undefined]>
+  }
+
   /**
    * Makes a clear_state call to an existing instance of the MsigApp smart contract.
    *
