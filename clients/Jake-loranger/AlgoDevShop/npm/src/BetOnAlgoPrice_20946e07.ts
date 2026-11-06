@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"BetOnAlgoPrice","desc":"","methods":[{"name":"createApplication","desc":"Create the application","args":[{"name":"price","type":"uint64","desc":"The target price of ALGO"},{"name":"date","type":"uint64","desc":"The target date (timestamp)"},{"name":"condition","type":"string","desc":"The condition (Over or Under)"},{"name":"amount","type":"uint64","desc":"The amount to bet (in ALGO)"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"optIn","desc":"Opt-in to the contract (per user)","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"placeBet","desc":"Place a bet on the contract","args":[{"name":"amount","type":"uint64","desc":"The amount to wager in ALGO"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"settleBet","desc":"Settle the bet based on whether the user won or lost","args":[{"name":"isWinner","type":"bool","desc":"Boolean indicating if the sender is the winner"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteApplication","desc":"Method to delete the application\nThis method transfers any remaining funds back to the creator","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":2,"ints":3},"local":{"bytes":0,"ints":0}},"keys":{"global":{"price":{"key":"cHJpY2U=","keyType":"AVMBytes","valueType":"uint64"},"targetDate":{"key":"dGFyZ2V0RGF0ZQ==","keyType":"AVMBytes","valueType":"uint64"},"condition":{"key":"Y29uZGl0aW9u","keyType":"AVMBytes","valueType":"string"},"betAmount":{"key":"YmV0QW1vdW50","keyType":"AVMBytes","valueType":"uint64"},"settled":{"key":"c2V0dGxlZA==","keyType":"AVMBytes","valueType":"bool"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[62],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[168],"errorMessage":"Creator cannot opt-in","teal":127},{"pc":[184],"errorMessage":"Insufficient balance to opt-in","teal":145},{"pc":[207],"errorMessage":"Creator cannot place a bet","teal":176},{"pc":[214],"errorMessage":"The bet has already been settled","teal":188},{"pc":[220],"errorMessage":"Bet amount must match the expected wager","teal":198},{"pc":[229],"errorMessage":"Insufficient balance to place the bet","teal":209},{"pc":[254],"errorMessage":"argument 0 (isWinner) for settleBet must be a bool","teal":248},{"pc":[271],"errorMessage":"The bet has already been settled","teal":275},{"pc":[354],"errorMessage":"Only the creator can delete the application","teal":392},{"pc":[400],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":439},{"pc":[430],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":449},{"pc":[444],"errorMessage":"this contract does not implement the given ABI method for call DeleteApplication","teal":457}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"BetOnAlgoPrice","desc":"","methods":[{"name":"createApplication","desc":"Create the application","args":[{"name":"price","type":"uint64","desc":"The target price of ALGO"},{"name":"date","type":"uint64","desc":"The target date (timestamp)"},{"name":"condition","type":"string","desc":"The condition (Over or Under)"},{"name":"amount","type":"uint64","desc":"The amount to bet (in ALGO)"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"optIn","desc":"Opt-in to the contract (per user)","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"placeBet","desc":"Place a bet on the contract","args":[{"name":"amount","type":"uint64","desc":"The amount to wager in ALGO"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"settleBet","desc":"Settle the bet based on whether the user won or lost","args":[{"name":"isWinner","type":"bool","desc":"Boolean indicating if the sender is the winner"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteApplication","desc":"Method to delete the application\nThis method transfers any remaining funds back to the creator","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":2,"ints":3},"local":{"bytes":0,"ints":0}},"keys":{"global":{"price":{"key":"cHJpY2U=","keyType":"AVMBytes","valueType":"uint64"},"targetDate":{"key":"dGFyZ2V0RGF0ZQ==","keyType":"AVMBytes","valueType":"uint64"},"condition":{"key":"Y29uZGl0aW9u","keyType":"AVMBytes","valueType":"string"},"betAmount":{"key":"YmV0QW1vdW50","keyType":"AVMBytes","valueType":"uint64"},"settled":{"key":"c2V0dGxlZA==","keyType":"AVMBytes","valueType":"bool"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[62],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[168],"errorMessage":"Creator cannot opt-in","teal":127},{"pc":[184],"errorMessage":"Insufficient balance to opt-in","teal":145},{"pc":[207],"errorMessage":"Creator cannot place a bet","teal":176},{"pc":[214],"errorMessage":"The bet has already been settled","teal":188},{"pc":[220],"errorMessage":"Bet amount must match the expected wager","teal":198},{"pc":[229],"errorMessage":"Insufficient balance to place the bet","teal":209},{"pc":[254],"errorMessage":"argument 0 (isWinner) for settleBet must be a bool","teal":248},{"pc":[271],"errorMessage":"The bet has already been settled","teal":275},{"pc":[354],"errorMessage":"Only the creator can delete the application","teal":392},{"pc":[400],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":439},{"pc":[430],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":449},{"pc":[444],"errorMessage":"this contract does not implement the given ABI method for call DeleteApplication","teal":457}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAwIDEKYnl0ZWNibG9jayAweDYyNjU3NDQxNmQ2Zjc1NmU3NCAweDczNjU3NDc0NmM2NTY0IDB4MDAKCi8vIFRoaXMgVEVBTCB3YXMgZ2VuZXJhdGVkIGJ5IFRFQUxTY3JpcHQgdjAuMTA2LjAKLy8gaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9URUFMU2NyaXB0CgovLyBUaGlzIGNvbnRyYWN0IGlzIGNvbXBsaWFudCB3aXRoIGFuZC9vciBpbXBsZW1lbnRzIHRoZSBmb2xsb3dpbmcgQVJDczogWyBBUkM0IF0KCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCnB1c2hpbnQgNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpjYWxsX0RlbGV0ZUFwcGxpY2F0aW9uICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gY3JlYXRlQXBwbGljYXRpb24odWludDY0LHVpbnQ2NCxzdHJpbmcsdWludDY0KXZvaWQKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCS8vIGFtb3VudDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyA0CglidG9pCgoJLy8gY29uZGl0aW9uOiBzdHJpbmcKCXR4bmEgQXBwbGljYXRpb25BcmdzIDMKCWV4dHJhY3QgMiAwCgoJLy8gZGF0ZTogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglidG9pCgoJLy8gcHJpY2U6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGV4ZWN1dGUgY3JlYXRlQXBwbGljYXRpb24odWludDY0LHVpbnQ2NCxzdHJpbmcsdWludDY0KXZvaWQKCWNhbGxzdWIgY3JlYXRlQXBwbGljYXRpb24KCWludGMgMSAvLyAxCglyZXR1cm4KCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKHByaWNlOiB1aW50NjQsIGRhdGU6IHVpbnQ2NCwgY29uZGl0aW9uOiBCZXRDb25kaXRpb24sIGFtb3VudDogdWludDY0KTogdm9pZAovLwovLyBDcmVhdGUgdGhlIGFwcGxpY2F0aW9uCi8vCi8vIEBwYXJhbSBwcmljZSBUaGUgdGFyZ2V0IHByaWNlIG9mIEFMR08KLy8gQHBhcmFtIGRhdGUgVGhlIHRhcmdldCBkYXRlICh0aW1lc3RhbXApCi8vIEBwYXJhbSBjb25kaXRpb24gVGhlIGNvbmRpdGlvbiAoT3ZlciBvciBVbmRlcikKLy8gQHBhcmFtIGFtb3VudCBUaGUgYW1vdW50IHRvIGJldCAoaW4gQUxHTykKY3JlYXRlQXBwbGljYXRpb246Cglwcm90byA0IDAKCgkvLyBjb250cmFjdHNcQmV0T25BbGdvUHJpY2UuYWxnby50czoyNwoJLy8gdGhpcy5wcmljZS52YWx1ZSA9IHByaWNlCglwdXNoYnl0ZXMgMHg3MDcyNjk2MzY1IC8vICJwcmljZSIKCWZyYW1lX2RpZyAtMSAvLyBwcmljZTogdWludDY0CglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0c1xCZXRPbkFsZ29QcmljZS5hbGdvLnRzOjI4CgkvLyB0aGlzLnRhcmdldERhdGUudmFsdWUgPSBkYXRlCglwdXNoYnl0ZXMgMHg3NDYxNzI2NzY1NzQ0NDYxNzQ2NSAvLyAidGFyZ2V0RGF0ZSIKCWZyYW1lX2RpZyAtMiAvLyBkYXRlOiB1aW50NjQKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzXEJldE9uQWxnb1ByaWNlLmFsZ28udHM6MjkKCS8vIHRoaXMuY29uZGl0aW9uLnZhbHVlID0gY29uZGl0aW9uCglwdXNoYnl0ZXMgMHg2MzZmNmU2NDY5NzQ2OTZmNmUgLy8gImNvbmRpdGlvbiIKCWZyYW1lX2RpZyAtMyAvLyBjb25kaXRpb246IEJldENvbmRpdGlvbgoJZHVwCglsZW4KCWl0b2IKCWV4dHJhY3QgNiAyCglzd2FwCgljb25jYXQKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzXEJldE9uQWxnb1ByaWNlLmFsZ28udHM6MzAKCS8vIHRoaXMuYmV0QW1vdW50LnZhbHVlID0gYW1vdW50CglieXRlYyAwIC8vICAiYmV0QW1vdW50IgoJZnJhbWVfZGlnIC00IC8vIGFtb3VudDogdWludDY0CglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0c1xCZXRPbkFsZ29QcmljZS5hbGdvLnRzOjMxCgkvLyB0aGlzLnNldHRsZWQudmFsdWUgPSBmYWxzZQoJYnl0ZWMgMSAvLyAgInNldHRsZWQiCglpbnRjIDAgLy8gMAoJYnl0ZWMgMiAvLyAweDAwCglpbnRjIDAgLy8gMAoJdW5jb3ZlciAyCglzZXRiaXQKCWFwcF9nbG9iYWxfcHV0CglyZXRzdWIKCi8vIG9wdEluKCl2b2lkCiphYmlfcm91dGVfb3B0SW46CgkvLyBleGVjdXRlIG9wdEluKCl2b2lkCgljYWxsc3ViIG9wdEluCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBvcHRJbigpOiB2b2lkCi8vCi8vIE9wdC1pbiB0byB0aGUgY29udHJhY3QgKHBlciB1c2VyKQpvcHRJbjoKCXByb3RvIDAgMAoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglwdXNoYnl0ZXMgMHgKCgkvLyBjb250cmFjdHNcQmV0T25BbGdvUHJpY2UuYWxnby50czozOAoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciAhPT0gdGhpcy5hcHAuY3JlYXRvciwgJ0NyZWF0b3IgY2Fubm90IG9wdC1pbicpCgl0eG4gU2VuZGVyCgl0eG5hIEFwcGxpY2F0aW9ucyAwCglhcHBfcGFyYW1zX2dldCBBcHBDcmVhdG9yCglwb3AKCSE9CgoJLy8gQ3JlYXRvciBjYW5ub3Qgb3B0LWluCglhc3NlcnQKCgkvLyBjb250cmFjdHNcQmV0T25BbGdvUHJpY2UuYWxnby50czo0MQoJLy8gbWluQmFsYW5jZSA9IGdsb2JhbHMubWluQmFsYW5jZSArIGdsb2JhbHMuYXNzZXRPcHRJbk1pbkJhbGFuY2UKCWdsb2JhbCBNaW5CYWxhbmNlCglnbG9iYWwgQXNzZXRPcHRJbk1pbkJhbGFuY2UKCSsKCWZyYW1lX2J1cnkgMCAvLyBtaW5CYWxhbmNlOiB1aW50NjQKCgkvLyBjb250cmFjdHNcQmV0T25BbGdvUHJpY2UuYWxnby50czo0MgoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlci5iYWxhbmNlID49IG1pbkJhbGFuY2UsICdJbnN1ZmZpY2llbnQgYmFsYW5jZSB0byBvcHQtaW4nKQoJdHhuIFNlbmRlcgoJYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCglwb3AKCWZyYW1lX2RpZyAwIC8vIG1pbkJhbGFuY2U6IHVpbnQ2NAoJPj0KCgkvLyBJbnN1ZmZpY2llbnQgYmFsYW5jZSB0byBvcHQtaW4KCWFzc2VydAoJcmV0c3ViCgovLyBwbGFjZUJldCh1aW50NjQpdm9pZAoqYWJpX3JvdXRlX3BsYWNlQmV0OgoJLy8gYW1vdW50OiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWJ0b2kKCgkvLyBleGVjdXRlIHBsYWNlQmV0KHVpbnQ2NCl2b2lkCgljYWxsc3ViIHBsYWNlQmV0CglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBwbGFjZUJldChhbW91bnQ6IHVpbnQ2NCk6IHZvaWQKLy8KLy8gUGxhY2UgYSBiZXQgb24gdGhlIGNvbnRyYWN0Ci8vCi8vIEBwYXJhbSBhbW91bnQgVGhlIGFtb3VudCB0byB3YWdlciBpbiBBTEdPCnBsYWNlQmV0OgoJcHJvdG8gMSAwCgoJLy8gY29udHJhY3RzXEJldE9uQWxnb1ByaWNlLmFsZ28udHM6NTcKCS8vIGFzc2VydCh0aGlzLnR4bi5zZW5kZXIgIT09IHRoaXMuYXBwLmNyZWF0b3IsICdDcmVhdG9yIGNhbm5vdCBwbGFjZSBhIGJldCcpCgl0eG4gU2VuZGVyCgl0eG5hIEFwcGxpY2F0aW9ucyAwCglhcHBfcGFyYW1zX2dldCBBcHBDcmVhdG9yCglwb3AKCSE9CgoJLy8gQ3JlYXRvciBjYW5ub3QgcGxhY2UgYSBiZXQKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xCZXRPbkFsZ29QcmljZS5hbGdvLnRzOjU4CgkvLyBhc3NlcnQodGhpcy5zZXR0bGVkLnZhbHVlID09PSBmYWxzZSwgJ1RoZSBiZXQgaGFzIGFscmVhZHkgYmVlbiBzZXR0bGVkJykKCWJ5dGVjIDEgLy8gICJzZXR0bGVkIgoJYXBwX2dsb2JhbF9nZXQKCWludGMgMCAvLyAwCglnZXRiaXQKCWludGMgMCAvLyAwCgk9PQoKCS8vIFRoZSBiZXQgaGFzIGFscmVhZHkgYmVlbiBzZXR0bGVkCglhc3NlcnQKCgkvLyBjb250cmFjdHNcQmV0T25BbGdvUHJpY2UuYWxnby50czo2MQoJLy8gYXNzZXJ0KGFtb3VudCA9PT0gdGhpcy5iZXRBbW91bnQudmFsdWUsICdCZXQgYW1vdW50IG11c3QgbWF0Y2ggdGhlIGV4cGVjdGVkIHdhZ2VyJykKCWZyYW1lX2RpZyAtMSAvLyBhbW91bnQ6IHVpbnQ2NAoJYnl0ZWMgMCAvLyAgImJldEFtb3VudCIKCWFwcF9nbG9iYWxfZ2V0Cgk9PQoKCS8vIEJldCBhbW91bnQgbXVzdCBtYXRjaCB0aGUgZXhwZWN0ZWQgd2FnZXIKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xCZXRPbkFsZ29QcmljZS5hbGdvLnRzOjY0CgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyLmJhbGFuY2UgPj0gYW1vdW50LCAnSW5zdWZmaWNpZW50IGJhbGFuY2UgdG8gcGxhY2UgdGhlIGJldCcpCgl0eG4gU2VuZGVyCglhY2N0X3BhcmFtc19nZXQgQWNjdEJhbGFuY2UKCXBvcAoJZnJhbWVfZGlnIC0xIC8vIGFtb3VudDogdWludDY0Cgk+PQoKCS8vIEluc3VmZmljaWVudCBiYWxhbmNlIHRvIHBsYWNlIHRoZSBiZXQKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xCZXRPbkFsZ29QcmljZS5hbGdvLnRzOjY3CgkvLyBzZW5kUGF5bWVudCh7CgkvLyAgICAgICByZWNlaXZlcjogdGhpcy5hcHAuYWRkcmVzcywKCS8vICAgICAgIGFtb3VudDogYW1vdW50CgkvLyAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMSAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzXEJldE9uQWxnb1ByaWNlLmFsZ28udHM6NjgKCS8vIHJlY2VpdmVyOiB0aGlzLmFwcC5hZGRyZXNzCglnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwoJaXR4bl9maWVsZCBSZWNlaXZlcgoKCS8vIGNvbnRyYWN0c1xCZXRPbkFsZ29QcmljZS5hbGdvLnRzOjY5CgkvLyBhbW91bnQ6IGFtb3VudAoJZnJhbWVfZGlnIC0xIC8vIGFtb3VudDogdWludDY0CglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIEZlZSBmaWVsZCBub3Qgc2V0LCBkZWZhdWx0aW5nIHRvIDAKCWludGMgMCAvLyAwCglpdHhuX2ZpZWxkIEZlZQoKCS8vIFN1Ym1pdCBpbm5lciB0cmFuc2FjdGlvbgoJaXR4bl9zdWJtaXQKCXJldHN1YgoKLy8gc2V0dGxlQmV0KGJvb2wpdm9pZAoqYWJpX3JvdXRlX3NldHRsZUJldDoKCS8vIGlzV2lubmVyOiBib29sCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyAxIC8vIDEKCT09CgoJLy8gYXJndW1lbnQgMCAoaXNXaW5uZXIpIGZvciBzZXR0bGVCZXQgbXVzdCBiZSBhIGJvb2wKCWFzc2VydAoJaW50YyAwIC8vIDAKCWdldGJpdAoKCS8vIGV4ZWN1dGUgc2V0dGxlQmV0KGJvb2wpdm9pZAoJY2FsbHN1YiBzZXR0bGVCZXQKCWludGMgMSAvLyAxCglyZXR1cm4KCi8vIHNldHRsZUJldChpc1dpbm5lcjogYm9vbGVhbik6IHZvaWQKLy8KLy8gU2V0dGxlIHRoZSBiZXQgYmFzZWQgb24gd2hldGhlciB0aGUgdXNlciB3b24gb3IgbG9zdAovLwovLyBAcGFyYW0gaXNXaW5uZXIgQm9vbGVhbiBpbmRpY2F0aW5nIGlmIHRoZSBzZW5kZXIgaXMgdGhlIHdpbm5lcgpzZXR0bGVCZXQ6Cglwcm90byAxIDAKCgkvLyBjb250cmFjdHNcQmV0T25BbGdvUHJpY2UuYWxnby50czo4MgoJLy8gYXNzZXJ0KHRoaXMuc2V0dGxlZC52YWx1ZSA9PT0gZmFsc2UsICdUaGUgYmV0IGhhcyBhbHJlYWR5IGJlZW4gc2V0dGxlZCcpCglieXRlYyAxIC8vICAic2V0dGxlZCIKCWFwcF9nbG9iYWxfZ2V0CglpbnRjIDAgLy8gMAoJZ2V0Yml0CglpbnRjIDAgLy8gMAoJPT0KCgkvLyBUaGUgYmV0IGhhcyBhbHJlYWR5IGJlZW4gc2V0dGxlZAoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXEJldE9uQWxnb1ByaWNlLmFsZ28udHM6ODUKCS8vIHRoaXMuc2V0dGxlZC52YWx1ZSA9IHRydWUKCWJ5dGVjIDEgLy8gICJzZXR0bGVkIgoJaW50YyAxIC8vIDEKCWJ5dGVjIDIgLy8gMHgwMAoJaW50YyAwIC8vIDAKCXVuY292ZXIgMgoJc2V0Yml0CglhcHBfZ2xvYmFsX3B1dAoKCS8vICppZjBfY29uZGl0aW9uCgkvLyBjb250cmFjdHNcQmV0T25BbGdvUHJpY2UuYWxnby50czo4OAoJLy8gaXNXaW5uZXIKCWZyYW1lX2RpZyAtMSAvLyBpc1dpbm5lcjogYm9vbGVhbgoJYnogKmlmMF9lbHNlCgoJLy8gKmlmMF9jb25zZXF1ZW50CgkvLyBjb250cmFjdHNcQmV0T25BbGdvUHJpY2UuYWxnby50czo4OQoJLy8gc2VuZFBheW1lbnQoewoJLy8gICAgICAgICByZWNlaXZlcjogdGhpcy50eG4uc2VuZGVyLCAvLyBTZW5kZXIgcmVjZWl2ZXMgdGhlIGJldCBhbW91bnQgYmFjawoJLy8gICAgICAgICBhbW91bnQ6IHRoaXMuYmV0QW1vdW50LnZhbHVlLAoJLy8gICAgICAgICBjbG9zZVJlbWFpbmRlclRvOiB0aGlzLnR4bi5zZW5kZXIgLy8gT3B0aW9uYWxseSBjbG9zZSBhbnkgcmVtYWluaW5nIGJhbGFuY2UgdG8gdGhlIHNlbmRlcgoJLy8gICAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMSAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzXEJldE9uQWxnb1ByaWNlLmFsZ28udHM6OTAKCS8vIHJlY2VpdmVyOiB0aGlzLnR4bi5zZW5kZXIKCXR4biBTZW5kZXIKCWl0eG5fZmllbGQgUmVjZWl2ZXIKCgkvLyBjb250cmFjdHNcQmV0T25BbGdvUHJpY2UuYWxnby50czo5MQoJLy8gYW1vdW50OiB0aGlzLmJldEFtb3VudC52YWx1ZQoJYnl0ZWMgMCAvLyAgImJldEFtb3VudCIKCWFwcF9nbG9iYWxfZ2V0CglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIGNvbnRyYWN0c1xCZXRPbkFsZ29QcmljZS5hbGdvLnRzOjkyCgkvLyBjbG9zZVJlbWFpbmRlclRvOiB0aGlzLnR4bi5zZW5kZXIKCXR4biBTZW5kZXIKCWl0eG5fZmllbGQgQ2xvc2VSZW1haW5kZXJUbwoKCS8vIEZlZSBmaWVsZCBub3Qgc2V0LCBkZWZhdWx0aW5nIHRvIDAKCWludGMgMCAvLyAwCglpdHhuX2ZpZWxkIEZlZQoKCS8vIFN1Ym1pdCBpbm5lciB0cmFuc2FjdGlvbgoJaXR4bl9zdWJtaXQKCWIgKmlmMF9lbmQKCippZjBfZWxzZToKCS8vIGNvbnRyYWN0c1xCZXRPbkFsZ29QcmljZS5hbGdvLnRzOjk2CgkvLyBzZW5kUGF5bWVudCh7CgkvLyAgICAgICAgIHJlY2VpdmVyOiB0aGlzLmFwcC5jcmVhdG9yLCAvLyBPciBhbm90aGVyIGFkZHJlc3MgaWYgdGhlIGJldCB3YXMgbG9zdAoJLy8gICAgICAgICBhbW91bnQ6IHRoaXMuYmV0QW1vdW50LnZhbHVlLAoJLy8gICAgICAgICBjbG9zZVJlbWFpbmRlclRvOiB0aGlzLmFwcC5jcmVhdG9yIC8vIE9wdGlvbmFsbHkgY2xvc2UgYW55IHJlbWFpbmluZyBiYWxhbmNlIHRvIHRoZSBjcmVhdG9yCgkvLyAgICAgICB9KQoJaXR4bl9iZWdpbgoJaW50YyAxIC8vICBwYXkKCWl0eG5fZmllbGQgVHlwZUVudW0KCgkvLyBjb250cmFjdHNcQmV0T25BbGdvUHJpY2UuYWxnby50czo5NwoJLy8gcmVjZWl2ZXI6IHRoaXMuYXBwLmNyZWF0b3IKCXR4bmEgQXBwbGljYXRpb25zIDAKCWFwcF9wYXJhbXNfZ2V0IEFwcENyZWF0b3IKCXBvcAoJaXR4bl9maWVsZCBSZWNlaXZlcgoKCS8vIGNvbnRyYWN0c1xCZXRPbkFsZ29QcmljZS5hbGdvLnRzOjk4CgkvLyBhbW91bnQ6IHRoaXMuYmV0QW1vdW50LnZhbHVlCglieXRlYyAwIC8vICAiYmV0QW1vdW50IgoJYXBwX2dsb2JhbF9nZXQKCWl0eG5fZmllbGQgQW1vdW50CgoJLy8gY29udHJhY3RzXEJldE9uQWxnb1ByaWNlLmFsZ28udHM6OTkKCS8vIGNsb3NlUmVtYWluZGVyVG86IHRoaXMuYXBwLmNyZWF0b3IKCXR4bmEgQXBwbGljYXRpb25zIDAKCWFwcF9wYXJhbXNfZ2V0IEFwcENyZWF0b3IKCXBvcAoJaXR4bl9maWVsZCBDbG9zZVJlbWFpbmRlclRvCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAwIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoKKmlmMF9lbmQ6CglyZXRzdWIKCi8vIGRlbGV0ZUFwcGxpY2F0aW9uKCl2b2lkCiphYmlfcm91dGVfZGVsZXRlQXBwbGljYXRpb246CgkvLyBleGVjdXRlIGRlbGV0ZUFwcGxpY2F0aW9uKCl2b2lkCgljYWxsc3ViIGRlbGV0ZUFwcGxpY2F0aW9uCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBkZWxldGVBcHBsaWNhdGlvbigpOiB2b2lkCi8vCi8vIE1ldGhvZCB0byBkZWxldGUgdGhlIGFwcGxpY2F0aW9uCi8vIFRoaXMgbWV0aG9kIHRyYW5zZmVycyBhbnkgcmVtYWluaW5nIGZ1bmRzIGJhY2sgdG8gdGhlIGNyZWF0b3IKZGVsZXRlQXBwbGljYXRpb246Cglwcm90byAwIDAKCgkvLyBjb250cmFjdHNcQmV0T25BbGdvUHJpY2UuYWxnby50czoxMDkKCS8vIGFzc2VydCh0aGlzLnR4bi5zZW5kZXIgPT09IHRoaXMuYXBwLmNyZWF0b3IsICdPbmx5IHRoZSBjcmVhdG9yIGNhbiBkZWxldGUgdGhlIGFwcGxpY2F0aW9uJykKCXR4biBTZW5kZXIKCXR4bmEgQXBwbGljYXRpb25zIDAKCWFwcF9wYXJhbXNfZ2V0IEFwcENyZWF0b3IKCXBvcAoJPT0KCgkvLyBPbmx5IHRoZSBjcmVhdG9yIGNhbiBkZWxldGUgdGhlIGFwcGxpY2F0aW9uCglhc3NlcnQKCgkvLyBjb250cmFjdHNcQmV0T25BbGdvUHJpY2UuYWxnby50czoxMTIKCS8vIHNlbmRQYXltZW50KHsKCS8vICAgICAgIHJlY2VpdmVyOiB0aGlzLmFwcC5jcmVhdG9yLAoJLy8gICAgICAgYW1vdW50OiB0aGlzLmFwcC5hZGRyZXNzLmJhbGFuY2UsCgkvLyAgICAgICBjbG9zZVJlbWFpbmRlclRvOiB0aGlzLmFwcC5jcmVhdG9yCgkvLyAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMSAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzXEJldE9uQWxnb1ByaWNlLmFsZ28udHM6MTEzCgkvLyByZWNlaXZlcjogdGhpcy5hcHAuY3JlYXRvcgoJdHhuYSBBcHBsaWNhdGlvbnMgMAoJYXBwX3BhcmFtc19nZXQgQXBwQ3JlYXRvcgoJcG9wCglpdHhuX2ZpZWxkIFJlY2VpdmVyCgoJLy8gY29udHJhY3RzXEJldE9uQWxnb1ByaWNlLmFsZ28udHM6MTE0CgkvLyBhbW91bnQ6IHRoaXMuYXBwLmFkZHJlc3MuYmFsYW5jZQoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCWFjY3RfcGFyYW1zX2dldCBBY2N0QmFsYW5jZQoJcG9wCglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIGNvbnRyYWN0c1xCZXRPbkFsZ29QcmljZS5hbGdvLnRzOjExNQoJLy8gY2xvc2VSZW1haW5kZXJUbzogdGhpcy5hcHAuY3JlYXRvcgoJdHhuYSBBcHBsaWNhdGlvbnMgMAoJYXBwX3BhcmFtc19nZXQgQXBwQ3JlYXRvcgoJcG9wCglpdHhuX2ZpZWxkIENsb3NlUmVtYWluZGVyVG8KCgkvLyBGZWUgZmllbGQgbm90IHNldCwgZGVmYXVsdGluZyB0byAwCglpbnRjIDAgLy8gMAoJaXR4bl9maWVsZCBGZWUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CglyZXRzdWIKCipjcmVhdGVfTm9PcDoKCXB1c2hieXRlcyAweGQ0YThlOTczIC8vIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24odWludDY0LHVpbnQ2NCxzdHJpbmcsdWludDY0KXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNyZWF0ZSBOb09wCgllcnIKCipjYWxsX05vT3A6CglwdXNoYnl0ZXMgMHgyOTMxNGQ5NSAvLyBtZXRob2QgIm9wdEluKCl2b2lkIgoJcHVzaGJ5dGVzIDB4NDJmNjM4Y2EgLy8gbWV0aG9kICJwbGFjZUJldCh1aW50NjQpdm9pZCIKCXB1c2hieXRlcyAweDgwYzJhMzk5IC8vIG1ldGhvZCAic2V0dGxlQmV0KGJvb2wpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfb3B0SW4gKmFiaV9yb3V0ZV9wbGFjZUJldCAqYWJpX3JvdXRlX3NldHRsZUJldAoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKKmNhbGxfRGVsZXRlQXBwbGljYXRpb246CglwdXNoYnl0ZXMgMHgyNDg3YzMyYyAvLyBtZXRob2QgImRlbGV0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9kZWxldGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIERlbGV0ZUFwcGxpY2F0aW9uCgllcnI=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiACAAEmAwliZXRBbW91bnQHc2V0dGxlZAEAMRgUgQYLMRkIjQwBUwAAAAAAAAAAAXEBRQAAAAAAAAAAAAAANhoEFzYaA1cCADYaAhc2GgEXiAACI0OKBACABXByaWNli/9ngAp0YXJnZXREYXRli/5ngAljb25kaXRpb26L/UkVFlcGAkxQZyiL/GcpIioiTwJUZ4mIAAIjQ4oAAIAAMQA2MgByB0gTRDIBMhAIjAAxAHMASIsAD0SJNhoBF4gAAiNDigEAMQA2MgByB0gTRClkIlMiEkSL/yhkEkQxAHMASIv/D0SxI7IQMgqyB4v/sggisgGziTYaAUkVIxJEIlOIAAIjQ4oBAClkIlMiEkQpIyoiTwJUZ4v/QQAXsSOyEDEAsgcoZLIIMQCyCSKyAbNCAByxI7IQNjIAcgdIsgcoZLIINjIAcgdIsgkisgGziYgAAiNDigAAMQA2MgByB0gSRLEjshA2MgByB0iyBzIKcwBIsgg2MgByB0iyCSKyAbOJgATUqOlzNhoAjgH+rwCABCkxTZWABEL2OMqABIDCo5k2GgCOA/7n/wz/SQCABCSHwyw2GgCOAf+VAA==","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -205,11 +205,97 @@ export type MethodReturn<TSignature extends BetOnAlgoPriceSignatures> = BetOnAlg
 export type GlobalKeysState = BetOnAlgoPriceTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type BetOnAlgoPriceCreateCallParams =
+  | Expand<CallParams<BetOnAlgoPriceArgs['obj']['createApplication(uint64,uint64,string,uint64)void'] | BetOnAlgoPriceArgs['tuple']['createApplication(uint64,uint64,string,uint64)void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<BetOnAlgoPriceArgs['obj']['createApplication(uint64,uint64,string,uint64)void'] | BetOnAlgoPriceArgs['tuple']['createApplication(uint64,uint64,string,uint64)void']> & {method: 'createApplication(uint64,uint64,string,uint64)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type BetOnAlgoPriceDeleteCallParams =
+  | Expand<CallParams<BetOnAlgoPriceArgs['obj']['deleteApplication()void'] | BetOnAlgoPriceArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication'}>
+  | Expand<CallParams<BetOnAlgoPriceArgs['obj']['deleteApplication()void'] | BetOnAlgoPriceArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type BetOnAlgoPriceDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: BetOnAlgoPriceCreateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: BetOnAlgoPriceDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the BetOnAlgoPrice smart contract
  */
 export abstract class BetOnAlgoPriceParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends BetOnAlgoPriceCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication(uint64,uint64,string,uint64)void':
+            return BetOnAlgoPriceParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the BetOnAlgoPrice smart contract using the createApplication(uint64,uint64,string,uint64)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<BetOnAlgoPriceArgs['obj']['createApplication(uint64,uint64,string,uint64)void'] | BetOnAlgoPriceArgs['tuple']['createApplication(uint64,uint64,string,uint64)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication(uint64,uint64,string,uint64)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.price, params.args.date, params.args.condition, params.args.amount],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends BetOnAlgoPriceDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'deleteApplication':
+          case 'deleteApplication()void':
+            return BetOnAlgoPriceParamsFactory.delete.deleteApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the BetOnAlgoPrice smart contract using the deleteApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      deleteApplication(params: CallParams<BetOnAlgoPriceArgs['obj']['deleteApplication()void'] | BetOnAlgoPriceArgs['tuple']['deleteApplication()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'deleteApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the optIn()void ABI method
    *
@@ -257,6 +343,174 @@ export abstract class BetOnAlgoPriceParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the BetOnAlgoPrice smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class BetOnAlgoPriceFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `BetOnAlgoPriceFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new BetOnAlgoPriceClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new BetOnAlgoPriceClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the BetOnAlgoPrice smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: BetOnAlgoPriceDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? BetOnAlgoPriceParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (BetOnAlgoPriceCreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? BetOnAlgoPriceParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (BetOnAlgoPriceDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new BetOnAlgoPriceClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BetOnAlgoPrice smart contract using the createApplication(uint64,uint64,string,uint64)void ABI method.
+       *
+       * Create the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<BetOnAlgoPriceArgs['obj']['createApplication(uint64,uint64,string,uint64)void'] | BetOnAlgoPriceArgs['tuple']['createApplication(uint64,uint64,string,uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(BetOnAlgoPriceParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the BetOnAlgoPrice smart contract using the deleteApplication()void ABI method.
+       *
+      * Method to delete the application
+      This method transfers any remaining funds back to the creator
+
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      deleteApplication: (params: CallParams<BetOnAlgoPriceArgs['obj']['deleteApplication()void'] | BetOnAlgoPriceArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(BetOnAlgoPriceParamsFactory.delete.deleteApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BetOnAlgoPrice smart contract using the createApplication(uint64,uint64,string,uint64)void ABI method.
+       *
+       * Create the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<BetOnAlgoPriceArgs['obj']['createApplication(uint64,uint64,string,uint64)void'] | BetOnAlgoPriceArgs['tuple']['createApplication(uint64,uint64,string,uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(BetOnAlgoPriceParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BetOnAlgoPrice smart contract using an ABI method call using the createApplication(uint64,uint64,string,uint64)void ABI method.
+       *
+       * Create the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<BetOnAlgoPriceArgs['obj']['createApplication(uint64,uint64,string,uint64)void'] | BetOnAlgoPriceArgs['tuple']['createApplication(uint64,uint64,string,uint64)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(BetOnAlgoPriceParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | BetOnAlgoPriceReturns['createApplication(uint64,uint64,string,uint64)void']) }, appClient: new BetOnAlgoPriceClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the BetOnAlgoPrice smart contract
  */
@@ -337,6 +591,26 @@ export class BetOnAlgoPriceClient {
    */
   readonly params = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the BetOnAlgoPrice smart contract using the `deleteApplication()void` ABI method.
+       *
+      * Method to delete the application
+      This method transfers any remaining funds back to the creator
+
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      deleteApplication: (params: CallParams<BetOnAlgoPriceArgs['obj']['deleteApplication()void'] | BetOnAlgoPriceArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.params.delete(BetOnAlgoPriceParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the BetOnAlgoPrice smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -389,6 +663,26 @@ export class BetOnAlgoPriceClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the BetOnAlgoPrice smart contract using the `deleteApplication()void` ABI method.
+       *
+      * Method to delete the application
+      This method transfers any remaining funds back to the creator
+
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      deleteApplication: (params: CallParams<BetOnAlgoPriceArgs['obj']['deleteApplication()void'] | BetOnAlgoPriceArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(BetOnAlgoPriceParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the BetOnAlgoPrice smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -440,6 +734,27 @@ export class BetOnAlgoPriceClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the BetOnAlgoPrice smart contract using the `deleteApplication()void` ABI method.
+       *
+      * Method to delete the application
+      This method transfers any remaining funds back to the creator
+
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      deleteApplication: async (params: CallParams<BetOnAlgoPriceArgs['obj']['deleteApplication()void'] | BetOnAlgoPriceArgs['tuple']['deleteApplication()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(BetOnAlgoPriceParamsFactory.delete.deleteApplication(params))
+        return {...result, return: result.return as unknown as (undefined | BetOnAlgoPriceReturns['deleteApplication()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the BetOnAlgoPrice smart contract.
      *
@@ -575,6 +890,15 @@ export class BetOnAlgoPriceClient {
         resultMappers.push(undefined)
         return this
       },
+      get delete() {
+        return {
+          deleteApplication: (params: CallParams<BetOnAlgoPriceArgs['obj']['deleteApplication()void'] | BetOnAlgoPriceArgs['tuple']['deleteApplication()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.deleteApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the BetOnAlgoPrice contract
        */
@@ -642,6 +966,20 @@ export type BetOnAlgoPriceComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   settleBet(params?: CallParams<BetOnAlgoPriceArgs['obj']['settleBet(bool)void'] | BetOnAlgoPriceArgs['tuple']['settleBet(bool)void']>): BetOnAlgoPriceComposer<[...TReturns, BetOnAlgoPriceReturns['settleBet(bool)void'] | undefined]>
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the BetOnAlgoPrice smart contract using the deleteApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    deleteApplication(params?: CallParams<BetOnAlgoPriceArgs['obj']['deleteApplication()void'] | BetOnAlgoPriceArgs['tuple']['deleteApplication()void']>): BetOnAlgoPriceComposer<[...TReturns, BetOnAlgoPriceReturns['deleteApplication()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the BetOnAlgoPrice smart contract.
