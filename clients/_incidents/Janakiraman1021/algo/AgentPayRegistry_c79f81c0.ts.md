@@ -2,8 +2,8 @@
 
 - **Repo**: [Janakiraman1021/algo](https://github.com/Janakiraman1021/algo)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Janakiraman1021/algo/HEAD/smart-contract/artifacts/AgentPayRegistry.arc56.json](https://raw.githubusercontent.com/Janakiraman1021/algo/HEAD/smart-contract/artifacts/AgentPayRegistry.arc56.json)
-- **Detected**: 2026-08-24T06:56:01.416959+00:00
-- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
+- **Detected**: 2026-11-06T13:54:20.802087+00:00
+- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.2`
 
 ## Reproduce
 
