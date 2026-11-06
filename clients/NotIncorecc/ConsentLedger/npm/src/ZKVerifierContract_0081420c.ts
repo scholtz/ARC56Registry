@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ZKVerifierContract","structs":{"ProofRecord":[{"name":"proofHash","type":"uint8[32]"},{"name":"circuitType","type":"uint8"},{"name":"isVerified","type":"bool"},{"name":"verifiedRound","type":"uint64"},{"name":"consentAppId","type":"uint64"}]},"methods":[{"name":"set_consent_ledger_app","args":[{"type":"uint64","name":"app_id"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Set the linked ConsentLedger app ID. Only the contract creator can call this.","events":[],"recommendations":{}},{"name":"submit_proof","args":[{"type":"uint8[32]","name":"proof_hash"},{"type":"uint8","name":"circuit_type"},{"type":"uint64","name":"consent_app_id"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"User submits the SHA-256 hash of their ZK proof.\nThe actual proof is verified off-chain by the trusted backend (creator). Box key = sha256(sender || proof_hash) — fits within AVM 64-byte limit.","events":[],"recommendations":{}},{"name":"confirm_verification","args":[{"type":"address","name":"user"},{"type":"uint8[32]","name":"proof_hash"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Marks a proof as verified after off-chain gnark verification.\nOnly the contract creator (trusted backend deployer) can call this.","events":[],"recommendations":{}},{"name":"is_proof_valid","args":[{"type":"address","name":"user"},{"type":"uint8[32]","name":"proof_hash"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns True if the proof has been confirmed by the trusted backend.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Staged Groth16 ZK proof verifier for ConsentLedger.\n\n    AVM cannot perform EC pairings natively within the ~70k opcode budget.\n    Two-phase strategy:\n      1. User submits proof_hash on-chain (cheap: ~1000 ops)\n      2. Trusted backend (contract creator) verifies off-chain via gnark, then\n         calls confirm_verification() to mark the proof valid on-chain.\n      3. ConsentLedger reads is_proof_valid() before granting consent.\n\n    Box key = sha256(user_address || proof_hash) to fit within 64-byte AVM limit.\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"consent_ledger_app":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y29uc2VudF9sZWRnZXJfYXBw"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"proofs":{"keyType":"AVMBytes","valueType":"ProofRecord","prefix":""}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[107],"errorMessage":"Only creator can configure"},{"pc":[194],"errorMessage":"Only trusted backend can confirm"},{"pc":[218],"errorMessage":"Proof already confirmed"},{"pc":[149],"errorMessage":"Proof already submitted"},{"pc":[201],"errorMessage":"Unknown proof — call submit_proof first"},{"pc":[292],"errorMessage":"check self.proofs entry exists"},{"pc":[121,180,188,260,268],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[101,137],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[129],"errorMessage":"invalid number of bytes for arc4.uint8"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ZKVerifierContract","structs":{"ProofRecord":[{"name":"proofHash","type":"uint8[32]"},{"name":"circuitType","type":"uint8"},{"name":"isVerified","type":"bool"},{"name":"verifiedRound","type":"uint64"},{"name":"consentAppId","type":"uint64"}]},"methods":[{"name":"set_consent_ledger_app","args":[{"type":"uint64","name":"app_id"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Set the linked ConsentLedger app ID. Only the contract creator can call this.","events":[],"recommendations":{}},{"name":"submit_proof","args":[{"type":"uint8[32]","name":"proof_hash"},{"type":"uint8","name":"circuit_type"},{"type":"uint64","name":"consent_app_id"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"User submits the SHA-256 hash of their ZK proof.\nThe actual proof is verified off-chain by the trusted backend (creator). Box key = sha256(sender || proof_hash) — fits within AVM 64-byte limit.","events":[],"recommendations":{}},{"name":"confirm_verification","args":[{"type":"address","name":"user"},{"type":"uint8[32]","name":"proof_hash"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Marks a proof as verified after off-chain gnark verification.\nOnly the contract creator (trusted backend deployer) can call this.","events":[],"recommendations":{}},{"name":"is_proof_valid","args":[{"type":"address","name":"user"},{"type":"uint8[32]","name":"proof_hash"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns True if the proof has been confirmed by the trusted backend.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Staged Groth16 ZK proof verifier for ConsentLedger.\n\n    AVM cannot perform EC pairings natively within the ~70k opcode budget.\n    Two-phase strategy:\n      1. User submits proof_hash on-chain (cheap: ~1000 ops)\n      2. Trusted backend (contract creator) verifies off-chain via gnark, then\n         calls confirm_verification() to mark the proof valid on-chain.\n      3. ConsentLedger reads is_proof_valid() before granting consent.\n\n    Box key = sha256(user_address || proof_hash) to fit within 64-byte AVM limit.\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"consent_ledger_app":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y29uc2VudF9sZWRnZXJfYXBw"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"proofs":{"keyType":"AVMBytes","valueType":"ProofRecord","prefix":""}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[107],"errorMessage":"Only creator can configure"},{"pc":[194],"errorMessage":"Only trusted backend can confirm"},{"pc":[218],"errorMessage":"Proof already confirmed"},{"pc":[149],"errorMessage":"Proof already submitted"},{"pc":[201],"errorMessage":"Unknown proof — call submit_proof first"},{"pc":[292],"errorMessage":"check self.proofs entry exists"},{"pc":[121,180,188,260,268],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[101,137],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[129],"errorMessage":"invalid number of bytes for arc4.uint8"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDMyIDAgOAogICAgYnl0ZWNibG9jayAweDAwICJjb25zZW50X2xlZGdlcl9hcHAiCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6MzktNDEKICAgIC8vICMgY29uc2VudF9sZWRnZXJfYXBwIGxpbmtzIHByb29mcyB0byBhIHNwZWNpZmljIENvbnNlbnRMZWRnZXIgZGVwbG95bWVudC4KICAgIC8vICMgVXBkYXRlZCBwb3N0LWRlcGxveSB2aWEgc2V0X2NvbnNlbnRfbGVkZ2VyX2FwcCgpIGJ5IHRoZSBjcmVhdG9yLgogICAgLy8gc2VsZi5jb25zZW50X2xlZGdlcl9hcHAgPSBVSW50NjQoMCkKICAgIGJ5dGVjXzEgLy8gImNvbnNlbnRfbGVkZ2VyX2FwcCIKICAgIGludGNfMiAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6MjQKICAgIC8vIGNsYXNzIFpLVmVyaWZpZXJDb250cmFjdChBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAMTMKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDliODIyMGJkIDB4NjQzNDcxMDcgMHg1ZDYxNTM3YiAweGM0MTM3ODkyIC8vIG1ldGhvZCAic2V0X2NvbnNlbnRfbGVkZ2VyX2FwcCh1aW50NjQpdm9pZCIsIG1ldGhvZCAic3VibWl0X3Byb29mKHVpbnQ4WzMyXSx1aW50OCx1aW50NjQpdm9pZCIsIG1ldGhvZCAiY29uZmlybV92ZXJpZmljYXRpb24oYWRkcmVzcyx1aW50OFszMl0pdm9pZCIsIG1ldGhvZCAiaXNfcHJvb2ZfdmFsaWQoYWRkcmVzcyx1aW50OFszMl0pYm9vbCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHNldF9jb25zZW50X2xlZGdlcl9hcHAgc3VibWl0X3Byb29mIGNvbmZpcm1fdmVyaWZpY2F0aW9uIGlzX3Byb29mX3ZhbGlkCiAgICBlcnIKCm1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAMTM6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy56a192ZXJpZmllci5jb250cmFjdC5aS1ZlcmlmaWVyQ29udHJhY3Quc2V0X2NvbnNlbnRfbGVkZ2VyX2FwcFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnNldF9jb25zZW50X2xlZGdlcl9hcHA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6NDUKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjQ4CiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBHbG9iYWwuY3JlYXRvcl9hZGRyZXNzLCAiT25seSBjcmVhdG9yIGNhbiBjb25maWd1cmUiCiAgICB0eG4gU2VuZGVyCiAgICBnbG9iYWwgQ3JlYXRvckFkZHJlc3MKICAgID09CiAgICBhc3NlcnQgLy8gT25seSBjcmVhdG9yIGNhbiBjb25maWd1cmUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy96a192ZXJpZmllci9jb250cmFjdC5weTo0OQogICAgLy8gc2VsZi5jb25zZW50X2xlZGdlcl9hcHAgPSBhcHBfaWQubmF0aXZlCiAgICBidG9pCiAgICBieXRlY18xIC8vICJjb25zZW50X2xlZGdlcl9hcHAiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjQ1CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuemtfdmVyaWZpZXIuY29udHJhY3QuWktWZXJpZmllckNvbnRyYWN0LnN1Ym1pdF9wcm9vZltyb3V0aW5nXSgpIC0+IHZvaWQ6CnN1Ym1pdF9wcm9vZjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy96a192ZXJpZmllci9jb250cmFjdC5weTo1MQogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50OAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjYzCiAgICAvLyBrZXkgPSBvcC5zaGEyNTYoVHhuLnNlbmRlci5ieXRlcyArIHByb29mX2hhc2guYnl0ZXMpCiAgICB0eG4gU2VuZGVyCiAgICBkaWcgMwogICAgY29uY2F0CiAgICBzaGEyNTYKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy96a192ZXJpZmllci9jb250cmFjdC5weTo2NAogICAgLy8gYXNzZXJ0IGtleSBub3QgaW4gc2VsZi5wcm9vZnMsICJQcm9vZiBhbHJlYWR5IHN1Ym1pdHRlZCIKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAhCiAgICBhc3NlcnQgLy8gUHJvb2YgYWxyZWFkeSBzdWJtaXR0ZWQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy96a192ZXJpZmllci9jb250cmFjdC5weTo2NS03MQogICAgLy8gcmVjb3JkID0gUHJvb2ZSZWNvcmQoCiAgICAvLyAgICAgcHJvb2ZfaGFzaD1wcm9vZl9oYXNoLmNvcHkoKSwKICAgIC8vICAgICBjaXJjdWl0X3R5cGU9Y2lyY3VpdF90eXBlLAogICAgLy8gICAgIGlzX3ZlcmlmaWVkPWFyYzQuQm9vbChGYWxzZSksCiAgICAvLyAgICAgdmVyaWZpZWRfcm91bmQ9YXJjNC5VSW50NjQoMCksCiAgICAvLyAgICAgY29uc2VudF9hcHBfaWQ9Y29uc2VudF9hcHBfaWQsCiAgICAvLyApCiAgICB1bmNvdmVyIDMKICAgIHVuY292ZXIgMwogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy96a192ZXJpZmllci9jb250cmFjdC5weTo3MgogICAgLy8gc2VsZi5wcm9vZnNba2V5XSA9IHJlY29yZC5jb3B5KCkKICAgIGJveF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy96a192ZXJpZmllci9jb250cmFjdC5weTo1MQogICAgLy8gQGFiaW1ldGhvZCgpCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnprX3ZlcmlmaWVyLmNvbnRyYWN0LlpLVmVyaWZpZXJDb250cmFjdC5jb25maXJtX3ZlcmlmaWNhdGlvbltyb3V0aW5nXSgpIC0+IHZvaWQ6CmNvbmZpcm1fdmVyaWZpY2F0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5Ojc0CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6ODQKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IEdsb2JhbC5jcmVhdG9yX2FkZHJlc3MsICJPbmx5IHRydXN0ZWQgYmFja2VuZCBjYW4gY29uZmlybSIKICAgIHR4biBTZW5kZXIKICAgIGdsb2JhbCBDcmVhdG9yQWRkcmVzcwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IHRydXN0ZWQgYmFja2VuZCBjYW4gY29uZmlybQogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5Ojg1CiAgICAvLyBrZXkgPSBvcC5zaGEyNTYodXNlci5ieXRlcyArIHByb29mX2hhc2guYnl0ZXMpCiAgICBjb25jYXQKICAgIHNoYTI1NgogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5Ojg2CiAgICAvLyBhc3NlcnQga2V5IGluIHNlbGYucHJvb2ZzLCAiVW5rbm93biBwcm9vZiDigJQgY2FsbCBzdWJtaXRfcHJvb2YgZmlyc3QiCiAgICBkdXAKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgYXNzZXJ0IC8vIFVua25vd24gcHJvb2Yg4oCUIGNhbGwgc3VibWl0X3Byb29mIGZpcnN0CiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6ODcKICAgIC8vIHJlY29yZCA9IHNlbGYucHJvb2ZzW2tleV0uY29weSgpCiAgICBkdXAKICAgIGJveF9nZXQKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5Ojg4CiAgICAvLyBhc3NlcnQgbm90IHJlY29yZC5pc192ZXJpZmllZC5uYXRpdmUsICJQcm9vZiBhbHJlYWR5IGNvbmZpcm1lZCIKICAgIGR1cAogICAgcHVzaGludCAyNjQKICAgIGdldGJpdAogICAgYnl0ZWNfMCAvLyAweDAwCiAgICBpbnRjXzIgLy8gMAogICAgdW5jb3ZlciAyCiAgICBzZXRiaXQKICAgIGludGNfMiAvLyAwCiAgICBnZXRiaXQKICAgICEKICAgIGFzc2VydCAvLyBQcm9vZiBhbHJlYWR5IGNvbmZpcm1lZAogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjkwCiAgICAvLyBwcm9vZl9oYXNoPXJlY29yZC5wcm9vZl9oYXNoLmNvcHkoKSwKICAgIGR1cAogICAgZXh0cmFjdCAwIDMyCiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6OTEKICAgIC8vIGNpcmN1aXRfdHlwZT1yZWNvcmQuY2lyY3VpdF90eXBlLAogICAgZGlnIDEKICAgIGV4dHJhY3QgMzIgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjkzCiAgICAvLyB2ZXJpZmllZF9yb3VuZD1hcmM0LlVJbnQ2NChHbG9iYWwucm91bmQpLAogICAgZ2xvYmFsIFJvdW5kCiAgICBpdG9iCiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6OTQKICAgIC8vIGNvbnNlbnRfYXBwX2lkPXJlY29yZC5jb25zZW50X2FwcF9pZCwKICAgIHVuY292ZXIgMwogICAgZXh0cmFjdCA0MiA4CiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6ODktOTUKICAgIC8vIHNlbGYucHJvb2ZzW2tleV0gPSBQcm9vZlJlY29yZCgKICAgIC8vICAgICBwcm9vZl9oYXNoPXJlY29yZC5wcm9vZl9oYXNoLmNvcHkoKSwKICAgIC8vICAgICBjaXJjdWl0X3R5cGU9cmVjb3JkLmNpcmN1aXRfdHlwZSwKICAgIC8vICAgICBpc192ZXJpZmllZD1hcmM0LkJvb2woVHJ1ZSksCiAgICAvLyAgICAgdmVyaWZpZWRfcm91bmQ9YXJjNC5VSW50NjQoR2xvYmFsLnJvdW5kKSwKICAgIC8vICAgICBjb25zZW50X2FwcF9pZD1yZWNvcmQuY29uc2VudF9hcHBfaWQsCiAgICAvLyApLmNvcHkoKQogICAgdW5jb3ZlciAzCiAgICB1bmNvdmVyIDMKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5OjkyCiAgICAvLyBpc192ZXJpZmllZD1hcmM0LkJvb2woVHJ1ZSksCiAgICBwdXNoYnl0ZXMgMHg4MAogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5Ojg5LTk1CiAgICAvLyBzZWxmLnByb29mc1trZXldID0gUHJvb2ZSZWNvcmQoCiAgICAvLyAgICAgcHJvb2ZfaGFzaD1yZWNvcmQucHJvb2ZfaGFzaC5jb3B5KCksCiAgICAvLyAgICAgY2lyY3VpdF90eXBlPXJlY29yZC5jaXJjdWl0X3R5cGUsCiAgICAvLyAgICAgaXNfdmVyaWZpZWQ9YXJjNC5Cb29sKFRydWUpLAogICAgLy8gICAgIHZlcmlmaWVkX3JvdW5kPWFyYzQuVUludDY0KEdsb2JhbC5yb3VuZCksCiAgICAvLyAgICAgY29uc2VudF9hcHBfaWQ9cmVjb3JkLmNvbnNlbnRfYXBwX2lkLAogICAgLy8gKS5jb3B5KCkKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYm94X3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5Ojc0CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuemtfdmVyaWZpZXIuY29udHJhY3QuWktWZXJpZmllckNvbnRyYWN0LmlzX3Byb29mX3ZhbGlkW3JvdXRpbmddKCkgLT4gdm9pZDoKaXNfcHJvb2ZfdmFsaWQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6OTcKICAgIC8vIEBhYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6MTA0CiAgICAvLyBrZXkgPSBvcC5zaGEyNTYodXNlci5ieXRlcyArIHByb29mX2hhc2guYnl0ZXMpCiAgICBjb25jYXQKICAgIHNoYTI1NgogICAgZHVwCiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6MTA1CiAgICAvLyBpZiBrZXkgbm90IGluIHNlbGYucHJvb2ZzOgogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBibnogaXNfcHJvb2ZfdmFsaWRfYWZ0ZXJfaWZfZWxzZUAzCiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6MTA2CiAgICAvLyByZXR1cm4gYXJjNC5Cb29sKEZhbHNlKQogICAgYnl0ZWNfMCAvLyAweDAwCgppc19wcm9vZl92YWxpZF9hZnRlcl9pbmxpbmVkX3NtYXJ0X2NvbnRyYWN0cy56a192ZXJpZmllci5jb250cmFjdC5aS1ZlcmlmaWVyQ29udHJhY3QuaXNfcHJvb2ZfdmFsaWRANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy96a192ZXJpZmllci9jb250cmFjdC5weTo5NwogICAgLy8gQGFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgppc19wcm9vZl92YWxpZF9hZnRlcl9pZl9lbHNlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvemtfdmVyaWZpZXIvY29udHJhY3QucHk6MTA3CiAgICAvLyByZXR1cm4gYXJjNC5Cb29sKHNlbGYucHJvb2ZzW2tleV0uaXNfdmVyaWZpZWQubmF0aXZlKQogICAgZHVwCiAgICBib3hfZ2V0CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5wcm9vZnMgZW50cnkgZXhpc3RzCiAgICBwdXNoaW50IDI2NAogICAgZ2V0Yml0CiAgICBieXRlY18wIC8vIDB4MDAKICAgIGludGNfMiAvLyAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgLy8gc21hcnRfY29udHJhY3RzL3prX3ZlcmlmaWVyL2NvbnRyYWN0LnB5Ojk3CiAgICAvLyBAYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBiIGlzX3Byb29mX3ZhbGlkX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzLnprX3ZlcmlmaWVyLmNvbnRyYWN0LlpLVmVyaWZpZXJDb250cmFjdC5pc19wcm9vZl92YWxpZEA0Cg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEASAACCYCAQASY29uc2VudF9sZWRnZXJfYXBwMRhAAAMpJGcxG0EAKzEZFEQxGESCBASbgiC9BGQ0cQcEXWFTewTEE3iSNhoAjgQACQAdAFgAqAAxGRQxGBQQQzYaAUkVJRJEMQAyCRJEFylMZyJDNhoBSRUjEkQ2GgJJFSISRDYaA0kVJRJEMQBLA1ABSb1FARRETwNPA1CACQAAAAAAAAAAAFBPAlC/IkM2GgFJFSMSRDYaAkkVIxJEMQAyCRJEUAFJvUUBREm+SEmBiAJTKCRPAlQkUxRESVcAIEsBVyABMgYWTwNXKghPA08DUIABgFBPAlBMUL8iQzYaAUkVIxJENhoCSRUjEkRQAUm9RQFAAAwogAQVH3x1TFCwIkNJvkSBiAJTKCRPAlRC/+Y=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -211,6 +211,21 @@ export type GlobalKeysState = ZkVerifierContractTypes['state']['global']['keys']
 export type BoxKeysState = ZkVerifierContractTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ZkVerifierContractCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ZkVerifierContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ZkVerifierContractCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ZkVerifierContract smart contract
@@ -282,6 +297,147 @@ export abstract class ZkVerifierContractParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ZKVerifierContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ZkVerifierContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ZkVerifierContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ZkVerifierContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ZkVerifierContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ZKVerifierContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ZkVerifierContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new ZkVerifierContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ZKVerifierContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ZKVerifierContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ZKVerifierContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new ZkVerifierContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ZKVerifierContract smart contract
  */
