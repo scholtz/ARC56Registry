@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Managable","structs":{},"methods":[{"name":"updateManager","args":[{"type":"address","name":"newManager"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Update the manager of this contract","events":[],"recommendations":{}},{"name":"deleteManager","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Delete the manager of this contract","events":[],"recommendations":{}},{"name":"manager","args":[],"returns":{"type":"address","desc":"The current manager of this contract"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Convenience function to get the current manager of this contract","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Manageable contract, designed to be inherited by other contracts (address will always be set to app creator initially)","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"_manager":{"keyType":"AVMString","valueType":"address","key":"bWFuYWdlcg=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[62,83,95],"errorMessage":"OnCompletion is not NoOp"},{"pc":[115],"errorMessage":"can only call when creating"},{"pc":[65,86,98],"errorMessage":"can only call when not creating"},{"pc":[121,155],"errorMessage":"check GlobalState exists"},{"pc":[138],"errorMessage":"manager cannot be the zero address"},{"pc":[125],"errorMessage":"only the manager can call this method"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Managable","structs":{},"methods":[{"name":"updateManager","args":[{"type":"address","name":"newManager"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Update the manager of this contract","events":[],"recommendations":{}},{"name":"deleteManager","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Delete the manager of this contract","events":[],"recommendations":{}},{"name":"manager","args":[],"returns":{"type":"address","desc":"The current manager of this contract"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Convenience function to get the current manager of this contract","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Manageable contract, designed to be inherited by other contracts (address will always be set to app creator initially)","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"_manager":{"keyType":"AVMString","valueType":"address","key":"bWFuYWdlcg=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[62,83,95],"errorMessage":"OnCompletion is not NoOp"},{"pc":[115],"errorMessage":"can only call when creating"},{"pc":[65,86,98],"errorMessage":"can only call when not creating"},{"pc":[121,155],"errorMessage":"check GlobalState exists"},{"pc":[138],"errorMessage":"manager cannot be the zero address"},{"pc":[125],"errorMessage":"only the manager can call this method"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwCiAgICBieXRlY2Jsb2NrICJtYW5hZ2VyIgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvbWFuYWdlYWJsZS5hbGdvLnRzOjEyCiAgICAvLyBrZXk6ICdtYW5hZ2VyJywKICAgIGJ5dGVjXzAgLy8gIm1hbmFnZXIiCiAgICAvLyBzbWFydF9jb250cmFjdHMvcm91bGV0dGUvbGlicy9tYW5hZ2VhYmxlLmFsZ28udHM6MTMKICAgIC8vIGluaXRpYWxWYWx1ZTogbmV3IGFyYzQuQWRkcmVzcyhHbG9iYWwuY3JlYXRvckFkZHJlc3MpLAogICAgZ2xvYmFsIENyZWF0b3JBZGRyZXNzCiAgICAvLyBzbWFydF9jb250cmFjdHMvcm91bGV0dGUvbGlicy9tYW5hZ2VhYmxlLmFsZ28udHM6MTEtMTQKICAgIC8vIHByaXZhdGUgX21hbmFnZXIgPSBHbG9iYWxTdGF0ZTxhcmM0LkFkZHJlc3M+KHsKICAgIC8vICAga2V5OiAnbWFuYWdlcicsCiAgICAvLyAgIGluaXRpYWxWYWx1ZTogbmV3IGFyYzQuQWRkcmVzcyhHbG9iYWwuY3JlYXRvckFkZHJlc3MpLAogICAgLy8gfSkKICAgIGFwcF9nbG9iYWxfcHV0CgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yb3VsZXR0ZS9saWJzL21hbmFnZWFibGUuYWxnby50czoxMAogICAgLy8gZXhwb3J0IGNsYXNzIE1hbmFnYWJsZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0AxMAogICAgcHVzaGJ5dGVzcyAweDg5NjAxNjhlIDB4ZDQ4ZDQyNmMgMHg2NzQzNDAzMSAvLyBtZXRob2QgInVwZGF0ZU1hbmFnZXIoYWRkcmVzcyl2b2lkIiwgbWV0aG9kICJkZWxldGVNYW5hZ2VyKCl2b2lkIiwgbWV0aG9kICJtYW5hZ2VyKClhZGRyZXNzIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl91cGRhdGVNYW5hZ2VyX3JvdXRlQDUgbWFpbl9kZWxldGVNYW5hZ2VyX3JvdXRlQDYgbWFpbl9tYW5hZ2VyX3JvdXRlQDcKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxNDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yb3VsZXR0ZS9saWJzL21hbmFnZWFibGUuYWxnby50czoxMAogICAgLy8gZXhwb3J0IGNsYXNzIE1hbmFnYWJsZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIGludGNfMSAvLyAwCiAgICByZXR1cm4KCm1haW5fbWFuYWdlcl9yb3V0ZUA3OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvbWFuYWdlYWJsZS5hbGdvLnRzOjUyCiAgICAvLyBAYXJjNC5hYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIG1hbmFnZXIKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9kZWxldGVNYW5hZ2VyX3JvdXRlQDY6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcm91bGV0dGUvbGlicy9tYW5hZ2VhYmxlLmFsZ28udHM6NDEKICAgIC8vIHB1YmxpYyBkZWxldGVNYW5hZ2VyKCk6IHZvaWQgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGRlbGV0ZU1hbmFnZXIKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fdXBkYXRlTWFuYWdlcl9yb3V0ZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvbWFuYWdlYWJsZS5hbGdvLnRzOjI4CiAgICAvLyBwdWJsaWMgdXBkYXRlTWFuYWdlcihuZXdNYW5hZ2VyOiBhcmM0LkFkZHJlc3MpOiB2b2lkIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvbWFuYWdlYWJsZS5hbGdvLnRzOjEwCiAgICAvLyBleHBvcnQgY2xhc3MgTWFuYWdhYmxlIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvbWFuYWdlYWJsZS5hbGdvLnRzOjI4CiAgICAvLyBwdWJsaWMgdXBkYXRlTWFuYWdlcihuZXdNYW5hZ2VyOiBhcmM0LkFkZHJlc3MpOiB2b2lkIHsKICAgIGNhbGxzdWIgdXBkYXRlTWFuYWdlcgogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9iYXJlX3JvdXRpbmdAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcm91bGV0dGUvbGlicy9tYW5hZ2VhYmxlLmFsZ28udHM6MTAKICAgIC8vIGV4cG9ydCBjbGFzcyBNYW5hZ2FibGUgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDE0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9yb3VsZXR0ZS9saWJzL21hbmFnZWFibGUuYWxnby50czo6TWFuYWdhYmxlLm9ubHlNYW5hZ2VyKCkgLT4gdm9pZDoKb25seU1hbmFnZXI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcm91bGV0dGUvbGlicy9tYW5hZ2VhYmxlLmFsZ28udHM6MTIKICAgIC8vIGtleTogJ21hbmFnZXInLAogICAgaW50Y18xIC8vIDAKICAgIGJ5dGVjXzAgLy8gIm1hbmFnZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvbWFuYWdlYWJsZS5hbGdvLnRzOjIxCiAgICAvLyBhc3NlcnQodGhpcy5fbWFuYWdlci52YWx1ZS5uYXRpdmUgPT09IFR4bi5zZW5kZXIsICdvbmx5IHRoZSBtYW5hZ2VyIGNhbiBjYWxsIHRoaXMgbWV0aG9kJykKICAgIHR4biBTZW5kZXIKICAgID09CiAgICBhc3NlcnQgLy8gb25seSB0aGUgbWFuYWdlciBjYW4gY2FsbCB0aGlzIG1ldGhvZAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvbWFuYWdlYWJsZS5hbGdvLnRzOjpNYW5hZ2FibGUudXBkYXRlTWFuYWdlcihuZXdNYW5hZ2VyOiBieXRlcykgLT4gdm9pZDoKdXBkYXRlTWFuYWdlcjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yb3VsZXR0ZS9saWJzL21hbmFnZWFibGUuYWxnby50czoyOAogICAgLy8gcHVibGljIHVwZGF0ZU1hbmFnZXIobmV3TWFuYWdlcjogYXJjNC5BZGRyZXNzKTogdm9pZCB7CiAgICBwcm90byAxIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yb3VsZXR0ZS9saWJzL21hbmFnZWFibGUuYWxnby50czozMAogICAgLy8gdGhpcy5vbmx5TWFuYWdlcigpCiAgICBjYWxsc3ViIG9ubHlNYW5hZ2VyCiAgICAvLyBzbWFydF9jb250cmFjdHMvcm91bGV0dGUvbGlicy9tYW5hZ2VhYmxlLmFsZ28udHM6MzIKICAgIC8vIGFzc2VydChuZXdNYW5hZ2VyLm5hdGl2ZSAhPT0gR2xvYmFsLnplcm9BZGRyZXNzLCAnbWFuYWdlciBjYW5ub3QgYmUgdGhlIHplcm8gYWRkcmVzcycpCiAgICBmcmFtZV9kaWcgLTEKICAgIGdsb2JhbCBaZXJvQWRkcmVzcwogICAgIT0KICAgIGFzc2VydCAvLyBtYW5hZ2VyIGNhbm5vdCBiZSB0aGUgemVybyBhZGRyZXNzCiAgICAvLyBzbWFydF9jb250cmFjdHMvcm91bGV0dGUvbGlicy9tYW5hZ2VhYmxlLmFsZ28udHM6MTIKICAgIC8vIGtleTogJ21hbmFnZXInLAogICAgYnl0ZWNfMCAvLyAibWFuYWdlciIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yb3VsZXR0ZS9saWJzL21hbmFnZWFibGUuYWxnby50czozNAogICAgLy8gdGhpcy5fbWFuYWdlci52YWx1ZSA9IG5ld01hbmFnZXIKICAgIGZyYW1lX2RpZyAtMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9yb3VsZXR0ZS9saWJzL21hbmFnZWFibGUuYWxnby50czo6TWFuYWdhYmxlLmRlbGV0ZU1hbmFnZXIoKSAtPiB2b2lkOgpkZWxldGVNYW5hZ2VyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvbWFuYWdlYWJsZS5hbGdvLnRzOjQzCiAgICAvLyB0aGlzLm9ubHlNYW5hZ2VyKCkKICAgIGNhbGxzdWIgb25seU1hbmFnZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yb3VsZXR0ZS9saWJzL21hbmFnZWFibGUuYWxnby50czoxMgogICAgLy8ga2V5OiAnbWFuYWdlcicsCiAgICBieXRlY18wIC8vICJtYW5hZ2VyIgogICAgLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvbWFuYWdlYWJsZS5hbGdvLnRzOjQ1CiAgICAvLyB0aGlzLl9tYW5hZ2VyLnZhbHVlID0gbmV3IGFyYzQuQWRkcmVzcyhHbG9iYWwuemVyb0FkZHJlc3MpCiAgICBnbG9iYWwgWmVyb0FkZHJlc3MKICAgIGFwcF9nbG9iYWxfcHV0CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMvcm91bGV0dGUvbGlicy9tYW5hZ2VhYmxlLmFsZ28udHM6Ok1hbmFnYWJsZS5tYW5hZ2VyKCkgLT4gYnl0ZXM6Cm1hbmFnZXI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcm91bGV0dGUvbGlicy9tYW5hZ2VhYmxlLmFsZ28udHM6MTIKICAgIC8vIGtleTogJ21hbmFnZXInLAogICAgaW50Y18xIC8vIDAKICAgIGJ5dGVjXzAgLy8gIm1hbmFnZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3JvdWxldHRlL2xpYnMvbWFuYWdlYWJsZS5hbGdvLnRzOjU0CiAgICAvLyByZXR1cm4gdGhpcy5fbWFuYWdlci52YWx1ZQogICAgcmV0c3ViCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiACAQAmAQdtYW5hZ2VyMRhAAAQoMglnMRtBAE6CAwSJYBaOBNSNQmwEZ0NAMTYaAI4DACMAFwACI0MxGRREMRhEiABTgAQVH3x1TFCwIkMxGRREMRhEiAA2IkMxGRREMRhENhoBiAAWIkMxGUD/yTEYFEQiQyMoZUQxABJEiYoBAIj/8Yv/MgMTRCiL/2eJiP/jKDIDZ4kjKGVEiQ==","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -167,6 +167,21 @@ export type MethodReturn<TSignature extends ManagableSignatures> = ManagableType
 export type GlobalKeysState = ManagableTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ManagableCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ManagableDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ManagableCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Managable smart contract
@@ -219,6 +234,147 @@ export abstract class ManagableParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Managable smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ManagableFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ManagableFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ManagableClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ManagableClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Managable smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ManagableDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new ManagableClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Managable smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Managable smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Managable smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new ManagableClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Managable smart contract
  */
