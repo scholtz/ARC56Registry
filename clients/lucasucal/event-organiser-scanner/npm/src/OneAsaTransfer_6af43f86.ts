@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"OneAsaTransfer","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"transfer","args":[{"type":"uint64","name":"assetId"},{"type":"byte[]","name":"receiver"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"owner":{"keyType":"AVMString","valueType":"AVMBytes","key":"b3duZXI="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[44,66],"errorMessage":"OnCompletion is not NoOp"},{"pc":[83],"errorMessage":"can only call when creating"},{"pc":[47,69],"errorMessage":"can only call when not creating"},{"pc":[99],"errorMessage":"check GlobalState exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"OneAsaTransfer","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"transfer","args":[{"type":"uint64","name":"assetId"},{"type":"byte[]","name":"receiver"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"owner":{"keyType":"AVMString","valueType":"AVMBytes","key":"b3duZXI="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[44,66],"errorMessage":"OnCompletion is not NoOp"},{"pc":[83],"errorMessage":"can only call when creating"},{"pc":[47,69],"errorMessage":"can only call when not creating"},{"pc":[99],"errorMessage":"check GlobalState exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwCiAgICBieXRlY2Jsb2NrICJvd25lciIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vbmVfYXNhX3RyYW5zZmVyL2NvbnRyYWN0LmFsZ28udHM6NgogICAgLy8gZXhwb3J0IGNsYXNzIE9uZUFzYVRyYW5zZmVyIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYmFyZV9yb3V0aW5nQDcKICAgIHB1c2hieXRlc3MgMHg0YzVjNjFiYSAweDQ0ZjU0Y2JjIC8vIG1ldGhvZCAiY3JlYXRlKCl2b2lkIiwgbWV0aG9kICJ0cmFuc2Zlcih1aW50NjQsYnl0ZVtdKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2NyZWF0ZV9yb3V0ZUAzIG1haW5fdHJhbnNmZXJfcm91dGVANAoKbWFpbl9hZnRlcl9pZl9lbHNlQDExOgogICAgLy8gc21hcnRfY29udHJhY3RzL29uZV9hc2FfdHJhbnNmZXIvY29udHJhY3QuYWxnby50czo2CiAgICAvLyBleHBvcnQgY2xhc3MgT25lQXNhVHJhbnNmZXIgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBpbnRjXzEgLy8gMAogICAgcmV0dXJuCgptYWluX3RyYW5zZmVyX3JvdXRlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvb25lX2FzYV90cmFuc2Zlci9jb250cmFjdC5hbGdvLnRzOjE4CiAgICAvLyBwdWJsaWMgdHJhbnNmZXIoYXNzZXRJZDogdWludDY0LCByZWNlaXZlcjogYnl0ZXMpOiB2b2lkIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL29uZV9hc2FfdHJhbnNmZXIvY29udHJhY3QuYWxnby50czo2CiAgICAvLyBleHBvcnQgY2xhc3MgT25lQXNhVHJhbnNmZXIgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL29uZV9hc2FfdHJhbnNmZXIvY29udHJhY3QuYWxnby50czoxOAogICAgLy8gcHVibGljIHRyYW5zZmVyKGFzc2V0SWQ6IHVpbnQ2NCwgcmVjZWl2ZXI6IGJ5dGVzKTogdm9pZCB7CiAgICBjYWxsc3ViIHRyYW5zZmVyCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2NyZWF0ZV9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL29uZV9hc2FfdHJhbnNmZXIvY29udHJhY3QuYWxnby50czoxMQogICAgLy8gcHVibGljIGNyZWF0ZSgpOiB2b2lkIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgY2FsbHN1YiBjcmVhdGUKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYmFyZV9yb3V0aW5nQDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvb25lX2FzYV90cmFuc2Zlci9jb250cmFjdC5hbGdvLnRzOjYKICAgIC8vIGV4cG9ydCBjbGFzcyBPbmVBc2FUcmFuc2ZlciBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL29uZV9hc2FfdHJhbnNmZXIvY29udHJhY3QuYWxnby50czo6T25lQXNhVHJhbnNmZXIuY3JlYXRlKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL29uZV9hc2FfdHJhbnNmZXIvY29udHJhY3QuYWxnby50czo4CiAgICAvLyBvd25lciA9IEdsb2JhbFN0YXRlPGJ5dGVzPih7IGtleTogJ293bmVyJyB9KQogICAgYnl0ZWNfMCAvLyAib3duZXIiCiAgICAvLyBzbWFydF9jb250cmFjdHMvb25lX2FzYV90cmFuc2Zlci9jb250cmFjdC5hbGdvLnRzOjEzCiAgICAvLyB0aGlzLm93bmVyLnZhbHVlID0gVHhuLnNlbmRlci5ieXRlcwogICAgdHhuIFNlbmRlcgogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9vbmVfYXNhX3RyYW5zZmVyL2NvbnRyYWN0LmFsZ28udHM6Ok9uZUFzYVRyYW5zZmVyLnRyYW5zZmVyKGFzc2V0SWQ6IHVpbnQ2NCwgcmVjZWl2ZXI6IGJ5dGVzKSAtPiB2b2lkOgp0cmFuc2ZlcjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vbmVfYXNhX3RyYW5zZmVyL2NvbnRyYWN0LmFsZ28udHM6MTgKICAgIC8vIHB1YmxpYyB0cmFuc2Zlcihhc3NldElkOiB1aW50NjQsIHJlY2VpdmVyOiBieXRlcyk6IHZvaWQgewogICAgcHJvdG8gMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvb25lX2FzYV90cmFuc2Zlci9jb250cmFjdC5hbGdvLnRzOjIwCiAgICAvLyBhc3NlcnQoVHhuLnNlbmRlci5ieXRlcy5lcXVhbHModGhpcy5vd25lci52YWx1ZSkpCiAgICB0eG4gU2VuZGVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvb25lX2FzYV90cmFuc2Zlci9jb250cmFjdC5hbGdvLnRzOjgKICAgIC8vIG93bmVyID0gR2xvYmFsU3RhdGU8Ynl0ZXM+KHsga2V5OiAnb3duZXInIH0pCiAgICBpbnRjXzEgLy8gMAogICAgYnl0ZWNfMCAvLyAib3duZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL29uZV9hc2FfdHJhbnNmZXIvY29udHJhY3QuYWxnby50czoyMAogICAgLy8gYXNzZXJ0KFR4bi5zZW5kZXIuYnl0ZXMuZXF1YWxzKHRoaXMub3duZXIudmFsdWUpKQogICAgPT0KICAgIGFzc2VydAogICAgLy8gc21hcnRfY29udHJhY3RzL29uZV9hc2FfdHJhbnNmZXIvY29udHJhY3QuYWxnby50czoyMy0yOAogICAgLy8gYXNzZXRUcmFuc2Zlcih7CiAgICAvLyAgIHhmZXJBc3NldDogYXNzZXRJZCwKICAgIC8vICAgLy8gVHJhbnNmZXIgZXhhY3RseSAxIHVuaXQgKFVpbnQ2NCBoZWxwZXIgY3JlYXRlcyB0aGUgcHJvcGVyIHVpbnQ2NCB0eXBlKQogICAgLy8gICBhc3NldEFtb3VudDogVWludDY0KDEpLAogICAgLy8gICBhc3NldFJlY2VpdmVyOiByZWNlaXZlciwKICAgIC8vIH0pLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICBmcmFtZV9kaWcgLTEKICAgIGl0eG5fZmllbGQgQXNzZXRSZWNlaXZlcgogICAgLy8gc21hcnRfY29udHJhY3RzL29uZV9hc2FfdHJhbnNmZXIvY29udHJhY3QuYWxnby50czoyNgogICAgLy8gYXNzZXRBbW91bnQ6IFVpbnQ2NCgxKSwKICAgIGludGNfMCAvLyAxCiAgICBpdHhuX2ZpZWxkIEFzc2V0QW1vdW50CiAgICBmcmFtZV9kaWcgLTIKICAgIGl0eG5fZmllbGQgWGZlckFzc2V0CiAgICAvLyBzbWFydF9jb250cmFjdHMvb25lX2FzYV90cmFuc2Zlci9jb250cmFjdC5hbGdvLnRzOjIzLTI4CiAgICAvLyBhc3NldFRyYW5zZmVyKHsKICAgIC8vICAgeGZlckFzc2V0OiBhc3NldElkLAogICAgLy8gICAvLyBUcmFuc2ZlciBleGFjdGx5IDEgdW5pdCAoVWludDY0IGhlbHBlciBjcmVhdGVzIHRoZSBwcm9wZXIgdWludDY0IHR5cGUpCiAgICAvLyAgIGFzc2V0QW1vdW50OiBVaW50NjQoMSksCiAgICAvLyAgIGFzc2V0UmVjZWl2ZXI6IHJlY2VpdmVyLAogICAgLy8gfSkuc3VibWl0KCkKICAgIHB1c2hpbnQgNCAvLyA0CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzEgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIGl0eG5fc3VibWl0CiAgICByZXRzdWIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiACAQAmAQVvd25lcjEbQQA5ggIETFxhugRE9Uy8NhoAjgIAGAACI0MxGRREMRhENhoBFzYaAlcCAIgAHiJDMRkURDEYRIgADSJDMRlA/9cxGBREIkMoMQBniYoCADEAIyhlRBJEsYv/shQishKL/rIRgQSyECOyAbOJ","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -153,6 +153,21 @@ export type MethodReturn<TSignature extends OneAsaTransferSignatures> = OneAsaTr
 export type GlobalKeysState = OneAsaTransferTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type OneAsaTransferCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type OneAsaTransferDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: OneAsaTransferCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the OneAsaTransfer smart contract
@@ -186,6 +201,147 @@ export abstract class OneAsaTransferParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the OneAsaTransfer smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class OneAsaTransferFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `OneAsaTransferFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new OneAsaTransferClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new OneAsaTransferClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the OneAsaTransfer smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: OneAsaTransferDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new OneAsaTransferClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the OneAsaTransfer smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the OneAsaTransfer smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the OneAsaTransfer smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new OneAsaTransferClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the OneAsaTransfer smart contract
  */
