@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Bounty","desc":"","methods":[{"name":"issueBounty","args":[{"name":"payTxn","type":"pay"},{"name":"amount","type":"uint64"},{"name":"addr","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"claimBounty","args":[{"name":"amount","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"bountyBox":{"keyType":"address","valueType":"uint64"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[46],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[55],"errorMessage":"argument 0 (addr) for issueBounty must be a address","teal":37},{"pc":[69],"errorMessage":"argument 2 (payTxn) for issueBounty must be a pay transaction","teal":53},{"pc":[83],"errorMessage":"amount must be greater than zero","teal":74},{"pc":[102],"errorMessage":"transaction verification failed: {\"txn\":\"payTxn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":104},{"pc":[110],"errorMessage":"transaction verification failed: {\"txn\":\"payTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":113},{"pc":[118],"errorMessage":"transaction verification failed: {\"txn\":\"payTxn\",\"field\":\"amount\",\"expected\":\"amount\"}","teal":122},{"pc":[124],"errorMessage":"box value does not exist: this.bountyBox(addr).value","teal":131},{"pc":[141],"errorMessage":"transaction verification failed: {\"txn\":\"payTxn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":153},{"pc":[149],"errorMessage":"transaction verification failed: {\"txn\":\"payTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":162},{"pc":[159],"errorMessage":"transaction verification failed: {\"txn\":\"payTxn\",\"field\":\"amount\",\"expected\":\"totalCost + amount\"}","teal":173},{"pc":[190],"errorMessage":"Sorry, you have no bounty to claim","teal":217},{"pc":[195],"errorMessage":"Invalid bounty amount","teal":226},{"pc":[199],"errorMessage":"box value does not exist: this.bountyBox(addr).value","teal":234},{"pc":[208],"errorMessage":"No bounty available to claim","teal":245},{"pc":[272],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":305},{"pc":[294],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":314}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Bounty","desc":"","methods":[{"name":"issueBounty","args":[{"name":"payTxn","type":"pay"},{"name":"amount","type":"uint64"},{"name":"addr","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"claimBounty","args":[{"name":"amount","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"bountyBox":{"keyType":"address","valueType":"uint64"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[46],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[55],"errorMessage":"argument 0 (addr) for issueBounty must be a address","teal":37},{"pc":[69],"errorMessage":"argument 2 (payTxn) for issueBounty must be a pay transaction","teal":53},{"pc":[83],"errorMessage":"amount must be greater than zero","teal":74},{"pc":[102],"errorMessage":"transaction verification failed: {\"txn\":\"payTxn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":104},{"pc":[110],"errorMessage":"transaction verification failed: {\"txn\":\"payTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":113},{"pc":[118],"errorMessage":"transaction verification failed: {\"txn\":\"payTxn\",\"field\":\"amount\",\"expected\":\"amount\"}","teal":122},{"pc":[124],"errorMessage":"box value does not exist: this.bountyBox(addr).value","teal":131},{"pc":[141],"errorMessage":"transaction verification failed: {\"txn\":\"payTxn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":153},{"pc":[149],"errorMessage":"transaction verification failed: {\"txn\":\"payTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":162},{"pc":[159],"errorMessage":"transaction verification failed: {\"txn\":\"payTxn\",\"field\":\"amount\",\"expected\":\"totalCost + amount\"}","teal":173},{"pc":[190],"errorMessage":"Sorry, you have no bounty to claim","teal":217},{"pc":[195],"errorMessage":"Invalid bounty amount","teal":226},{"pc":[199],"errorMessage":"box value does not exist: this.bountyBox(addr).value","teal":234},{"pc":[208],"errorMessage":"No bounty available to claim","teal":245},{"pc":[272],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":305},{"pc":[294],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":314}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDAgMTMxMzAwCmJ5dGVjYmxvY2sgMHgKCi8vIFRoaXMgVEVBTCB3YXMgZ2VuZXJhdGVkIGJ5IFRFQUxTY3JpcHQgdjAuMTA2LjIKLy8gaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9URUFMU2NyaXB0CgovLyBUaGlzIGNvbnRyYWN0IGlzIGNvbXBsaWFudCB3aXRoIGFuZC9vciBpbXBsZW1lbnRzIHRoZSBmb2xsb3dpbmcgQVJDczogWyBBUkM0IF0KCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCnB1c2hpbnQgNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKmNyZWF0ZV9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRAoKKk5PVF9JTVBMRU1FTlRFRDoKCS8vIFRoZSByZXF1ZXN0ZWQgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGlzIGNvbnRyYWN0LiBBcmUgeW91IHVzaW5nIHRoZSBjb3JyZWN0IE9uQ29tcGxldGU/IERpZCB5b3Ugc2V0IHlvdXIgYXBwIElEPwoJZXJyCgovLyBpc3N1ZUJvdW50eShwYXksdWludDY0LGFkZHJlc3Mpdm9pZAoqYWJpX3JvdXRlX2lzc3VlQm91bnR5OgoJLy8gYWRkcjogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJZHVwCglsZW4KCXB1c2hpbnQgMzIKCT09CgoJLy8gYXJndW1lbnQgMCAoYWRkcikgZm9yIGlzc3VlQm91bnR5IG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBhbW91bnQ6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIHBheVR4bjogcGF5Cgl0eG4gR3JvdXBJbmRleAoJaW50YyAwIC8vIDEKCS0KCWR1cAoJZ3R4bnMgVHlwZUVudW0KCWludGMgMCAvLyAgcGF5Cgk9PQoKCS8vIGFyZ3VtZW50IDIgKHBheVR4bikgZm9yIGlzc3VlQm91bnR5IG11c3QgYmUgYSBwYXkgdHJhbnNhY3Rpb24KCWFzc2VydAoKCS8vIGV4ZWN1dGUgaXNzdWVCb3VudHkocGF5LHVpbnQ2NCxhZGRyZXNzKXZvaWQKCWNhbGxzdWIgaXNzdWVCb3VudHkKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGlzc3VlQm91bnR5KHBheVR4bjogUGF5VHhuLCBhbW91bnQ6IHVpbnQ2NCwgYWRkcjogQWRkcmVzcyk6IHZvaWQKaXNzdWVCb3VudHk6Cglwcm90byAzIDAKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgMCAvLyAweAoKCS8vIGNvbnRyYWN0cy9Cb3VudHkuYWxnby50czoxMQoJLy8gYXNzZXJ0KGFtb3VudCA+IDAsICdhbW91bnQgbXVzdCBiZSBncmVhdGVyIHRoYW4gemVybycpCglmcmFtZV9kaWcgLTIgLy8gYW1vdW50OiB1aW50NjQKCWludGMgMSAvLyAwCgk+CgoJLy8gYW1vdW50IG11c3QgYmUgZ3JlYXRlciB0aGFuIHplcm8KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9Cb3VudHkuYWxnby50czoxMwoJLy8gdG90YWxDb3N0ID0gTUJSICsgQ09TVF9QRVJfQk9YICsgQ09TVF9QRVJfQllURSAqICg4ICsgNjQpCglpbnRjIDIgLy8gMTMxMzAwCglmcmFtZV9idXJ5IDAgLy8gdG90YWxDb3N0OiB1aW50NjQKCgkvLyAqaWYwX2NvbmRpdGlvbgoJLy8gY29udHJhY3RzL0JvdW50eS5hbGdvLnRzOjE1CgkvLyB0aGlzLmJvdW50eUJveChhZGRyKS5leGlzdHMKCWZyYW1lX2RpZyAtMyAvLyBhZGRyOiBBZGRyZXNzCglib3hfbGVuCglzd2FwCglwb3AKCWJ6ICppZjBfZWxzZQoKCS8vICppZjBfY29uc2VxdWVudAoJLy8gY29udHJhY3RzL0JvdW50eS5hbGdvLnRzOjE2CgkvLyB2ZXJpZnlQYXlUeG4ocGF5VHhuLCB7CgkvLyAgICAgICAgIHNlbmRlcjogdGhpcy50eG4uc2VuZGVyLAoJLy8gICAgICAgICByZWNlaXZlcjogdGhpcy5hcHAuYWRkcmVzcywKCS8vICAgICAgICAgYW1vdW50OiBhbW91bnQsCgkvLyAgICAgICB9KQoJLy8gdmVyaWZ5IHNlbmRlcgoJZnJhbWVfZGlnIC0xIC8vIHBheVR4bjogUGF5VHhuCglndHhucyBTZW5kZXIKCXR4biBTZW5kZXIKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJwYXlUeG4iLCJmaWVsZCI6InNlbmRlciIsImV4cGVjdGVkIjoidGhpcy50eG4uc2VuZGVyIn0KCWFzc2VydAoKCS8vIHZlcmlmeSByZWNlaXZlcgoJZnJhbWVfZGlnIC0xIC8vIHBheVR4bjogUGF5VHhuCglndHhucyBSZWNlaXZlcgoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJwYXlUeG4iLCJmaWVsZCI6InJlY2VpdmVyIiwiZXhwZWN0ZWQiOiJ0aGlzLmFwcC5hZGRyZXNzIn0KCWFzc2VydAoKCS8vIHZlcmlmeSBhbW91bnQKCWZyYW1lX2RpZyAtMSAvLyBwYXlUeG46IFBheVR4bgoJZ3R4bnMgQW1vdW50CglmcmFtZV9kaWcgLTIgLy8gYW1vdW50OiB1aW50NjQKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJwYXlUeG4iLCJmaWVsZCI6ImFtb3VudCIsImV4cGVjdGVkIjoiYW1vdW50In0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9Cb3VudHkuYWxnby50czoyMgoJLy8gdGhpcy5ib3VudHlCb3goYWRkcikudmFsdWUgPSB0aGlzLmJvdW50eUJveChhZGRyKS52YWx1ZSArIGFtb3VudAoJZnJhbWVfZGlnIC0zIC8vIGFkZHI6IEFkZHJlc3MKCWZyYW1lX2RpZyAtMyAvLyBhZGRyOiBBZGRyZXNzCglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmJvdW50eUJveChhZGRyKS52YWx1ZQoJYXNzZXJ0CglidG9pCglmcmFtZV9kaWcgLTIgLy8gYW1vdW50OiB1aW50NjQKCSsKCWl0b2IKCWJveF9wdXQKCWIgKmlmMF9lbmQKCippZjBfZWxzZToKCS8vIGNvbnRyYWN0cy9Cb3VudHkuYWxnby50czoyNAoJLy8gdmVyaWZ5UGF5VHhuKHBheVR4biwgewoJLy8gICAgICAgICBzZW5kZXI6IHRoaXMudHhuLnNlbmRlciwKCS8vICAgICAgICAgcmVjZWl2ZXI6IHRoaXMuYXBwLmFkZHJlc3MsCgkvLyAgICAgICAgIGFtb3VudDogdG90YWxDb3N0ICsgYW1vdW50LAoJLy8gICAgICAgfSkKCS8vIHZlcmlmeSBzZW5kZXIKCWZyYW1lX2RpZyAtMSAvLyBwYXlUeG46IFBheVR4bgoJZ3R4bnMgU2VuZGVyCgl0eG4gU2VuZGVyCgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoicGF5VHhuIiwiZmllbGQiOiJzZW5kZXIiLCJleHBlY3RlZCI6InRoaXMudHhuLnNlbmRlciJ9Cglhc3NlcnQKCgkvLyB2ZXJpZnkgcmVjZWl2ZXIKCWZyYW1lX2RpZyAtMSAvLyBwYXlUeG46IFBheVR4bgoJZ3R4bnMgUmVjZWl2ZXIKCWdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoicGF5VHhuIiwiZmllbGQiOiJyZWNlaXZlciIsImV4cGVjdGVkIjoidGhpcy5hcHAuYWRkcmVzcyJ9Cglhc3NlcnQKCgkvLyB2ZXJpZnkgYW1vdW50CglmcmFtZV9kaWcgLTEgLy8gcGF5VHhuOiBQYXlUeG4KCWd0eG5zIEFtb3VudAoJaW50YyAyIC8vICB0b3RhbENvc3Q6IHVpbnQ2NAoJZnJhbWVfZGlnIC0yIC8vIGFtb3VudDogdWludDY0CgkrCgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoicGF5VHhuIiwiZmllbGQiOiJhbW91bnQiLCJleHBlY3RlZCI6InRvdGFsQ29zdCArIGFtb3VudCJ9Cglhc3NlcnQKCgkvLyBjb250cmFjdHMvQm91bnR5LmFsZ28udHM6MzAKCS8vIHRoaXMuYm91bnR5Qm94KGFkZHIpLnZhbHVlID0gYW1vdW50CglmcmFtZV9kaWcgLTMgLy8gYWRkcjogQWRkcmVzcwoJZnJhbWVfZGlnIC0yIC8vIGFtb3VudDogdWludDY0CglpdG9iCglib3hfcHV0CgoqaWYwX2VuZDoKCXJldHN1YgoKLy8gY2xhaW1Cb3VudHkodWludDY0KXZvaWQKKmFiaV9yb3V0ZV9jbGFpbUJvdW50eToKCS8vIGFtb3VudDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBjbGFpbUJvdW50eSh1aW50NjQpdm9pZAoJY2FsbHN1YiBjbGFpbUJvdW50eQoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gY2xhaW1Cb3VudHkoYW1vdW50OiB1aW50NjQpOiB2b2lkCmNsYWltQm91bnR5OgoJcHJvdG8gMSAwCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCWR1cAoKCS8vIGNvbnRyYWN0cy9Cb3VudHkuYWxnby50czozNQoJLy8gYWRkciA9IHRoaXMudHhuLnNlbmRlcgoJdHhuIFNlbmRlcgoJZnJhbWVfYnVyeSAwIC8vIGFkZHI6IGFkZHJlc3MKCgkvLyBjb250cmFjdHMvQm91bnR5LmFsZ28udHM6MzYKCS8vIGFzc2VydCh0aGlzLmJvdW50eUJveChhZGRyKS5leGlzdHMsICdTb3JyeSwgeW91IGhhdmUgbm8gYm91bnR5IHRvIGNsYWltJykKCWZyYW1lX2RpZyAwIC8vIGFkZHI6IGFkZHJlc3MKCWJveF9sZW4KCXN3YXAKCXBvcAoKCS8vIFNvcnJ5LCB5b3UgaGF2ZSBubyBib3VudHkgdG8gY2xhaW0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9Cb3VudHkuYWxnby50czozNwoJLy8gYXNzZXJ0KGFtb3VudCA+IDAsICdJbnZhbGlkIGJvdW50eSBhbW91bnQnKQoJZnJhbWVfZGlnIC0xIC8vIGFtb3VudDogdWludDY0CglpbnRjIDEgLy8gMAoJPgoKCS8vIEludmFsaWQgYm91bnR5IGFtb3VudAoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL0JvdW50eS5hbGdvLnRzOjM5CgkvLyB1bmNsYWltZWRBbW91bnQgPSB0aGlzLmJvdW50eUJveChhZGRyKS52YWx1ZQoJZnJhbWVfZGlnIDAgLy8gYWRkcjogYWRkcmVzcwoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5ib3VudHlCb3goYWRkcikudmFsdWUKCWFzc2VydAoJYnRvaQoJZnJhbWVfYnVyeSAxIC8vIHVuY2xhaW1lZEFtb3VudDogdWludDY0CgoJLy8gY29udHJhY3RzL0JvdW50eS5hbGdvLnRzOjQwCgkvLyBhc3NlcnQodW5jbGFpbWVkQW1vdW50ID49IGFtb3VudCwgJ05vIGJvdW50eSBhdmFpbGFibGUgdG8gY2xhaW0nKQoJZnJhbWVfZGlnIDEgLy8gdW5jbGFpbWVkQW1vdW50OiB1aW50NjQKCWZyYW1lX2RpZyAtMSAvLyBhbW91bnQ6IHVpbnQ2NAoJPj0KCgkvLyBObyBib3VudHkgYXZhaWxhYmxlIHRvIGNsYWltCglhc3NlcnQKCgkvLyBjb250cmFjdHMvQm91bnR5LmFsZ28udHM6NDIKCS8vIHNlbmRQYXltZW50KHsKCS8vICAgICAgIGFtb3VudDogYW1vdW50LAoJLy8gICAgICAgc2VuZGVyOiB0aGlzLmFwcC5hZGRyZXNzLAoJLy8gICAgICAgcmVjZWl2ZXI6IHRoaXMudHhuLnNlbmRlciwKCS8vICAgICAgIG5vdGU6ICdCb3VudHkgY2xhaW1lZCcsCgkvLyAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL0JvdW50eS5hbGdvLnRzOjQzCgkvLyBhbW91bnQ6IGFtb3VudAoJZnJhbWVfZGlnIC0xIC8vIGFtb3VudDogdWludDY0CglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIGNvbnRyYWN0cy9Cb3VudHkuYWxnby50czo0NAoJLy8gc2VuZGVyOiB0aGlzLmFwcC5hZGRyZXNzCglnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwoJaXR4bl9maWVsZCBTZW5kZXIKCgkvLyBjb250cmFjdHMvQm91bnR5LmFsZ28udHM6NDUKCS8vIHJlY2VpdmVyOiB0aGlzLnR4bi5zZW5kZXIKCXR4biBTZW5kZXIKCWl0eG5fZmllbGQgUmVjZWl2ZXIKCgkvLyBjb250cmFjdHMvQm91bnR5LmFsZ28udHM6NDYKCS8vIG5vdGU6ICdCb3VudHkgY2xhaW1lZCcKCXB1c2hieXRlcyAweDQyNmY3NTZlNzQ3OTIwNjM2YzYxNjk2ZDY1NjQgLy8gIkJvdW50eSBjbGFpbWVkIgoJaXR4bl9maWVsZCBOb3RlCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoKCS8vIGNvbnRyYWN0cy9Cb3VudHkuYWxnby50czo0OQoJLy8gdGhpcy5ib3VudHlCb3goYWRkcikudmFsdWUgPSB1bmNsYWltZWRBbW91bnQgLSBhbW91bnQKCWZyYW1lX2RpZyAwIC8vIGFkZHI6IGFkZHJlc3MKCWZyYW1lX2RpZyAxIC8vIHVuY2xhaW1lZEFtb3VudDogdWludDY0CglmcmFtZV9kaWcgLTEgLy8gYW1vdW50OiB1aW50NjQKCS0KCWl0b2IKCWJveF9wdXQKCXJldHN1YgoKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCWludGMgMCAvLyAxCglyZXR1cm4KCipjcmVhdGVfTm9PcDoKCXB1c2hieXRlcyAweGI4NDQ3YjM2IC8vIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNyZWF0ZSBOb09wCgllcnIKCipjYWxsX05vT3A6CglwdXNoYnl0ZXMgMHhmODllMDQ5NyAvLyBtZXRob2QgImlzc3VlQm91bnR5KHBheSx1aW50NjQsYWRkcmVzcyl2b2lkIgoJcHVzaGJ5dGVzIDB4N2NlYmU4MTAgLy8gbWV0aG9kICJjbGFpbUJvdW50eSh1aW50NjQpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfaXNzdWVCb3VudHkgKmFiaV9yb3V0ZV9jbGFpbUJvdW50eQoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiADAQDkgQgmAQAxGBSBBgsxGQiNDADjAAAAAAAAAAAAAADVAAAAAAAAAAAAAAA2GgJJFYEgEkQ2GgEXMRYiCUk4ECISRIgAAiJDigMAKIv+Iw1EJIwAi/29TEhBACeL/zgAMQASRIv/OAcyChJEi/84CIv+EkSL/Yv9vkQXi/4IFr9CACCL/zgAMQASRIv/OAcyChJEi/84CCSL/ggSRIv9i/4Wv4k2GgEXiAACIkOKAQAoSTEAjACLAL1MSESL/yMNRIsAvkQXjAGLAYv/D0SxIrIQi/+yCDIKsgAxALIHgA5Cb3VudHkgY2xhaW1lZLIFI7IBs4sAiwGL/wkWv4kiQ4AEuER7NjYaAI4B//EAgAT4ngSXgAR86+gQNhoAjgL/Cf+BAA==","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -164,11 +164,57 @@ export type MethodReturn<TSignature extends BountySignatures> = BountyTypes['met
 export type BoxKeysState = BountyTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type BountyCreateCallParams =
+  | Expand<CallParams<BountyArgs['obj']['createApplication()void'] | BountyArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<BountyArgs['obj']['createApplication()void'] | BountyArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type BountyDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: BountyCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Bounty smart contract
  */
 export abstract class BountyParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends BountyCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return BountyParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the Bounty smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<BountyArgs['obj']['createApplication()void'] | BountyArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the issueBounty(pay,uint64,address)void ABI method
    *
@@ -197,6 +243,148 @@ export abstract class BountyParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Bounty smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class BountyFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `BountyFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new BountyClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new BountyClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Bounty smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: BountyDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? BountyParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (BountyCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new BountyClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Bounty smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<BountyArgs['obj']['createApplication()void'] | BountyArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(BountyParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Bounty smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<BountyArgs['obj']['createApplication()void'] | BountyArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(BountyParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Bounty smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<BountyArgs['obj']['createApplication()void'] | BountyArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(BountyParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | BountyReturns['createApplication()void']) }, appClient: new BountyClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Bounty smart contract
  */
