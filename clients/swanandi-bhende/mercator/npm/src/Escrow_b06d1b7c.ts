@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Escrow","structs":{"UnlockRecord":[{"name":"buyer","type":"address"},{"name":"unlocked","type":"bool"}]},"methods":[{"name":"release_after_payment","args":[{"type":"address","name":"buyer","desc":"Algorand wallet address of the buyer (must match tx sender)."},{"type":"uint64","name":"listing_id","desc":"InsightListing ID that buyer paid for."}],"returns":{"type":"bool","desc":"True if unlock recorded successfully."},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Record buyer access after x402 payment confirmed on-chain.\nPurpose: Post-payment gate. Called by post_payment_flow after x402 tx confirmed + indexed. Atomically validates that **transaction sender is the buyer** (prevents spoofing).\nActions: 1. Assert op.Txn.sender == buyer.native (confirms caller is buyer's wallet). 2. Store UnlockRecord in boxes: {buyer, unlocked=True}. 3. Return True to signal success.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Escrow settlement tracking for x402 micropayments.\n    \n    State:\n        registry_app_id: Global reference to AgentRegistry app (UInt64).\n        unlocked_listings: BoxMap(listing_id => UnlockRecord) recording buyer access grants.\n    \n    Purpose: Immutable on-chain proof that buyer paid for and accessed specific listing.\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"registry_app_id":{"keyType":"AVMString","valueType":"AVMUint64","key":"cmVnaXN0cnlfYXBwX2lk"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"unlocked_listings":{"keyType":"uint64","valueType":"UnlockRecord","prefix":"dW5sb2Nr"}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[145],"errorMessage":"Buyer must be registered in AgentRegistry"},{"pc":[84],"errorMessage":"Only the buyer can release after payment"},{"pc":[132],"errorMessage":"application log value is not the result of an ABI return"},{"pc":[88,96],"errorMessage":"check self.registry_app_id exists"},{"pc":[140],"errorMessage":"invalid number of bytes for arc4.bool"},{"pc":[69],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[80],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Escrow","structs":{"UnlockRecord":[{"name":"buyer","type":"address"},{"name":"unlocked","type":"bool"}]},"methods":[{"name":"release_after_payment","args":[{"type":"address","name":"buyer","desc":"Algorand wallet address of the buyer (must match tx sender)."},{"type":"uint64","name":"listing_id","desc":"InsightListing ID that buyer paid for."}],"returns":{"type":"bool","desc":"True if unlock recorded successfully."},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Record buyer access after x402 payment confirmed on-chain.\nPurpose: Post-payment gate. Called by post_payment_flow after x402 tx confirmed + indexed. Atomically validates that **transaction sender is the buyer** (prevents spoofing).\nActions: 1. Assert op.Txn.sender == buyer.native (confirms caller is buyer's wallet). 2. Store UnlockRecord in boxes: {buyer, unlocked=True}. 3. Return True to signal success.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Escrow settlement tracking for x402 micropayments.\n    \n    State:\n        registry_app_id: Global reference to AgentRegistry app (UInt64).\n        unlocked_listings: BoxMap(listing_id => UnlockRecord) recording buyer access grants.\n    \n    Purpose: Immutable on-chain proof that buyer paid for and accessed specific listing.\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"registry_app_id":{"keyType":"AVMString","valueType":"AVMUint64","key":"cmVnaXN0cnlfYXBwX2lk"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"unlocked_listings":{"keyType":"uint64","valueType":"UnlockRecord","prefix":"dW5sb2Nr"}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[145],"errorMessage":"Buyer must be registered in AgentRegistry"},{"pc":[84],"errorMessage":"Only the buyer can release after payment"},{"pc":[132],"errorMessage":"application log value is not the result of an ABI return"},{"pc":[88,96],"errorMessage":"check self.registry_app_id exists"},{"pc":[140],"errorMessage":"invalid number of bytes for arc4.bool"},{"pc":[69],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[80],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEKICAgIGJ5dGVjYmxvY2sgInJlZ2lzdHJ5X2FwcF9pZCIKICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2VzY3Jvdy9zbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjM3CiAgICAvLyBjbGFzcyBFc2Nyb3coQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDcKICAgIHB1c2hieXRlcyAweGEyNjMxMzUzIC8vIG1ldGhvZCAicmVsZWFzZV9hZnRlcl9wYXltZW50KGFkZHJlc3MsdWludDY0KWJvb2wiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3JlbGVhc2VfYWZ0ZXJfcGF5bWVudF9yb3V0ZUA1CiAgICBlcnIKCm1haW5fcmVsZWFzZV9hZnRlcl9wYXltZW50X3JvdXRlQDU6CiAgICAvLyBiYWNrZW5kL2NvbnRyYWN0cy9lc2Nyb3cvc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo1MwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0CiAgICBiIHJlbGVhc2VfYWZ0ZXJfcGF5bWVudAoKbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA3OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuZXNjcm93LmNvbnRyYWN0LkVzY3Jvdy5yZWxlYXNlX2FmdGVyX3BheW1lbnRbcm91dGluZ10oKSAtPiB2b2lkOgpyZWxlYXNlX2FmdGVyX3BheW1lbnQ6CiAgICAvLyBiYWNrZW5kL2NvbnRyYWN0cy9lc2Nyb3cvc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo1MwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cG4gMgogICAgbGVuCiAgICBwdXNoaW50IDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgY292ZXIgMgogICAgbGVuCiAgICBwdXNoaW50IDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICAvLyBiYWNrZW5kL2NvbnRyYWN0cy9lc2Nyb3cvc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo4NC04NQogICAgLy8gIyBQb3N0LXBheW1lbnQgcmVsZWFzZSBwYXRoOiBidXllciBkaXJlY3RseSBjYWxscyBlc2Nyb3cgYWZ0ZXIgcGF5bWVudCBjb25maXJtYXRpb24uCiAgICAvLyBhc3NlcnQgb3AuVHhuLnNlbmRlciA9PSBidXllci5uYXRpdmUsICJPbmx5IHRoZSBidXllciBjYW4gcmVsZWFzZSBhZnRlciBwYXltZW50IgogICAgdHhuIFNlbmRlcgogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IHRoZSBidXllciBjYW4gcmVsZWFzZSBhZnRlciBwYXltZW50CiAgICAvLyBiYWNrZW5kL2NvbnRyYWN0cy9lc2Nyb3cvc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo4Ny04OAogICAgLy8gIyBPcHRpb25hbGx5IGNoZWNrIGJ1eWVyIGlzIHJlZ2lzdGVyZWQgaW4gQWdlbnRSZWdpc3RyeSAoaWYgcmVnaXN0cnlfYXBwX2lkIGlzIHNldCkKICAgIC8vIGlmIHNlbGYucmVnaXN0cnlfYXBwX2lkLnZhbHVlICE9IFVJbnQ2NCgwKToKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJyZWdpc3RyeV9hcHBfaWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYucmVnaXN0cnlfYXBwX2lkIGV4aXN0cwogICAgYnogcmVsZWFzZV9hZnRlcl9wYXltZW50X2FmdGVyX2lmX2Vsc2VANAogICAgLy8gYmFja2VuZC9jb250cmFjdHMvZXNjcm93L3NtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6ODktOTMKICAgIC8vIGlzX3JlZ2lzdGVyZWQsIHR4biA9IGFyYzQuYWJpX2NhbGxbYXJjNC5Cb29sXSgKICAgIC8vICAgICAiaXNfcmVnaXN0ZXJlZChhZGRyZXNzKWJvb2wiLAogICAgLy8gICAgIGJ1eWVyLAogICAgLy8gICAgIGFwcF9pZD1zZWxmLnJlZ2lzdHJ5X2FwcF9pZC52YWx1ZSwKICAgIC8vICkKICAgIGl0eG5fYmVnaW4KICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2VzY3Jvdy9zbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5OjkyCiAgICAvLyBhcHBfaWQ9c2VsZi5yZWdpc3RyeV9hcHBfaWQudmFsdWUsCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAicmVnaXN0cnlfYXBwX2lkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnJlZ2lzdHJ5X2FwcF9pZCBleGlzdHMKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25JRAogICAgLy8gYmFja2VuZC9jb250cmFjdHMvZXNjcm93L3NtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6ODktOTMKICAgIC8vIGlzX3JlZ2lzdGVyZWQsIHR4biA9IGFyYzQuYWJpX2NhbGxbYXJjNC5Cb29sXSgKICAgIC8vICAgICAiaXNfcmVnaXN0ZXJlZChhZGRyZXNzKWJvb2wiLAogICAgLy8gICAgIGJ1eWVyLAogICAgLy8gICAgIGFwcF9pZD1zZWxmLnJlZ2lzdHJ5X2FwcF9pZC52YWx1ZSwKICAgIC8vICkKICAgIHB1c2hieXRlcyAweDkxOWMwMmRmIC8vIG1ldGhvZCAiaXNfcmVnaXN0ZXJlZChhZGRyZXNzKWJvb2wiCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgZGlnIDEKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBwdXNoaW50IDYgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBMYXN0TG9nCiAgICBkdXAKICAgIGV4dHJhY3QgMCA0CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NQogICAgPT0KICAgIGFzc2VydCAvLyBhcHBsaWNhdGlvbiBsb2cgdmFsdWUgaXMgbm90IHRoZSByZXN1bHQgb2YgYW4gQUJJIHJldHVybgogICAgZXh0cmFjdCA0IDAKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5ib29sCiAgICAvLyBiYWNrZW5kL2NvbnRyYWN0cy9lc2Nyb3cvc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo5NAogICAgLy8gYXNzZXJ0IGlzX3JlZ2lzdGVyZWQsICJCdXllciBtdXN0IGJlIHJlZ2lzdGVyZWQgaW4gQWdlbnRSZWdpc3RyeSIKICAgIHB1c2hieXRlcyAweDAwCiAgICAhPQogICAgYXNzZXJ0IC8vIEJ1eWVyIG11c3QgYmUgcmVnaXN0ZXJlZCBpbiBBZ2VudFJlZ2lzdHJ5CgpyZWxlYXNlX2FmdGVyX3BheW1lbnRfYWZ0ZXJfaWZfZWxzZUA0OgogICAgLy8gYmFja2VuZC9jb250cmFjdHMvZXNjcm93L3NtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6OTYtOTkKICAgIC8vIHNlbGYudW5sb2NrZWRfbGlzdGluZ3NbbGlzdGluZ19pZF0gPSBVbmxvY2tSZWNvcmQoCiAgICAvLyAgICAgYnV5ZXI9YnV5ZXIsCiAgICAvLyAgICAgdW5sb2NrZWQ9YXJjNC5Cb29sKFRydWUpLAogICAgLy8gKQogICAgZGlnIDEKICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2VzY3Jvdy9zbWFydF9jb250cmFjdHMvZXNjcm93L2NvbnRyYWN0LnB5Ojk4CiAgICAvLyB1bmxvY2tlZD1hcmM0LkJvb2woVHJ1ZSksCiAgICBwdXNoYnl0ZXMgMHg4MAogICAgLy8gYmFja2VuZC9jb250cmFjdHMvZXNjcm93L3NtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6OTYtOTkKICAgIC8vIHNlbGYudW5sb2NrZWRfbGlzdGluZ3NbbGlzdGluZ19pZF0gPSBVbmxvY2tSZWNvcmQoCiAgICAvLyAgICAgYnV5ZXI9YnV5ZXIsCiAgICAvLyAgICAgdW5sb2NrZWQ9YXJjNC5Cb29sKFRydWUpLAogICAgLy8gKQogICAgY29uY2F0CiAgICAvLyBiYWNrZW5kL2NvbnRyYWN0cy9lc2Nyb3cvc21hcnRfY29udHJhY3RzL2VzY3Jvdy9jb250cmFjdC5weTo5NgogICAgLy8gc2VsZi51bmxvY2tlZF9saXN0aW5nc1tsaXN0aW5nX2lkXSA9IFVubG9ja1JlY29yZCgKICAgIHB1c2hieXRlcyAweDc1NmU2YzZmNjM2YgogICAgZGlnIDIKICAgIGNvbmNhdAogICAgLy8gYmFja2VuZC9jb250cmFjdHMvZXNjcm93L3NtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6OTYtOTkKICAgIC8vIHNlbGYudW5sb2NrZWRfbGlzdGluZ3NbbGlzdGluZ19pZF0gPSBVbmxvY2tSZWNvcmQoCiAgICAvLyAgICAgYnV5ZXI9YnV5ZXIsCiAgICAvLyAgICAgdW5sb2NrZWQ9YXJjNC5Cb29sKFRydWUpLAogICAgLy8gKQogICAgc3dhcAogICAgYm94X3B1dAogICAgLy8gYmFja2VuZC9jb250cmFjdHMvZXNjcm93L3NtYXJ0X2NvbnRyYWN0cy9lc2Nyb3cvY29udHJhY3QucHk6NTMKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTgwCiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyACAAEmAQ9yZWdpc3RyeV9hcHBfaWQxG0EAGIAEomMTUzYaAI4BAAEAMRkUMRgQREIACDEZFDEYFBBDNhoBRwIVgSASRDYaAklOAhWBCBJEMQASRCIoZURBADaxIihlRLIYgASRnALfshpLAbIagQayECKyAbO0PklXAASABBUffHUSRFcEAEkVIxJEgAEAE0RLAYABgFCABnVubG9ja0sCUEy/gAUVH3x1gLAjQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -184,6 +184,21 @@ export type GlobalKeysState = EscrowTypes['state']['global']['keys']
 export type BoxKeysState = EscrowTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type EscrowCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type EscrowDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: EscrowCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Escrow smart contract
@@ -209,6 +224,147 @@ export abstract class EscrowParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Escrow smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class EscrowFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `EscrowFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new EscrowClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new EscrowClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Escrow smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: EscrowDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new EscrowClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Escrow smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Escrow smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Escrow smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new EscrowClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Escrow smart contract
  */

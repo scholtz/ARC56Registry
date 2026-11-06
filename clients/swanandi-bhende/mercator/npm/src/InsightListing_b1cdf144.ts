@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"InsightListing","structs":{"Listing":[{"name":"price","type":"uint64"},{"name":"seller","type":"address"},{"name":"ipfsHash","type":"string"},{"name":"asaId","type":"uint64"}]},"methods":[{"name":"create_listing","args":[{"type":"uint64","name":"price","desc":"Settlement amount (micro-USDC). e.g., 5_000_000 = 5 USDC."},{"type":"address","name":"seller","desc":"Seller's Algorand wallet (58-char checksummed address)."},{"type":"string","name":"ipfs_hash","desc":"Content CID (e.g., \"Qm...\") pinned on Pinata."}],"returns":{"type":"uint64","desc":"Unique identifier (used in /discover results, x402 payment, escrow)."},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Publish a new trading insight and receive seller ASA for proof-of-ownership.\nPurpose: Allocate unique listing ID and link IPFS content permanently on-chain.\nActions: 1. Increment next_listing_id counter → allocate new listing ID. 2. Call itxn.AssetConfig to mint one ASA with:    - INSIGHT token name, Mercator Insight asset name, IpfsHash as URL.    - Seller as manager + reserve + freeze + clawback (seller controls proof token).    - Fee=1000 micro-Algo. 3. Store Listing struct in boxes: {price, seller, ipfs_hash, asa_id}. 4. Increment counter for next invocation. 5. Return listing_id to caller (frontend caches this).","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"On-chain listing registry for trading insights.\n    \n    State:\n        next_listing_id: Global counter allocating unique listing IDs (UInt64).\n        listings: BoxMap(listing_id => Listing), storing all current listings.\n    \n    Purpose: Seller-facing contract for publishing insights + buyer-facing registry for discovery.\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"next_listing_id":{"keyType":"AVMString","valueType":"AVMUint64","key":"bmV4dF9saXN0aW5nX2lk"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"listings":{"keyType":"uint64","valueType":"Listing","prefix":"bGlzdGluZw=="}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[103],"errorMessage":"check self.next_listing_id exists"},{"pc":[91],"errorMessage":"invalid array length header"},{"pc":[99],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[85],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[76],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"InsightListing","structs":{"Listing":[{"name":"price","type":"uint64"},{"name":"seller","type":"address"},{"name":"ipfsHash","type":"string"},{"name":"asaId","type":"uint64"}]},"methods":[{"name":"create_listing","args":[{"type":"uint64","name":"price","desc":"Settlement amount (micro-USDC). e.g., 5_000_000 = 5 USDC."},{"type":"address","name":"seller","desc":"Seller's Algorand wallet (58-char checksummed address)."},{"type":"string","name":"ipfs_hash","desc":"Content CID (e.g., \"Qm...\") pinned on Pinata."}],"returns":{"type":"uint64","desc":"Unique identifier (used in /discover results, x402 payment, escrow)."},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Publish a new trading insight and receive seller ASA for proof-of-ownership.\nPurpose: Allocate unique listing ID and link IPFS content permanently on-chain.\nActions: 1. Increment next_listing_id counter → allocate new listing ID. 2. Call itxn.AssetConfig to mint one ASA with:    - INSIGHT token name, Mercator Insight asset name, IpfsHash as URL.    - Seller as manager + reserve + freeze + clawback (seller controls proof token).    - Fee=1000 micro-Algo. 3. Store Listing struct in boxes: {price, seller, ipfs_hash, asa_id}. 4. Increment counter for next invocation. 5. Return listing_id to caller (frontend caches this).","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"On-chain listing registry for trading insights.\n    \n    State:\n        next_listing_id: Global counter allocating unique listing IDs (UInt64).\n        listings: BoxMap(listing_id => Listing), storing all current listings.\n    \n    Purpose: Seller-facing contract for publishing insights + buyer-facing registry for discovery.\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"next_listing_id":{"keyType":"AVMString","valueType":"AVMUint64","key":"bmV4dF9saXN0aW5nX2lk"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"listings":{"keyType":"uint64","valueType":"Listing","prefix":"bGlzdGluZw=="}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[103],"errorMessage":"check self.next_listing_id exists"},{"pc":[91],"errorMessage":"invalid array length header"},{"pc":[99],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[85],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[76],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEKICAgIGJ5dGVjYmxvY2sgIm5leHRfbGlzdGluZ19pZCIKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9zbWFydF9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL2NvbnRyYWN0LnB5OjQ3CiAgICAvLyBzZWxmLm5leHRfbGlzdGluZ19pZCA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMCAvLyAibmV4dF9saXN0aW5nX2lkIgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9zbWFydF9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL2NvbnRyYWN0LnB5OjM3CiAgICAvLyBjbGFzcyBJbnNpZ2h0TGlzdGluZyhBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVANwogICAgcHVzaGJ5dGVzIDB4MzViODM2ZDYgLy8gbWV0aG9kICJjcmVhdGVfbGlzdGluZyh1aW50NjQsYWRkcmVzcyxzdHJpbmcpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVfbGlzdGluZ19yb3V0ZUA1CiAgICBlcnIKCm1haW5fY3JlYXRlX2xpc3Rpbmdfcm91dGVANToKICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9zbWFydF9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL2NvbnRyYWN0LnB5OjUwCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgY3JlYXRlX2xpc3RpbmcKCm1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVANzoKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmluc2lnaHRfbGlzdGluZy5jb250cmFjdC5JbnNpZ2h0TGlzdGluZy5jcmVhdGVfbGlzdGluZ1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZV9saXN0aW5nOgogICAgLy8gYmFja2VuZC9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL3NtYXJ0X2NvbnRyYWN0cy9pbnNpZ2h0X2xpc3RpbmcvY29udHJhY3QucHk6NTAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9zbWFydF9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL2NvbnRyYWN0LnB5Ojc5CiAgICAvLyBsaXN0aW5nX2lkID0gc2VsZi5uZXh0X2xpc3RpbmdfaWQKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJuZXh0X2xpc3RpbmdfaWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYubmV4dF9saXN0aW5nX2lkIGV4aXN0cwogICAgLy8gYmFja2VuZC9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL3NtYXJ0X2NvbnRyYWN0cy9pbnNpZ2h0X2xpc3RpbmcvY29udHJhY3QucHk6ODEtOTQKICAgIC8vICMgTWludCBvbmUgQVNBIGZvciB0aGlzIGxpc3RpbmcgYW5kIHN0b3JlIGl0cyBpZCB3aXRoIGxpc3RpbmcgbWV0YWRhdGEuCiAgICAvLyBhc3NldF9yZXN1bHQgPSBpdHhuLkFzc2V0Q29uZmlnKAogICAgLy8gICAgIHRvdGFsPVVJbnQ2NCgxKSwKICAgIC8vICAgICBkZWNpbWFscz1VSW50NjQoMCksCiAgICAvLyAgICAgZGVmYXVsdF9mcm96ZW49RmFsc2UsCiAgICAvLyAgICAgdW5pdF9uYW1lPSJJTlNJR0hUIiwKICAgIC8vICAgICBhc3NldF9uYW1lPSJNZXJjYXRvciBJbnNpZ2h0IiwKICAgIC8vICAgICB1cmw9aXBmc19oYXNoLm5hdGl2ZSwKICAgIC8vICAgICBtYW5hZ2VyPXNlbGxlci5uYXRpdmUsCiAgICAvLyAgICAgcmVzZXJ2ZT1zZWxsZXIubmF0aXZlLAogICAgLy8gICAgIGZyZWV6ZT1zZWxsZXIubmF0aXZlLAogICAgLy8gICAgIGNsYXdiYWNrPXNlbGxlci5uYXRpdmUsCiAgICAvLyAgICAgZmVlPVVJbnQ2NCgxMDAwKSwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9zbWFydF9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL2NvbnRyYWN0LnB5Ojg4CiAgICAvLyB1cmw9aXBmc19oYXNoLm5hdGl2ZSwKICAgIGRpZyAxCiAgICBleHRyYWN0IDIgMAogICAgZGlnIDMKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXRDbGF3YmFjawogICAgZGlnIDMKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXRGcmVlemUKICAgIGRpZyAzCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0UmVzZXJ2ZQogICAgZGlnIDMKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXRNYW5hZ2VyCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0VVJMCiAgICAvLyBiYWNrZW5kL2NvbnRyYWN0cy9pbnNpZ2h0X2xpc3Rpbmcvc21hcnRfY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9jb250cmFjdC5weTo4NwogICAgLy8gYXNzZXRfbmFtZT0iTWVyY2F0b3IgSW5zaWdodCIsCiAgICBwdXNoYnl0ZXMgIk1lcmNhdG9yIEluc2lnaHQiCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0TmFtZQogICAgLy8gYmFja2VuZC9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL3NtYXJ0X2NvbnRyYWN0cy9pbnNpZ2h0X2xpc3RpbmcvY29udHJhY3QucHk6ODYKICAgIC8vIHVuaXRfbmFtZT0iSU5TSUdIVCIsCiAgICBwdXNoYnl0ZXMgIklOU0lHSFQiCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0VW5pdE5hbWUKICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9zbWFydF9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL2NvbnRyYWN0LnB5Ojg1CiAgICAvLyBkZWZhdWx0X2Zyb3plbj1GYWxzZSwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0RGVmYXVsdEZyb3plbgogICAgLy8gYmFja2VuZC9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL3NtYXJ0X2NvbnRyYWN0cy9pbnNpZ2h0X2xpc3RpbmcvY29udHJhY3QucHk6ODQKICAgIC8vIGRlY2ltYWxzPVVJbnQ2NCgwKSwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0RGVjaW1hbHMKICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9zbWFydF9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL2NvbnRyYWN0LnB5OjgzCiAgICAvLyB0b3RhbD1VSW50NjQoMSksCiAgICBpbnRjXzEgLy8gMQogICAgaXR4bl9maWVsZCBDb25maWdBc3NldFRvdGFsCiAgICAvLyBiYWNrZW5kL2NvbnRyYWN0cy9pbnNpZ2h0X2xpc3Rpbmcvc21hcnRfY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9jb250cmFjdC5weTo4MS04MgogICAgLy8gIyBNaW50IG9uZSBBU0EgZm9yIHRoaXMgbGlzdGluZyBhbmQgc3RvcmUgaXRzIGlkIHdpdGggbGlzdGluZyBtZXRhZGF0YS4KICAgIC8vIGFzc2V0X3Jlc3VsdCA9IGl0eG4uQXNzZXRDb25maWcoCiAgICBwdXNoaW50IDMgLy8gYWNmZwogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gYmFja2VuZC9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL3NtYXJ0X2NvbnRyYWN0cy9pbnNpZ2h0X2xpc3RpbmcvY29udHJhY3QucHk6OTMKICAgIC8vIGZlZT1VSW50NjQoMTAwMCksCiAgICBwdXNoaW50IDEwMDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBiYWNrZW5kL2NvbnRyYWN0cy9pbnNpZ2h0X2xpc3Rpbmcvc21hcnRfY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9jb250cmFjdC5weTo4MS05NAogICAgLy8gIyBNaW50IG9uZSBBU0EgZm9yIHRoaXMgbGlzdGluZyBhbmQgc3RvcmUgaXRzIGlkIHdpdGggbGlzdGluZyBtZXRhZGF0YS4KICAgIC8vIGFzc2V0X3Jlc3VsdCA9IGl0eG4uQXNzZXRDb25maWcoCiAgICAvLyAgICAgdG90YWw9VUludDY0KDEpLAogICAgLy8gICAgIGRlY2ltYWxzPVVJbnQ2NCgwKSwKICAgIC8vICAgICBkZWZhdWx0X2Zyb3plbj1GYWxzZSwKICAgIC8vICAgICB1bml0X25hbWU9IklOU0lHSFQiLAogICAgLy8gICAgIGFzc2V0X25hbWU9Ik1lcmNhdG9yIEluc2lnaHQiLAogICAgLy8gICAgIHVybD1pcGZzX2hhc2gubmF0aXZlLAogICAgLy8gICAgIG1hbmFnZXI9c2VsbGVyLm5hdGl2ZSwKICAgIC8vICAgICByZXNlcnZlPXNlbGxlci5uYXRpdmUsCiAgICAvLyAgICAgZnJlZXplPXNlbGxlci5uYXRpdmUsCiAgICAvLyAgICAgY2xhd2JhY2s9c2VsbGVyLm5hdGl2ZSwKICAgIC8vICAgICBmZWU9VUludDY0KDEwMDApLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIGl0eG4gQ3JlYXRlZEFzc2V0SUQKICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9zbWFydF9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL2NvbnRyYWN0LnB5OjEwMQogICAgLy8gYXNhX2lkPWFyYzQuVUludDY0KGFzYV9pZCksCiAgICBpdG9iCiAgICAvLyBiYWNrZW5kL2NvbnRyYWN0cy9pbnNpZ2h0X2xpc3Rpbmcvc21hcnRfY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9jb250cmFjdC5weTo5Ny0xMDIKICAgIC8vIHNlbGYubGlzdGluZ3NbYXJjNC5VSW50NjQobGlzdGluZ19pZCldID0gTGlzdGluZygKICAgIC8vICAgICBwcmljZT1wcmljZSwKICAgIC8vICAgICBzZWxsZXI9c2VsbGVyLAogICAgLy8gICAgIGlwZnNfaGFzaD1pcGZzX2hhc2gsCiAgICAvLyAgICAgYXNhX2lkPWFyYzQuVUludDY0KGFzYV9pZCksCiAgICAvLyApCiAgICB1bmNvdmVyIDQKICAgIHVuY292ZXIgNAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgwMDMyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9zbWFydF9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL2NvbnRyYWN0LnB5Ojk3CiAgICAvLyBzZWxmLmxpc3RpbmdzW2FyYzQuVUludDY0KGxpc3RpbmdfaWQpXSA9IExpc3RpbmcoCiAgICBkaWcgMQogICAgaXRvYgogICAgcHVzaGJ5dGVzIDB4NmM2OTczNzQ2OTZlNjcKICAgIGRpZyAxCiAgICBjb25jYXQKICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9zbWFydF9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL2NvbnRyYWN0LnB5Ojk3LTEwMgogICAgLy8gc2VsZi5saXN0aW5nc1thcmM0LlVJbnQ2NChsaXN0aW5nX2lkKV0gPSBMaXN0aW5nKAogICAgLy8gICAgIHByaWNlPXByaWNlLAogICAgLy8gICAgIHNlbGxlcj1zZWxsZXIsCiAgICAvLyAgICAgaXBmc19oYXNoPWlwZnNfaGFzaCwKICAgIC8vICAgICBhc2FfaWQ9YXJjNC5VSW50NjQoYXNhX2lkKSwKICAgIC8vICkKICAgIGR1cAogICAgYm94X2RlbAogICAgcG9wCiAgICB1bmNvdmVyIDIKICAgIGJveF9wdXQKICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9zbWFydF9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL2NvbnRyYWN0LnB5OjEwMwogICAgLy8gc2VsZi5uZXh0X2xpc3RpbmdfaWQgPSBsaXN0aW5nX2lkICsgVUludDY0KDEpCiAgICBzd2FwCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYnl0ZWNfMCAvLyAibmV4dF9saXN0aW5nX2lkIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGJhY2tlbmQvY29udHJhY3RzL2luc2lnaHRfbGlzdGluZy9zbWFydF9jb250cmFjdHMvaW5zaWdodF9saXN0aW5nL2NvbnRyYWN0LnB5OjUwCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyACAAEmAQ9uZXh0X2xpc3RpbmdfaWQxGEAAAygiZzEbQQAYgAQ1uDbWNhoAjgEAAQAxGRQxGBBEQgAIMRkUMRgUEEM2GgFJFYEIEkQ2GgJJFYEgEkQ2GgNJIlmBAghLARUSRCIoZUSxSwFXAgBLA7IsSwOyK0sDsipLA7IpsieAEE1lcmNhdG9yIEluc2lnaHSyJoAHSU5TSUdIVLIlIrIkIrIjI7IigQOyEIHoB7IBs7Q8Fk8ETwRQgAIAMlBMUE8CUEsBFoAHbGlzdGluZ0sBUEm8SE8Cv0wjCChMZ4AEFR98dUxQsCND","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -190,6 +190,21 @@ export type GlobalKeysState = InsightListingTypes['state']['global']['keys']
 export type BoxKeysState = InsightListingTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type InsightListingCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type InsightListingDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: InsightListingCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the InsightListing smart contract
@@ -215,6 +230,147 @@ export abstract class InsightListingParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the InsightListing smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class InsightListingFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `InsightListingFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new InsightListingClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new InsightListingClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the InsightListing smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: InsightListingDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new InsightListingClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the InsightListing smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the InsightListing smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the InsightListing smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new InsightListingClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the InsightListing smart contract
  */
