@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"TestFactory","structs":{},"methods":[{"name":"set_test_contract_child","args":[{"type":"uint64","name":"test_contract_child_app"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"create_test_contract_child_and_box","args":[{"type":"pay","name":"mbr_payment"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"test_contract_child":{"keyType":"AVMString","valueType":"AVMUint64","key":"dGVzdF9jb250cmFjdF9jaGlsZA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[48],"errorMessage":"OnCompletion must be NoOp"},{"pc":[113,219],"errorMessage":"account funded"},{"pc":[122,126,150,167],"errorMessage":"application exists"},{"pc":[213],"errorMessage":"application log value is not the result of an ABI return"},{"pc":[118],"errorMessage":"check self.test_contract_child exists"},{"pc":[100],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"TestFactory","structs":{},"methods":[{"name":"set_test_contract_child","args":[{"type":"uint64","name":"test_contract_child_app"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"create_test_contract_child_and_box","args":[{"type":"pay","name":"mbr_payment"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"test_contract_child":{"keyType":"AVMString","valueType":"AVMUint64","key":"dGVzdF9jb250cmFjdF9jaGlsZA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[48],"errorMessage":"OnCompletion must be NoOp"},{"pc":[113,219],"errorMessage":"account funded"},{"pc":[122,126,150,167],"errorMessage":"application exists"},{"pc":[213],"errorMessage":"application log value is not the result of an ABI return"},{"pc":[118],"errorMessage":"check self.test_contract_child exists"},{"pc":[100],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgNSA2IDEwMDAwMAogICAgYnl0ZWNibG9jayAidGVzdF9jb250cmFjdF9jaGlsZCIgMHgxNTFmN2M3NQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weToyMwogICAgLy8gc2VsZi50ZXN0X2NvbnRyYWN0X2NoaWxkID0gQXBwbGljYXRpb24oKQogICAgYnl0ZWNfMCAvLyAidGVzdF9jb250cmFjdF9jaGlsZCIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjIxCiAgICAvLyBjbGFzcyBUZXN0RmFjdG9yeShBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDcKICAgIHB1c2hieXRlcyAweDc0NGVjNGRjIC8vIG1ldGhvZCAiY3JlYXRlX3Rlc3RfY29udHJhY3RfY2hpbGRfYW5kX2JveChwYXkpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlX3Rlc3RfY29udHJhY3RfY2hpbGRfYW5kX2JveAogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjIxCiAgICAvLyBjbGFzcyBUZXN0RmFjdG9yeShBUkM0Q29udHJhY3QpOgogICAgcHVzaGJ5dGVzIDB4Njg1ZDNiNjggLy8gbWV0aG9kICJzZXRfdGVzdF9jb250cmFjdF9jaGlsZCh1aW50NjQpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHNldF90ZXN0X2NvbnRyYWN0X2NoaWxkCiAgICBlcnIKCgovLyBzbWFydF9jb250cmFjdHMudGVzdF9mYWN0b3J5LmNvbnRyYWN0LlRlc3RGYWN0b3J5LnNldF90ZXN0X2NvbnRyYWN0X2NoaWxkW3JvdXRpbmddKCkgLT4gdm9pZDoKc2V0X3Rlc3RfY29udHJhY3RfY2hpbGQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjI1CiAgICAvLyBAYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjI3CiAgICAvLyBzZWxmLnRlc3RfY29udHJhY3RfY2hpbGQgPSB0ZXN0X2NvbnRyYWN0X2NoaWxkX2FwcAogICAgYnl0ZWNfMCAvLyAidGVzdF9jb250cmFjdF9jaGlsZCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjI1CiAgICAvLyBAYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnRlc3RfZmFjdG9yeS5jb250cmFjdC5UZXN0RmFjdG9yeS5jcmVhdGVfdGVzdF9jb250cmFjdF9jaGlsZF9hbmRfYm94W3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlX3Rlc3RfY29udHJhY3RfY2hpbGRfYW5kX2JveDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6MjkKICAgIC8vIEBhYmltZXRob2QKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzEgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18xIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTozMwogICAgLy8gYXNzZXJ0IG1icl9wYXltZW50LmFtb3VudCA+PSAxXzAwMF8wMDAKICAgIGd0eG5zIEFtb3VudAogICAgcHVzaGludCAxMDAwMDAwIC8vIDEwMDAwMDAKICAgID49CiAgICBhc3NlcnQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6MTgKICAgIC8vIHJldHVybiBHbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLm1pbl9iYWxhbmNlCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RNaW5CYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6MzctNDIKICAgIC8vIGNyZWF0ZV9jaGlsZF90eCA9IGl0eG4uQXBwbGljYXRpb25DYWxsKAogICAgLy8gICAgIGFwcHJvdmFsX3Byb2dyYW09c2VsZi50ZXN0X2NvbnRyYWN0X2NoaWxkLmFwcHJvdmFsX3Byb2dyYW0sCiAgICAvLyAgICAgY2xlYXJfc3RhdGVfcHJvZ3JhbT1zZWxmLnRlc3RfY29udHJhY3RfY2hpbGQuY2xlYXJfc3RhdGVfcHJvZ3JhbSwKICAgIC8vICAgICBnbG9iYWxfbnVtX2J5dGVzPTUsCiAgICAvLyAgICAgZ2xvYmFsX251bV91aW50PTUsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjM4CiAgICAvLyBhcHByb3ZhbF9wcm9ncmFtPXNlbGYudGVzdF9jb250cmFjdF9jaGlsZC5hcHByb3ZhbF9wcm9ncmFtLAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInRlc3RfY29udHJhY3RfY2hpbGQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudGVzdF9jb250cmFjdF9jaGlsZCBleGlzdHMKICAgIGR1cAogICAgYXBwX3BhcmFtc19nZXQgQXBwQXBwcm92YWxQcm9ncmFtCiAgICBhc3NlcnQgLy8gYXBwbGljYXRpb24gZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjM5CiAgICAvLyBjbGVhcl9zdGF0ZV9wcm9ncmFtPXNlbGYudGVzdF9jb250cmFjdF9jaGlsZC5jbGVhcl9zdGF0ZV9wcm9ncmFtLAogICAgc3dhcAogICAgYXBwX3BhcmFtc19nZXQgQXBwQ2xlYXJTdGF0ZVByb2dyYW0KICAgIGFzc2VydCAvLyBhcHBsaWNhdGlvbiBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NDEKICAgIC8vIGdsb2JhbF9udW1fdWludD01LAogICAgaW50Y18yIC8vIDUKICAgIGl0eG5fZmllbGQgR2xvYmFsTnVtVWludAogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTo0MAogICAgLy8gZ2xvYmFsX251bV9ieXRlcz01LAogICAgaW50Y18yIC8vIDUKICAgIGl0eG5fZmllbGQgR2xvYmFsTnVtQnl0ZVNsaWNlCiAgICBpdHhuX2ZpZWxkIENsZWFyU3RhdGVQcm9ncmFtUGFnZXMKICAgIGl0eG5fZmllbGQgQXBwcm92YWxQcm9ncmFtUGFnZXMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6MzcKICAgIC8vIGNyZWF0ZV9jaGlsZF90eCA9IGl0eG4uQXBwbGljYXRpb25DYWxsKAogICAgaW50Y18zIC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTozNy00MgogICAgLy8gY3JlYXRlX2NoaWxkX3R4ID0gaXR4bi5BcHBsaWNhdGlvbkNhbGwoCiAgICAvLyAgICAgYXBwcm92YWxfcHJvZ3JhbT1zZWxmLnRlc3RfY29udHJhY3RfY2hpbGQuYXBwcm92YWxfcHJvZ3JhbSwKICAgIC8vICAgICBjbGVhcl9zdGF0ZV9wcm9ncmFtPXNlbGYudGVzdF9jb250cmFjdF9jaGlsZC5jbGVhcl9zdGF0ZV9wcm9ncmFtLAogICAgLy8gICAgIGdsb2JhbF9udW1fYnl0ZXM9NSwKICAgIC8vICAgICBnbG9iYWxfbnVtX3VpbnQ9NSwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICBpdHhuIENyZWF0ZWRBcHBsaWNhdGlvbklECiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjQ0LTQ2CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9Y3JlYXRlX2NoaWxkX3R4LmNyZWF0ZWRfYXBwLmFkZHJlc3MsIGFtb3VudD0xMDBfMDAwCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjQ1CiAgICAvLyByZWNlaXZlcj1jcmVhdGVfY2hpbGRfdHguY3JlYXRlZF9hcHAuYWRkcmVzcywgYW1vdW50PTEwMF8wMDAKICAgIGR1cAogICAgYXBwX3BhcmFtc19nZXQgQXBwQWRkcmVzcwogICAgYXNzZXJ0IC8vIGFwcGxpY2F0aW9uIGV4aXN0cwogICAgaW50YyA0IC8vIDEwMDAwMAogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NDQKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIGludGNfMSAvLyBwYXkKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTo0NC00NgogICAgLy8gaXR4bi5QYXltZW50KAogICAgLy8gICAgIHJlY2VpdmVyPWNyZWF0ZV9jaGlsZF90eC5jcmVhdGVkX2FwcC5hZGRyZXNzLCBhbW91bnQ9MTAwXzAwMAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NDkKICAgIC8vIHJlY2VpdmVyPWNyZWF0ZV9jaGlsZF90eC5jcmVhdGVkX2FwcC5hZGRyZXNzLCBhbW91bnQ9MTAwXzAwMAogICAgZHVwCiAgICBhcHBfcGFyYW1zX2dldCBBcHBBZGRyZXNzCiAgICBhc3NlcnQgLy8gYXBwbGljYXRpb24gZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjUyLTU2CiAgICAvLyBleGNlc3NfbWJyX3JldHVybmVkLCB0eG4gPSBhYmlfY2FsbCgKICAgIC8vICAgICBUZXN0Q2hpbGQuY3JlYXRlX2JveCwKICAgIC8vICAgICBpbm5lcl9tYnJfcGF5bWVudCwKICAgIC8vICAgICBhcHBfaWQ9Y3JlYXRlX2NoaWxkX3R4LmNyZWF0ZWRfYXBwLmlkLAogICAgLy8gKQogICAgaXR4bl9iZWdpbgogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTo0OQogICAgLy8gcmVjZWl2ZXI9Y3JlYXRlX2NoaWxkX3R4LmNyZWF0ZWRfYXBwLmFkZHJlc3MsIGFtb3VudD0xMDBfMDAwCiAgICBpbnRjIDQgLy8gMTAwMDAwCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTo0OAogICAgLy8gaW5uZXJfbWJyX3BheW1lbnQgPSBpdHhuLlBheW1lbnQoCiAgICBpbnRjXzEgLy8gcGF5CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NTItNTYKICAgIC8vIGV4Y2Vzc19tYnJfcmV0dXJuZWQsIHR4biA9IGFiaV9jYWxsKAogICAgLy8gICAgIFRlc3RDaGlsZC5jcmVhdGVfYm94LAogICAgLy8gICAgIGlubmVyX21icl9wYXltZW50LAogICAgLy8gICAgIGFwcF9pZD1jcmVhdGVfY2hpbGRfdHguY3JlYXRlZF9hcHAuaWQsCiAgICAvLyApCiAgICBpdHhuX25leHQKICAgIGR1cAogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICBwdXNoYnl0ZXMgMHg5MGZhZmJlOCAvLyBtZXRob2QgImNyZWF0ZV9ib3gocGF5KXVpbnQ2NCIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpbnRjXzMgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgZ2l0eG4gMSBMYXN0TG9nCiAgICBkdXAKICAgIGV4dHJhY3QgNCAwCiAgICBzd2FwCiAgICBleHRyYWN0IDAgNAogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICA9PQogICAgYXNzZXJ0IC8vIGFwcGxpY2F0aW9uIGxvZyB2YWx1ZSBpcyBub3QgdGhlIHJlc3VsdCBvZiBhbiBBQkkgcmV0dXJuCiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjE4CiAgICAvLyByZXR1cm4gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcy5taW5fYmFsYW5jZQogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIGFjY3RfcGFyYW1zX2dldCBBY2N0TWluQmFsYW5jZQogICAgYXNzZXJ0IC8vIGFjY291bnQgZnVuZGVkCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjU5CiAgICAvLyBtYnJfZGlmZiA9IGV4Y2Vzc19tYnJfcmV0dXJuZWQgKyAocG9zdF9tYnIgLSBwcmVfbWJyKQogICAgdW5jb3ZlciAzCiAgICAtCiAgICArCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjYwCiAgICAvLyBpdHhuLlBheW1lbnQocmVjZWl2ZXI9VHhuLnNlbmRlciwgYW1vdW50PW1icl9kaWZmKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgdHhuIFNlbmRlcgogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIGludGNfMSAvLyBwYXkKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NjIKICAgIC8vIHNlbGYudGVzdF9jb250cmFjdF9jaGlsZCA9IGNyZWF0ZV9jaGlsZF90eC5jcmVhdGVkX2FwcAogICAgYnl0ZWNfMCAvLyAidGVzdF9jb250cmFjdF9jaGlsZCIKICAgIGRpZyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weToyOQogICAgLy8gQGFiaW1ldGhvZAogICAgaXRvYgogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyAFAAEFBqCNBiYCE3Rlc3RfY29udHJhY3RfY2hpbGQEFR98dTEYQAADKCJnMRkURDEYQQAOgAR0TsTcNhoAjgEAGACABGhdO2g2GgCOAQABADYaARcoTGcjQzEWIwlJOBAjEkQ4CIHAhD0PRDIKcwFEsSIoZURJcgBETHIBRCSyNCSyNbJCskAlshAisgGztD2xSXIIRCEEsgiyByOyECKyAbNJcghEsSEEsgiyByOyECKyAbZJshiABJD6++iyGiWyECKyAbO3AT5JVwQATFcABCkSRBcyCnMBRE8DCQixMQCyB7III7IQIrIBsyhLAWcWKUxQsCND","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -158,11 +158,57 @@ export type MethodReturn<TSignature extends TestFactorySignatures> = TestFactory
 export type GlobalKeysState = TestFactoryTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TestFactoryCreateCallParams =
+  | Expand<CallParams<TestFactoryArgs['obj']['set_test_contract_child(uint64)void'] | TestFactoryArgs['tuple']['set_test_contract_child(uint64)void']> & {method: 'set_test_contract_child'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<TestFactoryArgs['obj']['set_test_contract_child(uint64)void'] | TestFactoryArgs['tuple']['set_test_contract_child(uint64)void']> & {method: 'set_test_contract_child(uint64)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TestFactoryDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TestFactoryCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TestFactory smart contract
  */
 export abstract class TestFactoryParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends TestFactoryCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'set_test_contract_child':
+          case 'set_test_contract_child(uint64)void':
+            return TestFactoryParamsFactory.create.setTestContractChild(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the TestFactory smart contract using the set_test_contract_child(uint64)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      setTestContractChild(params: CallParams<TestFactoryArgs['obj']['set_test_contract_child(uint64)void'] | TestFactoryArgs['tuple']['set_test_contract_child(uint64)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'set_test_contract_child(uint64)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.testContractChildApp],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the create_test_contract_child_and_box(pay)uint64 ABI method
    *
@@ -178,6 +224,148 @@ export abstract class TestFactoryParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TestFactory smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TestFactoryFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TestFactoryFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TestFactoryClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TestFactoryClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TestFactory smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TestFactoryDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? TestFactoryParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (TestFactoryCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new TestFactoryClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestFactory smart contract using the set_test_contract_child(uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      setTestContractChild: (params: CallParams<TestFactoryArgs['obj']['set_test_contract_child(uint64)void'] | TestFactoryArgs['tuple']['set_test_contract_child(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(TestFactoryParamsFactory.create.setTestContractChild(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestFactory smart contract using the set_test_contract_child(uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      setTestContractChild: (params: CallParams<TestFactoryArgs['obj']['set_test_contract_child(uint64)void'] | TestFactoryArgs['tuple']['set_test_contract_child(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(TestFactoryParamsFactory.create.setTestContractChild(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestFactory smart contract using an ABI method call using the set_test_contract_child(uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      setTestContractChild: async (params: CallParams<TestFactoryArgs['obj']['set_test_contract_child(uint64)void'] | TestFactoryArgs['tuple']['set_test_contract_child(uint64)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(TestFactoryParamsFactory.create.setTestContractChild(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | TestFactoryReturns['set_test_contract_child(uint64)void']) }, appClient: new TestFactoryClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TestFactory smart contract
  */

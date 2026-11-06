@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"TestChild","structs":{},"methods":[{"name":"update_or_delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication","DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"create_box","args":[{"type":"pay","name":"mbr_payment"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[60],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[38],"errorMessage":"OnCompletion must be NoOp && can only call when not creating"},{"pc":[52],"errorMessage":"OnCompletion must be one of UpdateApplication, DeleteApplication && can only call when not creating"},{"pc":[75,80,104],"errorMessage":"account funded"},{"pc":[70],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"TestChild","structs":{},"methods":[{"name":"update_or_delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication","DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"create_box","args":[{"type":"pay","name":"mbr_payment"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[60],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[38],"errorMessage":"OnCompletion must be NoOp && can only call when not creating"},{"pc":[52],"errorMessage":"OnCompletion must be one of UpdateApplication, DeleteApplication && can only call when not creating"},{"pc":[75,80,104],"errorMessage":"account funded"},{"pc":[70],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NjcKICAgIC8vIGNsYXNzIFRlc3RDaGlsZChBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVANgogICAgcHVzaGJ5dGVzcyAweDUwZGMzYTBlIDB4OTBmYWZiZTggLy8gbWV0aG9kICJ1cGRhdGVfb3JfZGVsZXRlKCl2b2lkIiwgbWV0aG9kICJjcmVhdGVfYm94KHBheSl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3VwZGF0ZV9vcl9kZWxldGVfcm91dGVAMyBtYWluX2NyZWF0ZV9ib3hfcm91dGVANAogICAgZXJyCgptYWluX2NyZWF0ZV9ib3hfcm91dGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NzMKICAgIC8vIEBhYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AgJiYgY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgYiBjcmVhdGVfYm94CgptYWluX3VwZGF0ZV9vcl9kZWxldGVfcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NjkKICAgIC8vIEBhYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIlVwZGF0ZUFwcGxpY2F0aW9uIiwgIkRlbGV0ZUFwcGxpY2F0aW9uIl0pCiAgICBpbnRjXzAgLy8gMQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgc2hsCiAgICBwdXNoaW50IDQ4IC8vIDQ4CiAgICAmCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIHJldHVybiAvLyBvbiBlcnJvcjogT25Db21wbGV0aW9uIG11c3QgYmUgb25lIG9mIFVwZGF0ZUFwcGxpY2F0aW9uLCBEZWxldGVBcHBsaWNhdGlvbiAmJiBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDY6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybiAvLyBvbiBlcnJvcjogT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcCAmJiBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKCgovLyBzbWFydF9jb250cmFjdHMudGVzdF9mYWN0b3J5LmNvbnRyYWN0LlRlc3RDaGlsZC5jcmVhdGVfYm94W3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlX2JveDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90ZXN0X2ZhY3RvcnkvY29udHJhY3QucHk6NzMKICAgIC8vIEBhYmltZXRob2QKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18wIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weToxOAogICAgLy8gcmV0dXJuIEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MubWluX2JhbGFuY2UKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICBhY2N0X3BhcmFtc19nZXQgQWNjdE1pbkJhbGFuY2UKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTo3NgogICAgLy8gaWYgR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcy5iYWxhbmNlID09IDA6CiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIGJueiBjcmVhdGVfYm94X2FmdGVyX2lmX2Vsc2VAMwogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTo3NwogICAgLy8gcHJlX21iciA9IFVJbnQ2NCgwKQogICAgaW50Y18xIC8vIDAKICAgIGJ1cnkgMQoKY3JlYXRlX2JveF9hZnRlcl9pZl9lbHNlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5Ojc5CiAgICAvLyB0ZXN0X2JveCA9IEJveFJlZihrZXk9YXJjNC5VSW50NjQoMCkuYnl0ZXMpCiAgICBwdXNoYnl0ZXMgMHgwMDAwMDAwMDAwMDAwMDAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjgwCiAgICAvLyB0ZXN0X2JveC5jcmVhdGUoc2l6ZT0wKQogICAgaW50Y18xIC8vIDAKICAgIGJveF9jcmVhdGUKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weToxOAogICAgLy8gcmV0dXJuIEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MubWluX2JhbGFuY2UKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICBhY2N0X3BhcmFtc19nZXQgQWNjdE1pbkJhbGFuY2UKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTo4NAogICAgLy8gZXhjZXNzX21iciA9IG1icl9wYXltZW50LmFtb3VudCAtIChwb3N0X21iciAtIHByZV9tYnIpCiAgICBkaWcgMgogICAgZ3R4bnMgQW1vdW50CiAgICBzd2FwCiAgICBkaWcgMgogICAgLQogICAgLQogICAgLy8gc21hcnRfY29udHJhY3RzL3Rlc3RfZmFjdG9yeS9jb250cmFjdC5weTo4NgogICAgLy8gaXR4bi5QYXltZW50KHJlY2VpdmVyPVR4bi5zZW5kZXIsIGFtb3VudD1leGNlc3NfbWJyKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgdHhuIFNlbmRlcgogICAgZGlnIDEKICAgIGl0eG5fZmllbGQgQW1vdW50CiAgICBpdHhuX2ZpZWxkIFJlY2VpdmVyCiAgICBpbnRjXzAgLy8gcGF5CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzEgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIGl0eG5fc3VibWl0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdGVzdF9mYWN0b3J5L2NvbnRyYWN0LnB5OjczCiAgICAvLyBAYWJpbWV0aG9kCiAgICBpdG9iCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyACAQAxG0EAK4ICBFDcOg4EkPr76DYaAI4CAAsAAQAxGRQxGBBEQgATIjEZkIEwGjEYEEMxGRQxGBQQQzEWIglJOBAiEkQyCnMBRDIKcwBEQAADI0UBgAgAAAAAAAAAACO5SDIKcwFESwI4CExLAgkJsTEASwGyCLIHIrIQI7IBsxaABBUffHVMULAiQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -140,11 +140,106 @@ export type MethodArgs<TSignature extends TestChildSignatures> = TestChildTypes[
 export type MethodReturn<TSignature extends TestChildSignatures> = TestChildTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TestChildCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type TestChildUpdateCallParams =
+  | Expand<CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> & {method: 'update_or_delete'}>
+  | Expand<CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> & {method: 'update_or_delete()void'}>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type TestChildDeleteCallParams =
+  | Expand<CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> & {method: 'update_or_delete'}>
+  | Expand<CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> & {method: 'update_or_delete()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TestChildDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TestChildCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: TestChildUpdateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: TestChildDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TestChild smart contract
  */
 export abstract class TestChildParamsFactory {
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends TestChildUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'update_or_delete':
+          case 'update_or_delete()void':
+            return TestChildParamsFactory.update.updateOrDelete(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the TestChild smart contract using the update_or_delete()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateOrDelete(params: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'update_or_delete()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends TestChildDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'update_or_delete':
+          case 'update_or_delete()void':
+            return TestChildParamsFactory.delete.updateOrDelete(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the TestChild smart contract using the update_or_delete()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateOrDelete(params: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'update_or_delete()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the create_box(pay)uint64 ABI method
    *
@@ -160,6 +255,179 @@ export abstract class TestChildParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TestChild smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TestChildFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TestChildFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TestChildClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TestChildClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TestChild smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TestChildDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      updateParams: params.updateParams?.method ? TestChildParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (TestChildUpdateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? TestChildParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (TestChildDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new TestChildClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestChild smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the TestChild smart contract using the update_or_delete()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateOrDelete: (params: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(TestChildParamsFactory.update.updateOrDelete(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the TestChild smart contract using the update_or_delete()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      updateOrDelete: (params: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(TestChildParamsFactory.delete.updateOrDelete(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestChild smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestChild smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new TestChildClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TestChild smart contract
  */
@@ -248,6 +516,38 @@ export class TestChildClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the TestChild smart contract using the `update_or_delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateOrDelete: (params: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(TestChildParamsFactory.update.updateOrDelete(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TestChild smart contract using the `update_or_delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      updateOrDelete: (params: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> = {args: []}) => {
+        return this.appClient.params.delete(TestChildParamsFactory.delete.updateOrDelete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the TestChild smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -274,6 +574,38 @@ export class TestChildClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the TestChild smart contract using the `update_or_delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateOrDelete: (params: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(TestChildParamsFactory.update.updateOrDelete(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TestChild smart contract using the `update_or_delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      updateOrDelete: (params: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(TestChildParamsFactory.delete.updateOrDelete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the TestChild smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -299,6 +631,40 @@ export class TestChildClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the TestChild smart contract using the `update_or_delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateOrDelete: async (params: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(TestChildParamsFactory.update.updateOrDelete(params))
+        return {...result, return: result.return as unknown as (undefined | TestChildReturns['update_or_delete()void'])}
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TestChild smart contract using the `update_or_delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      updateOrDelete: async (params: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(TestChildParamsFactory.delete.updateOrDelete(params))
+        return {...result, return: result.return as unknown as (undefined | TestChildReturns['update_or_delete()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the TestChild smart contract.
      *
@@ -352,6 +718,24 @@ export class TestChildClient {
         resultMappers.push((v) => client.decodeReturnValue('create_box(pay)uint64', v))
         return this
       },
+      get update() {
+        return {
+          updateOrDelete: (params: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateOrDelete(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
+      get delete() {
+        return {
+          updateOrDelete: (params: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.updateOrDelete(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the TestChild contract
        */
@@ -395,6 +779,34 @@ export type TestChildComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   createBox(params?: CallParams<TestChildArgs['obj']['create_box(pay)uint64'] | TestChildArgs['tuple']['create_box(pay)uint64']>): TestChildComposer<[...TReturns, TestChildReturns['create_box(pay)uint64'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the TestChild smart contract using the update_or_delete()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateOrDelete(params?: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']>): TestChildComposer<[...TReturns, TestChildReturns['update_or_delete()void'] | undefined]>
+  }
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the TestChild smart contract using the update_or_delete()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateOrDelete(params?: CallParams<TestChildArgs['obj']['update_or_delete()void'] | TestChildArgs['tuple']['update_or_delete()void']>): TestChildComposer<[...TReturns, TestChildReturns['update_or_delete()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the TestChild smart contract.
