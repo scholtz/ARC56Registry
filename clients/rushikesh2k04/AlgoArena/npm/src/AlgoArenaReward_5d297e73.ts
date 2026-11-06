@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"AlgoArenaReward","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Sets the contract owner to the sender on application creation.","events":[],"recommendations":{}},{"name":"reward_user","args":[{"type":"address","name":"recipient_address"},{"type":"uint64","name":"algo_reward_amount"},{"type":"uint64","name":"nft_asset_id"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Distributes Algos and an NFT to a recipient.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    ARC-4 Contract for distributing Algo and NFT rewards to AlgoArena users.\n    The contract owner (game server) is the only entity authorized to call \n    the reward_user method, which executes two Inner Transactions atomically:\n    1. An Algo payment to the winner.\n    2. An Asset Transfer (NFT) to the winner.\n    ","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"owner":{"keyType":"AVMString","valueType":"address","key":"b3duZXJfYWRkcg=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[36],"errorMessage":"OnCompletion must be NoOp"},{"pc":[69],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[110],"errorMessage":"Only the AlgoArena owner/server can issue rewards."},{"pc":[106],"errorMessage":"check self.owner exists"},{"pc":[86],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[94,102],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"AlgoArenaReward","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Sets the contract owner to the sender on application creation.","events":[],"recommendations":{}},{"name":"reward_user","args":[{"type":"address","name":"recipient_address"},{"type":"uint64","name":"algo_reward_amount"},{"type":"uint64","name":"nft_asset_id"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Distributes Algos and an NFT to a recipient.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    ARC-4 Contract for distributing Algo and NFT rewards to AlgoArena users.\n    The contract owner (game server) is the only entity authorized to call \n    the reward_user method, which executes two Inner Transactions atomically:\n    1. An Algo payment to the winner.\n    2. An Asset Transfer (NFT) to the winner.\n    ","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"owner":{"keyType":"AVMString","valueType":"address","key":"b3duZXJfYWRkcg=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[36],"errorMessage":"OnCompletion must be NoOp"},{"pc":[69],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[110],"errorMessage":"Only the AlgoArena owner/server can issue rewards."},{"pc":[106],"errorMessage":"check self.owner exists"},{"pc":[86],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[94,102],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAgOAogICAgYnl0ZWNibG9jayAib3duZXJfYWRkciIKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2FyZW5hL2NvbnRyYWN0LnB5OjE1CiAgICAvLyBzZWxmLm93bmVyID0gR2xvYmFsU3RhdGUoQWRkcmVzcygpLCBrZXk9Im93bmVyX2FkZHIiKQogICAgYnl0ZWNfMCAvLyAib3duZXJfYWRkciIKICAgIGdsb2JhbCBaZXJvQWRkcmVzcwogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fYXJlbmEvY29udHJhY3QucHk6NQogICAgLy8gY2xhc3MgQWxnb0FyZW5hUmV3YXJkKEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxMQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHg0YzVjNjFiYSAweDZhMjk2ZWUyIC8vIG1ldGhvZCAiY3JlYXRlKCl2b2lkIiwgbWV0aG9kICJyZXdhcmRfdXNlcihhZGRyZXNzLHVpbnQ2NCx1aW50NjQpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGNyZWF0ZSByZXdhcmRfdXNlcgogICAgZXJyCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDExOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcCAmJiBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuYWxnb19hcmVuYS5jb250cmFjdC5BbGdvQXJlbmFSZXdhcmQuY3JlYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fYXJlbmEvY29udHJhY3QucHk6MjAKICAgIC8vIHNlbGYub3duZXIudmFsdWUgPSBBZGRyZXNzKFR4bi5zZW5kZXIpCiAgICBieXRlY18wIC8vICJvd25lcl9hZGRyIgogICAgdHhuIFNlbmRlcgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2FyZW5hL2NvbnRyYWN0LnB5OjE3CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuYWxnb19hcmVuYS5jb250cmFjdC5BbGdvQXJlbmFSZXdhcmQucmV3YXJkX3VzZXJbcm91dGluZ10oKSAtPiB2b2lkOgpyZXdhcmRfdXNlcjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2FyZW5hL2NvbnRyYWN0LnB5OjIyCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDMyIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2FyZW5hL2NvbnRyYWN0LnB5OjMwCiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBzZWxmLm93bmVyLnZhbHVlLCAiT25seSB0aGUgQWxnb0FyZW5hIG93bmVyL3NlcnZlciBjYW4gaXNzdWUgcmV3YXJkcy4iCiAgICBpbnRjXzEgLy8gMAogICAgYnl0ZWNfMCAvLyAib3duZXJfYWRkciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5vd25lciBleGlzdHMKICAgIHR4biBTZW5kZXIKICAgID09CiAgICBhc3NlcnQgLy8gT25seSB0aGUgQWxnb0FyZW5hIG93bmVyL3NlcnZlciBjYW4gaXNzdWUgcmV3YXJkcy4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2FyZW5hL2NvbnRyYWN0LnB5OjMyLTM2CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgc2VuZGVyPUdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyAgICAgcmVjZWl2ZXI9cmVjaXBpZW50X2FkZHJlc3MubmF0aXZlLAogICAgLy8gICAgIGFtb3VudD1hbGdvX3Jld2FyZF9hbW91bnQubmF0aXZlCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19hcmVuYS9jb250cmFjdC5weTozMwogICAgLy8gc2VuZGVyPUdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fYXJlbmEvY29udHJhY3QucHk6MzUKICAgIC8vIGFtb3VudD1hbGdvX3Jld2FyZF9hbW91bnQubmF0aXZlCiAgICB1bmNvdmVyIDIKICAgIGJ0b2kKICAgIGl0eG5fZmllbGQgQW1vdW50CiAgICBkaWcgMgogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgaXR4bl9maWVsZCBTZW5kZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2FyZW5hL2NvbnRyYWN0LnB5OjMyCiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICBpbnRjXzAgLy8gcGF5CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzEgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2FyZW5hL2NvbnRyYWN0LnB5OjMyLTM2CiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgc2VuZGVyPUdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyAgICAgcmVjZWl2ZXI9cmVjaXBpZW50X2FkZHJlc3MubmF0aXZlLAogICAgLy8gICAgIGFtb3VudD1hbGdvX3Jld2FyZF9hbW91bnQubmF0aXZlCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fYXJlbmEvY29udHJhY3QucHk6MzgtNDMKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICBzZW5kZXI9R2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIC8vICAgICBhc3NldF9yZWNlaXZlcj1yZWNpcGllbnRfYWRkcmVzcy5uYXRpdmUsCiAgICAvLyAgICAgeGZlcl9hc3NldD1uZnRfYXNzZXRfaWQubmF0aXZlLAogICAgLy8gICAgIGFzc2V0X2Ftb3VudD1OYXRpdmVVSW50NjQoMSkKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2FyZW5hL2NvbnRyYWN0LnB5OjM5CiAgICAvLyBzZW5kZXI9R2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19hcmVuYS9jb250cmFjdC5weTo0MQogICAgLy8geGZlcl9hc3NldD1uZnRfYXNzZXRfaWQubmF0aXZlLAogICAgc3dhcAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fYXJlbmEvY29udHJhY3QucHk6NDIKICAgIC8vIGFzc2V0X2Ftb3VudD1OYXRpdmVVSW50NjQoMSkKICAgIGludGNfMCAvLyAxCiAgICBpdHhuX2ZpZWxkIEFzc2V0QW1vdW50CiAgICBpdHhuX2ZpZWxkIFhmZXJBc3NldAogICAgaXR4bl9maWVsZCBTZW5kZXIKICAgIGl0eG5fZmllbGQgQXNzZXRSZWNlaXZlcgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fYXJlbmEvY29udHJhY3QucHk6MzgKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIHB1c2hpbnQgNCAvLyBheGZlcgogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18xIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19hcmVuYS9jb250cmFjdC5weTozOC00MwogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgLy8gICAgIHNlbmRlcj1HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgLy8gICAgIGFzc2V0X3JlY2VpdmVyPXJlY2lwaWVudF9hZGRyZXNzLm5hdGl2ZSwKICAgIC8vICAgICB4ZmVyX2Fzc2V0PW5mdF9hc3NldF9pZC5uYXRpdmUsCiAgICAvLyAgICAgYXNzZXRfYW1vdW50PU5hdGl2ZVVJbnQ2NCgxKQogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2FyZW5hL2NvbnRyYWN0LnB5OjIyCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyADAQAIJgEKb3duZXJfYWRkcjEYQAAEKDIDZzEbQQAdMRkURDEYRIICBExcYboEailu4jYaAI4CAAsAEQAxGRQxGBQQRCJDKDEAZyJDNhoBSRWBIBJENhoCSRUkEkQ2GgNJFSQSRCMoZUQxABJEsTIKTwIXsghLArIHsgAishAjsgGzsTIKTBcishKyEbIAshSBBLIQI7IBsyJD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -154,6 +154,21 @@ export type MethodReturn<TSignature extends AlgoArenaRewardSignatures> = AlgoAre
 export type GlobalKeysState = AlgoArenaRewardTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AlgoArenaRewardCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AlgoArenaRewardDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AlgoArenaRewardCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AlgoArenaReward smart contract
@@ -191,6 +206,147 @@ export abstract class AlgoArenaRewardParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the AlgoArenaReward smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AlgoArenaRewardFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AlgoArenaRewardFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AlgoArenaRewardClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AlgoArenaRewardClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the AlgoArenaReward smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AlgoArenaRewardDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new AlgoArenaRewardClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AlgoArenaReward smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AlgoArenaReward smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AlgoArenaReward smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new AlgoArenaRewardClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the AlgoArenaReward smart contract
  */
