@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"arcs":[],"name":"PaymentApp","structs":{},"methods":[{"name":"payWithRoyaltySplit","args":[{"name":"creator","type":"address"},{"name":"platform","type":"address"},{"name":"royaltyRecipient","type":"address"},{"name":"amount","type":"uint64"}],"returns":{"type":"void"},"events":[],"actions":{"create":[],"call":["NoOp"]}},{"name":"payFullToCreator","args":[{"name":"creator","type":"address"},{"name":"amount","type":"uint64"}],"returns":{"type":"void"},"events":[],"actions":{"create":[],"call":["NoOp"]}}],"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"arcs":[],"name":"PaymentApp","structs":{},"methods":[{"name":"payWithRoyaltySplit","args":[{"name":"creator","type":"address"},{"name":"platform","type":"address"},{"name":"royaltyRecipient","type":"address"},{"name":"amount","type":"uint64"}],"returns":{"type":"void"},"events":[],"actions":{"create":[],"call":["NoOp"]}},{"name":"payFullToCreator","args":[{"name":"creator","type":"address"},{"name":"amount","type":"uint64"}],"returns":{"type":"void"},"events":[],"actions":{"create":[],"call":["NoOp"]}}],"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDgKaW50Y2Jsb2NrIDAgMSAxMDAwMApieXRlY2Jsb2NrIDB4CnR4biBOdW1BcHBBcmdzCmludGNfMCAvLyAwCj09CmJueiBtYWluX2w2CnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4Yzg1NmIyODEgLy8gInBheVdpdGhSb3lhbHR5U3BsaXQoYWRkcmVzcyxhZGRyZXNzLGFkZHJlc3MsdWludDY0KXZvaWQiCj09CmJueiBtYWluX2w1CnR4bmEgQXBwbGljYXRpb25BcmdzIDAKcHVzaGJ5dGVzIDB4YjU2ZDkwNTUgLy8gInBheUZ1bGxUb0NyZWF0b3IoYWRkcmVzcyx1aW50NjQpdm9pZCIKPT0KYm56IG1haW5fbDQKZXJyCm1haW5fbDQ6CnR4biBPbkNvbXBsZXRpb24KaW50Y18wIC8vIE5vT3AKPT0KdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKIT0KJiYKYXNzZXJ0CmNhbGxzdWIgcGF5RnVsbFRvQ3JlYXRvcmNhc3Rlcl8zCmludGNfMSAvLyAxCnJldHVybgptYWluX2w1Ogp0eG4gT25Db21wbGV0aW9uCmludGNfMCAvLyBOb09wCj09CnR4biBBcHBsaWNhdGlvbklECmludGNfMCAvLyAwCiE9CiYmCmFzc2VydApjYWxsc3ViIHBheVdpdGhSb3lhbHR5U3BsaXRjYXN0ZXJfMgppbnRjXzEgLy8gMQpyZXR1cm4KbWFpbl9sNjoKdHhuIE9uQ29tcGxldGlvbgppbnRjXzAgLy8gTm9PcAo9PQpibnogbWFpbl9sOAplcnIKbWFpbl9sODoKdHhuIEFwcGxpY2F0aW9uSUQKaW50Y18wIC8vIDAKPT0KYXNzZXJ0CmludGNfMSAvLyAxCnJldHVybgoKLy8gcGF5V2l0aFJveWFsdHlTcGxpdApwYXlXaXRoUm95YWx0eVNwbGl0XzA6CnByb3RvIDQgMApnbG9iYWwgR3JvdXBTaXplCnB1c2hpbnQgMiAvLyAyCj09CmFzc2VydApndHhuIDAgVHlwZUVudW0KaW50Y18xIC8vIHBheQo9PQphc3NlcnQKZ3R4biAwIFNlbmRlcgp0eG4gU2VuZGVyCj09CmFzc2VydApndHhuIDAgUmVjZWl2ZXIKZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKPT0KYXNzZXJ0Cmd0eG4gMCBBbW91bnQKZnJhbWVfZGlnIC0xCj09CmFzc2VydApmcmFtZV9kaWcgLTEKaW50Y18wIC8vIDAKPgphc3NlcnQKZnJhbWVfZGlnIC00Cmdsb2JhbCBaZXJvQWRkcmVzcwohPQphc3NlcnQKZnJhbWVfZGlnIC0zCmdsb2JhbCBaZXJvQWRkcmVzcwohPQphc3NlcnQKZnJhbWVfZGlnIC0yCmdsb2JhbCBaZXJvQWRkcmVzcwohPQphc3NlcnQKZnJhbWVfZGlnIC0xCnB1c2hpbnQgMjUwIC8vIDI1MAptdWx3CmludGNfMCAvLyAwCmludGNfMiAvLyAxMDAwMApkaXZtb2R3CnBvcApwb3AKc3dhcAohCmFzc2VydApzdG9yZSAwCmZyYW1lX2RpZyAtMQpsb2FkIDAKLQpzdG9yZSAxCmxvYWQgMQpwdXNoaW50IDEwMDAgLy8gMTAwMAptdWx3CmludGNfMCAvLyAwCmludGNfMiAvLyAxMDAwMApkaXZtb2R3CnBvcApwb3AKc3dhcAohCmFzc2VydApzdG9yZSAyCmxvYWQgMQpsb2FkIDIKLQpzdG9yZSAzCml0eG5fYmVnaW4KaW50Y18xIC8vIHBheQppdHhuX2ZpZWxkIFR5cGVFbnVtCmZyYW1lX2RpZyAtMwppdHhuX2ZpZWxkIFJlY2VpdmVyCmxvYWQgMAppdHhuX2ZpZWxkIEFtb3VudAppbnRjXzAgLy8gMAppdHhuX2ZpZWxkIEZlZQppdHhuX3N1Ym1pdAppdHhuX2JlZ2luCmludGNfMSAvLyBwYXkKaXR4bl9maWVsZCBUeXBlRW51bQpmcmFtZV9kaWcgLTIKaXR4bl9maWVsZCBSZWNlaXZlcgpsb2FkIDIKaXR4bl9maWVsZCBBbW91bnQKaW50Y18wIC8vIDAKaXR4bl9maWVsZCBGZWUKaXR4bl9zdWJtaXQKaXR4bl9iZWdpbgppbnRjXzEgLy8gcGF5Cml0eG5fZmllbGQgVHlwZUVudW0KZnJhbWVfZGlnIC00Cml0eG5fZmllbGQgUmVjZWl2ZXIKbG9hZCAzCml0eG5fZmllbGQgQW1vdW50CmludGNfMCAvLyAwCml0eG5fZmllbGQgRmVlCml0eG5fc3VibWl0CnB1c2hieXRlcyAweDUwNDE1OTRkNDU0ZTU0NWY1MzUwNGM0OTU0NWY0NDRmNGU0NSAvLyAiUEFZTUVOVF9TUExJVF9ET05FIgpsb2cKcmV0c3ViCgovLyBwYXlGdWxsVG9DcmVhdG9yCnBheUZ1bGxUb0NyZWF0b3JfMToKcHJvdG8gMiAwCmd0eG4gMCBUeXBlRW51bQppbnRjXzEgLy8gcGF5Cj09CmFzc2VydApndHhuIDAgU2VuZGVyCnR4biBTZW5kZXIKPT0KYXNzZXJ0Cmd0eG4gMCBBbW91bnQKZnJhbWVfZGlnIC0xCj09CmFzc2VydApmcmFtZV9kaWcgLTEKaW50Y18wIC8vIDAKPgphc3NlcnQKZnJhbWVfZGlnIC0yCmdsb2JhbCBaZXJvQWRkcmVzcwohPQphc3NlcnQKaXR4bl9iZWdpbgppbnRjXzEgLy8gcGF5Cml0eG5fZmllbGQgVHlwZUVudW0KZnJhbWVfZGlnIC0yCml0eG5fZmllbGQgUmVjZWl2ZXIKZnJhbWVfZGlnIC0xCml0eG5fZmllbGQgQW1vdW50Cml0eG5fc3VibWl0CnB1c2hieXRlcyAweDQ2NTU0YzRjNWY1MDQxNTk0ZDQ1NGU1NCAvLyAiRlVMTF9QQVlNRU5UIgpsb2cKcmV0c3ViCgovLyBwYXlXaXRoUm95YWx0eVNwbGl0X2Nhc3RlcgpwYXlXaXRoUm95YWx0eVNwbGl0Y2FzdGVyXzI6CnByb3RvIDAgMApieXRlY18wIC8vICIiCmR1cG4gMgppbnRjXzAgLy8gMAp0eG5hIEFwcGxpY2F0aW9uQXJncyAxCmZyYW1lX2J1cnkgMAp0eG5hIEFwcGxpY2F0aW9uQXJncyAyCmZyYW1lX2J1cnkgMQp0eG5hIEFwcGxpY2F0aW9uQXJncyAzCmZyYW1lX2J1cnkgMgp0eG5hIEFwcGxpY2F0aW9uQXJncyA0CmJ0b2kKZnJhbWVfYnVyeSAzCmZyYW1lX2RpZyAwCmZyYW1lX2RpZyAxCmZyYW1lX2RpZyAyCmZyYW1lX2RpZyAzCmNhbGxzdWIgcGF5V2l0aFJveWFsdHlTcGxpdF8wCnJldHN1YgoKLy8gcGF5RnVsbFRvQ3JlYXRvcl9jYXN0ZXIKcGF5RnVsbFRvQ3JlYXRvcmNhc3Rlcl8zOgpwcm90byAwIDAKYnl0ZWNfMCAvLyAiIgppbnRjXzAgLy8gMAp0eG5hIEFwcGxpY2F0aW9uQXJncyAxCmZyYW1lX2J1cnkgMAp0eG5hIEFwcGxpY2F0aW9uQXJncyAyCmJ0b2kKZnJhbWVfYnVyeSAxCmZyYW1lX2RpZyAwCmZyYW1lX2RpZyAxCmNhbGxzdWIgcGF5RnVsbFRvQ3JlYXRvcl8xCnJldHN1Yg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDgKcHVzaGludCAwIC8vIDAKcmV0dXJu"},"bareActions":{"create":["NoOp"],"call":[]}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -142,6 +142,21 @@ export type MethodArgs<TSignature extends PaymentAppSignatures> = PaymentAppType
 export type MethodReturn<TSignature extends PaymentAppSignatures> = PaymentAppTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type PaymentAppCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type PaymentAppDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: PaymentAppCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the PaymentApp smart contract
@@ -175,6 +190,147 @@ export abstract class PaymentAppParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the PaymentApp smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class PaymentAppFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `PaymentAppFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new PaymentAppClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new PaymentAppClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the PaymentApp smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: PaymentAppDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new PaymentAppClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the PaymentApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the PaymentApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the PaymentApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new PaymentAppClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the PaymentApp smart contract
  */
