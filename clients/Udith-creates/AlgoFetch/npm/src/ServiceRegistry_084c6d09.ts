@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ServiceRegistry","structs":{"ServiceRecord":[{"name":"price","type":"uint64"},{"name":"provider","type":"address"}]},"methods":[{"name":"register_service","args":[{"type":"string","name":"id"},{"type":"uint64","name":"price"},{"type":"address","name":"provider"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Register a new service or update an existing one.","events":[],"recommendations":{}},{"name":"get_service","args":[{"type":"string","name":"id"}],"returns":{"type":"(uint64,address)","struct":"ServiceRecord"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Fetch details of a specific service directly from the state registry.","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"services":{"keyType":"AVMString","valueType":"ServiceRecord","prefix":"c2VydmljZXM="}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[96],"errorMessage":"Address length is 32 bytes"},{"pc":[129],"errorMessage":"Service not found in registry"},{"pc":[65,111],"errorMessage":"invalid array length header"},{"pc":[72,118],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[93],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[84],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ServiceRegistry","structs":{"ServiceRecord":[{"name":"price","type":"uint64"},{"name":"provider","type":"address"}]},"methods":[{"name":"register_service","args":[{"type":"string","name":"id"},{"type":"uint64","name":"price"},{"type":"address","name":"provider"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Register a new service or update an existing one.","events":[],"recommendations":{}},{"name":"get_service","args":[{"type":"string","name":"id"}],"returns":{"type":"(uint64,address)","struct":"ServiceRecord"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Fetch details of a specific service directly from the state registry.","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"services":{"keyType":"AVMString","valueType":"ServiceRecord","prefix":"c2VydmljZXM="}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[96],"errorMessage":"Address length is 32 bytes"},{"pc":[129],"errorMessage":"Service not found in registry"},{"pc":[65,111],"errorMessage":"invalid array length header"},{"pc":[72,118],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[93],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[84],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDIgMzIgMQogICAgYnl0ZWNibG9jayAic2VydmljZXMiCiAgICAvLyBzbWFydF9jb250cmFjdHMvc2VydmljZV9yZWdpc3RyeS9jb250cmFjdC5weTo3CiAgICAvLyBjbGFzcyBTZXJ2aWNlUmVnaXN0cnkoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDExCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHgzYjU0NDMwZCAweDExYjQ1NjIzIC8vIG1ldGhvZCAicmVnaXN0ZXJfc2VydmljZShzdHJpbmcsdWludDY0LGFkZHJlc3Mpdm9pZCIsIG1ldGhvZCAiZ2V0X3NlcnZpY2Uoc3RyaW5nKSh1aW50NjQsYWRkcmVzcykiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCByZWdpc3Rlcl9zZXJ2aWNlIGdldF9zZXJ2aWNlCiAgICBlcnIKCm1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAMTE6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5zZXJ2aWNlX3JlZ2lzdHJ5LmNvbnRyYWN0LlNlcnZpY2VSZWdpc3RyeS5yZWdpc3Rlcl9zZXJ2aWNlW3JvdXRpbmddKCkgLT4gdm9pZDoKcmVnaXN0ZXJfc2VydmljZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zZXJ2aWNlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjEyCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIGR1cAogICAgaW50Y18yIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zZXJ2aWNlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjE3CiAgICAvLyBwcm92aWRlcj1hcmM0LkFkZHJlc3MocHJvdmlkZXIuYnl0ZXMpCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gQWRkcmVzcyBsZW5ndGggaXMgMzIgYnl0ZXMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zZXJ2aWNlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjE1LTE4CiAgICAvLyBzZWxmLnNlcnZpY2VzW2lkXSA9IFNlcnZpY2VSZWNvcmQoCiAgICAvLyAgICAgcHJpY2U9YXJjNC5VSW50NjQocHJpY2UpLAogICAgLy8gICAgIHByb3ZpZGVyPWFyYzQuQWRkcmVzcyhwcm92aWRlci5ieXRlcykKICAgIC8vICkKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL3NlcnZpY2VfcmVnaXN0cnkvY29udHJhY3QucHk6MTUKICAgIC8vIHNlbGYuc2VydmljZXNbaWRdID0gU2VydmljZVJlY29yZCgKICAgIGJ5dGVjXzAgLy8gInNlcnZpY2VzIgogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zZXJ2aWNlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjE1LTE4CiAgICAvLyBzZWxmLnNlcnZpY2VzW2lkXSA9IFNlcnZpY2VSZWNvcmQoCiAgICAvLyAgICAgcHJpY2U9YXJjNC5VSW50NjQocHJpY2UpLAogICAgLy8gICAgIHByb3ZpZGVyPWFyYzQuQWRkcmVzcyhwcm92aWRlci5ieXRlcykKICAgIC8vICkKICAgIHN3YXAKICAgIGJveF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zZXJ2aWNlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjEyCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGludGNfMyAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuc2VydmljZV9yZWdpc3RyeS5jb250cmFjdC5TZXJ2aWNlUmVnaXN0cnkuZ2V0X3NlcnZpY2Vbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfc2VydmljZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zZXJ2aWNlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjIwCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvc2VydmljZV9yZWdpc3RyeS9jb250cmFjdC5weToyMwogICAgLy8gYXNzZXJ0IGlkIGluIHNlbGYuc2VydmljZXMsICJTZXJ2aWNlIG5vdCBmb3VuZCBpbiByZWdpc3RyeSIKICAgIGJ5dGVjXzAgLy8gInNlcnZpY2VzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgYXNzZXJ0IC8vIFNlcnZpY2Ugbm90IGZvdW5kIGluIHJlZ2lzdHJ5CiAgICAvLyBzbWFydF9jb250cmFjdHMvc2VydmljZV9yZWdpc3RyeS9jb250cmFjdC5weToyNAogICAgLy8gcmV0dXJuIHNlbGYuc2VydmljZXNbaWRdCiAgICBib3hfZ2V0CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zZXJ2aWNlX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjIwCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18zIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAAIgASYBCHNlcnZpY2VzMRtBAB0xGRREMRhEggIEO1RDDQQRtFYjNhoAjgIACQA3ADEZFDEYFBBDNhoBSSJZIwhLARUSRFcCADYaAkkVgQgSRDYaA0kVSSQSRCQSRFAoTwJQTL8lQzYaAUkiWSMISwEVEkRXAgAoTFBJvUUBRL5IgAQVH3x1TFCwJUM=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -175,6 +175,21 @@ export type MethodReturn<TSignature extends ServiceRegistrySignatures> = Service
 export type BoxKeysState = ServiceRegistryTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ServiceRegistryCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ServiceRegistryDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ServiceRegistryCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ServiceRegistry smart contract
@@ -212,6 +227,147 @@ export abstract class ServiceRegistryParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ServiceRegistry smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ServiceRegistryFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ServiceRegistryFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ServiceRegistryClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ServiceRegistryClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ServiceRegistry smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ServiceRegistryDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new ServiceRegistryClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ServiceRegistry smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ServiceRegistry smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ServiceRegistry smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new ServiceRegistryClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ServiceRegistry smart contract
  */
