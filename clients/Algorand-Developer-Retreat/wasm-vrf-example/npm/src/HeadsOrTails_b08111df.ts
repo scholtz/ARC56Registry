@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"HeadsOrTails","desc":"","methods":[{"name":"createGame","desc":"Create a new HeadsOrTails game","args":[{"name":"boxFeeTxn","type":"pay","desc":"PayTxn covering the mbr increase"},{"name":"pk","type":"byte[32]","desc":"public key of the generated vrf keypair"},{"name":"heads","type":"bool","desc":"does user think the user will be heads?"}],"returns":{"type":"uint64","desc":"uint64 the commitmentRound when participant can complete the game"},"actions":{"create":[],"call":["NoOp"]}},{"name":"completeGame","desc":"Completes a game and refunds the user their box storage fees","args":[{"name":"proof","type":"byte[80]","desc":"the VRF proof signed by the participant's private key (using the block seed at commitmentRound)"}],"returns":{"type":"bool","desc":"boolean if the user won or not"},"actions":{"create":[],"call":["NoOp"]}},{"name":"cancelGame","desc":"Cancels a game and refunds the user their box storage fees","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"HeadsOrTailsGame":[{"name":"pk","type":"byte[32]"},{"name":"heads","type":"bool"},{"name":"commitmentRound","type":"uint64"}]},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"game":{"keyType":"address","valueType":"HeadsOrTailsGame"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[84],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[93],"errorMessage":"argument 0 (heads) for createGame must be a bool","teal":40},{"pc":[104],"errorMessage":"argument 1 (pk) for createGame must be a byte[32]","teal":52},{"pc":[114],"errorMessage":"argument 2 (boxFeeTxn) for createGame must be a pay transaction","teal":64},{"pc":[133],"errorMessage":"must not have a game in progress","teal":97},{"pc":[141],"errorMessage":"transaction verification failed: {\"txn\":\"boxFeeTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":113},{"pc":[148],"errorMessage":"transaction verification failed: {\"txn\":\"boxFeeTxn\",\"field\":\"amount\",\"condition\":\"greaterThanEqualTo\",\"expected\":\">=BOX_STORAGE_COST\"}","teal":122},{"pc":[186],"errorMessage":"argument 0 (proof) for completeGame must be a byte[80]","teal":170},{"pc":[213],"errorMessage":"box value does not exist: this.game(this.txn.sender).value","teal":207},{"pc":[264],"errorMessage":"box value does not exist: this.game(this.txn.sender).value","teal":250},{"pc":[280],"errorMessage":"the vrf must be verified","teal":263},{"pc":[296],"errorMessage":"box value does not exist: this.game(this.txn.sender).value","teal":281},{"pc":[318],"errorMessage":"box value does not exist: this.game(this.txn.sender).value","teal":299},{"pc":[374],"errorMessage":"box value does not exist: this.game(this.txn.sender).value","teal":391},{"pc":[428],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":452},{"pc":[458],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":462}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"HeadsOrTails","desc":"","methods":[{"name":"createGame","desc":"Create a new HeadsOrTails game","args":[{"name":"boxFeeTxn","type":"pay","desc":"PayTxn covering the mbr increase"},{"name":"pk","type":"byte[32]","desc":"public key of the generated vrf keypair"},{"name":"heads","type":"bool","desc":"does user think the user will be heads?"}],"returns":{"type":"uint64","desc":"uint64 the commitmentRound when participant can complete the game"},"actions":{"create":[],"call":["NoOp"]}},{"name":"completeGame","desc":"Completes a game and refunds the user their box storage fees","args":[{"name":"proof","type":"byte[80]","desc":"the VRF proof signed by the participant's private key (using the block seed at commitmentRound)"}],"returns":{"type":"bool","desc":"boolean if the user won or not"},"actions":{"create":[],"call":["NoOp"]}},{"name":"cancelGame","desc":"Cancels a game and refunds the user their box storage fees","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"HeadsOrTailsGame":[{"name":"pk","type":"byte[32]"},{"name":"heads","type":"bool"},{"name":"commitmentRound","type":"uint64"}]},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"game":{"keyType":"address","valueType":"HeadsOrTailsGame"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[84],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[93],"errorMessage":"argument 0 (heads) for createGame must be a bool","teal":40},{"pc":[104],"errorMessage":"argument 1 (pk) for createGame must be a byte[32]","teal":52},{"pc":[114],"errorMessage":"argument 2 (boxFeeTxn) for createGame must be a pay transaction","teal":64},{"pc":[133],"errorMessage":"must not have a game in progress","teal":97},{"pc":[141],"errorMessage":"transaction verification failed: {\"txn\":\"boxFeeTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":113},{"pc":[148],"errorMessage":"transaction verification failed: {\"txn\":\"boxFeeTxn\",\"field\":\"amount\",\"condition\":\"greaterThanEqualTo\",\"expected\":\">=BOX_STORAGE_COST\"}","teal":122},{"pc":[186],"errorMessage":"argument 0 (proof) for completeGame must be a byte[80]","teal":170},{"pc":[213],"errorMessage":"box value does not exist: this.game(this.txn.sender).value","teal":207},{"pc":[264],"errorMessage":"box value does not exist: this.game(this.txn.sender).value","teal":250},{"pc":[280],"errorMessage":"the vrf must be verified","teal":263},{"pc":[296],"errorMessage":"box value does not exist: this.game(this.txn.sender).value","teal":281},{"pc":[318],"errorMessage":"box value does not exist: this.game(this.txn.sender).value","teal":299},{"pc":[374],"errorMessage":"box value does not exist: this.game(this.txn.sender).value","teal":391},{"pc":[428],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":452},{"pc":[458],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":462}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDAgMzE3MDAgMjU2IDYKYnl0ZWNibG9jayAweCAweDYyNmY3ODIwNzM3NDZmNzI2MTY3NjUyMDYzNmY3Mzc0MjA3MjY1NjY3NTZlNjQgMHgxNTFmN2M3NSAweDBhODEwMSAweDAwCgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwNi4yCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIHRlbiBsaW5lcyBvZiBURUFMIGhhbmRsZSBpbml0aWFsIHByb2dyYW0gZmxvdwovLyBUaGlzIHBhdHRlcm4gaXMgdXNlZCB0byBtYWtlIGl0IGVhc3kgZm9yIGFueW9uZSB0byBwYXJzZSB0aGUgc3RhcnQgb2YgdGhlIHByb2dyYW0gYW5kIGRldGVybWluZSBpZiBhIHNwZWNpZmljIGFjdGlvbiBpcyBhbGxvd2VkCi8vIEhlcmUsIGFjdGlvbiByZWZlcnMgdG8gdGhlIE9uQ29tcGxldGUgaW4gY29tYmluYXRpb24gd2l0aCB3aGV0aGVyIHRoZSBhcHAgaXMgYmVpbmcgY3JlYXRlZCBvciBjYWxsZWQKLy8gRXZlcnkgcG9zc2libGUgYWN0aW9uIGZvciB0aGlzIGNvbnRyYWN0IGlzIHJlcHJlc2VudGVkIGluIHRoZSBzd2l0Y2ggc3RhdGVtZW50Ci8vIElmIHRoZSBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoZSBjb250cmFjdCwgaXRzIHJlc3BlY3RpdmUgYnJhbmNoIHdpbGwgYmUgIipOT1RfSU1QTEVNRU5URUQiIHdoaWNoIGp1c3QgY29udGFpbnMgImVyciIKdHhuIEFwcGxpY2F0aW9uSUQKIQppbnRjIDQgLy8gNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKmNyZWF0ZV9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRAoKKk5PVF9JTVBMRU1FTlRFRDoKCS8vIFRoZSByZXF1ZXN0ZWQgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGlzIGNvbnRyYWN0LiBBcmUgeW91IHVzaW5nIHRoZSBjb3JyZWN0IE9uQ29tcGxldGU/IERpZCB5b3Ugc2V0IHlvdXIgYXBwIElEPwoJZXJyCgovLyBjcmVhdGVHYW1lKHBheSxieXRlWzMyXSxib29sKXVpbnQ2NAoqYWJpX3JvdXRlX2NyZWF0ZUdhbWU6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDIgLy8gMHgxNTFmN2M3NQoKCS8vIGhlYWRzOiBib29sCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglkdXAKCWxlbgoJaW50YyAwIC8vIDEKCT09CgoJLy8gYXJndW1lbnQgMCAoaGVhZHMpIGZvciBjcmVhdGVHYW1lIG11c3QgYmUgYSBib29sCglhc3NlcnQKCWludGMgMSAvLyAwCglnZXRiaXQKCgkvLyBwazogYnl0ZVszMl0KCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglwdXNoaW50IDMyCgk9PQoKCS8vIGFyZ3VtZW50IDEgKHBrKSBmb3IgY3JlYXRlR2FtZSBtdXN0IGJlIGEgYnl0ZVszMl0KCWFzc2VydAoKCS8vIGJveEZlZVR4bjogcGF5Cgl0eG4gR3JvdXBJbmRleAoJaW50YyAwIC8vIDEKCS0KCWR1cAoJZ3R4bnMgVHlwZUVudW0KCWludGMgMCAvLyAgcGF5Cgk9PQoKCS8vIGFyZ3VtZW50IDIgKGJveEZlZVR4bikgZm9yIGNyZWF0ZUdhbWUgbXVzdCBiZSBhIHBheSB0cmFuc2FjdGlvbgoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBjcmVhdGVHYW1lKHBheSxieXRlWzMyXSxib29sKXVpbnQ2NAoJY2FsbHN1YiBjcmVhdGVHYW1lCglpdG9iCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gY3JlYXRlR2FtZShib3hGZWVUeG46IFBheVR4biwgcGs6IGJ5dGVzMzIsIGhlYWRzOiBib29sZWFuKTogdWludDY0Ci8vCi8vCi8vIENyZWF0ZSBhIG5ldyBIZWFkc09yVGFpbHMgZ2FtZQovLyBAcGFyYW0gYm94RmVlVHhuIFBheVR4biBjb3ZlcmluZyB0aGUgbWJyIGluY3JlYXNlCi8vIEBwYXJhbSBwayBwdWJsaWMga2V5IG9mIHRoZSBnZW5lcmF0ZWQgdnJmIGtleXBhaXIKLy8gQHBhcmFtIGhlYWRzIGRvZXMgdXNlciB0aGluayB0aGUgdXNlciB3aWxsIGJlIGhlYWRzPwovLyBAcmV0dXJucyB1aW50NjQgdGhlIGNvbW1pdG1lbnRSb3VuZCB3aGVuIHBhcnRpY2lwYW50IGNhbiBjb21wbGV0ZSB0aGUgZ2FtZQpjcmVhdGVHYW1lOgoJcHJvdG8gMyAxCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCgkvLyBjb250cmFjdHMvSGVhZHNPclRhaWxzLmFsZ28udHM6MjgKCS8vIGFzc2VydCghdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikuZXhpc3RzLCAnbXVzdCBub3QgaGF2ZSBhIGdhbWUgaW4gcHJvZ3Jlc3MnKQoJdHhuIFNlbmRlcgoJYm94X2xlbgoJc3dhcAoJcG9wCgkhCgoJLy8gbXVzdCBub3QgaGF2ZSBhIGdhbWUgaW4gcHJvZ3Jlc3MKCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czozMQoJLy8gdmVyaWZ5UGF5VHhuKGJveEZlZVR4biwgewoJLy8gICAgICAgcmVjZWl2ZXI6IHRoaXMuYXBwLmFkZHJlc3MsCgkvLyAgICAgICBhbW91bnQ6IHsKCS8vICAgICAgICAgZ3JlYXRlclRoYW5FcXVhbFRvOiBCT1hfU1RPUkFHRV9DT1NULCAvLyBtdXN0IGF0IGxlYXN0IGNvdmVyIHRoZSBtYnIgaW5jcmVhc2UKCS8vICAgICAgIH0sCgkvLyAgICAgfSkKCS8vIHZlcmlmeSByZWNlaXZlcgoJZnJhbWVfZGlnIC0xIC8vIGJveEZlZVR4bjogUGF5VHhuCglndHhucyBSZWNlaXZlcgoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJib3hGZWVUeG4iLCJmaWVsZCI6InJlY2VpdmVyIiwiZXhwZWN0ZWQiOiJ0aGlzLmFwcC5hZGRyZXNzIn0KCWFzc2VydAoKCS8vIHZlcmlmeSBhbW91bnQKCWZyYW1lX2RpZyAtMSAvLyBib3hGZWVUeG46IFBheVR4bgoJZ3R4bnMgQW1vdW50CglpbnRjIDIgLy8gMzE3MDAKCT49CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJib3hGZWVUeG4iLCJmaWVsZCI6ImFtb3VudCIsImNvbmRpdGlvbiI6ImdyZWF0ZXJUaGFuRXF1YWxUbyIsImV4cGVjdGVkIjoiPj1CT1hfU1RPUkFHRV9DT1NUIn0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czozOAoJLy8gY29tbWl0bWVudFJvdW5kOiB1aW50NjQgPSBnbG9iYWxzLnJvdW5kICsgTUlOX1JPVU5EX0dBUAoJZ2xvYmFsIFJvdW5kCglwdXNoaW50IDgKCSsKCWZyYW1lX2J1cnkgMCAvLyBjb21taXRtZW50Um91bmQ6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo0MAoJLy8gdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUgPSB7CgkvLyAgICAgICBwazogcGssCgkvLyAgICAgICBoZWFkczogaGVhZHMsCgkvLyAgICAgICBjb21taXRtZW50Um91bmQ6IGNvbW1pdG1lbnRSb3VuZCwKCS8vICAgICB9Cgl0eG4gU2VuZGVyCglmcmFtZV9kaWcgLTIgLy8gcGs6IGJ5dGVzMzIKCWJ5dGVjIDQgLy8gMHgwMAoJaW50YyAxIC8vIDAKCWZyYW1lX2RpZyAtMyAvLyBoZWFkczogYm9vbGVhbgoJc2V0Yml0Cgljb25jYXQgLy8gMgoJZnJhbWVfZGlnIDAgLy8gY29tbWl0bWVudFJvdW5kOiB1aW50NjQKCWl0b2IKCWNvbmNhdAoJYm94X3B1dAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo0NgoJLy8gcmV0dXJuIGNvbW1pdG1lbnRSb3VuZDsKCWZyYW1lX2RpZyAwIC8vIGNvbW1pdG1lbnRSb3VuZDogdWludDY0CgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCglyZXRzdWIKCi8vIGNvbXBsZXRlR2FtZShieXRlWzgwXSlib29sCiphYmlfcm91dGVfY29tcGxldGVHYW1lOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAyIC8vIDB4MTUxZjdjNzUKCgkvLyBwcm9vZjogYnl0ZVs4MF0KCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglwdXNoaW50IDgwCgk9PQoKCS8vIGFyZ3VtZW50IDAgKHByb29mKSBmb3IgY29tcGxldGVHYW1lIG11c3QgYmUgYSBieXRlWzgwXQoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBjb21wbGV0ZUdhbWUoYnl0ZVs4MF0pYm9vbAoJY2FsbHN1YiBjb21wbGV0ZUdhbWUKCWJ5dGVjIDQgLy8gMHgwMAoJaW50YyAxIC8vIDAKCXVuY292ZXIgMgoJc2V0Yml0Cgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gY29tcGxldGVHYW1lKHByb29mOiBieXRlczw4MD4pOiBib29sZWFuCi8vCi8vCi8vIENvbXBsZXRlcyBhIGdhbWUgYW5kIHJlZnVuZHMgdGhlIHVzZXIgdGhlaXIgYm94IHN0b3JhZ2UgZmVlcwovLyBAcGFyYW0gcHJvb2YgdGhlIFZSRiBwcm9vZiBzaWduZWQgYnkgdGhlIHBhcnRpY2lwYW50J3MgcHJpdmF0ZSBrZXkgKHVzaW5nIHRoZSBibG9jayBzZWVkIGF0IGNvbW1pdG1lbnRSb3VuZCkKLy8gQHJldHVybnMgYm9vbGVhbiBpZiB0aGUgdXNlciB3b24gb3Igbm90CmNvbXBsZXRlR2FtZToKCXByb3RvIDEgMQoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAwIC8vIDB4CglkdXBuIDUKCgkvLyBjb250cmFjdHMvSGVhZHNPclRhaWxzLmFsZ28udHM6NTcKCS8vIGdhbWU6IEhlYWRzT3JUYWlsc0dhbWUgPSB0aGlzLmdhbWUodGhpcy50eG4uc2VuZGVyKS52YWx1ZQoJdHhuIFNlbmRlcgoJZnJhbWVfYnVyeSAwIC8vIHN0b3JhZ2Uga2V5Ly9nYW1lCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjYwCgkvLyBzZWVkID0gYmxvY2tzW2dhbWUuY29tbWl0bWVudFJvdW5kXS5zZWVkCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vZ2FtZQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWV4dHJhY3QgMzMgOAoJYnRvaQoJYmxvY2sgQmxrU2VlZAoJZnJhbWVfYnVyeSAxIC8vIHNlZWQ6IGJ5dGVbXQoKKndoaWxlXzA6Cgoqd2hpbGVfMF9jb250aW51ZToKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo2MwoJLy8gZ2xvYmFscy5vcGNvZGVCdWRnZXQgPCA1NzAwCglnbG9iYWwgT3Bjb2RlQnVkZ2V0CglwdXNoaW50IDU3MDAKCTwKCWJ6ICp3aGlsZV8wX2VuZAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo2NAoJLy8gaW5jcmVhc2VPcGNvZGVCdWRnZXQoKQoJaXR4bl9iZWdpbgoJaW50YyA0IC8vICBhcHBsCglpdHhuX2ZpZWxkIFR5cGVFbnVtCglpbnRjIDEgLy8gMAoJaXR4bl9maWVsZCBGZWUKCWJ5dGVjIDMgLy8gICNwcmFnbWEgdmVyc2lvbiAxMDsgaW50IDEKCWR1cAoJaXR4bl9maWVsZCBBcHByb3ZhbFByb2dyYW0KCWl0eG5fZmllbGQgQ2xlYXJTdGF0ZVByb2dyYW0KCXB1c2hpbnQgNSAvLyBEZWxldGVBcHBsaWNhdGlvbgoJaXR4bl9maWVsZCBPbkNvbXBsZXRpb24KCWl0eG5fc3VibWl0CgliICp3aGlsZV8wCgoqd2hpbGVfMF9lbmQ6CgkvLyBjb250cmFjdHMvSGVhZHNPclRhaWxzLmFsZ28udHM6NjcKCS8vIHIgPSB2cmZWZWZpcnkoJ1ZyZkFsZ29yYW5kJywgc2VlZCwgcHJvb2YsIGdhbWUucGspCglmcmFtZV9kaWcgMSAvLyBzZWVkOiBieXRlW10KCWZyYW1lX2RpZyAtMSAvLyBwcm9vZjogYnl0ZXM8ODA+CglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vZ2FtZQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWV4dHJhY3QgMCAzMgoJdnJmX3ZlcmlmeSBWcmZBbGdvcmFuZAoJZnJhbWVfYnVyeSAyIC8vIHIgdmVyaWZpZWQ6IGJvb2wKCWZyYW1lX2J1cnkgMyAvLyByIG91dHB1dDogYnl0ZVtdCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjY5CgkvLyBhc3NlcnQoci52ZXJpZmllZCwgJ3RoZSB2cmYgbXVzdCBiZSB2ZXJpZmllZCcpCglmcmFtZV9kaWcgMiAvLyByIHZlcmlmaWVkOiBib29sCgoJLy8gdGhlIHZyZiBtdXN0IGJlIHZlcmlmaWVkCglhc3NlcnQKCgkvLyBjb250cmFjdHMvSGVhZHNPclRhaWxzLmFsZ28udHM6NzIKCS8vIHJlc3VsdElzSGVhZHMgPSBnZXRiaXQoci5vdXRwdXQsIDApCglmcmFtZV9kaWcgMyAvLyByIG91dHB1dDogYnl0ZVtdCglpbnRjIDEgLy8gMAoJZ2V0Yml0CglmcmFtZV9idXJ5IDQgLy8gcmVzdWx0SXNIZWFkczogdWludDY0CgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjc0CgkvLyB3b246IGJvb2xlYW4gPSAoKHJlc3VsdElzSGVhZHMgJiYgZ2FtZS5oZWFkcykgYXMgYm9vbGVhbikgfHwgKCghcmVzdWx0SXNIZWFkcyAmJiAhZ2FtZS5oZWFkcykgYXMgYm9vbGVhbikKCWZyYW1lX2RpZyA0IC8vIHJlc3VsdElzSGVhZHM6IHVpbnQ2NAoJZHVwCglieiAqc2tpcF9hbmQwCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vZ2FtZQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWludGMgMyAvLyAyNTYKCWdldGJpdAoJJiYKCipza2lwX2FuZDA6CglkdXAKCWJueiAqc2tpcF9vcjAKCWZyYW1lX2RpZyA0IC8vIHJlc3VsdElzSGVhZHM6IHVpbnQ2NAoJIQoJZHVwCglieiAqc2tpcF9hbmQxCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vZ2FtZQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWludGMgMyAvLyAyNTYKCWdldGJpdAoJIQoJJiYKCipza2lwX2FuZDE6Cgl8fAoKKnNraXBfb3IwOgoJZnJhbWVfYnVyeSA1IC8vIHdvbjogYm9vbGVhbgoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo3NwoJLy8gc2VuZFBheW1lbnQoewoJLy8gICAgICAgcmVjZWl2ZXI6IHRoaXMudHhuLnNlbmRlciwKCS8vICAgICAgIGFtb3VudDogQk9YX1NUT1JBR0VfQ09TVCwKCS8vICAgICAgIGZlZTogMCwKCS8vICAgICAgIG5vdGU6ICdib3ggc3RvcmFnZSBjb3N0IHJlZnVuZCcsCgkvLyAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjc4CgkvLyByZWNlaXZlcjogdGhpcy50eG4uc2VuZGVyCgl0eG4gU2VuZGVyCglpdHhuX2ZpZWxkIFJlY2VpdmVyCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjc5CgkvLyBhbW91bnQ6IEJPWF9TVE9SQUdFX0NPU1QKCWludGMgMiAvLyAzMTcwMAoJaXR4bl9maWVsZCBBbW91bnQKCgkvLyBjb250cmFjdHMvSGVhZHNPclRhaWxzLmFsZ28udHM6ODAKCS8vIGZlZTogMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjgxCgkvLyBub3RlOiAnYm94IHN0b3JhZ2UgY29zdCByZWZ1bmQnCglieXRlYyAxIC8vICAiYm94IHN0b3JhZ2UgY29zdCByZWZ1bmQiCglpdHhuX2ZpZWxkIE5vdGUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjg1CgkvLyB0aGlzLmdhbWUodGhpcy50eG4uc2VuZGVyKS5kZWxldGUoKQoJdHhuIFNlbmRlcgoJYm94X2RlbAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo4NwoJLy8gcmV0dXJuIHdvbjsKCWZyYW1lX2RpZyA1IC8vIHdvbjogYm9vbGVhbgoKCS8vIHNldCB0aGUgc3Vicm91dGluZSByZXR1cm4gdmFsdWUKCWZyYW1lX2J1cnkgMAoKCS8vIHBvcCBhbGwgbG9jYWwgdmFyaWFibGVzIGZyb20gdGhlIHN0YWNrCglwb3BuIDUKCXJldHN1YgoKLy8gY2FuY2VsR2FtZSgpdm9pZAoqYWJpX3JvdXRlX2NhbmNlbEdhbWU6CgkvLyBleGVjdXRlIGNhbmNlbEdhbWUoKXZvaWQKCWNhbGxzdWIgY2FuY2VsR2FtZQoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gY2FuY2VsR2FtZSgpOiB2b2lkCi8vCi8vCi8vIENhbmNlbHMgYSBnYW1lIGFuZCByZWZ1bmRzIHRoZSB1c2VyIHRoZWlyIGJveCBzdG9yYWdlIGZlZXMKY2FuY2VsR2FtZToKCXByb3RvIDAgMAoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAwIC8vIDB4CgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjk2CgkvLyBnYW1lID0gdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUKCXR4biBTZW5kZXIKCWZyYW1lX2J1cnkgMCAvLyBzdG9yYWdlIGtleS8vZ2FtZQoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czo5OAoJLy8gYXNzZXJ0KGdhbWUuY29tbWl0bWVudFJvdW5kIDw9IHRoaXMudHhuLmxhc3RWYWxpZCAtIDEwMDIpCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vZ2FtZQoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5nYW1lKHRoaXMudHhuLnNlbmRlcikudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWV4dHJhY3QgMzMgOAoJYnRvaQoJdHhuIExhc3RWYWxpZAoJcHVzaGludCAxMDAyCgktCgk8PQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjEwMQoJLy8gc2VuZFBheW1lbnQoewoJLy8gICAgICAgcmVjZWl2ZXI6IHRoaXMudHhuLnNlbmRlciwKCS8vICAgICAgIGFtb3VudDogQk9YX1NUT1JBR0VfQ09TVCwKCS8vICAgICAgIGZlZTogMCwKCS8vICAgICAgIG5vdGU6ICdib3ggc3RvcmFnZSBjb3N0IHJlZnVuZCcsCgkvLyAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjEwMgoJLy8gcmVjZWl2ZXI6IHRoaXMudHhuLnNlbmRlcgoJdHhuIFNlbmRlcgoJaXR4bl9maWVsZCBSZWNlaXZlcgoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czoxMDMKCS8vIGFtb3VudDogQk9YX1NUT1JBR0VfQ09TVAoJaW50YyAyIC8vIDMxNzAwCglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czoxMDQKCS8vIGZlZTogMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gY29udHJhY3RzL0hlYWRzT3JUYWlscy5hbGdvLnRzOjEwNQoJLy8gbm90ZTogJ2JveCBzdG9yYWdlIGNvc3QgcmVmdW5kJwoJYnl0ZWMgMSAvLyAgImJveCBzdG9yYWdlIGNvc3QgcmVmdW5kIgoJaXR4bl9maWVsZCBOb3RlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoKCS8vIGNvbnRyYWN0cy9IZWFkc09yVGFpbHMuYWxnby50czoxMDkKCS8vIHRoaXMuZ2FtZSh0aGlzLnR4bi5zZW5kZXIpLmRlbGV0ZSgpCgl0eG4gU2VuZGVyCglib3hfZGVsCglyZXRzdWIKCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CglpbnRjIDAgLy8gMQoJcmV0dXJuCgoqY3JlYXRlX05vT3A6CglwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjcmVhdGUgTm9PcAoJZXJyCgoqY2FsbF9Ob09wOgoJcHVzaGJ5dGVzIDB4MzJmMzc2MWEgLy8gbWV0aG9kICJjcmVhdGVHYW1lKHBheSxieXRlWzMyXSxib29sKXVpbnQ2NCIKCXB1c2hieXRlcyAweDZiYjE5M2I0IC8vIG1ldGhvZCAiY29tcGxldGVHYW1lKGJ5dGVbODBdKWJvb2wiCglwdXNoYnl0ZXMgMHg3ZDczZTNhNiAvLyBtZXRob2QgImNhbmNlbEdhbWUoKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2NyZWF0ZUdhbWUgKmFiaV9yb3V0ZV9jb21wbGV0ZUdhbWUgKmFiaV9yb3V0ZV9jYW5jZWxHYW1lCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgTm9PcAoJZXJy","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiAFAQDU9wGAAgYmBQAXYm94IHN0b3JhZ2UgY29zdCByZWZ1bmQEFR98dQMKgQEBADEYFCEECzEZCI0MAVkAAAAAAAAAAAAAAUsAAAAAAAAAAAAAACo2GgJJFSISRCNTNhoBSRWBIBJEMRYiCUk4ECISRIgABRZQsCJDigMBKDEAvUxIFESL/zgHMgoSRIv/OAgkD0QyBoEICIwAMQCL/icEI4v9VFCLABZQv4sAjACJKjYaAUkVgVASRIgACicEI08CVFCwIkOKAQEoRwUxAIwAiwC+RDX/NP9XIQgX0QCMATIMgcQsDEEAFrEhBLIQI7IBK0myHrIfgQWyGbNC/+GLAYv/iwC+RDX/NP9XACDQAIwCjAOLAkSLAyNTjASLBElBAAuLAL5ENf80/yVTEElAABSLBBRJQQAMiwC+RDX/NP8lUxQQEYwFsSKyEDEAsgcksggjsgEpsgWzMQC8iwWMAEYFiYgAAiJDigAAKDEAjACLAL5ENf80/1chCBcxBIHqBwkORLEishAxALIHJLIII7IBKbIFszEAvIkiQ4AEuER7NjYaAI4B//EAgAQy83YagARrsZO0gAR9c+OmNhoAjgP+i/7n/5wA","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -210,11 +210,57 @@ export type MethodReturn<TSignature extends HeadsOrTailsSignatures> = HeadsOrTai
 export type BoxKeysState = HeadsOrTailsTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type HeadsOrTailsCreateCallParams =
+  | Expand<CallParams<HeadsOrTailsArgs['obj']['createApplication()void'] | HeadsOrTailsArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<HeadsOrTailsArgs['obj']['createApplication()void'] | HeadsOrTailsArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type HeadsOrTailsDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: HeadsOrTailsCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the HeadsOrTails smart contract
  */
 export abstract class HeadsOrTailsParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends HeadsOrTailsCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return HeadsOrTailsParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the HeadsOrTails smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<HeadsOrTailsArgs['obj']['createApplication()void'] | HeadsOrTailsArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the createGame(pay,byte[32],bool)uint64 ABI method
    *
@@ -262,6 +308,148 @@ export abstract class HeadsOrTailsParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the HeadsOrTails smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class HeadsOrTailsFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `HeadsOrTailsFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new HeadsOrTailsClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new HeadsOrTailsClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the HeadsOrTails smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: HeadsOrTailsDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? HeadsOrTailsParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (HeadsOrTailsCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new HeadsOrTailsClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HeadsOrTails smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<HeadsOrTailsArgs['obj']['createApplication()void'] | HeadsOrTailsArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(HeadsOrTailsParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HeadsOrTails smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<HeadsOrTailsArgs['obj']['createApplication()void'] | HeadsOrTailsArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(HeadsOrTailsParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HeadsOrTails smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<HeadsOrTailsArgs['obj']['createApplication()void'] | HeadsOrTailsArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(HeadsOrTailsParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | HeadsOrTailsReturns['createApplication()void']) }, appClient: new HeadsOrTailsClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the HeadsOrTails smart contract
  */
