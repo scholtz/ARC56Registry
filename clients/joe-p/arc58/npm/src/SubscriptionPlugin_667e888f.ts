@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"SubscriptionPlugin","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"makePayment","args":[{"type":"uint64","name":"sender"},{"type":"address","name":"_acctRef"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"lastPayment":{"keyType":"AVMString","valueType":"AVMUint64","key":"bGFzdFBheW1lbnQ="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[58,76],"errorMessage":"OnCompletion is not NoOp"},{"pc":[116],"errorMessage":"application exists"},{"pc":[80],"errorMessage":"can only call when creating"},{"pc":[61],"errorMessage":"can only call when not creating"},{"pc":[91],"errorMessage":"check GlobalState exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"SubscriptionPlugin","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"makePayment","args":[{"type":"uint64","name":"sender"},{"type":"address","name":"_acctRef"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"lastPayment":{"keyType":"AVMString","valueType":"AVMUint64","key":"bGFzdFBheW1lbnQ="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[58,76],"errorMessage":"OnCompletion is not NoOp"},{"pc":[116],"errorMessage":"application exists"},{"pc":[80],"errorMessage":"can only call when creating"},{"pc":[61],"errorMessage":"can only call when not creating"},{"pc":[91],"errorMessage":"check GlobalState exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICBieXRlY2Jsb2NrICJsYXN0UGF5bWVudCIKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIGNvbnRyYWN0cy9wbHVnaW5zL3N1YnNjcmlwdGlvbl9wbHVnaW4uYWxnby50czoxMgogICAgLy8gbGFzdFBheW1lbnQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsgaW5pdGlhbFZhbHVlOiAwIH0pOwogICAgYnl0ZWNfMCAvLyAibGFzdFBheW1lbnQiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gY29udHJhY3RzL3BsdWdpbnMvc3Vic2NyaXB0aW9uX3BsdWdpbi5hbGdvLnRzOjEwCiAgICAvLyBleHBvcnQgY2xhc3MgU3Vic2NyaXB0aW9uUGx1Z2luIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMAogICAgcHVzaGJ5dGVzcyAweGI4NDQ3YjM2IDB4ZWY0YWI3MGUgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIsIG1ldGhvZCAibWFrZVBheW1lbnQodWludDY0LGFkZHJlc3Mpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fY3JlYXRlQXBwbGljYXRpb25fcm91dGVANSBtYWluX21ha2VQYXltZW50X3JvdXRlQDYKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMDoKICAgIC8vIGNvbnRyYWN0cy9wbHVnaW5zL3N1YnNjcmlwdGlvbl9wbHVnaW4uYWxnby50czoxMAogICAgLy8gZXhwb3J0IGNsYXNzIFN1YnNjcmlwdGlvblBsdWdpbiBleHRlbmRzIENvbnRyYWN0IHsKICAgIGludGNfMCAvLyAwCiAgICByZXR1cm4KCm1haW5fbWFrZVBheW1lbnRfcm91dGVANjoKICAgIC8vIGNvbnRyYWN0cy9wbHVnaW5zL3N1YnNjcmlwdGlvbl9wbHVnaW4uYWxnby50czoxNy0yMQogICAgLy8gbWFrZVBheW1lbnQoCiAgICAvLyAgIHNlbmRlcjogYXJjNC5VaW50TjY0LAogICAgLy8gICAvLyBlc2xpbnQtZGlzYWJsZS1uZXh0LWxpbmUgbm8tdW51c2VkLXZhcnMKICAgIC8vICAgX2FjY3RSZWY6IGFyYzQuQWRkcmVzcwogICAgLy8gKTogdm9pZCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIGNvbnRyYWN0cy9wbHVnaW5zL3N1YnNjcmlwdGlvbl9wbHVnaW4uYWxnby50czoxMAogICAgLy8gZXhwb3J0IGNsYXNzIFN1YnNjcmlwdGlvblBsdWdpbiBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIC8vIGNvbnRyYWN0cy9wbHVnaW5zL3N1YnNjcmlwdGlvbl9wbHVnaW4uYWxnby50czoxNy0yMQogICAgLy8gbWFrZVBheW1lbnQoCiAgICAvLyAgIHNlbmRlcjogYXJjNC5VaW50TjY0LAogICAgLy8gICAvLyBlc2xpbnQtZGlzYWJsZS1uZXh0LWxpbmUgbm8tdW51c2VkLXZhcnMKICAgIC8vICAgX2FjY3RSZWY6IGFyYzQuQWRkcmVzcwogICAgLy8gKTogdm9pZCB7CiAgICBjYWxsc3ViIG1ha2VQYXltZW50CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2NyZWF0ZUFwcGxpY2F0aW9uX3JvdXRlQDU6CiAgICAvLyBjb250cmFjdHMvcGx1Z2lucy9zdWJzY3JpcHRpb25fcGx1Z2luLmFsZ28udHM6MTQKICAgIC8vIEBhYmltZXRob2QoeyBvbkNyZWF0ZTogJ3JlcXVpcmUnIH0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9wbHVnaW5zL3N1YnNjcmlwdGlvbl9wbHVnaW4uYWxnby50czo6U3Vic2NyaXB0aW9uUGx1Z2luLm1ha2VQYXltZW50KHNlbmRlcjogYnl0ZXMsIF9hY2N0UmVmOiBieXRlcykgLT4gdm9pZDoKbWFrZVBheW1lbnQ6CiAgICAvLyBjb250cmFjdHMvcGx1Z2lucy9zdWJzY3JpcHRpb25fcGx1Z2luLmFsZ28udHM6MTctMjEKICAgIC8vIG1ha2VQYXltZW50KAogICAgLy8gICBzZW5kZXI6IGFyYzQuVWludE42NCwKICAgIC8vICAgLy8gZXNsaW50LWRpc2FibGUtbmV4dC1saW5lIG5vLXVudXNlZC12YXJzCiAgICAvLyAgIF9hY2N0UmVmOiBhcmM0LkFkZHJlc3MKICAgIC8vICk6IHZvaWQgewogICAgcHJvdG8gMiAwCiAgICAvLyBjb250cmFjdHMvcGx1Z2lucy9zdWJzY3JpcHRpb25fcGx1Z2luLmFsZ28udHM6MjIKICAgIC8vIGFzc2VydChHbG9iYWwucm91bmQgLSB0aGlzLmxhc3RQYXltZW50LnZhbHVlID4gRlJFUVVFTkNZKTsKICAgIGdsb2JhbCBSb3VuZAogICAgLy8gY29udHJhY3RzL3BsdWdpbnMvc3Vic2NyaXB0aW9uX3BsdWdpbi5hbGdvLnRzOjEyCiAgICAvLyBsYXN0UGF5bWVudCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBpbml0aWFsVmFsdWU6IDAgfSk7CiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAibGFzdFBheW1lbnQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gY29udHJhY3RzL3BsdWdpbnMvc3Vic2NyaXB0aW9uX3BsdWdpbi5hbGdvLnRzOjIyCiAgICAvLyBhc3NlcnQoR2xvYmFsLnJvdW5kIC0gdGhpcy5sYXN0UGF5bWVudC52YWx1ZSA+IEZSRVFVRU5DWSk7CiAgICAtCiAgICAvLyBjb250cmFjdHMvcGx1Z2lucy9zdWJzY3JpcHRpb25fcGx1Z2luLmFsZ28udHM6NgogICAgLy8gY29uc3QgRlJFUVVFTkNZOiB1aW50NjQgPSAxOwogICAgaW50Y18xIC8vIDEKICAgIC8vIGNvbnRyYWN0cy9wbHVnaW5zL3N1YnNjcmlwdGlvbl9wbHVnaW4uYWxnby50czoyMgogICAgLy8gYXNzZXJ0KEdsb2JhbC5yb3VuZCAtIHRoaXMubGFzdFBheW1lbnQudmFsdWUgPiBGUkVRVUVOQ1kpOwogICAgPgogICAgYXNzZXJ0CiAgICAvLyBjb250cmFjdHMvcGx1Z2lucy9zdWJzY3JpcHRpb25fcGx1Z2luLmFsZ28udHM6MTIKICAgIC8vIGxhc3RQYXltZW50ID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGluaXRpYWxWYWx1ZTogMCB9KTsKICAgIGJ5dGVjXzAgLy8gImxhc3RQYXltZW50IgogICAgLy8gY29udHJhY3RzL3BsdWdpbnMvc3Vic2NyaXB0aW9uX3BsdWdpbi5hbGdvLnRzOjIzCiAgICAvLyB0aGlzLmxhc3RQYXltZW50LnZhbHVlID0gR2xvYmFsLnJvdW5kOwogICAgZ2xvYmFsIFJvdW5kCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29udHJhY3RzL3BsdWdpbnMvc3Vic2NyaXB0aW9uX3BsdWdpbi5hbGdvLnRzOjI1CiAgICAvLyBjb25zdCBbY29udHJvbGxlZEFjY291bnRCeXRlc10gPSBvcC5BcHBHbG9iYWwuZ2V0RXhCeXRlcyhBcHBsaWNhdGlvbihzZW5kZXIubmF0aXZlKSwgQnl0ZXMoJ2MnKSk7CiAgICBmcmFtZV9kaWcgLTIKICAgIGJ0b2kKICAgIGR1cAogICAgcHVzaGJ5dGVzICJjIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgc3dhcAogICAgLy8gY29udHJhY3RzL3BsdWdpbnMvc3Vic2NyaXB0aW9uX3BsdWdpbi5hbGdvLnRzOjI3LTM3CiAgICAvLyBpdHhuCiAgICAvLyAgIC5wYXltZW50KHsKICAgIC8vICAgICBzZW5kZXI6IEFjY291bnQoQnl0ZXMoY29udHJvbGxlZEFjY291bnRCeXRlcykpLAogICAgLy8gICAgIGFtb3VudDogQU1PVU5ULAogICAgLy8gICAgIC8vIEJ5dGVzLmZyb21CYXNlMzIgYXBwZWFycyB0byBiZSBicm9rZW4KICAgIC8vICAgICAvLyByZWNlaXZlcjogQWNjb3VudChCeXRlcy5mcm9tQmFzZTMyKCI0NlhZUjdPVFJaWElTSTJUUlNCRFdQVVZRVDRFQ0JXTkk3VEZXUFBTNkVLQVBKN1c1T0JYU05HNjZNIikpLAogICAgLy8gICAgIHJlY2VpdmVyOiBHbG9iYWwuemVyb0FkZHJlc3MsCiAgICAvLyAgICAgcmVrZXlUbzogQXBwbGljYXRpb24oc2VuZGVyLm5hdGl2ZSkuYWRkcmVzcywKICAgIC8vICAgICBmZWU6IDAsCiAgICAvLyAgIH0pCiAgICAvLyAgIC5zdWJtaXQoKTsKICAgIGl0eG5fYmVnaW4KICAgIC8vIGNvbnRyYWN0cy9wbHVnaW5zL3N1YnNjcmlwdGlvbl9wbHVnaW4uYWxnby50czozMwogICAgLy8gcmVjZWl2ZXI6IEdsb2JhbC56ZXJvQWRkcmVzcywKICAgIGdsb2JhbCBaZXJvQWRkcmVzcwogICAgLy8gY29udHJhY3RzL3BsdWdpbnMvc3Vic2NyaXB0aW9uX3BsdWdpbi5hbGdvLnRzOjM0CiAgICAvLyByZWtleVRvOiBBcHBsaWNhdGlvbihzZW5kZXIubmF0aXZlKS5hZGRyZXNzLAogICAgc3dhcAogICAgYXBwX3BhcmFtc19nZXQgQXBwQWRkcmVzcwogICAgYXNzZXJ0IC8vIGFwcGxpY2F0aW9uIGV4aXN0cwogICAgaXR4bl9maWVsZCBSZWtleVRvCiAgICBpdHhuX2ZpZWxkIFJlY2VpdmVyCiAgICAvLyBjb250cmFjdHMvcGx1Z2lucy9zdWJzY3JpcHRpb25fcGx1Z2luLmFsZ28udHM6OAogICAgLy8gY29uc3QgQU1PVU5UOiB1aW50NjQgPSAxMDBfMDAwOwogICAgcHVzaGludCAxMDAwMDAgLy8gMTAwMDAwCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgaXR4bl9maWVsZCBTZW5kZXIKICAgIC8vIGNvbnRyYWN0cy9wbHVnaW5zL3N1YnNjcmlwdGlvbl9wbHVnaW4uYWxnby50czoyNy0zNgogICAgLy8gaXR4bgogICAgLy8gICAucGF5bWVudCh7CiAgICAvLyAgICAgc2VuZGVyOiBBY2NvdW50KEJ5dGVzKGNvbnRyb2xsZWRBY2NvdW50Qnl0ZXMpKSwKICAgIC8vICAgICBhbW91bnQ6IEFNT1VOVCwKICAgIC8vICAgICAvLyBCeXRlcy5mcm9tQmFzZTMyIGFwcGVhcnMgdG8gYmUgYnJva2VuCiAgICAvLyAgICAgLy8gcmVjZWl2ZXI6IEFjY291bnQoQnl0ZXMuZnJvbUJhc2UzMigiNDZYWVI3T1RSWlhJU0kyVFJTQkRXUFVWUVQ0RUNCV05JN1RGV1BQUzZFS0FQSjdXNU9CWFNORzY2TSIpKSwKICAgIC8vICAgICByZWNlaXZlcjogR2xvYmFsLnplcm9BZGRyZXNzLAogICAgLy8gICAgIHJla2V5VG86IEFwcGxpY2F0aW9uKHNlbmRlci5uYXRpdmUpLmFkZHJlc3MsCiAgICAvLyAgICAgZmVlOiAwLAogICAgLy8gICB9KQogICAgaW50Y18xIC8vIDEKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIC8vIGNvbnRyYWN0cy9wbHVnaW5zL3N1YnNjcmlwdGlvbl9wbHVnaW4uYWxnby50czozNQogICAgLy8gZmVlOiAwLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBjb250cmFjdHMvcGx1Z2lucy9zdWJzY3JpcHRpb25fcGx1Z2luLmFsZ28udHM6MjctMzcKICAgIC8vIGl0eG4KICAgIC8vICAgLnBheW1lbnQoewogICAgLy8gICAgIHNlbmRlcjogQWNjb3VudChCeXRlcyhjb250cm9sbGVkQWNjb3VudEJ5dGVzKSksCiAgICAvLyAgICAgYW1vdW50OiBBTU9VTlQsCiAgICAvLyAgICAgLy8gQnl0ZXMuZnJvbUJhc2UzMiBhcHBlYXJzIHRvIGJlIGJyb2tlbgogICAgLy8gICAgIC8vIHJlY2VpdmVyOiBBY2NvdW50KEJ5dGVzLmZyb21CYXNlMzIoIjQ2WFlSN09UUlpYSVNJMlRSU0JEV1BVVlFUNEVDQldOSTdURldQUFM2RUtBUEo3VzVPQlhTTkc2Nk0iKSksCiAgICAvLyAgICAgcmVjZWl2ZXI6IEdsb2JhbC56ZXJvQWRkcmVzcywKICAgIC8vICAgICByZWtleVRvOiBBcHBsaWNhdGlvbihzZW5kZXIubmF0aXZlKS5hZGRyZXNzLAogICAgLy8gICAgIGZlZTogMCwKICAgIC8vICAgfSkKICAgIC8vICAgLnN1Ym1pdCgpOwogICAgaXR4bl9zdWJtaXQKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiACAAEmAQtsYXN0UGF5bWVudDEYQAADKCJnMRtBABWCAgS4RHs2BO9Ktw42GgCOAgAUAAIiQzEZFEQxGEQ2GgE2GgKIAAwjQzEZFEQxGBREI0OKAgAyBiIoZUQJIw1EKDIGZ4v+F0mAAWNlSEyxMgNMcghEsiCyB4GgjQayCLIAI7IQIrIBs4k=","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -153,11 +153,57 @@ export type MethodReturn<TSignature extends SubscriptionPluginSignatures> = Subs
 export type GlobalKeysState = SubscriptionPluginTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type SubscriptionPluginCreateCallParams =
+  | Expand<CallParams<SubscriptionPluginArgs['obj']['createApplication()void'] | SubscriptionPluginArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<SubscriptionPluginArgs['obj']['createApplication()void'] | SubscriptionPluginArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type SubscriptionPluginDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: SubscriptionPluginCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the SubscriptionPlugin smart contract
  */
 export abstract class SubscriptionPluginParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends SubscriptionPluginCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return SubscriptionPluginParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the SubscriptionPlugin smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<SubscriptionPluginArgs['obj']['createApplication()void'] | SubscriptionPluginArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the makePayment(uint64,address)void ABI method
    *
@@ -173,6 +219,148 @@ export abstract class SubscriptionPluginParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the SubscriptionPlugin smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class SubscriptionPluginFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `SubscriptionPluginFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new SubscriptionPluginClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new SubscriptionPluginClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the SubscriptionPlugin smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: SubscriptionPluginDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? SubscriptionPluginParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (SubscriptionPluginCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new SubscriptionPluginClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SubscriptionPlugin smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<SubscriptionPluginArgs['obj']['createApplication()void'] | SubscriptionPluginArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(SubscriptionPluginParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SubscriptionPlugin smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<SubscriptionPluginArgs['obj']['createApplication()void'] | SubscriptionPluginArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(SubscriptionPluginParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SubscriptionPlugin smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<SubscriptionPluginArgs['obj']['createApplication()void'] | SubscriptionPluginArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(SubscriptionPluginParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | SubscriptionPluginReturns['createApplication()void']) }, appClient: new SubscriptionPluginClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the SubscriptionPlugin smart contract
  */
