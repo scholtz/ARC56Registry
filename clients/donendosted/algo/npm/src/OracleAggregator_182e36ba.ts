@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"OracleAggregator","structs":{},"methods":[{"name":"create","args":[{"type":"uint64","name":"registry_app_id"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"push_price","args":[{"type":"string","name":"symbol"},{"type":"uint64","name":"price_usd_x1000"},{"type":"uint64","name":"source_count"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_price","args":[{"type":"string","name":"symbol"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"get_price_with_timestamp","args":[{"type":"string","name":"symbol"}],"returns":{"type":"(uint64,uint64)"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"registry_app_id":{"keyType":"AVMString","valueType":"AVMUint64","key":"cmVnaXN0cnlfYXBwX2lk"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[108,175,222],"errorMessage":"invalid array length header"},{"pc":[115,182,229],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[80,127,135],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[140],"errorMessage":"need >= 2 sources"},{"pc":[193,240],"errorMessage":"no price for symbol"},{"pc":[207],"errorMessage":"price stale"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"OracleAggregator","structs":{},"methods":[{"name":"create","args":[{"type":"uint64","name":"registry_app_id"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"push_price","args":[{"type":"string","name":"symbol"},{"type":"uint64","name":"price_usd_x1000"},{"type":"uint64","name":"source_count"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_price","args":[{"type":"string","name":"symbol"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"get_price_with_timestamp","args":[{"type":"string","name":"symbol"}],"returns":{"type":"(uint64,uint64)"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"registry_app_id":{"keyType":"AVMString","valueType":"AVMUint64","key":"cmVnaXN0cnlfYXBwX2lk"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[108,175,222],"errorMessage":"invalid array length header"},{"pc":[115,182,229],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[80,127,135],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[140],"errorMessage":"need >= 2 sources"},{"pc":[193,240],"errorMessage":"no price for symbol"},{"pc":[207],"errorMessage":"price stale"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayA4IDEgMiAwCiAgICBieXRlY2Jsb2NrIDB4NzA3MjY5NjM2NTNhIDB4MTUxZjdjNzUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vcmFjbGVfYWdncmVnYXRvci9jb250cmFjdC5weToyNQogICAgLy8gY2xhc3MgT3JhY2xlQWdncmVnYXRvcihBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEA5CiAgICBwdXNoYnl0ZXNzIDB4N2ViZTRmM2UgMHg3ZWFiMGYzZiAweGQ3ODA4ZTY1IC8vIG1ldGhvZCAicHVzaF9wcmljZShzdHJpbmcsdWludDY0LHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJnZXRfcHJpY2Uoc3RyaW5nKXVpbnQ2NCIsIG1ldGhvZCAiZ2V0X3ByaWNlX3dpdGhfdGltZXN0YW1wKHN0cmluZykodWludDY0LHVpbnQ2NCkiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBwdXNoX3ByaWNlIGdldF9wcmljZSBnZXRfcHJpY2Vfd2l0aF90aW1lc3RhbXAKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEA5OgogICAgLy8gc21hcnRfY29udHJhY3RzL29yYWNsZV9hZ2dyZWdhdG9yL2NvbnRyYWN0LnB5OjI1CiAgICAvLyBjbGFzcyBPcmFjbGVBZ2dyZWdhdG9yKEFSQzRDb250cmFjdCk6CiAgICBwdXNoYnl0ZXMgMHgyNDBkMmY2NyAvLyBtZXRob2QgImNyZWF0ZSh1aW50NjQpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGNyZWF0ZQogICAgZXJyCgoKLy8gc21hcnRfY29udHJhY3RzLm9yYWNsZV9hZ2dyZWdhdG9yLmNvbnRyYWN0Lk9yYWNsZUFnZ3JlZ2F0b3IuY3JlYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL29yYWNsZV9hZ2dyZWdhdG9yL2NvbnRyYWN0LnB5OjMwCiAgICAvLyBAYXJjNC5hYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzAgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vcmFjbGVfYWdncmVnYXRvci9jb250cmFjdC5weTozMgogICAgLy8gc2VsZi5yZWdpc3RyeV9hcHBfaWQudmFsdWUgPSByZWdpc3RyeV9hcHBfaWQKICAgIHB1c2hieXRlcyAicmVnaXN0cnlfYXBwX2lkIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vcmFjbGVfYWdncmVnYXRvci9jb250cmFjdC5weTozMAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLm9yYWNsZV9hZ2dyZWdhdG9yLmNvbnRyYWN0Lk9yYWNsZUFnZ3JlZ2F0b3IucHVzaF9wcmljZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnB1c2hfcHJpY2U6CiAgICAvLyBzbWFydF9jb250cmFjdHMvb3JhY2xlX2FnZ3JlZ2F0b3IvY29udHJhY3QucHk6MzQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzMgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZHVwCiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMCAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgZHVwCiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvb3JhY2xlX2FnZ3JlZ2F0b3IvY29udHJhY3QucHk6NDEKICAgIC8vIGFzc2VydCBzb3VyY2VfY291bnQgPj0gVUludDY0KDIpLCAibmVlZCA+PSAyIHNvdXJjZXMiCiAgICBpbnRjXzIgLy8gMgogICAgPj0KICAgIGFzc2VydCAvLyBuZWVkID49IDIgc291cmNlcwogICAgLy8gc21hcnRfY29udHJhY3RzL29yYWNsZV9hZ2dyZWdhdG9yL2NvbnRyYWN0LnB5OjQzCiAgICAvLyBib3hfa2V5ID0gQnl0ZXMoYiJwcmljZToiKSArIHN5bWJvbC5ieXRlcwogICAgYnl0ZWNfMCAvLyAweDcwNzI2OTYzNjUzYQogICAgdW5jb3ZlciAzCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vcmFjbGVfYWdncmVnYXRvci9jb250cmFjdC5weTo0NwogICAgLy8gdGltZXN0YW1wPWFyYzQuVUludDY0KEdsb2JhbC5sYXRlc3RfdGltZXN0YW1wKSwKICAgIGdsb2JhbCBMYXRlc3RUaW1lc3RhbXAKICAgIGl0b2IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vcmFjbGVfYWdncmVnYXRvci9jb250cmFjdC5weTo0NS01MAogICAgLy8gYm94LnZhbHVlID0gUHJpY2VGZWVkKAogICAgLy8gICAgIHByaWNlX3VzZF94MTAwMD1hcmM0LlVJbnQ2NChwcmljZV91c2RfeDEwMDApLAogICAgLy8gICAgIHRpbWVzdGFtcD1hcmM0LlVJbnQ2NChHbG9iYWwubGF0ZXN0X3RpbWVzdGFtcCksCiAgICAvLyAgICAgc291cmNlX2NvdW50PWFyYzQuVUludDY0KHNvdXJjZV9jb3VudCksCiAgICAvLyAgICAgc3ltYm9sPWFyYzQuU3RyaW5nKHN5bWJvbCksCiAgICAvLyApCiAgICB1bmNvdmVyIDMKICAgIHN3YXAKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDAwMWEKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIGRpZyAxCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGJveF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vcmFjbGVfYWdncmVnYXRvci9jb250cmFjdC5weTozNAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLm9yYWNsZV9hZ2dyZWdhdG9yLmNvbnRyYWN0Lk9yYWNsZUFnZ3JlZ2F0b3IuZ2V0X3ByaWNlW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X3ByaWNlOgogICAgLy8gc21hcnRfY29udHJhY3RzL29yYWNsZV9hZ2dyZWdhdG9yL2NvbnRyYWN0LnB5OjUyCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18zIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvb3JhY2xlX2FnZ3JlZ2F0b3IvY29udHJhY3QucHk6NTQKICAgIC8vIGJveF9rZXkgPSBCeXRlcyhiInByaWNlOiIpICsgc3ltYm9sLmJ5dGVzCiAgICBieXRlY18wIC8vIDB4NzA3MjY5NjM2NTNhCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vcmFjbGVfYWdncmVnYXRvci9jb250cmFjdC5weTo1NgogICAgLy8gYXNzZXJ0IGJveC5tYXliZSgpWzFdLCAibm8gcHJpY2UgZm9yIHN5bWJvbCIKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBhc3NlcnQgLy8gbm8gcHJpY2UgZm9yIHN5bWJvbAogICAgLy8gc21hcnRfY29udHJhY3RzL29yYWNsZV9hZ2dyZWdhdG9yL2NvbnRyYWN0LnB5OjU3CiAgICAvLyBmZWVkID0gYm94Lm1heWJlKClbMF0uY29weSgpCiAgICBib3hfZ2V0CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vcmFjbGVfYWdncmVnYXRvci9jb250cmFjdC5weTo1OAogICAgLy8gYWdlID0gR2xvYmFsLmxhdGVzdF90aW1lc3RhbXAgLSBmZWVkLnRpbWVzdGFtcC5uYXRpdmUKICAgIGdsb2JhbCBMYXRlc3RUaW1lc3RhbXAKICAgIGRpZyAxCiAgICBpbnRjXzAgLy8gOAogICAgZXh0cmFjdF91aW50NjQKICAgIC0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vcmFjbGVfYWdncmVnYXRvci9jb250cmFjdC5weTo1OQogICAgLy8gYXNzZXJ0IGFnZSA8PSBVSW50NjQoU1RBTEVORVNTX1dJTkRPVyksICJwcmljZSBzdGFsZSIKICAgIHB1c2hpbnQgMzAwCiAgICA8PQogICAgYXNzZXJ0IC8vIHByaWNlIHN0YWxlCiAgICAvLyBzbWFydF9jb250cmFjdHMvb3JhY2xlX2FnZ3JlZ2F0b3IvY29udHJhY3QucHk6NjAKICAgIC8vIHJldHVybiBmZWVkLnByaWNlX3VzZF94MTAwMAogICAgZXh0cmFjdCAwIDgKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vcmFjbGVfYWdncmVnYXRvci9jb250cmFjdC5weTo1MgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLm9yYWNsZV9hZ2dyZWdhdG9yLmNvbnRyYWN0Lk9yYWNsZUFnZ3JlZ2F0b3IuZ2V0X3ByaWNlX3dpdGhfdGltZXN0YW1wW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X3ByaWNlX3dpdGhfdGltZXN0YW1wOgogICAgLy8gc21hcnRfY29udHJhY3RzL29yYWNsZV9hZ2dyZWdhdG9yL2NvbnRyYWN0LnB5OjYyCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18zIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvb3JhY2xlX2FnZ3JlZ2F0b3IvY29udHJhY3QucHk6NjQKICAgIC8vIGJveF9rZXkgPSBCeXRlcyhiInByaWNlOiIpICsgc3ltYm9sLmJ5dGVzCiAgICBieXRlY18wIC8vIDB4NzA3MjY5NjM2NTNhCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vcmFjbGVfYWdncmVnYXRvci9jb250cmFjdC5weTo2NgogICAgLy8gYXNzZXJ0IGJveC5tYXliZSgpWzFdLCAibm8gcHJpY2UgZm9yIHN5bWJvbCIKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBhc3NlcnQgLy8gbm8gcHJpY2UgZm9yIHN5bWJvbAogICAgLy8gc21hcnRfY29udHJhY3RzL29yYWNsZV9hZ2dyZWdhdG9yL2NvbnRyYWN0LnB5OjY3CiAgICAvLyBmZWVkID0gYm94Lm1heWJlKClbMF0uY29weSgpCiAgICBib3hfZ2V0CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9vcmFjbGVfYWdncmVnYXRvci9jb250cmFjdC5weTo2OAogICAgLy8gcmV0dXJuIGFyYzQuVHVwbGUoKGZlZWQucHJpY2VfdXNkX3gxMDAwLCBmZWVkLnRpbWVzdGFtcCkpCiAgICBkdXAKICAgIGV4dHJhY3QgMCA4CiAgICBzd2FwCiAgICBleHRyYWN0IDggOAogICAgY29uY2F0CiAgICAvLyBzbWFydF9jb250cmFjdHMvb3JhY2xlX2FnZ3JlZ2F0b3IvY29udHJhY3QucHk6NjIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAECAECACYCBnByaWNlOgQVH3x1MRkURDEYQQAdggMEfr5PPgR+qw8/BNeAjmU2GgCOAwAtAHAAnwCABCQNL2c2GgCOAQABADYaAUkVIhJEF4APcmVnaXN0cnlfYXBwX2lkTGcjQzYaAUklWSQISwEVEkRJVwIANhoCSRUiEkQ2GgNJFSISREkXJA9EKE8DUDIHFk8DTFBPAlCAAgAaUE8CUEsBvEi/I0M2GgFJJVkkCEsBFRJEVwIAKExQSb1FAUS+SDIHSwEiWwmBrAIORFcACClMULAjQzYaAUklWSQISwEVEkRXAgAoTFBJvUUBRL5ISVcACExXCAhQKUxQsCND","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -180,11 +180,57 @@ export type MethodReturn<TSignature extends OracleAggregatorSignatures> = Oracle
 export type GlobalKeysState = OracleAggregatorTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type OracleAggregatorCreateCallParams =
+  | Expand<CallParams<OracleAggregatorArgs['obj']['create(uint64)void'] | OracleAggregatorArgs['tuple']['create(uint64)void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<OracleAggregatorArgs['obj']['create(uint64)void'] | OracleAggregatorArgs['tuple']['create(uint64)void']> & {method: 'create(uint64)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type OracleAggregatorDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: OracleAggregatorCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the OracleAggregator smart contract
  */
 export abstract class OracleAggregatorParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends OracleAggregatorCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(uint64)void':
+            return OracleAggregatorParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the OracleAggregator smart contract using the create(uint64)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<OracleAggregatorArgs['obj']['create(uint64)void'] | OracleAggregatorArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(uint64)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.registryAppId],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the push_price(string,uint64,uint64)void ABI method
    *
@@ -226,6 +272,148 @@ export abstract class OracleAggregatorParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the OracleAggregator smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class OracleAggregatorFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `OracleAggregatorFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new OracleAggregatorClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new OracleAggregatorClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the OracleAggregator smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: OracleAggregatorDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? OracleAggregatorParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (OracleAggregatorCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new OracleAggregatorClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the OracleAggregator smart contract using the create(uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<OracleAggregatorArgs['obj']['create(uint64)void'] | OracleAggregatorArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(OracleAggregatorParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the OracleAggregator smart contract using the create(uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<OracleAggregatorArgs['obj']['create(uint64)void'] | OracleAggregatorArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(OracleAggregatorParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the OracleAggregator smart contract using an ABI method call using the create(uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<OracleAggregatorArgs['obj']['create(uint64)void'] | OracleAggregatorArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(OracleAggregatorParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | OracleAggregatorReturns['create(uint64)void']) }, appClient: new OracleAggregatorClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the OracleAggregator smart contract
  */
