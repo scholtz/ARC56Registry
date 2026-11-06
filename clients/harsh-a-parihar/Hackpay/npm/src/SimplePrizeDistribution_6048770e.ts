@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"SimplePrizeDistribution","structs":{},"methods":[{"name":"createDistribution","args":[{"type":"byte[]","name":"eventId"},{"type":"uint64","name":"totalPrize"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create a new prize distribution","events":[],"recommendations":{}},{"name":"getStatus","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get distribution status","events":[],"recommendations":{}},{"name":"getTotalAmount","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get total amount","events":[],"recommendations":{}},{"name":"getWinnersCount","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get winners count","events":[],"recommendations":{}},{"name":"claimPrize","args":[{"type":"uint64","name":"amount"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Claim prize for a winner","events":[],"recommendations":{}},{"name":"hello","args":[{"type":"byte[]","name":"name"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Hello method for testing","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Simple Prize Distribution Contract\nMinimal working version for deployment testing","networks":{},"state":{"schema":{"global":{"ints":3,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"organizer":{"keyType":"AVMString","valueType":"AVMBytes","key":"b3JnYW5pemVy"},"totalAmount":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxBbW91bnQ="},"winnersCount":{"keyType":"AVMString","valueType":"AVMUint64","key":"d2lubmVyc0NvdW50"},"distributedCount":{"keyType":"AVMString","valueType":"AVMUint64","key":"ZGlzdHJpYnV0ZWRDb3VudA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[290],"errorMessage":"Insufficient prize amount"},{"pc":[113,140,156,173,190,207],"errorMessage":"OnCompletion is not NoOp"},{"pc":[234],"errorMessage":"can only call when creating"},{"pc":[116,143,159,176,193,210],"errorMessage":"can only call when not creating"},{"pc":[268,273,278,286,294],"errorMessage":"check GlobalState exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"SimplePrizeDistribution","structs":{},"methods":[{"name":"createDistribution","args":[{"type":"byte[]","name":"eventId"},{"type":"uint64","name":"totalPrize"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create a new prize distribution","events":[],"recommendations":{}},{"name":"getStatus","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get distribution status","events":[],"recommendations":{}},{"name":"getTotalAmount","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get total amount","events":[],"recommendations":{}},{"name":"getWinnersCount","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get winners count","events":[],"recommendations":{}},{"name":"claimPrize","args":[{"type":"uint64","name":"amount"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Claim prize for a winner","events":[],"recommendations":{}},{"name":"hello","args":[{"type":"byte[]","name":"name"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Hello method for testing","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Simple Prize Distribution Contract\nMinimal working version for deployment testing","networks":{},"state":{"schema":{"global":{"ints":3,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"organizer":{"keyType":"AVMString","valueType":"AVMBytes","key":"b3JnYW5pemVy"},"totalAmount":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxBbW91bnQ="},"winnersCount":{"keyType":"AVMString","valueType":"AVMUint64","key":"d2lubmVyc0NvdW50"},"distributedCount":{"keyType":"AVMString","valueType":"AVMUint64","key":"ZGlzdHJpYnV0ZWRDb3VudA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[290],"errorMessage":"Insufficient prize amount"},{"pc":[113,140,156,173,190,207],"errorMessage":"OnCompletion is not NoOp"},{"pc":[234],"errorMessage":"can only call when creating"},{"pc":[116,143,159,176,193,210],"errorMessage":"can only call when not creating"},{"pc":[268,273,278,286,294],"errorMessage":"check GlobalState exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUgImRpc3RyaWJ1dGVkQ291bnQiICJ0b3RhbEFtb3VudCIgIndpbm5lcnNDb3VudCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6NwogICAgLy8gZXhwb3J0IGNsYXNzIFNpbXBsZVByaXplRGlzdHJpYnV0aW9uIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYmFyZV9yb3V0aW5nQDExCiAgICBwdXNoYnl0ZXNzIDB4ZmQ1MzdkMWYgMHg5OTJhYzNiZSAweDU0MWY0YzM0IDB4NTZiM2E2MzQgMHhlZmY3NzAyNiAweGUwODM4YmJhIC8vIG1ldGhvZCAiY3JlYXRlRGlzdHJpYnV0aW9uKGJ5dGVbXSx1aW50NjQpdm9pZCIsIG1ldGhvZCAiZ2V0U3RhdHVzKCl1aW50NjQiLCBtZXRob2QgImdldFRvdGFsQW1vdW50KCl1aW50NjQiLCBtZXRob2QgImdldFdpbm5lcnNDb3VudCgpdWludDY0IiwgbWV0aG9kICJjbGFpbVByaXplKHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJoZWxsbyhieXRlW10pYnl0ZVtdIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVEaXN0cmlidXRpb25fcm91dGVAMyBtYWluX2dldFN0YXR1c19yb3V0ZUA0IG1haW5fZ2V0VG90YWxBbW91bnRfcm91dGVANSBtYWluX2dldFdpbm5lcnNDb3VudF9yb3V0ZUA2IG1haW5fY2xhaW1Qcml6ZV9yb3V0ZUA3IG1haW5faGVsbG9fcm91dGVAOAoKbWFpbl9hZnRlcl9pZl9lbHNlQDE1OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czo3CiAgICAvLyBleHBvcnQgY2xhc3MgU2ltcGxlUHJpemVEaXN0cmlidXRpb24gZXh0ZW5kcyBDb250cmFjdCB7CiAgICBpbnRjXzAgLy8gMAogICAgcmV0dXJuCgptYWluX2hlbGxvX3JvdXRlQDg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjY5CiAgICAvLyBAYXJjNC5hYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjcKICAgIC8vIGV4cG9ydCBjbGFzcyBTaW1wbGVQcml6ZURpc3RyaWJ1dGlvbiBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjY5CiAgICAvLyBAYXJjNC5hYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fY2xhaW1Qcml6ZV9yb3V0ZUA3OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czo1NQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czo3CiAgICAvLyBleHBvcnQgY2xhc3MgU2ltcGxlUHJpemVEaXN0cmlidXRpb24gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjU1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgY2FsbHN1YiBjbGFpbVByaXplCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2dldFdpbm5lcnNDb3VudF9yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czo0NwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgY2FsbHN1YiBnZXRXaW5uZXJzQ291bnQKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0VG90YWxBbW91bnRfcm91dGVANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6MzkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgZ2V0VG90YWxBbW91bnQKICAgIGl0b2IKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0U3RhdHVzX3JvdXRlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjMxCiAgICAvLyBAYXJjNC5hYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIGdldFN0YXR1cwogICAgaXRvYgogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9jcmVhdGVEaXN0cmlidXRpb25fcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6MTcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6NwogICAgLy8gZXhwb3J0IGNsYXNzIFNpbXBsZVByaXplRGlzdHJpYnV0aW9uIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6MTcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBjYWxsc3ViIGNyZWF0ZURpc3RyaWJ1dGlvbgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9iYXJlX3JvdXRpbmdAMTE6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjcKICAgIC8vIGV4cG9ydCBjbGFzcyBTaW1wbGVQcml6ZURpc3RyaWJ1dGlvbiBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTUKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czo6U2ltcGxlUHJpemVEaXN0cmlidXRpb24uY3JlYXRlRGlzdHJpYnV0aW9uKGV2ZW50SWQ6IGJ5dGVzLCB0b3RhbFByaXplOiB1aW50NjQpIC0+IHZvaWQ6CmNyZWF0ZURpc3RyaWJ1dGlvbjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6MTctMjEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICAvLyBjcmVhdGVEaXN0cmlidXRpb24oCiAgICAvLyAgIGV2ZW50SWQ6IGJ5dGVzLAogICAgLy8gICB0b3RhbFByaXplOiB1aW50NjQKICAgIC8vICk6IHZvaWQgewogICAgcHJvdG8gMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjkKICAgIC8vIG9yZ2FuaXplciA9IEdsb2JhbFN0YXRlPGJ5dGVzPigpOwogICAgcHVzaGJ5dGVzICJvcmdhbml6ZXIiCiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjIyCiAgICAvLyB0aGlzLm9yZ2FuaXplci52YWx1ZSA9IFR4bi5zZW5kZXIuYnl0ZXM7CiAgICB0eG4gU2VuZGVyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czoxMAogICAgLy8gdG90YWxBbW91bnQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KCk7CiAgICBieXRlY18yIC8vICJ0b3RhbEFtb3VudCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6MjMKICAgIC8vIHRoaXMudG90YWxBbW91bnQudmFsdWUgPSB0b3RhbFByaXplOwogICAgZnJhbWVfZGlnIC0xCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czoxMQogICAgLy8gd2lubmVyc0NvdW50ID0gR2xvYmFsU3RhdGU8dWludDY0PigpOwogICAgYnl0ZWNfMyAvLyAid2lubmVyc0NvdW50IgogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czoyNAogICAgLy8gdGhpcy53aW5uZXJzQ291bnQudmFsdWUgPSAwOwogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjEyCiAgICAvLyBkaXN0cmlidXRlZENvdW50ID0gR2xvYmFsU3RhdGU8dWludDY0PigpOwogICAgYnl0ZWNfMSAvLyAiZGlzdHJpYnV0ZWRDb3VudCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6MjUKICAgIC8vIHRoaXMuZGlzdHJpYnV0ZWRDb3VudC52YWx1ZSA9IDA7CiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6OlNpbXBsZVByaXplRGlzdHJpYnV0aW9uLmdldFN0YXR1cygpIC0+IHVpbnQ2NDoKZ2V0U3RhdHVzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czoxMgogICAgLy8gZGlzdHJpYnV0ZWRDb3VudCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oKTsKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJkaXN0cmlidXRlZENvdW50IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6MzMKICAgIC8vIHJldHVybiB0aGlzLmRpc3RyaWJ1dGVkQ291bnQudmFsdWU7CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjpTaW1wbGVQcml6ZURpc3RyaWJ1dGlvbi5nZXRUb3RhbEFtb3VudCgpIC0+IHVpbnQ2NDoKZ2V0VG90YWxBbW91bnQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjEwCiAgICAvLyB0b3RhbEFtb3VudCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oKTsKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18yIC8vICJ0b3RhbEFtb3VudCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjQxCiAgICAvLyByZXR1cm4gdGhpcy50b3RhbEFtb3VudC52YWx1ZTsKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6OlNpbXBsZVByaXplRGlzdHJpYnV0aW9uLmdldFdpbm5lcnNDb3VudCgpIC0+IHVpbnQ2NDoKZ2V0V2lubmVyc0NvdW50OgogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czoxMQogICAgLy8gd2lubmVyc0NvdW50ID0gR2xvYmFsU3RhdGU8dWludDY0PigpOwogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzMgLy8gIndpbm5lcnNDb3VudCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjQ5CiAgICAvLyByZXR1cm4gdGhpcy53aW5uZXJzQ291bnQudmFsdWU7CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjpTaW1wbGVQcml6ZURpc3RyaWJ1dGlvbi5jbGFpbVByaXplKGFtb3VudDogdWludDY0KSAtPiB2b2lkOgpjbGFpbVByaXplOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czo1NS01NgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIC8vIGNsYWltUHJpemUoYW1vdW50OiB1aW50NjQpOiB2b2lkIHsKICAgIHByb3RvIDEgMAogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czoxMAogICAgLy8gdG90YWxBbW91bnQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KCk7CiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMiAvLyAidG90YWxBbW91bnQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czo1OAogICAgLy8gYXNzZXJ0KHRoaXMudG90YWxBbW91bnQudmFsdWUgPj0gYW1vdW50LCAnSW5zdWZmaWNpZW50IHByaXplIGFtb3VudCcpOwogICAgZnJhbWVfZGlnIC0xCiAgICA+PQogICAgYXNzZXJ0IC8vIEluc3VmZmljaWVudCBwcml6ZSBhbW91bnQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6MTIKICAgIC8vIGRpc3RyaWJ1dGVkQ291bnQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KCk7CiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAiZGlzdHJpYnV0ZWRDb3VudCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvc2ltcGxlX3ByaXplX2Rpc3RyaWJ1dGlvbi9jb250cmFjdC5hbGdvLnRzOjYzCiAgICAvLyB0aGlzLmRpc3RyaWJ1dGVkQ291bnQudmFsdWUgPSB0aGlzLmRpc3RyaWJ1dGVkQ291bnQudmFsdWUgKyAxOwogICAgaW50Y18xIC8vIDEKICAgICsKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zaW1wbGVfcHJpemVfZGlzdHJpYnV0aW9uL2NvbnRyYWN0LmFsZ28udHM6MTIKICAgIC8vIGRpc3RyaWJ1dGVkQ291bnQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KCk7CiAgICBieXRlY18xIC8vICJkaXN0cmlidXRlZENvdW50IgogICAgLy8gc21hcnRfY29udHJhY3RzL3NpbXBsZV9wcml6ZV9kaXN0cmlidXRpb24vY29udHJhY3QuYWxnby50czo2MwogICAgLy8gdGhpcy5kaXN0cmlidXRlZENvdW50LnZhbHVlID0gdGhpcy5kaXN0cmlidXRlZENvdW50LnZhbHVlICsgMTsKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICByZXRzdWIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiACAAEmBAQVH3x1EGRpc3RyaWJ1dGVkQ291bnQLdG90YWxBbW91bnQMd2lubmVyc0NvdW50MRtBAKeCBgT9U30fBJkqw74EVB9MNARWs6Y0BO/3cCYE4IOLujYaAI4GAGAATwA+AC0AHQACIkMxGRREMRhENhoBVwIASRUWVwYCTFAoTFCwI0MxGRREMRhENhoBF4gAgSNDMRkURDEYRIgAcBYoTFCwI0MxGRREMRhEiABaFihMULAjQzEZFEQxGESIAEQWKExQsCNDMRkURDEYRDYaAVcCADYaAheIAA0jQzEZQP+FMRgURCNDigIAgAlvcmdhbml6ZXIxAGcqi/9nKyJnKSJniSIpZUSJIiplRIkiK2VEiYoBACIqZUSL/w9EIillRCMIKUxniQ==","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -196,6 +196,21 @@ export type MethodReturn<TSignature extends SimplePrizeDistributionSignatures> =
 export type GlobalKeysState = SimplePrizeDistributionTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type SimplePrizeDistributionCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type SimplePrizeDistributionDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: SimplePrizeDistributionCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the SimplePrizeDistribution smart contract
@@ -293,6 +308,147 @@ export abstract class SimplePrizeDistributionParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the SimplePrizeDistribution smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class SimplePrizeDistributionFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `SimplePrizeDistributionFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new SimplePrizeDistributionClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new SimplePrizeDistributionClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the SimplePrizeDistribution smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: SimplePrizeDistributionDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new SimplePrizeDistributionClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SimplePrizeDistribution smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SimplePrizeDistribution smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SimplePrizeDistribution smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new SimplePrizeDistributionClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the SimplePrizeDistribution smart contract
  */
