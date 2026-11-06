@@ -2,8 +2,8 @@
 
 - **Repo**: [Premkumar1845/CipherTrust](https://github.com/Premkumar1845/CipherTrust)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/Premkumar1845/CipherTrust/HEAD/contracts/arc56/CipherTrustConsentRegistry.arc56.json](https://raw.githubusercontent.com/Premkumar1845/CipherTrust/HEAD/contracts/arc56/CipherTrustConsentRegistry.arc56.json)
-- **Detected**: 2026-07-18T08:23:31.190623+00:00
-- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
+- **Detected**: 2026-11-06T14:22:43.049502+00:00
+- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.2`
 
 ## Reproduce
 
