@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"MockAkitaDAO","structs":{},"methods":[{"name":"update","args":[{"type":"string","name":"newVersion"}],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"ping","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[79],"errorMessage":"invalid array length header"},{"pc":[86],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"MockAkitaDAO","structs":{},"methods":[{"name":"update","args":[{"type":"string","name":"newVersion"}],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"ping","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[79],"errorMessage":"invalid array length header"},{"pc":[86],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyBzbWFydF9jb250cmFjdHMvbW9ja3MvZGFvL21vY2suYWxnby50czo0CiAgICAvLyBleHBvcnQgY2xhc3MgTW9ja0FraXRhREFPIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDYKICAgIHB1c2hieXRlc3MgMHhlYTkxODBkZCAweDFkNWM1NjFiIC8vIG1ldGhvZCAidXBkYXRlKHN0cmluZyl2b2lkIiwgbWV0aG9kICJwaW5nKCl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3VwZGF0ZV9yb3V0ZUAzIG1haW5fcGluZ19yb3V0ZUA0CiAgICBlcnIKCm1haW5fcGluZ19yb3V0ZUA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6OQogICAgLy8gcGluZygpOiB1aW50NjQgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDUzOQogICAgbG9nCiAgICBwdXNoaW50IDEKICAgIHJldHVybgoKbWFpbl91cGRhdGVfcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tb2Nrcy9kYW8vbW9jay5hbGdvLnRzOjYKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6IFsnVXBkYXRlQXBwbGljYXRpb24nXSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgcHVzaGludCA0IC8vIFVwZGF0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgdXBkYXRlCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6NAogICAgLy8gZXhwb3J0IGNsYXNzIE1vY2tBa2l0YURBTyBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6Ok1vY2tBa2l0YURBTy51cGRhdGVbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbW9ja3MvZGFvL21vY2suYWxnby50czo2CiAgICAvLyBAYWJpbWV0aG9kKHsgYWxsb3dBY3Rpb25zOiBbJ1VwZGF0ZUFwcGxpY2F0aW9uJ10gfSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgcHVzaGludCAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CzEbQQA7ggIE6pGA3QQdXFYbNhoAjgIAGgABADEZFDEYEESADBUffHUAAAAAAAAFObCBAUMxGYEEEjEYEERCAAgxGRQxGBQQQzYaAUmBAFmBAghMFRJEgQFD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -140,11 +140,66 @@ export type MethodArgs<TSignature extends MockAkitaDaoSignatures> = MockAkitaDao
 export type MethodReturn<TSignature extends MockAkitaDaoSignatures> = MockAkitaDaoTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type MockAkitaDaoCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type MockAkitaDaoUpdateCallParams =
+  | Expand<CallParams<MockAkitaDaoArgs['obj']['update(string)void'] | MockAkitaDaoArgs['tuple']['update(string)void']> & {method: 'update'}>
+  | Expand<CallParams<MockAkitaDaoArgs['obj']['update(string)void'] | MockAkitaDaoArgs['tuple']['update(string)void']> & {method: 'update(string)void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type MockAkitaDaoDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: MockAkitaDaoCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: MockAkitaDaoUpdateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the MockAkitaDao smart contract
  */
 export abstract class MockAkitaDaoParamsFactory {
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends MockAkitaDaoUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'update':
+          case 'update(string)void':
+            return MockAkitaDaoParamsFactory.update.update(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the MockAkitaDAO smart contract using the update(string)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      update(params: CallParams<MockAkitaDaoArgs['obj']['update(string)void'] | MockAkitaDaoArgs['tuple']['update(string)void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'update(string)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.newVersion],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the ping()uint64 ABI method
    *
@@ -160,6 +215,163 @@ export abstract class MockAkitaDaoParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the MockAkitaDAO smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class MockAkitaDaoFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `MockAkitaDaoFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new MockAkitaDaoClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new MockAkitaDaoClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the MockAkitaDAO smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: MockAkitaDaoDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      updateParams: params.updateParams?.method ? MockAkitaDaoParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (MockAkitaDaoUpdateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new MockAkitaDaoClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MockAkitaDAO smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the MockAkitaDAO smart contract using the update(string)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      update: (params: CallParams<MockAkitaDaoArgs['obj']['update(string)void'] | MockAkitaDaoArgs['tuple']['update(string)void']> & AppClientCompilationParams) => {
+        return this.appFactory.params.deployUpdate(MockAkitaDaoParamsFactory.update.update(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MockAkitaDAO smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MockAkitaDAO smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new MockAkitaDaoClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the MockAkitaDAO smart contract
  */
@@ -248,6 +460,22 @@ export class MockAkitaDaoClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the MockAkitaDAO smart contract using the `update(string)void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      update: (params: CallParams<MockAkitaDaoArgs['obj']['update(string)void'] | MockAkitaDaoArgs['tuple']['update(string)void']> & AppClientCompilationParams) => {
+        return this.appClient.params.update(MockAkitaDaoParamsFactory.update.update(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the MockAkitaDAO smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -274,6 +502,22 @@ export class MockAkitaDaoClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the MockAkitaDAO smart contract using the `update(string)void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      update: (params: CallParams<MockAkitaDaoArgs['obj']['update(string)void'] | MockAkitaDaoArgs['tuple']['update(string)void']> & AppClientCompilationParams) => {
+        return this.appClient.createTransaction.update(MockAkitaDaoParamsFactory.update.update(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the MockAkitaDAO smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -299,6 +543,23 @@ export class MockAkitaDaoClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the MockAkitaDAO smart contract using the `update(string)void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      update: async (params: CallParams<MockAkitaDaoArgs['obj']['update(string)void'] | MockAkitaDaoArgs['tuple']['update(string)void']> & AppClientCompilationParams & SendParams) => {
+        const result = await this.appClient.send.update(MockAkitaDaoParamsFactory.update.update(params))
+        return {...result, return: result.return as unknown as (undefined | MockAkitaDaoReturns['update(string)void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the MockAkitaDAO smart contract.
      *
@@ -352,6 +613,15 @@ export class MockAkitaDaoClient {
         resultMappers.push((v) => client.decodeReturnValue('ping()uint64', v))
         return this
       },
+      get update() {
+        return {
+          update: (params: CallParams<MockAkitaDaoArgs['obj']['update(string)void'] | MockAkitaDaoArgs['tuple']['update(string)void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.update(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the MockAkitaDAO contract
        */
@@ -395,6 +665,20 @@ export type MockAkitaDaoComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   ping(params?: CallParams<MockAkitaDaoArgs['obj']['ping()uint64'] | MockAkitaDaoArgs['tuple']['ping()uint64']>): MockAkitaDaoComposer<[...TReturns, MockAkitaDaoReturns['ping()uint64'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the MockAkitaDAO smart contract using the update(string)void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    update(params?: CallParams<MockAkitaDaoArgs['obj']['update(string)void'] | MockAkitaDaoArgs['tuple']['update(string)void']>): MockAkitaDaoComposer<[...TReturns, MockAkitaDaoReturns['update(string)void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the MockAkitaDAO smart contract.
