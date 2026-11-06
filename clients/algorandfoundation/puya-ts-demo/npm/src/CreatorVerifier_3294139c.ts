@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"CreatorVerifier","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"allowOptInsFrom","args":[{"type":"address","name":"creator"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Allow anyone to use the lsig to opt in the txn sender into an asset created by the creator","events":[],"recommendations":{}},{"name":"disableOptInsFrom","args":[{"type":"address","name":"creator"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Disable opt-ins for ASAs from the given creator","events":[],"recommendations":{}},{"name":"verifyCreator","args":[{"type":"axfer","name":"optIn"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"allowedCreators":{"keyType":"(address,address)","valueType":"bool","desc":"Mapping of [user,creator] to determine which creators the user will allow opt-ins from","prefix":""}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[104],"errorMessage":"Box must have value"},{"pc":[7],"errorMessage":"OnCompletion must be NoOp"},{"pc":[101],"errorMessage":"asset exists"},{"pc":[92],"errorMessage":"transaction type is axfer"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"CreatorVerifier","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"allowOptInsFrom","args":[{"type":"address","name":"creator"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Allow anyone to use the lsig to opt in the txn sender into an asset created by the creator","events":[],"recommendations":{}},{"name":"disableOptInsFrom","args":[{"type":"address","name":"creator"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Disable opt-ins for ASAs from the given creator","events":[],"recommendations":{}},{"name":"verifyCreator","args":[{"type":"axfer","name":"optIn"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"allowedCreators":{"keyType":"(address,address)","valueType":"bool","desc":"Mapping of [user,creator] to determine which creators the user will allow opt-ins from","prefix":""}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[104],"errorMessage":"Box must have value"},{"pc":[7],"errorMessage":"OnCompletion must be NoOp"},{"pc":[101],"errorMessage":"asset exists"},{"pc":[92],"errorMessage":"transaction type is axfer"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMQogICAgLy8gY29udHJhY3RzL2xzaWctd2l0aC1hcHAvbHNpZy13aXRoLWFwcC5hbGdvLnRzOjUwCiAgICAvLyBleHBvcnQgY2xhc3MgQ3JlYXRvclZlcmlmaWVyIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDcKICAgIHB1c2hieXRlc3MgMHhmMWJmMmNhOCAweGJjMjhhYzJiIDB4OGQ1YWE3MjcgLy8gbWV0aG9kICJhbGxvd09wdEluc0Zyb20oYWRkcmVzcyl2b2lkIiwgbWV0aG9kICJkaXNhYmxlT3B0SW5zRnJvbShhZGRyZXNzKXZvaWQiLCBtZXRob2QgInZlcmlmeUNyZWF0b3IoYXhmZXIpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGFsbG93T3B0SW5zRnJvbSBkaXNhYmxlT3B0SW5zRnJvbSB2ZXJpZnlDcmVhdG9yCiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BANzoKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo1MAogICAgLy8gZXhwb3J0IGNsYXNzIENyZWF0b3JWZXJpZmllciBleHRlbmRzIENvbnRyYWN0IHsKICAgIHB1c2hieXRlcyAweGI4NDQ3YjM2IC8vIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2NyZWF0ZUFwcGxpY2F0aW9uX3JvdXRlQDgKICAgIGVycgoKbWFpbl9jcmVhdGVBcHBsaWNhdGlvbl9yb3V0ZUA4OgogICAgLy8gY29udHJhY3RzL2xzaWctd2l0aC1hcHAvbHNpZy13aXRoLWFwcC5hbGdvLnRzOjUxCiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICJyZXF1aXJlIiB9KQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo6Q3JlYXRvclZlcmlmaWVyLmFsbG93T3B0SW5zRnJvbVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmFsbG93T3B0SW5zRnJvbToKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo2MQogICAgLy8gdGhpcy5hbGxvd2VkQ3JlYXRvcnMoW1R4bi5zZW5kZXIsIGNyZWF0b3IubmF0aXZlXSkudmFsdWUgPSBuZXcgQm9vbCh0cnVlKTsKICAgIHR4biBTZW5kZXIKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo2MAogICAgLy8gYWxsb3dPcHRJbnNGcm9tKGNyZWF0b3I6IEFkZHJlc3MpOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo2MQogICAgLy8gdGhpcy5hbGxvd2VkQ3JlYXRvcnMoW1R4bi5zZW5kZXIsIGNyZWF0b3IubmF0aXZlXSkudmFsdWUgPSBuZXcgQm9vbCh0cnVlKTsKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4ODAKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo2MAogICAgLy8gYWxsb3dPcHRJbnNGcm9tKGNyZWF0b3I6IEFkZHJlc3MpOiB2b2lkIHsKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBjb250cmFjdHMvbHNpZy13aXRoLWFwcC9sc2lnLXdpdGgtYXBwLmFsZ28udHM6OkNyZWF0b3JWZXJpZmllci5kaXNhYmxlT3B0SW5zRnJvbVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmRpc2FibGVPcHRJbnNGcm9tOgogICAgLy8gY29udHJhY3RzL2xzaWctd2l0aC1hcHAvbHNpZy13aXRoLWFwcC5hbGdvLnRzOjY2CiAgICAvLyB0aGlzLmFsbG93ZWRDcmVhdG9ycyhbVHhuLnNlbmRlciwgY3JlYXRvci5uYXRpdmVdKS52YWx1ZSA9IG5ldyBCb29sKGZhbHNlKTsKICAgIHR4biBTZW5kZXIKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo2NQogICAgLy8gZGlzYWJsZU9wdEluc0Zyb20oY3JlYXRvcjogQWRkcmVzcyk6IHZvaWQgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgLy8gY29udHJhY3RzL2xzaWctd2l0aC1hcHAvbHNpZy13aXRoLWFwcC5hbGdvLnRzOjY2CiAgICAvLyB0aGlzLmFsbG93ZWRDcmVhdG9ycyhbVHhuLnNlbmRlciwgY3JlYXRvci5uYXRpdmVdKS52YWx1ZSA9IG5ldyBCb29sKGZhbHNlKTsKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo2NQogICAgLy8gZGlzYWJsZU9wdEluc0Zyb20oY3JlYXRvcjogQWRkcmVzcyk6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo6Q3JlYXRvclZlcmlmaWVyLnZlcmlmeUNyZWF0b3Jbcm91dGluZ10oKSAtPiB2b2lkOgp2ZXJpZnlDcmVhdG9yOgogICAgLy8gY29udHJhY3RzL2xzaWctd2l0aC1hcHAvbHNpZy13aXRoLWFwcC5hbGdvLnRzOjcwCiAgICAvLyB2ZXJpZnlDcmVhdG9yKG9wdEluOiBndHhuLkFzc2V0VHJhbnNmZXJUeG4pOiB2b2lkIHsKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgcHVzaGludCA0IC8vIGF4ZmVyCiAgICA9PQogICAgYXNzZXJ0IC8vIHRyYW5zYWN0aW9uIHR5cGUgaXMgYXhmZXIKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo3MwogICAgLy8gdGhpcy5hbGxvd2VkQ3JlYXRvcnMoW29wdEluLnNlbmRlciwgb3B0SW4ueGZlckFzc2V0LmNyZWF0b3JdKS52YWx1ZQogICAgZHVwCiAgICBndHhucyBTZW5kZXIKICAgIHN3YXAKICAgIGd0eG5zIFhmZXJBc3NldAogICAgYXNzZXRfcGFyYW1zX2dldCBBc3NldENyZWF0b3IKICAgIGFzc2VydCAvLyBhc3NldCBleGlzdHMKICAgIGNvbmNhdAogICAgYm94X2dldAogICAgYXNzZXJ0IC8vIEJveCBtdXN0IGhhdmUgdmFsdWUKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo3NAogICAgLy8gLm5hdGl2ZSwKICAgIHB1c2hpbnQgMCAvLyAwCiAgICBnZXRiaXQKICAgIC8vIGNvbnRyYWN0cy9sc2lnLXdpdGgtYXBwL2xzaWctd2l0aC1hcHAuYWxnby50czo3MAogICAgLy8gdmVyaWZ5Q3JlYXRvcihvcHRJbjogZ3R4bi5Bc3NldFRyYW5zZmVyVHhuKTogdm9pZCB7CiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiABATEZFEQxGEEAHYIDBPG/LKgEvCisKwSNWqcnNhoAjgMAEQAdACkAgAS4RHs2NhoAjgEAAQAiQzEANhoBUIABgL8iQzEANhoBUIABAL8iQzEWIglJOBCBBBJESTgATDgRcQtEUL5EgQBTQw==","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -175,11 +175,57 @@ export type MethodReturn<TSignature extends CreatorVerifierSignatures> = Creator
 export type BoxKeysState = CreatorVerifierTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type CreatorVerifierCreateCallParams =
+  | Expand<CallParams<CreatorVerifierArgs['obj']['createApplication()void'] | CreatorVerifierArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<CreatorVerifierArgs['obj']['createApplication()void'] | CreatorVerifierArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type CreatorVerifierDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: CreatorVerifierCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the CreatorVerifier smart contract
  */
 export abstract class CreatorVerifierParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends CreatorVerifierCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return CreatorVerifierParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the CreatorVerifier smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<CreatorVerifierArgs['obj']['createApplication()void'] | CreatorVerifierArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the allowOptInsFrom(address)void ABI method
    *
@@ -225,6 +271,148 @@ export abstract class CreatorVerifierParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the CreatorVerifier smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class CreatorVerifierFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `CreatorVerifierFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new CreatorVerifierClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new CreatorVerifierClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the CreatorVerifier smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: CreatorVerifierDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? CreatorVerifierParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (CreatorVerifierCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new CreatorVerifierClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CreatorVerifier smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<CreatorVerifierArgs['obj']['createApplication()void'] | CreatorVerifierArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(CreatorVerifierParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CreatorVerifier smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<CreatorVerifierArgs['obj']['createApplication()void'] | CreatorVerifierArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(CreatorVerifierParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CreatorVerifier smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<CreatorVerifierArgs['obj']['createApplication()void'] | CreatorVerifierArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(CreatorVerifierParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | CreatorVerifierReturns['createApplication()void']) }, appClient: new CreatorVerifierClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the CreatorVerifier smart contract
  */

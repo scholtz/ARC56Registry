@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ZkWhitelistContract","structs":{},"methods":[{"name":"create","args":[{"type":"string","name":"name"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"update","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication","DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"optInOrOut","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["OptIn","CloseOut"]},"readonly":false,"events":[],"recommendations":{}},{"name":"addAddressToWhitelist","args":[{"type":"address","name":"address"},{"type":"address[]","name":"proof"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"isOnWhitelist","args":[{"type":"address","name":"address"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"verifyProof","args":[{"type":"uint64","name":"appId"},{"type":"address[]","name":"proof"},{"type":"address[]","name":"publicInputs"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":1,"bytes":0}},"keys":{"global":{"appName":{"keyType":"AVMString","valueType":"string","key":"YXBwTmFtZQ=="}},"local":{"whiteList":{"keyType":"AVMString","valueType":"AVMUint64","key":"d2hpdGVMaXN0"}},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[424],"errorMessage":"Bytes has valid prefix"},{"pc":[24],"errorMessage":"OnCompletion must be NoOp"},{"pc":[82],"errorMessage":"OnCompletion must be one of OptIn, CloseOut && can only call when not creating"},{"pc":[93],"errorMessage":"OnCompletion must be one of UpdateApplication, DeleteApplication && can only call when not creating"},{"pc":[348],"errorMessage":"check LocalState exists"}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ZkWhitelistContract","structs":{},"methods":[{"name":"create","args":[{"type":"string","name":"name"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"update","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication","DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"optInOrOut","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["OptIn","CloseOut"]},"readonly":false,"events":[],"recommendations":{}},{"name":"addAddressToWhitelist","args":[{"type":"address","name":"address"},{"type":"address[]","name":"proof"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"isOnWhitelist","args":[{"type":"address","name":"address"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"verifyProof","args":[{"type":"uint64","name":"appId"},{"type":"address[]","name":"proof"},{"type":"address[]","name":"publicInputs"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":1,"bytes":0}},"keys":{"global":{"appName":{"keyType":"AVMString","valueType":"string","key":"YXBwTmFtZQ=="}},"local":{"whiteList":{"keyType":"AVMString","valueType":"AVMUint64","key":"d2hpdGVMaXN0"}},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[424],"errorMessage":"Bytes has valid prefix"},{"pc":[24],"errorMessage":"OnCompletion must be NoOp"},{"pc":[82],"errorMessage":"OnCompletion must be one of OptIn, CloseOut && can only call when not creating"},{"pc":[93],"errorMessage":"OnCompletion must be one of UpdateApplication, DeleteApplication && can only call when not creating"},{"pc":[348],"errorMessage":"check LocalState exists"}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDYgVE1QTF9WRVJJRklFUl9BUFBfSUQKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NSAweDA2ODEwMSAid2hpdGVMaXN0IiAweDAwCiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjI5CiAgICAvLyBleHBvcnQgZGVmYXVsdCBjbGFzcyBaa1doaXRlbGlzdENvbnRyYWN0IGV4dGVuZHMgYXJjNC5Db250cmFjdCB7CiAgICBwdXNoYnl0ZXNzIDB4YTBlODE4NzIgMHg5MzAwYWFlMiAvLyBtZXRob2QgInVwZGF0ZSgpdm9pZCIsIG1ldGhvZCAib3B0SW5Pck91dCgpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdXBkYXRlX3JvdXRlQDIgbWFpbl9vcHRJbk9yT3V0X3JvdXRlQDMKCm1haW5fc3dpdGNoX2Nhc2VfbmV4dEA0OgogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czoyOQogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgWmtXaGl0ZWxpc3RDb250cmFjdCBleHRlbmRzIGFyYzQuQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDEwCiAgICBwdXNoYnl0ZXNzIDB4Y2I3N2MwN2EgMHg1MTc2MzdjNiAweGYxMDc3M2YxIC8vIG1ldGhvZCAiYWRkQWRkcmVzc1RvV2hpdGVsaXN0KGFkZHJlc3MsYWRkcmVzc1tdKXN0cmluZyIsIG1ldGhvZCAiaXNPbldoaXRlbGlzdChhZGRyZXNzKWJvb2wiLCBtZXRob2QgInZlcmlmeVByb29mKHVpbnQ2NCxhZGRyZXNzW10sYWRkcmVzc1tdKWJvb2wiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBhZGRBZGRyZXNzVG9XaGl0ZWxpc3QgaXNPbldoaXRlbGlzdCB2ZXJpZnlQcm9vZgogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDEwOgogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czoyOQogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgWmtXaGl0ZWxpc3RDb250cmFjdCBleHRlbmRzIGFyYzQuQ29udHJhY3QgewogICAgcHVzaGJ5dGVzIDB4MjBkZjNhNTQgLy8gbWV0aG9kICJjcmVhdGUoc3RyaW5nKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGUKICAgIGVycgoKbWFpbl9vcHRJbk9yT3V0X3JvdXRlQDM6CiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjQ1CiAgICAvLyBAYWJpbWV0aG9kKHsgYWxsb3dBY3Rpb25zOiBbIk9wdEluIiwgIkNsb3NlT3V0Il0gfSkKICAgIGludGNfMCAvLyAxCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBzaGwKICAgIGludGNfMiAvLyA2CiAgICAmCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIHJldHVybiAvLyBvbiBlcnJvcjogT25Db21wbGV0aW9uIG11c3QgYmUgb25lIG9mIE9wdEluLCBDbG9zZU91dCAmJiBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCgptYWluX3VwZGF0ZV9yb3V0ZUAyOgogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czozOQogICAgLy8gQGFiaW1ldGhvZCh7IGFsbG93QWN0aW9uczogWyJVcGRhdGVBcHBsaWNhdGlvbiIsICJEZWxldGVBcHBsaWNhdGlvbiJdIH0pCiAgICBpbnRjXzAgLy8gMQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgc2hsCiAgICBwdXNoaW50IDQ4IC8vIDQ4CiAgICAmCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBvbmUgb2YgVXBkYXRlQXBwbGljYXRpb24sIERlbGV0ZUFwcGxpY2F0aW9uICYmIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGIgdXBkYXRlCgoKLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo6WmtXaGl0ZWxpc3RDb250cmFjdC5jcmVhdGVbcm91dGluZ10oKSAtPiB2b2lkOgpjcmVhdGU6CiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjMwCiAgICAvLyBhcHBOYW1lID0gR2xvYmFsU3RhdGU8YXJjNC5TdHI+KHt9KTsKICAgIHB1c2hieXRlcyAiYXBwTmFtZSIKICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6MzMKICAgIC8vIEBhYmltZXRob2QoeyBvbkNyZWF0ZTogInJlcXVpcmUiIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjM2CiAgICAvLyB0aGlzLmFwcE5hbWUudmFsdWUgPSBuYW1lOwogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6MzMKICAgIC8vIEBhYmltZXRob2QoeyBvbkNyZWF0ZTogInJlcXVpcmUiIH0pCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo6WmtXaGl0ZWxpc3RDb250cmFjdC51cGRhdGVbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGU6CiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjQyCiAgICAvLyBhc3NlcnQoR2xvYmFsLmNyZWF0b3JBZGRyZXNzID09PSBUeG4uc2VuZGVyKTsKICAgIGdsb2JhbCBDcmVhdG9yQWRkcmVzcwogICAgdHhuIFNlbmRlcgogICAgPT0KICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6MzkKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6IFsiVXBkYXRlQXBwbGljYXRpb24iLCAiRGVsZXRlQXBwbGljYXRpb24iXSB9KQogICAgcmV0dXJuCgoKLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo6WmtXaGl0ZWxpc3RDb250cmFjdC5hZGRBZGRyZXNzVG9XaGl0ZWxpc3Rbcm91dGluZ10oKSAtPiB2b2lkOgphZGRBZGRyZXNzVG9XaGl0ZWxpc3Q6CiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjUxCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKCmFkZEFkZHJlc3NUb1doaXRlbGlzdF93aGlsZV90b3BAODoKICAgIHB1c2hpbnQgMTQ1MDEwIC8vIDE0NTAxMAogICAgZ2xvYmFsIE9wY29kZUJ1ZGdldAogICAgPgogICAgYnogYWRkQWRkcmVzc1RvV2hpdGVsaXN0X2FmdGVyX3doaWxlQDEzCiAgICBpdHhuX2JlZ2luCiAgICBpbnRjXzIgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgcHVzaGludCA1IC8vIERlbGV0ZUFwcGxpY2F0aW9uCiAgICBpdHhuX2ZpZWxkIE9uQ29tcGxldGlvbgogICAgYnl0ZWNfMSAvLyAweDA2ODEwMQogICAgaXR4bl9maWVsZCBBcHByb3ZhbFByb2dyYW0KICAgIGJ5dGVjXzEgLy8gMHgwNjgxMDEKICAgIGl0eG5fZmllbGQgQ2xlYXJTdGF0ZVByb2dyYW0KICAgIGludGNfMSAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGIgYWRkQWRkcmVzc1RvV2hpdGVsaXN0X3doaWxlX3RvcEA4CgphZGRBZGRyZXNzVG9XaGl0ZWxpc3RfYWZ0ZXJfd2hpbGVAMTM6CiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjY2CiAgICAvLyBvcC5iemVybygzMikuYml0d2lzZU9yKEJ5dGVzKEJpZ1VpbnQoYWRkcmVzcy5ieXRlcykgJSBjdXJ2ZU1vZCkpLAogICAgcHVzaGludCAzMiAvLyAzMgogICAgYnplcm8KICAgIGRpZyAyCiAgICBwdXNoYnl0ZXMgMHgzMDY0NGU3MmUxMzFhMDI5Yjg1MDQ1YjY4MTgxNTg1ZDI4MzNlODQ4NzliOTcwOTE0M2UxZjU5M2YwMDAwMDAxCiAgICBiJQogICAgYnwKICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6NzMKICAgIC8vIG5ldyBhcmM0LkR5bmFtaWNBcnJheShhZGRyZXNzTW9kKSwKICAgIHB1c2hieXRlcyAweDAwMDEKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo3MQogICAgLy8gVGVtcGxhdGVWYXI8dWludDY0PigiVkVSSUZJRVJfQVBQX0lEIiksCiAgICBpbnRjXzMgLy8gVE1QTF9WRVJJRklFUl9BUFBfSUQKICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6NzAtNzQKICAgIC8vIGNvbnN0IHZlcmlmaWVkID0gdGhpcy52ZXJpZnlQcm9vZigKICAgIC8vICAgVGVtcGxhdGVWYXI8dWludDY0PigiVkVSSUZJRVJfQVBQX0lEIiksCiAgICAvLyAgIHByb29mLAogICAgLy8gICBuZXcgYXJjNC5EeW5hbWljQXJyYXkoYWRkcmVzc01vZCksCiAgICAvLyApOwogICAgZGlnIDIKICAgIHVuY292ZXIgMgogICAgY2FsbHN1YiBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjpaa1doaXRlbGlzdENvbnRyYWN0LnZlcmlmeVByb29mCiAgICBwb3BuIDIKICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6NzUKICAgIC8vIGlmICghdmVyaWZpZWQubmF0aXZlKSB7CiAgICBpbnRjXzEgLy8gMAogICAgZ2V0Yml0CiAgICBibnogYWRkQWRkcmVzc1RvV2hpdGVsaXN0X2FmdGVyX2lmX2Vsc2VAMwogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo3NgogICAgLy8gcmV0dXJuIG5ldyBhcmM0LlN0cigiUHJvb2YgdmVyaWZpY2F0aW9uIGZhaWxlZCIpOwogICAgcHVzaGJ5dGVzIDB4MDAxOTUwNzI2ZjZmNjYyMDc2NjU3MjY5NjY2OTYzNjE3NDY5NmY2ZTIwNjY2MTY5NmM2NTY0CgphZGRBZGRyZXNzVG9XaGl0ZWxpc3RfYWZ0ZXJfaW5saW5lZF9jb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjpaa1doaXRlbGlzdENvbnRyYWN0LmFkZEFkZHJlc3NUb1doaXRlbGlzdEA2OgogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo1MQogICAgLy8gQGFiaW1ldGhvZCgpCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgphZGRBZGRyZXNzVG9XaGl0ZWxpc3RfYWZ0ZXJfaWZfZWxzZUAzOgogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo4MAogICAgLy8gaWYgKFR4bi5zZW5kZXIgIT09IGFjY291bnQpIHsKICAgIHR4biBTZW5kZXIKICAgIGRpZyAyCiAgICAhPQogICAgYnogYWRkQWRkcmVzc1RvV2hpdGVsaXN0X2FmdGVyX2lmX2Vsc2VANQogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo4MQogICAgLy8gcmV0dXJuIG5ldyBhcmM0LlN0cigiU2VuZGVyIGFkZHJlc3MgZG9lcyBub3QgbWF0Y2ggYXV0aG9yaXplZCBhZGRyZXNzIik7CiAgICBwdXNoYnl0ZXMgMHgwMDMwNTM2NTZlNjQ2NTcyMjA2MTY0NjQ3MjY1NzM3MzIwNjQ2ZjY1NzMyMDZlNmY3NDIwNmQ2MTc0NjM2ODIwNjE3NTc0Njg2ZjcyNjk3YTY1NjQyMDYxNjQ2NDcyNjU3MzczCiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjUxCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGIgYWRkQWRkcmVzc1RvV2hpdGVsaXN0X2FmdGVyX2lubGluZWRfY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo6WmtXaGl0ZWxpc3RDb250cmFjdC5hZGRBZGRyZXNzVG9XaGl0ZWxpc3RANgoKYWRkQWRkcmVzc1RvV2hpdGVsaXN0X2FmdGVyX2lmX2Vsc2VANToKICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6ODMKICAgIC8vIHRoaXMud2hpdGVMaXN0KGFjY291bnQpLnZhbHVlID0gdHJ1ZTsKICAgIGRpZyAxCiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjMxCiAgICAvLyB3aGl0ZUxpc3QgPSBMb2NhbFN0YXRlPGJvb2xlYW4+KCk7CiAgICBieXRlY18yIC8vICJ3aGl0ZUxpc3QiCiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjgzCiAgICAvLyB0aGlzLndoaXRlTGlzdChhY2NvdW50KS52YWx1ZSA9IHRydWU7CiAgICBpbnRjXzAgLy8gMQogICAgYXBwX2xvY2FsX3B1dAogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo4NAogICAgLy8gcmV0dXJuIG5ldyBhcmM0LlN0cigiIik7CiAgICBwdXNoYnl0ZXMgMHgwMDAwCiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjUxCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGIgYWRkQWRkcmVzc1RvV2hpdGVsaXN0X2FmdGVyX2lubGluZWRfY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo6WmtXaGl0ZWxpc3RDb250cmFjdC5hZGRBZGRyZXNzVG9XaGl0ZWxpc3RANgoKCi8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6OlprV2hpdGVsaXN0Q29udHJhY3QuaXNPbldoaXRlbGlzdFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmlzT25XaGl0ZWxpc3Q6CiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjg3CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo5MQogICAgLy8gY29uc3Qgb3B0ZWRJbiA9IG9wLmFwcE9wdGVkSW4oYWNjb3VudCwgR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbklkKTsKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25JRAogICAgYXBwX29wdGVkX2luCiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjkyCiAgICAvLyBpZiAoIW9wdGVkSW4pIHsKICAgIGJueiBpc09uV2hpdGVsaXN0X2FmdGVyX2lmX2Vsc2VAMwogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo5MwogICAgLy8gcmV0dXJuIG5ldyBhcmM0LkJvb2woZmFsc2UpOwogICAgYnl0ZWNfMyAvLyAweDAwCgppc09uV2hpdGVsaXN0X2FmdGVyX2lubGluZWRfY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo6WmtXaGl0ZWxpc3RDb250cmFjdC5pc09uV2hpdGVsaXN0QDQ6CiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjg3CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCmlzT25XaGl0ZWxpc3RfYWZ0ZXJfaWZfZWxzZUAzOgogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo5NQogICAgLy8gY29uc3Qgd2hpdGVsaXN0ZWQgPSB0aGlzLndoaXRlTGlzdChhY2NvdW50KS52YWx1ZTsKICAgIGR1cAogICAgaW50Y18xIC8vIDAKICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6MzEKICAgIC8vIHdoaXRlTGlzdCA9IExvY2FsU3RhdGU8Ym9vbGVhbj4oKTsKICAgIGJ5dGVjXzIgLy8gIndoaXRlTGlzdCIKICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6OTUKICAgIC8vIGNvbnN0IHdoaXRlbGlzdGVkID0gdGhpcy53aGl0ZUxpc3QoYWNjb3VudCkudmFsdWU7CiAgICBhcHBfbG9jYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgTG9jYWxTdGF0ZSBleGlzdHMKICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6OTYKICAgIC8vIHJldHVybiBuZXcgYXJjNC5Cb29sKHdoaXRlbGlzdGVkKTsKICAgIGJ5dGVjXzMgLy8gMHgwMAogICAgaW50Y18xIC8vIDAKICAgIHVuY292ZXIgMgogICAgc2V0Yml0CiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjg3CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGIgaXNPbldoaXRlbGlzdF9hZnRlcl9pbmxpbmVkX2NvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6OlprV2hpdGVsaXN0Q29udHJhY3QuaXNPbldoaXRlbGlzdEA0CgoKLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo6WmtXaGl0ZWxpc3RDb250cmFjdC52ZXJpZnlQcm9vZltyb3V0aW5nXSgpIC0+IHZvaWQ6CnZlcmlmeVByb29mOgogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo5OS0xMDMKICAgIC8vIHZlcmlmeVByb29mKAogICAgLy8gICBhcHBJZDogdWludDY0LAogICAgLy8gICBwcm9vZjogYXJjNC5EeW5hbWljQXJyYXk8YXJjNC5BZGRyZXNzPiwKICAgIC8vICAgcHVibGljSW5wdXRzOiBhcmM0LkR5bmFtaWNBcnJheTxhcmM0LkFkZHJlc3M+LAogICAgLy8gKTogYXJjNC5Cb29sIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGNhbGxzdWIgY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo6WmtXaGl0ZWxpc3RDb250cmFjdC52ZXJpZnlQcm9vZgogICAgcG9wbiAyCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czo6WmtXaGl0ZWxpc3RDb250cmFjdC52ZXJpZnlQcm9vZihhcHBJZDogdWludDY0LCBwcm9vZjogYnl0ZXMsIHB1YmxpY0lucHV0czogYnl0ZXMpIC0+IGJ5dGVzLCBieXRlcywgYnl0ZXM6CmNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6OlprV2hpdGVsaXN0Q29udHJhY3QudmVyaWZ5UHJvb2Y6CiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjk5LTEwMwogICAgLy8gdmVyaWZ5UHJvb2YoCiAgICAvLyAgIGFwcElkOiB1aW50NjQsCiAgICAvLyAgIHByb29mOiBhcmM0LkR5bmFtaWNBcnJheTxhcmM0LkFkZHJlc3M+LAogICAgLy8gICBwdWJsaWNJbnB1dHM6IGFyYzQuRHluYW1pY0FycmF5PGFyYzQuQWRkcmVzcz4sCiAgICAvLyApOiBhcmM0LkJvb2wgewogICAgcHJvdG8gMyAzCiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjEwNS0xMTYKICAgIC8vIGNvbnN0IHZlcmlmaWVkID0gaXR4bgogICAgLy8gICAuYXBwbGljYXRpb25DYWxsKHsKICAgIC8vICAgICBhcHBJZDogYXBwSWQsCiAgICAvLyAgICAgZmVlOiAwLAogICAgLy8gICAgIGFwcEFyZ3M6IFsKICAgIC8vICAgICAgIGFyYzQubWV0aG9kU2VsZWN0b3IoInZlcmlmeShieXRlWzMyXVtdLGJ5dGVbMzJdW10pYm9vbCIpLAogICAgLy8gICAgICAgY2xvbmUocHJvb2YpLAogICAgLy8gICAgICAgY2xvbmUocHVibGljSW5wdXRzKSwKICAgIC8vICAgICBdLAogICAgLy8gICAgIG9uQ29tcGxldGlvbjogT25Db21wbGV0ZUFjdGlvbi5Ob09wLAogICAgLy8gICB9KQogICAgLy8gICAuc3VibWl0KCkubGFzdExvZzsKICAgIGl0eG5fYmVnaW4KICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6MTE0CiAgICAvLyBvbkNvbXBsZXRpb246IE9uQ29tcGxldGVBY3Rpb24uTm9PcCwKICAgIGludGNfMSAvLyAwCiAgICBpdHhuX2ZpZWxkIE9uQ29tcGxldGlvbgogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czoxMTAKICAgIC8vIGFyYzQubWV0aG9kU2VsZWN0b3IoInZlcmlmeShieXRlWzMyXVtdLGJ5dGVbMzJdW10pYm9vbCIpLAogICAgcHVzaGJ5dGVzIDB4OGEzY2VjN2EgLy8gbWV0aG9kICJ2ZXJpZnkoYnl0ZVszMl1bXSxieXRlWzMyXVtdKWJvb2wiCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgZnJhbWVfZGlnIC0yCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgZnJhbWVfZGlnIC0xCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgZnJhbWVfZGlnIC0zCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6MTA1LTExNQogICAgLy8gY29uc3QgdmVyaWZpZWQgPSBpdHhuCiAgICAvLyAgIC5hcHBsaWNhdGlvbkNhbGwoewogICAgLy8gICAgIGFwcElkOiBhcHBJZCwKICAgIC8vICAgICBmZWU6IDAsCiAgICAvLyAgICAgYXBwQXJnczogWwogICAgLy8gICAgICAgYXJjNC5tZXRob2RTZWxlY3RvcigidmVyaWZ5KGJ5dGVbMzJdW10sYnl0ZVszMl1bXSlib29sIiksCiAgICAvLyAgICAgICBjbG9uZShwcm9vZiksCiAgICAvLyAgICAgICBjbG9uZShwdWJsaWNJbnB1dHMpLAogICAgLy8gICAgIF0sCiAgICAvLyAgICAgb25Db21wbGV0aW9uOiBPbkNvbXBsZXRlQWN0aW9uLk5vT3AsCiAgICAvLyAgIH0pCiAgICBpbnRjXzIgLy8gNgogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czoxMDgKICAgIC8vIGZlZTogMCwKICAgIGludGNfMSAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czoxMDUtMTE2CiAgICAvLyBjb25zdCB2ZXJpZmllZCA9IGl0eG4KICAgIC8vICAgLmFwcGxpY2F0aW9uQ2FsbCh7CiAgICAvLyAgICAgYXBwSWQ6IGFwcElkLAogICAgLy8gICAgIGZlZTogMCwKICAgIC8vICAgICBhcHBBcmdzOiBbCiAgICAvLyAgICAgICBhcmM0Lm1ldGhvZFNlbGVjdG9yKCJ2ZXJpZnkoYnl0ZVszMl1bXSxieXRlWzMyXVtdKWJvb2wiKSwKICAgIC8vICAgICAgIGNsb25lKHByb29mKSwKICAgIC8vICAgICAgIGNsb25lKHB1YmxpY0lucHV0cyksCiAgICAvLyAgICAgXSwKICAgIC8vICAgICBvbkNvbXBsZXRpb246IE9uQ29tcGxldGVBY3Rpb24uTm9PcCwKICAgIC8vICAgfSkKICAgIC8vICAgLnN1Ym1pdCgpLmxhc3RMb2c7CiAgICBpdHhuX3N1Ym1pdAogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czoxMTYKICAgIC8vIC5zdWJtaXQoKS5sYXN0TG9nOwogICAgaXR4biBMYXN0TG9nCiAgICAvLyBjb250cmFjdHMvemstd2hpdGVsaXN0L3prLXdoaXRlbGlzdC5hbGdvLnRzOjExNy0xMjAKICAgIC8vIHJldHVybiBhcmM0LmNvbnZlcnRCeXRlczxhcmM0LkJvb2w+KHZlcmlmaWVkLCB7CiAgICAvLyAgIHByZWZpeDogImxvZyIsCiAgICAvLyAgIHN0cmF0ZWd5OiAidW5zYWZlLWNhc3QiLAogICAgLy8gfSk7CiAgICBkdXAKICAgIGV4dHJhY3QgNCAwCiAgICBzd2FwCiAgICBleHRyYWN0IDAgNAogICAgLy8gY29udHJhY3RzL3prLXdoaXRlbGlzdC96ay13aGl0ZWxpc3QuYWxnby50czoxMTgKICAgIC8vIHByZWZpeDogImxvZyIsCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIC8vIGNvbnRyYWN0cy96ay13aGl0ZWxpc3Qvemstd2hpdGVsaXN0LmFsZ28udHM6MTE3LTEyMAogICAgLy8gcmV0dXJuIGFyYzQuY29udmVydEJ5dGVzPGFyYzQuQm9vbD4odmVyaWZpZWQsIHsKICAgIC8vICAgcHJlZml4OiAibG9nIiwKICAgIC8vICAgc3RyYXRlZ3k6ICJ1bnNhZmUtY2FzdCIsCiAgICAvLyB9KTsKICAgID09CiAgICBhc3NlcnQgLy8gQnl0ZXMgaGFzIHZhbGlkIHByZWZpeAogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9kaWcgLTEKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiAEAQAGACYEBBUffHUDBoEBCXdoaXRlTGlzdAEAggIEoOgYcgSTAKriNhoAjgIAPgA0MRkURDEYQQAdggMEy3fAegRRdjfGBPEHc/E2GgCOAwA8AQ0BKwCABCDfOlQ2GgCOAQAZACIxGZAkGjEYEEMiMRmQgTAaMRgQREIAD4AHYXBwTmFtZTYaAWciQzIJMQASQzYaATYaAoHy7AgyDA1BABWxJLIQgQWyGSmyHimyHyOyAbNC/+GBIK9LAoAgMGROcuExoCm4UEW2gYFYXSgz6Eh5uXCRQ+H1k/AAAAGqq4ACAAFMUCVLAk8CiACoRgIjU0AAI4AbABlQcm9vZiB2ZXJpZmljYXRpb24gZmFpbGVkKExQsCJDMQBLAhNBADeAMgAwU2VuZGVyIGFkZHJlc3MgZG9lcyBub3QgbWF0Y2ggYXV0aG9yaXplZCBhZGRyZXNzQv+7SwEqImaAAgAAQv+vNhoBSTIIYUAABysoTFCwIkNJIypjRCsjTwJUQv/tNhoBFzYaAjYaA4gACEYCKExQsCJDigMDsSOyGYAEijzserIai/6yGov/shqL/bIYJLIQI7IBs7Q+SVcEAExXAAQoEkSL/ov/iQ==","clear":"CoEBQw=="},"events":[],"templateVariables":{"VERIFIER_APP_ID":{"type":"AVMUint64"}}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -61,6 +61,13 @@ export type Expand<T> = T extends (...args: infer A) => infer R
     ? { [K in keyof O]: O[K] }
     : never
 
+
+/**
+ * Deploy-time template variables
+ */
+export type TemplateVariables = {
+  VERIFIER_APP_ID: bigint,
+}
 
 /**
  * The argument types for the ZkWhitelistContract contract
@@ -208,11 +215,137 @@ export type GlobalKeysState = ZkWhitelistContractTypes['state']['global']['keys'
 export type LocalKeysState = ZkWhitelistContractTypes['state']['local']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ZkWhitelistContractCreateCallParams =
+  | Expand<CallParams<ZkWhitelistContractArgs['obj']['create(string)void'] | ZkWhitelistContractArgs['tuple']['create(string)void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<ZkWhitelistContractArgs['obj']['create(string)void'] | ZkWhitelistContractArgs['tuple']['create(string)void']> & {method: 'create(string)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type ZkWhitelistContractUpdateCallParams =
+  | Expand<CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> & {method: 'update'}>
+  | Expand<CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> & {method: 'update()void'}>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type ZkWhitelistContractDeleteCallParams =
+  | Expand<CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> & {method: 'update'}>
+  | Expand<CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> & {method: 'update()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ZkWhitelistContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ZkWhitelistContractCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: ZkWhitelistContractUpdateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: ZkWhitelistContractDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ZkWhitelistContract smart contract
  */
 export abstract class ZkWhitelistContractParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends ZkWhitelistContractCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(string)void':
+            return ZkWhitelistContractParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the ZkWhitelistContract smart contract using the create(string)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<ZkWhitelistContractArgs['obj']['create(string)void'] | ZkWhitelistContractArgs['tuple']['create(string)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(string)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.name],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends ZkWhitelistContractUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'update':
+          case 'update()void':
+            return ZkWhitelistContractParamsFactory.update.update(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the ZkWhitelistContract smart contract using the update()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      update(params: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'update()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends ZkWhitelistContractDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'update':
+          case 'update()void':
+            return ZkWhitelistContractParamsFactory.delete.update(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the ZkWhitelistContract smart contract using the update()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      update(params: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'update()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Gets available optIn ABI call param factories
    */
@@ -296,6 +429,180 @@ export abstract class ZkWhitelistContractParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ZkWhitelistContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ZkWhitelistContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ZkWhitelistContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ZkWhitelistContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ZkWhitelistContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ZkWhitelistContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ZkWhitelistContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? ZkWhitelistContractParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (ZkWhitelistContractCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? ZkWhitelistContractParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (ZkWhitelistContractUpdateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? ZkWhitelistContractParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (ZkWhitelistContractDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new ZkWhitelistContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ZkWhitelistContract smart contract using the create(string)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<ZkWhitelistContractArgs['obj']['create(string)void'] | ZkWhitelistContractArgs['tuple']['create(string)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(ZkWhitelistContractParamsFactory.create.create(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the ZkWhitelistContract smart contract using the update()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      update: (params: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(ZkWhitelistContractParamsFactory.update.update(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the ZkWhitelistContract smart contract using the update()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      update: (params: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(ZkWhitelistContractParamsFactory.delete.update(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ZkWhitelistContract smart contract using the create(string)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<ZkWhitelistContractArgs['obj']['create(string)void'] | ZkWhitelistContractArgs['tuple']['create(string)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(ZkWhitelistContractParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ZkWhitelistContract smart contract using an ABI method call using the create(string)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<ZkWhitelistContractArgs['obj']['create(string)void'] | ZkWhitelistContractArgs['tuple']['create(string)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(ZkWhitelistContractParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | ZkWhitelistContractReturns['create(string)void']) }, appClient: new ZkWhitelistContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ZkWhitelistContract smart contract
  */
@@ -384,6 +691,38 @@ export class ZkWhitelistContractClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the ZkWhitelistContract smart contract using the `update()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      update: (params: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(ZkWhitelistContractParamsFactory.update.update(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the ZkWhitelistContract smart contract using the `update()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      update: (params: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> = {args: []}) => {
+        return this.appClient.params.delete(ZkWhitelistContractParamsFactory.delete.update(params))
+      },
+
+    },
+
+    /**
      * Gets available optIn methods
      */
     optIn: {
@@ -462,6 +801,38 @@ export class ZkWhitelistContractClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the ZkWhitelistContract smart contract using the `update()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      update: (params: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(ZkWhitelistContractParamsFactory.update.update(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the ZkWhitelistContract smart contract using the `update()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      update: (params: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(ZkWhitelistContractParamsFactory.delete.update(params))
+      },
+
+    },
+
+    /**
      * Gets available optIn methods
      */
     optIn: {
@@ -539,6 +910,40 @@ export class ZkWhitelistContractClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the ZkWhitelistContract smart contract using the `update()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      update: async (params: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(ZkWhitelistContractParamsFactory.update.update(params))
+        return {...result, return: result.return as unknown as (undefined | ZkWhitelistContractReturns['update()void'])}
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the ZkWhitelistContract smart contract using the `update()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      update: async (params: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(ZkWhitelistContractParamsFactory.delete.update(params))
+        return {...result, return: result.return as unknown as (undefined | ZkWhitelistContractReturns['update()void'])}
+      },
+
+    },
+
     /**
      * Gets available optIn methods
      */
@@ -703,6 +1108,24 @@ export class ZkWhitelistContractClient {
         resultMappers.push((v) => client.decodeReturnValue('verifyProof(uint64,address[],address[])bool', v))
         return this
       },
+      get update() {
+        return {
+          update: (params: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.update(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
+      get delete() {
+        return {
+          update: (params: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.update(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       get optIn() {
         return {
           optInOrOut: (params: CallParams<ZkWhitelistContractArgs['obj']['optInOrOut()void'] | ZkWhitelistContractArgs['tuple']['optInOrOut()void']>) => {
@@ -782,6 +1205,34 @@ export type ZkWhitelistContractComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   verifyProof(params?: CallParams<ZkWhitelistContractArgs['obj']['verifyProof(uint64,address[],address[])bool'] | ZkWhitelistContractArgs['tuple']['verifyProof(uint64,address[],address[])bool']>): ZkWhitelistContractComposer<[...TReturns, ZkWhitelistContractReturns['verifyProof(uint64,address[],address[])bool'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the ZkWhitelistContract smart contract using the update()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    update(params?: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']>): ZkWhitelistContractComposer<[...TReturns, ZkWhitelistContractReturns['update()void'] | undefined]>
+  }
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the ZkWhitelistContract smart contract using the update()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    update(params?: CallParams<ZkWhitelistContractArgs['obj']['update()void'] | ZkWhitelistContractArgs['tuple']['update()void']>): ZkWhitelistContractComposer<[...TReturns, ZkWhitelistContractReturns['update()void'] | undefined]>
+  }
 
   /**
    * Gets available optIn methods
