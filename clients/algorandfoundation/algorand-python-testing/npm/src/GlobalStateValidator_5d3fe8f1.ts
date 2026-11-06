@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"GlobalStateValidator","structs":{},"methods":[{"name":"validate_g_args","args":[{"type":"uint64","name":"arg1"},{"type":"string","name":"arg2"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[72],"errorMessage":"transaction type is appl"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"GlobalStateValidator","structs":{},"methods":[{"name":"validate_g_args","args":[{"type":"uint64","name":"arg1"},{"type":"string","name":"arg2"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[72],"errorMessage":"transaction type is appl"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGJ5dGVjYmxvY2sgMHhjMGViNWM2NwogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL0dsb2JhbFN0YXRlVmFsaWRhdG9yL2NvbnRyYWN0LnB5OjQKICAgIC8vIGNsYXNzIEdsb2JhbFN0YXRlVmFsaWRhdG9yKEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA1CiAgICBieXRlY18wIC8vIG1ldGhvZCAidmFsaWRhdGVfZ19hcmdzKHVpbnQ2NCxzdHJpbmcpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdmFsaWRhdGVfZ19hcmdzX3JvdXRlQDMKICAgIGVycgoKbWFpbl92YWxpZGF0ZV9nX2FyZ3Nfcm91dGVAMzoKICAgIC8vIHRlc3RzL2FydGlmYWN0cy9HbG9iYWxTdGF0ZVZhbGlkYXRvci9jb250cmFjdC5weTo1CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0CiAgICBiIHZhbGlkYXRlX2dfYXJncwoKbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA1OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0cy5hcnRpZmFjdHMuR2xvYmFsU3RhdGVWYWxpZGF0b3IuY29udHJhY3QuR2xvYmFsU3RhdGVWYWxpZGF0b3IudmFsaWRhdGVfZ19hcmdzW3JvdXRpbmddKCkgLT4gdm9pZDoKdmFsaWRhdGVfZ19hcmdzOgogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL0dsb2JhbFN0YXRlVmFsaWRhdG9yL2NvbnRyYWN0LnB5OjUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL0dsb2JhbFN0YXRlVmFsaWRhdG9yL2NvbnRyYWN0LnB5OjcKICAgIC8vIGFzc2VydCBUeG4uYXBwbGljYXRpb25fYXJncygwKSA9PSBhcmM0LmFyYzRfc2lnbmF0dXJlKCJ2YWxpZGF0ZV9nX2FyZ3ModWludDY0LHN0cmluZyl2b2lkIikKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIGJ5dGVjXzAgLy8gbWV0aG9kICJ2YWxpZGF0ZV9nX2FyZ3ModWludDY0LHN0cmluZyl2b2lkIgogICAgPT0KICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL0dsb2JhbFN0YXRlVmFsaWRhdG9yL2NvbnRyYWN0LnB5OjgKICAgIC8vIGFzc2VydCBUeG4uYXBwbGljYXRpb25fYXJncygxKSA9PSBhcmcxLmJ5dGVzCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkaWcgMgogICAgPT0KICAgIGFzc2VydAogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL0dsb2JhbFN0YXRlVmFsaWRhdG9yL2NvbnRyYWN0LnB5OjkKICAgIC8vIGFzc2VydCBUeG4uYXBwbGljYXRpb25fYXJncygyKSA9PSBhcmcyLmJ5dGVzCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcnRpZmFjdHMvR2xvYmFsU3RhdGVWYWxpZGF0b3IvY29udHJhY3QucHk6MTAKICAgIC8vIGFzc2VydCBndHhuLkFwcGxpY2F0aW9uQ2FsbFRyYW5zYWN0aW9uKFR4bi5ncm91cF9pbmRleCkuYXBwX2FyZ3MoMSkgPT0gYXJnMS5ieXRlcwogICAgdHhuIEdyb3VwSW5kZXgKICAgIGR1cAogICAgZ3R4bnMgVHlwZUVudW0KICAgIHB1c2hpbnQgNiAvLyBhcHBsCiAgICA9PQogICAgYXNzZXJ0IC8vIHRyYW5zYWN0aW9uIHR5cGUgaXMgYXBwbAogICAgcHVzaGludCAxCiAgICBndHhuc2FzIEFwcGxpY2F0aW9uQXJncwogICAgZGlnIDEKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FydGlmYWN0cy9HbG9iYWxTdGF0ZVZhbGlkYXRvci9jb250cmFjdC5weToxMQogICAgLy8gYXNzZXJ0IGd0eG4uVHJhbnNhY3Rpb24oVHhuLmdyb3VwX2luZGV4KS5hcHBfYXJncygxKSA9PSBhcmcxLmJ5dGVzCiAgICB0eG4gR3JvdXBJbmRleAogICAgcHVzaGludCAxCiAgICBndHhuc2FzIEFwcGxpY2F0aW9uQXJncwogICAgZGlnIDEKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHRlc3RzL2FydGlmYWN0cy9HbG9iYWxTdGF0ZVZhbGlkYXRvci9jb250cmFjdC5weToxMgogICAgLy8gYXNzZXJ0IG9wLkdUeG4uYXBwbGljYXRpb25fYXJncyhUeG4uZ3JvdXBfaW5kZXgsIDEpID09IGFyZzEuYnl0ZXMKICAgIHR4biBHcm91cEluZGV4CiAgICBndHhuc2EgQXBwbGljYXRpb25BcmdzIDEKICAgIGRpZyAxCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcnRpZmFjdHMvR2xvYmFsU3RhdGVWYWxpZGF0b3IvY29udHJhY3QucHk6MTMKICAgIC8vIGFzc2VydCBvcC5UeG4uYXBwbGljYXRpb25fYXJncygxKSA9PSBhcmcxLmJ5dGVzCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyB0ZXN0cy9hcnRpZmFjdHMvR2xvYmFsU3RhdGVWYWxpZGF0b3IvY29udHJhY3QucHk6NQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBwdXNoaW50IDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyYBBMDrXGcxG0EAEyg2GgCOAQABADEZFDEYEERCAAgxGRQxGBQQQzYaATYaAjYaACgSRDYaAUsCEkQ2GgISRDEWSTgQgQYSRIEBwhpLARJEMRaBAcIaSwESRDEWORoBSwESRDYaARJEgQFD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -129,6 +129,21 @@ export type MethodArgs<TSignature extends GlobalStateValidatorSignatures> = Glob
 export type MethodReturn<TSignature extends GlobalStateValidatorSignatures> = GlobalStateValidatorTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type GlobalStateValidatorCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type GlobalStateValidatorDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: GlobalStateValidatorCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the GlobalStateValidator smart contract
@@ -149,6 +164,147 @@ export abstract class GlobalStateValidatorParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the GlobalStateValidator smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class GlobalStateValidatorFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `GlobalStateValidatorFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new GlobalStateValidatorClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new GlobalStateValidatorClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the GlobalStateValidator smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: GlobalStateValidatorDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new GlobalStateValidatorClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the GlobalStateValidator smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the GlobalStateValidator smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the GlobalStateValidator smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new GlobalStateValidatorClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the GlobalStateValidator smart contract
  */

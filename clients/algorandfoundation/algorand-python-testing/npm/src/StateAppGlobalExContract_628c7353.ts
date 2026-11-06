@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"StateAppGlobalExContract","structs":{},"methods":[],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":2,"bytes":5},"local":{"ints":0,"bytes":0}},"keys":{"global":{"global_uint64":{"keyType":"AVMString","valueType":"AVMUint64","key":"Z2xvYmFsX3VpbnQ2NA=="},"global_bytes":{"keyType":"AVMString","valueType":"AVMBytes","key":"Z2xvYmFsX2J5dGVz"},"global_uint64_explicit":{"keyType":"AVMString","valueType":"AVMUint64","key":"Z2xvYmFsX3VpbnQ2NF9leHBsaWNpdA=="},"global_bytes_explicit":{"keyType":"AVMString","valueType":"AVMBytes","key":"Z2xvYmFsX2J5dGVzX2V4cGxpY2l0"},"global_arc4_bytes":{"keyType":"AVMString","valueType":"byte[]","key":"Z2xvYmFsX2FyYzRfYnl0ZXM="},"global_arc4_bytes_explicit":{"keyType":"AVMString","valueType":"byte[]","key":"Z2xvYmFsX2FyYzRfYnl0ZXNfZXhwbGljaXQ="},"global_tuple":{"keyType":"AVMString","valueType":"(uint64,uint64)","key":"Z2xvYmFsX3R1cGxl"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"StateAppGlobalExContract","structs":{},"methods":[],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":2,"bytes":5},"local":{"ints":0,"bytes":0}},"keys":{"global":{"global_uint64":{"keyType":"AVMString","valueType":"AVMUint64","key":"Z2xvYmFsX3VpbnQ2NA=="},"global_bytes":{"keyType":"AVMString","valueType":"AVMBytes","key":"Z2xvYmFsX2J5dGVz"},"global_uint64_explicit":{"keyType":"AVMString","valueType":"AVMUint64","key":"Z2xvYmFsX3VpbnQ2NF9leHBsaWNpdA=="},"global_bytes_explicit":{"keyType":"AVMString","valueType":"AVMBytes","key":"Z2xvYmFsX2J5dGVzX2V4cGxpY2l0"},"global_arc4_bytes":{"keyType":"AVMString","valueType":"byte[]","key":"Z2xvYmFsX2FyYzRfYnl0ZXM="},"global_arc4_bytes_explicit":{"keyType":"AVMString","valueType":"byte[]","key":"Z2xvYmFsX2FyYzRfYnl0ZXNfZXhwbGljaXQ="},"global_tuple":{"keyType":"AVMString","valueType":"(uint64,uint64)","key":"Z2xvYmFsX3R1cGxl"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGJ5dGVjYmxvY2sgMHg2NDc1NmQ2ZDc5NWY2Mjc5NzQ2NTczIDB4MDAxMDY0NzU2ZDZkNzk1ZjYxNzI2MzM0NWY2Mjc5NzQ2NTczCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyB0ZXN0cy9hcnRpZmFjdHMvU3RhdGVPcHMvY29udHJhY3QucHk6NDM0CiAgICAvLyBrZXk9Imdsb2JhbF91aW50NjQiLAogICAgcHVzaGJ5dGVzICJnbG9iYWxfdWludDY0IgogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL1N0YXRlT3BzL2NvbnRyYWN0LnB5OjQzMwogICAgLy8gVUludDY0KDIpLAogICAgcHVzaGludCAyCiAgICAvLyB0ZXN0cy9hcnRpZmFjdHMvU3RhdGVPcHMvY29udHJhY3QucHk6NDMyLTQzNQogICAgLy8gc2VsZi5nbG9iYWxfdWludDY0ID0gR2xvYmFsU3RhdGUoCiAgICAvLyAgICAgVUludDY0KDIpLAogICAgLy8gICAgIGtleT0iZ2xvYmFsX3VpbnQ2NCIsCiAgICAvLyApCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL1N0YXRlT3BzL2NvbnRyYWN0LnB5OjQzOAogICAgLy8ga2V5PSJnbG9iYWxfYnl0ZXMiLAogICAgcHVzaGJ5dGVzICJnbG9iYWxfYnl0ZXMiCiAgICAvLyB0ZXN0cy9hcnRpZmFjdHMvU3RhdGVPcHMvY29udHJhY3QucHk6NDM3CiAgICAvLyBCeXRlcyhiImR1bW15X2J5dGVzIiksCiAgICBieXRlY18wIC8vIDB4NjQ3NTZkNmQ3OTVmNjI3OTc0NjU3MwogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL1N0YXRlT3BzL2NvbnRyYWN0LnB5OjQzNi00MzkKICAgIC8vIHNlbGYuZ2xvYmFsX2J5dGVzID0gR2xvYmFsU3RhdGUoCiAgICAvLyAgICAgQnl0ZXMoYiJkdW1teV9ieXRlcyIpLAogICAgLy8gICAgIGtleT0iZ2xvYmFsX2J5dGVzIiwKICAgIC8vICkKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcnRpZmFjdHMvU3RhdGVPcHMvY29udHJhY3QucHk6NDQwCiAgICAvLyBzZWxmLmdsb2JhbF91aW50NjRfZXhwbGljaXQgPSBhbGdvcHkuVUludDY0KDIpCiAgICBwdXNoYnl0ZXMgImdsb2JhbF91aW50NjRfZXhwbGljaXQiCiAgICBwdXNoaW50IDIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcnRpZmFjdHMvU3RhdGVPcHMvY29udHJhY3QucHk6NDQxCiAgICAvLyBzZWxmLmdsb2JhbF9ieXRlc19leHBsaWNpdCA9IGFsZ29weS5CeXRlcyhiImR1bW15X2J5dGVzIikKICAgIHB1c2hieXRlcyAiZ2xvYmFsX2J5dGVzX2V4cGxpY2l0IgogICAgYnl0ZWNfMCAvLyAweDY0NzU2ZDZkNzk1ZjYyNzk3NDY1NzMKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcnRpZmFjdHMvU3RhdGVPcHMvY29udHJhY3QucHk6NDQzCiAgICAvLyBhbGdvcHkuYXJjNC5EeW5hbWljQnl0ZXMoYiJkdW1teV9hcmM0X2J5dGVzIiksIGtleT0iZ2xvYmFsX2FyYzRfYnl0ZXMiCiAgICBwdXNoYnl0ZXMgImdsb2JhbF9hcmM0X2J5dGVzIgogICAgYnl0ZWNfMSAvLyAweDAwMTA2NDc1NmQ2ZDc5NWY2MTcyNjMzNDVmNjI3OTc0NjU3MwogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL1N0YXRlT3BzL2NvbnRyYWN0LnB5OjQ0Mi00NDQKICAgIC8vIHNlbGYuZ2xvYmFsX2FyYzRfYnl0ZXMgPSBHbG9iYWxTdGF0ZSgKICAgIC8vICAgICBhbGdvcHkuYXJjNC5EeW5hbWljQnl0ZXMoYiJkdW1teV9hcmM0X2J5dGVzIiksIGtleT0iZ2xvYmFsX2FyYzRfYnl0ZXMiCiAgICAvLyApCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL1N0YXRlT3BzL2NvbnRyYWN0LnB5OjQ0NQogICAgLy8gc2VsZi5nbG9iYWxfYXJjNF9ieXRlc19leHBsaWNpdCA9IGFsZ29weS5hcmM0LkR5bmFtaWNCeXRlcyhiImR1bW15X2FyYzRfYnl0ZXMiKQogICAgcHVzaGJ5dGVzICJnbG9iYWxfYXJjNF9ieXRlc19leHBsaWNpdCIKICAgIC8vIHRlc3RzL2FydGlmYWN0cy9TdGF0ZU9wcy9jb250cmFjdC5weTo0NDMKICAgIC8vIGFsZ29weS5hcmM0LkR5bmFtaWNCeXRlcyhiImR1bW15X2FyYzRfYnl0ZXMiKSwga2V5PSJnbG9iYWxfYXJjNF9ieXRlcyIKICAgIGJ5dGVjXzEgLy8gMHgwMDEwNjQ3NTZkNmQ3OTVmNjE3MjYzMzQ1ZjYyNzk3NDY1NzMKICAgIC8vIHRlc3RzL2FydGlmYWN0cy9TdGF0ZU9wcy9jb250cmFjdC5weTo0NDUKICAgIC8vIHNlbGYuZ2xvYmFsX2FyYzRfYnl0ZXNfZXhwbGljaXQgPSBhbGdvcHkuYXJjNC5EeW5hbWljQnl0ZXMoYiJkdW1teV9hcmM0X2J5dGVzIikKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyB0ZXN0cy9hcnRpZmFjdHMvU3RhdGVPcHMvY29udHJhY3QucHk6NDQ2CiAgICAvLyBzZWxmLmdsb2JhbF90dXBsZSA9IChVSW50NjQoMCksIFVJbnQ2NCgxKSkKICAgIHB1c2hieXRlc3MgImdsb2JhbF90dXBsZSIgMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMQogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gdGVzdHMvYXJ0aWZhY3RzL1N0YXRlT3BzL2NvbnRyYWN0LnB5OjQzMAogICAgLy8gY2xhc3MgU3RhdGVBcHBHbG9iYWxFeENvbnRyYWN0KEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyYCC2R1bW15X2J5dGVzEgAQZHVtbXlfYXJjNF9ieXRlczEYQACqgA1nbG9iYWxfdWludDY0gQJngAxnbG9iYWxfYnl0ZXMoZ4AWZ2xvYmFsX3VpbnQ2NF9leHBsaWNpdIECZ4AVZ2xvYmFsX2J5dGVzX2V4cGxpY2l0KGeAEWdsb2JhbF9hcmM0X2J5dGVzKWeAGmdsb2JhbF9hcmM0X2J5dGVzX2V4cGxpY2l0KWeCAgxnbG9iYWxfdHVwbGUQAAAAAAAAAAAAAAAAAAAAAWcxGxREMRkUMRgUEEM=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -140,6 +140,21 @@ export type MethodReturn<TSignature extends StateAppGlobalExContractSignatures> 
 export type GlobalKeysState = StateAppGlobalExContractTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type StateAppGlobalExContractCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type StateAppGlobalExContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: StateAppGlobalExContractCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the StateAppGlobalExContract smart contract
@@ -147,6 +162,147 @@ export type GlobalKeysState = StateAppGlobalExContractTypes['state']['global']['
 export abstract class StateAppGlobalExContractParamsFactory {
 }
 
+/**
+ * A factory to create and deploy one or more instance of the StateAppGlobalExContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class StateAppGlobalExContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `StateAppGlobalExContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new StateAppGlobalExContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new StateAppGlobalExContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the StateAppGlobalExContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: StateAppGlobalExContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new StateAppGlobalExContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the StateAppGlobalExContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the StateAppGlobalExContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the StateAppGlobalExContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new StateAppGlobalExContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the StateAppGlobalExContract smart contract
  */
