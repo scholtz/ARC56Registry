@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"arcs":[22,28,56],"name":"Vault","desc":"A vault contract exercising the full ARC-56 schema","networks":{"wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8=":{"appID":1001},"SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=":{"appID":2002}},"structs":{"Pair":[{"name":"first","type":"uint64"},{"name":"second","type":"uint64"}],"Outer":[{"name":"inner","type":[{"name":"a","type":"uint64"}]}]},"methods":[{"name":"store","desc":"Store a pair scaled by a factor","args":[{"type":"(uint64,uint64)","struct":"Pair","name":"p"},{"type":"uint64","name":"factor","defaultValue":{"source":"literal","data":"AAAAAAAAAAE=","type":"uint64"}}],"returns":{"type":"(uint64,uint64)","struct":"Pair","desc":"the stored pair"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{"innerTransactionCount":1,"boxes":{"key":"Ym94","readBytes":100,"writeBytes":100},"apps":[123],"accounts":[],"assets":[]}},{"name":"get_total","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true}],"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"total":{"keyType":"AVMString","valueType":"uint64","key":"dG90YWw="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"balances":{"keyType":"address","valueType":"uint64","prefix":"Yg=="}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[0,1],"errorMessage":"assert failed","teal":5}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[{"name":"Stored","desc":"emitted on store","args":[{"type":"uint64","name":"value"}]}]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"arcs":[22,28,56],"name":"Vault","desc":"A vault contract exercising the full ARC-56 schema","networks":{"wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8=":{"appID":1001},"SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=":{"appID":2002}},"structs":{"Pair":[{"name":"first","type":"uint64"},{"name":"second","type":"uint64"}],"Outer":[{"name":"inner","type":[{"name":"a","type":"uint64"}]}]},"methods":[{"name":"store","desc":"Store a pair scaled by a factor","args":[{"type":"(uint64,uint64)","struct":"Pair","name":"p"},{"type":"uint64","name":"factor","defaultValue":{"source":"literal","data":"AAAAAAAAAAE=","type":"uint64"}}],"returns":{"type":"(uint64,uint64)","struct":"Pair","desc":"the stored pair"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{"innerTransactionCount":1,"boxes":{"key":"Ym94","readBytes":100,"writeBytes":100},"apps":[123],"accounts":[],"assets":[]}},{"name":"get_total","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true}],"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"total":{"keyType":"AVMString","valueType":"uint64","key":"dG90YWw="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"balances":{"keyType":"address","valueType":"uint64","prefix":"Yg=="}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[0,1],"errorMessage":"assert failed","teal":5}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYQ==","clear":"I3ByYWdtYQ=="},"byteCode":{"approval":"AQ==","clear":"AQ=="},"events":[{"name":"Stored","desc":"emitted on store","args":[{"type":"uint64","name":"value"}]}],"templateVariables":{"TMPL_OWNER":{"type":"address"}},"scratchVariables":{"counter":{"slot":0,"type":"uint64"}}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -89,6 +89,13 @@ export type Outer = {
  */
 export function OuterFromTuple(abiTuple: [[bigint]]) {
   return getABIStructFromABITuple(abiTuple, APP_SPEC.structs.Outer, APP_SPEC.structs) as Outer
+}
+
+/**
+ * Deploy-time template variables
+ */
+export type TemplateVariables = {
+  TMPL_OWNER: string,
 }
 
 /**
@@ -200,6 +207,21 @@ export type GlobalKeysState = VaultTypes['state']['global']['keys']
 export type BoxKeysState = VaultTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type VaultCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type VaultDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: VaultCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Vault smart contract
@@ -235,6 +257,147 @@ export abstract class VaultParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Vault smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class VaultFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `VaultFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new VaultClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new VaultClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Vault smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: VaultDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new VaultClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Vault smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Vault smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Vault smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new VaultClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Vault smart contract
  */

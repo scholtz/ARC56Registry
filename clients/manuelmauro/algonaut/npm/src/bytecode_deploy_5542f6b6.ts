@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"arcs":[22,28,56],"name":"ByteCodeDeploy","desc":"A synthetic ARC-56 spec that ships only precompiled byteCode (no TEAL source) and is created through an ABI createApplication method with typed constructor arguments. Exercises the byteCode-only deploy path and create-method constructor parameters offline.","structs":{},"methods":[{"name":"createApplication","desc":"Create the app with an initial owner and seed amount.","args":[{"name":"owner","type":"address"},{"name":"seed","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"ping","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}}],"events":[],"state":{"schema":{"global":{"ints":2,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"arcs":[22,28,56],"name":"ByteCodeDeploy","desc":"A synthetic ARC-56 spec that ships only precompiled byteCode (no TEAL source) and is created through an ABI createApplication method with typed constructor arguments. Exercises the byteCode-only deploy path and create-method constructor parameters offline.","structs":{},"methods":[{"name":"createApplication","desc":"Create the app with an initial owner and seed amount.","args":[{"name":"owner","type":"address"},{"name":"seed","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"ping","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}}],"events":[],"state":{"schema":{"global":{"ints":2,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"byteCode":{"approval":"CoEB","clear":"CoEB"}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -141,11 +141,57 @@ export type MethodArgs<TSignature extends ByteCodeDeploySignatures> = ByteCodeDe
 export type MethodReturn<TSignature extends ByteCodeDeploySignatures> = ByteCodeDeployTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ByteCodeDeployCreateCallParams =
+  | Expand<CallParams<ByteCodeDeployArgs['obj']['createApplication(address,uint64)void'] | ByteCodeDeployArgs['tuple']['createApplication(address,uint64)void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<ByteCodeDeployArgs['obj']['createApplication(address,uint64)void'] | ByteCodeDeployArgs['tuple']['createApplication(address,uint64)void']> & {method: 'createApplication(address,uint64)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ByteCodeDeployDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ByteCodeDeployCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ByteCodeDeploy smart contract
  */
 export abstract class ByteCodeDeployParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends ByteCodeDeployCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication(address,uint64)void':
+            return ByteCodeDeployParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the ByteCodeDeploy smart contract using the createApplication(address,uint64)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<ByteCodeDeployArgs['obj']['createApplication(address,uint64)void'] | ByteCodeDeployArgs['tuple']['createApplication(address,uint64)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication(address,uint64)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.owner, params.args.seed],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the ping()uint64 ABI method
    *
@@ -161,6 +207,154 @@ export abstract class ByteCodeDeployParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ByteCodeDeploy smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ByteCodeDeployFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ByteCodeDeployFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ByteCodeDeployClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ByteCodeDeployClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ByteCodeDeploy smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ByteCodeDeployDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? ByteCodeDeployParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (ByteCodeDeployCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new ByteCodeDeployClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ByteCodeDeploy smart contract using the createApplication(address,uint64)void ABI method.
+       *
+       * Create the app with an initial owner and seed amount.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<ByteCodeDeployArgs['obj']['createApplication(address,uint64)void'] | ByteCodeDeployArgs['tuple']['createApplication(address,uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(ByteCodeDeployParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ByteCodeDeploy smart contract using the createApplication(address,uint64)void ABI method.
+       *
+       * Create the app with an initial owner and seed amount.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<ByteCodeDeployArgs['obj']['createApplication(address,uint64)void'] | ByteCodeDeployArgs['tuple']['createApplication(address,uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(ByteCodeDeployParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ByteCodeDeploy smart contract using an ABI method call using the createApplication(address,uint64)void ABI method.
+       *
+       * Create the app with an initial owner and seed amount.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<ByteCodeDeployArgs['obj']['createApplication(address,uint64)void'] | ByteCodeDeployArgs['tuple']['createApplication(address,uint64)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(ByteCodeDeployParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | ByteCodeDeployReturns['createApplication(address,uint64)void']) }, appClient: new ByteCodeDeployClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ByteCodeDeploy smart contract
  */
