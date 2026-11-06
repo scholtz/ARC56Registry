@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"NFDRegistry","desc":"","methods":[{"name":"updateApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]}},{"name":"gas","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getPrice","desc":"Returns the price for a given NFD (single year), the max # of years allowed (Name for Display),\nand extra algo required to cover MBR when purchasing.","args":[{"name":"nfdName","type":"string","desc":"The NFD name for which to retrieve the price."},{"name":"caller","type":"address","desc":"the address this request is on behalf of (since an nfd contract might call us it\nneeds to be able to pass on the request on behalf of ITS caller - ie: getting price for an expired nfd will be\ndifferent if its owner ir asking.\n PriceInfo Type containing the price, carry cost, etc."}],"returns":{"type":"(uint64,uint64,bool,bool,bool)","struct":"PriceInfo"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getConstraints","args":[],"returns":{"type":"(uint64,uint64,uint64,address,uint64,uint64,uint64)","struct":"Constraints"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getNfdMbrCost","desc":"Returns the MBR amounts needed to MINT an nfd.\nThis value needs to be added to purchase price in mintNfd call.\ngetPrice() returns it though.","args":[{"name":"nfdName","type":"string"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getNfdLinkOnMintExtraMbrCost","args":[{"name":"address","type":"address"}],"returns":{"type":"(uint64,uint64)","struct":"LinkOnMintExtraMbrCosts"},"actions":{"create":[],"call":["NoOp"]}},{"name":"mintNfd","desc":"Mint an NFD (NFT) and create a new NFD instance.","args":[{"name":"purchaseTxn","type":"pay","desc":"The payment transaction covering the purchase amount of the nfd"},{"name":"nfdName","type":"string","desc":"The name of the NFD to mint"},{"name":"reservedFor","type":"address","desc":"The address that will own the NFD once minted (so you can buy for someone else)"},{"name":"linkOnMint","type":"bool","desc":"whether to auto-link the address (reserved for MUST MATCH payer!) at mint\n uint64 - The ID of the newly created NFD instance."}],"returns":{"type":"uint64"},"events":[{"name":"nfdRegistry_minted","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"priceOneYear","type":"uint64"},{"name":"paidAmount","type":"uint64"},{"name":"carryCost","type":"uint64"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"owner","type":"address"},{"name":"expTime","type":"uint64"},{"name":"amountToSeller","type":"uint64"},{"name":"commissionAddress","type":"address"},{"name":"amountToCommission","type":"uint64"},{"name":"segmentRootOwner","type":"address"},{"name":"amountToSegmentRoot","type":"uint64"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"linkNfdAddress","args":[{"name":"nfdName","type":"string"},{"name":"nfdAppId","type":"uint64"},{"name":"addrToVerify","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"unlinkNfdAddress","args":[{"name":"nfdName","type":"string"},{"name":"nfdAppId","type":"uint64"},{"name":"addrToUnlink","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"ownershipAssign","args":[{"name":"nfdName","type":"string"},{"name":"nfdAppId","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"ownershipChanged","desc":"This method is triggered when the ownership of an NFD (Non-Fungible Domain) changes.\nIt is called by the NFD via the purchase method.  It can also be called by TxnLab admin for older 3.3\nNFDs when it detects purchased events for 3.3","args":[{"name":"nfdName","type":"string","desc":"The name of the NFD."},{"name":"nfdAppId","type":"uint64","desc":"The unique application ID of the NFD."},{"name":"seller","type":"address","desc":"The address of the prior owner (seller) of the nfd"},{"name":"buyer","type":"address","desc":"The address of the new owner of the NFD."}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setAddressPrimaryNfd","desc":"Makes the specified NFD the 'first' NFD in the reverse-address set so its the primary NFD for this address.\nThe NFD must be valid, and the sender must be the address (or nfd owner if vault).  The NFD wouldn't already be\nin the reverse-lookup set if it wasn't already valid.","args":[{"name":"nfdName","type":"string"},{"name":"nfdAppId","type":"uint64"},{"name":"addrBeingModified","type":"address"}],"returns":{"type":"void"},"events":[{"name":"nfdRegistry_addressPrimaryNfdChanged","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"address","type":"address"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"upgradeNfd","args":[{"name":"nfdName","type":"string"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]}},{"name":"isValidNfdAppId","args":[{"name":"nfdName","type":"string"},{"name":"nfdAppId","type":"uint64"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getNameAppId","args":[{"name":"nfdName","type":"string"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getAddressAppIds","args":[{"name":"lookupAddress","type":"address"}],"returns":{"type":"uint64[]"},"actions":{"create":[],"call":["NoOp"]}},{"name":"nfdContractInit","desc":"Initializes the NFD contract bytecode into the registry","args":[{"name":"version","type":"string","desc":"The version of the contract."},{"name":"size","type":"uint64","desc":"exact byte size of contract to load"},{"name":"clearCode","type":"byte[]","desc":"bytes of clear code"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"nfdContractLoad","desc":"Loads contract data into the  box at the specified offset.","args":[{"name":"version","type":"string","desc":"The version of the contract."},{"name":"offset","type":"uint64","desc":"The offset at which to replace the contract data within the box."},{"name":"data","type":"byte[]","desc":"The contract data to be loaded."}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"nfdContractCommit","desc":"Commit a new version of the contract.","args":[{"name":"version","type":"string","desc":"The version number of the contract to be committed."}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"usdInMicroAlgo","args":[{"name":"usdCost","type":"uint64"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"costToAddToAddress","desc":"Returns the cost to add an NFD to the reverse-lookup data","args":[{"name":"lookupAddress","type":"address","desc":"The address to add the NFD app id to"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"calcFuturePrice","desc":"Calculates the future price based on the current price and the number of years.","args":[{"name":"curPrice","type":"uint64","desc":"The current price in USD (in decimals). For example, if the current price is $2.00, the value should be 200."},{"name":"forTime","type":"uint64","desc":"The timestamp to calc the future price based on - ie: 1 year past 'go live date' the price would have inflated by 1 year.\n\n\n uint64 The future price calculated based on the current price and the specified number of years."}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"events":[{"name":"nfdRegistry_minted","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"priceOneYear","type":"uint64"},{"name":"paidAmount","type":"uint64"},{"name":"carryCost","type":"uint64"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"owner","type":"address"},{"name":"expTime","type":"uint64"},{"name":"amountToSeller","type":"uint64"},{"name":"commissionAddress","type":"address"},{"name":"amountToCommission","type":"uint64"},{"name":"segmentRootOwner","type":"address"},{"name":"amountToSegmentRoot","type":"uint64"}],"desc":""},{"name":"nfdRegistry_addressPrimaryNfdChanged","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"address","type":"address"}],"desc":""}],"arcs":[4,56],"structs":{"PriceInfo":[{"name":"oneYearPrice","type":"uint64"},{"name":"carryCost","type":"uint64"},{"name":"exists","type":"bool"},{"name":"isExpired","type":"bool"},{"name":"inAuction","type":"bool"}],"Constraints":[{"name":"segmentPlatformCostInUsd","type":"uint64"},{"name":"segmentPlatformCostInAlgo","type":"uint64"},{"name":"maxYearsAllowed","type":"uint64"},{"name":"treasuryAddress","type":"address"},{"name":"expiredAuctionDuration","type":"uint64"},{"name":"expiredStartingPrice","type":"uint64"},{"name":"maxMintCarryCost","type":"uint64"}],"LinkOnMintExtraMbrCosts":[{"name":"linkingNfdMbrCost","type":"uint64"},{"name":"linkingRegistryMbrCost","type":"uint64"}]},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":16,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{"localState":{"keyType":"AVMBytes","valueType":"AVMBytes"}},"box":{"boxes":{"keyType":"AVMBytes","valueType":"AVMBytes"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[35],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[516],"errorMessage":"invalid","teal":414},{"pc":[637],"errorMessage":"invalid method","teal":510},{"pc":[638],"errorMessage":"unknown method","teal":514},{"pc":[658],"errorMessage":"argument 0 (caller) for getPrice must be a address","teal":542},{"pc":[909],"errorMessage":"argument 0 (address) for getNfdLinkOnMintExtraMbrCost must be a address","teal":736},{"pc":[947],"errorMessage":"argument 0 (linkOnMint) for mintNfd must be a bool","teal":780},{"pc":[958],"errorMessage":"argument 1 (reservedFor) for mintNfd must be a address","teal":792},{"pc":[974],"errorMessage":"argument 3 (purchaseTxn) for mintNfd must be a pay transaction","teal":808},{"pc":[996],"errorMessage":"transaction verification failed: {\"txn\":\"purchaseTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":843},{"pc":[1085],"errorMessage":"parent nfd/id must be found","teal":931},{"pc":[1114],"errorMessage":"global state value does not exist: AppID.fromUint64(parentAppId).globalState(NFD_KEY_SELLER)","teal":951},{"pc":[1128],"errorMessage":"global state value does not exist: AppID.fromUint64(parentAppId).globalState(NFD_KEY_OWNER)","teal":968},{"pc":[1130],"errorMessage":"only owner of root can mint segments if segments are locked","teal":972},{"pc":[1154],"errorMessage":"price can never be 0","teal":996},{"pc":[1208],"errorMessage":"if linking on mint, the buyer MUST be who will be the owner (reservedFor)","teal":1052},{"pc":[1232],"errorMessage":"payment transaction must be at least enough to cover 30 days of nfd cost + carry cost","teal":1081},{"pc":[1236],"errorMessage":"box value does not exist: this.boxes(REGISTRY_CONTRACT_BOX_CURRENT_CONTRACT).value","teal":1090},{"pc":[1244],"errorMessage":"box value does not exist: this.boxes(REGISTRY_CONTRACT_BOX_CURRENT_CONTRACT).value","teal":1103},{"pc":[1254],"errorMessage":"box value does not exist: this.boxes(concat(REGISTRY_CONTRACT_BOX_CLEAR_NAMEPREFIX, currentContractVer)).value","teal":1115},{"pc":[1260],"errorMessage":"box value does not exist: this.boxes(approvProgName).size","teal":1124},{"pc":[1602],"errorMessage":"global state value does not exist: AppID.fromUint64(parentAppId).globalState(NFD_KEY_VERSION)","teal":1470},{"pc":[1610],"errorMessage":"nfd root not 3.x must be version 2.12 in order for segment minting to succeed","teal":1475},{"pc":[1967],"errorMessage":"argument 0 (addrToVerify) for linkNfdAddress must be a address","teal":1768},{"pc":[1999],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_OWNER)","teal":1804},{"pc":[2009],"errorMessage":"referenced NFD name/id must be valid","teal":1814},{"pc":[2026],"errorMessage":"verifying vault account, sender must be NFD owner","teal":1834},{"pc":[2035],"errorMessage":"app call sender must match address being added/removed","teal":1845},{"pc":[2045],"errorMessage":"nfd verified caAlgo.0.as must contain address being added/removed","teal":1859},{"pc":[2064],"errorMessage":"should add nfd to reverse address","teal":1878},{"pc":[2083],"errorMessage":"argument 0 (addrToUnlink) for unlinkNfdAddress must be a address","teal":1899},{"pc":[2108],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_OWNER)","teal":1929},{"pc":[2118],"errorMessage":"referenced NFD name/id must be valid","teal":1939},{"pc":[2148],"errorMessage":"Sender unlinking must be NFD owner OR address removing itself","teal":1969},{"pc":[2158],"errorMessage":"nfd verified caAlgo.0.as must contain address being removed","teal":1983},{"pc":[2257],"errorMessage":"referenced NFD name/id must be valid","teal":2085},{"pc":[2264],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_OWNER)","teal":2098},{"pc":[2291],"errorMessage":"argument 0 (buyer) for ownershipChanged must be a address","teal":2128},{"pc":[2300],"errorMessage":"argument 1 (seller) for ownershipChanged must be a address","teal":2138},{"pc":[2337],"errorMessage":"referenced NFD name/id must be valid","teal":2191},{"pc":[2343],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_VERSION)","teal":2201},{"pc":[2358],"errorMessage":"only txnlab can call this method to backfill ownership, 3.4+ handles it by calling from the nfd itself","teal":2216},{"pc":[2406],"errorMessage":"argument 0 (addrBeingModified) for setAddressPrimaryNfd must be a address","teal":2266},{"pc":[2433],"errorMessage":"referenced NFD name/id must be valid","teal":2302},{"pc":[2438],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_OWNER)","teal":2311},{"pc":[2457],"errorMessage":"if changing primary nfd for vault account, sender must be NFD owner","teal":2332},{"pc":[2466],"errorMessage":"app call sender must match address being updated to change primary NFD","teal":2346},{"pc":[2558],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_OWNER)","teal":2428},{"pc":[2566],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_NAME)","teal":2438},{"pc":[2586],"errorMessage":"only NFD owner or TxnLab can upgrade NFD","teal":2459},{"pc":[2598],"errorMessage":"box value does not exist: this.boxes(REGISTRY_CONTRACT_BOX_CURRENT_CONTRACT).value","teal":2476},{"pc":[2606],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_VERSION)","teal":2489},{"pc":[2610],"errorMessage":"contract already at this version","teal":2494},{"pc":[2616],"errorMessage":"box value does not exist: this.boxes(REGISTRY_CONTRACT_BOX_CURRENT_CONTRACT).value","teal":2506},{"pc":[2626],"errorMessage":"box value does not exist: this.boxes(concat(REGISTRY_CONTRACT_BOX_CLEAR_NAMEPREFIX, currentContractVer)).value","teal":2518},{"pc":[2632],"errorMessage":"box value does not exist: this.boxes(approvProgName).size","teal":2527},{"pc":[2809],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":2730},{"pc":[2837],"errorMessage":"argument 0 (lookupAddress) for getAddressAppIds must be a address","teal":2768},{"pc":[2888],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":2827},{"pc":[3084],"errorMessage":"global state value does not exist: AppID.fromUint64(this.algoUsdOracleAppId).globalState('ts')","teal":3056},{"pc":[3100],"errorMessage":"global state value does not exist: AppID.fromUint64(this.algoUsdOracleAppId).globalState('decimals')","teal":3066},{"pc":[3113],"errorMessage":"global state value does not exist: AppID.fromUint64(this.algoUsdOracleAppId).globalState('price')","teal":3076},{"pc":[3195],"errorMessage":"argument 0 (lookupAddress) for costToAddToAddress must be a address","teal":3141},{"pc":[3429],"errorMessage":"box value does not exist: this.boxes(key).value","teal":3383},{"pc":[3516],"errorMessage":"box value does not exist: this.boxes(key).value","teal":3494},{"pc":[3918],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":3900},{"pc":[3935],"errorMessage":"must be existing v1 name","teal":3922},{"pc":[3950],"errorMessage":"global state value does not exist: AppID.fromUint64(btoi(this.txn.applicationArgs![2])).globalState(REGISTRY_KEY_ASAID)","teal":3932},{"pc":[4102],"errorMessage":"NFD already exists with this name","teal":4106},{"pc":[4122],"errorMessage":"NFD has already been minted!","teal":4134},{"pc":[4184],"errorMessage":"box value does not exist: this.boxes(key).value","teal":4206},{"pc":[4198],"errorMessage":"int (appid) 'set' should already have at least two values","teal":4224},{"pc":[4267],"errorMessage":"int (app id) must be found in set in order to move it","teal":4307},{"pc":[4311],"errorMessage":"box value does not exist: this.boxes(key).value","teal":4363},{"pc":[4637],"errorMessage":"if not at least 6 chars can't be valid - minimum length to have .algo","teal":4742},{"pc":[4656],"errorMessage":"string must end w/ .algo","teal":4756},{"pc":[4739],"errorMessage":"must be 1-27 chars in nfd root or segment name","teal":4851},{"pc":[4781],"errorMessage":"must be 1-27 chars and at end of string","teal":4895},{"pc":[4785],"errorMessage":"too many '.' chars in name","teal":4900},{"pc":[4836],"errorMessage":"invalid character in name","teal":4949},{"pc":[4971],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":5089},{"pc":[5031],"errorMessage":"global state value does not exist: AppID.fromUint64(appId).globalState(key)","teal":5160},{"pc":[5054],"errorMessage":"global state value does not exist: AppID.fromUint64(appId).globalState(key)","teal":5192},{"pc":[5095],"errorMessage":"parent nfd/id must be found","teal":5258},{"pc":[5178],"errorMessage":"segment mint cost must be at least NFD_MIN_SEGMENT_USD","teal":5325},{"pc":[5284],"errorMessage":"invalid cost calc","teal":5426},{"pc":[5327],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_OWNER)","teal":5476},{"pc":[5480],"errorMessage":"price always needs to be at least 1 algo","teal":5633},{"pc":[5951],"errorMessage":"lsig has to have i.appid localstate","teal":6086},{"pc":[6024],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":6159},{"pc":[6030],"errorMessage":"box value does not exist: this.boxes(boxName).size","teal":6168},{"pc":[6076],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_NAME)","teal":6227},{"pc":[6138],"errorMessage":"max expiration exceeded parameters defined by registry","teal":6306},{"pc":[6155],"errorMessage":"global state value does not exist: AppID.fromUint64(appId).globalState(NFD_KEY_VERSION)","teal":6333},{"pc":[6198],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":6364}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"NFDRegistry","desc":"","methods":[{"name":"updateApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]}},{"name":"gas","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getPrice","desc":"Returns the price for a given NFD (single year), the max # of years allowed (Name for Display),\nand extra algo required to cover MBR when purchasing.","args":[{"name":"nfdName","type":"string","desc":"The NFD name for which to retrieve the price."},{"name":"caller","type":"address","desc":"the address this request is on behalf of (since an nfd contract might call us it\nneeds to be able to pass on the request on behalf of ITS caller - ie: getting price for an expired nfd will be\ndifferent if its owner ir asking.\n PriceInfo Type containing the price, carry cost, etc."}],"returns":{"type":"(uint64,uint64,bool,bool,bool)","struct":"PriceInfo"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getConstraints","args":[],"returns":{"type":"(uint64,uint64,uint64,address,uint64,uint64,uint64)","struct":"Constraints"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getNfdMbrCost","desc":"Returns the MBR amounts needed to MINT an nfd.\nThis value needs to be added to purchase price in mintNfd call.\ngetPrice() returns it though.","args":[{"name":"nfdName","type":"string"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getNfdLinkOnMintExtraMbrCost","args":[{"name":"address","type":"address"}],"returns":{"type":"(uint64,uint64)","struct":"LinkOnMintExtraMbrCosts"},"actions":{"create":[],"call":["NoOp"]}},{"name":"mintNfd","desc":"Mint an NFD (NFT) and create a new NFD instance.","args":[{"name":"purchaseTxn","type":"pay","desc":"The payment transaction covering the purchase amount of the nfd"},{"name":"nfdName","type":"string","desc":"The name of the NFD to mint"},{"name":"reservedFor","type":"address","desc":"The address that will own the NFD once minted (so you can buy for someone else)"},{"name":"linkOnMint","type":"bool","desc":"whether to auto-link the address (reserved for MUST MATCH payer!) at mint\n uint64 - The ID of the newly created NFD instance."}],"returns":{"type":"uint64"},"events":[{"name":"nfdRegistry_minted","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"priceOneYear","type":"uint64"},{"name":"paidAmount","type":"uint64"},{"name":"carryCost","type":"uint64"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"owner","type":"address"},{"name":"expTime","type":"uint64"},{"name":"amountToSeller","type":"uint64"},{"name":"commissionAddress","type":"address"},{"name":"amountToCommission","type":"uint64"},{"name":"segmentRootOwner","type":"address"},{"name":"amountToSegmentRoot","type":"uint64"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"linkNfdAddress","args":[{"name":"nfdName","type":"string"},{"name":"nfdAppId","type":"uint64"},{"name":"addrToVerify","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"unlinkNfdAddress","args":[{"name":"nfdName","type":"string"},{"name":"nfdAppId","type":"uint64"},{"name":"addrToUnlink","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"ownershipAssign","args":[{"name":"nfdName","type":"string"},{"name":"nfdAppId","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"ownershipChanged","desc":"This method is triggered when the ownership of an NFD (Non-Fungible Domain) changes.\nIt is called by the NFD via the purchase method.  It can also be called by TxnLab admin for older 3.3\nNFDs when it detects purchased events for 3.3","args":[{"name":"nfdName","type":"string","desc":"The name of the NFD."},{"name":"nfdAppId","type":"uint64","desc":"The unique application ID of the NFD."},{"name":"seller","type":"address","desc":"The address of the prior owner (seller) of the nfd"},{"name":"buyer","type":"address","desc":"The address of the new owner of the NFD."}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"setAddressPrimaryNfd","desc":"Makes the specified NFD the 'first' NFD in the reverse-address set so its the primary NFD for this address.\nThe NFD must be valid, and the sender must be the address (or nfd owner if vault).  The NFD wouldn't already be\nin the reverse-lookup set if it wasn't already valid.","args":[{"name":"nfdName","type":"string"},{"name":"nfdAppId","type":"uint64"},{"name":"addrBeingModified","type":"address"}],"returns":{"type":"void"},"events":[{"name":"nfdRegistry_addressPrimaryNfdChanged","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"address","type":"address"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"upgradeNfd","args":[{"name":"nfdName","type":"string"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]}},{"name":"isValidNfdAppId","args":[{"name":"nfdName","type":"string"},{"name":"nfdAppId","type":"uint64"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getNameAppId","args":[{"name":"nfdName","type":"string"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getAddressAppIds","args":[{"name":"lookupAddress","type":"address"}],"returns":{"type":"uint64[]"},"actions":{"create":[],"call":["NoOp"]}},{"name":"nfdContractInit","desc":"Initializes the NFD contract bytecode into the registry","args":[{"name":"version","type":"string","desc":"The version of the contract."},{"name":"size","type":"uint64","desc":"exact byte size of contract to load"},{"name":"clearCode","type":"byte[]","desc":"bytes of clear code"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"nfdContractLoad","desc":"Loads contract data into the  box at the specified offset.","args":[{"name":"version","type":"string","desc":"The version of the contract."},{"name":"offset","type":"uint64","desc":"The offset at which to replace the contract data within the box."},{"name":"data","type":"byte[]","desc":"The contract data to be loaded."}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"nfdContractCommit","desc":"Commit a new version of the contract.","args":[{"name":"version","type":"string","desc":"The version number of the contract to be committed."}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"usdInMicroAlgo","args":[{"name":"usdCost","type":"uint64"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"costToAddToAddress","desc":"Returns the cost to add an NFD to the reverse-lookup data","args":[{"name":"lookupAddress","type":"address","desc":"The address to add the NFD app id to"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"calcFuturePrice","desc":"Calculates the future price based on the current price and the number of years.","args":[{"name":"curPrice","type":"uint64","desc":"The current price in USD (in decimals). For example, if the current price is $2.00, the value should be 200."},{"name":"forTime","type":"uint64","desc":"The timestamp to calc the future price based on - ie: 1 year past 'go live date' the price would have inflated by 1 year.\n\n\n uint64 The future price calculated based on the current price and the specified number of years."}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"events":[{"name":"nfdRegistry_minted","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"priceOneYear","type":"uint64"},{"name":"paidAmount","type":"uint64"},{"name":"carryCost","type":"uint64"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"owner","type":"address"},{"name":"expTime","type":"uint64"},{"name":"amountToSeller","type":"uint64"},{"name":"commissionAddress","type":"address"},{"name":"amountToCommission","type":"uint64"},{"name":"segmentRootOwner","type":"address"},{"name":"amountToSegmentRoot","type":"uint64"}],"desc":""},{"name":"nfdRegistry_addressPrimaryNfdChanged","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"address","type":"address"}],"desc":""}],"arcs":[4,56],"structs":{"PriceInfo":[{"name":"oneYearPrice","type":"uint64"},{"name":"carryCost","type":"uint64"},{"name":"exists","type":"bool"},{"name":"isExpired","type":"bool"},{"name":"inAuction","type":"bool"}],"Constraints":[{"name":"segmentPlatformCostInUsd","type":"uint64"},{"name":"segmentPlatformCostInAlgo","type":"uint64"},{"name":"maxYearsAllowed","type":"uint64"},{"name":"treasuryAddress","type":"address"},{"name":"expiredAuctionDuration","type":"uint64"},{"name":"expiredStartingPrice","type":"uint64"},{"name":"maxMintCarryCost","type":"uint64"}],"LinkOnMintExtraMbrCosts":[{"name":"linkingNfdMbrCost","type":"uint64"},{"name":"linkingRegistryMbrCost","type":"uint64"}]},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":16,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{"localState":{"keyType":"AVMBytes","valueType":"AVMBytes"}},"box":{"boxes":{"keyType":"AVMBytes","valueType":"AVMBytes"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[35],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[516],"errorMessage":"invalid","teal":414},{"pc":[637],"errorMessage":"invalid method","teal":510},{"pc":[638],"errorMessage":"unknown method","teal":514},{"pc":[658],"errorMessage":"argument 0 (caller) for getPrice must be a address","teal":542},{"pc":[909],"errorMessage":"argument 0 (address) for getNfdLinkOnMintExtraMbrCost must be a address","teal":736},{"pc":[947],"errorMessage":"argument 0 (linkOnMint) for mintNfd must be a bool","teal":780},{"pc":[958],"errorMessage":"argument 1 (reservedFor) for mintNfd must be a address","teal":792},{"pc":[974],"errorMessage":"argument 3 (purchaseTxn) for mintNfd must be a pay transaction","teal":808},{"pc":[996],"errorMessage":"transaction verification failed: {\"txn\":\"purchaseTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":843},{"pc":[1085],"errorMessage":"parent nfd/id must be found","teal":931},{"pc":[1114],"errorMessage":"global state value does not exist: AppID.fromUint64(parentAppId).globalState(NFD_KEY_SELLER)","teal":951},{"pc":[1128],"errorMessage":"global state value does not exist: AppID.fromUint64(parentAppId).globalState(NFD_KEY_OWNER)","teal":968},{"pc":[1130],"errorMessage":"only owner of root can mint segments if segments are locked","teal":972},{"pc":[1154],"errorMessage":"price can never be 0","teal":996},{"pc":[1208],"errorMessage":"if linking on mint, the buyer MUST be who will be the owner (reservedFor)","teal":1052},{"pc":[1232],"errorMessage":"payment transaction must be at least enough to cover 30 days of nfd cost + carry cost","teal":1081},{"pc":[1236],"errorMessage":"box value does not exist: this.boxes(REGISTRY_CONTRACT_BOX_CURRENT_CONTRACT).value","teal":1090},{"pc":[1244],"errorMessage":"box value does not exist: this.boxes(REGISTRY_CONTRACT_BOX_CURRENT_CONTRACT).value","teal":1103},{"pc":[1254],"errorMessage":"box value does not exist: this.boxes(concat(REGISTRY_CONTRACT_BOX_CLEAR_NAMEPREFIX, currentContractVer)).value","teal":1115},{"pc":[1260],"errorMessage":"box value does not exist: this.boxes(approvProgName).size","teal":1124},{"pc":[1602],"errorMessage":"global state value does not exist: AppID.fromUint64(parentAppId).globalState(NFD_KEY_VERSION)","teal":1470},{"pc":[1610],"errorMessage":"nfd root not 3.x must be version 2.12 in order for segment minting to succeed","teal":1475},{"pc":[1967],"errorMessage":"argument 0 (addrToVerify) for linkNfdAddress must be a address","teal":1768},{"pc":[1999],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_OWNER)","teal":1804},{"pc":[2009],"errorMessage":"referenced NFD name/id must be valid","teal":1814},{"pc":[2026],"errorMessage":"verifying vault account, sender must be NFD owner","teal":1834},{"pc":[2035],"errorMessage":"app call sender must match address being added/removed","teal":1845},{"pc":[2045],"errorMessage":"nfd verified caAlgo.0.as must contain address being added/removed","teal":1859},{"pc":[2064],"errorMessage":"should add nfd to reverse address","teal":1878},{"pc":[2083],"errorMessage":"argument 0 (addrToUnlink) for unlinkNfdAddress must be a address","teal":1899},{"pc":[2108],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_OWNER)","teal":1929},{"pc":[2118],"errorMessage":"referenced NFD name/id must be valid","teal":1939},{"pc":[2148],"errorMessage":"Sender unlinking must be NFD owner OR address removing itself","teal":1969},{"pc":[2158],"errorMessage":"nfd verified caAlgo.0.as must contain address being removed","teal":1983},{"pc":[2257],"errorMessage":"referenced NFD name/id must be valid","teal":2085},{"pc":[2264],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_OWNER)","teal":2098},{"pc":[2291],"errorMessage":"argument 0 (buyer) for ownershipChanged must be a address","teal":2128},{"pc":[2300],"errorMessage":"argument 1 (seller) for ownershipChanged must be a address","teal":2138},{"pc":[2337],"errorMessage":"referenced NFD name/id must be valid","teal":2191},{"pc":[2343],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_VERSION)","teal":2201},{"pc":[2358],"errorMessage":"only txnlab can call this method to backfill ownership, 3.4+ handles it by calling from the nfd itself","teal":2216},{"pc":[2406],"errorMessage":"argument 0 (addrBeingModified) for setAddressPrimaryNfd must be a address","teal":2266},{"pc":[2433],"errorMessage":"referenced NFD name/id must be valid","teal":2302},{"pc":[2438],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_OWNER)","teal":2311},{"pc":[2457],"errorMessage":"if changing primary nfd for vault account, sender must be NFD owner","teal":2332},{"pc":[2466],"errorMessage":"app call sender must match address being updated to change primary NFD","teal":2346},{"pc":[2558],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_OWNER)","teal":2428},{"pc":[2566],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_NAME)","teal":2438},{"pc":[2586],"errorMessage":"only NFD owner or TxnLab can upgrade NFD","teal":2459},{"pc":[2598],"errorMessage":"box value does not exist: this.boxes(REGISTRY_CONTRACT_BOX_CURRENT_CONTRACT).value","teal":2476},{"pc":[2606],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_VERSION)","teal":2489},{"pc":[2610],"errorMessage":"contract already at this version","teal":2494},{"pc":[2616],"errorMessage":"box value does not exist: this.boxes(REGISTRY_CONTRACT_BOX_CURRENT_CONTRACT).value","teal":2506},{"pc":[2626],"errorMessage":"box value does not exist: this.boxes(concat(REGISTRY_CONTRACT_BOX_CLEAR_NAMEPREFIX, currentContractVer)).value","teal":2518},{"pc":[2632],"errorMessage":"box value does not exist: this.boxes(approvProgName).size","teal":2527},{"pc":[2809],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":2730},{"pc":[2837],"errorMessage":"argument 0 (lookupAddress) for getAddressAppIds must be a address","teal":2768},{"pc":[2888],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":2827},{"pc":[3084],"errorMessage":"global state value does not exist: AppID.fromUint64(this.algoUsdOracleAppId).globalState('ts')","teal":3056},{"pc":[3100],"errorMessage":"global state value does not exist: AppID.fromUint64(this.algoUsdOracleAppId).globalState('decimals')","teal":3066},{"pc":[3113],"errorMessage":"global state value does not exist: AppID.fromUint64(this.algoUsdOracleAppId).globalState('price')","teal":3076},{"pc":[3195],"errorMessage":"argument 0 (lookupAddress) for costToAddToAddress must be a address","teal":3141},{"pc":[3429],"errorMessage":"box value does not exist: this.boxes(key).value","teal":3383},{"pc":[3516],"errorMessage":"box value does not exist: this.boxes(key).value","teal":3494},{"pc":[3918],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":3900},{"pc":[3935],"errorMessage":"must be existing v1 name","teal":3922},{"pc":[3950],"errorMessage":"global state value does not exist: AppID.fromUint64(btoi(this.txn.applicationArgs![2])).globalState(REGISTRY_KEY_ASAID)","teal":3932},{"pc":[4102],"errorMessage":"NFD already exists with this name","teal":4106},{"pc":[4122],"errorMessage":"NFD has already been minted!","teal":4134},{"pc":[4184],"errorMessage":"box value does not exist: this.boxes(key).value","teal":4206},{"pc":[4198],"errorMessage":"int (appid) 'set' should already have at least two values","teal":4224},{"pc":[4267],"errorMessage":"int (app id) must be found in set in order to move it","teal":4307},{"pc":[4311],"errorMessage":"box value does not exist: this.boxes(key).value","teal":4363},{"pc":[4637],"errorMessage":"if not at least 6 chars can't be valid - minimum length to have .algo","teal":4742},{"pc":[4656],"errorMessage":"string must end w/ .algo","teal":4756},{"pc":[4739],"errorMessage":"must be 1-27 chars in nfd root or segment name","teal":4851},{"pc":[4781],"errorMessage":"must be 1-27 chars and at end of string","teal":4895},{"pc":[4785],"errorMessage":"too many '.' chars in name","teal":4900},{"pc":[4836],"errorMessage":"invalid character in name","teal":4949},{"pc":[4971],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":5089},{"pc":[5031],"errorMessage":"global state value does not exist: AppID.fromUint64(appId).globalState(key)","teal":5160},{"pc":[5054],"errorMessage":"global state value does not exist: AppID.fromUint64(appId).globalState(key)","teal":5192},{"pc":[5095],"errorMessage":"parent nfd/id must be found","teal":5258},{"pc":[5178],"errorMessage":"segment mint cost must be at least NFD_MIN_SEGMENT_USD","teal":5325},{"pc":[5284],"errorMessage":"invalid cost calc","teal":5426},{"pc":[5327],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_OWNER)","teal":5476},{"pc":[5480],"errorMessage":"price always needs to be at least 1 algo","teal":5633},{"pc":[5951],"errorMessage":"lsig has to have i.appid localstate","teal":6086},{"pc":[6024],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":6159},{"pc":[6030],"errorMessage":"box value does not exist: this.boxes(boxName).size","teal":6168},{"pc":[6076],"errorMessage":"global state value does not exist: AppID.fromUint64(nfdAppId).globalState(NFD_KEY_NAME)","teal":6227},{"pc":[6138],"errorMessage":"max expiration exceeded parameters defined by registry","teal":6306},{"pc":[6155],"errorMessage":"global state value does not exist: AppID.fromUint64(appId).globalState(NFD_KEY_VERSION)","teal":6333},{"pc":[6198],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":6364}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"templateVariables":{"adminAsaId":{"type":"uint64"},"nfdTreasuryAddr":{"type":"address"},"nfdCommission1Addr":{"type":"address"},"nfdCommission1Rate":{"type":"uint64"},"algoUsdOracleAppId":{"type":"uint64"},"developmentAllowShortMints":{"type":"uint64"}},"scratchVariables":{"adminAsaId":{"type":"uint64","slot":200},"nfdTreasuryAddr":{"type":"address","slot":201},"nfdCommission1Addr":{"type":"address","slot":202},"nfdCommission1Rate":{"type":"uint64","slot":203},"algoUsdOracleAppId":{"type":"uint64","slot":204},"developmentAllowShortMints":{"type":"uint64","slot":205}}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -109,6 +109,18 @@ export type LinkOnMintExtraMbrCosts = {
  */
 export function LinkOnMintExtraMbrCostsFromTuple(abiTuple: [bigint, bigint]) {
   return getABIStructFromABITuple(abiTuple, APP_SPEC.structs.LinkOnMintExtraMbrCosts, APP_SPEC.structs) as LinkOnMintExtraMbrCosts
+}
+
+/**
+ * Deploy-time template variables
+ */
+export type TemplateVariables = {
+  adminAsaId: bigint,
+  nfdTreasuryAddr: string,
+  nfdCommission1Addr: string,
+  nfdCommission1Rate: bigint,
+  algoUsdOracleAppId: bigint,
+  developmentAllowShortMints: bigint,
 }
 
 /**
@@ -510,11 +522,97 @@ export type LocalKeysState = NfdRegistryTypes['state']['local']['keys']
 export type BoxKeysState = NfdRegistryTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type NfdRegistryCreateCallParams =
+  | Expand<CallParams<NfdRegistryArgs['obj']['createApplication()void'] | NfdRegistryArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<NfdRegistryArgs['obj']['createApplication()void'] | NfdRegistryArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type NfdRegistryUpdateCallParams =
+  | Expand<CallParams<NfdRegistryArgs['obj']['updateApplication()void'] | NfdRegistryArgs['tuple']['updateApplication()void']> & {method: 'updateApplication'}>
+  | Expand<CallParams<NfdRegistryArgs['obj']['updateApplication()void'] | NfdRegistryArgs['tuple']['updateApplication()void']> & {method: 'updateApplication()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type NfdRegistryDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: NfdRegistryCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: NfdRegistryUpdateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the NfdRegistry smart contract
  */
 export abstract class NfdRegistryParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends NfdRegistryCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return NfdRegistryParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the NFDRegistry smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<NfdRegistryArgs['obj']['createApplication()void'] | NfdRegistryArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends NfdRegistryUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'updateApplication':
+          case 'updateApplication()void':
+            return NfdRegistryParamsFactory.update.updateApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the NFDRegistry smart contract using the updateApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateApplication(params: CallParams<NfdRegistryArgs['obj']['updateApplication()void'] | NfdRegistryArgs['tuple']['updateApplication()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'updateApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the gas()void ABI method
    *
@@ -822,6 +920,164 @@ export abstract class NfdRegistryParamsFactory {
 }
 
 /**
+ * A factory to create and deploy one or more instance of the NFDRegistry smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class NfdRegistryFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `NfdRegistryFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new NfdRegistryClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new NfdRegistryClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the NFDRegistry smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: NfdRegistryDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? NfdRegistryParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (NfdRegistryCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? NfdRegistryParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (NfdRegistryUpdateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new NfdRegistryClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NFDRegistry smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<NfdRegistryArgs['obj']['createApplication()void'] | NfdRegistryArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(NfdRegistryParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the NFDRegistry smart contract using the updateApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateApplication: (params: CallParams<NfdRegistryArgs['obj']['updateApplication()void'] | NfdRegistryArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(NfdRegistryParamsFactory.update.updateApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NFDRegistry smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<NfdRegistryArgs['obj']['createApplication()void'] | NfdRegistryArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(NfdRegistryParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NFDRegistry smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<NfdRegistryArgs['obj']['createApplication()void'] | NfdRegistryArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(NfdRegistryParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | NfdRegistryReturns['createApplication()void']) }, appClient: new NfdRegistryClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
+/**
  * A client to make calls to the NFDRegistry smart contract
  */
 export class NfdRegistryClient {
@@ -908,6 +1164,22 @@ export class NfdRegistryClient {
    * Get parameters to create transactions for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
    */
   readonly params = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the NFDRegistry smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateApplication: (params: CallParams<NfdRegistryArgs['obj']['updateApplication()void'] | NfdRegistryArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(NfdRegistryParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the NFDRegistry smart contract.
      *
@@ -1166,6 +1438,22 @@ export class NfdRegistryClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the NFDRegistry smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateApplication: (params: CallParams<NfdRegistryArgs['obj']['updateApplication()void'] | NfdRegistryArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(NfdRegistryParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the NFDRegistry smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -1422,6 +1710,23 @@ export class NfdRegistryClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the NFDRegistry smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateApplication: async (params: CallParams<NfdRegistryArgs['obj']['updateApplication()void'] | NfdRegistryArgs['tuple']['updateApplication()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(NfdRegistryParamsFactory.update.updateApplication(params))
+        return {...result, return: result.return as unknown as (undefined | NfdRegistryReturns['updateApplication()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the NFDRegistry smart contract.
      *
@@ -1941,6 +2246,15 @@ export class NfdRegistryClient {
         resultMappers.push((v) => client.decodeReturnValue('calcFuturePrice(uint64,uint64)uint64', v))
         return this
       },
+      get update() {
+        return {
+          updateApplication: (params: CallParams<NfdRegistryArgs['obj']['updateApplication()void'] | NfdRegistryArgs['tuple']['updateApplication()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the NFDRegistry contract
        */
@@ -2195,6 +2509,20 @@ export type NfdRegistryComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   calcFuturePrice(params?: CallParams<NfdRegistryArgs['obj']['calcFuturePrice(uint64,uint64)uint64'] | NfdRegistryArgs['tuple']['calcFuturePrice(uint64,uint64)uint64']>): NfdRegistryComposer<[...TReturns, NfdRegistryReturns['calcFuturePrice(uint64,uint64)uint64'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the NFDRegistry smart contract using the updateApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateApplication(params?: CallParams<NfdRegistryArgs['obj']['updateApplication()void'] | NfdRegistryArgs['tuple']['updateApplication()void']>): NfdRegistryComposer<[...TReturns, NfdRegistryReturns['updateApplication()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the NFDRegistry smart contract.

@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"NFDInstance","desc":"","methods":[{"name":"createApplication","args":[{"name":"nfdName","type":"string"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"purchaseAmount","type":"uint64"},{"name":"expTime","type":"uint64"},{"name":"commission1Addr","type":"address"},{"name":"commission1Pct","type":"uint64"},{"name":"commission2Addr","type":"address"},{"name":"commission2Pct","type":"uint64"},{"name":"segmentRootAppId","type":"uint64"},{"name":"segmentRootCommissionAddr","type":"address"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"updateApplication","args":[{"name":"versionNum","type":"string"}],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]}},{"name":"gas","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"mintAsa","args":[{"name":"nfdName","type":"string"},{"name":"url","type":"string"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteFields","args":[{"name":"fieldNames","type":"byte[][]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateSegmentCount","args":[{"name":"childNfdName","type":"string"},{"name":"childNfdAppID","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getFieldUpdateCost","readonly":true,"args":[{"name":"fieldAndVals","type":"byte[][]"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateFields","args":[{"name":"fieldAndVals","type":"byte[][]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"readField","readonly":true,"args":[{"name":"fieldName","type":"byte[]"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]}},{"name":"offerForSale","args":[{"name":"sellAmount","type":"uint64"},{"name":"reservedFor","type":"address"}],"returns":{"type":"void"},"events":[{"name":"nfd_offerForSale","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"seller","type":"address"},{"name":"amount","type":"uint64"},{"name":"reservedFor","type":"address"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"cancelSale","args":[],"returns":{"type":"void"},"events":[{"name":"nfd_saleCancelled","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"postOffer","args":[{"name":"offer","type":"uint64"},{"name":"note","type":"string"}],"returns":{"type":"void"},"events":[{"name":"nfd_postedOffer","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"sender","type":"address"},{"name":"amount","type":"uint64"},{"name":"note","type":"string"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"mintPayout","args":[{"name":"oneYearPrice","type":"uint64"},{"name":"segmentPlatformCostInAlgo","type":"uint64"}],"returns":{"type":"(uint64,address,uint64,address,uint64)","struct":"PayoutInfo"},"actions":{"create":[],"call":["NoOp"]}},{"name":"purchase","args":[{"name":"payment","type":"pay"}],"returns":{"type":"void"},"events":[{"name":"nfd_purchased","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"sellAmount","type":"uint64"},{"name":"offerAmount","type":"uint64"},{"name":"overpaymentRefund","type":"uint64"},{"name":"convFeeAddr","type":"address"},{"name":"convFeeAmount","type":"uint64"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"isAddressInField","readonly":true,"args":[{"name":"fieldName","type":"string"},{"name":"address","type":"address"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getRenewPrice","readonly":true,"args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateHash","args":[{"name":"hash","type":"byte[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"contractLock","args":[{"name":"lock","type":"bool"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"segmentLock","args":[{"name":"lock","type":"bool"},{"name":"usdPrice","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"vaultOptInLock","args":[{"name":"lock","type":"bool"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"vaultOptIn","args":[{"name":"assets","type":"uint64[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"vaultSend","args":[{"name":"amount","type":"uint64"},{"name":"receiver","type":"address"},{"name":"note","type":"string"},{"name":"asset","type":"uint64"},{"name":"otherAssets","type":"uint64[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"renew","desc":"Renew adds more time to an existing NFDs expiration, or renews it if expired.\n\n\nAs part of v2-v3 upgrade, the NFDs are converted from lifetime NFDs to renewal NFDs. The v2 contract is upgraded\nto v3, then renew is called on the (now v3) nfd to turn it into a renewal (note the if curExpiration === 0 check)\n\n\nIf already renewal, then it extends the current expiration time by the time specified (minimum 1 yr) (365 / price paid * mint price)\nExpirations can never be more than NFD_MAX_EXPIRATION_DAYS days in the future.\n\n\nIF the NFD is expired:\n    x The current owner can take it back over at base price - and NFD metadata doesn't have to be cleared - they\n    get it back as-is.\n    x If not current owner, then the price goes from high of base price * 10,000 down to base price over 24 hrs where\n    'buyer' has to pay at least that price.  The NFD MUST ALREADY HAVE ITS METADATA CLEARED!","args":[{"name":"payment","type":"pay","desc":"The payment transaction from which the renewal period is determined.."}],"returns":{"type":"void"},"events":[{"name":"nfd_saleCancelled","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"}],"desc":""},{"name":"nfd_renewed","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"origOwner","type":"address"},{"name":"buyer","type":"address"},{"name":"priceOneYear","type":"uint64"},{"name":"renewAmount","type":"uint64"},{"name":"expTime","type":"uint64"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"setPrimaryAddress","args":[{"name":"fieldName","type":"string"},{"name":"address","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"registryAddingVerifiedAddress","desc":"Approved call from registry instructing us to move the specified u.cav.xx field and add to the specified\nverified field.","args":[{"name":"fieldBeingVerified","type":"string","desc":"- MUST START with u.cav. (!)\ngets 'added' to 'set' in next arg - must be fixed-sized bytes"},{"name":"fieldSetName","type":"string","desc":"(must BE v.ca[...].as)"}],"returns":{"type":"bool","desc":"true if added or already present, false otherwise"},"events":[{"name":"nfd_addressLinked","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"address","type":"address"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"registryRemovingVerifiedAddress","desc":"Approved call from registry instructing us to REMOVE an address from the specified verified address set","args":[{"name":"fieldBeingChanged","type":"string","desc":"The field being changed in the address registry."},{"name":"address","type":"address","desc":"The address to be removed from the field."},{"name":"mbrRefundDest","type":"address","desc":"the address to send reclaimed MBR (if any)\n boolean - true if valid removed"}],"returns":{"type":"bool"},"events":[{"name":"nfd_addressUnlinked","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"address","type":"address"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}}],"events":[{"name":"nfd_offerForSale","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"seller","type":"address"},{"name":"amount","type":"uint64"},{"name":"reservedFor","type":"address"}],"desc":""},{"name":"nfd_saleCancelled","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"}],"desc":""},{"name":"nfd_postedOffer","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"sender","type":"address"},{"name":"amount","type":"uint64"},{"name":"note","type":"string"}],"desc":""},{"name":"nfd_purchased","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"sellAmount","type":"uint64"},{"name":"offerAmount","type":"uint64"},{"name":"overpaymentRefund","type":"uint64"},{"name":"convFeeAddr","type":"address"},{"name":"convFeeAmount","type":"uint64"}],"desc":""},{"name":"nfd_renewed","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"origOwner","type":"address"},{"name":"buyer","type":"address"},{"name":"priceOneYear","type":"uint64"},{"name":"renewAmount","type":"uint64"},{"name":"expTime","type":"uint64"}],"desc":""},{"name":"nfd_addressLinked","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"address","type":"address"}],"desc":""},{"name":"nfd_addressUnlinked","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"address","type":"address"}],"desc":""}],"arcs":[4,56],"structs":{"PayoutInfo":[{"name":"amountToSeller","type":"uint64"},{"name":"commissionAddress","type":"address"},{"name":"amountToCommission","type":"uint64"},{"name":"segmentRootOwner","type":"address"},{"name":"amountToSegmentRoot","type":"uint64"}]},"state":{"schema":{"global":{"bytes":30,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{"globalState":{"keyType":"AVMBytes","valueType":"AVMBytes"}},"local":{},"box":{"boxes":{"keyType":"AVMBytes","valueType":"AVMBytes"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[36],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[44],"errorMessage":"argument 0 (segmentRootCommissionAddr) for createApplication must be a address","teal":37},{"pc":[60],"errorMessage":"argument 3 (commission2Addr) for createApplication must be a address","teal":55},{"pc":[72],"errorMessage":"argument 5 (commission1Addr) for createApplication must be a address","teal":69},{"pc":[88],"errorMessage":"argument 8 (buyer) for createApplication must be a address","teal":87},{"pc":[96],"errorMessage":"argument 9 (seller) for createApplication must be a address","teal":97},{"pc":[117],"errorMessage":"caller must be NFD registry!","teal":122},{"pc":[217],"errorMessage":"commission must be between 1 and 50%","teal":224},{"pc":[251],"errorMessage":"commission must be between 1 and 50%","teal":262},{"pc":[382],"errorMessage":"parent commission address must be set if parent app id is set and parent is unlocked","teal":370},{"pc":[393],"errorMessage":"the segment commission agent should be the parent nfd's seller","teal":384},{"pc":[420],"errorMessage":"contract must be unlocked to upgrade","teal":420},{"pc":[426],"errorMessage":"caller must be NFD registry!","teal":429},{"pc":[449],"errorMessage":"can't still be in minting state","teal":459},{"pc":[467],"errorMessage":"NFD can't be expired for these v1/v2 operations","teal":481},{"pc":[731],"errorMessage":"unknown method","teal":677},{"pc":[768],"errorMessage":"caller must be NFD registry!","teal":721},{"pc":[959],"errorMessage":"field not removable or no permissions to remove","teal":942},{"pc":[963],"errorMessage":"box value does not exist: this.boxes(name).size","teal":950},{"pc":[1067],"errorMessage":"field not removable or no permissions to remove","teal":1075},{"pc":[1111],"errorMessage":"caller must be NFD registry!","teal":1130},{"pc":[1121],"errorMessage":"child NFD MUST still be in pre-claim state!","teal":1144},{"pc":[1144],"errorMessage":"passed in child name must match name in created nfd state","teal":1172},{"pc":[1177],"errorMessage":"parent must be suffix of child","teal":1209},{"pc":[1346],"errorMessage":"box value does not exist: this.boxes(name).size","teal":1381},{"pc":[1386],"errorMessage":"box value does not exist: this.boxes(name).size","teal":1423},{"pc":[1487],"errorMessage":"can't update fields if NFD expired","teal":1537},{"pc":[1615],"errorMessage":"invalid update call by registry","teal":1644},{"pc":[1717],"errorMessage":"field not updatable or no permissions to update","teal":1738},{"pc":[1763],"errorMessage":"can't update fields if NFD expired","teal":1799},{"pc":[1803],"errorMessage":"field not updatable or no permissions to update","teal":1844},{"pc":[1902],"errorMessage":"must be user-defined or verified field to fetch","teal":1953},{"pc":[1914],"errorMessage":"box value does not exist: this.boxes(fieldName).value","teal":1971},{"pc":[1944],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":2005},{"pc":[1994],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":2057},{"pc":[2021],"errorMessage":"argument 0 (reservedFor) for offerForSale must be a address","teal":2093},{"pc":[2039],"errorMessage":"can't sell if NFD expired","teal":2117},{"pc":[2089],"errorMessage":"can only be sold if no user-defined or verified properties remain","teal":2165},{"pc":[2106],"errorMessage":"must be sold for at least MIN amount","teal":2185},{"pc":[2252],"errorMessage":"can't update fields if NFD expired","teal":2323},{"pc":[2265],"errorMessage":"must be for sale","teal":2340},{"pc":[2420],"errorMessage":"caller must be NFD registry!","teal":2484},{"pc":[2652],"errorMessage":"argument 0 (payment) for purchase must be a pay transaction","teal":2751},{"pc":[2677],"errorMessage":"can't be expired","teal":2782},{"pc":[2681],"errorMessage":"must be for sale","teal":2789},{"pc":[2733],"errorMessage":"payment sender must be same as purchase caller","teal":2830},{"pc":[2749],"errorMessage":"Reserved owner set, but sender isn't the reserved address","teal":2853},{"pc":[2795],"errorMessage":"offer must be at least min amount","teal":2900},{"pc":[2801],"errorMessage":"offer must be at least sell amount","teal":2910},{"pc":[2823],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"amount\",\"expected\":\"origOfferamt\"}","teal":2935},{"pc":[2831],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":2944},{"pc":[3291],"errorMessage":"argument 0 (address) for isAddressInField must be a address","teal":3406},{"pc":[3336],"errorMessage":"box value does not exist: this.boxes(fieldName).value","teal":3458},{"pc":[3553],"errorMessage":"must pass 32-byte hash that isn't 0","teal":3711},{"pc":[3567],"errorMessage":"only txnlab or owner can request an nfd nft hash update","teal":3729},{"pc":[3603],"errorMessage":"argument 0 (lock) for contractLock must be a bool","teal":3782},{"pc":[3649],"errorMessage":"argument 1 (lock) for segmentLock must be a bool","teal":3835},{"pc":[3732],"errorMessage":"amount must be at least NFD_MIN_SEGMENT_USD dollars in algo","teal":3930},{"pc":[3747],"errorMessage":"argument 0 (lock) for vaultOptInLock must be a bool","teal":3952},{"pc":[3812],"errorMessage":"sender must be owner when vault locked","teal":4032},{"pc":[3817],"errorMessage":"part of opt-in for new asset, must have prior txn paying MBR","teal":4042},{"pc":[3830],"errorMessage":"transaction verification failed: {\"txn\":\"this.txnGroup[this.txn.groupIndex - 1]\",\"field\":\"typeEnum\",\"expected\":\"pay\"}","teal":4061},{"pc":[3838],"errorMessage":"transaction verification failed: {\"txn\":\"this.txnGroup[this.txn.groupIndex - 1]\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":4070},{"pc":[3853],"errorMessage":"transaction verification failed: {\"txn\":\"this.txnGroup[this.txn.groupIndex - 1]\",\"field\":\"amount\",\"expected\":\"100_000 * assets.length\"}","teal":4084},{"pc":[3954],"errorMessage":"argument 3 (receiver) for vaultSend must be a address","teal":4198},{"pc":[3994],"errorMessage":"can't specify other assets if sending algo from vault","teal":4247},{"pc":[4061],"errorMessage":"can only send one asset if amount == 0","teal":4329},{"pc":[4128],"errorMessage":"receiver must be owner","teal":4402},{"pc":[4237],"errorMessage":"argument 0 (payment) for renew must be a pay transaction","teal":4537},{"pc":[4256],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":4577},{"pc":[4386],"errorMessage":"can't claim expired nfd unless all metadata is cleared","teal":4706},{"pc":[4394],"errorMessage":"must pay at least minimum renewal price","teal":4719},{"pc":[4550],"errorMessage":"global state value does not exist: parentAppId.globalState(NFD_KEY_OWNER)","teal":4892},{"pc":[4716],"errorMessage":"argument 0 (address) for setPrimaryAddress must be a address","teal":5039},{"pc":[4802],"errorMessage":"caller must be NFD registry!","teal":5126},{"pc":[4820],"errorMessage":"field being verified MUST START with u.cav","teal":5140},{"pc":[4829],"errorMessage":"destination field MUST START with v.ca[....]","teal":5150},{"pc":[4844],"errorMessage":"destination field must end END with .as","teal":5165},{"pc":[4850],"errorMessage":"referenced field to add as verified address must have value in box storage","teal":5178},{"pc":[4859],"errorMessage":"box value does not exist: this.boxes(fieldBeingVerified).value","teal":5193},{"pc":[4924],"errorMessage":"argument 0 (mbrRefundDest) for registryRemovingVerifiedAddress must be a address","teal":5253},{"pc":[4932],"errorMessage":"argument 1 (address) for registryRemovingVerifiedAddress must be a address","teal":5263},{"pc":[4962],"errorMessage":"caller must be NFD registry!","teal":5302},{"pc":[4974],"errorMessage":"can't be for sale","teal":5318},{"pc":[4983],"errorMessage":"verified field MUST START with v.ca[....]","teal":5329},{"pc":[4998],"errorMessage":"verified field must end END with .as","teal":5347},{"pc":[5007],"errorMessage":"box value does not exist: this.boxes(fieldBeingChanged).size","teal":5362},{"pc":[5175],"errorMessage":"sender must be owner","teal":5542},{"pc":[5180],"errorMessage":"part of opt-in for new asset, must have prior txn paying MBR","teal":5552},{"pc":[5193],"errorMessage":"transaction verification failed: {\"txn\":\"this.txnGroup[this.txn.groupIndex - 1]\",\"field\":\"typeEnum\",\"expected\":\"pay\"}","teal":5571},{"pc":[5201],"errorMessage":"transaction verification failed: {\"txn\":\"this.txnGroup[this.txn.groupIndex - 1]\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":5580},{"pc":[5214],"errorMessage":"transaction verification failed: {\"txn\":\"this.txnGroup[this.txn.groupIndex - 1]\",\"field\":\"amount\",\"expected\":\"100_000 * (this.txn.numAppArgs - 1)\"}","teal":5593},{"pc":[5317],"errorMessage":"global state value does not exist: AppID.fromUint64(appId).globalState(key)","teal":5730},{"pc":[5371],"errorMessage":"internal fields can never be deleted","teal":5796},{"pc":[5388],"errorMessage":"must be owned","teal":5820},{"pc":[5400],"errorMessage":"can't be for sale","teal":5836},{"pc":[5471],"errorMessage":"internal fields can never be updated","teal":5920},{"pc":[5526],"errorMessage":"must be owned","teal":5977},{"pc":[5531],"errorMessage":"can't be for sale","teal":5985},{"pc":[5537],"errorMessage":"sender must be owner","teal":5995},{"pc":[5567],"errorMessage":"updating v.caAlgo field isn't allowed via regular field update","teal":6031},{"pc":[5688],"errorMessage":"can't be for sale","teal":6176},{"pc":[5693],"errorMessage":"can't be expired","teal":6184},{"pc":[5778],"errorMessage":"max expiration exceeded parameters defined by registry","teal":6296},{"pc":[5946],"errorMessage":"box value does not exist: this.boxes(key).value","teal":6529},{"pc":[5961],"errorMessage":"address 'set' should already have at least two values","teal":6547},{"pc":[6029],"errorMessage":"address must be found in set in order to move it","teal":6629},{"pc":[6095],"errorMessage":"box value does not exist: this.boxes(key).value","teal":6712},{"pc":[6114],"errorMessage":"existing set must be multiple of key being added","teal":6733},{"pc":[6221],"errorMessage":"box value does not exist: this.boxes(key).value","teal":6869},{"pc":[6390],"errorMessage":"sender must be owner","teal":7078},{"pc":[6405],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":7087},{"pc":[6621],"errorMessage":"this contract does not implement the given ABI method for call UpdateApplication","teal":7128}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"NFDInstance","desc":"","methods":[{"name":"createApplication","args":[{"name":"nfdName","type":"string"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"purchaseAmount","type":"uint64"},{"name":"expTime","type":"uint64"},{"name":"commission1Addr","type":"address"},{"name":"commission1Pct","type":"uint64"},{"name":"commission2Addr","type":"address"},{"name":"commission2Pct","type":"uint64"},{"name":"segmentRootAppId","type":"uint64"},{"name":"segmentRootCommissionAddr","type":"address"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"updateApplication","args":[{"name":"versionNum","type":"string"}],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]}},{"name":"gas","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"mintAsa","args":[{"name":"nfdName","type":"string"},{"name":"url","type":"string"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteFields","args":[{"name":"fieldNames","type":"byte[][]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateSegmentCount","args":[{"name":"childNfdName","type":"string"},{"name":"childNfdAppID","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getFieldUpdateCost","readonly":true,"args":[{"name":"fieldAndVals","type":"byte[][]"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateFields","args":[{"name":"fieldAndVals","type":"byte[][]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"readField","readonly":true,"args":[{"name":"fieldName","type":"byte[]"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]}},{"name":"offerForSale","args":[{"name":"sellAmount","type":"uint64"},{"name":"reservedFor","type":"address"}],"returns":{"type":"void"},"events":[{"name":"nfd_offerForSale","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"seller","type":"address"},{"name":"amount","type":"uint64"},{"name":"reservedFor","type":"address"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"cancelSale","args":[],"returns":{"type":"void"},"events":[{"name":"nfd_saleCancelled","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"postOffer","args":[{"name":"offer","type":"uint64"},{"name":"note","type":"string"}],"returns":{"type":"void"},"events":[{"name":"nfd_postedOffer","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"sender","type":"address"},{"name":"amount","type":"uint64"},{"name":"note","type":"string"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"mintPayout","args":[{"name":"oneYearPrice","type":"uint64"},{"name":"segmentPlatformCostInAlgo","type":"uint64"}],"returns":{"type":"(uint64,address,uint64,address,uint64)","struct":"PayoutInfo"},"actions":{"create":[],"call":["NoOp"]}},{"name":"purchase","args":[{"name":"payment","type":"pay"}],"returns":{"type":"void"},"events":[{"name":"nfd_purchased","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"sellAmount","type":"uint64"},{"name":"offerAmount","type":"uint64"},{"name":"overpaymentRefund","type":"uint64"},{"name":"convFeeAddr","type":"address"},{"name":"convFeeAmount","type":"uint64"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"isAddressInField","readonly":true,"args":[{"name":"fieldName","type":"string"},{"name":"address","type":"address"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getRenewPrice","readonly":true,"args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateHash","args":[{"name":"hash","type":"byte[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"contractLock","args":[{"name":"lock","type":"bool"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"segmentLock","args":[{"name":"lock","type":"bool"},{"name":"usdPrice","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"vaultOptInLock","args":[{"name":"lock","type":"bool"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"vaultOptIn","args":[{"name":"assets","type":"uint64[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"vaultSend","args":[{"name":"amount","type":"uint64"},{"name":"receiver","type":"address"},{"name":"note","type":"string"},{"name":"asset","type":"uint64"},{"name":"otherAssets","type":"uint64[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"renew","desc":"Renew adds more time to an existing NFDs expiration, or renews it if expired.\n\n\nAs part of v2-v3 upgrade, the NFDs are converted from lifetime NFDs to renewal NFDs. The v2 contract is upgraded\nto v3, then renew is called on the (now v3) nfd to turn it into a renewal (note the if curExpiration === 0 check)\n\n\nIf already renewal, then it extends the current expiration time by the time specified (minimum 1 yr) (365 / price paid * mint price)\nExpirations can never be more than NFD_MAX_EXPIRATION_DAYS days in the future.\n\n\nIF the NFD is expired:\n    x The current owner can take it back over at base price - and NFD metadata doesn't have to be cleared - they\n    get it back as-is.\n    x If not current owner, then the price goes from high of base price * 10,000 down to base price over 24 hrs where\n    'buyer' has to pay at least that price.  The NFD MUST ALREADY HAVE ITS METADATA CLEARED!","args":[{"name":"payment","type":"pay","desc":"The payment transaction from which the renewal period is determined.."}],"returns":{"type":"void"},"events":[{"name":"nfd_saleCancelled","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"}],"desc":""},{"name":"nfd_renewed","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"origOwner","type":"address"},{"name":"buyer","type":"address"},{"name":"priceOneYear","type":"uint64"},{"name":"renewAmount","type":"uint64"},{"name":"expTime","type":"uint64"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"setPrimaryAddress","args":[{"name":"fieldName","type":"string"},{"name":"address","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"registryAddingVerifiedAddress","desc":"Approved call from registry instructing us to move the specified u.cav.xx field and add to the specified\nverified field.","args":[{"name":"fieldBeingVerified","type":"string","desc":"- MUST START with u.cav. (!)\ngets 'added' to 'set' in next arg - must be fixed-sized bytes"},{"name":"fieldSetName","type":"string","desc":"(must BE v.ca[...].as)"}],"returns":{"type":"bool","desc":"true if added or already present, false otherwise"},"events":[{"name":"nfd_addressLinked","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"address","type":"address"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}},{"name":"registryRemovingVerifiedAddress","desc":"Approved call from registry instructing us to REMOVE an address from the specified verified address set","args":[{"name":"fieldBeingChanged","type":"string","desc":"The field being changed in the address registry."},{"name":"address","type":"address","desc":"The address to be removed from the field."},{"name":"mbrRefundDest","type":"address","desc":"the address to send reclaimed MBR (if any)\n boolean - true if valid removed"}],"returns":{"type":"bool"},"events":[{"name":"nfd_addressUnlinked","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"address","type":"address"}],"desc":""}],"actions":{"create":[],"call":["NoOp"]}}],"events":[{"name":"nfd_offerForSale","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"seller","type":"address"},{"name":"amount","type":"uint64"},{"name":"reservedFor","type":"address"}],"desc":""},{"name":"nfd_saleCancelled","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"}],"desc":""},{"name":"nfd_postedOffer","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"sender","type":"address"},{"name":"amount","type":"uint64"},{"name":"note","type":"string"}],"desc":""},{"name":"nfd_purchased","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"sellAmount","type":"uint64"},{"name":"offerAmount","type":"uint64"},{"name":"overpaymentRefund","type":"uint64"},{"name":"convFeeAddr","type":"address"},{"name":"convFeeAmount","type":"uint64"}],"desc":""},{"name":"nfd_renewed","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"origOwner","type":"address"},{"name":"buyer","type":"address"},{"name":"priceOneYear","type":"uint64"},{"name":"renewAmount","type":"uint64"},{"name":"expTime","type":"uint64"}],"desc":""},{"name":"nfd_addressLinked","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"address","type":"address"}],"desc":""},{"name":"nfd_addressUnlinked","args":[{"name":"appId","type":"uint64"},{"name":"name","type":"string"},{"name":"address","type":"address"}],"desc":""}],"arcs":[4,56],"structs":{"PayoutInfo":[{"name":"amountToSeller","type":"uint64"},{"name":"commissionAddress","type":"address"},{"name":"amountToCommission","type":"uint64"},{"name":"segmentRootOwner","type":"address"},{"name":"amountToSegmentRoot","type":"uint64"}]},"state":{"schema":{"global":{"bytes":30,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{"globalState":{"keyType":"AVMBytes","valueType":"AVMBytes"}},"local":{},"box":{"boxes":{"keyType":"AVMBytes","valueType":"AVMBytes"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[36],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[44],"errorMessage":"argument 0 (segmentRootCommissionAddr) for createApplication must be a address","teal":37},{"pc":[60],"errorMessage":"argument 3 (commission2Addr) for createApplication must be a address","teal":55},{"pc":[72],"errorMessage":"argument 5 (commission1Addr) for createApplication must be a address","teal":69},{"pc":[88],"errorMessage":"argument 8 (buyer) for createApplication must be a address","teal":87},{"pc":[96],"errorMessage":"argument 9 (seller) for createApplication must be a address","teal":97},{"pc":[117],"errorMessage":"caller must be NFD registry!","teal":122},{"pc":[217],"errorMessage":"commission must be between 1 and 50%","teal":224},{"pc":[251],"errorMessage":"commission must be between 1 and 50%","teal":262},{"pc":[382],"errorMessage":"parent commission address must be set if parent app id is set and parent is unlocked","teal":370},{"pc":[393],"errorMessage":"the segment commission agent should be the parent nfd's seller","teal":384},{"pc":[420],"errorMessage":"contract must be unlocked to upgrade","teal":420},{"pc":[426],"errorMessage":"caller must be NFD registry!","teal":429},{"pc":[449],"errorMessage":"can't still be in minting state","teal":459},{"pc":[467],"errorMessage":"NFD can't be expired for these v1/v2 operations","teal":481},{"pc":[731],"errorMessage":"unknown method","teal":677},{"pc":[768],"errorMessage":"caller must be NFD registry!","teal":721},{"pc":[959],"errorMessage":"field not removable or no permissions to remove","teal":942},{"pc":[963],"errorMessage":"box value does not exist: this.boxes(name).size","teal":950},{"pc":[1067],"errorMessage":"field not removable or no permissions to remove","teal":1075},{"pc":[1111],"errorMessage":"caller must be NFD registry!","teal":1130},{"pc":[1121],"errorMessage":"child NFD MUST still be in pre-claim state!","teal":1144},{"pc":[1144],"errorMessage":"passed in child name must match name in created nfd state","teal":1172},{"pc":[1177],"errorMessage":"parent must be suffix of child","teal":1209},{"pc":[1346],"errorMessage":"box value does not exist: this.boxes(name).size","teal":1381},{"pc":[1386],"errorMessage":"box value does not exist: this.boxes(name).size","teal":1423},{"pc":[1487],"errorMessage":"can't update fields if NFD expired","teal":1537},{"pc":[1615],"errorMessage":"invalid update call by registry","teal":1644},{"pc":[1717],"errorMessage":"field not updatable or no permissions to update","teal":1738},{"pc":[1763],"errorMessage":"can't update fields if NFD expired","teal":1799},{"pc":[1803],"errorMessage":"field not updatable or no permissions to update","teal":1844},{"pc":[1902],"errorMessage":"must be user-defined or verified field to fetch","teal":1953},{"pc":[1914],"errorMessage":"box value does not exist: this.boxes(fieldName).value","teal":1971},{"pc":[1944],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":2005},{"pc":[1994],"errorMessage":"box value does not exist: this.boxes(boxName).value","teal":2057},{"pc":[2021],"errorMessage":"argument 0 (reservedFor) for offerForSale must be a address","teal":2093},{"pc":[2039],"errorMessage":"can't sell if NFD expired","teal":2117},{"pc":[2089],"errorMessage":"can only be sold if no user-defined or verified properties remain","teal":2165},{"pc":[2106],"errorMessage":"must be sold for at least MIN amount","teal":2185},{"pc":[2252],"errorMessage":"can't update fields if NFD expired","teal":2323},{"pc":[2265],"errorMessage":"must be for sale","teal":2340},{"pc":[2420],"errorMessage":"caller must be NFD registry!","teal":2484},{"pc":[2652],"errorMessage":"argument 0 (payment) for purchase must be a pay transaction","teal":2751},{"pc":[2677],"errorMessage":"can't be expired","teal":2782},{"pc":[2681],"errorMessage":"must be for sale","teal":2789},{"pc":[2733],"errorMessage":"payment sender must be same as purchase caller","teal":2830},{"pc":[2749],"errorMessage":"Reserved owner set, but sender isn't the reserved address","teal":2853},{"pc":[2795],"errorMessage":"offer must be at least min amount","teal":2900},{"pc":[2801],"errorMessage":"offer must be at least sell amount","teal":2910},{"pc":[2823],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"amount\",\"expected\":\"origOfferamt\"}","teal":2935},{"pc":[2831],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":2944},{"pc":[3291],"errorMessage":"argument 0 (address) for isAddressInField must be a address","teal":3406},{"pc":[3336],"errorMessage":"box value does not exist: this.boxes(fieldName).value","teal":3458},{"pc":[3553],"errorMessage":"must pass 32-byte hash that isn't 0","teal":3711},{"pc":[3567],"errorMessage":"only txnlab or owner can request an nfd nft hash update","teal":3729},{"pc":[3603],"errorMessage":"argument 0 (lock) for contractLock must be a bool","teal":3782},{"pc":[3649],"errorMessage":"argument 1 (lock) for segmentLock must be a bool","teal":3835},{"pc":[3732],"errorMessage":"amount must be at least NFD_MIN_SEGMENT_USD dollars in algo","teal":3930},{"pc":[3747],"errorMessage":"argument 0 (lock) for vaultOptInLock must be a bool","teal":3952},{"pc":[3812],"errorMessage":"sender must be owner when vault locked","teal":4032},{"pc":[3817],"errorMessage":"part of opt-in for new asset, must have prior txn paying MBR","teal":4042},{"pc":[3830],"errorMessage":"transaction verification failed: {\"txn\":\"this.txnGroup[this.txn.groupIndex - 1]\",\"field\":\"typeEnum\",\"expected\":\"pay\"}","teal":4061},{"pc":[3838],"errorMessage":"transaction verification failed: {\"txn\":\"this.txnGroup[this.txn.groupIndex - 1]\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":4070},{"pc":[3853],"errorMessage":"transaction verification failed: {\"txn\":\"this.txnGroup[this.txn.groupIndex - 1]\",\"field\":\"amount\",\"expected\":\"100_000 * assets.length\"}","teal":4084},{"pc":[3954],"errorMessage":"argument 3 (receiver) for vaultSend must be a address","teal":4198},{"pc":[3994],"errorMessage":"can't specify other assets if sending algo from vault","teal":4247},{"pc":[4061],"errorMessage":"can only send one asset if amount == 0","teal":4329},{"pc":[4128],"errorMessage":"receiver must be owner","teal":4402},{"pc":[4237],"errorMessage":"argument 0 (payment) for renew must be a pay transaction","teal":4537},{"pc":[4256],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":4577},{"pc":[4386],"errorMessage":"can't claim expired nfd unless all metadata is cleared","teal":4706},{"pc":[4394],"errorMessage":"must pay at least minimum renewal price","teal":4719},{"pc":[4550],"errorMessage":"global state value does not exist: parentAppId.globalState(NFD_KEY_OWNER)","teal":4892},{"pc":[4716],"errorMessage":"argument 0 (address) for setPrimaryAddress must be a address","teal":5039},{"pc":[4802],"errorMessage":"caller must be NFD registry!","teal":5126},{"pc":[4820],"errorMessage":"field being verified MUST START with u.cav","teal":5140},{"pc":[4829],"errorMessage":"destination field MUST START with v.ca[....]","teal":5150},{"pc":[4844],"errorMessage":"destination field must end END with .as","teal":5165},{"pc":[4850],"errorMessage":"referenced field to add as verified address must have value in box storage","teal":5178},{"pc":[4859],"errorMessage":"box value does not exist: this.boxes(fieldBeingVerified).value","teal":5193},{"pc":[4924],"errorMessage":"argument 0 (mbrRefundDest) for registryRemovingVerifiedAddress must be a address","teal":5253},{"pc":[4932],"errorMessage":"argument 1 (address) for registryRemovingVerifiedAddress must be a address","teal":5263},{"pc":[4962],"errorMessage":"caller must be NFD registry!","teal":5302},{"pc":[4974],"errorMessage":"can't be for sale","teal":5318},{"pc":[4983],"errorMessage":"verified field MUST START with v.ca[....]","teal":5329},{"pc":[4998],"errorMessage":"verified field must end END with .as","teal":5347},{"pc":[5007],"errorMessage":"box value does not exist: this.boxes(fieldBeingChanged).size","teal":5362},{"pc":[5175],"errorMessage":"sender must be owner","teal":5542},{"pc":[5180],"errorMessage":"part of opt-in for new asset, must have prior txn paying MBR","teal":5552},{"pc":[5193],"errorMessage":"transaction verification failed: {\"txn\":\"this.txnGroup[this.txn.groupIndex - 1]\",\"field\":\"typeEnum\",\"expected\":\"pay\"}","teal":5571},{"pc":[5201],"errorMessage":"transaction verification failed: {\"txn\":\"this.txnGroup[this.txn.groupIndex - 1]\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":5580},{"pc":[5214],"errorMessage":"transaction verification failed: {\"txn\":\"this.txnGroup[this.txn.groupIndex - 1]\",\"field\":\"amount\",\"expected\":\"100_000 * (this.txn.numAppArgs - 1)\"}","teal":5593},{"pc":[5317],"errorMessage":"global state value does not exist: AppID.fromUint64(appId).globalState(key)","teal":5730},{"pc":[5371],"errorMessage":"internal fields can never be deleted","teal":5796},{"pc":[5388],"errorMessage":"must be owned","teal":5820},{"pc":[5400],"errorMessage":"can't be for sale","teal":5836},{"pc":[5471],"errorMessage":"internal fields can never be updated","teal":5920},{"pc":[5526],"errorMessage":"must be owned","teal":5977},{"pc":[5531],"errorMessage":"can't be for sale","teal":5985},{"pc":[5537],"errorMessage":"sender must be owner","teal":5995},{"pc":[5567],"errorMessage":"updating v.caAlgo field isn't allowed via regular field update","teal":6031},{"pc":[5688],"errorMessage":"can't be for sale","teal":6176},{"pc":[5693],"errorMessage":"can't be expired","teal":6184},{"pc":[5778],"errorMessage":"max expiration exceeded parameters defined by registry","teal":6296},{"pc":[5946],"errorMessage":"box value does not exist: this.boxes(key).value","teal":6529},{"pc":[5961],"errorMessage":"address 'set' should already have at least two values","teal":6547},{"pc":[6029],"errorMessage":"address must be found in set in order to move it","teal":6629},{"pc":[6095],"errorMessage":"box value does not exist: this.boxes(key).value","teal":6712},{"pc":[6114],"errorMessage":"existing set must be multiple of key being added","teal":6733},{"pc":[6221],"errorMessage":"box value does not exist: this.boxes(key).value","teal":6869},{"pc":[6390],"errorMessage":"sender must be owner","teal":7078},{"pc":[6405],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":7087},{"pc":[6621],"errorMessage":"this contract does not implement the given ABI method for call UpdateApplication","teal":7128}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"templateVariables":{"adminAsaId":{"type":"uint64"},"registryAppId":{"type":"uint64"}},"scratchVariables":{"adminAsaId":{"type":"uint64","slot":200},"registryAppId":{"type":"uint64","slot":201}}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -78,6 +78,14 @@ export type PayoutInfo = {
  */
 export function PayoutInfoFromTuple(abiTuple: [bigint, string, bigint, string, bigint]) {
   return getABIStructFromABITuple(abiTuple, APP_SPEC.structs.PayoutInfo, APP_SPEC.structs) as PayoutInfo
+}
+
+/**
+ * Deploy-time template variables
+ */
+export type TemplateVariables = {
+  adminAsaId: bigint,
+  registryAppId: bigint,
 }
 
 /**
@@ -471,11 +479,97 @@ export type GlobalKeysState = NfdInstanceTypes['state']['global']['keys']
 export type BoxKeysState = NfdInstanceTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type NfdInstanceCreateCallParams =
+  | Expand<CallParams<NfdInstanceArgs['obj']['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void'] | NfdInstanceArgs['tuple']['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<NfdInstanceArgs['obj']['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void'] | NfdInstanceArgs['tuple']['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void']> & {method: 'createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type NfdInstanceUpdateCallParams =
+  | Expand<CallParams<NfdInstanceArgs['obj']['updateApplication(string)void'] | NfdInstanceArgs['tuple']['updateApplication(string)void']> & {method: 'updateApplication'}>
+  | Expand<CallParams<NfdInstanceArgs['obj']['updateApplication(string)void'] | NfdInstanceArgs['tuple']['updateApplication(string)void']> & {method: 'updateApplication(string)void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type NfdInstanceDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: NfdInstanceCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: NfdInstanceUpdateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the NfdInstance smart contract
  */
 export abstract class NfdInstanceParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends NfdInstanceCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void':
+            return NfdInstanceParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the NFDInstance smart contract using the createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<NfdInstanceArgs['obj']['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void'] | NfdInstanceArgs['tuple']['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.nfdName, params.args.seller, params.args.buyer, params.args.purchaseAmount, params.args.expTime, params.args.commission1Addr, params.args.commission1Pct, params.args.commission2Addr, params.args.commission2Pct, params.args.segmentRootAppId, params.args.segmentRootCommissionAddr],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends NfdInstanceUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'updateApplication':
+          case 'updateApplication(string)void':
+            return NfdInstanceParamsFactory.update.updateApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the NFDInstance smart contract using the updateApplication(string)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateApplication(params: CallParams<NfdInstanceArgs['obj']['updateApplication(string)void'] | NfdInstanceArgs['tuple']['updateApplication(string)void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'updateApplication(string)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.versionNum],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the gas()void ABI method
    *
@@ -815,6 +909,164 @@ export abstract class NfdInstanceParamsFactory {
 }
 
 /**
+ * A factory to create and deploy one or more instance of the NFDInstance smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class NfdInstanceFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `NfdInstanceFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new NfdInstanceClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new NfdInstanceClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the NFDInstance smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: NfdInstanceDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? NfdInstanceParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (NfdInstanceCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? NfdInstanceParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (NfdInstanceUpdateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new NfdInstanceClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NFDInstance smart contract using the createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<NfdInstanceArgs['obj']['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void'] | NfdInstanceArgs['tuple']['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(NfdInstanceParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the NFDInstance smart contract using the updateApplication(string)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateApplication: (params: CallParams<NfdInstanceArgs['obj']['updateApplication(string)void'] | NfdInstanceArgs['tuple']['updateApplication(string)void']> & AppClientCompilationParams) => {
+        return this.appFactory.params.deployUpdate(NfdInstanceParamsFactory.update.updateApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NFDInstance smart contract using the createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<NfdInstanceArgs['obj']['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void'] | NfdInstanceArgs['tuple']['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(NfdInstanceParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NFDInstance smart contract using an ABI method call using the createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<NfdInstanceArgs['obj']['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void'] | NfdInstanceArgs['tuple']['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(NfdInstanceParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | NfdInstanceReturns['createApplication(string,address,address,uint64,uint64,address,uint64,address,uint64,uint64,address)void']) }, appClient: new NfdInstanceClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
+/**
  * A client to make calls to the NFDInstance smart contract
  */
 export class NfdInstanceClient {
@@ -901,6 +1153,22 @@ export class NfdInstanceClient {
    * Get parameters to create transactions for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
    */
   readonly params = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the NFDInstance smart contract using the `updateApplication(string)void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateApplication: (params: CallParams<NfdInstanceArgs['obj']['updateApplication(string)void'] | NfdInstanceArgs['tuple']['updateApplication(string)void']> & AppClientCompilationParams) => {
+        return this.appClient.params.update(NfdInstanceParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the NFDInstance smart contract.
      *
@@ -1190,6 +1458,22 @@ export class NfdInstanceClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the NFDInstance smart contract using the `updateApplication(string)void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateApplication: (params: CallParams<NfdInstanceArgs['obj']['updateApplication(string)void'] | NfdInstanceArgs['tuple']['updateApplication(string)void']> & AppClientCompilationParams) => {
+        return this.appClient.createTransaction.update(NfdInstanceParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the NFDInstance smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -1477,6 +1761,23 @@ export class NfdInstanceClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the NFDInstance smart contract using the `updateApplication(string)void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateApplication: async (params: CallParams<NfdInstanceArgs['obj']['updateApplication(string)void'] | NfdInstanceArgs['tuple']['updateApplication(string)void']> & AppClientCompilationParams & SendParams) => {
+        const result = await this.appClient.send.update(NfdInstanceParamsFactory.update.updateApplication(params))
+        return {...result, return: result.return as unknown as (undefined | NfdInstanceReturns['updateApplication(string)void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the NFDInstance smart contract.
      *
@@ -2103,6 +2404,15 @@ export class NfdInstanceClient {
         resultMappers.push((v) => client.decodeReturnValue('registryRemovingVerifiedAddress(string,address,address)bool', v))
         return this
       },
+      get update() {
+        return {
+          updateApplication: (params: CallParams<NfdInstanceArgs['obj']['updateApplication(string)void'] | NfdInstanceArgs['tuple']['updateApplication(string)void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the NFDInstance contract
        */
@@ -2377,6 +2687,20 @@ export type NfdInstanceComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   registryRemovingVerifiedAddress(params?: CallParams<NfdInstanceArgs['obj']['registryRemovingVerifiedAddress(string,address,address)bool'] | NfdInstanceArgs['tuple']['registryRemovingVerifiedAddress(string,address,address)bool']>): NfdInstanceComposer<[...TReturns, NfdInstanceReturns['registryRemovingVerifiedAddress(string,address,address)bool'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the NFDInstance smart contract using the updateApplication(string)void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateApplication(params?: CallParams<NfdInstanceArgs['obj']['updateApplication(string)void'] | NfdInstanceArgs['tuple']['updateApplication(string)void']>): NfdInstanceComposer<[...TReturns, NfdInstanceReturns['updateApplication(string)void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the NFDInstance smart contract.
