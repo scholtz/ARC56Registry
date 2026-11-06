@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"DIDAlgoStorage","desc":"","methods":[{"name":"startUpload","desc":"Allocate boxes to begin data upload process","args":[{"name":"pubKey","type":"address","desc":"The pubkey of the DID"},{"name":"numBoxes","type":"uint64","desc":"The number of boxes that the data will take up"},{"name":"endBoxSize","type":"uint64","desc":"The size of the last box"},{"name":"mbrPayment","type":"pay","desc":"Payment from the uploader to cover the box MBR"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"upload","desc":"Upload data to a specific offset in a box","args":[{"name":"pubKey","type":"address","desc":"The pubkey of the DID"},{"name":"boxIndex","type":"uint64","desc":"The index of the box to upload the given chunk of data to"},{"name":"offset","type":"uint64","desc":"The offset within the box to start writing the data"},{"name":"data","type":"byte[]","desc":"The data to write"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"finishUpload","desc":"Mark uploading as false","args":[{"name":"pubKey","type":"address","desc":"The address of the DID"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"startDelete","desc":"Starts the deletion process for the data associated with a DID","args":[{"name":"pubKey","type":"address","desc":"The address of the DID"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteData","desc":"Deletes a box of data","args":[{"name":"pubKey","type":"address","desc":"The address of the DID"},{"name":"boxIndex","type":"uint64","desc":"The index of the box to delete"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateApplication","desc":"Allow the contract to be updated by the creator","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]}},{"name":"dummy","desc":"Dummy function to add extra box references for deleteData.\nBoxes are 32k, but a single app call can only inlcude enough references to read/write 8k\nat a time. Thus when a box is deleted, we need to add additional dummy calls with box\nreferences to increase the total read/write budget to 32k.","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"Metadata":[{"name":"start","type":"uint64"},{"name":"end","type":"uint64"},{"name":"status","type":"uint8"},{"name":"endSize","type":"uint64"},{"name":"lastDeleted","type":"uint64"}]},"state":{"schema":{"global":{"bytes":0,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"currentIndex":{"key":"Y3VycmVudEluZGV4","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"dataBoxes":{"keyType":"uint64","valueType":"AVMBytes"},"metadata":{"keyType":"address","valueType":"Metadata"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[67],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[77],"errorMessage":"argument 0 (mbrPayment) for startUpload must be a pay transaction","teal":39},{"pc":[94],"errorMessage":"argument 3 (pubKey) for startUpload must be a address","teal":57},{"pc":[250],"errorMessage":"argument 3 (pubKey) for upload must be a address","teal":215},{"pc":[356],"errorMessage":"argument 0 (pubKey) for finishUpload must be a address","teal":338},{"pc":[387],"errorMessage":"argument 0 (pubKey) for startDelete must be a address","teal":379},{"pc":[436],"errorMessage":"argument 1 (pubKey) for deleteData must be a address","teal":442},{"pc":[617],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":657},{"pc":[671],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":670},{"pc":[685],"errorMessage":"this contract does not implement the given ABI method for call UpdateApplication","teal":678}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"DIDAlgoStorage","desc":"","methods":[{"name":"startUpload","desc":"Allocate boxes to begin data upload process","args":[{"name":"pubKey","type":"address","desc":"The pubkey of the DID"},{"name":"numBoxes","type":"uint64","desc":"The number of boxes that the data will take up"},{"name":"endBoxSize","type":"uint64","desc":"The size of the last box"},{"name":"mbrPayment","type":"pay","desc":"Payment from the uploader to cover the box MBR"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"upload","desc":"Upload data to a specific offset in a box","args":[{"name":"pubKey","type":"address","desc":"The pubkey of the DID"},{"name":"boxIndex","type":"uint64","desc":"The index of the box to upload the given chunk of data to"},{"name":"offset","type":"uint64","desc":"The offset within the box to start writing the data"},{"name":"data","type":"byte[]","desc":"The data to write"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"finishUpload","desc":"Mark uploading as false","args":[{"name":"pubKey","type":"address","desc":"The address of the DID"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"startDelete","desc":"Starts the deletion process for the data associated with a DID","args":[{"name":"pubKey","type":"address","desc":"The address of the DID"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteData","desc":"Deletes a box of data","args":[{"name":"pubKey","type":"address","desc":"The address of the DID"},{"name":"boxIndex","type":"uint64","desc":"The index of the box to delete"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateApplication","desc":"Allow the contract to be updated by the creator","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]}},{"name":"dummy","desc":"Dummy function to add extra box references for deleteData.\nBoxes are 32k, but a single app call can only inlcude enough references to read/write 8k\nat a time. Thus when a box is deleted, we need to add additional dummy calls with box\nreferences to increase the total read/write budget to 32k.","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"Metadata":[{"name":"start","type":"uint64"},{"name":"end","type":"uint64"},{"name":"status","type":"uint8"},{"name":"endSize","type":"uint64"},{"name":"lastDeleted","type":"uint64"}]},"state":{"schema":{"global":{"bytes":0,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"currentIndex":{"key":"Y3VycmVudEluZGV4","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"dataBoxes":{"keyType":"uint64","valueType":"AVMBytes"},"metadata":{"keyType":"address","valueType":"Metadata"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[67],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[77],"errorMessage":"argument 0 (mbrPayment) for startUpload must be a pay transaction","teal":39},{"pc":[94],"errorMessage":"argument 3 (pubKey) for startUpload must be a address","teal":57},{"pc":[250],"errorMessage":"argument 3 (pubKey) for upload must be a address","teal":215},{"pc":[356],"errorMessage":"argument 0 (pubKey) for finishUpload must be a address","teal":338},{"pc":[387],"errorMessage":"argument 0 (pubKey) for startDelete must be a address","teal":379},{"pc":[436],"errorMessage":"argument 1 (pubKey) for deleteData must be a address","teal":442},{"pc":[617],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":657},{"pc":[671],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":670},{"pc":[685],"errorMessage":"this contract does not implement the given ABI method for call UpdateApplication","teal":678}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDggMCAxNiAzMiA0MDAgMjUwMCAzMjc2OCAyNQpieXRlY2Jsb2NrIDB4IDB4NjM3NTcyNzI2NTZlNzQ0OTZlNjQ2NTc4CgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwNy4wCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIHRlbiBsaW5lcyBvZiBURUFMIGhhbmRsZSBpbml0aWFsIHByb2dyYW0gZmxvdwovLyBUaGlzIHBhdHRlcm4gaXMgdXNlZCB0byBtYWtlIGl0IGVhc3kgZm9yIGFueW9uZSB0byBwYXJzZSB0aGUgc3RhcnQgb2YgdGhlIHByb2dyYW0gYW5kIGRldGVybWluZSBpZiBhIHNwZWNpZmljIGFjdGlvbiBpcyBhbGxvd2VkCi8vIEhlcmUsIGFjdGlvbiByZWZlcnMgdG8gdGhlIE9uQ29tcGxldGUgaW4gY29tYmluYXRpb24gd2l0aCB3aGV0aGVyIHRoZSBhcHAgaXMgYmVpbmcgY3JlYXRlZCBvciBjYWxsZWQKLy8gRXZlcnkgcG9zc2libGUgYWN0aW9uIGZvciB0aGlzIGNvbnRyYWN0IGlzIHJlcHJlc2VudGVkIGluIHRoZSBzd2l0Y2ggc3RhdGVtZW50Ci8vIElmIHRoZSBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoZSBjb250cmFjdCwgaXRzIHJlc3BlY3RpdmUgYnJhbmNoIHdpbGwgYmUgIipOT1RfSU1QTEVNRU5URUQiIHdoaWNoIGp1c3QgY29udGFpbnMgImVyciIKdHhuIEFwcGxpY2F0aW9uSUQKIQpwdXNoaW50IDYKKgp0eG4gT25Db21wbGV0aW9uCisKc3dpdGNoICpjYWxsX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKmNhbGxfVXBkYXRlQXBwbGljYXRpb24gKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIHN0YXJ0VXBsb2FkKGFkZHJlc3MsdWludDY0LHVpbnQ2NCxwYXkpdm9pZAoqYWJpX3JvdXRlX3N0YXJ0VXBsb2FkOgoJLy8gbWJyUGF5bWVudDogcGF5Cgl0eG4gR3JvdXBJbmRleAoJaW50YyAwIC8vIDEKCS0KCWR1cAoJZ3R4bnMgVHlwZUVudW0KCWludGMgMCAvLyAgcGF5Cgk9PQoKCS8vIGFyZ3VtZW50IDAgKG1iclBheW1lbnQpIGZvciBzdGFydFVwbG9hZCBtdXN0IGJlIGEgcGF5IHRyYW5zYWN0aW9uCglhc3NlcnQKCgkvLyBlbmRCb3hTaXplOiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDMKCWJ0b2kKCgkvLyBudW1Cb3hlczogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglidG9pCgoJLy8gcHViS2V5OiBhZGRyZXNzCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyA0IC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDMgKHB1YktleSkgZm9yIHN0YXJ0VXBsb2FkIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBleGVjdXRlIHN0YXJ0VXBsb2FkKGFkZHJlc3MsdWludDY0LHVpbnQ2NCxwYXkpdm9pZAoJY2FsbHN1YiBzdGFydFVwbG9hZAoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gc3RhcnRVcGxvYWQocHViS2V5OiBBZGRyZXNzLCBudW1Cb3hlczogdWludDY0LCBlbmRCb3hTaXplOiB1aW50NjQsIG1iclBheW1lbnQ6IFBheVR4bik6IHZvaWQKLy8KLy8KLy8gQWxsb2NhdGUgYm94ZXMgdG8gYmVnaW4gZGF0YSB1cGxvYWQgcHJvY2VzcwovLwovLyBAcGFyYW0gcHViS2V5IFRoZSBwdWJrZXkgb2YgdGhlIERJRAovLyBAcGFyYW0gbnVtQm94ZXMgVGhlIG51bWJlciBvZiBib3hlcyB0aGF0IHRoZSBkYXRhIHdpbGwgdGFrZSB1cAovLyBAcGFyYW0gZW5kQm94U2l6ZSBUaGUgc2l6ZSBvZiB0aGUgbGFzdCBib3gKLy8gQHBhcmFtIG1iclBheW1lbnQgUGF5bWVudCBmcm9tIHRoZSB1cGxvYWRlciB0byBjb3ZlciB0aGUgYm94IE1CUgpzdGFydFVwbG9hZDoKCXByb3RvIDQgMAoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAwIC8vIDB4CglkdXBuIDMKCgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjYzCgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyID09PSBnbG9iYWxzLmNyZWF0b3JBZGRyZXNzKQoJdHhuIFNlbmRlcgoJZ2xvYmFsIENyZWF0b3JBZGRyZXNzCgk9PQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czo2NQoJLy8gc3RhcnRCb3ggPSB0aGlzLmN1cnJlbnRJbmRleC52YWx1ZQoJYnl0ZWMgMSAvLyAgImN1cnJlbnRJbmRleCIKCWFwcF9nbG9iYWxfZ2V0CglmcmFtZV9idXJ5IDAgLy8gc3RhcnRCb3g6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0cy9kaWQtYWxnby1zdG9yYWdlLmFsZ28udHM6NjYKCS8vIGVuZEJveCA9IHN0YXJ0Qm94ICsgbnVtQm94ZXMgLSAxCglmcmFtZV9kaWcgMCAvLyBzdGFydEJveDogdWludDY0CglmcmFtZV9kaWcgLTIgLy8gbnVtQm94ZXM6IHVpbnQ2NAoJKwoJaW50YyAwIC8vIDEKCS0KCWZyYW1lX2J1cnkgMSAvLyBlbmRCb3g6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0cy9kaWQtYWxnby1zdG9yYWdlLmFsZ28udHM6NjgKCS8vIG1ldGFkYXRhOiBNZXRhZGF0YSA9IHsKCS8vICAgICAgIHN0YXJ0OiBzdGFydEJveCwgZW5kOiBlbmRCb3gsIHN0YXR1czogVVBMT0FESU5HLCBlbmRTaXplOiBlbmRCb3hTaXplLCBsYXN0RGVsZXRlZDogMCwKCS8vICAgICB9CglmcmFtZV9kaWcgMCAvLyBzdGFydEJveDogdWludDY0CglpdG9iCglmcmFtZV9kaWcgMSAvLyBlbmRCb3g6IHVpbnQ2NAoJaXRvYgoJY29uY2F0CglwdXNoYnl0ZXMgMHgwMAoJY29uY2F0CglmcmFtZV9kaWcgLTMgLy8gZW5kQm94U2l6ZTogdWludDY0CglpdG9iCgljb25jYXQKCXB1c2hieXRlcyAweDAwMDAwMDAwMDAwMDAwMDAKCWNvbmNhdAoJZnJhbWVfYnVyeSAyIC8vIG1ldGFkYXRhOiBNZXRhZGF0YQoKCS8vIGNvbnRyYWN0cy9kaWQtYWxnby1zdG9yYWdlLmFsZ28udHM6NzIKCS8vIGFzc2VydCghdGhpcy5tZXRhZGF0YShwdWJLZXkpLmV4aXN0cykKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWJveF9sZW4KCXN3YXAKCXBvcAoJIQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czo3NAoJLy8gdGhpcy5tZXRhZGF0YShwdWJLZXkpLnZhbHVlID0gbWV0YWRhdGEKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWZyYW1lX2RpZyAyIC8vIG1ldGFkYXRhOiBNZXRhZGF0YQoJYm94X3B1dAoKCS8vIGNvbnRyYWN0cy9kaWQtYWxnby1zdG9yYWdlLmFsZ28udHM6NzYKCS8vIHRoaXMuY3VycmVudEluZGV4LnZhbHVlID0gZW5kQm94ICsgMQoJYnl0ZWMgMSAvLyAgImN1cnJlbnRJbmRleCIKCWZyYW1lX2RpZyAxIC8vIGVuZEJveDogdWludDY0CglpbnRjIDAgLy8gMQoJKwoJYXBwX2dsb2JhbF9wdXQKCgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjc4CgkvLyB0b3RhbENvc3QgPSBudW1Cb3hlcyAqIENPU1RfUEVSX0JPWCAvLyBjb3N0IG9mIGRhdGEgYm94ZXMKCS8vICAgICArIChudW1Cb3hlcyAtIDEpICogTUFYX0JPWF9TSVpFICogQ09TVF9QRVJfQllURSAvLyBjb3N0IG9mIGRhdGEKCS8vICAgICArIG51bUJveGVzICogOCAqIENPU1RfUEVSX0JZVEUgLy8gY29zdCBvZiBkYXRhIGtleXMKCS8vICAgICArIGVuZEJveFNpemUgKiBDT1NUX1BFUl9CWVRFIC8vIGNvc3Qgb2YgbGFzdCBkYXRhIGJveAoJLy8gICAgICsgQ09TVF9QRVJfQk9YICsgKDggKyA4ICsgMSArIDggKyAzMiArIDgpICogQ09TVF9QRVJfQllURQoJZnJhbWVfZGlnIC0yIC8vIG51bUJveGVzOiB1aW50NjQKCWludGMgNiAvLyAyNTAwCgkqCglmcmFtZV9kaWcgLTIgLy8gbnVtQm94ZXM6IHVpbnQ2NAoJaW50YyAwIC8vIDEKCS0KCWludGMgNyAvLyAzMjc2OAoJKgoJaW50YyA1IC8vIDQwMAoJKgoJKwoJZnJhbWVfZGlnIC0yIC8vIG51bUJveGVzOiB1aW50NjQKCWludGMgMSAvLyA4CgkqCglpbnRjIDUgLy8gNDAwCgkqCgkrCglmcmFtZV9kaWcgLTMgLy8gZW5kQm94U2l6ZTogdWludDY0CglpbnRjIDUgLy8gNDAwCgkqCgkrCglpbnRjIDYgLy8gMjUwMAoJKwoJcHVzaGludCAyNjAwMAoJKwoJZnJhbWVfYnVyeSAzIC8vIHRvdGFsQ29zdDogdWludDY0CgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czo4NAoJLy8gYXNzZXJ0KG1iclBheW1lbnQuYW1vdW50ID09PSB0b3RhbENvc3QpCglmcmFtZV9kaWcgLTQgLy8gbWJyUGF5bWVudDogUGF5VHhuCglndHhucyBBbW91bnQKCWZyYW1lX2RpZyAzIC8vIHRvdGFsQ29zdDogdWludDY0Cgk9PQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czo4NQoJLy8gYXNzZXJ0KG1iclBheW1lbnQucmVjZWl2ZXIgPT09IHRoaXMuYXBwLmFkZHJlc3MpCglmcmFtZV9kaWcgLTQgLy8gbWJyUGF5bWVudDogUGF5VHhuCglndHhucyBSZWNlaXZlcgoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCT09Cglhc3NlcnQKCXJldHN1YgoKLy8gdXBsb2FkKGFkZHJlc3MsdWludDY0LHVpbnQ2NCxieXRlW10pdm9pZAoqYWJpX3JvdXRlX3VwbG9hZDoKCS8vIGRhdGE6IGJ5dGVbXQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNAoJZXh0cmFjdCAyIDAKCgkvLyBvZmZzZXQ6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwoJYnRvaQoKCS8vIGJveEluZGV4OiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWJ0b2kKCgkvLyBwdWJLZXk6IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDQgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMyAocHViS2V5KSBmb3IgdXBsb2FkIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBleGVjdXRlIHVwbG9hZChhZGRyZXNzLHVpbnQ2NCx1aW50NjQsYnl0ZVtdKXZvaWQKCWNhbGxzdWIgdXBsb2FkCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyB1cGxvYWQocHViS2V5OiBBZGRyZXNzLCBib3hJbmRleDogdWludDY0LCBvZmZzZXQ6IHVpbnQ2NCwgZGF0YTogYnl0ZXMpOiB2b2lkCi8vCi8vCi8vIFVwbG9hZCBkYXRhIHRvIGEgc3BlY2lmaWMgb2Zmc2V0IGluIGEgYm94Ci8vCi8vIEBwYXJhbSBwdWJLZXkgVGhlIHB1YmtleSBvZiB0aGUgRElECi8vIEBwYXJhbSBib3hJbmRleCBUaGUgaW5kZXggb2YgdGhlIGJveCB0byB1cGxvYWQgdGhlIGdpdmVuIGNodW5rIG9mIGRhdGEgdG8KLy8gQHBhcmFtIG9mZnNldCBUaGUgb2Zmc2V0IHdpdGhpbiB0aGUgYm94IHRvIHN0YXJ0IHdyaXRpbmcgdGhlIGRhdGEKLy8gQHBhcmFtIGRhdGEgVGhlIGRhdGEgdG8gd3JpdGUKdXBsb2FkOgoJcHJvdG8gNCAwCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjk4CgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyID09PSBnbG9iYWxzLmNyZWF0b3JBZGRyZXNzKQoJdHhuIFNlbmRlcgoJZ2xvYmFsIENyZWF0b3JBZGRyZXNzCgk9PQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czoxMDAKCS8vIG1ldGFkYXRhID0gdGhpcy5tZXRhZGF0YShwdWJLZXkpLnZhbHVlCglmcmFtZV9kaWcgLTEgLy8gcHViS2V5OiBBZGRyZXNzCglmcmFtZV9idXJ5IDAgLy8gc3RvcmFnZSBrZXkvL21ldGFkYXRhCgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czoxMDEKCS8vIGFzc2VydChtZXRhZGF0YS5zdGF0dXMgPT09IFVQTE9BRElORykKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWludGMgMyAvLyAgaGVhZE9mZnNldAoJaW50YyAwIC8vIDEKCWJveF9leHRyYWN0CglidG9pCglpbnRjIDIgLy8gMAoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9kaWQtYWxnby1zdG9yYWdlLmFsZ28udHM6MTAyCgkvLyBhc3NlcnQobWV0YWRhdGEuc3RhcnQgPD0gYm94SW5kZXggJiYgYm94SW5kZXggPD0gbWV0YWRhdGEuZW5kKQoJZnJhbWVfZGlnIC0xIC8vIHB1YktleTogQWRkcmVzcwoJaW50YyAyIC8vIDAKCWludGMgMSAvLyA4Cglib3hfZXh0cmFjdAoJYnRvaQoJZnJhbWVfZGlnIC0yIC8vIGJveEluZGV4OiB1aW50NjQKCTw9CglkdXAKCWJ6ICpza2lwX2FuZDAKCWZyYW1lX2RpZyAtMiAvLyBib3hJbmRleDogdWludDY0CglmcmFtZV9kaWcgLTEgLy8gcHViS2V5OiBBZGRyZXNzCglpbnRjIDEgLy8gIGhlYWRPZmZzZXQKCWludGMgMSAvLyA4Cglib3hfZXh0cmFjdAoJYnRvaQoJPD0KCSYmCgoqc2tpcF9hbmQwOgoJYXNzZXJ0CgoJLy8gKmlmMF9jb25kaXRpb24KCS8vIGNvbnRyYWN0cy9kaWQtYWxnby1zdG9yYWdlLmFsZ28udHM6MTA0CgkvLyBvZmZzZXQgPT09IDAKCWZyYW1lX2RpZyAtMyAvLyBvZmZzZXQ6IHVpbnQ2NAoJaW50YyAyIC8vIDAKCT09CglieiAqaWYwX2VuZAoKCS8vICppZjBfY29uc2VxdWVudAoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czoxMDUKCS8vIHRoaXMuZGF0YUJveGVzKGJveEluZGV4KS5jcmVhdGUoYm94SW5kZXggPT09IG1ldGFkYXRhLmVuZCA/IG1ldGFkYXRhLmVuZFNpemUgOiBNQVhfQk9YX1NJWkUpCglmcmFtZV9kaWcgLTIgLy8gYm94SW5kZXg6IHVpbnQ2NAoJaXRvYgoJZnJhbWVfZGlnIC0yIC8vIGJveEluZGV4OiB1aW50NjQKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWludGMgMSAvLyAgaGVhZE9mZnNldAoJaW50YyAxIC8vIDgKCWJveF9leHRyYWN0CglidG9pCgk9PQoJYnogKnRlcm5hcnkwX2ZhbHNlCglmcmFtZV9kaWcgLTEgLy8gcHViS2V5OiBBZGRyZXNzCglwdXNoaW50IDE3IC8vIGhlYWRPZmZzZXQKCWludGMgMSAvLyA4Cglib3hfZXh0cmFjdAoJYnRvaQoJYiAqdGVybmFyeTBfZW5kCgoqdGVybmFyeTBfZmFsc2U6CglpbnRjIDcgLy8gMzI3NjgKCip0ZXJuYXJ5MF9lbmQ6Cglib3hfY3JlYXRlCglwb3AKCippZjBfZW5kOgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czoxMDgKCS8vIHRoaXMuZGF0YUJveGVzKGJveEluZGV4KS5yZXBsYWNlKG9mZnNldCwgZGF0YSkKCWZyYW1lX2RpZyAtMiAvLyBib3hJbmRleDogdWludDY0CglpdG9iCglmcmFtZV9kaWcgLTMgLy8gb2Zmc2V0OiB1aW50NjQKCWZyYW1lX2RpZyAtNCAvLyBkYXRhOiBieXRlcwoJYm94X3JlcGxhY2UKCXJldHN1YgoKLy8gZmluaXNoVXBsb2FkKGFkZHJlc3Mpdm9pZAoqYWJpX3JvdXRlX2ZpbmlzaFVwbG9hZDoKCS8vIHB1YktleTogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgNCAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChwdWJLZXkpIGZvciBmaW5pc2hVcGxvYWQgbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIGV4ZWN1dGUgZmluaXNoVXBsb2FkKGFkZHJlc3Mpdm9pZAoJY2FsbHN1YiBmaW5pc2hVcGxvYWQKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGZpbmlzaFVwbG9hZChwdWJLZXk6IEFkZHJlc3MpOiB2b2lkCi8vCi8vCi8vIE1hcmsgdXBsb2FkaW5nIGFzIGZhbHNlCi8vCi8vIEBwYXJhbSBwdWJLZXkgVGhlIGFkZHJlc3Mgb2YgdGhlIERJRApmaW5pc2hVcGxvYWQ6Cglwcm90byAxIDAKCgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjExOAoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gZ2xvYmFscy5jcmVhdG9yQWRkcmVzcykKCXR4biBTZW5kZXIKCWdsb2JhbCBDcmVhdG9yQWRkcmVzcwoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9kaWQtYWxnby1zdG9yYWdlLmFsZ28udHM6MTIwCgkvLyB0aGlzLm1ldGFkYXRhKHB1YktleSkudmFsdWUuc3RhdHVzID0gUkVBRFkKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWludGMgMyAvLyAgaGVhZE9mZnNldAoJcHVzaGJ5dGVzIDB4MDEKCWJveF9yZXBsYWNlCglyZXRzdWIKCi8vIHN0YXJ0RGVsZXRlKGFkZHJlc3Mpdm9pZAoqYWJpX3JvdXRlX3N0YXJ0RGVsZXRlOgoJLy8gcHViS2V5OiBhZGRyZXNzCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyA0IC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDAgKHB1YktleSkgZm9yIHN0YXJ0RGVsZXRlIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBleGVjdXRlIHN0YXJ0RGVsZXRlKGFkZHJlc3Mpdm9pZAoJY2FsbHN1YiBzdGFydERlbGV0ZQoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gc3RhcnREZWxldGUocHViS2V5OiBBZGRyZXNzKTogdm9pZAovLwovLyBTdGFydHMgdGhlIGRlbGV0aW9uIHByb2Nlc3MgZm9yIHRoZSBkYXRhIGFzc29jaWF0ZWQgd2l0aCBhIERJRAovLwovLyBAcGFyYW0gcHViS2V5IFRoZSBhZGRyZXNzIG9mIHRoZSBESUQKc3RhcnREZWxldGU6Cglwcm90byAxIDAKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgMCAvLyAweAoKCS8vIGNvbnRyYWN0cy9kaWQtYWxnby1zdG9yYWdlLmFsZ28udHM6MTI5CgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyID09PSBnbG9iYWxzLmNyZWF0b3JBZGRyZXNzKQoJdHhuIFNlbmRlcgoJZ2xvYmFsIENyZWF0b3JBZGRyZXNzCgk9PQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czoxMzEKCS8vIG1ldGFkYXRhID0gdGhpcy5tZXRhZGF0YShwdWJLZXkpLnZhbHVlCglmcmFtZV9kaWcgLTEgLy8gcHViS2V5OiBBZGRyZXNzCglmcmFtZV9idXJ5IDAgLy8gc3RvcmFnZSBrZXkvL21ldGFkYXRhCgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czoxMzIKCS8vIGFzc2VydChtZXRhZGF0YS5zdGF0dXMgPT09IFJFQURZKQoJZnJhbWVfZGlnIC0xIC8vIHB1YktleTogQWRkcmVzcwoJaW50YyAzIC8vICBoZWFkT2Zmc2V0CglpbnRjIDAgLy8gMQoJYm94X2V4dHJhY3QKCWJ0b2kKCWludGMgMCAvLyAxCgk9PQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czoxMzQKCS8vIG1ldGFkYXRhLnN0YXR1cyA9IERFTEVUSU5HCglmcmFtZV9kaWcgMCAvLyBzdG9yYWdlIGtleS8vbWV0YWRhdGEKCWludGMgMyAvLyAgaGVhZE9mZnNldAoJcHVzaGJ5dGVzIDB4MDIKCWJveF9yZXBsYWNlCglyZXRzdWIKCi8vIGRlbGV0ZURhdGEoYWRkcmVzcyx1aW50NjQpdm9pZAoqYWJpX3JvdXRlX2RlbGV0ZURhdGE6CgkvLyBib3hJbmRleDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglidG9pCgoJLy8gcHViS2V5OiBhZGRyZXNzCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyA0IC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDEgKHB1YktleSkgZm9yIGRlbGV0ZURhdGEgbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIGV4ZWN1dGUgZGVsZXRlRGF0YShhZGRyZXNzLHVpbnQ2NCl2b2lkCgljYWxsc3ViIGRlbGV0ZURhdGEKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGRlbGV0ZURhdGEocHViS2V5OiBBZGRyZXNzLCBib3hJbmRleDogdWludDY0KTogdm9pZAovLwovLyBEZWxldGVzIGEgYm94IG9mIGRhdGEKLy8KLy8gQHBhcmFtIHB1YktleSBUaGUgYWRkcmVzcyBvZiB0aGUgRElECi8vIEBwYXJhbSBib3hJbmRleCBUaGUgaW5kZXggb2YgdGhlIGJveCB0byBkZWxldGUKZGVsZXRlRGF0YToKCXByb3RvIDIgMAoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAwIC8vIDB4CglkdXAKCgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjE0NAoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gZ2xvYmFscy5jcmVhdG9yQWRkcmVzcykKCXR4biBTZW5kZXIKCWdsb2JhbCBDcmVhdG9yQWRkcmVzcwoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9kaWQtYWxnby1zdG9yYWdlLmFsZ28udHM6MTQ2CgkvLyBtZXRhZGF0YSA9IHRoaXMubWV0YWRhdGEocHViS2V5KS52YWx1ZQoJZnJhbWVfZGlnIC0xIC8vIHB1YktleTogQWRkcmVzcwoJZnJhbWVfYnVyeSAwIC8vIHN0b3JhZ2Uga2V5Ly9tZXRhZGF0YQoKCS8vIGNvbnRyYWN0cy9kaWQtYWxnby1zdG9yYWdlLmFsZ28udHM6MTQ3CgkvLyBhc3NlcnQobWV0YWRhdGEuc3RhdHVzID09PSBERUxFVElORykKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWludGMgMyAvLyAgaGVhZE9mZnNldAoJaW50YyAwIC8vIDEKCWJveF9leHRyYWN0CglidG9pCglwdXNoaW50IDIKCT09Cglhc3NlcnQKCgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjE0OAoJLy8gYXNzZXJ0KG1ldGFkYXRhLnN0YXJ0IDw9IGJveEluZGV4ICYmIGJveEluZGV4IDw9IG1ldGFkYXRhLmVuZCkKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWludGMgMiAvLyAwCglpbnRjIDEgLy8gOAoJYm94X2V4dHJhY3QKCWJ0b2kKCWZyYW1lX2RpZyAtMiAvLyBib3hJbmRleDogdWludDY0Cgk8PQoJZHVwCglieiAqc2tpcF9hbmQxCglmcmFtZV9kaWcgLTIgLy8gYm94SW5kZXg6IHVpbnQ2NAoJZnJhbWVfZGlnIC0xIC8vIHB1YktleTogQWRkcmVzcwoJaW50YyAxIC8vICBoZWFkT2Zmc2V0CglpbnRjIDEgLy8gOAoJYm94X2V4dHJhY3QKCWJ0b2kKCTw9CgkmJgoKKnNraXBfYW5kMToKCWFzc2VydAoKCS8vICppZjFfY29uZGl0aW9uCgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjE1MAoJLy8gYm94SW5kZXggIT09IG1ldGFkYXRhLnN0YXJ0CglmcmFtZV9kaWcgLTIgLy8gYm94SW5kZXg6IHVpbnQ2NAoJZnJhbWVfZGlnIC0xIC8vIHB1YktleTogQWRkcmVzcwoJaW50YyAyIC8vIDAKCWludGMgMSAvLyA4Cglib3hfZXh0cmFjdAoJYnRvaQoJIT0KCWJ6ICppZjFfZW5kCgoJLy8gKmlmMV9jb25zZXF1ZW50CgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjE1MAoJLy8gYXNzZXJ0KG1ldGFkYXRhLmxhc3REZWxldGVkID09PSBib3hJbmRleCAtIDEpCglmcmFtZV9kaWcgLTEgLy8gcHViS2V5OiBBZGRyZXNzCglpbnRjIDggLy8gIGhlYWRPZmZzZXQKCWludGMgMSAvLyA4Cglib3hfZXh0cmFjdAoJYnRvaQoJZnJhbWVfZGlnIC0yIC8vIGJveEluZGV4OiB1aW50NjQKCWludGMgMCAvLyAxCgktCgk9PQoJYXNzZXJ0CgoqaWYxX2VuZDoKCS8vIGNvbnRyYWN0cy9kaWQtYWxnby1zdG9yYWdlLmFsZ28udHM6MTUyCgkvLyBwcmVNQlIgPSBnbG9iYWxzLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MubWluQmFsYW5jZQoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCWFjY3RfcGFyYW1zX2dldCBBY2N0TWluQmFsYW5jZQoJcG9wCglmcmFtZV9idXJ5IDEgLy8gcHJlTUJSOiB1aW50NjQKCgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjE1NAoJLy8gdGhpcy5kYXRhQm94ZXMoYm94SW5kZXgpLmRlbGV0ZSgpCglmcmFtZV9kaWcgLTIgLy8gYm94SW5kZXg6IHVpbnQ2NAoJaXRvYgoJYm94X2RlbAoKCS8vICppZjJfY29uZGl0aW9uCgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjE1NgoJLy8gYm94SW5kZXggPT09IG1ldGFkYXRhLmVuZAoJZnJhbWVfZGlnIC0yIC8vIGJveEluZGV4OiB1aW50NjQKCWZyYW1lX2RpZyAtMSAvLyBwdWJLZXk6IEFkZHJlc3MKCWludGMgMSAvLyAgaGVhZE9mZnNldAoJaW50YyAxIC8vIDgKCWJveF9leHRyYWN0CglidG9pCgk9PQoJYnogKmlmMl9lbHNlCgoJLy8gKmlmMl9jb25zZXF1ZW50CgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjE1NgoJLy8gdGhpcy5tZXRhZGF0YShwdWJLZXkpLmRlbGV0ZSgpCglmcmFtZV9kaWcgLTEgLy8gcHViS2V5OiBBZGRyZXNzCglib3hfZGVsCgliICppZjJfZW5kCgoqaWYyX2Vsc2U6CgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjE1NwoJLy8gbWV0YWRhdGEubGFzdERlbGV0ZWQgPSBib3hJbmRleAoJaW50YyA4IC8vICBoZWFkT2Zmc2V0CglmcmFtZV9kaWcgLTIgLy8gYm94SW5kZXg6IHVpbnQ2NAoJaXRvYgoJZnJhbWVfZGlnIDAgLy8gc3RvcmFnZSBrZXkvL21ldGFkYXRhCgljb3ZlciAyCglib3hfcmVwbGFjZQoKKmlmMl9lbmQ6CgkvLyBjb250cmFjdHMvZGlkLWFsZ28tc3RvcmFnZS5hbGdvLnRzOjE1OQoJLy8gc2VuZFBheW1lbnQoewoJLy8gICAgICAgYW1vdW50OiBwcmVNQlIgLSBnbG9iYWxzLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MubWluQmFsYW5jZSwKCS8vICAgICAgIHJlY2VpdmVyOiB0aGlzLnR4bi5zZW5kZXIsCgkvLyAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czoxNjAKCS8vIGFtb3VudDogcHJlTUJSIC0gZ2xvYmFscy5jdXJyZW50QXBwbGljYXRpb25BZGRyZXNzLm1pbkJhbGFuY2UKCWZyYW1lX2RpZyAxIC8vIHByZU1CUjogdWludDY0CglnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwoJYWNjdF9wYXJhbXNfZ2V0IEFjY3RNaW5CYWxhbmNlCglwb3AKCS0KCWl0eG5fZmllbGQgQW1vdW50CgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czoxNjEKCS8vIHJlY2VpdmVyOiB0aGlzLnR4bi5zZW5kZXIKCXR4biBTZW5kZXIKCWl0eG5fZmllbGQgUmVjZWl2ZXIKCgkvLyBGZWUgZmllbGQgbm90IHNldCwgZGVmYXVsdGluZyB0byAwCglpbnRjIDIgLy8gMAoJaXR4bl9maWVsZCBGZWUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CglyZXRzdWIKCi8vIHVwZGF0ZUFwcGxpY2F0aW9uKCl2b2lkCiphYmlfcm91dGVfdXBkYXRlQXBwbGljYXRpb246CgkvLyBleGVjdXRlIHVwZGF0ZUFwcGxpY2F0aW9uKCl2b2lkCgljYWxsc3ViIHVwZGF0ZUFwcGxpY2F0aW9uCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyB1cGRhdGVBcHBsaWNhdGlvbigpOiB2b2lkCi8vCi8vIEFsbG93IHRoZSBjb250cmFjdCB0byBiZSB1cGRhdGVkIGJ5IHRoZSBjcmVhdG9yCnVwZGF0ZUFwcGxpY2F0aW9uOgoJcHJvdG8gMCAwCgoJLy8gY29udHJhY3RzL2RpZC1hbGdvLXN0b3JhZ2UuYWxnby50czoxNjkKCS8vIGFzc2VydCh0aGlzLnR4bi5zZW5kZXIgPT09IGdsb2JhbHMuY3JlYXRvckFkZHJlc3MpCgl0eG4gU2VuZGVyCglnbG9iYWwgQ3JlYXRvckFkZHJlc3MKCT09Cglhc3NlcnQKCXJldHN1YgoKLy8gZHVtbXkoKXZvaWQKKmFiaV9yb3V0ZV9kdW1teToKCS8vIGV4ZWN1dGUgZHVtbXkoKXZvaWQKCWNhbGxzdWIgZHVtbXkKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGR1bW15KCk6IHZvaWQKLy8KLy8gRHVtbXkgZnVuY3Rpb24gdG8gYWRkIGV4dHJhIGJveCByZWZlcmVuY2VzIGZvciBkZWxldGVEYXRhLgovLyBCb3hlcyBhcmUgMzJrLCBidXQgYSBzaW5nbGUgYXBwIGNhbGwgY2FuIG9ubHkgaW5sY3VkZSBlbm91Z2ggcmVmZXJlbmNlcyB0byByZWFkL3dyaXRlIDhrCi8vIGF0IGEgdGltZS4gVGh1cyB3aGVuIGEgYm94IGlzIGRlbGV0ZWQsIHdlIG5lZWQgdG8gYWRkIGFkZGl0aW9uYWwgZHVtbXkgY2FsbHMgd2l0aCBib3gKLy8gcmVmZXJlbmNlcyB0byBpbmNyZWFzZSB0aGUgdG90YWwgcmVhZC93cml0ZSBidWRnZXQgdG8gMzJrLgpkdW1teToKCXByb3RvIDAgMAoJcmV0c3ViCgoqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uOgoJaW50YyAwIC8vIDEKCXJldHVybgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweDU2NWM2NzVkIC8vIG1ldGhvZCAic3RhcnRVcGxvYWQoYWRkcmVzcyx1aW50NjQsdWludDY0LHBheSl2b2lkIgoJcHVzaGJ5dGVzIDB4NGRiMWM0MTggLy8gbWV0aG9kICJ1cGxvYWQoYWRkcmVzcyx1aW50NjQsdWludDY0LGJ5dGVbXSl2b2lkIgoJcHVzaGJ5dGVzIDB4MGU3ODcyNTcgLy8gbWV0aG9kICJmaW5pc2hVcGxvYWQoYWRkcmVzcyl2b2lkIgoJcHVzaGJ5dGVzIDB4YmQyYzg0ZTIgLy8gbWV0aG9kICJzdGFydERlbGV0ZShhZGRyZXNzKXZvaWQiCglwdXNoYnl0ZXMgMHg2ODkxYmE5MCAvLyBtZXRob2QgImRlbGV0ZURhdGEoYWRkcmVzcyx1aW50NjQpdm9pZCIKCXB1c2hieXRlcyAweGEzMGNlN2ZmIC8vIG1ldGhvZCAiZHVtbXkoKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX3N0YXJ0VXBsb2FkICphYmlfcm91dGVfdXBsb2FkICphYmlfcm91dGVfZmluaXNoVXBsb2FkICphYmlfcm91dGVfc3RhcnREZWxldGUgKmFiaV9yb3V0ZV9kZWxldGVEYXRhICphYmlfcm91dGVfZHVtbXkKCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY2FsbCBOb09wCgllcnIKCipjYWxsX1VwZGF0ZUFwcGxpY2F0aW9uOgoJcHVzaGJ5dGVzIDB4NDZmNzY1MzMgLy8gbWV0aG9kICJ1cGRhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfdXBkYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY2FsbCBVcGRhdGVBcHBsaWNhdGlvbgoJZXJy","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiAJAQgAECCQA8QTgIACGSYCAAxjdXJyZW50SW5kZXgxGBSBBgsxGQiNDAInAAAAAAAAAl0AAAIZAAAAAAAAAAAAAAAxFiIJSTgQIhJENhoDFzYaAhc2GgFJFSEEEkSIAAIiQ4oEAChHAzEAMgkSRClkjACLAIv+CCIJjAGLABaLARZQgAEAUIv9FlCACAAAAAAAAAAAUIwCi/+9TEgURIv/iwK/KYsBIghni/4hBguL/iIJIQcLIQULCIv+IwshBQsIi/0hBQsIIQYIgZDLAQiMA4v8OAiLAxJEi/w4BzIKEkSJNhoEVwIANhoDFzYaAhc2GgFJFSEEEkSIAAIiQ4oEACgxADIJEkSL/4wAi/8lIroXJBJEi/8kI7oXi/4OSUEACov+i/8jI7oXDhBEi/0kEkEAHYv+Fov+i/8jI7oXEkEACov/gREjuhdCAAIhB7lIi/4Wi/2L/LuJNhoBSRUhBBJEiAACIkOKAQAxADIJEkSL/yWAAQG7iTYaAUkVIQQSRIgAAiJDigEAKDEAMgkSRIv/jACL/yUiuhciEkSLACWAAQK7iTYaAhc2GgFJFSEEEkSIAAIiQ4oCAChJMQAyCRJEi/+MAIv/JSK6F4ECEkSL/yQjuheL/g5JQQAKi/6L/yMjuhcOEESL/ov/JCO6FxNBAA2L/yEII7oXi/4iCRJEMgpzAUiMAYv+FryL/ov/IyO6FxJBAAaL/7xCAAohCIv+FosATgK7sSKyEIsBMgpzAUgJsggxALIHJLIBs4mIAAIiQ4oAADEAMgkSRImIAAIiQ4oAAIkiQ4AEuER7NjYaAI4B//EAgARWXGddgARNscQYgAQOeHJXgAS9LITigARokbqQgASjDOf/NhoAjgb9pf5F/r3+3P8J/7IAgARG92UzNhoAjgH/lQA=","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -281,11 +281,97 @@ export type GlobalKeysState = DidAlgoStorageTypes['state']['global']['keys']
 export type BoxKeysState = DidAlgoStorageTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type DidAlgoStorageCreateCallParams =
+  | Expand<CallParams<DidAlgoStorageArgs['obj']['createApplication()void'] | DidAlgoStorageArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<DidAlgoStorageArgs['obj']['createApplication()void'] | DidAlgoStorageArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type DidAlgoStorageUpdateCallParams =
+  | Expand<CallParams<DidAlgoStorageArgs['obj']['updateApplication()void'] | DidAlgoStorageArgs['tuple']['updateApplication()void']> & {method: 'updateApplication'}>
+  | Expand<CallParams<DidAlgoStorageArgs['obj']['updateApplication()void'] | DidAlgoStorageArgs['tuple']['updateApplication()void']> & {method: 'updateApplication()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type DidAlgoStorageDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: DidAlgoStorageCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: DidAlgoStorageUpdateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the DidAlgoStorage smart contract
  */
 export abstract class DidAlgoStorageParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends DidAlgoStorageCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return DidAlgoStorageParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the DIDAlgoStorage smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<DidAlgoStorageArgs['obj']['createApplication()void'] | DidAlgoStorageArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends DidAlgoStorageUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'updateApplication':
+          case 'updateApplication()void':
+            return DidAlgoStorageParamsFactory.update.updateApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the DIDAlgoStorage smart contract using the updateApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateApplication(params: CallParams<DidAlgoStorageArgs['obj']['updateApplication()void'] | DidAlgoStorageArgs['tuple']['updateApplication()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'updateApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the startUpload(address,uint64,uint64,pay)void ABI method
    *
@@ -383,6 +469,166 @@ export abstract class DidAlgoStorageParamsFactory {
 }
 
 /**
+ * A factory to create and deploy one or more instance of the DIDAlgoStorage smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class DidAlgoStorageFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `DidAlgoStorageFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new DidAlgoStorageClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new DidAlgoStorageClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the DIDAlgoStorage smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: DidAlgoStorageDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? DidAlgoStorageParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (DidAlgoStorageCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? DidAlgoStorageParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (DidAlgoStorageUpdateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new DidAlgoStorageClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DIDAlgoStorage smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<DidAlgoStorageArgs['obj']['createApplication()void'] | DidAlgoStorageArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(DidAlgoStorageParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the DIDAlgoStorage smart contract using the updateApplication()void ABI method.
+       *
+       * Allow the contract to be updated by the creator
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateApplication: (params: CallParams<DidAlgoStorageArgs['obj']['updateApplication()void'] | DidAlgoStorageArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(DidAlgoStorageParamsFactory.update.updateApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DIDAlgoStorage smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<DidAlgoStorageArgs['obj']['createApplication()void'] | DidAlgoStorageArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(DidAlgoStorageParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DIDAlgoStorage smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<DidAlgoStorageArgs['obj']['createApplication()void'] | DidAlgoStorageArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(DidAlgoStorageParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | DidAlgoStorageReturns['createApplication()void']) }, appClient: new DidAlgoStorageClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
+/**
  * A client to make calls to the DIDAlgoStorage smart contract
  */
 export class DidAlgoStorageClient {
@@ -461,6 +707,24 @@ export class DidAlgoStorageClient {
    * Get parameters to create transactions for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
    */
   readonly params = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the DIDAlgoStorage smart contract using the `updateApplication()void` ABI method.
+       *
+       * Allow the contract to be updated by the creator
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateApplication: (params: CallParams<DidAlgoStorageArgs['obj']['updateApplication()void'] | DidAlgoStorageArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(DidAlgoStorageParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the DIDAlgoStorage smart contract.
      *
@@ -554,6 +818,24 @@ export class DidAlgoStorageClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the DIDAlgoStorage smart contract using the `updateApplication()void` ABI method.
+       *
+       * Allow the contract to be updated by the creator
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateApplication: (params: CallParams<DidAlgoStorageArgs['obj']['updateApplication()void'] | DidAlgoStorageArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(DidAlgoStorageParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the DIDAlgoStorage smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -645,6 +927,25 @@ export class DidAlgoStorageClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the DIDAlgoStorage smart contract using the `updateApplication()void` ABI method.
+       *
+       * Allow the contract to be updated by the creator
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateApplication: async (params: CallParams<DidAlgoStorageArgs['obj']['updateApplication()void'] | DidAlgoStorageArgs['tuple']['updateApplication()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(DidAlgoStorageParamsFactory.update.updateApplication(params))
+        return {...result, return: result.return as unknown as (undefined | DidAlgoStorageReturns['updateApplication()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the DIDAlgoStorage smart contract.
      *
@@ -866,6 +1167,15 @@ export class DidAlgoStorageClient {
         resultMappers.push(undefined)
         return this
       },
+      get update() {
+        return {
+          updateApplication: (params: CallParams<DidAlgoStorageArgs['obj']['updateApplication()void'] | DidAlgoStorageArgs['tuple']['updateApplication()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the DIDAlgoStorage contract
        */
@@ -970,6 +1280,20 @@ export type DidAlgoStorageComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   dummy(params?: CallParams<DidAlgoStorageArgs['obj']['dummy()void'] | DidAlgoStorageArgs['tuple']['dummy()void']>): DidAlgoStorageComposer<[...TReturns, DidAlgoStorageReturns['dummy()void'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the DIDAlgoStorage smart contract using the updateApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateApplication(params?: CallParams<DidAlgoStorageArgs['obj']['updateApplication()void'] | DidAlgoStorageArgs['tuple']['updateApplication()void']>): DidAlgoStorageComposer<[...TReturns, DidAlgoStorageReturns['updateApplication()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the DIDAlgoStorage smart contract.
