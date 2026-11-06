@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"TriviaPay","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Application creation","events":[],"recommendations":{}},{"name":"deposit","args":[{"type":"pay","name":"payment"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Deposit ALGO via grouped PaymentTxn to the app address.","events":[],"recommendations":{}},{"name":"pay","args":[{"type":"address","name":"recipient"},{"type":"uint64","name":"amount"},{"type":"string","name":"note"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Owner pays a recipient from escrow.","events":[],"recommendations":{}},{"name":"withdraw","args":[{"type":"uint64","name":"amount"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Owner withdraws funds back to themselves.","events":[],"recommendations":{}},{"name":"balance","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"get_owner","args":[],"returns":{"type":"address"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}}],"arcs":[22,28],"desc":"TriviaPay escrow / payment-pool contract (Algorand TypeScript / Puya).\r\n\r\nMethods:\r\n- createApplication(): bootstrap owner + counters\r\n- deposit(payment): group with a PaymentTxn to app address\r\n- pay(recipient, amount, note): owner-only payout from escrow\r\n- withdraw(amount): owner-only withdrawal back to owner\r\n- balance(): view total escrowed microAlgos\r\n- get_owner(): view owner account","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"owner":{"keyType":"AVMString","valueType":"address","key":"b3duZXI="},"totalDeposited":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWw="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[176,234],"errorMessage":"Amount must be > 0"},{"pc":[120],"errorMessage":"Deposit amount must be > 0"},{"pc":[185,243],"errorMessage":"Insufficient escrow balance"},{"pc":[28],"errorMessage":"OnCompletion must be NoOp"},{"pc":[173],"errorMessage":"Only owner can call pay()"},{"pc":[231],"errorMessage":"Only owner can withdraw"},{"pc":[116],"errorMessage":"Payment must go to this contract address"},{"pc":[124,171,180,226,238,269,280],"errorMessage":"check GlobalState exists"},{"pc":[154],"errorMessage":"invalid array length header"},{"pc":[162],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[139],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[147,219],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[109],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"TriviaPay","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Application creation","events":[],"recommendations":{}},{"name":"deposit","args":[{"type":"pay","name":"payment"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Deposit ALGO via grouped PaymentTxn to the app address.","events":[],"recommendations":{}},{"name":"pay","args":[{"type":"address","name":"recipient"},{"type":"uint64","name":"amount"},{"type":"string","name":"note"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Owner pays a recipient from escrow.","events":[],"recommendations":{}},{"name":"withdraw","args":[{"type":"uint64","name":"amount"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Owner withdraws funds back to themselves.","events":[],"recommendations":{}},{"name":"balance","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"get_owner","args":[],"returns":{"type":"address"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}}],"arcs":[22,28],"desc":"TriviaPay escrow / payment-pool contract (Algorand TypeScript / Puya).\r\n\r\nMethods:\r\n- createApplication(): bootstrap owner + counters\r\n- deposit(payment): group with a PaymentTxn to app address\r\n- pay(recipient, amount, note): owner-only payout from escrow\r\n- withdraw(amount): owner-only withdrawal back to owner\r\n- balance(): view total escrowed microAlgos\r\n- get_owner(): view owner account","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"owner":{"keyType":"AVMString","valueType":"address","key":"b3duZXI="},"totalDeposited":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWw="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[176,234],"errorMessage":"Amount must be > 0"},{"pc":[120],"errorMessage":"Deposit amount must be > 0"},{"pc":[185,243],"errorMessage":"Insufficient escrow balance"},{"pc":[28],"errorMessage":"OnCompletion must be NoOp"},{"pc":[173],"errorMessage":"Only owner can call pay()"},{"pc":[231],"errorMessage":"Only owner can withdraw"},{"pc":[116],"errorMessage":"Payment must go to this contract address"},{"pc":[124,171,180,226,238,269,280],"errorMessage":"check GlobalState exists"},{"pc":[154],"errorMessage":"invalid array length header"},{"pc":[162],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[139],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[147,219],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[109],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDgKICAgIGJ5dGVjYmxvY2sgInRvdGFsIiAib3duZXIiIDB4MTUxZjdjNzUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6MjYKICAgIC8vIGV4cG9ydCBjbGFzcyBUcml2aWFQYXkgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BAOQogICAgcHVzaGJ5dGVzcyAweDM2MjVlNGViIDB4NDg0N2NkNzEgMHgyMWYxZGRmZiAweDdjNWIwMjg5IDB4ZmYyYmE1YzUgLy8gbWV0aG9kICJkZXBvc2l0KHBheSl2b2lkIiwgbWV0aG9kICJwYXkoYWRkcmVzcyx1aW50NjQsc3RyaW5nKXZvaWQiLCBtZXRob2QgIndpdGhkcmF3KHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJiYWxhbmNlKCl1aW50NjQiLCBtZXRob2QgImdldF9vd25lcigpYWRkcmVzcyIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGRlcG9zaXQgcGF5IHdpdGhkcmF3IGJhbGFuY2UgZ2V0X293bmVyCiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BAOToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6MjYKICAgIC8vIGV4cG9ydCBjbGFzcyBUcml2aWFQYXkgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlQXBwbGljYXRpb24KICAgIGVycgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6OlRyaXZpYVBheS5jcmVhdGVBcHBsaWNhdGlvbltyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZUFwcGxpY2F0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czoyOAogICAgLy8gb3duZXIgPSBHbG9iYWxTdGF0ZTxBY2NvdW50Pih7IGtleTogJ293bmVyJyB9KQogICAgYnl0ZWNfMSAvLyAib3duZXIiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjMzCiAgICAvLyB0aGlzLm93bmVyLnZhbHVlID0gVHhuLnNlbmRlcgogICAgdHhuIFNlbmRlcgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6MjkKICAgIC8vIHRvdGFsRGVwb3NpdGVkID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGtleTogJ3RvdGFsJyB9KQogICAgYnl0ZWNfMCAvLyAidG90YWwiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjM0CiAgICAvLyB0aGlzLnRvdGFsRGVwb3NpdGVkLnZhbHVlID0gVWludDY0KDApCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6MzIKICAgIC8vIHB1YmxpYyBjcmVhdGVBcHBsaWNhdGlvbigpOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjpUcml2aWFQYXkuZGVwb3NpdFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmRlcG9zaXQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjM4CiAgICAvLyBwdWJsaWMgZGVwb3NpdChwYXltZW50OiBndHhuLlBheW1lbnRUeG4pOiB2b2lkIHsKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzEgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18xIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czozOQogICAgLy8gYXNzZXJ0KHBheW1lbnQucmVjZWl2ZXIgPT09IEdsb2JhbC5jdXJyZW50QXBwbGljYXRpb25BZGRyZXNzLCAnUGF5bWVudCBtdXN0IGdvIHRvIHRoaXMgY29udHJhY3QgYWRkcmVzcycpCiAgICBkdXAKICAgIGd0eG5zIFJlY2VpdmVyCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgPT0KICAgIGFzc2VydCAvLyBQYXltZW50IG11c3QgZ28gdG8gdGhpcyBjb250cmFjdCBhZGRyZXNzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjQwCiAgICAvLyBhc3NlcnQocGF5bWVudC5hbW91bnQgPiBVaW50NjQoMCksICdEZXBvc2l0IGFtb3VudCBtdXN0IGJlID4gMCcpCiAgICBndHhucyBBbW91bnQKICAgIGR1cAogICAgYXNzZXJ0IC8vIERlcG9zaXQgYW1vdW50IG11c3QgYmUgPiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjQyCiAgICAvLyB0aGlzLnRvdGFsRGVwb3NpdGVkLnZhbHVlID0gdGhpcy50b3RhbERlcG9zaXRlZC52YWx1ZSArIHBheW1lbnQuYW1vdW50CiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czoyOQogICAgLy8gdG90YWxEZXBvc2l0ZWQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAndG90YWwnIH0pCiAgICBieXRlY18wIC8vICJ0b3RhbCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6NDIKICAgIC8vIHRoaXMudG90YWxEZXBvc2l0ZWQudmFsdWUgPSB0aGlzLnRvdGFsRGVwb3NpdGVkLnZhbHVlICsgcGF5bWVudC5hbW91bnQKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICArCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjI5CiAgICAvLyB0b3RhbERlcG9zaXRlZCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICd0b3RhbCcgfSkKICAgIGJ5dGVjXzAgLy8gInRvdGFsIgogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo0MgogICAgLy8gdGhpcy50b3RhbERlcG9zaXRlZC52YWx1ZSA9IHRoaXMudG90YWxEZXBvc2l0ZWQudmFsdWUgKyBwYXltZW50LmFtb3VudAogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6MzgKICAgIC8vIHB1YmxpYyBkZXBvc2l0KHBheW1lbnQ6IGd0eG4uUGF5bWVudFR4bik6IHZvaWQgewogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6OlRyaXZpYVBheS5wYXlbcm91dGluZ10oKSAtPiB2b2lkOgpwYXk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjQ2CiAgICAvLyBwdWJsaWMgcGF5KHJlY2lwaWVudDogQWNjb3VudCwgYW1vdW50OiB1aW50NjQsIG5vdGU6IHN0cmluZyk6IHZvaWQgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgMzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAyIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6NDcKICAgIC8vIGFzc2VydChUeG4uc2VuZGVyID09PSB0aGlzLm93bmVyLnZhbHVlLCAnT25seSBvd25lciBjYW4gY2FsbCBwYXkoKScpCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czoyOAogICAgLy8gb3duZXIgPSBHbG9iYWxTdGF0ZTxBY2NvdW50Pih7IGtleTogJ293bmVyJyB9KQogICAgYnl0ZWNfMSAvLyAib3duZXIiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjQ3CiAgICAvLyBhc3NlcnQoVHhuLnNlbmRlciA9PT0gdGhpcy5vd25lci52YWx1ZSwgJ09ubHkgb3duZXIgY2FuIGNhbGwgcGF5KCknKQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgID09CiAgICBhc3NlcnQgLy8gT25seSBvd25lciBjYW4gY2FsbCBwYXkoKQogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo0OAogICAgLy8gYXNzZXJ0KGFtb3VudCA+IFVpbnQ2NCgwKSwgJ0Ftb3VudCBtdXN0IGJlID4gMCcpCiAgICBkaWcgMQogICAgYXNzZXJ0IC8vIEFtb3VudCBtdXN0IGJlID4gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo0OQogICAgLy8gYXNzZXJ0KHRoaXMudG90YWxEZXBvc2l0ZWQudmFsdWUgPj0gYW1vdW50LCAnSW5zdWZmaWNpZW50IGVzY3JvdyBiYWxhbmNlJykKICAgIGludGNfMCAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjI5CiAgICAvLyB0b3RhbERlcG9zaXRlZCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICd0b3RhbCcgfSkKICAgIGJ5dGVjXzAgLy8gInRvdGFsIgogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo0OQogICAgLy8gYXNzZXJ0KHRoaXMudG90YWxEZXBvc2l0ZWQudmFsdWUgPj0gYW1vdW50LCAnSW5zdWZmaWNpZW50IGVzY3JvdyBiYWxhbmNlJykKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBkdXAKICAgIGRpZyAzCiAgICA+PQogICAgYXNzZXJ0IC8vIEluc3VmZmljaWVudCBlc2Nyb3cgYmFsYW5jZQogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo1MS01NgogICAgLy8gaXR4bi5wYXltZW50KHsKICAgIC8vICAgcmVjZWl2ZXI6IHJlY2lwaWVudCwKICAgIC8vICAgYW1vdW50OiBhbW91bnQsCiAgICAvLyAgIG5vdGU6IG5vdGUsCiAgICAvLyAgIGZlZTogVWludDY0KDApLAogICAgLy8gfSkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIHN3YXAKICAgIGl0eG5fZmllbGQgTm90ZQogICAgZGlnIDEKICAgIGl0eG5fZmllbGQgQW1vdW50CiAgICB1bmNvdmVyIDIKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIGludGNfMSAvLyAxCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjU1CiAgICAvLyBmZWU6IFVpbnQ2NCgwKSwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo1MS01NgogICAgLy8gaXR4bi5wYXltZW50KHsKICAgIC8vICAgcmVjZWl2ZXI6IHJlY2lwaWVudCwKICAgIC8vICAgYW1vdW50OiBhbW91bnQsCiAgICAvLyAgIG5vdGU6IG5vdGUsCiAgICAvLyAgIGZlZTogVWludDY0KDApLAogICAgLy8gfSkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjU4CiAgICAvLyB0aGlzLnRvdGFsRGVwb3NpdGVkLnZhbHVlID0gdGhpcy50b3RhbERlcG9zaXRlZC52YWx1ZSAtIGFtb3VudAogICAgc3dhcAogICAgLQogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czoyOQogICAgLy8gdG90YWxEZXBvc2l0ZWQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAndG90YWwnIH0pCiAgICBieXRlY18wIC8vICJ0b3RhbCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6NTgKICAgIC8vIHRoaXMudG90YWxEZXBvc2l0ZWQudmFsdWUgPSB0aGlzLnRvdGFsRGVwb3NpdGVkLnZhbHVlIC0gYW1vdW50CiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo0NgogICAgLy8gcHVibGljIHBheShyZWNpcGllbnQ6IEFjY291bnQsIGFtb3VudDogdWludDY0LCBub3RlOiBzdHJpbmcpOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjpUcml2aWFQYXkud2l0aGRyYXdbcm91dGluZ10oKSAtPiB2b2lkOgp3aXRoZHJhdzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6NjIKICAgIC8vIHB1YmxpYyB3aXRoZHJhdyhhbW91bnQ6IHVpbnQ2NCk6IHZvaWQgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo2MwogICAgLy8gYXNzZXJ0KFR4bi5zZW5kZXIgPT09IHRoaXMub3duZXIudmFsdWUsICdPbmx5IG93bmVyIGNhbiB3aXRoZHJhdycpCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czoyOAogICAgLy8gb3duZXIgPSBHbG9iYWxTdGF0ZTxBY2NvdW50Pih7IGtleTogJ293bmVyJyB9KQogICAgYnl0ZWNfMSAvLyAib3duZXIiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjYzCiAgICAvLyBhc3NlcnQoVHhuLnNlbmRlciA9PT0gdGhpcy5vd25lci52YWx1ZSwgJ09ubHkgb3duZXIgY2FuIHdpdGhkcmF3JykKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBzd2FwCiAgICBkaWcgMQogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IG93bmVyIGNhbiB3aXRoZHJhdwogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo2NAogICAgLy8gYXNzZXJ0KGFtb3VudCA+IFVpbnQ2NCgwKSwgJ0Ftb3VudCBtdXN0IGJlID4gMCcpCiAgICBkaWcgMQogICAgYXNzZXJ0IC8vIEFtb3VudCBtdXN0IGJlID4gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo2NQogICAgLy8gYXNzZXJ0KHRoaXMudG90YWxEZXBvc2l0ZWQudmFsdWUgPj0gYW1vdW50LCAnSW5zdWZmaWNpZW50IGVzY3JvdyBiYWxhbmNlJykKICAgIGludGNfMCAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjI5CiAgICAvLyB0b3RhbERlcG9zaXRlZCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICd0b3RhbCcgfSkKICAgIGJ5dGVjXzAgLy8gInRvdGFsIgogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo2NQogICAgLy8gYXNzZXJ0KHRoaXMudG90YWxEZXBvc2l0ZWQudmFsdWUgPj0gYW1vdW50LCAnSW5zdWZmaWNpZW50IGVzY3JvdyBiYWxhbmNlJykKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBkdXAKICAgIGRpZyAzCiAgICA+PQogICAgYXNzZXJ0IC8vIEluc3VmZmljaWVudCBlc2Nyb3cgYmFsYW5jZQogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo2Ny03MQogICAgLy8gaXR4bi5wYXltZW50KHsKICAgIC8vICAgcmVjZWl2ZXI6IHRoaXMub3duZXIudmFsdWUsCiAgICAvLyAgIGFtb3VudDogYW1vdW50LAogICAgLy8gICBmZWU6IFVpbnQ2NCgwKSwKICAgIC8vIH0pLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICBkaWcgMgogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIHN3YXAKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIGludGNfMSAvLyAxCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjcwCiAgICAvLyBmZWU6IFVpbnQ2NCgwKSwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo2Ny03MQogICAgLy8gaXR4bi5wYXltZW50KHsKICAgIC8vICAgcmVjZWl2ZXI6IHRoaXMub3duZXIudmFsdWUsCiAgICAvLyAgIGFtb3VudDogYW1vdW50LAogICAgLy8gICBmZWU6IFVpbnQ2NCgwKSwKICAgIC8vIH0pLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo3MwogICAgLy8gdGhpcy50b3RhbERlcG9zaXRlZC52YWx1ZSA9IHRoaXMudG90YWxEZXBvc2l0ZWQudmFsdWUgLSBhbW91bnQKICAgIHN3YXAKICAgIC0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6MjkKICAgIC8vIHRvdGFsRGVwb3NpdGVkID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGtleTogJ3RvdGFsJyB9KQogICAgYnl0ZWNfMCAvLyAidG90YWwiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjczCiAgICAvLyB0aGlzLnRvdGFsRGVwb3NpdGVkLnZhbHVlID0gdGhpcy50b3RhbERlcG9zaXRlZC52YWx1ZSAtIGFtb3VudAogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6NjIKICAgIC8vIHB1YmxpYyB3aXRoZHJhdyhhbW91bnQ6IHVpbnQ2NCk6IHZvaWQgewogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6OlRyaXZpYVBheS5iYWxhbmNlW3JvdXRpbmddKCkgLT4gdm9pZDoKYmFsYW5jZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6NzgKICAgIC8vIHJldHVybiB0aGlzLnRvdGFsRGVwb3NpdGVkLnZhbHVlCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czoyOQogICAgLy8gdG90YWxEZXBvc2l0ZWQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAndG90YWwnIH0pCiAgICBieXRlY18wIC8vICJ0b3RhbCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6NzgKICAgIC8vIHJldHVybiB0aGlzLnRvdGFsRGVwb3NpdGVkLnZhbHVlCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo3NgogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICBpdG9iCiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czo6VHJpdmlhUGF5LmdldF9vd25lcltyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9vd25lcjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6ODMKICAgIC8vIHJldHVybiB0aGlzLm93bmVyLnZhbHVlCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3RyaXZpYV9wYXkvY29udHJhY3QuYWxnby50czoyOAogICAgLy8gb3duZXIgPSBHbG9iYWxTdGF0ZTxBY2NvdW50Pih7IGtleTogJ293bmVyJyB9KQogICAgYnl0ZWNfMSAvLyAib3duZXIiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJpdmlhX3BheS9jb250cmFjdC5hbGdvLnRzOjgzCiAgICAvLyByZXR1cm4gdGhpcy5vd25lci52YWx1ZQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cml2aWFfcGF5L2NvbnRyYWN0LmFsZ28udHM6ODEKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAAEIJgMFdG90YWwFb3duZXIEFR98dTEZFEQxGEEAK4IFBDYl5OsESEfNcQQh8d3/BHxbAokE/yulxTYaAI4FABgANwCIAL4AyQCABLhEezY2GgCOAQABACkxAGcoImcjQzEWIwlJOBAjEkRJOAcyChJEOAhJRCIoZUQIKExnI0M2GgFJFYEgEkQ2GgJJFSQSRBc2GgNJIlmBAghLARUSRFcCADEAIillRBJESwFEIihlRElLAw9EsUyyBUsBsghPArIHI7IQIrIBs0wJKExnI0M2GgFJFSQSRBcxACIpZURMSwESREsBRCIoZURJSwMPRLFLArIITLIHI7IQIrIBs0wJKExnI0MiKGVEFipMULAjQyIpZUQqTFCwI0M=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -195,11 +195,57 @@ export type MethodReturn<TSignature extends TriviaPaySignatures> = TriviaPayType
 export type GlobalKeysState = TriviaPayTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TriviaPayCreateCallParams =
+  | Expand<CallParams<TriviaPayArgs['obj']['createApplication()void'] | TriviaPayArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<TriviaPayArgs['obj']['createApplication()void'] | TriviaPayArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TriviaPayDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TriviaPayCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TriviaPay smart contract
  */
 export abstract class TriviaPayParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends TriviaPayCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return TriviaPayParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the TriviaPay smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<TriviaPayArgs['obj']['createApplication()void'] | TriviaPayArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the deposit(pay)void ABI method
    *
@@ -273,6 +319,154 @@ export abstract class TriviaPayParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TriviaPay smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TriviaPayFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TriviaPayFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TriviaPayClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TriviaPayClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TriviaPay smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TriviaPayDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? TriviaPayParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (TriviaPayCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new TriviaPayClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TriviaPay smart contract using the createApplication()void ABI method.
+       *
+       * Application creation
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<TriviaPayArgs['obj']['createApplication()void'] | TriviaPayArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(TriviaPayParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TriviaPay smart contract using the createApplication()void ABI method.
+       *
+       * Application creation
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<TriviaPayArgs['obj']['createApplication()void'] | TriviaPayArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(TriviaPayParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TriviaPay smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * Application creation
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<TriviaPayArgs['obj']['createApplication()void'] | TriviaPayArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(TriviaPayParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | TriviaPayReturns['createApplication()void']) }, appClient: new TriviaPayClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TriviaPay smart contract
  */
