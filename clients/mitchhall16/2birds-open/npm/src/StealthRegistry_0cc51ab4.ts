@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"StealthRegistry","desc":"","methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"register","desc":"Register a stealth meta-address (spending pub 64B + viewing pub 64B = 128B).","args":[{"name":"label","type":"byte[]"},{"name":"metaAddress","type":"byte[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"announce","desc":"Publish a stealth payment announcement.\nData: ephemeral_pub (64B) + stealth_addr (32B) + view_tag (1B) + metadata","args":[{"name":"announcementData","type":"byte[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deregister","desc":"Remove a meta-address registration. Reclaims box MBR.","args":[{"name":"label","type":"byte[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"announcementCount":{"key":"Y291bnQ=","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"metaAddresses":{"keyType":"AVMBytes","valueType":"AVMBytes","prefix":"bWV0YQ=="},"announcements":{"keyType":"uint64","valueType":"AVMBytes","prefix":"YW5u"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"StealthRegistry","desc":"","methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"register","desc":"Register a stealth meta-address (spending pub 64B + viewing pub 64B = 128B).","args":[{"name":"label","type":"byte[]"},{"name":"metaAddress","type":"byte[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"announce","desc":"Publish a stealth payment announcement.\nData: ephemeral_pub (64B) + stealth_addr (32B) + view_tag (1B) + metadata","args":[{"name":"announcementData","type":"byte[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deregister","desc":"Remove a meta-address registration. Reclaims box MBR.","args":[{"name":"label","type":"byte[]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"announcementCount":{"key":"Y291bnQ=","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"metaAddresses":{"keyType":"AVMBytes","valueType":"AVMBytes","prefix":"bWV0YQ=="},"announcements":{"keyType":"uint64","valueType":"AVMBytes","prefix":"YW5u"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDAKYnl0ZWNibG9jayAweDYzNmY3NTZlNzQgMHg2ZDY1NzQ2MQoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDcuMgovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKcHVzaGludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CgkvLyBleGVjdXRlIGNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkCgljYWxsc3ViIGNyZWF0ZUFwcGxpY2F0aW9uCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBjcmVhdGVBcHBsaWNhdGlvbigpOiB2b2lkCmNyZWF0ZUFwcGxpY2F0aW9uOgoJcHJvdG8gMCAwCgoJLy8gY29udHJhY3RzL3N0ZWFsdGgtcmVnaXN0cnkuYWxnby50czoxMQoJLy8gdGhpcy5hbm5vdW5jZW1lbnRDb3VudC52YWx1ZSA9IDAKCWJ5dGVjIDAgLy8gICJjb3VudCIKCWludGMgMSAvLyAwCglhcHBfZ2xvYmFsX3B1dAoJcmV0c3ViCgovLyByZWdpc3RlcihieXRlW10sYnl0ZVtdKXZvaWQKKmFiaV9yb3V0ZV9yZWdpc3RlcjoKCS8vIG1ldGFBZGRyZXNzOiBieXRlW10KCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWV4dHJhY3QgMiAwCgoJLy8gbGFiZWw6IGJ5dGVbXQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZXh0cmFjdCAyIDAKCgkvLyBleGVjdXRlIHJlZ2lzdGVyKGJ5dGVbXSxieXRlW10pdm9pZAoJY2FsbHN1YiByZWdpc3RlcgoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gcmVnaXN0ZXIobGFiZWw6IGJ5dGVzLCBtZXRhQWRkcmVzczogYnl0ZXMpOiB2b2lkCi8vCi8vIFJlZ2lzdGVyIGEgc3RlYWx0aCBtZXRhLWFkZHJlc3MgKHNwZW5kaW5nIHB1YiA2NEIgKyB2aWV3aW5nIHB1YiA2NEIgPSAxMjhCKS4KcmVnaXN0ZXI6Cglwcm90byAyIDAKCgkvLyBjb250cmFjdHMvc3RlYWx0aC1yZWdpc3RyeS5hbGdvLnRzOjE4CgkvLyBhc3NlcnQobGVuKG1ldGFBZGRyZXNzKSA9PT0gMTI4KQoJZnJhbWVfZGlnIC0yIC8vIG1ldGFBZGRyZXNzOiBieXRlcwoJbGVuCglwdXNoaW50IDEyOAoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9zdGVhbHRoLXJlZ2lzdHJ5LmFsZ28udHM6MTkKCS8vIGFzc2VydChsZW4obGFiZWwpID4gMCkKCWZyYW1lX2RpZyAtMSAvLyBsYWJlbDogYnl0ZXMKCWxlbgoJaW50YyAxIC8vIDAKCT4KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9zdGVhbHRoLXJlZ2lzdHJ5LmFsZ28udHM6MjAKCS8vIHRoaXMubWV0YUFkZHJlc3NlcyhsYWJlbCkudmFsdWUgPSBtZXRhQWRkcmVzcwoJYnl0ZWMgMSAvLyAgIm1ldGEiCglmcmFtZV9kaWcgLTEgLy8gbGFiZWw6IGJ5dGVzCgljb25jYXQKCWR1cAoJYm94X2RlbAoJcG9wCglmcmFtZV9kaWcgLTIgLy8gbWV0YUFkZHJlc3M6IGJ5dGVzCglib3hfcHV0CglyZXRzdWIKCi8vIGFubm91bmNlKGJ5dGVbXSl2b2lkCiphYmlfcm91dGVfYW5ub3VuY2U6CgkvLyBhbm5vdW5jZW1lbnREYXRhOiBieXRlW10KCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWV4dHJhY3QgMiAwCgoJLy8gZXhlY3V0ZSBhbm5vdW5jZShieXRlW10pdm9pZAoJY2FsbHN1YiBhbm5vdW5jZQoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gYW5ub3VuY2UoYW5ub3VuY2VtZW50RGF0YTogYnl0ZXMpOiB2b2lkCi8vCi8vIFB1Ymxpc2ggYSBzdGVhbHRoIHBheW1lbnQgYW5ub3VuY2VtZW50LgovLyBEYXRhOiBlcGhlbWVyYWxfcHViICg2NEIpICsgc3RlYWx0aF9hZGRyICgzMkIpICsgdmlld190YWcgKDFCKSArIG1ldGFkYXRhCmFubm91bmNlOgoJcHJvdG8gMSAwCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCXB1c2hieXRlcyAweAoKCS8vIGNvbnRyYWN0cy9zdGVhbHRoLXJlZ2lzdHJ5LmFsZ28udHM6MjgKCS8vIGFzc2VydChsZW4oYW5ub3VuY2VtZW50RGF0YSkgPj0gOTcpCglmcmFtZV9kaWcgLTEgLy8gYW5ub3VuY2VtZW50RGF0YTogYnl0ZXMKCWxlbgoJcHVzaGludCA5NwoJPj0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9zdGVhbHRoLXJlZ2lzdHJ5LmFsZ28udHM6MzAKCS8vIGNvdW50ID0gdGhpcy5hbm5vdW5jZW1lbnRDb3VudC52YWx1ZQoJYnl0ZWMgMCAvLyAgImNvdW50IgoJYXBwX2dsb2JhbF9nZXQKCWZyYW1lX2J1cnkgMCAvLyBjb3VudDogdWludDY0CgoJLy8gY29udHJhY3RzL3N0ZWFsdGgtcmVnaXN0cnkuYWxnby50czozMQoJLy8gdGhpcy5hbm5vdW5jZW1lbnRzKGNvdW50KS52YWx1ZSA9IGFubm91bmNlbWVudERhdGEKCXB1c2hieXRlcyAweDYxNmU2ZSAvLyAiYW5uIgoJZnJhbWVfZGlnIDAgLy8gY291bnQ6IHVpbnQ2NAoJaXRvYgoJY29uY2F0CglkdXAKCWJveF9kZWwKCXBvcAoJZnJhbWVfZGlnIC0xIC8vIGFubm91bmNlbWVudERhdGE6IGJ5dGVzCglib3hfcHV0CgoJLy8gY29udHJhY3RzL3N0ZWFsdGgtcmVnaXN0cnkuYWxnby50czozMgoJLy8gdGhpcy5hbm5vdW5jZW1lbnRDb3VudC52YWx1ZSA9IGNvdW50ICsgMQoJYnl0ZWMgMCAvLyAgImNvdW50IgoJZnJhbWVfZGlnIDAgLy8gY291bnQ6IHVpbnQ2NAoJaW50YyAwIC8vIDEKCSsKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzL3N0ZWFsdGgtcmVnaXN0cnkuYWxnby50czozNAoJLy8gbG9nKGNvbmNhdChoZXgoJzYxNmU2ZTZmNzU2ZTYzNjUnKSwgaXRvYihjb3VudCkpKQoJcHVzaGJ5dGVzIDB4NjE2ZTZlNmY3NTZlNjM2NQoJZnJhbWVfZGlnIDAgLy8gY291bnQ6IHVpbnQ2NAoJaXRvYgoJY29uY2F0Cglsb2cKCXJldHN1YgoKLy8gZGVyZWdpc3RlcihieXRlW10pdm9pZAoqYWJpX3JvdXRlX2RlcmVnaXN0ZXI6CgkvLyBsYWJlbDogYnl0ZVtdCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglleHRyYWN0IDIgMAoKCS8vIGV4ZWN1dGUgZGVyZWdpc3RlcihieXRlW10pdm9pZAoJY2FsbHN1YiBkZXJlZ2lzdGVyCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBkZXJlZ2lzdGVyKGxhYmVsOiBieXRlcyk6IHZvaWQKLy8KLy8gUmVtb3ZlIGEgbWV0YS1hZGRyZXNzIHJlZ2lzdHJhdGlvbi4gUmVjbGFpbXMgYm94IE1CUi4KZGVyZWdpc3RlcjoKCXByb3RvIDEgMAoKCS8vIGNvbnRyYWN0cy9zdGVhbHRoLXJlZ2lzdHJ5LmFsZ28udHM6NDEKCS8vIGFzc2VydCh0aGlzLm1ldGFBZGRyZXNzZXMobGFiZWwpLmV4aXN0cykKCWJ5dGVjIDEgLy8gICJtZXRhIgoJZnJhbWVfZGlnIC0xIC8vIGxhYmVsOiBieXRlcwoJY29uY2F0Cglib3hfbGVuCglzd2FwCglwb3AKCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9zdGVhbHRoLXJlZ2lzdHJ5LmFsZ28udHM6NDIKCS8vIHRoaXMubWV0YUFkZHJlc3NlcyhsYWJlbCkuZGVsZXRlKCkKCWJ5dGVjIDEgLy8gICJtZXRhIgoJZnJhbWVfZGlnIC0xIC8vIGxhYmVsOiBieXRlcwoJY29uY2F0Cglib3hfZGVsCglyZXRzdWIKCipjcmVhdGVfTm9PcDoKCXB1c2hieXRlcyAweGI4NDQ3YjM2IC8vIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNyZWF0ZSBOb09wCgllcnIKCipjYWxsX05vT3A6CglwdXNoYnl0ZXMgMHg3OTM4MTVkZSAvLyBtZXRob2QgInJlZ2lzdGVyKGJ5dGVbXSxieXRlW10pdm9pZCIKCXB1c2hieXRlcyAweDY0NWUzY2Q3IC8vIG1ldGhvZCAiYW5ub3VuY2UoYnl0ZVtdKXZvaWQiCglwdXNoYnl0ZXMgMHg5MDcyMTZhMiAvLyBtZXRob2QgImRlcmVnaXN0ZXIoYnl0ZVtdKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX3JlZ2lzdGVyICphYmlfcm91dGVfYW5ub3VuY2UgKmFiaV9yb3V0ZV9kZXJlZ2lzdGVyCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgTm9PcAoJZXJy","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -185,11 +185,57 @@ export type GlobalKeysState = StealthRegistryTypes['state']['global']['keys']
 export type BoxKeysState = StealthRegistryTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type StealthRegistryCreateCallParams =
+  | Expand<CallParams<StealthRegistryArgs['obj']['createApplication()void'] | StealthRegistryArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<StealthRegistryArgs['obj']['createApplication()void'] | StealthRegistryArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type StealthRegistryDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: StealthRegistryCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the StealthRegistry smart contract
  */
 export abstract class StealthRegistryParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends StealthRegistryCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return StealthRegistryParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the StealthRegistry smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<StealthRegistryArgs['obj']['createApplication()void'] | StealthRegistryArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the register(byte[],byte[])void ABI method
    *
@@ -239,6 +285,148 @@ export abstract class StealthRegistryParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the StealthRegistry smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class StealthRegistryFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `StealthRegistryFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new StealthRegistryClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new StealthRegistryClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the StealthRegistry smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: StealthRegistryDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? StealthRegistryParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (StealthRegistryCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new StealthRegistryClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the StealthRegistry smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<StealthRegistryArgs['obj']['createApplication()void'] | StealthRegistryArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(StealthRegistryParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the StealthRegistry smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<StealthRegistryArgs['obj']['createApplication()void'] | StealthRegistryArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(StealthRegistryParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the StealthRegistry smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<StealthRegistryArgs['obj']['createApplication()void'] | StealthRegistryArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(StealthRegistryParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | StealthRegistryReturns['createApplication()void']) }, appClient: new StealthRegistryClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the StealthRegistry smart contract
  */
