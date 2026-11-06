@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"CounterfeitAlert","structs":{},"methods":[{"name":"verify_and_freeze","args":[{"type":"uint64","name":"med_asset"},{"type":"address","name":"holder"},{"type":"byte[]","name":"scanned_hash"},{"type":"byte[]","name":"true_hash"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[67,83],"errorMessage":"invalid array length header"},{"pc":[74,90],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[61],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[51],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"CounterfeitAlert","structs":{},"methods":[{"name":"verify_and_freeze","args":[{"type":"uint64","name":"med_asset"},{"type":"address","name":"holder"},{"type":"byte[]","name":"scanned_hash"},{"type":"byte[]","name":"true_hash"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[67,83],"errorMessage":"invalid array length header"},{"pc":[74,90],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[61],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[51],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDIgMQogICAgLy8gQ291bnRlcmZlaXRBbGVydC5weTozCiAgICAvLyBjbGFzcyBDb3VudGVyZmVpdEFsZXJ0KEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA1CiAgICBwdXNoYnl0ZXMgMHg2YjU4ZmE3OCAvLyBtZXRob2QgInZlcmlmeV9hbmRfZnJlZXplKHVpbnQ2NCxhZGRyZXNzLGJ5dGVbXSxieXRlW10pc3RyaW5nIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl92ZXJpZnlfYW5kX2ZyZWV6ZV9yb3V0ZUAzCiAgICBlcnIKCm1haW5fdmVyaWZ5X2FuZF9mcmVlemVfcm91dGVAMzoKICAgIC8vIENvdW50ZXJmZWl0QWxlcnQucHk6NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgYiB2ZXJpZnlfYW5kX2ZyZWV6ZQoKbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA1OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyBDb3VudGVyZmVpdEFsZXJ0LkNvdW50ZXJmZWl0QWxlcnQudmVyaWZ5X2FuZF9mcmVlemVbcm91dGluZ10oKSAtPiB2b2lkOgp2ZXJpZnlfYW5kX2ZyZWV6ZToKICAgIC8vIENvdW50ZXJmZWl0QWxlcnQucHk6NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18xIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDQKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMSAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBDb3VudGVyZmVpdEFsZXJ0LnB5OjYKICAgIC8vIGlmIHNjYW5uZWRfaGFzaCAhPSB0cnVlX2hhc2g6CiAgICAhPQogICAgYnogdmVyaWZ5X2FuZF9mcmVlemVfYWZ0ZXJfaWZfZWxzZUA0CiAgICAvLyBDb3VudGVyZmVpdEFsZXJ0LnB5OjctMTEKICAgIC8vIGl0eG4uQXNzZXRGcmVlemUoCiAgICAvLyAgICAgZnJlZXplX2Fzc2V0PW1lZF9hc3NldCwKICAgIC8vICAgICBmcmVlemVfYWNjb3VudD1ob2xkZXIsCiAgICAvLyAgICAgZnJvemVuPVRydWUKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIENvdW50ZXJmZWl0QWxlcnQucHk6MTAKICAgIC8vIGZyb3plbj1UcnVlCiAgICBpbnRjXzIgLy8gMQogICAgaXR4bl9maWVsZCBGcmVlemVBc3NldEZyb3plbgogICAgZHVwCiAgICBpdHhuX2ZpZWxkIEZyZWV6ZUFzc2V0QWNjb3VudAogICAgZGlnIDEKICAgIGl0eG5fZmllbGQgRnJlZXplQXNzZXQKICAgIC8vIENvdW50ZXJmZWl0QWxlcnQucHk6NwogICAgLy8gaXR4bi5Bc3NldEZyZWV6ZSgKICAgIHB1c2hpbnQgNSAvLyBhZnJ6CiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIENvdW50ZXJmZWl0QWxlcnQucHk6Ny0xMQogICAgLy8gaXR4bi5Bc3NldEZyZWV6ZSgKICAgIC8vICAgICBmcmVlemVfYXNzZXQ9bWVkX2Fzc2V0LAogICAgLy8gICAgIGZyZWV6ZV9hY2NvdW50PWhvbGRlciwKICAgIC8vICAgICBmcm96ZW49VHJ1ZQogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIENvdW50ZXJmZWl0QWxlcnQucHk6MTIKICAgIC8vIGxvZygiQUxFUlQ6IENvdW50ZXJmZWl0IGRldGVjdGVkISBBc3NldCBmcm96ZW4uIikKICAgIHB1c2hieXRlcyAiQUxFUlQ6IENvdW50ZXJmZWl0IGRldGVjdGVkISBBc3NldCBmcm96ZW4uIgogICAgbG9nCiAgICAvLyBDb3VudGVyZmVpdEFsZXJ0LnB5OjEzCiAgICAvLyByZXR1cm4gU3RyaW5nKCJDT1VOVEVSRkVJVF9ERVRFQ1RFRCIpCiAgICBwdXNoYnl0ZXMgIkNPVU5URVJGRUlUX0RFVEVDVEVEIgoKdmVyaWZ5X2FuZF9mcmVlemVfYWZ0ZXJfaW5saW5lZF9Db3VudGVyZmVpdEFsZXJ0LkNvdW50ZXJmZWl0QWxlcnQudmVyaWZ5X2FuZF9mcmVlemVANToKICAgIC8vIENvdW50ZXJmZWl0QWxlcnQucHk6NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgp2ZXJpZnlfYW5kX2ZyZWV6ZV9hZnRlcl9pZl9lbHNlQDQ6CiAgICAvLyBDb3VudGVyZmVpdEFsZXJ0LnB5OjE0CiAgICAvLyByZXR1cm4gU3RyaW5nKCJCQVRDSF9HRU5VSU5FIikKICAgIHB1c2hieXRlcyAiQkFUQ0hfR0VOVUlORSIKICAgIC8vIENvdW50ZXJmZWl0QWxlcnQucHk6NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBiIHZlcmlmeV9hbmRfZnJlZXplX2FmdGVyX2lubGluZWRfQ291bnRlcmZlaXRBbGVydC5Db3VudGVyZmVpdEFsZXJ0LnZlcmlmeV9hbmRfZnJlZXplQDUK","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAAIBMRtBABiABGtY+ng2GgCOAQABADEZFDEYEERCAAgxGRQxGBQQQzYaAUkVgQgSRBc2GgJJFYEgEkQ2GgNJIlkjCEsBFRJEVwIANhoESSJZIwhLARUSRFcCABNBAGmxJLIvSbIuSwGyLYEFshAisgGzgCpBTEVSVDogQ291bnRlcmZlaXQgZGV0ZWN0ZWQhIEFzc2V0IGZyb3plbi6wgBRDT1VOVEVSRkVJVF9ERVRFQ1RFREkVFlcGAkxQgAQVH3x1TFCwJEOADUJBVENIX0dFTlVJTkVC/9s=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -135,6 +135,21 @@ export type MethodArgs<TSignature extends CounterfeitAlertSignatures> = Counterf
 export type MethodReturn<TSignature extends CounterfeitAlertSignatures> = CounterfeitAlertTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type CounterfeitAlertCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type CounterfeitAlertDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: CounterfeitAlertCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the CounterfeitAlert smart contract
@@ -155,6 +170,147 @@ export abstract class CounterfeitAlertParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the CounterfeitAlert smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class CounterfeitAlertFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `CounterfeitAlertFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new CounterfeitAlertClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new CounterfeitAlertClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the CounterfeitAlert smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: CounterfeitAlertDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new CounterfeitAlertClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CounterfeitAlert smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CounterfeitAlert smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CounterfeitAlert smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new CounterfeitAlertClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the CounterfeitAlert smart contract
  */
