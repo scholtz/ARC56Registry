@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"VestingVault","structs":{},"methods":[{"name":"setupSchedule","args":[{"type":"uint64","name":"startTime"},{"type":"uint64","name":"amountPerStage"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"claim","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"desc":"And here’s our main contract class.\n\nIf you remember the Python example from earlier, this should feel familiar:\nwe’ve got a clean class, a couple of fields, a setup function, and a claim function.\n\nThe idea of this contract is simple:\nwe define a vesting schedule up front…\nand then later, the user calls `claim()` to withdraw any unlocked but unclaimed tokens.","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{"schedule":{"keyType":"AVMString","valueType":"(uint64,uint64,bool)[4]","key":"c2NoZWR1bGU=","desc":"Here's where we store the actual vesting schedule.\n\nWe’re using a Box because it lets us store larger or more complex data structures.\nAnd we’re using a FixedArray with exactly 4 elements.\n\nThis is perfect for a “static schedule” — we know the number of vesting steps,\nand we never push/splice or resize the array.\n\nThis also lines up with one of the course’s best practices:\n“Use StaticArray / FixedArray when the size is known.”"}}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[177],"errorMessage":"Box must have value"},{"pc":[28],"errorMessage":"OnCompletion must be NoOp"},{"pc":[61],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[100,113,127,141,196,239],"errorMessage":"index access is out of bounds"},{"pc":[71,80],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"VestingVault","structs":{},"methods":[{"name":"setupSchedule","args":[{"type":"uint64","name":"startTime"},{"type":"uint64","name":"amountPerStage"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"claim","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"desc":"And here’s our main contract class.\n\nIf you remember the Python example from earlier, this should feel familiar:\nwe’ve got a clean class, a couple of fields, a setup function, and a claim function.\n\nThe idea of this contract is simple:\nwe define a vesting schedule up front…\nand then later, the user calls `claim()` to withdraw any unlocked but unclaimed tokens.","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{"schedule":{"keyType":"AVMString","valueType":"(uint64,uint64,bool)[4]","key":"c2NoZWR1bGU=","desc":"Here's where we store the actual vesting schedule.\n\nWe’re using a Box because it lets us store larger or more complex data structures.\nAnd we’re using a FixedArray with exactly 4 elements.\n\nThis is perfect for a “static schedule” — we know the number of vesting steps,\nand we never push/splice or resize the array.\n\nThis also lines up with one of the course’s best practices:\n“Use StaticArray / FixedArray when the size is known.”"}}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[177],"errorMessage":"Box must have value"},{"pc":[28],"errorMessage":"OnCompletion must be NoOp"},{"pc":[61],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[100,113,127,141,196,239],"errorMessage":"index access is out of bounds"},{"pc":[71,80],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDggMTcKICAgIGJ5dGVjYmxvY2sgMHgwMCAic2NoZWR1bGUiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjUyCiAgICAvLyBleHBvcnQgY2xhc3MgVmVzdGluZ1ZhdWx0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4ZDE2NjE0ODMgMHhjYzgyYWI5OSAvLyBtZXRob2QgInNldHVwU2NoZWR1bGUodWludDY0LHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJjbGFpbSgpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggc2V0dXBTY2hlZHVsZSBjbGFpbQogICAgZXJyCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA5OgogICAgLy8gc21hcnRfY29udHJhY3RzL3Zlc3RpbmcvY29udHJhY3QuYWxnby50czo1MgogICAgLy8gZXhwb3J0IGNsYXNzIFZlc3RpbmdWYXVsdCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AgJiYgY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3Zlc3RpbmcvY29udHJhY3QuYWxnby50czo6VmVzdGluZ1ZhdWx0LnNldHVwU2NoZWR1bGVbcm91dGluZ10oKSAtPiB2b2lkOgpzZXR1cFNjaGVkdWxlOgogICAgLy8gc21hcnRfY29udHJhY3RzL3Zlc3RpbmcvY29udHJhY3QuYWxnby50czo2OAogICAgLy8gcHVibGljIHNldHVwU2NoZWR1bGUoc3RhcnRUaW1lOiB1aW50NjQsIGFtb3VudFBlclN0YWdlOiB1aW50NjQpOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy92ZXN0aW5nL2NvbnRyYWN0LmFsZ28udHM6ODAKICAgIC8vIGNvbnN0IG5ld1NjaGVkdWxlID0gbmV3IEZpeGVkQXJyYXk8VmVzdGluZ1N0YWdlLCA0PigpOwogICAgcHVzaGludCA2OCAvLyA2OAogICAgYnplcm8KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy92ZXN0aW5nL2NvbnRyYWN0LmFsZ28udHM6ODMtODcKICAgIC8vIG5ld1NjaGVkdWxlWzBdID0gewogICAgLy8gICB1bmxvY2tUaW1lOiBzdGFydFRpbWUsCiAgICAvLyAgIGFtb3VudDogYW1vdW50UGVyU3RhZ2UsCiAgICAvLyAgIGlzQ2xhaW1lZDogZmFsc2UKICAgIC8vIH07CiAgICBkaWcgMgogICAgaXRvYgogICAgdW5jb3ZlciAyCiAgICBpdG9iCiAgICBzd2FwCiAgICBkaWcgMQogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MDAKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBzd2FwCiAgICByZXBsYWNlMiAwIC8vIG9uIGVycm9yOiBpbmRleCBhY2Nlc3MgaXMgb3V0IG9mIGJvdW5kcwogICAgLy8gc21hcnRfY29udHJhY3RzL3Zlc3RpbmcvY29udHJhY3QuYWxnby50czo5MQogICAgLy8gdW5sb2NrVGltZTogc3RhcnRUaW1lICsgVWludDY0KDEwMCksCiAgICBkaWcgMgogICAgcHVzaGludCAxMDAgLy8gMTAwCiAgICArCiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjkwLTk0CiAgICAvLyBuZXdTY2hlZHVsZVsxXSA9IHsKICAgIC8vICAgdW5sb2NrVGltZTogc3RhcnRUaW1lICsgVWludDY0KDEwMCksCiAgICAvLyAgIGFtb3VudDogYW1vdW50UGVyU3RhZ2UsCiAgICAvLyAgIGlzQ2xhaW1lZDogZmFsc2UKICAgIC8vIH07CiAgICBpdG9iCiAgICBkaWcgMgogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MDAKICAgIGNvbmNhdAogICAgcmVwbGFjZTIgMTcgLy8gb24gZXJyb3I6IGluZGV4IGFjY2VzcyBpcyBvdXQgb2YgYm91bmRzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjk4CiAgICAvLyB1bmxvY2tUaW1lOiBzdGFydFRpbWUgKyBVaW50NjQoMjAwKSwKICAgIGRpZyAyCiAgICBwdXNoaW50IDIwMCAvLyAyMDAKICAgICsKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy92ZXN0aW5nL2NvbnRyYWN0LmFsZ28udHM6OTctMTAxCiAgICAvLyBuZXdTY2hlZHVsZVsyXSA9IHsKICAgIC8vICAgdW5sb2NrVGltZTogc3RhcnRUaW1lICsgVWludDY0KDIwMCksCiAgICAvLyAgIGFtb3VudDogYW1vdW50UGVyU3RhZ2UsCiAgICAvLyAgIGlzQ2xhaW1lZDogZmFsc2UKICAgIC8vIH07CiAgICBpdG9iCiAgICBkaWcgMgogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MDAKICAgIGNvbmNhdAogICAgcmVwbGFjZTIgMzQgLy8gb24gZXJyb3I6IGluZGV4IGFjY2VzcyBpcyBvdXQgb2YgYm91bmRzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjEwNQogICAgLy8gdW5sb2NrVGltZTogc3RhcnRUaW1lICsgVWludDY0KDMwMCksCiAgICB1bmNvdmVyIDIKICAgIHB1c2hpbnQgMzAwIC8vIDMwMAogICAgKwogICAgLy8gc21hcnRfY29udHJhY3RzL3Zlc3RpbmcvY29udHJhY3QuYWxnby50czoxMDQtMTA4CiAgICAvLyBuZXdTY2hlZHVsZVszXSA9IHsKICAgIC8vICAgdW5sb2NrVGltZTogc3RhcnRUaW1lICsgVWludDY0KDMwMCksCiAgICAvLyAgIGFtb3VudDogYW1vdW50UGVyU3RhZ2UsCiAgICAvLyAgIGlzQ2xhaW1lZDogZmFsc2UKICAgIC8vIH07CiAgICBpdG9iCiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgYnl0ZWNfMCAvLyAweDAwCiAgICBjb25jYXQKICAgIHJlcGxhY2UyIDUxIC8vIG9uIGVycm9yOiBpbmRleCBhY2Nlc3MgaXMgb3V0IG9mIGJvdW5kcwogICAgLy8gc21hcnRfY29udHJhY3RzL3Zlc3RpbmcvY29udHJhY3QuYWxnby50czo2NgogICAgLy8gc2NoZWR1bGUgPSBCb3g8Rml4ZWRBcnJheTxWZXN0aW5nU3RhZ2UsIDQ+Pih7IGtleTogQnl0ZXMoInNjaGVkdWxlIikgfSk7CiAgICBieXRlY18xIC8vICJzY2hlZHVsZSIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy92ZXN0aW5nL2NvbnRyYWN0LmFsZ28udHM6MTE3CiAgICAvLyB0aGlzLnNjaGVkdWxlLnZhbHVlID0gY2xvbmUobmV3U2NoZWR1bGUpOwogICAgc3dhcAogICAgYm94X3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3Zlc3RpbmcvY29udHJhY3QuYWxnby50czoxMTkKICAgIC8vIGxvZyhCeXRlcygiU2NoZWR1bGUgSW5pdGlhbGl6ZWQiKSk7CiAgICBwdXNoYnl0ZXMgIlNjaGVkdWxlIEluaXRpYWxpemVkIgogICAgbG9nCiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjY4CiAgICAvLyBwdWJsaWMgc2V0dXBTY2hlZHVsZShzdGFydFRpbWU6IHVpbnQ2NCwgYW1vdW50UGVyU3RhZ2U6IHVpbnQ2NCk6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy92ZXN0aW5nL2NvbnRyYWN0LmFsZ28udHM6OlZlc3RpbmdWYXVsdC5jbGFpbVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNsYWltOgogICAgaW50Y18xIC8vIDAKICAgIHB1c2hieXRlcyAiIgogICAgLy8gc21hcnRfY29udHJhY3RzL3Zlc3RpbmcvY29udHJhY3QuYWxnby50czoxMzgKICAgIC8vIGxldCB0b3RhbENsYWltYWJsZTogdWludDY0ID0gMDsKICAgIGludGNfMSAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjY2CiAgICAvLyBzY2hlZHVsZSA9IEJveDxGaXhlZEFycmF5PFZlc3RpbmdTdGFnZSwgND4+KHsga2V5OiBCeXRlcygic2NoZWR1bGUiKSB9KTsKICAgIGJ5dGVjXzEgLy8gInNjaGVkdWxlIgogICAgLy8gc21hcnRfY29udHJhY3RzL3Zlc3RpbmcvY29udHJhY3QuYWxnby50czoxNDEKICAgIC8vIGNvbnN0IGN1cnJlbnRTY2hlZHVsZSA9IGNsb25lKHRoaXMuc2NoZWR1bGUudmFsdWUpOwogICAgYm94X2dldAogICAgYXNzZXJ0IC8vIEJveCBtdXN0IGhhdmUgdmFsdWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy92ZXN0aW5nL2NvbnRyYWN0LmFsZ28udHM6MTUwCiAgICAvLyBmb3IgKGxldCBpID0gVWludDY0KDApOyBpIDwgbGVuZ3RoOyBpKyspIHsKICAgIGludGNfMSAvLyAwCgpjbGFpbV93aGlsZV90b3BAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy92ZXN0aW5nL2NvbnRyYWN0LmFsZ28udHM6MTUwCiAgICAvLyBmb3IgKGxldCBpID0gVWludDY0KDApOyBpIDwgbGVuZ3RoOyBpKyspIHsKICAgIGR1cAogICAgLy8gc21hcnRfY29udHJhY3RzL3Zlc3RpbmcvY29udHJhY3QuYWxnby50czoxNDIKICAgIC8vIGNvbnN0IGxlbmd0aDogdWludDY0ID0gY3VycmVudFNjaGVkdWxlLmxlbmd0aDsKICAgIHB1c2hpbnQgNCAvLyA0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjE1MAogICAgLy8gZm9yIChsZXQgaSA9IFVpbnQ2NCgwKTsgaSA8IGxlbmd0aDsgaSsrKSB7CiAgICA8CiAgICBieiBjbGFpbV9hZnRlcl93aGlsZUA3CiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjE1NgogICAgLy8gY29uc3Qgc3RhZ2UgPSBjbG9uZShjdXJyZW50U2NoZWR1bGVbaV0pOwogICAgZHVwCiAgICBpbnRjXzMgLy8gMTcKICAgICoKICAgIGR1cAogICAgYnVyeSA1CiAgICBkaWcgMgogICAgc3dhcAogICAgaW50Y18zIC8vIDE3CiAgICBleHRyYWN0MyAvLyBvbiBlcnJvcjogaW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIGR1cAogICAgYnVyeSA2CiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjE1OQogICAgLy8gaWYgKEdsb2JhbC5sYXRlc3RUaW1lc3RhbXAgPj0gc3RhZ2UudW5sb2NrVGltZSAmJiAhc3RhZ2UuaXNDbGFpbWVkKSB7CiAgICBnbG9iYWwgTGF0ZXN0VGltZXN0YW1wCiAgICBzd2FwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50NjQKICAgID49CiAgICBieiBjbGFpbV9hZnRlcl9pZl9lbHNlQDYKICAgIGRpZyA0CiAgICBwdXNoaW50IDEyOCAvLyAxMjgKICAgIGdldGJpdAogICAgYm56IGNsYWltX2FmdGVyX2lmX2Vsc2VANgogICAgLy8gc21hcnRfY29udHJhY3RzL3Zlc3RpbmcvY29udHJhY3QuYWxnby50czoxNjAKICAgIC8vIHRvdGFsQ2xhaW1hYmxlID0gdG90YWxDbGFpbWFibGUgKyBzdGFnZS5hbW91bnQ7CiAgICBkaWcgNAogICAgZHVwCiAgICBpbnRjXzIgLy8gOAogICAgZXh0cmFjdF91aW50NjQKICAgIGRpZyA0CiAgICArCiAgICBidXJ5IDQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy92ZXN0aW5nL2NvbnRyYWN0LmFsZ28udHM6MTYzCiAgICAvLyBzdGFnZS5pc0NsYWltZWQgPSB0cnVlOwogICAgcHVzaGludCAxMjggLy8gMTI4CiAgICBpbnRjXzAgLy8gMQogICAgc2V0Yml0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjE2NgogICAgLy8gY3VycmVudFNjaGVkdWxlW2ldID0gY2xvbmUoc3RhZ2UpOwogICAgZGlnIDIKICAgIGRpZyA1CiAgICB1bmNvdmVyIDIKICAgIHJlcGxhY2UzIC8vIG9uIGVycm9yOiBpbmRleCBhY2Nlc3MgaXMgb3V0IG9mIGJvdW5kcwogICAgYnVyeSAyCgpjbGFpbV9hZnRlcl9pZl9lbHNlQDY6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjE1MAogICAgLy8gZm9yIChsZXQgaSA9IFVpbnQ2NCgwKTsgaSA8IGxlbmd0aDsgaSsrKSB7CiAgICBkdXAKICAgIGludGNfMCAvLyAxCiAgICArCiAgICBidXJ5IDEKICAgIGIgY2xhaW1fd2hpbGVfdG9wQDIKCmNsYWltX2FmdGVyX3doaWxlQDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjE3NAogICAgLy8gaWYgKHRvdGFsQ2xhaW1hYmxlID4gMCkgewogICAgZGlnIDIKICAgIGJ6IGNsYWltX2FmdGVyX2lmX2Vsc2VAOQogICAgLy8gc21hcnRfY29udHJhY3RzL3Zlc3RpbmcvY29udHJhY3QuYWxnby50czo2NgogICAgLy8gc2NoZWR1bGUgPSBCb3g8Rml4ZWRBcnJheTxWZXN0aW5nU3RhZ2UsIDQ+Pih7IGtleTogQnl0ZXMoInNjaGVkdWxlIikgfSk7CiAgICBieXRlY18xIC8vICJzY2hlZHVsZSIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy92ZXN0aW5nL2NvbnRyYWN0LmFsZ28udHM6MTc1CiAgICAvLyB0aGlzLnNjaGVkdWxlLnZhbHVlID0gY2xvbmUoY3VycmVudFNjaGVkdWxlKTsKICAgIGRpZyAyCiAgICBib3hfcHV0CgpjbGFpbV9hZnRlcl9pZl9lbHNlQDk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjE3OQogICAgLy8gbG9nKEJ5dGVzKCJUb3RhbCBDbGFpbWVkOiIpKTsKICAgIHB1c2hieXRlcyAiVG90YWwgQ2xhaW1lZDoiCiAgICBsb2cKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy92ZXN0aW5nL2NvbnRyYWN0LmFsZ28udHM6MTgwCiAgICAvLyBsb2cob3AuaXRvYih0b3RhbENsYWltYWJsZSkpOwogICAgZGlnIDIKICAgIGl0b2IKICAgIGR1cAogICAgbG9nCiAgICAvLyBzbWFydF9jb250cmFjdHMvdmVzdGluZy9jb250cmFjdC5hbGdvLnRzOjEyMgogICAgLy8gcHVibGljIGNsYWltKCk6IHVpbnQ2NCB7CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAQAIESYCAQAIc2NoZWR1bGUxG0EAHTEZFEQxGESCAgTRZhSDBMyCq5k2GgCOAgALAHYAMRkUMRgUEEQiQzYaAUkVJBJEFzYaAkkVJBJEF4FEr0sCFk8CFkxLAVAoUE8CTFwASwKBZAgWSwJQKFBcEUsCgcgBCBZLAlAoUFwiTwKBrAIIFk8CUChQXDMpTL+AFFNjaGVkdWxlIEluaXRpYWxpemVksCJDI4AAIym+RCNJgQQMQQBASSULSUUFSwJMJVhJRQYyB0wjWw9BACFLBIGAAVNAABhLBEkkW0sECEUEgYABIlRLAksFTwJdRQJJIghFAUL/uUsCQQAEKUsCv4AOVG90YWwgQ2xhaW1lZDqwSwIWSbCABBUffHVMULAiQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -170,6 +170,21 @@ export type MethodReturn<TSignature extends VestingVaultSignatures> = VestingVau
 export type BoxKeysState = VestingVaultTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type VestingVaultCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type VestingVaultDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: VestingVaultCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the VestingVault smart contract
@@ -203,6 +218,147 @@ export abstract class VestingVaultParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the VestingVault smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class VestingVaultFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `VestingVaultFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new VestingVaultClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new VestingVaultClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the VestingVault smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: VestingVaultDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new VestingVaultClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the VestingVault smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the VestingVault smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the VestingVault smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new VestingVaultClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the VestingVault smart contract
  */
