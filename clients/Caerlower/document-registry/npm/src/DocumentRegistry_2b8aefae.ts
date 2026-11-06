@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"DocumentRegistry","structs":{},"methods":[{"name":"store","args":[{"type":"byte[]","name":"component_id"},{"type":"byte[]","name":"cid"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Store/Update: component_id -> cid | \"|\" | timestamp(8 bytes) | uploader(bytes32)","events":[],"recommendations":{}},{"name":"get","args":[{"type":"byte[]","name":"component_id"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Returns raw stored bytes or empty Bytes().","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"docs":{"keyType":"AVMBytes","valueType":"AVMBytes","prefix":"ZG9jcw=="}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[24],"errorMessage":"OnCompletion must be NoOp"},{"pc":[57],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[146],"errorMessage":"Only original uploader can update"},{"pc":[124,184],"errorMessage":"check self.docs entry exists"},{"pc":[65,81,161],"errorMessage":"invalid array length header"},{"pc":[72,88,168],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"DocumentRegistry","structs":{},"methods":[{"name":"store","args":[{"type":"byte[]","name":"component_id"},{"type":"byte[]","name":"cid"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Store/Update: component_id -> cid | \"|\" | timestamp(8 bytes) | uploader(bytes32)","events":[],"recommendations":{}},{"name":"get","args":[{"type":"byte[]","name":"component_id"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Returns raw stored bytes or empty Bytes().","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"docs":{"keyType":"AVMBytes","valueType":"AVMBytes","prefix":"ZG9jcw=="}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[24],"errorMessage":"OnCompletion must be NoOp"},{"pc":[57],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[146],"errorMessage":"Only original uploader can update"},{"pc":[124,184],"errorMessage":"check self.docs entry exists"},{"pc":[65,81,161],"errorMessage":"invalid array length header"},{"pc":[72,88,168],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAgMiAzMgogICAgYnl0ZWNibG9jayAweDdjICJkb2NzIgogICAgLy8gc21hcnRfY29udHJhY3RzL2RvY3VtZW50X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjEzCiAgICAvLyBjbGFzcyBEb2N1bWVudFJlZ2lzdHJ5KEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxMQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHgyNmYwMzQxZCAweDUxMjA0ZjQ2IC8vIG1ldGhvZCAic3RvcmUoYnl0ZVtdLGJ5dGVbXSl2b2lkIiwgbWV0aG9kICJnZXQoYnl0ZVtdKWJ5dGVbXSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHN0b3JlIGdldAogICAgZXJyCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDExOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcCAmJiBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuZG9jdW1lbnRfcmVnaXN0cnkuY29udHJhY3QuRG9jdW1lbnRSZWdpc3RyeS5zdG9yZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnN0b3JlOgogICAgLy8gc21hcnRfY29udHJhY3RzL2RvY3VtZW50X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjE5CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18xIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2RvY3VtZW50X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjI1LTI2CiAgICAvLyAjIHRpbWVzdGFtcCAoVUludDY0KQogICAgLy8gdHMgPSBHbG9iYWwubGF0ZXN0X3RpbWVzdGFtcAogICAgZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAogICAgLy8gc21hcnRfY29udHJhY3RzL2RvY3VtZW50X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjI3CiAgICAvLyB0c19ieXRlcyA9IG9wLml0b2IodHMpCiAgICBpdG9iCiAgICAvLyBzbWFydF9jb250cmFjdHMvZG9jdW1lbnRfcmVnaXN0cnkvY29udHJhY3QucHk6MjktMzAKICAgIC8vICMgdXBsb2FkZXIgYnl0ZXMgKGNvbnZlcnQgQWNjb3VudCDihpIgQnl0ZXMpCiAgICAvLyB1cGxvYWRlcl9ieXRlcyA9IFR4bi5zZW5kZXIuYnl0ZXMKICAgIHR4biBTZW5kZXIKICAgIGR1cAogICAgY292ZXIgMwogICAgY292ZXIgNAogICAgLy8gc21hcnRfY29udHJhY3RzL2RvY3VtZW50X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjMyLTMzCiAgICAvLyAjIHN0b3JlZCBmb3JtYXQ6IGNpZCB8ICJ8IiB8IHRpbWVzdGFtcCB8IHVwbG9hZGVyCiAgICAvLyB2YWx1ZSA9IGNpZCArIGIifCIgKyB0c19ieXRlcyArIGIifCIgKyB1cGxvYWRlcl9ieXRlcwogICAgc3dhcAogICAgYnl0ZWNfMCAvLyAweDdjCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMCAvLyAweDdjCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgc3dhcAogICAgLy8gc21hcnRfY29udHJhY3RzL2RvY3VtZW50X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjM1LTM2CiAgICAvLyAjIGlmIGV4aXN0cywgb25seSBvcmlnaW5hbCB1cGxvYWRlciBjYW4gdXBkYXRlCiAgICAvLyBpZiBjb21wb25lbnRfaWQgaW4gc2VsZi5kb2NzOgogICAgYnl0ZWNfMSAvLyAiZG9jcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGJ6IHN0b3JlX2FmdGVyX2lmX2Vsc2VAMwogICAgLy8gc21hcnRfY29udHJhY3RzL2RvY3VtZW50X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjM3CiAgICAvLyBleGlzdGluZyA9IHNlbGYuZG9jc1tjb21wb25lbnRfaWRdCiAgICBkdXAKICAgIGJveF9nZXQKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmRvY3MgZW50cnkgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvZG9jdW1lbnRfcmVnaXN0cnkvY29udHJhY3QucHk6MzgKICAgIC8vIG9sZF91cGxvYWRlciA9IGV4aXN0aW5nWy0zMjpdICAjIGxhc3QgMzIgYnl0ZXMKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gMzIKICAgIGRpZyAxCiAgICA+PQogICAgaW50Y18zIC8vIDMyCiAgICBkaWcgMgogICAgdW5jb3ZlciAyCiAgICBzZWxlY3QKICAgIGRpZyAxCiAgICBzd2FwCiAgICAtCiAgICBzd2FwCiAgICBzdWJzdHJpbmczCiAgICAvLyBzbWFydF9jb250cmFjdHMvZG9jdW1lbnRfcmVnaXN0cnkvY29udHJhY3QucHk6NDAKICAgIC8vIGFzc2VydCBvbGRfdXBsb2FkZXIgPT0gdXBsb2FkZXJfYnl0ZXMsICJPbmx5IG9yaWdpbmFsIHVwbG9hZGVyIGNhbiB1cGRhdGUiCiAgICBkaWcgMwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IG9yaWdpbmFsIHVwbG9hZGVyIGNhbiB1cGRhdGUKCnN0b3JlX2FmdGVyX2lmX2Vsc2VAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kb2N1bWVudF9yZWdpc3RyeS9jb250cmFjdC5weTo0MgogICAgLy8gc2VsZi5kb2NzW2NvbXBvbmVudF9pZF0gPSB2YWx1ZQogICAgZHVwbiAyCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGRpZyAyCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZG9jdW1lbnRfcmVnaXN0cnkvY29udHJhY3QucHk6MTkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5kb2N1bWVudF9yZWdpc3RyeS5jb250cmFjdC5Eb2N1bWVudFJlZ2lzdHJ5LmdldFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kb2N1bWVudF9yZWdpc3RyeS9jb250cmFjdC5weTo0NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2RvY3VtZW50X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjQ5CiAgICAvLyBpZiBjb21wb25lbnRfaWQgaW4gc2VsZi5kb2NzOgogICAgYnl0ZWNfMSAvLyAiZG9jcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGJ6IGdldF9lbHNlX2JvZHlAMwogICAgLy8gc21hcnRfY29udHJhY3RzL2RvY3VtZW50X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjUwCiAgICAvLyByZXR1cm4gc2VsZi5kb2NzW2NvbXBvbmVudF9pZF0KICAgIGR1cAogICAgYm94X2dldAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuZG9jcyBlbnRyeSBleGlzdHMKCmdldF9hZnRlcl9pbmxpbmVkX3NtYXJ0X2NvbnRyYWN0cy5kb2N1bWVudF9yZWdpc3RyeS5jb250cmFjdC5Eb2N1bWVudFJlZ2lzdHJ5LmdldEA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2RvY3VtZW50X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjQ0CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCmdldF9lbHNlX2JvZHlAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9kb2N1bWVudF9yZWdpc3RyeS9jb250cmFjdC5weTo1MgogICAgLy8gcmV0dXJuIEJ5dGVzKGIiIikKICAgIHB1c2hieXRlcyAweAogICAgLy8gc21hcnRfY29udHJhY3RzL2RvY3VtZW50X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjQ0CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGIgZ2V0X2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzLmRvY3VtZW50X3JlZ2lzdHJ5LmNvbnRyYWN0LkRvY3VtZW50UmVnaXN0cnkuZ2V0QDQK","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyAEAQACICYCAXwEZG9jczEbQQAdMRkURDEYRIICBCbwNB0EUSBPRjYaAI4CAAsAawAxGRQxGBQQRCJDNhoBSSNZJAhLARUSRFcCADYaAkkjWSQISwEVEkRXAgAyBxYxAElOA04ETChQTFAoUExQTClMUEm9RQFBABlJvkRJFSVLAQ8lSwJPAk1LAUwJTFJLAxJERwK8SEsCvyJDNhoBSSNZJAhLARUSRFcCAClMUEm9RQFBABZJvkRJFRZXBgJMUIAEFR98dUxQsCJDgABC/+g=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -159,6 +159,21 @@ export type MethodReturn<TSignature extends DocumentRegistrySignatures> = Docume
 export type BoxKeysState = DocumentRegistryTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type DocumentRegistryCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type DocumentRegistryDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: DocumentRegistryCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the DocumentRegistry smart contract
@@ -196,6 +211,147 @@ export abstract class DocumentRegistryParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the DocumentRegistry smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class DocumentRegistryFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `DocumentRegistryFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new DocumentRegistryClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new DocumentRegistryClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the DocumentRegistry smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: DocumentRegistryDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new DocumentRegistryClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DocumentRegistry smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DocumentRegistry smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DocumentRegistry smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new DocumentRegistryClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the DocumentRegistry smart contract
  */
