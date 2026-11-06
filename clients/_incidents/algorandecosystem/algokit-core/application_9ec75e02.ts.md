@@ -2,8 +2,8 @@
 
 - **Repo**: [algorandecosystem/algokit-core](https://github.com/algorandecosystem/algokit-core)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandecosystem/algokit-core/HEAD/crates/algokit_test_artifacts/contracts/abi_payment_call_test/application.arc56.json](https://raw.githubusercontent.com/algorandecosystem/algokit-core/HEAD/crates/algokit_test_artifacts/contracts/abi_payment_call_test/application.arc56.json)
-- **Detected**: 2026-07-18T08:31:17.720896+00:00
-- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
+- **Detected**: 2026-11-06T13:58:52.211470+00:00
+- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.2`
 
 ## Reproduce
 

@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"arcs":[],"bareActions":{"call":[],"create":["NoOp"]},"methods":[{"actions":{"call":["NoOp"],"create":[]},"args":[{"type":"string","name":"name"},{"type":"byte[]","name":"value"}],"name":"set_box_bytes","returns":{"type":"void"},"events":[]},{"actions":{"call":["NoOp"],"create":[]},"args":[{"type":"string","name":"name"},{"type":"string","name":"value"}],"name":"set_box_str","returns":{"type":"void"},"events":[]},{"actions":{"call":["NoOp"],"create":[]},"args":[{"type":"string","name":"name"},{"type":"uint32","name":"value"}],"name":"set_box_int","returns":{"type":"void"},"events":[]},{"actions":{"call":["NoOp"],"create":[]},"args":[{"type":"string","name":"name"},{"type":"uint512","name":"value"}],"name":"set_box_int512","returns":{"type":"void"},"events":[]},{"actions":{"call":["NoOp"],"create":[]},"args":[{"type":"string","name":"name"},{"type":"byte[4]","name":"value"}],"name":"set_box_static","returns":{"type":"void"},"events":[]},{"actions":{"call":["NoOp"],"create":[]},"args":[{"type":"string","name":"name"},{"type":"(string,uint64)","name":"value","struct":"DummyStruct"}],"name":"set_struct","returns":{"type":"void"},"events":[]}],"name":"TestPuyaBoxes","state":{"keys":{"box":{},"global":{},"local":{}},"maps":{"box":{},"global":{},"local":{}},"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}}},"structs":{"DummyStruct":[{"name":"name","type":"string"},{"name":"id","type":"uint64"}]}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"arcs":[],"bareActions":{"call":[],"create":["NoOp"]},"methods":[{"actions":{"call":["NoOp"],"create":[]},"args":[{"type":"string","name":"name"},{"type":"byte[]","name":"value"}],"name":"set_box_bytes","returns":{"type":"void"},"events":[]},{"actions":{"call":["NoOp"],"create":[]},"args":[{"type":"string","name":"name"},{"type":"string","name":"value"}],"name":"set_box_str","returns":{"type":"void"},"events":[]},{"actions":{"call":["NoOp"],"create":[]},"args":[{"type":"string","name":"name"},{"type":"uint32","name":"value"}],"name":"set_box_int","returns":{"type":"void"},"events":[]},{"actions":{"call":["NoOp"],"create":[]},"args":[{"type":"string","name":"name"},{"type":"uint512","name":"value"}],"name":"set_box_int512","returns":{"type":"void"},"events":[]},{"actions":{"call":["NoOp"],"create":[]},"args":[{"type":"string","name":"name"},{"type":"byte[4]","name":"value"}],"name":"set_box_static","returns":{"type":"void"},"events":[]},{"actions":{"call":["NoOp"],"create":[]},"args":[{"type":"string","name":"name"},{"type":"(string,uint64)","name":"value","struct":"DummyStruct"}],"name":"set_struct","returns":{"type":"void"},"events":[]}],"name":"TestPuyaBoxes","state":{"keys":{"box":{},"global":{},"local":{}},"maps":{"box":{},"global":{},"local":{}},"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}}},"structs":{"DummyStruct":[{"name":"name","type":"string"},{"name":"id","type":"uint64"}]},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuaGVsbG9fd29ybGQzLmNvbnRyYWN0LlRlc3RQdXlhQm94ZXMuYXBwcm92YWxfcHJvZ3JhbToKICAgIGludGNibG9jayAxIDAKICAgIGNhbGxzdWIgX19wdXlhX2FyYzRfcm91dGVyX18KICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5oZWxsb193b3JsZDMuY29udHJhY3QuVGVzdFB1eWFCb3hlcy5fX3B1eWFfYXJjNF9yb3V0ZXJfXygpIC0+IHVpbnQ2NDoKX19wdXlhX2FyYzRfcm91dGVyX186CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQzL2NvbnRyYWN0LnB5OjExCiAgICAvLyBjbGFzcyBUZXN0UHV5YUJveGVzKEFSQzRDb250cmFjdCk6CiAgICBwcm90byAwIDEKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBfX3B1eWFfYXJjNF9yb3V0ZXJfX19iYXJlX3JvdXRpbmdAMTAKICAgIHB1c2hieXRlc3MgMHgyMDJmYTczYSAweGRmN2VlYTRhIDB4MzY4OGVkMmMgMHg1ZDE3MjBkZCAweGY4MDY2NjVjIDB4ODFkMjYwZTIgLy8gbWV0aG9kICJzZXRfYm94X2J5dGVzKHN0cmluZyxieXRlW10pdm9pZCIsIG1ldGhvZCAic2V0X2JveF9zdHIoc3RyaW5nLHN0cmluZyl2b2lkIiwgbWV0aG9kICJzZXRfYm94X2ludChzdHJpbmcsdWludDMyKXZvaWQiLCBtZXRob2QgInNldF9ib3hfaW50NTEyKHN0cmluZyx1aW50NTEyKXZvaWQiLCBtZXRob2QgInNldF9ib3hfc3RhdGljKHN0cmluZyxieXRlWzRdKXZvaWQiLCBtZXRob2QgInNldF9zdHJ1Y3Qoc3RyaW5nLChzdHJpbmcsdWludDY0KSl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggX19wdXlhX2FyYzRfcm91dGVyX19fc2V0X2JveF9ieXRlc19yb3V0ZUAyIF9fcHV5YV9hcmM0X3JvdXRlcl9fX3NldF9ib3hfc3RyX3JvdXRlQDMgX19wdXlhX2FyYzRfcm91dGVyX19fc2V0X2JveF9pbnRfcm91dGVANCBfX3B1eWFfYXJjNF9yb3V0ZXJfX19zZXRfYm94X2ludDUxMl9yb3V0ZUA1IF9fcHV5YV9hcmM0X3JvdXRlcl9fX3NldF9ib3hfc3RhdGljX3JvdXRlQDYgX19wdXlhX2FyYzRfcm91dGVyX19fc2V0X3N0cnVjdF9yb3V0ZUA3CiAgICBpbnRjXzEgLy8gMAogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19zZXRfYm94X2J5dGVzX3JvdXRlQDI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQzL2NvbnRyYWN0LnB5OjIwCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weToxMQogICAgLy8gY2xhc3MgVGVzdFB1eWFCb3hlcyhBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZDMvY29udHJhY3QucHk6MjAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgY2FsbHN1YiBzZXRfYm94X2J5dGVzCiAgICBpbnRjXzAgLy8gMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19zZXRfYm94X3N0cl9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weToyNAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZDMvY29udHJhY3QucHk6MTEKICAgIC8vIGNsYXNzIFRlc3RQdXlhQm94ZXMoQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZDMvY29udHJhY3QucHk6MjQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgY2FsbHN1YiBzZXRfYm94X3N0cgogICAgaW50Y18wIC8vIDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fc2V0X2JveF9pbnRfcm91dGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZDMvY29udHJhY3QucHk6MjgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQzL2NvbnRyYWN0LnB5OjExCiAgICAvLyBjbGFzcyBUZXN0UHV5YUJveGVzKEFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQzL2NvbnRyYWN0LnB5OjI4CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGNhbGxzdWIgc2V0X2JveF9pbnQKICAgIGludGNfMCAvLyAxCiAgICByZXRzdWIKCl9fcHV5YV9hcmM0X3JvdXRlcl9fX3NldF9ib3hfaW50NTEyX3JvdXRlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQzL2NvbnRyYWN0LnB5OjMyCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weToxMQogICAgLy8gY2xhc3MgVGVzdFB1eWFCb3hlcyhBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weTozMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBjYWxsc3ViIHNldF9ib3hfaW50NTEyCiAgICBpbnRjXzAgLy8gMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19zZXRfYm94X3N0YXRpY19yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weTozNgogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZDMvY29udHJhY3QucHk6MTEKICAgIC8vIGNsYXNzIFRlc3RQdXlhQm94ZXMoQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZDMvY29udHJhY3QucHk6MzYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgY2FsbHN1YiBzZXRfYm94X3N0YXRpYwogICAgaW50Y18wIC8vIDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fc2V0X3N0cnVjdF9yb3V0ZUA3OgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weTo0MgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weToxMQogICAgLy8gY2xhc3MgVGVzdFB1eWFCb3hlcyhBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weTo0MgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGNhbGxzdWIgc2V0X3N0cnVjdAogICAgaW50Y18wIC8vIDEKICAgIHJldHN1YgoKX19wdXlhX2FyYzRfcm91dGVyX19fYmFyZV9yb3V0aW5nQDEwOgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weToxMQogICAgLy8gY2xhc3MgVGVzdFB1eWFCb3hlcyhBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IF9fcHV5YV9hcmM0X3JvdXRlcl9fX2FmdGVyX2lmX2Vsc2VAMTQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0c3ViCgpfX3B1eWFfYXJjNF9yb3V0ZXJfX19hZnRlcl9pZl9lbHNlQDE0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weToxMQogICAgLy8gY2xhc3MgVGVzdFB1eWFCb3hlcyhBUkM0Q29udHJhY3QpOgogICAgaW50Y18xIC8vIDAKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5oZWxsb193b3JsZDMuY29udHJhY3QuVGVzdFB1eWFCb3hlcy5zZXRfYm94X2J5dGVzKG5hbWU6IGJ5dGVzLCB2YWx1ZTogYnl0ZXMpIC0+IHZvaWQ6CnNldF9ib3hfYnl0ZXM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQzL2NvbnRyYWN0LnB5OjIwLTIxCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIC8vIGRlZiBzZXRfYm94X2J5dGVzKHNlbGYsIG5hbWU6IGFyYzQuU3RyaW5nLCB2YWx1ZTogQnl0ZXMpIC0+IE5vbmU6CiAgICBwcm90byAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZDMvY29udHJhY3QucHk6MjIKICAgIC8vIHNlbGYuYm94X2J5dGVzW25hbWVdID0gdmFsdWUKICAgIHB1c2hieXRlcyAiYm94X2J5dGVzIgogICAgZnJhbWVfZGlnIC0yCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2RlbAogICAgcG9wCiAgICBmcmFtZV9kaWcgLTEKICAgIGJveF9wdXQKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5oZWxsb193b3JsZDMuY29udHJhY3QuVGVzdFB1eWFCb3hlcy5zZXRfYm94X3N0cihuYW1lOiBieXRlcywgdmFsdWU6IGJ5dGVzKSAtPiB2b2lkOgpzZXRfYm94X3N0cjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZDMvY29udHJhY3QucHk6MjQtMjUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgLy8gZGVmIHNldF9ib3hfc3RyKHNlbGYsIG5hbWU6IGFyYzQuU3RyaW5nLCB2YWx1ZTogYXJjNC5TdHJpbmcpIC0+IE5vbmU6CiAgICBwcm90byAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZDMvY29udHJhY3QucHk6MjYKICAgIC8vIHNlbGYuYm94X3N0cltuYW1lXSA9IHZhbHVlCiAgICBwdXNoYnl0ZXMgImJveF9zdHIiCiAgICBmcmFtZV9kaWcgLTIKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGZyYW1lX2RpZyAtMQogICAgYm94X3B1dAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLmhlbGxvX3dvcmxkMy5jb250cmFjdC5UZXN0UHV5YUJveGVzLnNldF9ib3hfaW50KG5hbWU6IGJ5dGVzLCB2YWx1ZTogYnl0ZXMpIC0+IHZvaWQ6CnNldF9ib3hfaW50OgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weToyOC0yOQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICAvLyBkZWYgc2V0X2JveF9pbnQoc2VsZiwgbmFtZTogYXJjNC5TdHJpbmcsIHZhbHVlOiBhcmM0LlVJbnQzMikgLT4gTm9uZToKICAgIHByb3RvIDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weTozMAogICAgLy8gc2VsZi5ib3hfaW50W25hbWVdID0gdmFsdWUKICAgIHB1c2hieXRlcyAiYm94X2ludCIKICAgIGZyYW1lX2RpZyAtMgogICAgY29uY2F0CiAgICBmcmFtZV9kaWcgLTEKICAgIGJveF9wdXQKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5oZWxsb193b3JsZDMuY29udHJhY3QuVGVzdFB1eWFCb3hlcy5zZXRfYm94X2ludDUxMihuYW1lOiBieXRlcywgdmFsdWU6IGJ5dGVzKSAtPiB2b2lkOgpzZXRfYm94X2ludDUxMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZDMvY29udHJhY3QucHk6MzItMzMKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgLy8gZGVmIHNldF9ib3hfaW50NTEyKHNlbGYsIG5hbWU6IGFyYzQuU3RyaW5nLCB2YWx1ZTogYXJjNC5VSW50NTEyKSAtPiBOb25lOgogICAgcHJvdG8gMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQzL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBzZWxmLmJveF9pbnQ1MTJbbmFtZV0gPSB2YWx1ZQogICAgcHVzaGJ5dGVzICJib3hfaW50NTEyIgogICAgZnJhbWVfZGlnIC0yCiAgICBjb25jYXQKICAgIGZyYW1lX2RpZyAtMQogICAgYm94X3B1dAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLmhlbGxvX3dvcmxkMy5jb250cmFjdC5UZXN0UHV5YUJveGVzLnNldF9ib3hfc3RhdGljKG5hbWU6IGJ5dGVzLCB2YWx1ZTogYnl0ZXMpIC0+IHZvaWQ6CnNldF9ib3hfc3RhdGljOgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weTozNi0zOQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICAvLyBkZWYgc2V0X2JveF9zdGF0aWMoCiAgICAvLyAgICAgc2VsZiwgbmFtZTogYXJjNC5TdHJpbmcsIHZhbHVlOiBhcmM0LlN0YXRpY0FycmF5W2FyYzQuQnl0ZSwgTGl0ZXJhbFs0XV0KICAgIC8vICkgLT4gTm9uZToKICAgIHByb3RvIDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weTo0MAogICAgLy8gc2VsZi5ib3hfc3RhdGljW25hbWVdID0gdmFsdWUuY29weSgpCiAgICBwdXNoYnl0ZXMgImJveF9zdGF0aWMiCiAgICBmcmFtZV9kaWcgLTIKICAgIGNvbmNhdAogICAgZnJhbWVfZGlnIC0xCiAgICBib3hfcHV0CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMuaGVsbG9fd29ybGQzLmNvbnRyYWN0LlRlc3RQdXlhQm94ZXMuc2V0X3N0cnVjdChuYW1lOiBieXRlcywgdmFsdWU6IGJ5dGVzKSAtPiB2b2lkOgpzZXRfc3RydWN0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkMy9jb250cmFjdC5weTo0Mi00MwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIC8vIGRlZiBzZXRfc3RydWN0KHNlbGYsIG5hbWU6IGFyYzQuU3RyaW5nLCB2YWx1ZTogRHVtbXlTdHJ1Y3QpIC0+IE5vbmU6CiAgICBwcm90byAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZDMvY29udHJhY3QucHk6NDQKICAgIC8vIGFzc2VydCBuYW1lLmJ5dGVzID09IHZhbHVlLm5hbWUuYnl0ZXMsICJOYW1lIG11c3QgbWF0Y2ggaWQgb2Ygc3RydWN0IgogICAgZnJhbWVfZGlnIC0xCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgIGZyYW1lX2RpZyAtMQogICAgbGVuCiAgICBmcmFtZV9kaWcgLTEKICAgIGNvdmVyIDIKICAgIHN1YnN0cmluZzMKICAgIGZyYW1lX2RpZyAtMgogICAgPT0KICAgIGFzc2VydCAvLyBOYW1lIG11c3QgbWF0Y2ggaWQgb2Ygc3RydWN0CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQzL2NvbnRyYWN0LnB5OjQ1CiAgICAvLyBvcC5Cb3gucHV0KG5hbWUuYnl0ZXMsIHZhbHVlLmJ5dGVzKQogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9kaWcgLTEKICAgIGJveF9wdXQKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCgpzbWFydF9jb250cmFjdHMuaGVsbG9fd29ybGQzLmNvbnRyYWN0LlRlc3RQdXlhQm94ZXMuY2xlYXJfc3RhdGVfcHJvZ3JhbToKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -199,6 +199,21 @@ export type MethodArgs<TSignature extends TestPuyaBoxesSignatures> = TestPuyaBox
 export type MethodReturn<TSignature extends TestPuyaBoxesSignatures> = TestPuyaBoxesTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TestPuyaBoxesCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TestPuyaBoxesDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TestPuyaBoxesCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TestPuyaBoxes smart contract
@@ -284,6 +299,147 @@ export abstract class TestPuyaBoxesParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TestPuyaBoxes smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TestPuyaBoxesFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TestPuyaBoxesFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TestPuyaBoxesClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TestPuyaBoxesClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TestPuyaBoxes smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TestPuyaBoxesDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new TestPuyaBoxesClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestPuyaBoxes smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestPuyaBoxes smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestPuyaBoxes smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new TestPuyaBoxesClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TestPuyaBoxes smart contract
  */

@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"application","structs":{},"methods":[{"name":"create","args":[{"type":"pay","name":"pay_txn"}],"returns":{"type":"string"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Create the application","events":[],"recommendations":{}},{"name":"delete","args":[{"type":"pay","name":"pay_txn"}],"returns":{"type":"string"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Delete the application","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":["UpdateApplication"]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[34],"errorMessage":"OnCompletion is not DeleteApplication"},{"pc":[73],"errorMessage":"OnCompletion is not NoOp"},{"pc":[77],"errorMessage":"can only call when creating"},{"pc":[37,118],"errorMessage":"can only call when not creating"},{"pc":[47,86],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"application","structs":{},"methods":[{"name":"create","args":[{"type":"pay","name":"pay_txn"}],"returns":{"type":"string"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Create the application","events":[],"recommendations":{}},{"name":"delete","args":[{"type":"pay","name":"pay_txn"}],"returns":{"type":"string"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Delete the application","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":["UpdateApplication"]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[34],"errorMessage":"OnCompletion is not DeleteApplication"},{"pc":[73],"errorMessage":"OnCompletion is not NoOp"},{"pc":[77],"errorMessage":"can only call when creating"},{"pc":[37,118],"errorMessage":"can only call when not creating"},{"pc":[47,86],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"cblocks"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIFRNUExfVVBEQVRBQkxFIFRNUExfREVMRVRBQkxFCiAgICAvLyBjb250cmFjdC5weTo0CiAgICAvLyBjbGFzcyBhcHBsaWNhdGlvbihBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYmFyZV9yb3V0aW5nQDcKICAgIHB1c2hieXRlc3MgMHhjNjY5NWYzOSAweDg4ZDZjZTlkIC8vIG1ldGhvZCAiY3JlYXRlKHBheSlzdHJpbmciLCBtZXRob2QgImRlbGV0ZShwYXkpc3RyaW5nIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVfcm91dGVAMyBtYWluX2RlbGV0ZV9yb3V0ZUA0CgptYWluX2FmdGVyX2lmX2Vsc2VAMTE6CiAgICAvLyBjb250cmFjdC5weTo0CiAgICAvLyBjbGFzcyBhcHBsaWNhdGlvbihBUkM0Q29udHJhY3QpOgogICAgcHVzaGludCAwIC8vIDAKICAgIHJldHVybgoKbWFpbl9kZWxldGVfcm91dGVANDoKICAgIC8vIGNvbnRyYWN0LnB5OjE0CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIkRlbGV0ZUFwcGxpY2F0aW9uIl0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDUgLy8gRGVsZXRlQXBwbGljYXRpb24KICAgID09CiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBEZWxldGVBcHBsaWNhdGlvbgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBjb250cmFjdC5weTo0CiAgICAvLyBjbGFzcyBhcHBsaWNhdGlvbihBUkM0Q29udHJhY3QpOgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMCAvLyAxCiAgICAtCiAgICBkdXAKICAgIGd0eG5zIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gcGF5CiAgICA9PQogICAgYXNzZXJ0IC8vIHRyYW5zYWN0aW9uIHR5cGUgaXMgcGF5CiAgICAvLyBjb250cmFjdC5weToxNAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJEZWxldGVBcHBsaWNhdGlvbiJdKQogICAgY2FsbHN1YiBkZWxldGUKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fY3JlYXRlX3JvdXRlQDM6CiAgICAvLyBjb250cmFjdC5weTo1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICAvLyBjb250cmFjdC5weTo0CiAgICAvLyBjbGFzcyBhcHBsaWNhdGlvbihBUkM0Q29udHJhY3QpOgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMCAvLyAxCiAgICAtCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18wIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgLy8gY29udHJhY3QucHk6NQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDc2MzcyNjU2MTc0NjU2NAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0A3OgogICAgLy8gY29udHJhY3QucHk6NAogICAgLy8gY2xhc3MgYXBwbGljYXRpb24oQVJDNENvbnRyYWN0KToKICAgIHB1c2hpbnQgNCAvLyA0CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBtYXRjaCBtYWluX3VwZGF0ZUA4CiAgICBiIG1haW5fYWZ0ZXJfaWZfZWxzZUAxMQoKbWFpbl91cGRhdGVAODoKICAgIC8vIGNvbnRyYWN0LnB5OjEwCiAgICAvLyBAYXJjNC5iYXJlbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJVcGRhdGVBcHBsaWNhdGlvbiJdKQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBjYWxsc3ViIHVwZGF0ZQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0LmFwcGxpY2F0aW9uLnVwZGF0ZSgpIC0+IHZvaWQ6CnVwZGF0ZToKICAgIC8vIGNvbnRyYWN0LnB5OjEyCiAgICAvLyBhc3NlcnQgVGVtcGxhdGVWYXJbYm9vbF0oIlVQREFUQUJMRSIpCiAgICBpbnRjXzEgLy8gVE1QTF9VUERBVEFCTEUKICAgIGFzc2VydAogICAgcmV0c3ViCgoKLy8gY29udHJhY3QuYXBwbGljYXRpb24uZGVsZXRlKHBheV90eG46IHVpbnQ2NCkgLT4gYnl0ZXM6CmRlbGV0ZToKICAgIC8vIGNvbnRyYWN0LnB5OjE0LTE1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIkRlbGV0ZUFwcGxpY2F0aW9uIl0pCiAgICAvLyBkZWYgZGVsZXRlKHNlbGYsIHBheV90eG46IGd0eG4uUGF5bWVudFRyYW5zYWN0aW9uKSAtPiBTdHJpbmc6CiAgICBwcm90byAxIDEKICAgIC8vIGNvbnRyYWN0LnB5OjE3CiAgICAvLyBhc3NlcnQgVGVtcGxhdGVWYXJbVUludDY0XSgiREVMRVRBQkxFIikKICAgIGludGNfMiAvLyBUTVBMX0RFTEVUQUJMRQogICAgYXNzZXJ0CiAgICAvLyBjb250cmFjdC5weToxOAogICAgLy8gcmV0dXJuIFN0cmluZygiZGVsZXRlZCIpCiAgICBwdXNoYnl0ZXMgImRlbGV0ZWQiCiAgICByZXRzdWIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CiADAQAAMRtBAGSCAgTGaV85BIjWzp02GgCOAgAsAAOBAEMxGYEFEkQxGEQxFiIJSTgQIhJEiABMSRUWVwYCTFCABBUffHVMULAiQzEZFEQxGBREMRYiCTgQIhJEgA0VH3x1AAdjcmVhdGVksCJDgQQxGY4BAANC/6YxGESIAAIiQyNEiYoBASREgAdkZWxldGVkiQ==","clear":"CoEBQw=="},"events":[],"templateVariables":{"UPDATABLE":{"type":"AVMUint64"},"DELETABLE":{"type":"AVMUint64"}}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -61,6 +61,14 @@ export type Expand<T> = T extends (...args: infer A) => infer R
     ? { [K in keyof O]: O[K] }
     : never
 
+
+/**
+ * Deploy-time template variables
+ */
+export type TemplateVariables = {
+  UPDATABLE: bigint,
+  DELETABLE: bigint,
+}
 
 /**
  * The argument types for the Application contract
@@ -142,13 +150,289 @@ export type MethodArgs<TSignature extends ApplicationSignatures> = ApplicationTy
 export type MethodReturn<TSignature extends ApplicationSignatures> = ApplicationTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ApplicationCreateCallParams =
+  | Expand<CallParams<ApplicationArgs['obj']['create(pay)string'] | ApplicationArgs['tuple']['create(pay)string']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<ApplicationArgs['obj']['create(pay)string'] | ApplicationArgs['tuple']['create(pay)string']> & {method: 'create(pay)string'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type ApplicationUpdateCallParams =
+  | Expand<AppClientBareCallParams> & {method?: never}
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type ApplicationDeleteCallParams =
+  | Expand<CallParams<ApplicationArgs['obj']['delete(pay)string'] | ApplicationArgs['tuple']['delete(pay)string']> & {method: 'delete'}>
+  | Expand<CallParams<ApplicationArgs['obj']['delete(pay)string'] | ApplicationArgs['tuple']['delete(pay)string']> & {method: 'delete(pay)string'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ApplicationDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ApplicationCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: ApplicationUpdateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: ApplicationDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Application smart contract
  */
 export abstract class ApplicationParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends ApplicationCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(pay)string':
+            return ApplicationParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the application smart contract using the create(pay)string ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<ApplicationArgs['obj']['create(pay)string'] | ApplicationArgs['tuple']['create(pay)string']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(pay)string' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.payTxn],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends ApplicationDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'delete':
+          case 'delete(pay)string':
+            return ApplicationParamsFactory.delete.delete(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the application smart contract using the delete(pay)string ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      delete(params: CallParams<ApplicationArgs['obj']['delete(pay)string'] | ApplicationArgs['tuple']['delete(pay)string']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'delete(pay)string' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.payTxn],
+        }
+      },
+    }
+  }
+
 }
 
+/**
+ * A factory to create and deploy one or more instance of the application smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ApplicationFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ApplicationFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ApplicationClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ApplicationClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the application smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ApplicationDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? ApplicationParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (ApplicationCreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? ApplicationParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (ApplicationDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new ApplicationClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the application smart contract using the create(pay)string ABI method.
+       *
+       * Create the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<ApplicationArgs['obj']['create(pay)string'] | ApplicationArgs['tuple']['create(pay)string']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(ApplicationParamsFactory.create.create(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the application smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a deployUpdate call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appFactory.params.bare.deployUpdate(params)
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the application smart contract using the delete(pay)string ABI method.
+       *
+       * Delete the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      delete: (params: CallParams<ApplicationArgs['obj']['delete(pay)string'] | ApplicationArgs['tuple']['delete(pay)string']>) => {
+        return this.appFactory.params.deployDelete(ApplicationParamsFactory.delete.delete(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the application smart contract using the create(pay)string ABI method.
+       *
+       * Create the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<ApplicationArgs['obj']['create(pay)string'] | ApplicationArgs['tuple']['create(pay)string']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(ApplicationParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the application smart contract using an ABI method call using the create(pay)string ABI method.
+       *
+       * Create the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<ApplicationArgs['obj']['create(pay)string'] | ApplicationArgs['tuple']['create(pay)string']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(ApplicationParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | ApplicationReturns['create(pay)string']) }, appClient: new ApplicationClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the application smart contract
  */
@@ -237,6 +521,39 @@ export class ApplicationClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the application smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appClient.params.bare.update(params)
+      },
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the application smart contract using the `delete(pay)string` ABI method.
+       *
+       * Delete the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      delete: (params: CallParams<ApplicationArgs['obj']['delete(pay)string'] | ApplicationArgs['tuple']['delete(pay)string']>) => {
+        return this.appClient.params.delete(ApplicationParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the application smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -253,6 +570,39 @@ export class ApplicationClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the application smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appClient.createTransaction.bare.update(params)
+      },
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the application smart contract using the `delete(pay)string` ABI method.
+       *
+       * Delete the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      delete: (params: CallParams<ApplicationArgs['obj']['delete(pay)string'] | ApplicationArgs['tuple']['delete(pay)string']>) => {
+        return this.appClient.createTransaction.delete(ApplicationParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the application smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -268,6 +618,40 @@ export class ApplicationClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the application smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & SendParams>) => {
+        return this.appClient.send.bare.update(params)
+      },
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the application smart contract using the `delete(pay)string` ABI method.
+       *
+       * Delete the application
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      delete: async (params: CallParams<ApplicationArgs['obj']['delete(pay)string'] | ApplicationArgs['tuple']['delete(pay)string']> & SendParams) => {
+        const result = await this.appClient.send.delete(ApplicationParamsFactory.delete.delete(params))
+        return {...result, return: result.return as unknown as (undefined | ApplicationReturns['delete(pay)string'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the application smart contract.
      *
@@ -302,6 +686,23 @@ export class ApplicationClient {
     let promiseChain:Promise<unknown> = Promise.resolve()
     const resultMappers: Array<undefined | ((x: ABIReturn | undefined) => any)> = []
     return {
+      get update() {
+        return {
+          bare: (params?: AppClientBareCallParams & AppClientCompilationParams ) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdate(await client.params.update.bare(params)))
+            return this
+          },
+        }
+      },
+      get delete() {
+        return {
+          delete: (params: CallParams<ApplicationArgs['obj']['delete(pay)string'] | ApplicationArgs['tuple']['delete(pay)string']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.delete(params)))
+            resultMappers.push((v) => client.decodeReturnValue('delete(pay)string', v))
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the application contract
        */
@@ -337,6 +738,33 @@ export class ApplicationClient {
   }
 }
 export type ApplicationComposer<TReturns extends [...any[]] = []> = {
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the application smart contract using a bare call.
+     *
+     * @param args The arguments for the bare call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    bare(params?: AppClientBareCallParams ): ApplicationComposer<[...TReturns, undefined]>
+  }
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the application smart contract using the delete(pay)string ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    delete(params?: CallParams<ApplicationArgs['obj']['delete(pay)string'] | ApplicationArgs['tuple']['delete(pay)string']>): ApplicationComposer<[...TReturns, ApplicationReturns['delete(pay)string'] | undefined]>
+  }
+
   /**
    * Makes a clear_state call to an existing instance of the application smart contract.
    *
