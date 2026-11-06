@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"NFTContract","structs":{},"methods":[{"name":"create_application","args":[{"type":"asset","name":"asset_id"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"opt_in_to_asset","args":[{"type":"pay","name":"mbrpay"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"asset_opt_in_sender","args":[{"type":"asset","name":"asset"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"asset_transfer_from_app","args":[{"type":"asset","name":"asset"},{"type":"account","name":"receiver"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"assetid":{"keyType":"AVMString","valueType":"AVMUint64","key":"YXNzZXRpZA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[61,85,103,125],"errorMessage":"OnCompletion is not NoOp"},{"pc":[129],"errorMessage":"can only call when creating"},{"pc":[64,88,106],"errorMessage":"can only call when not creating"},{"pc":[163],"errorMessage":"check self.assetid exists"},{"pc":[116],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"NFTContract","structs":{},"methods":[{"name":"create_application","args":[{"type":"asset","name":"asset_id"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"opt_in_to_asset","args":[{"type":"pay","name":"mbrpay"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"asset_opt_in_sender","args":[{"type":"asset","name":"asset"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"asset_transfer_from_app","args":[{"type":"asset","name":"asset"},{"type":"account","name":"receiver"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"assetid":{"keyType":"AVMString","valueType":"AVMUint64","key":"YXNzZXRpZA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[61,85,103,125],"errorMessage":"OnCompletion is not NoOp"},{"pc":[129],"errorMessage":"can only call when creating"},{"pc":[64,88,106],"errorMessage":"can only call when not creating"},{"pc":[163],"errorMessage":"check self.assetid exists"},{"pc":[116],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgNAogICAgYnl0ZWNibG9jayAiYXNzZXRpZCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnQvY29udHJhY3QucHk6NgogICAgLy8gY2xhc3MgTkZUQ29udHJhY3QoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2FmdGVyX2lmX2Vsc2VAMTAKICAgIHB1c2hieXRlc3MgMHgzY2YzMWIzMSAweDE1NzQ1MzVhIDB4ZThhNzBlNTMgMHhlYjdjNjNmZiAvLyBtZXRob2QgImNyZWF0ZV9hcHBsaWNhdGlvbihhc3NldCl2b2lkIiwgbWV0aG9kICJvcHRfaW5fdG9fYXNzZXQocGF5KXZvaWQiLCBtZXRob2QgImFzc2V0X29wdF9pbl9zZW5kZXIoYXNzZXQpdm9pZCIsIG1ldGhvZCAiYXNzZXRfdHJhbnNmZXJfZnJvbV9hcHAoYXNzZXQsYWNjb3VudCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVfYXBwbGljYXRpb25fcm91dGVAMyBtYWluX29wdF9pbl90b19hc3NldF9yb3V0ZUA0IG1haW5fYXNzZXRfb3B0X2luX3NlbmRlcl9yb3V0ZUA1IG1haW5fYXNzZXRfdHJhbnNmZXJfZnJvbV9hcHBfcm91dGVANgoKbWFpbl9hZnRlcl9pZl9lbHNlQDEwOgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weTo2CiAgICAvLyBjbGFzcyBORlRDb250cmFjdChBUkM0Q29udHJhY3QpOgogICAgaW50Y18wIC8vIDAKICAgIHJldHVybgoKbWFpbl9hc3NldF90cmFuc2Zlcl9mcm9tX2FwcF9yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weTo0Mi00MwogICAgLy8gIyBleGFtcGxlOiBBU1NFVF9UUkFOU0ZFUgogICAgLy8gQGFiaW1ldGhvZAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjYKICAgIC8vIGNsYXNzIE5GVENvbnRyYWN0KEFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICB0eG5hcyBBc3NldHMKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGJ0b2kKICAgIHR4bmFzIEFjY291bnRzCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjQyLTQzCiAgICAvLyAjIGV4YW1wbGU6IEFTU0VUX1RSQU5TRkVSCiAgICAvLyBAYWJpbWV0aG9kCiAgICBjYWxsc3ViIGFzc2V0X3RyYW5zZmVyX2Zyb21fYXBwCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2Fzc2V0X29wdF9pbl9zZW5kZXJfcm91dGVANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnQvY29udHJhY3QucHk6MzEKICAgIC8vIEBhYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weTo2CiAgICAvLyBjbGFzcyBORlRDb250cmFjdChBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgdHhuYXMgQXNzZXRzCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjMxCiAgICAvLyBAYWJpbWV0aG9kCiAgICBjYWxsc3ViIGFzc2V0X29wdF9pbl9zZW5kZXIKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fb3B0X2luX3RvX2Fzc2V0X3JvdXRlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjE0LTE1CiAgICAvLyAgIyBvcHQgaW4gdG8gdGhlIGFzc2V0IGludG8gdGhlIHNtYXJ0IGNvbnRyYWN0CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weTo2CiAgICAvLyBjbGFzcyBORlRDb250cmFjdChBUkM0Q29udHJhY3QpOgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMSAvLyAxCiAgICAtCiAgICBkdXAKICAgIGd0eG5zIFR5cGVFbnVtCiAgICBpbnRjXzEgLy8gcGF5CiAgICA9PQogICAgYXNzZXJ0IC8vIHRyYW5zYWN0aW9uIHR5cGUgaXMgcGF5CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjE0LTE1CiAgICAvLyAgIyBvcHQgaW4gdG8gdGhlIGFzc2V0IGludG8gdGhlIHNtYXJ0IGNvbnRyYWN0CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGNhbGxzdWIgb3B0X2luX3RvX2Fzc2V0CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2NyZWF0ZV9hcHBsaWNhdGlvbl9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weTo5LTEwCiAgICAvLyAjY3JlYXRlIHRoZSBhcHAKICAgIC8vIEBhYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSwgY3JlYXRlPSJyZXF1aXJlIikKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjYKICAgIC8vIGNsYXNzIE5GVENvbnRyYWN0KEFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICB0eG5hcyBBc3NldHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnQvY29udHJhY3QucHk6OS0xMAogICAgLy8gI2NyZWF0ZSB0aGUgYXBwCiAgICAvLyBAYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0sIGNyZWF0ZT0icmVxdWlyZSIpCiAgICBjYWxsc3ViIGNyZWF0ZV9hcHBsaWNhdGlvbgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5uZnQuY29udHJhY3QuTkZUQ29udHJhY3QuY3JlYXRlX2FwcGxpY2F0aW9uKGFzc2V0X2lkOiB1aW50NjQpIC0+IHZvaWQ6CmNyZWF0ZV9hcHBsaWNhdGlvbjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnQvY29udHJhY3QucHk6OS0xMQogICAgLy8gI2NyZWF0ZSB0aGUgYXBwCiAgICAvLyBAYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0sIGNyZWF0ZT0icmVxdWlyZSIpCiAgICAvLyBkZWYgY3JlYXRlX2FwcGxpY2F0aW9uKHNlbGYsIGFzc2V0X2lkOiBBc3NldCkgLT4gTm9uZToKICAgIHByb3RvIDEgMAogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weToxMgogICAgLy8gc2VsZi5hc3NldGlkID0gYXNzZXRfaWQuaWQKICAgIGJ5dGVjXzAgLy8gImFzc2V0aWQiCiAgICBmcmFtZV9kaWcgLTEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMubmZ0LmNvbnRyYWN0Lk5GVENvbnRyYWN0Lm9wdF9pbl90b19hc3NldChtYnJwYXk6IHVpbnQ2NCkgLT4gdm9pZDoKb3B0X2luX3RvX2Fzc2V0OgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weToxNC0xNgogICAgLy8gICMgb3B0IGluIHRvIHRoZSBhc3NldCBpbnRvIHRoZSBzbWFydCBjb250cmFjdAogICAgLy8gQGFiaW1ldGhvZCgpCiAgICAvLyBkZWYgb3B0X2luX3RvX2Fzc2V0KHNlbGYsIG1icnBheTogZ3R4bi5QYXltZW50VHJhbnNhY3Rpb24pIC0+IE5vbmU6CiAgICBwcm90byAxIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnQvY29udHJhY3QucHk6MTcKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IEdsb2JhbC5jcmVhdG9yX2FkZHJlc3MKICAgIHR4biBTZW5kZXIKICAgIGdsb2JhbCBDcmVhdG9yQWRkcmVzcwogICAgPT0KICAgIGFzc2VydAogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weToxOAogICAgLy8gYXNzZXJ0IG5vdCBHbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLmlzX29wdGVkX2luKEFzc2V0KHNlbGYuYXNzZXRpZCkpCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gImFzc2V0aWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuYXNzZXRpZCBleGlzdHMKICAgIHN3YXAKICAgIGRpZyAxCiAgICBhc3NldF9ob2xkaW5nX2dldCBBc3NldEJhbGFuY2UKICAgIGJ1cnkgMQogICAgIQogICAgYXNzZXJ0CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjIwCiAgICAvLyBhc3NlcnQgbWJycGF5LnJlY2VpdmVyID09IEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MKICAgIGZyYW1lX2RpZyAtMQogICAgZ3R4bnMgUmVjZWl2ZXIKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjIyCiAgICAvLyBhc3NlcnQgbWJycGF5LmFtb3VudCA9PSBHbG9iYWwubWluX2JhbGFuY2UgKyBHbG9iYWwuYXNzZXRfb3B0X2luX21pbl9iYWxhbmNlCiAgICBmcmFtZV9kaWcgLTEKICAgIGd0eG5zIEFtb3VudAogICAgZ2xvYmFsIE1pbkJhbGFuY2UKICAgIGdsb2JhbCBBc3NldE9wdEluTWluQmFsYW5jZQogICAgKwogICAgPT0KICAgIGFzc2VydAogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weToyNC0yOQogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgLy8gICAgIHhmZXJfYXNzZXQ9IHNlbGYuYXNzZXRpZCwKICAgIC8vICAgICBhc3NldF9yZWNlaXZlcj0gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIC8vICAgICBhc3NldF9hbW91bnQ9IDAsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjI2CiAgICAvLyBhc3NldF9yZWNlaXZlcj0gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjI3CiAgICAvLyBhc3NldF9hbW91bnQ9IDAsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBBc3NldEFtb3VudAogICAgaXR4bl9maWVsZCBBc3NldFJlY2VpdmVyCiAgICBpdHhuX2ZpZWxkIFhmZXJBc3NldAogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weToyNAogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgaW50Y18yIC8vIGF4ZmVyCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjI4CiAgICAvLyBmZWU9MCwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weToyNC0yOQogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgLy8gICAgIHhmZXJfYXNzZXQ9IHNlbGYuYXNzZXRpZCwKICAgIC8vICAgICBhc3NldF9yZWNlaXZlcj0gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIC8vICAgICBhc3NldF9hbW91bnQ9IDAsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLm5mdC5jb250cmFjdC5ORlRDb250cmFjdC5hc3NldF9vcHRfaW5fc2VuZGVyKGFzc2V0OiB1aW50NjQpIC0+IHZvaWQ6CmFzc2V0X29wdF9pbl9zZW5kZXI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjMxLTMyCiAgICAvLyBAYWJpbWV0aG9kCiAgICAvLyBkZWYgYXNzZXRfb3B0X2luX3NlbmRlcihzZWxmLCBhc3NldDogQXNzZXQpIC0+IE5vbmU6CiAgICBwcm90byAxIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnQvY29udHJhY3QucHk6MzQtMzkKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICBhc3NldF9yZWNlaXZlcj1UeG4uc2VuZGVyLAogICAgLy8gICAgIHhmZXJfYXNzZXQ9YXNzZXQsCiAgICAvLyAgICAgYXNzZXRfYW1vdW50PTAsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjM1CiAgICAvLyBhc3NldF9yZWNlaXZlcj1UeG4uc2VuZGVyLAogICAgdHhuIFNlbmRlcgogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weTozNwogICAgLy8gYXNzZXRfYW1vdW50PTAsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBBc3NldEFtb3VudAogICAgZnJhbWVfZGlnIC0xCiAgICBpdHhuX2ZpZWxkIFhmZXJBc3NldAogICAgaXR4bl9maWVsZCBBc3NldFJlY2VpdmVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjM0CiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICBpbnRjXzIgLy8gYXhmZXIKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnQvY29udHJhY3QucHk6MzgKICAgIC8vIGZlZT0wLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvbmZ0L2NvbnRyYWN0LnB5OjM0LTM5CiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXI9VHhuLnNlbmRlciwKICAgIC8vICAgICB4ZmVyX2Fzc2V0PWFzc2V0LAogICAgLy8gICAgIGFzc2V0X2Ftb3VudD0wLAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5uZnQuY29udHJhY3QuTkZUQ29udHJhY3QuYXNzZXRfdHJhbnNmZXJfZnJvbV9hcHAoYXNzZXQ6IHVpbnQ2NCwgcmVjZWl2ZXI6IGJ5dGVzKSAtPiB2b2lkOgphc3NldF90cmFuc2Zlcl9mcm9tX2FwcDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnQvY29udHJhY3QucHk6NDItNDQKICAgIC8vICMgZXhhbXBsZTogQVNTRVRfVFJBTlNGRVIKICAgIC8vIEBhYmltZXRob2QKICAgIC8vIGRlZiBhc3NldF90cmFuc2Zlcl9mcm9tX2FwcChzZWxmLCBhc3NldDogQXNzZXQsIHJlY2VpdmVyOiBBY2NvdW50ICkgLT4gTm9uZToKICAgIHByb3RvIDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weTo0NS01MQogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgLy8gICAgIHNlbmRlciA9IEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXIgPSByZWNlaXZlciwKICAgIC8vICAgICB4ZmVyX2Fzc2V0ID0gYXNzZXQsCiAgICAvLyAgICAgYXNzZXRfYW1vdW50ID0gMSwKICAgIC8vICAgICBmZWU9MCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnQvY29udHJhY3QucHk6NDYKICAgIC8vIHNlbmRlciA9IEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weTo0OQogICAgLy8gYXNzZXRfYW1vdW50ID0gMSwKICAgIGludGNfMSAvLyAxCiAgICBpdHhuX2ZpZWxkIEFzc2V0QW1vdW50CiAgICBmcmFtZV9kaWcgLTIKICAgIGl0eG5fZmllbGQgWGZlckFzc2V0CiAgICBmcmFtZV9kaWcgLTEKICAgIGl0eG5fZmllbGQgQXNzZXRSZWNlaXZlcgogICAgaXR4bl9maWVsZCBTZW5kZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnQvY29udHJhY3QucHk6NDUKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIGludGNfMiAvLyBheGZlcgogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gc21hcnRfY29udHJhY3RzL25mdC9jb250cmFjdC5weTo1MAogICAgLy8gZmVlPTAsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9uZnQvY29udHJhY3QucHk6NDUtNTEKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICBzZW5kZXIgPSBHbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgLy8gICAgIGFzc2V0X3JlY2VpdmVyID0gcmVjZWl2ZXIsCiAgICAvLyAgICAgeGZlcl9hc3NldCA9IGFzc2V0LAogICAgLy8gICAgIGFzc2V0X2Ftb3VudCA9IDEsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgcmV0c3ViCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CiADAAEEJgEHYXNzZXRpZDEbQQAjggQEPPMbMQQVdFNaBOinDlME63xj/zYaAI4EAEIALAAaAAIiQzEZFEQxGEQ2GgEXwDA2GgIXwByIAJkjQzEZFEQxGEQ2GgEXwDCIAHAjQzEZFEQxGEQxFiMJSTgQIxJEiAAdI0MxGRREMRgURDYaARfAMIgAAiNDigEAKIv/Z4mKAQAxADIJEkQyCiIoZURMSwFwAEUBFESL/zgHMgoSRIv/OAgyATIQCBJEsTIKIrISshSyESSyECKyAbOJigEAsTEAIrISi/+yEbIUJLIQIrIBs4mKAgCxMgojshKL/rIRi/+yFLIAJLIQIrIBs4k=","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -175,11 +175,57 @@ export type MethodReturn<TSignature extends NftContractSignatures> = NftContract
 export type GlobalKeysState = NftContractTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type NftContractCreateCallParams =
+  | Expand<CallParams<NftContractArgs['obj']['create_application(asset)void'] | NftContractArgs['tuple']['create_application(asset)void']> & {method: 'create_application'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<NftContractArgs['obj']['create_application(asset)void'] | NftContractArgs['tuple']['create_application(asset)void']> & {method: 'create_application(asset)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type NftContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: NftContractCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the NftContract smart contract
  */
 export abstract class NftContractParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends NftContractCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create_application':
+          case 'create_application(asset)void':
+            return NftContractParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the NFTContract smart contract using the create_application(asset)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<NftContractArgs['obj']['create_application(asset)void'] | NftContractArgs['tuple']['create_application(asset)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create_application(asset)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.assetId],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the opt_in_to_asset(pay)void ABI method
    *
@@ -221,6 +267,148 @@ export abstract class NftContractParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the NFTContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class NftContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `NftContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new NftContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new NftContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the NFTContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: NftContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? NftContractParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (NftContractCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new NftContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NFTContract smart contract using the create_application(asset)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<NftContractArgs['obj']['create_application(asset)void'] | NftContractArgs['tuple']['create_application(asset)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(NftContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NFTContract smart contract using the create_application(asset)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<NftContractArgs['obj']['create_application(asset)void'] | NftContractArgs['tuple']['create_application(asset)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(NftContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NFTContract smart contract using an ABI method call using the create_application(asset)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<NftContractArgs['obj']['create_application(asset)void'] | NftContractArgs['tuple']['create_application(asset)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(NftContractParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | NftContractReturns['create_application(asset)void']) }, appClient: new NftContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the NFTContract smart contract
  */
