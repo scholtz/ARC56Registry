@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"UserAccountContract","structs":{"VerifierStruct":[{"name":"name","type":"string"},{"name":"isVerified","type":"bool"},{"name":"proofHash","type":"string"}]},"methods":[{"name":"createApplication","args":[{"type":"account","name":"ownerAddress"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"verify","args":[{"type":"string","name":"providerName"},{"type":"string","name":"proofHash"},{"type":"account","name":"account"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":2,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"ownerAddress":{"keyType":"AVMString","valueType":"address","key":"b3duZXJBZGRyZXNz"},"limit":{"keyType":"AVMString","valueType":"AVMUint64","key":"bGltaXQ="},"piggyBank":{"keyType":"AVMString","valueType":"AVMUint64","key":"cGlnZ3lCYW5r"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"verifiers":{"keyType":"address","valueType":"VerifierStruct","prefix":""}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[33,58],"errorMessage":"OnCompletion is not NoOp"},{"pc":[146],"errorMessage":"Only the allowed address can access this method"},{"pc":[62],"errorMessage":"can only call when creating"},{"pc":[36],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"UserAccountContract","structs":{"VerifierStruct":[{"name":"name","type":"string"},{"name":"isVerified","type":"bool"},{"name":"proofHash","type":"string"}]},"methods":[{"name":"createApplication","args":[{"type":"account","name":"ownerAddress"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"verify","args":[{"type":"string","name":"providerName"},{"type":"string","name":"proofHash"},{"type":"account","name":"account"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":2,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"ownerAddress":{"keyType":"AVMString","valueType":"address","key":"b3duZXJBZGRyZXNz"},"limit":{"keyType":"AVMString","valueType":"AVMUint64","key":"bGltaXQ="},"piggyBank":{"keyType":"AVMString","valueType":"AVMUint64","key":"cGlnZ3lCYW5r"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"verifiers":{"keyType":"address","valueType":"VerifierStruct","prefix":""}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[33,58],"errorMessage":"OnCompletion is not NoOp"},{"pc":[146],"errorMessage":"Only the allowed address can access this method"},{"pc":[62],"errorMessage":"can only call when creating"},{"pc":[36],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyBzbWFydF9jb250cmFjdHMvVXNlckFjY291bnQuYWxnby50czoyNgogICAgLy8gZXhwb3J0IGNsYXNzIFVzZXJBY2NvdW50Q29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9hZnRlcl9pZl9lbHNlQDgKICAgIHB1c2hieXRlc3MgMHhkYTUzZmVmZSAweDgzZDUzYzY5IC8vIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oYWNjb3VudCl2b2lkIiwgbWV0aG9kICJ2ZXJpZnkoc3RyaW5nLHN0cmluZyxhY2NvdW50KXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2NyZWF0ZUFwcGxpY2F0aW9uX3JvdXRlQDMgbWFpbl92ZXJpZnlfcm91dGVANAoKbWFpbl9hZnRlcl9pZl9lbHNlQDg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvVXNlckFjY291bnQuYWxnby50czoyNgogICAgLy8gZXhwb3J0IGNsYXNzIFVzZXJBY2NvdW50Q29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoaW50IDAgLy8gMAogICAgcmV0dXJuCgptYWluX3ZlcmlmeV9yb3V0ZUA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL1VzZXJBY2NvdW50LmFsZ28udHM6NTEKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvVXNlckFjY291bnQuYWxnby50czoyNgogICAgLy8gZXhwb3J0IGNsYXNzIFVzZXJBY2NvdW50Q29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBidG9pCiAgICB0eG5hcyBBY2NvdW50cwogICAgLy8gc21hcnRfY29udHJhY3RzL1VzZXJBY2NvdW50LmFsZ28udHM6NTEKICAgIC8vIEBhYmltZXRob2QoKQogICAgY2FsbHN1YiB2ZXJpZnkKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4KCm1haW5fY3JlYXRlQXBwbGljYXRpb25fcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9Vc2VyQWNjb3VudC5hbGdvLnRzOjQxCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvVXNlckFjY291bnQuYWxnby50czoyNgogICAgLy8gZXhwb3J0IGNsYXNzIFVzZXJBY2NvdW50Q29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICB0eG5hcyBBY2NvdW50cwogICAgLy8gc21hcnRfY29udHJhY3RzL1VzZXJBY2NvdW50LmFsZ28udHM6NDEKICAgIC8vIEBhYmltZXRob2QoKQogICAgY2FsbHN1YiBjcmVhdGVBcHBsaWNhdGlvbgogICAgcHVzaGludCAxIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9Vc2VyQWNjb3VudC5hbGdvLnRzOjpVc2VyQWNjb3VudENvbnRyYWN0LmNyZWF0ZUFwcGxpY2F0aW9uKG93bmVyQWRkcmVzczogYnl0ZXMpIC0+IHZvaWQ6CmNyZWF0ZUFwcGxpY2F0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzL1VzZXJBY2NvdW50LmFsZ28udHM6NDEtNDIKICAgIC8vIEBhYmltZXRob2QoKQogICAgLy8gY3JlYXRlQXBwbGljYXRpb24ob3duZXJBZGRyZXNzIDogQWNjb3VudCk6IHZvaWQgewogICAgcHJvdG8gMSAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvVXNlckFjY291bnQuYWxnby50czoyOQogICAgLy8gb3duZXJBZGRyZXNzID0gR2xvYmFsU3RhdGU8QWNjb3VudD4oKTsKICAgIHB1c2hieXRlcyAib3duZXJBZGRyZXNzIgogICAgLy8gc21hcnRfY29udHJhY3RzL1VzZXJBY2NvdW50LmFsZ28udHM6NDQKICAgIC8vIHRoaXMub3duZXJBZGRyZXNzLnZhbHVlID0gb3duZXJBZGRyZXNzOwogICAgZnJhbWVfZGlnIC0xCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL1VzZXJBY2NvdW50LmFsZ28udHM6MzAKICAgIC8vIGxpbWl0ID0gR2xvYmFsU3RhdGU8dWludDY0PigpOwogICAgcHVzaGJ5dGVzICJsaW1pdCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9Vc2VyQWNjb3VudC5hbGdvLnRzOjQ1CiAgICAvLyB0aGlzLmxpbWl0LnZhbHVlID0gMTA7CiAgICBwdXNoaW50IDEwIC8vIDEwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzL1VzZXJBY2NvdW50LmFsZ28udHM6OlVzZXJBY2NvdW50Q29udHJhY3QudmVyaWZ5KHByb3ZpZGVyTmFtZTogYnl0ZXMsIHByb29mSGFzaDogYnl0ZXMsIGFjY291bnQ6IGJ5dGVzKSAtPiB2b2lkOgp2ZXJpZnk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvVXNlckFjY291bnQuYWxnby50czo1MS01MgogICAgLy8gICAgQGFiaW1ldGhvZCgpCiAgICAvLyB2ZXJpZnkocHJvdmlkZXJOYW1lIDogU3RyLCBwcm9vZkhhc2g6IFN0ciwgYWNjb3VudDogQWNjb3VudCl7CiAgICBwcm90byAzIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9Vc2VyQWNjb3VudC5hbGdvLnRzOjUzCiAgICAvLyBhc3NlcnQoVHhuLnNlbmRlciA9PT0gYWxsb3dlZEFkZHJlc3MsICdPbmx5IHRoZSBhbGxvd2VkIGFkZHJlc3MgY2FuIGFjY2VzcyB0aGlzIG1ldGhvZCcpOwogICAgdHhuIFNlbmRlcgogICAgLy8gc21hcnRfY29udHJhY3RzL1VzZXJBY2NvdW50LmFsZ28udHM6MjQKICAgIC8vIGNvbnN0IGFsbG93ZWRBZGRyZXNzID0gQWNjb3VudCgnTEVHRU5ETVFRSkpXU1FWSFJGSzM2RVA3R1RNM01USTNWRDNHTjI1WU1LSjZNRUJSMzVKNFNCTlZENCcpOwogICAgcHVzaGJ5dGVzIGJhc2UzMihMRUdFTkRNUVFKSldTUVZIUkZLMzZFUDdHVE0zTVRJM1ZEM0dOMjVZTUtKNk1FQlIzNUpRKSAvLyBhZGRyIExFR0VORE1RUUpKV1NRVkhSRkszNkVQN0dUTTNNVEkzVkQzR04yNVlNS0o2TUVCUjM1SjRTQk5WRDQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9Vc2VyQWNjb3VudC5hbGdvLnRzOjUzCiAgICAvLyBhc3NlcnQoVHhuLnNlbmRlciA9PT0gYWxsb3dlZEFkZHJlc3MsICdPbmx5IHRoZSBhbGxvd2VkIGFkZHJlc3MgY2FuIGFjY2VzcyB0aGlzIG1ldGhvZCcpOwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IHRoZSBhbGxvd2VkIGFkZHJlc3MgY2FuIGFjY2VzcyB0aGlzIG1ldGhvZAogICAgLy8gc21hcnRfY29udHJhY3RzL1VzZXJBY2NvdW50LmFsZ28udHM6NTUtNTkKICAgIC8vIHRoaXMudmVyaWZpZXJzKGFjY291bnQpLnZhbHVlID0gbmV3IFZlcmlmaWVyU3RydWN0KHsKICAgIC8vICAgbmFtZTogcHJvdmlkZXJOYW1lLAogICAgLy8gICBpc1ZlcmlmaWVkOiBuZXcgYXJjNC5Cb29sKHRydWUpLAogICAgLy8gICBwcm9vZkhhc2g6IHByb29mSGFzaAogICAgLy8gfSk7CiAgICBmcmFtZV9kaWcgLTMKICAgIGxlbgogICAgcHVzaGludCA1IC8vIDUKICAgICsKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBwdXNoYnl0ZXMgMHgwMDA1ODAKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZnJhbWVfZGlnIC0zCiAgICBjb25jYXQKICAgIGZyYW1lX2RpZyAtMgogICAgY29uY2F0CiAgICBmcmFtZV9kaWcgLTEKICAgIGJveF9kZWwKICAgIHBvcAogICAgZnJhbWVfZGlnIC0xCiAgICBzd2FwCiAgICBib3hfcHV0CiAgICByZXRzdWIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CjEbQQAVggIE2lP+/gSD1TxpNhoAjgIAHAADgQBDMRkURDEYRDYaATYaAjYaAxfAHIgANoEBQzEZFEQxGBRENhoBF8AciAADgQFDigEAgAxvd25lckFkZHJlc3OL/2eABWxpbWl0gQpniYoDADEAgCBZDEaNkIJTaUKniVW/Ef802bZNG6j2Zuu4YpPmEDHfUxJEi/0VgQUIFlcGAoADAAWATFCL/VCL/lCL/7xIi/9Mv4k=","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -185,11 +185,57 @@ export type GlobalKeysState = UserAccountContractTypes['state']['global']['keys'
 export type BoxKeysState = UserAccountContractTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type UserAccountContractCreateCallParams =
+  | Expand<CallParams<UserAccountContractArgs['obj']['createApplication(account)void'] | UserAccountContractArgs['tuple']['createApplication(account)void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<UserAccountContractArgs['obj']['createApplication(account)void'] | UserAccountContractArgs['tuple']['createApplication(account)void']> & {method: 'createApplication(account)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type UserAccountContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: UserAccountContractCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the UserAccountContract smart contract
  */
 export abstract class UserAccountContractParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends UserAccountContractCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication(account)void':
+            return UserAccountContractParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the UserAccountContract smart contract using the createApplication(account)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<UserAccountContractArgs['obj']['createApplication(account)void'] | UserAccountContractArgs['tuple']['createApplication(account)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication(account)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.ownerAddress],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the verify(string,string,account)void ABI method
    *
@@ -205,6 +251,148 @@ export abstract class UserAccountContractParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the UserAccountContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class UserAccountContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `UserAccountContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new UserAccountContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new UserAccountContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the UserAccountContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: UserAccountContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? UserAccountContractParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (UserAccountContractCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new UserAccountContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the UserAccountContract smart contract using the createApplication(account)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<UserAccountContractArgs['obj']['createApplication(account)void'] | UserAccountContractArgs['tuple']['createApplication(account)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(UserAccountContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the UserAccountContract smart contract using the createApplication(account)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<UserAccountContractArgs['obj']['createApplication(account)void'] | UserAccountContractArgs['tuple']['createApplication(account)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(UserAccountContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the UserAccountContract smart contract using an ABI method call using the createApplication(account)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<UserAccountContractArgs['obj']['createApplication(account)void'] | UserAccountContractArgs['tuple']['createApplication(account)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(UserAccountContractParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | UserAccountContractReturns['createApplication(account)void']) }, appClient: new UserAccountContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the UserAccountContract smart contract
  */
