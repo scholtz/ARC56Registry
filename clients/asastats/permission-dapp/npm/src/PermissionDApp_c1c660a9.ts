@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"PermissionDApp","structs":{},"methods":[{"name":"write_box","args":[{"type":"byte[]","name":"box_name","desc":"The name of the box (should be 32 bytes)"},{"type":"string","name":"value","desc":"The string value to write to the box"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Write a value to a box. Only the creator can call this method.","events":[],"recommendations":{}},{"name":"delete_box","args":[{"type":"byte[]","name":"box_name","desc":"The name of the box to delete (should be 32 bytes)"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Delete a box. Only the creator can call this method.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    A permission-based dApp that allows only the creator to manage boxes.\n    ","networks":{"SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=":{"appID":750094865}},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":["DeleteApplication","UpdateApplication"]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[142,185],"errorMessage":"Box name must be exactly 32 bytes"},{"pc":[15],"errorMessage":"OnCompletion must be NoOp"},{"pc":[66],"errorMessage":"Only creator can delete application"},{"pc":[176],"errorMessage":"Only creator can delete boxes"},{"pc":[77],"errorMessage":"Only creator can update application"},{"pc":[119],"errorMessage":"Only creator can write to boxes"},{"pc":[83],"errorMessage":"can only call when creating"},{"pc":[60,71],"errorMessage":"can only call when not creating"},{"pc":[91,105,162],"errorMessage":"invalid array length header"},{"pc":[99,113,170],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"PermissionDApp","structs":{},"methods":[{"name":"write_box","args":[{"type":"byte[]","name":"box_name","desc":"The name of the box (should be 32 bytes)"},{"type":"string","name":"value","desc":"The string value to write to the box"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Write a value to a box. Only the creator can call this method.","events":[],"recommendations":{}},{"name":"delete_box","args":[{"type":"byte[]","name":"box_name","desc":"The name of the box to delete (should be 32 bytes)"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Delete a box. Only the creator can call this method.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    A permission-based dApp that allows only the creator to manage boxes.\n    ","networks":{"SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=":{"appID":750094865}},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":["DeleteApplication","UpdateApplication"]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[142,185],"errorMessage":"Box name must be exactly 32 bytes"},{"pc":[15],"errorMessage":"OnCompletion must be NoOp"},{"pc":[66],"errorMessage":"Only creator can delete application"},{"pc":[176],"errorMessage":"Only creator can delete boxes"},{"pc":[77],"errorMessage":"Only creator can update application"},{"pc":[119],"errorMessage":"Only creator can write to boxes"},{"pc":[83],"errorMessage":"can only call when creating"},{"pc":[60,71],"errorMessage":"can only call when not creating"},{"pc":[91,105,162],"errorMessage":"invalid array length header"},{"pc":[99,113,170],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAyIDEgMCAzMgogICAgLy8gY29udHJhY3QucHk6NgogICAgLy8gY2xhc3MgUGVybWlzc2lvbkRBcHAoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0AxMQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHhmOWM4MzIxOSAweDE4YTQyM2RiIC8vIG1ldGhvZCAid3JpdGVfYm94KGJ5dGVbXSxzdHJpbmcpdm9pZCIsIG1ldGhvZCAiZGVsZXRlX2JveChieXRlW10pdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHdyaXRlX2JveCBkZWxldGVfYm94CgptYWluX2FmdGVyX2lmX2Vsc2VAMTY6CiAgICAvLyBjb250cmFjdC5weTo2CiAgICAvLyBjbGFzcyBQZXJtaXNzaW9uREFwcChBUkM0Q29udHJhY3QpOgogICAgZXJyCgptYWluX2JhcmVfcm91dGluZ0AxMToKICAgIC8vIGNvbnRyYWN0LnB5OjYKICAgIC8vIGNsYXNzIFBlcm1pc3Npb25EQXBwKEFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBzd2l0Y2ggbWFpbl9jcmVhdGVfYXBwbGljYXRpb25AMTIgbWFpbl9hZnRlcl9pZl9lbHNlQDE2IG1haW5fYWZ0ZXJfaWZfZWxzZUAxNiBtYWluX2FmdGVyX2lmX2Vsc2VAMTYgbWFpbl91cGRhdGVfYXBwbGljYXRpb25AMTMgbWFpbl9kZWxldGVfYXBwbGljYXRpb25AMTQKICAgIGVycgoKbWFpbl9kZWxldGVfYXBwbGljYXRpb25AMTQ6CiAgICAvLyBjb250cmFjdC5weTozMwogICAgLy8gQGFyYzQuYmFyZW1ldGhvZChhbGxvd19hY3Rpb25zPVsiRGVsZXRlQXBwbGljYXRpb24iXSkKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gY29udHJhY3QucHk6MzkKICAgIC8vIFR4bi5zZW5kZXIgPT0gR2xvYmFsLmNyZWF0b3JfYWRkcmVzcwogICAgdHhuIFNlbmRlcgogICAgZ2xvYmFsIENyZWF0b3JBZGRyZXNzCiAgICA9PQogICAgLy8gY29udHJhY3QucHk6MzgtNDAKICAgIC8vIGFzc2VydCAoCiAgICAvLyAgICAgVHhuLnNlbmRlciA9PSBHbG9iYWwuY3JlYXRvcl9hZGRyZXNzCiAgICAvLyApLCAiT25seSBjcmVhdG9yIGNhbiBkZWxldGUgYXBwbGljYXRpb24iCiAgICBhc3NlcnQgLy8gT25seSBjcmVhdG9yIGNhbiBkZWxldGUgYXBwbGljYXRpb24KICAgIC8vIGNvbnRyYWN0LnB5OjMzCiAgICAvLyBAYXJjNC5iYXJlbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJEZWxldGVBcHBsaWNhdGlvbiJdKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl91cGRhdGVfYXBwbGljYXRpb25AMTM6CiAgICAvLyBjb250cmFjdC5weToyNAogICAgLy8gQGFyYzQuYmFyZW1ldGhvZChhbGxvd19hY3Rpb25zPVsiVXBkYXRlQXBwbGljYXRpb24iXSkKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gY29udHJhY3QucHk6MzAKICAgIC8vIFR4bi5zZW5kZXIgPT0gR2xvYmFsLmNyZWF0b3JfYWRkcmVzcwogICAgdHhuIFNlbmRlcgogICAgZ2xvYmFsIENyZWF0b3JBZGRyZXNzCiAgICA9PQogICAgLy8gY29udHJhY3QucHk6MjktMzEKICAgIC8vIGFzc2VydCAoCiAgICAvLyAgICAgVHhuLnNlbmRlciA9PSBHbG9iYWwuY3JlYXRvcl9hZGRyZXNzCiAgICAvLyApLCAiT25seSBjcmVhdG9yIGNhbiB1cGRhdGUgYXBwbGljYXRpb24iCiAgICBhc3NlcnQgLy8gT25seSBjcmVhdG9yIGNhbiB1cGRhdGUgYXBwbGljYXRpb24KICAgIC8vIGNvbnRyYWN0LnB5OjI0CiAgICAvLyBAYXJjNC5iYXJlbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJVcGRhdGVBcHBsaWNhdGlvbiJdKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9jcmVhdGVfYXBwbGljYXRpb25AMTI6CiAgICAvLyBjb250cmFjdC5weToxNQogICAgLy8gQGFyYzQuYmFyZW1ldGhvZChhbGxvd19hY3Rpb25zPVsiTm9PcCJdLCBjcmVhdGU9InJlcXVpcmUiKQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBkYXBwLmNvbnRyYWN0LlBlcm1pc3Npb25EQXBwLndyaXRlX2JveFtyb3V0aW5nXSgpIC0+IHZvaWQ6CndyaXRlX2JveDoKICAgIC8vIGNvbnRyYWN0LnB5OjQyCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18yIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGR1cAogICAgaW50Y18wIC8vIDIKICAgICsKICAgIGRpZyAyCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzIgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgZHVwCiAgICBpbnRjXzAgLy8gMgogICAgKwogICAgZGlnIDIKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICAvLyBjb250cmFjdC5weTo1MQogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gR2xvYmFsLmNyZWF0b3JfYWRkcmVzcywgIk9ubHkgY3JlYXRvciBjYW4gd3JpdGUgdG8gYm94ZXMiCiAgICB0eG4gU2VuZGVyCiAgICBnbG9iYWwgQ3JlYXRvckFkZHJlc3MKICAgID09CiAgICBhc3NlcnQgLy8gT25seSBjcmVhdG9yIGNhbiB3cml0ZSB0byBib3hlcwogICAgLy8gY29udHJhY3QucHk6NjAKICAgIC8vIGFjdHVhbF9ib3hfbmFtZSA9IG9wLmV4dHJhY3QoYm94X25hbWVfYnl0ZXMsIDIsIGFjdHVhbF9ib3hfbmFtZV9sZW5ndGgpCiAgICB1bmNvdmVyIDMKICAgIGludGNfMCAvLyAyCiAgICBkaWcgNAogICAgZXh0cmFjdDMKICAgIGR1cAogICAgY292ZXIgMgogICAgY292ZXIgNAogICAgLy8gY29udHJhY3QucHk6NjQKICAgIC8vIGFjdHVhbF92YWx1ZSA9IG9wLmV4dHJhY3QodmFsdWVfYnl0ZXMsIDIsIGFjdHVhbF92YWx1ZV9sZW5ndGgpCiAgICB1bmNvdmVyIDIKICAgIGludGNfMCAvLyAyCiAgICB1bmNvdmVyIDIKICAgIGV4dHJhY3QzCiAgICBjb3ZlciAyCiAgICAvLyBjb250cmFjdC5weTo2NgogICAgLy8gYXNzZXJ0IGFjdHVhbF9ib3hfbmFtZV9sZW5ndGggPT0gMzIsICJCb3ggbmFtZSBtdXN0IGJlIGV4YWN0bHkgMzIgYnl0ZXMiCiAgICBzd2FwCiAgICBpbnRjXzMgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gQm94IG5hbWUgbXVzdCBiZSBleGFjdGx5IDMyIGJ5dGVzCiAgICAvLyBjb250cmFjdC5weTo2OC03MAogICAgLy8gIyBTaW1wbGUgYXBwcm9hY2g6IGFsd2F5cyBkZWxldGUgdGhlIGJveCBmaXJzdCBpZiBpdCBleGlzdHMsIHRoZW4gY3JlYXRlIGl0CiAgICAvLyAjIFRoaXMgYXZvaWRzIHRoZSBsZW5ndGggY29tcGFyaXNvbiBpc3N1ZQogICAgLy8gX2xlbmd0aCwgZXhpc3RzID0gb3AuQm94Lmxlbmd0aChhY3R1YWxfYm94X25hbWUpCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIC8vIGNvbnRyYWN0LnB5OjcxCiAgICAvLyBpZiBleGlzdHM6CiAgICBieiB3cml0ZV9ib3hfYWZ0ZXJfaWZfZWxzZUAzCiAgICAvLyBjb250cmFjdC5weTo3MgogICAgLy8gb3AuQm94LmRlbGV0ZShhY3R1YWxfYm94X25hbWUpCiAgICBkaWcgMQogICAgYm94X2RlbAogICAgcG9wCgp3cml0ZV9ib3hfYWZ0ZXJfaWZfZWxzZUAzOgogICAgLy8gY29udHJhY3QucHk6NzQtNzUKICAgIC8vICMgV3JpdGUgdG8gYm94IChjcmVhdGUgbmV3IGJveCkKICAgIC8vIG9wLkJveC5wdXQoYWN0dWFsX2JveF9uYW1lLCBhY3R1YWxfdmFsdWUpCiAgICBkdXAyCiAgICBib3hfcHV0CiAgICAvLyBjb250cmFjdC5weTo0MgogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gZGFwcC5jb250cmFjdC5QZXJtaXNzaW9uREFwcC5kZWxldGVfYm94W3JvdXRpbmddKCkgLT4gdm9pZDoKZGVsZXRlX2JveDoKICAgIC8vIGNvbnRyYWN0LnB5Ojc3CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18yIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGR1cAogICAgaW50Y18wIC8vIDIKICAgICsKICAgIGRpZyAyCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgLy8gY29udHJhY3QucHk6ODUKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IEdsb2JhbC5jcmVhdG9yX2FkZHJlc3MsICJPbmx5IGNyZWF0b3IgY2FuIGRlbGV0ZSBib3hlcyIKICAgIHR4biBTZW5kZXIKICAgIGdsb2JhbCBDcmVhdG9yQWRkcmVzcwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3IgY2FuIGRlbGV0ZSBib3hlcwogICAgLy8gY29udHJhY3QucHk6OTIKICAgIC8vIGFjdHVhbF9ib3hfbmFtZSA9IG9wLmV4dHJhY3QoYm94X25hbWVfYnl0ZXMsIDIsIGFjdHVhbF9ib3hfbmFtZV9sZW5ndGgpCiAgICBzd2FwCiAgICBpbnRjXzAgLy8gMgogICAgZGlnIDIKICAgIGV4dHJhY3QzCiAgICAvLyBjb250cmFjdC5weTo5NAogICAgLy8gYXNzZXJ0IGFjdHVhbF9ib3hfbmFtZV9sZW5ndGggPT0gMzIsICJCb3ggbmFtZSBtdXN0IGJlIGV4YWN0bHkgMzIgYnl0ZXMiCiAgICBzd2FwCiAgICBpbnRjXzMgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gQm94IG5hbWUgbXVzdCBiZSBleGFjdGx5IDMyIGJ5dGVzCiAgICAvLyBjb250cmFjdC5weTo5Ni05NwogICAgLy8gIyBEZWxldGUgdGhlIGJveAogICAgLy8gb3AuQm94LmRlbGV0ZShhY3R1YWxfYm94X25hbWUpCiAgICBib3hfZGVsCiAgICBwb3AKICAgIC8vIGNvbnRyYWN0LnB5Ojc3CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyAEAgEAIDEbQQAdMRkURDEYRIICBPnIMhkEGKQj2zYaAI4CAC4AdQAxGY0GABf/7//v/+8ADAABADEYRDEAMgkSRCNDMRhEMQAyCRJEI0MxGBREI0M2GgFJJFlJIghLAhUSRDYaAkkkWUkiCEsCFRJEMQAyCRJETwMiSwRYSU4CTgRPAiJPAlhOAkwlEkS9RQFBAARLAbxISr8jQzYaAUkkWUkiCEsCFRJEMQAyCRJETCJLAlhMJRJEvEgjQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -148,6 +148,39 @@ export type MethodArgs<TSignature extends PermissionDAppSignatures> = Permission
 export type MethodReturn<TSignature extends PermissionDAppSignatures> = PermissionDAppTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type PermissionDAppCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type PermissionDAppUpdateCallParams =
+  | Expand<AppClientBareCallParams> & {method?: never}
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type PermissionDAppDeleteCallParams =
+  | Expand<AppClientBareCallParams> & {method?: never}
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type PermissionDAppDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: PermissionDAppCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: PermissionDAppUpdateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: PermissionDAppDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the PermissionDApp smart contract
@@ -185,6 +218,177 @@ export abstract class PermissionDAppParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the PermissionDApp smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class PermissionDAppFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `PermissionDAppFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new PermissionDAppClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new PermissionDAppClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the PermissionDApp smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: PermissionDAppDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new PermissionDAppClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the PermissionDApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the PermissionDApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a deployUpdate call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appFactory.params.bare.deployUpdate(params)
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the PermissionDApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a deployDelete call
+       */
+      bare: (params?: Expand<AppClientBareCallParams>) => {
+        return this.appFactory.params.bare.deployDelete(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the PermissionDApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the PermissionDApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new PermissionDAppClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the PermissionDApp smart contract
  */
@@ -265,6 +469,36 @@ export class PermissionDAppClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the PermissionDApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appClient.params.bare.update(params)
+      },
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the PermissionDApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The delete result
+       */
+      bare: (params?: Expand<AppClientBareCallParams>) => {
+        return this.appClient.params.bare.delete(params)
+      },
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the PermissionDApp smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -305,6 +539,36 @@ export class PermissionDAppClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the PermissionDApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appClient.createTransaction.bare.update(params)
+      },
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the PermissionDApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The delete result
+       */
+      bare: (params?: Expand<AppClientBareCallParams>) => {
+        return this.appClient.createTransaction.bare.delete(params)
+      },
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the PermissionDApp smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -344,6 +608,36 @@ export class PermissionDAppClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the PermissionDApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & SendParams>) => {
+        return this.appClient.send.bare.update(params)
+      },
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the PermissionDApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The delete result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & SendParams>) => {
+        return this.appClient.send.bare.delete(params)
+      },
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the PermissionDApp smart contract.
      *
@@ -420,6 +714,22 @@ export class PermissionDAppClient {
         resultMappers.push(undefined)
         return this
       },
+      get update() {
+        return {
+          bare: (params?: AppClientBareCallParams & AppClientCompilationParams ) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdate(await client.params.update.bare(params)))
+            return this
+          },
+        }
+      },
+      get delete() {
+        return {
+          bare: (params?: AppClientBareCallParams ) => {
+            promiseChain = promiseChain.then(() => composer.addAppDelete(client.params.delete.bare(params)))
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the PermissionDApp contract
        */
@@ -476,6 +786,32 @@ export type PermissionDAppComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   deleteBox(params?: CallParams<PermissionDAppArgs['obj']['delete_box(byte[])void'] | PermissionDAppArgs['tuple']['delete_box(byte[])void']>): PermissionDAppComposer<[...TReturns, PermissionDAppReturns['delete_box(byte[])void'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the PermissionDApp smart contract using a bare call.
+     *
+     * @param args The arguments for the bare call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    bare(params?: AppClientBareCallParams ): PermissionDAppComposer<[...TReturns, undefined]>
+  }
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the PermissionDApp smart contract using a bare call.
+     *
+     * @param args The arguments for the bare call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    bare(params?: AppClientBareCallParams ): PermissionDAppComposer<[...TReturns, undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the PermissionDApp smart contract.
