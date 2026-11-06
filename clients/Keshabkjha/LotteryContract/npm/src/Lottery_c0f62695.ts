@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Lottery","structs":{},"methods":[{"name":"create_application","args":[{"type":"uint64","name":"entry_fee"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize the lottery contract with an entry fee.","events":[],"recommendations":{}},{"name":"enter_lottery","args":[{"type":"pay","name":"payment_txn"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Allow users to enter the lottery by sending the entry fee.","events":[],"recommendations":{}},{"name":"pick_winner","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Allows the contract creator to randomly pick a winner.","events":[],"recommendations":{}},{"name":"delete_application","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Allows the creator to delete the application.","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":2,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"entry_fee":{"keyType":"AVMString","valueType":"AVMUint64","key":"ZW50cnlfZmVl"},"total_entries":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfZW50cmllcw=="},"creator_address":{"keyType":"AVMString","valueType":"AVMBytes","key":"Y3JlYXRvcl9hZGRyZXNz"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[96],"errorMessage":"OnCompletion is not DeleteApplication"},{"pc":[108,120,142],"errorMessage":"OnCompletion is not NoOp"},{"pc":[236],"errorMessage":"account funded"},{"pc":[146],"errorMessage":"can only call when creating"},{"pc":[99,111,123],"errorMessage":"can only call when not creating"},{"pc":[207,259,266,270],"errorMessage":"check self.creator_address exists"},{"pc":[189],"errorMessage":"check self.entry_fee exists"},{"pc":[195,213,222],"errorMessage":"check self.total_entries exists"},{"pc":[133],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Lottery","structs":{},"methods":[{"name":"create_application","args":[{"type":"uint64","name":"entry_fee"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize the lottery contract with an entry fee.","events":[],"recommendations":{}},{"name":"enter_lottery","args":[{"type":"pay","name":"payment_txn"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Allow users to enter the lottery by sending the entry fee.","events":[],"recommendations":{}},{"name":"pick_winner","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Allows the contract creator to randomly pick a winner.","events":[],"recommendations":{}},{"name":"delete_application","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"desc":"Allows the creator to delete the application.","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":2,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"entry_fee":{"keyType":"AVMString","valueType":"AVMUint64","key":"ZW50cnlfZmVl"},"total_entries":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfZW50cmllcw=="},"creator_address":{"keyType":"AVMString","valueType":"AVMBytes","key":"Y3JlYXRvcl9hZGRyZXNz"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[96],"errorMessage":"OnCompletion is not DeleteApplication"},{"pc":[108,120,142],"errorMessage":"OnCompletion is not NoOp"},{"pc":[236],"errorMessage":"account funded"},{"pc":[146],"errorMessage":"can only call when creating"},{"pc":[99,111,123],"errorMessage":"can only call when not creating"},{"pc":[207,259,266,270],"errorMessage":"check self.creator_address exists"},{"pc":[189],"errorMessage":"check self.entry_fee exists"},{"pc":[195,213,222],"errorMessage":"check self.total_entries exists"},{"pc":[133],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMTAwMAogICAgYnl0ZWNibG9jayAiY3JlYXRvcl9hZGRyZXNzIiAidG90YWxfZW50cmllcyIgImVudHJ5X2ZlZSIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9sb3R0ZXJ5L2NvbnRyYWN0LnB5OjEyLTEzCiAgICAvLyAjIFdlIHdhbnQgdGhlIG1ldGhvZHMgaW4gb3VyIGNvbnRyYWN0IHRvIGZvbGxvdyB0aGUgQVJDNCBzdGFuZGFyZAogICAgLy8gY2xhc3MgTG90dGVyeShBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMAogICAgcHVzaGJ5dGVzcyAweGEwM2I4MWQyIDB4ODdlYTQ5ZDcgMHhiZTBiZGViZiAweDMzYjM0OTllIC8vIG1ldGhvZCAiY3JlYXRlX2FwcGxpY2F0aW9uKHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJlbnRlcl9sb3R0ZXJ5KHBheSl2b2lkIiwgbWV0aG9kICJwaWNrX3dpbm5lcigpdm9pZCIsIG1ldGhvZCAiZGVsZXRlX2FwcGxpY2F0aW9uKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVfYXBwbGljYXRpb25fcm91dGVAMyBtYWluX2VudGVyX2xvdHRlcnlfcm91dGVANCBtYWluX3BpY2tfd2lubmVyX3JvdXRlQDUgbWFpbl9kZWxldGVfYXBwbGljYXRpb25fcm91dGVANgoKbWFpbl9hZnRlcl9pZl9lbHNlQDEwOgogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6MTItMTMKICAgIC8vICMgV2Ugd2FudCB0aGUgbWV0aG9kcyBpbiBvdXIgY29udHJhY3QgdG8gZm9sbG93IHRoZSBBUkM0IHN0YW5kYXJkCiAgICAvLyBjbGFzcyBMb3R0ZXJ5KEFSQzRDb250cmFjdCk6CiAgICBpbnRjXzAgLy8gMAogICAgcmV0dXJuCgptYWluX2RlbGV0ZV9hcHBsaWNhdGlvbl9yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6ODItODQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgKICAgIC8vICAgICBhbGxvd19hY3Rpb25zPVsiRGVsZXRlQXBwbGljYXRpb24iXQogICAgLy8gKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgcHVzaGludCA1IC8vIERlbGV0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgRGVsZXRlQXBwbGljYXRpb24KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgY2FsbHN1YiBkZWxldGVfYXBwbGljYXRpb24KICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fcGlja193aW5uZXJfcm91dGVANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9sb3R0ZXJ5L2NvbnRyYWN0LnB5OjUyCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgY2FsbHN1YiBwaWNrX3dpbm5lcgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9lbnRlcl9sb3R0ZXJ5X3JvdXRlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weTozOQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9sb3R0ZXJ5L2NvbnRyYWN0LnB5OjEyLTEzCiAgICAvLyAjIFdlIHdhbnQgdGhlIG1ldGhvZHMgaW4gb3VyIGNvbnRyYWN0IHRvIGZvbGxvdyB0aGUgQVJDNCBzdGFuZGFyZAogICAgLy8gY2xhc3MgTG90dGVyeShBUkM0Q29udHJhY3QpOgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMSAvLyAxCiAgICAtCiAgICBkdXAKICAgIGd0eG5zIFR5cGVFbnVtCiAgICBpbnRjXzEgLy8gcGF5CiAgICA9PQogICAgYXNzZXJ0IC8vIHRyYW5zYWN0aW9uIHR5cGUgaXMgcGF5CiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weTozOQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBjYWxsc3ViIGVudGVyX2xvdHRlcnkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fY3JlYXRlX2FwcGxpY2F0aW9uX3JvdXRlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weToyMy0yNgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKAogICAgLy8gICAgIGFsbG93X2FjdGlvbnM9WyJOb09wIl0sCiAgICAvLyAgICAgY3JlYXRlPSJyZXF1aXJlIiwKICAgIC8vICkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weToxMi0xMwogICAgLy8gIyBXZSB3YW50IHRoZSBtZXRob2RzIGluIG91ciBjb250cmFjdCB0byBmb2xsb3cgdGhlIEFSQzQgc3RhbmRhcmQKICAgIC8vIGNsYXNzIExvdHRlcnkoQVJDNENvbnRyYWN0KToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9sb3R0ZXJ5L2NvbnRyYWN0LnB5OjIzLTI2CiAgICAvLyBAYXJjNC5hYmltZXRob2QoCiAgICAvLyAgICAgYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSwKICAgIC8vICAgICBjcmVhdGU9InJlcXVpcmUiLAogICAgLy8gKQogICAgY2FsbHN1YiBjcmVhdGVfYXBwbGljYXRpb24KICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMubG90dGVyeS5jb250cmFjdC5Mb3R0ZXJ5LmNyZWF0ZV9hcHBsaWNhdGlvbihlbnRyeV9mZWU6IHVpbnQ2NCkgLT4gdm9pZDoKY3JlYXRlX2FwcGxpY2F0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6MjMtMzAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgKICAgIC8vICAgICBhbGxvd19hY3Rpb25zPVsiTm9PcCJdLAogICAgLy8gICAgIGNyZWF0ZT0icmVxdWlyZSIsCiAgICAvLyApCiAgICAvLyBkZWYgY3JlYXRlX2FwcGxpY2F0aW9uKAogICAgLy8gICAgIHNlbGYsCiAgICAvLyAgICAgZW50cnlfZmVlOiBVSW50NjQsICAjIFRoZSBlbnRyeSBmZWUgcmVxdWlyZWQgdG8gcGFydGljaXBhdGUgaW4gdGhlIGxvdHRlcnkKICAgIC8vICkgLT4gTm9uZToKICAgIHByb3RvIDEgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6MzQtMzUKICAgIC8vICMgSW5pdGlhbGl6ZSB0aGUgZW50cnkgZmVlIGFuZCBjcmVhdG9yIGFkZHJlc3MgaW4gdGhlIGNvbnRyYWN0J3Mgc3RhdGUKICAgIC8vIHNlbGYuZW50cnlfZmVlID0gZW50cnlfZmVlCiAgICBieXRlY18yIC8vICJlbnRyeV9mZWUiCiAgICBmcmFtZV9kaWcgLTEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weTozNgogICAgLy8gc2VsZi5jcmVhdG9yX2FkZHJlc3MgPSBHbG9iYWwuY3JlYXRvcl9hZGRyZXNzCiAgICBieXRlY18wIC8vICJjcmVhdG9yX2FkZHJlc3MiCiAgICBnbG9iYWwgQ3JlYXRvckFkZHJlc3MKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weTozNwogICAgLy8gc2VsZi50b3RhbF9lbnRyaWVzID0gVUludDY0KDApICAjIEluaXRpYWxpemUgdGhlIHRvdGFsIG51bWJlciBvZiBlbnRyaWVzIHRvIDAKICAgIGJ5dGVjXzEgLy8gInRvdGFsX2VudHJpZXMiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5sb3R0ZXJ5LmNvbnRyYWN0LkxvdHRlcnkuZW50ZXJfbG90dGVyeShwYXltZW50X3R4bjogdWludDY0KSAtPiB2b2lkOgplbnRlcl9sb3R0ZXJ5OgogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6MzktNDAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgLy8gZGVmIGVudGVyX2xvdHRlcnkoc2VsZiwgcGF5bWVudF90eG46IGd0eG4uUGF5bWVudFRyYW5zYWN0aW9uKSAtPiBOb25lOgogICAgcHJvdG8gMSAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weTo0NC00NQogICAgLy8gIyBFbnN1cmUgdGhhdCB0aGUgcGF5bWVudCBpcyBzZW50IHRvIHRoZSBhcHBsaWNhdGlvbiBhZGRyZXNzCiAgICAvLyBhc3NlcnQgcGF5bWVudF90eG4ucmVjZWl2ZXIgPT0gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcwogICAgZnJhbWVfZGlnIC0xCiAgICBndHhucyBSZWNlaXZlcgogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9sb3R0ZXJ5L2NvbnRyYWN0LnB5OjQ3LTQ4CiAgICAvLyAjICMgRW5zdXJlIHRoYXQgdGhlIHBheW1lbnQgYW1vdW50KG1pY3JvYWxnbykgaXMgZXF1YWwgdG8gdGhlIGVudHJ5IGZlZQogICAgLy8gYXNzZXJ0IHBheW1lbnRfdHhuLmFtb3VudCA9PSBzZWxmLmVudHJ5X2ZlZQogICAgZnJhbWVfZGlnIC0xCiAgICBndHhucyBBbW91bnQKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18yIC8vICJlbnRyeV9mZWUiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuZW50cnlfZmVlIGV4aXN0cwogICAgPT0KICAgIGFzc2VydAogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6NTAKICAgIC8vIHNlbGYudG90YWxfZW50cmllcyArPSBVSW50NjQoMSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJ0b3RhbF9lbnRyaWVzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX2VudHJpZXMgZXhpc3RzCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYnl0ZWNfMSAvLyAidG90YWxfZW50cmllcyIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMubG90dGVyeS5jb250cmFjdC5Mb3R0ZXJ5LnBpY2tfd2lubmVyKCkgLT4gdm9pZDoKcGlja193aW5uZXI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weTo1Ny01OAogICAgLy8gIyAjIEVuc3VyZSB0aGF0IG9ubHkgdGhlIGNyZWF0b3IgY2FuIGNhbGwgdGhpcyBmdW5jdGlvbgogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gc2VsZi5jcmVhdG9yX2FkZHJlc3MKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJjcmVhdG9yX2FkZHJlc3MiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuY3JlYXRvcl9hZGRyZXNzIGV4aXN0cwogICAgPT0KICAgIGFzc2VydAogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6NjAtNjEKICAgIC8vICMgRW5zdXJlIHRoZXJlIGlzIGF0IGxlYXN0IG9uZSBwYXJ0aWNpcGFudAogICAgLy8gYXNzZXJ0IHNlbGYudG90YWxfZW50cmllcyA+IFVJbnQ2NCgwKQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gInRvdGFsX2VudHJpZXMiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG90YWxfZW50cmllcyBleGlzdHMKICAgIGFzc2VydAogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6NjMtNjQKICAgIC8vICMgU2ltcGxlIHBzZXVkby1yYW5kb20gbnVtYmVyIGdlbmVyYXRvciB1c2luZyByb3VuZCBhbmQgaW5kZXgKICAgIC8vIHJvdW5kX251bWJlciA9IEdsb2JhbC5yb3VuZAogICAgZ2xvYmFsIFJvdW5kCiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weTo2NQogICAgLy8gZ3JvdXBfc2l6ZSA9IEdsb2JhbC5ncm91cF9zaXplCiAgICBnbG9iYWwgR3JvdXBTaXplCiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weTo2Ny02OAogICAgLy8gIyBDYWxjdWxhdGUgcHNldWRvLXJhbmRvbSBpbmRleCBiYXNlZCBvbiByb3VuZCBudW1iZXIgYW5kIGdyb3VwIHNpemUKICAgIC8vIHJhbmRvbV9udW1iZXIgPSByb3VuZF9udW1iZXIgJSBzZWxmLnRvdGFsX2VudHJpZXMKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJ0b3RhbF9lbnRyaWVzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX2VudHJpZXMgZXhpc3RzCiAgICB1bmNvdmVyIDIKICAgIHN3YXAKICAgICUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9sb3R0ZXJ5L2NvbnRyYWN0LnB5OjcwLTcxCiAgICAvLyAjIEdldCB0aGUgd2lubmVyJ3MgYWRkcmVzcyBmcm9tIHRoZSB0cmFuc2FjdGlvbiBhdCB0aGUgY2FsY3VsYXRlZCBpbmRleAogICAgLy8gd2lubmVyX2luZGV4ID0gcmFuZG9tX251bWJlciAlIGdyb3VwX3NpemUKICAgIHN3YXAKICAgICUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9sb3R0ZXJ5L2NvbnRyYWN0LnB5OjcyCiAgICAvLyB3aW5uZXJfYWRkcmVzcyA9IGd0eG4uVHJhbnNhY3Rpb24od2lubmVyX2luZGV4KS5zZW5kZXIKICAgIGd0eG5zIFNlbmRlcgogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6NzQtODAKICAgIC8vICMgaXR4bi5mZWUoVUludDY0KDEwMDApKQogICAgLy8gIyBUcmFuc2ZlciBhbGwgQUxHT3MgY29sbGVjdGVkIHRvIHRoZSB3aW5uZXIKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICBhbW91bnQ9R2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcy5iYWxhbmNlIC0gVUludDY0KDEwMF8wMF8wMCksICMgMSBBbGdvID0gMTAwMDAwMCBtaWNyb2FsZ29zCiAgICAvLyAgICAgcmVjZWl2ZXI9d2lubmVyX2FkZHJlc3MsCiAgICAvLyAgICAgZmVlPVVJbnQ2NCgxMDAwKQogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6NzcKICAgIC8vIGFtb3VudD1HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLmJhbGFuY2UgLSBVSW50NjQoMTAwXzAwXzAwKSwgIyAxIEFsZ28gPSAxMDAwMDAwIG1pY3JvYWxnb3MKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICBhY2N0X3BhcmFtc19nZXQgQWNjdEJhbGFuY2UKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAogICAgcHVzaGludCAxMDAwMDAwIC8vIDEwMDAwMDAKICAgIC0KICAgIGl0eG5fZmllbGQgQW1vdW50CiAgICBpdHhuX2ZpZWxkIFJlY2VpdmVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weTo3NC03NgogICAgLy8gIyBpdHhuLmZlZShVSW50NjQoMTAwMCkpCiAgICAvLyAjIFRyYW5zZmVyIGFsbCBBTEdPcyBjb2xsZWN0ZWQgdG8gdGhlIHdpbm5lcgogICAgLy8gaXR4bi5QYXltZW50KAogICAgaW50Y18xIC8vIHBheQogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6NzkKICAgIC8vIGZlZT1VSW50NjQoMTAwMCkKICAgIGludGNfMiAvLyAxMDAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6NzQtODAKICAgIC8vICMgaXR4bi5mZWUoVUludDY0KDEwMDApKQogICAgLy8gIyBUcmFuc2ZlciBhbGwgQUxHT3MgY29sbGVjdGVkIHRvIHRoZSB3aW5uZXIKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICBhbW91bnQ9R2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcy5iYWxhbmNlIC0gVUludDY0KDEwMF8wMF8wMCksICMgMSBBbGdvID0gMTAwMDAwMCBtaWNyb2FsZ29zCiAgICAvLyAgICAgcmVjZWl2ZXI9d2lubmVyX2FkZHJlc3MsCiAgICAvLyAgICAgZmVlPVVJbnQ2NCgxMDAwKQogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5sb3R0ZXJ5LmNvbnRyYWN0LkxvdHRlcnkuZGVsZXRlX2FwcGxpY2F0aW9uKCkgLT4gdm9pZDoKZGVsZXRlX2FwcGxpY2F0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6ODktOTAKICAgIC8vICMgT25seSBhbGxvdyB0aGUgY3JlYXRvciB0byBkZWxldGUgdGhlIGFwcGxpY2F0aW9uCiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBzZWxmLmNyZWF0b3JfYWRkcmVzcwogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gImNyZWF0b3JfYWRkcmVzcyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jcmVhdG9yX2FkZHJlc3MgZXhpc3RzCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weTo5Mi05OAogICAgLy8gIyBTZW5kIHRoZSByZW1haW5pbmcgYmFsYW5jZSB0byB0aGUgY3JlYXRvcgogICAgLy8gaXR4bi5QYXltZW50KAogICAgLy8gICAgIHJlY2VpdmVyPXNlbGYuY3JlYXRvcl9hZGRyZXNzLAogICAgLy8gICAgIGFtb3VudD0wLAogICAgLy8gICAgIGNsb3NlX3JlbWFpbmRlcl90bz1zZWxmLmNyZWF0b3JfYWRkcmVzcywKICAgIC8vICAgICBmZWU9VUludDY0KDEwMDApCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weTo5NAogICAgLy8gcmVjZWl2ZXI9c2VsZi5jcmVhdG9yX2FkZHJlc3MsCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAiY3JlYXRvcl9hZGRyZXNzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmNyZWF0b3JfYWRkcmVzcyBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9sb3R0ZXJ5L2NvbnRyYWN0LnB5Ojk2CiAgICAvLyBjbG9zZV9yZW1haW5kZXJfdG89c2VsZi5jcmVhdG9yX2FkZHJlc3MsCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAiY3JlYXRvcl9hZGRyZXNzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmNyZWF0b3JfYWRkcmVzcyBleGlzdHMKICAgIGl0eG5fZmllbGQgQ2xvc2VSZW1haW5kZXJUbwogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6OTUKICAgIC8vIGFtb3VudD0wLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgQW1vdW50CiAgICBpdHhuX2ZpZWxkIFJlY2VpdmVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvbG90dGVyeS9jb250cmFjdC5weTo5Mi05MwogICAgLy8gIyBTZW5kIHRoZSByZW1haW5pbmcgYmFsYW5jZSB0byB0aGUgY3JlYXRvcgogICAgLy8gaXR4bi5QYXltZW50KAogICAgaW50Y18xIC8vIHBheQogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6OTcKICAgIC8vIGZlZT1VSW50NjQoMTAwMCkKICAgIGludGNfMiAvLyAxMDAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL2xvdHRlcnkvY29udHJhY3QucHk6OTItOTgKICAgIC8vICMgU2VuZCB0aGUgcmVtYWluaW5nIGJhbGFuY2UgdG8gdGhlIGNyZWF0b3IKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1zZWxmLmNyZWF0b3JfYWRkcmVzcywKICAgIC8vICAgICBhbW91bnQ9MCwKICAgIC8vICAgICBjbG9zZV9yZW1haW5kZXJfdG89c2VsZi5jcmVhdG9yX2FkZHJlc3MsCiAgICAvLyAgICAgZmVlPVVJbnQ2NCgxMDAwKQogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CiADAAHoByYDD2NyZWF0b3JfYWRkcmVzcw10b3RhbF9lbnRyaWVzCWVudHJ5X2ZlZTEbQQAjggQEoDuB0gSH6knXBL4L3r8EM7NJnjYaAI4EADIAHAAQAAIiQzEZgQUSRDEYRIgAlyNDMRkURDEYRIgAVyNDMRkURDEYRDEWIwlJOBAjEkSIACIjQzEZFEQxGBRENhoBF4gAAiNDigEAKov/ZygyCWcpImeJigEAi/84BzIKEkSL/zgIIiplRBJEIillRCMIKUxniTEAIihlRBJEIillREQyBjIEIillRE8CTBhMGDgAsTIKcwBEgcCEPQmyCLIHI7IQJLIBs4kxACIoZUQSRLEiKGVEIihlRLIJIrIIsgcjshAksgGziQ==","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -172,11 +172,97 @@ export type MethodReturn<TSignature extends LotterySignatures> = LotteryTypes['m
 export type GlobalKeysState = LotteryTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type LotteryCreateCallParams =
+  | Expand<CallParams<LotteryArgs['obj']['create_application(uint64)void'] | LotteryArgs['tuple']['create_application(uint64)void']> & {method: 'create_application'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<LotteryArgs['obj']['create_application(uint64)void'] | LotteryArgs['tuple']['create_application(uint64)void']> & {method: 'create_application(uint64)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type LotteryDeleteCallParams =
+  | Expand<CallParams<LotteryArgs['obj']['delete_application()void'] | LotteryArgs['tuple']['delete_application()void']> & {method: 'delete_application'}>
+  | Expand<CallParams<LotteryArgs['obj']['delete_application()void'] | LotteryArgs['tuple']['delete_application()void']> & {method: 'delete_application()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type LotteryDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: LotteryCreateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: LotteryDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Lottery smart contract
  */
 export abstract class LotteryParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends LotteryCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create_application':
+          case 'create_application(uint64)void':
+            return LotteryParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the Lottery smart contract using the create_application(uint64)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<LotteryArgs['obj']['create_application(uint64)void'] | LotteryArgs['tuple']['create_application(uint64)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create_application(uint64)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.entryFee],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends LotteryDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'delete_application':
+          case 'delete_application()void':
+            return LotteryParamsFactory.delete.deleteApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the Lottery smart contract using the delete_application()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      deleteApplication(params: CallParams<LotteryArgs['obj']['delete_application()void'] | LotteryArgs['tuple']['delete_application()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'delete_application()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the enter_lottery(pay)void ABI method
    *
@@ -209,6 +295,172 @@ export abstract class LotteryParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Lottery smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class LotteryFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `LotteryFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new LotteryClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new LotteryClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Lottery smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: LotteryDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? LotteryParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (LotteryCreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? LotteryParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (LotteryDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new LotteryClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Lottery smart contract using the create_application(uint64)void ABI method.
+       *
+       * Initialize the lottery contract with an entry fee.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<LotteryArgs['obj']['create_application(uint64)void'] | LotteryArgs['tuple']['create_application(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(LotteryParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the Lottery smart contract using the delete_application()void ABI method.
+       *
+       * Allows the creator to delete the application.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      deleteApplication: (params: CallParams<LotteryArgs['obj']['delete_application()void'] | LotteryArgs['tuple']['delete_application()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(LotteryParamsFactory.delete.deleteApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Lottery smart contract using the create_application(uint64)void ABI method.
+       *
+       * Initialize the lottery contract with an entry fee.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<LotteryArgs['obj']['create_application(uint64)void'] | LotteryArgs['tuple']['create_application(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(LotteryParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Lottery smart contract using an ABI method call using the create_application(uint64)void ABI method.
+       *
+       * Initialize the lottery contract with an entry fee.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<LotteryArgs['obj']['create_application(uint64)void'] | LotteryArgs['tuple']['create_application(uint64)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(LotteryParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | LotteryReturns['create_application(uint64)void']) }, appClient: new LotteryClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Lottery smart contract
  */
@@ -289,6 +541,24 @@ export class LotteryClient {
    */
   readonly params = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the Lottery smart contract using the `delete_application()void` ABI method.
+       *
+       * Allows the creator to delete the application.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      deleteApplication: (params: CallParams<LotteryArgs['obj']['delete_application()void'] | LotteryArgs['tuple']['delete_application()void']> = {args: []}) => {
+        return this.appClient.params.delete(LotteryParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the Lottery smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -329,6 +599,24 @@ export class LotteryClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the Lottery smart contract using the `delete_application()void` ABI method.
+       *
+       * Allows the creator to delete the application.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      deleteApplication: (params: CallParams<LotteryArgs['obj']['delete_application()void'] | LotteryArgs['tuple']['delete_application()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(LotteryParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the Lottery smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -368,6 +656,25 @@ export class LotteryClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the Lottery smart contract using the `delete_application()void` ABI method.
+       *
+       * Allows the creator to delete the application.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      deleteApplication: async (params: CallParams<LotteryArgs['obj']['delete_application()void'] | LotteryArgs['tuple']['delete_application()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(LotteryParamsFactory.delete.deleteApplication(params))
+        return {...result, return: result.return as unknown as (undefined | LotteryReturns['delete_application()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the Lottery smart contract.
      *
@@ -472,6 +779,15 @@ export class LotteryClient {
         resultMappers.push(undefined)
         return this
       },
+      get delete() {
+        return {
+          deleteApplication: (params: CallParams<LotteryArgs['obj']['delete_application()void'] | LotteryArgs['tuple']['delete_application()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.deleteApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the Lottery contract
        */
@@ -528,6 +844,20 @@ export type LotteryComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   pickWinner(params?: CallParams<LotteryArgs['obj']['pick_winner()void'] | LotteryArgs['tuple']['pick_winner()void']>): LotteryComposer<[...TReturns, LotteryReturns['pick_winner()void'] | undefined]>
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the Lottery smart contract using the delete_application()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    deleteApplication(params?: CallParams<LotteryArgs['obj']['delete_application()void'] | LotteryArgs['tuple']['delete_application()void']>): LotteryComposer<[...TReturns, LotteryReturns['delete_application()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the Lottery smart contract.
