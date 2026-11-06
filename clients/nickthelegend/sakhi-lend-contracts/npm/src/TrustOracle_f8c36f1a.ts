@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"TrustOracle","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"attest","args":[{"type":"address","name":"user"},{"type":"uint64","name":"score"},{"type":"pay","name":"mbrPayment"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Attests to a user's creditworthiness with a TTF score.\nAdmin only. Requires MBR payment for boxes.","events":[],"recommendations":{}},{"name":"revokeAttestation","args":[{"type":"address","name":"user"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Revokes a user's verification status.\nAdmin only.","events":[],"recommendations":{}},{"name":"getScore","args":[{"type":"address","name":"user"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Returns a user's score.","events":[],"recommendations":{}},{"name":"isVerified","args":[{"type":"address","name":"user"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Returns whether a user is verified.","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"creator":{"keyType":"AVMString","valueType":"address","key":"Y3JlYXRvcg==","desc":"The creator of the application (oracle admin)"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"scores":{"keyType":"address","valueType":"uint64","desc":"Scores (0-1000) for verified users","prefix":"cw=="},"verified":{"keyType":"address","valueType":"uint64","desc":"Verification status","prefix":"dg=="},"attestedAt":{"keyType":"address","valueType":"uint64","desc":"Last attestation round","prefix":"YQ=="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[170,283],"errorMessage":"Admin only"},{"pc":[206],"errorMessage":"Insufficient MBR for boxes"},{"pc":[198],"errorMessage":"MBR to oracle"},{"pc":[61],"errorMessage":"OnCompletion must be NoOp"},{"pc":[177],"errorMessage":"Score must be <= 1000"},{"pc":[157,270],"errorMessage":"check GlobalState exists"},{"pc":[131,264,335,362],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[140],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[151],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"TrustOracle","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"attest","args":[{"type":"address","name":"user"},{"type":"uint64","name":"score"},{"type":"pay","name":"mbrPayment"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Attests to a user's creditworthiness with a TTF score.\nAdmin only. Requires MBR payment for boxes.","events":[],"recommendations":{}},{"name":"revokeAttestation","args":[{"type":"address","name":"user"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Revokes a user's verification status.\nAdmin only.","events":[],"recommendations":{}},{"name":"getScore","args":[{"type":"address","name":"user"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Returns a user's score.","events":[],"recommendations":{}},{"name":"isVerified","args":[{"type":"address","name":"user"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Returns whether a user is verified.","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"creator":{"keyType":"AVMString","valueType":"address","key":"Y3JlYXRvcg==","desc":"The creator of the application (oracle admin)"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"scores":{"keyType":"address","valueType":"uint64","desc":"Scores (0-1000) for verified users","prefix":"cw=="},"verified":{"keyType":"address","valueType":"uint64","desc":"Verification status","prefix":"dg=="},"attestedAt":{"keyType":"address","valueType":"uint64","desc":"Last attestation round","prefix":"YQ=="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[170,283],"errorMessage":"Admin only"},{"pc":[206],"errorMessage":"Insufficient MBR for boxes"},{"pc":[198],"errorMessage":"MBR to oracle"},{"pc":[61],"errorMessage":"OnCompletion must be NoOp"},{"pc":[177],"errorMessage":"Score must be <= 1000"},{"pc":[157,270],"errorMessage":"check GlobalState exists"},{"pc":[131,264,335,362],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[140],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[151],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDMyCiAgICBieXRlY2Jsb2NrICJjcmVhdG9yIiAicyIgInYiIGJhc2UzMihMRUdFTkRNUVFKSldTUVZIUkZLMzZFUDdHVE0zTVRJM1ZEM0dOMjVZTUtKNk1FQlIzNUpRKSAweDE1MWY3Yzc1CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6MTYKICAgIC8vIGV4cG9ydCBjbGFzcyBUcnVzdE9yYWNsZSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEA4CiAgICBwdXNoYnl0ZXNzIDB4ZWY1MzExOWMgMHhiODY2MDJmOSAweDk3ODM0NWQxIDB4ZTMxZWQ0NzQgLy8gbWV0aG9kICJhdHRlc3QoYWRkcmVzcyx1aW50NjQscGF5KXZvaWQiLCBtZXRob2QgInJldm9rZUF0dGVzdGF0aW9uKGFkZHJlc3Mpdm9pZCIsIG1ldGhvZCAiZ2V0U2NvcmUoYWRkcmVzcyl1aW50NjQiLCBtZXRob2QgImlzVmVyaWZpZWQoYWRkcmVzcylib29sIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggYXR0ZXN0IHJldm9rZUF0dGVzdGF0aW9uIGdldFNjb3JlIGlzVmVyaWZpZWQKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEA4OgogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjE2CiAgICAvLyBleHBvcnQgY2xhc3MgVHJ1c3RPcmFjbGUgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlQXBwbGljYXRpb24KICAgIGVycgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czo6VHJ1c3RPcmFjbGUuY3JlYXRlQXBwbGljYXRpb25bcm91dGluZ10oKSAtPiB2b2lkOgpjcmVhdGVBcHBsaWNhdGlvbjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czoxOAogICAgLy8gcHVibGljIGNyZWF0b3IgPSBHbG9iYWxTdGF0ZTxBY2NvdW50PigpCiAgICBieXRlY18wIC8vICJjcmVhdG9yIgogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjMwCiAgICAvLyB0aGlzLmNyZWF0b3IudmFsdWUgPSBUeG4uc2VuZGVyCiAgICB0eG4gU2VuZGVyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjI5CiAgICAvLyBwdWJsaWMgY3JlYXRlQXBwbGljYXRpb24oKTogdm9pZCB7CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjpUcnVzdE9yYWNsZS5hdHRlc3Rbcm91dGluZ10oKSAtPiB2b2lkOgphdHRlc3Q6CiAgICBpbnRjXzEgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjM3CiAgICAvLyBwdWJsaWMgYXR0ZXN0KHVzZXI6IEFjY291bnQsIHNjb3JlOiB1aW50NjQsIG1iclBheW1lbnQ6IGd0eG4uUGF5bWVudFR4bik6IHZvaWQgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA4IC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18wIC8vIDEKICAgIC0KICAgIGR1cAogICAgZ3R4bnMgVHlwZUVudW0KICAgIGludGNfMCAvLyBwYXkKICAgID09CiAgICBhc3NlcnQgLy8gdHJhbnNhY3Rpb24gdHlwZSBpcyBwYXkKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czozOAogICAgLy8gYXNzZXJ0KFR4bi5zZW5kZXIgPT09IHRoaXMuY3JlYXRvci52YWx1ZSB8fCBUeG4uc2VuZGVyID09PSBuZXcgYXJjNC5BZGRyZXNzKCJMRUdFTkRNUVFKSldTUVZIUkZLMzZFUDdHVE0zTVRJM1ZEM0dOMjVZTUtKNk1FQlIzNUo0U0JOVkQ0IikubmF0aXZlLCAnQWRtaW4gb25seScpCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzEgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjE4CiAgICAvLyBwdWJsaWMgY3JlYXRvciA9IEdsb2JhbFN0YXRlPEFjY291bnQ+KCkKICAgIGJ5dGVjXzAgLy8gImNyZWF0b3IiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6MzgKICAgIC8vIGFzc2VydChUeG4uc2VuZGVyID09PSB0aGlzLmNyZWF0b3IudmFsdWUgfHwgVHhuLnNlbmRlciA9PT0gbmV3IGFyYzQuQWRkcmVzcygiTEVHRU5ETVFRSkpXU1FWSFJGSzM2RVA3R1RNM01USTNWRDNHTjI1WU1LSjZNRUJSMzVKNFNCTlZENCIpLm5hdGl2ZSwgJ0FkbWluIG9ubHknKQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgID09CiAgICBibnogYXR0ZXN0X2Jvb2xfdHJ1ZUAzCiAgICB0eG4gU2VuZGVyCiAgICBieXRlY18zIC8vIGFkZHIgTEVHRU5ETVFRSkpXU1FWSFJGSzM2RVA3R1RNM01USTNWRDNHTjI1WU1LSjZNRUJSMzVKNFNCTlZENAogICAgPT0KICAgIGJ6IGF0dGVzdF9ib29sX2ZhbHNlQDQKCmF0dGVzdF9ib29sX3RydWVAMzoKICAgIGludGNfMCAvLyAxCgphdHRlc3RfYm9vbF9tZXJnZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjM4CiAgICAvLyBhc3NlcnQoVHhuLnNlbmRlciA9PT0gdGhpcy5jcmVhdG9yLnZhbHVlIHx8IFR4bi5zZW5kZXIgPT09IG5ldyBhcmM0LkFkZHJlc3MoIkxFR0VORE1RUUpKV1NRVkhSRkszNkVQN0dUTTNNVEkzVkQzR04yNVlNS0o2TUVCUjM1SjRTQk5WRDQiKS5uYXRpdmUsICdBZG1pbiBvbmx5JykKICAgIGFzc2VydCAvLyBBZG1pbiBvbmx5CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6MzkKICAgIC8vIGFzc2VydChzY29yZSA8PSAxMDAwLCAnU2NvcmUgbXVzdCBiZSA8PSAxMDAwJykKICAgIGRpZyAxCiAgICBwdXNoaW50IDEwMDAgLy8gMTAwMAogICAgPD0KICAgIGFzc2VydCAvLyBTY29yZSBtdXN0IGJlIDw9IDEwMDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czoyMQogICAgLy8gcHVibGljIHNjb3JlcyA9IEJveE1hcDxBY2NvdW50LCB1aW50NjQ+KHsga2V5UHJlZml4OiAncycgfSkKICAgIGJ5dGVjXzEgLy8gInMiCiAgICBkaWcgMwogICAgY29uY2F0CiAgICBkdXAKICAgIGJ1cnkgNQogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjQyCiAgICAvLyBpZiAoIXRoaXMuc2NvcmVzKHVzZXIpLmV4aXN0cykgewogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBibnogYXR0ZXN0X2FmdGVyX2lmX2Vsc2VANwogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjQ0CiAgICAvLyBhc3NlcnQobWJyUGF5bWVudC5yZWNlaXZlciA9PT0gR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MsICdNQlIgdG8gb3JhY2xlJykKICAgIGR1cG4gMgogICAgZ3R4bnMgUmVjZWl2ZXIKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICA9PQogICAgYXNzZXJ0IC8vIE1CUiB0byBvcmFjbGUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czo0NQogICAgLy8gYXNzZXJ0KG1iclBheW1lbnQuYW1vdW50ID49IEJPWF9NQlIgKiAzLCAnSW5zdWZmaWNpZW50IE1CUiBmb3IgYm94ZXMnKQogICAgZ3R4bnMgQW1vdW50CiAgICBwdXNoaW50IDM4NTUwMCAvLyAzODU1MDAKICAgID49CiAgICBhc3NlcnQgLy8gSW5zdWZmaWNpZW50IE1CUiBmb3IgYm94ZXMKCmF0dGVzdF9hZnRlcl9pZl9lbHNlQDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6NDgKICAgIC8vIHRoaXMuc2NvcmVzKHVzZXIpLnZhbHVlID0gc2NvcmUKICAgIGRpZyAxCiAgICBpdG9iCiAgICBkaWcgNAogICAgc3dhcAogICAgYm94X3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjIzCiAgICAvLyBwdWJsaWMgdmVyaWZpZWQgPSBCb3hNYXA8QWNjb3VudCwgYm9vbGVhbj4oeyBrZXlQcmVmaXg6ICd2JyB9KQogICAgYnl0ZWNfMiAvLyAidiIKICAgIGRpZyAzCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjQ5CiAgICAvLyB0aGlzLnZlcmlmaWVkKHVzZXIpLnZhbHVlID0gdHJ1ZQogICAgaW50Y18wIC8vIDEKICAgIGl0b2IKICAgIGJveF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czo1MAogICAgLy8gdGhpcy5hdHRlc3RlZEF0KHVzZXIpLnZhbHVlID0gR2xvYmFsLnJvdW5kCiAgICBnbG9iYWwgUm91bmQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czoyNQogICAgLy8gcHVibGljIGF0dGVzdGVkQXQgPSBCb3hNYXA8QWNjb3VudCwgdWludDY0Pih7IGtleVByZWZpeDogJ2EnIH0pCiAgICBwdXNoYnl0ZXMgImEiCiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjUwCiAgICAvLyB0aGlzLmF0dGVzdGVkQXQodXNlcikudmFsdWUgPSBHbG9iYWwucm91bmQKICAgIHN3YXAKICAgIGl0b2IKICAgIGJveF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czo1MgogICAgLy8gbG9nKCdVU0VSX0FUVEVTVEVEJykKICAgIHB1c2hieXRlcyAiVVNFUl9BVFRFU1RFRCIKICAgIGxvZwogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjM3CiAgICAvLyBwdWJsaWMgYXR0ZXN0KHVzZXI6IEFjY291bnQsIHNjb3JlOiB1aW50NjQsIG1iclBheW1lbnQ6IGd0eG4uUGF5bWVudFR4bik6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKYXR0ZXN0X2Jvb2xfZmFsc2VANDoKICAgIGludGNfMSAvLyAwCiAgICBiIGF0dGVzdF9ib29sX21lcmdlQDUKCgovLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6OlRydXN0T3JhY2xlLnJldm9rZUF0dGVzdGF0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKcmV2b2tlQXR0ZXN0YXRpb246CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6NTkKICAgIC8vIHB1YmxpYyByZXZva2VBdHRlc3RhdGlvbih1c2VyOiBBY2NvdW50KTogdm9pZCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czo2MAogICAgLy8gYXNzZXJ0KFR4bi5zZW5kZXIgPT09IHRoaXMuY3JlYXRvci52YWx1ZSB8fCBUeG4uc2VuZGVyID09PSBuZXcgYXJjNC5BZGRyZXNzKCJMRUdFTkRNUVFKSldTUVZIUkZLMzZFUDdHVE0zTVRJM1ZEM0dOMjVZTUtKNk1FQlIzNUo0U0JOVkQ0IikubmF0aXZlLCAnQWRtaW4gb25seScpCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzEgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjE4CiAgICAvLyBwdWJsaWMgY3JlYXRvciA9IEdsb2JhbFN0YXRlPEFjY291bnQ+KCkKICAgIGJ5dGVjXzAgLy8gImNyZWF0b3IiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6NjAKICAgIC8vIGFzc2VydChUeG4uc2VuZGVyID09PSB0aGlzLmNyZWF0b3IudmFsdWUgfHwgVHhuLnNlbmRlciA9PT0gbmV3IGFyYzQuQWRkcmVzcygiTEVHRU5ETVFRSkpXU1FWSFJGSzM2RVA3R1RNM01USTNWRDNHTjI1WU1LSjZNRUJSMzVKNFNCTlZENCIpLm5hdGl2ZSwgJ0FkbWluIG9ubHknKQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgID09CiAgICBibnogcmV2b2tlQXR0ZXN0YXRpb25fYm9vbF90cnVlQDMKICAgIHR4biBTZW5kZXIKICAgIGJ5dGVjXzMgLy8gYWRkciBMRUdFTkRNUVFKSldTUVZIUkZLMzZFUDdHVE0zTVRJM1ZEM0dOMjVZTUtKNk1FQlIzNUo0U0JOVkQ0CiAgICA9PQogICAgYnogcmV2b2tlQXR0ZXN0YXRpb25fYm9vbF9mYWxzZUA0CgpyZXZva2VBdHRlc3RhdGlvbl9ib29sX3RydWVAMzoKICAgIGludGNfMCAvLyAxCgpyZXZva2VBdHRlc3RhdGlvbl9ib29sX21lcmdlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6NjAKICAgIC8vIGFzc2VydChUeG4uc2VuZGVyID09PSB0aGlzLmNyZWF0b3IudmFsdWUgfHwgVHhuLnNlbmRlciA9PT0gbmV3IGFyYzQuQWRkcmVzcygiTEVHRU5ETVFRSkpXU1FWSFJGSzM2RVA3R1RNM01USTNWRDNHTjI1WU1LSjZNRUJSMzVKNFNCTlZENCIpLm5hdGl2ZSwgJ0FkbWluIG9ubHknKQogICAgYXNzZXJ0IC8vIEFkbWluIG9ubHkKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czoyMwogICAgLy8gcHVibGljIHZlcmlmaWVkID0gQm94TWFwPEFjY291bnQsIGJvb2xlYW4+KHsga2V5UHJlZml4OiAndicgfSkKICAgIGJ5dGVjXzIgLy8gInYiCiAgICBkaWcgMQogICAgZHVwCiAgICBjb3ZlciAyCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czo2MQogICAgLy8gdGhpcy52ZXJpZmllZCh1c2VyKS52YWx1ZSA9IGZhbHNlCiAgICBpbnRjXzEgLy8gMAogICAgaXRvYgogICAgYm94X3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjIxCiAgICAvLyBwdWJsaWMgc2NvcmVzID0gQm94TWFwPEFjY291bnQsIHVpbnQ2ND4oeyBrZXlQcmVmaXg6ICdzJyB9KQogICAgYnl0ZWNfMSAvLyAicyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjYyCiAgICAvLyB0aGlzLnNjb3Jlcyh1c2VyKS52YWx1ZSA9IDAKICAgIGludGNfMSAvLyAwCiAgICBpdG9iCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6NjMKICAgIC8vIGxvZygnQVRURVNUQVRJT05fUkVWT0tFRCcpCiAgICBwdXNoYnl0ZXMgIkFUVEVTVEFUSU9OX1JFVk9LRUQiCiAgICBsb2cKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czo1OQogICAgLy8gcHVibGljIHJldm9rZUF0dGVzdGF0aW9uKHVzZXI6IEFjY291bnQpOiB2b2lkIHsKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCnJldm9rZUF0dGVzdGF0aW9uX2Jvb2xfZmFsc2VANDoKICAgIGludGNfMSAvLyAwCiAgICBiIHJldm9rZUF0dGVzdGF0aW9uX2Jvb2xfbWVyZ2VANQoKCi8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czo6VHJ1c3RPcmFjbGUuZ2V0U2NvcmVbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRTY29yZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czo2OQogICAgLy8gcHVibGljIGdldFNjb3JlKHVzZXI6IEFjY291bnQpOiB1aW50NjQgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6MjEKICAgIC8vIHB1YmxpYyBzY29yZXMgPSBCb3hNYXA8QWNjb3VudCwgdWludDY0Pih7IGtleVByZWZpeDogJ3MnIH0pCiAgICBieXRlY18xIC8vICJzIgogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6NzAKICAgIC8vIHJldHVybiB0aGlzLnNjb3Jlcyh1c2VyKS5nZXQoeyBkZWZhdWx0OiBVaW50NjQoMCkgfSkKICAgIGJveF9nZXQKICAgIHN3YXAKICAgIGJ0b2kKICAgIGludGNfMSAvLyAwCiAgICBzd2FwCiAgICB1bmNvdmVyIDIKICAgIHNlbGVjdAogICAgLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjY5CiAgICAvLyBwdWJsaWMgZ2V0U2NvcmUodXNlcjogQWNjb3VudCk6IHVpbnQ2NCB7CiAgICBpdG9iCiAgICBieXRlYyA0IC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3RydXN0X29yYWNsZS9jb250cmFjdC5hbGdvLnRzOjpUcnVzdE9yYWNsZS5pc1ZlcmlmaWVkW3JvdXRpbmddKCkgLT4gdm9pZDoKaXNWZXJpZmllZDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czo3NgogICAgLy8gcHVibGljIGlzVmVyaWZpZWQodXNlcjogQWNjb3VudCk6IGJvb2xlYW4gewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6MjMKICAgIC8vIHB1YmxpYyB2ZXJpZmllZCA9IEJveE1hcDxBY2NvdW50LCBib29sZWFuPih7IGtleVByZWZpeDogJ3YnIH0pCiAgICBieXRlY18yIC8vICJ2IgogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdHJ1c3Rfb3JhY2xlL2NvbnRyYWN0LmFsZ28udHM6NzcKICAgIC8vIHJldHVybiB0aGlzLnZlcmlmaWVkKHVzZXIpLmdldCh7IGRlZmF1bHQ6IGZhbHNlIH0pCiAgICBib3hfZ2V0CiAgICBzd2FwCiAgICBidG9pCiAgICBpbnRjXzEgLy8gMAogICAgc3dhcAogICAgdW5jb3ZlciAyCiAgICBzZWxlY3QKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90cnVzdF9vcmFjbGUvY29udHJhY3QuYWxnby50czo3NgogICAgLy8gcHVibGljIGlzVmVyaWZpZWQodXNlcjogQWNjb3VudCk6IGJvb2xlYW4gewogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGludGNfMSAvLyAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgYnl0ZWMgNCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAQAgJgUHY3JlYXRvcgFzAXYgWQxGjZCCU2lCp4lVvxH/NNm2TRuo9mbruGKT5hAx31MEFR98dTEZFEQxGEEAJIIEBO9TEZwEuGYC+QSXg0XRBOMe1HQ2GgCOBAAVAJsA4gD9AIAEuER7NjYaAI4BAAEAKDEAZyJDIzYaAUkVJBJENhoCSRWBCBJEFzEWIglJOBAiEkQxACMoZUQSQAAHMQArEkEAVCJESwGB6AcORClLA1BJRQW9RQFAABBHAjgHMgoSRDgIgdzDFw9ESwEWSwRMvypLA0lOAlAiFr8yBoABYU8CUEwWv4ANVVNFUl9BVFRFU1RFRLAiQyNC/6k2GgFJFSQSRDEAIyhlRBJAAAcxACsSQQAqIkQqSwFJTgJQIxa/KUxQIxa/gBNBVFRFU1RBVElPTl9SRVZPS0VEsCJDI0L/0zYaAUkVJBJEKUxQvkwXI0xPAk0WJwRMULAiQzYaAUkVJBJEKkxQvkwXI0xPAk2AAQAjTwJUJwRMULAiQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -213,11 +213,57 @@ export type GlobalKeysState = TrustOracleTypes['state']['global']['keys']
 export type BoxKeysState = TrustOracleTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TrustOracleCreateCallParams =
+  | Expand<CallParams<TrustOracleArgs['obj']['createApplication()void'] | TrustOracleArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<TrustOracleArgs['obj']['createApplication()void'] | TrustOracleArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TrustOracleDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TrustOracleCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TrustOracle smart contract
  */
 export abstract class TrustOracleParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends TrustOracleCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return TrustOracleParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the TrustOracle smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<TrustOracleArgs['obj']['createApplication()void'] | TrustOracleArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the attest(address,uint64,pay)void ABI method
    *
@@ -284,6 +330,148 @@ export abstract class TrustOracleParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TrustOracle smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TrustOracleFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TrustOracleFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TrustOracleClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TrustOracleClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TrustOracle smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TrustOracleDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? TrustOracleParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (TrustOracleCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new TrustOracleClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TrustOracle smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<TrustOracleArgs['obj']['createApplication()void'] | TrustOracleArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(TrustOracleParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TrustOracle smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<TrustOracleArgs['obj']['createApplication()void'] | TrustOracleArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(TrustOracleParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TrustOracle smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<TrustOracleArgs['obj']['createApplication()void'] | TrustOracleArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(TrustOracleParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | TrustOracleReturns['createApplication()void']) }, appClient: new TrustOracleClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TrustOracle smart contract
  */
