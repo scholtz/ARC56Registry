@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"CompxGovernance","desc":"","methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"createNewProposal","desc":"Create a new proposal","args":[{"name":"proposalType","type":"string","desc":"Type of the proposal - can be reg or pool"},{"name":"proposalTitle","type":"string","desc":"Title of the proposal"},{"name":"proposalDescription","type":"string","desc":"Description of the proposal"},{"name":"expiresIn","type":"uint64","desc":"Time in seconds for the proposal to expire"},{"name":"mbrTxn","type":"pay"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{"ProposalDataType":[{"name":"proposalTitle","type":"string"},{"name":"proposalDescription","type":"string"},{"name":"proposalTotalVotes","type":"uint64"},{"name":"proposalYesVotes","type":"uint64"},{"name":"createdAtTimestamp","type":"uint64"},{"name":"expiryTimestamp","type":"uint64"}],"ProposalIdType":[{"name":"nonce","type":"uint64"},{"name":"proposalType","type":"string"}]},"state":{"schema":{"global":{"bytes":1,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"deployer_address":{"key":"ZGVwbG95ZXJfYWRkcmVzcw==","keyType":"AVMBytes","valueType":"address"},"total_proposals":{"key":"dG90YWxfcHJvcG9zYWxz","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"proposals":{"keyType":"ProposalIdType","valueType":"ProposalDataType","prefix":"_proposals"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[99],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[128],"errorMessage":"argument 0 (mbrTxn) for createNewProposal must be a pay transaction","teal":69},{"pc":[188],"errorMessage":"Only the deployer can create proposals","teal":139},{"pc":[220],"errorMessage":"Proposal already exists","teal":167},{"pc":[229],"errorMessage":"transaction verification failed: {\"txn\":\"mbrTxn\",\"field\":\"amount\",\"condition\":\"greaterThanEqualTo\",\"expected\":\">=proposalMbr\"}","teal":178},{"pc":[338],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":260},{"pc":[352],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":268}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"CompxGovernance","desc":"","methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"createNewProposal","desc":"Create a new proposal","args":[{"name":"proposalType","type":"string","desc":"Type of the proposal - can be reg or pool"},{"name":"proposalTitle","type":"string","desc":"Title of the proposal"},{"name":"proposalDescription","type":"string","desc":"Description of the proposal"},{"name":"expiresIn","type":"uint64","desc":"Time in seconds for the proposal to expire"},{"name":"mbrTxn","type":"pay"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{"ProposalDataType":[{"name":"proposalTitle","type":"string"},{"name":"proposalDescription","type":"string"},{"name":"proposalTotalVotes","type":"uint64"},{"name":"proposalYesVotes","type":"uint64"},{"name":"createdAtTimestamp","type":"uint64"},{"name":"expiryTimestamp","type":"uint64"}],"ProposalIdType":[{"name":"nonce","type":"uint64"},{"name":"proposalType","type":"string"}]},"state":{"schema":{"global":{"bytes":1,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"deployer_address":{"key":"ZGVwbG95ZXJfYWRkcmVzcw==","keyType":"AVMBytes","valueType":"address"},"total_proposals":{"key":"dG90YWxfcHJvcG9zYWxz","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"proposals":{"keyType":"ProposalIdType","valueType":"ProposalDataType","prefix":"_proposals"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[99],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[128],"errorMessage":"argument 0 (mbrTxn) for createNewProposal must be a pay transaction","teal":69},{"pc":[188],"errorMessage":"Only the deployer can create proposals","teal":139},{"pc":[220],"errorMessage":"Proposal already exists","teal":167},{"pc":[229],"errorMessage":"transaction verification failed: {\"txn\":\"mbrTxn\",\"field\":\"amount\",\"condition\":\"greaterThanEqualTo\",\"expected\":\">=proposalMbr\"}","teal":178},{"pc":[338],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":260},{"pc":[352],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":268}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDAKYnl0ZWNibG9jayAweCAweDc0NmY3NDYxNmM1ZjcwNzI2ZjcwNmY3MzYxNmM3MyAweDY0NjU3MDZjNmY3OTY1NzI1ZjYxNjQ2NDcyNjU3MzczIDB4NWY3MDcyNmY3MDZmNzM2MTZjNzMgMHgwMDAwMDAwMDAwMDAwMDAwIDB4MDAwYQoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDYuMgovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKcHVzaGludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CgkvLyBleGVjdXRlIGNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkCgljYWxsc3ViIGNyZWF0ZUFwcGxpY2F0aW9uCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBjcmVhdGVBcHBsaWNhdGlvbigpOiB2b2lkCmNyZWF0ZUFwcGxpY2F0aW9uOgoJcHJvdG8gMCAwCgoJLy8gY29udHJhY3RzL0NvbXB4R292ZXJuYW5jZS5hbGdvLnRzOjE4CgkvLyB0aGlzLnRvdGFsX3Byb3Bvc2Fscy52YWx1ZSA9IDAKCWJ5dGVjIDEgLy8gICJ0b3RhbF9wcm9wb3NhbHMiCglpbnRjIDEgLy8gMAoJYXBwX2dsb2JhbF9wdXQKCgkvLyBjb250cmFjdHMvQ29tcHhHb3Zlcm5hbmNlLmFsZ28udHM6MTkKCS8vIHRoaXMuZGVwbG95ZXJfYWRkcmVzcy52YWx1ZSA9IHRoaXMudHhuLnNlbmRlcgoJYnl0ZWMgMiAvLyAgImRlcGxveWVyX2FkZHJlc3MiCgl0eG4gU2VuZGVyCglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0cy9Db21weEdvdmVybmFuY2UuYWxnby50czoyMAoJLy8gdGhpcy50b3RhbF9wcm9wb3NhbHMudmFsdWUgPSAwCglieXRlYyAxIC8vICAidG90YWxfcHJvcG9zYWxzIgoJaW50YyAxIC8vIDAKCWFwcF9nbG9iYWxfcHV0CglyZXRzdWIKCi8vIGNyZWF0ZU5ld1Byb3Bvc2FsKHN0cmluZyxzdHJpbmcsc3RyaW5nLHVpbnQ2NCxwYXkpdm9pZAoqYWJpX3JvdXRlX2NyZWF0ZU5ld1Byb3Bvc2FsOgoJLy8gbWJyVHhuOiBwYXkKCXR4biBHcm91cEluZGV4CglpbnRjIDAgLy8gMQoJLQoJZHVwCglndHhucyBUeXBlRW51bQoJaW50YyAwIC8vICBwYXkKCT09CgoJLy8gYXJndW1lbnQgMCAobWJyVHhuKSBmb3IgY3JlYXRlTmV3UHJvcG9zYWwgbXVzdCBiZSBhIHBheSB0cmFuc2FjdGlvbgoJYXNzZXJ0CgoJLy8gZXhwaXJlc0luOiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDQKCWJ0b2kKCgkvLyBwcm9wb3NhbERlc2NyaXB0aW9uOiBzdHJpbmcKCXR4bmEgQXBwbGljYXRpb25BcmdzIDMKCWV4dHJhY3QgMiAwCgoJLy8gcHJvcG9zYWxUaXRsZTogc3RyaW5nCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglleHRyYWN0IDIgMAoKCS8vIHByb3Bvc2FsVHlwZTogc3RyaW5nCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglleHRyYWN0IDIgMAoKCS8vIGV4ZWN1dGUgY3JlYXRlTmV3UHJvcG9zYWwoc3RyaW5nLHN0cmluZyxzdHJpbmcsdWludDY0LHBheSl2b2lkCgljYWxsc3ViIGNyZWF0ZU5ld1Byb3Bvc2FsCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBjcmVhdGVOZXdQcm9wb3NhbChwcm9wb3NhbFR5cGU6IHN0cmluZywgcHJvcG9zYWxUaXRsZTogc3RyaW5nLCBwcm9wb3NhbERlc2NyaXB0aW9uOiBzdHJpbmcsIGV4cGlyZXNJbjogdWludDY0LCBtYnJUeG46IFBheVR4bik6IHZvaWQKLy8KLy8gQ3JlYXRlIGEgbmV3IHByb3Bvc2FsCi8vIEBwYXJhbSBwcm9wb3NhbFR5cGUgVHlwZSBvZiB0aGUgcHJvcG9zYWwgLSBjYW4gYmUgcmVnIG9yIHBvb2wKLy8gQHBhcmFtIHByb3Bvc2FsVGl0bGUgVGl0bGUgb2YgdGhlIHByb3Bvc2FsCi8vIEBwYXJhbSBwcm9wb3NhbERlc2NyaXB0aW9uIERlc2NyaXB0aW9uIG9mIHRoZSBwcm9wb3NhbAovLyBAcGFyYW0gZXhwaXJlc0luIFRpbWUgaW4gc2Vjb25kcyBmb3IgdGhlIHByb3Bvc2FsIHRvIGV4cGlyZQpjcmVhdGVOZXdQcm9wb3NhbDoKCXByb3RvIDUgMAoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAwIC8vIDB4CglkdXBuIDMKCgkvLyBjb250cmFjdHMvQ29tcHhHb3Zlcm5hbmNlLmFsZ28udHM6MzgKCS8vIHByb3Bvc2VyQWRkcmVzczogQWRkcmVzcyA9IHRoaXMudHhuLnNlbmRlcgoJdHhuIFNlbmRlcgoJZnJhbWVfYnVyeSAwIC8vIHByb3Bvc2VyQWRkcmVzczogQWRkcmVzcwoKCS8vIGNvbnRyYWN0cy9Db21weEdvdmVybmFuY2UuYWxnby50czo0MQoJLy8gcHJvcG9zYWxOb25jZTogdWludDY0ID0gdGhpcy50b3RhbF9wcm9wb3NhbHMudmFsdWUgKyAxCglieXRlYyAxIC8vICAidG90YWxfcHJvcG9zYWxzIgoJYXBwX2dsb2JhbF9nZXQKCWludGMgMCAvLyAxCgkrCglmcmFtZV9idXJ5IDEgLy8gcHJvcG9zYWxOb25jZTogdWludDY0CgoJLy8gY29udHJhY3RzL0NvbXB4R292ZXJuYW5jZS5hbGdvLnRzOjQyCgkvLyBjdXJyZW50VGltZXN0YW1wOiB1aW50NjQgPSBnbG9iYWxzLmxhdGVzdFRpbWVzdGFtcAoJZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAoJZnJhbWVfYnVyeSAyIC8vIGN1cnJlbnRUaW1lc3RhbXA6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0cy9Db21weEdvdmVybmFuY2UuYWxnby50czo0NQoJLy8gZXhwaXJ5VGltZXN0YW1wOiB1aW50NjQgPSBjdXJyZW50VGltZXN0YW1wICsgZXhwaXJlc0luCglmcmFtZV9kaWcgMiAvLyBjdXJyZW50VGltZXN0YW1wOiB1aW50NjQKCWZyYW1lX2RpZyAtNCAvLyBleHBpcmVzSW46IHVpbnQ2NAoJKwoJZnJhbWVfYnVyeSAzIC8vIGV4cGlyeVRpbWVzdGFtcDogdWludDY0CgoJLy8gY29udHJhY3RzL0NvbXB4R292ZXJuYW5jZS5hbGdvLnRzOjQ4CgkvLyBhc3NlcnQocHJvcG9zZXJBZGRyZXNzID09PSB0aGlzLmRlcGxveWVyX2FkZHJlc3MudmFsdWUsICdPbmx5IHRoZSBkZXBsb3llciBjYW4gY3JlYXRlIHByb3Bvc2FscycpCglmcmFtZV9kaWcgMCAvLyBwcm9wb3NlckFkZHJlc3M6IEFkZHJlc3MKCWJ5dGVjIDIgLy8gICJkZXBsb3llcl9hZGRyZXNzIgoJYXBwX2dsb2JhbF9nZXQKCT09CgoJLy8gT25seSB0aGUgZGVwbG95ZXIgY2FuIGNyZWF0ZSBwcm9wb3NhbHMKCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9Db21weEdvdmVybmFuY2UuYWxnby50czo0OQoJLy8gYXNzZXJ0KCF0aGlzLnByb3Bvc2Fscyh7IG5vbmNlOiBwcm9wb3NhbE5vbmNlLCBwcm9wb3NhbFR5cGU6IHByb3Bvc2FsVHlwZSB9KS5leGlzdHMsICdQcm9wb3NhbCBhbHJlYWR5IGV4aXN0cycpCglieXRlYyAzIC8vICAiX3Byb3Bvc2FscyIKCWJ5dGVjIDAgLy8gIGluaXRpYWwgaGVhZAoJYnl0ZWMgMCAvLyAgaW5pdGlhbCB0YWlsCglieXRlYyA1IC8vICBpbml0aWFsIGhlYWQgb2Zmc2V0CglmcmFtZV9kaWcgMSAvLyBwcm9wb3NhbE5vbmNlOiB1aW50NjQKCWl0b2IKCWNhbGxzdWIgKnByb2Nlc3Nfc3RhdGljX3R1cGxlX2VsZW1lbnQKCWZyYW1lX2RpZyAtMSAvLyBwcm9wb3NhbFR5cGU6IHN0cmluZwoJZHVwCglsZW4KCWl0b2IKCWV4dHJhY3QgNiAyCglzd2FwCgljb25jYXQKCWNhbGxzdWIgKnByb2Nlc3NfZHluYW1pY190dXBsZV9lbGVtZW50Cglwb3AgLy8gcG9wIGhlYWQgb2Zmc2V0Cgljb25jYXQgLy8gY29uY2F0IGhlYWQgYW5kIHRhaWwKCWNvbmNhdAoJYm94X2xlbgoJc3dhcAoJcG9wCgkhCgoJLy8gUHJvcG9zYWwgYWxyZWFkeSBleGlzdHMKCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9Db21weEdvdmVybmFuY2UuYWxnby50czo1MgoJLy8gdmVyaWZ5UGF5VHhuKG1iclR4biwgeyBhbW91bnQ6IHsgZ3JlYXRlclRoYW5FcXVhbFRvOiBwcm9wb3NhbE1iciB9IH0pCgkvLyB2ZXJpZnkgYW1vdW50CglmcmFtZV9kaWcgLTUgLy8gbWJyVHhuOiBQYXlUeG4KCWd0eG5zIEFtb3VudAoJcHVzaGludCAyOTEyCgk+PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoibWJyVHhuIiwiZmllbGQiOiJhbW91bnQiLCJjb25kaXRpb24iOiJncmVhdGVyVGhhbkVxdWFsVG8iLCJleHBlY3RlZCI6Ij49cHJvcG9zYWxNYnIifQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL0NvbXB4R292ZXJuYW5jZS5hbGdvLnRzOjU1CgkvLyB0aGlzLnByb3Bvc2Fscyh7IG5vbmNlOiBwcm9wb3NhbE5vbmNlLCBwcm9wb3NhbFR5cGU6IHByb3Bvc2FsVHlwZSB9KS52YWx1ZSA9IHsKCS8vICAgICAgIHByb3Bvc2FsVGl0bGU6IHByb3Bvc2FsVGl0bGUsCgkvLyAgICAgICBwcm9wb3NhbERlc2NyaXB0aW9uOiBwcm9wb3NhbERlc2NyaXB0aW9uLAoJLy8gICAgICAgUHJvcG9zYWxUb3RhbFZvdGVzOiAwLAoJLy8gICAgICAgUHJvcG9zYWxZZXNWb3RlczogMCwKCS8vICAgICAgIENyZWF0ZWRBdFRpbWVzdGFtcDogY3VycmVudFRpbWVzdGFtcCwKCS8vICAgICAgIEV4cGlyeVRpbWVzdGFtcDogZXhwaXJ5VGltZXN0YW1wLAoJLy8gICAgIH0KCWJ5dGVjIDMgLy8gICJfcHJvcG9zYWxzIgoJYnl0ZWMgMCAvLyAgaW5pdGlhbCBoZWFkCglieXRlYyAwIC8vICBpbml0aWFsIHRhaWwKCWJ5dGVjIDUgLy8gIGluaXRpYWwgaGVhZCBvZmZzZXQKCWZyYW1lX2RpZyAxIC8vIHByb3Bvc2FsTm9uY2U6IHVpbnQ2NAoJaXRvYgoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJZnJhbWVfZGlnIC0xIC8vIHByb3Bvc2FsVHlwZTogc3RyaW5nCglkdXAKCWxlbgoJaXRvYgoJZXh0cmFjdCA2IDIKCXN3YXAKCWNvbmNhdAoJY2FsbHN1YiAqcHJvY2Vzc19keW5hbWljX3R1cGxlX2VsZW1lbnQKCXBvcCAvLyBwb3AgaGVhZCBvZmZzZXQKCWNvbmNhdCAvLyBjb25jYXQgaGVhZCBhbmQgdGFpbAoJY29uY2F0CglkdXAKCWJveF9kZWwKCXBvcAoJYnl0ZWMgMCAvLyAgaW5pdGlhbCBoZWFkCglieXRlYyAwIC8vICBpbml0aWFsIHRhaWwKCXB1c2hieXRlcyAweDAwMjQgLy8gaW5pdGlhbCBoZWFkIG9mZnNldAoJZnJhbWVfZGlnIC0yIC8vIHByb3Bvc2FsVGl0bGU6IHN0cmluZwoJZHVwCglsZW4KCWl0b2IKCWV4dHJhY3QgNiAyCglzd2FwCgljb25jYXQKCWNhbGxzdWIgKnByb2Nlc3NfZHluYW1pY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgLTMgLy8gcHJvcG9zYWxEZXNjcmlwdGlvbjogc3RyaW5nCglkdXAKCWxlbgoJaXRvYgoJZXh0cmFjdCA2IDIKCXN3YXAKCWNvbmNhdAoJY2FsbHN1YiAqcHJvY2Vzc19keW5hbWljX3R1cGxlX2VsZW1lbnQKCWJ5dGVjIDQgLy8gMHgwMDAwMDAwMDAwMDAwMDAwCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglieXRlYyA0IC8vIDB4MDAwMDAwMDAwMDAwMDAwMAoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJZnJhbWVfZGlnIDIgLy8gY3VycmVudFRpbWVzdGFtcDogdWludDY0CglpdG9iCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglmcmFtZV9kaWcgMyAvLyBleHBpcnlUaW1lc3RhbXA6IHVpbnQ2NAoJaXRvYgoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJcG9wIC8vIHBvcCBoZWFkIG9mZnNldAoJY29uY2F0IC8vIGNvbmNhdCBoZWFkIGFuZCB0YWlsCglib3hfcHV0CgoJLy8gY29udHJhY3RzL0NvbXB4R292ZXJuYW5jZS5hbGdvLnRzOjY0CgkvLyB0aGlzLnRvdGFsX3Byb3Bvc2Fscy52YWx1ZSArPSAxCglieXRlYyAxIC8vICAidG90YWxfcHJvcG9zYWxzIgoJYXBwX2dsb2JhbF9nZXQKCWludGMgMCAvLyAxCgkrCglieXRlYyAxIC8vICAidG90YWxfcHJvcG9zYWxzIgoJc3dhcAoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweDNlNWMxNWU2IC8vIG1ldGhvZCAiY3JlYXRlTmV3UHJvcG9zYWwoc3RyaW5nLHN0cmluZyxzdHJpbmcsdWludDY0LHBheSl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVOZXdQcm9wb3NhbAoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKKnByb2Nlc3Nfc3RhdGljX3R1cGxlX2VsZW1lbnQ6Cglwcm90byA0IDMKCWZyYW1lX2RpZyAtNCAvLyB0dXBsZSBoZWFkCglmcmFtZV9kaWcgLTEgLy8gZWxlbWVudAoJY29uY2F0CglmcmFtZV9kaWcgLTMgLy8gdHVwbGUgdGFpbAoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0CglyZXRzdWIKCipwcm9jZXNzX2R5bmFtaWNfdHVwbGVfZWxlbWVudDoKCXByb3RvIDQgMwoJZnJhbWVfZGlnIC00IC8vIHR1cGxlIGhlYWQKCWZyYW1lX2RpZyAtMiAvLyBoZWFkIG9mZnNldAoJY29uY2F0CglmcmFtZV9idXJ5IC00IC8vIHR1cGxlIGhlYWQKCWZyYW1lX2RpZyAtMSAvLyBlbGVtZW50CglkdXAKCWxlbgoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0CglidG9pCgkrCglpdG9iCglleHRyYWN0IDYgMgoJZnJhbWVfYnVyeSAtMiAvLyBoZWFkIG9mZnNldAoJZnJhbWVfZGlnIC0zIC8vIHR1cGxlIHRhaWwKCXN3YXAKCWNvbmNhdAoJZnJhbWVfYnVyeSAtMyAvLyB0dXBsZSB0YWlsCglmcmFtZV9kaWcgLTQgLy8gdHVwbGUgaGVhZAoJZnJhbWVfZGlnIC0zIC8vIHR1cGxlIHRhaWwKCWZyYW1lX2RpZyAtMiAvLyBoZWFkIG9mZnNldAoJcmV0c3Vi","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiACAQAmBgAPdG90YWxfcHJvcG9zYWxzEGRlcGxveWVyX2FkZHJlc3MKX3Byb3Bvc2FscwgAAAAAAAAAAAIACjEYFIEGCzEZCI0MAPAAAAAAAAAAAAAAAOIAAAAAAAAAAAAAAIgAAiJDigAAKSNnKjEAZykjZ4kxFiIJSTgQIhJENhoEFzYaA1cCADYaAlcCADYaAVcCAIgAAiJDigUAKEcDMQCMAClkIgiMATIHjAKLAov8CIwDiwAqZBJEKygoJwWLARaIAJmL/0kVFlcGAkxQiACZSFBQvUxIFESL+zgIgeAWD0QrKCgnBYsBFogAcIv/SRUWVwYCTFCIAHBIUFBJvEgoKIACACSL/kkVFlcGAkxQiABXi/1JFRZXBgJMUIgASicEiAA4JwSIADOLAhaIAC2LAxaIACdIUL8pZCIIKUxniYAEuER7NjYaAI4B/xIAgAQ+XBXmNhoAjgH/FwCKBAOL/Iv/UIv9i/6JigQDi/yL/lCM/Iv/SRWL/hcIFlcGAoz+i/1MUIz9i/yL/Yv+iQ==","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -212,11 +212,57 @@ export type GlobalKeysState = CompxGovernanceTypes['state']['global']['keys']
 export type BoxKeysState = CompxGovernanceTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type CompxGovernanceCreateCallParams =
+  | Expand<CallParams<CompxGovernanceArgs['obj']['createApplication()void'] | CompxGovernanceArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<CompxGovernanceArgs['obj']['createApplication()void'] | CompxGovernanceArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type CompxGovernanceDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: CompxGovernanceCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the CompxGovernance smart contract
  */
 export abstract class CompxGovernanceParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends CompxGovernanceCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return CompxGovernanceParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the CompxGovernance smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<CompxGovernanceArgs['obj']['createApplication()void'] | CompxGovernanceArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the createNewProposal(string,string,string,uint64,pay)void ABI method
    *
@@ -234,6 +280,148 @@ export abstract class CompxGovernanceParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the CompxGovernance smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class CompxGovernanceFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `CompxGovernanceFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new CompxGovernanceClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new CompxGovernanceClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the CompxGovernance smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: CompxGovernanceDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? CompxGovernanceParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (CompxGovernanceCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new CompxGovernanceClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CompxGovernance smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<CompxGovernanceArgs['obj']['createApplication()void'] | CompxGovernanceArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(CompxGovernanceParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CompxGovernance smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<CompxGovernanceArgs['obj']['createApplication()void'] | CompxGovernanceArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(CompxGovernanceParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CompxGovernance smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<CompxGovernanceArgs['obj']['createApplication()void'] | CompxGovernanceArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(CompxGovernanceParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | CompxGovernanceReturns['createApplication()void']) }, appClient: new CompxGovernanceClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the CompxGovernance smart contract
  */
