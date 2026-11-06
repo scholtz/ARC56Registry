@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"AlgorackMarket","structs":{},"methods":[{"name":"create_application","args":[{"type":"asset","name":"asset_id"},{"type":"uint64","name":"unitary_price"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_price","args":[{"type":"uint64","name":"unitary_price"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"opt_in_to_asset","args":[{"type":"pay","name":"mbrpay"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"buy","args":[{"type":"pay","name":"buyerTxn"},{"type":"uint64","name":"quantity"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"delete_application","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":2,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"assetid":{"keyType":"AVMString","valueType":"AVMUint64","key":"YXNzZXRpZA=="},"unitaryprice":{"keyType":"AVMString","valueType":"AVMUint64","key":"dW5pdGFyeXByaWNl"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[85],"errorMessage":"OnCompletion is not DeleteApplication"},{"pc":[97,123,145,161],"errorMessage":"OnCompletion is not NoOp"},{"pc":[165],"errorMessage":"can only call when creating"},{"pc":[88,100,126,148],"errorMessage":"can only call when not creating"},{"pc":[221,251,305,334],"errorMessage":"check self.assetid exists"},{"pc":[295],"errorMessage":"check self.unitaryprice exists"},{"pc":[110,136],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"AlgorackMarket","structs":{},"methods":[{"name":"create_application","args":[{"type":"asset","name":"asset_id"},{"type":"uint64","name":"unitary_price"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_price","args":[{"type":"uint64","name":"unitary_price"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"opt_in_to_asset","args":[{"type":"pay","name":"mbrpay"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"buy","args":[{"type":"pay","name":"buyerTxn"},{"type":"uint64","name":"quantity"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"delete_application","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":2,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"assetid":{"keyType":"AVMString","valueType":"AVMUint64","key":"YXNzZXRpZA=="},"unitaryprice":{"keyType":"AVMString","valueType":"AVMUint64","key":"dW5pdGFyeXByaWNl"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[85],"errorMessage":"OnCompletion is not DeleteApplication"},{"pc":[97,123,145,161],"errorMessage":"OnCompletion is not NoOp"},{"pc":[165],"errorMessage":"can only call when creating"},{"pc":[88,100,126,148],"errorMessage":"can only call when not creating"},{"pc":[221,251,305,334],"errorMessage":"check self.assetid exists"},{"pc":[295],"errorMessage":"check self.unitaryprice exists"},{"pc":[110,136],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgNCAxMDAwCiAgICBieXRlY2Jsb2NrICJhc3NldGlkIiAidW5pdGFyeXByaWNlIgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTo1CiAgICAvLyBjbGFzcyBBbGdvcmFja01hcmtldChBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMQogICAgcHVzaGJ5dGVzcyAweDg3OGNiYjNkIDB4Y2M3NjAwMzcgMHgxNTc0NTM1YSAweDc5MGJmNTlmIDB4MzNiMzQ5OWUgLy8gbWV0aG9kICJjcmVhdGVfYXBwbGljYXRpb24oYXNzZXQsdWludDY0KXZvaWQiLCBtZXRob2QgInNldF9wcmljZSh1aW50NjQpdm9pZCIsIG1ldGhvZCAib3B0X2luX3RvX2Fzc2V0KHBheSl2b2lkIiwgbWV0aG9kICJidXkocGF5LHVpbnQ2NCl2b2lkIiwgbWV0aG9kICJkZWxldGVfYXBwbGljYXRpb24oKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2NyZWF0ZV9hcHBsaWNhdGlvbl9yb3V0ZUAzIG1haW5fc2V0X3ByaWNlX3JvdXRlQDQgbWFpbl9vcHRfaW5fdG9fYXNzZXRfcm91dGVANSBtYWluX2J1eV9yb3V0ZUA2IG1haW5fZGVsZXRlX2FwcGxpY2F0aW9uX3JvdXRlQDcKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NQogICAgLy8gY2xhc3MgQWxnb3JhY2tNYXJrZXQoQVJDNENvbnRyYWN0KToKICAgIGludGNfMCAvLyAwCiAgICByZXR1cm4KCm1haW5fZGVsZXRlX2FwcGxpY2F0aW9uX3JvdXRlQDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjUxLTUyCiAgICAvLyAjZGVsZXRlIHRoZSBhcHAgJiB0YWtlIHlvdXIgYXNzZXRzIGFuZCBwcm9maXQgYmFjawogICAgLy8gQGFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiRGVsZXRlQXBwbGljYXRpb24iXSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIHB1c2hpbnQgNSAvLyBEZWxldGVBcHBsaWNhdGlvbgogICAgPT0KICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IERlbGV0ZUFwcGxpY2F0aW9uCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgZGVsZXRlX2FwcGxpY2F0aW9uCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2J1eV9yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTozOC0zOQogICAgLy8gIyBidXkgdGhlIGFzc2V0CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTo1CiAgICAvLyBjbGFzcyBBbGdvcmFja01hcmtldChBUkM0Q29udHJhY3QpOgogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMSAvLyAxCiAgICAtCiAgICBkdXAKICAgIGd0eG5zIFR5cGVFbnVtCiAgICBpbnRjXzEgLy8gcGF5CiAgICA9PQogICAgYXNzZXJ0IC8vIHRyYW5zYWN0aW9uIHR5cGUgaXMgcGF5CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjM4LTM5CiAgICAvLyAjIGJ1eSB0aGUgYXNzZXQKICAgIC8vIEBhYmltZXRob2QoKQogICAgY2FsbHN1YiBidXkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fb3B0X2luX3RvX2Fzc2V0X3JvdXRlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjIxLTIyCiAgICAvLyAjIG9wdCBpbiB0byB0aGUgYXNzZXQgdGhhdCB3aWxsIGJlIHNvbGQKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIEFsZ29yYWNrTWFya2V0KEFSQzRDb250cmFjdCk6CiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18xIC8vIDEKICAgIC0KICAgIGR1cAogICAgZ3R4bnMgVHlwZUVudW0KICAgIGludGNfMSAvLyBwYXkKICAgID09CiAgICBhc3NlcnQgLy8gdHJhbnNhY3Rpb24gdHlwZSBpcyBwYXkKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6MjEtMjIKICAgIC8vICMgb3B0IGluIHRvIHRoZSBhc3NldCB0aGF0IHdpbGwgYmUgc29sZAogICAgLy8gQGFiaW1ldGhvZCgpCiAgICBjYWxsc3ViIG9wdF9pbl90b19hc3NldAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9zZXRfcHJpY2Vfcm91dGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6MTUtMTYKICAgIC8vICN1cGRhdGUgdGhlIGxpc3RpbmcgcHJpY2UKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIEFsZ29yYWNrTWFya2V0KEFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjE1LTE2CiAgICAvLyAjdXBkYXRlIHRoZSBsaXN0aW5nIHByaWNlCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGNhbGxzdWIgc2V0X3ByaWNlCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX2NyZWF0ZV9hcHBsaWNhdGlvbl9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTo5LTEwCiAgICAvLyAjY3JlYXRlIHRoZSBhcHAKICAgIC8vIEBhYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSwgY3JlYXRlPSJyZXF1aXJlIikKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIEFsZ29yYWNrTWFya2V0KEFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICB0eG5hcyBBc3NldHMKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6OS0xMAogICAgLy8gI2NyZWF0ZSB0aGUgYXBwCiAgICAvLyBAYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJOb09wIl0sIGNyZWF0ZT0icmVxdWlyZSIpCiAgICBjYWxsc3ViIGNyZWF0ZV9hcHBsaWNhdGlvbgogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5hbGdvX3JhY2suY29udHJhY3QuQWxnb3JhY2tNYXJrZXQuY3JlYXRlX2FwcGxpY2F0aW9uKGFzc2V0X2lkOiB1aW50NjQsIHVuaXRhcnlfcHJpY2U6IHVpbnQ2NCkgLT4gdm9pZDoKY3JlYXRlX2FwcGxpY2F0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTo5LTExCiAgICAvLyAjY3JlYXRlIHRoZSBhcHAKICAgIC8vIEBhYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSwgY3JlYXRlPSJyZXF1aXJlIikKICAgIC8vIGRlZiBjcmVhdGVfYXBwbGljYXRpb24oc2VsZiwgYXNzZXRfaWQ6IEFzc2V0LCB1bml0YXJ5X3ByaWNlOiBVSW50NjQpIC0+IE5vbmU6CiAgICBwcm90byAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6MTIKICAgIC8vIHNlbGYuYXNzZXRpZCA9IGFzc2V0X2lkLmlkCiAgICBieXRlY18wIC8vICJhc3NldGlkIgogICAgZnJhbWVfZGlnIC0yCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weToxMwogICAgLy8gc2VsZi51bml0YXJ5cHJpY2UgPSB1bml0YXJ5X3ByaWNlCiAgICBieXRlY18xIC8vICJ1bml0YXJ5cHJpY2UiCiAgICBmcmFtZV9kaWcgLTEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMuYWxnb19yYWNrLmNvbnRyYWN0LkFsZ29yYWNrTWFya2V0LnNldF9wcmljZSh1bml0YXJ5X3ByaWNlOiB1aW50NjQpIC0+IHZvaWQ6CnNldF9wcmljZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6MTUtMTcKICAgIC8vICN1cGRhdGUgdGhlIGxpc3RpbmcgcHJpY2UKICAgIC8vIEBhYmltZXRob2QoKQogICAgLy8gZGVmIHNldF9wcmljZShzZWxmLCB1bml0YXJ5X3ByaWNlOiBVSW50NjQpIC0+IE5vbmU6CiAgICBwcm90byAxIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6MTgKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IEdsb2JhbC5jcmVhdG9yX2FkZHJlc3MKICAgIHR4biBTZW5kZXIKICAgIGdsb2JhbCBDcmVhdG9yQWRkcmVzcwogICAgPT0KICAgIGFzc2VydAogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weToxOQogICAgLy8gc2VsZi51bml0YXJ5cHJpY2UgPSB1bml0YXJ5X3ByaWNlCiAgICBieXRlY18xIC8vICJ1bml0YXJ5cHJpY2UiCiAgICBmcmFtZV9kaWcgLTEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMuYWxnb19yYWNrLmNvbnRyYWN0LkFsZ29yYWNrTWFya2V0Lm9wdF9pbl90b19hc3NldChtYnJwYXk6IHVpbnQ2NCkgLT4gdm9pZDoKb3B0X2luX3RvX2Fzc2V0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weToyMS0yMwogICAgLy8gIyBvcHQgaW4gdG8gdGhlIGFzc2V0IHRoYXQgd2lsbCBiZSBzb2xkCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIC8vIGRlZiBvcHRfaW5fdG9fYXNzZXQoc2VsZiwgbWJycGF5OiBndHhuLlBheW1lbnRUcmFuc2FjdGlvbikgLT4gTm9uZToKICAgIHByb3RvIDEgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weToyNAogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gR2xvYmFsLmNyZWF0b3JfYWRkcmVzcwogICAgdHhuIFNlbmRlcgogICAgZ2xvYmFsIENyZWF0b3JBZGRyZXNzCiAgICA9PQogICAgYXNzZXJ0CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjI1CiAgICAvLyBhc3NlcnQgbm90IEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MuaXNfb3B0ZWRfaW4oQXNzZXQoc2VsZi5hc3NldGlkKSkKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAiYXNzZXRpZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5hc3NldGlkIGV4aXN0cwogICAgYXNzZXRfaG9sZGluZ19nZXQgQXNzZXRCYWxhbmNlCiAgICBidXJ5IDEKICAgICEKICAgIGFzc2VydAogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weToyNwogICAgLy8gYXNzZXJ0IG1icnBheS5yZWNlaXZlciA9PSBHbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzCiAgICBmcmFtZV9kaWcgLTEKICAgIGd0eG5zIFJlY2VpdmVyCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgPT0KICAgIGFzc2VydAogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weToyOQogICAgLy8gYXNzZXJ0IG1icnBheS5hbW91bnQgPT0gR2xvYmFsLm1pbl9iYWxhbmNlICsgR2xvYmFsLmFzc2V0X29wdF9pbl9taW5fYmFsYW5jZQogICAgZnJhbWVfZGlnIC0xCiAgICBndHhucyBBbW91bnQKICAgIGdsb2JhbCBNaW5CYWxhbmNlCiAgICBnbG9iYWwgQXNzZXRPcHRJbk1pbkJhbGFuY2UKICAgICsKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6MzEtMzUKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICB4ZmVyX2Fzc2V0PSBzZWxmLmFzc2V0aWQsCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXI9IEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyAgICAgYXNzZXRfYW1vdW50PSAwLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTozMgogICAgLy8geGZlcl9hc3NldD0gc2VsZi5hc3NldGlkLAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gImFzc2V0aWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuYXNzZXRpZCBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6MzMKICAgIC8vIGFzc2V0X3JlY2VpdmVyPSBHbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6MzQKICAgIC8vIGFzc2V0X2Ftb3VudD0gMCwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEFzc2V0QW1vdW50CiAgICBpdHhuX2ZpZWxkIEFzc2V0UmVjZWl2ZXIKICAgIGl0eG5fZmllbGQgWGZlckFzc2V0CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjMxCiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICBpbnRjXzIgLy8gYXhmZXIKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTozMS0zNQogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgLy8gICAgIHhmZXJfYXNzZXQ9IHNlbGYuYXNzZXRpZCwKICAgIC8vICAgICBhc3NldF9yZWNlaXZlcj0gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIC8vICAgICBhc3NldF9hbW91bnQ9IDAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzLmFsZ29fcmFjay5jb250cmFjdC5BbGdvcmFja01hcmtldC5idXkoYnV5ZXJUeG46IHVpbnQ2NCwgcXVhbnRpdHk6IHVpbnQ2NCkgLT4gdm9pZDoKYnV5OgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTozOC00MAogICAgLy8gIyBidXkgdGhlIGFzc2V0CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIC8vIGRlZiBidXkoc2VsZiwgYnV5ZXJUeG46IGd0eG4uUGF5bWVudFRyYW5zYWN0aW9uLCBxdWFudGl0eTpVSW50NjQpIC0+IE5vbmU6CiAgICBwcm90byAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NDEKICAgIC8vIGFzc2VydCBidXllclR4bi5zZW5kZXIgPT0gVHhuLnNlbmRlcgogICAgZnJhbWVfZGlnIC0yCiAgICBndHhucyBTZW5kZXIKICAgIHR4biBTZW5kZXIKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NDIKICAgIC8vIGFzc2VydCBidXllclR4bi5yZWNlaXZlciA9PSBHbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzCiAgICBmcmFtZV9kaWcgLTIKICAgIGd0eG5zIFJlY2VpdmVyCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgPT0KICAgIGFzc2VydAogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTo0MwogICAgLy8gYXNzZXJ0IGJ1eWVyVHhuLmFtb3VudCA9PSBzZWxmLnVuaXRhcnlwcmljZSAqIHF1YW50aXR5CiAgICBmcmFtZV9kaWcgLTIKICAgIGd0eG5zIEFtb3VudAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gInVuaXRhcnlwcmljZSIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi51bml0YXJ5cHJpY2UgZXhpc3RzCiAgICBmcmFtZV9kaWcgLTEKICAgICoKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NDUtNDkKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICB4ZmVyX2Fzc2V0PSBzZWxmLmFzc2V0aWQsCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXI9IFR4bi5zZW5kZXIsCiAgICAvLyAgICAgYXNzZXRfYW1vdW50PSBxdWFudGl0eSwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NDYKICAgIC8vIHhmZXJfYXNzZXQ9IHNlbGYuYXNzZXRpZCwKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJhc3NldGlkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmFzc2V0aWQgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjQ3CiAgICAvLyBhc3NldF9yZWNlaXZlcj0gVHhuLnNlbmRlciwKICAgIHR4biBTZW5kZXIKICAgIGZyYW1lX2RpZyAtMQogICAgaXR4bl9maWVsZCBBc3NldEFtb3VudAogICAgaXR4bl9maWVsZCBBc3NldFJlY2VpdmVyCiAgICBpdHhuX2ZpZWxkIFhmZXJBc3NldAogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTo0NQogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgaW50Y18yIC8vIGF4ZmVyCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NDUtNDkKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICB4ZmVyX2Fzc2V0PSBzZWxmLmFzc2V0aWQsCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXI9IFR4bi5zZW5kZXIsCiAgICAvLyAgICAgYXNzZXRfYW1vdW50PSBxdWFudGl0eSwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMuYWxnb19yYWNrLmNvbnRyYWN0LkFsZ29yYWNrTWFya2V0LmRlbGV0ZV9hcHBsaWNhdGlvbigpIC0+IHZvaWQ6CmRlbGV0ZV9hcHBsaWNhdGlvbjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NTQtNTUKICAgIC8vICMgT25seSBhbGxvdyB0aGUgY3JlYXRvciB0byBkZWxldGUgdGhlIGFwcGxpY2F0aW9uCiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBHbG9iYWwuY3JlYXRvcl9hZGRyZXNzCiAgICB0eG4gU2VuZGVyCiAgICBnbG9iYWwgQ3JlYXRvckFkZHJlc3MKICAgID09CiAgICBhc3NlcnQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NTctNjcKICAgIC8vICMgU2VuZCBhbGwgdGhlIHVuc29sZCBhc3NldHMgdG8gdGhlIGNyZWF0b3IKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICB4ZmVyX2Fzc2V0PXNlbGYuYXNzZXRpZCwKICAgIC8vICAgICBhc3NldF9yZWNlaXZlcj1HbG9iYWwuY3JlYXRvcl9hZGRyZXNzLAogICAgLy8gICAgICMgVGhlIGFtb3VudCBpcyAwLCBidXQgdGhlIGFzc2V0X2Nsb3NlX3RvIGZpZWxkIGlzIHNldAogICAgLy8gICAgICMgVGhpcyBtZWFucyB0aGF0IEFMTCBhc3NldHMgYXJlIGJlaW5nIHNlbnQgdG8gdGhlIGFzc2V0X2Nsb3NlX3RvIGFkZHJlc3MKICAgIC8vICAgICBhc3NldF9hbW91bnQ9MCwKICAgIC8vICAgICAjIENsb3NlIHRoZSBhc3NldCB0byB1bmxvY2sgdGhlIDAuMSBBTEdPIHRoYXQgd2FzIGxvY2tlZCBpbiBvcHRfaW5fdG9fYXNzZXQKICAgIC8vICAgICBhc3NldF9jbG9zZV90bz1HbG9iYWwuY3JlYXRvcl9hZGRyZXNzLAogICAgLy8gICAgIGZlZT0xXzAwMCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NTkKICAgIC8vIHhmZXJfYXNzZXQ9c2VsZi5hc3NldGlkLAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gImFzc2V0aWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuYXNzZXRpZCBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NjAKICAgIC8vIGFzc2V0X3JlY2VpdmVyPUdsb2JhbC5jcmVhdG9yX2FkZHJlc3MsCiAgICBnbG9iYWwgQ3JlYXRvckFkZHJlc3MKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NjQtNjUKICAgIC8vICMgQ2xvc2UgdGhlIGFzc2V0IHRvIHVubG9jayB0aGUgMC4xIEFMR08gdGhhdCB3YXMgbG9ja2VkIGluIG9wdF9pbl90b19hc3NldAogICAgLy8gYXNzZXRfY2xvc2VfdG89R2xvYmFsLmNyZWF0b3JfYWRkcmVzcywKICAgIGR1cAogICAgaXR4bl9maWVsZCBBc3NldENsb3NlVG8KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NjEtNjMKICAgIC8vICMgVGhlIGFtb3VudCBpcyAwLCBidXQgdGhlIGFzc2V0X2Nsb3NlX3RvIGZpZWxkIGlzIHNldAogICAgLy8gIyBUaGlzIG1lYW5zIHRoYXQgQUxMIGFzc2V0cyBhcmUgYmVpbmcgc2VudCB0byB0aGUgYXNzZXRfY2xvc2VfdG8gYWRkcmVzcwogICAgLy8gYXNzZXRfYW1vdW50PTAsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBBc3NldEFtb3VudAogICAgaXR4bl9maWVsZCBBc3NldFJlY2VpdmVyCiAgICBpdHhuX2ZpZWxkIFhmZXJBc3NldAogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTo1Ny01OAogICAgLy8gIyBTZW5kIGFsbCB0aGUgdW5zb2xkIGFzc2V0cyB0byB0aGUgY3JlYXRvcgogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgaW50Y18yIC8vIGF4ZmVyCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjY2CiAgICAvLyBmZWU9MV8wMDAsCiAgICBpbnRjXzMgLy8gMTAwMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NTctNjcKICAgIC8vICMgU2VuZCBhbGwgdGhlIHVuc29sZCBhc3NldHMgdG8gdGhlIGNyZWF0b3IKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICB4ZmVyX2Fzc2V0PXNlbGYuYXNzZXRpZCwKICAgIC8vICAgICBhc3NldF9yZWNlaXZlcj1HbG9iYWwuY3JlYXRvcl9hZGRyZXNzLAogICAgLy8gICAgICMgVGhlIGFtb3VudCBpcyAwLCBidXQgdGhlIGFzc2V0X2Nsb3NlX3RvIGZpZWxkIGlzIHNldAogICAgLy8gICAgICMgVGhpcyBtZWFucyB0aGF0IEFMTCBhc3NldHMgYXJlIGJlaW5nIHNlbnQgdG8gdGhlIGFzc2V0X2Nsb3NlX3RvIGFkZHJlc3MKICAgIC8vICAgICBhc3NldF9hbW91bnQ9MCwKICAgIC8vICAgICAjIENsb3NlIHRoZSBhc3NldCB0byB1bmxvY2sgdGhlIDAuMSBBTEdPIHRoYXQgd2FzIGxvY2tlZCBpbiBvcHRfaW5fdG9fYXNzZXQKICAgIC8vICAgICBhc3NldF9jbG9zZV90bz1HbG9iYWwuY3JlYXRvcl9hZGRyZXNzLAogICAgLy8gICAgIGZlZT0xXzAwMCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjY5LTc2CiAgICAvLyAjIFNlbmQgdGhlIHJlbWFpbmluZyBiYWxhbmNlIHRvIHRoZSBjcmVhdG9yCiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9R2xvYmFsLmNyZWF0b3JfYWRkcmVzcywKICAgIC8vICAgICBhbW91bnQ9MCwKICAgIC8vICAgICAjIENsb3NlIHRoZSBhY2NvdW50IHRvIGdldCBiYWNrIEFMTCB0aGUgQUxHTyBpbiB0aGUgYWNjb3VudAogICAgLy8gICAgIGNsb3NlX3JlbWFpbmRlcl90bz1HbG9iYWwuY3JlYXRvcl9hZGRyZXNzLAogICAgLy8gICAgIGZlZT0xXzAwMCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NzEKICAgIC8vIHJlY2VpdmVyPUdsb2JhbC5jcmVhdG9yX2FkZHJlc3MsCiAgICBnbG9iYWwgQ3JlYXRvckFkZHJlc3MKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX3JhY2svY29udHJhY3QucHk6NzMtNzQKICAgIC8vICMgQ2xvc2UgdGhlIGFjY291bnQgdG8gZ2V0IGJhY2sgQUxMIHRoZSBBTEdPIGluIHRoZSBhY2NvdW50CiAgICAvLyBjbG9zZV9yZW1haW5kZXJfdG89R2xvYmFsLmNyZWF0b3JfYWRkcmVzcywKICAgIGR1cAogICAgaXR4bl9maWVsZCBDbG9zZVJlbWFpbmRlclRvCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjcyCiAgICAvLyBhbW91bnQ9MCwKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTo2OS03MAogICAgLy8gIyBTZW5kIHRoZSByZW1haW5pbmcgYmFsYW5jZSB0byB0aGUgY3JlYXRvcgogICAgLy8gaXR4bi5QYXltZW50KAogICAgaW50Y18xIC8vIHBheQogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fcmFjay9jb250cmFjdC5weTo3NQogICAgLy8gZmVlPTFfMDAwLAogICAgaW50Y18zIC8vIDEwMDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19yYWNrL2NvbnRyYWN0LnB5OjY5LTc2CiAgICAvLyAjIFNlbmQgdGhlIHJlbWFpbmluZyBiYWxhbmNlIHRvIHRoZSBjcmVhdG9yCiAgICAvLyBpdHhuLlBheW1lbnQoCiAgICAvLyAgICAgcmVjZWl2ZXI9R2xvYmFsLmNyZWF0b3JfYWRkcmVzcywKICAgIC8vICAgICBhbW91bnQ9MCwKICAgIC8vICAgICAjIENsb3NlIHRoZSBhY2NvdW50IHRvIGdldCBiYWNrIEFMTCB0aGUgQUxHTyBpbiB0aGUgYWNjb3VudAogICAgLy8gICAgIGNsb3NlX3JlbWFpbmRlcl90bz1HbG9iYWwuY3JlYXRvcl9hZGRyZXNzLAogICAgLy8gICAgIGZlZT0xXzAwMCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICByZXRzdWIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CiAEAAEE6AcmAgdhc3NldGlkDHVuaXRhcnlwcmljZTEbQQAqggUEh4y7PQTMdgA3BBV0U1oEeQv1nwQzs0meNhoAjgUAUABAACoAEAACIkMxGYEFEkQxGESIAOgjQzEZFEQxGEQxFiMJSTgQIxJENhoBF4gAlyNDMRkURDEYRDEWIwlJOBAjEkSIAEMjQzEZFEQxGEQ2GgEXiAAlI0MxGRREMRgURDYaARfAMDYaAheIAAIjQ4oCACiL/mcpi/9niYoBADEAMgkSRCmL/2eJigEAMQAyCRJEMgoiKGVEcABFARREi/84BzIKEkSL/zgIMgEyEAgSRLEiKGVEMgoishKyFLIRJLIQIrIBs4mKAgCL/jgAMQASRIv+OAcyChJEi/44CCIpZUSL/wsSRLEiKGVEMQCL/7ISshSyESSyECKyAbOJMQAyCRJEsSIoZUQyCUmyFSKyErIUshEkshAlsgGzsTIJSbIJIrIIsgcjshAlsgGziQ==","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -185,11 +185,97 @@ export type MethodReturn<TSignature extends AlgorackMarketSignatures> = Algorack
 export type GlobalKeysState = AlgorackMarketTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AlgorackMarketCreateCallParams =
+  | Expand<CallParams<AlgorackMarketArgs['obj']['create_application(asset,uint64)void'] | AlgorackMarketArgs['tuple']['create_application(asset,uint64)void']> & {method: 'create_application'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<AlgorackMarketArgs['obj']['create_application(asset,uint64)void'] | AlgorackMarketArgs['tuple']['create_application(asset,uint64)void']> & {method: 'create_application(asset,uint64)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type AlgorackMarketDeleteCallParams =
+  | Expand<CallParams<AlgorackMarketArgs['obj']['delete_application()void'] | AlgorackMarketArgs['tuple']['delete_application()void']> & {method: 'delete_application'}>
+  | Expand<CallParams<AlgorackMarketArgs['obj']['delete_application()void'] | AlgorackMarketArgs['tuple']['delete_application()void']> & {method: 'delete_application()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AlgorackMarketDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AlgorackMarketCreateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: AlgorackMarketDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AlgorackMarket smart contract
  */
 export abstract class AlgorackMarketParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends AlgorackMarketCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create_application':
+          case 'create_application(asset,uint64)void':
+            return AlgorackMarketParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the AlgorackMarket smart contract using the create_application(asset,uint64)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<AlgorackMarketArgs['obj']['create_application(asset,uint64)void'] | AlgorackMarketArgs['tuple']['create_application(asset,uint64)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create_application(asset,uint64)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.assetId, params.args.unitaryPrice],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends AlgorackMarketDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'delete_application':
+          case 'delete_application()void':
+            return AlgorackMarketParamsFactory.delete.deleteApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the AlgorackMarket smart contract using the delete_application()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      deleteApplication(params: CallParams<AlgorackMarketArgs['obj']['delete_application()void'] | AlgorackMarketArgs['tuple']['delete_application()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'delete_application()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the set_price(uint64)void ABI method
    *
@@ -231,6 +317,164 @@ export abstract class AlgorackMarketParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the AlgorackMarket smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AlgorackMarketFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AlgorackMarketFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AlgorackMarketClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AlgorackMarketClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the AlgorackMarket smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AlgorackMarketDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? AlgorackMarketParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (AlgorackMarketCreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? AlgorackMarketParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (AlgorackMarketDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new AlgorackMarketClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AlgorackMarket smart contract using the create_application(asset,uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<AlgorackMarketArgs['obj']['create_application(asset,uint64)void'] | AlgorackMarketArgs['tuple']['create_application(asset,uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(AlgorackMarketParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the AlgorackMarket smart contract using the delete_application()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      deleteApplication: (params: CallParams<AlgorackMarketArgs['obj']['delete_application()void'] | AlgorackMarketArgs['tuple']['delete_application()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(AlgorackMarketParamsFactory.delete.deleteApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AlgorackMarket smart contract using the create_application(asset,uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<AlgorackMarketArgs['obj']['create_application(asset,uint64)void'] | AlgorackMarketArgs['tuple']['create_application(asset,uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(AlgorackMarketParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AlgorackMarket smart contract using an ABI method call using the create_application(asset,uint64)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<AlgorackMarketArgs['obj']['create_application(asset,uint64)void'] | AlgorackMarketArgs['tuple']['create_application(asset,uint64)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(AlgorackMarketParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | AlgorackMarketReturns['create_application(asset,uint64)void']) }, appClient: new AlgorackMarketClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the AlgorackMarket smart contract
  */
@@ -311,6 +555,22 @@ export class AlgorackMarketClient {
    */
   readonly params = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the AlgorackMarket smart contract using the `delete_application()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      deleteApplication: (params: CallParams<AlgorackMarketArgs['obj']['delete_application()void'] | AlgorackMarketArgs['tuple']['delete_application()void']> = {args: []}) => {
+        return this.appClient.params.delete(AlgorackMarketParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the AlgorackMarket smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -357,6 +617,22 @@ export class AlgorackMarketClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the AlgorackMarket smart contract using the `delete_application()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      deleteApplication: (params: CallParams<AlgorackMarketArgs['obj']['delete_application()void'] | AlgorackMarketArgs['tuple']['delete_application()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(AlgorackMarketParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the AlgorackMarket smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -402,6 +678,23 @@ export class AlgorackMarketClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the AlgorackMarket smart contract using the `delete_application()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      deleteApplication: async (params: CallParams<AlgorackMarketArgs['obj']['delete_application()void'] | AlgorackMarketArgs['tuple']['delete_application()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(AlgorackMarketParamsFactory.delete.deleteApplication(params))
+        return {...result, return: result.return as unknown as (undefined | AlgorackMarketReturns['delete_application()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the AlgorackMarket smart contract.
      *
@@ -516,6 +809,15 @@ export class AlgorackMarketClient {
         resultMappers.push(undefined)
         return this
       },
+      get delete() {
+        return {
+          deleteApplication: (params: CallParams<AlgorackMarketArgs['obj']['delete_application()void'] | AlgorackMarketArgs['tuple']['delete_application()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.deleteApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the AlgorackMarket contract
        */
@@ -577,6 +879,20 @@ export type AlgorackMarketComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   buy(params?: CallParams<AlgorackMarketArgs['obj']['buy(pay,uint64)void'] | AlgorackMarketArgs['tuple']['buy(pay,uint64)void']>): AlgorackMarketComposer<[...TReturns, AlgorackMarketReturns['buy(pay,uint64)void'] | undefined]>
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the AlgorackMarket smart contract using the delete_application()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    deleteApplication(params?: CallParams<AlgorackMarketArgs['obj']['delete_application()void'] | AlgorackMarketArgs['tuple']['delete_application()void']>): AlgorackMarketComposer<[...TReturns, AlgorackMarketReturns['delete_application()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the AlgorackMarket smart contract.
