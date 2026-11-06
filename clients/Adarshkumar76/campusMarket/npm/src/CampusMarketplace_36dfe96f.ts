@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"CampusMarketplace","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Called once when the app is first created.","events":[],"recommendations":{}},{"name":"list_item","args":[{"type":"uint64","name":"price"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"List a new item for sale.\nOnly the seller (contract creator) can call this. Price is in microALGO (1 ALGO = 1,000,000 microALGO). Returns the assigned item_id.","events":[],"recommendations":{}},{"name":"buy_item","args":[{"type":"uint64","name":"item_id"},{"type":"pay","name":"pay_txn"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Buy an item. Must be called in an atomic group with a payment txn.\nThe payment amount must match the listed price. The payment receiver must be the seller (creator).","events":[],"recommendations":{}},{"name":"get_price","args":[{"type":"uint64","name":"item_id"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get the price of an item. Returns 0 if sold or not listed.","events":[],"recommendations":{}},{"name":"get_item_count","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"How many items have been listed total.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Marketplace contract.\n    - The deployer is the seller\n    - Seller lists items with prices (in microALGO)\n    - Buyer pays ALGO to purchase items\n    - Payment goes directly to the seller\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"item_count":{"keyType":"AVMString","valueType":"AVMUint64","key":"aXRlbV9jb3VudA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"prices":{"keyType":"uint64","valueType":"uint64","prefix":"cHJpY2Vz"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[123,238],"errorMessage":"check self.item_count exists"},{"pc":[171],"errorMessage":"check self.prices entry exists"},{"pc":[110,152,201],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[174],"errorMessage":"item not available"},{"pc":[116],"errorMessage":"only seller can list"},{"pc":[182],"errorMessage":"pay the seller"},{"pc":[119],"errorMessage":"price must be > 0"},{"pc":[162],"errorMessage":"transaction type is pay"},{"pc":[188],"errorMessage":"wrong payment amount"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"CampusMarketplace","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Called once when the app is first created.","events":[],"recommendations":{}},{"name":"list_item","args":[{"type":"uint64","name":"price"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"List a new item for sale.\nOnly the seller (contract creator) can call this. Price is in microALGO (1 ALGO = 1,000,000 microALGO). Returns the assigned item_id.","events":[],"recommendations":{}},{"name":"buy_item","args":[{"type":"uint64","name":"item_id"},{"type":"pay","name":"pay_txn"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Buy an item. Must be called in an atomic group with a payment txn.\nThe payment amount must match the listed price. The payment receiver must be the seller (creator).","events":[],"recommendations":{}},{"name":"get_price","args":[{"type":"uint64","name":"item_id"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Get the price of an item. Returns 0 if sold or not listed.","events":[],"recommendations":{}},{"name":"get_item_count","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"How many items have been listed total.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Marketplace contract.\n    - The deployer is the seller\n    - Seller lists items with prices (in microALGO)\n    - Buyer pays ALGO to purchase items\n    - Payment goes directly to the seller\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"item_count":{"keyType":"AVMString","valueType":"AVMUint64","key":"aXRlbV9jb3VudA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"prices":{"keyType":"uint64","valueType":"uint64","prefix":"cHJpY2Vz"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[123,238],"errorMessage":"check self.item_count exists"},{"pc":[171],"errorMessage":"check self.prices entry exists"},{"pc":[110,152,201],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[174],"errorMessage":"item not available"},{"pc":[116],"errorMessage":"only seller can list"},{"pc":[182],"errorMessage":"pay the seller"},{"pc":[119],"errorMessage":"price must be > 0"},{"pc":[162],"errorMessage":"transaction type is pay"},{"pc":[188],"errorMessage":"wrong payment amount"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAgOAogICAgYnl0ZWNibG9jayAiaXRlbV9jb3VudCIgInByaWNlcyIgMHgxNTFmN2M3NQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6MzEKICAgIC8vIHNlbGYuaXRlbV9jb3VudCA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMCAvLyAiaXRlbV9jb3VudCIKICAgIGludGNfMSAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyBtYXJrZXRwbGFjZS9jb250cmFjdC5weToyMQogICAgLy8gY2xhc3MgQ2FtcHVzTWFya2V0cGxhY2UoQVJDNENvbnRyYWN0KToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BAMTAKICAgIHB1c2hieXRlc3MgMHg5NWUzOWFiYiAweDdiMmJmNTM5IDB4MGUxYTc5ZWYgMHhmMmRkYTg4NyAvLyBtZXRob2QgImxpc3RfaXRlbSh1aW50NjQpdWludDY0IiwgbWV0aG9kICJidXlfaXRlbSh1aW50NjQscGF5KXZvaWQiLCBtZXRob2QgImdldF9wcmljZSh1aW50NjQpdWludDY0IiwgbWV0aG9kICJnZXRfaXRlbV9jb3VudCgpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbGlzdF9pdGVtIGJ1eV9pdGVtIGdldF9wcmljZSBnZXRfaXRlbV9jb3VudAogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDEwOgogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6MjEKICAgIC8vIGNsYXNzIENhbXB1c01hcmtldHBsYWNlKEFSQzRDb250cmFjdCk6CiAgICBwdXNoYnl0ZXMgMHg0YzVjNjFiYSAvLyBtZXRob2QgImNyZWF0ZSgpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fY3JlYXRlX3JvdXRlQDExCiAgICBlcnIKCm1haW5fY3JlYXRlX3JvdXRlQDExOgogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6MzgKICAgIC8vIHNlbGYuaXRlbV9jb3VudCA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMCAvLyAiaXRlbV9jb3VudCIKICAgIGludGNfMSAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6MzUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChjcmVhdGU9InJlcXVpcmUiKQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0LkNhbXB1c01hcmtldHBsYWNlLmxpc3RfaXRlbVtyb3V0aW5nXSgpIC0+IHZvaWQ6Cmxpc3RfaXRlbToKICAgIC8vIG1hcmtldHBsYWNlL2NvbnRyYWN0LnB5OjQwCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6NDgKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IEdsb2JhbC5jcmVhdG9yX2FkZHJlc3MsICJvbmx5IHNlbGxlciBjYW4gbGlzdCIKICAgIHR4biBTZW5kZXIKICAgIGdsb2JhbCBDcmVhdG9yQWRkcmVzcwogICAgPT0KICAgIGFzc2VydCAvLyBvbmx5IHNlbGxlciBjYW4gbGlzdAogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6NDkKICAgIC8vIGFzc2VydCBwcmljZS5uYXRpdmUgPiBVSW50NjQoMCksICJwcmljZSBtdXN0IGJlID4gMCIKICAgIGJ0b2kKICAgIGR1cAogICAgYXNzZXJ0IC8vIHByaWNlIG11c3QgYmUgPiAwCiAgICAvLyBtYXJrZXRwbGFjZS9jb250cmFjdC5weTo1MQogICAgLy8gc2VsZi5pdGVtX2NvdW50ICs9IDEKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18wIC8vICJpdGVtX2NvdW50IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLml0ZW1fY291bnQgZXhpc3RzCiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgYnl0ZWNfMCAvLyAiaXRlbV9jb3VudCIKICAgIGRpZyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6NTIKICAgIC8vIHNlbGYucHJpY2VzW3NlbGYuaXRlbV9jb3VudF0gPSBwcmljZS5uYXRpdmUKICAgIGl0b2IKICAgIGJ5dGVjXzEgLy8gInByaWNlcyIKICAgIGRpZyAxCiAgICBjb25jYXQKICAgIHVuY292ZXIgMgogICAgaXRvYgogICAgYm94X3B1dAogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6NDAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gY29udHJhY3QuQ2FtcHVzTWFya2V0cGxhY2UuYnV5X2l0ZW1bcm91dGluZ10oKSAtPiB2b2lkOgpidXlfaXRlbToKICAgIC8vIG1hcmtldHBsYWNlL2NvbnRyYWN0LnB5OjU2CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMCAvLyAxCiAgICAtCiAgICBkdXAKICAgIGd0eG5zIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gcGF5CiAgICA9PQogICAgYXNzZXJ0IC8vIHRyYW5zYWN0aW9uIHR5cGUgaXMgcGF5CiAgICAvLyBtYXJrZXRwbGFjZS9jb250cmFjdC5weTo2NwogICAgLy8gcHJpY2UgPSBzZWxmLnByaWNlc1tpdGVtX2lkLm5hdGl2ZV0KICAgIHN3YXAKICAgIGJ0b2kKICAgIGl0b2IKICAgIGJ5dGVjXzEgLy8gInByaWNlcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfZ2V0CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5wcmljZXMgZW50cnkgZXhpc3RzCiAgICBidG9pCiAgICAvLyBtYXJrZXRwbGFjZS9jb250cmFjdC5weTo2OAogICAgLy8gYXNzZXJ0IHByaWNlID4gVUludDY0KDApLCAiaXRlbSBub3QgYXZhaWxhYmxlIgogICAgZHVwCiAgICBhc3NlcnQgLy8gaXRlbSBub3QgYXZhaWxhYmxlCiAgICAvLyBtYXJrZXRwbGFjZS9jb250cmFjdC5weTo3MAogICAgLy8gYXNzZXJ0IHBheV90eG4ucmVjZWl2ZXIgPT0gR2xvYmFsLmNyZWF0b3JfYWRkcmVzcywgInBheSB0aGUgc2VsbGVyIgogICAgZGlnIDIKICAgIGd0eG5zIFJlY2VpdmVyCiAgICBnbG9iYWwgQ3JlYXRvckFkZHJlc3MKICAgID09CiAgICBhc3NlcnQgLy8gcGF5IHRoZSBzZWxsZXIKICAgIC8vIG1hcmtldHBsYWNlL2NvbnRyYWN0LnB5OjcxCiAgICAvLyBhc3NlcnQgcGF5X3R4bi5hbW91bnQgPT0gcHJpY2UsICJ3cm9uZyBwYXltZW50IGFtb3VudCIKICAgIHVuY292ZXIgMgogICAgZ3R4bnMgQW1vdW50CiAgICA9PQogICAgYXNzZXJ0IC8vIHdyb25nIHBheW1lbnQgYW1vdW50CiAgICAvLyBtYXJrZXRwbGFjZS9jb250cmFjdC5weTo3My03NAogICAgLy8gIyBtYXJrIGFzIHNvbGQgKHNldCBwcmljZSB0byAwKQogICAgLy8gc2VsZi5wcmljZXNbaXRlbV9pZC5uYXRpdmVdID0gVUludDY0KDApCiAgICBpbnRjXzEgLy8gMAogICAgaXRvYgogICAgYm94X3B1dAogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6NTYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gY29udHJhY3QuQ2FtcHVzTWFya2V0cGxhY2UuZ2V0X3ByaWNlW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X3ByaWNlOgogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6NzYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6NzkKICAgIC8vIHByaWNlLCBfZXhpc3RzID0gc2VsZi5wcmljZXMubWF5YmUoaXRlbV9pZC5uYXRpdmUpCiAgICBidG9pCiAgICBpdG9iCiAgICBieXRlY18xIC8vICJwcmljZXMiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJveF9nZXQKICAgIHN3YXAKICAgIGJ0b2kKICAgIHN3YXAKICAgIC8vIG1hcmtldHBsYWNlL2NvbnRyYWN0LnB5OjgwCiAgICAvLyBpZiBfZXhpc3RzOgogICAgYnogZ2V0X3ByaWNlX2FmdGVyX2lmX2Vsc2VAMwogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6ODEKICAgIC8vIHJldHVybiBhcmM0LlVJbnQ2NChwcmljZSkKICAgIGR1cAogICAgaXRvYgoKZ2V0X3ByaWNlX2FmdGVyX2lubGluZWRfY29udHJhY3QuQ2FtcHVzTWFya2V0cGxhY2UuZ2V0X3ByaWNlQDQ6CiAgICAvLyBtYXJrZXRwbGFjZS9jb250cmFjdC5weTo3NgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgpnZXRfcHJpY2VfYWZ0ZXJfaWZfZWxzZUAzOgogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6ODIKICAgIC8vIHJldHVybiBhcmM0LlVJbnQ2NCgwKQogICAgcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDAwMAogICAgLy8gbWFya2V0cGxhY2UvY29udHJhY3QucHk6NzYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgYiBnZXRfcHJpY2VfYWZ0ZXJfaW5saW5lZF9jb250cmFjdC5DYW1wdXNNYXJrZXRwbGFjZS5nZXRfcHJpY2VANAoKCi8vIGNvbnRyYWN0LkNhbXB1c01hcmtldHBsYWNlLmdldF9pdGVtX2NvdW50W3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X2l0ZW1fY291bnQ6CiAgICAvLyBtYXJrZXRwbGFjZS9jb250cmFjdC5weTo4NwogICAgLy8gcmV0dXJuIGFyYzQuVUludDY0KHNlbGYuaXRlbV9jb3VudCkKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18wIC8vICJpdGVtX2NvdW50IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLml0ZW1fY291bnQgZXhpc3RzCiAgICBpdG9iCiAgICAvLyBtYXJrZXRwbGFjZS9jb250cmFjdC5weTo4NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAQAIJgMKaXRlbV9jb3VudAZwcmljZXMEFR98dTEYQAADKCNnMRkURDEYQQAkggQEleOauwR7K/U5BA4aee8E8t2ohzYaAI4EABQAPgBvAJgAgARMXGG6NhoAjgEAAQAoI2ciQzYaAUkVJBJEMQAyCRJEF0lEIyhlRCIIKEsBZxYpSwFQTwIWvypMULAiQzYaAUkVJBJEMRYiCUk4ECISREwXFilMUEm+RBdJREsCOAcyCRJETwI4CBJEIxa/IkM2GgFJFSQSRBcWKUxQvkwXTEEACEkWKkxQsCJDgAgAAAAAAAAAAEL/7SMoZUQWKkxQsCJD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -196,11 +196,57 @@ export type GlobalKeysState = CampusMarketplaceTypes['state']['global']['keys']
 export type BoxKeysState = CampusMarketplaceTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type CampusMarketplaceCreateCallParams =
+  | Expand<CallParams<CampusMarketplaceArgs['obj']['create()void'] | CampusMarketplaceArgs['tuple']['create()void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<CampusMarketplaceArgs['obj']['create()void'] | CampusMarketplaceArgs['tuple']['create()void']> & {method: 'create()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type CampusMarketplaceDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: CampusMarketplaceCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the CampusMarketplace smart contract
  */
 export abstract class CampusMarketplaceParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends CampusMarketplaceCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create()void':
+            return CampusMarketplaceParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the CampusMarketplace smart contract using the create()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<CampusMarketplaceArgs['obj']['create()void'] | CampusMarketplaceArgs['tuple']['create()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the list_item(uint64)uint64 ABI method
    *
@@ -267,6 +313,154 @@ export abstract class CampusMarketplaceParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the CampusMarketplace smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class CampusMarketplaceFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `CampusMarketplaceFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new CampusMarketplaceClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new CampusMarketplaceClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the CampusMarketplace smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: CampusMarketplaceDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? CampusMarketplaceParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (CampusMarketplaceCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new CampusMarketplaceClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CampusMarketplace smart contract using the create()void ABI method.
+       *
+       * Called once when the app is first created.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<CampusMarketplaceArgs['obj']['create()void'] | CampusMarketplaceArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(CampusMarketplaceParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CampusMarketplace smart contract using the create()void ABI method.
+       *
+       * Called once when the app is first created.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<CampusMarketplaceArgs['obj']['create()void'] | CampusMarketplaceArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(CampusMarketplaceParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CampusMarketplace smart contract using an ABI method call using the create()void ABI method.
+       *
+       * Called once when the app is first created.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<CampusMarketplaceArgs['obj']['create()void'] | CampusMarketplaceArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(CampusMarketplaceParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | CampusMarketplaceReturns['create()void']) }, appClient: new CampusMarketplaceClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the CampusMarketplace smart contract
  */
