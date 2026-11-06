@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"FileSharingApp","structs":{},"methods":[{"name":"initialize","args":[{"type":"string","name":"adminAddress","desc":"Admin address who can manage the system"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Initialize the file sharing application","events":[],"recommendations":{}},{"name":"createFileRequest","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"},{"type":"string","name":"recipientAddress","desc":"Recipient's Algorand address"},{"type":"string","name":"fileHash","desc":"SHA256 hash of the file content"},{"type":"string","name":"fileSize","desc":"Size of the file in bytes"},{"type":"string","name":"accessFee","desc":"Fee required to access the file (in microALGO)"},{"type":"string","name":"fileType","desc":"Type of file (e.g., \"payslip\", \"contract\", \"document\")"},{"type":"string","name":"isIPFS","desc":"Whether file is stored on IPFS (true) or WebRTC (false)"},{"type":"string","name":"ipfsCID","desc":"IPFS Content ID (empty string if WebRTC)"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create a file sharing request with escrow","events":[],"recommendations":{}},{"name":"approveAndPay","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Recipient approves and pays for file access","events":[],"recommendations":{}},{"name":"confirmReceipt","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"},{"type":"string","name":"confirmationHash","desc":"Hash of the received file for verification"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Recipient confirms file receipt and releases payment","events":[],"recommendations":{}},{"name":"disputeTransfer","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"},{"type":"string","name":"reason","desc":"Reason for dispute"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Dispute file transfer - can be called by either party","events":[],"recommendations":{}},{"name":"resolveDispute","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"},{"type":"string","name":"resolution","desc":"Resolution: \"sender_wins\" or \"recipient_wins\""}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Admin resolves dispute","events":[],"recommendations":{}},{"name":"cancelRequest","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Cancel file request (only by sender before approval)","events":[],"recommendations":{}},{"name":"getFileRequest","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"}],"returns":{"type":"string","desc":"File request info as JSON string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get file request information","events":[],"recommendations":{}},{"name":"getUserFileRequests","args":[{"type":"string","name":"userAddress","desc":"User's Algorand address"}],"returns":{"type":"string","desc":"List of file requests as JSON string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get all file requests for a user (sender or recipient)","events":[],"recommendations":{}},{"name":"updateFileMetadata","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"},{"type":"string","name":"newFileHash","desc":"New file hash"},{"type":"string","name":"newFileSize","desc":"New file size"},{"type":"string","name":"newAccessFee","desc":"New access fee"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Update file metadata (only by sender before approval)","events":[],"recommendations":{}},{"name":"emergencyWithdraw","args":[{"type":"string","name":"amount","desc":"Amount to withdraw in microALGO"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Emergency withdrawal by admin (for stuck funds)","events":[],"recommendations":{}},{"name":"getStats","args":[],"returns":{"type":"string","desc":"Statistics as JSON string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get application statistics","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[106,126,135,144,164,191,200,209,218,227,236,245],"errorMessage":"OnCompletion is not NoOp"},{"pc":[259],"errorMessage":"can only call when creating"},{"pc":[109,129,138,147,167,194,203,212,221,230,239,248],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"FileSharingApp","structs":{},"methods":[{"name":"initialize","args":[{"type":"string","name":"adminAddress","desc":"Admin address who can manage the system"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Initialize the file sharing application","events":[],"recommendations":{}},{"name":"createFileRequest","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"},{"type":"string","name":"recipientAddress","desc":"Recipient's Algorand address"},{"type":"string","name":"fileHash","desc":"SHA256 hash of the file content"},{"type":"string","name":"fileSize","desc":"Size of the file in bytes"},{"type":"string","name":"accessFee","desc":"Fee required to access the file (in microALGO)"},{"type":"string","name":"fileType","desc":"Type of file (e.g., \"payslip\", \"contract\", \"document\")"},{"type":"string","name":"isIPFS","desc":"Whether file is stored on IPFS (true) or WebRTC (false)"},{"type":"string","name":"ipfsCID","desc":"IPFS Content ID (empty string if WebRTC)"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create a file sharing request with escrow","events":[],"recommendations":{}},{"name":"approveAndPay","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Recipient approves and pays for file access","events":[],"recommendations":{}},{"name":"confirmReceipt","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"},{"type":"string","name":"confirmationHash","desc":"Hash of the received file for verification"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Recipient confirms file receipt and releases payment","events":[],"recommendations":{}},{"name":"disputeTransfer","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"},{"type":"string","name":"reason","desc":"Reason for dispute"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Dispute file transfer - can be called by either party","events":[],"recommendations":{}},{"name":"resolveDispute","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"},{"type":"string","name":"resolution","desc":"Resolution: \"sender_wins\" or \"recipient_wins\""}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Admin resolves dispute","events":[],"recommendations":{}},{"name":"cancelRequest","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Cancel file request (only by sender before approval)","events":[],"recommendations":{}},{"name":"getFileRequest","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"}],"returns":{"type":"string","desc":"File request info as JSON string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get file request information","events":[],"recommendations":{}},{"name":"getUserFileRequests","args":[{"type":"string","name":"userAddress","desc":"User's Algorand address"}],"returns":{"type":"string","desc":"List of file requests as JSON string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get all file requests for a user (sender or recipient)","events":[],"recommendations":{}},{"name":"updateFileMetadata","args":[{"type":"string","name":"fileId","desc":"Unique identifier for the file"},{"type":"string","name":"newFileHash","desc":"New file hash"},{"type":"string","name":"newFileSize","desc":"New file size"},{"type":"string","name":"newAccessFee","desc":"New access fee"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Update file metadata (only by sender before approval)","events":[],"recommendations":{}},{"name":"emergencyWithdraw","args":[{"type":"string","name":"amount","desc":"Amount to withdraw in microALGO"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Emergency withdrawal by admin (for stuck funds)","events":[],"recommendations":{}},{"name":"getStats","args":[],"returns":{"type":"string","desc":"Statistics as JSON string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get application statistics","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[106,126,135,144,164,191,200,209,218,227,236,245],"errorMessage":"OnCompletion is not NoOp"},{"pc":[259],"errorMessage":"can only call when creating"},{"pc":[109,129,138,147,167,194,203,212,221,230,239,248],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMQogICAgLy8gc21hcnRfY29udHJhY3RzL2ZpbGVfc2hhcmluZ19hcHAvY29udHJhY3QuYWxnby50czozCiAgICAvLyBleHBvcnQgY2xhc3MgRmlsZVNoYXJpbmdBcHAgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdAMTcKICAgIHB1c2hieXRlc3MgMHhlY2YzMzllNyAweDg1MzVjZmI3IDB4ZjE0OWVkMzggMHhmODM4Y2VkNCAweGU2YjBhZWE2IDB4NTJiZWZkYzYgMHg2NGE3ZWVjMCAweGYzMDQyNWNlIDB4ZjIxYzM1OWMgMHgwMDJjN2M4MyAweGZmNzgwOTQ0IDB4ZWU1OWMyMTEgLy8gbWV0aG9kICJpbml0aWFsaXplKHN0cmluZyl2b2lkIiwgbWV0aG9kICJjcmVhdGVGaWxlUmVxdWVzdChzdHJpbmcsc3RyaW5nLHN0cmluZyxzdHJpbmcsc3RyaW5nLHN0cmluZyxzdHJpbmcsc3RyaW5nKXZvaWQiLCBtZXRob2QgImFwcHJvdmVBbmRQYXkoc3RyaW5nKXZvaWQiLCBtZXRob2QgImNvbmZpcm1SZWNlaXB0KHN0cmluZyxzdHJpbmcpdm9pZCIsIG1ldGhvZCAiZGlzcHV0ZVRyYW5zZmVyKHN0cmluZyxzdHJpbmcpdm9pZCIsIG1ldGhvZCAicmVzb2x2ZURpc3B1dGUoc3RyaW5nLHN0cmluZyl2b2lkIiwgbWV0aG9kICJjYW5jZWxSZXF1ZXN0KHN0cmluZyl2b2lkIiwgbWV0aG9kICJnZXRGaWxlUmVxdWVzdChzdHJpbmcpc3RyaW5nIiwgbWV0aG9kICJnZXRVc2VyRmlsZVJlcXVlc3RzKHN0cmluZylzdHJpbmciLCBtZXRob2QgInVwZGF0ZUZpbGVNZXRhZGF0YShzdHJpbmcsc3RyaW5nLHN0cmluZyxzdHJpbmcpdm9pZCIsIG1ldGhvZCAiZW1lcmdlbmN5V2l0aGRyYXcoc3RyaW5nKXZvaWQiLCBtZXRob2QgImdldFN0YXRzKClzdHJpbmciCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2luaXRpYWxpemVfcm91dGVAMyBtYWluX2NyZWF0ZUZpbGVSZXF1ZXN0X3JvdXRlQDQgbWFpbl9hcHByb3ZlQW5kUGF5X3JvdXRlQDUgbWFpbl9jb25maXJtUmVjZWlwdF9yb3V0ZUA2IG1haW5fZGlzcHV0ZVRyYW5zZmVyX3JvdXRlQDcgbWFpbl9yZXNvbHZlRGlzcHV0ZV9yb3V0ZUA4IG1haW5fY2FuY2VsUmVxdWVzdF9yb3V0ZUA5IG1haW5fZ2V0RmlsZVJlcXVlc3Rfcm91dGVAMTAgbWFpbl9nZXRVc2VyRmlsZVJlcXVlc3RzX3JvdXRlQDExIG1haW5fdXBkYXRlRmlsZU1ldGFkYXRhX3JvdXRlQDEyIG1haW5fZW1lcmdlbmN5V2l0aGRyYXdfcm91dGVAMTMgbWFpbl9nZXRTdGF0c19yb3V0ZUAxNAoKbWFpbl9hZnRlcl9pZl9lbHNlQDIxOgogICAgLy8gc21hcnRfY29udHJhY3RzL2ZpbGVfc2hhcmluZ19hcHAvY29udHJhY3QuYWxnby50czozCiAgICAvLyBleHBvcnQgY2xhc3MgRmlsZVNoYXJpbmdBcHAgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoaW50IDAgLy8gMAogICAgcmV0dXJuCgptYWluX2dldFN0YXRzX3JvdXRlQDE0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2ZpbGVfc2hhcmluZ19hcHAvY29udHJhY3QuYWxnby50czoxMjIKICAgIC8vIHB1YmxpYyBnZXRTdGF0cygpOiBzdHJpbmcgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDI3YjdkCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZW1lcmdlbmN5V2l0aGRyYXdfcm91dGVAMTM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZmlsZV9zaGFyaW5nX2FwcC9jb250cmFjdC5hbGdvLnRzOjExNAogICAgLy8gcHVibGljIGVtZXJnZW5jeVdpdGhkcmF3KGFtb3VudDogc3RyaW5nKTogdm9pZCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fdXBkYXRlRmlsZU1ldGFkYXRhX3JvdXRlQDEyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2ZpbGVfc2hhcmluZ19hcHAvY29udHJhY3QuYWxnby50czoxMDYKICAgIC8vIHB1YmxpYyB1cGRhdGVGaWxlTWV0YWRhdGEoZmlsZUlkOiBzdHJpbmcsIG5ld0ZpbGVIYXNoOiBzdHJpbmcsIG5ld0ZpbGVTaXplOiBzdHJpbmcsIG5ld0FjY2Vzc0ZlZTogc3RyaW5nKTogdm9pZCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0VXNlckZpbGVSZXF1ZXN0c19yb3V0ZUAxMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9maWxlX3NoYXJpbmdfYXBwL2NvbnRyYWN0LmFsZ28udHM6OTQKICAgIC8vIHB1YmxpYyBnZXRVc2VyRmlsZVJlcXVlc3RzKHVzZXJBZGRyZXNzOiBzdHJpbmcpOiBzdHJpbmcgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDI1YjVkCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZ2V0RmlsZVJlcXVlc3Rfcm91dGVAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZmlsZV9zaGFyaW5nX2FwcC9jb250cmFjdC5hbGdvLnRzOjg0CiAgICAvLyBwdWJsaWMgZ2V0RmlsZVJlcXVlc3QoZmlsZUlkOiBzdHJpbmcpOiBzdHJpbmcgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMDk2ZTZmNzQ1ZjY2NmY3NTZlNjQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9jYW5jZWxSZXF1ZXN0X3JvdXRlQDk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZmlsZV9zaGFyaW5nX2FwcC9jb250cmFjdC5hbGdvLnRzOjc1CiAgICAvLyBwdWJsaWMgY2FuY2VsUmVxdWVzdChmaWxlSWQ6IHN0cmluZyk6IHZvaWQgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3Jlc29sdmVEaXNwdXRlX3JvdXRlQDg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZmlsZV9zaGFyaW5nX2FwcC9jb250cmFjdC5hbGdvLnRzOjY3CiAgICAvLyBwdWJsaWMgcmVzb2x2ZURpc3B1dGUoZmlsZUlkOiBzdHJpbmcsIHJlc29sdXRpb246IHN0cmluZyk6IHZvaWQgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2Rpc3B1dGVUcmFuc2Zlcl9yb3V0ZUA3OgogICAgLy8gc21hcnRfY29udHJhY3RzL2ZpbGVfc2hhcmluZ19hcHAvY29udHJhY3QuYWxnby50czo1OAogICAgLy8gcHVibGljIGRpc3B1dGVUcmFuc2ZlcihmaWxlSWQ6IHN0cmluZywgcmVhc29uOiBzdHJpbmcpOiB2b2lkIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9jb25maXJtUmVjZWlwdF9yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL2ZpbGVfc2hhcmluZ19hcHAvY29udHJhY3QuYWxnby50czo0OQogICAgLy8gcHVibGljIGNvbmZpcm1SZWNlaXB0KGZpbGVJZDogc3RyaW5nLCBjb25maXJtYXRpb25IYXNoOiBzdHJpbmcpOiB2b2lkIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9hcHByb3ZlQW5kUGF5X3JvdXRlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZmlsZV9zaGFyaW5nX2FwcC9jb250cmFjdC5hbGdvLnRzOjQwCiAgICAvLyBwdWJsaWMgYXBwcm92ZUFuZFBheShmaWxlSWQ6IHN0cmluZyk6IHZvaWQgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2NyZWF0ZUZpbGVSZXF1ZXN0X3JvdXRlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZmlsZV9zaGFyaW5nX2FwcC9jb250cmFjdC5hbGdvLnRzOjIzLTMyCiAgICAvLyBwdWJsaWMgY3JlYXRlRmlsZVJlcXVlc3QoCiAgICAvLyAgIGZpbGVJZDogc3RyaW5nLAogICAgLy8gICByZWNpcGllbnRBZGRyZXNzOiBzdHJpbmcsCiAgICAvLyAgIGZpbGVIYXNoOiBzdHJpbmcsCiAgICAvLyAgIGZpbGVTaXplOiBzdHJpbmcsCiAgICAvLyAgIGFjY2Vzc0ZlZTogc3RyaW5nLAogICAgLy8gICBmaWxlVHlwZTogc3RyaW5nLAogICAgLy8gICBpc0lQRlM6IHN0cmluZywKICAgIC8vICAgaXBmc0NJRDogc3RyaW5nLAogICAgLy8gKTogdm9pZCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5faW5pdGlhbGl6ZV9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL2ZpbGVfc2hhcmluZ19hcHAvY29udHJhY3QuYWxnby50czo4CiAgICAvLyBwdWJsaWMgaW5pdGlhbGl6ZShhZG1pbkFkZHJlc3M6IHN0cmluZyk6IHZvaWQgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0AxNzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9maWxlX3NoYXJpbmdfYXBwL2NvbnRyYWN0LmFsZ28udHM6MwogICAgLy8gZXhwb3J0IGNsYXNzIEZpbGVTaGFyaW5nQXBwIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyMQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiABATEbQQDyggwE7PM55wSFNc+3BPFJ7TgE+DjO1ATmsK6mBFK+/cYEZKfuwATzBCXOBPIcNZwEACx8gwT/eAlEBO5ZwhE2GgCODACOAIUAfABzAGoAYQBYAD0AKQAgABcAA4EAQzEZFEQxGESACBUffHUAAnt9sCJDMRkURDEYRCJDMRkURDEYRCJDMRkURDEYRIAIFR98dQACW12wIkMxGRREMRhEgA8VH3x1AAlub3RfZm91bmSwIkMxGRREMRhEIkMxGRREMRhEIkMxGRREMRhEIkMxGRREMRhEIkMxGRREMRhEIkMxGRREMRhEIkMxGRREMRhEIkMxGUD/ZDEYFEQiQw==","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -334,6 +334,21 @@ export type MethodArgs<TSignature extends FileSharingAppSignatures> = FileSharin
 export type MethodReturn<TSignature extends FileSharingAppSignatures> = FileSharingAppTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type FileSharingAppCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type FileSharingAppDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: FileSharingAppCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the FileSharingApp smart contract
@@ -521,6 +536,147 @@ export abstract class FileSharingAppParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the FileSharingApp smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class FileSharingAppFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `FileSharingAppFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new FileSharingAppClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new FileSharingAppClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the FileSharingApp smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: FileSharingAppDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new FileSharingAppClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the FileSharingApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the FileSharingApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the FileSharingApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new FileSharingAppClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the FileSharingApp smart contract
  */
