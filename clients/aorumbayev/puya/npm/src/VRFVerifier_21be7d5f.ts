@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"VRFVerifier","structs":{},"methods":[{"name":"verify","args":[{"type":"byte[]","name":"message"},{"type":"byte[]","name":"proof"},{"type":"byte[]","name":"pk"}],"returns":{"type":"(byte[],bool)"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[34],"errorMessage":"OnCompletion is not NoOp"},{"pc":[103],"errorMessage":"can only call when creating"},{"pc":[37],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"VRFVerifier","structs":{},"methods":[{"name":"verify","args":[{"type":"byte[]","name":"message"},{"type":"byte[]","name":"proof"},{"type":"byte[]","name":"pk"}],"returns":{"type":"(byte[],bool)"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[34],"errorMessage":"OnCompletion is not NoOp"},{"pc":[103],"errorMessage":"can only call when creating"},{"pc":[37],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEKICAgIGJ5dGVjYmxvY2sgMHgwNjgxMDEKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvYnJhbmNoX3RvX3Byb3RvLnB5OjQKICAgIC8vIGNsYXNzIFZSRlZlcmlmaWVyKEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdANgogICAgcHVzaGJ5dGVzIDB4NmU1MGJkOTkgLy8gbWV0aG9kICJ2ZXJpZnkoYnl0ZVtdLGJ5dGVbXSxieXRlW10pKGJ5dGVbXSxib29sKSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdmVyaWZ5X3JvdXRlQDMKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMDoKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvYnJhbmNoX3RvX3Byb3RvLnB5OjQKICAgIC8vIGNsYXNzIFZSRlZlcmlmaWVyKEFSQzRDb250cmFjdCk6CiAgICBpbnRjXzAgLy8gMAogICAgcmV0dXJuCgptYWluX3ZlcmlmeV9yb3V0ZUAzOgogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9icmFuY2hfdG9fcHJvdG8ucHk6NQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvYnJhbmNoX3RvX3Byb3RvLnB5OjQKICAgIC8vIGNsYXNzIFZSRlZlcmlmaWVyKEFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGV4dHJhY3QgMiAwCiAgICAvLyByZWdyZXNzaW9uX3Rlc3RzL2JyYW5jaF90b19wcm90by5weTo1CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGNhbGxzdWIgdmVyaWZ5CiAgICBkaWcgMQogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDAwCiAgICBpbnRjXzAgLy8gMAogICAgdW5jb3ZlciAzCiAgICBzZXRiaXQKICAgIHB1c2hieXRlcyAweDAwMDMKICAgIHN3YXAKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fYmFyZV9yb3V0aW5nQDY6CiAgICAvLyByZWdyZXNzaW9uX3Rlc3RzL2JyYW5jaF90b19wcm90by5weTo0CiAgICAvLyBjbGFzcyBWUkZWZXJpZmllcihBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0X2Nhc2VzLnJlZ3Jlc3Npb25fdGVzdHMuYnJhbmNoX3RvX3Byb3RvLlZSRlZlcmlmaWVyLnZlcmlmeShtZXNzYWdlOiBieXRlcywgcHJvb2Y6IGJ5dGVzLCBwazogYnl0ZXMpIC0+IGJ5dGVzLCB1aW50NjQ6CnZlcmlmeToKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvYnJhbmNoX3RvX3Byb3RvLnB5OjUtNgogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICAvLyBkZWYgdmVyaWZ5KHNlbGYsIG1lc3NhZ2U6IEJ5dGVzLCBwcm9vZjogQnl0ZXMsIHBrOiBCeXRlcykgLT4gdHVwbGVbQnl0ZXMsIGJvb2xdOgogICAgcHJvdG8gMyAyCgp2ZXJpZnlfd2hpbGVfdG9wQDI6CiAgICBwdXNoaW50IDEwMDEwIC8vIDEwMDEwCiAgICBnbG9iYWwgT3Bjb2RlQnVkZ2V0CiAgICA+CiAgICBieiB2ZXJpZnlfYWZ0ZXJfd2hpbGVANwogICAgaXR4bl9iZWdpbgogICAgcHVzaGludCA2IC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIHB1c2hpbnQgNSAvLyBEZWxldGVBcHBsaWNhdGlvbgogICAgaXR4bl9maWVsZCBPbkNvbXBsZXRpb24KICAgIGJ5dGVjXzAgLy8gMHgwNjgxMDEKICAgIGl0eG5fZmllbGQgQXBwcm92YWxQcm9ncmFtCiAgICBieXRlY18wIC8vIDB4MDY4MTAxCiAgICBpdHhuX2ZpZWxkIENsZWFyU3RhdGVQcm9ncmFtCiAgICBnbG9iYWwgTWluVHhuRmVlCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGIgdmVyaWZ5X3doaWxlX3RvcEAyCgp2ZXJpZnlfYWZ0ZXJfd2hpbGVANzoKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvYnJhbmNoX3RvX3Byb3RvLnB5OjgKICAgIC8vIHJldHVybiBvcC52cmZfdmVyaWZ5KG9wLlZyZlZlcmlmeS5WcmZBbGdvcmFuZCwgbWVzc2FnZSwgcHJvb2YsIHBrKQogICAgZnJhbWVfZGlnIC0zCiAgICBmcmFtZV9kaWcgLTIKICAgIGZyYW1lX2RpZyAtMQogICAgdnJmX3ZlcmlmeSBWcmZBbGdvcmFuZAogICAgcmV0c3ViCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CiACAAEmAQMGgQExG0EAT4AEblC9mTYaAI4BAAIiQzEZFEQxGEQ2GgFXAgA2GgJXAgA2GgNXAgCIAC9LARUWVwYCTwJQgAEAIk8DVIACAANMUExQgAQVH3x1TFCwI0MxGUD/uTEYFEQjQ4oDAoGaTjIMDUEAF7GBBrIQgQWyGSiyHiiyHzIAsgGzQv/gi/2L/ov/0ACJ","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -134,6 +134,21 @@ export type MethodArgs<TSignature extends VrfVerifierSignatures> = VrfVerifierTy
 export type MethodReturn<TSignature extends VrfVerifierSignatures> = VrfVerifierTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type VrfVerifierCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type VrfVerifierDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: VrfVerifierCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the VrfVerifier smart contract
@@ -154,6 +169,147 @@ export abstract class VrfVerifierParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the VRFVerifier smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class VrfVerifierFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `VrfVerifierFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new VrfVerifierClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new VrfVerifierClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the VRFVerifier smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: VrfVerifierDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new VrfVerifierClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the VRFVerifier smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the VRFVerifier smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the VRFVerifier smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new VrfVerifierClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the VRFVerifier smart contract
  */

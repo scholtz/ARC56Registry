@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"HelloOtherConstants","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"uint64"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"greet","args":[{"type":"string","name":"name"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":4},"local":{"ints":0,"bytes":0}},"keys":{"global":{"greeting":{"keyType":"AVMString","valueType":"AVMString","key":"Z3JlZXRpbmc="},"num":{"keyType":"AVMString","valueType":"AVMBytes","key":"bnVt"},"address":{"keyType":"AVMString","valueType":"AVMBytes","key":"YWRkcmVzcw=="},"method":{"keyType":"AVMString","valueType":"AVMBytes","key":"bWV0aG9k"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[176],"errorMessage":"OnCompletion is not DeleteApplication"},{"pc":[139,185],"errorMessage":"OnCompletion is not NoOp"},{"pc":[189],"errorMessage":"can only call when creating"},{"pc":[142,179],"errorMessage":"can only call when not creating"},{"pc":[240],"errorMessage":"check self.address exists"},{"pc":[227],"errorMessage":"check self.greeting exists"},{"pc":[245],"errorMessage":"check self.method exists"},{"pc":[213],"errorMessage":"check self.num exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"HelloOtherConstants","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"uint64"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"greet","args":[{"type":"string","name":"name"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":4},"local":{"ints":0,"bytes":0}},"keys":{"global":{"greeting":{"keyType":"AVMString","valueType":"AVMString","key":"Z3JlZXRpbmc="},"num":{"keyType":"AVMString","valueType":"AVMBytes","key":"bnVt"},"address":{"keyType":"AVMString","valueType":"AVMBytes","key":"YWRkcmVzcw=="},"method":{"keyType":"AVMString","valueType":"AVMBytes","key":"bWV0aG9k"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[176],"errorMessage":"OnCompletion is not DeleteApplication"},{"pc":[139,185],"errorMessage":"OnCompletion is not NoOp"},{"pc":[189],"errorMessage":"can only call when creating"},{"pc":[142,179],"errorMessage":"can only call when not creating"},{"pc":[240],"errorMessage":"check self.address exists"},{"pc":[227],"errorMessage":"check self.greeting exists"},{"pc":[245],"errorMessage":"check self.method exists"},{"pc":[213],"errorMessage":"check self.num exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyB0ZXN0X2Nhc2VzLmNvbXBpbGUuYXBwcy5IZWxsb090aGVyQ29uc3RhbnRzLl9fYWxnb3B5X2VudHJ5cG9pbnRfd2l0aF9pbml0KCkgLT4gdWludDY0OgptYWluOgogICAgaW50Y2Jsb2NrIDAgMQogICAgYnl0ZWNibG9jayAiZ3JlZXRpbmciICJudW0iICJhZGRyZXNzIiAibWV0aG9kIiBUTVBMX0dSRUVUSU5HIFRNUExfTlVNIFRNUExfQUNDT1VOVCBUTVBMX01FVEhPRAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gY29tcGlsZS9hcHBzLnB5Ojc4CiAgICAvLyBzZWxmLmdyZWV0aW5nID0gVGVtcGxhdGVWYXJbU3RyaW5nXSgiR1JFRVRJTkciKQogICAgYnl0ZWNfMCAvLyAiZ3JlZXRpbmciCiAgICBieXRlYyA0IC8vIFRNUExfR1JFRVRJTkcKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb21waWxlL2FwcHMucHk6NzkKICAgIC8vIHNlbGYubnVtID0gVGVtcGxhdGVWYXJbQmlnVUludF0oIk5VTSIpCiAgICBieXRlY18xIC8vICJudW0iCiAgICBieXRlYyA1IC8vIFRNUExfTlVNCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29tcGlsZS9hcHBzLnB5OjgwCiAgICAvLyBzZWxmLmFkZHJlc3MgPSBUZW1wbGF0ZVZhcltBY2NvdW50XSgiQUNDT1VOVCIpCiAgICBieXRlY18yIC8vICJhZGRyZXNzIgogICAgYnl0ZWMgNiAvLyBUTVBMX0FDQ09VTlQKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb21waWxlL2FwcHMucHk6ODEKICAgIC8vIHNlbGYubWV0aG9kID0gVGVtcGxhdGVWYXJbQnl0ZXNdKCJNRVRIT0QiKQogICAgYnl0ZWNfMyAvLyAibWV0aG9kIgogICAgYnl0ZWMgNyAvLyBUTVBMX01FVEhPRAogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gY29tcGlsZS9hcHBzLnB5Ojc2CiAgICAvLyBjbGFzcyBIZWxsb090aGVyQ29uc3RhbnRzKEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9hZnRlcl9pZl9lbHNlQDgKICAgIHB1c2hieXRlc3MgMHhkOTI4NWE3NCAweDI0Mzc4ZDNjIDB4NWIwYzIzNzUgLy8gbWV0aG9kICJjcmVhdGUoKXVpbnQ2NCIsIG1ldGhvZCAiZGVsZXRlKCl2b2lkIiwgbWV0aG9kICJncmVldChzdHJpbmcpYnl0ZVtdIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVfcm91dGVANSBtYWluX2RlbGV0ZV9yb3V0ZUA2IG1haW5fZ3JlZXRfcm91dGVANwoKbWFpbl9hZnRlcl9pZl9lbHNlQDg6CiAgICAvLyBjb21waWxlL2FwcHMucHk6NzYKICAgIC8vIGNsYXNzIEhlbGxvT3RoZXJDb25zdGFudHMoQVJDNENvbnRyYWN0KToKICAgIGludGNfMCAvLyAwCiAgICByZXR1cm4KCm1haW5fZ3JlZXRfcm91dGVANzoKICAgIC8vIGNvbXBpbGUvYXBwcy5weTo5MQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gY29tcGlsZS9hcHBzLnB5Ojc2CiAgICAvLyBjbGFzcyBIZWxsb090aGVyQ29uc3RhbnRzKEFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBleHRyYWN0IDIgMAogICAgLy8gY29tcGlsZS9hcHBzLnB5OjkxCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgY2FsbHN1YiBncmVldAogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9kZWxldGVfcm91dGVANjoKICAgIC8vIGNvbXBpbGUvYXBwcy5weTo4NwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJEZWxldGVBcHBsaWNhdGlvbiJdKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgcHVzaGludCA1IC8vIERlbGV0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgRGVsZXRlQXBwbGljYXRpb24KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKbWFpbl9jcmVhdGVfcm91dGVANToKICAgIC8vIGNvbXBpbGUvYXBwcy5weTo4MwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAxCiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0X2Nhc2VzLmNvbXBpbGUuYXBwcy5IZWxsb090aGVyQ29uc3RhbnRzLmdyZWV0KG5hbWU6IGJ5dGVzKSAtPiBieXRlczoKZ3JlZXQ6CiAgICAvLyBjb21waWxlL2FwcHMucHk6OTEtOTIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICAvLyBkZWYgZ3JlZXQoc2VsZiwgbmFtZTogU3RyaW5nKSAtPiBCeXRlczoKICAgIHByb3RvIDEgMQogICAgLy8gY29tcGlsZS9hcHBzLnB5OjkzCiAgICAvLyBudW1fYWxwaGEgPSAoc2VsZi5udW0gKyA0OCkuYnl0ZXNbLTFdCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAibnVtIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLm51bSBleGlzdHMKICAgIHB1c2hieXRlcyAweDMwCiAgICBiKwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAxCiAgICAtCiAgICBpbnRjXzEgLy8gMQogICAgZXh0cmFjdDMKICAgIC8vIGNvbXBpbGUvYXBwcy5weTo5NQogICAgLy8gc2VsZi5ncmVldGluZy5ieXRlcyArIGIiICIgKyBuYW1lLmJ5dGVzICsgbnVtX2FscGhhICsgc2VsZi5hZGRyZXNzLmJ5dGVzICsgc2VsZi5tZXRob2QKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJncmVldGluZyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5ncmVldGluZyBleGlzdHMKICAgIHB1c2hieXRlcyAweDIwCiAgICBjb25jYXQKICAgIGZyYW1lX2RpZyAtMQogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18yIC8vICJhZGRyZXNzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmFkZHJlc3MgZXhpc3RzCiAgICBjb25jYXQKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18zIC8vICJtZXRob2QiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYubWV0aG9kIGV4aXN0cwogICAgY29uY2F0CiAgICAvLyBjb21waWxlL2FwcHMucHk6OTQtOTYKICAgIC8vIHJldHVybiAoCiAgICAvLyAgICAgc2VsZi5ncmVldGluZy5ieXRlcyArIGIiICIgKyBuYW1lLmJ5dGVzICsgbnVtX2FscGhhICsgc2VsZi5hZGRyZXNzLmJ5dGVzICsgc2VsZi5tZXRob2QKICAgIC8vICkKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CiACAAEmCAhncmVldGluZwNudW0HYWRkcmVzcwZtZXRob2QEdG1wbAFCIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAxGEAAECgnBGcpJwVnKicGZysnB2cxG0EAHIIDBNkoWnQEJDeNPARbDCN1NhoAjgMAMAAlAAIiQzEZFEQxGEQ2GgFXAgCIADdJFRZXBgJMUIAEFR98dUxQsCNDMRmBBRJEMRhEI0MxGRREMRgURIAMFR98dQAAAAAAAAABsCNDigEBIillRIABMKBJFSMJI1giKGVEgAEgUIv/UExQIiplRFAiK2VEUIk=","clear":"CoEBQw=="},"events":[],"templateVariables":{"TMPL_GREETING":{"type":"AVMString","value":"dG1wbA=="},"TMPL_NUM":{"type":"AVMBytes","value":"Qg=="},"TMPL_ACCOUNT":{"type":"AVMBytes","value":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="},"TMPL_METHOD":{"type":"AVMBytes","value":"AAAAAA=="}}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -61,6 +61,16 @@ export type Expand<T> = T extends (...args: infer A) => infer R
     ? { [K in keyof O]: O[K] }
     : never
 
+
+/**
+ * Deploy-time template variables
+ */
+export type TemplateVariables = {
+  TMPL_GREETING: string,
+  TMPL_NUM: Uint8Array,
+  TMPL_ACCOUNT: Uint8Array,
+  TMPL_METHOD: Uint8Array,
+}
 
 /**
  * The argument types for the HelloOtherConstants contract
@@ -167,11 +177,97 @@ export type MethodReturn<TSignature extends HelloOtherConstantsSignatures> = Hel
 export type GlobalKeysState = HelloOtherConstantsTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type HelloOtherConstantsCreateCallParams =
+  | Expand<CallParams<HelloOtherConstantsArgs['obj']['create()uint64'] | HelloOtherConstantsArgs['tuple']['create()uint64']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<HelloOtherConstantsArgs['obj']['create()uint64'] | HelloOtherConstantsArgs['tuple']['create()uint64']> & {method: 'create()uint64'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type HelloOtherConstantsDeleteCallParams =
+  | Expand<CallParams<HelloOtherConstantsArgs['obj']['delete()void'] | HelloOtherConstantsArgs['tuple']['delete()void']> & {method: 'delete'}>
+  | Expand<CallParams<HelloOtherConstantsArgs['obj']['delete()void'] | HelloOtherConstantsArgs['tuple']['delete()void']> & {method: 'delete()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type HelloOtherConstantsDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: HelloOtherConstantsCreateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: HelloOtherConstantsDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the HelloOtherConstants smart contract
  */
 export abstract class HelloOtherConstantsParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends HelloOtherConstantsCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create()uint64':
+            return HelloOtherConstantsParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the HelloOtherConstants smart contract using the create()uint64 ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<HelloOtherConstantsArgs['obj']['create()uint64'] | HelloOtherConstantsArgs['tuple']['create()uint64']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create()uint64' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends HelloOtherConstantsDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'delete':
+          case 'delete()void':
+            return HelloOtherConstantsParamsFactory.delete.delete(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the HelloOtherConstants smart contract using the delete()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      delete(params: CallParams<HelloOtherConstantsArgs['obj']['delete()void'] | HelloOtherConstantsArgs['tuple']['delete()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'delete()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the greet(string)byte[] ABI method
    *
@@ -187,6 +283,164 @@ export abstract class HelloOtherConstantsParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the HelloOtherConstants smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class HelloOtherConstantsFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `HelloOtherConstantsFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new HelloOtherConstantsClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new HelloOtherConstantsClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the HelloOtherConstants smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: HelloOtherConstantsDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? HelloOtherConstantsParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (HelloOtherConstantsCreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? HelloOtherConstantsParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (HelloOtherConstantsDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new HelloOtherConstantsClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HelloOtherConstants smart contract using the create()uint64 ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<HelloOtherConstantsArgs['obj']['create()uint64'] | HelloOtherConstantsArgs['tuple']['create()uint64']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(HelloOtherConstantsParamsFactory.create.create(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the HelloOtherConstants smart contract using the delete()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      delete: (params: CallParams<HelloOtherConstantsArgs['obj']['delete()void'] | HelloOtherConstantsArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(HelloOtherConstantsParamsFactory.delete.delete(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HelloOtherConstants smart contract using the create()uint64 ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<HelloOtherConstantsArgs['obj']['create()uint64'] | HelloOtherConstantsArgs['tuple']['create()uint64']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(HelloOtherConstantsParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HelloOtherConstants smart contract using an ABI method call using the create()uint64 ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<HelloOtherConstantsArgs['obj']['create()uint64'] | HelloOtherConstantsArgs['tuple']['create()uint64']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(HelloOtherConstantsParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | HelloOtherConstantsReturns['create()uint64']) }, appClient: new HelloOtherConstantsClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the HelloOtherConstants smart contract
  */
@@ -275,6 +529,22 @@ export class HelloOtherConstantsClient {
    */
   readonly params = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the HelloOtherConstants smart contract using the `delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      delete: (params: CallParams<HelloOtherConstantsArgs['obj']['delete()void'] | HelloOtherConstantsArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.params.delete(HelloOtherConstantsParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the HelloOtherConstants smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -301,6 +571,22 @@ export class HelloOtherConstantsClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the HelloOtherConstants smart contract using the `delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      delete: (params: CallParams<HelloOtherConstantsArgs['obj']['delete()void'] | HelloOtherConstantsArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(HelloOtherConstantsParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the HelloOtherConstants smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -326,6 +612,23 @@ export class HelloOtherConstantsClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the HelloOtherConstants smart contract using the `delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      delete: async (params: CallParams<HelloOtherConstantsArgs['obj']['delete()void'] | HelloOtherConstantsArgs['tuple']['delete()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(HelloOtherConstantsParamsFactory.delete.delete(params))
+        return {...result, return: result.return as unknown as (undefined | HelloOtherConstantsReturns['delete()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the HelloOtherConstants smart contract.
      *
@@ -412,6 +715,15 @@ export class HelloOtherConstantsClient {
         resultMappers.push((v) => client.decodeReturnValue('greet(string)byte[]', v))
         return this
       },
+      get delete() {
+        return {
+          delete: (params: CallParams<HelloOtherConstantsArgs['obj']['delete()void'] | HelloOtherConstantsArgs['tuple']['delete()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.delete(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the HelloOtherConstants contract
        */
@@ -455,6 +767,20 @@ export type HelloOtherConstantsComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   greet(params?: CallParams<HelloOtherConstantsArgs['obj']['greet(string)byte[]'] | HelloOtherConstantsArgs['tuple']['greet(string)byte[]']>): HelloOtherConstantsComposer<[...TReturns, HelloOtherConstantsReturns['greet(string)byte[]'] | undefined]>
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the HelloOtherConstants smart contract using the delete()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    delete(params?: CallParams<HelloOtherConstantsArgs['obj']['delete()void'] | HelloOtherConstantsArgs['tuple']['delete()void']>): HelloOtherConstantsComposer<[...TReturns, HelloOtherConstantsReturns['delete()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the HelloOtherConstants smart contract.

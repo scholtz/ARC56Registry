@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"NamedTuplesContract","structs":{"TestTuple":[{"name":"a","type":"uint64"},{"name":"b","type":"uint512"},{"name":"c","type":"string"},{"name":"d","type":"byte[]"}]},"methods":[{"name":"build_tuple","args":[{"type":"uint64","name":"a"},{"type":"uint512","name":"b"},{"type":"string","name":"c"},{"type":"byte[]","name":"d"}],"returns":{"type":"(uint64,uint512,string,byte[])","struct":"TestTuple"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"test_tuple","args":[{"type":"(uint64,uint512,string,byte[])","struct":"TestTuple","name":"value"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[49],"errorMessage":"Index access is out of bounds"},{"pc":[37,93],"errorMessage":"OnCompletion is not NoOp"},{"pc":[195],"errorMessage":"can only call when creating"},{"pc":[40,96],"errorMessage":"can only call when not creating"},{"pc":[124],"errorMessage":"overflow"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"NamedTuplesContract","structs":{"TestTuple":[{"name":"a","type":"uint64"},{"name":"b","type":"uint512"},{"name":"c","type":"string"},{"name":"d","type":"byte[]"}]},"methods":[{"name":"build_tuple","args":[{"type":"uint64","name":"a"},{"type":"uint512","name":"b"},{"type":"string","name":"c"},{"type":"byte[]","name":"d"}],"returns":{"type":"(uint64,uint512,string,byte[])","struct":"TestTuple"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"test_tuple","args":[{"type":"(uint64,uint512,string,byte[])","struct":"TestTuple","name":"value"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[49],"errorMessage":"Index access is out of bounds"},{"pc":[37,93],"errorMessage":"OnCompletion is not NoOp"},{"pc":[195],"errorMessage":"can only call when creating"},{"pc":[40,96],"errorMessage":"can only call when not creating"},{"pc":[124],"errorMessage":"overflow"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAgNjQKICAgIC8vIG5hbWVkX3R1cGxlcy9jb250cmFjdC5weToxNQogICAgLy8gY2xhc3MgTmFtZWRUdXBsZXNDb250cmFjdChhcmM0LkFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdANwogICAgcHVzaGJ5dGVzcyAweDQ1NmVlYWNlIDB4NmY5ZjViZjAgLy8gbWV0aG9kICJidWlsZF90dXBsZSh1aW50NjQsdWludDUxMixzdHJpbmcsYnl0ZVtdKSh1aW50NjQsdWludDUxMixzdHJpbmcsYnl0ZVtdKSIsIG1ldGhvZCAidGVzdF90dXBsZSgodWludDY0LHVpbnQ1MTIsc3RyaW5nLGJ5dGVbXSkpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fYnVpbGRfdHVwbGVfcm91dGVAMyBtYWluX3Rlc3RfdHVwbGVfcm91dGVANAoKbWFpbl9hZnRlcl9pZl9lbHNlQDExOgogICAgLy8gbmFtZWRfdHVwbGVzL2NvbnRyYWN0LnB5OjE1CiAgICAvLyBjbGFzcyBOYW1lZFR1cGxlc0NvbnRyYWN0KGFyYzQuQVJDNENvbnRyYWN0KToKICAgIGludGNfMSAvLyAwCiAgICByZXR1cm4KCm1haW5fdGVzdF90dXBsZV9yb3V0ZUA0OgogICAgLy8gbmFtZWRfdHVwbGVzL2NvbnRyYWN0LnB5OjMxCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBuYW1lZF90dXBsZXMvY29udHJhY3QucHk6MTUKICAgIC8vIGNsYXNzIE5hbWVkVHVwbGVzQ29udHJhY3QoYXJjNC5BUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50NjQKICAgIGRpZyAxCiAgICBleHRyYWN0IDggNjQgLy8gb24gZXJyb3I6IEluZGV4IGFjY2VzcyBpcyBvdXQgb2YgYm91bmRzCiAgICBkaWcgMgogICAgcHVzaGludCA3MiAvLyA3MgogICAgZXh0cmFjdF91aW50MTYKICAgIGRpZyAzCiAgICBwdXNoaW50IDc0IC8vIDc0CiAgICBleHRyYWN0X3VpbnQxNgogICAgZGlnIDQKICAgIHVuY292ZXIgMgogICAgZGlnIDIKICAgIHN1YnN0cmluZzMKICAgIGV4dHJhY3QgMiAwCiAgICBkaWcgNAogICAgbGVuCiAgICB1bmNvdmVyIDUKICAgIHVuY292ZXIgMwogICAgdW5jb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBleHRyYWN0IDIgMAogICAgLy8gbmFtZWRfdHVwbGVzL2NvbnRyYWN0LnB5OjMxCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgY2FsbHN1YiB0ZXN0X3R1cGxlCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2J1aWxkX3R1cGxlX3JvdXRlQDM6CiAgICAvLyBuYW1lZF90dXBsZXMvY29udHJhY3QucHk6MTYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIG5hbWVkX3R1cGxlcy9jb250cmFjdC5weToxNQogICAgLy8gY2xhc3MgTmFtZWRUdXBsZXNDb250cmFjdChhcmM0LkFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgNAogICAgZXh0cmFjdCAyIDAKICAgIC8vIG5hbWVkX3R1cGxlcy9jb250cmFjdC5weToxNgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHVuY292ZXIgMwogICAgaXRvYgogICAgZGlnIDMKICAgIGxlbgogICAgaW50Y18yIC8vIDY0CiAgICA8PQogICAgYXNzZXJ0IC8vIG92ZXJmbG93CiAgICBpbnRjXzIgLy8gNjQKICAgIGJ6ZXJvCiAgICB1bmNvdmVyIDQKICAgIGJ8CiAgICBkaWcgMwogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgdW5jb3ZlciA0CiAgICBjb25jYXQKICAgIGRpZyAzCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICB1bmNvdmVyIDQKICAgIGNvbmNhdAogICAgdW5jb3ZlciAzCiAgICB1bmNvdmVyIDMKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MDA0YwogICAgY29uY2F0CiAgICBkaWcgMgogICAgbGVuCiAgICBwdXNoaW50IDc2IC8vIDc2CiAgICArCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgY29uY2F0CiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYmFyZV9yb3V0aW5nQDc6CiAgICAvLyBuYW1lZF90dXBsZXMvY29udHJhY3QucHk6MTUKICAgIC8vIGNsYXNzIE5hbWVkVHVwbGVzQ29udHJhY3QoYXJjNC5BUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0X2Nhc2VzLm5hbWVkX3R1cGxlcy5jb250cmFjdC5OYW1lZFR1cGxlc0NvbnRyYWN0LnRlc3RfdHVwbGUodmFsdWUuYTogdWludDY0LCB2YWx1ZS5iOiBieXRlcywgdmFsdWUuYzogYnl0ZXMsIHZhbHVlLmQ6IGJ5dGVzKSAtPiB2b2lkOgp0ZXN0X3R1cGxlOgogICAgLy8gbmFtZWRfdHVwbGVzL2NvbnRyYWN0LnB5OjMxLTMyCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgLy8gZGVmIHRlc3RfdHVwbGUoc2VsZiwgdmFsdWU6IFRlc3RUdXBsZSkgLT4gTm9uZToKICAgIHByb3RvIDQgMAogICAgLy8gbmFtZWRfdHVwbGVzL2NvbnRyYWN0LnB5OjMzCiAgICAvLyBhc3NlcnQgdmFsdWUuYSA8IDEwMDAKICAgIGZyYW1lX2RpZyAtNAogICAgcHVzaGludCAxMDAwIC8vIDEwMDAKICAgIDwKICAgIGFzc2VydAogICAgLy8gbmFtZWRfdHVwbGVzL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBhc3NlcnQgdmFsdWUuYiA8IDIqKjY1CiAgICBmcmFtZV9kaWcgLTMKICAgIHB1c2hieXRlcyAweDAyMDAwMDAwMDAwMDAwMDAwMAogICAgYjwKICAgIGFzc2VydAogICAgLy8gbmFtZWRfdHVwbGVzL2NvbnRyYWN0LnB5OjM1CiAgICAvLyBhc3NlcnQgdmFsdWUuYy5ieXRlcy5sZW5ndGggPiAxCiAgICBmcmFtZV9kaWcgLTIKICAgIGxlbgogICAgaW50Y18wIC8vIDEKICAgID4KICAgIGFzc2VydAogICAgLy8gbmFtZWRfdHVwbGVzL2NvbnRyYWN0LnB5OjM2CiAgICAvLyBhc3NlcnQgdmFsdWUuZCA9PSBUeG4uc2VuZGVyLmJ5dGVzCiAgICBmcmFtZV9kaWcgLTEKICAgIHR4biBTZW5kZXIKICAgID09CiAgICBhc3NlcnQKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CiADAQBAMRtBALCCAgRFburOBG+fW/A2GgCOAgA6AAIjQzEZFEQxGEQ2GgFJI1tLAVcIQEsCgUhZSwOBSllLBE8CSwJSVwIASwQVTwVPA08CUlcCAIgAbiJDMRkURDEYRDYaARc2GgI2GgNXAgA2GgRXAgBPAxZLAxUkDkQkr08Eq0sDFRZXBgJPBFBLAxUWVwYCTwRQTwNPA1CAAgBMUEsCFYFMCBZXBgJQTwJQTFCABBUffHVMULAiQzEZQP9gMRgURCJDigQAi/yB6AcMRIv9gAkCAAAAAAAAAACkRIv+FSINRIv/MQASRIk=","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -162,6 +162,21 @@ export type MethodArgs<TSignature extends NamedTuplesContractSignatures> = Named
 export type MethodReturn<TSignature extends NamedTuplesContractSignatures> = NamedTuplesContractTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type NamedTuplesContractCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type NamedTuplesContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: NamedTuplesContractCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the NamedTuplesContract smart contract
@@ -195,6 +210,147 @@ export abstract class NamedTuplesContractParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the NamedTuplesContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class NamedTuplesContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `NamedTuplesContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new NamedTuplesContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new NamedTuplesContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the NamedTuplesContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: NamedTuplesContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new NamedTuplesContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NamedTuplesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NamedTuplesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NamedTuplesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new NamedTuplesContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the NamedTuplesContract smart contract
  */
