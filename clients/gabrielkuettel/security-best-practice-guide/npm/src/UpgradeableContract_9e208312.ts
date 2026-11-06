@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"UpgradeableContract","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"scheduleUpgrade","args":[{"type":"byte[]","name":"programHash"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"updateApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"cancelUpgrade","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"getVersion","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"isUpgradeScheduled","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":3,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"upgradeHash":{"keyType":"AVMString","valueType":"AVMBytes","key":"dWhhc2g="},"upgradeTimestamp":{"keyType":"AVMString","valueType":"AVMUint64","key":"dXRpbWU="},"upgradeReady":{"keyType":"AVMString","valueType":"AVMUint64","key":"dXJlYWR5"},"version":{"keyType":"AVMString","valueType":"AVMUint64","key":"dmVy"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[146,170,201],"errorMessage":"Admin only"},{"pc":[177],"errorMessage":"No upgrade scheduled"},{"pc":[45],"errorMessage":"OnCompletion must be NoOp"},{"pc":[109],"errorMessage":"OnCompletion must be UpdateApplication && can only call when not creating"},{"pc":[190],"errorMessage":"Timelock not expired"},{"pc":[174,183,210,221],"errorMessage":"check GlobalState exists"},{"pc":[129],"errorMessage":"invalid array length header"},{"pc":[137],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"UpgradeableContract","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"scheduleUpgrade","args":[{"type":"byte[]","name":"programHash"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"updateApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"cancelUpgrade","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"getVersion","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"isUpgradeScheduled","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":3,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"upgradeHash":{"keyType":"AVMString","valueType":"AVMBytes","key":"dWhhc2g="},"upgradeTimestamp":{"keyType":"AVMString","valueType":"AVMUint64","key":"dXRpbWU="},"upgradeReady":{"keyType":"AVMString","valueType":"AVMUint64","key":"dXJlYWR5"},"version":{"keyType":"AVMString","valueType":"AVMUint64","key":"dmVy"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[146,170,201],"errorMessage":"Admin only"},{"pc":[177],"errorMessage":"No upgrade scheduled"},{"pc":[45],"errorMessage":"OnCompletion must be NoOp"},{"pc":[109],"errorMessage":"OnCompletion must be UpdateApplication && can only call when not creating"},{"pc":[190],"errorMessage":"Timelock not expired"},{"pc":[174,183,210,221],"errorMessage":"check GlobalState exists"},{"pc":[129],"errorMessage":"invalid array length header"},{"pc":[137],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICBieXRlY2Jsb2NrICJ1cmVhZHkiICJ1dGltZSIgInZlciIgMHgxNTFmN2M3NQogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6NgogICAgLy8gZXhwb3J0IGNsYXNzIFVwZ3JhZGVhYmxlQ29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoYnl0ZXMgMHg0NmY3NjUzMyAvLyBtZXRob2QgInVwZGF0ZUFwcGxpY2F0aW9uKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl91cGRhdGVBcHBsaWNhdGlvbl9yb3V0ZUAyCgptYWluX3N3aXRjaF9jYXNlX25leHRAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjYKICAgIC8vIGV4cG9ydCBjbGFzcyBVcGdyYWRlYWJsZUNvbnRyYWN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDEwCiAgICBwdXNoYnl0ZXNzIDB4Y2VkOTMyNzYgMHgzNjYwMjU3NyAweGJiZTkyOGI3IDB4NTQ4OGU3NzMgLy8gbWV0aG9kICJzY2hlZHVsZVVwZ3JhZGUoYnl0ZVtdKXZvaWQiLCBtZXRob2QgImNhbmNlbFVwZ3JhZGUoKXZvaWQiLCBtZXRob2QgImdldFZlcnNpb24oKXVpbnQ2NCIsIG1ldGhvZCAiaXNVcGdyYWRlU2NoZWR1bGVkKCl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBzY2hlZHVsZVVwZ3JhZGUgY2FuY2VsVXBncmFkZSBnZXRWZXJzaW9uIGlzVXBncmFkZVNjaGVkdWxlZAogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDEwOgogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6NgogICAgLy8gZXhwb3J0IGNsYXNzIFVwZ3JhZGVhYmxlQ29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlQXBwbGljYXRpb24KICAgIGVycgoKbWFpbl91cGRhdGVBcHBsaWNhdGlvbl9yb3V0ZUAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6MjcKICAgIC8vIHB1YmxpYyB1cGRhdGVBcHBsaWNhdGlvbigpOiB2b2lkIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIHB1c2hpbnQgNCAvLyBVcGRhdGVBcHBsaWNhdGlvbgogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIFVwZGF0ZUFwcGxpY2F0aW9uICYmIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGIgdXBkYXRlQXBwbGljYXRpb24KCgovLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czo6VXBncmFkZWFibGVDb250cmFjdC5jcmVhdGVBcHBsaWNhdGlvbltyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZUFwcGxpY2F0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6OQogICAgLy8gdXBncmFkZVJlYWR5ID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGtleTogJ3VyZWFkeScgfSkKICAgIGJ5dGVjXzAgLy8gInVyZWFkeSIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjEzCiAgICAvLyB0aGlzLnVwZ3JhZGVSZWFkeS52YWx1ZSA9IDAKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6OAogICAgLy8gdXBncmFkZVRpbWVzdGFtcCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICd1dGltZScgfSkKICAgIGJ5dGVjXzEgLy8gInV0aW1lIgogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6MTQKICAgIC8vIHRoaXMudXBncmFkZVRpbWVzdGFtcC52YWx1ZSA9IDAKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6MTAKICAgIC8vIHZlcnNpb24gPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAndmVyJyB9KQogICAgYnl0ZWNfMiAvLyAidmVyIgogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6MTUKICAgIC8vIHRoaXMudmVyc2lvbi52YWx1ZSA9IDEKICAgIGludGNfMSAvLyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6MTIKICAgIC8vIHB1YmxpYyBjcmVhdGVBcHBsaWNhdGlvbigpOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czo6VXBncmFkZWFibGVDb250cmFjdC5zY2hlZHVsZVVwZ3JhZGVbcm91dGluZ10oKSAtPiB2b2lkOgpzY2hlZHVsZVVwZ3JhZGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czoxOQogICAgLy8gcHVibGljIHNjaGVkdWxlVXBncmFkZShwcm9ncmFtSGFzaDogYnl0ZXMpOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czoyMAogICAgLy8gYXNzZXJ0KFR4bi5zZW5kZXIgPT09IEdsb2JhbC5jcmVhdG9yQWRkcmVzcywgJ0FkbWluIG9ubHknKQogICAgdHhuIFNlbmRlcgogICAgZ2xvYmFsIENyZWF0b3JBZGRyZXNzCiAgICA9PQogICAgYXNzZXJ0IC8vIEFkbWluIG9ubHkKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjcKICAgIC8vIHVwZ3JhZGVIYXNoID0gR2xvYmFsU3RhdGU8Ynl0ZXM+KHsga2V5OiAndWhhc2gnIH0pCiAgICBwdXNoYnl0ZXMgInVoYXNoIgogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6MjEKICAgIC8vIHRoaXMudXBncmFkZUhhc2gudmFsdWUgPSBwcm9ncmFtSGFzaAogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjgKICAgIC8vIHVwZ3JhZGVUaW1lc3RhbXAgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAndXRpbWUnIH0pCiAgICBieXRlY18xIC8vICJ1dGltZSIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjIyCiAgICAvLyB0aGlzLnVwZ3JhZGVUaW1lc3RhbXAudmFsdWUgPSBHbG9iYWwubGF0ZXN0VGltZXN0YW1wCiAgICBnbG9iYWwgTGF0ZXN0VGltZXN0YW1wCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6OQogICAgLy8gdXBncmFkZVJlYWR5ID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGtleTogJ3VyZWFkeScgfSkKICAgIGJ5dGVjXzAgLy8gInVyZWFkeSIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjIzCiAgICAvLyB0aGlzLnVwZ3JhZGVSZWFkeS52YWx1ZSA9IDEKICAgIGludGNfMSAvLyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6MTkKICAgIC8vIHB1YmxpYyBzY2hlZHVsZVVwZ3JhZGUocHJvZ3JhbUhhc2g6IGJ5dGVzKTogdm9pZCB7CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6OlVwZ3JhZGVhYmxlQ29udHJhY3QudXBkYXRlQXBwbGljYXRpb25bcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGVBcHBsaWNhdGlvbjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjI4CiAgICAvLyBhc3NlcnQoVHhuLnNlbmRlciA9PT0gR2xvYmFsLmNyZWF0b3JBZGRyZXNzLCAnQWRtaW4gb25seScpCiAgICB0eG4gU2VuZGVyCiAgICBnbG9iYWwgQ3JlYXRvckFkZHJlc3MKICAgID09CiAgICBhc3NlcnQgLy8gQWRtaW4gb25seQogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6MjkKICAgIC8vIGFzc2VydCh0aGlzLnVwZ3JhZGVSZWFkeS52YWx1ZSA9PT0gVWludDY0KDEpLCAnTm8gdXBncmFkZSBzY2hlZHVsZWQnKQogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjkKICAgIC8vIHVwZ3JhZGVSZWFkeSA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICd1cmVhZHknIH0pCiAgICBieXRlY18wIC8vICJ1cmVhZHkiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czoyOQogICAgLy8gYXNzZXJ0KHRoaXMudXBncmFkZVJlYWR5LnZhbHVlID09PSBVaW50NjQoMSksICdObyB1cGdyYWRlIHNjaGVkdWxlZCcpCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgaW50Y18xIC8vIDEKICAgID09CiAgICBhc3NlcnQgLy8gTm8gdXBncmFkZSBzY2hlZHVsZWQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjMyCiAgICAvLyBjb25zdCBlbGFwc2VkOiB1aW50NjQgPSBHbG9iYWwubGF0ZXN0VGltZXN0YW1wIC0gdGhpcy51cGdyYWRlVGltZXN0YW1wLnZhbHVlCiAgICBnbG9iYWwgTGF0ZXN0VGltZXN0YW1wCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6OAogICAgLy8gdXBncmFkZVRpbWVzdGFtcCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICd1dGltZScgfSkKICAgIGJ5dGVjXzEgLy8gInV0aW1lIgogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6MzIKICAgIC8vIGNvbnN0IGVsYXBzZWQ6IHVpbnQ2NCA9IEdsb2JhbC5sYXRlc3RUaW1lc3RhbXAgLSB0aGlzLnVwZ3JhZGVUaW1lc3RhbXAudmFsdWUKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAtCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czozMwogICAgLy8gYXNzZXJ0KGVsYXBzZWQgPj0gVVBHUkFERV9ERUxBWSwgJ1RpbWVsb2NrIG5vdCBleHBpcmVkJykKICAgIHB1c2hpbnQgODY0MDAgLy8gODY0MDAKICAgID49CiAgICBhc3NlcnQgLy8gVGltZWxvY2sgbm90IGV4cGlyZWQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjkKICAgIC8vIHVwZ3JhZGVSZWFkeSA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICd1cmVhZHknIH0pCiAgICBieXRlY18wIC8vICJ1cmVhZHkiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czozNgogICAgLy8gdGhpcy51cGdyYWRlUmVhZHkudmFsdWUgPSAwCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjI3CiAgICAvLyBwdWJsaWMgdXBkYXRlQXBwbGljYXRpb24oKTogdm9pZCB7CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6OlVwZ3JhZGVhYmxlQ29udHJhY3QuY2FuY2VsVXBncmFkZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNhbmNlbFVwZ3JhZGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czo0MQogICAgLy8gYXNzZXJ0KFR4bi5zZW5kZXIgPT09IEdsb2JhbC5jcmVhdG9yQWRkcmVzcywgJ0FkbWluIG9ubHknKQogICAgdHhuIFNlbmRlcgogICAgZ2xvYmFsIENyZWF0b3JBZGRyZXNzCiAgICA9PQogICAgYXNzZXJ0IC8vIEFkbWluIG9ubHkKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjkKICAgIC8vIHVwZ3JhZGVSZWFkeSA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICd1cmVhZHknIH0pCiAgICBieXRlY18wIC8vICJ1cmVhZHkiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czo0MgogICAgLy8gdGhpcy51cGdyYWRlUmVhZHkudmFsdWUgPSAwCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjQwCiAgICAvLyBwdWJsaWMgY2FuY2VsVXBncmFkZSgpOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czo6VXBncmFkZWFibGVDb250cmFjdC5nZXRWZXJzaW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0VmVyc2lvbjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjQ2CiAgICAvLyByZXR1cm4gdGhpcy52ZXJzaW9uLnZhbHVlCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6MTAKICAgIC8vIHZlcnNpb24gPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAndmVyJyB9KQogICAgYnl0ZWNfMiAvLyAidmVyIgogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6NDYKICAgIC8vIHJldHVybiB0aGlzLnZlcnNpb24udmFsdWUKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czo0NQogICAgLy8gcHVibGljIGdldFZlcnNpb24oKTogdWludDY0IHsKICAgIGl0b2IKICAgIGJ5dGVjXzMgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czo6VXBncmFkZWFibGVDb250cmFjdC5pc1VwZ3JhZGVTY2hlZHVsZWRbcm91dGluZ10oKSAtPiB2b2lkOgppc1VwZ3JhZGVTY2hlZHVsZWQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czo1MAogICAgLy8gcmV0dXJuIHRoaXMudXBncmFkZVJlYWR5LnZhbHVlCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3VwZ3JhZGVhYmxlX2NvbnRyYWN0L2NvbnRyYWN0LmFsZ28udHM6OQogICAgLy8gdXBncmFkZVJlYWR5ID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGtleTogJ3VyZWFkeScgfSkKICAgIGJ5dGVjXzAgLy8gInVyZWFkeSIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91cGdyYWRlYWJsZV9jb250cmFjdC9jb250cmFjdC5hbGdvLnRzOjUwCiAgICAvLyByZXR1cm4gdGhpcy51cGdyYWRlUmVhZHkudmFsdWUKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXBncmFkZWFibGVfY29udHJhY3QvY29udHJhY3QuYWxnby50czo0OQogICAgLy8gcHVibGljIGlzVXBncmFkZVNjaGVkdWxlZCgpOiB1aW50NjQgewogICAgaXRvYgogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyACAAEmBAZ1cmVhZHkFdXRpbWUDdmVyBBUffHWABEb3ZTM2GgCOAQA7MRkURDEYQQAkggQEztkydgQ2YCV3BLvpKLcEVIjnczYaAI4EACYAbgB5AIQAgAS4RHs2NhoAjgEADQAxGYEEEjEYEERCADQoImcpImcqI2cjQzYaAUkiWYECCEsBFRJEVwIAMQAyCRJEgAV1aGFzaExnKTIHZygjZyNDMQAyCRJEIihlRCMSRDIHIillRAmBgKMFD0QoImcjQzEAMgkSRCgiZyNDIiplRBYrTFCwI0MiKGVEFitMULAjQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -191,11 +191,97 @@ export type MethodReturn<TSignature extends UpgradeableContractSignatures> = Upg
 export type GlobalKeysState = UpgradeableContractTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type UpgradeableContractCreateCallParams =
+  | Expand<CallParams<UpgradeableContractArgs['obj']['createApplication()void'] | UpgradeableContractArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<UpgradeableContractArgs['obj']['createApplication()void'] | UpgradeableContractArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type UpgradeableContractUpdateCallParams =
+  | Expand<CallParams<UpgradeableContractArgs['obj']['updateApplication()void'] | UpgradeableContractArgs['tuple']['updateApplication()void']> & {method: 'updateApplication'}>
+  | Expand<CallParams<UpgradeableContractArgs['obj']['updateApplication()void'] | UpgradeableContractArgs['tuple']['updateApplication()void']> & {method: 'updateApplication()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type UpgradeableContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: UpgradeableContractCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: UpgradeableContractUpdateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the UpgradeableContract smart contract
  */
 export abstract class UpgradeableContractParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends UpgradeableContractCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return UpgradeableContractParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the UpgradeableContract smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<UpgradeableContractArgs['obj']['createApplication()void'] | UpgradeableContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends UpgradeableContractUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'updateApplication':
+          case 'updateApplication()void':
+            return UpgradeableContractParamsFactory.update.updateApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the UpgradeableContract smart contract using the updateApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateApplication(params: CallParams<UpgradeableContractArgs['obj']['updateApplication()void'] | UpgradeableContractArgs['tuple']['updateApplication()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'updateApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the scheduleUpgrade(byte[])void ABI method
    *
@@ -250,6 +336,164 @@ export abstract class UpgradeableContractParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the UpgradeableContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class UpgradeableContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `UpgradeableContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new UpgradeableContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new UpgradeableContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the UpgradeableContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: UpgradeableContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? UpgradeableContractParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (UpgradeableContractCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? UpgradeableContractParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (UpgradeableContractUpdateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new UpgradeableContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the UpgradeableContract smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<UpgradeableContractArgs['obj']['createApplication()void'] | UpgradeableContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(UpgradeableContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the UpgradeableContract smart contract using the updateApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateApplication: (params: CallParams<UpgradeableContractArgs['obj']['updateApplication()void'] | UpgradeableContractArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(UpgradeableContractParamsFactory.update.updateApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the UpgradeableContract smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<UpgradeableContractArgs['obj']['createApplication()void'] | UpgradeableContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(UpgradeableContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the UpgradeableContract smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<UpgradeableContractArgs['obj']['createApplication()void'] | UpgradeableContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(UpgradeableContractParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | UpgradeableContractReturns['createApplication()void']) }, appClient: new UpgradeableContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the UpgradeableContract smart contract
  */
@@ -338,6 +582,22 @@ export class UpgradeableContractClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the UpgradeableContract smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateApplication: (params: CallParams<UpgradeableContractArgs['obj']['updateApplication()void'] | UpgradeableContractArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(UpgradeableContractParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the UpgradeableContract smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -394,6 +654,22 @@ export class UpgradeableContractClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the UpgradeableContract smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateApplication: (params: CallParams<UpgradeableContractArgs['obj']['updateApplication()void'] | UpgradeableContractArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(UpgradeableContractParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the UpgradeableContract smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -449,6 +725,23 @@ export class UpgradeableContractClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the UpgradeableContract smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateApplication: async (params: CallParams<UpgradeableContractArgs['obj']['updateApplication()void'] | UpgradeableContractArgs['tuple']['updateApplication()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(UpgradeableContractParamsFactory.update.updateApplication(params))
+        return {...result, return: result.return as unknown as (undefined | UpgradeableContractReturns['updateApplication()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the UpgradeableContract smart contract.
      *
@@ -592,6 +885,15 @@ export class UpgradeableContractClient {
         resultMappers.push((v) => client.decodeReturnValue('isUpgradeScheduled()uint64', v))
         return this
       },
+      get update() {
+        return {
+          updateApplication: (params: CallParams<UpgradeableContractArgs['obj']['updateApplication()void'] | UpgradeableContractArgs['tuple']['updateApplication()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the UpgradeableContract contract
        */
@@ -662,6 +964,20 @@ export type UpgradeableContractComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   isUpgradeScheduled(params?: CallParams<UpgradeableContractArgs['obj']['isUpgradeScheduled()uint64'] | UpgradeableContractArgs['tuple']['isUpgradeScheduled()uint64']>): UpgradeableContractComposer<[...TReturns, UpgradeableContractReturns['isUpgradeScheduled()uint64'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the UpgradeableContract smart contract using the updateApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateApplication(params?: CallParams<UpgradeableContractArgs['obj']['updateApplication()void'] | UpgradeableContractArgs['tuple']['updateApplication()void']>): UpgradeableContractComposer<[...TReturns, UpgradeableContractReturns['updateApplication()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the UpgradeableContract smart contract.

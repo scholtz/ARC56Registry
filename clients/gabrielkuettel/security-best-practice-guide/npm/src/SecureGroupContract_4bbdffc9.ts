@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"SecureGroupContract","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"buyCredit","args":[{"type":"pay","name":"payment"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"totalCredits":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y3JlZGl0cw=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[81],"errorMessage":"Insufficient payment"},{"pc":[73],"errorMessage":"Must pay app"},{"pc":[18],"errorMessage":"OnCompletion must be NoOp"},{"pc":[85],"errorMessage":"check GlobalState exists"},{"pc":[66],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"SecureGroupContract","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"buyCredit","args":[{"type":"pay","name":"payment"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"totalCredits":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y3JlZGl0cw=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[81],"errorMessage":"Insufficient payment"},{"pc":[73],"errorMessage":"Must pay app"},{"pc":[18],"errorMessage":"OnCompletion must be NoOp"},{"pc":[85],"errorMessage":"check GlobalState exists"},{"pc":[66],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwCiAgICBieXRlY2Jsb2NrICJjcmVkaXRzIgogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjM0CiAgICAvLyBleHBvcnQgY2xhc3MgU2VjdXJlR3JvdXBDb250cmFjdCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEA1CiAgICBwdXNoYnl0ZXMgMHhlZTc1NTFkNyAvLyBtZXRob2QgImJ1eUNyZWRpdChwYXkpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGJ1eUNyZWRpdAogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6MzQKICAgIC8vIGV4cG9ydCBjbGFzcyBTZWN1cmVHcm91cENvbnRyYWN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fY3JlYXRlQXBwbGljYXRpb25fcm91dGVANgogICAgZXJyCgptYWluX2NyZWF0ZUFwcGxpY2F0aW9uX3JvdXRlQDY6CiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6MzUKICAgIC8vIHB1YmxpYyB0b3RhbENyZWRpdHMgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAiY3JlZGl0cyIgfSk7CiAgICBieXRlY18wIC8vICJjcmVkaXRzIgogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjM4CiAgICAvLyB0aGlzLnRvdGFsQ3JlZGl0cy52YWx1ZSA9IDA7CiAgICBpbnRjXzEgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czozNwogICAgLy8gcHVibGljIGNyZWF0ZUFwcGxpY2F0aW9uKCk6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czo6U2VjdXJlR3JvdXBDb250cmFjdC5idXlDcmVkaXRbcm91dGluZ10oKSAtPiB2b2lkOgpidXlDcmVkaXQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6NDEKICAgIC8vIHB1YmxpYyBidXlDcmVkaXQocGF5bWVudDogZ3R4bi5QYXltZW50VHhuKTogdm9pZCB7CiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18wIC8vIDEKICAgIC0KICAgIGR1cAogICAgZ3R4bnMgVHlwZUVudW0KICAgIGludGNfMCAvLyBwYXkKICAgID09CiAgICBhc3NlcnQgLy8gdHJhbnNhY3Rpb24gdHlwZSBpcyBwYXkKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czo0MwogICAgLy8gcGF5bWVudC5yZWNlaXZlciA9PT0gR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MsCiAgICBkdXAKICAgIGd0eG5zIFJlY2VpdmVyCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgPT0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czo0Mi00NQogICAgLy8gYXNzZXJ0KAogICAgLy8gICBwYXltZW50LnJlY2VpdmVyID09PSBHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcywKICAgIC8vICAgIk11c3QgcGF5IGFwcCIsCiAgICAvLyApOwogICAgYXNzZXJ0IC8vIE11c3QgcGF5IGFwcAogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjQ2CiAgICAvLyBhc3NlcnQocGF5bWVudC5hbW91bnQgPj0gVWludDY0KDFfMDAwXzAwMCksICJJbnN1ZmZpY2llbnQgcGF5bWVudCIpOwogICAgZ3R4bnMgQW1vdW50CiAgICBwdXNoaW50IDEwMDAwMDAgLy8gMTAwMDAwMAogICAgPj0KICAgIGFzc2VydCAvLyBJbnN1ZmZpY2llbnQgcGF5bWVudAogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjQ4CiAgICAvLyB0aGlzLnRvdGFsQ3JlZGl0cy52YWx1ZSA9IHRoaXMudG90YWxDcmVkaXRzLnZhbHVlICsgVWludDY0KDEpOwogICAgaW50Y18xIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czozNQogICAgLy8gcHVibGljIHRvdGFsQ3JlZGl0cyA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICJjcmVkaXRzIiB9KTsKICAgIGJ5dGVjXzAgLy8gImNyZWRpdHMiCiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6NDgKICAgIC8vIHRoaXMudG90YWxDcmVkaXRzLnZhbHVlID0gdGhpcy50b3RhbENyZWRpdHMudmFsdWUgKyBVaW50NjQoMSk7CiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgaW50Y18wIC8vIDEKICAgICsKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czozNQogICAgLy8gcHVibGljIHRvdGFsQ3JlZGl0cyA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICJjcmVkaXRzIiB9KTsKICAgIGJ5dGVjXzAgLy8gImNyZWRpdHMiCiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6NDgKICAgIC8vIHRoaXMudG90YWxDcmVkaXRzLnZhbHVlID0gdGhpcy50b3RhbENyZWRpdHMudmFsdWUgKyBVaW50NjQoMSk7CiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjQxCiAgICAvLyBwdWJsaWMgYnV5Q3JlZGl0KHBheW1lbnQ6IGd0eG4uUGF5bWVudFR4bik6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyACAQAmAQdjcmVkaXRzMRkURDEYQQAOgATudVHXNhoAjgEAFACABLhEezY2GgCOAQABACgjZyJDMRYiCUk4ECISREk4BzIKEkQ4CIHAhD0PRCMoZUQiCChMZyJD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -152,11 +152,57 @@ export type MethodReturn<TSignature extends SecureGroupContractSignatures> = Sec
 export type GlobalKeysState = SecureGroupContractTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type SecureGroupContractCreateCallParams =
+  | Expand<CallParams<SecureGroupContractArgs['obj']['createApplication()void'] | SecureGroupContractArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<SecureGroupContractArgs['obj']['createApplication()void'] | SecureGroupContractArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type SecureGroupContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: SecureGroupContractCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the SecureGroupContract smart contract
  */
 export abstract class SecureGroupContractParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends SecureGroupContractCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return SecureGroupContractParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the SecureGroupContract smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<SecureGroupContractArgs['obj']['createApplication()void'] | SecureGroupContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the buyCredit(pay)void ABI method
    *
@@ -172,6 +218,148 @@ export abstract class SecureGroupContractParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the SecureGroupContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class SecureGroupContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `SecureGroupContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new SecureGroupContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new SecureGroupContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the SecureGroupContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: SecureGroupContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? SecureGroupContractParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (SecureGroupContractCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new SecureGroupContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SecureGroupContract smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<SecureGroupContractArgs['obj']['createApplication()void'] | SecureGroupContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(SecureGroupContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SecureGroupContract smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<SecureGroupContractArgs['obj']['createApplication()void'] | SecureGroupContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(SecureGroupContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SecureGroupContract smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<SecureGroupContractArgs['obj']['createApplication()void'] | SecureGroupContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(SecureGroupContractParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | SecureGroupContractReturns['createApplication()void']) }, appClient: new SecureGroupContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the SecureGroupContract smart contract
  */

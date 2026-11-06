@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"VulnerableGroupContract","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"buyCredit","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"totalCredits":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y3JlZGl0cw=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[69],"errorMessage":"Must pay app"},{"pc":[18],"errorMessage":"OnCompletion must be NoOp"},{"pc":[73],"errorMessage":"check GlobalState exists"},{"pc":[62],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"VulnerableGroupContract","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"buyCredit","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"totalCredits":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y3JlZGl0cw=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[69],"errorMessage":"Must pay app"},{"pc":[18],"errorMessage":"OnCompletion must be NoOp"},{"pc":[73],"errorMessage":"check GlobalState exists"},{"pc":[62],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxCiAgICBieXRlY2Jsb2NrICJjcmVkaXRzIgogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjEzCiAgICAvLyBleHBvcnQgY2xhc3MgVnVsbmVyYWJsZUdyb3VwQ29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BANQogICAgcHVzaGJ5dGVzIDB4NTdlNTQ1NmYgLy8gbWV0aG9kICJidXlDcmVkaXQoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBidXlDcmVkaXQKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEA1OgogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjEzCiAgICAvLyBleHBvcnQgY2xhc3MgVnVsbmVyYWJsZUdyb3VwQ29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVBcHBsaWNhdGlvbl9yb3V0ZUA2CiAgICBlcnIKCm1haW5fY3JlYXRlQXBwbGljYXRpb25fcm91dGVANjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czoxNAogICAgLy8gcHVibGljIHRvdGFsQ3JlZGl0cyA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICJjcmVkaXRzIiB9KTsKICAgIGJ5dGVjXzAgLy8gImNyZWRpdHMiCiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6MTcKICAgIC8vIHRoaXMudG90YWxDcmVkaXRzLnZhbHVlID0gMDsKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjE2CiAgICAvLyBwdWJsaWMgY3JlYXRlQXBwbGljYXRpb24oKTogdm9pZCB7CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjpWdWxuZXJhYmxlR3JvdXBDb250cmFjdC5idXlDcmVkaXRbcm91dGluZ10oKSAtPiB2b2lkOgpidXlDcmVkaXQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6MjEKICAgIC8vIGNvbnN0IHBheW1lbnQgPSBndHhuLlBheW1lbnRUeG4oVWludDY0KDApKTsgLy8gQWx3YXlzIHJlYWRzIGluZGV4IDAKICAgIGludGNfMCAvLyAwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18xIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czoyMwogICAgLy8gcGF5bWVudC5yZWNlaXZlciA9PT0gR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MsCiAgICBndHhucyBSZWNlaXZlcgogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgID09CiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6MjItMjUKICAgIC8vIGFzc2VydCgKICAgIC8vICAgcGF5bWVudC5yZWNlaXZlciA9PT0gR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MsCiAgICAvLyAgICJNdXN0IHBheSBhcHAiLAogICAgLy8gKTsKICAgIGFzc2VydCAvLyBNdXN0IHBheSBhcHAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czoyOAogICAgLy8gdGhpcy50b3RhbENyZWRpdHMudmFsdWUgPSB0aGlzLnRvdGFsQ3JlZGl0cy52YWx1ZSArIFVpbnQ2NCgxKTsKICAgIGludGNfMCAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6MTQKICAgIC8vIHB1YmxpYyB0b3RhbENyZWRpdHMgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAiY3JlZGl0cyIgfSk7CiAgICBieXRlY18wIC8vICJjcmVkaXRzIgogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjI4CiAgICAvLyB0aGlzLnRvdGFsQ3JlZGl0cy52YWx1ZSA9IHRoaXMudG90YWxDcmVkaXRzLnZhbHVlICsgVWludDY0KDEpOwogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIGludGNfMSAvLyAxCiAgICArCiAgICAvLyBzbWFydF9jb250cmFjdHMvNy1ncm91cC10cmFuc2FjdGlvbi1zZWN1cml0eS9ncm91cC12YWxpZGF0aW9uLmFsZ28udHM6MTQKICAgIC8vIHB1YmxpYyB0b3RhbENyZWRpdHMgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAiY3JlZGl0cyIgfSk7CiAgICBieXRlY18wIC8vICJjcmVkaXRzIgogICAgLy8gc21hcnRfY29udHJhY3RzLzctZ3JvdXAtdHJhbnNhY3Rpb24tc2VjdXJpdHkvZ3JvdXAtdmFsaWRhdGlvbi5hbGdvLnRzOjI4CiAgICAvLyB0aGlzLnRvdGFsQ3JlZGl0cy52YWx1ZSA9IHRoaXMudG90YWxDcmVkaXRzLnZhbHVlICsgVWludDY0KDEpOwogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy83LWdyb3VwLXRyYW5zYWN0aW9uLXNlY3VyaXR5L2dyb3VwLXZhbGlkYXRpb24uYWxnby50czoyMAogICAgLy8gcHVibGljIGJ1eUNyZWRpdCgpOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyACAAEmAQdjcmVkaXRzMRkURDEYQQAOgARX5UVvNhoAjgEAFACABLhEezY2GgCOAQABACgiZyNDIjgQIxJEIjgHMgoSRCIoZUQjCChMZyND","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -150,11 +150,57 @@ export type MethodReturn<TSignature extends VulnerableGroupContractSignatures> =
 export type GlobalKeysState = VulnerableGroupContractTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type VulnerableGroupContractCreateCallParams =
+  | Expand<CallParams<VulnerableGroupContractArgs['obj']['createApplication()void'] | VulnerableGroupContractArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<VulnerableGroupContractArgs['obj']['createApplication()void'] | VulnerableGroupContractArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type VulnerableGroupContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: VulnerableGroupContractCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the VulnerableGroupContract smart contract
  */
 export abstract class VulnerableGroupContractParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends VulnerableGroupContractCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return VulnerableGroupContractParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the VulnerableGroupContract smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<VulnerableGroupContractArgs['obj']['createApplication()void'] | VulnerableGroupContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the buyCredit()void ABI method
    *
@@ -170,6 +216,148 @@ export abstract class VulnerableGroupContractParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the VulnerableGroupContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class VulnerableGroupContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `VulnerableGroupContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new VulnerableGroupContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new VulnerableGroupContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the VulnerableGroupContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: VulnerableGroupContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? VulnerableGroupContractParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (VulnerableGroupContractCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new VulnerableGroupContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the VulnerableGroupContract smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<VulnerableGroupContractArgs['obj']['createApplication()void'] | VulnerableGroupContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(VulnerableGroupContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the VulnerableGroupContract smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<VulnerableGroupContractArgs['obj']['createApplication()void'] | VulnerableGroupContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(VulnerableGroupContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the VulnerableGroupContract smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<VulnerableGroupContractArgs['obj']['createApplication()void'] | VulnerableGroupContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(VulnerableGroupContractParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | VulnerableGroupContractReturns['createApplication()void']) }, appClient: new VulnerableGroupContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the VulnerableGroupContract smart contract
  */

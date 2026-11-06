@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"RoleBasedContract","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"grantRole","args":[{"type":"byte[]","name":"role"},{"type":"address","name":"account"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"revokeRole","args":[{"type":"byte[]","name":"role"},{"type":"address","name":"account"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"performOperation","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"updateApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"deleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"roles":{"keyType":"AVMBytes","valueType":"uint64","prefix":"cm9sZQ=="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[248],"errorMessage":"Missing required role"},{"pc":[103],"errorMessage":"OnCompletion must be DeleteApplication && can only call when not creating"},{"pc":[44],"errorMessage":"OnCompletion must be NoOp"},{"pc":[115],"errorMessage":"OnCompletion must be UpdateApplication && can only call when not creating"},{"pc":[124,161],"errorMessage":"invalid array length header"},{"pc":[131,168],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[142,179],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"RoleBasedContract","structs":{},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"grantRole","args":[{"type":"byte[]","name":"role"},{"type":"address","name":"account"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"revokeRole","args":[{"type":"byte[]","name":"role"},{"type":"address","name":"account"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"performOperation","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"updateApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"deleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"roles":{"keyType":"AVMBytes","valueType":"uint64","prefix":"cm9sZQ=="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[248],"errorMessage":"Missing required role"},{"pc":[103],"errorMessage":"OnCompletion must be DeleteApplication && can only call when not creating"},{"pc":[44],"errorMessage":"OnCompletion must be NoOp"},{"pc":[115],"errorMessage":"OnCompletion must be UpdateApplication && can only call when not creating"},{"pc":[124,161],"errorMessage":"invalid array length header"},{"pc":[131,168],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[142,179],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDIgMzIKICAgIGJ5dGVjYmxvY2sgImFkbWluIiAicm9sZSIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6NwogICAgLy8gZXhwb3J0IGNsYXNzIFJvbGVCYXNlZENvbnRyYWN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgcHVzaGJ5dGVzcyAweDQ2Zjc2NTMzIDB4MjQ4N2MzMmMgLy8gbWV0aG9kICJ1cGRhdGVBcHBsaWNhdGlvbigpdm9pZCIsIG1ldGhvZCAiZGVsZXRlQXBwbGljYXRpb24oKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3VwZGF0ZUFwcGxpY2F0aW9uX3JvdXRlQDIgbWFpbl9kZWxldGVBcHBsaWNhdGlvbl9yb3V0ZUAzCgptYWluX3N3aXRjaF9jYXNlX25leHRANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6NwogICAgLy8gZXhwb3J0IGNsYXNzIFJvbGVCYXNlZENvbnRyYWN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDEwCiAgICBwdXNoYnl0ZXNzIDB4ZGE3ZjBjZTQgMHhjMjJjNjE3NCAweGE5NGJlY2YxIC8vIG1ldGhvZCAiZ3JhbnRSb2xlKGJ5dGVbXSxhZGRyZXNzKXZvaWQiLCBtZXRob2QgInJldm9rZVJvbGUoYnl0ZVtdLGFkZHJlc3Mpdm9pZCIsIG1ldGhvZCAicGVyZm9ybU9wZXJhdGlvbigpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGdyYW50Um9sZSByZXZva2VSb2xlIHBlcmZvcm1PcGVyYXRpb24KICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEAxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6NwogICAgLy8gZXhwb3J0IGNsYXNzIFJvbGVCYXNlZENvbnRyYWN0IGV4dGVuZHMgQ29udHJhY3QgewogICAgcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fY3JlYXRlQXBwbGljYXRpb25fcm91dGVAMTEKICAgIGVycgoKbWFpbl9jcmVhdGVBcHBsaWNhdGlvbl9yb3V0ZUAxMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6MTEKICAgIC8vIHB1YmxpYyBjcmVhdGVBcHBsaWNhdGlvbigpOiB2b2lkIHsKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fZGVsZXRlQXBwbGljYXRpb25fcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6NTEKICAgIC8vIHB1YmxpYyBkZWxldGVBcHBsaWNhdGlvbigpOiB2b2lkIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIHB1c2hpbnQgNSAvLyBEZWxldGVBcHBsaWNhdGlvbgogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIERlbGV0ZUFwcGxpY2F0aW9uICYmIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGIgZGVsZXRlQXBwbGljYXRpb24KCm1haW5fdXBkYXRlQXBwbGljYXRpb25fcm91dGVAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6NDcKICAgIC8vIHB1YmxpYyB1cGRhdGVBcHBsaWNhdGlvbigpOiB2b2lkIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIHB1c2hpbnQgNCAvLyBVcGRhdGVBcHBsaWNhdGlvbgogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIFVwZGF0ZUFwcGxpY2F0aW9uICYmIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGIgdXBkYXRlQXBwbGljYXRpb24KCgovLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9yb2xlLWJhc2VkLWFjY2Vzcy5hbGdvLnRzOjpSb2xlQmFzZWRDb250cmFjdC5ncmFudFJvbGVbcm91dGluZ10oKSAtPiB2b2lkOgpncmFudFJvbGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9yb2xlLWJhc2VkLWFjY2Vzcy5hbGdvLnRzOjMwCiAgICAvLyBwdWJsaWMgZ3JhbnRSb2xlKHJvbGU6IGJ5dGVzLCBhY2NvdW50OiBBY2NvdW50KTogdm9pZCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9yb2xlLWJhc2VkLWFjY2Vzcy5hbGdvLnRzOjMxCiAgICAvLyB0aGlzLnJlcXVpcmVSb2xlKFJPTEVfQURNSU4pCiAgICBieXRlY18wIC8vICJhZG1pbiIKICAgIGNhbGxzdWIgcmVxdWlyZVJvbGUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6MzIKICAgIC8vIHRoaXMucm9sZXMocm9sZS5jb25jYXQoYWNjb3VudC5ieXRlcykpLnZhbHVlID0gVWludDY0KDEpCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6OQogICAgLy8gcHVibGljIHJvbGVzID0gQm94TWFwPGJ5dGVzLCB1aW50NjQ+KHsga2V5UHJlZml4OiAncm9sZScgfSkKICAgIGJ5dGVjXzEgLy8gInJvbGUiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6MzIKICAgIC8vIHRoaXMucm9sZXMocm9sZS5jb25jYXQoYWNjb3VudC5ieXRlcykpLnZhbHVlID0gVWludDY0KDEpCiAgICBpbnRjXzAgLy8gMQogICAgaXRvYgogICAgYm94X3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czozMAogICAgLy8gcHVibGljIGdyYW50Um9sZShyb2xlOiBieXRlcywgYWNjb3VudDogQWNjb3VudCk6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6OlJvbGVCYXNlZENvbnRyYWN0LnJldm9rZVJvbGVbcm91dGluZ10oKSAtPiB2b2lkOgpyZXZva2VSb2xlOgogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czozNQogICAgLy8gcHVibGljIHJldm9rZVJvbGUocm9sZTogYnl0ZXMsIGFjY291bnQ6IEFjY291bnQpOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18xIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18zIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6MzYKICAgIC8vIHRoaXMucmVxdWlyZVJvbGUoUk9MRV9BRE1JTikKICAgIGJ5dGVjXzAgLy8gImFkbWluIgogICAgY2FsbHN1YiByZXF1aXJlUm9sZQogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czozNwogICAgLy8gY29uc3Qga2V5ID0gcm9sZS5jb25jYXQoYWNjb3VudC5ieXRlcykKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czo5CiAgICAvLyBwdWJsaWMgcm9sZXMgPSBCb3hNYXA8Ynl0ZXMsIHVpbnQ2ND4oeyBrZXlQcmVmaXg6ICdyb2xlJyB9KQogICAgYnl0ZWNfMSAvLyAicm9sZSIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICAvLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9yb2xlLWJhc2VkLWFjY2Vzcy5hbGdvLnRzOjM4CiAgICAvLyBpZiAodGhpcy5yb2xlcyhrZXkpLmV4aXN0cykgewogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBieiByZXZva2VSb2xlX2FmdGVyX2lmX2Vsc2VAMwogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czozOQogICAgLy8gdGhpcy5yb2xlcyhrZXkpLmRlbGV0ZSgpCiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAoKcmV2b2tlUm9sZV9hZnRlcl9pZl9lbHNlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9yb2xlLWJhc2VkLWFjY2Vzcy5hbGdvLnRzOjM1CiAgICAvLyBwdWJsaWMgcmV2b2tlUm9sZShyb2xlOiBieXRlcywgYWNjb3VudDogQWNjb3VudCk6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6OlJvbGVCYXNlZENvbnRyYWN0LnBlcmZvcm1PcGVyYXRpb25bcm91dGluZ10oKSAtPiB2b2lkOgpwZXJmb3JtT3BlcmF0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czo0NAogICAgLy8gdGhpcy5yZXF1aXJlUm9sZShST0xFX09QRVJBVE9SKQogICAgcHVzaGJ5dGVzICJvcGVyYXRvciIKICAgIGNhbGxzdWIgcmVxdWlyZVJvbGUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6NDMKICAgIC8vIHB1YmxpYyBwZXJmb3JtT3BlcmF0aW9uKCk6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6OlJvbGVCYXNlZENvbnRyYWN0LnVwZGF0ZUFwcGxpY2F0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKdXBkYXRlQXBwbGljYXRpb246CiAgICAvLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9yb2xlLWJhc2VkLWFjY2Vzcy5hbGdvLnRzOjQ4CiAgICAvLyB0aGlzLnJlcXVpcmVSb2xlKFJPTEVfQURNSU4pCiAgICBieXRlY18wIC8vICJhZG1pbiIKICAgIGNhbGxzdWIgcmVxdWlyZVJvbGUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6NDcKICAgIC8vIHB1YmxpYyB1cGRhdGVBcHBsaWNhdGlvbigpOiB2b2lkIHsKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9yb2xlLWJhc2VkLWFjY2Vzcy5hbGdvLnRzOjpSb2xlQmFzZWRDb250cmFjdC5kZWxldGVBcHBsaWNhdGlvbltyb3V0aW5nXSgpIC0+IHZvaWQ6CmRlbGV0ZUFwcGxpY2F0aW9uOgogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czo1MgogICAgLy8gdGhpcy5yZXF1aXJlUm9sZShST0xFX0FETUlOKQogICAgYnl0ZWNfMCAvLyAiYWRtaW4iCiAgICBjYWxsc3ViIHJlcXVpcmVSb2xlCiAgICAvLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9yb2xlLWJhc2VkLWFjY2Vzcy5hbGdvLnRzOjUxCiAgICAvLyBwdWJsaWMgZGVsZXRlQXBwbGljYXRpb24oKTogdm9pZCB7CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czo6Um9sZUJhc2VkQ29udHJhY3QucmVxdWlyZVJvbGUocm9sZTogYnl0ZXMpIC0+IHZvaWQ6CnJlcXVpcmVSb2xlOgogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czoyNgogICAgLy8gcHJpdmF0ZSByZXF1aXJlUm9sZShyb2xlOiBieXRlcyk6IHZvaWQgewogICAgcHJvdG8gMSAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9yb2xlLWJhc2VkLWFjY2Vzcy5hbGdvLnRzOjI3CiAgICAvLyBhc3NlcnQodGhpcy5oYXNSb2xlKHJvbGUsIFR4bi5zZW5kZXIpLCAnTWlzc2luZyByZXF1aXJlZCByb2xlJykKICAgIHR4biBTZW5kZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6MTkKICAgIC8vIGlmIChyb2xlID09PSBST0xFX0FETUlOICYmIGFjY291bnQgPT09IEdsb2JhbC5jcmVhdG9yQWRkcmVzcykgewogICAgZnJhbWVfZGlnIC0xCiAgICBieXRlY18wIC8vICJhZG1pbiIKICAgID09CiAgICBieiByZXF1aXJlUm9sZV9hZnRlcl9pZl9lbHNlQDQKICAgIGZyYW1lX2RpZyAwCiAgICBnbG9iYWwgQ3JlYXRvckFkZHJlc3MKICAgID09CiAgICBieiByZXF1aXJlUm9sZV9hZnRlcl9pZl9lbHNlQDQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy8yLWFjY2Vzcy1jb250cm9sL3JvbGUtYmFzZWQtYWNjZXNzLmFsZ28udHM6MjAKICAgIC8vIHJldHVybiB0cnVlCiAgICBpbnRjXzAgLy8gMQoKcmVxdWlyZVJvbGVfYWZ0ZXJfaW5saW5lZF9zbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9yb2xlLWJhc2VkLWFjY2Vzcy5hbGdvLnRzOjpSb2xlQmFzZWRDb250cmFjdC5oYXNSb2xlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvMi1hY2Nlc3MtY29udHJvbC9yb2xlLWJhc2VkLWFjY2Vzcy5hbGdvLnRzOjI3CiAgICAvLyBhc3NlcnQodGhpcy5oYXNSb2xlKHJvbGUsIFR4bi5zZW5kZXIpLCAnTWlzc2luZyByZXF1aXJlZCByb2xlJykKICAgIGFzc2VydCAvLyBNaXNzaW5nIHJlcXVpcmVkIHJvbGUKICAgIHJldHN1YgoKcmVxdWlyZVJvbGVfYWZ0ZXJfaWZfZWxzZUA0OgogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czoyMgogICAgLy8gY29uc3Qga2V5ID0gcm9sZS5jb25jYXQoYWNjb3VudC5ieXRlcykKICAgIGZyYW1lX2RpZyAtMQogICAgZnJhbWVfZGlnIDAKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czo5CiAgICAvLyBwdWJsaWMgcm9sZXMgPSBCb3hNYXA8Ynl0ZXMsIHVpbnQ2ND4oeyBrZXlQcmVmaXg6ICdyb2xlJyB9KQogICAgYnl0ZWNfMSAvLyAicm9sZSIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czoyMwogICAgLy8gcmV0dXJuIHRoaXMucm9sZXMoa2V5KS5leGlzdHMKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgLy8gc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czoyNwogICAgLy8gYXNzZXJ0KHRoaXMuaGFzUm9sZShyb2xlLCBUeG4uc2VuZGVyKSwgJ01pc3NpbmcgcmVxdWlyZWQgcm9sZScpCiAgICBiIHJlcXVpcmVSb2xlX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzLzItYWNjZXNzLWNvbnRyb2wvcm9sZS1iYXNlZC1hY2Nlc3MuYWxnby50czo6Um9sZUJhc2VkQ29udHJhY3QuaGFzUm9sZUA1Cg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAQACICYCBWFkbWluBHJvbGWCAgRG92UzBCSHwyw2GgCOAgBCADYxGRREMRhBAB2CAwTafwzkBMIsYXQEqUvs8TYaAI4DACkATgB6AIAEuER7NjYaAI4BAAEAIkMxGYEFEjEYEERCAHIxGYEEEjEYEERCAGA2GgFJI1kkCEsBFRJEVwIANhoCSRUlEkQoiABQUClMUCIWvyJDNhoBSSNZJAhLARUSRFcCADYaAkkVJRJEKIgAK1ApTFBJvUUBQQADSbxIIkOACG9wZXJhdG9yiAAOIkMoiAAIIkMoiAACIkOKAQAxAIv/KBJBAAuLADIJEkEAAyJEiYv/iwBQKUxQvUUBQv/w","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -188,11 +188,137 @@ export type MethodReturn<TSignature extends RoleBasedContractSignatures> = RoleB
 export type BoxKeysState = RoleBasedContractTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type RoleBasedContractCreateCallParams =
+  | Expand<CallParams<RoleBasedContractArgs['obj']['createApplication()void'] | RoleBasedContractArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<RoleBasedContractArgs['obj']['createApplication()void'] | RoleBasedContractArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type RoleBasedContractUpdateCallParams =
+  | Expand<CallParams<RoleBasedContractArgs['obj']['updateApplication()void'] | RoleBasedContractArgs['tuple']['updateApplication()void']> & {method: 'updateApplication'}>
+  | Expand<CallParams<RoleBasedContractArgs['obj']['updateApplication()void'] | RoleBasedContractArgs['tuple']['updateApplication()void']> & {method: 'updateApplication()void'}>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type RoleBasedContractDeleteCallParams =
+  | Expand<CallParams<RoleBasedContractArgs['obj']['deleteApplication()void'] | RoleBasedContractArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication'}>
+  | Expand<CallParams<RoleBasedContractArgs['obj']['deleteApplication()void'] | RoleBasedContractArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type RoleBasedContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: RoleBasedContractCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: RoleBasedContractUpdateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: RoleBasedContractDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the RoleBasedContract smart contract
  */
 export abstract class RoleBasedContractParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends RoleBasedContractCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return RoleBasedContractParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the RoleBasedContract smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<RoleBasedContractArgs['obj']['createApplication()void'] | RoleBasedContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends RoleBasedContractUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'updateApplication':
+          case 'updateApplication()void':
+            return RoleBasedContractParamsFactory.update.updateApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the RoleBasedContract smart contract using the updateApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateApplication(params: CallParams<RoleBasedContractArgs['obj']['updateApplication()void'] | RoleBasedContractArgs['tuple']['updateApplication()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'updateApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends RoleBasedContractDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'deleteApplication':
+          case 'deleteApplication()void':
+            return RoleBasedContractParamsFactory.delete.deleteApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the RoleBasedContract smart contract using the deleteApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      deleteApplication(params: CallParams<RoleBasedContractArgs['obj']['deleteApplication()void'] | RoleBasedContractArgs['tuple']['deleteApplication()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'deleteApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the grantRole(byte[],address)void ABI method
    *
@@ -234,6 +360,180 @@ export abstract class RoleBasedContractParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the RoleBasedContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class RoleBasedContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `RoleBasedContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new RoleBasedContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new RoleBasedContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the RoleBasedContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: RoleBasedContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? RoleBasedContractParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (RoleBasedContractCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? RoleBasedContractParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (RoleBasedContractUpdateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? RoleBasedContractParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (RoleBasedContractDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new RoleBasedContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the RoleBasedContract smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<RoleBasedContractArgs['obj']['createApplication()void'] | RoleBasedContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(RoleBasedContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the RoleBasedContract smart contract using the updateApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateApplication: (params: CallParams<RoleBasedContractArgs['obj']['updateApplication()void'] | RoleBasedContractArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(RoleBasedContractParamsFactory.update.updateApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the RoleBasedContract smart contract using the deleteApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      deleteApplication: (params: CallParams<RoleBasedContractArgs['obj']['deleteApplication()void'] | RoleBasedContractArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(RoleBasedContractParamsFactory.delete.deleteApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the RoleBasedContract smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<RoleBasedContractArgs['obj']['createApplication()void'] | RoleBasedContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(RoleBasedContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the RoleBasedContract smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<RoleBasedContractArgs['obj']['createApplication()void'] | RoleBasedContractArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(RoleBasedContractParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | RoleBasedContractReturns['createApplication()void']) }, appClient: new RoleBasedContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the RoleBasedContract smart contract
  */
@@ -314,6 +614,38 @@ export class RoleBasedContractClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the RoleBasedContract smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateApplication: (params: CallParams<RoleBasedContractArgs['obj']['updateApplication()void'] | RoleBasedContractArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(RoleBasedContractParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the RoleBasedContract smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      deleteApplication: (params: CallParams<RoleBasedContractArgs['obj']['deleteApplication()void'] | RoleBasedContractArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.params.delete(RoleBasedContractParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the RoleBasedContract smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -360,6 +692,38 @@ export class RoleBasedContractClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the RoleBasedContract smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateApplication: (params: CallParams<RoleBasedContractArgs['obj']['updateApplication()void'] | RoleBasedContractArgs['tuple']['updateApplication()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(RoleBasedContractParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the RoleBasedContract smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      deleteApplication: (params: CallParams<RoleBasedContractArgs['obj']['deleteApplication()void'] | RoleBasedContractArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(RoleBasedContractParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the RoleBasedContract smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -405,6 +769,40 @@ export class RoleBasedContractClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the RoleBasedContract smart contract using the `updateApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateApplication: async (params: CallParams<RoleBasedContractArgs['obj']['updateApplication()void'] | RoleBasedContractArgs['tuple']['updateApplication()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(RoleBasedContractParamsFactory.update.updateApplication(params))
+        return {...result, return: result.return as unknown as (undefined | RoleBasedContractReturns['updateApplication()void'])}
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the RoleBasedContract smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      deleteApplication: async (params: CallParams<RoleBasedContractArgs['obj']['deleteApplication()void'] | RoleBasedContractArgs['tuple']['deleteApplication()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(RoleBasedContractParamsFactory.delete.deleteApplication(params))
+        return {...result, return: result.return as unknown as (undefined | RoleBasedContractReturns['deleteApplication()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the RoleBasedContract smart contract.
      *
@@ -522,6 +920,24 @@ export class RoleBasedContractClient {
         resultMappers.push(undefined)
         return this
       },
+      get update() {
+        return {
+          updateApplication: (params: CallParams<RoleBasedContractArgs['obj']['updateApplication()void'] | RoleBasedContractArgs['tuple']['updateApplication()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
+      get delete() {
+        return {
+          deleteApplication: (params: CallParams<RoleBasedContractArgs['obj']['deleteApplication()void'] | RoleBasedContractArgs['tuple']['deleteApplication()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.deleteApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the RoleBasedContract contract
        */
@@ -583,6 +999,34 @@ export type RoleBasedContractComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   performOperation(params?: CallParams<RoleBasedContractArgs['obj']['performOperation()void'] | RoleBasedContractArgs['tuple']['performOperation()void']>): RoleBasedContractComposer<[...TReturns, RoleBasedContractReturns['performOperation()void'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the RoleBasedContract smart contract using the updateApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateApplication(params?: CallParams<RoleBasedContractArgs['obj']['updateApplication()void'] | RoleBasedContractArgs['tuple']['updateApplication()void']>): RoleBasedContractComposer<[...TReturns, RoleBasedContractReturns['updateApplication()void'] | undefined]>
+  }
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the RoleBasedContract smart contract using the deleteApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    deleteApplication(params?: CallParams<RoleBasedContractArgs['obj']['deleteApplication()void'] | RoleBasedContractArgs['tuple']['deleteApplication()void']>): RoleBasedContractComposer<[...TReturns, RoleBasedContractReturns['deleteApplication()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the RoleBasedContract smart contract.

@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"SecureDepositContract","structs":{},"methods":[{"name":"setAsset","args":[{"type":"uint64","name":"asset"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"optInToAsset","args":[{"type":"uint64","name":"asset"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"deposit","args":[{"type":"axfer","name":"payment"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"acceptedAsset":{"keyType":"AVMString","valueType":"AVMUint64","key":"YXNzZXQ="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[148],"errorMessage":"Must send nonzero amount"},{"pc":[136],"errorMessage":"Must send to app"},{"pc":[23],"errorMessage":"OnCompletion must be NoOp"},{"pc":[63],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[100],"errorMessage":"Only creator"},{"pc":[80],"errorMessage":"Only creator can set asset"},{"pc":[145],"errorMessage":"Wrong asset"},{"pc":[143],"errorMessage":"check GlobalState exists"},{"pc":[73,93],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[129],"errorMessage":"transaction type is axfer"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"SecureDepositContract","structs":{},"methods":[{"name":"setAsset","args":[{"type":"uint64","name":"asset"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"optInToAsset","args":[{"type":"uint64","name":"asset"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"deposit","args":[{"type":"axfer","name":"payment"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"acceptedAsset":{"keyType":"AVMString","valueType":"AVMUint64","key":"YXNzZXQ="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[148],"errorMessage":"Must send nonzero amount"},{"pc":[136],"errorMessage":"Must send to app"},{"pc":[23],"errorMessage":"OnCompletion must be NoOp"},{"pc":[63],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[100],"errorMessage":"Only creator"},{"pc":[80],"errorMessage":"Only creator can set asset"},{"pc":[145],"errorMessage":"Wrong asset"},{"pc":[143],"errorMessage":"check GlobalState exists"},{"pc":[73,93],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[129],"errorMessage":"transaction type is axfer"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDggNAogICAgYnl0ZWNibG9jayAiYXNzZXQiCiAgICAvLyBzbWFydF9jb250cmFjdHMvNC10cmFuc2FjdGlvbi1pbnB1dC12YWxpZGF0aW9uL2NvbnRyYWN0LmFsZ28udHM6MjIKICAgIC8vIGV4cG9ydCBjbGFzcyBTZWN1cmVEZXBvc2l0Q29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAMTAKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4M2Q3MjZmODYgMHg2ZmU5YWY4NSAweDkzMzUzMTg2IC8vIG1ldGhvZCAic2V0QXNzZXQodWludDY0KXZvaWQiLCBtZXRob2QgIm9wdEluVG9Bc3NldCh1aW50NjQpdm9pZCIsIG1ldGhvZCAiZGVwb3NpdChheGZlcil2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggc2V0QXNzZXQgb3B0SW5Ub0Fzc2V0IGRlcG9zaXQKICAgIGVycgoKbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvNC10cmFuc2FjdGlvbi1pbnB1dC12YWxpZGF0aW9uL2NvbnRyYWN0LmFsZ28udHM6MjIKICAgIC8vIGV4cG9ydCBjbGFzcyBTZWN1cmVEZXBvc2l0Q29udHJhY3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wICYmIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy80LXRyYW5zYWN0aW9uLWlucHV0LXZhbGlkYXRpb24vY29udHJhY3QuYWxnby50czo6U2VjdXJlRGVwb3NpdENvbnRyYWN0LnNldEFzc2V0W3JvdXRpbmddKCkgLT4gdm9pZDoKc2V0QXNzZXQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvNC10cmFuc2FjdGlvbi1pbnB1dC12YWxpZGF0aW9uL2NvbnRyYWN0LmFsZ28udHM6MjUKICAgIC8vIHB1YmxpYyBzZXRBc3NldChhc3NldDogQXNzZXQpOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy80LXRyYW5zYWN0aW9uLWlucHV0LXZhbGlkYXRpb24vY29udHJhY3QuYWxnby50czoyNgogICAgLy8gYXNzZXJ0KFR4bi5zZW5kZXIgPT09IEdsb2JhbC5jcmVhdG9yQWRkcmVzcywgJ09ubHkgY3JlYXRvciBjYW4gc2V0IGFzc2V0JykKICAgIHR4biBTZW5kZXIKICAgIGdsb2JhbCBDcmVhdG9yQWRkcmVzcwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3IgY2FuIHNldCBhc3NldAogICAgLy8gc21hcnRfY29udHJhY3RzLzQtdHJhbnNhY3Rpb24taW5wdXQtdmFsaWRhdGlvbi9jb250cmFjdC5hbGdvLnRzOjIzCiAgICAvLyBwdWJsaWMgYWNjZXB0ZWRBc3NldCA9IEdsb2JhbFN0YXRlPEFzc2V0Pih7IGtleTogJ2Fzc2V0JyB9KQogICAgYnl0ZWNfMCAvLyAiYXNzZXQiCiAgICAvLyBzbWFydF9jb250cmFjdHMvNC10cmFuc2FjdGlvbi1pbnB1dC12YWxpZGF0aW9uL2NvbnRyYWN0LmFsZ28udHM6MjcKICAgIC8vIHRoaXMuYWNjZXB0ZWRBc3NldC52YWx1ZSA9IGFzc2V0CiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzLzQtdHJhbnNhY3Rpb24taW5wdXQtdmFsaWRhdGlvbi9jb250cmFjdC5hbGdvLnRzOjI1CiAgICAvLyBwdWJsaWMgc2V0QXNzZXQoYXNzZXQ6IEFzc2V0KTogdm9pZCB7CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLzQtdHJhbnNhY3Rpb24taW5wdXQtdmFsaWRhdGlvbi9jb250cmFjdC5hbGdvLnRzOjpTZWN1cmVEZXBvc2l0Q29udHJhY3Qub3B0SW5Ub0Fzc2V0W3JvdXRpbmddKCkgLT4gdm9pZDoKb3B0SW5Ub0Fzc2V0OgogICAgLy8gc21hcnRfY29udHJhY3RzLzQtdHJhbnNhY3Rpb24taW5wdXQtdmFsaWRhdGlvbi9jb250cmFjdC5hbGdvLnRzOjMwCiAgICAvLyBwdWJsaWMgb3B0SW5Ub0Fzc2V0KGFzc2V0OiBBc3NldCk6IHZvaWQgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzLzQtdHJhbnNhY3Rpb24taW5wdXQtdmFsaWRhdGlvbi9jb250cmFjdC5hbGdvLnRzOjMxCiAgICAvLyBhc3NlcnQoVHhuLnNlbmRlciA9PT0gR2xvYmFsLmNyZWF0b3JBZGRyZXNzLCAnT25seSBjcmVhdG9yJykKICAgIHR4biBTZW5kZXIKICAgIGdsb2JhbCBDcmVhdG9yQWRkcmVzcwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGNyZWF0b3IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy80LXRyYW5zYWN0aW9uLWlucHV0LXZhbGlkYXRpb24vY29udHJhY3QuYWxnby50czozMgogICAgLy8gaXR4bi5hc3NldFRyYW5zZmVyKHsgYXNzZXRSZWNlaXZlcjogR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MsIHhmZXJBc3NldDogYXNzZXQsIGFzc2V0QW1vdW50OiAwLCBmZWU6IDAgfSkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICBpbnRjXzEgLy8gMAogICAgaXR4bl9maWVsZCBBc3NldEFtb3VudAogICAgaXR4bl9maWVsZCBBc3NldFJlY2VpdmVyCiAgICBpdHhuX2ZpZWxkIFhmZXJBc3NldAogICAgaW50Y18zIC8vIDQKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMSAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy80LXRyYW5zYWN0aW9uLWlucHV0LXZhbGlkYXRpb24vY29udHJhY3QuYWxnby50czozMAogICAgLy8gcHVibGljIG9wdEluVG9Bc3NldChhc3NldDogQXNzZXQpOiB2b2lkIHsKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvNC10cmFuc2FjdGlvbi1pbnB1dC12YWxpZGF0aW9uL2NvbnRyYWN0LmFsZ28udHM6OlNlY3VyZURlcG9zaXRDb250cmFjdC5kZXBvc2l0W3JvdXRpbmddKCkgLT4gdm9pZDoKZGVwb3NpdDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy80LXRyYW5zYWN0aW9uLWlucHV0LXZhbGlkYXRpb24vY29udHJhY3QuYWxnby50czozNgogICAgLy8gcHVibGljIGRlcG9zaXQocGF5bWVudDogZ3R4bi5Bc3NldFRyYW5zZmVyVHhuKTogdm9pZCB7CiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18wIC8vIDEKICAgIC0KICAgIGR1cAogICAgZ3R4bnMgVHlwZUVudW0KICAgIGludGNfMyAvLyBheGZlcgogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIGF4ZmVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvNC10cmFuc2FjdGlvbi1pbnB1dC12YWxpZGF0aW9uL2NvbnRyYWN0LmFsZ28udHM6MzcKICAgIC8vIGFzc2VydChwYXltZW50LmFzc2V0UmVjZWl2ZXIgPT09IEdsb2JhbC5jdXJyZW50QXBwbGljYXRpb25BZGRyZXNzLCAnTXVzdCBzZW5kIHRvIGFwcCcpCiAgICBkdXAKICAgIGd0eG5zIEFzc2V0UmVjZWl2ZXIKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICA9PQogICAgYXNzZXJ0IC8vIE11c3Qgc2VuZCB0byBhcHAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy80LXRyYW5zYWN0aW9uLWlucHV0LXZhbGlkYXRpb24vY29udHJhY3QuYWxnby50czozOAogICAgLy8gYXNzZXJ0KHBheW1lbnQueGZlckFzc2V0LmlkID09PSB0aGlzLmFjY2VwdGVkQXNzZXQudmFsdWUuaWQsICdXcm9uZyBhc3NldCcpCiAgICBkdXAKICAgIGd0eG5zIFhmZXJBc3NldAogICAgaW50Y18xIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy80LXRyYW5zYWN0aW9uLWlucHV0LXZhbGlkYXRpb24vY29udHJhY3QuYWxnby50czoyMwogICAgLy8gcHVibGljIGFjY2VwdGVkQXNzZXQgPSBHbG9iYWxTdGF0ZTxBc3NldD4oeyBrZXk6ICdhc3NldCcgfSkKICAgIGJ5dGVjXzAgLy8gImFzc2V0IgogICAgLy8gc21hcnRfY29udHJhY3RzLzQtdHJhbnNhY3Rpb24taW5wdXQtdmFsaWRhdGlvbi9jb250cmFjdC5hbGdvLnRzOjM4CiAgICAvLyBhc3NlcnQocGF5bWVudC54ZmVyQXNzZXQuaWQgPT09IHRoaXMuYWNjZXB0ZWRBc3NldC52YWx1ZS5pZCwgJ1dyb25nIGFzc2V0JykKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICA9PQogICAgYXNzZXJ0IC8vIFdyb25nIGFzc2V0CiAgICAvLyBzbWFydF9jb250cmFjdHMvNC10cmFuc2FjdGlvbi1pbnB1dC12YWxpZGF0aW9uL2NvbnRyYWN0LmFsZ28udHM6MzkKICAgIC8vIGFzc2VydChwYXltZW50LmFzc2V0QW1vdW50ID4gVWludDY0KDApLCAnTXVzdCBzZW5kIG5vbnplcm8gYW1vdW50JykKICAgIGd0eG5zIEFzc2V0QW1vdW50CiAgICBhc3NlcnQgLy8gTXVzdCBzZW5kIG5vbnplcm8gYW1vdW50CiAgICAvLyBzbWFydF9jb250cmFjdHMvNC10cmFuc2FjdGlvbi1pbnB1dC12YWxpZGF0aW9uL2NvbnRyYWN0LmFsZ28udHM6MzYKICAgIC8vIHB1YmxpYyBkZXBvc2l0KHBheW1lbnQ6IGd0eG4uQXNzZXRUcmFuc2ZlclR4bik6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAQAIBCYBBWFzc2V0MRtBACQxGRREMRhEggMEPXJvhgRv6a+FBJM1MYY2GgCOAwALAB8AQQAxGRQxGBQQRCJDNhoBSRUkEkQXMQAyCRJEKExnIkM2GgFJFSQSRBcxADIJEkSxMgojshKyFLIRJbIQI7IBsyJDMRYiCUk4ECUSREk4FDIKEkRJOBEjKGVEEkQ4EkQiQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -164,6 +164,21 @@ export type MethodReturn<TSignature extends SecureDepositContractSignatures> = S
 export type GlobalKeysState = SecureDepositContractTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type SecureDepositContractCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type SecureDepositContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: SecureDepositContractCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the SecureDepositContract smart contract
@@ -210,6 +225,147 @@ export abstract class SecureDepositContractParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the SecureDepositContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class SecureDepositContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `SecureDepositContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new SecureDepositContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new SecureDepositContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the SecureDepositContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: SecureDepositContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new SecureDepositContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SecureDepositContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SecureDepositContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SecureDepositContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new SecureDepositContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the SecureDepositContract smart contract
  */
