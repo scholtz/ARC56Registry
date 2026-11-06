@@ -51,7 +51,7 @@ contract generated this way; every other contract includes a working `Factory`.
 
 | Namespace | Client class | Source ARC-56 spec |
 | --- | --- | --- |
-| `AnjoliDAO_4032bf59` | `AnjoliDaoClient` | [https://raw.githubusercontent.com/krittikabiswas/Durga-Puja-2025/HEAD/projects/DurgaDao-contracts/smart_contracts/anjoli_dao/AnjoliDAO.arc56.json](https://raw.githubusercontent.com/krittikabiswas/Durga-Puja-2025/HEAD/projects/DurgaDao-contracts/smart_contracts/anjoli_dao/AnjoliDAO.arc56.json) |
+| `AnjoliDAO_4032bf59` | `AnjoliDaoClient` _(minimal mode - full mode failed to generate/type-check for this contract)_ | [https://raw.githubusercontent.com/krittikabiswas/Durga-Puja-2025/HEAD/projects/DurgaDao-contracts/smart_contracts/anjoli_dao/AnjoliDAO.arc56.json](https://raw.githubusercontent.com/krittikabiswas/Durga-Puja-2025/HEAD/projects/DurgaDao-contracts/smart_contracts/anjoli_dao/AnjoliDAO.arc56.json) |
 | `AnjoliDao_f9422c4d` | `AnjoliDaoClient` | [https://raw.githubusercontent.com/krittikabiswas/Durga-Puja-2025/HEAD/projects/DurgaDao-contracts/smart_contracts/artifacts/anjoli_dao/AnjoliDao.arc56.json](https://raw.githubusercontent.com/krittikabiswas/Durga-Puja-2025/HEAD/projects/DurgaDao-contracts/smart_contracts/artifacts/anjoli_dao/AnjoliDao.arc56.json) |
 
 ## Versioning
