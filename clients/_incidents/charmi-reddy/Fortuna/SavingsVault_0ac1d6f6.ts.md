@@ -2,8 +2,8 @@
 
 - **Repo**: [charmi-reddy/Fortuna](https://github.com/charmi-reddy/Fortuna)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/charmi-reddy/Fortuna/HEAD/backend/savings_vault/smart_contracts/artifacts/savings_vault/SavingsVault.arc56.json](https://raw.githubusercontent.com/charmi-reddy/Fortuna/HEAD/backend/savings_vault/smart_contracts/artifacts/savings_vault/SavingsVault.arc56.json)
-- **Detected**: 2026-07-19T19:27:39.375997+00:00
-- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
+- **Detected**: 2026-11-06T14:07:12.260235+00:00
+- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.2`
 
 ## Reproduce
 
@@ -26,7 +26,7 @@ src/SavingsVault_0ac1d6f6.ts(511,79): error TS2349: This expression is not calla
 src/SavingsVault_0ac1d6f6.ts(601,7): error TS2300: Duplicate identifier 'optIn'.
 src/SavingsVault_0ac1d6f6.ts(630,11): error TS1119: An object literal cannot have property and accessor with the same name.
 src/SavingsVault_0ac1d6f6.ts(630,11): error TS2300: Duplicate identifier 'optIn'.
-src/SavingsVault_0ac1d6f6.ts(633,114): error TS2339: Property 'optIn' does not exist on type '(params?: { sender?: string | Address; signer?: TransactionSigner | TransactionSignerAccount; rekeyTo?: string | Address; ... 14 more ...; args: [] | { ...; }; } & { ...; }) => Promise<...>'.
-src/SavingsVault_0ac1d6f6.ts(713,12): error TS2687: All declarations of 'optIn' must have identical modifiers.
-src/SavingsVault_0ac1d6f6.ts(713,12): error TS2717: Subsequent property declarations must have the same type.  Property 'optIn' must be of type '(params?: { sender?: string | Address; signer?: TransactionSigner | TransactionSignerAccount; rekeyTo?: string | Address; ... 14 more ...; args: [] | { ...; }; }) => SavingsVaultComposer<...>', but here has type '{ optIn(params?: { sender?: string | Address; signer?: TransactionSigner | TransactionSignerAccount; rekeyTo?: string | Address; ... 14 more ...; args: [] | { ...; }; }): SavingsVaultComposer<...>; }'.
+src/SavingsVault_0ac1d6f6.ts(633,114): error TS2339: Property 'optIn' does not exist on type '(params?: { signer?: TransactionSigner | TransactionSignerAccount; rekeyTo?: string | Address; note?: string | Uint8Array<ArrayBufferLike>; ... 14 more ...; args: { ...; } | []; } & { ...; }) => Promise<...>'.
+src/SavingsVault_0ac1d6f6.ts(681,3): error TS2300: Duplicate identifier 'optIn'.
+src/SavingsVault_0ac1d6f6.ts(713,12): error TS2300: Duplicate identifier 'optIn'.
 ```
