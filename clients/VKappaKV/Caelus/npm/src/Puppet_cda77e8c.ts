@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Puppet","desc":"","methods":[{"name":"spawn","args":[],"returns":{"type":"address"},"actions":{"create":["DeleteApplication"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[40],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":24},{"pc":[92],"errorMessage":"this contract does not implement the given ABI method for create DeleteApplication","teal":85}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Puppet","desc":"","methods":[{"name":"spawn","args":[],"returns":{"type":"address"},"actions":{"create":["DeleteApplication"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[40],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":24},{"pc":[92],"errorMessage":"this contract does not implement the given ABI method for create DeleteApplication","teal":85}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAwIDEKCi8vIFRoaXMgVEVBTCB3YXMgZ2VuZXJhdGVkIGJ5IFRFQUxTY3JpcHQgdjAuMTA3LjIKLy8gaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9URUFMU2NyaXB0CgovLyBUaGlzIGNvbnRyYWN0IGlzIGNvbXBsaWFudCB3aXRoIGFuZC9vciBpbXBsZW1lbnRzIHRoZSBmb2xsb3dpbmcgQVJDczogWyBBUkM0IF0KCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCnB1c2hpbnQgNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpjcmVhdGVfRGVsZXRlQXBwbGljYXRpb24KCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gc3Bhd24oKWFkZHJlc3MKKmFiaV9yb3V0ZV9zcGF3bjoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJcHVzaGJ5dGVzIDB4MTUxZjdjNzUKCgkvLyBleGVjdXRlIHNwYXduKClhZGRyZXNzCgljYWxsc3ViIHNwYXduCgljb25jYXQKCWxvZwoJaW50YyAxIC8vIDEKCXJldHVybgoKLy8gc3Bhd24oKTogQWRkcmVzcwpzcGF3bjoKCXByb3RvIDAgMQoKCS8vIGNvbnRyYWN0c1xQdXBwZXQuYWxnby50czo2CgkvLyBzZW5kUGF5bWVudCh7CgkvLyAgICAgICByZWNlaXZlcjogdGhpcy5hcHAuYWRkcmVzcywKCS8vICAgICAgIGFtb3VudDogMCwKCS8vICAgICAgIHJla2V5VG86IGdsb2JhbHMuY2FsbGVyQXBwbGljYXRpb25BZGRyZXNzLAoJLy8gICAgIH0pCglpdHhuX2JlZ2luCglpbnRjIDEgLy8gIHBheQoJaXR4bl9maWVsZCBUeXBlRW51bQoKCS8vIGNvbnRyYWN0c1xQdXBwZXQuYWxnby50czo3CgkvLyByZWNlaXZlcjogdGhpcy5hcHAuYWRkcmVzcwoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCWl0eG5fZmllbGQgUmVjZWl2ZXIKCgkvLyBjb250cmFjdHNcUHVwcGV0LmFsZ28udHM6OAoJLy8gYW1vdW50OiAwCglpbnRjIDAgLy8gMAoJaXR4bl9maWVsZCBBbW91bnQKCgkvLyBjb250cmFjdHNcUHVwcGV0LmFsZ28udHM6OQoJLy8gcmVrZXlUbzogZ2xvYmFscy5jYWxsZXJBcHBsaWNhdGlvbkFkZHJlc3MKCWdsb2JhbCBDYWxsZXJBcHBsaWNhdGlvbkFkZHJlc3MKCWl0eG5fZmllbGQgUmVrZXlUbwoKCS8vIEZlZSBmaWVsZCBub3Qgc2V0LCBkZWZhdWx0aW5nIHRvIDAKCWludGMgMCAvLyAwCglpdHhuX2ZpZWxkIEZlZQoKCS8vIFN1Ym1pdCBpbm5lciB0cmFuc2FjdGlvbgoJaXR4bl9zdWJtaXQKCgkvLyBjb250cmFjdHNcUHVwcGV0LmFsZ28udHM6MTEKCS8vIHJldHVybiB0aGlzLmFwcC5hZGRyZXNzOwoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCXJldHN1YgoKKmNyZWF0ZV9EZWxldGVBcHBsaWNhdGlvbjoKCXB1c2hieXRlcyAweDFjOTE4ZTkwIC8vIG1ldGhvZCAic3Bhd24oKWFkZHJlc3MiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX3NwYXduCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNyZWF0ZSBEZWxldGVBcHBsaWNhdGlvbgoJZXJy","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiACAAExGBSBBgsxGQiNDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJwCABBUffHWIAARQsCNDigABsSOyEDIKsgcisggyDrIgIrIBszIKiYAEHJGOkDYaAI4B/80A","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -130,13 +130,201 @@ export type MethodArgs<TSignature extends PuppetSignatures> = PuppetTypes['metho
 export type MethodReturn<TSignature extends PuppetSignatures> = PuppetTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type PuppetCreateCallParams =
+  | Expand<CallParams<PuppetArgs['obj']['spawn()address'] | PuppetArgs['tuple']['spawn()address']> & {method: 'spawn'} & {onComplete: OnApplicationComplete.DeleteApplicationOC} & CreateSchema>
+  | Expand<CallParams<PuppetArgs['obj']['spawn()address'] | PuppetArgs['tuple']['spawn()address']> & {method: 'spawn()address'} & {onComplete: OnApplicationComplete.DeleteApplicationOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type PuppetDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: PuppetCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Puppet smart contract
  */
 export abstract class PuppetParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends PuppetCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'spawn':
+          case 'spawn()address':
+            return PuppetParamsFactory.create.spawn(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the Puppet smart contract using the spawn()address ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      spawn(params: CallParams<PuppetArgs['obj']['spawn()address'] | PuppetArgs['tuple']['spawn()address']> & AppClientCompilationParams & {onComplete: OnApplicationComplete.DeleteApplicationOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete: OnApplicationComplete.DeleteApplicationOC} {
+        return {
+          ...params,
+          method: 'spawn()address' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Puppet smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class PuppetFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `PuppetFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new PuppetClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new PuppetClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Puppet smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: PuppetDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? PuppetParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (PuppetCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new PuppetClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Puppet smart contract using the spawn()address ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      spawn: (params: CallParams<PuppetArgs['obj']['spawn()address'] | PuppetArgs['tuple']['spawn()address']> & AppClientCompilationParams & CreateSchema & {onComplete: OnApplicationComplete.DeleteApplicationOC}) => {
+        return this.appFactory.params.create(PuppetParamsFactory.create.spawn(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Puppet smart contract using the spawn()address ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      spawn: (params: CallParams<PuppetArgs['obj']['spawn()address'] | PuppetArgs['tuple']['spawn()address']> & AppClientCompilationParams & CreateSchema & {onComplete: OnApplicationComplete.DeleteApplicationOC}) => {
+        return this.appFactory.createTransaction.create(PuppetParamsFactory.create.spawn(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Puppet smart contract using an ABI method call using the spawn()address ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      spawn: async (params: CallParams<PuppetArgs['obj']['spawn()address'] | PuppetArgs['tuple']['spawn()address']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete: OnApplicationComplete.DeleteApplicationOC}) => {
+        const result = await this.appFactory.send.create(PuppetParamsFactory.create.spawn(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | PuppetReturns['spawn()address']) }, appClient: new PuppetClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Puppet smart contract
  */
