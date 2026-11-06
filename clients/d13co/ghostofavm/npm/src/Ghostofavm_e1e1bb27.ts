@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Ghostofavm","structs":{"AcctBalanceData":[{"name":"address","type":"address"},{"name":"balance","type":"uint64"},{"name":"minBalance","type":"uint64"}],"BlkData":[{"name":"round","type":"uint64"},{"name":"timestamp","type":"uint64"},{"name":"txnCounter","type":"uint64"},{"name":"proposer","type":"address"}]},"methods":[{"name":"blkTimestamp","args":[{"type":"uint64","name":"firstRound"},{"type":"uint64","name":"lastRound"}],"returns":{"type":"uint64"},"actions":{"create":["NoOp"],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"blkTxnCounter","args":[{"type":"uint64","name":"firstRound"},{"type":"uint64","name":"lastRound"}],"returns":{"type":"uint64"},"actions":{"create":["NoOp"],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"blkProposer","args":[{"type":"uint64","name":"firstRound"},{"type":"uint64","name":"lastRound"}],"returns":{"type":"address"},"actions":{"create":["NoOp"],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"blkData","args":[{"type":"uint64","name":"firstRound"},{"type":"uint64","name":"lastRound"}],"returns":{"type":"(uint64,uint64,uint64,address)","struct":"BlkData"},"actions":{"create":["NoOp"],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"acctBalanceData","args":[{"type":"address[]","name":"accounts"}],"returns":{"type":"(address,uint64,uint64)","struct":"AcctBalanceData"},"actions":{"create":["NoOp"],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[24],"errorMessage":"OnCompletion must be NoOp"},{"pc":[343],"errorMessage":"index access is out of bounds"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Ghostofavm","structs":{"AcctBalanceData":[{"name":"address","type":"address"},{"name":"balance","type":"uint64"},{"name":"minBalance","type":"uint64"}],"BlkData":[{"name":"round","type":"uint64"},{"name":"timestamp","type":"uint64"},{"name":"txnCounter","type":"uint64"},{"name":"proposer","type":"address"}]},"methods":[{"name":"blkTimestamp","args":[{"type":"uint64","name":"firstRound"},{"type":"uint64","name":"lastRound"}],"returns":{"type":"uint64"},"actions":{"create":["NoOp"],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"blkTxnCounter","args":[{"type":"uint64","name":"firstRound"},{"type":"uint64","name":"lastRound"}],"returns":{"type":"uint64"},"actions":{"create":["NoOp"],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"blkProposer","args":[{"type":"uint64","name":"firstRound"},{"type":"uint64","name":"lastRound"}],"returns":{"type":"address"},"actions":{"create":["NoOp"],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"blkData","args":[{"type":"uint64","name":"firstRound"},{"type":"uint64","name":"lastRound"}],"returns":{"type":"(uint64,uint64,uint64,address)","struct":"BlkData"},"actions":{"create":["NoOp"],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"acctBalanceData","args":[{"type":"address[]","name":"accounts"}],"returns":{"type":"(address,uint64,uint64)","struct":"AcctBalanceData"},"actions":{"create":["NoOp"],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[24],"errorMessage":"OnCompletion must be NoOp"},{"pc":[343],"errorMessage":"index access is out of bounds"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDMyCiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjE3LTE4CiAgICAvLyBAY29udHJhY3QoeyBhdm1WZXJzaW9uOiAxMSB9KQogICAgLy8gZXhwb3J0IGNsYXNzIEdob3N0b2Zhdm0gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcAogICAgcHVzaGJ5dGVzcyAweDk5YjczOTBmIDB4YjAzNjk0ZGQgMHg1MmVlODE2MSAweDcwYmU0YjNkIDB4YjUzNGEzNTIgLy8gbWV0aG9kICJibGtUaW1lc3RhbXAodWludDY0LHVpbnQ2NCl1aW50NjQiLCBtZXRob2QgImJsa1R4bkNvdW50ZXIodWludDY0LHVpbnQ2NCl1aW50NjQiLCBtZXRob2QgImJsa1Byb3Bvc2VyKHVpbnQ2NCx1aW50NjQpYWRkcmVzcyIsIG1ldGhvZCAiYmxrRGF0YSh1aW50NjQsdWludDY0KSh1aW50NjQsdWludDY0LHVpbnQ2NCxhZGRyZXNzKSIsIG1ldGhvZCAiYWNjdEJhbGFuY2VEYXRhKGFkZHJlc3NbXSkoYWRkcmVzcyx1aW50NjQsdWludDY0KSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGJsa1RpbWVzdGFtcCBibGtUeG5Db3VudGVyIGJsa1Byb3Bvc2VyIGJsa0RhdGEgYWNjdEJhbGFuY2VEYXRhCiAgICBlcnIKCgovLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjpHaG9zdG9mYXZtLmJsa1RpbWVzdGFtcFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmJsa1RpbWVzdGFtcDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6MTkKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSwgb25DcmVhdGU6ICdhbGxvdycgfSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGJ0b2kKICAgIHN3YXAKCmJsa1RpbWVzdGFtcF93aGlsZV90b3BAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6MjEKICAgIC8vIGZvciAobGV0IHJvdW5kOiB1aW50NjQgPSBmaXJzdFJvdW5kOyByb3VuZCA8PSBsYXN0Um91bmQ7IHJvdW5kKyspIHsKICAgIGR1cAogICAgZGlnIDIKICAgIDw9CiAgICBieiBibGtUaW1lc3RhbXBfYWZ0ZXJfd2hpbGVANAogICAgLy8gc21hcnRfY29udHJhY3RzL2dob3N0b2Zhdm0vY29udHJhY3QuYWxnby50czoyMgogICAgLy8gbG9nKG9wLkJsb2NrLmJsa1RpbWVzdGFtcChyb3VuZCkpCiAgICBkdXBuIDIKICAgIGJsb2NrIEJsa1RpbWVzdGFtcAogICAgaXRvYgogICAgbG9nCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjIxCiAgICAvLyBmb3IgKGxldCByb3VuZDogdWludDY0ID0gZmlyc3RSb3VuZDsgcm91bmQgPD0gbGFzdFJvdW5kOyByb3VuZCsrKSB7CiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgYnVyeSAxCiAgICBiIGJsa1RpbWVzdGFtcF93aGlsZV90b3BAMgoKYmxrVGltZXN0YW1wX2FmdGVyX3doaWxlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjE5CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUsIG9uQ3JlYXRlOiAnYWxsb3cnIH0pCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMDAwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjpHaG9zdG9mYXZtLmJsa1R4bkNvdW50ZXJbcm91dGluZ10oKSAtPiB2b2lkOgpibGtUeG5Db3VudGVyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dob3N0b2Zhdm0vY29udHJhY3QuYWxnby50czoyNwogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlLCBvbkNyZWF0ZTogJ2FsbG93JyB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgYnRvaQogICAgc3dhcAoKYmxrVHhuQ291bnRlcl93aGlsZV90b3BAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6MjkKICAgIC8vIGZvciAobGV0IHJvdW5kOiB1aW50NjQgPSBmaXJzdFJvdW5kOyByb3VuZCA8PSBsYXN0Um91bmQ7IHJvdW5kKyspIHsKICAgIGR1cAogICAgZGlnIDIKICAgIDw9CiAgICBieiBibGtUeG5Db3VudGVyX2FmdGVyX3doaWxlQDQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6MzAKICAgIC8vIGxvZyhvcC5CbG9jay5ibGtUeG5Db3VudGVyKHJvdW5kKSkKICAgIGR1cG4gMgogICAgYmxvY2sgQmxrVHhuQ291bnRlcgogICAgaXRvYgogICAgbG9nCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjI5CiAgICAvLyBmb3IgKGxldCByb3VuZDogdWludDY0ID0gZmlyc3RSb3VuZDsgcm91bmQgPD0gbGFzdFJvdW5kOyByb3VuZCsrKSB7CiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgYnVyeSAxCiAgICBiIGJsa1R4bkNvdW50ZXJfd2hpbGVfdG9wQDIKCmJsa1R4bkNvdW50ZXJfYWZ0ZXJfd2hpbGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6MjcKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSwgb25DcmVhdGU6ICdhbGxvdycgfSkKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NTAwMDAwMDAwMDAwMDAwMDAKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6Okdob3N0b2Zhdm0uYmxrUHJvcG9zZXJbcm91dGluZ10oKSAtPiB2b2lkOgpibGtQcm9wb3NlcjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6MzUKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSwgb25DcmVhdGU6ICdhbGxvdycgfSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGJ0b2kKICAgIHN3YXAKCmJsa1Byb3Bvc2VyX3doaWxlX3RvcEAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dob3N0b2Zhdm0vY29udHJhY3QuYWxnby50czozNwogICAgLy8gZm9yIChsZXQgcm91bmQ6IHVpbnQ2NCA9IGZpcnN0Um91bmQ7IHJvdW5kIDw9IGxhc3RSb3VuZDsgcm91bmQrKykgewogICAgZHVwCiAgICBkaWcgMgogICAgPD0KICAgIGJ6IGJsa1Byb3Bvc2VyX2FmdGVyX3doaWxlQDQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6MzgKICAgIC8vIGxvZyhvcC5CbG9jay5ibGtQcm9wb3Nlcihyb3VuZCkpCiAgICBkdXBuIDIKICAgIGJsb2NrIEJsa1Byb3Bvc2VyCiAgICBsb2cKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6MzcKICAgIC8vIGZvciAobGV0IHJvdW5kOiB1aW50NjQgPSBmaXJzdFJvdW5kOyByb3VuZCA8PSBsYXN0Um91bmQ7IHJvdW5kKyspIHsKICAgIGludGNfMCAvLyAxCiAgICArCiAgICBidXJ5IDEKICAgIGIgYmxrUHJvcG9zZXJfd2hpbGVfdG9wQDIKCmJsa1Byb3Bvc2VyX2FmdGVyX3doaWxlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjM1CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUsIG9uQ3JlYXRlOiAnYWxsb3cnIH0pCiAgICBwdXNoYnl0ZXMgYmFzZTMyKENVUFhZNUlBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUEpCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjpHaG9zdG9mYXZtLmJsa0RhdGFbcm91dGluZ10oKSAtPiB2b2lkOgpibGtEYXRhOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dob3N0b2Zhdm0vY29udHJhY3QuYWxnby50czo0MwogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlLCBvbkNyZWF0ZTogJ2FsbG93JyB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgYnRvaQogICAgc3dhcAoKYmxrRGF0YV93aGlsZV90b3BAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6NDUKICAgIC8vIGZvciAobGV0IHJvdW5kOiB1aW50NjQgPSBmaXJzdFJvdW5kOyByb3VuZCA8PSBsYXN0Um91bmQ7IHJvdW5kKyspIHsKICAgIGR1cAogICAgZGlnIDIKICAgIDw9CiAgICBieiBibGtEYXRhX2FmdGVyX3doaWxlQDQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6NDgKICAgIC8vIHRpbWVzdGFtcDogb3AuQmxvY2suYmxrVGltZXN0YW1wKHJvdW5kKSwKICAgIGR1cG4gMgogICAgYmxvY2sgQmxrVGltZXN0YW1wCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjQ5CiAgICAvLyBwcm9wb3Nlcjogb3AuQmxvY2suYmxrUHJvcG9zZXIocm91bmQpLAogICAgZGlnIDEKICAgIGJsb2NrIEJsa1Byb3Bvc2VyCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjUwCiAgICAvLyB0eG5Db3VudGVyOiBvcC5CbG9jay5ibGtUeG5Db3VudGVyKHJvdW5kKSwKICAgIGRpZyAyCiAgICBibG9jayBCbGtUeG5Db3VudGVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjQ2LTUxCiAgICAvLyBjb25zdCBibGtEYXRhOiBCbGtEYXRhID0gewogICAgLy8gICByb3VuZCwKICAgIC8vICAgdGltZXN0YW1wOiBvcC5CbG9jay5ibGtUaW1lc3RhbXAocm91bmQpLAogICAgLy8gICBwcm9wb3Nlcjogb3AuQmxvY2suYmxrUHJvcG9zZXIocm91bmQpLAogICAgLy8gICB0eG5Db3VudGVyOiBvcC5CbG9jay5ibGtUeG5Db3VudGVyKHJvdW5kKSwKICAgIC8vIH0KICAgIGRpZyAzCiAgICBpdG9iCiAgICB1bmNvdmVyIDMKICAgIGl0b2IKICAgIGNvbmNhdAogICAgc3dhcAogICAgaXRvYgogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6NTIKICAgIC8vIGxvZyhlbmNvZGVBcmM0KGJsa0RhdGEpKQogICAgbG9nCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjQ1CiAgICAvLyBmb3IgKGxldCByb3VuZDogdWludDY0ID0gZmlyc3RSb3VuZDsgcm91bmQgPD0gbGFzdFJvdW5kOyByb3VuZCsrKSB7CiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgYnVyeSAxCiAgICBiIGJsa0RhdGFfd2hpbGVfdG9wQDIKCmJsa0RhdGFfYWZ0ZXJfd2hpbGVANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6NDMKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSwgb25DcmVhdGU6ICdhbGxvdycgfSkKICAgIHB1c2hieXRlcyBiYXNlMzIoQ1VQWFk1SUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBKQogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL2dob3N0b2Zhdm0vY29udHJhY3QuYWxnby50czo6R2hvc3RvZmF2bS5hY2N0QmFsYW5jZURhdGFbcm91dGluZ10oKSAtPiB2b2lkOgphY2N0QmFsYW5jZURhdGE6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjU3CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUsIG9uQ3JlYXRlOiAnYWxsb3cnIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6NTkKICAgIC8vIGZvciAoY29uc3QgYWNjb3VudCBvZiBhY2NvdW50cykgewogICAgaW50Y18xIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBpbnRjXzEgLy8gMAoKYWNjdEJhbGFuY2VEYXRhX2Zvcl9oZWFkZXJAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6NTkKICAgIC8vIGZvciAoY29uc3QgYWNjb3VudCBvZiBhY2NvdW50cykgewogICAgZHVwCiAgICBkaWcgMgogICAgPAogICAgYnogYWNjdEJhbGFuY2VEYXRhX2FmdGVyX2ZvckA1CiAgICBkaWcgMgogICAgZXh0cmFjdCAyIDAKICAgIGRpZyAxCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGludGNfMiAvLyAzMgogICAgKgogICAgaW50Y18yIC8vIDMyCiAgICBleHRyYWN0MyAvLyBvbiBlcnJvcjogaW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6NjIKICAgIC8vIGJhbGFuY2U6IG9wLmJhbGFuY2UoYWNjb3VudCksIC8vIGFjY291bnQuYmFsYW5jZSBhc3NlcnRzIG5vbiB6ZXJvLiB3ZSBkb250IHdhbnQgdGhhdAogICAgZHVwCiAgICBiYWxhbmNlCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjYzCiAgICAvLyBtaW5CYWxhbmNlOiBvcC5taW5CYWxhbmNlKGFjY291bnQpLAogICAgZGlnIDEKICAgIG1pbl9iYWxhbmNlCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjYwLTY0CiAgICAvLyBjb25zdCBhY2N0QmFsYW5jZURhdGE6IEFjY3RCYWxhbmNlRGF0YSA9IHsKICAgIC8vICAgYWRkcmVzczogYWNjb3VudCwKICAgIC8vICAgYmFsYW5jZTogb3AuYmFsYW5jZShhY2NvdW50KSwgLy8gYWNjb3VudC5iYWxhbmNlIGFzc2VydHMgbm9uIHplcm8uIHdlIGRvbnQgd2FudCB0aGF0CiAgICAvLyAgIG1pbkJhbGFuY2U6IG9wLm1pbkJhbGFuY2UoYWNjb3VudCksCiAgICAvLyB9CiAgICBzd2FwCiAgICBpdG9iCiAgICB1bmNvdmVyIDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgc3dhcAogICAgaXRvYgogICAgY29uY2F0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2hvc3RvZmF2bS9jb250cmFjdC5hbGdvLnRzOjY1CiAgICAvLyBsb2coZW5jb2RlQXJjNChhY2N0QmFsYW5jZURhdGEpKQogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgYnVyeSAxCiAgICBiIGFjY3RCYWxhbmNlRGF0YV9mb3JfaGVhZGVyQDIKCmFjY3RCYWxhbmNlRGF0YV9hZnRlcl9mb3JANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9naG9zdG9mYXZtL2NvbnRyYWN0LmFsZ28udHM6NTcKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSwgb25DcmVhdGU6ICdhbGxvdycgfSkKICAgIHB1c2hieXRlcyBiYXNlMzIoQ1VQWFk1SUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBKQogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAQAgJgEMFR98dQAAAAAAAAAAMRkURIIFBJm3OQ8EsDaU3QRS7oFhBHC+Sz0EtTSjUjYaAI4FAAEAIgBDAIgA+QA2GgEXNhoCF0xJSwIOQQANRwLRARawIghFAUL/7CiwIkM2GgEXNhoCF0xJSwIOQQANRwLRCBawIghFAUL/7CiwIkM2GgEXNhoCF0xJSwIOQQAMRwLRArAiCEUBQv/tgCQVH3x1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwIkM2GgEXNhoCF0xJSwIOQQAgRwLRAUsB0QJLAtEISwMWTwMWUEwWUExQsCIIRQFC/9mAPBUffHUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALAiQzYaAUkjWSNJSwIMQQAkSwJXAgBLAUlOAiQLJFhJYEsBeEwWTwJMUEwWULAiCEUBQv/VgDQVH3x1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsCJD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -207,11 +207,129 @@ export type MethodArgs<TSignature extends GhostofavmSignatures> = GhostofavmType
 export type MethodReturn<TSignature extends GhostofavmSignatures> = GhostofavmTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type GhostofavmCreateCallParams =
+  | Expand<CallParams<GhostofavmArgs['obj']['blkTimestamp(uint64,uint64)uint64'] | GhostofavmArgs['tuple']['blkTimestamp(uint64,uint64)uint64']> & {method: 'blkTimestamp'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<GhostofavmArgs['obj']['blkTimestamp(uint64,uint64)uint64'] | GhostofavmArgs['tuple']['blkTimestamp(uint64,uint64)uint64']> & {method: 'blkTimestamp(uint64,uint64)uint64'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<GhostofavmArgs['obj']['blkTxnCounter(uint64,uint64)uint64'] | GhostofavmArgs['tuple']['blkTxnCounter(uint64,uint64)uint64']> & {method: 'blkTxnCounter'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<GhostofavmArgs['obj']['blkTxnCounter(uint64,uint64)uint64'] | GhostofavmArgs['tuple']['blkTxnCounter(uint64,uint64)uint64']> & {method: 'blkTxnCounter(uint64,uint64)uint64'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<GhostofavmArgs['obj']['blkProposer(uint64,uint64)address'] | GhostofavmArgs['tuple']['blkProposer(uint64,uint64)address']> & {method: 'blkProposer'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<GhostofavmArgs['obj']['blkProposer(uint64,uint64)address'] | GhostofavmArgs['tuple']['blkProposer(uint64,uint64)address']> & {method: 'blkProposer(uint64,uint64)address'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<GhostofavmArgs['obj']['blkData(uint64,uint64)(uint64,uint64,uint64,address)'] | GhostofavmArgs['tuple']['blkData(uint64,uint64)(uint64,uint64,uint64,address)']> & {method: 'blkData'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<GhostofavmArgs['obj']['blkData(uint64,uint64)(uint64,uint64,uint64,address)'] | GhostofavmArgs['tuple']['blkData(uint64,uint64)(uint64,uint64,uint64,address)']> & {method: 'blkData(uint64,uint64)(uint64,uint64,uint64,address)'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<GhostofavmArgs['obj']['acctBalanceData(address[])(address,uint64,uint64)'] | GhostofavmArgs['tuple']['acctBalanceData(address[])(address,uint64,uint64)']> & {method: 'acctBalanceData'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<GhostofavmArgs['obj']['acctBalanceData(address[])(address,uint64,uint64)'] | GhostofavmArgs['tuple']['acctBalanceData(address[])(address,uint64,uint64)']> & {method: 'acctBalanceData(address[])(address,uint64,uint64)'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type GhostofavmDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: GhostofavmCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Ghostofavm smart contract
  */
 export abstract class GhostofavmParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends GhostofavmCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'blkTimestamp':
+          case 'blkTimestamp(uint64,uint64)uint64':
+            return GhostofavmParamsFactory.create.blkTimestamp(params)
+          case 'blkTxnCounter':
+          case 'blkTxnCounter(uint64,uint64)uint64':
+            return GhostofavmParamsFactory.create.blkTxnCounter(params)
+          case 'blkProposer':
+          case 'blkProposer(uint64,uint64)address':
+            return GhostofavmParamsFactory.create.blkProposer(params)
+          case 'blkData':
+          case 'blkData(uint64,uint64)(uint64,uint64,uint64,address)':
+            return GhostofavmParamsFactory.create.blkData(params)
+          case 'acctBalanceData':
+          case 'acctBalanceData(address[])(address,uint64,uint64)':
+            return GhostofavmParamsFactory.create.acctBalanceData(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the Ghostofavm smart contract using the blkTimestamp(uint64,uint64)uint64 ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      blkTimestamp(params: CallParams<GhostofavmArgs['obj']['blkTimestamp(uint64,uint64)uint64'] | GhostofavmArgs['tuple']['blkTimestamp(uint64,uint64)uint64']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'blkTimestamp(uint64,uint64)uint64' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.firstRound, params.args.lastRound],
+        }
+      },
+      /**
+       * Constructs create ABI call params for the Ghostofavm smart contract using the blkTxnCounter(uint64,uint64)uint64 ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      blkTxnCounter(params: CallParams<GhostofavmArgs['obj']['blkTxnCounter(uint64,uint64)uint64'] | GhostofavmArgs['tuple']['blkTxnCounter(uint64,uint64)uint64']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'blkTxnCounter(uint64,uint64)uint64' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.firstRound, params.args.lastRound],
+        }
+      },
+      /**
+       * Constructs create ABI call params for the Ghostofavm smart contract using the blkProposer(uint64,uint64)address ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      blkProposer(params: CallParams<GhostofavmArgs['obj']['blkProposer(uint64,uint64)address'] | GhostofavmArgs['tuple']['blkProposer(uint64,uint64)address']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'blkProposer(uint64,uint64)address' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.firstRound, params.args.lastRound],
+        }
+      },
+      /**
+       * Constructs create ABI call params for the Ghostofavm smart contract using the blkData(uint64,uint64)(uint64,uint64,uint64,address) ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      blkData(params: CallParams<GhostofavmArgs['obj']['blkData(uint64,uint64)(uint64,uint64,uint64,address)'] | GhostofavmArgs['tuple']['blkData(uint64,uint64)(uint64,uint64,uint64,address)']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'blkData(uint64,uint64)(uint64,uint64,uint64,address)' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.firstRound, params.args.lastRound],
+        }
+      },
+      /**
+       * Constructs create ABI call params for the Ghostofavm smart contract using the acctBalanceData(address[])(address,uint64,uint64) ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      acctBalanceData(params: CallParams<GhostofavmArgs['obj']['acctBalanceData(address[])(address,uint64,uint64)'] | GhostofavmArgs['tuple']['acctBalanceData(address[])(address,uint64,uint64)']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'acctBalanceData(address[])(address,uint64,uint64)' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.accounts],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the blkTimestamp(uint64,uint64)uint64 ABI method
    *
@@ -279,6 +397,260 @@ export abstract class GhostofavmParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Ghostofavm smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class GhostofavmFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `GhostofavmFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new GhostofavmClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new GhostofavmClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Ghostofavm smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: GhostofavmDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? GhostofavmParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (GhostofavmCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new GhostofavmClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using the blkTimestamp(uint64,uint64)uint64 ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      blkTimestamp: (params: CallParams<GhostofavmArgs['obj']['blkTimestamp(uint64,uint64)uint64'] | GhostofavmArgs['tuple']['blkTimestamp(uint64,uint64)uint64']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(GhostofavmParamsFactory.create.blkTimestamp(params))
+      },
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using the blkTxnCounter(uint64,uint64)uint64 ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      blkTxnCounter: (params: CallParams<GhostofavmArgs['obj']['blkTxnCounter(uint64,uint64)uint64'] | GhostofavmArgs['tuple']['blkTxnCounter(uint64,uint64)uint64']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(GhostofavmParamsFactory.create.blkTxnCounter(params))
+      },
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using the blkProposer(uint64,uint64)address ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      blkProposer: (params: CallParams<GhostofavmArgs['obj']['blkProposer(uint64,uint64)address'] | GhostofavmArgs['tuple']['blkProposer(uint64,uint64)address']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(GhostofavmParamsFactory.create.blkProposer(params))
+      },
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using the blkData(uint64,uint64)(uint64,uint64,uint64,address) ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      blkData: (params: CallParams<GhostofavmArgs['obj']['blkData(uint64,uint64)(uint64,uint64,uint64,address)'] | GhostofavmArgs['tuple']['blkData(uint64,uint64)(uint64,uint64,uint64,address)']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(GhostofavmParamsFactory.create.blkData(params))
+      },
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using the acctBalanceData(address[])(address,uint64,uint64) ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      acctBalanceData: (params: CallParams<GhostofavmArgs['obj']['acctBalanceData(address[])(address,uint64,uint64)'] | GhostofavmArgs['tuple']['acctBalanceData(address[])(address,uint64,uint64)']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(GhostofavmParamsFactory.create.acctBalanceData(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using the blkTimestamp(uint64,uint64)uint64 ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      blkTimestamp: (params: CallParams<GhostofavmArgs['obj']['blkTimestamp(uint64,uint64)uint64'] | GhostofavmArgs['tuple']['blkTimestamp(uint64,uint64)uint64']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(GhostofavmParamsFactory.create.blkTimestamp(params))
+      },
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using the blkTxnCounter(uint64,uint64)uint64 ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      blkTxnCounter: (params: CallParams<GhostofavmArgs['obj']['blkTxnCounter(uint64,uint64)uint64'] | GhostofavmArgs['tuple']['blkTxnCounter(uint64,uint64)uint64']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(GhostofavmParamsFactory.create.blkTxnCounter(params))
+      },
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using the blkProposer(uint64,uint64)address ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      blkProposer: (params: CallParams<GhostofavmArgs['obj']['blkProposer(uint64,uint64)address'] | GhostofavmArgs['tuple']['blkProposer(uint64,uint64)address']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(GhostofavmParamsFactory.create.blkProposer(params))
+      },
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using the blkData(uint64,uint64)(uint64,uint64,uint64,address) ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      blkData: (params: CallParams<GhostofavmArgs['obj']['blkData(uint64,uint64)(uint64,uint64,uint64,address)'] | GhostofavmArgs['tuple']['blkData(uint64,uint64)(uint64,uint64,uint64,address)']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(GhostofavmParamsFactory.create.blkData(params))
+      },
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using the acctBalanceData(address[])(address,uint64,uint64) ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      acctBalanceData: (params: CallParams<GhostofavmArgs['obj']['acctBalanceData(address[])(address,uint64,uint64)'] | GhostofavmArgs['tuple']['acctBalanceData(address[])(address,uint64,uint64)']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(GhostofavmParamsFactory.create.acctBalanceData(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using an ABI method call using the blkTimestamp(uint64,uint64)uint64 ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      blkTimestamp: async (params: CallParams<GhostofavmArgs['obj']['blkTimestamp(uint64,uint64)uint64'] | GhostofavmArgs['tuple']['blkTimestamp(uint64,uint64)uint64']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(GhostofavmParamsFactory.create.blkTimestamp(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | GhostofavmReturns['blkTimestamp(uint64,uint64)uint64']) }, appClient: new GhostofavmClient(result.appClient) }
+      },
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using an ABI method call using the blkTxnCounter(uint64,uint64)uint64 ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      blkTxnCounter: async (params: CallParams<GhostofavmArgs['obj']['blkTxnCounter(uint64,uint64)uint64'] | GhostofavmArgs['tuple']['blkTxnCounter(uint64,uint64)uint64']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(GhostofavmParamsFactory.create.blkTxnCounter(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | GhostofavmReturns['blkTxnCounter(uint64,uint64)uint64']) }, appClient: new GhostofavmClient(result.appClient) }
+      },
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using an ABI method call using the blkProposer(uint64,uint64)address ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      blkProposer: async (params: CallParams<GhostofavmArgs['obj']['blkProposer(uint64,uint64)address'] | GhostofavmArgs['tuple']['blkProposer(uint64,uint64)address']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(GhostofavmParamsFactory.create.blkProposer(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | GhostofavmReturns['blkProposer(uint64,uint64)address']) }, appClient: new GhostofavmClient(result.appClient) }
+      },
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using an ABI method call using the blkData(uint64,uint64)(uint64,uint64,uint64,address) ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      blkData: async (params: CallParams<GhostofavmArgs['obj']['blkData(uint64,uint64)(uint64,uint64,uint64,address)'] | GhostofavmArgs['tuple']['blkData(uint64,uint64)(uint64,uint64,uint64,address)']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(GhostofavmParamsFactory.create.blkData(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | GhostofavmReturns['blkData(uint64,uint64)(uint64,uint64,uint64,address)']) }, appClient: new GhostofavmClient(result.appClient) }
+      },
+      /**
+       * Creates a new instance of the Ghostofavm smart contract using an ABI method call using the acctBalanceData(address[])(address,uint64,uint64) ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      acctBalanceData: async (params: CallParams<GhostofavmArgs['obj']['acctBalanceData(address[])(address,uint64,uint64)'] | GhostofavmArgs['tuple']['acctBalanceData(address[])(address,uint64,uint64)']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(GhostofavmParamsFactory.create.acctBalanceData(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | GhostofavmReturns['acctBalanceData(address[])(address,uint64,uint64)']) }, appClient: new GhostofavmClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Ghostofavm smart contract
  */
