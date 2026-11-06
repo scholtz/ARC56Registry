@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Derived","structs":{},"methods":[{"name":"method","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Derived","structs":{},"methods":[{"name":"method","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIGRpYW1vbmRfbXJvL2Rlcml2ZWQucHk6OQogICAgLy8gbG9nKCJkZXJpdmVkLl9faW5pdF9fIikKICAgIHB1c2hieXRlcyAiZGVyaXZlZC5fX2luaXRfXyIKICAgIGxvZwogICAgLy8gZGlhbW9uZF9tcm8vYmFzZTEucHk6OAogICAgLy8gbG9nKCJiYXNlMS5fX2luaXRfXyIpCiAgICBwdXNoYnl0ZXMgImJhc2UxLl9faW5pdF9fIgogICAgbG9nCiAgICAvLyBkaWFtb25kX21yby9iYXNlMi5weTo4CiAgICAvLyBsb2coImJhc2UyLl9faW5pdF9fIikKICAgIHB1c2hieXRlcyAiYmFzZTIuX19pbml0X18iCiAgICBsb2cKICAgIC8vIGRpYW1vbmRfbXJvL2dwLnB5OjgKICAgIC8vIGxvZygiZ3AuX19pbml0X18iKQogICAgcHVzaGJ5dGVzICJncC5fX2luaXRfXyIKICAgIGxvZwoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyBkaWFtb25kX21yby9kZXJpdmVkLnB5OjcKICAgIC8vIGNsYXNzIERlcml2ZWQoQmFzZTEsIEJhc2UyKToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BANwogICAgcHVzaGJ5dGVzIDB4NGYwNDVkODQgLy8gbWV0aG9kICJtZXRob2QoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtZXRob2QKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEA3OgogICAgLy8gZGlhbW9uZF9tcm8vZGVyaXZlZC5weTo3CiAgICAvLyBjbGFzcyBEZXJpdmVkKEJhc2UxLCBCYXNlMik6CiAgICBwdXNoYnl0ZXMgMHg0YzVjNjFiYSAvLyBtZXRob2QgImNyZWF0ZSgpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fY3JlYXRlX3JvdXRlQDgKICAgIGVycgoKbWFpbl9jcmVhdGVfcm91dGVAODoKICAgIC8vIGRpYW1vbmRfbXJvL2dwLnB5OjExCiAgICAvLyBAYXJjNC5hYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCgoKLy8gdGVzdF9jYXNlcy5kaWFtb25kX21yby5kZXJpdmVkLkRlcml2ZWQubWV0aG9kW3JvdXRpbmddKCkgLT4gdm9pZDoKbWV0aG9kOgogICAgLy8gZGlhbW9uZF9tcm8vZGVyaXZlZC5weToxNAogICAgLy8gbG9nKCJkZXJpdmVkLm1ldGhvZCIpCiAgICBwdXNoYnl0ZXMgImRlcml2ZWQubWV0aG9kIgogICAgbG9nCiAgICAvLyBkaWFtb25kX21yby9iYXNlMS5weToxMwogICAgLy8gbG9nKCJiYXNlMS5tZXRob2QiKQogICAgcHVzaGJ5dGVzICJiYXNlMS5tZXRob2QiCiAgICBsb2cKICAgIC8vIGRpYW1vbmRfbXJvL2Jhc2UyLnB5OjEzCiAgICAvLyBsb2coImJhc2UyLm1ldGhvZCIpCiAgICBwdXNoYnl0ZXMgImJhc2UyLm1ldGhvZCIKICAgIGxvZwogICAgLy8gZGlhbW9uZF9tcm8vZ3AucHk6MTcKICAgIC8vIGxvZygiZ3AubWV0aG9kIikKICAgIHB1c2hieXRlcyAiZ3AubWV0aG9kIgogICAgbG9nCiAgICAvLyBkaWFtb25kX21yby9kZXJpdmVkLnB5OjEyCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CzEYQABDgBBkZXJpdmVkLl9faW5pdF9fsIAOYmFzZTEuX19pbml0X1+wgA5iYXNlMi5fX2luaXRfX7CAC2dwLl9faW5pdF9fsDEZFEQxGEEADoAETwRdhDYaAI4BABIAgARMXGG6NhoAjgEAAQCBAUOADmRlcml2ZWQubWV0aG9ksIAMYmFzZTEubWV0aG9ksIAMYmFzZTIubWV0aG9ksIAJZ3AubWV0aG9ksIEBQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -134,11 +134,57 @@ export type MethodArgs<TSignature extends DerivedSignatures> = DerivedTypes['met
 export type MethodReturn<TSignature extends DerivedSignatures> = DerivedTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type DerivedCreateCallParams =
+  | Expand<CallParams<DerivedArgs['obj']['create()void'] | DerivedArgs['tuple']['create()void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<DerivedArgs['obj']['create()void'] | DerivedArgs['tuple']['create()void']> & {method: 'create()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type DerivedDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: DerivedCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Derived smart contract
  */
 export abstract class DerivedParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends DerivedCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create()void':
+            return DerivedParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the Derived smart contract using the create()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<DerivedArgs['obj']['create()void'] | DerivedArgs['tuple']['create()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the method()void ABI method
    *
@@ -154,6 +200,148 @@ export abstract class DerivedParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Derived smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class DerivedFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `DerivedFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new DerivedClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new DerivedClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Derived smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: DerivedDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? DerivedParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (DerivedCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new DerivedClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Derived smart contract using the create()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<DerivedArgs['obj']['create()void'] | DerivedArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(DerivedParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Derived smart contract using the create()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<DerivedArgs['obj']['create()void'] | DerivedArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(DerivedParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Derived smart contract using an ABI method call using the create()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<DerivedArgs['obj']['create()void'] | DerivedArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(DerivedParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | DerivedReturns['create()void']) }, appClient: new DerivedClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Derived smart contract
  */

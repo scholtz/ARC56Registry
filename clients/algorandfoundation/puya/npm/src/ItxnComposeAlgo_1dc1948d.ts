@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ItxnComposeAlgo","structs":{},"methods":[{"name":"distribute","args":[{"type":"address[]","name":"addresses"},{"type":"pay","name":"funds"},{"type":"uint64","name":"verifier"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"conditionalBegin","args":[{"type":"uint64","name":"count"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[109],"errorMessage":"assert target is match for conditions"},{"pc":[205],"errorMessage":"index access is out of bounds"},{"pc":[66],"errorMessage":"invalid array length header"},{"pc":[80],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.static_array<arc4.uint8, 32>>"},{"pc":[99,270],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[112],"errorMessage":"must provide some accounts"},{"pc":[90],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ItxnComposeAlgo","structs":{},"methods":[{"name":"distribute","args":[{"type":"address[]","name":"addresses"},{"type":"pay","name":"funds"},{"type":"uint64","name":"verifier"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"conditionalBegin","args":[{"type":"uint64","name":"count"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[109],"errorMessage":"assert target is match for conditions"},{"pc":[205],"errorMessage":"index access is out of bounds"},{"pc":[66],"errorMessage":"invalid array length header"},{"pc":[80],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.static_array<arc4.uint8, 32>>"},{"pc":[99,270],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[112],"errorMessage":"must provide some accounts"},{"pc":[90],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDYgMzIKICAgIGJ5dGVjYmxvY2sgMHhkMGEyODIwMCAweDAwMDI2ODZmCiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAOQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4MWVjYWQzNGMgMHg5MGQyOTc2MiAvLyBtZXRob2QgImRpc3RyaWJ1dGUoYWRkcmVzc1tdLHBheSx1aW50NjQpdm9pZCIsIG1ldGhvZCAiY29uZGl0aW9uYWxCZWdpbih1aW50NjQpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGRpc3RyaWJ1dGUgY29uZGl0aW9uYWxCZWdpbgogICAgZXJyCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA5OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0cy9hcHByb3ZhbHMvaXR4bi1jb21wb3NlLmFsZ28udHM6Okl0eG5Db21wb3NlQWxnby5kaXN0cmlidXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKZGlzdHJpYnV0ZToKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGR1cAogICAgY292ZXIgMgogICAgZHVwCiAgICBpbnRjXzMgLy8gMzIKICAgICoKICAgIHB1c2hpbnQgMgogICAgKwogICAgZGlnIDIKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPj4KICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzEgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18xIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIGNvdmVyIDMKICAgIGR1cAogICAgZ3R4bnMgUmVjZWl2ZXIKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICA9PQogICAgYXNzZXJ0IC8vIGFzc2VydCB0YXJnZXQgaXMgbWF0Y2ggZm9yIGNvbmRpdGlvbnMKICAgIGRpZyAxCiAgICBhc3NlcnQgLy8gbXVzdCBwcm92aWRlIHNvbWUgYWNjb3VudHMKICAgIGd0eG5zIEFtb3VudAogICAgc3dhcAogICAgLwogICAgZGlnIDEKICAgIGV4dHJhY3QgMiAwCiAgICBjb3ZlciAyCiAgICBzd2FwCiAgICBleHRyYWN0IDIgMzIKICAgIGludGNfMSAvLyAxCiAgICBpdG9iCiAgICB1bmNvdmVyIDIKICAgIGl0b2IKICAgIGNvbmNhdAogICAgZGlnIDEKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBzd2FwCiAgICBwdXNoYnl0ZXMgMHgwMDEyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgaXR4bl9iZWdpbgogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50NjQKICAgIGR1cAogICAgY292ZXIgMgogICAgY292ZXIgNAogICAgZHVwCiAgICBwdXNoaW50IDgKICAgIGV4dHJhY3RfdWludDY0CiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGNvdmVyIDMKICAgIGR1cAogICAgcHVzaGludCAxNgogICAgZXh0cmFjdF91aW50MTYKICAgIGRpZyAxCiAgICBsZW4KICAgIHN1YnN0cmluZzMKICAgIGV4dHJhY3QgMiAwCiAgICBpdHhuX2ZpZWxkIFJlY2VpdmVyCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpbnRjXzEgLy8gMQoKZGlzdHJpYnV0ZV9mb3JfaGVhZGVyQDI6CiAgICBkdXAKICAgIGRpZyA2CiAgICA8CiAgICBieiBkaXN0cmlidXRlX2FmdGVyX2ZvckA1CiAgICBkdXAKICAgIGludGNfMyAvLyAzMgogICAgKgogICAgZGlnIDMKICAgIHN3YXAKICAgIGludGNfMyAvLyAzMgogICAgZXh0cmFjdDMgLy8gb24gZXJyb3I6IGluZGV4IGFjY2VzcyBpcyBvdXQgb2YgYm91bmRzCiAgICBpdHhuX25leHQKICAgIGl0eG5fZmllbGQgUmVjZWl2ZXIKICAgIGRpZyAxCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgZGlnIDQKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaW50Y18xIC8vIDEKICAgICsKICAgIGIgZGlzdHJpYnV0ZV9mb3JfaGVhZGVyQDIKCmRpc3RyaWJ1dGVfYWZ0ZXJfZm9yQDU6CiAgICBwb3BuIDMKICAgIGl0eG5fbmV4dAogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICBwdXNoYnl0ZXMgMHg2NWE5YWVjYyAvLyBtZXRob2QgInZlcmlmeSgpdm9pZCIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpbnRjXzIgLy8gNgogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX25leHQKICAgIHB1c2hieXRlcyAiYWJjIgogICAgaXR4bl9maWVsZCBDb25maWdBc3NldE5hbWUKICAgIHB1c2hpbnQgMwogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RzL2FwcHJvdmFscy9pdHhuLWNvbXBvc2UuYWxnby50czo6SXR4bkNvbXBvc2VBbGdvLmNvbmRpdGlvbmFsQmVnaW5bcm91dGluZ10oKSAtPiB2b2lkOgpjb25kaXRpb25hbEJlZ2luOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIGl0eG5fYmVnaW4KICAgIHB1c2hieXRlcyAweDAwOTIyNWFlIC8vIG1ldGhvZCAiaGVsbG9DcmVhdGUoc3RyaW5nKXZvaWQiCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgcHVzaGJ5dGVzIDB4MDAwMjQ4NjkKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBpbnRjXzEgLy8gMQogICAgaXR4bl9maWVsZCBHbG9iYWxOdW1CeXRlU2xpY2UKICAgIHB1c2hieXRlcyBiYXNlNjQoQzRFQlF3PT0pCiAgICBpdHhuX2ZpZWxkIENsZWFyU3RhdGVQcm9ncmFtUGFnZXMKICAgIHB1c2hieXRlcyBiYXNlNjQoQ3lBRUFBSUJCQ1lEQ0dkeVpXVjBhVzVuQVNBRUZSOThkVEVZUUFBRUtJQUFaNElDQkNRM2pUd0VvT2dZY2pZYUFJNENBRFVBTFRFWkZFUXhHRUVBRm9JQ0JOQ2lnZ0FFVVlDNklEWWFBSTRDQURVQVd3Q0FCQUNTSmE0MkdnQ09BUUFTQURFWkpSSXhHQkJETVJtQkJSSXhHQkJETmhvQlNTSlpJd2hMQVJVU1JGY0NBQ2hNWnlSRE5ob0JTU0paSXdoTEFSVVNSRmNDQUNJb1pVUXBVRXhRU1JVV1Z3WUNURkFxVEZDd0pFTTJHZ0ZKRlVzQklsbEpKUkpFU3dKTEFVc0RVaUpaZ1FZSVN3TWpXVWxMQWhKRVN3UkxBVXNGVWtraVdTTUlUd01JVHdRU1JDSW9aVVFwVUU0RVRnUlNWd0lBVUV4WEFnQlFTUlVXVndZQ1RGQXFURkN3SkVNPSkKICAgIGl0eG5fZmllbGQgQXBwcm92YWxQcm9ncmFtUGFnZXMKICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIE9uQ29tcGxldGlvbgogICAgaW50Y18yIC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGdpdHhuIDAgQ3JlYXRlZEFwcGxpY2F0aW9uSUQKICAgIGludGNfMCAvLyAwCgpjb25kaXRpb25hbEJlZ2luX2Zvcl9oZWFkZXJAMzoKICAgIGR1cAogICAgZGlnIDMKICAgIDwKICAgIGJ6IGNvbmRpdGlvbmFsQmVnaW5fYWZ0ZXJfZm9yQDkKICAgIGR1cAogICAgYm56IGNvbmRpdGlvbmFsQmVnaW5fZWxzZV9ib2R5QDYKICAgIGl0eG5fYmVnaW4KICAgIGJ5dGVjXzAgLy8gbWV0aG9kICJncmVldChzdHJpbmcpc3RyaW5nIgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGJ5dGVjXzEgLy8gMHgwMDAyNjg2ZgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGRpZyAxCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIGludGNfMiAvLyBhcHBsCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKCmNvbmRpdGlvbmFsQmVnaW5fYWZ0ZXJfaWZfZWxzZUA3OgogICAgaW50Y18xIC8vIDEKICAgICsKICAgIGIgY29uZGl0aW9uYWxCZWdpbl9mb3JfaGVhZGVyQDMKCmNvbmRpdGlvbmFsQmVnaW5fZWxzZV9ib2R5QDY6CiAgICBpdHhuX25leHQKICAgIGJ5dGVjXzAgLy8gbWV0aG9kICJncmVldChzdHJpbmcpc3RyaW5nIgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGJ5dGVjXzEgLy8gMHgwMDAyNjg2ZgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGRpZyAxCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIGludGNfMiAvLyBhcHBsCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIGIgY29uZGl0aW9uYWxCZWdpbl9hZnRlcl9pZl9lbHNlQDcKCmNvbmRpdGlvbmFsQmVnaW5fYWZ0ZXJfZm9yQDk6CiAgICBpdHhuX3N1Ym1pdAogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="},"byteCode":{"approval":"CyAEAAEGICYCBNCiggAEAAJobzEbQQAdMRkURDEYRIICBB7K00wEkNKXYjYaAI4CAAkA0gAxGRQxGBQQQzYaAUkiWUlOAkklC4ECCEsCFRJEMRYjCUk4ECMSRDYaAkkVgQgSRBdOA0k4BzIKEkRLAUQ4CEwKSwFXAgBOAkxXAiAjFk8CFlBLARUWVwYCTwJQTIACABJQTFCxSSJbSU4CTgRJgQhbSU4CTgNJgRBZSwEVUlcCALIHsgiyECKyASNJSwYMQQAbSSULSwNMJVi2sgdLAbIISwSyECKyASMIQv/eRgO2shiABGWprsyyGiSyECKyAbaAA2FiY7ImgQOyECKyAbMjQzYaAUkVgQgSRBexgAQAkiWushqABAACSGmyGiOyNYAEC4EBQ7JCgIcCCyAEAAIBBCYDCGdyZWV0aW5nASAEFR98dTEYQAAEKIAAZ4ICBCQ3jTwEoOgYcjYaAI4CADUALTEZFEQxGEEAFoICBNCiggAEUYC6IDYaAI4CADUAWwCABACSJa42GgCOAQASADEZJRIxGBBDMRmBBRIxGBBDNhoBSSJZIwhLARUSRFcCAChMZyRDNhoBSSJZIwhLARUSRFcCACIoZUQpUExQSRUWVwYCTFAqTFCwJEM2GgFJFUsBIllJJRJESwJLAUsDUiJZgQYISwMjWUlLAhJESwRLAUsFUkkiWSMITwMITwQSRCIoZUQpUE4ETgRSVwIAUExXAgBQSRUWVwYCTFAqTFCwJEOyQCKyGSSyECKyAbO3AD0iSUsDDEEALklAABaxKLIaKbIaSwGyGCSyECKyASMIQv/ftiiyGimyGksBshgkshAisgFC/+ezI0M=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -140,6 +140,21 @@ export type MethodArgs<TSignature extends ItxnComposeAlgoSignatures> = ItxnCompo
 export type MethodReturn<TSignature extends ItxnComposeAlgoSignatures> = ItxnComposeAlgoTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ItxnComposeAlgoCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ItxnComposeAlgoDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ItxnComposeAlgoCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ItxnComposeAlgo smart contract
@@ -173,6 +188,147 @@ export abstract class ItxnComposeAlgoParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ItxnComposeAlgo smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ItxnComposeAlgoFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ItxnComposeAlgoFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ItxnComposeAlgoClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ItxnComposeAlgoClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ItxnComposeAlgo smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ItxnComposeAlgoDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new ItxnComposeAlgoClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ItxnComposeAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ItxnComposeAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ItxnComposeAlgo smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new ItxnComposeAlgoClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ItxnComposeAlgo smart contract
  */

@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"CheckCompiledSig","structs":{},"methods":[{"name":"check_sig_with_logic_sig_only_op_compiles","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[75],"errorMessage":"expected to be signed by logic sig"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"CheckCompiledSig","structs":{},"methods":[{"name":"check_sig_with_logic_sig_only_op_compiles","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[75],"errorMessage":"expected to be signed by logic sig"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIC8vIGxvZ2ljX3NpZ25hdHVyZS9jb21waWxlZF9sb2dpY19zaWcucHk6MTUKICAgIC8vIGNsYXNzIENoZWNrQ29tcGlsZWRTaWcoYXJjNC5BUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVANQogICAgcHVzaGJ5dGVzIDB4YmIzMWZjODIgLy8gbWV0aG9kICJjaGVja19zaWdfd2l0aF9sb2dpY19zaWdfb25seV9vcF9jb21waWxlcygpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fY2hlY2tfc2lnX3dpdGhfbG9naWNfc2lnX29ubHlfb3BfY29tcGlsZXNfcm91dGVAMwogICAgZXJyCgptYWluX2NoZWNrX3NpZ193aXRoX2xvZ2ljX3NpZ19vbmx5X29wX2NvbXBpbGVzX3JvdXRlQDM6CiAgICAvLyBsb2dpY19zaWduYXR1cmUvY29tcGlsZWRfbG9naWNfc2lnLnB5OjE2CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgY2hlY2tfc2lnX3dpdGhfbG9naWNfc2lnX29ubHlfb3BfY29tcGlsZXMKCm1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVANToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCgoKLy8gdGVzdF9jYXNlcy5sb2dpY19zaWduYXR1cmUuY29tcGlsZWRfbG9naWNfc2lnLkNoZWNrQ29tcGlsZWRTaWcuY2hlY2tfc2lnX3dpdGhfbG9naWNfc2lnX29ubHlfb3BfY29tcGlsZXNbcm91dGluZ10oKSAtPiB2b2lkOgpjaGVja19zaWdfd2l0aF9sb2dpY19zaWdfb25seV9vcF9jb21waWxlczoKICAgIC8vIGxvZ2ljX3NpZ25hdHVyZS9jb21waWxlZF9sb2dpY19zaWcucHk6MTkKICAgIC8vIFR4bi5zZW5kZXIgPT0gY29tcGlsZV9sb2dpY3NpZyhkb250X3VzZV90aGlzKS5hY2NvdW50CiAgICB0eG4gU2VuZGVyCiAgICBwdXNoYnl0ZXMgYmFzZTMyKEZMS1VSSVhEVkxJTVZZTVQ1Q1pPWVhNSjI2WDdYNkIyQkE1UktKWTdZNzVRUzVBR0ZWTlEpIC8vIGFkZHIgRkxLVVJJWERWTElNVllNVDVDWk9ZWE1KMjZYN1g2QjJCQTVSS0pZN1k3NVFTNUFHRlZOUTQ3NDdGSQogICAgPT0KICAgIC8vIGxvZ2ljX3NpZ25hdHVyZS9jb21waWxlZF9sb2dpY19zaWcucHk6MTgtMjAKICAgIC8vIGFzc2VydCAoCiAgICAvLyAgICAgVHhuLnNlbmRlciA9PSBjb21waWxlX2xvZ2ljc2lnKGRvbnRfdXNlX3RoaXMpLmFjY291bnQKICAgIC8vICksICJleHBlY3RlZCB0byBiZSBzaWduZWQgYnkgbG9naWMgc2lnIgogICAgYXNzZXJ0IC8vIGV4cGVjdGVkIHRvIGJlIHNpZ25lZCBieSBsb2dpYyBzaWcKICAgIC8vIGxvZ2ljX3NpZ25hdHVyZS9jb21waWxlZF9sb2dpY19zaWcucHk6MTYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBwdXNoaW50IDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CzEbQQAYgAS7MfyCNhoAjgEAAQAxGRQxGBBEQgAIMRkUMRgUEEMxAIAgKtVIouOq0Mrhk+iy7F2J16/7+DoIOxUnH8f7CXQGLVsSRIEBQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -126,6 +126,21 @@ export type MethodArgs<TSignature extends CheckCompiledSigSignatures> = CheckCom
 export type MethodReturn<TSignature extends CheckCompiledSigSignatures> = CheckCompiledSigTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type CheckCompiledSigCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type CheckCompiledSigDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: CheckCompiledSigCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the CheckCompiledSig smart contract
@@ -146,6 +161,147 @@ export abstract class CheckCompiledSigParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the CheckCompiledSig smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class CheckCompiledSigFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `CheckCompiledSigFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new CheckCompiledSigClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new CheckCompiledSigClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the CheckCompiledSig smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: CheckCompiledSigDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new CheckCompiledSigClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CheckCompiledSig smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CheckCompiledSig smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CheckCompiledSig smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new CheckCompiledSigClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the CheckCompiledSig smart contract
  */

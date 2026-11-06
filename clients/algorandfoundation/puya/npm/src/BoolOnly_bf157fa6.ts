@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"BoolOnly","structs":{},"methods":[{"name":"set_0_convert","args":[{"type":"byte[]","name":"inp"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_0_compare","args":[{"type":"byte[]","name":"inp"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"bool_only_properties","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[67,104],"errorMessage":"invalid array length header"},{"pc":[74,111],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"BoolOnly","structs":{},"methods":[{"name":"set_0_convert","args":[{"type":"byte[]","name":"inp"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"set_0_compare","args":[{"type":"byte[]","name":"inp"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"bool_only_properties","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[67,104],"errorMessage":"invalid array length header"},{"pc":[74,111],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMgogICAgYnl0ZWNibG9jayAweDE1MWY3Yzc1CiAgICAvLyByZWdyZXNzaW9uX3Rlc3RzL2Jvb2xfb25seS5weTo0CiAgICAvLyBjbGFzcyBCb29sT25seShhcmM0LkFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxMAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4YTg1YmZmMDAgMHhjNGFmMjI1YyAweDgzNTg5ZjJkIC8vIG1ldGhvZCAic2V0XzBfY29udmVydChieXRlW10pYnl0ZVtdIiwgbWV0aG9kICJzZXRfMF9jb21wYXJlKGJ5dGVbXSlieXRlW10iLCBtZXRob2QgImJvb2xfb25seV9wcm9wZXJ0aWVzKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggc2V0XzBfY29udmVydCBzZXRfMF9jb21wYXJlIGJvb2xfb25seV9wcm9wZXJ0aWVzCiAgICBlcnIKCm1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAMTA6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgoKCi8vIHRlc3RfY2FzZXMucmVncmVzc2lvbl90ZXN0cy5ib29sX29ubHkuQm9vbE9ubHkuc2V0XzBfY29udmVydFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnNldF8wX2NvbnZlcnQ6CiAgICAvLyByZWdyZXNzaW9uX3Rlc3RzL2Jvb2xfb25seS5weTo1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvYm9vbF9vbmx5LnB5OjcKICAgIC8vIHJldHVybiBvcC5zZXRiaXRfYnl0ZXMoaW5wLCAwLCBib29sKFR4bi5udW1fYXBwX2FyZ3MpKQogICAgdHhuIE51bUFwcEFyZ3MKICAgIGludGNfMCAvLyAwCiAgICAhPQogICAgaW50Y18wIC8vIDAKICAgIHN3YXAKICAgIHNldGJpdAogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9ib29sX29ubHkucHk6NQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdF9jYXNlcy5yZWdyZXNzaW9uX3Rlc3RzLmJvb2xfb25seS5Cb29sT25seS5zZXRfMF9jb21wYXJlW3JvdXRpbmddKCkgLT4gdm9pZDoKc2V0XzBfY29tcGFyZToKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvYm9vbF9vbmx5LnB5OjkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9ib29sX29ubHkucHk6MTEKICAgIC8vIHJldHVybiBvcC5zZXRiaXRfYnl0ZXMoaW5wLCAwLCBUeG4ubnVtX2FwcF9hcmdzID4gMCkKICAgIHR4biBOdW1BcHBBcmdzCiAgICBpbnRjXzAgLy8gMAogICAgPgogICAgaW50Y18wIC8vIDAKICAgIHN3YXAKICAgIHNldGJpdAogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9ib29sX29ubHkucHk6OQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdF9jYXNlcy5yZWdyZXNzaW9uX3Rlc3RzLmJvb2xfb25seS5Cb29sT25seS5ib29sX29ubHlfcHJvcGVydGllc1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmJvb2xfb25seV9wcm9wZXJ0aWVzOgogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9ib29sX29ubHkucHk6MTUKICAgIC8vIG9wLklUeG5DcmVhdGUuYmVnaW4oKQogICAgaXR4bl9iZWdpbgogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9ib29sX29ubHkucHk6MTYKICAgIC8vIG9wLklUeG5DcmVhdGUuc2V0X3R5cGVfZW51bShUcmFuc2FjdGlvblR5cGUuQXNzZXRDb25maWcpCiAgICBwdXNoaW50IDMgLy8gYWNmZwogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9ib29sX29ubHkucHk6MTcKICAgIC8vIG9wLklUeG5DcmVhdGUuc2V0X2NvbmZpZ19hc3NldF9kZWZhdWx0X2Zyb3plbihib29sKFR4bi5udW1fYXBwX2FyZ3MpKQogICAgdHhuIE51bUFwcEFyZ3MKICAgIGludGNfMCAvLyAwCiAgICAhPQogICAgaXR4bl9maWVsZCBDb25maWdBc3NldERlZmF1bHRGcm96ZW4KICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvYm9vbF9vbmx5LnB5OjE4CiAgICAvLyBvcC5JVHhuQ3JlYXRlLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9ib29sX29ubHkucHk6MjAtMjIKICAgIC8vIGl0eG4uS2V5UmVnaXN0cmF0aW9uKAogICAgLy8gICAgIG5vbl9wYXJ0aWNpcGF0aW9uPVRydWUsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyByZWdyZXNzaW9uX3Rlc3RzL2Jvb2xfb25seS5weToyMQogICAgLy8gbm9uX3BhcnRpY2lwYXRpb249VHJ1ZSwKICAgIGludGNfMSAvLyAxCiAgICBpdHhuX2ZpZWxkIE5vbnBhcnRpY2lwYXRpb24KICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvYm9vbF9vbmx5LnB5OjIwCiAgICAvLyBpdHhuLktleVJlZ2lzdHJhdGlvbigKICAgIGludGNfMiAvLyBrZXlyZWcKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9ib29sX29ubHkucHk6MjAtMjIKICAgIC8vIGl0eG4uS2V5UmVnaXN0cmF0aW9uKAogICAgLy8gICAgIG5vbl9wYXJ0aWNpcGF0aW9uPVRydWUsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9ib29sX29ubHkucHk6MTMKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAAECJgEEFR98dTEbQQAkMRkURDEYRIIDBKhb/wAExK8iXASDWJ8tNhoAjgMACQAuAFMAMRkUMRgUEEM2GgFJIlkkCEsBFRJEVwIAMRsiEyJMVEkVFlcGAkxQKExQsCNDNhoBSSJZJAhLARUSRFcCADEbIg0iTFRJFRZXBgJMUChMULAjQ7GBA7IQMRsiE7Iks7EjsjkkshAisgGzI0M=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -150,6 +150,21 @@ export type MethodArgs<TSignature extends BoolOnlySignatures> = BoolOnlyTypes['m
 export type MethodReturn<TSignature extends BoolOnlySignatures> = BoolOnlyTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type BoolOnlyCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type BoolOnlyDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: BoolOnlyCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the BoolOnly smart contract
@@ -196,6 +211,147 @@ export abstract class BoolOnlyParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the BoolOnly smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class BoolOnlyFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `BoolOnlyFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new BoolOnlyClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new BoolOnlyClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the BoolOnly smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: BoolOnlyDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new BoolOnlyClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BoolOnly smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BoolOnly smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BoolOnly smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new BoolOnlyClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the BoolOnly smart contract
  */

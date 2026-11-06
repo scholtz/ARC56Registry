@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"TemplateVariablesContract","structs":{"AStruct":[{"name":"a","type":"uint64"},{"name":"b","type":"uint64"}],"ATuple":[{"name":"a","type":"uint64"},{"name":"b","type":"uint64"}]},"methods":[{"name":"get_bytes","args":[],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_big_uint","args":[],"returns":{"type":"uint512"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_a_named_tuple","args":[],"returns":{"type":"(uint64,uint64)","struct":"ATuple"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_a_tuple","args":[],"returns":{"type":"(uint64,uint64)"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_a_struct","args":[],"returns":{"type":"(uint64,uint64)","struct":"AStruct"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":["DeleteApplication","UpdateApplication"]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[177],"errorMessage":"overflow"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"TemplateVariablesContract","structs":{"AStruct":[{"name":"a","type":"uint64"},{"name":"b","type":"uint64"}],"ATuple":[{"name":"a","type":"uint64"},{"name":"b","type":"uint64"}]},"methods":[{"name":"get_bytes","args":[],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_big_uint","args":[],"returns":{"type":"uint512"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_a_named_tuple","args":[],"returns":{"type":"(uint64,uint64)","struct":"ATuple"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_a_tuple","args":[],"returns":{"type":"(uint64,uint64)"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"get_a_struct","args":[],"returns":{"type":"(uint64,uint64)","struct":"AStruct"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":["DeleteApplication","UpdateApplication"]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[177],"errorMessage":"overflow"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDY0IFRNUExfREVMRVRBQkxFIFRNUExfVVBEQVRBQkxFCiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUgVE1QTF9TT01FX0JZVEVTIFRNUExfU09NRV9CSUdfVUlOVCBUTVBMX05BTUVEX1RVUExFIFRNUExfVFVQTEUgVE1QTF9TVFJVQ1QKICAgIC8vIHRlbXBsYXRlX3ZhcmlhYmxlcy9jb250cmFjdC5weToxNwogICAgLy8gY2xhc3MgVGVtcGxhdGVWYXJpYWJsZXNDb250cmFjdChhcmM0LkFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdAMTIKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDJmY2FkZGY2IDB4MzdmNjRjZjMgMHgyNWZjYjFiMSAweDk1ZmQ4YWQxIDB4YjRjZWZhMzkgLy8gbWV0aG9kICJnZXRfYnl0ZXMoKWJ5dGVbXSIsIG1ldGhvZCAiZ2V0X2JpZ191aW50KCl1aW50NTEyIiwgbWV0aG9kICJnZXRfYV9uYW1lZF90dXBsZSgpKHVpbnQ2NCx1aW50NjQpIiwgbWV0aG9kICJnZXRfYV90dXBsZSgpKHVpbnQ2NCx1aW50NjQpIiwgbWV0aG9kICJnZXRfYV9zdHJ1Y3QoKSh1aW50NjQsdWludDY0KSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGdldF9ieXRlcyBnZXRfYmlnX3VpbnQgZ2V0X2FfbmFtZWRfdHVwbGUgZ2V0X2FfdHVwbGUgZ2V0X2Ffc3RydWN0CgptYWluX2FmdGVyX2lmX2Vsc2VAMTc6CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6MTcKICAgIC8vIGNsYXNzIFRlbXBsYXRlVmFyaWFibGVzQ29udHJhY3QoYXJjNC5BUkM0Q29udHJhY3QpOgogICAgZXJyCgptYWluX2JhcmVfcm91dGluZ0AxMjoKICAgIC8vIHRlbXBsYXRlX3ZhcmlhYmxlcy9jb250cmFjdC5weToxNwogICAgLy8gY2xhc3MgVGVtcGxhdGVWYXJpYWJsZXNDb250cmFjdChhcmM0LkFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBzd2l0Y2ggbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxMyBtYWluX2FmdGVyX2lmX2Vsc2VAMTcgbWFpbl9hZnRlcl9pZl9lbHNlQDE3IG1haW5fYWZ0ZXJfaWZfZWxzZUAxNyBtYWluX29uX3VwZGF0ZUAxNCBtYWluX29uX2RlbGV0ZUAxNQogICAgZXJyCgptYWluX29uX2RlbGV0ZUAxNToKICAgIC8vIHRlbXBsYXRlX3ZhcmlhYmxlcy9jb250cmFjdC5weTozMQogICAgLy8gQGFyYzQuYmFyZW1ldGhvZChhbGxvd19hY3Rpb25zPVsiRGVsZXRlQXBwbGljYXRpb24iXSkKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIC8vIHRlbXBsYXRlX3ZhcmlhYmxlcy9jb250cmFjdC5weTozMwogICAgLy8gYXNzZXJ0IFRlbXBsYXRlVmFyW1VJbnQ2NF0oIkRFTEVUQUJMRSIpCiAgICBpbnRjXzIgLy8gVE1QTF9ERUxFVEFCTEUKICAgIGFzc2VydAogICAgLy8gdGVtcGxhdGVfdmFyaWFibGVzL2NvbnRyYWN0LnB5OjMxCiAgICAvLyBAYXJjNC5iYXJlbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJEZWxldGVBcHBsaWNhdGlvbiJdKQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9vbl91cGRhdGVAMTQ6CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6MjcKICAgIC8vIEBhcmM0LmJhcmVtZXRob2QoYWxsb3dfYWN0aW9ucz1bIlVwZGF0ZUFwcGxpY2F0aW9uIl0pCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6MjkKICAgIC8vIGFzc2VydCBUZW1wbGF0ZVZhcltib29sXSgiVVBEQVRBQkxFIikKICAgIGludGNfMyAvLyBUTVBMX1VQREFUQUJMRQogICAgYXNzZXJ0CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6MjcKICAgIC8vIEBhcmM0LmJhcmVtZXRob2QoYWxsb3dfYWN0aW9ucz1bIlVwZGF0ZUFwcGxpY2F0aW9uIl0pCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDEzOgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIHJldHVybgoKCi8vIHRlc3RfY2FzZXMudGVtcGxhdGVfdmFyaWFibGVzLmNvbnRyYWN0LlRlbXBsYXRlVmFyaWFibGVzQ29udHJhY3QuZ2V0X2J5dGVzW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X2J5dGVzOgogICAgLy8gdGVtcGxhdGVfdmFyaWFibGVzL2NvbnRyYWN0LnB5OjIwCiAgICAvLyByZXR1cm4gc2VsZi5yZWNlaXZlX3ZhbHVlKFRlbXBsYXRlVmFyW0J5dGVzXSgiU09NRV9CWVRFUyIpKQogICAgYnl0ZWNfMSAvLyBUTVBMX1NPTUVfQllURVMKICAgIC8vIHRlbXBsYXRlX3ZhcmlhYmxlcy9jb250cmFjdC5weToxOAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdF9jYXNlcy50ZW1wbGF0ZV92YXJpYWJsZXMuY29udHJhY3QuVGVtcGxhdGVWYXJpYWJsZXNDb250cmFjdC5nZXRfYmlnX3VpbnRbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfYmlnX3VpbnQ6CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6MjQKICAgIC8vIHggPSBUZW1wbGF0ZVZhcltCaWdVSW50XSgiU09NRV9CSUdfVUlOVCIpCiAgICBieXRlY18yIC8vIFRNUExfU09NRV9CSUdfVUlOVAogICAgLy8gdGVtcGxhdGVfdmFyaWFibGVzL2NvbnRyYWN0LnB5OjI1CiAgICAvLyByZXR1cm4gVUludDUxMih4KQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyA2NAogICAgPD0KICAgIGFzc2VydCAvLyBvdmVyZmxvdwogICAgaW50Y18xIC8vIDY0CiAgICBiemVybwogICAgYnwKICAgIC8vIHRlbXBsYXRlX3ZhcmlhYmxlcy9jb250cmFjdC5weToyMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0X2Nhc2VzLnRlbXBsYXRlX3ZhcmlhYmxlcy5jb250cmFjdC5UZW1wbGF0ZVZhcmlhYmxlc0NvbnRyYWN0LmdldF9hX25hbWVkX3R1cGxlW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X2FfbmFtZWRfdHVwbGU6CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6MzkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6NDEKICAgIC8vIHJldHVybiBUZW1wbGF0ZVZhcltBVHVwbGVdKCJOQU1FRF9UVVBMRSIpCiAgICBieXRlY18zIC8vIFRNUExfTkFNRURfVFVQTEUKICAgIC8vIHRlbXBsYXRlX3ZhcmlhYmxlcy9jb250cmFjdC5weTozOQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHRlc3RfY2FzZXMudGVtcGxhdGVfdmFyaWFibGVzLmNvbnRyYWN0LlRlbXBsYXRlVmFyaWFibGVzQ29udHJhY3QuZ2V0X2FfdHVwbGVbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfYV90dXBsZToKICAgIC8vIHRlbXBsYXRlX3ZhcmlhYmxlcy9jb250cmFjdC5weTo0MwogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIC8vIHRlbXBsYXRlX3ZhcmlhYmxlcy9jb250cmFjdC5weTo0NQogICAgLy8gcmV0dXJuIFRlbXBsYXRlVmFyW3R1cGxlW1VJbnQ2NCwgVUludDY0XV0oIlRVUExFIikKICAgIGJ5dGVjIDQgLy8gVE1QTF9UVVBMRQogICAgLy8gdGVtcGxhdGVfdmFyaWFibGVzL2NvbnRyYWN0LnB5OjQzCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gdGVzdF9jYXNlcy50ZW1wbGF0ZV92YXJpYWJsZXMuY29udHJhY3QuVGVtcGxhdGVWYXJpYWJsZXNDb250cmFjdC5nZXRfYV9zdHJ1Y3Rbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfYV9zdHJ1Y3Q6CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6NDcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICAvLyB0ZW1wbGF0ZV92YXJpYWJsZXMvY29udHJhY3QucHk6NDkKICAgIC8vIHJldHVybiBUZW1wbGF0ZVZhcltBU3RydWN0XSgiU1RSVUNUIikKICAgIGJ5dGVjIDUgLy8gVE1QTF9TVFJVQ1QKICAgIC8vIHRlbXBsYXRlX3ZhcmlhYmxlcy9jb250cmFjdC5weTo0NwogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAUAAACYGBBUffHUAABAAAAAAAAAAAwAAAAAAAAAEEAAAAAAAAAABAAAAAAAAAAIQAAAAAAAAAAUAAAAAAAAABjEbQQAyMRkURDEYRIIFBC/K3fYEN/ZM8wQl/LGxBJX9itEEtM76OTYaAI4FACQAMwBCAEgATwAxGY0GAA//7//v/+8ACAABADEYRCREIkMxGEQlRCJDMRgUQylJFRZXBgJMUChMULAiQypJFSMORCOvqyhMULAiQygrULAiQygnBFCwIkMoJwVQsCJD","clear":"C4EBQw=="},"events":[],"templateVariables":{"DELETABLE":{"type":"AVMUint64","value":"AAAAAAAAAAA="},"UPDATABLE":{"type":"AVMUint64","value":"AAAAAAAAAAA="},"SOME_BYTES":{"type":"AVMBytes","value":""},"SOME_BIG_UINT":{"type":"AVMBytes","value":""},"NAMED_TUPLE":{"type":"ATuple","value":"AAAAAAAAAAMAAAAAAAAABA=="},"TUPLE":{"type":"(uint64,uint64)","value":"AAAAAAAAAAEAAAAAAAAAAg=="},"STRUCT":{"type":"AStruct","value":"AAAAAAAAAAUAAAAAAAAABg=="}}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -88,6 +88,19 @@ export type ATuple = {
  */
 export function ATupleFromTuple(abiTuple: [bigint, bigint]) {
   return getABIStructFromABITuple(abiTuple, APP_SPEC.structs.ATuple, APP_SPEC.structs) as ATuple
+}
+
+/**
+ * Deploy-time template variables
+ */
+export type TemplateVariables = {
+  DELETABLE: bigint,
+  UPDATABLE: bigint,
+  SOME_BYTES: Uint8Array,
+  SOME_BIG_UINT: Uint8Array,
+  NAMED_TUPLE: ATuple,
+  TUPLE: [bigint, bigint],
+  STRUCT: AStruct,
 }
 
 /**
@@ -190,6 +203,39 @@ export type MethodArgs<TSignature extends TemplateVariablesContractSignatures> =
 export type MethodReturn<TSignature extends TemplateVariablesContractSignatures> = TemplateVariablesContractTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TemplateVariablesContractCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type TemplateVariablesContractUpdateCallParams =
+  | Expand<AppClientBareCallParams> & {method?: never}
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type TemplateVariablesContractDeleteCallParams =
+  | Expand<AppClientBareCallParams> & {method?: never}
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TemplateVariablesContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TemplateVariablesContractCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: TemplateVariablesContractUpdateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: TemplateVariablesContractDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TemplateVariablesContract smart contract
@@ -262,6 +308,177 @@ export abstract class TemplateVariablesContractParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TemplateVariablesContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TemplateVariablesContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TemplateVariablesContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TemplateVariablesContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TemplateVariablesContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TemplateVariablesContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TemplateVariablesContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new TemplateVariablesContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TemplateVariablesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the TemplateVariablesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a deployUpdate call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appFactory.params.bare.deployUpdate(params)
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the TemplateVariablesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a deployDelete call
+       */
+      bare: (params?: Expand<AppClientBareCallParams>) => {
+        return this.appFactory.params.bare.deployDelete(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TemplateVariablesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TemplateVariablesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new TemplateVariablesContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TemplateVariablesContract smart contract
  */
@@ -350,6 +567,36 @@ export class TemplateVariablesContractClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the TemplateVariablesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appClient.params.bare.update(params)
+      },
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TemplateVariablesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The delete result
+       */
+      bare: (params?: Expand<AppClientBareCallParams>) => {
+        return this.appClient.params.bare.delete(params)
+      },
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the TemplateVariablesContract smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -416,6 +663,36 @@ export class TemplateVariablesContractClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the TemplateVariablesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appClient.createTransaction.bare.update(params)
+      },
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TemplateVariablesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The delete result
+       */
+      bare: (params?: Expand<AppClientBareCallParams>) => {
+        return this.appClient.createTransaction.bare.delete(params)
+      },
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the TemplateVariablesContract smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -481,6 +758,36 @@ export class TemplateVariablesContractClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the TemplateVariablesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & SendParams>) => {
+        return this.appClient.send.bare.update(params)
+      },
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TemplateVariablesContract smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The delete result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & SendParams>) => {
+        return this.appClient.send.bare.delete(params)
+      },
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the TemplateVariablesContract smart contract.
      *
@@ -610,6 +917,22 @@ export class TemplateVariablesContractClient {
         resultMappers.push((v) => client.decodeReturnValue('get_a_struct()(uint64,uint64)', v))
         return this
       },
+      get update() {
+        return {
+          bare: (params?: AppClientBareCallParams & AppClientCompilationParams ) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdate(await client.params.update.bare(params)))
+            return this
+          },
+        }
+      },
+      get delete() {
+        return {
+          bare: (params?: AppClientBareCallParams ) => {
+            promiseChain = promiseChain.then(() => composer.addAppDelete(client.params.delete.bare(params)))
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the TemplateVariablesContract contract
        */
@@ -689,6 +1012,32 @@ export type TemplateVariablesContractComposer<TReturns extends [...any[]] = []> 
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   getAStruct(params?: CallParams<TemplateVariablesContractArgs['obj']['get_a_struct()(uint64,uint64)'] | TemplateVariablesContractArgs['tuple']['get_a_struct()(uint64,uint64)']>): TemplateVariablesContractComposer<[...TReturns, TemplateVariablesContractReturns['get_a_struct()(uint64,uint64)'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the TemplateVariablesContract smart contract using a bare call.
+     *
+     * @param args The arguments for the bare call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    bare(params?: AppClientBareCallParams ): TemplateVariablesContractComposer<[...TReturns, undefined]>
+  }
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the TemplateVariablesContract smart contract using a bare call.
+     *
+     * @param args The arguments for the bare call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    bare(params?: AppClientBareCallParams ): TemplateVariablesContractComposer<[...TReturns, undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the TemplateVariablesContract smart contract.

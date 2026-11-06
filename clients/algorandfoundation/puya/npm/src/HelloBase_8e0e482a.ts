@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"HelloBase","structs":{},"methods":[{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"greet","args":[{"type":"string","name":"name"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"greeting":{"keyType":"AVMString","valueType":"AVMString","key":"Z3JlZXRpbmc="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":["UpdateApplication"]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[109],"errorMessage":"check self.greeting exists"},{"pc":[93],"errorMessage":"invalid array length header"},{"pc":[101],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"HelloBase","structs":{},"methods":[{"name":"delete","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}},{"name":"greet","args":[{"type":"string","name":"name"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"greeting":{"keyType":"AVMString","valueType":"AVMString","key":"Z3JlZXRpbmc="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":["UpdateApplication"]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[109],"errorMessage":"check self.greeting exists"},{"pc":[93],"errorMessage":"invalid array length header"},{"pc":[101],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGJ5dGVjYmxvY2sgImdyZWV0aW5nIgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gY29tcGlsZS9hcHBzLnB5OjIyCiAgICAvLyBzZWxmLmdyZWV0aW5nID0gU3RyaW5nKCkKICAgIGJ5dGVjXzAgLy8gImdyZWV0aW5nIgogICAgcHVzaGJ5dGVzICIiCiAgICBhcHBfZ2xvYmFsX3B1dAoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyBjb21waWxlL2FwcHMucHk6MjAKICAgIC8vIGNsYXNzIEhlbGxvQmFzZShBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYmFyZV9yb3V0aW5nQDgKICAgIHB1c2hieXRlc3MgMHgyNDM3OGQzYyAweGQwYTI4MjAwIC8vIG1ldGhvZCAiZGVsZXRlKCl2b2lkIiwgbWV0aG9kICJncmVldChzdHJpbmcpc3RyaW5nIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9kZWxldGVfcm91dGVANSBtYWluX2dyZWV0X3JvdXRlQDYKICAgIGVycgoKbWFpbl9ncmVldF9yb3V0ZUA2OgogICAgLy8gY29tcGlsZS9hcHBzLnB5OjMyCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgZ3JlZXQKCm1haW5fZGVsZXRlX3JvdXRlQDU6CiAgICAvLyBjb21waWxlL2FwcHMucHk6MjQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiRGVsZXRlQXBwbGljYXRpb24iXSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIHB1c2hpbnQgNSAvLyBEZWxldGVBcHBsaWNhdGlvbgogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0A4OgogICAgLy8gY29tcGlsZS9hcHBzLnB5OjIwCiAgICAvLyBjbGFzcyBIZWxsb0Jhc2UoQVJDNENvbnRyYWN0KToKICAgIHB1c2hpbnRzIDAgNCAvLyBOb09wLCBVcGRhdGVBcHBsaWNhdGlvbgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgbWF0Y2ggbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA5IG1haW5fdXBkYXRlQDEwCiAgICBlcnIKCm1haW5fdXBkYXRlQDEwOgogICAgLy8gY29tcGlsZS9hcHBzLnB5OjI4CiAgICAvLyBAYXJjNC5iYXJlbWV0aG9kKGFsbG93X2FjdGlvbnM9WyJVcGRhdGVBcHBsaWNhdGlvbiJdKQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIHJldHVybgoKbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA5OgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIHJldHVybgoKCi8vIHRlc3RfY2FzZXMuY29tcGlsZS5hcHBzLkhlbGxvQmFzZS5ncmVldFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdyZWV0OgogICAgLy8gY29tcGlsZS9hcHBzLnB5OjMyCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBwdXNoaW50IDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gY29tcGlsZS9hcHBzLnB5OjM0CiAgICAvLyByZXR1cm4gc2VsZi5ncmVldGluZyArICIgIiArIG5hbWUKICAgIHB1c2hpbnQgMAogICAgYnl0ZWNfMCAvLyAiZ3JlZXRpbmciCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuZ3JlZXRpbmcgZXhpc3RzCiAgICBwdXNoYnl0ZXMgIiAiCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gY29tcGlsZS9hcHBzLnB5OjMyCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgcHVzaGludCAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyYBCGdyZWV0aW5nMRhAAAQogABnMRtBACmCAgQkN408BNCiggA2GgCOAgALAAEAMRkUMRgQREIAHTEZgQUSMRgQQ4MCAAQxGY4CAAQAAQAxGEMxGBRDNhoBSYEAWYECCEsBFRJEVwIAgQAoZUSAASBQTFBJFRZXBgJMUIAEFR98dUxQsIEBQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -156,11 +156,75 @@ export type MethodReturn<TSignature extends HelloBaseSignatures> = HelloBaseType
 export type GlobalKeysState = HelloBaseTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type HelloBaseCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type HelloBaseUpdateCallParams =
+  | Expand<AppClientBareCallParams> & {method?: never}
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type HelloBaseDeleteCallParams =
+  | Expand<CallParams<HelloBaseArgs['obj']['delete()void'] | HelloBaseArgs['tuple']['delete()void']> & {method: 'delete'}>
+  | Expand<CallParams<HelloBaseArgs['obj']['delete()void'] | HelloBaseArgs['tuple']['delete()void']> & {method: 'delete()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type HelloBaseDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: HelloBaseCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: HelloBaseUpdateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: HelloBaseDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the HelloBase smart contract
  */
 export abstract class HelloBaseParamsFactory {
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends HelloBaseDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'delete':
+          case 'delete()void':
+            return HelloBaseParamsFactory.delete.delete(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the HelloBase smart contract using the delete()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      delete(params: CallParams<HelloBaseArgs['obj']['delete()void'] | HelloBaseArgs['tuple']['delete()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'delete()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the greet(string)string ABI method
    *
@@ -176,6 +240,178 @@ export abstract class HelloBaseParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the HelloBase smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class HelloBaseFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `HelloBaseFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new HelloBaseClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new HelloBaseClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the HelloBase smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: HelloBaseDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      deleteParams: params.deleteParams?.method ? HelloBaseParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (HelloBaseDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new HelloBaseClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HelloBase smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the HelloBase smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a deployUpdate call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appFactory.params.bare.deployUpdate(params)
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the HelloBase smart contract using the delete()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      delete: (params: CallParams<HelloBaseArgs['obj']['delete()void'] | HelloBaseArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(HelloBaseParamsFactory.delete.delete(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HelloBase smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the HelloBase smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new HelloBaseClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the HelloBase smart contract
  */
@@ -264,6 +500,37 @@ export class HelloBaseClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the HelloBase smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appClient.params.bare.update(params)
+      },
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the HelloBase smart contract using the `delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      delete: (params: CallParams<HelloBaseArgs['obj']['delete()void'] | HelloBaseArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.params.delete(HelloBaseParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the HelloBase smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -290,6 +557,37 @@ export class HelloBaseClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the HelloBase smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams>) => {
+        return this.appClient.createTransaction.bare.update(params)
+      },
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the HelloBase smart contract using the `delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      delete: (params: CallParams<HelloBaseArgs['obj']['delete()void'] | HelloBaseArgs['tuple']['delete()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(HelloBaseParamsFactory.delete.delete(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the HelloBase smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -315,6 +613,38 @@ export class HelloBaseClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the HelloBase smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The update result
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & SendParams>) => {
+        return this.appClient.send.bare.update(params)
+      },
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the HelloBase smart contract using the `delete()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      delete: async (params: CallParams<HelloBaseArgs['obj']['delete()void'] | HelloBaseArgs['tuple']['delete()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(HelloBaseParamsFactory.delete.delete(params))
+        return {...result, return: result.return as unknown as (undefined | HelloBaseReturns['delete()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the HelloBase smart contract.
      *
@@ -386,6 +716,23 @@ export class HelloBaseClient {
         resultMappers.push((v) => client.decodeReturnValue('greet(string)string', v))
         return this
       },
+      get update() {
+        return {
+          bare: (params?: AppClientBareCallParams & AppClientCompilationParams ) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdate(await client.params.update.bare(params)))
+            return this
+          },
+        }
+      },
+      get delete() {
+        return {
+          delete: (params: CallParams<HelloBaseArgs['obj']['delete()void'] | HelloBaseArgs['tuple']['delete()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.delete(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the HelloBase contract
        */
@@ -429,6 +776,33 @@ export type HelloBaseComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   greet(params?: CallParams<HelloBaseArgs['obj']['greet(string)string'] | HelloBaseArgs['tuple']['greet(string)string']>): HelloBaseComposer<[...TReturns, HelloBaseReturns['greet(string)string'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the HelloBase smart contract using a bare call.
+     *
+     * @param args The arguments for the bare call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    bare(params?: AppClientBareCallParams ): HelloBaseComposer<[...TReturns, undefined]>
+  }
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the HelloBase smart contract using the delete()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    delete(params?: CallParams<HelloBaseArgs['obj']['delete()void'] | HelloBaseArgs['tuple']['delete()void']>): HelloBaseComposer<[...TReturns, HelloBaseReturns['delete()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the HelloBase smart contract.

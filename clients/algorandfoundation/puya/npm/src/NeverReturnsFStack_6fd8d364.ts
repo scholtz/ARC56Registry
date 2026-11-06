@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"NeverReturnsFStack","structs":{},"methods":[{"name":"method","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"NeverReturnsFStack","structs":{},"methods":[{"name":"method","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvbmV2ZXJfcmV0dXJucy5weToxNgogICAgLy8gY2xhc3MgTmV2ZXJSZXR1cm5zRlN0YWNrKEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA1CiAgICBwdXNoYnl0ZXMgMHgzZjI3ZjRhNCAvLyBtZXRob2QgIm1ldGhvZCgpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9tZXRob2Rfcm91dGVAMwogICAgZXJyCgptYWluX21ldGhvZF9yb3V0ZUAzOgogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9uZXZlcl9yZXR1cm5zLnB5OjE3CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0CiAgICBiIG1ldGhvZAoKbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA1OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0X2Nhc2VzLnJlZ3Jlc3Npb25fdGVzdHMubmV2ZXJfcmV0dXJucy5OZXZlclJldHVybnNGU3RhY2subWV0aG9kW3JvdXRpbmddKCkgLT4gdm9pZDoKbWV0aG9kOgogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9uZXZlcl9yZXR1cm5zLnB5OjI1CiAgICAvLyB4ID0gVUludDY0KDEpCiAgICBwdXNoaW50IDEKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvbmV2ZXJfcmV0dXJucy5weToyNgogICAgLy8gaWYgVHhuLm51bV9hcHBfYXJncyA+IDA6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWV0aG9kX2FmdGVyX2lmX2Vsc2VAMwogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9uZXZlcl9yZXR1cm5zLnB5OjI3CiAgICAvLyB4ID0gVUludDY0KDIpCiAgICBwdXNoaW50IDIKICAgIGJ1cnkgMQoKbWV0aG9kX2FmdGVyX2lmX2Vsc2VAMzoKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvbmV2ZXJfcmV0dXJucy5weTozMAogICAgLy8gZm9yIGlkeCBpbiB1cmFuZ2UoVHhuLm51bV9hcHBfYXJncyk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9uZXZlcl9yZXR1cm5zLnB5OjI5CiAgICAvLyBvbmUgPSBVSW50NjQoMCkKICAgIHB1c2hpbnQgMAogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9uZXZlcl9yZXR1cm5zLnB5OjMwCiAgICAvLyBmb3IgaWR4IGluIHVyYW5nZShUeG4ubnVtX2FwcF9hcmdzKToKICAgIGR1cAoKbWV0aG9kX2Zvcl9oZWFkZXJANDoKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvbmV2ZXJfcmV0dXJucy5weTozMAogICAgLy8gZm9yIGlkeCBpbiB1cmFuZ2UoVHhuLm51bV9hcHBfYXJncyk6CiAgICBkdXAKICAgIGRpZyAzCiAgICA8CiAgICBieiBtZXRob2RfYWZ0ZXJfZm9yQDgKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvbmV2ZXJfcmV0dXJucy5weTozMQogICAgLy8geCArPSBpZHgKICAgIGRpZyAzCiAgICBkaWcgMQogICAgZHVwCiAgICBjb3ZlciAyCiAgICArCiAgICBidXJ5IDUKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvbmV2ZXJfcmV0dXJucy5weTozMgogICAgLy8gaWYgaWR4ID09IDA6CiAgICBibnogbWV0aG9kX2FmdGVyX2lmX2Vsc2VANwogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9uZXZlcl9yZXR1cm5zLnB5OjMzCiAgICAvLyBvbmUgKz0gMQogICAgc3dhcAogICAgcHVzaGludCAxCiAgICArCiAgICBzd2FwCgptZXRob2RfYWZ0ZXJfaWZfZWxzZUA3OgogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9uZXZlcl9yZXR1cm5zLnB5OjMwCiAgICAvLyBmb3IgaWR4IGluIHVyYW5nZShUeG4ubnVtX2FwcF9hcmdzKToKICAgIHB1c2hpbnQgMQogICAgKwogICAgYiBtZXRob2RfZm9yX2hlYWRlckA0CgptZXRob2RfYWZ0ZXJfZm9yQDg6CiAgICBwb3AKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvbmV2ZXJfcmV0dXJucy5weTozNQogICAgLy8gbG9nKCJ5b3Ugd29uJ3Qgc2VlIHRoaXMiLCBvbmUpCiAgICBpdG9iCiAgICBwdXNoYnl0ZXMgInlvdSB3b24ndCBzZWUgdGhpcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICAvLyByZWdyZXNzaW9uX3Rlc3RzL25ldmVyX3JldHVybnMucHk6MzYKICAgIC8vIG9wLmVycigpCiAgICBlcnIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CzEbQQAYgAQ/J/SkNhoAjgEAAQAxGRQxGBBEQgAIMRkUMRgUEEOBATEbQQAEgQJFATEbgQBJSUsDDEEAGEsDSwFJTgIIRQVAAAVMgQEITIEBCEL/4UgWgBJ5b3Ugd29uJ3Qgc2VlIHRoaXNMULAA","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -130,6 +130,21 @@ export type MethodArgs<TSignature extends NeverReturnsFStackSignatures> = NeverR
 export type MethodReturn<TSignature extends NeverReturnsFStackSignatures> = NeverReturnsFStackTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type NeverReturnsFStackCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type NeverReturnsFStackDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: NeverReturnsFStackCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the NeverReturnsFStack smart contract
@@ -150,6 +165,147 @@ export abstract class NeverReturnsFStackParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the NeverReturnsFStack smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class NeverReturnsFStackFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `NeverReturnsFStackFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new NeverReturnsFStackClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new NeverReturnsFStackClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the NeverReturnsFStack smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: NeverReturnsFStackDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new NeverReturnsFStackClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NeverReturnsFStack smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NeverReturnsFStack smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NeverReturnsFStack smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new NeverReturnsFStackClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the NeverReturnsFStack smart contract
  */

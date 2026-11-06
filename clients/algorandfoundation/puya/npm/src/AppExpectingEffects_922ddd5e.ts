@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"AppExpectingEffects","structs":{},"methods":[{"name":"create_group","args":[{"type":"acfg","name":"asset_create"},{"type":"appl","name":"app_create"}],"returns":{"type":"(uint64,uint64)"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"log_group","args":[{"type":"appl","name":"app_call"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[154],"errorMessage":"application log value is not the result of an ABI return"},{"pc":[96],"errorMessage":"expected app created"},{"pc":[81],"errorMessage":"expected asset created"},{"pc":[105],"errorMessage":"expected correct app id"},{"pc":[90],"errorMessage":"expected correct asset id"},{"pc":[138],"errorMessage":"expected correct method called"},{"pc":[144],"errorMessage":"expected logs"},{"pc":[163],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[65],"errorMessage":"transaction type is acfg"},{"pc":[75,126],"errorMessage":"transaction type is appl"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"AppExpectingEffects","structs":{},"methods":[{"name":"create_group","args":[{"type":"acfg","name":"asset_create"},{"type":"appl","name":"app_create"}],"returns":{"type":"(uint64,uint64)"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"log_group","args":[{"type":"appl","name":"app_call"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[154],"errorMessage":"application log value is not the result of an ABI return"},{"pc":[96],"errorMessage":"expected app created"},{"pc":[81],"errorMessage":"expected asset created"},{"pc":[105],"errorMessage":"expected correct app id"},{"pc":[90],"errorMessage":"expected correct asset id"},{"pc":[138],"errorMessage":"expected correct method called"},{"pc":[144],"errorMessage":"expected logs"},{"pc":[163],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[65],"errorMessage":"transaction type is acfg"},{"pc":[75,126],"errorMessage":"transaction type is appl"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDYKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NQogICAgLy8gZ3JvdXBfc2lkZV9lZmZlY3RzL2NvbnRyYWN0LnB5OjQKICAgIC8vIGNsYXNzIEFwcEV4cGVjdGluZ0VmZmVjdHMoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDZkM2EwNDM5IDB4NjJhMGVmNjIgLy8gbWV0aG9kICJjcmVhdGVfZ3JvdXAoYWNmZyxhcHBsKSh1aW50NjQsdWludDY0KSIsIG1ldGhvZCAibG9nX2dyb3VwKGFwcGwpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGNyZWF0ZV9ncm91cCBsb2dfZ3JvdXAKICAgIGVycgoKbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA5OgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyB0ZXN0X2Nhc2VzLmdyb3VwX3NpZGVfZWZmZWN0cy5jb250cmFjdC5BcHBFeHBlY3RpbmdFZmZlY3RzLmNyZWF0ZV9ncm91cFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZV9ncm91cDoKICAgIC8vIGdyb3VwX3NpZGVfZWZmZWN0cy9jb250cmFjdC5weTo1CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBHcm91cEluZGV4CiAgICBwdXNoaW50IDIKICAgIC0KICAgIGR1cAogICAgZ3R4bnMgVHlwZUVudW0KICAgIHB1c2hpbnQgMyAvLyBhY2ZnCiAgICA9PQogICAgYXNzZXJ0IC8vIHRyYW5zYWN0aW9uIHR5cGUgaXMgYWNmZwogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMCAvLyAxCiAgICAtCiAgICBkdXAKICAgIGd0eG5zIFR5cGVFbnVtCiAgICBpbnRjXzEgLy8gYXBwbAogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIGFwcGwKICAgIC8vIGdyb3VwX3NpZGVfZWZmZWN0cy9jb250cmFjdC5weToxMQogICAgLy8gYXNzZXJ0IGFzc2V0X2NyZWF0ZS5jcmVhdGVkX2Fzc2V0LmlkLCAiZXhwZWN0ZWQgYXNzZXQgY3JlYXRlZCIKICAgIGRpZyAxCiAgICBndHhucyBDcmVhdGVkQXNzZXRJRAogICAgZHVwCiAgICBhc3NlcnQgLy8gZXhwZWN0ZWQgYXNzZXQgY3JlYXRlZAogICAgLy8gZ3JvdXBfc2lkZV9lZmZlY3RzL2NvbnRyYWN0LnB5OjEzCiAgICAvLyBvcC5nYWlkKGFzc2V0X2NyZWF0ZS5ncm91cF9pbmRleCkgPT0gYXNzZXRfY3JlYXRlLmNyZWF0ZWRfYXNzZXQuaWQKICAgIHVuY292ZXIgMgogICAgZ3R4bnMgR3JvdXBJbmRleAogICAgZ2FpZHMKICAgIGRpZyAxCiAgICA9PQogICAgLy8gZ3JvdXBfc2lkZV9lZmZlY3RzL2NvbnRyYWN0LnB5OjEyLTE0CiAgICAvLyBhc3NlcnQgKAogICAgLy8gICAgIG9wLmdhaWQoYXNzZXRfY3JlYXRlLmdyb3VwX2luZGV4KSA9PSBhc3NldF9jcmVhdGUuY3JlYXRlZF9hc3NldC5pZAogICAgLy8gKSwgImV4cGVjdGVkIGNvcnJlY3QgYXNzZXQgaWQiCiAgICBhc3NlcnQgLy8gZXhwZWN0ZWQgY29ycmVjdCBhc3NldCBpZAogICAgLy8gZ3JvdXBfc2lkZV9lZmZlY3RzL2NvbnRyYWN0LnB5OjE1CiAgICAvLyBhc3NlcnQgYXBwX2NyZWF0ZS5jcmVhdGVkX2FwcC5pZCwgImV4cGVjdGVkIGFwcCBjcmVhdGVkIgogICAgZGlnIDEKICAgIGd0eG5zIENyZWF0ZWRBcHBsaWNhdGlvbklECiAgICBkdXAKICAgIGFzc2VydCAvLyBleHBlY3RlZCBhcHAgY3JlYXRlZAogICAgLy8gZ3JvdXBfc2lkZV9lZmZlY3RzL2NvbnRyYWN0LnB5OjE3CiAgICAvLyBvcC5nYWlkKGFwcF9jcmVhdGUuZ3JvdXBfaW5kZXgpID09IGFwcF9jcmVhdGUuY3JlYXRlZF9hcHAuaWQKICAgIHVuY292ZXIgMgogICAgZ3R4bnMgR3JvdXBJbmRleAogICAgZ2FpZHMKICAgIGRpZyAxCiAgICA9PQogICAgLy8gZ3JvdXBfc2lkZV9lZmZlY3RzL2NvbnRyYWN0LnB5OjE2LTE4CiAgICAvLyBhc3NlcnQgKAogICAgLy8gICAgIG9wLmdhaWQoYXBwX2NyZWF0ZS5ncm91cF9pbmRleCkgPT0gYXBwX2NyZWF0ZS5jcmVhdGVkX2FwcC5pZAogICAgLy8gKSwgImV4cGVjdGVkIGNvcnJlY3QgYXBwIGlkIgogICAgYXNzZXJ0IC8vIGV4cGVjdGVkIGNvcnJlY3QgYXBwIGlkCiAgICAvLyBncm91cF9zaWRlX2VmZmVjdHMvY29udHJhY3QucHk6NQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBzd2FwCiAgICBpdG9iCiAgICBzd2FwCiAgICBpdG9iCiAgICBjb25jYXQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyB0ZXN0X2Nhc2VzLmdyb3VwX3NpZGVfZWZmZWN0cy5jb250cmFjdC5BcHBFeHBlY3RpbmdFZmZlY3RzLmxvZ19ncm91cFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmxvZ19ncm91cDoKICAgIC8vIGdyb3VwX3NpZGVfZWZmZWN0cy9jb250cmFjdC5weToyMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG4gR3JvdXBJbmRleAogICAgaW50Y18wIC8vIDEKICAgIC0KICAgIGR1cAogICAgZ3R4bnMgVHlwZUVudW0KICAgIGludGNfMSAvLyBhcHBsCiAgICA9PQogICAgYXNzZXJ0IC8vIHRyYW5zYWN0aW9uIHR5cGUgaXMgYXBwbAogICAgLy8gZ3JvdXBfc2lkZV9lZmZlY3RzL2NvbnRyYWN0LnB5OjI0CiAgICAvLyBhc3NlcnQgYXBwX2NhbGwuYXBwX2FyZ3MoMCkgPT0gYXJjNC5hcmM0X3NpZ25hdHVyZSgKICAgIGR1cAogICAgZ3R4bnNhIEFwcGxpY2F0aW9uQXJncyAwCiAgICAvLyBncm91cF9zaWRlX2VmZmVjdHMvY29udHJhY3QucHk6MjQtMjYKICAgIC8vIGFzc2VydCBhcHBfY2FsbC5hcHBfYXJncygwKSA9PSBhcmM0LmFyYzRfc2lnbmF0dXJlKAogICAgLy8gICAgICJzb21lX3ZhbHVlKCl1aW50NjQiCiAgICAvLyApLCAiZXhwZWN0ZWQgY29ycmVjdCBtZXRob2QgY2FsbGVkIgogICAgcHVzaGJ5dGVzIDB4ZDM0NzllNjUgLy8gbWV0aG9kICJzb21lX3ZhbHVlKCl1aW50NjQiCiAgICA9PQogICAgYXNzZXJ0IC8vIGV4cGVjdGVkIGNvcnJlY3QgbWV0aG9kIGNhbGxlZAogICAgLy8gZ3JvdXBfc2lkZV9lZmZlY3RzL2NvbnRyYWN0LnB5OjI3CiAgICAvLyBhc3NlcnQgYXBwX2NhbGwubnVtX2xvZ3MgPT0gMSwgImV4cGVjdGVkIGxvZ3MiCiAgICBkdXAKICAgIGd0eG5zIE51bUxvZ3MKICAgIGludGNfMCAvLyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIGV4cGVjdGVkIGxvZ3MKICAgIC8vIGdyb3VwX3NpZGVfZWZmZWN0cy9jb250cmFjdC5weToyOQogICAgLy8gYXJjNC5VSW50NjQuZnJvbV9sb2coYXBwX2NhbGwubGFzdF9sb2cpCiAgICBkdXAKICAgIGd0eG5zIExhc3RMb2cKICAgIGR1cAogICAgZXh0cmFjdCAwIDQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgPT0KICAgIGFzc2VydCAvLyBhcHBsaWNhdGlvbiBsb2cgdmFsdWUgaXMgbm90IHRoZSByZXN1bHQgb2YgYW4gQUJJIHJldHVybgogICAgZXh0cmFjdCA0IDAKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICAvLyBncm91cF9zaWRlX2VmZmVjdHMvY29udHJhY3QucHk6MzAKICAgIC8vID09IChhcHBfY2FsbC5ncm91cF9pbmRleCArIDEpICogR2xvYmFsLmdyb3VwX3NpemUKICAgIHN3YXAKICAgIGd0eG5zIEdyb3VwSW5kZXgKICAgIGludGNfMCAvLyAxCiAgICArCiAgICBnbG9iYWwgR3JvdXBTaXplCiAgICAqCiAgICAvLyBncm91cF9zaWRlX2VmZmVjdHMvY29udHJhY3QucHk6MjktMzAKICAgIC8vIGFyYzQuVUludDY0LmZyb21fbG9nKGFwcF9jYWxsLmxhc3RfbG9nKQogICAgLy8gPT0gKGFwcF9jYWxsLmdyb3VwX2luZGV4ICsgMSkgKiBHbG9iYWwuZ3JvdXBfc2l6ZQogICAgaXRvYgogICAgYj09CiAgICAvLyBncm91cF9zaWRlX2VmZmVjdHMvY29udHJhY3QucHk6MjgtMzEKICAgIC8vIGFzc2VydCAoCiAgICAvLyAgICAgYXJjNC5VSW50NjQuZnJvbV9sb2coYXBwX2NhbGwubGFzdF9sb2cpCiAgICAvLyAgICAgPT0gKGFwcF9jYWxsLmdyb3VwX2luZGV4ICsgMSkgKiBHbG9iYWwuZ3JvdXBfc2l6ZQogICAgLy8gKQogICAgYXNzZXJ0CiAgICAvLyBncm91cF9zaWRlX2VmZmVjdHMvY29udHJhY3QucHk6MjIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyACAQYmAQQVH3x1MRtBAB0xGRREMRhEggIEbToEOQRioO9iNhoAjgIACQBIADEZFDEYFBBDMRaBAglJOBCBAxJEMRYiCUk4ECMSREsBODxJRE8COBY9SwESREsBOD1JRE8COBY9SwESREwWTBZQKExQsCJDMRYiCUk4ECMSREk5GgCABNNHnmUSREk4OyISREk4PklXAAQoEkRXBABJFYEIEkRMOBYiCDIECxaoRCJD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -143,6 +143,21 @@ export type MethodArgs<TSignature extends AppExpectingEffectsSignatures> = AppEx
 export type MethodReturn<TSignature extends AppExpectingEffectsSignatures> = AppExpectingEffectsTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AppExpectingEffectsCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AppExpectingEffectsDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AppExpectingEffectsCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AppExpectingEffects smart contract
@@ -176,6 +191,147 @@ export abstract class AppExpectingEffectsParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the AppExpectingEffects smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AppExpectingEffectsFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AppExpectingEffectsFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AppExpectingEffectsClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AppExpectingEffectsClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the AppExpectingEffects smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AppExpectingEffectsDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new AppExpectingEffectsClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AppExpectingEffects smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AppExpectingEffects smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AppExpectingEffects smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new AppExpectingEffectsClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the AppExpectingEffects smart contract
  */

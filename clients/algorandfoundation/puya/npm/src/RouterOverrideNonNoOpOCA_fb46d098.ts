@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"RouterOverrideNonNoOpOCA","structs":{},"methods":[{"name":"noop_method","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"another_noop_method","args":[{"type":"uint64","name":"val"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"update_application","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[105],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"RouterOverrideNonNoOpOCA","structs":{},"methods":[{"name":"noop_method","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"another_noop_method","args":[{"type":"uint64","name":"val"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"update_application","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[105],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyB0ZXN0X2Nhc2VzLnJlZ3Jlc3Npb25fdGVzdHMucm91dGVyX292ZXJyaWRlX25vbl9ub29wX29jYS5Sb3V0ZXJPdmVycmlkZU5vbk5vT3BPQ0EuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxCiAgICAvLyByZWdyZXNzaW9uX3Rlc3RzL3JvdXRlcl9vdmVycmlkZV9ub25fbm9vcF9vY2EucHk6NgogICAgLy8gY2xhc3MgUm91dGVyT3ZlcnJpZGVOb25Ob09wT0NBKEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUA5CiAgICBwdXNoYnl0ZXMgMHhiNTNlMjU5MyAvLyBtZXRob2QgInVwZGF0ZV9hcHBsaWNhdGlvbigpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdXBkYXRlX2FwcGxpY2F0aW9uX3JvdXRlQDMKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fYWZ0ZXJfaWZfZWxzZUA4CiAgICBwdXNoYnl0ZXNzIDB4YzFmMWViZDggMHhjZjUyMzUzYiAvLyBtZXRob2QgIm5vb3BfbWV0aG9kKCl2b2lkIiwgbWV0aG9kICJhbm90aGVyX25vb3BfbWV0aG9kKHVpbnQ2NCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9ub29wX21ldGhvZF9yb3V0ZUA2IG1haW5fYW5vdGhlcl9ub29wX21ldGhvZF9yb3V0ZUA3CgptYWluX2FmdGVyX2lmX2Vsc2VAODoKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvcm91dGVyX292ZXJyaWRlX25vbl9ub29wX29jYS5weTo5CiAgICAvLyByZXR1cm4gc3VwZXIoKS5hcHByb3ZhbF9wcm9ncmFtKCkKICAgIGVycgoKbWFpbl9hbm90aGVyX25vb3BfbWV0aG9kX3JvdXRlQDc6CiAgICAvLyByZWdyZXNzaW9uX3Rlc3RzL3JvdXRlcl9vdmVycmlkZV9ub25fbm9vcF9vY2EucHk6MTUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZAogICAgY2FsbHN1YiBhbm90aGVyX25vb3BfbWV0aG9kCiAgICBpbnRjXzAgLy8gMQogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9yb3V0ZXJfb3ZlcnJpZGVfbm9uX25vb3Bfb2NhLnB5OjkKICAgIC8vIHJldHVybiBzdXBlcigpLmFwcHJvdmFsX3Byb2dyYW0oKQogICAgcmV0dXJuCgptYWluX25vb3BfbWV0aG9kX3JvdXRlQDY6CiAgICAvLyByZWdyZXNzaW9uX3Rlc3RzL3JvdXRlcl9vdmVycmlkZV9ub25fbm9vcF9vY2EucHk6MTMKICAgIC8vIGxvZygibm9vcCIpCiAgICBwdXNoYnl0ZXMgIm5vb3AiCiAgICBsb2cKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvcm91dGVyX292ZXJyaWRlX25vbl9ub29wX29jYS5weToxMQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBpbnRjXzAgLy8gMQogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9yb3V0ZXJfb3ZlcnJpZGVfbm9uX25vb3Bfb2NhLnB5OjkKICAgIC8vIHJldHVybiBzdXBlcigpLmFwcHJvdmFsX3Byb2dyYW0oKQogICAgcmV0dXJuCgptYWluX3VwZGF0ZV9hcHBsaWNhdGlvbl9yb3V0ZUAzOgogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9yb3V0ZXJfb3ZlcnJpZGVfbm9uX25vb3Bfb2NhLnB5OjE5CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIlVwZGF0ZUFwcGxpY2F0aW9uIl0pCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBwdXNoaW50IDQgLy8gVXBkYXRlQXBwbGljYXRpb24KICAgID09CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9yb3V0ZXJfb3ZlcnJpZGVfbm9uX25vb3Bfb2NhLnB5OjIxCiAgICAvLyBsb2coInVwZGF0ZSIpCiAgICBwdXNoYnl0ZXMgInVwZGF0ZSIKICAgIGxvZwogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9yb3V0ZXJfb3ZlcnJpZGVfbm9uX25vb3Bfb2NhLnB5OjE5CiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIlVwZGF0ZUFwcGxpY2F0aW9uIl0pCiAgICBpbnRjXzAgLy8gMQogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9yb3V0ZXJfb3ZlcnJpZGVfbm9uX25vb3Bfb2NhLnB5OjkKICAgIC8vIHJldHVybiBzdXBlcigpLmFwcHJvdmFsX3Byb2dyYW0oKQogICAgcmV0dXJuCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIGFzc2VydAogICAgaW50Y18wIC8vIDEKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvcm91dGVyX292ZXJyaWRlX25vbl9ub29wX29jYS5weTo5CiAgICAvLyByZXR1cm4gc3VwZXIoKS5hcHByb3ZhbF9wcm9ncmFtKCkKICAgIHJldHVybgoKCi8vIHRlc3RfY2FzZXMucmVncmVzc2lvbl90ZXN0cy5yb3V0ZXJfb3ZlcnJpZGVfbm9uX25vb3Bfb2NhLlJvdXRlck92ZXJyaWRlTm9uTm9PcE9DQS5hbm90aGVyX25vb3BfbWV0aG9kW3JvdXRpbmddKCkgLT4gdm9pZDoKYW5vdGhlcl9ub29wX21ldGhvZDoKICAgIC8vIHJlZ3Jlc3Npb25fdGVzdHMvcm91dGVyX292ZXJyaWRlX25vbl9ub29wX29jYS5weToxNQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gcmVncmVzc2lvbl90ZXN0cy9yb3V0ZXJfb3ZlcnJpZGVfbm9uX25vb3Bfb2NhLnB5OjE3CiAgICAvLyBsb2coImFub3RoZXIgbm9vcCIsIHZhbCkKICAgIGl0b2IKICAgIHB1c2hieXRlcyAiYW5vdGhlciBub29wIgogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyABATEbQQBOgAS1PiWTNhoAjgEALTEZFEQxGEEAFYICBMHx69gEz1I1OzYaAI4CAAYAAQCIACkiQ4AEbm9vcLAiQzEZgQQSMRgQRIAGdXBkYXRlsCJDMRkUMRgUEEQiQzYaAUkVgQgSRBcWgAxhbm90aGVyIG5vb3BMULCJ","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -144,11 +144,66 @@ export type MethodArgs<TSignature extends RouterOverrideNonNoOpOcaSignatures> = 
 export type MethodReturn<TSignature extends RouterOverrideNonNoOpOcaSignatures> = RouterOverrideNonNoOpOcaTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type RouterOverrideNonNoOpOcaCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type RouterOverrideNonNoOpOcaUpdateCallParams =
+  | Expand<CallParams<RouterOverrideNonNoOpOcaArgs['obj']['update_application()void'] | RouterOverrideNonNoOpOcaArgs['tuple']['update_application()void']> & {method: 'update_application'}>
+  | Expand<CallParams<RouterOverrideNonNoOpOcaArgs['obj']['update_application()void'] | RouterOverrideNonNoOpOcaArgs['tuple']['update_application()void']> & {method: 'update_application()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type RouterOverrideNonNoOpOcaDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: RouterOverrideNonNoOpOcaCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: RouterOverrideNonNoOpOcaUpdateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the RouterOverrideNonNoOpOca smart contract
  */
 export abstract class RouterOverrideNonNoOpOcaParamsFactory {
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends RouterOverrideNonNoOpOcaUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'update_application':
+          case 'update_application()void':
+            return RouterOverrideNonNoOpOcaParamsFactory.update.updateApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the RouterOverrideNonNoOpOCA smart contract using the update_application()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateApplication(params: CallParams<RouterOverrideNonNoOpOcaArgs['obj']['update_application()void'] | RouterOverrideNonNoOpOcaArgs['tuple']['update_application()void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'update_application()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the noop_method()void ABI method
    *
@@ -177,6 +232,163 @@ export abstract class RouterOverrideNonNoOpOcaParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the RouterOverrideNonNoOpOCA smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class RouterOverrideNonNoOpOcaFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `RouterOverrideNonNoOpOcaFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new RouterOverrideNonNoOpOcaClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new RouterOverrideNonNoOpOcaClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the RouterOverrideNonNoOpOCA smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: RouterOverrideNonNoOpOcaDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      updateParams: params.updateParams?.method ? RouterOverrideNonNoOpOcaParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (RouterOverrideNonNoOpOcaUpdateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new RouterOverrideNonNoOpOcaClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the RouterOverrideNonNoOpOCA smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the RouterOverrideNonNoOpOCA smart contract using the update_application()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateApplication: (params: CallParams<RouterOverrideNonNoOpOcaArgs['obj']['update_application()void'] | RouterOverrideNonNoOpOcaArgs['tuple']['update_application()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appFactory.params.deployUpdate(RouterOverrideNonNoOpOcaParamsFactory.update.updateApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the RouterOverrideNonNoOpOCA smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the RouterOverrideNonNoOpOCA smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new RouterOverrideNonNoOpOcaClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the RouterOverrideNonNoOpOCA smart contract
  */
@@ -257,6 +469,22 @@ export class RouterOverrideNonNoOpOcaClient {
    */
   readonly params = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the RouterOverrideNonNoOpOCA smart contract using the `update_application()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateApplication: (params: CallParams<RouterOverrideNonNoOpOcaArgs['obj']['update_application()void'] | RouterOverrideNonNoOpOcaArgs['tuple']['update_application()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.params.update(RouterOverrideNonNoOpOcaParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the RouterOverrideNonNoOpOCA smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -293,6 +521,22 @@ export class RouterOverrideNonNoOpOcaClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the RouterOverrideNonNoOpOCA smart contract using the `update_application()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateApplication: (params: CallParams<RouterOverrideNonNoOpOcaArgs['obj']['update_application()void'] | RouterOverrideNonNoOpOcaArgs['tuple']['update_application()void']> & AppClientCompilationParams = {args: []}) => {
+        return this.appClient.createTransaction.update(RouterOverrideNonNoOpOcaParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the RouterOverrideNonNoOpOCA smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -328,6 +572,23 @@ export class RouterOverrideNonNoOpOcaClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the RouterOverrideNonNoOpOCA smart contract using the `update_application()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateApplication: async (params: CallParams<RouterOverrideNonNoOpOcaArgs['obj']['update_application()void'] | RouterOverrideNonNoOpOcaArgs['tuple']['update_application()void']> & AppClientCompilationParams & SendParams = {args: []}) => {
+        const result = await this.appClient.send.update(RouterOverrideNonNoOpOcaParamsFactory.update.updateApplication(params))
+        return {...result, return: result.return as unknown as (undefined | RouterOverrideNonNoOpOcaReturns['update_application()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the RouterOverrideNonNoOpOCA smart contract.
      *
@@ -400,6 +661,15 @@ export class RouterOverrideNonNoOpOcaClient {
         resultMappers.push(undefined)
         return this
       },
+      get update() {
+        return {
+          updateApplication: (params: CallParams<RouterOverrideNonNoOpOcaArgs['obj']['update_application()void'] | RouterOverrideNonNoOpOcaArgs['tuple']['update_application()void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the RouterOverrideNonNoOpOCA contract
        */
@@ -452,6 +722,20 @@ export type RouterOverrideNonNoOpOcaComposer<TReturns extends [...any[]] = []> =
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   anotherNoopMethod(params?: CallParams<RouterOverrideNonNoOpOcaArgs['obj']['another_noop_method(uint64)void'] | RouterOverrideNonNoOpOcaArgs['tuple']['another_noop_method(uint64)void']>): RouterOverrideNonNoOpOcaComposer<[...TReturns, RouterOverrideNonNoOpOcaReturns['another_noop_method(uint64)void'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the RouterOverrideNonNoOpOCA smart contract using the update_application()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateApplication(params?: CallParams<RouterOverrideNonNoOpOcaArgs['obj']['update_application()void'] | RouterOverrideNonNoOpOcaArgs['tuple']['update_application()void']>): RouterOverrideNonNoOpOcaComposer<[...TReturns, RouterOverrideNonNoOpOcaReturns['update_application()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the RouterOverrideNonNoOpOCA smart contract.
