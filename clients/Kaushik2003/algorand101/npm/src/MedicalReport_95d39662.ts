@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"MedicalReport","structs":{},"methods":[{"name":"issueReport","args":[{"type":"string","name":"name"},{"type":"string","name":"rep"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"patient":{"keyType":"AVMString","valueType":"AVMString","key":"cGF0aWVudA=="},"report":{"keyType":"AVMString","valueType":"AVMString","key":"cmVwb3J0"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[58],"errorMessage":"OnCompletion is not NoOp"},{"pc":[105],"errorMessage":"can only call when creating"},{"pc":[61],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"MedicalReport","structs":{},"methods":[{"name":"issueReport","args":[{"type":"string","name":"name"},{"type":"string","name":"rep"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"patient":{"keyType":"AVMString","valueType":"AVMString","key":"cGF0aWVudA=="},"report":{"keyType":"AVMString","valueType":"AVMString","key":"cmVwb3J0"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[58],"errorMessage":"OnCompletion is not NoOp"},{"pc":[105],"errorMessage":"can only call when creating"},{"pc":[61],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBieXRlY2Jsb2NrICJwYXRpZW50IiAibm9uZSIgInJlcG9ydCIKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjQKICAgIC8vIHBhdGllbnQgPSBHbG9iYWxTdGF0ZTxzdHJpbmc+KHsga2V5OiAicGF0aWVudCIsIGluaXRpYWxWYWx1ZTogIm5vbmUiIH0pCiAgICBieXRlY18wIC8vICJwYXRpZW50IgogICAgYnl0ZWNfMSAvLyAibm9uZSIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czo1CiAgICAvLyByZXBvcnQgPSBHbG9iYWxTdGF0ZTxzdHJpbmc+KHsga2V5OiAicmVwb3J0IiwgaW5pdGlhbFZhbHVlOiAibm9uZSIgfSkKICAgIGJ5dGVjXzIgLy8gInJlcG9ydCIKICAgIGJ5dGVjXzEgLy8gIm5vbmUiCiAgICBhcHBfZ2xvYmFsX3B1dAoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czozCiAgICAvLyBleHBvcnQgY2xhc3MgTWVkaWNhbFJlcG9ydCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0A4CiAgICBwdXNoYnl0ZXMgMHg4N2U4ZWM4YiAvLyBtZXRob2QgImlzc3VlUmVwb3J0KHN0cmluZyxzdHJpbmcpc3RyaW5nIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9pc3N1ZVJlcG9ydF9yb3V0ZUA1CgptYWluX2FmdGVyX2lmX2Vsc2VAMTI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czozCiAgICAvLyBleHBvcnQgY2xhc3MgTWVkaWNhbFJlcG9ydCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHB1c2hpbnQgMCAvLyAwCiAgICByZXR1cm4KCm1haW5faXNzdWVSZXBvcnRfcm91dGVANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjcKICAgIC8vIGlzc3VlUmVwb3J0KG5hbWU6IHN0cmluZywgcmVwOiBzdHJpbmcpOiBzdHJpbmcgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czozCiAgICAvLyBleHBvcnQgY2xhc3MgTWVkaWNhbFJlcG9ydCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkL2NvbnRyYWN0LmFsZ28udHM6NwogICAgLy8gaXNzdWVSZXBvcnQobmFtZTogc3RyaW5nLCByZXA6IHN0cmluZyk6IHN0cmluZyB7CiAgICBjYWxsc3ViIGlzc3VlUmVwb3J0CiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0A4OgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkL2NvbnRyYWN0LmFsZ28udHM6MwogICAgLy8gZXhwb3J0IGNsYXNzIE1lZGljYWxSZXBvcnQgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDEyCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgcHVzaGludCAxIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjpNZWRpY2FsUmVwb3J0Lmlzc3VlUmVwb3J0KG5hbWU6IGJ5dGVzLCByZXA6IGJ5dGVzKSAtPiBieXRlczoKaXNzdWVSZXBvcnQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czo3CiAgICAvLyBpc3N1ZVJlcG9ydChuYW1lOiBzdHJpbmcsIHJlcDogc3RyaW5nKTogc3RyaW5nIHsKICAgIHByb3RvIDIgMQogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkL2NvbnRyYWN0LmFsZ28udHM6NAogICAgLy8gcGF0aWVudCA9IEdsb2JhbFN0YXRlPHN0cmluZz4oeyBrZXk6ICJwYXRpZW50IiwgaW5pdGlhbFZhbHVlOiAibm9uZSIgfSkKICAgIGJ5dGVjXzAgLy8gInBhdGllbnQiCiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czo4CiAgICAvLyB0aGlzLnBhdGllbnQudmFsdWUgPSBuYW1lCiAgICBmcmFtZV9kaWcgLTIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czo1CiAgICAvLyByZXBvcnQgPSBHbG9iYWxTdGF0ZTxzdHJpbmc+KHsga2V5OiAicmVwb3J0IiwgaW5pdGlhbFZhbHVlOiAibm9uZSIgfSkKICAgIGJ5dGVjXzIgLy8gInJlcG9ydCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjkKICAgIC8vIHRoaXMucmVwb3J0LnZhbHVlID0gcmVwCiAgICBmcmFtZV9kaWcgLTEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czoxMAogICAgLy8gcmV0dXJuICJNZWRpY2FsIHJlcG9ydCBpc3N1ZWQgZm9yICIgKyBuYW1lCiAgICBwdXNoYnl0ZXMgIk1lZGljYWwgcmVwb3J0IGlzc3VlZCBmb3IgIgogICAgZnJhbWVfZGlnIC0yCiAgICBjb25jYXQKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiYDB3BhdGllbnQEbm9uZQZyZXBvcnQxGEAABigpZyopZzEbQQA6gASH6OyLNhoAjgEAA4EAQzEZFEQxGEQ2GgFXAgA2GgJXAgCIACBJFRZXBgJMUIAEFR98dUxQsIEBQzEZQP/OMRgURIEBQ4oCASiL/mcqi/9ngBpNZWRpY2FsIHJlcG9ydCBpc3N1ZWQgZm9yIIv+UIk=","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -150,6 +150,21 @@ export type MethodReturn<TSignature extends MedicalReportSignatures> = MedicalRe
 export type GlobalKeysState = MedicalReportTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type MedicalReportCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type MedicalReportDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: MedicalReportCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the MedicalReport smart contract
@@ -170,6 +185,147 @@ export abstract class MedicalReportParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the MedicalReport smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class MedicalReportFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `MedicalReportFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new MedicalReportClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new MedicalReportClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the MedicalReport smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: MedicalReportDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new MedicalReportClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MedicalReport smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MedicalReport smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MedicalReport smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new MedicalReportClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the MedicalReport smart contract
  */
