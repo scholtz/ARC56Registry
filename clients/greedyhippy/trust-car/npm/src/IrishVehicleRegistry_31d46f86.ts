@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"IrishVehicleRegistry","structs":{},"methods":[{"name":"registerVehicle","args":[{"type":"string","name":"registration"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"transferOwnership","args":[{"type":"string","name":"registration"},{"type":"string","name":"newOwner"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"addServiceRecord","args":[{"type":"string","name":"registration"},{"type":"string","name":"serviceType"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"getInfo","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[57,102,138,174],"errorMessage":"OnCompletion is not NoOp"},{"pc":[209],"errorMessage":"can only call when creating"},{"pc":[60,105,141,177],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"IrishVehicleRegistry","structs":{},"methods":[{"name":"registerVehicle","args":[{"type":"string","name":"registration"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"transferOwnership","args":[{"type":"string","name":"registration"},{"type":"string","name":"newOwner"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"addServiceRecord","args":[{"type":"string","name":"registration"},{"type":"string","name":"serviceType"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"getInfo","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[57,102,138,174],"errorMessage":"OnCompletion is not NoOp"},{"pc":[209],"errorMessage":"can only call when creating"},{"pc":[60,105,141,177],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMQogICAgYnl0ZWNibG9jayAweDE1MWY3Yzc1CiAgICAvLyBzbWFydF9jb250cmFjdHMvaXJpc2hfdmVoaWNsZV9yZWdpc3RyeS9jb250cmFjdC5hbGdvLnRzOjQKICAgIC8vIGV4cG9ydCBjbGFzcyBJcmlzaFZlaGljbGVSZWdpc3RyeSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0A5CiAgICBwdXNoYnl0ZXNzIDB4MTFlMDI5ZmQgMHhkMDRlYjUxYiAweGMyYzU1Y2ZiIDB4M2QwODAyYTMgLy8gbWV0aG9kICJyZWdpc3RlclZlaGljbGUoc3RyaW5nKXN0cmluZyIsIG1ldGhvZCAidHJhbnNmZXJPd25lcnNoaXAoc3RyaW5nLHN0cmluZylzdHJpbmciLCBtZXRob2QgImFkZFNlcnZpY2VSZWNvcmQoc3RyaW5nLHN0cmluZylzdHJpbmciLCBtZXRob2QgImdldEluZm8oKXN0cmluZyIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fcmVnaXN0ZXJWZWhpY2xlX3JvdXRlQDMgbWFpbl90cmFuc2Zlck93bmVyc2hpcF9yb3V0ZUA0IG1haW5fYWRkU2VydmljZVJlY29yZF9yb3V0ZUA1IG1haW5fZ2V0SW5mb19yb3V0ZUA2CgptYWluX2FmdGVyX2lmX2Vsc2VAMTM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaXJpc2hfdmVoaWNsZV9yZWdpc3RyeS9jb250cmFjdC5hbGdvLnRzOjQKICAgIC8vIGV4cG9ydCBjbGFzcyBJcmlzaFZlaGljbGVSZWdpc3RyeSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHB1c2hpbnQgMCAvLyAwCiAgICByZXR1cm4KCm1haW5fZ2V0SW5mb19yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL2lyaXNoX3ZlaGljbGVfcmVnaXN0cnkvY29udHJhY3QuYWxnby50czoyMQogICAgLy8gcHVibGljIGdldEluZm8oKTogc3RyaW5nIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDFiNDk3MjY5NzM2ODIwNTY2NTY4Njk2MzZjNjUyMDUyNjU2NzY5NzM3NDcyNzkyMDc2MzEyZTMwCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYWRkU2VydmljZVJlY29yZF9yb3V0ZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL2lyaXNoX3ZlaGljbGVfcmVnaXN0cnkvY29udHJhY3QuYWxnby50czoxNgogICAgLy8gcHVibGljIGFkZFNlcnZpY2VSZWNvcmQocmVnaXN0cmF0aW9uOiBzdHJpbmcsIHNlcnZpY2VUeXBlOiBzdHJpbmcpOiBzdHJpbmcgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvaXJpc2hfdmVoaWNsZV9yZWdpc3RyeS9jb250cmFjdC5hbGdvLnRzOjQKICAgIC8vIGV4cG9ydCBjbGFzcyBJcmlzaFZlaGljbGVSZWdpc3RyeSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2lyaXNoX3ZlaGljbGVfcmVnaXN0cnkvY29udHJhY3QuYWxnby50czoxNgogICAgLy8gcHVibGljIGFkZFNlcnZpY2VSZWNvcmQocmVnaXN0cmF0aW9uOiBzdHJpbmcsIHNlcnZpY2VUeXBlOiBzdHJpbmcpOiBzdHJpbmcgewogICAgY2FsbHN1YiBhZGRTZXJ2aWNlUmVjb3JkCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl90cmFuc2Zlck93bmVyc2hpcF9yb3V0ZUA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2lyaXNoX3ZlaGljbGVfcmVnaXN0cnkvY29udHJhY3QuYWxnby50czoxMQogICAgLy8gcHVibGljIHRyYW5zZmVyT3duZXJzaGlwKHJlZ2lzdHJhdGlvbjogc3RyaW5nLCBuZXdPd25lcjogc3RyaW5nKTogc3RyaW5nIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL2lyaXNoX3ZlaGljbGVfcmVnaXN0cnkvY29udHJhY3QuYWxnby50czo0CiAgICAvLyBleHBvcnQgY2xhc3MgSXJpc2hWZWhpY2xlUmVnaXN0cnkgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9pcmlzaF92ZWhpY2xlX3JlZ2lzdHJ5L2NvbnRyYWN0LmFsZ28udHM6MTEKICAgIC8vIHB1YmxpYyB0cmFuc2Zlck93bmVyc2hpcChyZWdpc3RyYXRpb246IHN0cmluZywgbmV3T3duZXI6IHN0cmluZyk6IHN0cmluZyB7CiAgICBjYWxsc3ViIHRyYW5zZmVyT3duZXJzaGlwCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9yZWdpc3RlclZlaGljbGVfcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9pcmlzaF92ZWhpY2xlX3JlZ2lzdHJ5L2NvbnRyYWN0LmFsZ28udHM6NgogICAgLy8gcHVibGljIHJlZ2lzdGVyVmVoaWNsZShyZWdpc3RyYXRpb246IHN0cmluZyk6IHN0cmluZyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9pcmlzaF92ZWhpY2xlX3JlZ2lzdHJ5L2NvbnRyYWN0LmFsZ28udHM6NAogICAgLy8gZXhwb3J0IGNsYXNzIElyaXNoVmVoaWNsZVJlZ2lzdHJ5IGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9pcmlzaF92ZWhpY2xlX3JlZ2lzdHJ5L2NvbnRyYWN0LmFsZ28udHM6NgogICAgLy8gcHVibGljIHJlZ2lzdGVyVmVoaWNsZShyZWdpc3RyYXRpb246IHN0cmluZyk6IHN0cmluZyB7CiAgICBjYWxsc3ViIHJlZ2lzdGVyVmVoaWNsZQogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fYmFyZV9yb3V0aW5nQDk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaXJpc2hfdmVoaWNsZV9yZWdpc3RyeS9jb250cmFjdC5hbGdvLnRzOjQKICAgIC8vIGV4cG9ydCBjbGFzcyBJcmlzaFZlaGljbGVSZWdpc3RyeSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTMKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL2lyaXNoX3ZlaGljbGVfcmVnaXN0cnkvY29udHJhY3QuYWxnby50czo6SXJpc2hWZWhpY2xlUmVnaXN0cnkucmVnaXN0ZXJWZWhpY2xlKHJlZ2lzdHJhdGlvbjogYnl0ZXMpIC0+IGJ5dGVzOgpyZWdpc3RlclZlaGljbGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaXJpc2hfdmVoaWNsZV9yZWdpc3RyeS9jb250cmFjdC5hbGdvLnRzOjYKICAgIC8vIHB1YmxpYyByZWdpc3RlclZlaGljbGUocmVnaXN0cmF0aW9uOiBzdHJpbmcpOiBzdHJpbmcgewogICAgcHJvdG8gMSAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvaXJpc2hfdmVoaWNsZV9yZWdpc3RyeS9jb250cmFjdC5hbGdvLnRzOjcKICAgIC8vIHJldHVybiBgVmVoaWNsZSAke3JlZ2lzdHJhdGlvbn0gcmVnaXN0ZXJlZGAKICAgIHB1c2hieXRlcyAiVmVoaWNsZSAiCiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzICIgcmVnaXN0ZXJlZCIKICAgIGNvbmNhdAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzL2lyaXNoX3ZlaGljbGVfcmVnaXN0cnkvY29udHJhY3QuYWxnby50czo6SXJpc2hWZWhpY2xlUmVnaXN0cnkudHJhbnNmZXJPd25lcnNoaXAocmVnaXN0cmF0aW9uOiBieXRlcywgbmV3T3duZXI6IGJ5dGVzKSAtPiBieXRlczoKdHJhbnNmZXJPd25lcnNoaXA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaXJpc2hfdmVoaWNsZV9yZWdpc3RyeS9jb250cmFjdC5hbGdvLnRzOjExCiAgICAvLyBwdWJsaWMgdHJhbnNmZXJPd25lcnNoaXAocmVnaXN0cmF0aW9uOiBzdHJpbmcsIG5ld093bmVyOiBzdHJpbmcpOiBzdHJpbmcgewogICAgcHJvdG8gMiAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvaXJpc2hfdmVoaWNsZV9yZWdpc3RyeS9jb250cmFjdC5hbGdvLnRzOjEyCiAgICAvLyByZXR1cm4gYCR7cmVnaXN0cmF0aW9ufSB0cmFuc2ZlcnJlZCB0byAke25ld093bmVyfWAKICAgIGZyYW1lX2RpZyAtMgogICAgcHVzaGJ5dGVzICIgdHJhbnNmZXJyZWQgdG8gIgogICAgY29uY2F0CiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzL2lyaXNoX3ZlaGljbGVfcmVnaXN0cnkvY29udHJhY3QuYWxnby50czo6SXJpc2hWZWhpY2xlUmVnaXN0cnkuYWRkU2VydmljZVJlY29yZChyZWdpc3RyYXRpb246IGJ5dGVzLCBzZXJ2aWNlVHlwZTogYnl0ZXMpIC0+IGJ5dGVzOgphZGRTZXJ2aWNlUmVjb3JkOgogICAgLy8gc21hcnRfY29udHJhY3RzL2lyaXNoX3ZlaGljbGVfcmVnaXN0cnkvY29udHJhY3QuYWxnby50czoxNgogICAgLy8gcHVibGljIGFkZFNlcnZpY2VSZWNvcmQocmVnaXN0cmF0aW9uOiBzdHJpbmcsIHNlcnZpY2VUeXBlOiBzdHJpbmcpOiBzdHJpbmcgewogICAgcHJvdG8gMiAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvaXJpc2hfdmVoaWNsZV9yZWdpc3RyeS9jb250cmFjdC5hbGdvLnRzOjE3CiAgICAvLyByZXR1cm4gYFNlcnZpY2UgJHtzZXJ2aWNlVHlwZX0gcmVjb3JkZWQgZm9yICR7cmVnaXN0cmF0aW9ufWAKICAgIHB1c2hieXRlcyAiU2VydmljZSAiCiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzICIgcmVjb3JkZWQgZm9yICIKICAgIGNvbmNhdAogICAgZnJhbWVfZGlnIC0yCiAgICBjb25jYXQKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiABASYBBBUffHUxG0EAuYIEBBHgKf0E0E61GwTCxVz7BD0IAqM2GgCOBAB4AFQAMAADgQBDMRkURDEYRIAhFR98dQAbSXJpc2ggVmVoaWNsZSBSZWdpc3RyeSB2MS4wsCJDMRkURDEYRDYaAVcCADYaAlcCAIgAlkkVFlcGAkxQKExQsCJDMRkURDEYRDYaAVcCADYaAlcCAIgAVkkVFlcGAkxQKExQsCJDMRkURDEYRDYaAVcCAIgAGUkVFlcGAkxQKExQsCJDMRlA/2UxGBREIkOKAQGACFZlaGljbGUgi/9QgAsgcmVnaXN0ZXJlZFCJigIBi/6AECB0cmFuc2ZlcnJlZCB0byBQi/9QiYoCAYAIU2VydmljZSCL/1CADiByZWNvcmRlZCBmb3IgUIv+UIk=","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -162,6 +162,21 @@ export type MethodArgs<TSignature extends IrishVehicleRegistrySignatures> = Iris
 export type MethodReturn<TSignature extends IrishVehicleRegistrySignatures> = IrishVehicleRegistryTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type IrishVehicleRegistryCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type IrishVehicleRegistryDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: IrishVehicleRegistryCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the IrishVehicleRegistry smart contract
@@ -221,6 +236,147 @@ export abstract class IrishVehicleRegistryParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the IrishVehicleRegistry smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class IrishVehicleRegistryFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `IrishVehicleRegistryFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new IrishVehicleRegistryClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new IrishVehicleRegistryClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the IrishVehicleRegistry smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: IrishVehicleRegistryDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new IrishVehicleRegistryClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the IrishVehicleRegistry smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the IrishVehicleRegistry smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the IrishVehicleRegistry smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new IrishVehicleRegistryClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the IrishVehicleRegistry smart contract
  */
