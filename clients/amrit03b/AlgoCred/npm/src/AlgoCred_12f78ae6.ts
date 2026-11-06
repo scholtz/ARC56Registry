@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"AlgoCred","structs":{},"methods":[{"name":"registerIssuer","args":[{"type":"string","name":"organizationName"},{"type":"string","name":"organizationId"},{"type":"string","name":"verificationUrl"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Register a new issuer organization","events":[],"recommendations":{}},{"name":"createCredential","args":[{"type":"string","name":"recipientAddress"},{"type":"string","name":"credentialType"},{"type":"string","name":"credentialDataJson"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create and transfer a credential NFT to recipient","events":[],"recommendations":{}},{"name":"verifyCredential","args":[{"type":"string","name":"asaIdStr"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Verify a credential by ASA ID","events":[],"recommendations":{}},{"name":"getIssuerInfo","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get issuer information","events":[],"recommendations":{}},{"name":"updateIssuerStatus","args":[{"type":"string","name":"isActive"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Update issuer status","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"AlgoCred - Algorand Credential Transfer Smart Contract\n\nA simplified version for deployment that provides basic credential management\nfunctionality using Algorand Standard Assets (ASAs).","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[64,94,142,192,234],"errorMessage":"OnCompletion is not NoOp"},{"pc":[281],"errorMessage":"can only call when creating"},{"pc":[67,97,145,195,237],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"AlgoCred","structs":{},"methods":[{"name":"registerIssuer","args":[{"type":"string","name":"organizationName"},{"type":"string","name":"organizationId"},{"type":"string","name":"verificationUrl"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Register a new issuer organization","events":[],"recommendations":{}},{"name":"createCredential","args":[{"type":"string","name":"recipientAddress"},{"type":"string","name":"credentialType"},{"type":"string","name":"credentialDataJson"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create and transfer a credential NFT to recipient","events":[],"recommendations":{}},{"name":"verifyCredential","args":[{"type":"string","name":"asaIdStr"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Verify a credential by ASA ID","events":[],"recommendations":{}},{"name":"getIssuerInfo","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get issuer information","events":[],"recommendations":{}},{"name":"updateIssuerStatus","args":[{"type":"string","name":"isActive"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Update issuer status","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"AlgoCred - Algorand Credential Transfer Smart Contract\n\nA simplified version for deployment that provides basic credential management\nfunctionality using Algorand Standard Assets (ASAs).","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[64,94,142,192,234],"errorMessage":"OnCompletion is not NoOp"},{"pc":[281],"errorMessage":"can only call when creating"},{"pc":[67,97,145,195,237],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMQogICAgYnl0ZWNibG9jayAweDE1MWY3Yzc1CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19jcmVkL2NvbnRyYWN0LmFsZ28udHM6OQogICAgLy8gZXhwb3J0IGNsYXNzIEFsZ29DcmVkIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYmFyZV9yb3V0aW5nQDEwCiAgICBwdXNoYnl0ZXNzIDB4MDJiNmYzZjggMHhiNDRhOWJiNCAweDhlNmU4YzkwIDB4OGJlMmE1ZDYgMHhhNjIzNDUyOCAvLyBtZXRob2QgInJlZ2lzdGVySXNzdWVyKHN0cmluZyxzdHJpbmcsc3RyaW5nKXN0cmluZyIsIG1ldGhvZCAiY3JlYXRlQ3JlZGVudGlhbChzdHJpbmcsc3RyaW5nLHN0cmluZylzdHJpbmciLCBtZXRob2QgInZlcmlmeUNyZWRlbnRpYWwoc3RyaW5nKXN0cmluZyIsIG1ldGhvZCAiZ2V0SXNzdWVySW5mbygpc3RyaW5nIiwgbWV0aG9kICJ1cGRhdGVJc3N1ZXJTdGF0dXMoc3RyaW5nKXN0cmluZyIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fcmVnaXN0ZXJJc3N1ZXJfcm91dGVAMyBtYWluX2NyZWF0ZUNyZWRlbnRpYWxfcm91dGVANCBtYWluX3ZlcmlmeUNyZWRlbnRpYWxfcm91dGVANSBtYWluX2dldElzc3VlckluZm9fcm91dGVANiBtYWluX3VwZGF0ZUlzc3VlclN0YXR1c19yb3V0ZUA3CgptYWluX2FmdGVyX2lmX2Vsc2VAMTQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19jcmVkL2NvbnRyYWN0LmFsZ28udHM6OQogICAgLy8gZXhwb3J0IGNsYXNzIEFsZ29DcmVkIGV4dGVuZHMgQ29udHJhY3QgewogICAgcHVzaGludCAwIC8vIDAKICAgIHJldHVybgoKbWFpbl91cGRhdGVJc3N1ZXJTdGF0dXNfcm91dGVANzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2NyZWQvY29udHJhY3QuYWxnby50czo1MAogICAgLy8gdXBkYXRlSXNzdWVyU3RhdHVzKGlzQWN0aXZlOiBzdHJpbmcpOiBzdHJpbmcgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19jcmVkL2NvbnRyYWN0LmFsZ28udHM6OQogICAgLy8gZXhwb3J0IGNsYXNzIEFsZ29DcmVkIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2NyZWQvY29udHJhY3QuYWxnby50czo1MAogICAgLy8gdXBkYXRlSXNzdWVyU3RhdHVzKGlzQWN0aXZlOiBzdHJpbmcpOiBzdHJpbmcgewogICAgY2FsbHN1YiB1cGRhdGVJc3N1ZXJTdGF0dXMKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldElzc3VlckluZm9fcm91dGVANjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2NyZWQvY29udHJhY3QuYWxnby50czo0MwogICAgLy8gZ2V0SXNzdWVySW5mbygpOiBzdHJpbmcgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMWU1NDY1NzM3NDIwNTU2ZTY5NzY2NTcyNzM2OTc0NzkyMDI4NzQ2NTczNzQyZDc1NmU2OTJkMzAzMDMxMjkKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl92ZXJpZnlDcmVkZW50aWFsX3JvdXRlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19jcmVkL2NvbnRyYWN0LmFsZ28udHM6MzYKICAgIC8vIHZlcmlmeUNyZWRlbnRpYWwoYXNhSWRTdHI6IHN0cmluZyk6IHN0cmluZyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAyMDQzNzI2NTY0NjU2ZTc0Njk2MTZjMjA3NjY1NzI2OTY2Njk2NTY0MjA3Mzc1NjM2MzY1NzM3MzY2NzU2YzZjNzkKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9jcmVhdGVDcmVkZW50aWFsX3JvdXRlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19jcmVkL2NvbnRyYWN0LmFsZ28udHM6MjUtMjkKICAgIC8vIGNyZWF0ZUNyZWRlbnRpYWwoCiAgICAvLyAgIHJlY2lwaWVudEFkZHJlc3M6IHN0cmluZywKICAgIC8vICAgY3JlZGVudGlhbFR5cGU6IHN0cmluZywKICAgIC8vICAgY3JlZGVudGlhbERhdGFKc29uOiBzdHJpbmcKICAgIC8vICk6IHN0cmluZyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2NyZWQvY29udHJhY3QuYWxnby50czo5CiAgICAvLyBleHBvcnQgY2xhc3MgQWxnb0NyZWQgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19jcmVkL2NvbnRyYWN0LmFsZ28udHM6MjUtMjkKICAgIC8vIGNyZWF0ZUNyZWRlbnRpYWwoCiAgICAvLyAgIHJlY2lwaWVudEFkZHJlc3M6IHN0cmluZywKICAgIC8vICAgY3JlZGVudGlhbFR5cGU6IHN0cmluZywKICAgIC8vICAgY3JlZGVudGlhbERhdGFKc29uOiBzdHJpbmcKICAgIC8vICk6IHN0cmluZyB7CiAgICBjYWxsc3ViIGNyZWF0ZUNyZWRlbnRpYWwKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3JlZ2lzdGVySXNzdWVyX3JvdXRlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19jcmVkL2NvbnRyYWN0LmFsZ28udHM6MTQtMTgKICAgIC8vIHJlZ2lzdGVySXNzdWVyKAogICAgLy8gICBvcmdhbml6YXRpb25OYW1lOiBzdHJpbmcsCiAgICAvLyAgIG9yZ2FuaXphdGlvbklkOiBzdHJpbmcsCiAgICAvLyAgIHZlcmlmaWNhdGlvblVybDogc3RyaW5nCiAgICAvLyApOiBzdHJpbmcgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19jcmVkL2NvbnRyYWN0LmFsZ28udHM6OQogICAgLy8gZXhwb3J0IGNsYXNzIEFsZ29DcmVkIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGV4dHJhY3QgMiAwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fY3JlZC9jb250cmFjdC5hbGdvLnRzOjE0LTE4CiAgICAvLyByZWdpc3Rlcklzc3VlcigKICAgIC8vICAgb3JnYW5pemF0aW9uTmFtZTogc3RyaW5nLAogICAgLy8gICBvcmdhbml6YXRpb25JZDogc3RyaW5nLAogICAgLy8gICB2ZXJpZmljYXRpb25Vcmw6IHN0cmluZwogICAgLy8gKTogc3RyaW5nIHsKICAgIGNhbGxzdWIgcmVnaXN0ZXJJc3N1ZXIKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0AxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2NyZWQvY29udHJhY3QuYWxnby50czo5CiAgICAvLyBleHBvcnQgY2xhc3MgQWxnb0NyZWQgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDE0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2NyZWQvY29udHJhY3QuYWxnby50czo6QWxnb0NyZWQucmVnaXN0ZXJJc3N1ZXIob3JnYW5pemF0aW9uTmFtZTogYnl0ZXMsIG9yZ2FuaXphdGlvbklkOiBieXRlcywgdmVyaWZpY2F0aW9uVXJsOiBieXRlcykgLT4gYnl0ZXM6CnJlZ2lzdGVySXNzdWVyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fY3JlZC9jb250cmFjdC5hbGdvLnRzOjE0LTE4CiAgICAvLyByZWdpc3Rlcklzc3VlcigKICAgIC8vICAgb3JnYW5pemF0aW9uTmFtZTogc3RyaW5nLAogICAgLy8gICBvcmdhbml6YXRpb25JZDogc3RyaW5nLAogICAgLy8gICB2ZXJpZmljYXRpb25Vcmw6IHN0cmluZwogICAgLy8gKTogc3RyaW5nIHsKICAgIHByb3RvIDMgMQogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fY3JlZC9jb250cmFjdC5hbGdvLnRzOjE5CiAgICAvLyByZXR1cm4gYElzc3VlciAke29yZ2FuaXphdGlvbk5hbWV9IHJlZ2lzdGVyZWQgc3VjY2Vzc2Z1bGx5YAogICAgcHVzaGJ5dGVzICJJc3N1ZXIgIgogICAgZnJhbWVfZGlnIC0zCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAiIHJlZ2lzdGVyZWQgc3VjY2Vzc2Z1bGx5IgogICAgY29uY2F0CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMvYWxnb19jcmVkL2NvbnRyYWN0LmFsZ28udHM6OkFsZ29DcmVkLmNyZWF0ZUNyZWRlbnRpYWwocmVjaXBpZW50QWRkcmVzczogYnl0ZXMsIGNyZWRlbnRpYWxUeXBlOiBieXRlcywgY3JlZGVudGlhbERhdGFKc29uOiBieXRlcykgLT4gYnl0ZXM6CmNyZWF0ZUNyZWRlbnRpYWw6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWxnb19jcmVkL2NvbnRyYWN0LmFsZ28udHM6MjUtMjkKICAgIC8vIGNyZWF0ZUNyZWRlbnRpYWwoCiAgICAvLyAgIHJlY2lwaWVudEFkZHJlc3M6IHN0cmluZywKICAgIC8vICAgY3JlZGVudGlhbFR5cGU6IHN0cmluZywKICAgIC8vICAgY3JlZGVudGlhbERhdGFKc29uOiBzdHJpbmcKICAgIC8vICk6IHN0cmluZyB7CiAgICBwcm90byAzIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2NyZWQvY29udHJhY3QuYWxnby50czozMAogICAgLy8gcmV0dXJuIGBDcmVkZW50aWFsIE5GVCBjcmVhdGVkIGZvciAke3JlY2lwaWVudEFkZHJlc3N9YAogICAgcHVzaGJ5dGVzICJDcmVkZW50aWFsIE5GVCBjcmVhdGVkIGZvciAiCiAgICBmcmFtZV9kaWcgLTMKICAgIGNvbmNhdAogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzL2FsZ29fY3JlZC9jb250cmFjdC5hbGdvLnRzOjpBbGdvQ3JlZC51cGRhdGVJc3N1ZXJTdGF0dXMoaXNBY3RpdmU6IGJ5dGVzKSAtPiBieXRlczoKdXBkYXRlSXNzdWVyU3RhdHVzOgogICAgLy8gc21hcnRfY29udHJhY3RzL2FsZ29fY3JlZC9jb250cmFjdC5hbGdvLnRzOjUwCiAgICAvLyB1cGRhdGVJc3N1ZXJTdGF0dXMoaXNBY3RpdmU6IHN0cmluZyk6IHN0cmluZyB7CiAgICBwcm90byAxIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hbGdvX2NyZWQvY29udHJhY3QuYWxnby50czo1MQogICAgLy8gcmV0dXJuIGBJc3N1ZXIgc3RhdHVzIHVwZGF0ZWQgdG8gJHtpc0FjdGl2ZX1gCiAgICBwdXNoYnl0ZXMgIklzc3VlciBzdGF0dXMgdXBkYXRlZCB0byAiCiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgcmV0c3ViCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiABASYBBBUffHUxG0EBAYIFBAK28/gEtEqbtASOboyQBIvipdYEpiNFKDYaAI4FAK0AgwBRACEAA4EAQzEZFEQxGEQ2GgFXAgCIAR5JFRZXBgJMUChMULAiQzEZFEQxGESAJBUffHUAHlRlc3QgVW5pdmVyc2l0eSAodGVzdC11bmktMDAxKbAiQzEZFEQxGESAJhUffHUAIENyZWRlbnRpYWwgdmVyaWZpZWQgc3VjY2Vzc2Z1bGx5sCJDMRkURDEYRDYaAVcCADYaAlcCADYaA1cCAIgAbkkVFlcGAkxQKExQsCJDMRkURDEYRDYaAVcCADYaAlcCADYaA1cCAIgAGUkVFlcGAkxQKExQsCJDMRlA/yQxGBREIkOKAwGAB0lzc3VlciCL/VCAGCByZWdpc3RlcmVkIHN1Y2Nlc3NmdWxseVCJigMBgBtDcmVkZW50aWFsIE5GVCBjcmVhdGVkIGZvciCL/VCJigEBgBlJc3N1ZXIgc3RhdHVzIHVwZGF0ZWQgdG8gi/9QiQ==","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -174,6 +174,21 @@ export type MethodArgs<TSignature extends AlgoCredSignatures> = AlgoCredTypes['m
 export type MethodReturn<TSignature extends AlgoCredSignatures> = AlgoCredTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AlgoCredCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AlgoCredDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AlgoCredCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AlgoCred smart contract
@@ -256,6 +271,147 @@ export abstract class AlgoCredParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the AlgoCred smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AlgoCredFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AlgoCredFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AlgoCredClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AlgoCredClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the AlgoCred smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AlgoCredDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new AlgoCredClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AlgoCred smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AlgoCred smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the AlgoCred smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new AlgoCredClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the AlgoCred smart contract
  */
