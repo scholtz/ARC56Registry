@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"PaymentDNARegistry","structs":{"DNARecord":[{"name":"vector","type":"byte[]"},{"name":"lastUpdated","type":"uint64"},{"name":"totalPayments","type":"uint64"},{"name":"driftEvents","type":"uint64"}]},"methods":[{"name":"create","args":[{"type":"uint64","name":"sentinel_escrow_app_id"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Called once on deployment to lock in the trusted caller.","events":[],"recommendations":{}},{"name":"initialize_dna","args":[{"type":"address","name":"agent"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create a zero-vector DNA record for a new agent.\nCallable by anyone (agent must not already have a record).","events":[],"recommendations":{}},{"name":"update_dna","args":[{"type":"address","name":"agent"},{"type":"byte[]","name":"observation"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Merge a 32-byte observation into the agent's DNA vector using EMA.\nONLY callable by the SentinelEscrow application (inner-txn caller).\nobservation : 32 bytes (int8 × 32) from the off-chain SDK.","events":[],"recommendations":{}},{"name":"record_drift_event","args":[{"type":"address","name":"agent"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Increment the drift event counter for forensic audit.","events":[],"recommendations":{}},{"name":"get_dna_vector","args":[{"type":"address","name":"agent"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Return the raw 32-byte DNA vector for an agent.","events":[],"recommendations":{}},{"name":"get_drift_events","args":[{"type":"address","name":"agent"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Return total recorded drift events for an agent.","events":[],"recommendations":{}},{"name":"get_total_payments","args":[{"type":"address","name":"agent"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Return total successful payments recorded for an agent.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Stores one DNARecord per agent address.\n    Only SentinelEscrow (stored app_id) may call update_dna().\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"sentinel_app_id":{"keyType":"AVMString","valueType":"AVMUint64","key":"c2VudGluZWxfYXBwX2lk"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"dna_records":{"keyType":"address","valueType":"DNARecord","prefix":"ZG5hOg=="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[150],"errorMessage":"DNA already initialised for agent"},{"pc":[323,412,446,472],"errorMessage":"DNA not initialised"},{"pc":[257],"errorMessage":"DNA not initialised — call initialize_dna first"},{"pc":[242],"errorMessage":"caller check placeholder"},{"pc":[265,274,346,353,360,450,476],"errorMessage":"index out of bounds"},{"pc":[224],"errorMessage":"invalid array length header"},{"pc":[231],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[141,217,315,404,438,464],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[127],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[248],"errorMessage":"observation must be 32 bytes"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"PaymentDNARegistry","structs":{"DNARecord":[{"name":"vector","type":"byte[]"},{"name":"lastUpdated","type":"uint64"},{"name":"totalPayments","type":"uint64"},{"name":"driftEvents","type":"uint64"}]},"methods":[{"name":"create","args":[{"type":"uint64","name":"sentinel_escrow_app_id"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Called once on deployment to lock in the trusted caller.","events":[],"recommendations":{}},{"name":"initialize_dna","args":[{"type":"address","name":"agent"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create a zero-vector DNA record for a new agent.\nCallable by anyone (agent must not already have a record).","events":[],"recommendations":{}},{"name":"update_dna","args":[{"type":"address","name":"agent"},{"type":"byte[]","name":"observation"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Merge a 32-byte observation into the agent's DNA vector using EMA.\nONLY callable by the SentinelEscrow application (inner-txn caller).\nobservation : 32 bytes (int8 × 32) from the off-chain SDK.","events":[],"recommendations":{}},{"name":"record_drift_event","args":[{"type":"address","name":"agent"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Increment the drift event counter for forensic audit.","events":[],"recommendations":{}},{"name":"get_dna_vector","args":[{"type":"address","name":"agent"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Return the raw 32-byte DNA vector for an agent.","events":[],"recommendations":{}},{"name":"get_drift_events","args":[{"type":"address","name":"agent"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Return total recorded drift events for an agent.","events":[],"recommendations":{}},{"name":"get_total_payments","args":[{"type":"address","name":"agent"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Return total successful payments recorded for an agent.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Stores one DNARecord per agent address.\n    Only SentinelEscrow (stored app_id) may call update_dna().\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"sentinel_app_id":{"keyType":"AVMString","valueType":"AVMUint64","key":"c2VudGluZWxfYXBwX2lk"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"dna_records":{"keyType":"address","valueType":"DNARecord","prefix":"ZG5hOg=="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[150],"errorMessage":"DNA already initialised for agent"},{"pc":[323,412,446,472],"errorMessage":"DNA not initialised"},{"pc":[257],"errorMessage":"DNA not initialised — call initialize_dna first"},{"pc":[242],"errorMessage":"caller check placeholder"},{"pc":[265,274,346,353,360,450,476],"errorMessage":"index out of bounds"},{"pc":[224],"errorMessage":"invalid array length header"},{"pc":[231],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[141,217,315,404,438,464],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[127],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[248],"errorMessage":"observation must be 32 bytes"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDggMzIgMgogICAgYnl0ZWNibG9jayAweDY0NmU2MTNhIDB4MDAxYSAweDE1MWY3Yzc1ICJzZW50aW5lbF9hcHBfaWQiCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6MzItMzMKICAgIC8vICMgQXBwIElEIG9mIHRoZSBhdXRob3Jpc2VkIFNlbnRpbmVsRXNjcm93IOKAlCBzZXQgaW4gY3JlYXRlKCkKICAgIC8vIHNlbGYuc2VudGluZWxfYXBwX2lkID0gVUludDY0KDApCiAgICBieXRlY18zIC8vICJzZW50aW5lbF9hcHBfaWQiCiAgICBwdXNoaW50IDAKICAgIGFwcF9nbG9iYWxfcHV0CgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weToyNAogICAgLy8gY2xhc3MgUGF5bWVudEROQVJlZ2lzdHJ5KEFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDEyCiAgICBwdXNoYnl0ZXNzIDB4MTQ5NWI2ZTggMHhhYmNmYThkZCAweDhiZjBjYjE5IDB4YTk1NTA1NGMgMHg5NDFhMmQyMSAweDBhNDgyYzBmIC8vIG1ldGhvZCAiaW5pdGlhbGl6ZV9kbmEoYWRkcmVzcyl2b2lkIiwgbWV0aG9kICJ1cGRhdGVfZG5hKGFkZHJlc3MsYnl0ZVtdKXZvaWQiLCBtZXRob2QgInJlY29yZF9kcmlmdF9ldmVudChhZGRyZXNzKXZvaWQiLCBtZXRob2QgImdldF9kbmFfdmVjdG9yKGFkZHJlc3MpYnl0ZVtdIiwgbWV0aG9kICJnZXRfZHJpZnRfZXZlbnRzKGFkZHJlc3MpdWludDY0IiwgbWV0aG9kICJnZXRfdG90YWxfcGF5bWVudHMoYWRkcmVzcyl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBpbml0aWFsaXplX2RuYSB1cGRhdGVfZG5hIHJlY29yZF9kcmlmdF9ldmVudCBnZXRfZG5hX3ZlY3RvciBnZXRfZHJpZnRfZXZlbnRzIGdldF90b3RhbF9wYXltZW50cwogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDEyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjI0CiAgICAvLyBjbGFzcyBQYXltZW50RE5BUmVnaXN0cnkoQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweDI0MGQyZjY3IC8vIG1ldGhvZCAiY3JlYXRlKHVpbnQ2NCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlCiAgICBlcnIKCgovLyBzbWFydF9jb250cmFjdHMucGF5bWVudF9kbmFfcmVnaXN0cnkuY29udHJhY3QuUGF5bWVudEROQVJlZ2lzdHJ5LmNyZWF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weTozNQogICAgLy8gQGFiaW1ldGhvZChjcmVhdGU9InJlcXVpcmUiKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjM4CiAgICAvLyBzZWxmLnNlbnRpbmVsX2FwcF9pZCA9IHNlbnRpbmVsX2VzY3Jvd19hcHBfaWQKICAgIGJ5dGVjXzMgLy8gInNlbnRpbmVsX2FwcF9pZCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6MzUKICAgIC8vIEBhYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucGF5bWVudF9kbmFfcmVnaXN0cnkuY29udHJhY3QuUGF5bWVudEROQVJlZ2lzdHJ5LmluaXRpYWxpemVfZG5hW3JvdXRpbmddKCkgLT4gdm9pZDoKaW5pdGlhbGl6ZV9kbmE6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6NDQKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6NTAKICAgIC8vIGV4aXN0cyA9IGFnZW50IGluIHNlbGYuZG5hX3JlY29yZHMKICAgIGJ5dGVjXzAgLy8gMHg2NDZlNjEzYQogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjUxCiAgICAvLyBhc3NlcnQgbm90IGV4aXN0cywgIkROQSBhbHJlYWR5IGluaXRpYWxpc2VkIGZvciBhZ2VudCIKICAgICEKICAgIGFzc2VydCAvLyBETkEgYWxyZWFkeSBpbml0aWFsaXNlZCBmb3IgYWdlbnQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weTo1NAogICAgLy8gbGFzdF91cGRhdGVkPUdsb2JhbC5yb3VuZCwKICAgIGdsb2JhbCBSb3VuZAogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjUyLTU3CiAgICAvLyBzZWxmLmRuYV9yZWNvcmRzW2FnZW50XSA9IEROQVJlY29yZCgKICAgIC8vICAgICB2ZWN0b3I9Qnl0ZXMoYiJceDAwIiAqIDMyKSwKICAgIC8vICAgICBsYXN0X3VwZGF0ZWQ9R2xvYmFsLnJvdW5kLAogICAgLy8gICAgIHRvdGFsX3BheW1lbnRzPVVJbnQ2NCgwKSwKICAgIC8vICAgICBkcmlmdF9ldmVudHM9VUludDY0KDApLAogICAgLy8gKQogICAgaXRvYgogICAgYnl0ZWNfMSAvLyAweDAwMWEKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjU1CiAgICAvLyB0b3RhbF9wYXltZW50cz1VSW50NjQoMCksCiAgICBwdXNoaW50IDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weTo1Mi01NwogICAgLy8gc2VsZi5kbmFfcmVjb3Jkc1thZ2VudF0gPSBETkFSZWNvcmQoCiAgICAvLyAgICAgdmVjdG9yPUJ5dGVzKGIiXHgwMCIgKiAzMiksCiAgICAvLyAgICAgbGFzdF91cGRhdGVkPUdsb2JhbC5yb3VuZCwKICAgIC8vICAgICB0b3RhbF9wYXltZW50cz1VSW50NjQoMCksCiAgICAvLyAgICAgZHJpZnRfZXZlbnRzPVVJbnQ2NCgwKSwKICAgIC8vICkKICAgIGl0b2IKICAgIHN3YXAKICAgIGRpZyAxCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MDAyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAKICAgIGNvbmNhdAogICAgZGlnIDEKICAgIGJveF9kZWwKICAgIHBvcAogICAgYm94X3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjQ0CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucGF5bWVudF9kbmFfcmVnaXN0cnkuY29udHJhY3QuUGF5bWVudEROQVJlZ2lzdHJ5LnVwZGF0ZV9kbmFbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGVfZG5hOgogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjU5CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBwdXNoaW50IDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMyAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6NjcKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IEdsb2JhbC5jcmVhdG9yX2FkZHJlc3Mgb3IgVHJ1ZSwgImNhbGxlciBjaGVjayBwbGFjZWhvbGRlciIKICAgIHR4biBTZW5kZXIKICAgIGdsb2JhbCBDcmVhdG9yQWRkcmVzcwogICAgPT0KICAgIGludGNfMCAvLyAxCiAgICB8fAogICAgYXNzZXJ0IC8vIGNhbGxlciBjaGVjayBwbGFjZWhvbGRlcgogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjY4CiAgICAvLyBhc3NlcnQgb2JzZXJ2YXRpb24ubGVuZ3RoID09IDMyLCAib2JzZXJ2YXRpb24gbXVzdCBiZSAzMiBieXRlcyIKICAgIGR1cAogICAgbGVuCiAgICBkdXAKICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBvYnNlcnZhdGlvbiBtdXN0IGJlIDMyIGJ5dGVzCiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6NzAKICAgIC8vIGV4aXN0cyA9IGFnZW50IGluIHNlbGYuZG5hX3JlY29yZHMKICAgIGJ5dGVjXzAgLy8gMHg2NDZlNjEzYQogICAgdW5jb3ZlciAzCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6NzEKICAgIC8vIGFzc2VydCBleGlzdHMsICJETkEgbm90IGluaXRpYWxpc2VkIOKAlCBjYWxsIGluaXRpYWxpemVfZG5hIGZpcnN0IgogICAgYXNzZXJ0IC8vIEROQSBub3QgaW5pdGlhbGlzZWQg4oCUIGNhbGwgaW5pdGlhbGl6ZV9kbmEgZmlyc3QKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weTo3OAogICAgLy8gbGFzdF91cGRhdGVkPUdsb2JhbC5yb3VuZCwKICAgIGdsb2JhbCBSb3VuZAogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5Ojc5CiAgICAvLyB0b3RhbF9wYXltZW50cz1yZWNvcmQudG90YWxfcGF5bWVudHMgKyBVSW50NjQoMSksCiAgICBkaWcgMQogICAgcHVzaGludCAxMAogICAgaW50Y18xIC8vIDgKICAgIGJveF9leHRyYWN0IC8vIG9uIGVycm9yOiBpbmRleCBvdXQgb2YgYm91bmRzCiAgICBidG9pCiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjgwCiAgICAvLyBkcmlmdF9ldmVudHM9cmVjb3JkLmRyaWZ0X2V2ZW50cywKICAgIGRpZyAyCiAgICBwdXNoaW50IDE4CiAgICBpbnRjXzEgLy8gOAogICAgYm94X2V4dHJhY3QgLy8gb24gZXJyb3I6IGluZGV4IG91dCBvZiBib3VuZHMKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weTo3NC04MQogICAgLy8gIyBFTUEgYmxlbmQ6IG5ld192ZWN0b3JbaV0gPSAwLjEgKiBvYnNbaV0gKyAwLjkgKiBvbGRbaV0KICAgIC8vICMgRG9uZSBvZmYtY2hhaW47IHdlIGp1c3Qgc3RvcmUgdGhlIHByZS1ibGVuZGVkIGJ5dGVzIGhlcmUuCiAgICAvLyBzZWxmLmRuYV9yZWNvcmRzW2FnZW50XSA9IEROQVJlY29yZCgKICAgIC8vICAgICB2ZWN0b3I9b2JzZXJ2YXRpb24sCiAgICAvLyAgICAgbGFzdF91cGRhdGVkPUdsb2JhbC5yb3VuZCwKICAgIC8vICAgICB0b3RhbF9wYXltZW50cz1yZWNvcmQudG90YWxfcGF5bWVudHMgKyBVSW50NjQoMSksCiAgICAvLyAgICAgZHJpZnRfZXZlbnRzPXJlY29yZC5kcmlmdF9ldmVudHMsCiAgICAvLyApCiAgICB1bmNvdmVyIDQKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICB1bmNvdmVyIDUKICAgIGNvbmNhdAogICAgdW5jb3ZlciAzCiAgICBpdG9iCiAgICBieXRlY18xIC8vIDB4MDAxYQogICAgc3dhcAogICAgY29uY2F0CiAgICB1bmNvdmVyIDMKICAgIGl0b2IKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBpdG9iCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZGlnIDEKICAgIGJveF9kZWwKICAgIHBvcAogICAgYm94X3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjU5CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucGF5bWVudF9kbmFfcmVnaXN0cnkuY29udHJhY3QuUGF5bWVudEROQVJlZ2lzdHJ5LnJlY29yZF9kcmlmdF9ldmVudFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlY29yZF9kcmlmdF9ldmVudDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weTo4MwogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weTo4NgogICAgLy8gZXhpc3RzID0gYWdlbnQgaW4gc2VsZi5kbmFfcmVjb3JkcwogICAgYnl0ZWNfMCAvLyAweDY0NmU2MTNhCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6ODcKICAgIC8vIGFzc2VydCBleGlzdHMsICJETkEgbm90IGluaXRpYWxpc2VkIgogICAgYXNzZXJ0IC8vIEROQSBub3QgaW5pdGlhbGlzZWQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weTo5MAogICAgLy8gdmVjdG9yPXJlY29yZC52ZWN0b3IsCiAgICBkdXAKICAgIHB1c2hpbnQgMjYKICAgIGludGNfMyAvLyAyCiAgICBib3hfZXh0cmFjdAogICAgYnRvaQogICAgaW50Y18zIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBwdXNoaW50IDI2CiAgICB1bmNvdmVyIDIKICAgIGJveF9leHRyYWN0CiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjkxCiAgICAvLyBsYXN0X3VwZGF0ZWQ9cmVjb3JkLmxhc3RfdXBkYXRlZCwKICAgIGRpZyAxCiAgICBpbnRjXzMgLy8gMgogICAgaW50Y18xIC8vIDgKICAgIGJveF9leHRyYWN0IC8vIG9uIGVycm9yOiBpbmRleCBvdXQgb2YgYm91bmRzCiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6OTIKICAgIC8vIHRvdGFsX3BheW1lbnRzPXJlY29yZC50b3RhbF9wYXltZW50cywKICAgIGRpZyAyCiAgICBwdXNoaW50IDEwCiAgICBpbnRjXzEgLy8gOAogICAgYm94X2V4dHJhY3QgLy8gb24gZXJyb3I6IGluZGV4IG91dCBvZiBib3VuZHMKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weTo5MwogICAgLy8gZHJpZnRfZXZlbnRzPXJlY29yZC5kcmlmdF9ldmVudHMgKyBVSW50NjQoMSksCiAgICBkaWcgMwogICAgcHVzaGludCAxOAogICAgaW50Y18xIC8vIDgKICAgIGJveF9leHRyYWN0IC8vIG9uIGVycm9yOiBpbmRleCBvdXQgb2YgYm91bmRzCiAgICBidG9pCiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5Ojg5LTk0CiAgICAvLyBzZWxmLmRuYV9yZWNvcmRzW2FnZW50XSA9IEROQVJlY29yZCgKICAgIC8vICAgICB2ZWN0b3I9cmVjb3JkLnZlY3RvciwKICAgIC8vICAgICBsYXN0X3VwZGF0ZWQ9cmVjb3JkLmxhc3RfdXBkYXRlZCwKICAgIC8vICAgICB0b3RhbF9wYXltZW50cz1yZWNvcmQudG90YWxfcGF5bWVudHMsCiAgICAvLyAgICAgZHJpZnRfZXZlbnRzPXJlY29yZC5kcmlmdF9ldmVudHMgKyBVSW50NjQoMSksCiAgICAvLyApCiAgICBkaWcgMwogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgdW5jb3ZlciA0CiAgICBjb25jYXQKICAgIHVuY292ZXIgMwogICAgaXRvYgogICAgYnl0ZWNfMSAvLyAweDAwMWEKICAgIHN3YXAKICAgIGNvbmNhdAogICAgdW5jb3ZlciAzCiAgICBpdG9iCiAgICBjb25jYXQKICAgIHVuY292ZXIgMgogICAgaXRvYgogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGRpZyAxCiAgICBib3hfZGVsCiAgICBwb3AKICAgIGJveF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weTo4MwogICAgLy8gQGFiaW1ldGhvZCgpCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnBheW1lbnRfZG5hX3JlZ2lzdHJ5LmNvbnRyYWN0LlBheW1lbnRETkFSZWdpc3RyeS5nZXRfZG5hX3ZlY3Rvcltyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9kbmFfdmVjdG9yOgogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjEwMAogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weToxMDMKICAgIC8vIGV4aXN0cyA9IGFnZW50IGluIHNlbGYuZG5hX3JlY29yZHMKICAgIGJ5dGVjXzAgLy8gMHg2NDZlNjEzYQogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjEwNAogICAgLy8gYXNzZXJ0IGV4aXN0cywgIkROQSBub3QgaW5pdGlhbGlzZWQiCiAgICBhc3NlcnQgLy8gRE5BIG5vdCBpbml0aWFsaXNlZAogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjEwNS0xMDYKICAgIC8vIHJlY29yZCA9IHNlbGYuZG5hX3JlY29yZHNbYWdlbnRdLmNvcHkoKQogICAgLy8gcmV0dXJuIHJlY29yZC52ZWN0b3IKICAgIGR1cAogICAgcHVzaGludCAyNgogICAgaW50Y18zIC8vIDIKICAgIGJveF9leHRyYWN0CiAgICBidG9pCiAgICBpbnRjXzMgLy8gMgogICAgKwogICAgcHVzaGludCAyNgogICAgc3dhcAogICAgYm94X2V4dHJhY3QKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weToxMDAKICAgIC8vIEBhYmltZXRob2QoKQogICAgYnl0ZWNfMiAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5wYXltZW50X2RuYV9yZWdpc3RyeS5jb250cmFjdC5QYXltZW50RE5BUmVnaXN0cnkuZ2V0X2RyaWZ0X2V2ZW50c1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9kcmlmdF9ldmVudHM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6MTA4CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjExMQogICAgLy8gZXhpc3RzID0gYWdlbnQgaW4gc2VsZi5kbmFfcmVjb3JkcwogICAgYnl0ZWNfMCAvLyAweDY0NmU2MTNhCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6MTEyCiAgICAvLyBhc3NlcnQgZXhpc3RzLCAiRE5BIG5vdCBpbml0aWFsaXNlZCIKICAgIGFzc2VydCAvLyBETkEgbm90IGluaXRpYWxpc2VkCiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6MTEzLTExNAogICAgLy8gcmVjb3JkID0gc2VsZi5kbmFfcmVjb3Jkc1thZ2VudF0uY29weSgpCiAgICAvLyByZXR1cm4gcmVjb3JkLmRyaWZ0X2V2ZW50cwogICAgcHVzaGludCAxOAogICAgaW50Y18xIC8vIDgKICAgIGJveF9leHRyYWN0IC8vIG9uIGVycm9yOiBpbmRleCBvdXQgb2YgYm91bmRzCiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6MTA4CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGJ5dGVjXzIgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucGF5bWVudF9kbmFfcmVnaXN0cnkuY29udHJhY3QuUGF5bWVudEROQVJlZ2lzdHJ5LmdldF90b3RhbF9wYXltZW50c1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF90b3RhbF9wYXltZW50czoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weToxMTYKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvcGF5bWVudF9kbmFfcmVnaXN0cnkvY29udHJhY3QucHk6MTE5CiAgICAvLyBleGlzdHMgPSBhZ2VudCBpbiBzZWxmLmRuYV9yZWNvcmRzCiAgICBieXRlY18wIC8vIDB4NjQ2ZTYxM2EKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weToxMjAKICAgIC8vIGFzc2VydCBleGlzdHMsICJETkEgbm90IGluaXRpYWxpc2VkIgogICAgYXNzZXJ0IC8vIEROQSBub3QgaW5pdGlhbGlzZWQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9wYXltZW50X2RuYV9yZWdpc3RyeS9jb250cmFjdC5weToxMjEtMTIyCiAgICAvLyByZWNvcmQgPSBzZWxmLmRuYV9yZWNvcmRzW2FnZW50XS5jb3B5KCkKICAgIC8vIHJldHVybiByZWNvcmQudG90YWxfcGF5bWVudHMKICAgIHB1c2hpbnQgMTAKICAgIGludGNfMSAvLyA4CiAgICBib3hfZXh0cmFjdCAvLyBvbiBlcnJvcjogaW5kZXggb3V0IG9mIGJvdW5kcwogICAgLy8gc21hcnRfY29udHJhY3RzL3BheW1lbnRfZG5hX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjExNgogICAgLy8gQGFiaW1ldGhvZCgpCiAgICBieXRlY18yIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAQggAiYEBGRuYToCABoEFR98dQ9zZW50aW5lbF9hcHBfaWQxGEAABCuBAGcxGRREMRhBADKCBgQUlbboBKvPqN0Ei/DLGQSpVQVMBJQaLSEECkgsDzYaAI4GAB0AaQDLASQBRgFgAIAEJA0vZzYaAI4BAAEANhoBSRUjEkQXK0xnIkM2GgFJFSQSRChMUEm9RQEURDIGFilMUIEAFkxLAVBMUIAiACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFBLAbxIvyJDNhoBSRUkEkQ2GgJJgQBZJQhLARUSRFcCADEAMgkSIhFESRVJJBJEKE8DUEm9RQFEMgZLAYEKI7oXIghLAoESI7oXTwQWVwYCTwVQTwMWKUxQTwMWUE8CFlBMUEsBvEi/IkM2GgFJFSQSRChMUEm9RQFESYEaJboXJQhLAYEaTwK6VwIASwElI7oXSwKBCiO6F0sDgRIjuhciCEsDFRZXBgJPBFBPAxYpTFBPAxZQTwIWUExQSwG8SL8iQzYaAUkVJBJEKExQSb1FAURJgRoluhclCIEaTLoqTFCwIkM2GgFJFSQSRChMUEm9RQFEgRIjuipMULAiQzYaAUkVJBJEKExQSb1FAUSBCiO6KkxQsCJD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -237,11 +237,57 @@ export type GlobalKeysState = PaymentDnaRegistryTypes['state']['global']['keys']
 export type BoxKeysState = PaymentDnaRegistryTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type PaymentDnaRegistryCreateCallParams =
+  | Expand<CallParams<PaymentDnaRegistryArgs['obj']['create(uint64)void'] | PaymentDnaRegistryArgs['tuple']['create(uint64)void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<PaymentDnaRegistryArgs['obj']['create(uint64)void'] | PaymentDnaRegistryArgs['tuple']['create(uint64)void']> & {method: 'create(uint64)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type PaymentDnaRegistryDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: PaymentDnaRegistryCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the PaymentDnaRegistry smart contract
  */
 export abstract class PaymentDnaRegistryParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends PaymentDnaRegistryCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(uint64)void':
+            return PaymentDnaRegistryParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the PaymentDNARegistry smart contract using the create(uint64)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<PaymentDnaRegistryArgs['obj']['create(uint64)void'] | PaymentDnaRegistryArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(uint64)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.sentinelEscrowAppId],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the initialize_dna(address)void ABI method
    *
@@ -339,6 +385,154 @@ export abstract class PaymentDnaRegistryParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the PaymentDNARegistry smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class PaymentDnaRegistryFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `PaymentDnaRegistryFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new PaymentDnaRegistryClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new PaymentDnaRegistryClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the PaymentDNARegistry smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: PaymentDnaRegistryDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? PaymentDnaRegistryParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (PaymentDnaRegistryCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new PaymentDnaRegistryClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the PaymentDNARegistry smart contract using the create(uint64)void ABI method.
+       *
+       * Called once on deployment to lock in the trusted caller.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<PaymentDnaRegistryArgs['obj']['create(uint64)void'] | PaymentDnaRegistryArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(PaymentDnaRegistryParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the PaymentDNARegistry smart contract using the create(uint64)void ABI method.
+       *
+       * Called once on deployment to lock in the trusted caller.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<PaymentDnaRegistryArgs['obj']['create(uint64)void'] | PaymentDnaRegistryArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(PaymentDnaRegistryParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the PaymentDNARegistry smart contract using an ABI method call using the create(uint64)void ABI method.
+       *
+       * Called once on deployment to lock in the trusted caller.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<PaymentDnaRegistryArgs['obj']['create(uint64)void'] | PaymentDnaRegistryArgs['tuple']['create(uint64)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(PaymentDnaRegistryParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | PaymentDnaRegistryReturns['create(uint64)void']) }, appClient: new PaymentDnaRegistryClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the PaymentDNARegistry smart contract
  */
