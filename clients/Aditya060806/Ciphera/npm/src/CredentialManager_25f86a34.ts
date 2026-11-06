@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"CredentialManager","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize — deployer becomes issuer. Fund app with 0.3 ALGO then call initialize_asa().","events":[],"recommendations":{}},{"name":"initialize_asa","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create the KYC credential ASA. Must be called AFTER funding app with >= 0.3 ALGO.\nReturns the new ASA ID. App address is manager/clawback/freeze.","events":[],"recommendations":{}},{"name":"issue_credential","args":[{"type":"address","name":"recipient"},{"type":"byte[]","name":"nullifier"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Issue a KYC credential to a verified wallet. Issuer-only.","events":[],"recommendations":{}},{"name":"revoke_credential","args":[{"type":"address","name":"wallet"},{"type":"byte[]","name":"nullifier"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Revoke credential via clawback. Issuer-only.","events":[],"recommendations":{}},{"name":"get_credential_asa_id","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Return the credential ASA ID.","events":[],"recommendations":{}},{"name":"get_total_issued","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"get_total_revoked","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"update_issuer","args":[{"type":"address","name":"new_issuer"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Transfer issuer role. Issuer-only.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Issues and revokes non-transferable KYC credential ASAs.","networks":{},"state":{"schema":{"global":{"ints":3,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"issuer":{"keyType":"AVMString","valueType":"address","key":"aXNzdWVy"},"credential_asa_id":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y3JlZGVudGlhbF9hc2FfaWQ="},"total_issued":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfaXNzdWVk"},"total_revoked":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfcmV2b2tlZA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[189],"errorMessage":"ASA already created"},{"pc":[183,325,429,520],"errorMessage":"Only issuer"},{"pc":[187,329,434,472],"errorMessage":"check self.credential_asa_id exists"},{"pc":[181,323,427,518],"errorMessage":"check self.issuer exists"},{"pc":[390,484],"errorMessage":"check self.total_issued exists"},{"pc":[461,496],"errorMessage":"check self.total_revoked exists"},{"pc":[307,411],"errorMessage":"invalid array length header"},{"pc":[314,418],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[301,405,512],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"CredentialManager","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize — deployer becomes issuer. Fund app with 0.3 ALGO then call initialize_asa().","events":[],"recommendations":{}},{"name":"initialize_asa","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create the KYC credential ASA. Must be called AFTER funding app with >= 0.3 ALGO.\nReturns the new ASA ID. App address is manager/clawback/freeze.","events":[],"recommendations":{}},{"name":"issue_credential","args":[{"type":"address","name":"recipient"},{"type":"byte[]","name":"nullifier"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Issue a KYC credential to a verified wallet. Issuer-only.","events":[],"recommendations":{}},{"name":"revoke_credential","args":[{"type":"address","name":"wallet"},{"type":"byte[]","name":"nullifier"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Revoke credential via clawback. Issuer-only.","events":[],"recommendations":{}},{"name":"get_credential_asa_id","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Return the credential ASA ID.","events":[],"recommendations":{}},{"name":"get_total_issued","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"get_total_revoked","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"update_issuer","args":[{"type":"address","name":"new_issuer"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Transfer issuer role. Issuer-only.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Issues and revokes non-transferable KYC credential ASAs.","networks":{},"state":{"schema":{"global":{"ints":3,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"issuer":{"keyType":"AVMString","valueType":"address","key":"aXNzdWVy"},"credential_asa_id":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y3JlZGVudGlhbF9hc2FfaWQ="},"total_issued":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfaXNzdWVk"},"total_revoked":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfcmV2b2tlZA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[189],"errorMessage":"ASA already created"},{"pc":[183,325,429,520],"errorMessage":"Only issuer"},{"pc":[187,329,434,472],"errorMessage":"check self.credential_asa_id exists"},{"pc":[181,323,427,518],"errorMessage":"check self.issuer exists"},{"pc":[390,484],"errorMessage":"check self.total_issued exists"},{"pc":[461,496],"errorMessage":"check self.total_revoked exists"},{"pc":[307,411],"errorMessage":"invalid array length header"},{"pc":[314,418],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[301,405,512],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMzIgMgogICAgYnl0ZWNibG9jayAiaXNzdWVyIiAiY3JlZGVudGlhbF9hc2FfaWQiICJ0b3RhbF9pc3N1ZWQiICJ0b3RhbF9yZXZva2VkIiAweDE1MWY3Yzc1CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjE3CiAgICAvLyBzZWxmLmlzc3VlciA9IEFjY291bnQoKQogICAgYnl0ZWNfMCAvLyAiaXNzdWVyIgogICAgZ2xvYmFsIFplcm9BZGRyZXNzCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weToxOAogICAgLy8gc2VsZi5jcmVkZW50aWFsX2FzYV9pZCA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMSAvLyAiY3JlZGVudGlhbF9hc2FfaWQiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6MTkKICAgIC8vIHNlbGYudG90YWxfaXNzdWVkID0gVUludDY0KDApCiAgICBieXRlY18yIC8vICJ0b3RhbF9pc3N1ZWQiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6MjAKICAgIC8vIHNlbGYudG90YWxfcmV2b2tlZCA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMyAvLyAidG90YWxfcmV2b2tlZCIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjEzCiAgICAvLyBjbGFzcyBDcmVkZW50aWFsTWFuYWdlcihBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEAxMwogICAgcHVzaGJ5dGVzcyAweGFhNWQ5MDM1IDB4ZDc4MTQ4ZWEgMHgzNWY0OGEzYiAweGJiZWQ1MDgzIDB4NWZkMjJiZWEgMHg5OWZiMzYyOSAweDJjYmMwNDBlIC8vIG1ldGhvZCAiaW5pdGlhbGl6ZV9hc2EoKXVpbnQ2NCIsIG1ldGhvZCAiaXNzdWVfY3JlZGVudGlhbChhZGRyZXNzLGJ5dGVbXSl2b2lkIiwgbWV0aG9kICJyZXZva2VfY3JlZGVudGlhbChhZGRyZXNzLGJ5dGVbXSl2b2lkIiwgbWV0aG9kICJnZXRfY3JlZGVudGlhbF9hc2FfaWQoKXVpbnQ2NCIsIG1ldGhvZCAiZ2V0X3RvdGFsX2lzc3VlZCgpdWludDY0IiwgbWV0aG9kICJnZXRfdG90YWxfcmV2b2tlZCgpdWludDY0IiwgbWV0aG9kICJ1cGRhdGVfaXNzdWVyKGFkZHJlc3Mpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGluaXRpYWxpemVfYXNhIGlzc3VlX2NyZWRlbnRpYWwgcmV2b2tlX2NyZWRlbnRpYWwgZ2V0X2NyZWRlbnRpYWxfYXNhX2lkIGdldF90b3RhbF9pc3N1ZWQgZ2V0X3RvdGFsX3Jldm9rZWQgdXBkYXRlX2lzc3VlcgogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDEzOgogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weToxMwogICAgLy8gY2xhc3MgQ3JlZGVudGlhbE1hbmFnZXIoQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweDRjNWM2MWJhIC8vIG1ldGhvZCAiY3JlYXRlKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlCiAgICBlcnIKCgovLyBzbWFydF9jb250cmFjdHMuY3JlZGVudGlhbF9tYW5hZ2VyLmNvbnRyYWN0LkNyZWRlbnRpYWxNYW5hZ2VyLmNyZWF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6MjUKICAgIC8vIHNlbGYuaXNzdWVyID0gVHhuLnNlbmRlcgogICAgYnl0ZWNfMCAvLyAiaXNzdWVyIgogICAgdHhuIFNlbmRlcgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6MjYKICAgIC8vIHNlbGYudG90YWxfaXNzdWVkID0gVUludDY0KDApCiAgICBieXRlY18yIC8vICJ0b3RhbF9pc3N1ZWQiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6MjcKICAgIC8vIHNlbGYudG90YWxfcmV2b2tlZCA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMyAvLyAidG90YWxfcmV2b2tlZCIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weToyMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmNyZWRlbnRpYWxfbWFuYWdlci5jb250cmFjdC5DcmVkZW50aWFsTWFuYWdlci5pbml0aWFsaXplX2FzYVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmluaXRpYWxpemVfYXNhOgogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weTozNQogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gc2VsZi5pc3N1ZXIsICJPbmx5IGlzc3VlciIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJpc3N1ZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuaXNzdWVyIGV4aXN0cwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGlzc3VlcgogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weTozNgogICAgLy8gYXNzZXJ0IHNlbGYuY3JlZGVudGlhbF9hc2FfaWQgPT0gVUludDY0KDApLCAiQVNBIGFscmVhZHkgY3JlYXRlZCIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJjcmVkZW50aWFsX2FzYV9pZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jcmVkZW50aWFsX2FzYV9pZCBleGlzdHMKICAgICEKICAgIGFzc2VydCAvLyBBU0EgYWxyZWFkeSBjcmVhdGVkCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjM4LTUwCiAgICAvLyByZXN1bHQgPSBpdHhuLkFzc2V0Q29uZmlnKAogICAgLy8gICAgIHRvdGFsPTFfMDAwXzAwMF8wMDAsCiAgICAvLyAgICAgZGVjaW1hbHM9MCwKICAgIC8vICAgICBkZWZhdWx0X2Zyb3plbj1UcnVlLAogICAgLy8gICAgIHVuaXRfbmFtZT1iIktZQ1JFRCIsCiAgICAvLyAgICAgYXNzZXRfbmFtZT1iIkFsZ29LWUMgQ3JlZGVudGlhbCIsCiAgICAvLyAgICAgdXJsPWIiaHR0cHM6Ly9hbGdva3ljLmRldiIsCiAgICAvLyAgICAgbWFuYWdlcj1HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgLy8gICAgIGNsYXdiYWNrPUdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyAgICAgZnJlZXplPUdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyAgICAgcmVzZXJ2ZT1HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weTo0NQogICAgLy8gbWFuYWdlcj1HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NDYtNDgKICAgIC8vIGNsYXdiYWNrPUdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyBmcmVlemU9R2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIC8vIHJlc2VydmU9R2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIGR1cG4gMwogICAgaXR4bl9maWVsZCBDb25maWdBc3NldFJlc2VydmUKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXRGcmVlemUKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXRDbGF3YmFjawogICAgaXR4bl9maWVsZCBDb25maWdBc3NldE1hbmFnZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NDQKICAgIC8vIHVybD1iImh0dHBzOi8vYWxnb2t5Yy5kZXYiLAogICAgcHVzaGJ5dGVzIDB4Njg3NDc0NzA3MzNhMmYyZjYxNmM2NzZmNmI3OTYzMmU2NDY1NzYKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXRVUkwKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NDMKICAgIC8vIGFzc2V0X25hbWU9YiJBbGdvS1lDIENyZWRlbnRpYWwiLAogICAgcHVzaGJ5dGVzIDB4NDE2YzY3NmY0YjU5NDMyMDQzNzI2NTY0NjU2ZTc0Njk2MTZjCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0TmFtZQogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weTo0MgogICAgLy8gdW5pdF9uYW1lPWIiS1lDUkVEIiwKICAgIHB1c2hieXRlcyAweDRiNTk0MzUyNDU0NAogICAgaXR4bl9maWVsZCBDb25maWdBc3NldFVuaXROYW1lCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjQxCiAgICAvLyBkZWZhdWx0X2Zyb3plbj1UcnVlLAogICAgaW50Y18xIC8vIDEKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXREZWZhdWx0RnJvemVuCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjQwCiAgICAvLyBkZWNpbWFscz0wLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXREZWNpbWFscwogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weTozOQogICAgLy8gdG90YWw9MV8wMDBfMDAwXzAwMCwKICAgIHB1c2hpbnQgMTAwMDAwMDAwMAogICAgaXR4bl9maWVsZCBDb25maWdBc3NldFRvdGFsCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjM4CiAgICAvLyByZXN1bHQgPSBpdHhuLkFzc2V0Q29uZmlnKAogICAgcHVzaGludCAzIC8vIGFjZmcKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NDkKICAgIC8vIGZlZT0wLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjM4LTUwCiAgICAvLyByZXN1bHQgPSBpdHhuLkFzc2V0Q29uZmlnKAogICAgLy8gICAgIHRvdGFsPTFfMDAwXzAwMF8wMDAsCiAgICAvLyAgICAgZGVjaW1hbHM9MCwKICAgIC8vICAgICBkZWZhdWx0X2Zyb3plbj1UcnVlLAogICAgLy8gICAgIHVuaXRfbmFtZT1iIktZQ1JFRCIsCiAgICAvLyAgICAgYXNzZXRfbmFtZT1iIkFsZ29LWUMgQ3JlZGVudGlhbCIsCiAgICAvLyAgICAgdXJsPWIiaHR0cHM6Ly9hbGdva3ljLmRldiIsCiAgICAvLyAgICAgbWFuYWdlcj1HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgLy8gICAgIGNsYXdiYWNrPUdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyAgICAgZnJlZXplPUdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyAgICAgcmVzZXJ2ZT1HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIGl0eG4gQ3JlYXRlZEFzc2V0SUQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NTIKICAgIC8vIHNlbGYuY3JlZGVudGlhbF9hc2FfaWQgPSByZXN1bHQuY3JlYXRlZF9hc3NldC5pZAogICAgYnl0ZWNfMSAvLyAiY3JlZGVudGlhbF9hc2FfaWQiCiAgICBkaWcgMQogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6MjkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBpdG9iCiAgICBieXRlYyA0IC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmNyZWRlbnRpYWxfbWFuYWdlci5jb250cmFjdC5DcmVkZW50aWFsTWFuYWdlci5pc3N1ZV9jcmVkZW50aWFsW3JvdXRpbmddKCkgLT4gdm9pZDoKaXNzdWVfY3JlZGVudGlhbDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NTUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMyAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjU4CiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBzZWxmLmlzc3VlciwgIk9ubHkgaXNzdWVyIgogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gImlzc3VlciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5pc3N1ZXIgZXhpc3RzCiAgICA9PQogICAgYXNzZXJ0IC8vIE9ubHkgaXNzdWVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjYwCiAgICAvLyBhc2EgPSBBc3NldChzZWxmLmNyZWRlbnRpYWxfYXNhX2lkKQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gImNyZWRlbnRpYWxfYXNhX2lkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmNyZWRlbnRpYWxfYXNhX2lkIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weTo2Mi02NwogICAgLy8gaXR4bi5Bc3NldEZyZWV6ZSgKICAgIC8vICAgICBmcmVlemVfYXNzZXQ9YXNhLAogICAgLy8gICAgIGZyZWV6ZV9hY2NvdW50PXJlY2lwaWVudCwKICAgIC8vICAgICBmcm96ZW49RmFsc2UsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjY1CiAgICAvLyBmcm96ZW49RmFsc2UsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGcmVlemVBc3NldEZyb3plbgogICAgZGlnIDIKICAgIGl0eG5fZmllbGQgRnJlZXplQXNzZXRBY2NvdW50CiAgICBkdXAKICAgIGl0eG5fZmllbGQgRnJlZXplQXNzZXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NjIKICAgIC8vIGl0eG4uQXNzZXRGcmVlemUoCiAgICBwdXNoaW50IDUgLy8gYWZyegogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weTo2NgogICAgLy8gZmVlPTAsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NjItNjcKICAgIC8vIGl0eG4uQXNzZXRGcmVlemUoCiAgICAvLyAgICAgZnJlZXplX2Fzc2V0PWFzYSwKICAgIC8vICAgICBmcmVlemVfYWNjb3VudD1yZWNpcGllbnQsCiAgICAvLyAgICAgZnJvemVuPUZhbHNlLAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NjktNzUKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICB4ZmVyX2Fzc2V0PWFzYSwKICAgIC8vICAgICBhc3NldF9yZWNlaXZlcj1yZWNpcGllbnQsCiAgICAvLyAgICAgYXNzZXRfYW1vdW50PTEsCiAgICAvLyAgICAgbm90ZT1udWxsaWZpZXIsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICBzd2FwCiAgICBpdHhuX2ZpZWxkIE5vdGUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NzIKICAgIC8vIGFzc2V0X2Ftb3VudD0xLAogICAgaW50Y18xIC8vIDEKICAgIGl0eG5fZmllbGQgQXNzZXRBbW91bnQKICAgIGRpZyAxCiAgICBpdHhuX2ZpZWxkIEFzc2V0UmVjZWl2ZXIKICAgIGR1cAogICAgaXR4bl9maWVsZCBYZmVyQXNzZXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NjkKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIHB1c2hpbnQgNCAvLyBheGZlcgogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weTo3NAogICAgLy8gZmVlPTAsCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NjktNzUKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICB4ZmVyX2Fzc2V0PWFzYSwKICAgIC8vICAgICBhc3NldF9yZWNlaXZlcj1yZWNpcGllbnQsCiAgICAvLyAgICAgYXNzZXRfYW1vdW50PTEsCiAgICAvLyAgICAgbm90ZT1udWxsaWZpZXIsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weTo3Ny04MgogICAgLy8gaXR4bi5Bc3NldEZyZWV6ZSgKICAgIC8vICAgICBmcmVlemVfYXNzZXQ9YXNhLAogICAgLy8gICAgIGZyZWV6ZV9hY2NvdW50PXJlY2lwaWVudCwKICAgIC8vICAgICBmcm96ZW49VHJ1ZSwKICAgIC8vICAgICBmZWU9MCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6ODAKICAgIC8vIGZyb3plbj1UcnVlLAogICAgaW50Y18xIC8vIDEKICAgIGl0eG5fZmllbGQgRnJlZXplQXNzZXRGcm96ZW4KICAgIGl0eG5fZmllbGQgRnJlZXplQXNzZXQKICAgIGl0eG5fZmllbGQgRnJlZXplQXNzZXRBY2NvdW50CiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5Ojc3CiAgICAvLyBpdHhuLkFzc2V0RnJlZXplKAogICAgcHVzaGludCA1IC8vIGFmcnoKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6ODEKICAgIC8vIGZlZT0wLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5Ojc3LTgyCiAgICAvLyBpdHhuLkFzc2V0RnJlZXplKAogICAgLy8gICAgIGZyZWV6ZV9hc3NldD1hc2EsCiAgICAvLyAgICAgZnJlZXplX2FjY291bnQ9cmVjaXBpZW50LAogICAgLy8gICAgIGZyb3plbj1UcnVlLAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6ODQKICAgIC8vIHNlbGYudG90YWxfaXNzdWVkICs9IFVJbnQ2NCgxKQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzIgLy8gInRvdGFsX2lzc3VlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF9pc3N1ZWQgZXhpc3RzCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYnl0ZWNfMiAvLyAidG90YWxfaXNzdWVkIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6NTUKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmNyZWRlbnRpYWxfbWFuYWdlci5jb250cmFjdC5DcmVkZW50aWFsTWFuYWdlci5yZXZva2VfY3JlZGVudGlhbFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnJldm9rZV9jcmVkZW50aWFsOgogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weTo4NgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18zIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6ODkKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IHNlbGYuaXNzdWVyLCAiT25seSBpc3N1ZXIiCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAiaXNzdWVyIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmlzc3VlciBleGlzdHMKICAgID09CiAgICBhc3NlcnQgLy8gT25seSBpc3N1ZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6OTEtOTgKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIC8vICAgICB4ZmVyX2Fzc2V0PUFzc2V0KHNlbGYuY3JlZGVudGlhbF9hc2FfaWQpLAogICAgLy8gICAgIGFzc2V0X3NlbmRlcj13YWxsZXQsCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXI9R2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIC8vICAgICBhc3NldF9hbW91bnQ9MSwKICAgIC8vICAgICBub3RlPW51bGxpZmllciwKICAgIC8vICAgICBmZWU9MCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6OTIKICAgIC8vIHhmZXJfYXNzZXQ9QXNzZXQoc2VsZi5jcmVkZW50aWFsX2FzYV9pZCksCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAiY3JlZGVudGlhbF9hc2FfaWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuY3JlZGVudGlhbF9hc2FfaWQgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5Ojk0CiAgICAvLyBhc3NldF9yZWNlaXZlcj1HbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLAogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIHVuY292ZXIgMgogICAgaXR4bl9maWVsZCBOb3RlCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5Ojk1CiAgICAvLyBhc3NldF9hbW91bnQ9MSwKICAgIGludGNfMSAvLyAxCiAgICBpdHhuX2ZpZWxkIEFzc2V0QW1vdW50CiAgICBpdHhuX2ZpZWxkIEFzc2V0UmVjZWl2ZXIKICAgIGl0eG5fZmllbGQgWGZlckFzc2V0CiAgICBpdHhuX2ZpZWxkIEFzc2V0U2VuZGVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjkxCiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICBwdXNoaW50IDQgLy8gYXhmZXIKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6OTcKICAgIC8vIGZlZT0wLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjkxLTk4CiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICAvLyAgICAgeGZlcl9hc3NldD1Bc3NldChzZWxmLmNyZWRlbnRpYWxfYXNhX2lkKSwKICAgIC8vICAgICBhc3NldF9zZW5kZXI9d2FsbGV0LAogICAgLy8gICAgIGFzc2V0X3JlY2VpdmVyPUdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICAvLyAgICAgYXNzZXRfYW1vdW50PTEsCiAgICAvLyAgICAgbm90ZT1udWxsaWZpZXIsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weToxMDAKICAgIC8vIHNlbGYudG90YWxfcmV2b2tlZCArPSBVSW50NjQoMSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18zIC8vICJ0b3RhbF9yZXZva2VkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX3Jldm9rZWQgZXhpc3RzCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYnl0ZWNfMyAvLyAidG90YWxfcmV2b2tlZCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5Ojg2CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5jcmVkZW50aWFsX21hbmFnZXIuY29udHJhY3QuQ3JlZGVudGlhbE1hbmFnZXIuZ2V0X2NyZWRlbnRpYWxfYXNhX2lkW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X2NyZWRlbnRpYWxfYXNhX2lkOgogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weToxMDUKICAgIC8vIHJldHVybiBzZWxmLmNyZWRlbnRpYWxfYXNhX2lkCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAiY3JlZGVudGlhbF9hc2FfaWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuY3JlZGVudGlhbF9hc2FfaWQgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjEwMgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBpdG9iCiAgICBieXRlYyA0IC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmNyZWRlbnRpYWxfbWFuYWdlci5jb250cmFjdC5DcmVkZW50aWFsTWFuYWdlci5nZXRfdG90YWxfaXNzdWVkW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X3RvdGFsX2lzc3VlZDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6MTA5CiAgICAvLyByZXR1cm4gc2VsZi50b3RhbF9pc3N1ZWQKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18yIC8vICJ0b3RhbF9pc3N1ZWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG90YWxfaXNzdWVkIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weToxMDcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgaXRvYgogICAgYnl0ZWMgNCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5jcmVkZW50aWFsX21hbmFnZXIuY29udHJhY3QuQ3JlZGVudGlhbE1hbmFnZXIuZ2V0X3RvdGFsX3Jldm9rZWRbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfdG90YWxfcmV2b2tlZDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6MTEzCiAgICAvLyByZXR1cm4gc2VsZi50b3RhbF9yZXZva2VkCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMyAvLyAidG90YWxfcmV2b2tlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF9yZXZva2VkIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weToxMTEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgaXRvYgogICAgYnl0ZWMgNCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5jcmVkZW50aWFsX21hbmFnZXIuY29udHJhY3QuQ3JlZGVudGlhbE1hbmFnZXIudXBkYXRlX2lzc3Vlcltyb3V0aW5nXSgpIC0+IHZvaWQ6CnVwZGF0ZV9pc3N1ZXI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjExNQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gc21hcnRfY29udHJhY3RzL2NyZWRlbnRpYWxfbWFuYWdlci9jb250cmFjdC5weToxMTgKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IHNlbGYuaXNzdWVyLCAiT25seSBpc3N1ZXIiCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAiaXNzdWVyIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmlzc3VlciBleGlzdHMKICAgID09CiAgICBhc3NlcnQgLy8gT25seSBpc3N1ZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jcmVkZW50aWFsX21hbmFnZXIvY29udHJhY3QucHk6MTE5CiAgICAvLyBzZWxmLmlzc3VlciA9IG5ld19pc3N1ZXIKICAgIGJ5dGVjXzAgLy8gImlzc3VlciIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvY3JlZGVudGlhbF9tYW5hZ2VyL2NvbnRyYWN0LnB5OjExNQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAAEgAiYFBmlzc3VlchFjcmVkZW50aWFsX2FzYV9pZAx0b3RhbF9pc3N1ZWQNdG90YWxfcmV2b2tlZAQVH3x1MRhAAA0oMgNnKSJnKiJnKyJnMRkURDEYQQA5ggcEql2QNQTXgUjqBDX0ijsEu+1QgwRf0ivqBJn7NikELLwEDjYaAI4HABsAkQD5AUABTAFYAWQAgARMXGG6NhoAjgEAAQAoMQBnKiJnKyJnI0MxACIoZUQSRCIpZUQURLEyCkcDsiqyK7IssimAE2h0dHBzOi8vYWxnb2t5Yy5kZXayJ4ASQWxnb0tZQyBDcmVkZW50aWFssiaABktZQ1JFRLIlI7IkIrIjgYCU69wDsiKBA7IQIrIBs7Q8KUsBZxYnBExQsCNDNhoBSRUkEkQ2GgJJIlklCEsBFRJEVwIAMQAiKGVEEkQiKWVEsSKyL0sCsi5Jsi2BBbIQIrIBs7FMsgUjshJLAbIUSbIRgQSyECKyAbOxI7Ivsi2yLoEFshAisgGzIiplRCMIKkxnI0M2GgFJFSQSRDYaAkkiWSUISwEVEkRXAgAxACIoZUQSRLEiKWVEMgpPArIFI7ISshSyEbITgQSyECKyAbMiK2VEIwgrTGcjQyIpZUQWJwRMULAjQyIqZUQWJwRMULAjQyIrZUQWJwRMULAjQzYaAUkVJBJEMQAiKGVEEkQoTGcjQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -213,11 +213,57 @@ export type MethodReturn<TSignature extends CredentialManagerSignatures> = Crede
 export type GlobalKeysState = CredentialManagerTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type CredentialManagerCreateCallParams =
+  | Expand<CallParams<CredentialManagerArgs['obj']['create()void'] | CredentialManagerArgs['tuple']['create()void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<CredentialManagerArgs['obj']['create()void'] | CredentialManagerArgs['tuple']['create()void']> & {method: 'create()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type CredentialManagerDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: CredentialManagerCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the CredentialManager smart contract
  */
 export abstract class CredentialManagerParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends CredentialManagerCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create()void':
+            return CredentialManagerParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the CredentialManager smart contract using the create()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<CredentialManagerArgs['obj']['create()void'] | CredentialManagerArgs['tuple']['create()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the initialize_asa()uint64 ABI method
    *
@@ -323,6 +369,154 @@ export abstract class CredentialManagerParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the CredentialManager smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class CredentialManagerFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `CredentialManagerFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new CredentialManagerClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new CredentialManagerClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the CredentialManager smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: CredentialManagerDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? CredentialManagerParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (CredentialManagerCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new CredentialManagerClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CredentialManager smart contract using the create()void ABI method.
+       *
+       * Initialize — deployer becomes issuer. Fund app with 0.3 ALGO then call initialize_asa().
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<CredentialManagerArgs['obj']['create()void'] | CredentialManagerArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(CredentialManagerParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CredentialManager smart contract using the create()void ABI method.
+       *
+       * Initialize — deployer becomes issuer. Fund app with 0.3 ALGO then call initialize_asa().
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<CredentialManagerArgs['obj']['create()void'] | CredentialManagerArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(CredentialManagerParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the CredentialManager smart contract using an ABI method call using the create()void ABI method.
+       *
+       * Initialize — deployer becomes issuer. Fund app with 0.3 ALGO then call initialize_asa().
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<CredentialManagerArgs['obj']['create()void'] | CredentialManagerArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(CredentialManagerParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | CredentialManagerReturns['create()void']) }, appClient: new CredentialManagerClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the CredentialManager smart contract
  */
