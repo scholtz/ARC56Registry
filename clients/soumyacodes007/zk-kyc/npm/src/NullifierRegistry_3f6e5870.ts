@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"NullifierRegistry","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize — caller becomes the issuer.","events":[],"recommendations":{}},{"name":"register","args":[{"type":"byte[]","name":"nullifier"},{"type":"address","name":"wallet"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Register nullifier → wallet. Issuer-only.\nFails if nullifier already registered (one Aadhaar per wallet).","events":[],"recommendations":{}},{"name":"is_registered","args":[{"type":"byte[]","name":"nullifier"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Check if a nullifier has been registered.","events":[],"recommendations":{}},{"name":"get_wallet","args":[{"type":"byte[]","name":"nullifier"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Retrieve wallet bytes for a nullifier (court order lookup).","events":[],"recommendations":{}},{"name":"invalidate","args":[{"type":"byte[]","name":"nullifier"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Remove nullifier registration — issuer-only, used on revocation.","events":[],"recommendations":{}},{"name":"get_total_registered","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Total registered credentials.","events":[],"recommendations":{}},{"name":"update_issuer","args":[{"type":"address","name":"new_issuer"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Transfer issuer role. Issuer-only.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Registry mapping nullifier_hash → wallet for Sybil prevention.","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"issuer":{"keyType":"AVMString","valueType":"address","key":"aXNzdWVy"},"total_registered":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfcmVnaXN0ZXJlZA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"nullifiers":{"keyType":"AVMBytes","valueType":"AVMBytes","prefix":"bnVsXw=="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[178],"errorMessage":"Nullifier already registered"},{"pc":[253,301],"errorMessage":"Nullifier not found"},{"pc":[168,293,348],"errorMessage":"Only issuer"},{"pc":[166,291,346],"errorMessage":"check self.issuer exists"},{"pc":[187,307,314,325],"errorMessage":"check self.total_registered exists"},{"pc":[142,200,235,275],"errorMessage":"invalid array length header"},{"pc":[149,207,242,282],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[160,340],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"NullifierRegistry","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize — caller becomes the issuer.","events":[],"recommendations":{}},{"name":"register","args":[{"type":"byte[]","name":"nullifier"},{"type":"address","name":"wallet"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Register nullifier → wallet. Issuer-only.\nFails if nullifier already registered (one Aadhaar per wallet).","events":[],"recommendations":{}},{"name":"is_registered","args":[{"type":"byte[]","name":"nullifier"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Check if a nullifier has been registered.","events":[],"recommendations":{}},{"name":"get_wallet","args":[{"type":"byte[]","name":"nullifier"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Retrieve wallet bytes for a nullifier (court order lookup).","events":[],"recommendations":{}},{"name":"invalidate","args":[{"type":"byte[]","name":"nullifier"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Remove nullifier registration — issuer-only, used on revocation.","events":[],"recommendations":{}},{"name":"get_total_registered","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Total registered credentials.","events":[],"recommendations":{}},{"name":"update_issuer","args":[{"type":"address","name":"new_issuer"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Transfer issuer role. Issuer-only.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Registry mapping nullifier_hash → wallet for Sybil prevention.","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"issuer":{"keyType":"AVMString","valueType":"address","key":"aXNzdWVy"},"total_registered":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfcmVnaXN0ZXJlZA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"nullifiers":{"keyType":"AVMBytes","valueType":"AVMBytes","prefix":"bnVsXw=="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[178],"errorMessage":"Nullifier already registered"},{"pc":[253,301],"errorMessage":"Nullifier not found"},{"pc":[168,293,348],"errorMessage":"Only issuer"},{"pc":[166,291,346],"errorMessage":"check self.issuer exists"},{"pc":[187,307,314,325],"errorMessage":"check self.total_registered exists"},{"pc":[142,200,235,275],"errorMessage":"invalid array length header"},{"pc":[149,207,242,282],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[160,340],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMiAzMgogICAgYnl0ZWNibG9jayAidG90YWxfcmVnaXN0ZXJlZCIgImlzc3VlciIgMHg2ZTc1NmM1ZiAweDE1MWY3Yzc1CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjEzLTE0CiAgICAvLyAjIElzc3VlciBpcyBzZXQgYXQgY3JlYXRpb24g4oCUIG9ubHkgaXNzdWVyIGNhbiByZWdpc3Rlci9pbnZhbGlkYXRlCiAgICAvLyBzZWxmLmlzc3VlciA9IEFjY291bnQoKQogICAgYnl0ZWNfMSAvLyAiaXNzdWVyIgogICAgZ2xvYmFsIFplcm9BZGRyZXNzCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL251bGxpZmllcl9yZWdpc3RyeS9jb250cmFjdC5weToxNQogICAgLy8gc2VsZi50b3RhbF9yZWdpc3RlcmVkID0gVUludDY0KDApCiAgICBieXRlY18wIC8vICJ0b3RhbF9yZWdpc3RlcmVkIgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9udWxsaWZpZXJfcmVnaXN0cnkvY29udHJhY3QucHk6OQogICAgLy8gY2xhc3MgTnVsbGlmaWVyUmVnaXN0cnkoQVJDNENvbnRyYWN0KToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BAMTIKICAgIHB1c2hieXRlc3MgMHg4NWIyODQxOSAweDEzMjJhZTAyIDB4MDI5MTJiNzMgMHg4NDM2MzdjNyAweDQ2ODY5ZjMzIDB4MmNiYzA0MGUgLy8gbWV0aG9kICJyZWdpc3RlcihieXRlW10sYWRkcmVzcyl2b2lkIiwgbWV0aG9kICJpc19yZWdpc3RlcmVkKGJ5dGVbXSlib29sIiwgbWV0aG9kICJnZXRfd2FsbGV0KGJ5dGVbXSlieXRlW10iLCBtZXRob2QgImludmFsaWRhdGUoYnl0ZVtdKXZvaWQiLCBtZXRob2QgImdldF90b3RhbF9yZWdpc3RlcmVkKCl1aW50NjQiLCBtZXRob2QgInVwZGF0ZV9pc3N1ZXIoYWRkcmVzcyl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggcmVnaXN0ZXIgaXNfcmVnaXN0ZXJlZCBnZXRfd2FsbGV0IGludmFsaWRhdGUgZ2V0X3RvdGFsX3JlZ2lzdGVyZWQgdXBkYXRlX2lzc3VlcgogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDEyOgogICAgLy8gc21hcnRfY29udHJhY3RzL251bGxpZmllcl9yZWdpc3RyeS9jb250cmFjdC5weTo5CiAgICAvLyBjbGFzcyBOdWxsaWZpZXJSZWdpc3RyeShBUkM0Q29udHJhY3QpOgogICAgcHVzaGJ5dGVzIDB4NGM1YzYxYmEgLy8gbWV0aG9kICJjcmVhdGUoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGUKICAgIGVycgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5udWxsaWZpZXJfcmVnaXN0cnkuY29udHJhY3QuTnVsbGlmaWVyUmVnaXN0cnkuY3JlYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL251bGxpZmllcl9yZWdpc3RyeS9jb250cmFjdC5weToyMwogICAgLy8gc2VsZi5pc3N1ZXIgPSBUeG4uc2VuZGVyCiAgICBieXRlY18xIC8vICJpc3N1ZXIiCiAgICB0eG4gU2VuZGVyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL251bGxpZmllcl9yZWdpc3RyeS9jb250cmFjdC5weToyNAogICAgLy8gc2VsZi50b3RhbF9yZWdpc3RlcmVkID0gVUludDY0KDApCiAgICBieXRlY18wIC8vICJ0b3RhbF9yZWdpc3RlcmVkIgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjIwCiAgICAvLyBAYXJjNC5hYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMubnVsbGlmaWVyX3JlZ2lzdHJ5LmNvbnRyYWN0Lk51bGxpZmllclJlZ2lzdHJ5LnJlZ2lzdGVyW3JvdXRpbmddKCkgLT4gdm9pZDoKcmVnaXN0ZXI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjI2CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgLy8gc21hcnRfY29udHJhY3RzL251bGxpZmllcl9yZWdpc3RyeS9jb250cmFjdC5weTozMgogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gc2VsZi5pc3N1ZXIsICJPbmx5IGlzc3VlciIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJpc3N1ZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuaXNzdWVyIGV4aXN0cwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGlzc3VlcgogICAgLy8gc21hcnRfY29udHJhY3RzL251bGxpZmllcl9yZWdpc3RyeS9jb250cmFjdC5weTozMwogICAgLy8gYXNzZXJ0IG51bGxpZmllciBub3QgaW4gc2VsZi5udWxsaWZpZXJzLCAiTnVsbGlmaWVyIGFscmVhZHkgcmVnaXN0ZXJlZCIKICAgIGJ5dGVjXzIgLy8gMHg2ZTc1NmM1ZgogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAhCiAgICBhc3NlcnQgLy8gTnVsbGlmaWVyIGFscmVhZHkgcmVnaXN0ZXJlZAogICAgLy8gc21hcnRfY29udHJhY3RzL251bGxpZmllcl9yZWdpc3RyeS9jb250cmFjdC5weTozNAogICAgLy8gc2VsZi5udWxsaWZpZXJzW251bGxpZmllcl0gPSB3YWxsZXQuYnl0ZXMKICAgIGR1cAogICAgYm94X2RlbAogICAgcG9wCiAgICBzd2FwCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjM1CiAgICAvLyBzZWxmLnRvdGFsX3JlZ2lzdGVyZWQgKz0gVUludDY0KDEpCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAidG90YWxfcmVnaXN0ZXJlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF9yZWdpc3RlcmVkIGV4aXN0cwogICAgaW50Y18xIC8vIDEKICAgICsKICAgIGJ5dGVjXzAgLy8gInRvdGFsX3JlZ2lzdGVyZWQiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL251bGxpZmllcl9yZWdpc3RyeS9jb250cmFjdC5weToyNgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMubnVsbGlmaWVyX3JlZ2lzdHJ5LmNvbnRyYWN0Lk51bGxpZmllclJlZ2lzdHJ5LmlzX3JlZ2lzdGVyZWRbcm91dGluZ10oKSAtPiB2b2lkOgppc19yZWdpc3RlcmVkOgogICAgLy8gc21hcnRfY29udHJhY3RzL251bGxpZmllcl9yZWdpc3RyeS9jb250cmFjdC5weTozNwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL251bGxpZmllcl9yZWdpc3RyeS9jb250cmFjdC5weTo0MAogICAgLy8gcmV0dXJuIG51bGxpZmllciBpbiBzZWxmLm51bGxpZmllcnMKICAgIGJ5dGVjXzIgLy8gMHg2ZTc1NmM1ZgogICAgc3dhcAogICAgY29uY2F0CiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9udWxsaWZpZXJfcmVnaXN0cnkvY29udHJhY3QucHk6MzcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGludGNfMCAvLyAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5udWxsaWZpZXJfcmVnaXN0cnkuY29udHJhY3QuTnVsbGlmaWVyUmVnaXN0cnkuZ2V0X3dhbGxldFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF93YWxsZXQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjQyCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjQ1CiAgICAvLyBhc3NlcnQgbnVsbGlmaWVyIGluIHNlbGYubnVsbGlmaWVycywgIk51bGxpZmllciBub3QgZm91bmQiCiAgICBieXRlY18yIC8vIDB4NmU3NTZjNWYKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBOdWxsaWZpZXIgbm90IGZvdW5kCiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjQ2CiAgICAvLyByZXR1cm4gc2VsZi5udWxsaWZpZXJzW251bGxpZmllcl0KICAgIGJveF9nZXQKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL251bGxpZmllcl9yZWdpc3RyeS9jb250cmFjdC5weTo0MgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5udWxsaWZpZXJfcmVnaXN0cnkuY29udHJhY3QuTnVsbGlmaWVyUmVnaXN0cnkuaW52YWxpZGF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmludmFsaWRhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjQ4CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9udWxsaWZpZXJfcmVnaXN0cnkvY29udHJhY3QucHk6NTEKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IHNlbGYuaXNzdWVyLCAiT25seSBpc3N1ZXIiCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAiaXNzdWVyIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmlzc3VlciBleGlzdHMKICAgID09CiAgICBhc3NlcnQgLy8gT25seSBpc3N1ZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9udWxsaWZpZXJfcmVnaXN0cnkvY29udHJhY3QucHk6NTIKICAgIC8vIGFzc2VydCBudWxsaWZpZXIgaW4gc2VsZi5udWxsaWZpZXJzLCAiTnVsbGlmaWVyIG5vdCBmb3VuZCIKICAgIGJ5dGVjXzIgLy8gMHg2ZTc1NmM1ZgogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgYXNzZXJ0IC8vIE51bGxpZmllciBub3QgZm91bmQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9udWxsaWZpZXJfcmVnaXN0cnkvY29udHJhY3QucHk6NTMKICAgIC8vIGRlbCBzZWxmLm51bGxpZmllcnNbbnVsbGlmaWVyXQogICAgYm94X2RlbAogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjU0CiAgICAvLyBpZiBzZWxmLnRvdGFsX3JlZ2lzdGVyZWQgPiBVSW50NjQoMCk6CiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAidG90YWxfcmVnaXN0ZXJlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF9yZWdpc3RlcmVkIGV4aXN0cwogICAgYnogaW52YWxpZGF0ZV9hZnRlcl9pZl9lbHNlQDMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9udWxsaWZpZXJfcmVnaXN0cnkvY29udHJhY3QucHk6NTUKICAgIC8vIHNlbGYudG90YWxfcmVnaXN0ZXJlZCAtPSBVSW50NjQoMSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJ0b3RhbF9yZWdpc3RlcmVkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX3JlZ2lzdGVyZWQgZXhpc3RzCiAgICBpbnRjXzEgLy8gMQogICAgLQogICAgYnl0ZWNfMCAvLyAidG90YWxfcmVnaXN0ZXJlZCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CgppbnZhbGlkYXRlX2FmdGVyX2lmX2Vsc2VAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9udWxsaWZpZXJfcmVnaXN0cnkvY29udHJhY3QucHk6NDgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLm51bGxpZmllcl9yZWdpc3RyeS5jb250cmFjdC5OdWxsaWZpZXJSZWdpc3RyeS5nZXRfdG90YWxfcmVnaXN0ZXJlZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF90b3RhbF9yZWdpc3RlcmVkOgogICAgLy8gc21hcnRfY29udHJhY3RzL251bGxpZmllcl9yZWdpc3RyeS9jb250cmFjdC5weTo2MAogICAgLy8gcmV0dXJuIHNlbGYudG90YWxfcmVnaXN0ZXJlZAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInRvdGFsX3JlZ2lzdGVyZWQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG90YWxfcmVnaXN0ZXJlZCBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9udWxsaWZpZXJfcmVnaXN0cnkvY29udHJhY3QucHk6NTcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgaXRvYgogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5udWxsaWZpZXJfcmVnaXN0cnkuY29udHJhY3QuTnVsbGlmaWVyUmVnaXN0cnkudXBkYXRlX2lzc3Vlcltyb3V0aW5nXSgpIC0+IHZvaWQ6CnVwZGF0ZV9pc3N1ZXI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjYyCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjY1CiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBzZWxmLmlzc3VlciwgIk9ubHkgaXNzdWVyIgogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gImlzc3VlciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5pc3N1ZXIgZXhpc3RzCiAgICA9PQogICAgYXNzZXJ0IC8vIE9ubHkgaXNzdWVyCiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjY2CiAgICAvLyBzZWxmLmlzc3VlciA9IG5ld19pc3N1ZXIKICAgIGJ5dGVjXzEgLy8gImlzc3VlciIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvbnVsbGlmaWVyX3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjYyCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAAECICYEEHRvdGFsX3JlZ2lzdGVyZWQGaXNzdWVyBG51bF8EFR98dTEYQAAHKTIDZygiZzEZFEQxGEEAMoIGBIWyhBkEEyKuAgQCkStzBIQ2N8cERoafMwQsvAQONhoAjgYAGABSAHUAnQDRANwAgARMXGG6NhoAjgEAAQApMQBnKCJnI0M2GgFJIlkkCEsBFRJEVwIANhoCSRUlEkQxACIpZUQSRCpPAlBJvUUBFERJvEhMvyIoZUQjCChMZyNDNhoBSSJZJAhLARUSRFcCACpMUL1FAYABACJPAlQrTFCwI0M2GgFJIlkkCEsBFRJEVwIAKkxQSb1FAUS+SEkVFlcGAkxQK0xQsCNDNhoBSSJZJAhLARUSRFcCADEAIillRBJEKkxQSb1FAUS8SCIoZURBAAkiKGVEIwkoTGcjQyIoZUQWK0xQsCNDNhoBSRUlEkQxACIpZUQSRClMZyND","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -217,11 +217,57 @@ export type GlobalKeysState = NullifierRegistryTypes['state']['global']['keys']
 export type BoxKeysState = NullifierRegistryTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type NullifierRegistryCreateCallParams =
+  | Expand<CallParams<NullifierRegistryArgs['obj']['create()void'] | NullifierRegistryArgs['tuple']['create()void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<NullifierRegistryArgs['obj']['create()void'] | NullifierRegistryArgs['tuple']['create()void']> & {method: 'create()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type NullifierRegistryDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: NullifierRegistryCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the NullifierRegistry smart contract
  */
 export abstract class NullifierRegistryParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends NullifierRegistryCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create()void':
+            return NullifierRegistryParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the NullifierRegistry smart contract using the create()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<NullifierRegistryArgs['obj']['create()void'] | NullifierRegistryArgs['tuple']['create()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the register(byte[],address)void ABI method
    *
@@ -316,6 +362,154 @@ export abstract class NullifierRegistryParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the NullifierRegistry smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class NullifierRegistryFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `NullifierRegistryFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new NullifierRegistryClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new NullifierRegistryClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the NullifierRegistry smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: NullifierRegistryDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? NullifierRegistryParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (NullifierRegistryCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new NullifierRegistryClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NullifierRegistry smart contract using the create()void ABI method.
+       *
+       * Initialize — caller becomes the issuer.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<NullifierRegistryArgs['obj']['create()void'] | NullifierRegistryArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(NullifierRegistryParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NullifierRegistry smart contract using the create()void ABI method.
+       *
+       * Initialize — caller becomes the issuer.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<NullifierRegistryArgs['obj']['create()void'] | NullifierRegistryArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(NullifierRegistryParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NullifierRegistry smart contract using an ABI method call using the create()void ABI method.
+       *
+       * Initialize — caller becomes the issuer.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<NullifierRegistryArgs['obj']['create()void'] | NullifierRegistryArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(NullifierRegistryParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | NullifierRegistryReturns['create()void']) }, appClient: new NullifierRegistryClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the NullifierRegistry smart contract
  */

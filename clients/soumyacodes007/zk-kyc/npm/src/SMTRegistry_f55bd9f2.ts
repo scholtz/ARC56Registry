@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"SMTRegistry","structs":{},"methods":[{"name":"create","args":[{"type":"byte[]","name":"initial_root"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize with the genesis SMT root (32 zero bytes = empty tree).","events":[],"recommendations":{}},{"name":"update_root","args":[{"type":"byte[]","name":"new_root"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Update SMT root. Issuer-only.\nCalled after every credential issuance or revocation. 1 Algorand tx = all revocations reflected immediately.","events":[],"recommendations":{}},{"name":"get_root","args":[],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Return current SMT root for client-side SMT inclusion proof verification.","events":[],"recommendations":{}},{"name":"get_last_updated_round","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Algorand round at which root was last updated.","events":[],"recommendations":{}},{"name":"get_update_count","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Total root updates (audit counter).","events":[],"recommendations":{}},{"name":"update_issuer","args":[{"type":"address","name":"new_issuer"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Transfer issuer role. Issuer-only.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"On-chain store for the Sparse Merkle Tree root.","networks":{},"state":{"schema":{"global":{"ints":2,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"issuer":{"keyType":"AVMString","valueType":"address","key":"aXNzdWVy"},"smt_root":{"keyType":"AVMString","valueType":"AVMBytes","key":"c210X3Jvb3Q="},"last_updated_round":{"keyType":"AVMString","valueType":"AVMUint64","key":"bGFzdF91cGRhdGVkX3JvdW5k"},"update_count":{"keyType":"AVMString","valueType":"AVMUint64","key":"dXBkYXRlX2NvdW50"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[201,279],"errorMessage":"Only issuer"},{"pc":[199,277],"errorMessage":"check self.issuer exists"},{"pc":[242],"errorMessage":"check self.last_updated_round exists"},{"pc":[223],"errorMessage":"check self.smt_root exists"},{"pc":[212,254],"errorMessage":"check self.update_count exists"},{"pc":[151,183],"errorMessage":"invalid array length header"},{"pc":[158,190],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[271],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"SMTRegistry","structs":{},"methods":[{"name":"create","args":[{"type":"byte[]","name":"initial_root"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize with the genesis SMT root (32 zero bytes = empty tree).","events":[],"recommendations":{}},{"name":"update_root","args":[{"type":"byte[]","name":"new_root"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Update SMT root. Issuer-only.\nCalled after every credential issuance or revocation. 1 Algorand tx = all revocations reflected immediately.","events":[],"recommendations":{}},{"name":"get_root","args":[],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Return current SMT root for client-side SMT inclusion proof verification.","events":[],"recommendations":{}},{"name":"get_last_updated_round","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Algorand round at which root was last updated.","events":[],"recommendations":{}},{"name":"get_update_count","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Total root updates (audit counter).","events":[],"recommendations":{}},{"name":"update_issuer","args":[{"type":"address","name":"new_issuer"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Transfer issuer role. Issuer-only.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"On-chain store for the Sparse Merkle Tree root.","networks":{},"state":{"schema":{"global":{"ints":2,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"issuer":{"keyType":"AVMString","valueType":"address","key":"aXNzdWVy"},"smt_root":{"keyType":"AVMString","valueType":"AVMBytes","key":"c210X3Jvb3Q="},"last_updated_round":{"keyType":"AVMString","valueType":"AVMUint64","key":"bGFzdF91cGRhdGVkX3JvdW5k"},"update_count":{"keyType":"AVMString","valueType":"AVMUint64","key":"dXBkYXRlX2NvdW50"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[201,279],"errorMessage":"Only issuer"},{"pc":[199,277],"errorMessage":"check self.issuer exists"},{"pc":[242],"errorMessage":"check self.last_updated_round exists"},{"pc":[223],"errorMessage":"check self.smt_root exists"},{"pc":[212,254],"errorMessage":"check self.update_count exists"},{"pc":[151,183],"errorMessage":"invalid array length header"},{"pc":[158,190],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[271],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMgogICAgYnl0ZWNibG9jayAiaXNzdWVyIiAidXBkYXRlX2NvdW50IiAic210X3Jvb3QiICJsYXN0X3VwZGF0ZWRfcm91bmQiIDB4MTUxZjdjNzUKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zbXRfcmVnaXN0cnkvY29udHJhY3QucHk6MTMKICAgIC8vIHNlbGYuaXNzdWVyID0gQWNjb3VudCgpCiAgICBieXRlY18wIC8vICJpc3N1ZXIiCiAgICBnbG9iYWwgWmVyb0FkZHJlc3MKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc210X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjE0LTE1CiAgICAvLyAjIFNNVCByb290IOKAlCAzMiBieXRlcyAoUG9zZWlkb24gaGFzaCBvZiB0aGUgZnVsbCB0cmVlKQogICAgLy8gc2VsZi5zbXRfcm9vdCA9IEJ5dGVzKCkKICAgIGJ5dGVjXzIgLy8gInNtdF9yb290IgogICAgcHVzaGJ5dGVzIDB4CiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weToxNgogICAgLy8gc2VsZi5sYXN0X3VwZGF0ZWRfcm91bmQgPSBVSW50NjQoMCkKICAgIGJ5dGVjXzMgLy8gImxhc3RfdXBkYXRlZF9yb3VuZCIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weToxNwogICAgLy8gc2VsZi51cGRhdGVfY291bnQgPSBVSW50NjQoMCkKICAgIGJ5dGVjXzEgLy8gInVwZGF0ZV9jb3VudCIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc210X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjkKICAgIC8vIGNsYXNzIFNNVFJlZ2lzdHJ5KEFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDExCiAgICBwdXNoYnl0ZXNzIDB4ZGEwMTU1ODUgMHgwZDY3Y2IwMiAweGU0NWI1ODlhIDB4Zjg5Njc0YzcgMHgyY2JjMDQwZSAvLyBtZXRob2QgInVwZGF0ZV9yb290KGJ5dGVbXSl2b2lkIiwgbWV0aG9kICJnZXRfcm9vdCgpYnl0ZVtdIiwgbWV0aG9kICJnZXRfbGFzdF91cGRhdGVkX3JvdW5kKCl1aW50NjQiLCBtZXRob2QgImdldF91cGRhdGVfY291bnQoKXVpbnQ2NCIsIG1ldGhvZCAidXBkYXRlX2lzc3VlcihhZGRyZXNzKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCB1cGRhdGVfcm9vdCBnZXRfcm9vdCBnZXRfbGFzdF91cGRhdGVkX3JvdW5kIGdldF91cGRhdGVfY291bnQgdXBkYXRlX2lzc3VlcgogICAgZXJyCgptYWluX2NyZWF0ZV9Ob09wQDExOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weTo5CiAgICAvLyBjbGFzcyBTTVRSZWdpc3RyeShBUkM0Q29udHJhY3QpOgogICAgcHVzaGJ5dGVzIDB4OGU3OTM1OGQgLy8gbWV0aG9kICJjcmVhdGUoYnl0ZVtdKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGUKICAgIGVycgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5zbXRfcmVnaXN0cnkuY29udHJhY3QuU01UUmVnaXN0cnkuY3JlYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weToxOQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKGNyZWF0ZT0icmVxdWlyZSIpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weToyMgogICAgLy8gc2VsZi5pc3N1ZXIgPSBUeG4uc2VuZGVyCiAgICBieXRlY18wIC8vICJpc3N1ZXIiCiAgICB0eG4gU2VuZGVyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weToyMwogICAgLy8gc2VsZi5zbXRfcm9vdCA9IGluaXRpYWxfcm9vdAogICAgYnl0ZWNfMiAvLyAic210X3Jvb3QiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weToyNAogICAgLy8gc2VsZi5sYXN0X3VwZGF0ZWRfcm91bmQgPSBHbG9iYWwucm91bmQKICAgIGJ5dGVjXzMgLy8gImxhc3RfdXBkYXRlZF9yb3VuZCIKICAgIGdsb2JhbCBSb3VuZAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zbXRfcmVnaXN0cnkvY29udHJhY3QucHk6MjUKICAgIC8vIHNlbGYudXBkYXRlX2NvdW50ID0gVUludDY0KDApCiAgICBieXRlY18xIC8vICJ1cGRhdGVfY291bnQiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zbXRfcmVnaXN0cnkvY29udHJhY3QucHk6MTkKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChjcmVhdGU9InJlcXVpcmUiKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5zbXRfcmVnaXN0cnkuY29udHJhY3QuU01UUmVnaXN0cnkudXBkYXRlX3Jvb3Rbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGVfcm9vdDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zbXRfcmVnaXN0cnkvY29udHJhY3QucHk6MjcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weTozNAogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIgPT0gc2VsZi5pc3N1ZXIsICJPbmx5IGlzc3VlciIKICAgIHR4biBTZW5kZXIKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJpc3N1ZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuaXNzdWVyIGV4aXN0cwogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IGlzc3VlcgogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weTozNQogICAgLy8gc2VsZi5zbXRfcm9vdCA9IG5ld19yb290CiAgICBieXRlY18yIC8vICJzbXRfcm9vdCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvc210X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjM2CiAgICAvLyBzZWxmLmxhc3RfdXBkYXRlZF9yb3VuZCA9IEdsb2JhbC5yb3VuZAogICAgYnl0ZWNfMyAvLyAibGFzdF91cGRhdGVkX3JvdW5kIgogICAgZ2xvYmFsIFJvdW5kCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weTozNwogICAgLy8gc2VsZi51cGRhdGVfY291bnQgKz0gVUludDY0KDEpCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAidXBkYXRlX2NvdW50IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnVwZGF0ZV9jb3VudCBleGlzdHMKICAgIGludGNfMSAvLyAxCiAgICArCiAgICBieXRlY18xIC8vICJ1cGRhdGVfY291bnQiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weToyNwogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuc210X3JlZ2lzdHJ5LmNvbnRyYWN0LlNNVFJlZ2lzdHJ5LmdldF9yb290W3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X3Jvb3Q6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc210X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjQyCiAgICAvLyByZXR1cm4gc2VsZi5zbXRfcm9vdAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzIgLy8gInNtdF9yb290IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnNtdF9yb290IGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weTozOQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWMgNCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5zbXRfcmVnaXN0cnkuY29udHJhY3QuU01UUmVnaXN0cnkuZ2V0X2xhc3RfdXBkYXRlZF9yb3VuZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9sYXN0X3VwZGF0ZWRfcm91bmQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc210X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjQ3CiAgICAvLyByZXR1cm4gc2VsZi5sYXN0X3VwZGF0ZWRfcm91bmQKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18zIC8vICJsYXN0X3VwZGF0ZWRfcm91bmQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYubGFzdF91cGRhdGVkX3JvdW5kIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weTo0NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBpdG9iCiAgICBieXRlYyA0IC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnNtdF9yZWdpc3RyeS5jb250cmFjdC5TTVRSZWdpc3RyeS5nZXRfdXBkYXRlX2NvdW50W3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X3VwZGF0ZV9jb3VudDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zbXRfcmVnaXN0cnkvY29udHJhY3QucHk6NTIKICAgIC8vIHJldHVybiBzZWxmLnVwZGF0ZV9jb3VudAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gInVwZGF0ZV9jb3VudCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi51cGRhdGVfY291bnQgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvc210X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjQ5CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGl0b2IKICAgIGJ5dGVjIDQgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuc210X3JlZ2lzdHJ5LmNvbnRyYWN0LlNNVFJlZ2lzdHJ5LnVwZGF0ZV9pc3N1ZXJbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGVfaXNzdWVyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3NtdF9yZWdpc3RyeS9jb250cmFjdC5weTo1NAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zbXRfcmVnaXN0cnkvY29udHJhY3QucHk6NTcKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IHNlbGYuaXNzdWVyLCAiT25seSBpc3N1ZXIiCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAiaXNzdWVyIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmlzc3VlciBleGlzdHMKICAgID09CiAgICBhc3NlcnQgLy8gT25seSBpc3N1ZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zbXRfcmVnaXN0cnkvY29udHJhY3QucHk6NTgKICAgIC8vIHNlbGYuaXNzdWVyID0gbmV3X2lzc3VlcgogICAgYnl0ZWNfMCAvLyAiaXNzdWVyIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zbXRfcmVnaXN0cnkvY29udHJhY3QucHk6NTQKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAAECJgUGaXNzdWVyDHVwZGF0ZV9jb3VudAhzbXRfcm9vdBJsYXN0X3VwZGF0ZWRfcm91bmQEFR98dTEYQAAOKDIDZyqAAGcrImcpImcxGRREMRhBACuCBQTaAVWFBA1nywIE5FtYmgT4lnTHBCy8BA42GgCOBQAvAFkAbAB4AIQAgASOeTWNNhoAjgEAAQA2GgFJIlkkCEsBFRJEVwIAKDEAZypMZysyBmcpImcjQzYaAUkiWSQISwEVEkRXAgAxACIoZUQSRCpMZysyBmciKWVEIwgpTGcjQyIqZURJFRZXBgJMUCcETFCwI0MiK2VEFicETFCwI0MiKWVEFicETFCwI0M2GgFJFYEgEkQxACIoZUQSRChMZyND","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -195,11 +195,57 @@ export type MethodReturn<TSignature extends SmtRegistrySignatures> = SmtRegistry
 export type GlobalKeysState = SmtRegistryTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type SmtRegistryCreateCallParams =
+  | Expand<CallParams<SmtRegistryArgs['obj']['create(byte[])void'] | SmtRegistryArgs['tuple']['create(byte[])void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<SmtRegistryArgs['obj']['create(byte[])void'] | SmtRegistryArgs['tuple']['create(byte[])void']> & {method: 'create(byte[])void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type SmtRegistryDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: SmtRegistryCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the SmtRegistry smart contract
  */
 export abstract class SmtRegistryParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends SmtRegistryCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(byte[])void':
+            return SmtRegistryParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the SMTRegistry smart contract using the create(byte[])void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<SmtRegistryArgs['obj']['create(byte[])void'] | SmtRegistryArgs['tuple']['create(byte[])void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(byte[])void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.initialRoot],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the update_root(byte[])void ABI method
    *
@@ -279,6 +325,154 @@ export abstract class SmtRegistryParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the SMTRegistry smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class SmtRegistryFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `SmtRegistryFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new SmtRegistryClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new SmtRegistryClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the SMTRegistry smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: SmtRegistryDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? SmtRegistryParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (SmtRegistryCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new SmtRegistryClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SMTRegistry smart contract using the create(byte[])void ABI method.
+       *
+       * Initialize with the genesis SMT root (32 zero bytes = empty tree).
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<SmtRegistryArgs['obj']['create(byte[])void'] | SmtRegistryArgs['tuple']['create(byte[])void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(SmtRegistryParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SMTRegistry smart contract using the create(byte[])void ABI method.
+       *
+       * Initialize with the genesis SMT root (32 zero bytes = empty tree).
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<SmtRegistryArgs['obj']['create(byte[])void'] | SmtRegistryArgs['tuple']['create(byte[])void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(SmtRegistryParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SMTRegistry smart contract using an ABI method call using the create(byte[])void ABI method.
+       *
+       * Initialize with the genesis SMT root (32 zero bytes = empty tree).
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<SmtRegistryArgs['obj']['create(byte[])void'] | SmtRegistryArgs['tuple']['create(byte[])void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(SmtRegistryParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | SmtRegistryReturns['create(byte[])void']) }, appClient: new SmtRegistryClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the SMTRegistry smart contract
  */

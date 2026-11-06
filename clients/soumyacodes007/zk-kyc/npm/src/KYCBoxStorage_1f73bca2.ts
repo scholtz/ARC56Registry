@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"KYCBoxStorage","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize — deployer becomes issuer.","events":[],"recommendations":{}},{"name":"store_blob","args":[{"type":"byte[]","name":"nullifier"},{"type":"byte[]","name":"encrypted_blob"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Store ECIES-encrypted identity blob. Issuer-only.\nencrypted_blob = ECIES.encrypt(identity, issuer_public_key) Generated in user's browser — zero PII transmitted to contract.","events":[],"recommendations":{}},{"name":"get_blob","args":[{"type":"byte[]","name":"nullifier"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Retrieve encrypted blob. Issuer-only.\nBackend decrypts with reconstructed Shamir issuer key during court order.","events":[],"recommendations":{}},{"name":"delete_blob","args":[{"type":"byte[]","name":"nullifier"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Delete identity blob (DPDP Right to Erasure). Issuer-only.\nCalled on full credential revocation.","events":[],"recommendations":{}},{"name":"has_blob","args":[{"type":"byte[]","name":"nullifier"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Check whether an encrypted blob exists for this nullifier.","events":[],"recommendations":{}},{"name":"get_total_blobs","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Total encrypted blobs currently stored.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Box storage for ECIES-encrypted identity blobs keyed by nullifier.","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"issuer":{"keyType":"AVMString","valueType":"address","key":"aXNzdWVy"},"total_blobs":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfYmxvYnM="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"blobs":{"keyType":"AVMBytes","valueType":"AVMBytes","prefix":"YmxvYl8="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[225,273],"errorMessage":"Blob not found"},{"pc":[164,217,265],"errorMessage":"Only issuer"},{"pc":[162,215,263],"errorMessage":"check self.issuer exists"},{"pc":[186,279,286,332],"errorMessage":"check self.total_blobs exists"},{"pc":[130,146,199,247,299],"errorMessage":"invalid array length header"},{"pc":[137,153,206,254,306],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"KYCBoxStorage","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize — deployer becomes issuer.","events":[],"recommendations":{}},{"name":"store_blob","args":[{"type":"byte[]","name":"nullifier"},{"type":"byte[]","name":"encrypted_blob"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Store ECIES-encrypted identity blob. Issuer-only.\nencrypted_blob = ECIES.encrypt(identity, issuer_public_key) Generated in user's browser — zero PII transmitted to contract.","events":[],"recommendations":{}},{"name":"get_blob","args":[{"type":"byte[]","name":"nullifier"}],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Retrieve encrypted blob. Issuer-only.\nBackend decrypts with reconstructed Shamir issuer key during court order.","events":[],"recommendations":{}},{"name":"delete_blob","args":[{"type":"byte[]","name":"nullifier"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Delete identity blob (DPDP Right to Erasure). Issuer-only.\nCalled on full credential revocation.","events":[],"recommendations":{}},{"name":"has_blob","args":[{"type":"byte[]","name":"nullifier"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Check whether an encrypted blob exists for this nullifier.","events":[],"recommendations":{}},{"name":"get_total_blobs","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Total encrypted blobs currently stored.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Box storage for ECIES-encrypted identity blobs keyed by nullifier.","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"issuer":{"keyType":"AVMString","valueType":"address","key":"aXNzdWVy"},"total_blobs":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfYmxvYnM="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"blobs":{"keyType":"AVMBytes","valueType":"AVMBytes","prefix":"YmxvYl8="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[225,273],"errorMessage":"Blob not found"},{"pc":[164,217,265],"errorMessage":"Only issuer"},{"pc":[162,215,263],"errorMessage":"check self.issuer exists"},{"pc":[186,279,286,332],"errorMessage":"check self.total_blobs exists"},{"pc":[130,146,199,247,299],"errorMessage":"invalid array length header"},{"pc":[137,153,206,254,306],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMgogICAgYnl0ZWNibG9jayAidG90YWxfYmxvYnMiICJpc3N1ZXIiIDB4NjI2YzZmNjI1ZiAweDE1MWY3Yzc1CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjE0CiAgICAvLyBzZWxmLmlzc3VlciA9IEFjY291bnQoKQogICAgYnl0ZWNfMSAvLyAiaXNzdWVyIgogICAgZ2xvYmFsIFplcm9BZGRyZXNzCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2t5Y19ib3hfc3RvcmFnZS9jb250cmFjdC5weToxNQogICAgLy8gc2VsZi50b3RhbF9ibG9icyA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMCAvLyAidG90YWxfYmxvYnMiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2t5Y19ib3hfc3RvcmFnZS9jb250cmFjdC5weToxMAogICAgLy8gY2xhc3MgS1lDQm94U3RvcmFnZShBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEAxMQogICAgcHVzaGJ5dGVzcyAweDU2NzM3YWIwIDB4NmNiNTM1OGEgMHgzMzg1ZGU1MCAweGQ2MDE2ODI2IDB4NWI0ZmFhNTMgLy8gbWV0aG9kICJzdG9yZV9ibG9iKGJ5dGVbXSxieXRlW10pdm9pZCIsIG1ldGhvZCAiZ2V0X2Jsb2IoYnl0ZVtdKWJ5dGVbXSIsIG1ldGhvZCAiZGVsZXRlX2Jsb2IoYnl0ZVtdKXZvaWQiLCBtZXRob2QgImhhc19ibG9iKGJ5dGVbXSlib29sIiwgbWV0aG9kICJnZXRfdG90YWxfYmxvYnMoKXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHN0b3JlX2Jsb2IgZ2V0X2Jsb2IgZGVsZXRlX2Jsb2IgaGFzX2Jsb2IgZ2V0X3RvdGFsX2Jsb2JzCiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BAMTE6CiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjEwCiAgICAvLyBjbGFzcyBLWUNCb3hTdG9yYWdlKEFSQzRDb250cmFjdCk6CiAgICBwdXNoYnl0ZXMgMHg0YzVjNjFiYSAvLyBtZXRob2QgImNyZWF0ZSgpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGNyZWF0ZQogICAgZXJyCgoKLy8gc21hcnRfY29udHJhY3RzLmt5Y19ib3hfc3RvcmFnZS5jb250cmFjdC5LWUNCb3hTdG9yYWdlLmNyZWF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9reWNfYm94X3N0b3JhZ2UvY29udHJhY3QucHk6MjIKICAgIC8vIHNlbGYuaXNzdWVyID0gVHhuLnNlbmRlcgogICAgYnl0ZWNfMSAvLyAiaXNzdWVyIgogICAgdHhuIFNlbmRlcgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9reWNfYm94X3N0b3JhZ2UvY29udHJhY3QucHk6MjMKICAgIC8vIHNlbGYudG90YWxfYmxvYnMgPSBVSW50NjQoMCkKICAgIGJ5dGVjXzAgLy8gInRvdGFsX2Jsb2JzIgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjE5CiAgICAvLyBAYXJjNC5hYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMua3ljX2JveF9zdG9yYWdlLmNvbnRyYWN0LktZQ0JveFN0b3JhZ2Uuc3RvcmVfYmxvYltyb3V0aW5nXSgpIC0+IHZvaWQ6CnN0b3JlX2Jsb2I6CiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjI1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjMyCiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBzZWxmLmlzc3VlciwgIk9ubHkgaXNzdWVyIgogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gImlzc3VlciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5pc3N1ZXIgZXhpc3RzCiAgICA9PQogICAgYXNzZXJ0IC8vIE9ubHkgaXNzdWVyCiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjMzCiAgICAvLyBpc19uZXcgPSBudWxsaWZpZXIgbm90IGluIHNlbGYuYmxvYnMKICAgIGJ5dGVjXzIgLy8gMHg2MjZjNmY2MjVmCiAgICB1bmNvdmVyIDIKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBjb3ZlciAyCiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9reWNfYm94X3N0b3JhZ2UvY29udHJhY3QucHk6MzQKICAgIC8vIHNlbGYuYmxvYnNbbnVsbGlmaWVyXSA9IGVuY3J5cHRlZF9ibG9iCiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAogICAgdW5jb3ZlciAyCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjM1CiAgICAvLyBpZiBpc19uZXc6CiAgICBibnogc3RvcmVfYmxvYl9hZnRlcl9pZl9lbHNlQDMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9reWNfYm94X3N0b3JhZ2UvY29udHJhY3QucHk6MzYKICAgIC8vIHNlbGYudG90YWxfYmxvYnMgKz0gVUludDY0KDEpCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAidG90YWxfYmxvYnMiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG90YWxfYmxvYnMgZXhpc3RzCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYnl0ZWNfMCAvLyAidG90YWxfYmxvYnMiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAoKc3RvcmVfYmxvYl9hZnRlcl9pZl9lbHNlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjI1CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5reWNfYm94X3N0b3JhZ2UuY29udHJhY3QuS1lDQm94U3RvcmFnZS5nZXRfYmxvYltyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9ibG9iOgogICAgLy8gc21hcnRfY29udHJhY3RzL2t5Y19ib3hfc3RvcmFnZS9jb250cmFjdC5weTozOAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjQ0CiAgICAvLyBhc3NlcnQgVHhuLnNlbmRlciA9PSBzZWxmLmlzc3VlciwgIk9ubHkgaXNzdWVyIgogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzEgLy8gImlzc3VlciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5pc3N1ZXIgZXhpc3RzCiAgICA9PQogICAgYXNzZXJ0IC8vIE9ubHkgaXNzdWVyCiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjQ1CiAgICAvLyBhc3NlcnQgbnVsbGlmaWVyIGluIHNlbGYuYmxvYnMsICJCbG9iIG5vdCBmb3VuZCIKICAgIGJ5dGVjXzIgLy8gMHg2MjZjNmY2MjVmCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBhc3NlcnQgLy8gQmxvYiBub3QgZm91bmQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9reWNfYm94X3N0b3JhZ2UvY29udHJhY3QucHk6NDYKICAgIC8vIHJldHVybiBzZWxmLmJsb2JzW251bGxpZmllcl0KICAgIGJveF9nZXQKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL2t5Y19ib3hfc3RvcmFnZS9jb250cmFjdC5weTozOAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmt5Y19ib3hfc3RvcmFnZS5jb250cmFjdC5LWUNCb3hTdG9yYWdlLmRlbGV0ZV9ibG9iW3JvdXRpbmddKCkgLT4gdm9pZDoKZGVsZXRlX2Jsb2I6CiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjQ4CiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9reWNfYm94X3N0b3JhZ2UvY29udHJhY3QucHk6NTQKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IHNlbGYuaXNzdWVyLCAiT25seSBpc3N1ZXIiCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAiaXNzdWVyIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmlzc3VlciBleGlzdHMKICAgID09CiAgICBhc3NlcnQgLy8gT25seSBpc3N1ZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9reWNfYm94X3N0b3JhZ2UvY29udHJhY3QucHk6NTUKICAgIC8vIGFzc2VydCBudWxsaWZpZXIgaW4gc2VsZi5ibG9icywgIkJsb2Igbm90IGZvdW5kIgogICAgYnl0ZWNfMiAvLyAweDYyNmM2ZjYyNWYKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBCbG9iIG5vdCBmb3VuZAogICAgLy8gc21hcnRfY29udHJhY3RzL2t5Y19ib3hfc3RvcmFnZS9jb250cmFjdC5weTo1NgogICAgLy8gZGVsIHNlbGYuYmxvYnNbbnVsbGlmaWVyXQogICAgYm94X2RlbAogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjU3CiAgICAvLyBpZiBzZWxmLnRvdGFsX2Jsb2JzID4gVUludDY0KDApOgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInRvdGFsX2Jsb2JzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX2Jsb2JzIGV4aXN0cwogICAgYnogZGVsZXRlX2Jsb2JfYWZ0ZXJfaWZfZWxzZUAzCiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjU4CiAgICAvLyBzZWxmLnRvdGFsX2Jsb2JzIC09IFVJbnQ2NCgxKQogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInRvdGFsX2Jsb2JzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX2Jsb2JzIGV4aXN0cwogICAgaW50Y18xIC8vIDEKICAgIC0KICAgIGJ5dGVjXzAgLy8gInRvdGFsX2Jsb2JzIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKCmRlbGV0ZV9ibG9iX2FmdGVyX2lmX2Vsc2VAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9reWNfYm94X3N0b3JhZ2UvY29udHJhY3QucHk6NDgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmt5Y19ib3hfc3RvcmFnZS5jb250cmFjdC5LWUNCb3hTdG9yYWdlLmhhc19ibG9iW3JvdXRpbmddKCkgLT4gdm9pZDoKaGFzX2Jsb2I6CiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjYwCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjYzCiAgICAvLyByZXR1cm4gbnVsbGlmaWVyIGluIHNlbGYuYmxvYnMKICAgIGJ5dGVjXzIgLy8gMHg2MjZjNmY2MjVmCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgLy8gc21hcnRfY29udHJhY3RzL2t5Y19ib3hfc3RvcmFnZS9jb250cmFjdC5weTo2MAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKHJlYWRvbmx5PVRydWUpCiAgICBwdXNoYnl0ZXMgMHgwMAogICAgaW50Y18wIC8vIDAKICAgIHVuY292ZXIgMgogICAgc2V0Yml0CiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmt5Y19ib3hfc3RvcmFnZS5jb250cmFjdC5LWUNCb3hTdG9yYWdlLmdldF90b3RhbF9ibG9ic1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF90b3RhbF9ibG9iczoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9reWNfYm94X3N0b3JhZ2UvY29udHJhY3QucHk6NjgKICAgIC8vIHJldHVybiBzZWxmLnRvdGFsX2Jsb2JzCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAidG90YWxfYmxvYnMiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG90YWxfYmxvYnMgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMva3ljX2JveF9zdG9yYWdlL2NvbnRyYWN0LnB5OjY1CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGl0b2IKICAgIGJ5dGVjXzMgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAAECJgQLdG90YWxfYmxvYnMGaXNzdWVyBWJsb2JfBBUffHUxGEAABykyA2coImcxGRREMRhBACuCBQRWc3qwBGy1NYoEM4XeUATWAWgmBFtPqlM2GgCOBQAYAF0AjQDBAOQAgARMXGG6NhoAjgEAAQApMQBnKCJnI0M2GgFJIlkkCEsBFRJEVwIANhoCSSJZJAhLARUSRFcCADEAIillRBJEKk8CUEm9TgJISbxITwK/QAAJIihlRCMIKExnI0M2GgFJIlkkCEsBFRJEVwIAMQAiKWVEEkQqTFBJvUUBRL5ISRUWVwYCTFArTFCwI0M2GgFJIlkkCEsBFRJEVwIAMQAiKWVEEkQqTFBJvUUBRLxIIihlREEACSIoZUQjCShMZyNDNhoBSSJZJAhLARUSRFcCACpMUL1FAYABACJPAlQrTFCwI0MiKGVEFitMULAjQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -207,11 +207,57 @@ export type GlobalKeysState = KycBoxStorageTypes['state']['global']['keys']
 export type BoxKeysState = KycBoxStorageTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type KycBoxStorageCreateCallParams =
+  | Expand<CallParams<KycBoxStorageArgs['obj']['create()void'] | KycBoxStorageArgs['tuple']['create()void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<KycBoxStorageArgs['obj']['create()void'] | KycBoxStorageArgs['tuple']['create()void']> & {method: 'create()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type KycBoxStorageDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: KycBoxStorageCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the KycBoxStorage smart contract
  */
 export abstract class KycBoxStorageParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends KycBoxStorageCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create()void':
+            return KycBoxStorageParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the KYCBoxStorage smart contract using the create()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<KycBoxStorageArgs['obj']['create()void'] | KycBoxStorageArgs['tuple']['create()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the store_blob(byte[],byte[])void ABI method
    *
@@ -295,6 +341,154 @@ export abstract class KycBoxStorageParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the KYCBoxStorage smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class KycBoxStorageFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `KycBoxStorageFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new KycBoxStorageClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new KycBoxStorageClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the KYCBoxStorage smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: KycBoxStorageDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? KycBoxStorageParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (KycBoxStorageCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new KycBoxStorageClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the KYCBoxStorage smart contract using the create()void ABI method.
+       *
+       * Initialize — deployer becomes issuer.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<KycBoxStorageArgs['obj']['create()void'] | KycBoxStorageArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(KycBoxStorageParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the KYCBoxStorage smart contract using the create()void ABI method.
+       *
+       * Initialize — deployer becomes issuer.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<KycBoxStorageArgs['obj']['create()void'] | KycBoxStorageArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(KycBoxStorageParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the KYCBoxStorage smart contract using an ABI method call using the create()void ABI method.
+       *
+       * Initialize — deployer becomes issuer.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<KycBoxStorageArgs['obj']['create()void'] | KycBoxStorageArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(KycBoxStorageParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | KycBoxStorageReturns['create()void']) }, appClient: new KycBoxStorageClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the KYCBoxStorage smart contract
  */
