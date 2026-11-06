@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"EVoting","structs":{},"methods":[{"name":"add_candidate","args":[{"type":"string","name":"name"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Tambah kandidat baru, hanya admin","events":[],"recommendations":{}},{"name":"vote","args":[{"type":"string","name":"candidate"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Voting untuk kandidat tertentu","events":[],"recommendations":{}},{"name":"get_votes","args":[{"type":"string","name":"candidate"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Lihat jumlah suara kandidat","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"admin":{"keyType":"AVMString","valueType":"address","key":"YWRtaW4="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"candidates":{"keyType":"AVMString","valueType":"uint64","prefix":"Y2FuZGlkYXRlcw=="},"voters":{"keyType":"address","valueType":"uint64","prefix":"dm90ZXJz"}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[115],"errorMessage":"Hanya admin yang boleh menambah kandidat"},{"pc":[148],"errorMessage":"Kamu sudah voting!"},{"pc":[156,197],"errorMessage":"Kandidat tidak ditemukan!"},{"pc":[49],"errorMessage":"OnCompletion must be NoOp"},{"pc":[89],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[113],"errorMessage":"check self.admin exists"},{"pc":[97,129,179],"errorMessage":"invalid array length header"},{"pc":[104,136,186],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"EVoting","structs":{},"methods":[{"name":"add_candidate","args":[{"type":"string","name":"name"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Tambah kandidat baru, hanya admin","events":[],"recommendations":{}},{"name":"vote","args":[{"type":"string","name":"candidate"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Voting untuk kandidat tertentu","events":[],"recommendations":{}},{"name":"get_votes","args":[{"type":"string","name":"candidate"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Lihat jumlah suara kandidat","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"admin":{"keyType":"AVMString","valueType":"address","key":"YWRtaW4="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"candidates":{"keyType":"AVMString","valueType":"uint64","prefix":"Y2FuZGlkYXRlcw=="},"voters":{"keyType":"address","valueType":"uint64","prefix":"dm90ZXJz"}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[115],"errorMessage":"Hanya admin yang boleh menambah kandidat"},{"pc":[148],"errorMessage":"Kamu sudah voting!"},{"pc":[156,197],"errorMessage":"Kandidat tidak ditemukan!"},{"pc":[49],"errorMessage":"OnCompletion must be NoOp"},{"pc":[89],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[113],"errorMessage":"check self.admin exists"},{"pc":[97,129,179],"errorMessage":"invalid array length header"},{"pc":[104,136,186],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAgMgogICAgYnl0ZWNibG9jayAiY2FuZGlkYXRlcyIgImFkbWluIiAidm90ZXJzIgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gc21hcnRfY29udHJhY3RzL2V2b3RpbmcvY29udHJhY3QucHk6MTAtMTEKICAgIC8vICMgQWRtaW4gPSBwZW1idWF0IGtvbnRyYWsKICAgIC8vIHNlbGYuYWRtaW4gPSBHbG9iYWwuY3JlYXRvcl9hZGRyZXNzCiAgICBieXRlY18xIC8vICJhZG1pbiIKICAgIGdsb2JhbCBDcmVhdG9yQWRkcmVzcwogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2V2b3RpbmcvY29udHJhY3QucHk6NAogICAgLy8gY2xhc3MgRVZvdGluZyhBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAMTIKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4NWNmYTY4MjkgMHg4MWYyN2Y0ZCAweDI5YjM1NWRhIC8vIG1ldGhvZCAiYWRkX2NhbmRpZGF0ZShzdHJpbmcpdm9pZCIsIG1ldGhvZCAidm90ZShzdHJpbmcpdm9pZCIsIG1ldGhvZCAiZ2V0X3ZvdGVzKHN0cmluZyl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBhZGRfY2FuZGlkYXRlIHZvdGUgZ2V0X3ZvdGVzCiAgICBlcnIKCm1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAMTI6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wICYmIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5ldm90aW5nLmNvbnRyYWN0LkVWb3RpbmcuYWRkX2NhbmRpZGF0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmFkZF9jYW5kaWRhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXZvdGluZy9jb250cmFjdC5weToxMwogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2V2b3RpbmcvY29udHJhY3QucHk6MTgKICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyID09IHNlbGYuYWRtaW4sICJIYW55YSBhZG1pbiB5YW5nIGJvbGVoIG1lbmFtYmFoIGthbmRpZGF0IgogICAgdHhuIFNlbmRlcgogICAgaW50Y18xIC8vIDAKICAgIGJ5dGVjXzEgLy8gImFkbWluIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmFkbWluIGV4aXN0cwogICAgPT0KICAgIGFzc2VydCAvLyBIYW55YSBhZG1pbiB5YW5nIGJvbGVoIG1lbmFtYmFoIGthbmRpZGF0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXZvdGluZy9jb250cmFjdC5weToxOQogICAgLy8gc2VsZi5jYW5kaWRhdGVzW25hbWVdID0gVUludDY0KDApCiAgICBieXRlY18wIC8vICJjYW5kaWRhdGVzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBpbnRjXzEgLy8gMAogICAgaXRvYgogICAgYm94X3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2V2b3RpbmcvY29udHJhY3QucHk6MTMKICAgIC8vIEBhYmltZXRob2QoKQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5ldm90aW5nLmNvbnRyYWN0LkVWb3Rpbmcudm90ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CnZvdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXZvdGluZy9jb250cmFjdC5weToyMQogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2V2b3RpbmcvY29udHJhY3QucHk6MjYtMjgKICAgIC8vICMgQm94TWFwIGRvZXNuJ3QgZXhwb3NlIGEgLmNvbnRhaW5zIG1ldGhvZCBmb3IgdGhlIHR5cGVjaGVja2VyOwogICAgLy8gIyB1c2UgdGhlIGBpbmAgLyBgbm90IGluYCBvcGVyYXRvciB3aGljaCBtYXBzIHRvIF9fY29udGFpbnNfXy4KICAgIC8vIGFzc2VydCBUeG4uc2VuZGVyIG5vdCBpbiBzZWxmLnZvdGVycywgIkthbXUgc3VkYWggdm90aW5nISIKICAgIGJ5dGVjXzIgLy8gInZvdGVycyIKICAgIHR4biBTZW5kZXIKICAgIGNvbmNhdAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAhCiAgICBhc3NlcnQgLy8gS2FtdSBzdWRhaCB2b3RpbmchCiAgICAvLyBzbWFydF9jb250cmFjdHMvZXZvdGluZy9jb250cmFjdC5weToyOQogICAgLy8gYXNzZXJ0IGNhbmRpZGF0ZSBpbiBzZWxmLmNhbmRpZGF0ZXMsICJLYW5kaWRhdCB0aWRhayBkaXRlbXVrYW4hIgogICAgYnl0ZWNfMCAvLyAiY2FuZGlkYXRlcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBLYW5kaWRhdCB0aWRhayBkaXRlbXVrYW4hCiAgICAvLyBzbWFydF9jb250cmFjdHMvZXZvdGluZy9jb250cmFjdC5weTozMQogICAgLy8gc2VsZi5jYW5kaWRhdGVzW2NhbmRpZGF0ZV0gPSBzZWxmLmNhbmRpZGF0ZXNbY2FuZGlkYXRlXSArIFVJbnQ2NCgxKQogICAgZHVwCiAgICBib3hfZ2V0CiAgICBwb3AKICAgIGJ0b2kKICAgIGludGNfMCAvLyAxCiAgICArCiAgICBpdG9iCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZXZvdGluZy9jb250cmFjdC5weTozMgogICAgLy8gc2VsZi52b3RlcnNbVHhuLnNlbmRlcl0gPSBVSW50NjQoMSkKICAgIGJ5dGVjXzIgLy8gInZvdGVycyIKICAgIHR4biBTZW5kZXIKICAgIGNvbmNhdAogICAgaW50Y18wIC8vIDEKICAgIGl0b2IKICAgIGJveF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ldm90aW5nL2NvbnRyYWN0LnB5OjIxCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuZXZvdGluZy5jb250cmFjdC5FVm90aW5nLmdldF92b3Rlc1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF92b3RlczoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ldm90aW5nL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18xIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvZXZvdGluZy9jb250cmFjdC5weTozOQogICAgLy8gYXNzZXJ0IGNhbmRpZGF0ZSBpbiBzZWxmLmNhbmRpZGF0ZXMsICJLYW5kaWRhdCB0aWRhayBkaXRlbXVrYW4hIgogICAgYnl0ZWNfMCAvLyAiY2FuZGlkYXRlcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBLYW5kaWRhdCB0aWRhayBkaXRlbXVrYW4hCiAgICAvLyBzbWFydF9jb250cmFjdHMvZXZvdGluZy9jb250cmFjdC5weTo0MAogICAgLy8gcmV0dXJuIHNlbGYuY2FuZGlkYXRlc1tjYW5kaWRhdGVdCiAgICBib3hfZ2V0CiAgICBwb3AKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ldm90aW5nL2NvbnRyYWN0LnB5OjM0CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGl0b2IKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyADAQACJgMKY2FuZGlkYXRlcwVhZG1pbgZ2b3RlcnMxGEAABCkyCWcxG0EAJDEZFEQxGESCAwRc+mgpBIHyf00EKbNV2jYaAI4DAAsAKwBdADEZFDEYFBBEIkM2GgFJI1kkCEsBFRJEVwIAMQAjKWVEEkQoTFAjFr8iQzYaAUkjWSQISwEVEkRXAgAqMQBQvUUBFEQoTFBJvUUBREm+SBciCBa/KjEAUCIWvyJDNhoBSSNZJAhLARUSRFcCAChMUEm9RQFEvkgXFoAEFR98dUxQsCJD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -180,6 +180,21 @@ export type GlobalKeysState = EVotingTypes['state']['global']['keys']
 export type BoxKeysState = EVotingTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type EVotingCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type EVotingDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: EVotingCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the EVoting smart contract
@@ -232,6 +247,147 @@ export abstract class EVotingParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the EVoting smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class EVotingFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `EVotingFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new EVotingClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new EVotingClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the EVoting smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: EVotingDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new EVotingClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the EVoting smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the EVoting smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the EVoting smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new EVotingClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the EVoting smart contract
  */
