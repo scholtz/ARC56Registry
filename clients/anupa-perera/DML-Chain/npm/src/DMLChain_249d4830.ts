@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"DMLChain","desc":"","methods":[{"name":"createApplication","args":[{"name":"modelHash","type":"string"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"updateApplication","args":[{"name":"modelHash","type":"string"}],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]}},{"name":"assignRewardPool","args":[{"name":"rewardPoolAmount","type":"uint64"},{"name":"rewardPoolTxn","type":"pay"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"creatorCommitToListing","args":[{"name":"stakeAmountTxn","type":"pay"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"commitToListing","args":[{"name":"stakeAmountTxn","type":"pay"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"checkBalance","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"bulkPayoutRewards","args":[{"name":"addresses","type":"address[]"},{"name":"rewards","type":"uint64[]"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["DeleteApplication"]}},{"name":"adminBulkPayoutRewards","args":[{"name":"addresses","type":"address[]"},{"name":"rewards","type":"uint64[]"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["DeleteApplication"]}},{"name":"storeClassificationSelectionCriteria","args":[{"name":"evaluationMetrics","type":"(uint64,uint64,uint64,uint64)","struct":"Classification"},{"name":"mbrPay","type":"pay"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getClassificationCriteria","args":[],"returns":{"type":"(uint64,uint64,uint64,uint64)","struct":"Classification"},"actions":{"create":[],"call":["NoOp"]}},{"name":"classModelSelectionCriteria","args":[{"name":"modelEvaluationMetrics","type":"(uint64,uint64,uint64,uint64)","struct":"Classification"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"storeModelParams","args":[{"name":"mbrPay","type":"pay"},{"name":"Address","type":"address"},{"name":"paramsData","type":"(string,string,uint64,uint64)","struct":"ParamsData"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getBoxValue","args":[{"name":"Address","type":"address"}],"returns":{"type":"(string,string,uint64,uint64)","struct":"ParamsData"},"actions":{"create":[],"call":["NoOp"]}},{"name":"adminGetBoxValue","args":[{"name":"Address","type":"address"}],"returns":{"type":"(string,string,uint64,uint64)","struct":"ParamsData"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteInitialBox","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteBox","args":[{"name":"address","type":"address"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]}},{"name":"adminDeleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{"ParamsData":[{"name":"paramHash","type":"string"},{"name":"paramKey","type":"string"},{"name":"score","type":"uint64"},{"name":"reputation","type":"uint64"}],"Classification":[{"name":"accuracy","type":"uint64"},{"name":"precision","type":"uint64"},{"name":"recall","type":"uint64"},{"name":"f1score","type":"uint64"}]},"state":{"schema":{"global":{"bytes":1,"ints":2},"local":{"bytes":0,"ints":0}},"keys":{"global":{"ipfsHash":{"key":"aXBmc0hhc2g=","keyType":"AVMBytes","valueType":"string"},"rewardPool":{"key":"cmV3YXJkUG9vbA==","keyType":"AVMBytes","valueType":"uint64"},"stakeAmount":{"key":"c3Rha2VBbW91bnQ=","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"paramsData":{"keyType":"address","valueType":"ParamsData"},"classificationPerformanceMetrics":{"keyType":"string","valueType":"Classification"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[103],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[180],"errorMessage":"argument 0 (rewardPoolTxn) for assignRewardPool must be a pay transaction","teal":107},{"pc":[203],"errorMessage":"transaction verification failed: {\"txn\":\"rewardPoolTxn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":138},{"pc":[211],"errorMessage":"transaction verification failed: {\"txn\":\"rewardPoolTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":147},{"pc":[219],"errorMessage":"transaction verification failed: {\"txn\":\"rewardPoolTxn\",\"field\":\"amount\",\"expected\":\"rewardPoolAmount\"}","teal":156},{"pc":[247],"errorMessage":"wideRatio failed","teal":178},{"pc":[261],"errorMessage":"argument 0 (stakeAmountTxn) for creatorCommitToListing must be a pay transaction","teal":201},{"pc":[290],"errorMessage":"transaction verification failed: {\"txn\":\"stakeAmountTxn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":237},{"pc":[298],"errorMessage":"transaction verification failed: {\"txn\":\"stakeAmountTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":246},{"pc":[306],"errorMessage":"transaction verification failed: {\"txn\":\"stakeAmountTxn\",\"field\":\"amount\",\"expected\":\"this.stakeAmount.value\"}","teal":256},{"pc":[319],"errorMessage":"argument 0 (stakeAmountTxn) for commitToListing must be a pay transaction","teal":278},{"pc":[338],"errorMessage":"transaction verification failed: {\"txn\":\"stakeAmountTxn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":305},{"pc":[346],"errorMessage":"transaction verification failed: {\"txn\":\"stakeAmountTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":314},{"pc":[354],"errorMessage":"transaction verification failed: {\"txn\":\"stakeAmountTxn\",\"field\":\"amount\",\"expected\":\"this.stakeAmount.value\"}","teal":324},{"pc":[423],"errorMessage":"Arrays must have the same length","teal":406},{"pc":[486],"errorMessage":"wideRatio failed","teal":475},{"pc":[504],"errorMessage":"Insufficient balance for rewards","teal":494},{"pc":[666],"errorMessage":"Arrays must have the same length","teal":676},{"pc":[729],"errorMessage":"wideRatio failed","teal":745},{"pc":[747],"errorMessage":"Insufficient balance for rewards","teal":764},{"pc":[781],"errorMessage":"wideRatio failed","teal":803},{"pc":[919],"errorMessage":"argument 0 (mbrPay) for storeClassificationSelectionCriteria must be a pay transaction","teal":959},{"pc":[927],"errorMessage":"argument 1 (evaluationMetrics) for storeClassificationSelectionCriteria must be a (uint64,uint64,uint64,uint64)","teal":969},{"pc":[945],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"this.app.creator\"}","teal":990},{"pc":[953],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":1005},{"pc":[961],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":1014},{"pc":[969],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"amount\",\"expected\":\"boxMbr\"}","teal":1023},{"pc":[997],"errorMessage":"box value does not exist: this.classificationPerformanceMetrics('InitialModelMetrics').value","teal":1069},{"pc":[1007],"errorMessage":"argument 0 (modelEvaluationMetrics) for classModelSelectionCriteria must be a (uint64,uint64,uint64,uint64)","teal":1085},{"pc":[1114],"errorMessage":"argument 1 (Address) for storeModelParams must be a address","teal":1207},{"pc":[1124],"errorMessage":"argument 2 (mbrPay) for storeModelParams must be a pay transaction","teal":1219},{"pc":[1146],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":1248},{"pc":[1154],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":1263},{"pc":[1162],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":1272},{"pc":[1170],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"amount\",\"expected\":\"boxMbr\"}","teal":1281},{"pc":[1187],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":1302},{"pc":[1195],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":1317},{"pc":[1203],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":1326},{"pc":[1211],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"amount\",\"expected\":\"boxMbr\"}","teal":1335},{"pc":[1234],"errorMessage":"argument 0 (Address) for getBoxValue must be a address","teal":1369},{"pc":[1254],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"this.app.creator\"}","teal":1392},{"pc":[1264],"errorMessage":"box value does not exist: this.paramsData(Address).value","teal":1408},{"pc":[1274],"errorMessage":"argument 0 (Address) for adminGetBoxValue must be a address","teal":1424},{"pc":[1294],"errorMessage":"box value does not exist: this.paramsData(Address).value","teal":1451},{"pc":[1322],"errorMessage":"argument 0 (address) for deleteBox must be a address","teal":1496},{"pc":[1421],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":1626},{"pc":[1531],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":1646},{"pc":[1545],"errorMessage":"this contract does not implement the given ABI method for call UpdateApplication","teal":1654},{"pc":[1575],"errorMessage":"this contract does not implement the given ABI method for call DeleteApplication","teal":1664}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"DMLChain","desc":"","methods":[{"name":"createApplication","args":[{"name":"modelHash","type":"string"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"updateApplication","args":[{"name":"modelHash","type":"string"}],"returns":{"type":"void"},"actions":{"create":[],"call":["UpdateApplication"]}},{"name":"assignRewardPool","args":[{"name":"rewardPoolAmount","type":"uint64"},{"name":"rewardPoolTxn","type":"pay"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"creatorCommitToListing","args":[{"name":"stakeAmountTxn","type":"pay"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"commitToListing","args":[{"name":"stakeAmountTxn","type":"pay"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"checkBalance","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"bulkPayoutRewards","args":[{"name":"addresses","type":"address[]"},{"name":"rewards","type":"uint64[]"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["DeleteApplication"]}},{"name":"adminBulkPayoutRewards","args":[{"name":"addresses","type":"address[]"},{"name":"rewards","type":"uint64[]"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["DeleteApplication"]}},{"name":"storeClassificationSelectionCriteria","args":[{"name":"evaluationMetrics","type":"(uint64,uint64,uint64,uint64)","struct":"Classification"},{"name":"mbrPay","type":"pay"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getClassificationCriteria","args":[],"returns":{"type":"(uint64,uint64,uint64,uint64)","struct":"Classification"},"actions":{"create":[],"call":["NoOp"]}},{"name":"classModelSelectionCriteria","args":[{"name":"modelEvaluationMetrics","type":"(uint64,uint64,uint64,uint64)","struct":"Classification"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"storeModelParams","args":[{"name":"mbrPay","type":"pay"},{"name":"Address","type":"address"},{"name":"paramsData","type":"(string,string,uint64,uint64)","struct":"ParamsData"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"getBoxValue","args":[{"name":"Address","type":"address"}],"returns":{"type":"(string,string,uint64,uint64)","struct":"ParamsData"},"actions":{"create":[],"call":["NoOp"]}},{"name":"adminGetBoxValue","args":[{"name":"Address","type":"address"}],"returns":{"type":"(string,string,uint64,uint64)","struct":"ParamsData"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteInitialBox","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteBox","args":[{"name":"address","type":"address"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]}},{"name":"adminDeleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{"ParamsData":[{"name":"paramHash","type":"string"},{"name":"paramKey","type":"string"},{"name":"score","type":"uint64"},{"name":"reputation","type":"uint64"}],"Classification":[{"name":"accuracy","type":"uint64"},{"name":"precision","type":"uint64"},{"name":"recall","type":"uint64"},{"name":"f1score","type":"uint64"}]},"state":{"schema":{"global":{"bytes":1,"ints":2},"local":{"bytes":0,"ints":0}},"keys":{"global":{"ipfsHash":{"key":"aXBmc0hhc2g=","keyType":"AVMBytes","valueType":"string"},"rewardPool":{"key":"cmV3YXJkUG9vbA==","keyType":"AVMBytes","valueType":"uint64"},"stakeAmount":{"key":"c3Rha2VBbW91bnQ=","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"paramsData":{"keyType":"address","valueType":"ParamsData"},"classificationPerformanceMetrics":{"keyType":"string","valueType":"Classification"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[103],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[180],"errorMessage":"argument 0 (rewardPoolTxn) for assignRewardPool must be a pay transaction","teal":107},{"pc":[203],"errorMessage":"transaction verification failed: {\"txn\":\"rewardPoolTxn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":138},{"pc":[211],"errorMessage":"transaction verification failed: {\"txn\":\"rewardPoolTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":147},{"pc":[219],"errorMessage":"transaction verification failed: {\"txn\":\"rewardPoolTxn\",\"field\":\"amount\",\"expected\":\"rewardPoolAmount\"}","teal":156},{"pc":[247],"errorMessage":"wideRatio failed","teal":178},{"pc":[261],"errorMessage":"argument 0 (stakeAmountTxn) for creatorCommitToListing must be a pay transaction","teal":201},{"pc":[290],"errorMessage":"transaction verification failed: {\"txn\":\"stakeAmountTxn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":237},{"pc":[298],"errorMessage":"transaction verification failed: {\"txn\":\"stakeAmountTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":246},{"pc":[306],"errorMessage":"transaction verification failed: {\"txn\":\"stakeAmountTxn\",\"field\":\"amount\",\"expected\":\"this.stakeAmount.value\"}","teal":256},{"pc":[319],"errorMessage":"argument 0 (stakeAmountTxn) for commitToListing must be a pay transaction","teal":278},{"pc":[338],"errorMessage":"transaction verification failed: {\"txn\":\"stakeAmountTxn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":305},{"pc":[346],"errorMessage":"transaction verification failed: {\"txn\":\"stakeAmountTxn\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":314},{"pc":[354],"errorMessage":"transaction verification failed: {\"txn\":\"stakeAmountTxn\",\"field\":\"amount\",\"expected\":\"this.stakeAmount.value\"}","teal":324},{"pc":[423],"errorMessage":"Arrays must have the same length","teal":406},{"pc":[486],"errorMessage":"wideRatio failed","teal":475},{"pc":[504],"errorMessage":"Insufficient balance for rewards","teal":494},{"pc":[666],"errorMessage":"Arrays must have the same length","teal":676},{"pc":[729],"errorMessage":"wideRatio failed","teal":745},{"pc":[747],"errorMessage":"Insufficient balance for rewards","teal":764},{"pc":[781],"errorMessage":"wideRatio failed","teal":803},{"pc":[919],"errorMessage":"argument 0 (mbrPay) for storeClassificationSelectionCriteria must be a pay transaction","teal":959},{"pc":[927],"errorMessage":"argument 1 (evaluationMetrics) for storeClassificationSelectionCriteria must be a (uint64,uint64,uint64,uint64)","teal":969},{"pc":[945],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"this.app.creator\"}","teal":990},{"pc":[953],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":1005},{"pc":[961],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":1014},{"pc":[969],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"amount\",\"expected\":\"boxMbr\"}","teal":1023},{"pc":[997],"errorMessage":"box value does not exist: this.classificationPerformanceMetrics('InitialModelMetrics').value","teal":1069},{"pc":[1007],"errorMessage":"argument 0 (modelEvaluationMetrics) for classModelSelectionCriteria must be a (uint64,uint64,uint64,uint64)","teal":1085},{"pc":[1114],"errorMessage":"argument 1 (Address) for storeModelParams must be a address","teal":1207},{"pc":[1124],"errorMessage":"argument 2 (mbrPay) for storeModelParams must be a pay transaction","teal":1219},{"pc":[1146],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":1248},{"pc":[1154],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":1263},{"pc":[1162],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":1272},{"pc":[1170],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"amount\",\"expected\":\"boxMbr\"}","teal":1281},{"pc":[1187],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":1302},{"pc":[1195],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":1317},{"pc":[1203],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"receiver\",\"expected\":\"this.app.address\"}","teal":1326},{"pc":[1211],"errorMessage":"transaction verification failed: {\"txn\":\"mbrPay\",\"field\":\"amount\",\"expected\":\"boxMbr\"}","teal":1335},{"pc":[1234],"errorMessage":"argument 0 (Address) for getBoxValue must be a address","teal":1369},{"pc":[1254],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"this.app.creator\"}","teal":1392},{"pc":[1264],"errorMessage":"box value does not exist: this.paramsData(Address).value","teal":1408},{"pc":[1274],"errorMessage":"argument 0 (Address) for adminGetBoxValue must be a address","teal":1424},{"pc":[1294],"errorMessage":"box value does not exist: this.paramsData(Address).value","teal":1451},{"pc":[1322],"errorMessage":"argument 0 (address) for deleteBox must be a address","teal":1496},{"pc":[1421],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":1626},{"pc":[1531],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":1646},{"pc":[1545],"errorMessage":"this contract does not implement the given ABI method for call UpdateApplication","teal":1654},{"pc":[1575],"errorMessage":"this contract does not implement the given ABI method for call DeleteApplication","teal":1664}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDAgMzIgOCAxMDAwMDAwCmJ5dGVjYmxvY2sgMHggMHgwMDEzNDk2ZTY5NzQ2OTYxNmM0ZDZmNjQ2NTZjNGQ2NTc0NzI2OTYzNzMgMHgxNTFmN2M3NSAweDczNzQ2MTZiNjU0MTZkNmY3NTZlNzQgMHg2OTcwNjY3MzQ4NjE3MzY4IDB4NzI2NTc3NjE3MjY0CgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwNi4yCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIHRlbiBsaW5lcyBvZiBURUFMIGhhbmRsZSBpbml0aWFsIHByb2dyYW0gZmxvdwovLyBUaGlzIHBhdHRlcm4gaXMgdXNlZCB0byBtYWtlIGl0IGVhc3kgZm9yIGFueW9uZSB0byBwYXJzZSB0aGUgc3RhcnQgb2YgdGhlIHByb2dyYW0gYW5kIGRldGVybWluZSBpZiBhIHNwZWNpZmljIGFjdGlvbiBpcyBhbGxvd2VkCi8vIEhlcmUsIGFjdGlvbiByZWZlcnMgdG8gdGhlIE9uQ29tcGxldGUgaW4gY29tYmluYXRpb24gd2l0aCB3aGV0aGVyIHRoZSBhcHAgaXMgYmVpbmcgY3JlYXRlZCBvciBjYWxsZWQKLy8gRXZlcnkgcG9zc2libGUgYWN0aW9uIGZvciB0aGlzIGNvbnRyYWN0IGlzIHJlcHJlc2VudGVkIGluIHRoZSBzd2l0Y2ggc3RhdGVtZW50Ci8vIElmIHRoZSBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoZSBjb250cmFjdCwgaXRzIHJlc3BlY3RpdmUgYnJhbmNoIHdpbGwgYmUgIipOT1RfSU1QTEVNRU5URUQiIHdoaWNoIGp1c3QgY29udGFpbnMgImVyciIKdHhuIEFwcGxpY2F0aW9uSUQKIQpwdXNoaW50IDYKKgp0eG4gT25Db21wbGV0aW9uCisKc3dpdGNoICpjYWxsX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKmNhbGxfVXBkYXRlQXBwbGljYXRpb24gKmNhbGxfRGVsZXRlQXBwbGljYXRpb24gKmNyZWF0ZV9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRAoKKk5PVF9JTVBMRU1FTlRFRDoKCS8vIFRoZSByZXF1ZXN0ZWQgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGlzIGNvbnRyYWN0LiBBcmUgeW91IHVzaW5nIHRoZSBjb3JyZWN0IE9uQ29tcGxldGU/IERpZCB5b3Ugc2V0IHlvdXIgYXBwIElEPwoJZXJyCgovLyBjcmVhdGVBcHBsaWNhdGlvbihzdHJpbmcpdm9pZAoqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uOgoJLy8gbW9kZWxIYXNoOiBzdHJpbmcKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWV4dHJhY3QgMiAwCgoJLy8gZXhlY3V0ZSBjcmVhdGVBcHBsaWNhdGlvbihzdHJpbmcpdm9pZAoJY2FsbHN1YiBjcmVhdGVBcHBsaWNhdGlvbgoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gY3JlYXRlQXBwbGljYXRpb24obW9kZWxIYXNoOiBzdHJpbmcpOiB2b2lkCmNyZWF0ZUFwcGxpY2F0aW9uOgoJcHJvdG8gMSAwCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjQyCgkvLyB0aGlzLmlwZnNIYXNoLnZhbHVlID0gbW9kZWxIYXNoCglieXRlYyA0IC8vICAiaXBmc0hhc2giCglmcmFtZV9kaWcgLTEgLy8gbW9kZWxIYXNoOiBzdHJpbmcKCWR1cAoJbGVuCglpdG9iCglleHRyYWN0IDYgMgoJc3dhcAoJY29uY2F0CglhcHBfZ2xvYmFsX3B1dAoJcmV0c3ViCgovLyB1cGRhdGVBcHBsaWNhdGlvbihzdHJpbmcpdm9pZAoqYWJpX3JvdXRlX3VwZGF0ZUFwcGxpY2F0aW9uOgoJLy8gbW9kZWxIYXNoOiBzdHJpbmcKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWV4dHJhY3QgMiAwCgoJLy8gZXhlY3V0ZSB1cGRhdGVBcHBsaWNhdGlvbihzdHJpbmcpdm9pZAoJY2FsbHN1YiB1cGRhdGVBcHBsaWNhdGlvbgoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gdXBkYXRlQXBwbGljYXRpb24obW9kZWxIYXNoOiBzdHJpbmcpOiB2b2lkCnVwZGF0ZUFwcGxpY2F0aW9uOgoJcHJvdG8gMSAwCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjQ3CgkvLyBhc3NlcnQodGhpcy50eG4uc2VuZGVyID09PSB0aGlzLmFwcC5jcmVhdG9yKQoJdHhuIFNlbmRlcgoJdHhuYSBBcHBsaWNhdGlvbnMgMAoJYXBwX3BhcmFtc19nZXQgQXBwQ3JlYXRvcgoJcG9wCgk9PQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjQ4CgkvLyB0aGlzLmlwZnNIYXNoLnZhbHVlID0gbW9kZWxIYXNoCglieXRlYyA0IC8vICAiaXBmc0hhc2giCglmcmFtZV9kaWcgLTEgLy8gbW9kZWxIYXNoOiBzdHJpbmcKCWR1cAoJbGVuCglpdG9iCglleHRyYWN0IDYgMgoJc3dhcAoJY29uY2F0CglhcHBfZ2xvYmFsX3B1dAoJcmV0c3ViCgovLyBhc3NpZ25SZXdhcmRQb29sKHVpbnQ2NCxwYXkpdWludDY0CiphYmlfcm91dGVfYXNzaWduUmV3YXJkUG9vbDoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMiAvLyAweDE1MWY3Yzc1CgoJLy8gcmV3YXJkUG9vbFR4bjogcGF5Cgl0eG4gR3JvdXBJbmRleAoJaW50YyAwIC8vIDEKCS0KCWR1cAoJZ3R4bnMgVHlwZUVudW0KCWludGMgMCAvLyAgcGF5Cgk9PQoKCS8vIGFyZ3VtZW50IDAgKHJld2FyZFBvb2xUeG4pIGZvciBhc3NpZ25SZXdhcmRQb29sIG11c3QgYmUgYSBwYXkgdHJhbnNhY3Rpb24KCWFzc2VydAoKCS8vIHJld2FyZFBvb2xBbW91bnQ6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGV4ZWN1dGUgYXNzaWduUmV3YXJkUG9vbCh1aW50NjQscGF5KXVpbnQ2NAoJY2FsbHN1YiBhc3NpZ25SZXdhcmRQb29sCglpdG9iCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gYXNzaWduUmV3YXJkUG9vbChyZXdhcmRQb29sQW1vdW50OiB1aW50NjQsIHJld2FyZFBvb2xUeG46IFBheVR4bik6IHVpbnQ2NAphc3NpZ25SZXdhcmRQb29sOgoJcHJvdG8gMiAxCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjUzCgkvLyB2ZXJpZnlQYXlUeG4ocmV3YXJkUG9vbFR4biwgewoJLy8gICAgICAgc2VuZGVyOiB0aGlzLnR4bi5zZW5kZXIsCgkvLyAgICAgICByZWNlaXZlcjogdGhpcy5hcHAuYWRkcmVzcywKCS8vICAgICAgIGFtb3VudDogcmV3YXJkUG9vbEFtb3VudCwKCS8vICAgICB9KQoJLy8gdmVyaWZ5IHNlbmRlcgoJZnJhbWVfZGlnIC0yIC8vIHJld2FyZFBvb2xUeG46IFBheVR4bgoJZ3R4bnMgU2VuZGVyCgl0eG4gU2VuZGVyCgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoicmV3YXJkUG9vbFR4biIsImZpZWxkIjoic2VuZGVyIiwiZXhwZWN0ZWQiOiJ0aGlzLnR4bi5zZW5kZXIifQoJYXNzZXJ0CgoJLy8gdmVyaWZ5IHJlY2VpdmVyCglmcmFtZV9kaWcgLTIgLy8gcmV3YXJkUG9vbFR4bjogUGF5VHhuCglndHhucyBSZWNlaXZlcgoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJyZXdhcmRQb29sVHhuIiwiZmllbGQiOiJyZWNlaXZlciIsImV4cGVjdGVkIjoidGhpcy5hcHAuYWRkcmVzcyJ9Cglhc3NlcnQKCgkvLyB2ZXJpZnkgYW1vdW50CglmcmFtZV9kaWcgLTIgLy8gcmV3YXJkUG9vbFR4bjogUGF5VHhuCglndHhucyBBbW91bnQKCWZyYW1lX2RpZyAtMSAvLyByZXdhcmRQb29sQW1vdW50OiB1aW50NjQKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJyZXdhcmRQb29sVHhuIiwiZmllbGQiOiJhbW91bnQiLCJleHBlY3RlZCI6InJld2FyZFBvb2xBbW91bnQifQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjU4CgkvLyB0aGlzLnJld2FyZFBvb2wudmFsdWUgPSByZXdhcmRQb29sQW1vdW50CglwdXNoYnl0ZXMgMHg3MjY1Nzc2MTcyNjQ1MDZmNmY2YyAvLyAicmV3YXJkUG9vbCIKCWZyYW1lX2RpZyAtMSAvLyByZXdhcmRQb29sQW1vdW50OiB1aW50NjQKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjU5CgkvLyB0aGlzLnN0YWtlQW1vdW50LnZhbHVlID0gd2lkZVJhdGlvKFtyZXdhcmRQb29sQW1vdW50XSwgWzJdKQoJYnl0ZWMgMyAvLyAgInN0YWtlQW1vdW50IgoJaW50YyAxIC8vIDAKCWZyYW1lX2RpZyAtMSAvLyByZXdhcmRQb29sQW1vdW50OiB1aW50NjQKCWludGMgMSAvLyAwCglwdXNoaW50IDIKCWRpdm1vZHcKCXBvcAoJcG9wCglzd2FwCgkhCgoJLy8gd2lkZVJhdGlvIGZhaWxlZAoJYXNzZXJ0CglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czo2MAoJLy8gcmV0dXJuIDE7CglpbnRjIDAgLy8gMQoJcmV0c3ViCgovLyBjcmVhdG9yQ29tbWl0VG9MaXN0aW5nKHBheSl1aW50NjQKKmFiaV9yb3V0ZV9jcmVhdG9yQ29tbWl0VG9MaXN0aW5nOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAyIC8vIDB4MTUxZjdjNzUKCgkvLyBzdGFrZUFtb3VudFR4bjogcGF5Cgl0eG4gR3JvdXBJbmRleAoJaW50YyAwIC8vIDEKCS0KCWR1cAoJZ3R4bnMgVHlwZUVudW0KCWludGMgMCAvLyAgcGF5Cgk9PQoKCS8vIGFyZ3VtZW50IDAgKHN0YWtlQW1vdW50VHhuKSBmb3IgY3JlYXRvckNvbW1pdFRvTGlzdGluZyBtdXN0IGJlIGEgcGF5IHRyYW5zYWN0aW9uCglhc3NlcnQKCgkvLyBleGVjdXRlIGNyZWF0b3JDb21taXRUb0xpc3RpbmcocGF5KXVpbnQ2NAoJY2FsbHN1YiBjcmVhdG9yQ29tbWl0VG9MaXN0aW5nCglpdG9iCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gY3JlYXRvckNvbW1pdFRvTGlzdGluZyhzdGFrZUFtb3VudFR4bjogUGF5VHhuKTogdWludDY0CmNyZWF0b3JDb21taXRUb0xpc3Rpbmc6Cglwcm90byAxIDEKCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6NjUKCS8vIGFzc2VydCh0aGlzLnR4bi5zZW5kZXIgPT09IHRoaXMuYXBwLmNyZWF0b3IpCgl0eG4gU2VuZGVyCgl0eG5hIEFwcGxpY2F0aW9ucyAwCglhcHBfcGFyYW1zX2dldCBBcHBDcmVhdG9yCglwb3AKCT09Cglhc3NlcnQKCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6NjYKCS8vIHZlcmlmeVBheVR4bihzdGFrZUFtb3VudFR4biwgewoJLy8gICAgICAgc2VuZGVyOiB0aGlzLnR4bi5zZW5kZXIsCgkvLyAgICAgICByZWNlaXZlcjogdGhpcy5hcHAuYWRkcmVzcywKCS8vICAgICAgIGFtb3VudDogdGhpcy5zdGFrZUFtb3VudC52YWx1ZSwKCS8vICAgICB9KQoJLy8gdmVyaWZ5IHNlbmRlcgoJZnJhbWVfZGlnIC0xIC8vIHN0YWtlQW1vdW50VHhuOiBQYXlUeG4KCWd0eG5zIFNlbmRlcgoJdHhuIFNlbmRlcgoJPT0KCgkvLyB0cmFuc2FjdGlvbiB2ZXJpZmljYXRpb24gZmFpbGVkOiB7InR4biI6InN0YWtlQW1vdW50VHhuIiwiZmllbGQiOiJzZW5kZXIiLCJleHBlY3RlZCI6InRoaXMudHhuLnNlbmRlciJ9Cglhc3NlcnQKCgkvLyB2ZXJpZnkgcmVjZWl2ZXIKCWZyYW1lX2RpZyAtMSAvLyBzdGFrZUFtb3VudFR4bjogUGF5VHhuCglndHhucyBSZWNlaXZlcgoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJzdGFrZUFtb3VudFR4biIsImZpZWxkIjoicmVjZWl2ZXIiLCJleHBlY3RlZCI6InRoaXMuYXBwLmFkZHJlc3MifQoJYXNzZXJ0CgoJLy8gdmVyaWZ5IGFtb3VudAoJZnJhbWVfZGlnIC0xIC8vIHN0YWtlQW1vdW50VHhuOiBQYXlUeG4KCWd0eG5zIEFtb3VudAoJYnl0ZWMgMyAvLyAgInN0YWtlQW1vdW50IgoJYXBwX2dsb2JhbF9nZXQKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJzdGFrZUFtb3VudFR4biIsImZpZWxkIjoiYW1vdW50IiwiZXhwZWN0ZWQiOiJ0aGlzLnN0YWtlQW1vdW50LnZhbHVlIn0KCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czo3MgoJLy8gcmV0dXJuIDE7CglpbnRjIDAgLy8gMQoJcmV0c3ViCgovLyBjb21taXRUb0xpc3RpbmcocGF5KXVpbnQ2NAoqYWJpX3JvdXRlX2NvbW1pdFRvTGlzdGluZzoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMiAvLyAweDE1MWY3Yzc1CgoJLy8gc3Rha2VBbW91bnRUeG46IHBheQoJdHhuIEdyb3VwSW5kZXgKCWludGMgMCAvLyAxCgktCglkdXAKCWd0eG5zIFR5cGVFbnVtCglpbnRjIDAgLy8gIHBheQoJPT0KCgkvLyBhcmd1bWVudCAwIChzdGFrZUFtb3VudFR4bikgZm9yIGNvbW1pdFRvTGlzdGluZyBtdXN0IGJlIGEgcGF5IHRyYW5zYWN0aW9uCglhc3NlcnQKCgkvLyBleGVjdXRlIGNvbW1pdFRvTGlzdGluZyhwYXkpdWludDY0CgljYWxsc3ViIGNvbW1pdFRvTGlzdGluZwoJaXRvYgoJY29uY2F0Cglsb2cKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGNvbW1pdFRvTGlzdGluZyhzdGFrZUFtb3VudFR4bjogUGF5VHhuKTogdWludDY0CmNvbW1pdFRvTGlzdGluZzoKCXByb3RvIDEgMQoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czo3NwoJLy8gdmVyaWZ5UGF5VHhuKHN0YWtlQW1vdW50VHhuLCB7CgkvLyAgICAgICBzZW5kZXI6IHRoaXMudHhuLnNlbmRlciwKCS8vICAgICAgIHJlY2VpdmVyOiB0aGlzLmFwcC5hZGRyZXNzLAoJLy8gICAgICAgYW1vdW50OiB0aGlzLnN0YWtlQW1vdW50LnZhbHVlLAoJLy8gICAgIH0pCgkvLyB2ZXJpZnkgc2VuZGVyCglmcmFtZV9kaWcgLTEgLy8gc3Rha2VBbW91bnRUeG46IFBheVR4bgoJZ3R4bnMgU2VuZGVyCgl0eG4gU2VuZGVyCgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoic3Rha2VBbW91bnRUeG4iLCJmaWVsZCI6InNlbmRlciIsImV4cGVjdGVkIjoidGhpcy50eG4uc2VuZGVyIn0KCWFzc2VydAoKCS8vIHZlcmlmeSByZWNlaXZlcgoJZnJhbWVfZGlnIC0xIC8vIHN0YWtlQW1vdW50VHhuOiBQYXlUeG4KCWd0eG5zIFJlY2VpdmVyCglnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwoJPT0KCgkvLyB0cmFuc2FjdGlvbiB2ZXJpZmljYXRpb24gZmFpbGVkOiB7InR4biI6InN0YWtlQW1vdW50VHhuIiwiZmllbGQiOiJyZWNlaXZlciIsImV4cGVjdGVkIjoidGhpcy5hcHAuYWRkcmVzcyJ9Cglhc3NlcnQKCgkvLyB2ZXJpZnkgYW1vdW50CglmcmFtZV9kaWcgLTEgLy8gc3Rha2VBbW91bnRUeG46IFBheVR4bgoJZ3R4bnMgQW1vdW50CglieXRlYyAzIC8vICAic3Rha2VBbW91bnQiCglhcHBfZ2xvYmFsX2dldAoJPT0KCgkvLyB0cmFuc2FjdGlvbiB2ZXJpZmljYXRpb24gZmFpbGVkOiB7InR4biI6InN0YWtlQW1vdW50VHhuIiwiZmllbGQiOiJhbW91bnQiLCJleHBlY3RlZCI6InRoaXMuc3Rha2VBbW91bnQudmFsdWUifQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjgzCgkvLyByZXR1cm4gMTsKCWludGMgMCAvLyAxCglyZXRzdWIKCi8vIGNoZWNrQmFsYW5jZSgpdWludDY0CiphYmlfcm91dGVfY2hlY2tCYWxhbmNlOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAyIC8vIDB4MTUxZjdjNzUKCgkvLyBleGVjdXRlIGNoZWNrQmFsYW5jZSgpdWludDY0CgljYWxsc3ViIGNoZWNrQmFsYW5jZQoJaXRvYgoJY29uY2F0Cglsb2cKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGNoZWNrQmFsYW5jZSgpOiB1aW50NjQKY2hlY2tCYWxhbmNlOgoJcHJvdG8gMCAxCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjg4CgkvLyByZXR1cm4gdGhpcy5hcHAuYWRkcmVzcy5iYWxhbmNlOwoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCWFjY3RfcGFyYW1zX2dldCBBY2N0QmFsYW5jZQoJcG9wCglyZXRzdWIKCi8vIGJ1bGtQYXlvdXRSZXdhcmRzKGFkZHJlc3NbXSx1aW50NjRbXSl1aW50NjQKKmFiaV9yb3V0ZV9idWxrUGF5b3V0UmV3YXJkczoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMiAvLyAweDE1MWY3Yzc1CgoJLy8gcmV3YXJkczogdWludDY0W10KCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWV4dHJhY3QgMiAwCgoJLy8gYWRkcmVzc2VzOiBhZGRyZXNzW10KCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWV4dHJhY3QgMiAwCgoJLy8gZXhlY3V0ZSBidWxrUGF5b3V0UmV3YXJkcyhhZGRyZXNzW10sdWludDY0W10pdWludDY0CgljYWxsc3ViIGJ1bGtQYXlvdXRSZXdhcmRzCglpdG9iCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gYnVsa1BheW91dFJld2FyZHMoYWRkcmVzc2VzOiBBZGRyZXNzW10sIHJld2FyZHM6IHVpbnQ2NFtdKTogdWludDY0CmJ1bGtQYXlvdXRSZXdhcmRzOgoJcHJvdG8gMiAxCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCWR1cG4gNQoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czo5NAoJLy8gYXNzZXJ0KHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5hcHAuY3JlYXRvcikKCXR4biBTZW5kZXIKCXR4bmEgQXBwbGljYXRpb25zIDAKCWFwcF9wYXJhbXNfZ2V0IEFwcENyZWF0b3IKCXBvcAoJPT0KCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czo5NQoJLy8gYXNzZXJ0KGFkZHJlc3Nlcy5sZW5ndGggPT09IHJld2FyZHMubGVuZ3RoLCAnQXJyYXlzIG11c3QgaGF2ZSB0aGUgc2FtZSBsZW5ndGgnKQoJZnJhbWVfZGlnIC0xIC8vIGFkZHJlc3NlczogQWRkcmVzc1tdCglsZW4KCWludGMgMiAvLyAzMgoJLwoJZnJhbWVfZGlnIC0yIC8vIHJld2FyZHM6IHVpbnQ2NFtdCglsZW4KCWludGMgMyAvLyA4CgkvCgk9PQoKCS8vIEFycmF5cyBtdXN0IGhhdmUgdGhlIHNhbWUgbGVuZ3RoCglhc3NlcnQKCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6OTcKCS8vIHRvdGFsUmV3YXJkID0gMAoJaW50YyAxIC8vIDAKCWZyYW1lX2J1cnkgMCAvLyB0b3RhbFJld2FyZDogdWludDY0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjk4CgkvLyBmb3IgKGxldCBpID0gMDsgaSA8IHJld2FyZHMubGVuZ3RoOyBpICs9IDEpCglpbnRjIDEgLy8gMAoJZnJhbWVfYnVyeSAxIC8vIGk6IHVpbnQ2NAoKKmZvcl8wOgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjk4CgkvLyBpIDwgcmV3YXJkcy5sZW5ndGgKCWZyYW1lX2RpZyAxIC8vIGk6IHVpbnQ2NAoJZnJhbWVfZGlnIC0yIC8vIHJld2FyZHM6IHVpbnQ2NFtdCglsZW4KCWludGMgMyAvLyA4CgkvCgk8CglieiAqZm9yXzBfZW5kCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjk5CgkvLyB0b3RhbFJld2FyZCArPSByZXdhcmRzW2ldCglmcmFtZV9kaWcgMCAvLyB0b3RhbFJld2FyZDogdWludDY0CglmcmFtZV9kaWcgLTIgLy8gcmV3YXJkczogdWludDY0W10KCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5CglpbnRjIDEgLy8gIGluaXRpYWwgb2Zmc2V0CglmcmFtZV9kaWcgMSAvLyBpOiB1aW50NjQKCWludGMgMyAvLyA4CgkqIC8vIGFjYyAqIHR5cGVMZW5ndGgKCSsKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCXN3YXAKCWludGMgMyAvLyA4CglleHRyYWN0MwoJYnRvaQoJKwoJZnJhbWVfYnVyeSAwIC8vIHRvdGFsUmV3YXJkOiB1aW50NjQKCipmb3JfMF9jb250aW51ZToKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czo5OAoJLy8gaSArPSAxCglmcmFtZV9kaWcgMSAvLyBpOiB1aW50NjQKCWludGMgMCAvLyAxCgkrCglmcmFtZV9idXJ5IDEgLy8gaTogdWludDY0CgliICpmb3JfMAoKKmZvcl8wX2VuZDoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxMDIKCS8vIHRvdGFsU3Rha2VBbW91bnQgPSB3aWRlUmF0aW8oW2FkZHJlc3Nlcy5sZW5ndGgsIHRoaXMuc3Rha2VBbW91bnQudmFsdWVdLCBbMV0pCglmcmFtZV9kaWcgLTEgLy8gYWRkcmVzc2VzOiBBZGRyZXNzW10KCWxlbgoJaW50YyAyIC8vIDMyCgkvCglieXRlYyAzIC8vICAic3Rha2VBbW91bnQiCglhcHBfZ2xvYmFsX2dldAoJbXVsdwoJaW50YyAxIC8vIDAKCWludGMgMCAvLyAxCglkaXZtb2R3Cglwb3AKCXBvcAoJc3dhcAoJIQoKCS8vIHdpZGVSYXRpbyBmYWlsZWQKCWFzc2VydAoJZnJhbWVfYnVyeSAyIC8vIHRvdGFsU3Rha2VBbW91bnQ6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxMDQKCS8vIHRvdGFsUGF5b3V0ID0gdG90YWxSZXdhcmQgKyB0b3RhbFN0YWtlQW1vdW50CglmcmFtZV9kaWcgMCAvLyB0b3RhbFJld2FyZDogdWludDY0CglmcmFtZV9kaWcgMiAvLyB0b3RhbFN0YWtlQW1vdW50OiB1aW50NjQKCSsKCWZyYW1lX2J1cnkgMyAvLyB0b3RhbFBheW91dDogdWludDY0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjEwNgoJLy8gYXNzZXJ0KHRoaXMuYXBwLmFkZHJlc3MuYmFsYW5jZSA+PSB0b3RhbFBheW91dCwgJ0luc3VmZmljaWVudCBiYWxhbmNlIGZvciByZXdhcmRzJykKCWdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCglhY2N0X3BhcmFtc19nZXQgQWNjdEJhbGFuY2UKCXBvcAoJZnJhbWVfZGlnIDMgLy8gdG90YWxQYXlvdXQ6IHVpbnQ2NAoJPj0KCgkvLyBJbnN1ZmZpY2llbnQgYmFsYW5jZSBmb3IgcmV3YXJkcwoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjEwOAoJLy8gZm9yIChsZXQgaSA9IDA7IGkgPCBhZGRyZXNzZXMubGVuZ3RoOyBpICs9IDEpCglpbnRjIDEgLy8gMAoJZnJhbWVfYnVyeSA0IC8vIGk6IHVpbnQ2NAoKKmZvcl8xOgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjEwOAoJLy8gaSA8IGFkZHJlc3Nlcy5sZW5ndGgKCWZyYW1lX2RpZyA0IC8vIGk6IHVpbnQ2NAoJZnJhbWVfZGlnIC0xIC8vIGFkZHJlc3NlczogQWRkcmVzc1tdCglsZW4KCWludGMgMiAvLyAzMgoJLwoJPAoJYnogKmZvcl8xX2VuZAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxMDkKCS8vIHNlbmRQYXltZW50KHsKCS8vICAgICAgICAgYW1vdW50OiByZXdhcmRzW2ldICsgdGhpcy5zdGFrZUFtb3VudC52YWx1ZSwKCS8vICAgICAgICAgcmVjZWl2ZXI6IGFkZHJlc3Nlc1tpXSwKCS8vICAgICAgICAgbm90ZTogJ3Jld2FyZCcsCgkvLyAgICAgICB9KQoJaXR4bl9iZWdpbgoJaW50YyAwIC8vICBwYXkKCWl0eG5fZmllbGQgVHlwZUVudW0KCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MTEwCgkvLyBhbW91bnQ6IHJld2FyZHNbaV0gKyB0aGlzLnN0YWtlQW1vdW50LnZhbHVlCglmcmFtZV9kaWcgLTIgLy8gcmV3YXJkczogdWludDY0W10KCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5CglpbnRjIDEgLy8gIGluaXRpYWwgb2Zmc2V0CglmcmFtZV9kaWcgNCAvLyBpOiB1aW50NjQKCWludGMgMyAvLyA4CgkqIC8vIGFjYyAqIHR5cGVMZW5ndGgKCSsKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCXN3YXAKCWludGMgMyAvLyA4CglleHRyYWN0MwoJYnRvaQoJYnl0ZWMgMyAvLyAgInN0YWtlQW1vdW50IgoJYXBwX2dsb2JhbF9nZXQKCSsKCWl0eG5fZmllbGQgQW1vdW50CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjExMQoJLy8gcmVjZWl2ZXI6IGFkZHJlc3Nlc1tpXQoJZnJhbWVfZGlnIC0xIC8vIGFkZHJlc3NlczogQWRkcmVzc1tdCglzdG9yZSAyNTUgLy8gZnVsbCBhcnJheQoJaW50YyAxIC8vICBpbml0aWFsIG9mZnNldAoJZnJhbWVfZGlnIDQgLy8gaTogdWludDY0CglpbnRjIDIgLy8gMzIKCSogLy8gYWNjICogdHlwZUxlbmd0aAoJKwoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJc3dhcAoJaW50YyAyIC8vIDMyCglleHRyYWN0MwoJaXR4bl9maWVsZCBSZWNlaXZlcgoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxMTIKCS8vIG5vdGU6ICdyZXdhcmQnCglieXRlYyA1IC8vICAicmV3YXJkIgoJaXR4bl9maWVsZCBOb3RlCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoKKmZvcl8xX2NvbnRpbnVlOgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjEwOAoJLy8gaSArPSAxCglmcmFtZV9kaWcgNCAvLyBpOiB1aW50NjQKCWludGMgMCAvLyAxCgkrCglmcmFtZV9idXJ5IDQgLy8gaTogdWludDY0CgliICpmb3JfMQoKKmZvcl8xX2VuZDoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxMTYKCS8vIGZvciAobGV0IGkgPSAwOyBpIDwgYWRkcmVzc2VzLmxlbmd0aDsgaSArPSAxKQoJaW50YyAxIC8vIDAKCWZyYW1lX2J1cnkgNSAvLyBpOiB1aW50NjQKCipmb3JfMjoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxMTYKCS8vIGkgPCBhZGRyZXNzZXMubGVuZ3RoCglmcmFtZV9kaWcgNSAvLyBpOiB1aW50NjQKCWZyYW1lX2RpZyAtMSAvLyBhZGRyZXNzZXM6IEFkZHJlc3NbXQoJbGVuCglpbnRjIDIgLy8gMzIKCS8KCTwKCWJ6ICpmb3JfMl9lbmQKCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MTE3CgkvLyB0aGlzLmRlbGV0ZUJveChhZGRyZXNzZXNbaV0pCglmcmFtZV9kaWcgLTEgLy8gYWRkcmVzc2VzOiBBZGRyZXNzW10KCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5CglpbnRjIDEgLy8gIGluaXRpYWwgb2Zmc2V0CglmcmFtZV9kaWcgNSAvLyBpOiB1aW50NjQKCWludGMgMiAvLyAzMgoJKiAvLyBhY2MgKiB0eXBlTGVuZ3RoCgkrCglsb2FkIDI1NSAvLyBmdWxsIGFycmF5Cglzd2FwCglpbnRjIDIgLy8gMzIKCWV4dHJhY3QzCgljYWxsc3ViIGRlbGV0ZUJveAoKKmZvcl8yX2NvbnRpbnVlOgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjExNgoJLy8gaSArPSAxCglmcmFtZV9kaWcgNSAvLyBpOiB1aW50NjQKCWludGMgMCAvLyAxCgkrCglmcmFtZV9idXJ5IDUgLy8gaTogdWludDY0CgliICpmb3JfMgoKKmZvcl8yX2VuZDoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxMjAKCS8vIHRoaXMuZGVsZXRlQXBwbGljYXRpb24oKQoJY2FsbHN1YiBkZWxldGVBcHBsaWNhdGlvbgoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxMjIKCS8vIHJldHVybiAxOwoJaW50YyAwIC8vIDEKCgkvLyBzZXQgdGhlIHN1YnJvdXRpbmUgcmV0dXJuIHZhbHVlCglmcmFtZV9idXJ5IDAKCgkvLyBwb3AgYWxsIGxvY2FsIHZhcmlhYmxlcyBmcm9tIHRoZSBzdGFjawoJcG9wbiA1CglyZXRzdWIKCi8vIGFkbWluQnVsa1BheW91dFJld2FyZHMoYWRkcmVzc1tdLHVpbnQ2NFtdKXVpbnQ2NAoqYWJpX3JvdXRlX2FkbWluQnVsa1BheW91dFJld2FyZHM6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDIgLy8gMHgxNTFmN2M3NQoKCS8vIHJld2FyZHM6IHVpbnQ2NFtdCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglleHRyYWN0IDIgMAoKCS8vIGFkZHJlc3NlczogYWRkcmVzc1tdCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglleHRyYWN0IDIgMAoKCS8vIGV4ZWN1dGUgYWRtaW5CdWxrUGF5b3V0UmV3YXJkcyhhZGRyZXNzW10sdWludDY0W10pdWludDY0CgljYWxsc3ViIGFkbWluQnVsa1BheW91dFJld2FyZHMKCWl0b2IKCWNvbmNhdAoJbG9nCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBhZG1pbkJ1bGtQYXlvdXRSZXdhcmRzKGFkZHJlc3NlczogQWRkcmVzc1tdLCByZXdhcmRzOiB1aW50NjRbXSk6IHVpbnQ2NAphZG1pbkJ1bGtQYXlvdXRSZXdhcmRzOgoJcHJvdG8gMiAxCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCWR1cG4gNgoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxMjgKCS8vIGFzc2VydChhZGRyZXNzZXMubGVuZ3RoID09PSByZXdhcmRzLmxlbmd0aCwgJ0FycmF5cyBtdXN0IGhhdmUgdGhlIHNhbWUgbGVuZ3RoJykKCWZyYW1lX2RpZyAtMSAvLyBhZGRyZXNzZXM6IEFkZHJlc3NbXQoJbGVuCglpbnRjIDIgLy8gMzIKCS8KCWZyYW1lX2RpZyAtMiAvLyByZXdhcmRzOiB1aW50NjRbXQoJbGVuCglpbnRjIDMgLy8gOAoJLwoJPT0KCgkvLyBBcnJheXMgbXVzdCBoYXZlIHRoZSBzYW1lIGxlbmd0aAoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjEzMAoJLy8gdG90YWxSZXdhcmQgPSAwCglpbnRjIDEgLy8gMAoJZnJhbWVfYnVyeSAwIC8vIHRvdGFsUmV3YXJkOiB1aW50NjQKCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MTMxCgkvLyBmb3IgKGxldCBpID0gMDsgaSA8IHJld2FyZHMubGVuZ3RoOyBpICs9IDEpCglpbnRjIDEgLy8gMAoJZnJhbWVfYnVyeSAxIC8vIGk6IHVpbnQ2NAoKKmZvcl8zOgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjEzMQoJLy8gaSA8IHJld2FyZHMubGVuZ3RoCglmcmFtZV9kaWcgMSAvLyBpOiB1aW50NjQKCWZyYW1lX2RpZyAtMiAvLyByZXdhcmRzOiB1aW50NjRbXQoJbGVuCglpbnRjIDMgLy8gOAoJLwoJPAoJYnogKmZvcl8zX2VuZAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxMzIKCS8vIHRvdGFsUmV3YXJkICs9IHJld2FyZHNbaV0KCWZyYW1lX2RpZyAwIC8vIHRvdGFsUmV3YXJkOiB1aW50NjQKCWZyYW1lX2RpZyAtMiAvLyByZXdhcmRzOiB1aW50NjRbXQoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWludGMgMSAvLyAgaW5pdGlhbCBvZmZzZXQKCWZyYW1lX2RpZyAxIC8vIGk6IHVpbnQ2NAoJaW50YyAzIC8vIDgKCSogLy8gYWNjICogdHlwZUxlbmd0aAoJKwoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJc3dhcAoJaW50YyAzIC8vIDgKCWV4dHJhY3QzCglidG9pCgkrCglmcmFtZV9idXJ5IDAgLy8gdG90YWxSZXdhcmQ6IHVpbnQ2NAoKKmZvcl8zX2NvbnRpbnVlOgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjEzMQoJLy8gaSArPSAxCglmcmFtZV9kaWcgMSAvLyBpOiB1aW50NjQKCWludGMgMCAvLyAxCgkrCglmcmFtZV9idXJ5IDEgLy8gaTogdWludDY0CgliICpmb3JfMwoKKmZvcl8zX2VuZDoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxMzUKCS8vIHRvdGFsU3Rha2VBbW91bnQgPSB3aWRlUmF0aW8oW2FkZHJlc3Nlcy5sZW5ndGgsIHRoaXMuc3Rha2VBbW91bnQudmFsdWVdLCBbMV0pCglmcmFtZV9kaWcgLTEgLy8gYWRkcmVzc2VzOiBBZGRyZXNzW10KCWxlbgoJaW50YyAyIC8vIDMyCgkvCglieXRlYyAzIC8vICAic3Rha2VBbW91bnQiCglhcHBfZ2xvYmFsX2dldAoJbXVsdwoJaW50YyAxIC8vIDAKCWludGMgMCAvLyAxCglkaXZtb2R3Cglwb3AKCXBvcAoJc3dhcAoJIQoKCS8vIHdpZGVSYXRpbyBmYWlsZWQKCWFzc2VydAoJZnJhbWVfYnVyeSAyIC8vIHRvdGFsU3Rha2VBbW91bnQ6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxMzcKCS8vIHRvdGFsUGF5b3V0ID0gdG90YWxSZXdhcmQgKyB0b3RhbFN0YWtlQW1vdW50CglmcmFtZV9kaWcgMCAvLyB0b3RhbFJld2FyZDogdWludDY0CglmcmFtZV9kaWcgMiAvLyB0b3RhbFN0YWtlQW1vdW50OiB1aW50NjQKCSsKCWZyYW1lX2J1cnkgMyAvLyB0b3RhbFBheW91dDogdWludDY0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjEzOQoJLy8gYXNzZXJ0KHRoaXMuYXBwLmFkZHJlc3MuYmFsYW5jZSA+PSB0b3RhbFBheW91dCwgJ0luc3VmZmljaWVudCBiYWxhbmNlIGZvciByZXdhcmRzJykKCWdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCglhY2N0X3BhcmFtc19nZXQgQWNjdEJhbGFuY2UKCXBvcAoJZnJhbWVfZGlnIDMgLy8gdG90YWxQYXlvdXQ6IHVpbnQ2NAoJPj0KCgkvLyBJbnN1ZmZpY2llbnQgYmFsYW5jZSBmb3IgcmV3YXJkcwoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjE0MQoJLy8gdW5pdGFyeUNyZWF0b3JEaXN0cmlidXRlU3Rha2UgPSAwCglpbnRjIDEgLy8gMAoJZnJhbWVfYnVyeSA0IC8vIHVuaXRhcnlDcmVhdG9yRGlzdHJpYnV0ZVN0YWtlOiB1aW50NjQKCgkvLyAqaWYwX2NvbmRpdGlvbgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjE0MwoJLy8gYWRkcmVzc2VzLmxlbmd0aCA+IDAKCWZyYW1lX2RpZyAtMSAvLyBhZGRyZXNzZXM6IEFkZHJlc3NbXQoJbGVuCglpbnRjIDIgLy8gMzIKCS8KCWludGMgMSAvLyAwCgk+CglieiAqaWYwX2VuZAoKCS8vICppZjBfY29uc2VxdWVudAoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjE0NAoJLy8gdW5pdGFyeUNyZWF0b3JEaXN0cmlidXRlU3Rha2UgPSB3aWRlUmF0aW8oW3RoaXMuYXBwLmFkZHJlc3MuYmFsYW5jZSAtIHRvdGFsUGF5b3V0XSwgW2FkZHJlc3Nlcy5sZW5ndGhdKQoJaW50YyAxIC8vIDAKCWdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCglhY2N0X3BhcmFtc19nZXQgQWNjdEJhbGFuY2UKCXBvcAoJZnJhbWVfZGlnIDMgLy8gdG90YWxQYXlvdXQ6IHVpbnQ2NAoJLQoJaW50YyAxIC8vIDAKCWZyYW1lX2RpZyAtMSAvLyBhZGRyZXNzZXM6IEFkZHJlc3NbXQoJbGVuCglpbnRjIDIgLy8gMzIKCS8KCWRpdm1vZHcKCXBvcAoJcG9wCglzd2FwCgkhCgoJLy8gd2lkZVJhdGlvIGZhaWxlZAoJYXNzZXJ0CglmcmFtZV9idXJ5IDQgLy8gdW5pdGFyeUNyZWF0b3JEaXN0cmlidXRlU3Rha2U6IHVpbnQ2NAoKKmlmMF9lbmQ6CgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MTQ3CgkvLyBmb3IgKGxldCBpID0gMDsgaSA8IGFkZHJlc3Nlcy5sZW5ndGg7IGkgKz0gMSkKCWludGMgMSAvLyAwCglmcmFtZV9idXJ5IDUgLy8gaTogdWludDY0CgoqZm9yXzQ6CgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MTQ3CgkvLyBpIDwgYWRkcmVzc2VzLmxlbmd0aAoJZnJhbWVfZGlnIDUgLy8gaTogdWludDY0CglmcmFtZV9kaWcgLTEgLy8gYWRkcmVzc2VzOiBBZGRyZXNzW10KCWxlbgoJaW50YyAyIC8vIDMyCgkvCgk8CglieiAqZm9yXzRfZW5kCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjE0OAoJLy8gc2VuZFBheW1lbnQoewoJLy8gICAgICAgICBhbW91bnQ6IHJld2FyZHNbaV0gKyB0aGlzLnN0YWtlQW1vdW50LnZhbHVlICsgdW5pdGFyeUNyZWF0b3JEaXN0cmlidXRlU3Rha2UsCgkvLyAgICAgICAgIHJlY2VpdmVyOiBhZGRyZXNzZXNbaV0sCgkvLyAgICAgICAgIG5vdGU6ICdyZXdhcmQnLAoJLy8gICAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjE0OQoJLy8gYW1vdW50OiByZXdhcmRzW2ldICsgdGhpcy5zdGFrZUFtb3VudC52YWx1ZSArIHVuaXRhcnlDcmVhdG9yRGlzdHJpYnV0ZVN0YWtlCglmcmFtZV9kaWcgLTIgLy8gcmV3YXJkczogdWludDY0W10KCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5CglpbnRjIDEgLy8gIGluaXRpYWwgb2Zmc2V0CglmcmFtZV9kaWcgNSAvLyBpOiB1aW50NjQKCWludGMgMyAvLyA4CgkqIC8vIGFjYyAqIHR5cGVMZW5ndGgKCSsKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCXN3YXAKCWludGMgMyAvLyA4CglleHRyYWN0MwoJYnRvaQoJYnl0ZWMgMyAvLyAgInN0YWtlQW1vdW50IgoJYXBwX2dsb2JhbF9nZXQKCSsKCWZyYW1lX2RpZyA0IC8vIHVuaXRhcnlDcmVhdG9yRGlzdHJpYnV0ZVN0YWtlOiB1aW50NjQKCSsKCWl0eG5fZmllbGQgQW1vdW50CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjE1MAoJLy8gcmVjZWl2ZXI6IGFkZHJlc3Nlc1tpXQoJZnJhbWVfZGlnIC0xIC8vIGFkZHJlc3NlczogQWRkcmVzc1tdCglzdG9yZSAyNTUgLy8gZnVsbCBhcnJheQoJaW50YyAxIC8vICBpbml0aWFsIG9mZnNldAoJZnJhbWVfZGlnIDUgLy8gaTogdWludDY0CglpbnRjIDIgLy8gMzIKCSogLy8gYWNjICogdHlwZUxlbmd0aAoJKwoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJc3dhcAoJaW50YyAyIC8vIDMyCglleHRyYWN0MwoJaXR4bl9maWVsZCBSZWNlaXZlcgoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxNTEKCS8vIG5vdGU6ICdyZXdhcmQnCglieXRlYyA1IC8vICAicmV3YXJkIgoJaXR4bl9maWVsZCBOb3RlCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoKKmZvcl80X2NvbnRpbnVlOgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjE0NwoJLy8gaSArPSAxCglmcmFtZV9kaWcgNSAvLyBpOiB1aW50NjQKCWludGMgMCAvLyAxCgkrCglmcmFtZV9idXJ5IDUgLy8gaTogdWludDY0CgliICpmb3JfNAoKKmZvcl80X2VuZDoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxNTUKCS8vIGZvciAobGV0IGkgPSAwOyBpIDwgYWRkcmVzc2VzLmxlbmd0aDsgaSArPSAxKQoJaW50YyAxIC8vIDAKCWZyYW1lX2J1cnkgNiAvLyBpOiB1aW50NjQKCipmb3JfNToKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxNTUKCS8vIGkgPCBhZGRyZXNzZXMubGVuZ3RoCglmcmFtZV9kaWcgNiAvLyBpOiB1aW50NjQKCWZyYW1lX2RpZyAtMSAvLyBhZGRyZXNzZXM6IEFkZHJlc3NbXQoJbGVuCglpbnRjIDIgLy8gMzIKCS8KCTwKCWJ6ICpmb3JfNV9lbmQKCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MTU2CgkvLyB0aGlzLmRlbGV0ZUJveChhZGRyZXNzZXNbaV0pCglmcmFtZV9kaWcgLTEgLy8gYWRkcmVzc2VzOiBBZGRyZXNzW10KCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5CglpbnRjIDEgLy8gIGluaXRpYWwgb2Zmc2V0CglmcmFtZV9kaWcgNiAvLyBpOiB1aW50NjQKCWludGMgMiAvLyAzMgoJKiAvLyBhY2MgKiB0eXBlTGVuZ3RoCgkrCglsb2FkIDI1NSAvLyBmdWxsIGFycmF5Cglzd2FwCglpbnRjIDIgLy8gMzIKCWV4dHJhY3QzCgljYWxsc3ViIGRlbGV0ZUJveAoKKmZvcl81X2NvbnRpbnVlOgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjE1NQoJLy8gaSArPSAxCglmcmFtZV9kaWcgNiAvLyBpOiB1aW50NjQKCWludGMgMCAvLyAxCgkrCglmcmFtZV9idXJ5IDYgLy8gaTogdWludDY0CgliICpmb3JfNQoKKmZvcl81X2VuZDoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxNTkKCS8vIHRoaXMuYWRtaW5EZWxldGVBcHBsaWNhdGlvbigpCgljYWxsc3ViIGFkbWluRGVsZXRlQXBwbGljYXRpb24KCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MTYxCgkvLyByZXR1cm4gMTsKCWludGMgMCAvLyAxCgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCgoJLy8gcG9wIGFsbCBsb2NhbCB2YXJpYWJsZXMgZnJvbSB0aGUgc3RhY2sKCXBvcG4gNgoJcmV0c3ViCgovLyBzdG9yZUNsYXNzaWZpY2F0aW9uU2VsZWN0aW9uQ3JpdGVyaWEoKHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCkscGF5KXZvaWQKKmFiaV9yb3V0ZV9zdG9yZUNsYXNzaWZpY2F0aW9uU2VsZWN0aW9uQ3JpdGVyaWE6CgkvLyBtYnJQYXk6IHBheQoJdHhuIEdyb3VwSW5kZXgKCWludGMgMCAvLyAxCgktCglkdXAKCWd0eG5zIFR5cGVFbnVtCglpbnRjIDAgLy8gIHBheQoJPT0KCgkvLyBhcmd1bWVudCAwIChtYnJQYXkpIGZvciBzdG9yZUNsYXNzaWZpY2F0aW9uU2VsZWN0aW9uQ3JpdGVyaWEgbXVzdCBiZSBhIHBheSB0cmFuc2FjdGlvbgoJYXNzZXJ0CgoJLy8gZXZhbHVhdGlvbk1ldHJpY3M6ICh1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQpCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyAyIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDEgKGV2YWx1YXRpb25NZXRyaWNzKSBmb3Igc3RvcmVDbGFzc2lmaWNhdGlvblNlbGVjdGlvbkNyaXRlcmlhIG11c3QgYmUgYSAodWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0KQoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBzdG9yZUNsYXNzaWZpY2F0aW9uU2VsZWN0aW9uQ3JpdGVyaWEoKHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCkscGF5KXZvaWQKCWNhbGxzdWIgc3RvcmVDbGFzc2lmaWNhdGlvblNlbGVjdGlvbkNyaXRlcmlhCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBzdG9yZUNsYXNzaWZpY2F0aW9uU2VsZWN0aW9uQ3JpdGVyaWEoZXZhbHVhdGlvbk1ldHJpY3M6IENsYXNzaWZpY2F0aW9uLCBtYnJQYXk6IFBheVR4bik6IHZvaWQKc3RvcmVDbGFzc2lmaWNhdGlvblNlbGVjdGlvbkNyaXRlcmlhOgoJcHJvdG8gMiAwCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjE2NgoJLy8gdmVyaWZ5VHhuKHRoaXMudHhuLCB7IHNlbmRlcjogdGhpcy5hcHAuY3JlYXRvciB9KQoJLy8gdmVyaWZ5IHNlbmRlcgoJdHhuIFNlbmRlcgoJdHhuYSBBcHBsaWNhdGlvbnMgMAoJYXBwX3BhcmFtc19nZXQgQXBwQ3JlYXRvcgoJcG9wCgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoidGhpcy50eG4iLCJmaWVsZCI6InNlbmRlciIsImV4cGVjdGVkIjoidGhpcy5hcHAuY3JlYXRvciJ9Cglhc3NlcnQKCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MTY3CgkvLyB2ZXJpZnlQYXlUeG4obWJyUGF5LCB7CgkvLyAgICAgICBzZW5kZXI6IHRoaXMudHhuLnNlbmRlciwKCS8vICAgICAgIHJlY2VpdmVyOiB0aGlzLmFwcC5hZGRyZXNzLAoJLy8gICAgICAgYW1vdW50OiBib3hNYnIsCgkvLyAgICAgfSkKCS8vIHZlcmlmeSBzZW5kZXIKCWZyYW1lX2RpZyAtMiAvLyBtYnJQYXk6IFBheVR4bgoJZ3R4bnMgU2VuZGVyCgl0eG4gU2VuZGVyCgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoibWJyUGF5IiwiZmllbGQiOiJzZW5kZXIiLCJleHBlY3RlZCI6InRoaXMudHhuLnNlbmRlciJ9Cglhc3NlcnQKCgkvLyB2ZXJpZnkgcmVjZWl2ZXIKCWZyYW1lX2RpZyAtMiAvLyBtYnJQYXk6IFBheVR4bgoJZ3R4bnMgUmVjZWl2ZXIKCWdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoibWJyUGF5IiwiZmllbGQiOiJyZWNlaXZlciIsImV4cGVjdGVkIjoidGhpcy5hcHAuYWRkcmVzcyJ9Cglhc3NlcnQKCgkvLyB2ZXJpZnkgYW1vdW50CglmcmFtZV9kaWcgLTIgLy8gbWJyUGF5OiBQYXlUeG4KCWd0eG5zIEFtb3VudAoJaW50YyA0IC8vIDEwMDAwMDAKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJtYnJQYXkiLCJmaWVsZCI6ImFtb3VudCIsImV4cGVjdGVkIjoiYm94TWJyIn0KCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxNzMKCS8vIHRoaXMuY2xhc3NpZmljYXRpb25QZXJmb3JtYW5jZU1ldHJpY3MoJ0luaXRpYWxNb2RlbE1ldHJpY3MnKS5jcmVhdGUoMzIpCglieXRlYyAxIC8vIDB4MDAxMzQ5NmU2OTc0Njk2MTZjNGQ2ZjY0NjU2YzRkNjU3NDcyNjk2MzczCglpbnRjIDIgLy8gMzIKCWJveF9jcmVhdGUKCXBvcAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxNzQKCS8vIHRoaXMuY2xhc3NpZmljYXRpb25QZXJmb3JtYW5jZU1ldHJpY3MoJ0luaXRpYWxNb2RlbE1ldHJpY3MnKS52YWx1ZSA9IGV2YWx1YXRpb25NZXRyaWNzCglieXRlYyAxIC8vIDB4MDAxMzQ5NmU2OTc0Njk2MTZjNGQ2ZjY0NjU2YzRkNjU3NDcyNjk2MzczCglmcmFtZV9kaWcgLTEgLy8gZXZhbHVhdGlvbk1ldHJpY3M6IENsYXNzaWZpY2F0aW9uCglib3hfcHV0CglyZXRzdWIKCi8vIGdldENsYXNzaWZpY2F0aW9uQ3JpdGVyaWEoKSh1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQpCiphYmlfcm91dGVfZ2V0Q2xhc3NpZmljYXRpb25Dcml0ZXJpYToKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMiAvLyAweDE1MWY3Yzc1CgoJLy8gZXhlY3V0ZSBnZXRDbGFzc2lmaWNhdGlvbkNyaXRlcmlhKCkodWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0KQoJY2FsbHN1YiBnZXRDbGFzc2lmaWNhdGlvbkNyaXRlcmlhCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gZ2V0Q2xhc3NpZmljYXRpb25Dcml0ZXJpYSgpOiBDbGFzc2lmaWNhdGlvbgpnZXRDbGFzc2lmaWNhdGlvbkNyaXRlcmlhOgoJcHJvdG8gMCAxCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjE3OQoJLy8gYXNzZXJ0KHRoaXMuY2xhc3NpZmljYXRpb25QZXJmb3JtYW5jZU1ldHJpY3MoJ0luaXRpYWxNb2RlbE1ldHJpY3MnKS5leGlzdHMpCglieXRlYyAxIC8vIDB4MDAxMzQ5NmU2OTc0Njk2MTZjNGQ2ZjY0NjU2YzRkNjU3NDcyNjk2MzczCglib3hfbGVuCglzd2FwCglwb3AKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxODAKCS8vIHJldHVybiB0aGlzLmNsYXNzaWZpY2F0aW9uUGVyZm9ybWFuY2VNZXRyaWNzKCdJbml0aWFsTW9kZWxNZXRyaWNzJykudmFsdWU7CglieXRlYyAxIC8vIDB4MDAxMzQ5NmU2OTc0Njk2MTZjNGQ2ZjY0NjU2YzRkNjU3NDcyNjk2MzczCglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmNsYXNzaWZpY2F0aW9uUGVyZm9ybWFuY2VNZXRyaWNzKCdJbml0aWFsTW9kZWxNZXRyaWNzJykudmFsdWUKCWFzc2VydAoJcmV0c3ViCgovLyBjbGFzc01vZGVsU2VsZWN0aW9uQ3JpdGVyaWEoKHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCkpdWludDY0CiphYmlfcm91dGVfY2xhc3NNb2RlbFNlbGVjdGlvbkNyaXRlcmlhOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAyIC8vIDB4MTUxZjdjNzUKCgkvLyBtb2RlbEV2YWx1YXRpb25NZXRyaWNzOiAodWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0KQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMiAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChtb2RlbEV2YWx1YXRpb25NZXRyaWNzKSBmb3IgY2xhc3NNb2RlbFNlbGVjdGlvbkNyaXRlcmlhIG11c3QgYmUgYSAodWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0KQoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBjbGFzc01vZGVsU2VsZWN0aW9uQ3JpdGVyaWEoKHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ2NCkpdWludDY0CgljYWxsc3ViIGNsYXNzTW9kZWxTZWxlY3Rpb25Dcml0ZXJpYQoJaXRvYgoJY29uY2F0Cglsb2cKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGNsYXNzTW9kZWxTZWxlY3Rpb25Dcml0ZXJpYShtb2RlbEV2YWx1YXRpb25NZXRyaWNzOiBDbGFzc2lmaWNhdGlvbik6IHVpbnQ2NApjbGFzc01vZGVsU2VsZWN0aW9uQ3JpdGVyaWE6Cglwcm90byAxIDEKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgMCAvLyAweAoJZHVwCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjE4NQoJLy8gYXNzZXJ0KHRoaXMuY2xhc3NpZmljYXRpb25QZXJmb3JtYW5jZU1ldHJpY3MoJ0luaXRpYWxNb2RlbE1ldHJpY3MnKS5leGlzdHMpCglieXRlYyAxIC8vIDB4MDAxMzQ5NmU2OTc0Njk2MTZjNGQ2ZjY0NjU2YzRkNjU3NDcyNjk2MzczCglib3hfbGVuCglzd2FwCglwb3AKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoxODgKCS8vIGJhc2VsaW5lU2NvcmUgPQoJLy8gICAgICAgYmFzZWxpbmVDbGFzc01ldHJpY3MuYWNjdXJhY3kgKwoJLy8gICAgICAgYmFzZWxpbmVDbGFzc01ldHJpY3MucHJlY2lzaW9uICsKCS8vICAgICAgIGJhc2VsaW5lQ2xhc3NNZXRyaWNzLnJlY2FsbCArCgkvLyAgICAgICBiYXNlbGluZUNsYXNzTWV0cmljcy5mMXNjb3JlCglieXRlYyAxIC8vIDB4MDAxMzQ5NmU2OTc0Njk2MTZjNGQ2ZjY0NjU2YzRkNjU3NDcyNjk2MzczCglpbnRjIDEgLy8gMAoJaW50YyAzIC8vIDgKCWJveF9leHRyYWN0CglidG9pCglieXRlYyAxIC8vIDB4MDAxMzQ5NmU2OTc0Njk2MTZjNGQ2ZjY0NjU2YzRkNjU3NDcyNjk2MzczCglpbnRjIDMgLy8gIGhlYWRPZmZzZXQKCWludGMgMyAvLyA4Cglib3hfZXh0cmFjdAoJYnRvaQoJKwoJYnl0ZWMgMSAvLyAweDAwMTM0OTZlNjk3NDY5NjE2YzRkNmY2NDY1NmM0ZDY1NzQ3MjY5NjM3MwoJcHVzaGludCAxNiAvLyBoZWFkT2Zmc2V0CglpbnRjIDMgLy8gOAoJYm94X2V4dHJhY3QKCWJ0b2kKCSsKCWJ5dGVjIDEgLy8gMHgwMDEzNDk2ZTY5NzQ2OTYxNmM0ZDZmNjQ2NTZjNGQ2NTc0NzI2OTYzNzMKCXB1c2hpbnQgMjQgLy8gaGVhZE9mZnNldAoJaW50YyAzIC8vIDgKCWJveF9leHRyYWN0CglidG9pCgkrCglmcmFtZV9idXJ5IDAgLy8gYmFzZWxpbmVTY29yZTogdWludDY0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjE5NAoJLy8gbW9kZWxTY29yZSA9CgkvLyAgICAgICBtb2RlbEV2YWx1YXRpb25NZXRyaWNzLmFjY3VyYWN5ICsKCS8vICAgICAgIG1vZGVsRXZhbHVhdGlvbk1ldHJpY3MucHJlY2lzaW9uICsKCS8vICAgICAgIG1vZGVsRXZhbHVhdGlvbk1ldHJpY3MucmVjYWxsICsKCS8vICAgICAgIG1vZGVsRXZhbHVhdGlvbk1ldHJpY3MuZjFzY29yZQoJZnJhbWVfZGlnIC0xIC8vIG1vZGVsRXZhbHVhdGlvbk1ldHJpY3M6IENsYXNzaWZpY2F0aW9uCglleHRyYWN0IDAgOAoJYnRvaQoJZnJhbWVfZGlnIC0xIC8vIG1vZGVsRXZhbHVhdGlvbk1ldHJpY3M6IENsYXNzaWZpY2F0aW9uCglleHRyYWN0IDggOAoJYnRvaQoJKwoJZnJhbWVfZGlnIC0xIC8vIG1vZGVsRXZhbHVhdGlvbk1ldHJpY3M6IENsYXNzaWZpY2F0aW9uCglleHRyYWN0IDE2IDgKCWJ0b2kKCSsKCWZyYW1lX2RpZyAtMSAvLyBtb2RlbEV2YWx1YXRpb25NZXRyaWNzOiBDbGFzc2lmaWNhdGlvbgoJZXh0cmFjdCAyNCA4CglidG9pCgkrCglmcmFtZV9idXJ5IDEgLy8gbW9kZWxTY29yZTogdWludDY0CgoJLy8gKmlmMV9jb25kaXRpb24KCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoyMDAKCS8vIG1vZGVsU2NvcmUgPD0gYmFzZWxpbmVTY29yZQoJZnJhbWVfZGlnIDEgLy8gbW9kZWxTY29yZTogdWludDY0CglmcmFtZV9kaWcgMCAvLyBiYXNlbGluZVNjb3JlOiB1aW50NjQKCTw9CglieiAqaWYxX2VuZAoKCS8vICppZjFfY29uc2VxdWVudAoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjIwMQoJLy8gcmV0dXJuIDA7CglpbnRjIDEgLy8gMAoJYiAqY2xhc3NNb2RlbFNlbGVjdGlvbkNyaXRlcmlhKnJldHVybgoKKmlmMV9lbmQ6CgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MjA0CgkvLyByZXR1cm4gbW9kZWxTY29yZSAtIGJhc2VsaW5lU2NvcmU7CglmcmFtZV9kaWcgMSAvLyBtb2RlbFNjb3JlOiB1aW50NjQKCWZyYW1lX2RpZyAwIC8vIGJhc2VsaW5lU2NvcmU6IHVpbnQ2NAoJLQoKKmNsYXNzTW9kZWxTZWxlY3Rpb25Dcml0ZXJpYSpyZXR1cm46CgkvLyBzZXQgdGhlIHN1YnJvdXRpbmUgcmV0dXJuIHZhbHVlCglmcmFtZV9idXJ5IDAKCgkvLyBwb3AgYWxsIGxvY2FsIHZhcmlhYmxlcyBmcm9tIHRoZSBzdGFjawoJcG9wbiAxCglyZXRzdWIKCi8vIHN0b3JlTW9kZWxQYXJhbXMocGF5LGFkZHJlc3MsKHN0cmluZyxzdHJpbmcsdWludDY0LHVpbnQ2NCkpdm9pZAoqYWJpX3JvdXRlX3N0b3JlTW9kZWxQYXJhbXM6CgkvLyBwYXJhbXNEYXRhOiAoc3RyaW5nLHN0cmluZyx1aW50NjQsdWludDY0KQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoKCS8vIEFkZHJlc3M6IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDIgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMSAoQWRkcmVzcykgZm9yIHN0b3JlTW9kZWxQYXJhbXMgbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIG1iclBheTogcGF5Cgl0eG4gR3JvdXBJbmRleAoJaW50YyAwIC8vIDEKCS0KCWR1cAoJZ3R4bnMgVHlwZUVudW0KCWludGMgMCAvLyAgcGF5Cgk9PQoKCS8vIGFyZ3VtZW50IDIgKG1iclBheSkgZm9yIHN0b3JlTW9kZWxQYXJhbXMgbXVzdCBiZSBhIHBheSB0cmFuc2FjdGlvbgoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBzdG9yZU1vZGVsUGFyYW1zKHBheSxhZGRyZXNzLChzdHJpbmcsc3RyaW5nLHVpbnQ2NCx1aW50NjQpKXZvaWQKCWNhbGxzdWIgc3RvcmVNb2RlbFBhcmFtcwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gc3RvcmVNb2RlbFBhcmFtcyhtYnJQYXk6IFBheVR4biwgQWRkcmVzczogQWRkcmVzcywgcGFyYW1zRGF0YTogUGFyYW1zRGF0YSk6IHZvaWQKc3RvcmVNb2RlbFBhcmFtczoKCXByb3RvIDMgMAoKCS8vICppZjJfY29uZGl0aW9uCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MjA5CgkvLyB0aGlzLnBhcmFtc0RhdGEoQWRkcmVzcykuZXhpc3RzCglmcmFtZV9kaWcgLTIgLy8gQWRkcmVzczogQWRkcmVzcwoJYm94X2xlbgoJc3dhcAoJcG9wCglieiAqaWYyX2Vsc2UKCgkvLyAqaWYyX2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoyMTAKCS8vIHZlcmlmeVR4bih0aGlzLnR4biwgeyBzZW5kZXI6IHRoaXMudHhuLnNlbmRlciB9KQoJLy8gdmVyaWZ5IHNlbmRlcgoJdHhuIFNlbmRlcgoJdHhuIFNlbmRlcgoJPT0KCgkvLyB0cmFuc2FjdGlvbiB2ZXJpZmljYXRpb24gZmFpbGVkOiB7InR4biI6InRoaXMudHhuIiwiZmllbGQiOiJzZW5kZXIiLCJleHBlY3RlZCI6InRoaXMudHhuLnNlbmRlciJ9Cglhc3NlcnQKCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MjExCgkvLyB2ZXJpZnlQYXlUeG4obWJyUGF5LCB7CgkvLyAgICAgICAgIHNlbmRlcjogdGhpcy50eG4uc2VuZGVyLAoJLy8gICAgICAgICByZWNlaXZlcjogdGhpcy5hcHAuYWRkcmVzcywKCS8vICAgICAgICAgYW1vdW50OiBib3hNYnIsCgkvLyAgICAgICB9KQoJLy8gdmVyaWZ5IHNlbmRlcgoJZnJhbWVfZGlnIC0xIC8vIG1iclBheTogUGF5VHhuCglndHhucyBTZW5kZXIKCXR4biBTZW5kZXIKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJtYnJQYXkiLCJmaWVsZCI6InNlbmRlciIsImV4cGVjdGVkIjoidGhpcy50eG4uc2VuZGVyIn0KCWFzc2VydAoKCS8vIHZlcmlmeSByZWNlaXZlcgoJZnJhbWVfZGlnIC0xIC8vIG1iclBheTogUGF5VHhuCglndHhucyBSZWNlaXZlcgoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJtYnJQYXkiLCJmaWVsZCI6InJlY2VpdmVyIiwiZXhwZWN0ZWQiOiJ0aGlzLmFwcC5hZGRyZXNzIn0KCWFzc2VydAoKCS8vIHZlcmlmeSBhbW91bnQKCWZyYW1lX2RpZyAtMSAvLyBtYnJQYXk6IFBheVR4bgoJZ3R4bnMgQW1vdW50CglpbnRjIDQgLy8gMTAwMDAwMAoJPT0KCgkvLyB0cmFuc2FjdGlvbiB2ZXJpZmljYXRpb24gZmFpbGVkOiB7InR4biI6Im1iclBheSIsImZpZWxkIjoiYW1vdW50IiwiZXhwZWN0ZWQiOiJib3hNYnIifQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjIxNwoJLy8gdGhpcy5wYXJhbXNEYXRhKEFkZHJlc3MpLnZhbHVlID0gcGFyYW1zRGF0YQoJZnJhbWVfZGlnIC0yIC8vIEFkZHJlc3M6IEFkZHJlc3MKCWR1cAoJYm94X2RlbAoJcG9wCglmcmFtZV9kaWcgLTMgLy8gcGFyYW1zRGF0YTogUGFyYW1zRGF0YQoJYm94X3B1dAoJYiAqaWYyX2VuZAoKKmlmMl9lbHNlOgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjIxOQoJLy8gdmVyaWZ5VHhuKHRoaXMudHhuLCB7IHNlbmRlcjogdGhpcy50eG4uc2VuZGVyIH0pCgkvLyB2ZXJpZnkgc2VuZGVyCgl0eG4gU2VuZGVyCgl0eG4gU2VuZGVyCgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoidGhpcy50eG4iLCJmaWVsZCI6InNlbmRlciIsImV4cGVjdGVkIjoidGhpcy50eG4uc2VuZGVyIn0KCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoyMjAKCS8vIHZlcmlmeVBheVR4bihtYnJQYXksIHsKCS8vICAgICAgICAgc2VuZGVyOiB0aGlzLnR4bi5zZW5kZXIsCgkvLyAgICAgICAgIHJlY2VpdmVyOiB0aGlzLmFwcC5hZGRyZXNzLAoJLy8gICAgICAgICBhbW91bnQ6IGJveE1iciwKCS8vICAgICAgIH0pCgkvLyB2ZXJpZnkgc2VuZGVyCglmcmFtZV9kaWcgLTEgLy8gbWJyUGF5OiBQYXlUeG4KCWd0eG5zIFNlbmRlcgoJdHhuIFNlbmRlcgoJPT0KCgkvLyB0cmFuc2FjdGlvbiB2ZXJpZmljYXRpb24gZmFpbGVkOiB7InR4biI6Im1iclBheSIsImZpZWxkIjoic2VuZGVyIiwiZXhwZWN0ZWQiOiJ0aGlzLnR4bi5zZW5kZXIifQoJYXNzZXJ0CgoJLy8gdmVyaWZ5IHJlY2VpdmVyCglmcmFtZV9kaWcgLTEgLy8gbWJyUGF5OiBQYXlUeG4KCWd0eG5zIFJlY2VpdmVyCglnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwoJPT0KCgkvLyB0cmFuc2FjdGlvbiB2ZXJpZmljYXRpb24gZmFpbGVkOiB7InR4biI6Im1iclBheSIsImZpZWxkIjoicmVjZWl2ZXIiLCJleHBlY3RlZCI6InRoaXMuYXBwLmFkZHJlc3MifQoJYXNzZXJ0CgoJLy8gdmVyaWZ5IGFtb3VudAoJZnJhbWVfZGlnIC0xIC8vIG1iclBheTogUGF5VHhuCglndHhucyBBbW91bnQKCWludGMgNCAvLyAxMDAwMDAwCgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoibWJyUGF5IiwiZmllbGQiOiJhbW91bnQiLCJleHBlY3RlZCI6ImJveE1iciJ9Cglhc3NlcnQKCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MjI2CgkvLyB0aGlzLnBhcmFtc0RhdGEoQWRkcmVzcykuY3JlYXRlKDMyKQoJZnJhbWVfZGlnIC0yIC8vIEFkZHJlc3M6IEFkZHJlc3MKCWludGMgMiAvLyAzMgoJYm94X2NyZWF0ZQoJcG9wCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjIyNwoJLy8gdGhpcy5wYXJhbXNEYXRhKEFkZHJlc3MpLnZhbHVlID0gcGFyYW1zRGF0YQoJZnJhbWVfZGlnIC0yIC8vIEFkZHJlc3M6IEFkZHJlc3MKCWR1cAoJYm94X2RlbAoJcG9wCglmcmFtZV9kaWcgLTMgLy8gcGFyYW1zRGF0YTogUGFyYW1zRGF0YQoJYm94X3B1dAoKKmlmMl9lbmQ6CglyZXRzdWIKCi8vIGdldEJveFZhbHVlKGFkZHJlc3MpKHN0cmluZyxzdHJpbmcsdWludDY0LHVpbnQ2NCkKKmFiaV9yb3V0ZV9nZXRCb3hWYWx1ZToKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMiAvLyAweDE1MWY3Yzc1CgoJLy8gQWRkcmVzczogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMiAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChBZGRyZXNzKSBmb3IgZ2V0Qm94VmFsdWUgbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIGV4ZWN1dGUgZ2V0Qm94VmFsdWUoYWRkcmVzcykoc3RyaW5nLHN0cmluZyx1aW50NjQsdWludDY0KQoJY2FsbHN1YiBnZXRCb3hWYWx1ZQoJY29uY2F0Cglsb2cKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGdldEJveFZhbHVlKEFkZHJlc3M6IEFkZHJlc3MpOiBQYXJhbXNEYXRhCmdldEJveFZhbHVlOgoJcHJvdG8gMSAxCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjIzMwoJLy8gdmVyaWZ5VHhuKHRoaXMudHhuLCB7IHNlbmRlcjogdGhpcy5hcHAuY3JlYXRvciB9KQoJLy8gdmVyaWZ5IHNlbmRlcgoJdHhuIFNlbmRlcgoJdHhuYSBBcHBsaWNhdGlvbnMgMAoJYXBwX3BhcmFtc19nZXQgQXBwQ3JlYXRvcgoJcG9wCgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoidGhpcy50eG4iLCJmaWVsZCI6InNlbmRlciIsImV4cGVjdGVkIjoidGhpcy5hcHAuY3JlYXRvciJ9Cglhc3NlcnQKCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MjM0CgkvLyBhc3NlcnQodGhpcy5wYXJhbXNEYXRhKEFkZHJlc3MpLmV4aXN0cykKCWZyYW1lX2RpZyAtMSAvLyBBZGRyZXNzOiBBZGRyZXNzCglib3hfbGVuCglzd2FwCglwb3AKCWFzc2VydAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoyMzUKCS8vIHJldHVybiB0aGlzLnBhcmFtc0RhdGEoQWRkcmVzcykudmFsdWU7CglmcmFtZV9kaWcgLTEgLy8gQWRkcmVzczogQWRkcmVzcwoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5wYXJhbXNEYXRhKEFkZHJlc3MpLnZhbHVlCglhc3NlcnQKCXJldHN1YgoKLy8gYWRtaW5HZXRCb3hWYWx1ZShhZGRyZXNzKShzdHJpbmcsc3RyaW5nLHVpbnQ2NCx1aW50NjQpCiphYmlfcm91dGVfYWRtaW5HZXRCb3hWYWx1ZToKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMiAvLyAweDE1MWY3Yzc1CgoJLy8gQWRkcmVzczogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMiAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChBZGRyZXNzKSBmb3IgYWRtaW5HZXRCb3hWYWx1ZSBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBhZG1pbkdldEJveFZhbHVlKGFkZHJlc3MpKHN0cmluZyxzdHJpbmcsdWludDY0LHVpbnQ2NCkKCWNhbGxzdWIgYWRtaW5HZXRCb3hWYWx1ZQoJY29uY2F0Cglsb2cKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGFkbWluR2V0Qm94VmFsdWUoQWRkcmVzczogQWRkcmVzcyk6IFBhcmFtc0RhdGEKYWRtaW5HZXRCb3hWYWx1ZToKCXByb3RvIDEgMQoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoyNDAKCS8vIGFzc2VydCh0aGlzLnBhcmFtc0RhdGEoQWRkcmVzcykuZXhpc3RzKQoJZnJhbWVfZGlnIC0xIC8vIEFkZHJlc3M6IEFkZHJlc3MKCWJveF9sZW4KCXN3YXAKCXBvcAoJYXNzZXJ0CgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjI0MQoJLy8gcmV0dXJuIHRoaXMucGFyYW1zRGF0YShBZGRyZXNzKS52YWx1ZTsKCWZyYW1lX2RpZyAtMSAvLyBBZGRyZXNzOiBBZGRyZXNzCglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLnBhcmFtc0RhdGEoQWRkcmVzcykudmFsdWUKCWFzc2VydAoJcmV0c3ViCgovLyBkZWxldGVJbml0aWFsQm94KCl2b2lkCiphYmlfcm91dGVfZGVsZXRlSW5pdGlhbEJveDoKCS8vIGV4ZWN1dGUgZGVsZXRlSW5pdGlhbEJveCgpdm9pZAoJY2FsbHN1YiBkZWxldGVJbml0aWFsQm94CglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBkZWxldGVJbml0aWFsQm94KCk6IHZvaWQKZGVsZXRlSW5pdGlhbEJveDoKCXByb3RvIDAgMAoKCS8vICppZjNfY29uZGl0aW9uCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MjQ2CgkvLyB0aGlzLmNsYXNzaWZpY2F0aW9uUGVyZm9ybWFuY2VNZXRyaWNzKCdJbml0aWFsTW9kZWxNZXRyaWNzJykuZXhpc3RzCglieXRlYyAxIC8vIDB4MDAxMzQ5NmU2OTc0Njk2MTZjNGQ2ZjY0NjU2YzRkNjU3NDcyNjk2MzczCglib3hfbGVuCglzd2FwCglwb3AKCWJ6ICppZjNfZW5kCgoJLy8gKmlmM19jb25zZXF1ZW50CgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MjQ3CgkvLyB0aGlzLmNsYXNzaWZpY2F0aW9uUGVyZm9ybWFuY2VNZXRyaWNzKCdJbml0aWFsTW9kZWxNZXRyaWNzJykuZGVsZXRlKCkKCWJ5dGVjIDEgLy8gMHgwMDEzNDk2ZTY5NzQ2OTYxNmM0ZDZmNjQ2NTZjNGQ2NTc0NzI2OTYzNzMKCWJveF9kZWwKCippZjNfZW5kOgoJcmV0c3ViCgovLyBkZWxldGVCb3goYWRkcmVzcyl1aW50NjQKKmFiaV9yb3V0ZV9kZWxldGVCb3g6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDIgLy8gMHgxNTFmN2M3NQoKCS8vIGFkZHJlc3M6IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDIgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMCAoYWRkcmVzcykgZm9yIGRlbGV0ZUJveCBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBkZWxldGVCb3goYWRkcmVzcyl1aW50NjQKCWNhbGxzdWIgZGVsZXRlQm94CglpdG9iCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gZGVsZXRlQm94KGFkZHJlc3M6IEFkZHJlc3MpOiB1aW50NjQKZGVsZXRlQm94OgoJcHJvdG8gMSAxCgoJLy8gKmlmNF9jb25kaXRpb24KCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoyNTMKCS8vIHRoaXMuY2xhc3NpZmljYXRpb25QZXJmb3JtYW5jZU1ldHJpY3MoJ0luaXRpYWxNb2RlbE1ldHJpY3MnKS5leGlzdHMKCWJ5dGVjIDEgLy8gMHgwMDEzNDk2ZTY5NzQ2OTYxNmM0ZDZmNjQ2NTZjNGQ2NTc0NzI2OTYzNzMKCWJveF9sZW4KCXN3YXAKCXBvcAoJYnogKmlmNF9lbmQKCgkvLyAqaWY0X2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoyNTQKCS8vIHRoaXMuY2xhc3NpZmljYXRpb25QZXJmb3JtYW5jZU1ldHJpY3MoJ0luaXRpYWxNb2RlbE1ldHJpY3MnKS5kZWxldGUoKQoJYnl0ZWMgMSAvLyAweDAwMTM0OTZlNjk3NDY5NjE2YzRkNmY2NDY1NmM0ZDY1NzQ3MjY5NjM3MwoJYm94X2RlbAoKKmlmNF9lbmQ6CgkvLyAqaWY1X2NvbmRpdGlvbgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjI1NgoJLy8gdGhpcy5wYXJhbXNEYXRhKGFkZHJlc3MpLmV4aXN0cwoJZnJhbWVfZGlnIC0xIC8vIGFkZHJlc3M6IEFkZHJlc3MKCWJveF9sZW4KCXN3YXAKCXBvcAoJYnogKmlmNV9lbmQKCgkvLyAqaWY1X2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoyNTcKCS8vIHRoaXMucGFyYW1zRGF0YShhZGRyZXNzKS5kZWxldGUoKQoJZnJhbWVfZGlnIC0xIC8vIGFkZHJlc3M6IEFkZHJlc3MKCWJveF9kZWwKCippZjVfZW5kOgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjI1OQoJLy8gcmV0dXJuIDE7CglpbnRjIDAgLy8gMQoJcmV0c3ViCgovLyBkZWxldGVBcHBsaWNhdGlvbigpdm9pZAoqYWJpX3JvdXRlX2RlbGV0ZUFwcGxpY2F0aW9uOgoJLy8gZXhlY3V0ZSBkZWxldGVBcHBsaWNhdGlvbigpdm9pZAoJY2FsbHN1YiBkZWxldGVBcHBsaWNhdGlvbgoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gZGVsZXRlQXBwbGljYXRpb24oKTogdm9pZApkZWxldGVBcHBsaWNhdGlvbjoKCXByb3RvIDAgMAoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoyNjQKCS8vIGFzc2VydCh0aGlzLnR4bi5zZW5kZXIgPT09IHRoaXMuYXBwLmNyZWF0b3IpCgl0eG4gU2VuZGVyCgl0eG5hIEFwcGxpY2F0aW9ucyAwCglhcHBfcGFyYW1zX2dldCBBcHBDcmVhdG9yCglwb3AKCT09Cglhc3NlcnQKCgkvLyBjb250cmFjdHNcTW9kZXJhdG9yLmFsZ28udHM6MjY2CgkvLyBzZW5kUGF5bWVudCh7CgkvLyAgICAgICBjbG9zZVJlbWFpbmRlclRvOiB0aGlzLnR4bi5zZW5kZXIsCgkvLyAgICAgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjI2NwoJLy8gY2xvc2VSZW1haW5kZXJUbzogdGhpcy50eG4uc2VuZGVyCgl0eG4gU2VuZGVyCglpdHhuX2ZpZWxkIENsb3NlUmVtYWluZGVyVG8KCgkvLyBGZWUgZmllbGQgbm90IHNldCwgZGVmYXVsdGluZyB0byAwCglpbnRjIDEgLy8gMAoJaXR4bl9maWVsZCBGZWUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CglyZXRzdWIKCi8vIGFkbWluRGVsZXRlQXBwbGljYXRpb24oKXZvaWQKKmFiaV9yb3V0ZV9hZG1pbkRlbGV0ZUFwcGxpY2F0aW9uOgoJLy8gZXhlY3V0ZSBhZG1pbkRlbGV0ZUFwcGxpY2F0aW9uKCl2b2lkCgljYWxsc3ViIGFkbWluRGVsZXRlQXBwbGljYXRpb24KCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGFkbWluRGVsZXRlQXBwbGljYXRpb24oKTogdm9pZAphZG1pbkRlbGV0ZUFwcGxpY2F0aW9uOgoJcHJvdG8gMCAwCgoJLy8gY29udHJhY3RzXE1vZGVyYXRvci5hbGdvLnRzOjI3MwoJLy8gc2VuZFBheW1lbnQoewoJLy8gICAgICAgY2xvc2VSZW1haW5kZXJUbzogdGhpcy50eG4uc2VuZGVyLAoJLy8gICAgIH0pCglpdHhuX2JlZ2luCglpbnRjIDAgLy8gIHBheQoJaXR4bl9maWVsZCBUeXBlRW51bQoKCS8vIGNvbnRyYWN0c1xNb2RlcmF0b3IuYWxnby50czoyNzQKCS8vIGNsb3NlUmVtYWluZGVyVG86IHRoaXMudHhuLnNlbmRlcgoJdHhuIFNlbmRlcgoJaXR4bl9maWVsZCBDbG9zZVJlbWFpbmRlclRvCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoJcmV0c3ViCgoqY3JlYXRlX05vT3A6CglwdXNoYnl0ZXMgMHgxMTU3NTZkYiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKHN0cmluZyl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjcmVhdGUgTm9PcAoJZXJyCgoqY2FsbF9Ob09wOgoJcHVzaGJ5dGVzIDB4NjZlODE1OGMgLy8gbWV0aG9kICJhc3NpZ25SZXdhcmRQb29sKHVpbnQ2NCxwYXkpdWludDY0IgoJcHVzaGJ5dGVzIDB4OWU4ODZhYmEgLy8gbWV0aG9kICJjcmVhdG9yQ29tbWl0VG9MaXN0aW5nKHBheSl1aW50NjQiCglwdXNoYnl0ZXMgMHgwZmQzNjgzNiAvLyBtZXRob2QgImNvbW1pdFRvTGlzdGluZyhwYXkpdWludDY0IgoJcHVzaGJ5dGVzIDB4Mjg2YmU2MzYgLy8gbWV0aG9kICJjaGVja0JhbGFuY2UoKXVpbnQ2NCIKCXB1c2hieXRlcyAweGI3ODkxOGY1IC8vIG1ldGhvZCAic3RvcmVDbGFzc2lmaWNhdGlvblNlbGVjdGlvbkNyaXRlcmlhKCh1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQpLHBheSl2b2lkIgoJcHVzaGJ5dGVzIDB4NmRkY2RmZGMgLy8gbWV0aG9kICJnZXRDbGFzc2lmaWNhdGlvbkNyaXRlcmlhKCkodWludDY0LHVpbnQ2NCx1aW50NjQsdWludDY0KSIKCXB1c2hieXRlcyAweDQzNmEwMjk1IC8vIG1ldGhvZCAiY2xhc3NNb2RlbFNlbGVjdGlvbkNyaXRlcmlhKCh1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50NjQpKXVpbnQ2NCIKCXB1c2hieXRlcyAweDU0ZDI1MGJmIC8vIG1ldGhvZCAic3RvcmVNb2RlbFBhcmFtcyhwYXksYWRkcmVzcywoc3RyaW5nLHN0cmluZyx1aW50NjQsdWludDY0KSl2b2lkIgoJcHVzaGJ5dGVzIDB4NzA1Y2IzMTAgLy8gbWV0aG9kICJnZXRCb3hWYWx1ZShhZGRyZXNzKShzdHJpbmcsc3RyaW5nLHVpbnQ2NCx1aW50NjQpIgoJcHVzaGJ5dGVzIDB4NTY0NmZmNzQgLy8gbWV0aG9kICJhZG1pbkdldEJveFZhbHVlKGFkZHJlc3MpKHN0cmluZyxzdHJpbmcsdWludDY0LHVpbnQ2NCkiCglwdXNoYnl0ZXMgMHhmYmZkMjBkZCAvLyBtZXRob2QgImRlbGV0ZUluaXRpYWxCb3goKXZvaWQiCglwdXNoYnl0ZXMgMHhmNGEzMGMxZiAvLyBtZXRob2QgImRlbGV0ZUJveChhZGRyZXNzKXVpbnQ2NCIKCXB1c2hieXRlcyAweGYwMGI3ZjYxIC8vIG1ldGhvZCAiYWRtaW5EZWxldGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfYXNzaWduUmV3YXJkUG9vbCAqYWJpX3JvdXRlX2NyZWF0b3JDb21taXRUb0xpc3RpbmcgKmFiaV9yb3V0ZV9jb21taXRUb0xpc3RpbmcgKmFiaV9yb3V0ZV9jaGVja0JhbGFuY2UgKmFiaV9yb3V0ZV9zdG9yZUNsYXNzaWZpY2F0aW9uU2VsZWN0aW9uQ3JpdGVyaWEgKmFiaV9yb3V0ZV9nZXRDbGFzc2lmaWNhdGlvbkNyaXRlcmlhICphYmlfcm91dGVfY2xhc3NNb2RlbFNlbGVjdGlvbkNyaXRlcmlhICphYmlfcm91dGVfc3RvcmVNb2RlbFBhcmFtcyAqYWJpX3JvdXRlX2dldEJveFZhbHVlICphYmlfcm91dGVfYWRtaW5HZXRCb3hWYWx1ZSAqYWJpX3JvdXRlX2RlbGV0ZUluaXRpYWxCb3ggKmFiaV9yb3V0ZV9kZWxldGVCb3ggKmFiaV9yb3V0ZV9hZG1pbkRlbGV0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgTm9PcAoJZXJyCgoqY2FsbF9VcGRhdGVBcHBsaWNhdGlvbjoKCXB1c2hieXRlcyAweDE3NDc0MDViIC8vIG1ldGhvZCAidXBkYXRlQXBwbGljYXRpb24oc3RyaW5nKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX3VwZGF0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgVXBkYXRlQXBwbGljYXRpb24KCWVycgoKKmNhbGxfRGVsZXRlQXBwbGljYXRpb246CglwdXNoYnl0ZXMgMHg4MzQ1ZGM4MyAvLyBtZXRob2QgImJ1bGtQYXlvdXRSZXdhcmRzKGFkZHJlc3NbXSx1aW50NjRbXSl1aW50NjQiCglwdXNoYnl0ZXMgMHgxZmUxZTMzNSAvLyBtZXRob2QgImFkbWluQnVsa1BheW91dFJld2FyZHMoYWRkcmVzc1tdLHVpbnQ2NFtdKXVpbnQ2NCIKCXB1c2hieXRlcyAweDI0ODdjMzJjIC8vIG1ldGhvZCAiZGVsZXRlQXBwbGljYXRpb24oKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2J1bGtQYXlvdXRSZXdhcmRzICphYmlfcm91dGVfYWRtaW5CdWxrUGF5b3V0UmV3YXJkcyAqYWJpX3JvdXRlX2RlbGV0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgRGVsZXRlQXBwbGljYXRpb24KCWVycg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiAFAQAgCMCEPSYGABUAE0luaXRpYWxNb2RlbE1ldHJpY3MEFR98dQtzdGFrZUFtb3VudAhpcGZzSGFzaAZyZXdhcmQxGBSBBgsxGQiNDAUnAAAAAAAABZUFowUZAAAAAAAAAAAAAAA2GgFXAgCIAAIiQ4oBACcEi/9JFRZXBgJMUGeJNhoBVwIAiAACIkOKAQAxADYyAHIHSBJEJwSL/0kVFlcGAkxQZ4kqMRYiCUk4ECISRDYaAReIAAUWULAiQ4oCAYv+OAAxABJEi/44BzIKEkSL/jgIi/8SRIAKcmV3YXJkUG9vbIv/Zysji/8jgQIfSEhMFERnIokqMRYiCUk4ECISRIgABRZQsCJDigEBMQA2MgByB0gSRIv/OAAxABJEi/84BzIKEkSL/zgIK2QSRCKJKjEWIglJOBAiEkSIAAUWULAiQ4oBAYv/OAAxABJEi/84BzIKEkSL/zgIK2QSRCKJKogABRZQsCJDigABMgpzAEiJKjYaAlcCADYaAVcCAIgABRZQsCJDigIBKEcFMQA2MgByB0gSRIv/FSQKi/4VJQoSRCOMACOMAYsBi/4VJQoMQQAeiwCL/jX/I4sBJQsINP9MJVgXCIwAiwEiCIwBQv/Xi/8VJAorZB0jIh9ISEwURIwCiwCLAgiMAzIKcwBIiwMPRCOMBIsEi/8VJAoMQQA7sSKyEIv+Nf8jiwQlCwg0/0wlWBcrZAiyCIv/Nf8jiwQkCwg0/0wkWLIHJwWyBSOyAbOLBCIIjARC/7ojjAWLBYv/FSQKDEEAG4v/Nf8jiwUkCwg0/0wkWIgC0YsFIgiMBUL/2ogC4yKMAEYFiSo2GgJXAgA2GgFXAgCIAAUWULAiQ4oCAShHBov/FSQKi/4VJQoSRCOMACOMAYsBi/4VJQoMQQAeiwCL/jX/I4sBJQsINP9MJVgXCIwAiwEiCIwBQv/Xi/8VJAorZB0jIh9ISEwURIwCiwCLAgiMAzIKcwBIiwMPRCOMBIv/FSQKIw1BABcjMgpzAEiLAwkji/8VJAofSEhMFESMBCOMBYsFi/8VJAoMQQA+sSKyEIv+Nf8jiwUlCwg0/0wlWBcrZAiLBAiyCIv/Nf8jiwUkCwg0/0wkWLIHJwWyBSOyAbOLBSIIjAVC/7cjjAaLBov/FSQKDEEAG4v/Nf8jiwYkCwg0/0wkWIgBt4sGIgiMBkL/2ogB6CKMAEYGiTEWIglJOBAiEkQ2GgFJFSQSRIgAAiJDigIAMQA2MgByB0gSRIv+OAAxABJEi/44BzIKEkSL/jgIIQQSRCkkuUgpi/+/iSqIAARQsCJDigABKb1MSEQpvkSJKjYaAUkVJBJEiAAFFlCwIkOKAQEoSSm9TEhEKSMluhcpJSW6FwgpgRAluhcIKYEYJboXCIwAi/9XAAgXi/9XCAgXCIv/VxAIFwiL/1cYCBcIjAGLAYsADkEABCNCAAWLAYsACYwARgGJNhoCNhoBSRUkEkQxFiIJSTgQIhJEiAACIkOKAwCL/r1MSEEAKTEAMQASRIv/OAAxABJEi/84BzIKEkSL/zgIIQQSRIv+SbxIi/2/QgArMQAxABJEi/84ADEAEkSL/zgHMgoSRIv/OAghBBJEi/4kuUiL/km8SIv9v4kqNhoBSRUkEkSIAARQsCJDigEBMQA2MgByB0gSRIv/vUxIRIv/vkSJKjYaAUkVJBJEiAAEULAiQ4oBAYv/vUxIRIv/vkSJiAACIkOKAAApvUxIQQACKbyJKjYaAUkVJBJEiAAFFlCwIkOKAQEpvUxIQQACKbyL/71MSEEAA4v/vCKJiAACIkOKAAAxADYyAHIHSBJEsSKyEDEAsgkjsgGziYgAAiJDigAAsSKyEDEAsgkjsgGziYAEEVdW2zYaAI4B+tsAgARm6BWMgASeiGq6gAQP02g2gAQoa+Y2gAS3iRj1gARt3N/cgARDagKVgARU0lC/gARwXLMQgARWRv90gAT7/SDdgAT0owwfgATwC39hNhoAjg36r/sA+zr7av2T/dj97P5V/s/+9/8V/yf/cACABBdHQFs2GgCOAfp7AIAEg0Xcg4AEH+HjNYAEJIfDLDYaAI4D+1D8Tf8lAA==","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -360,11 +360,173 @@ export type GlobalKeysState = DmlChainTypes['state']['global']['keys']
 export type BoxKeysState = DmlChainTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type DmlChainCreateCallParams =
+  | Expand<CallParams<DmlChainArgs['obj']['createApplication(string)void'] | DmlChainArgs['tuple']['createApplication(string)void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<DmlChainArgs['obj']['createApplication(string)void'] | DmlChainArgs['tuple']['createApplication(string)void']> & {method: 'createApplication(string)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported update method params for this smart contract
+ */
+export type DmlChainUpdateCallParams =
+  | Expand<CallParams<DmlChainArgs['obj']['updateApplication(string)void'] | DmlChainArgs['tuple']['updateApplication(string)void']> & {method: 'updateApplication'}>
+  | Expand<CallParams<DmlChainArgs['obj']['updateApplication(string)void'] | DmlChainArgs['tuple']['updateApplication(string)void']> & {method: 'updateApplication(string)void'}>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type DmlChainDeleteCallParams =
+  | Expand<CallParams<DmlChainArgs['obj']['bulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['bulkPayoutRewards(address[],uint64[])uint64']> & {method: 'bulkPayoutRewards'}>
+  | Expand<CallParams<DmlChainArgs['obj']['bulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['bulkPayoutRewards(address[],uint64[])uint64']> & {method: 'bulkPayoutRewards(address[],uint64[])uint64'}>
+  | Expand<CallParams<DmlChainArgs['obj']['adminBulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['adminBulkPayoutRewards(address[],uint64[])uint64']> & {method: 'adminBulkPayoutRewards'}>
+  | Expand<CallParams<DmlChainArgs['obj']['adminBulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['adminBulkPayoutRewards(address[],uint64[])uint64']> & {method: 'adminBulkPayoutRewards(address[],uint64[])uint64'}>
+  | Expand<CallParams<DmlChainArgs['obj']['deleteApplication()void'] | DmlChainArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication'}>
+  | Expand<CallParams<DmlChainArgs['obj']['deleteApplication()void'] | DmlChainArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type DmlChainDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: DmlChainCreateCallParams
+  /**
+   * Update transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  updateParams?: DmlChainUpdateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: DmlChainDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the DmlChain smart contract
  */
 export abstract class DmlChainParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends DmlChainCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication(string)void':
+            return DmlChainParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the DMLChain smart contract using the createApplication(string)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<DmlChainArgs['obj']['createApplication(string)void'] | DmlChainArgs['tuple']['createApplication(string)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication(string)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.modelHash],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available update ABI call param factories
+   */
+  static get update() {
+    return {
+      _resolveByMethod<TParams extends DmlChainUpdateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'updateApplication':
+          case 'updateApplication(string)void':
+            return DmlChainParamsFactory.update.updateApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs update ABI call params for the DMLChain smart contract using the updateApplication(string)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      updateApplication(params: CallParams<DmlChainArgs['obj']['updateApplication(string)void'] | DmlChainArgs['tuple']['updateApplication(string)void']> & AppClientCompilationParams): AppClientMethodCallParams & AppClientCompilationParams {
+        return {
+          ...params,
+          method: 'updateApplication(string)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.modelHash],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends DmlChainDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'bulkPayoutRewards':
+          case 'bulkPayoutRewards(address[],uint64[])uint64':
+            return DmlChainParamsFactory.delete.bulkPayoutRewards(params)
+          case 'adminBulkPayoutRewards':
+          case 'adminBulkPayoutRewards(address[],uint64[])uint64':
+            return DmlChainParamsFactory.delete.adminBulkPayoutRewards(params)
+          case 'deleteApplication':
+          case 'deleteApplication()void':
+            return DmlChainParamsFactory.delete.deleteApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the DMLChain smart contract using the bulkPayoutRewards(address[],uint64[])uint64 ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      bulkPayoutRewards(params: CallParams<DmlChainArgs['obj']['bulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['bulkPayoutRewards(address[],uint64[])uint64']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'bulkPayoutRewards(address[],uint64[])uint64' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.addresses, params.args.rewards],
+        }
+      },
+      /**
+       * Constructs delete ABI call params for the DMLChain smart contract using the adminBulkPayoutRewards(address[],uint64[])uint64 ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      adminBulkPayoutRewards(params: CallParams<DmlChainArgs['obj']['adminBulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['adminBulkPayoutRewards(address[],uint64[])uint64']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'adminBulkPayoutRewards(address[],uint64[])uint64' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.addresses, params.args.rewards],
+        }
+      },
+      /**
+       * Constructs delete ABI call params for the DMLChain smart contract using the deleteApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      deleteApplication(params: CallParams<DmlChainArgs['obj']['deleteApplication()void'] | DmlChainArgs['tuple']['deleteApplication()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'deleteApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the assignRewardPool(uint64,pay)uint64 ABI method
    *
@@ -537,6 +699,198 @@ export abstract class DmlChainParamsFactory {
 }
 
 /**
+ * A factory to create and deploy one or more instance of the DMLChain smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class DmlChainFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `DmlChainFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new DmlChainClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new DmlChainClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the DMLChain smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: DmlChainDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? DmlChainParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (DmlChainCreateCallParams & { args: Uint8Array[] }) : undefined,
+      updateParams: params.updateParams?.method ? DmlChainParamsFactory.update._resolveByMethod(params.updateParams) : params.updateParams ? params.updateParams as (DmlChainUpdateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? DmlChainParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (DmlChainDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new DmlChainClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DMLChain smart contract using the createApplication(string)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<DmlChainArgs['obj']['createApplication(string)void'] | DmlChainArgs['tuple']['createApplication(string)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(DmlChainParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployUpdate methods
+     */
+    deployUpdate: {
+      /**
+       * Updates an existing instance of the DMLChain smart contract using the updateApplication(string)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployUpdate params
+       */
+      updateApplication: (params: CallParams<DmlChainArgs['obj']['updateApplication(string)void'] | DmlChainArgs['tuple']['updateApplication(string)void']> & AppClientCompilationParams) => {
+        return this.appFactory.params.deployUpdate(DmlChainParamsFactory.update.updateApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the DMLChain smart contract using the bulkPayoutRewards(address[],uint64[])uint64 ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      bulkPayoutRewards: (params: CallParams<DmlChainArgs['obj']['bulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['bulkPayoutRewards(address[],uint64[])uint64']>) => {
+        return this.appFactory.params.deployDelete(DmlChainParamsFactory.delete.bulkPayoutRewards(params))
+      },
+      /**
+       * Deletes an existing instance of the DMLChain smart contract using the adminBulkPayoutRewards(address[],uint64[])uint64 ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      adminBulkPayoutRewards: (params: CallParams<DmlChainArgs['obj']['adminBulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['adminBulkPayoutRewards(address[],uint64[])uint64']>) => {
+        return this.appFactory.params.deployDelete(DmlChainParamsFactory.delete.adminBulkPayoutRewards(params))
+      },
+      /**
+       * Deletes an existing instance of the DMLChain smart contract using the deleteApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      deleteApplication: (params: CallParams<DmlChainArgs['obj']['deleteApplication()void'] | DmlChainArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(DmlChainParamsFactory.delete.deleteApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DMLChain smart contract using the createApplication(string)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<DmlChainArgs['obj']['createApplication(string)void'] | DmlChainArgs['tuple']['createApplication(string)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(DmlChainParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the DMLChain smart contract using an ABI method call using the createApplication(string)void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<DmlChainArgs['obj']['createApplication(string)void'] | DmlChainArgs['tuple']['createApplication(string)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(DmlChainParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | DmlChainReturns['createApplication(string)void']) }, appClient: new DmlChainClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
+/**
  * A client to make calls to the DMLChain smart contract
  */
 export class DmlChainClient {
@@ -623,6 +977,58 @@ export class DmlChainClient {
    * Get parameters to create transactions for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
    */
   readonly params = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the DMLChain smart contract using the `updateApplication(string)void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update params
+       */
+      updateApplication: (params: CallParams<DmlChainArgs['obj']['updateApplication(string)void'] | DmlChainArgs['tuple']['updateApplication(string)void']> & AppClientCompilationParams) => {
+        return this.appClient.params.update(DmlChainParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the DMLChain smart contract using the `bulkPayoutRewards(address[],uint64[])uint64` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      bulkPayoutRewards: (params: CallParams<DmlChainArgs['obj']['bulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['bulkPayoutRewards(address[],uint64[])uint64']>) => {
+        return this.appClient.params.delete(DmlChainParamsFactory.delete.bulkPayoutRewards(params))
+      },
+
+      /**
+       * Deletes an existing instance of the DMLChain smart contract using the `adminBulkPayoutRewards(address[],uint64[])uint64` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      adminBulkPayoutRewards: (params: CallParams<DmlChainArgs['obj']['adminBulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['adminBulkPayoutRewards(address[],uint64[])uint64']>) => {
+        return this.appClient.params.delete(DmlChainParamsFactory.delete.adminBulkPayoutRewards(params))
+      },
+
+      /**
+       * Deletes an existing instance of the DMLChain smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      deleteApplication: (params: CallParams<DmlChainArgs['obj']['deleteApplication()void'] | DmlChainArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.params.delete(DmlChainParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the DMLChain smart contract.
      *
@@ -770,6 +1176,58 @@ export class DmlChainClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the DMLChain smart contract using the `updateApplication(string)void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update transaction
+       */
+      updateApplication: (params: CallParams<DmlChainArgs['obj']['updateApplication(string)void'] | DmlChainArgs['tuple']['updateApplication(string)void']> & AppClientCompilationParams) => {
+        return this.appClient.createTransaction.update(DmlChainParamsFactory.update.updateApplication(params))
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the DMLChain smart contract using the `bulkPayoutRewards(address[],uint64[])uint64` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      bulkPayoutRewards: (params: CallParams<DmlChainArgs['obj']['bulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['bulkPayoutRewards(address[],uint64[])uint64']>) => {
+        return this.appClient.createTransaction.delete(DmlChainParamsFactory.delete.bulkPayoutRewards(params))
+      },
+
+      /**
+       * Deletes an existing instance of the DMLChain smart contract using the `adminBulkPayoutRewards(address[],uint64[])uint64` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      adminBulkPayoutRewards: (params: CallParams<DmlChainArgs['obj']['adminBulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['adminBulkPayoutRewards(address[],uint64[])uint64']>) => {
+        return this.appClient.createTransaction.delete(DmlChainParamsFactory.delete.adminBulkPayoutRewards(params))
+      },
+
+      /**
+       * Deletes an existing instance of the DMLChain smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      deleteApplication: (params: CallParams<DmlChainArgs['obj']['deleteApplication()void'] | DmlChainArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(DmlChainParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the DMLChain smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -915,6 +1373,62 @@ export class DmlChainClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available update methods
+     */
+    update: {
+      /**
+       * Updates an existing instance of the DMLChain smart contract using the `updateApplication(string)void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The update result
+       */
+      updateApplication: async (params: CallParams<DmlChainArgs['obj']['updateApplication(string)void'] | DmlChainArgs['tuple']['updateApplication(string)void']> & AppClientCompilationParams & SendParams) => {
+        const result = await this.appClient.send.update(DmlChainParamsFactory.update.updateApplication(params))
+        return {...result, return: result.return as unknown as (undefined | DmlChainReturns['updateApplication(string)void'])}
+      },
+
+    },
+
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the DMLChain smart contract using the `bulkPayoutRewards(address[],uint64[])uint64` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      bulkPayoutRewards: async (params: CallParams<DmlChainArgs['obj']['bulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['bulkPayoutRewards(address[],uint64[])uint64']> & SendParams) => {
+        const result = await this.appClient.send.delete(DmlChainParamsFactory.delete.bulkPayoutRewards(params))
+        return {...result, return: result.return as unknown as (undefined | DmlChainReturns['bulkPayoutRewards(address[],uint64[])uint64'])}
+      },
+
+      /**
+       * Deletes an existing instance of the DMLChain smart contract using the `adminBulkPayoutRewards(address[],uint64[])uint64` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      adminBulkPayoutRewards: async (params: CallParams<DmlChainArgs['obj']['adminBulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['adminBulkPayoutRewards(address[],uint64[])uint64']> & SendParams) => {
+        const result = await this.appClient.send.delete(DmlChainParamsFactory.delete.adminBulkPayoutRewards(params))
+        return {...result, return: result.return as unknown as (undefined | DmlChainReturns['adminBulkPayoutRewards(address[],uint64[])uint64'])}
+      },
+
+      /**
+       * Deletes an existing instance of the DMLChain smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      deleteApplication: async (params: CallParams<DmlChainArgs['obj']['deleteApplication()void'] | DmlChainArgs['tuple']['deleteApplication()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(DmlChainParamsFactory.delete.deleteApplication(params))
+        return {...result, return: result.return as unknown as (undefined | DmlChainReturns['deleteApplication()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the DMLChain smart contract.
      *
@@ -1263,6 +1777,34 @@ export class DmlChainClient {
         resultMappers.push(undefined)
         return this
       },
+      get update() {
+        return {
+          updateApplication: (params: CallParams<DmlChainArgs['obj']['updateApplication(string)void'] | DmlChainArgs['tuple']['updateApplication(string)void']> & AppClientCompilationParams) => {
+            promiseChain = promiseChain.then(async () => composer.addAppUpdateMethodCall(await client.params.update.updateApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
+      get delete() {
+        return {
+          bulkPayoutRewards: (params: CallParams<DmlChainArgs['obj']['bulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['bulkPayoutRewards(address[],uint64[])uint64']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.bulkPayoutRewards(params)))
+            resultMappers.push((v) => client.decodeReturnValue('bulkPayoutRewards(address[],uint64[])uint64', v))
+            return this
+          },
+          adminBulkPayoutRewards: (params: CallParams<DmlChainArgs['obj']['adminBulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['adminBulkPayoutRewards(address[],uint64[])uint64']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.adminBulkPayoutRewards(params)))
+            resultMappers.push((v) => client.decodeReturnValue('adminBulkPayoutRewards(address[],uint64[])uint64', v))
+            return this
+          },
+          deleteApplication: (params: CallParams<DmlChainArgs['obj']['deleteApplication()void'] | DmlChainArgs['tuple']['deleteApplication()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.deleteApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the DMLChain contract
        */
@@ -1414,6 +1956,50 @@ export type DmlChainComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   adminDeleteApplication(params?: CallParams<DmlChainArgs['obj']['adminDeleteApplication()void'] | DmlChainArgs['tuple']['adminDeleteApplication()void']>): DmlChainComposer<[...TReturns, DmlChainReturns['adminDeleteApplication()void'] | undefined]>
+
+  /**
+   * Gets available update methods
+   */
+  readonly update: {
+    /**
+     * Updates an existing instance of the DMLChain smart contract using the updateApplication(string)void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    updateApplication(params?: CallParams<DmlChainArgs['obj']['updateApplication(string)void'] | DmlChainArgs['tuple']['updateApplication(string)void']>): DmlChainComposer<[...TReturns, DmlChainReturns['updateApplication(string)void'] | undefined]>
+  }
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the DMLChain smart contract using the bulkPayoutRewards(address[],uint64[])uint64 ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    bulkPayoutRewards(params?: CallParams<DmlChainArgs['obj']['bulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['bulkPayoutRewards(address[],uint64[])uint64']>): DmlChainComposer<[...TReturns, DmlChainReturns['bulkPayoutRewards(address[],uint64[])uint64'] | undefined]>
+    /**
+     * Deletes an existing instance of the DMLChain smart contract using the adminBulkPayoutRewards(address[],uint64[])uint64 ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    adminBulkPayoutRewards(params?: CallParams<DmlChainArgs['obj']['adminBulkPayoutRewards(address[],uint64[])uint64'] | DmlChainArgs['tuple']['adminBulkPayoutRewards(address[],uint64[])uint64']>): DmlChainComposer<[...TReturns, DmlChainReturns['adminBulkPayoutRewards(address[],uint64[])uint64'] | undefined]>
+    /**
+     * Deletes an existing instance of the DMLChain smart contract using the deleteApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    deleteApplication(params?: CallParams<DmlChainArgs['obj']['deleteApplication()void'] | DmlChainArgs['tuple']['deleteApplication()void']>): DmlChainComposer<[...TReturns, DmlChainReturns['deleteApplication()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the DMLChain smart contract.
