@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ContextRegistry","structs":{},"methods":[{"name":"create_context","args":[{"type":"string","name":"ipfs_hash"},{"type":"string","name":"title"},{"type":"uint64","name":"price"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create a new AI context","events":[],"recommendations":{}},{"name":"get_context_price","args":[{"type":"string","name":"context_id"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get context price - simplified implementation","events":[],"recommendations":{}},{"name":"purchase_context","args":[{"type":"string","name":"context_id"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Purchase access to a context","events":[],"recommendations":{}},{"name":"get_platform_fee_percentage","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get platform fee percentage","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Minimal production-ready smart contract for AI context registry","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[50,74,108,132],"errorMessage":"OnCompletion is not NoOp"},{"pc":[180],"errorMessage":"Price too low"},{"pc":[168],"errorMessage":"can only call when creating"},{"pc":[53,77,111,135],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ContextRegistry","structs":{},"methods":[{"name":"create_context","args":[{"type":"string","name":"ipfs_hash"},{"type":"string","name":"title"},{"type":"uint64","name":"price"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create a new AI context","events":[],"recommendations":{}},{"name":"get_context_price","args":[{"type":"string","name":"context_id"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get context price - simplified implementation","events":[],"recommendations":{}},{"name":"purchase_context","args":[{"type":"string","name":"context_id"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Purchase access to a context","events":[],"recommendations":{}},{"name":"get_platform_fee_percentage","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get platform fee percentage","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Minimal production-ready smart contract for AI context registry","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[50,74,108,132],"errorMessage":"OnCompletion is not NoOp"},{"pc":[180],"errorMessage":"Price too low"},{"pc":[168],"errorMessage":"can only call when creating"},{"pc":[53,77,111,135],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udGV4dF9yZWdpc3RyeS9jb250cmFjdC5weTo1CiAgICAvLyBjbGFzcyBDb250ZXh0UmVnaXN0cnkoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0A5CiAgICBwdXNoYnl0ZXNzIDB4MTMwZjkxZmMgMHhkOTdkN2YyMSAweDYyMGJiYWUwIDB4ZTI5NzQ5ZjggLy8gbWV0aG9kICJjcmVhdGVfY29udGV4dChzdHJpbmcsc3RyaW5nLHVpbnQ2NClzdHJpbmciLCBtZXRob2QgImdldF9jb250ZXh0X3ByaWNlKHN0cmluZyl1aW50NjQiLCBtZXRob2QgInB1cmNoYXNlX2NvbnRleHQoc3RyaW5nKXN0cmluZyIsIG1ldGhvZCAiZ2V0X3BsYXRmb3JtX2ZlZV9wZXJjZW50YWdlKCl1aW50NjQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX2NyZWF0ZV9jb250ZXh0X3JvdXRlQDMgbWFpbl9nZXRfY29udGV4dF9wcmljZV9yb3V0ZUA0IG1haW5fcHVyY2hhc2VfY29udGV4dF9yb3V0ZUA1IG1haW5fZ2V0X3BsYXRmb3JtX2ZlZV9wZXJjZW50YWdlX3JvdXRlQDYKCm1haW5fYWZ0ZXJfaWZfZWxzZUAxMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jb250ZXh0X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIENvbnRleHRSZWdpc3RyeShBUkM0Q29udHJhY3QpOgogICAgcHVzaGludCAwIC8vIDAKICAgIHJldHVybgoKbWFpbl9nZXRfcGxhdGZvcm1fZmVlX3BlcmNlbnRhZ2Vfcm91dGVANjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jb250ZXh0X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjMzCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwMGZhCiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fcHVyY2hhc2VfY29udGV4dF9yb3V0ZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL2NvbnRleHRfcmVnaXN0cnkvY29udHJhY3QucHk6MjgKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NTAwMTA3MDc1NzI2MzY4NjE3MzY1NWY3Mzc1NjM2MzY1NzM3MwogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldF9jb250ZXh0X3ByaWNlX3JvdXRlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udGV4dF9yZWdpc3RyeS9jb250cmFjdC5weToyMwogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMTM4OAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2NyZWF0ZV9jb250ZXh0X3JvdXRlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udGV4dF9yZWdpc3RyeS9jb250cmFjdC5weTo4CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL2NvbnRleHRfcmVnaXN0cnkvY29udHJhY3QucHk6NQogICAgLy8gY2xhc3MgQ29udGV4dFJlZ2lzdHJ5KEFSQzRDb250cmFjdCk6CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udGV4dF9yZWdpc3RyeS9jb250cmFjdC5weTo4CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGNhbGxzdWIgY3JlYXRlX2NvbnRleHQKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9iYXJlX3JvdXRpbmdAOToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jb250ZXh0X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIENvbnRleHRSZWdpc3RyeShBUkM0Q29udHJhY3QpOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAxMwogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuY29udGV4dF9yZWdpc3RyeS5jb250cmFjdC5Db250ZXh0UmVnaXN0cnkuY3JlYXRlX2NvbnRleHQoaXBmc19oYXNoOiBieXRlcywgdGl0bGU6IGJ5dGVzLCBwcmljZTogdWludDY0KSAtPiBieXRlczoKY3JlYXRlX2NvbnRleHQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udGV4dF9yZWdpc3RyeS9jb250cmFjdC5weTo4LTE0CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIC8vIGRlZiBjcmVhdGVfY29udGV4dCgKICAgIC8vICAgICBzZWxmLAogICAgLy8gICAgIGlwZnNfaGFzaDogU3RyaW5nLAogICAgLy8gICAgIHRpdGxlOiBTdHJpbmcsCiAgICAvLyAgICAgcHJpY2U6IFVJbnQ2NAogICAgLy8gKSAtPiBTdHJpbmc6CiAgICBwcm90byAzIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jb250ZXh0X3JlZ2lzdHJ5L2NvbnRyYWN0LnB5OjE3LTE4CiAgICAvLyAjIEJhc2ljIHZhbGlkYXRpb24KICAgIC8vIGFzc2VydCBwcmljZSA+PSBVSW50NjQoMTAwMCksICJQcmljZSB0b28gbG93IgogICAgZnJhbWVfZGlnIC0xCiAgICBwdXNoaW50IDEwMDAgLy8gMTAwMAogICAgPj0KICAgIGFzc2VydCAvLyBQcmljZSB0b28gbG93CiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udGV4dF9yZWdpc3RyeS9jb250cmFjdC5weToyMC0yMQogICAgLy8gIyBSZXR1cm4gYSBzaW1wbGUgY29udGV4dCBJRAogICAgLy8gcmV0dXJuIFN0cmluZygiY3R4X2NyZWF0ZWQiKQogICAgcHVzaGJ5dGVzIDB4MDAwYjYzNzQ3ODVmNjM3MjY1NjE3NDY1NjQKICAgIHJldHN1Ygo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CiABATEbQQCXggQEEw+R/ATZfX8hBGILuuAE4pdJ+DYaAI4EAFUAPQAbAAOBAEMxGRREMRhEgAwVH3x1AAAAAAAAAPqwIkMxGRREMRhEgBYVH3x1ABBwdXJjaGFzZV9zdWNjZXNzsCJDMRkURDEYRIAMFR98dQAAAAAAABOIsCJDMRkURDEYRDYaATYaAjYaAxeIABaABBUffHVMULAiQzEZQP+HMRgURCJDigMBi/+B6AcPRIANAAtjdHhfY3JlYXRlZIk=","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -162,6 +162,21 @@ export type MethodArgs<TSignature extends ContextRegistrySignatures> = ContextRe
 export type MethodReturn<TSignature extends ContextRegistrySignatures> = ContextRegistryTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ContextRegistryCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ContextRegistryDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ContextRegistryCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ContextRegistry smart contract
@@ -229,6 +244,147 @@ export abstract class ContextRegistryParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ContextRegistry smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ContextRegistryFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ContextRegistryFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ContextRegistryClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ContextRegistryClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ContextRegistry smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ContextRegistryDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new ContextRegistryClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ContextRegistry smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ContextRegistry smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ContextRegistry smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new ContextRegistryClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ContextRegistry smart contract
  */

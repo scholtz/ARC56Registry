@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"LicenseManager","structs":{},"methods":[{"name":"create_license","args":[{"type":"string","name":"context_id"},{"type":"uint64","name":"license_type"},{"type":"uint64","name":"price"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create a new license for a context","events":[],"recommendations":{}},{"name":"purchase_license","args":[{"type":"string","name":"license_id"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Purchase a license","events":[],"recommendations":{}},{"name":"get_license_price","args":[{"type":"string","name":"license_id"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get license price - simplified implementation","events":[],"recommendations":{}},{"name":"get_platform_fee_percentage","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get platform fee percentage","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Minimal production-ready smart contract for license management","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[50,74,98,133],"errorMessage":"OnCompletion is not NoOp"},{"pc":[182],"errorMessage":"Price too low"},{"pc":[170],"errorMessage":"can only call when creating"},{"pc":[53,77,101,136],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"LicenseManager","structs":{},"methods":[{"name":"create_license","args":[{"type":"string","name":"context_id"},{"type":"uint64","name":"license_type"},{"type":"uint64","name":"price"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create a new license for a context","events":[],"recommendations":{}},{"name":"purchase_license","args":[{"type":"string","name":"license_id"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Purchase a license","events":[],"recommendations":{}},{"name":"get_license_price","args":[{"type":"string","name":"license_id"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get license price - simplified implementation","events":[],"recommendations":{}},{"name":"get_platform_fee_percentage","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get platform fee percentage","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Minimal production-ready smart contract for license management","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[50,74,98,133],"errorMessage":"OnCompletion is not NoOp"},{"pc":[182],"errorMessage":"Price too low"},{"pc":[170],"errorMessage":"can only call when creating"},{"pc":[53,77,101,136],"errorMessage":"can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvbGljZW5zZV9tYW5hZ2VyL2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIExpY2Vuc2VNYW5hZ2VyKEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9iYXJlX3JvdXRpbmdAOQogICAgcHVzaGJ5dGVzcyAweDg0NjZiODJlIDB4YTJhZTM2YTQgMHg4MTBhYjIyYyAweGUyOTc0OWY4IC8vIG1ldGhvZCAiY3JlYXRlX2xpY2Vuc2Uoc3RyaW5nLHVpbnQ2NCx1aW50NjQpc3RyaW5nIiwgbWV0aG9kICJwdXJjaGFzZV9saWNlbnNlKHN0cmluZylzdHJpbmciLCBtZXRob2QgImdldF9saWNlbnNlX3ByaWNlKHN0cmluZyl1aW50NjQiLCBtZXRob2QgImdldF9wbGF0Zm9ybV9mZWVfcGVyY2VudGFnZSgpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVfbGljZW5zZV9yb3V0ZUAzIG1haW5fcHVyY2hhc2VfbGljZW5zZV9yb3V0ZUA0IG1haW5fZ2V0X2xpY2Vuc2VfcHJpY2Vfcm91dGVANSBtYWluX2dldF9wbGF0Zm9ybV9mZWVfcGVyY2VudGFnZV9yb3V0ZUA2CgptYWluX2FmdGVyX2lmX2Vsc2VAMTM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbGljZW5zZV9tYW5hZ2VyL2NvbnRyYWN0LnB5OjUKICAgIC8vIGNsYXNzIExpY2Vuc2VNYW5hZ2VyKEFSQzRDb250cmFjdCk6CiAgICBwdXNoaW50IDAgLy8gMAogICAgcmV0dXJuCgptYWluX2dldF9wbGF0Zm9ybV9mZWVfcGVyY2VudGFnZV9yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL2xpY2Vuc2VfbWFuYWdlci9jb250cmFjdC5weTozMwogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDBmYQogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2dldF9saWNlbnNlX3ByaWNlX3JvdXRlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbGljZW5zZV9tYW5hZ2VyL2NvbnRyYWN0LnB5OjI4CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwYmI4CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fcHVyY2hhc2VfbGljZW5zZV9yb3V0ZUA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2xpY2Vuc2VfbWFuYWdlci9jb250cmFjdC5weToyMwogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAxMTZjNjk2MzY1NmU3MzY1NWY3MDc1NzI2MzY4NjE3MzY1NjQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9jcmVhdGVfbGljZW5zZV9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL2xpY2Vuc2VfbWFuYWdlci9jb250cmFjdC5weTo4CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gc21hcnRfY29udHJhY3RzL2xpY2Vuc2VfbWFuYWdlci9jb250cmFjdC5weTo1CiAgICAvLyBjbGFzcyBMaWNlbnNlTWFuYWdlcihBUkM0Q29udHJhY3QpOgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL2xpY2Vuc2VfbWFuYWdlci9jb250cmFjdC5weTo4CiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGNhbGxzdWIgY3JlYXRlX2xpY2Vuc2UKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9iYXJlX3JvdXRpbmdAOToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9saWNlbnNlX21hbmFnZXIvY29udHJhY3QucHk6NQogICAgLy8gY2xhc3MgTGljZW5zZU1hbmFnZXIoQVJDNENvbnRyYWN0KToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTMKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmxpY2Vuc2VfbWFuYWdlci5jb250cmFjdC5MaWNlbnNlTWFuYWdlci5jcmVhdGVfbGljZW5zZShjb250ZXh0X2lkOiBieXRlcywgbGljZW5zZV90eXBlOiB1aW50NjQsIHByaWNlOiB1aW50NjQpIC0+IGJ5dGVzOgpjcmVhdGVfbGljZW5zZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9saWNlbnNlX21hbmFnZXIvY29udHJhY3QucHk6OC0xNAogICAgLy8gQGFiaW1ldGhvZCgpCiAgICAvLyBkZWYgY3JlYXRlX2xpY2Vuc2UoCiAgICAvLyAgICAgc2VsZiwKICAgIC8vICAgICBjb250ZXh0X2lkOiBTdHJpbmcsCiAgICAvLyAgICAgbGljZW5zZV90eXBlOiBVSW50NjQsCiAgICAvLyAgICAgcHJpY2U6IFVJbnQ2NAogICAgLy8gKSAtPiBTdHJpbmc6CiAgICBwcm90byAzIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9saWNlbnNlX21hbmFnZXIvY29udHJhY3QucHk6MTctMTgKICAgIC8vICMgQmFzaWMgdmFsaWRhdGlvbgogICAgLy8gYXNzZXJ0IHByaWNlID49IFVJbnQ2NCgxMDAwKSwgIlByaWNlIHRvbyBsb3ciCiAgICBmcmFtZV9kaWcgLTEKICAgIHB1c2hpbnQgMTAwMCAvLyAxMDAwCiAgICA+PQogICAgYXNzZXJ0IC8vIFByaWNlIHRvbyBsb3cKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9saWNlbnNlX21hbmFnZXIvY29udHJhY3QucHk6MjAtMjEKICAgIC8vICMgUmV0dXJuIGEgc2ltcGxlIGxpY2Vuc2UgSUQKICAgIC8vIHJldHVybiBTdHJpbmcoImxpY19jcmVhdGVkIikKICAgIHB1c2hieXRlcyAweDAwMGI2YzY5NjM1ZjYzNzI2NTYxNzQ2NTY0CiAgICByZXRzdWIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CiABATEbQQCZggQEhGa4LgSirjakBIEKsiwE4pdJ+DYaAI4EAFYAMwAbAAOBAEMxGRREMRhEgAwVH3x1AAAAAAAAAPqwIkMxGRREMRhEgAwVH3x1AAAAAAAAC7iwIkMxGRREMRhEgBcVH3x1ABFsaWNlbnNlX3B1cmNoYXNlZLAiQzEZFEQxGEQ2GgE2GgIXNhoDF4gAFoAEFR98dUxQsCJDMRlA/4UxGBREIkOKAwGL/4HoBw9EgA0AC2xpY19jcmVhdGVkiQ==","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -162,6 +162,21 @@ export type MethodArgs<TSignature extends LicenseManagerSignatures> = LicenseMan
 export type MethodReturn<TSignature extends LicenseManagerSignatures> = LicenseManagerTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type LicenseManagerCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type LicenseManagerDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: LicenseManagerCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the LicenseManager smart contract
@@ -229,6 +244,147 @@ export abstract class LicenseManagerParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the LicenseManager smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class LicenseManagerFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `LicenseManagerFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new LicenseManagerClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new LicenseManagerClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the LicenseManager smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: LicenseManagerDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new LicenseManagerClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the LicenseManager smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the LicenseManager smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the LicenseManager smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new LicenseManagerClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the LicenseManager smart contract
  */
