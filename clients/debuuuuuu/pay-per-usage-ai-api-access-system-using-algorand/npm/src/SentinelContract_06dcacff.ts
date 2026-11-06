@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"SentinelContract","structs":{},"methods":[{"name":"create_application","args":[{"type":"uint64","name":"min_amount"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Set minimum payment (microAlgos) on deploy.","events":[],"recommendations":{}},{"name":"purchase","args":[{"type":"pay","name":"pay"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Process a valid top-up: Payment txn must be in the atomic group (reference arg).","events":[],"recommendations":{}},{"name":"read_stats","args":[],"returns":{"type":"(uint64,uint64,uint64)"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Return (min_payment, total_purchases, total_algo_received_micro).","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Accepts grouped Payment + App call; tracks purchases and ALGO received in global state.","networks":{},"state":{"schema":{"global":{"ints":3,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"min_payment":{"keyType":"AVMString","valueType":"AVMUint64","key":"bWluX3BheW1lbnQ="},"total_purchases":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfcHVyY2hhc2Vz"},"total_algo_received":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfYWxnb19yZWNlaXZlZA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[161],"errorMessage":"below minimum"},{"pc":[157,184],"errorMessage":"check self.min_payment exists"},{"pc":[174,194],"errorMessage":"check self.total_algo_received exists"},{"pc":[165,189],"errorMessage":"check self.total_purchases exists"},{"pc":[122],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[151],"errorMessage":"receiver must be app account"},{"pc":[144],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"SentinelContract","structs":{},"methods":[{"name":"create_application","args":[{"type":"uint64","name":"min_amount"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Set minimum payment (microAlgos) on deploy.","events":[],"recommendations":{}},{"name":"purchase","args":[{"type":"pay","name":"pay"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Process a valid top-up: Payment txn must be in the atomic group (reference arg).","events":[],"recommendations":{}},{"name":"read_stats","args":[],"returns":{"type":"(uint64,uint64,uint64)"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Return (min_payment, total_purchases, total_algo_received_micro).","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"Accepts grouped Payment + App call; tracks purchases and ALGO received in global state.","networks":{},"state":{"schema":{"global":{"ints":3,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"min_payment":{"keyType":"AVMString","valueType":"AVMUint64","key":"bWluX3BheW1lbnQ="},"total_purchases":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfcHVyY2hhc2Vz"},"total_algo_received":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfYWxnb19yZWNlaXZlZA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[161],"errorMessage":"below minimum"},{"pc":[157,184],"errorMessage":"check self.min_payment exists"},{"pc":[174,194],"errorMessage":"check self.total_algo_received exists"},{"pc":[165,189],"errorMessage":"check self.total_purchases exists"},{"pc":[122],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[151],"errorMessage":"receiver must be app account"},{"pc":[144],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEKICAgIGJ5dGVjYmxvY2sgInRvdGFsX3B1cmNoYXNlcyIgInRvdGFsX2FsZ29fcmVjZWl2ZWQiICJtaW5fcGF5bWVudCIKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIHNlbnRpbmVsX2NvbnRyYWN0LnB5OjE4CiAgICAvLyBzZWxmLm1pbl9wYXltZW50ID0gVUludDY0KDApCiAgICBieXRlY18yIC8vICJtaW5fcGF5bWVudCIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc2VudGluZWxfY29udHJhY3QucHk6MTkKICAgIC8vIHNlbGYudG90YWxfcHVyY2hhc2VzID0gVUludDY0KDApCiAgICBieXRlY18wIC8vICJ0b3RhbF9wdXJjaGFzZXMiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNlbnRpbmVsX2NvbnRyYWN0LnB5OjIwCiAgICAvLyBzZWxmLnRvdGFsX2FsZ29fcmVjZWl2ZWQgPSBVSW50NjQoMCkKICAgIGJ5dGVjXzEgLy8gInRvdGFsX2FsZ29fcmVjZWl2ZWQiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKCm1haW5fYWZ0ZXJfaWZfZWxzZUAyOgogICAgLy8gc2VudGluZWxfY29udHJhY3QucHk6MTEtMTQKICAgIC8vIGNsYXNzIFNlbnRpbmVsQ29udHJhY3QoCiAgICAvLyAgICAgQVJDNENvbnRyYWN0LAogICAgLy8gICAgIHN0YXRlX3RvdGFscz1TdGF0ZVRvdGFscyhnbG9iYWxfdWludHM9MywgZ2xvYmFsX2J5dGVzPTApLAogICAgLy8gKToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BAOAogICAgcHVzaGJ5dGVzcyAweGEzOTJhZTgyIDB4YzY5ZDdjMTIgLy8gbWV0aG9kICJwdXJjaGFzZShwYXkpdm9pZCIsIG1ldGhvZCAicmVhZF9zdGF0cygpKHVpbnQ2NCx1aW50NjQsdWludDY0KSIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHB1cmNoYXNlIHJlYWRfc3RhdHMKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEA4OgogICAgLy8gc2VudGluZWxfY29udHJhY3QucHk6MTEtMTQKICAgIC8vIGNsYXNzIFNlbnRpbmVsQ29udHJhY3QoCiAgICAvLyAgICAgQVJDNENvbnRyYWN0LAogICAgLy8gICAgIHN0YXRlX3RvdGFscz1TdGF0ZVRvdGFscyhnbG9iYWxfdWludHM9MywgZ2xvYmFsX2J5dGVzPTApLAogICAgLy8gKToKICAgIHB1c2hieXRlcyAweGEwM2I4MWQyIC8vIG1ldGhvZCAiY3JlYXRlX2FwcGxpY2F0aW9uKHVpbnQ2NCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlX2FwcGxpY2F0aW9uCiAgICBlcnIKCgovLyBzZW50aW5lbF9jb250cmFjdC5TZW50aW5lbENvbnRyYWN0LmNyZWF0ZV9hcHBsaWNhdGlvbltyb3V0aW5nXSgpIC0+IHZvaWQ6CmNyZWF0ZV9hcHBsaWNhdGlvbjoKICAgIC8vIHNlbnRpbmVsX2NvbnRyYWN0LnB5OjIyCiAgICAvLyBAYXJjNC5hYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICAvLyBzZW50aW5lbF9jb250cmFjdC5weToyNQogICAgLy8gc2VsZi5taW5fcGF5bWVudCA9IG1pbl9hbW91bnQubmF0aXZlCiAgICBidG9pCiAgICBieXRlY18yIC8vICJtaW5fcGF5bWVudCIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzZW50aW5lbF9jb250cmFjdC5weToyNgogICAgLy8gc2VsZi50b3RhbF9wdXJjaGFzZXMgPSBVSW50NjQoMCkKICAgIGJ5dGVjXzAgLy8gInRvdGFsX3B1cmNoYXNlcyIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc2VudGluZWxfY29udHJhY3QucHk6MjcKICAgIC8vIHNlbGYudG90YWxfYWxnb19yZWNlaXZlZCA9IFVJbnQ2NCgwKQogICAgYnl0ZWNfMSAvLyAidG90YWxfYWxnb19yZWNlaXZlZCIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc2VudGluZWxfY29udHJhY3QucHk6MjIKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChjcmVhdGU9InJlcXVpcmUiKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNlbnRpbmVsX2NvbnRyYWN0LlNlbnRpbmVsQ29udHJhY3QucHVyY2hhc2Vbcm91dGluZ10oKSAtPiB2b2lkOgpwdXJjaGFzZToKICAgIC8vIHNlbnRpbmVsX2NvbnRyYWN0LnB5OjI5CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzEgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18xIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgLy8gc2VudGluZWxfY29udHJhY3QucHk6MzIKICAgIC8vIGFzc2VydCBwYXkucmVjZWl2ZXIgPT0gR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywgInJlY2VpdmVyIG11c3QgYmUgYXBwIGFjY291bnQiCiAgICBkdXAKICAgIGd0eG5zIFJlY2VpdmVyCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgPT0KICAgIGFzc2VydCAvLyByZWNlaXZlciBtdXN0IGJlIGFwcCBhY2NvdW50CiAgICAvLyBzZW50aW5lbF9jb250cmFjdC5weTozMwogICAgLy8gYXNzZXJ0IHBheS5hbW91bnQgPj0gc2VsZi5taW5fcGF5bWVudCwgImJlbG93IG1pbmltdW0iCiAgICBndHhucyBBbW91bnQKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18yIC8vICJtaW5fcGF5bWVudCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5taW5fcGF5bWVudCBleGlzdHMKICAgIGRpZyAxCiAgICA8PQogICAgYXNzZXJ0IC8vIGJlbG93IG1pbmltdW0KICAgIC8vIHNlbnRpbmVsX2NvbnRyYWN0LnB5OjM0CiAgICAvLyBzZWxmLnRvdGFsX3B1cmNoYXNlcyArPSBVSW50NjQoMSkKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJ0b3RhbF9wdXJjaGFzZXMiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG90YWxfcHVyY2hhc2VzIGV4aXN0cwogICAgaW50Y18xIC8vIDEKICAgICsKICAgIGJ5dGVjXzAgLy8gInRvdGFsX3B1cmNoYXNlcyIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzZW50aW5lbF9jb250cmFjdC5weTozNQogICAgLy8gc2VsZi50b3RhbF9hbGdvX3JlY2VpdmVkICs9IHBheS5hbW91bnQKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJ0b3RhbF9hbGdvX3JlY2VpdmVkIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRvdGFsX2FsZ29fcmVjZWl2ZWQgZXhpc3RzCiAgICArCiAgICBieXRlY18xIC8vICJ0b3RhbF9hbGdvX3JlY2VpdmVkIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNlbnRpbmVsX2NvbnRyYWN0LnB5OjI5CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzZW50aW5lbF9jb250cmFjdC5TZW50aW5lbENvbnRyYWN0LnJlYWRfc3RhdHNbcm91dGluZ10oKSAtPiB2b2lkOgpyZWFkX3N0YXRzOgogICAgLy8gc2VudGluZWxfY29udHJhY3QucHk6NDEKICAgIC8vIGFyYzQuVUludDY0KHNlbGYubWluX3BheW1lbnQpLAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzIgLy8gIm1pbl9wYXltZW50IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLm1pbl9wYXltZW50IGV4aXN0cwogICAgaXRvYgogICAgLy8gc2VudGluZWxfY29udHJhY3QucHk6NDIKICAgIC8vIGFyYzQuVUludDY0KHNlbGYudG90YWxfcHVyY2hhc2VzKSwKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJ0b3RhbF9wdXJjaGFzZXMiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG90YWxfcHVyY2hhc2VzIGV4aXN0cwogICAgaXRvYgogICAgLy8gc2VudGluZWxfY29udHJhY3QucHk6NDMKICAgIC8vIGFyYzQuVUludDY0KHNlbGYudG90YWxfYWxnb19yZWNlaXZlZCksCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAidG90YWxfYWxnb19yZWNlaXZlZCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF9hbGdvX3JlY2VpdmVkIGV4aXN0cwogICAgaXRvYgogICAgLy8gc2VudGluZWxfY29udHJhY3QucHk6MzcKICAgIC8vIEBhcmM0LmFiaW1ldGhvZChyZWFkb25seT1UcnVlKQogICAgY292ZXIgMgogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyACAAEmAw90b3RhbF9wdXJjaGFzZXMTdG90YWxfYWxnb19yZWNlaXZlZAttaW5fcGF5bWVudDEYQAAJKiJnKCJnKSJnMRkURDEYQQAWggIEo5KuggTGnXwSNhoAjgIAJABSAIAEoDuB0jYaAI4BAAEANhoBSRWBCBJEFypMZygiZykiZyNDMRYjCUk4ECMSREk4BzIKEkQ4CCIqZURLAQ5EIihlRCMIKExnIillRAgpTGcjQyIqZUQWIihlRBYiKWVEFk4CUExQgAQVH3x1TFCwI0M=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -168,11 +168,57 @@ export type MethodReturn<TSignature extends SentinelContractSignatures> = Sentin
 export type GlobalKeysState = SentinelContractTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type SentinelContractCreateCallParams =
+  | Expand<CallParams<SentinelContractArgs['obj']['create_application(uint64)void'] | SentinelContractArgs['tuple']['create_application(uint64)void']> & {method: 'create_application'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<SentinelContractArgs['obj']['create_application(uint64)void'] | SentinelContractArgs['tuple']['create_application(uint64)void']> & {method: 'create_application(uint64)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type SentinelContractDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: SentinelContractCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the SentinelContract smart contract
  */
 export abstract class SentinelContractParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends SentinelContractCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create_application':
+          case 'create_application(uint64)void':
+            return SentinelContractParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the SentinelContract smart contract using the create_application(uint64)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<SentinelContractArgs['obj']['create_application(uint64)void'] | SentinelContractArgs['tuple']['create_application(uint64)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create_application(uint64)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.minAmount],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the purchase(pay)void ABI method
    *
@@ -205,6 +251,154 @@ export abstract class SentinelContractParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the SentinelContract smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class SentinelContractFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `SentinelContractFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new SentinelContractClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new SentinelContractClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the SentinelContract smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: SentinelContractDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? SentinelContractParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (SentinelContractCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new SentinelContractClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SentinelContract smart contract using the create_application(uint64)void ABI method.
+       *
+       * Set minimum payment (microAlgos) on deploy.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<SentinelContractArgs['obj']['create_application(uint64)void'] | SentinelContractArgs['tuple']['create_application(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(SentinelContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SentinelContract smart contract using the create_application(uint64)void ABI method.
+       *
+       * Set minimum payment (microAlgos) on deploy.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<SentinelContractArgs['obj']['create_application(uint64)void'] | SentinelContractArgs['tuple']['create_application(uint64)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(SentinelContractParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the SentinelContract smart contract using an ABI method call using the create_application(uint64)void ABI method.
+       *
+       * Set minimum payment (microAlgos) on deploy.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<SentinelContractArgs['obj']['create_application(uint64)void'] | SentinelContractArgs['tuple']['create_application(uint64)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(SentinelContractParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | SentinelContractReturns['create_application(uint64)void']) }, appClient: new SentinelContractClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the SentinelContract smart contract
  */
