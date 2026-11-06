@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ReferenceAccount","structs":{},"methods":[{"name":"getAccountBalance","args":[],"returns":{"type":"uint64","desc":"The balance of the account"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns the balance of the account","events":[],"recommendations":{}},{"name":"getAccountBalanceWithArgument","args":[{"type":"address","name":"account","desc":"The account to get the balance of"}],"returns":{"type":"uint64","desc":"The balance of the account"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns the balance of the account","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"A contract that demonstrates how to use resource usage in a contract using an account reference","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[16],"errorMessage":"OnCompletion must be NoOp"},{"pc":[49],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[86,100],"errorMessage":"account funded"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ReferenceAccount","structs":{},"methods":[{"name":"getAccountBalance","args":[],"returns":{"type":"uint64","desc":"The balance of the account"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns the balance of the account","events":[],"recommendations":{}},{"name":"getAccountBalanceWithArgument","args":[{"type":"address","name":"account","desc":"The account to get the balance of"}],"returns":{"type":"uint64","desc":"The balance of the account"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Returns the balance of the account","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"A contract that demonstrates how to use resource usage in a contract using an account reference","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[16],"errorMessage":"OnCompletion must be NoOp"},{"pc":[49],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[86,100],"errorMessage":"account funded"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBieXRlY2Jsb2NrIDB4MTUxZjdjNzUKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6OAogICAgLy8gZXhwb3J0IGRlZmF1bHQgY2xhc3MgUmVmZXJlbmNlQWNjb3VudCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA5CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzcyAweDU1NDQ4ZTY5IDB4NjEwMmUyMGIgLy8gbWV0aG9kICJnZXRBY2NvdW50QmFsYW5jZSgpdWludDY0IiwgbWV0aG9kICJnZXRBY2NvdW50QmFsYW5jZVdpdGhBcmd1bWVudChhZGRyZXNzKXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGdldEFjY291bnRCYWxhbmNlIGdldEFjY291bnRCYWxhbmNlV2l0aEFyZ3VtZW50CiAgICBlcnIKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDk6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjgKICAgIC8vIGV4cG9ydCBkZWZhdWx0IGNsYXNzIFJlZmVyZW5jZUFjY291bnQgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybiAvLyBvbiBlcnJvcjogT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcCAmJiBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKCgovLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjpSZWZlcmVuY2VBY2NvdW50LmdldEFjY291bnRCYWxhbmNlW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0QWNjb3VudEJhbGFuY2U6CiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjE2CiAgICAvLyBjb25zdCBhZGRyZXNzQnl0ZXMgPSBhZGRyZXNzLmJ5dGVzCiAgICBwdXNoYnl0ZXMgYmFzZTMyKFIzSjc2TURQRVhRRVdCVjJMUTZGTFE0UFlDNFFYTkhIUElMMkJYMktTRlU0V1VOSkpNREEpIC8vIGFkZHIgUjNKNzZNRFBFWFFFV0JWMkxRNkZMUTRQWUM0UVhOSEhQSUwyQlgyS1NGVTRXVU5KSk1EQlRMUk5FTQogICAgLy8gY29udHJhY3RzL1JlZmVyZW5jZUFjY291bnQvY29udHJhY3QuYWxnby50czoxOQogICAgLy8gcmV0dXJuIGFjY291bnQuYmFsYW5jZQogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RCYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6MTMtMTQKICAgIC8vIEByZWFkb25seQogICAgLy8gcHVibGljIGdldEFjY291bnRCYWxhbmNlKCkgewogICAgaXRvYgogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgcHVzaGludCAxIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6OlJlZmVyZW5jZUFjY291bnQuZ2V0QWNjb3VudEJhbGFuY2VXaXRoQXJndW1lbnRbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRBY2NvdW50QmFsYW5jZVdpdGhBcmd1bWVudDoKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6MjctMjgKICAgIC8vIEByZWFkb25seQogICAgLy8gcHVibGljIGdldEFjY291bnRCYWxhbmNlV2l0aEFyZ3VtZW50KGFjY291bnQ6IEFjY291bnQpIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIC8vIGNvbnRyYWN0cy9SZWZlcmVuY2VBY2NvdW50L2NvbnRyYWN0LmFsZ28udHM6MjkKICAgIC8vIHJldHVybiBhY2NvdW50LmJhbGFuY2UKICAgIGFjY3RfcGFyYW1zX2dldCBBY2N0QmFsYW5jZQogICAgYXNzZXJ0IC8vIGFjY291bnQgZnVuZGVkCiAgICAvLyBjb250cmFjdHMvUmVmZXJlbmNlQWNjb3VudC9jb250cmFjdC5hbGdvLnRzOjI3LTI4CiAgICAvLyBAcmVhZG9ubHkKICAgIC8vIHB1YmxpYyBnZXRBY2NvdW50QmFsYW5jZVdpdGhBcmd1bWVudChhY2NvdW50OiBBY2NvdW50KSB7CiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyYBBBUffHUxG0EAHTEZFEQxGESCAgRVRI5pBGEC4gs2GgCOAgAJADYAMRkUMRgUEEOAII7T/zBvJeBLBrpcPFXDj8C5C7Tneheg30qRactRqUsGcwBEFihMULCBAUM2GgFzAEQWKExQsIEBQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -149,6 +149,21 @@ export type MethodArgs<TSignature extends ReferenceAccountSignatures> = Referenc
 export type MethodReturn<TSignature extends ReferenceAccountSignatures> = ReferenceAccountTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ReferenceAccountCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ReferenceAccountDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ReferenceAccountCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ReferenceAccount smart contract
@@ -186,6 +201,147 @@ export abstract class ReferenceAccountParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ReferenceAccount smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ReferenceAccountFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ReferenceAccountFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ReferenceAccountClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ReferenceAccountClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ReferenceAccount smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ReferenceAccountDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new ReferenceAccountClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ReferenceAccount smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ReferenceAccount smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ReferenceAccount smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new ReferenceAccountClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ReferenceAccount smart contract
  */

@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"MyCounter","structs":{},"methods":[{"name":"opt_in","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["OptIn"]},"readonly":false,"events":[],"recommendations":{}},{"name":"increment_my_counter","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":1,"bytes":0}},"keys":{"global":{},"local":{"my_counter":{"keyType":"AVMString","valueType":"AVMUint64","key":"bXlfY291bnRlcg=="}},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[73],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[51],"errorMessage":"OnCompletion must be NoOp && can only call when not creating"},{"pc":[62],"errorMessage":"OnCompletion must be OptIn && can only call when not creating"},{"pc":[93,104],"errorMessage":"check self.my_counter exists for account"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"MyCounter","structs":{},"methods":[{"name":"opt_in","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["OptIn"]},"readonly":false,"events":[],"recommendations":{}},{"name":"increment_my_counter","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":1,"bytes":0}},"keys":{"global":{},"local":{"my_counter":{"keyType":"AVMString","valueType":"AVMUint64","key":"bXlfY291bnRlcg=="}},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[73],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[51],"errorMessage":"OnCompletion must be NoOp && can only call when not creating"},{"pc":[62],"errorMessage":"OnCompletion must be OptIn && can only call when not creating"},{"pc":[93,104],"errorMessage":"check self.my_counter exists for account"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAKICAgIGJ5dGVjYmxvY2sgIm15X2NvdW50ZXIiCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXBwL2NvbnRyYWN0LnB5OjIwCiAgICAvLyBjbGFzcyBNeUNvdW50ZXIoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDgKICAgIHB1c2hieXRlc3MgMHgzMGM2ZDU4YSAweDg1NmExMjAyIC8vIG1ldGhvZCAib3B0X2luKCl2b2lkIiwgbWV0aG9kICJpbmNyZW1lbnRfbXlfY291bnRlcigpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9vcHRfaW5fcm91dGVANSBtYWluX2luY3JlbWVudF9teV9jb3VudGVyX3JvdXRlQDYKICAgIGVycgoKbWFpbl9pbmNyZW1lbnRfbXlfY291bnRlcl9yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTozOAogICAgLy8gQGFiaW1ldGhvZAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcCAmJiBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBiIGluY3JlbWVudF9teV9jb3VudGVyCgptYWluX29wdF9pbl9yb3V0ZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weToyOQogICAgLy8gQGFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiT3B0SW4iXSkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGludGNfMCAvLyBPcHRJbgogICAgPT0KICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE9wdEluICYmIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGIgb3B0X2luCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDg6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybiAvLyBvbiBlcnJvcjogT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcCAmJiBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKCgovLyBzbWFydF9jb250cmFjdHMucmVmZXJlbmNlX2FjY291bnRfYXBwLmNvbnRyYWN0Lk15Q291bnRlci5vcHRfaW5bcm91dGluZ10oKSAtPiB2b2lkOgpvcHRfaW46CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXBwL2NvbnRyYWN0LnB5OjMxCiAgICAvLyBzZWxmLm15X2NvdW50ZXJbVHhuLnNlbmRlcl0gPSBVSW50NjQoMCkKICAgIHR4biBTZW5kZXIKICAgIGJ5dGVjXzAgLy8gIm15X2NvdW50ZXIiCiAgICBpbnRjXzEgLy8gMAogICAgYXBwX2xvY2FsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weToyOQogICAgLy8gQGFiaW1ldGhvZChhbGxvd19hY3Rpb25zPVsiT3B0SW4iXSkKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMucmVmZXJlbmNlX2FjY291bnRfYXBwLmNvbnRyYWN0Lk15Q291bnRlci5pbmNyZW1lbnRfbXlfY291bnRlcltyb3V0aW5nXSgpIC0+IHZvaWQ6CmluY3JlbWVudF9teV9jb3VudGVyOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hY2NvdW50X2FwcC9jb250cmFjdC5weTo0MAogICAgLy8gYXNzZXJ0IFR4bi5zZW5kZXIuaXNfb3B0ZWRfaW4oR2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25faWQpCiAgICB0eG4gU2VuZGVyCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uSUQKICAgIGFwcF9vcHRlZF9pbgogICAgYXNzZXJ0CiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FjY291bnRfYXBwL2NvbnRyYWN0LnB5OjQyCiAgICAvLyBzZWxmLm15X2NvdW50ZXJbVHhuLnNlbmRlcl0gKz0gMQogICAgdHhuIFNlbmRlcgogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgYnl0ZWNfMCAvLyAibXlfY291bnRlciIKICAgIGFwcF9sb2NhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLm15X2NvdW50ZXIgZXhpc3RzIGZvciBhY2NvdW50CiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgYnl0ZWNfMCAvLyAibXlfY291bnRlciIKICAgIHN3YXAKICAgIGFwcF9sb2NhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hcHAvY29udHJhY3QucHk6NDMKICAgIC8vIHJldHVybiBzZWxmLm15X2NvdW50ZXJbVHhuLnNlbmRlcl0KICAgIHR4biBTZW5kZXIKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18wIC8vICJteV9jb3VudGVyIgogICAgYXBwX2xvY2FsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYubXlfY291bnRlciBleGlzdHMgZm9yIGFjY291bnQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYWNjb3VudF9hcHAvY29udHJhY3QucHk6MzgKICAgIC8vIEBhYmltZXRob2QKICAgIGl0b2IKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyACAQAmAQpteV9jb3VudGVyMRtBACuCAgQwxtWKBIVqEgI2GgCOAgALAAEAMRkUMRgQREIAGjEZIhIxGBBEQgAIMRkUMRgUEEMxACgjZiJDMQAyCGFEMQBJIyhjRCIIKExmMQAjKGNEFoAEFR98dUxQsCJD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -154,6 +154,21 @@ export type MethodReturn<TSignature extends MyCounterSignatures> = MyCounterType
 export type LocalKeysState = MyCounterTypes['state']['local']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type MyCounterCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type MyCounterDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: MyCounterCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the MyCounter smart contract
@@ -195,6 +210,147 @@ export abstract class MyCounterParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the MyCounter smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class MyCounterFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `MyCounterFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new MyCounterClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new MyCounterClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the MyCounter smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: MyCounterDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new MyCounterClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MyCounter smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MyCounter smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MyCounter smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new MyCounterClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the MyCounter smart contract
  */

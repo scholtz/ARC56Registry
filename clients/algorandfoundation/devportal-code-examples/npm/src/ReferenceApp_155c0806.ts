@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ReferenceApp","structs":{},"methods":[{"name":"increment_via_inner","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"increment_via_inner_with_arg","args":[{"type":"uint64","name":"app"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Calls the increment method on another Counter app with a hardcoded app ID\n    @returns The incremented counter value from the inner call\n    ","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[26],"errorMessage":"OnCompletion must be NoOp"},{"pc":[59],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[88,124],"errorMessage":"application log value is not the result of an ABI return"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ReferenceApp","structs":{},"methods":[{"name":"increment_via_inner","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"increment_via_inner_with_arg","args":[{"type":"uint64","name":"app"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    Calls the increment method on another Counter app with a hardcoded app ID\n    @returns The incremented counter value from the inner call\n    ","networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[26],"errorMessage":"OnCompletion must be NoOp"},{"pc":[59],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[88,124],"errorMessage":"application log value is not the result of an ABI return"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayA2IDAgMQogICAgYnl0ZWNibG9jayAweDE1MWY3Yzc1IDB4NGEzMjU5MDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYXBwL2NvbnRyYWN0LnB5OjMxCiAgICAvLyBjbGFzcyBSZWZlcmVuY2VBcHAoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4ZDA2ODQ2YTkgMHhhMWY2YjIzNSAvLyBtZXRob2QgImluY3JlbWVudF92aWFfaW5uZXIoKXVpbnQ2NCIsIG1ldGhvZCAiaW5jcmVtZW50X3ZpYV9pbm5lcl93aXRoX2FyZyh1aW50NjQpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggaW5jcmVtZW50X3ZpYV9pbm5lciBpbmNyZW1lbnRfdmlhX2lubmVyX3dpdGhfYXJnCiAgICBlcnIKCm1haW5fX19hbGdvcHlfZGVmYXVsdF9jcmVhdGVAOToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuIC8vIG9uIGVycm9yOiBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wICYmIGNhbiBvbmx5IGNhbGwgd2hlbiBjcmVhdGluZwoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5yZWZlcmVuY2VfYXBwLmNvbnRyYWN0LlJlZmVyZW5jZUFwcC5pbmNyZW1lbnRfdmlhX2lubmVyW3JvdXRpbmddKCkgLT4gdm9pZDoKaW5jcmVtZW50X3ZpYV9pbm5lcjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYXBwL2NvbnRyYWN0LnB5OjQxLTQ1CiAgICAvLyBjb3VudGVyX3Jlc3VsdCwgY2FsbF90eG4gPSBhcmM0LmFiaV9jYWxsKAogICAgLy8gICAgIENvdW50ZXIuaW5jcmVtZW50LAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gICAgIGFwcF9pZD1hcHAsCiAgICAvLyApCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvcmVmZXJlbmNlX2FwcC9jb250cmFjdC5weTozOQogICAgLy8gYXBwID0gQXBwbGljYXRpb24oMTcxNykgICMgUmVwbGFjZSB3aXRoIHlvdXIgYXBwbGljYXRpb24gaWQKICAgIHB1c2hpbnQgMTcxNyAvLyAxNzE3CiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYXBwL2NvbnRyYWN0LnB5OjQxLTQ1CiAgICAvLyBjb3VudGVyX3Jlc3VsdCwgY2FsbF90eG4gPSBhcmM0LmFiaV9jYWxsKAogICAgLy8gICAgIENvdW50ZXIuaW5jcmVtZW50LAogICAgLy8gICAgIGZlZT0wLAogICAgLy8gICAgIGFwcF9pZD1hcHAsCiAgICAvLyApCiAgICBieXRlY18xIC8vIG1ldGhvZCAiaW5jcmVtZW50KCl1aW50NjQiCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgaW50Y18wIC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYXBwL2NvbnRyYWN0LnB5OjQzCiAgICAvLyBmZWU9MCwKICAgIGludGNfMSAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hcHAvY29udHJhY3QucHk6NDEtNDUKICAgIC8vIGNvdW50ZXJfcmVzdWx0LCBjYWxsX3R4biA9IGFyYzQuYWJpX2NhbGwoCiAgICAvLyAgICAgQ291bnRlci5pbmNyZW1lbnQsCiAgICAvLyAgICAgZmVlPTAsCiAgICAvLyAgICAgYXBwX2lkPWFwcCwKICAgIC8vICkKICAgIGl0eG5fc3VibWl0CiAgICBpdHhuIExhc3RMb2cKICAgIGR1cAogICAgZXh0cmFjdCA0IDAKICAgIHN3YXAKICAgIGV4dHJhY3QgMCA0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgID09CiAgICBhc3NlcnQgLy8gYXBwbGljYXRpb24gbG9nIHZhbHVlIGlzIG5vdCB0aGUgcmVzdWx0IG9mIGFuIEFCSSByZXR1cm4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYXBwL2NvbnRyYWN0LnB5OjM3CiAgICAvLyBAYWJpbWV0aG9kCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzIgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnJlZmVyZW5jZV9hcHAuY29udHJhY3QuUmVmZXJlbmNlQXBwLmluY3JlbWVudF92aWFfaW5uZXJfd2l0aF9hcmdbcm91dGluZ10oKSAtPiB2b2lkOgppbmNyZW1lbnRfdmlhX2lubmVyX3dpdGhfYXJnOgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hcHAvY29udHJhY3QucHk6NTQKICAgIC8vIEBhYmltZXRob2QKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9yZWZlcmVuY2VfYXBwL2NvbnRyYWN0LnB5OjU2LTU3CiAgICAvLyAjIENhbGwgdGhlIGluY3JlbWVudCBtZXRob2Qgb24gdGhlIHByb3ZpZGVkIENvdW50ZXIgYXBwbGljYXRpb24KICAgIC8vIGNvdW50ZXJfcmVzdWx0LCBjYWxsX3R4biA9IGFyYzQuYWJpX2NhbGwoQ291bnRlci5pbmNyZW1lbnQsIGZlZT0wLCBhcHBfaWQ9YXBwKQogICAgaXR4bl9iZWdpbgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbklECiAgICBieXRlY18xIC8vIG1ldGhvZCAiaW5jcmVtZW50KCl1aW50NjQiCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgaW50Y18wIC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMSAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGl0eG4gTGFzdExvZwogICAgZHVwCiAgICBleHRyYWN0IDQgMAogICAgc3dhcAogICAgZXh0cmFjdCAwIDQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgPT0KICAgIGFzc2VydCAvLyBhcHBsaWNhdGlvbiBsb2cgdmFsdWUgaXMgbm90IHRoZSByZXN1bHQgb2YgYW4gQUJJIHJldHVybgogICAgLy8gc21hcnRfY29udHJhY3RzL3JlZmVyZW5jZV9hcHAvY29udHJhY3QucHk6NTQKICAgIC8vIEBhYmltZXRob2QKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMiAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyADBgABJgIEFR98dQRKMlkBMRtBAB0xGRREMRhEggIE0GhGqQSh9rI1NhoAjgIACQAsADEZFDEYFBBDsYG1DbIYKbIaIrIQI7IBs7Q+SVcEAExXAAQoEkQoTFCwJEM2GgEXsbIYKbIaIrIQI7IBs7Q+SVcEAExXAAQoEkQoTFCwJEM=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -140,6 +140,21 @@ export type MethodArgs<TSignature extends ReferenceAppSignatures> = ReferenceApp
 export type MethodReturn<TSignature extends ReferenceAppSignatures> = ReferenceAppTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ReferenceAppCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ReferenceAppDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ReferenceAppCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ReferenceApp smart contract
@@ -173,6 +188,147 @@ export abstract class ReferenceAppParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ReferenceApp smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ReferenceAppFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ReferenceAppFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ReferenceAppClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ReferenceAppClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ReferenceApp smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ReferenceAppDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new ReferenceAppClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ReferenceApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ReferenceApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ReferenceApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new ReferenceAppClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ReferenceApp smart contract
  */

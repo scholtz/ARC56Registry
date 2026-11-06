@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Arc4DynamicArray","structs":{},"methods":[{"name":"goodbye","args":[{"type":"string","name":"name"}],"returns":{"type":"string[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"hello","args":[{"type":"string","name":"name"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Dynamic Arrays have variable size and capacity.\nThey are similar to native Python lists because they can also append, extend, and pop.","events":[],"recommendations":{}},{"name":"arc4_dynamic_bytes","args":[],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"arc4.DynamicBytes is essentially an arc4.DynamicArray[arc4.Byte] with additional convenience methods","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[14],"errorMessage":"OnCompletion must be NoOp"},{"pc":[71],"errorMessage":"OnCompletion must be NoOp && can only call when creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Arc4DynamicArray","structs":{},"methods":[{"name":"goodbye","args":[{"type":"string","name":"name"}],"returns":{"type":"string[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"hello","args":[{"type":"string","name":"name"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Dynamic Arrays have variable size and capacity.\nThey are similar to native Python lists because they can also append, extend, and pop.","events":[],"recommendations":{}},{"name":"arc4_dynamic_bytes","args":[],"returns":{"type":"byte[]"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"arc4.DynamicBytes is essentially an arc4.DynamicArray[arc4.Byte] with additional convenience methods","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[14],"errorMessage":"OnCompletion must be NoOp"},{"pc":[71],"errorMessage":"OnCompletion must be NoOp && can only call when creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAyIDEgMAogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzRfdHlwZXMvY29udHJhY3QucHk6MTY1CiAgICAvLyBjbGFzcyBBcmM0RHluYW1pY0FycmF5KEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxMAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHg4YWQxMmEyYiAweDAyYmVjZTExIDB4OTVkNjQxMTYgLy8gbWV0aG9kICJnb29kYnllKHN0cmluZylzdHJpbmdbXSIsIG1ldGhvZCAiaGVsbG8oc3RyaW5nKXN0cmluZyIsIG1ldGhvZCAiYXJjNF9keW5hbWljX2J5dGVzKClieXRlW10iCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBnb29kYnllIGhlbGxvIG1haW5fYXJjNF9keW5hbWljX2J5dGVzX3JvdXRlQDYKICAgIGVycgoKbWFpbl9hcmM0X2R5bmFtaWNfYnl0ZXNfcm91dGVANjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM0X3R5cGVzL2NvbnRyYWN0LnB5OjE5Ni0xOTcKICAgIC8vICMgZXhhbXBsZTogQVJDNF9EWU5BTUlDX0JZVEVTCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwNjAwZmZmZmFhYmJmZgogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDEwOgogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4gLy8gb24gZXJyb3I6IE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AgJiYgY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCgoKLy8gc21hcnRfY29udHJhY3RzLmFyYzRfdHlwZXMuY29udHJhY3QuQXJjNER5bmFtaWNBcnJheS5nb29kYnllW3JvdXRpbmddKCkgLT4gdm9pZDoKZ29vZGJ5ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM0X3R5cGVzL2NvbnRyYWN0LnB5OjE2NgogICAgLy8gQGFiaW1ldGhvZAogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDAyMDAwNDAwMGYwMDA5NDc2ZjZmNjQyMDYyNzk2NTIwCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5hcmM0X3R5cGVzLmNvbnRyYWN0LkFyYzREeW5hbWljQXJyYXkuaGVsbG9bcm91dGluZ10oKSAtPiB2b2lkOgpoZWxsbzoKICAgIGludGNfMiAvLyAwCiAgICBkdXAKICAgIHB1c2hieXRlcyAiIgogICAgZHVwCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxNzIKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgLy8gc21hcnRfY29udHJhY3RzL2FyYzRfdHlwZXMvY29udHJhY3QucHk6MTgwCiAgICAvLyBleHRlbnNpb24gPSBhcmM0LkR5bmFtaWNBcnJheVthcmM0LlN0cmluZ10obmFtZSwgYXJjNC5TdHJpbmcoIiEiKSkKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDQgLy8gNAogICAgKwogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHB1c2hieXRlcyAweDAwMDIwMDA0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzIDB4MDAwMTIxCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM0X3R5cGVzL2NvbnRyYWN0LnB5OjE4MQogICAgLy8gZHluYW1pY19zdHJpbmdfYXJyYXkuZXh0ZW5kKGV4dGVuc2lvbikKICAgIGR1cAogICAgZXh0cmFjdCAyIDAKICAgIHN3YXAKICAgIGludGNfMiAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgZHVwCiAgICBpbnRjXzAgLy8gMgogICAgKgogICAgZGlnIDIKICAgIGxlbgogICAgdW5jb3ZlciAzCiAgICBkaWcgMgogICAgdW5jb3ZlciAyCiAgICBzdWJzdHJpbmczCiAgICBpbnRjXzEgLy8gMQogICAgdW5jb3ZlciAzCiAgICArCiAgICBkdXAKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBjb3ZlciAzCiAgICB1bmNvdmVyIDIKICAgIGJ6ZXJvCiAgICBwdXNoYnl0ZXMgMHgwMDAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDAwMDY0ODY1NmM2YzZmMjAKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIGludGNfMCAvLyAyCiAgICAqCiAgICBkdXAKICAgIGludGNfMiAvLyAwCgpoZWxsb19mb3JfaGVhZGVyQDc6CiAgICBkdXAKICAgIGRpZyAzCiAgICA8CiAgICBieiBoZWxsb19hZnRlcl9mb3JAOQogICAgZGlnIDEKICAgIGR1cAogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIGRpZyA1CiAgICBkaWcgMwogICAgZHVwCiAgICBjb3ZlciA0CiAgICB1bmNvdmVyIDIKICAgIHJlcGxhY2UzCiAgICBkdXAKICAgIGJ1cnkgNwogICAgZGlnIDEKICAgIGV4dHJhY3RfdWludDE2CiAgICBpbnRjXzAgLy8gMgogICAgKwogICAgKwogICAgYnVyeSAzCiAgICBpbnRjXzAgLy8gMgogICAgKwogICAgYnVyeSAxCiAgICBiIGhlbGxvX2Zvcl9oZWFkZXJANwoKaGVsbG9fYWZ0ZXJfZm9yQDk6CiAgICBkaWcgNAogICAgZGlnIDQKICAgIGNvbmNhdAogICAgZHVwCiAgICBidXJ5IDEwCiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxODgKICAgIC8vIGdyZWV0aW5nID0gU3RyaW5nKCkKICAgIHB1c2hieXRlcyAiIgogICAgYnVyeSA5CiAgICAvLyBzbWFydF9jb250cmFjdHMvYXJjNF90eXBlcy9jb250cmFjdC5weToxODkKICAgIC8vIGZvciB4IGluIGR5bmFtaWNfc3RyaW5nX2FycmF5OgogICAgaW50Y18yIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBidXJ5IDcKICAgIGludGNfMiAvLyAwCiAgICBidXJ5IDYKCmhlbGxvX2Zvcl9oZWFkZXJAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM0X3R5cGVzL2NvbnRyYWN0LnB5OjE4OQogICAgLy8gZm9yIHggaW4gZHluYW1pY19zdHJpbmdfYXJyYXk6CiAgICBkaWcgNQogICAgZGlnIDcKICAgIDwKICAgIGJ6IGhlbGxvX2FmdGVyX2ZvckA1CiAgICBkaWcgOAogICAgZXh0cmFjdCAyIDAKICAgIGRpZyA2CiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGludGNfMCAvLyAyCiAgICAqCiAgICBkaWcgMQogICAgc3dhcAogICAgZXh0cmFjdF91aW50MTYKICAgIGR1cDIKICAgIGV4dHJhY3RfdWludDE2CiAgICBpbnRjXzAgLy8gMgogICAgKwogICAgZXh0cmFjdDMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM0X3R5cGVzL2NvbnRyYWN0LnB5OjE5MAogICAgLy8gZ3JlZXRpbmcgKz0geC5uYXRpdmUKICAgIGV4dHJhY3QgMiAwCiAgICBkaWcgOQogICAgc3dhcAogICAgY29uY2F0CiAgICBidXJ5IDkKICAgIGludGNfMSAvLyAxCiAgICArCiAgICBidXJ5IDYKICAgIGIgaGVsbG9fZm9yX2hlYWRlckAyCgpoZWxsb19hZnRlcl9mb3JANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hcmM0X3R5cGVzL2NvbnRyYWN0LnB5OjE3MgogICAgLy8gQGFiaW1ldGhvZCgpCiAgICBkaWcgNwogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyADAgEAMRtBADUxGRREMRhEggMEitEqKwQCvs4RBJXWQRY2GgCOAwAaADgAAQCADBUffHUABgD//6q7/7AjQzEZFDEYFBBDgBUVH3x1AAIABAAPAAlHb29kIGJ5ZSA2GgFQsCNDJEmAAEk2GgFJFYEECBZXBgKABAACAARMUExQgAMAASFQSVcCAEwkWUkiC0sCFU8DSwJPAlIjTwMISRZXBgJOA08Cr4ACAAJMUIAIAAZIZWxsbyBQTwJQTCILSSRJSwMMQQAjSwFJFlcGAksFSwNJTgRPAl1JRQdLAVkiCAhFAyIIRQFC/9ZLBEsEUElFCoAARQkkWUUHJEUGSwVLBwxBACVLCFcCAEsGSU4CIgtLAUxZSlkiCFhXAgBLCUxQRQkjCEUGQv/TSwdJFRZXBgJMUIAEFR98dUxQsCND","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -150,6 +150,21 @@ export type MethodArgs<TSignature extends Arc4DynamicArraySignatures> = Arc4Dyna
 export type MethodReturn<TSignature extends Arc4DynamicArraySignatures> = Arc4DynamicArrayTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type Arc4DynamicArrayCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type Arc4DynamicArrayDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: Arc4DynamicArrayCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Arc4DynamicArray smart contract
@@ -202,6 +217,147 @@ export abstract class Arc4DynamicArrayParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Arc4DynamicArray smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class Arc4DynamicArrayFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `Arc4DynamicArrayFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new Arc4DynamicArrayClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new Arc4DynamicArrayClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Arc4DynamicArray smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: Arc4DynamicArrayDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new Arc4DynamicArrayClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Arc4DynamicArray smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Arc4DynamicArray smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Arc4DynamicArray smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new Arc4DynamicArrayClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Arc4DynamicArray smart contract
  */

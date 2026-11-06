@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"WhileLoopExample","structs":{},"methods":[{"name":"loop","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[40],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[29],"errorMessage":"OnCompletion must be NoOp && can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"WhileLoopExample","structs":{},"methods":[{"name":"loop","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[40],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[29],"errorMessage":"OnCompletion must be NoOp && can only call when not creating"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udHJvbF9mbG93L2NvbnRyYWN0LnB5Ojc5LTgwCiAgICAvLyAjIGV4YW1wbGU6IFdISUxFX0xPT1AKICAgIC8vIGNsYXNzIFdoaWxlTG9vcEV4YW1wbGUoQVJDNENvbnRyYWN0KToKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDUKICAgIHB1c2hieXRlcyAweGY4MmEyNjU0IC8vIG1ldGhvZCAibG9vcCgpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9sb29wX3JvdXRlQDMKICAgIGVycgoKbWFpbl9sb29wX3JvdXRlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udHJvbF9mbG93L2NvbnRyYWN0LnB5OjgxCiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AgJiYgY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgYiBsb29wCgptYWluX19fYWxnb3B5X2RlZmF1bHRfY3JlYXRlQDU6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybiAvLyBvbiBlcnJvcjogT25Db21wbGV0aW9uIG11c3QgYmUgTm9PcCAmJiBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKCgovLyBzbWFydF9jb250cmFjdHMuY29udHJvbF9mbG93LmNvbnRyYWN0LldoaWxlTG9vcEV4YW1wbGUubG9vcFtyb3V0aW5nXSgpIC0+IHZvaWQ6Cmxvb3A6CiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udHJvbF9mbG93L2NvbnRyYWN0LnB5OjgzLTg0CiAgICAvLyBudW0gPSBVSW50NjQoMTApCiAgICAvLyBsb29wX2NvdW50ID0gVUludDY0KDApCiAgICBwdXNoaW50cyAxMCAwIC8vIDEwLCAwCgpsb29wX3doaWxlX3RvcEAyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2NvbnRyb2xfZmxvdy9jb250cmFjdC5weTo4NgogICAgLy8gd2hpbGUgbnVtID4gMDoKICAgIGRpZyAxCiAgICBieiBsb29wX2FmdGVyX3doaWxlQDgKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jb250cm9sX2Zsb3cvY29udHJhY3QucHk6ODcKICAgIC8vIGlmIG51bSA+IDU6CiAgICBkaWcgMQogICAgcHVzaGludCA1IC8vIDUKICAgID4KICAgIGJ6IGxvb3BfYWZ0ZXJfaWZfZWxzZUA1CiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udHJvbF9mbG93L2NvbnRyYWN0LnB5Ojg4CiAgICAvLyBudW0gLT0gMQogICAgZGlnIDEKICAgIGludGNfMCAvLyAxCiAgICAtCiAgICBidXJ5IDIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jb250cm9sX2Zsb3cvY29udHJhY3QucHk6ODkKICAgIC8vIGxvb3BfY291bnQgKz0gMQogICAgZHVwCiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgYnVyeSAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udHJvbF9mbG93L2NvbnRyYWN0LnB5OjkwCiAgICAvLyBjb250aW51ZQogICAgYiBsb29wX3doaWxlX3RvcEAyCgpsb29wX2FmdGVyX2lmX2Vsc2VANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9jb250cm9sX2Zsb3cvY29udHJhY3QucHk6OTIKICAgIC8vIG51bSAtPSAyCiAgICBkaWcgMQogICAgcHVzaGludCAyIC8vIDIKICAgIC0KICAgIGR1cAogICAgYnVyeSAzCiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udHJvbF9mbG93L2NvbnRyYWN0LnB5OjkzCiAgICAvLyBsb29wX2NvdW50ICs9IDEKICAgIGRpZyAxCiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgYnVyeSAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvY29udHJvbF9mbG93L2NvbnRyYWN0LnB5Ojk1CiAgICAvLyBpZiBudW0gPT0gMToKICAgIGludGNfMCAvLyAxCiAgICA9PQogICAgYnogbG9vcF93aGlsZV90b3BAMgoKbG9vcF9hZnRlcl93aGlsZUA4OgogICAgLy8gc21hcnRfY29udHJhY3RzL2NvbnRyb2xfZmxvdy9jb250cmFjdC5weTo4MQogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICBkdXAKICAgIGl0b2IKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyABATEbQQAYgAT4KiZUNhoAjgEAAQAxGRQxGBBEQgAIMRkUMRgUEEODAgoASwFBAClLAYEFDUEADksBIglFAkkiCEUBQv/lSwGBAglJRQNLASIIRQIiEkH/0kkWgAQVH3x1TFCwIkM=","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -130,6 +130,21 @@ export type MethodArgs<TSignature extends WhileLoopExampleSignatures> = WhileLoo
 export type MethodReturn<TSignature extends WhileLoopExampleSignatures> = WhileLoopExampleTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type WhileLoopExampleCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type WhileLoopExampleDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: WhileLoopExampleCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the WhileLoopExample smart contract
@@ -150,6 +165,147 @@ export abstract class WhileLoopExampleParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the WhileLoopExample smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class WhileLoopExampleFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `WhileLoopExampleFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new WhileLoopExampleClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new WhileLoopExampleClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the WhileLoopExample smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: WhileLoopExampleDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new WhileLoopExampleClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the WhileLoopExample smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the WhileLoopExample smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the WhileLoopExample smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new WhileLoopExampleClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the WhileLoopExample smart contract
  */
