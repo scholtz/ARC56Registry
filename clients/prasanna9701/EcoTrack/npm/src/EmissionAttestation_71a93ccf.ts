@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"EmissionAttestation","structs":{"AttestationRecord":[{"name":"sender","type":"byte[]"},{"name":"scopeType","type":"uint64"},{"name":"timestamp","type":"uint64"}]},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Called on application creation.\nInitializes the attestation counter.","events":[],"recommendations":{}},{"name":"attest","args":[{"type":"byte[]","name":"recordHash","desc":"- SHA-256 hash of the emission record data"},{"type":"uint64","name":"scopeType","desc":"- Emission scope (1, 2, or 3)"},{"type":"pay","name":"mbrPay","desc":"- Payment transaction to cover box MBR"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Attest an emission record on-chain.\nCreates a tamper-proof hash entry in box storage.","events":[{"name":"EmissionAttested","args":[{"type":"byte[32]","name":"0"},{"type":"byte[]","name":"1"},{"type":"uint64","name":"2"},{"type":"uint64","name":"3"}]}],"recommendations":{}},{"name":"verify","args":[{"type":"byte[]","name":"recordHash","desc":"- The hash to verify"}],"returns":{"type":"bool","desc":"true if the hash exists in box storage"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Verify whether a record hash has been attested on-chain.","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"attestationCount":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y291bnQ="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"attestations":{"keyType":"AVMBytes","valueType":"AttestationRecord","prefix":"YQ=="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[139],"errorMessage":"Invalid scope type"},{"pc":[19],"errorMessage":"OnCompletion must be NoOp"},{"pc":[126],"errorMessage":"Record already attested"},{"pc":[114],"errorMessage":"assert target is match for conditions"},{"pc":[178],"errorMessage":"check GlobalState exists"},{"pc":[72,219],"errorMessage":"invalid array length header"},{"pc":[79,226],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[94],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[108],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[{"name":"EmissionAttested","args":[{"type":"byte[32]","name":"0"},{"type":"byte[]","name":"1"},{"type":"uint64","name":"2"},{"type":"uint64","name":"3"}]}]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"EmissionAttestation","structs":{"AttestationRecord":[{"name":"sender","type":"byte[]"},{"name":"scopeType","type":"uint64"},{"name":"timestamp","type":"uint64"}]},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Called on application creation.\nInitializes the attestation counter.","events":[],"recommendations":{}},{"name":"attest","args":[{"type":"byte[]","name":"recordHash","desc":"- SHA-256 hash of the emission record data"},{"type":"uint64","name":"scopeType","desc":"- Emission scope (1, 2, or 3)"},{"type":"pay","name":"mbrPay","desc":"- Payment transaction to cover box MBR"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Attest an emission record on-chain.\nCreates a tamper-proof hash entry in box storage.","events":[{"name":"EmissionAttested","args":[{"type":"byte[32]","name":"0"},{"type":"byte[]","name":"1"},{"type":"uint64","name":"2"},{"type":"uint64","name":"3"}]}],"recommendations":{}},{"name":"verify","args":[{"type":"byte[]","name":"recordHash","desc":"- The hash to verify"}],"returns":{"type":"bool","desc":"true if the hash exists in box storage"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Verify whether a record hash has been attested on-chain.","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"attestationCount":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y291bnQ="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"attestations":{"keyType":"AVMBytes","valueType":"AttestationRecord","prefix":"YQ=="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[139],"errorMessage":"Invalid scope type"},{"pc":[19],"errorMessage":"OnCompletion must be NoOp"},{"pc":[126],"errorMessage":"Record already attested"},{"pc":[114],"errorMessage":"assert target is match for conditions"},{"pc":[178],"errorMessage":"check GlobalState exists"},{"pc":[72,219],"errorMessage":"invalid array length header"},{"pc":[79,226],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[94],"errorMessage":"invalid number of bytes for arc4.uint64"},{"pc":[108],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDIKICAgIGJ5dGVjYmxvY2sgImNvdW50IiAiYSIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lbWlzc2lvbl9hdHRlc3RhdGlvbi9FbWlzc2lvbkF0dGVzdGF0aW9uLmFsZ28udHM6MzAKICAgIC8vIGV4cG9ydCBjbGFzcyBFbWlzc2lvbkF0dGVzdGF0aW9uIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDYKICAgIHB1c2hieXRlc3MgMHhmNmI5YjBmNiAweGZmM2Q5NDQzIC8vIG1ldGhvZCAiYXR0ZXN0KGJ5dGVbXSx1aW50NjQscGF5KXZvaWQiLCBtZXRob2QgInZlcmlmeShieXRlW10pYm9vbCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGF0dGVzdCB2ZXJpZnkKICAgIGVycgoKbWFpbl9jcmVhdGVfTm9PcEA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL2VtaXNzaW9uX2F0dGVzdGF0aW9uL0VtaXNzaW9uQXR0ZXN0YXRpb24uYWxnby50czozMAogICAgLy8gZXhwb3J0IGNsYXNzIEVtaXNzaW9uQXR0ZXN0YXRpb24gZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVBcHBsaWNhdGlvbl9yb3V0ZUA3CiAgICBlcnIKCm1haW5fY3JlYXRlQXBwbGljYXRpb25fcm91dGVANzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lbWlzc2lvbl9hdHRlc3RhdGlvbi9FbWlzc2lvbkF0dGVzdGF0aW9uLmFsZ28udHM6MzUKICAgIC8vIGF0dGVzdGF0aW9uQ291bnQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiAnY291bnQnIH0pCiAgICBieXRlY18wIC8vICJjb3VudCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lbWlzc2lvbl9hdHRlc3RhdGlvbi9FbWlzc2lvbkF0dGVzdGF0aW9uLmFsZ28udHM6NDIKICAgIC8vIHRoaXMuYXR0ZXN0YXRpb25Db3VudC52YWx1ZSA9IFVpbnQ2NCgwKQogICAgaW50Y18xIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZW1pc3Npb25fYXR0ZXN0YXRpb24vRW1pc3Npb25BdHRlc3RhdGlvbi5hbGdvLnRzOjQxCiAgICAvLyBwdWJsaWMgY3JlYXRlQXBwbGljYXRpb24oKTogdm9pZCB7CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL2VtaXNzaW9uX2F0dGVzdGF0aW9uL0VtaXNzaW9uQXR0ZXN0YXRpb24uYWxnby50czo6RW1pc3Npb25BdHRlc3RhdGlvbi5hdHRlc3Rbcm91dGluZ10oKSAtPiB2b2lkOgphdHRlc3Q6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZW1pc3Npb25fYXR0ZXN0YXRpb24vRW1pc3Npb25BdHRlc3RhdGlvbi5hbGdvLnRzOjUzLTU3CiAgICAvLyBwdWJsaWMgYXR0ZXN0KAogICAgLy8gICByZWNvcmRIYXNoOiBieXRlcywKICAgIC8vICAgc2NvcGVUeXBlOiB1aW50NjQsCiAgICAvLyAgIG1iclBheTogZ3R4bi5QYXltZW50VHhuLAogICAgLy8gKTogdm9pZCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXBuIDIKICAgIGludGNfMSAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBjb3ZlciAyCiAgICBkdXAKICAgIGxlbgogICAgcHVzaGludCA4IC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18wIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgLy8gc21hcnRfY29udHJhY3RzL2VtaXNzaW9uX2F0dGVzdGF0aW9uL0VtaXNzaW9uQXR0ZXN0YXRpb24uYWxnby50czo1OS02MQogICAgLy8gYXNzZXJ0TWF0Y2gobWJyUGF5LCB7CiAgICAvLyAgIHJlY2VpdmVyOiBHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcywKICAgIC8vIH0pCiAgICBndHhucyBSZWNlaXZlcgogICAgLy8gc21hcnRfY29udHJhY3RzL2VtaXNzaW9uX2F0dGVzdGF0aW9uL0VtaXNzaW9uQXR0ZXN0YXRpb24uYWxnby50czo2MAogICAgLy8gcmVjZWl2ZXI6IEdsb2JhbC5jdXJyZW50QXBwbGljYXRpb25BZGRyZXNzLAogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lbWlzc2lvbl9hdHRlc3RhdGlvbi9FbWlzc2lvbkF0dGVzdGF0aW9uLmFsZ28udHM6NTktNjEKICAgIC8vIGFzc2VydE1hdGNoKG1iclBheSwgewogICAgLy8gICByZWNlaXZlcjogR2xvYmFsLmN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MsCiAgICAvLyB9KQogICAgPT0KICAgIGFzc2VydCAvLyBhc3NlcnQgdGFyZ2V0IGlzIG1hdGNoIGZvciBjb25kaXRpb25zCiAgICAvLyBzbWFydF9jb250cmFjdHMvZW1pc3Npb25fYXR0ZXN0YXRpb24vRW1pc3Npb25BdHRlc3RhdGlvbi5hbGdvLnRzOjMyCiAgICAvLyBhdHRlc3RhdGlvbnMgPSBCb3hNYXA8Ynl0ZXMsIEF0dGVzdGF0aW9uUmVjb3JkPih7IGtleVByZWZpeDogJ2EnIH0pCiAgICBieXRlY18xIC8vICJhIgogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIGR1cAogICAgY292ZXIgMgogICAgLy8gc21hcnRfY29udHJhY3RzL2VtaXNzaW9uX2F0dGVzdGF0aW9uL0VtaXNzaW9uQXR0ZXN0YXRpb24uYWxnby50czo2NAogICAgLy8gYXNzZXJ0KCF0aGlzLmF0dGVzdGF0aW9ucyhyZWNvcmRIYXNoKS5leGlzdHMsICdSZWNvcmQgYWxyZWFkeSBhdHRlc3RlZCcpCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgICEKICAgIGFzc2VydCAvLyBSZWNvcmQgYWxyZWFkeSBhdHRlc3RlZAogICAgLy8gc21hcnRfY29udHJhY3RzL2VtaXNzaW9uX2F0dGVzdGF0aW9uL0VtaXNzaW9uQXR0ZXN0YXRpb24uYWxnby50czo2OAogICAgLy8gc2NvcGVUeXBlID49IFVpbnQ2NCgxKSAmJiBzY29wZVR5cGUgPD0gVWludDY0KDMpLAogICAgYnogYXR0ZXN0X2Jvb2xfZmFsc2VANAogICAgZGlnIDEKICAgIHB1c2hpbnQgMyAvLyAzCiAgICA8PQogICAgYnogYXR0ZXN0X2Jvb2xfZmFsc2VANAogICAgaW50Y18wIC8vIDEKCmF0dGVzdF9ib29sX21lcmdlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZW1pc3Npb25fYXR0ZXN0YXRpb24vRW1pc3Npb25BdHRlc3RhdGlvbi5hbGdvLnRzOjY3LTcwCiAgICAvLyBhc3NlcnQoCiAgICAvLyAgIHNjb3BlVHlwZSA+PSBVaW50NjQoMSkgJiYgc2NvcGVUeXBlIDw9IFVpbnQ2NCgzKSwKICAgIC8vICAgJ0ludmFsaWQgc2NvcGUgdHlwZScsCiAgICAvLyApCiAgICBhc3NlcnQgLy8gSW52YWxpZCBzY29wZSB0eXBlCiAgICAvLyBzbWFydF9jb250cmFjdHMvZW1pc3Npb25fYXR0ZXN0YXRpb24vRW1pc3Npb25BdHRlc3RhdGlvbi5hbGdvLnRzOjcyCiAgICAvLyBjb25zdCB0aW1lc3RhbXA6IHVpbnQ2NCA9IEdsb2JhbC5sYXRlc3RUaW1lc3RhbXAKICAgIGdsb2JhbCBMYXRlc3RUaW1lc3RhbXAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lbWlzc2lvbl9hdHRlc3RhdGlvbi9FbWlzc2lvbkF0dGVzdGF0aW9uLmFsZ28udHM6NzUtNzkKICAgIC8vIGNvbnN0IHJlY29yZDogQXR0ZXN0YXRpb25SZWNvcmQgPSB7CiAgICAvLyAgIHNlbmRlcjogVHhuLnNlbmRlci5ieXRlcywKICAgIC8vICAgc2NvcGVUeXBlOiBzY29wZVR5cGUsCiAgICAvLyAgIHRpbWVzdGFtcDogdGltZXN0YW1wLAogICAgLy8gfQogICAgcHVzaGJ5dGVzIDB4MDAyMAogICAgLy8gc21hcnRfY29udHJhY3RzL2VtaXNzaW9uX2F0dGVzdGF0aW9uL0VtaXNzaW9uQXR0ZXN0YXRpb24uYWxnby50czo3NgogICAgLy8gc2VuZGVyOiBUeG4uc2VuZGVyLmJ5dGVzLAogICAgdHhuIFNlbmRlcgogICAgLy8gc21hcnRfY29udHJhY3RzL2VtaXNzaW9uX2F0dGVzdGF0aW9uL0VtaXNzaW9uQXR0ZXN0YXRpb24uYWxnby50czo3NS03OQogICAgLy8gY29uc3QgcmVjb3JkOiBBdHRlc3RhdGlvblJlY29yZCA9IHsKICAgIC8vICAgc2VuZGVyOiBUeG4uc2VuZGVyLmJ5dGVzLAogICAgLy8gICBzY29wZVR5cGU6IHNjb3BlVHlwZSwKICAgIC8vICAgdGltZXN0YW1wOiB0aW1lc3RhbXAsCiAgICAvLyB9CiAgICBjb25jYXQKICAgIGRpZyAzCiAgICBpdG9iCiAgICBwdXNoYnl0ZXMgMHgwMDEyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHVuY292ZXIgMgogICAgaXRvYgogICAgc3dhcAogICAgZGlnIDEKICAgIGNvbmNhdAogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lbWlzc2lvbl9hdHRlc3RhdGlvbi9FbWlzc2lvbkF0dGVzdGF0aW9uLmFsZ28udHM6ODAKICAgIC8vIHRoaXMuYXR0ZXN0YXRpb25zKHJlY29yZEhhc2gpLnZhbHVlID0gY2xvbmUocmVjb3JkKQogICAgZGlnIDIKICAgIGR1cAogICAgYm94X2RlbAogICAgcG9wCiAgICBzd2FwCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZW1pc3Npb25fYXR0ZXN0YXRpb24vRW1pc3Npb25BdHRlc3RhdGlvbi5hbGdvLnRzOjgzCiAgICAvLyB0aGlzLmF0dGVzdGF0aW9uQ291bnQudmFsdWUgPSB0aGlzLmF0dGVzdGF0aW9uQ291bnQudmFsdWUgKyBVaW50NjQoMSkKICAgIGludGNfMSAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvZW1pc3Npb25fYXR0ZXN0YXRpb24vRW1pc3Npb25BdHRlc3RhdGlvbi5hbGdvLnRzOjM1CiAgICAvLyBhdHRlc3RhdGlvbkNvdW50ID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGtleTogJ2NvdW50JyB9KQogICAgYnl0ZWNfMCAvLyAiY291bnQiCiAgICAvLyBzbWFydF9jb250cmFjdHMvZW1pc3Npb25fYXR0ZXN0YXRpb24vRW1pc3Npb25BdHRlc3RhdGlvbi5hbGdvLnRzOjgzCiAgICAvLyB0aGlzLmF0dGVzdGF0aW9uQ291bnQudmFsdWUgPSB0aGlzLmF0dGVzdGF0aW9uQ291bnQudmFsdWUgKyBVaW50NjQoMSkKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgLy8gc21hcnRfY29udHJhY3RzL2VtaXNzaW9uX2F0dGVzdGF0aW9uL0VtaXNzaW9uQXR0ZXN0YXRpb24uYWxnby50czozNQogICAgLy8gYXR0ZXN0YXRpb25Db3VudCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6ICdjb3VudCcgfSkKICAgIGJ5dGVjXzAgLy8gImNvdW50IgogICAgLy8gc21hcnRfY29udHJhY3RzL2VtaXNzaW9uX2F0dGVzdGF0aW9uL0VtaXNzaW9uQXR0ZXN0YXRpb24uYWxnby50czo4MwogICAgLy8gdGhpcy5hdHRlc3RhdGlvbkNvdW50LnZhbHVlID0gdGhpcy5hdHRlc3RhdGlvbkNvdW50LnZhbHVlICsgVWludDY0KDEpCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2VtaXNzaW9uX2F0dGVzdGF0aW9uL0VtaXNzaW9uQXR0ZXN0YXRpb24uYWxnby50czo4NwogICAgLy8gVHhuLnNlbmRlci5ieXRlcywKICAgIHR4biBTZW5kZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lbWlzc2lvbl9hdHRlc3RhdGlvbi9FbWlzc2lvbkF0dGVzdGF0aW9uLmFsZ28udHM6ODYtOTEKICAgIC8vIGVtaXQ8RW1pc3Npb25BdHRlc3RlZD4oJ0VtaXNzaW9uQXR0ZXN0ZWQnLAogICAgLy8gICBUeG4uc2VuZGVyLmJ5dGVzLAogICAgLy8gICByZWNvcmRIYXNoLAogICAgLy8gICBzY29wZVR5cGUsCiAgICAvLyAgIHRpbWVzdGFtcCwKICAgIC8vICkKICAgIHB1c2hieXRlcyAweDAwMzIKICAgIGNvbmNhdAogICAgZGlnIDQKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBkaWcgNAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHhkYzJmMTM4NyAvLyBtZXRob2QgIkVtaXNzaW9uQXR0ZXN0ZWQoYnl0ZVszMl0sYnl0ZVtdLHVpbnQ2NCx1aW50NjQpIgogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lbWlzc2lvbl9hdHRlc3RhdGlvbi9FbWlzc2lvbkF0dGVzdGF0aW9uLmFsZ28udHM6NTMtNTcKICAgIC8vIHB1YmxpYyBhdHRlc3QoCiAgICAvLyAgIHJlY29yZEhhc2g6IGJ5dGVzLAogICAgLy8gICBzY29wZVR5cGU6IHVpbnQ2NCwKICAgIC8vICAgbWJyUGF5OiBndHhuLlBheW1lbnRUeG4sCiAgICAvLyApOiB2b2lkIHsKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCmF0dGVzdF9ib29sX2ZhbHNlQDQ6CiAgICBpbnRjXzEgLy8gMAogICAgYiBhdHRlc3RfYm9vbF9tZXJnZUA1CgoKLy8gc21hcnRfY29udHJhY3RzL2VtaXNzaW9uX2F0dGVzdGF0aW9uL0VtaXNzaW9uQXR0ZXN0YXRpb24uYWxnby50czo6RW1pc3Npb25BdHRlc3RhdGlvbi52ZXJpZnlbcm91dGluZ10oKSAtPiB2b2lkOgp2ZXJpZnk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZW1pc3Npb25fYXR0ZXN0YXRpb24vRW1pc3Npb25BdHRlc3RhdGlvbi5hbGdvLnRzOjEwMAogICAgLy8gcHVibGljIHZlcmlmeShyZWNvcmRIYXNoOiBieXRlcyk6IGJvb2xlYW4gewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lbWlzc2lvbl9hdHRlc3RhdGlvbi9FbWlzc2lvbkF0dGVzdGF0aW9uLmFsZ28udHM6MzIKICAgIC8vIGF0dGVzdGF0aW9ucyA9IEJveE1hcDxieXRlcywgQXR0ZXN0YXRpb25SZWNvcmQ+KHsga2V5UHJlZml4OiAnYScgfSkKICAgIGJ5dGVjXzEgLy8gImEiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lbWlzc2lvbl9hdHRlc3RhdGlvbi9FbWlzc2lvbkF0dGVzdGF0aW9uLmFsZ28udHM6MTAxCiAgICAvLyByZXR1cm4gdGhpcy5hdHRlc3RhdGlvbnMocmVjb3JkSGFzaCkuZXhpc3RzCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lbWlzc2lvbl9hdHRlc3RhdGlvbi9FbWlzc2lvbkF0dGVzdGF0aW9uLmFsZ28udHM6MTAwCiAgICAvLyBwdWJsaWMgdmVyaWZ5KHJlY29yZEhhc2g6IGJ5dGVzKTogYm9vbGVhbiB7CiAgICBwdXNoYnl0ZXMgMHgwMAogICAgaW50Y18xIC8vIDAKICAgIHVuY292ZXIgMgogICAgc2V0Yml0CiAgICBwdXNoYnl0ZXMgMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAQACJgIFY291bnQBYTEZFEQxGEEAFoICBPa5sPYE/z2UQzYaAI4CABQAqACABLhEezY2GgCOAQABACgjZyJDNhoBRwIjWSQISwEVEkRXAgA2GgJJTgJJFYEIEkQXSU4CMRYiCUk4ECISRDgHMgoSRClPAlBJTgK9RQEUREEAUEsBgQMOQQBIIkQyB4ACACAxAFBLAxaAAgASTFBPAhZMSwFQTwJQSwJJvEhMvyMoZUQiCChMZzEAgAIAMlBLBFBMUEsEUIAE3C8Th0xQsCJDI0L/tTYaAUkjWSQISwEVEkRXAgApTFC9RQGAAQAjTwJUgAQVH3x1TFCwIkM=","clear":"C4EBQw=="},"events":[{"name":"EmissionAttested","args":[{"type":"byte[32]","name":"0"},{"type":"byte[]","name":"1"},{"type":"uint64","name":"2"},{"type":"uint64","name":"3"}]}],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -210,11 +210,57 @@ export type GlobalKeysState = EmissionAttestationTypes['state']['global']['keys'
 export type BoxKeysState = EmissionAttestationTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type EmissionAttestationCreateCallParams =
+  | Expand<CallParams<EmissionAttestationArgs['obj']['createApplication()void'] | EmissionAttestationArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<EmissionAttestationArgs['obj']['createApplication()void'] | EmissionAttestationArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type EmissionAttestationDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: EmissionAttestationCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the EmissionAttestation smart contract
  */
 export abstract class EmissionAttestationParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends EmissionAttestationCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return EmissionAttestationParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the EmissionAttestation smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<EmissionAttestationArgs['obj']['createApplication()void'] | EmissionAttestationArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the attest(byte[],uint64,pay)void ABI method
    *
@@ -249,6 +295,160 @@ export abstract class EmissionAttestationParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the EmissionAttestation smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class EmissionAttestationFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `EmissionAttestationFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new EmissionAttestationClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new EmissionAttestationClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the EmissionAttestation smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: EmissionAttestationDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? EmissionAttestationParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (EmissionAttestationCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new EmissionAttestationClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the EmissionAttestation smart contract using the createApplication()void ABI method.
+       *
+      * Called on application creation.
+      Initializes the attestation counter.
+
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<EmissionAttestationArgs['obj']['createApplication()void'] | EmissionAttestationArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(EmissionAttestationParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the EmissionAttestation smart contract using the createApplication()void ABI method.
+       *
+      * Called on application creation.
+      Initializes the attestation counter.
+
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<EmissionAttestationArgs['obj']['createApplication()void'] | EmissionAttestationArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(EmissionAttestationParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the EmissionAttestation smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+      * Called on application creation.
+      Initializes the attestation counter.
+
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<EmissionAttestationArgs['obj']['createApplication()void'] | EmissionAttestationArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(EmissionAttestationParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | EmissionAttestationReturns['createApplication()void']) }, appClient: new EmissionAttestationClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the EmissionAttestation smart contract
  */
