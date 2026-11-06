@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"MerkleTree","desc":"","methods":[{"name":"deleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"verify","args":[{"name":"data","type":"byte[]"},{"name":"path","type":"byte[33][3]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"appendLeaf","args":[{"name":"data","type":"byte[]"},{"name":"path","type":"byte[33][3]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateLeaf","args":[{"name":"oldData","type":"byte[]"},{"name":"newData","type":"byte[]"},{"name":"path","type":"byte[33][3]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":1,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"root":{"key":"cm9vdA==","keyType":"AVMBytes","valueType":"byte[32]"},"size":{"key":"c2l6ZQ==","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[154],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[357],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"this.app.creator\"}","teal":236},{"pc":[380],"errorMessage":"argument 0 (path) for verify must be a byte[33][3]","teal":267},{"pc":[415],"errorMessage":"argument 0 (path) for appendLeaf must be a byte[33][3]","teal":304},{"pc":[477],"errorMessage":"argument 0 (path) for updateLeaf must be a byte[33][3]","teal":370},{"pc":[539],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":423},{"pc":[569],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":433},{"pc":[583],"errorMessage":"this contract does not implement the given ABI method for call DeleteApplication","teal":441}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"MerkleTree","desc":"","methods":[{"name":"deleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"verify","args":[{"name":"data","type":"byte[]"},{"name":"path","type":"byte[33][3]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"appendLeaf","args":[{"name":"data","type":"byte[]"},{"name":"path","type":"byte[33][3]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateLeaf","args":[{"name":"oldData","type":"byte[]"},{"name":"newData","type":"byte[]"},{"name":"path","type":"byte[33][3]"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":1,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"root":{"key":"cm9vdA==","keyType":"AVMBytes","valueType":"byte[32]"},"size":{"key":"c2l6ZQ==","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[154],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[357],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"this.app.creator\"}","teal":236},{"pc":[380],"errorMessage":"argument 0 (path) for verify must be a byte[33][3]","teal":267},{"pc":[415],"errorMessage":"argument 0 (path) for appendLeaf must be a byte[33][3]","teal":304},{"pc":[477],"errorMessage":"argument 0 (path) for updateLeaf must be a byte[33][3]","teal":370},{"pc":[539],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":423},{"pc":[569],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":433},{"pc":[583],"errorMessage":"this contract does not implement the given ABI method for call DeleteApplication","teal":441}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDMzIDAgOTkgMwpieXRlY2Jsb2NrIDB4IDB4NzI2ZjZmNzQgMHhlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAgMHg3MzY5N2E2NQoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDcuMgovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKcHVzaGludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKmNhbGxfRGVsZXRlQXBwbGljYXRpb24gKmNyZWF0ZV9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRAoKKk5PVF9JTVBMRU1FTlRFRDoKCS8vIFRoZSByZXF1ZXN0ZWQgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGlzIGNvbnRyYWN0LiBBcmUgeW91IHVzaW5nIHRoZSBjb3JyZWN0IE9uQ29tcGxldGU/IERpZCB5b3Ugc2V0IHlvdXIgYXBwIElEPwoJZXJyCgovLyBjYWxjSW5pdFJvb3QoKTogYnl0ZXMzMgpjYWxjSW5pdFJvb3Q6Cglwcm90byAwIDEKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgMCAvLyAweAoJZHVwCgoJLy8gZXhhbXBsZXMvbWVya2xlL21lcmtsZS5hbGdvLnRzOjE3CgkvLyByZXN1bHQgPSBoZXgoRU1QVFlfSEFTSCkgYXMgYnl0ZXMzMgoJYnl0ZWMgMiAvLyAweGUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCglieXRlYyAwIC8vIDB4CglkdXAKCWI9PQoJYXNzZXJ0CglleHRyYWN0IDAgMzIKCWZyYW1lX2J1cnkgMCAvLyByZXN1bHQ6IGJ5dGVbMzJdCgoJLy8gZXhhbXBsZXMvbWVya2xlL21lcmtsZS5hbGdvLnRzOjE5CgkvLyBmb3IgKGxldCBpID0gMDsgaSA8IFRSRUVfREVQVEg7IGkgPSBpICsgMSkKCWludGMgMiAvLyAwCglmcmFtZV9idXJ5IDEgLy8gaTogdWludDY0CgoqZm9yXzA6CgkvLyBleGFtcGxlcy9tZXJrbGUvbWVya2xlLmFsZ28udHM6MTkKCS8vIGkgPCBUUkVFX0RFUFRICglmcmFtZV9kaWcgMSAvLyBpOiB1aW50NjQKCWludGMgNCAvLyAzCgk8CglieiAqZm9yXzBfZW5kCgoJLy8gZXhhbXBsZXMvbWVya2xlL21lcmtsZS5hbGdvLnRzOjIwCgkvLyByZXN1bHQgPSBzaGEyNTYocmVzdWx0ICsgcmVzdWx0KQoJZnJhbWVfZGlnIDAgLy8gcmVzdWx0OiBieXRlWzMyXQoJZnJhbWVfZGlnIDAgLy8gcmVzdWx0OiBieXRlWzMyXQoJY29uY2F0CglzaGEyNTYKCWZyYW1lX2J1cnkgMCAvLyByZXN1bHQ6IGJ5dGVbMzJdCgoqZm9yXzBfY29udGludWU6CgkvLyBleGFtcGxlcy9tZXJrbGUvbWVya2xlLmFsZ28udHM6MTkKCS8vIGkgPSBpICsgMQoJZnJhbWVfZGlnIDEgLy8gaTogdWludDY0CglpbnRjIDAgLy8gMQoJKwoJZnJhbWVfYnVyeSAxIC8vIGk6IHVpbnQ2NAoJYiAqZm9yXzAKCipmb3JfMF9lbmQ6CgkvLyBleGFtcGxlcy9tZXJrbGUvbWVya2xlLmFsZ28udHM6MjMKCS8vIHJldHVybiByZXN1bHQ7CglmcmFtZV9kaWcgMCAvLyByZXN1bHQ6IGJ5dGVbMzJdCgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCgoJLy8gcG9wIGFsbCBsb2NhbCB2YXJpYWJsZXMgZnJvbSB0aGUgc3RhY2sKCXBvcG4gMQoJcmV0c3ViCgovLyBoYXNoQ29uY2F0KGxlZnQ6IGJ5dGVzMzIsIHJpZ2h0OiBieXRlczMyKTogYnl0ZXMzMgpoYXNoQ29uY2F0OgoJcHJvdG8gMiAxCgoJLy8gZXhhbXBsZXMvbWVya2xlL21lcmtsZS5hbGdvLnRzOjI3CgkvLyByZXR1cm4gc2hhMjU2KGxlZnQgKyByaWdodCk7CglmcmFtZV9kaWcgLTEgLy8gbGVmdDogYnl0ZXMzMgoJZnJhbWVfZGlnIC0yIC8vIHJpZ2h0OiBieXRlczMyCgljb25jYXQKCXNoYTI1NgoJcmV0c3ViCgovLyBpc1JpZ2h0U2libGluZyhlbGVtOiBCcmFuY2gpOiBib29sZWFuCmlzUmlnaHRTaWJsaW5nOgoJcHJvdG8gMSAxCgoJLy8gZXhhbXBsZXMvbWVya2xlL21lcmtsZS5hbGdvLnRzOjMxCgkvLyByZXR1cm4gZ2V0Ynl0ZShlbGVtLCAwKSA9PT0gUklHSFRfU0lCTElOR19QUkVGSVg7CglmcmFtZV9kaWcgLTEgLy8gZWxlbTogQnJhbmNoCglpbnRjIDIgLy8gMAoJZ2V0Ynl0ZQoJcHVzaGludCAxNzAKCT09CglyZXRzdWIKCi8vIGNhbGNSb290KGxlYWY6IGJ5dGVzMzIsIHBhdGg6IFBhdGgpOiBieXRlczMyCmNhbGNSb290OgoJcHJvdG8gMiAxCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCWR1cAoKCS8vIGV4YW1wbGVzL21lcmtsZS9tZXJrbGUuYWxnby50czozNwoJLy8gZm9yIChsZXQgaSA9IDA7IGkgPCBUUkVFX0RFUFRIOyBpID0gaSArIDEpCglpbnRjIDIgLy8gMAoJZnJhbWVfYnVyeSAwIC8vIGk6IHVpbnQ2NAoKKmZvcl8xOgoJLy8gZXhhbXBsZXMvbWVya2xlL21lcmtsZS5hbGdvLnRzOjM3CgkvLyBpIDwgVFJFRV9ERVBUSAoJZnJhbWVfZGlnIDAgLy8gaTogdWludDY0CglpbnRjIDQgLy8gMwoJPAoJYnogKmZvcl8xX2VuZAoJZnJhbWVfZGlnIDAgLy8gaTogdWludDY0CglmcmFtZV9idXJ5IDEgLy8gYWNjZXNzb3I6IGFjY2Vzc29yLy8wLy9lbGVtCgoJLy8gKmlmMF9jb25kaXRpb24KCS8vIGV4YW1wbGVzL21lcmtsZS9tZXJrbGUuYWxnby50czo0MAoJLy8gdGhpcy5pc1JpZ2h0U2libGluZyhlbGVtKQoJZnJhbWVfZGlnIC0yIC8vIHBhdGg6IFBhdGgKCWZyYW1lX2RpZyAxIC8vIHNhdmVkIGFjY2Vzc29yOiBhY2Nlc3Nvci8vMC8vZWxlbQoJaW50YyAxIC8vIDMzCgkqIC8vIGFjYyAqIHR5cGVMZW5ndGgKCWludGMgMSAvLyAzMwoJZXh0cmFjdDMKCWNhbGxzdWIgaXNSaWdodFNpYmxpbmcKCWJ6ICppZjBfZWxzZQoKCS8vICppZjBfY29uc2VxdWVudAoJLy8gZXhhbXBsZXMvbWVya2xlL21lcmtsZS5hbGdvLnRzOjQxCgkvLyByZXN1bHQgPSB0aGlzLmhhc2hDb25jYXQocmVzdWx0LCBleHRyYWN0MyhlbGVtLCAxLCAzMikgYXMgYnl0ZXMzMikKCWZyYW1lX2RpZyAtMiAvLyBwYXRoOiBQYXRoCglmcmFtZV9kaWcgMSAvLyBzYXZlZCBhY2Nlc3NvcjogYWNjZXNzb3IvLzAvL2VsZW0KCWludGMgMSAvLyAzMwoJKiAvLyBhY2MgKiB0eXBlTGVuZ3RoCglpbnRjIDEgLy8gMzMKCWV4dHJhY3QzCglleHRyYWN0IDEgMzIKCWJ5dGVjIDMgLy8gMHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCgljb25jYXQKCWR1cAoJZXh0cmFjdCAzMiAwCglieXRlYyAwIC8vIDB4CgliPT0KCWFzc2VydAoJZXh0cmFjdCAwIDMyCglmcmFtZV9kaWcgLTEgLy8gbGVhZjogYnl0ZXMzMgoJY2FsbHN1YiBoYXNoQ29uY2F0CglmcmFtZV9idXJ5IC0xIC8vIHJlc3VsdDogYnl0ZXMzMgoJYiAqaWYwX2VuZAoKKmlmMF9lbHNlOgoJLy8gZXhhbXBsZXMvbWVya2xlL21lcmtsZS5hbGdvLnRzOjQzCgkvLyByZXN1bHQgPSB0aGlzLmhhc2hDb25jYXQoZXh0cmFjdDMoZWxlbSwgMSwgMzIpIGFzIGJ5dGVzMzIsIHJlc3VsdCkKCWZyYW1lX2RpZyAtMSAvLyBsZWFmOiBieXRlczMyCglmcmFtZV9kaWcgLTIgLy8gcGF0aDogUGF0aAoJZnJhbWVfZGlnIDEgLy8gc2F2ZWQgYWNjZXNzb3I6IGFjY2Vzc29yLy8wLy9lbGVtCglpbnRjIDEgLy8gMzMKCSogLy8gYWNjICogdHlwZUxlbmd0aAoJaW50YyAxIC8vIDMzCglleHRyYWN0MwoJZXh0cmFjdCAxIDMyCglieXRlYyAzIC8vIDB4MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAoJY29uY2F0CglkdXAKCWV4dHJhY3QgMzIgMAoJYnl0ZWMgMCAvLyAweAoJYj09Cglhc3NlcnQKCWV4dHJhY3QgMCAzMgoJY2FsbHN1YiBoYXNoQ29uY2F0CglmcmFtZV9idXJ5IC0xIC8vIHJlc3VsdDogYnl0ZXMzMgoKKmlmMF9lbmQ6CgoqZm9yXzFfY29udGludWU6CgkvLyBleGFtcGxlcy9tZXJrbGUvbWVya2xlLmFsZ28udHM6MzcKCS8vIGkgPSBpICsgMQoJZnJhbWVfZGlnIDAgLy8gaTogdWludDY0CglpbnRjIDAgLy8gMQoJKwoJZnJhbWVfYnVyeSAwIC8vIGk6IHVpbnQ2NAoJYiAqZm9yXzEKCipmb3JfMV9lbmQ6CgkvLyBleGFtcGxlcy9tZXJrbGUvbWVya2xlLmFsZ28udHM6NDcKCS8vIHJldHVybiByZXN1bHQ7CglmcmFtZV9kaWcgLTEgLy8gbGVhZjogYnl0ZXMzMgoKCS8vIHNldCB0aGUgc3Vicm91dGluZSByZXR1cm4gdmFsdWUKCWZyYW1lX2J1cnkgMAoKCS8vIHBvcCBhbGwgbG9jYWwgdmFyaWFibGVzIGZyb20gdGhlIHN0YWNrCglwb3BuIDEKCXJldHN1YgoKLy8gZGVsZXRlQXBwbGljYXRpb24oKXZvaWQKKmFiaV9yb3V0ZV9kZWxldGVBcHBsaWNhdGlvbjoKCS8vIGV4ZWN1dGUgZGVsZXRlQXBwbGljYXRpb24oKXZvaWQKCWNhbGxzdWIgZGVsZXRlQXBwbGljYXRpb24KCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGRlbGV0ZUFwcGxpY2F0aW9uKCk6IHZvaWQKZGVsZXRlQXBwbGljYXRpb246Cglwcm90byAwIDAKCgkvLyBleGFtcGxlcy9tZXJrbGUvbWVya2xlLmFsZ28udHM6NTEKCS8vIHZlcmlmeUFwcENhbGxUeG4odGhpcy50eG4sIHsgc2VuZGVyOiB0aGlzLmFwcC5jcmVhdG9yIH0pCgkvLyB2ZXJpZnkgc2VuZGVyCgl0eG4gU2VuZGVyCgl0eG5hIEFwcGxpY2F0aW9ucyAwCglhcHBfcGFyYW1zX2dldCBBcHBDcmVhdG9yCglwb3AKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJ0aGlzLnR4biIsImZpZWxkIjoic2VuZGVyIiwiZXhwZWN0ZWQiOiJ0aGlzLmFwcC5jcmVhdG9yIn0KCWFzc2VydAoJcmV0c3ViCgovLyBjcmVhdGVBcHBsaWNhdGlvbigpdm9pZAoqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uOgoJLy8gZXhlY3V0ZSBjcmVhdGVBcHBsaWNhdGlvbigpdm9pZAoJY2FsbHN1YiBjcmVhdGVBcHBsaWNhdGlvbgoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gY3JlYXRlQXBwbGljYXRpb24oKTogdm9pZApjcmVhdGVBcHBsaWNhdGlvbjoKCXByb3RvIDAgMAoKCS8vIGV4YW1wbGVzL21lcmtsZS9tZXJrbGUuYWxnby50czo1NQoJLy8gdGhpcy5yb290LnZhbHVlID0gdGhpcy5jYWxjSW5pdFJvb3QoKQoJYnl0ZWMgMSAvLyAgInJvb3QiCgljYWxsc3ViIGNhbGNJbml0Um9vdAoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKLy8gdmVyaWZ5KGJ5dGVbXSxieXRlWzMzXVszXSl2b2lkCiphYmlfcm91dGVfdmVyaWZ5OgoJLy8gcGF0aDogYnl0ZVszM11bM10KCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWR1cAoJbGVuCglpbnRjIDMgLy8gOTkKCT09CgoJLy8gYXJndW1lbnQgMCAocGF0aCkgZm9yIHZlcmlmeSBtdXN0IGJlIGEgYnl0ZVszM11bM10KCWFzc2VydAoKCS8vIGRhdGE6IGJ5dGVbXQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZXh0cmFjdCAyIDAKCgkvLyBleGVjdXRlIHZlcmlmeShieXRlW10sYnl0ZVszM11bM10pdm9pZAoJY2FsbHN1YiB2ZXJpZnkKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHZlcmlmeShkYXRhOiBieXRlcywgcGF0aDogUGF0aCk6IHZvaWQKdmVyaWZ5OgoJcHJvdG8gMiAwCgoJLy8gZXhhbXBsZXMvbWVya2xlL21lcmtsZS5hbGdvLnRzOjU5CgkvLyBhc3NlcnQodGhpcy5yb290LnZhbHVlID09PSB0aGlzLmNhbGNSb290KHNoYTI1NihkYXRhKSwgcGF0aCkpCglieXRlYyAxIC8vICAicm9vdCIKCWFwcF9nbG9iYWxfZ2V0CglmcmFtZV9kaWcgLTIgLy8gcGF0aDogUGF0aAoJZnJhbWVfZGlnIC0xIC8vIGRhdGE6IGJ5dGVzCglzaGEyNTYKCWNhbGxzdWIgY2FsY1Jvb3QKCT09Cglhc3NlcnQKCXJldHN1YgoKLy8gYXBwZW5kTGVhZihieXRlW10sYnl0ZVszM11bM10pdm9pZAoqYWJpX3JvdXRlX2FwcGVuZExlYWY6CgkvLyBwYXRoOiBieXRlWzMzXVszXQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJZHVwCglsZW4KCWludGMgMyAvLyA5OQoJPT0KCgkvLyBhcmd1bWVudCAwIChwYXRoKSBmb3IgYXBwZW5kTGVhZiBtdXN0IGJlIGEgYnl0ZVszM11bM10KCWFzc2VydAoKCS8vIGRhdGE6IGJ5dGVbXQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZXh0cmFjdCAyIDAKCgkvLyBleGVjdXRlIGFwcGVuZExlYWYoYnl0ZVtdLGJ5dGVbMzNdWzNdKXZvaWQKCWNhbGxzdWIgYXBwZW5kTGVhZgoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gYXBwZW5kTGVhZihkYXRhOiBieXRlcywgcGF0aDogUGF0aCk6IHZvaWQKYXBwZW5kTGVhZjoKCXByb3RvIDIgMAoKCS8vIGV4YW1wbGVzL21lcmtsZS9tZXJrbGUuYWxnby50czo2MwoJLy8gYXNzZXJ0KGRhdGEgIT09ICcnKQoJZnJhbWVfZGlnIC0xIC8vIGRhdGE6IGJ5dGVzCglieXRlYyAwIC8vICAiIgoJIT0KCWFzc2VydAoKCS8vIGV4YW1wbGVzL21lcmtsZS9tZXJrbGUuYWxnby50czo2NAoJLy8gYXNzZXJ0KHRoaXMucm9vdC52YWx1ZSA9PT0gdGhpcy5jYWxjUm9vdChoZXgoRU1QVFlfSEFTSCkgYXMgYnl0ZXMzMiwgcGF0aCkpCglieXRlYyAxIC8vICAicm9vdCIKCWFwcF9nbG9iYWxfZ2V0CglmcmFtZV9kaWcgLTIgLy8gcGF0aDogUGF0aAoJYnl0ZWMgMiAvLyAweGUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwCglieXRlYyAwIC8vIDB4CglkdXAKCWI9PQoJYXNzZXJ0CglleHRyYWN0IDAgMzIKCWNhbGxzdWIgY2FsY1Jvb3QKCT09Cglhc3NlcnQKCgkvLyBleGFtcGxlcy9tZXJrbGUvbWVya2xlLmFsZ28udHM6NjYKCS8vIHRoaXMucm9vdC52YWx1ZSA9IHRoaXMuY2FsY1Jvb3Qoc2hhMjU2KGRhdGEpLCBwYXRoKQoJYnl0ZWMgMSAvLyAgInJvb3QiCglmcmFtZV9kaWcgLTIgLy8gcGF0aDogUGF0aAoJZnJhbWVfZGlnIC0xIC8vIGRhdGE6IGJ5dGVzCglzaGEyNTYKCWNhbGxzdWIgY2FsY1Jvb3QKCWFwcF9nbG9iYWxfcHV0CgoJLy8gZXhhbXBsZXMvbWVya2xlL21lcmtsZS5hbGdvLnRzOjY4CgkvLyB0aGlzLnNpemUudmFsdWUgPSB0aGlzLnNpemUudmFsdWUgKyAxCglieXRlYyA0IC8vICAic2l6ZSIKCWR1cAoJYXBwX2dsb2JhbF9nZXQKCWludGMgMCAvLyAxCgkrCglhcHBfZ2xvYmFsX3B1dAoJcmV0c3ViCgovLyB1cGRhdGVMZWFmKGJ5dGVbXSxieXRlW10sYnl0ZVszM11bM10pdm9pZAoqYWJpX3JvdXRlX3VwZGF0ZUxlYWY6CgkvLyBwYXRoOiBieXRlWzMzXVszXQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwoJZHVwCglsZW4KCWludGMgMyAvLyA5OQoJPT0KCgkvLyBhcmd1bWVudCAwIChwYXRoKSBmb3IgdXBkYXRlTGVhZiBtdXN0IGJlIGEgYnl0ZVszM11bM10KCWFzc2VydAoKCS8vIG5ld0RhdGE6IGJ5dGVbXQoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJZXh0cmFjdCAyIDAKCgkvLyBvbGREYXRhOiBieXRlW10KCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWV4dHJhY3QgMiAwCgoJLy8gZXhlY3V0ZSB1cGRhdGVMZWFmKGJ5dGVbXSxieXRlW10sYnl0ZVszM11bM10pdm9pZAoJY2FsbHN1YiB1cGRhdGVMZWFmCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyB1cGRhdGVMZWFmKG9sZERhdGE6IGJ5dGVzLCBuZXdEYXRhOiBieXRlcywgcGF0aDogUGF0aCk6IHZvaWQKdXBkYXRlTGVhZjoKCXByb3RvIDMgMAoKCS8vIGV4YW1wbGVzL21lcmtsZS9tZXJrbGUuYWxnby50czo3MgoJLy8gYXNzZXJ0KG5ld0RhdGEgIT09ICcnKQoJZnJhbWVfZGlnIC0yIC8vIG5ld0RhdGE6IGJ5dGVzCglieXRlYyAwIC8vICAiIgoJIT0KCWFzc2VydAoKCS8vIGV4YW1wbGVzL21lcmtsZS9tZXJrbGUuYWxnby50czo3MwoJLy8gYXNzZXJ0KHRoaXMucm9vdC52YWx1ZSA9PT0gdGhpcy5jYWxjUm9vdChzaGEyNTYob2xkRGF0YSksIHBhdGgpKQoJYnl0ZWMgMSAvLyAgInJvb3QiCglhcHBfZ2xvYmFsX2dldAoJZnJhbWVfZGlnIC0zIC8vIHBhdGg6IFBhdGgKCWZyYW1lX2RpZyAtMSAvLyBvbGREYXRhOiBieXRlcwoJc2hhMjU2CgljYWxsc3ViIGNhbGNSb290Cgk9PQoJYXNzZXJ0CgoJLy8gZXhhbXBsZXMvbWVya2xlL21lcmtsZS5hbGdvLnRzOjc1CgkvLyB0aGlzLnJvb3QudmFsdWUgPSB0aGlzLmNhbGNSb290KHNoYTI1NihuZXdEYXRhKSwgcGF0aCkKCWJ5dGVjIDEgLy8gICJyb290IgoJZnJhbWVfZGlnIC0zIC8vIHBhdGg6IFBhdGgKCWZyYW1lX2RpZyAtMiAvLyBuZXdEYXRhOiBieXRlcwoJc2hhMjU2CgljYWxsc3ViIGNhbGNSb290CglhcHBfZ2xvYmFsX3B1dAoJcmV0c3ViCgoqY3JlYXRlX05vT3A6CglwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjcmVhdGUgTm9PcAoJZXJyCgoqY2FsbF9Ob09wOgoJcHVzaGJ5dGVzIDB4NTA2Y2I4ZDggLy8gbWV0aG9kICJ2ZXJpZnkoYnl0ZVtdLGJ5dGVbMzNdWzNdKXZvaWQiCglwdXNoYnl0ZXMgMHgwNGY2MzIzOCAvLyBtZXRob2QgImFwcGVuZExlYWYoYnl0ZVtdLGJ5dGVbMzNdWzNdKXZvaWQiCglwdXNoYnl0ZXMgMHgyNTVkOTNlMyAvLyBtZXRob2QgInVwZGF0ZUxlYWYoYnl0ZVtdLGJ5dGVbXSxieXRlWzMzXVszXSl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV92ZXJpZnkgKmFiaV9yb3V0ZV9hcHBlbmRMZWFmICphYmlfcm91dGVfdXBkYXRlTGVhZgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKKmNhbGxfRGVsZXRlQXBwbGljYXRpb246CglwdXNoYnl0ZXMgMHgyNDg3YzMyYyAvLyBtZXRob2QgImRlbGV0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9kZWxldGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIERlbGV0ZUFwcGxpY2F0aW9uCgllcnI=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiAFASEAYwMmBQAEcm9vdEDjsMRCmPwcFJr79MiZb7kkJ65B5GSbk0yklZkbeFK4VQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABHNpemUxGBSBBgsxGQiNDAGCAAAAAAAAAAABoAF0AAAAAAAAAAAAAACKAAEoSSooSahEVwAgjAAkjAGLASEEDEEAEYsAiwBQAYwAiwEiCIwBQv/niwCMAEYBiYoCAYv/i/5QAYmKAQGL/yRVgaoBEomKAgEoSSSMAIsAIQQMQQBaiwCMAYv+iwEjCyNYiP/VQQAhi/6LASMLI1hXASArUElXIAAoqERXACCL/4j/rIz/QgAei/+L/osBIwsjWFcBICtQSVcgACioRFcAIIj/i4z/iwAiCIwAQv+ei/+MAEYBiYgAAiJDigAAMQA2MgByB0gSRImIAAIiQ4oAACmI/yhniTYaAkkVJRJENhoBVwIAiAACIkOKAgApZIv+i/8BiP9OEkSJNhoCSRUlEkQ2GgFXAgCIAAIiQ4oCAIv/KBNEKWSL/iooSahEVwAgiP8hEkQpi/6L/wGI/xZnJwRJZCIIZ4k2GgNJFSUSRDYaAlcCADYaAVcCAIgAAiJDigMAi/4oE0QpZIv9i/8BiP7iEkQpi/2L/gGI/tdniYAEuER7NjYaAI4B/0wAgARQbLjYgAQE9jI4gAQlXZPjNhoAjgP/PP9f/50AgAQkh8MsNhoAjgH/DQA=","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -185,11 +185,97 @@ export type MethodReturn<TSignature extends MerkleTreeSignatures> = MerkleTreeTy
 export type GlobalKeysState = MerkleTreeTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type MerkleTreeCreateCallParams =
+  | Expand<CallParams<MerkleTreeArgs['obj']['createApplication()void'] | MerkleTreeArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<MerkleTreeArgs['obj']['createApplication()void'] | MerkleTreeArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type MerkleTreeDeleteCallParams =
+  | Expand<CallParams<MerkleTreeArgs['obj']['deleteApplication()void'] | MerkleTreeArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication'}>
+  | Expand<CallParams<MerkleTreeArgs['obj']['deleteApplication()void'] | MerkleTreeArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type MerkleTreeDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: MerkleTreeCreateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: MerkleTreeDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the MerkleTree smart contract
  */
 export abstract class MerkleTreeParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends MerkleTreeCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return MerkleTreeParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the MerkleTree smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<MerkleTreeArgs['obj']['createApplication()void'] | MerkleTreeArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends MerkleTreeDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'deleteApplication':
+          case 'deleteApplication()void':
+            return MerkleTreeParamsFactory.delete.deleteApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the MerkleTree smart contract using the deleteApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      deleteApplication(params: CallParams<MerkleTreeArgs['obj']['deleteApplication()void'] | MerkleTreeArgs['tuple']['deleteApplication()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'deleteApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the verify(byte[],byte[33][3])void ABI method
    *
@@ -231,6 +317,164 @@ export abstract class MerkleTreeParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the MerkleTree smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class MerkleTreeFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `MerkleTreeFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new MerkleTreeClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new MerkleTreeClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the MerkleTree smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: MerkleTreeDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? MerkleTreeParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (MerkleTreeCreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? MerkleTreeParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (MerkleTreeDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new MerkleTreeClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MerkleTree smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<MerkleTreeArgs['obj']['createApplication()void'] | MerkleTreeArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(MerkleTreeParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the MerkleTree smart contract using the deleteApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      deleteApplication: (params: CallParams<MerkleTreeArgs['obj']['deleteApplication()void'] | MerkleTreeArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(MerkleTreeParamsFactory.delete.deleteApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MerkleTree smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<MerkleTreeArgs['obj']['createApplication()void'] | MerkleTreeArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(MerkleTreeParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the MerkleTree smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<MerkleTreeArgs['obj']['createApplication()void'] | MerkleTreeArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(MerkleTreeParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | MerkleTreeReturns['createApplication()void']) }, appClient: new MerkleTreeClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the MerkleTree smart contract
  */
@@ -311,6 +555,22 @@ export class MerkleTreeClient {
    */
   readonly params = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the MerkleTree smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      deleteApplication: (params: CallParams<MerkleTreeArgs['obj']['deleteApplication()void'] | MerkleTreeArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.params.delete(MerkleTreeParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the MerkleTree smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -357,6 +617,22 @@ export class MerkleTreeClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the MerkleTree smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      deleteApplication: (params: CallParams<MerkleTreeArgs['obj']['deleteApplication()void'] | MerkleTreeArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(MerkleTreeParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the MerkleTree smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -402,6 +678,23 @@ export class MerkleTreeClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the MerkleTree smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      deleteApplication: async (params: CallParams<MerkleTreeArgs['obj']['deleteApplication()void'] | MerkleTreeArgs['tuple']['deleteApplication()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(MerkleTreeParamsFactory.delete.deleteApplication(params))
+        return {...result, return: result.return as unknown as (undefined | MerkleTreeReturns['deleteApplication()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the MerkleTree smart contract.
      *
@@ -516,6 +809,15 @@ export class MerkleTreeClient {
         resultMappers.push(undefined)
         return this
       },
+      get delete() {
+        return {
+          deleteApplication: (params: CallParams<MerkleTreeArgs['obj']['deleteApplication()void'] | MerkleTreeArgs['tuple']['deleteApplication()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.deleteApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the MerkleTree contract
        */
@@ -577,6 +879,20 @@ export type MerkleTreeComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   updateLeaf(params?: CallParams<MerkleTreeArgs['obj']['updateLeaf(byte[],byte[],byte[33][3])void'] | MerkleTreeArgs['tuple']['updateLeaf(byte[],byte[],byte[33][3])void']>): MerkleTreeComposer<[...TReturns, MerkleTreeReturns['updateLeaf(byte[],byte[],byte[33][3])void'] | undefined]>
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the MerkleTree smart contract using the deleteApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    deleteApplication(params?: CallParams<MerkleTreeArgs['obj']['deleteApplication()void'] | MerkleTreeArgs['tuple']['deleteApplication()void']>): MerkleTreeComposer<[...TReturns, MerkleTreeReturns['deleteApplication()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the MerkleTree smart contract.

@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ABITestTypedVarFromStorage","desc":"","methods":[{"name":"typedVarFromStorage","args":[{"name":"key","type":"uint32"}],"returns":{"type":"byte[32]"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"boxMapTest":{"keyType":"uint32","valueType":"byte[32]"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[39],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":24},{"pc":[54],"errorMessage":"argument 0 (key) for typedVarFromStorage must be a uint32","teal":39},{"pc":[79],"errorMessage":"box value does not exist: this.boxMapTest(key).value","teal":69},{"pc":[98],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":85},{"pc":[112],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":93}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ABITestTypedVarFromStorage","desc":"","methods":[{"name":"typedVarFromStorage","args":[{"name":"key","type":"uint32"}],"returns":{"type":"byte[32]"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"boxMapTest":{"keyType":"uint32","valueType":"byte[32]"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[39],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":24},{"pc":[54],"errorMessage":"argument 0 (key) for typedVarFromStorage must be a uint32","teal":39},{"pc":[79],"errorMessage":"box value does not exist: this.boxMapTest(key).value","teal":69},{"pc":[98],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":85},{"pc":[112],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":93}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxCgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwNy4yCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIHRlbiBsaW5lcyBvZiBURUFMIGhhbmRsZSBpbml0aWFsIHByb2dyYW0gZmxvdwovLyBUaGlzIHBhdHRlcm4gaXMgdXNlZCB0byBtYWtlIGl0IGVhc3kgZm9yIGFueW9uZSB0byBwYXJzZSB0aGUgc3RhcnQgb2YgdGhlIHByb2dyYW0gYW5kIGRldGVybWluZSBpZiBhIHNwZWNpZmljIGFjdGlvbiBpcyBhbGxvd2VkCi8vIEhlcmUsIGFjdGlvbiByZWZlcnMgdG8gdGhlIE9uQ29tcGxldGUgaW4gY29tYmluYXRpb24gd2l0aCB3aGV0aGVyIHRoZSBhcHAgaXMgYmVpbmcgY3JlYXRlZCBvciBjYWxsZWQKLy8gRXZlcnkgcG9zc2libGUgYWN0aW9uIGZvciB0aGlzIGNvbnRyYWN0IGlzIHJlcHJlc2VudGVkIGluIHRoZSBzd2l0Y2ggc3RhdGVtZW50Ci8vIElmIHRoZSBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoZSBjb250cmFjdCwgaXRzIHJlc3BlY3RpdmUgYnJhbmNoIHdpbGwgYmUgIipOT1RfSU1QTEVNRU5URUQiIHdoaWNoIGp1c3QgY29udGFpbnMgImVyciIKdHhuIEFwcGxpY2F0aW9uSUQKIQpwdXNoaW50IDYKKgp0eG4gT25Db21wbGV0aW9uCisKc3dpdGNoICpjYWxsX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gdHlwZWRWYXJGcm9tU3RvcmFnZSh1aW50MzIpYnl0ZVszMl0KKmFiaV9yb3V0ZV90eXBlZFZhckZyb21TdG9yYWdlOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglwdXNoYnl0ZXMgMHgxNTFmN2M3NQoKCS8vIGtleTogdWludDMyCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJcHVzaGludCA0Cgk9PQoKCS8vIGFyZ3VtZW50IDAgKGtleSkgZm9yIHR5cGVkVmFyRnJvbVN0b3JhZ2UgbXVzdCBiZSBhIHVpbnQzMgoJYXNzZXJ0CglidG9pCgoJLy8gZXhlY3V0ZSB0eXBlZFZhckZyb21TdG9yYWdlKHVpbnQzMilieXRlWzMyXQoJY2FsbHN1YiB0eXBlZFZhckZyb21TdG9yYWdlCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gdHlwZWRWYXJGcm9tU3RvcmFnZShrZXk6IHVpbnQ8MzI+KTogYnl0ZXMzMgp0eXBlZFZhckZyb21TdG9yYWdlOgoJcHJvdG8gMSAxCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCXB1c2hieXRlcyAweAoKCS8vIHRlc3RzL2NvbnRyYWN0cy9hYmkuYWxnby50czoxMzAwCgkvLyB2YWx1ZTogYnl0ZXMzMiA9IHRoaXMuYm94TWFwVGVzdChrZXkpLnZhbHVlCglmcmFtZV9kaWcgLTEgLy8ga2V5OiB1aW50PDMyPgoJaXRvYgoJZXh0cmFjdCA0IDQKCWZyYW1lX2J1cnkgMCAvLyBzdG9yYWdlIGtleS8vdmFsdWUKCgkvLyB0ZXN0cy9jb250cmFjdHMvYWJpLmFsZ28udHM6MTMwMgoJLy8gcmV0dXJuIHZhbHVlOwoJZnJhbWVfZGlnIDAgLy8gc3RvcmFnZSBrZXkvL3ZhbHVlCglib3hfZ2V0CgoJLy8gYm94IHZhbHVlIGRvZXMgbm90IGV4aXN0OiB0aGlzLmJveE1hcFRlc3Qoa2V5KS52YWx1ZQoJYXNzZXJ0CgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCglyZXRzdWIKCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CglpbnRjIDAgLy8gMQoJcmV0dXJuCgoqY3JlYXRlX05vT3A6CglwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjcmVhdGUgTm9PcAoJZXJyCgoqY2FsbF9Ob09wOgoJcHVzaGJ5dGVzIDB4NGM1MjlmNTUgLy8gbWV0aG9kICJ0eXBlZFZhckZyb21TdG9yYWdlKHVpbnQzMilieXRlWzMyXSIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfdHlwZWRWYXJGcm9tU3RvcmFnZQoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiABATEYFIEGCzEZCI0MADwAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAIAEFR98dTYaAUkVgQQSRBeIAARQsCJDigEBgACL/xZXBASMAIsAvkSMAIkiQ4AEuER7NjYaAI4B//EAgARMUp9VNhoAjgH/uAA=","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -156,11 +156,57 @@ export type MethodReturn<TSignature extends AbiTestTypedVarFromStorageSignatures
 export type BoxKeysState = AbiTestTypedVarFromStorageTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AbiTestTypedVarFromStorageCreateCallParams =
+  | Expand<CallParams<AbiTestTypedVarFromStorageArgs['obj']['createApplication()void'] | AbiTestTypedVarFromStorageArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<AbiTestTypedVarFromStorageArgs['obj']['createApplication()void'] | AbiTestTypedVarFromStorageArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AbiTestTypedVarFromStorageDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AbiTestTypedVarFromStorageCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AbiTestTypedVarFromStorage smart contract
  */
 export abstract class AbiTestTypedVarFromStorageParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends AbiTestTypedVarFromStorageCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return AbiTestTypedVarFromStorageParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the ABITestTypedVarFromStorage smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<AbiTestTypedVarFromStorageArgs['obj']['createApplication()void'] | AbiTestTypedVarFromStorageArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the typedVarFromStorage(uint32)byte[32] ABI method
    *
@@ -176,6 +222,148 @@ export abstract class AbiTestTypedVarFromStorageParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ABITestTypedVarFromStorage smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AbiTestTypedVarFromStorageFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AbiTestTypedVarFromStorageFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AbiTestTypedVarFromStorageClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AbiTestTypedVarFromStorageClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ABITestTypedVarFromStorage smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AbiTestTypedVarFromStorageDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? AbiTestTypedVarFromStorageParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (AbiTestTypedVarFromStorageCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new AbiTestTypedVarFromStorageClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestTypedVarFromStorage smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<AbiTestTypedVarFromStorageArgs['obj']['createApplication()void'] | AbiTestTypedVarFromStorageArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(AbiTestTypedVarFromStorageParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestTypedVarFromStorage smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<AbiTestTypedVarFromStorageArgs['obj']['createApplication()void'] | AbiTestTypedVarFromStorageArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(AbiTestTypedVarFromStorageParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestTypedVarFromStorage smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<AbiTestTypedVarFromStorageArgs['obj']['createApplication()void'] | AbiTestTypedVarFromStorageArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(AbiTestTypedVarFromStorageParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | AbiTestTypedVarFromStorageReturns['createApplication()void']) }, appClient: new AbiTestTypedVarFromStorageClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ABITestTypedVarFromStorage smart contract
  */

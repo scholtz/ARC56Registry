@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"NonABIExample","desc":"","methods":[{"name":"abiAdd","args":[{"name":"x","type":"uint64"},{"name":"y","type":"uint64"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[42],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[142],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":119}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"NonABIExample","desc":"","methods":[{"name":"abiAdd","args":[{"name":"x","type":"uint64"},{"name":"y","type":"uint64"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[42],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[142],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":119}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxCmJ5dGVjYmxvY2sgMHgKCi8vIFRoaXMgVEVBTCB3YXMgZ2VuZXJhdGVkIGJ5IFRFQUxTY3JpcHQgdjAuMTA3LjIKLy8gaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9URUFMU2NyaXB0CgovLyAhISEhIFdBUk5JTkc6IFRoaXMgY29udHJhY3QgaXMgKk5PVCogQVJDNCBjb21wbGlhbnQuIEl0IG1heSBjb250YWluIEFCSSBtZXRob2RzLCBidXQgaXQgYWxzbyBhbGxvd3MgYXBwIGNhbGxzIHdoZXJlIHRoZSBmaXJzdCBhcmd1bWVudCBkb2VzIE5PVCBtYXRjaCBhbiBBQkkgc2VsZWN0b3IKCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCnB1c2hpbnQgNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY2FsbF9VcGRhdGVBcHBsaWNhdGlvbiAqTk9UX0lNUExFTUVOVEVEICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gYWRkKHg6IHVpbnQ2NCwgeTogdWludDY0KTogdWludDY0CmFkZDoKCXByb3RvIDIgMQoKCS8vIGV4YW1wbGVzL25vbl9hYmkvbm9uX2FiaS5hbGdvLnRzOjYKCS8vIHJldHVybiB4ICsgeTsKCWZyYW1lX2RpZyAtMSAvLyB4OiB1aW50NjQKCWZyYW1lX2RpZyAtMiAvLyB5OiB1aW50NjQKCSsKCXJldHN1YgoKLy8gYWJpQWRkKHVpbnQ2NCx1aW50NjQpdWludDY0CiphYmlfcm91dGVfYWJpQWRkOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglwdXNoYnl0ZXMgMHgxNTFmN2M3NQoKCS8vIHk6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJYnRvaQoKCS8vIHg6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGV4ZWN1dGUgYWJpQWRkKHVpbnQ2NCx1aW50NjQpdWludDY0CgljYWxsc3ViIGFiaUFkZAoJaXRvYgoJY29uY2F0Cglsb2cKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGFiaUFkZCh4OiB1aW50NjQsIHk6IHVpbnQ2NCk6IHVpbnQ2NAphYmlBZGQ6Cglwcm90byAyIDEKCgkvLyBleGFtcGxlcy9ub25fYWJpL25vbl9hYmkuYWxnby50czoxMAoJLy8gcmV0dXJuIHRoaXMuYWRkKHgsIHkpOwoJZnJhbWVfZGlnIC0yIC8vIHk6IHVpbnQ2NAoJZnJhbWVfZGlnIC0xIC8vIHg6IHVpbnQ2NAoJY2FsbHN1YiBhZGQKCXJldHN1YgoKLy8gbm9uQWJpQWRkKCk6IHZvaWQKbm9uQWJpQWRkOgoJcHJvdG8gMCAwCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCWR1cAoKCS8vIGV4YW1wbGVzL25vbl9hYmkvbm9uX2FiaS5hbGdvLnRzOjE1CgkvLyB4ID0gYnRvaSh0aGlzLnR4bi5hcHBsaWNhdGlvbkFyZ3MhWzBdKQoJdHhuIEFwcGxpY2F0aW9uQXJncyAwCglidG9pCglmcmFtZV9idXJ5IDAgLy8geDogdWludDY0CgoJLy8gZXhhbXBsZXMvbm9uX2FiaS9ub25fYWJpLmFsZ28udHM6MTYKCS8vIHkgPSBidG9pKHRoaXMudHhuLmFwcGxpY2F0aW9uQXJncyFbMV0pCgl0eG4gQXBwbGljYXRpb25BcmdzIDEKCWJ0b2kKCWZyYW1lX2J1cnkgMSAvLyB5OiB1aW50NjQKCgkvLyBleGFtcGxlcy9ub25fYWJpL25vbl9hYmkuYWxnby50czoxNwoJLy8gbG9nKGl0b2IodGhpcy5hZGQoeCwgeSkpKQoJZnJhbWVfZGlnIDEgLy8geTogdWludDY0CglmcmFtZV9kaWcgMCAvLyB4OiB1aW50NjQKCWNhbGxzdWIgYWRkCglpdG9iCglsb2cKCXJldHN1YgoKLy8gbm9uQWJpVXBkYXRlKCk6IHZvaWQKbm9uQWJpVXBkYXRlOgoJcHJvdG8gMCAwCgoJLy8gZXhhbXBsZXMvbm9uX2FiaS9ub25fYWJpLmFsZ28udHM6MjIKCS8vIGxvZygnVXBkYXRlZCEnKQoJcHVzaGJ5dGVzIDB4NTU3MDY0NjE3NDY1NjQyMSAvLyAiVXBkYXRlZCEiCglsb2cKCXJldHN1YgoKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCWludGMgMCAvLyAxCglyZXR1cm4KCipjcmVhdGVfTm9PcDoKCXB1c2hieXRlcyAweGI4NDQ3YjM2IC8vIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNyZWF0ZSBOb09wCgllcnIKCipjYWxsX05vT3A6CglwdXNoYnl0ZXMgMHhiOGI4NDQ4NCAvLyBtZXRob2QgImFiaUFkZCh1aW50NjQsdWludDY0KXVpbnQ2NCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfYWJpQWRkCgoJLy8gISEhISBXQVJOSU5HOiBub24tQUJJIHJvdXRpbmcKCWNhbGxzdWIgbm9uQWJpQWRkCglpbnRjIDAgLy8gMQoJcmV0dXJuCgoqY2FsbF9VcGRhdGVBcHBsaWNhdGlvbjoKCS8vICEhISEgV0FSTklORzogbm9uLUFCSSByb3V0aW5nCgljYWxsc3ViIG5vbkFiaVVwZGF0ZQoJaW50YyAwIC8vIDEKCXJldHVybg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiABASYBADEYFIEGCzEZCI0MAGUAAAAAAAAAdwAAAFcAAAAAAAAAAAAAAIoCAYv/i/4IiYAEFR98dTYaAhc2GgEXiAAFFlCwIkOKAgGL/ov/iP/XiYoAAChJNhoAF4wANhoBF4wBiwGLAIj/vhawiYoAAIAIVXBkYXRlZCGwiSJDgAS4RHs2NhoAjgH/8QCABLi4RIQ2GgCOAf+YiP+2IkOI/8wiQw==","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -141,11 +141,57 @@ export type MethodArgs<TSignature extends NonAbiExampleSignatures> = NonAbiExamp
 export type MethodReturn<TSignature extends NonAbiExampleSignatures> = NonAbiExampleTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type NonAbiExampleCreateCallParams =
+  | Expand<CallParams<NonAbiExampleArgs['obj']['createApplication()void'] | NonAbiExampleArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<NonAbiExampleArgs['obj']['createApplication()void'] | NonAbiExampleArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type NonAbiExampleDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: NonAbiExampleCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the NonAbiExample smart contract
  */
 export abstract class NonAbiExampleParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends NonAbiExampleCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return NonAbiExampleParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the NonABIExample smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<NonAbiExampleArgs['obj']['createApplication()void'] | NonAbiExampleArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the abiAdd(uint64,uint64)uint64 ABI method
    *
@@ -161,6 +207,148 @@ export abstract class NonAbiExampleParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the NonABIExample smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class NonAbiExampleFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `NonAbiExampleFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new NonAbiExampleClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new NonAbiExampleClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the NonABIExample smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: NonAbiExampleDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? NonAbiExampleParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (NonAbiExampleCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new NonAbiExampleClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NonABIExample smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<NonAbiExampleArgs['obj']['createApplication()void'] | NonAbiExampleArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(NonAbiExampleParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NonABIExample smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<NonAbiExampleArgs['obj']['createApplication()void'] | NonAbiExampleArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(NonAbiExampleParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NonABIExample smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<NonAbiExampleArgs['obj']['createApplication()void'] | NonAbiExampleArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(NonAbiExampleParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | NonAbiExampleReturns['createApplication()void']) }, appClient: new NonAbiExampleClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the NonABIExample smart contract
  */

@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ABITestNestedArrayInBox","desc":"","methods":[{"name":"nestedArrayInBox","args":[],"returns":{"type":"(byte[4][],uint64,uint64,uint64,bool)","struct":"T10"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"T10":[{"name":"bytes4Array","type":"byte[4][]"},{"name":"u64a","type":"uint64"},{"name":"u64b","type":"uint64"},{"name":"u64c","type":"uint64"},{"name":"boolValue","type":"bool"}]},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"bMap":{"keyType":"AVMBytes","valueType":"T10"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[48],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[143],"errorMessage":"box value does not exist: this.bMap('bMap').value","teal":81},{"pc":[160],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":94},{"pc":[174],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":102}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ABITestNestedArrayInBox","desc":"","methods":[{"name":"nestedArrayInBox","args":[],"returns":{"type":"(byte[4][],uint64,uint64,uint64,bool)","struct":"T10"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"T10":[{"name":"bytes4Array","type":"byte[4][]"},{"name":"u64a","type":"uint64"},{"name":"u64b","type":"uint64"},{"name":"u64c","type":"uint64"},{"name":"boolValue","type":"bool"}]},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"bMap":{"keyType":"AVMBytes","valueType":"T10"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[48],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[143],"errorMessage":"box value does not exist: this.bMap('bMap').value","teal":81},{"pc":[160],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":94},{"pc":[174],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":102}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAwIDEKYnl0ZWNibG9jayAweDYyNGQ2MTcwIDB4CgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwNy4yCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIHRlbiBsaW5lcyBvZiBURUFMIGhhbmRsZSBpbml0aWFsIHByb2dyYW0gZmxvdwovLyBUaGlzIHBhdHRlcm4gaXMgdXNlZCB0byBtYWtlIGl0IGVhc3kgZm9yIGFueW9uZSB0byBwYXJzZSB0aGUgc3RhcnQgb2YgdGhlIHByb2dyYW0gYW5kIGRldGVybWluZSBpZiBhIHNwZWNpZmljIGFjdGlvbiBpcyBhbGxvd2VkCi8vIEhlcmUsIGFjdGlvbiByZWZlcnMgdG8gdGhlIE9uQ29tcGxldGUgaW4gY29tYmluYXRpb24gd2l0aCB3aGV0aGVyIHRoZSBhcHAgaXMgYmVpbmcgY3JlYXRlZCBvciBjYWxsZWQKLy8gRXZlcnkgcG9zc2libGUgYWN0aW9uIGZvciB0aGlzIGNvbnRyYWN0IGlzIHJlcHJlc2VudGVkIGluIHRoZSBzd2l0Y2ggc3RhdGVtZW50Ci8vIElmIHRoZSBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoZSBjb250cmFjdCwgaXRzIHJlc3BlY3RpdmUgYnJhbmNoIHdpbGwgYmUgIipOT1RfSU1QTEVNRU5URUQiIHdoaWNoIGp1c3QgY29udGFpbnMgImVyciIKdHhuIEFwcGxpY2F0aW9uSUQKIQpwdXNoaW50IDYKKgp0eG4gT25Db21wbGV0aW9uCisKc3dpdGNoICpjYWxsX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gbmVzdGVkQXJyYXlJbkJveCgpKGJ5dGVbNF1bXSx1aW50NjQsdWludDY0LHVpbnQ2NCxib29sKQoqYWJpX3JvdXRlX25lc3RlZEFycmF5SW5Cb3g6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCXB1c2hieXRlcyAweDE1MWY3Yzc1CgoJLy8gZXhlY3V0ZSBuZXN0ZWRBcnJheUluQm94KCkoYnl0ZVs0XVtdLHVpbnQ2NCx1aW50NjQsdWludDY0LGJvb2wpCgljYWxsc3ViIG5lc3RlZEFycmF5SW5Cb3gKCWNvbmNhdAoJbG9nCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBuZXN0ZWRBcnJheUluQm94KCk6IFQxMApuZXN0ZWRBcnJheUluQm94OgoJcHJvdG8gMCAxCgoJLy8gdGVzdHMvY29udHJhY3RzL2FiaS5hbGdvLnRzOjE2NDEKCS8vIHRoaXMuYk1hcCgnYk1hcCcpLnZhbHVlID0gewoJLy8gICAgICAgYnl0ZXM0QXJyYXk6IFsnYWJjZCcgYXMgYnl0ZXM8ND4sICdlZmdoJyBhcyBieXRlczw0Pl0sCgkvLyAgICAgICB1NjRhOiAxLAoJLy8gICAgICAgdTY0YjogMiwKCS8vICAgICAgIHU2NGM6IDMsCgkvLyAgICAgICBib29sVmFsdWU6IGZhbHNlLAoJLy8gICAgIH0KCWJ5dGVjIDAgLy8gICJiTWFwIgoJZHVwCglib3hfZGVsCglwb3AKCWJ5dGVjIDEgLy8gIGluaXRpYWwgaGVhZAoJYnl0ZWMgMSAvLyAgaW5pdGlhbCB0YWlsCglwdXNoYnl0ZXMgMHgwMDFiIC8vIGluaXRpYWwgaGVhZCBvZmZzZXQKCXB1c2hieXRlcyAweDAwMDI2MTYyNjM2NDY1NjY2NzY4CgljYWxsc3ViICpwcm9jZXNzX2R5bmFtaWNfdHVwbGVfZWxlbWVudAoJcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDAwMQoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDAwMgoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJcHVzaGJ5dGVzIDB4MDAwMDAwMDAwMDAwMDAwMwoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJcHVzaGJ5dGVzIDB4MDAKCWludGMgMCAvLyAwCglkdXAKCXNldGJpdAoJY2FsbHN1YiAqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudAoJcG9wIC8vIHBvcCBoZWFkIG9mZnNldAoJY29uY2F0IC8vIGNvbmNhdCBoZWFkIGFuZCB0YWlsCglib3hfcHV0CgoJLy8gdGVzdHMvY29udHJhY3RzL2FiaS5hbGdvLnRzOjE2NDkKCS8vIHJldHVybiB0aGlzLmJNYXAoJ2JNYXAnKS52YWx1ZTsKCWJ5dGVjIDAgLy8gICJiTWFwIgoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5iTWFwKCdiTWFwJykudmFsdWUKCWFzc2VydAoJcmV0c3ViCgoqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uOgoJaW50YyAxIC8vIDEKCXJldHVybgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweGEwN2NhMGM4IC8vIG1ldGhvZCAibmVzdGVkQXJyYXlJbkJveCgpKGJ5dGVbNF1bXSx1aW50NjQsdWludDY0LHVpbnQ2NCxib29sKSIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfbmVzdGVkQXJyYXlJbkJveAoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKKnByb2Nlc3Nfc3RhdGljX3R1cGxlX2VsZW1lbnQ6Cglwcm90byA0IDMKCWZyYW1lX2RpZyAtNCAvLyB0dXBsZSBoZWFkCglmcmFtZV9kaWcgLTEgLy8gZWxlbWVudAoJY29uY2F0CglmcmFtZV9kaWcgLTMgLy8gdHVwbGUgdGFpbAoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0CglyZXRzdWIKCipwcm9jZXNzX2R5bmFtaWNfdHVwbGVfZWxlbWVudDoKCXByb3RvIDQgMwoJZnJhbWVfZGlnIC00IC8vIHR1cGxlIGhlYWQKCWZyYW1lX2RpZyAtMiAvLyBoZWFkIG9mZnNldAoJY29uY2F0CglmcmFtZV9idXJ5IC00IC8vIHR1cGxlIGhlYWQKCWZyYW1lX2RpZyAtMSAvLyBlbGVtZW50CglkdXAKCWxlbgoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0CglidG9pCgkrCglpdG9iCglleHRyYWN0IDYgMgoJZnJhbWVfYnVyeSAtMiAvLyBoZWFkIG9mZnNldAoJZnJhbWVfZGlnIC0zIC8vIHR1cGxlIHRhaWwKCXN3YXAKCWNvbmNhdAoJZnJhbWVfYnVyeSAtMyAvLyB0dXBsZSB0YWlsCglmcmFtZV9kaWcgLTQgLy8gdHVwbGUgaGVhZAoJZnJhbWVfZGlnIC0zIC8vIHR1cGxlIHRhaWwKCWZyYW1lX2RpZyAtMiAvLyBoZWFkIG9mZnNldAoJcmV0c3Vi","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiACAAEmAgRiTWFwADEYFIEGCzEZCI0MAHEAAAAAAAAAAAAAAGMAAAAAAAAAAAAAAIAEFR98dYgABFCwI0OKAAEoSbxIKSmAAgAbgAoAAmFiY2RlZmdoiABigAgAAAAAAAAAAYgASIAIAAAAAAAAAAKIADuACAAAAAAAAAADiAAugAEAIklUiAAlSFC/KL5EiSNDgAS4RHs2NhoAjgH/8QCABKB8oMg2GgCOAf+DAIoEA4v8i/9Qi/2L/omKBAOL/Iv+UIz8i/9JFYv+FwgWVwYCjP6L/UxQjP2L/Iv9i/6J","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -172,11 +172,57 @@ export type MethodReturn<TSignature extends AbiTestNestedArrayInBoxSignatures> =
 export type BoxKeysState = AbiTestNestedArrayInBoxTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AbiTestNestedArrayInBoxCreateCallParams =
+  | Expand<CallParams<AbiTestNestedArrayInBoxArgs['obj']['createApplication()void'] | AbiTestNestedArrayInBoxArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<AbiTestNestedArrayInBoxArgs['obj']['createApplication()void'] | AbiTestNestedArrayInBoxArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AbiTestNestedArrayInBoxDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AbiTestNestedArrayInBoxCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AbiTestNestedArrayInBox smart contract
  */
 export abstract class AbiTestNestedArrayInBoxParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends AbiTestNestedArrayInBoxCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return AbiTestNestedArrayInBoxParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the ABITestNestedArrayInBox smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<AbiTestNestedArrayInBoxArgs['obj']['createApplication()void'] | AbiTestNestedArrayInBoxArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the nestedArrayInBox()(byte[4][],uint64,uint64,uint64,bool) ABI method
    *
@@ -192,6 +238,148 @@ export abstract class AbiTestNestedArrayInBoxParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ABITestNestedArrayInBox smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AbiTestNestedArrayInBoxFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AbiTestNestedArrayInBoxFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AbiTestNestedArrayInBoxClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AbiTestNestedArrayInBoxClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ABITestNestedArrayInBox smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AbiTestNestedArrayInBoxDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? AbiTestNestedArrayInBoxParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (AbiTestNestedArrayInBoxCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new AbiTestNestedArrayInBoxClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestNestedArrayInBox smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<AbiTestNestedArrayInBoxArgs['obj']['createApplication()void'] | AbiTestNestedArrayInBoxArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(AbiTestNestedArrayInBoxParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestNestedArrayInBox smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<AbiTestNestedArrayInBoxArgs['obj']['createApplication()void'] | AbiTestNestedArrayInBoxArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(AbiTestNestedArrayInBoxParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestNestedArrayInBox smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<AbiTestNestedArrayInBoxArgs['obj']['createApplication()void'] | AbiTestNestedArrayInBoxArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(AbiTestNestedArrayInBoxParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | AbiTestNestedArrayInBoxReturns['createApplication()void']) }, appClient: new AbiTestNestedArrayInBoxClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ABITestNestedArrayInBox smart contract
  */

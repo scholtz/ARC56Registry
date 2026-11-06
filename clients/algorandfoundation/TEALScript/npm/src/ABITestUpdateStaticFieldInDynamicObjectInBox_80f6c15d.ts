@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ABITestUpdateStaticFieldInDynamicObjectInBox","desc":"","methods":[{"name":"updateStaticFieldInDynamicObjectInBox","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"{ addr: Address; str: string }":[{"name":"addr","type":"address"},{"name":"str","type":"string"}]},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"bMap":{"keyType":"string","valueType":"{ addr: Address; str: string }"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[49],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[113],"errorMessage":"box value does not exist: this.bMap('bMap').value","teal":72},{"pc":[131],"errorMessage":"box value does not exist: this.bMap('bMap').value","teal":91},{"pc":[173],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":120},{"pc":[187],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":128}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ABITestUpdateStaticFieldInDynamicObjectInBox","desc":"","methods":[{"name":"updateStaticFieldInDynamicObjectInBox","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"{ addr: Address; str: string }":[{"name":"addr","type":"address"},{"name":"str","type":"string"}]},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"bMap":{"keyType":"string","valueType":"{ addr: Address; str: string }"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[49],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[113],"errorMessage":"box value does not exist: this.bMap('bMap').value","teal":72},{"pc":[131],"errorMessage":"box value does not exist: this.bMap('bMap').value","teal":91},{"pc":[173],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":120},{"pc":[187],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":128}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxCmJ5dGVjYmxvY2sgMHgwMDA0NjI0ZDYxNzAgMHgKCi8vIFRoaXMgVEVBTCB3YXMgZ2VuZXJhdGVkIGJ5IFRFQUxTY3JpcHQgdjAuMTA3LjIKLy8gaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9URUFMU2NyaXB0CgovLyBUaGlzIGNvbnRyYWN0IGlzIGNvbXBsaWFudCB3aXRoIGFuZC9vciBpbXBsZW1lbnRzIHRoZSBmb2xsb3dpbmcgQVJDczogWyBBUkM0IF0KCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCnB1c2hpbnQgNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKmNyZWF0ZV9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRAoKKk5PVF9JTVBMRU1FTlRFRDoKCS8vIFRoZSByZXF1ZXN0ZWQgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGlzIGNvbnRyYWN0LiBBcmUgeW91IHVzaW5nIHRoZSBjb3JyZWN0IE9uQ29tcGxldGU/IERpZCB5b3Ugc2V0IHlvdXIgYXBwIElEPwoJZXJyCgovLyB1cGRhdGVTdGF0aWNGaWVsZEluRHluYW1pY09iamVjdEluQm94KClzdHJpbmcKKmFiaV9yb3V0ZV91cGRhdGVTdGF0aWNGaWVsZEluRHluYW1pY09iamVjdEluQm94OgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglwdXNoYnl0ZXMgMHgxNTFmN2M3NQoKCS8vIGV4ZWN1dGUgdXBkYXRlU3RhdGljRmllbGRJbkR5bmFtaWNPYmplY3RJbkJveCgpc3RyaW5nCgljYWxsc3ViIHVwZGF0ZVN0YXRpY0ZpZWxkSW5EeW5hbWljT2JqZWN0SW5Cb3gKCWR1cAoJbGVuCglpdG9iCglleHRyYWN0IDYgMgoJc3dhcAoJY29uY2F0Cgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gdXBkYXRlU3RhdGljRmllbGRJbkR5bmFtaWNPYmplY3RJbkJveCgpOiBzdHJpbmcKdXBkYXRlU3RhdGljRmllbGRJbkR5bmFtaWNPYmplY3RJbkJveDoKCXByb3RvIDAgMQoKCS8vIHRlc3RzL2NvbnRyYWN0cy9hYmkuYWxnby50czoxNTczCgkvLyB0aGlzLmJNYXAoJ2JNYXAnKS52YWx1ZSA9IHsgYWRkcjogdGhpcy50eG4uc2VuZGVyLCBzdHI6ICdIZWxsbyBXb3JsZCEnIH0KCWJ5dGVjIDAgLy8gMHgwMDA0NjI0ZDYxNzAKCWR1cAoJYm94X2RlbAoJcG9wCglieXRlYyAxIC8vICBpbml0aWFsIGhlYWQKCWJ5dGVjIDEgLy8gIGluaXRpYWwgdGFpbAoJcHVzaGJ5dGVzIDB4MDAyMiAvLyBpbml0aWFsIGhlYWQgb2Zmc2V0Cgl0eG4gU2VuZGVyCgljYWxsc3ViICpwcm9jZXNzX3N0YXRpY190dXBsZV9lbGVtZW50CglwdXNoYnl0ZXMgMHgwMDBjNDg2NTZjNmM2ZjIwNTc2ZjcyNmM2NDIxCgljYWxsc3ViICpwcm9jZXNzX2R5bmFtaWNfdHVwbGVfZWxlbWVudAoJcG9wIC8vIHBvcCBoZWFkIG9mZnNldAoJY29uY2F0IC8vIGNvbmNhdCBoZWFkIGFuZCB0YWlsCglib3hfcHV0CgoJLy8gdGVzdHMvY29udHJhY3RzL2FiaS5hbGdvLnRzOjE1NzUKCS8vIHRoaXMuYk1hcCgnYk1hcCcpLnZhbHVlLmFkZHIgPSB0aGlzLnR4bi5zZW5kZXIKCWJ5dGVjIDAgLy8gMHgwMDA0NjI0ZDYxNzAKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMuYk1hcCgnYk1hcCcpLnZhbHVlCglhc3NlcnQKCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5Cglsb2FkIDI1NSAvLyBmdWxsIGFycmF5CglwdXNoaW50IDAKCXR4biBTZW5kZXIKCXJlcGxhY2UzCglieXRlYyAwIC8vIDB4MDAwNDYyNGQ2MTcwCglkdXAKCWJveF9kZWwKCXBvcAoJc3dhcAoJYm94X3B1dAoKCS8vIHRlc3RzL2NvbnRyYWN0cy9hYmkuYWxnby50czoxNTc2CgkvLyByZXR1cm4gdGhpcy5iTWFwKCdiTWFwJykudmFsdWUuc3RyOwoJYnl0ZWMgMCAvLyAweDAwMDQ2MjRkNjE3MAoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5iTWFwKCdiTWFwJykudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCXB1c2hpbnQgMzIKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCXVuY292ZXIgMgoJZXh0cmFjdF91aW50MTYKCWR1cCAvLyBkdXBsaWNhdGUgc3RhcnQgb2YgZWxlbWVudAoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJc3dhcAoJZXh0cmFjdF91aW50MTYgLy8gZ2V0IG51bWJlciBvZiBlbGVtZW50cwoJaW50YyAwIC8vICBnZXQgdHlwZSBsZW5ndGgKCSogLy8gbXVsdGlwbHkgYnkgdHlwZSBsZW5ndGgKCXB1c2hpbnQgMgoJKyAvLyBhZGQgdHdvIGZvciBsZW5ndGgKCWV4dHJhY3QzCglleHRyYWN0IDIgMAoJcmV0c3ViCgoqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uOgoJaW50YyAwIC8vIDEKCXJldHVybgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweDE3NzQ0MzJlIC8vIG1ldGhvZCAidXBkYXRlU3RhdGljRmllbGRJbkR5bmFtaWNPYmplY3RJbkJveCgpc3RyaW5nIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV91cGRhdGVTdGF0aWNGaWVsZEluRHluYW1pY09iamVjdEluQm94CgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgTm9PcAoJZXJyCgoqcHJvY2Vzc19zdGF0aWNfdHVwbGVfZWxlbWVudDoKCXByb3RvIDQgMwoJZnJhbWVfZGlnIC00IC8vIHR1cGxlIGhlYWQKCWZyYW1lX2RpZyAtMSAvLyBlbGVtZW50Cgljb25jYXQKCWZyYW1lX2RpZyAtMyAvLyB0dXBsZSB0YWlsCglmcmFtZV9kaWcgLTIgLy8gaGVhZCBvZmZzZXQKCXJldHN1YgoKKnByb2Nlc3NfZHluYW1pY190dXBsZV9lbGVtZW50OgoJcHJvdG8gNCAzCglmcmFtZV9kaWcgLTQgLy8gdHVwbGUgaGVhZAoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0Cgljb25jYXQKCWZyYW1lX2J1cnkgLTQgLy8gdHVwbGUgaGVhZAoJZnJhbWVfZGlnIC0xIC8vIGVsZW1lbnQKCWR1cAoJbGVuCglmcmFtZV9kaWcgLTIgLy8gaGVhZCBvZmZzZXQKCWJ0b2kKCSsKCWl0b2IKCWV4dHJhY3QgNiAyCglmcmFtZV9idXJ5IC0yIC8vIGhlYWQgb2Zmc2V0CglmcmFtZV9kaWcgLTMgLy8gdHVwbGUgdGFpbAoJc3dhcAoJY29uY2F0CglmcmFtZV9idXJ5IC0zIC8vIHR1cGxlIHRhaWwKCWZyYW1lX2RpZyAtNCAvLyB0dXBsZSBoZWFkCglmcmFtZV9kaWcgLTMgLy8gdHVwbGUgdGFpbAoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0CglyZXRzdWI=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiABASYCBgAEYk1hcAAxGBSBBgsxGQiNDAB9AAAAAAAAAAAAAABvAAAAAAAAAAAAAACABBUffHWIAAxJFRZXBgJMUFCwIkOKAAEoSbxIKSmAAgAiMQCIAGOADgAMSGVsbG8gV29ybGQhiABdSFC/KL5ENf80/4EAMQBdKEm8SEy/KL5ENf+BIDT/NP9PAllJNP9MWSILgQIIWFcCAIkiQ4AEuER7NjYaAI4B//EAgAQXdEMuNhoAjgH/dwCKBAOL/Iv/UIv9i/6JigQDi/yL/lCM/Iv/SRWL/hcIFlcGAoz+i/1MUIz9i/yL/Yv+iQ==","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -169,11 +169,57 @@ export type MethodReturn<TSignature extends AbiTestUpdateStaticFieldInDynamicObj
 export type BoxKeysState = AbiTestUpdateStaticFieldInDynamicObjectInBoxTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AbiTestUpdateStaticFieldInDynamicObjectInBoxCreateCallParams =
+  | Expand<CallParams<AbiTestUpdateStaticFieldInDynamicObjectInBoxArgs['obj']['createApplication()void'] | AbiTestUpdateStaticFieldInDynamicObjectInBoxArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<AbiTestUpdateStaticFieldInDynamicObjectInBoxArgs['obj']['createApplication()void'] | AbiTestUpdateStaticFieldInDynamicObjectInBoxArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AbiTestUpdateStaticFieldInDynamicObjectInBoxDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AbiTestUpdateStaticFieldInDynamicObjectInBoxCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AbiTestUpdateStaticFieldInDynamicObjectInBox smart contract
  */
 export abstract class AbiTestUpdateStaticFieldInDynamicObjectInBoxParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends AbiTestUpdateStaticFieldInDynamicObjectInBoxCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return AbiTestUpdateStaticFieldInDynamicObjectInBoxParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the ABITestUpdateStaticFieldInDynamicObjectInBox smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<AbiTestUpdateStaticFieldInDynamicObjectInBoxArgs['obj']['createApplication()void'] | AbiTestUpdateStaticFieldInDynamicObjectInBoxArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the updateStaticFieldInDynamicObjectInBox()string ABI method
    *
@@ -189,6 +235,148 @@ export abstract class AbiTestUpdateStaticFieldInDynamicObjectInBoxParamsFactory 
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ABITestUpdateStaticFieldInDynamicObjectInBox smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AbiTestUpdateStaticFieldInDynamicObjectInBoxFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AbiTestUpdateStaticFieldInDynamicObjectInBoxFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AbiTestUpdateStaticFieldInDynamicObjectInBoxClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AbiTestUpdateStaticFieldInDynamicObjectInBoxClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ABITestUpdateStaticFieldInDynamicObjectInBox smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AbiTestUpdateStaticFieldInDynamicObjectInBoxDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? AbiTestUpdateStaticFieldInDynamicObjectInBoxParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (AbiTestUpdateStaticFieldInDynamicObjectInBoxCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new AbiTestUpdateStaticFieldInDynamicObjectInBoxClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestUpdateStaticFieldInDynamicObjectInBox smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<AbiTestUpdateStaticFieldInDynamicObjectInBoxArgs['obj']['createApplication()void'] | AbiTestUpdateStaticFieldInDynamicObjectInBoxArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(AbiTestUpdateStaticFieldInDynamicObjectInBoxParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestUpdateStaticFieldInDynamicObjectInBox smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<AbiTestUpdateStaticFieldInDynamicObjectInBoxArgs['obj']['createApplication()void'] | AbiTestUpdateStaticFieldInDynamicObjectInBoxArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(AbiTestUpdateStaticFieldInDynamicObjectInBoxParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestUpdateStaticFieldInDynamicObjectInBox smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<AbiTestUpdateStaticFieldInDynamicObjectInBoxArgs['obj']['createApplication()void'] | AbiTestUpdateStaticFieldInDynamicObjectInBoxArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(AbiTestUpdateStaticFieldInDynamicObjectInBoxParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | AbiTestUpdateStaticFieldInDynamicObjectInBoxReturns['createApplication()void']) }, appClient: new AbiTestUpdateStaticFieldInDynamicObjectInBoxClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ABITestUpdateStaticFieldInDynamicObjectInBox smart contract
  */

@@ -2,8 +2,8 @@
 
 - **Repo**: [algorandfoundation/TEALScript](https://github.com/algorandfoundation/TEALScript)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/TEALScript/HEAD/tests/contracts/artifacts/ABITestPlusEqualsObjValueInBox.arc56.json](https://raw.githubusercontent.com/algorandfoundation/TEALScript/HEAD/tests/contracts/artifacts/ABITestPlusEqualsObjValueInBox.arc56.json)
-- **Detected**: 2026-07-19T19:17:18.893278+00:00
-- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
+- **Detected**: 2026-11-06T14:02:53.226313+00:00
+- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.2`
 
 ## Reproduce
 

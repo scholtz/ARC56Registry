@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Simple","desc":"","methods":[{"name":"incr","args":[{"name":"i","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"decr","args":[{"name":"i","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"add","args":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"returns":{"type":"uint256"},"actions":{"create":[],"call":["NoOp"]}},{"name":"sub","args":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"returns":{"type":"uint256"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"counter":{"key":"Y291bnRlcg==","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[90],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[148],"errorMessage":"argument 0 (b) for add must be a uint256","teal":100},{"pc":[156],"errorMessage":"argument 1 (a) for add must be a uint256","teal":110},{"pc":[164],"errorMessage":"add return value overflowed 256 bits","teal":120},{"pc":[195],"errorMessage":"argument 0 (b) for sub must be a uint256","teal":159},{"pc":[203],"errorMessage":"argument 1 (a) for sub must be a uint256","teal":169},{"pc":[211],"errorMessage":"sub return value overflowed 256 bits","teal":179},{"pc":[249],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":215},{"pc":[287],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":226}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Simple","desc":"","methods":[{"name":"incr","args":[{"name":"i","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"decr","args":[{"name":"i","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"add","args":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"returns":{"type":"uint256"},"actions":{"create":[],"call":["NoOp"]}},{"name":"sub","args":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"returns":{"type":"uint256"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"counter":{"key":"Y291bnRlcg==","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[90],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[148],"errorMessage":"argument 0 (b) for add must be a uint256","teal":100},{"pc":[156],"errorMessage":"argument 1 (a) for add must be a uint256","teal":110},{"pc":[164],"errorMessage":"add return value overflowed 256 bits","teal":120},{"pc":[195],"errorMessage":"argument 0 (b) for sub must be a uint256","teal":159},{"pc":[203],"errorMessage":"argument 1 (a) for sub must be a uint256","teal":169},{"pc":[211],"errorMessage":"sub return value overflowed 256 bits","teal":179},{"pc":[249],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":215},{"pc":[287],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":226}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAzMiAxIDI1NgpieXRlY2Jsb2NrIDB4NjM2Zjc1NmU3NDY1NzIgMHhGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGIDB4MTUxZjdjNzUKCi8vIFRoaXMgVEVBTCB3YXMgZ2VuZXJhdGVkIGJ5IFRFQUxTY3JpcHQgdjAuMTA3LjIKLy8gaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9URUFMU2NyaXB0CgovLyBUaGlzIGNvbnRyYWN0IGlzIGNvbXBsaWFudCB3aXRoIGFuZC9vciBpbXBsZW1lbnRzIHRoZSBmb2xsb3dpbmcgQVJDczogWyBBUkM0IF0KCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCnB1c2hpbnQgNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKmNyZWF0ZV9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRAoKKk5PVF9JTVBMRU1FTlRFRDoKCS8vIFRoZSByZXF1ZXN0ZWQgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGlzIGNvbnRyYWN0LiBBcmUgeW91IHVzaW5nIHRoZSBjb3JyZWN0IE9uQ29tcGxldGU/IERpZCB5b3Ugc2V0IHlvdXIgYXBwIElEPwoJZXJyCgovLyBpbmNyZW1lbnRDb3VudGVyKGk6IHVpbnQ2NCk6IHZvaWQKaW5jcmVtZW50Q291bnRlcjoKCXByb3RvIDEgMAoKCS8vIGV4YW1wbGVzL3NpbXBsZS9zaW1wbGUuYWxnby50czo3CgkvLyB0aGlzLmNvdW50ZXIudmFsdWUgPSB0aGlzLmNvdW50ZXIudmFsdWUgKyBpCglieXRlYyAwIC8vICAiY291bnRlciIKCWR1cAoJYXBwX2dsb2JhbF9nZXQKCWZyYW1lX2RpZyAtMSAvLyBpOiB1aW50NjQKCSsKCWFwcF9nbG9iYWxfcHV0CglyZXRzdWIKCi8vIGluY3IodWludDY0KXZvaWQKKmFiaV9yb3V0ZV9pbmNyOgoJLy8gaTogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBpbmNyKHVpbnQ2NCl2b2lkCgljYWxsc3ViIGluY3IKCWludGMgMSAvLyAxCglyZXR1cm4KCi8vIGluY3IoaTogdWludDY0KTogdm9pZAppbmNyOgoJcHJvdG8gMSAwCgoJLy8gZXhhbXBsZXMvc2ltcGxlL3NpbXBsZS5hbGdvLnRzOjExCgkvLyB0aGlzLmluY3JlbWVudENvdW50ZXIoaSkKCWZyYW1lX2RpZyAtMSAvLyBpOiB1aW50NjQKCWNhbGxzdWIgaW5jcmVtZW50Q291bnRlcgoJcmV0c3ViCgovLyBkZWNyKHVpbnQ2NCl2b2lkCiphYmlfcm91dGVfZGVjcjoKCS8vIGk6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGV4ZWN1dGUgZGVjcih1aW50NjQpdm9pZAoJY2FsbHN1YiBkZWNyCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBkZWNyKGk6IHVpbnQ2NCk6IHZvaWQKZGVjcjoKCXByb3RvIDEgMAoKCS8vIGV4YW1wbGVzL3NpbXBsZS9zaW1wbGUuYWxnby50czoxNQoJLy8gdGhpcy5jb3VudGVyLnZhbHVlID0gdGhpcy5jb3VudGVyLnZhbHVlIC0gaQoJYnl0ZWMgMCAvLyAgImNvdW50ZXIiCglkdXAKCWFwcF9nbG9iYWxfZ2V0CglmcmFtZV9kaWcgLTEgLy8gaTogdWludDY0CgktCglhcHBfZ2xvYmFsX3B1dAoJcmV0c3ViCgovLyBhZGQodWludDI1Nix1aW50MjU2KXVpbnQyNTYKKmFiaV9yb3V0ZV9hZGQ6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDIgLy8gMHgxNTFmN2M3NQoKCS8vIGI6IHVpbnQyNTYKCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWR1cAoJbGVuCglpbnRjIDAgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMCAoYikgZm9yIGFkZCBtdXN0IGJlIGEgdWludDI1NgoJYXNzZXJ0CgoJLy8gYTogdWludDI1NgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMCAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAxIChhKSBmb3IgYWRkIG11c3QgYmUgYSB1aW50MjU2Cglhc3NlcnQKCgkvLyBleGVjdXRlIGFkZCh1aW50MjU2LHVpbnQyNTYpdWludDI1NgoJY2FsbHN1YiBhZGQKCWR1cAoJYml0bGVuCglpbnRjIDIgLy8gMjU2Cgk8PQoKCS8vIGFkZCByZXR1cm4gdmFsdWUgb3ZlcmZsb3dlZCAyNTYgYml0cwoJYXNzZXJ0CglieXRlYyAxIC8vIDB4RkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRgoJYiYKCWR1cAoJbGVuCglkdXAKCWludGMgMCAvLyAzMgoJLQoJc3dhcAoJc3Vic3RyaW5nMwoJY29uY2F0Cglsb2cKCWludGMgMSAvLyAxCglyZXR1cm4KCi8vIGFkZChhOiB1aW50MjU2LCBiOiB1aW50MjU2KTogdWludDI1NgphZGQ6Cglwcm90byAyIDEKCgkvLyBleGFtcGxlcy9zaW1wbGUvc2ltcGxlLmFsZ28udHM6MTkKCS8vIHJldHVybiBhICsgYjsKCWZyYW1lX2RpZyAtMSAvLyBhOiB1aW50MjU2CglmcmFtZV9kaWcgLTIgLy8gYjogdWludDI1NgoJYisKCXJldHN1YgoKLy8gc3ViKHVpbnQyNTYsdWludDI1Nil1aW50MjU2CiphYmlfcm91dGVfc3ViOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAyIC8vIDB4MTUxZjdjNzUKCgkvLyBiOiB1aW50MjU2Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglkdXAKCWxlbgoJaW50YyAwIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDAgKGIpIGZvciBzdWIgbXVzdCBiZSBhIHVpbnQyNTYKCWFzc2VydAoKCS8vIGE6IHVpbnQyNTYKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDAgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMSAoYSkgZm9yIHN1YiBtdXN0IGJlIGEgdWludDI1NgoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBzdWIodWludDI1Nix1aW50MjU2KXVpbnQyNTYKCWNhbGxzdWIgc3ViCglkdXAKCWJpdGxlbgoJaW50YyAyIC8vIDI1NgoJPD0KCgkvLyBzdWIgcmV0dXJuIHZhbHVlIG92ZXJmbG93ZWQgMjU2IGJpdHMKCWFzc2VydAoJYnl0ZWMgMSAvLyAweEZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkYKCWImCglkdXAKCWxlbgoJZHVwCglpbnRjIDAgLy8gMzIKCS0KCXN3YXAKCXN1YnN0cmluZzMKCWNvbmNhdAoJbG9nCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBzdWIoYTogdWludDI1NiwgYjogdWludDI1Nik6IHVpbnQyNTYKc3ViOgoJcHJvdG8gMiAxCgoJLy8gZXhhbXBsZXMvc2ltcGxlL3NpbXBsZS5hbGdvLnRzOjIzCgkvLyByZXR1cm4gYSAtIGI7CglmcmFtZV9kaWcgLTEgLy8gYTogdWludDI1NgoJZnJhbWVfZGlnIC0yIC8vIGI6IHVpbnQyNTYKCWItCglyZXRzdWIKCiphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb246CglpbnRjIDEgLy8gMQoJcmV0dXJuCgoqY3JlYXRlX05vT3A6CglwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjcmVhdGUgTm9PcAoJZXJyCgoqY2FsbF9Ob09wOgoJcHVzaGJ5dGVzIDB4OWZhYjg2MTAgLy8gbWV0aG9kICJpbmNyKHVpbnQ2NCl2b2lkIgoJcHVzaGJ5dGVzIDB4MmUwYzVhNDcgLy8gbWV0aG9kICJkZWNyKHVpbnQ2NCl2b2lkIgoJcHVzaGJ5dGVzIDB4YWM5NzZlMDIgLy8gbWV0aG9kICJhZGQodWludDI1Nix1aW50MjU2KXVpbnQyNTYiCglwdXNoYnl0ZXMgMHgwOTFiMzJhNyAvLyBtZXRob2QgInN1Yih1aW50MjU2LHVpbnQyNTYpdWludDI1NiIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfaW5jciAqYWJpX3JvdXRlX2RlY3IgKmFiaV9yb3V0ZV9hZGQgKmFiaV9yb3V0ZV9zdWIKCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY2FsbCBOb09wCgllcnI=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCgovLyBleGFtcGxlcy9zaW1wbGUvc2ltcGxlLmFsZ28udHM6MjcKLy8gdGhpcy5pbmNyZW1lbnRDb3VudGVyKDEpCmludGNibG9jayAxCmJ5dGVjYmxvY2sgMHg2MzZmNzU2ZTc0NjU3MgppbnRjIDAgLy8gMQpjYWxsc3ViIGluY3JlbWVudENvdW50ZXIKaW50YyAwIC8vIDEKcmV0dXJuCgovLyBpbmNyZW1lbnRDb3VudGVyKGk6IHVpbnQ2NCk6IHZvaWQKaW5jcmVtZW50Q291bnRlcjoKCXByb3RvIDEgMAoKCS8vIGV4YW1wbGVzL3NpbXBsZS9zaW1wbGUuYWxnby50czo3CgkvLyB0aGlzLmNvdW50ZXIudmFsdWUgPSB0aGlzLmNvdW50ZXIudmFsdWUgKyBpCglieXRlYyAwIC8vICAiY291bnRlciIKCWR1cAoJYXBwX2dsb2JhbF9nZXQKCWZyYW1lX2RpZyAtMSAvLyBpOiB1aW50NjQKCSsKCWFwcF9nbG9iYWxfcHV0CglyZXRzdWI="},"byteCode":{"approval":"CiADIAGAAiYDB2NvdW50ZXIg//////////////////////////////////////////8EFR98dTEYFIEGCzEZCI0MAKAAAAAAAAAAAAAAAJIAAAAAAAAAAAAAAIoBAChJZIv/CGeJNhoBF4gAAiNDigEAi/+I/+SJNhoBF4gAAiNDigEAKElki/8JZ4kqNhoCSRUiEkQ2GgFJFSISRIgAEkmTJA5EKaxJFUkiCUxSULAjQ4oCAYv/i/6giSo2GgJJFSISRDYaAUkVIhJEiAASSZMkDkQprEkVSSIJTFJQsCNDigIBi/+L/qGJI0OABLhEezY2GgCOAf/xAIAEn6uGEIAELgxaR4AErJduAoAECRsypzYaAI4E/0f/Wf9t/5wA","clear":"CiABASYBB2NvdW50ZXIiiAACIkOKAQAoSWSL/whniQ=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -188,11 +188,57 @@ export type MethodReturn<TSignature extends SimpleSignatures> = SimpleTypes['met
 export type GlobalKeysState = SimpleTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type SimpleCreateCallParams =
+  | Expand<CallParams<SimpleArgs['obj']['createApplication()void'] | SimpleArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<SimpleArgs['obj']['createApplication()void'] | SimpleArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type SimpleDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: SimpleCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Simple smart contract
  */
 export abstract class SimpleParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends SimpleCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return SimpleParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the Simple smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<SimpleArgs['obj']['createApplication()void'] | SimpleArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the incr(uint64)void ABI method
    *
@@ -247,6 +293,148 @@ export abstract class SimpleParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Simple smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class SimpleFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `SimpleFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new SimpleClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new SimpleClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Simple smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: SimpleDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? SimpleParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (SimpleCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new SimpleClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Simple smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<SimpleArgs['obj']['createApplication()void'] | SimpleArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(SimpleParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Simple smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<SimpleArgs['obj']['createApplication()void'] | SimpleArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(SimpleParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Simple smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<SimpleArgs['obj']['createApplication()void'] | SimpleArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(SimpleParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | SimpleReturns['createApplication()void']) }, appClient: new SimpleClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Simple smart contract
  */

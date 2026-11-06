@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ABITestBoolTupleUpdate","desc":"","methods":[{"name":"boolTupleUpdate","args":[],"returns":{"type":"(bool,bool,bool,bool,bool,bool,bool,bool,bool)"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[41],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":24},{"pc":[129],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":115},{"pc":[143],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":123}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ABITestBoolTupleUpdate","desc":"","methods":[{"name":"boolTupleUpdate","args":[],"returns":{"type":"(bool,bool,bool,bool,bool,bool,bool,bool,bool)"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[41],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":24},{"pc":[129],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":115},{"pc":[143],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":123}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDAgNiA4CgovLyBUaGlzIFRFQUwgd2FzIGdlbmVyYXRlZCBieSBURUFMU2NyaXB0IHYwLjEwNy4yCi8vIGh0dHBzOi8vZ2l0aHViLmNvbS9hbGdvcmFuZGZvdW5kYXRpb24vVEVBTFNjcmlwdAoKLy8gVGhpcyBjb250cmFjdCBpcyBjb21wbGlhbnQgd2l0aCBhbmQvb3IgaW1wbGVtZW50cyB0aGUgZm9sbG93aW5nIEFSQ3M6IFsgQVJDNCBdCgovLyBUaGUgZm9sbG93aW5nIHRlbiBsaW5lcyBvZiBURUFMIGhhbmRsZSBpbml0aWFsIHByb2dyYW0gZmxvdwovLyBUaGlzIHBhdHRlcm4gaXMgdXNlZCB0byBtYWtlIGl0IGVhc3kgZm9yIGFueW9uZSB0byBwYXJzZSB0aGUgc3RhcnQgb2YgdGhlIHByb2dyYW0gYW5kIGRldGVybWluZSBpZiBhIHNwZWNpZmljIGFjdGlvbiBpcyBhbGxvd2VkCi8vIEhlcmUsIGFjdGlvbiByZWZlcnMgdG8gdGhlIE9uQ29tcGxldGUgaW4gY29tYmluYXRpb24gd2l0aCB3aGV0aGVyIHRoZSBhcHAgaXMgYmVpbmcgY3JlYXRlZCBvciBjYWxsZWQKLy8gRXZlcnkgcG9zc2libGUgYWN0aW9uIGZvciB0aGlzIGNvbnRyYWN0IGlzIHJlcHJlc2VudGVkIGluIHRoZSBzd2l0Y2ggc3RhdGVtZW50Ci8vIElmIHRoZSBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoZSBjb250cmFjdCwgaXRzIHJlc3BlY3RpdmUgYnJhbmNoIHdpbGwgYmUgIipOT1RfSU1QTEVNRU5URUQiIHdoaWNoIGp1c3QgY29udGFpbnMgImVyciIKdHhuIEFwcGxpY2F0aW9uSUQKIQppbnRjIDIgLy8gNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKmNyZWF0ZV9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRAoKKk5PVF9JTVBMRU1FTlRFRDoKCS8vIFRoZSByZXF1ZXN0ZWQgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGlzIGNvbnRyYWN0LiBBcmUgeW91IHVzaW5nIHRoZSBjb3JyZWN0IE9uQ29tcGxldGU/IERpZCB5b3Ugc2V0IHlvdXIgYXBwIElEPwoJZXJyCgovLyBib29sVHVwbGVVcGRhdGUoKShib29sLGJvb2wsYm9vbCxib29sLGJvb2wsYm9vbCxib29sLGJvb2wsYm9vbCkKKmFiaV9yb3V0ZV9ib29sVHVwbGVVcGRhdGU6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCXB1c2hieXRlcyAweDE1MWY3Yzc1CgoJLy8gZXhlY3V0ZSBib29sVHVwbGVVcGRhdGUoKShib29sLGJvb2wsYm9vbCxib29sLGJvb2wsYm9vbCxib29sLGJvb2wsYm9vbCkKCWNhbGxzdWIgYm9vbFR1cGxlVXBkYXRlCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gYm9vbFR1cGxlVXBkYXRlKCk6IFtib29sZWFuLCBib29sZWFuLCBib29sZWFuLCBib29sZWFuLCBib29sZWFuLCBib29sZWFuLCBib29sZWFuLCBib29sZWFuLCBib29sZWFuXQpib29sVHVwbGVVcGRhdGU6Cglwcm90byAwIDEKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJcHVzaGJ5dGVzIDB4CgoJLy8gdGVzdHMvY29udHJhY3RzL2FiaS5hbGdvLnRzOjk2NwoJLy8gYTogW2Jvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW5dID0gWwoJLy8gICAgICAgdHJ1ZSwKCS8vICAgICAgIGZhbHNlLAoJLy8gICAgICAgdHJ1ZSwKCS8vICAgICAgIHRydWUsCgkvLyAgICAgICBmYWxzZSwKCS8vICAgICAgIGZhbHNlLAoJLy8gICAgICAgdHJ1ZSwKCS8vICAgICAgIGZhbHNlLAoJLy8gICAgICAgZmFsc2UsCgkvLyAgICAgXQoJcHVzaGJ5dGVzIDB4MDAwMAoJaW50YyAxIC8vIDAKCWludGMgMCAvLyAxCglzZXRiaXQKCWludGMgMCAvLyAxCglpbnRjIDEgLy8gMAoJc2V0Yml0CglwdXNoaW50IDIKCWludGMgMCAvLyAxCglzZXRiaXQKCXB1c2hpbnQgMwoJaW50YyAwIC8vIDEKCXNldGJpdAoJcHVzaGludCA0CglpbnRjIDEgLy8gMAoJc2V0Yml0CglwdXNoaW50IDUKCWludGMgMSAvLyAwCglzZXRiaXQKCWludGMgMiAvLyA2CglpbnRjIDAgLy8gMQoJc2V0Yml0CglwdXNoaW50IDcKCWludGMgMSAvLyAwCglzZXRiaXQKCWludGMgMyAvLyA4CglpbnRjIDEgLy8gMAoJc2V0Yml0CglmcmFtZV9idXJ5IDAgLy8gYTogW2Jvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW5dCgoJLy8gdGVzdHMvY29udHJhY3RzL2FiaS5hbGdvLnRzOjk3OQoJLy8gYVs4XSA9IHRydWUKCWZyYW1lX2RpZyAwIC8vIGE6IFtib29sZWFuLCBib29sZWFuLCBib29sZWFuLCBib29sZWFuLCBib29sZWFuLCBib29sZWFuLCBib29sZWFuLCBib29sZWFuLCBib29sZWFuXQoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWludGMgMyAvLyA4CglpbnRjIDAgLy8gMQoJc2V0Yml0CglmcmFtZV9idXJ5IDAgLy8gYTogW2Jvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW4sIGJvb2xlYW5dCgoJLy8gdGVzdHMvY29udHJhY3RzL2FiaS5hbGdvLnRzOjk4MAoJLy8gcmV0dXJuIGE7CglmcmFtZV9kaWcgMCAvLyBhOiBbYm9vbGVhbiwgYm9vbGVhbiwgYm9vbGVhbiwgYm9vbGVhbiwgYm9vbGVhbiwgYm9vbGVhbiwgYm9vbGVhbiwgYm9vbGVhbiwgYm9vbGVhbl0KCgkvLyBzZXQgdGhlIHN1YnJvdXRpbmUgcmV0dXJuIHZhbHVlCglmcmFtZV9idXJ5IDAKCXJldHN1YgoKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCWludGMgMCAvLyAxCglyZXR1cm4KCipjcmVhdGVfTm9PcDoKCXB1c2hieXRlcyAweGI4NDQ3YjM2IC8vIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNyZWF0ZSBOb09wCgllcnIKCipjYWxsX05vT3A6CglwdXNoYnl0ZXMgMHgyYTE4YmI3ZCAvLyBtZXRob2QgImJvb2xUdXBsZVVwZGF0ZSgpKGJvb2wsYm9vbCxib29sLGJvb2wsYm9vbCxib29sLGJvb2wsYm9vbCxib29sKSIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfYm9vbFR1cGxlVXBkYXRlCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgTm9PcAoJZXJy","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiAEAQAGCDEYFCQLMRkIjQwAWQAAAAAAAAAAAAAASwAAAAAAAAAAAAAAgAQVH3x1iAAEULAiQ4oAAYAAgAIAACMiVCIjVIECIlSBAyJUgQQjVIEFI1QkIlSBByNUJSNUjACLADX/NP8lIlSMAIsAjACJIkOABLhEezY2GgCOAf/xAIAEKhi7fTYaAI4B/5sA","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -138,11 +138,57 @@ export type MethodArgs<TSignature extends AbiTestBoolTupleUpdateSignatures> = Ab
 export type MethodReturn<TSignature extends AbiTestBoolTupleUpdateSignatures> = AbiTestBoolTupleUpdateTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AbiTestBoolTupleUpdateCreateCallParams =
+  | Expand<CallParams<AbiTestBoolTupleUpdateArgs['obj']['createApplication()void'] | AbiTestBoolTupleUpdateArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<AbiTestBoolTupleUpdateArgs['obj']['createApplication()void'] | AbiTestBoolTupleUpdateArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AbiTestBoolTupleUpdateDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AbiTestBoolTupleUpdateCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AbiTestBoolTupleUpdate smart contract
  */
 export abstract class AbiTestBoolTupleUpdateParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends AbiTestBoolTupleUpdateCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return AbiTestBoolTupleUpdateParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the ABITestBoolTupleUpdate smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<AbiTestBoolTupleUpdateArgs['obj']['createApplication()void'] | AbiTestBoolTupleUpdateArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the boolTupleUpdate()(bool,bool,bool,bool,bool,bool,bool,bool,bool) ABI method
    *
@@ -158,6 +204,148 @@ export abstract class AbiTestBoolTupleUpdateParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ABITestBoolTupleUpdate smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AbiTestBoolTupleUpdateFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AbiTestBoolTupleUpdateFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AbiTestBoolTupleUpdateClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AbiTestBoolTupleUpdateClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ABITestBoolTupleUpdate smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AbiTestBoolTupleUpdateDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? AbiTestBoolTupleUpdateParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (AbiTestBoolTupleUpdateCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new AbiTestBoolTupleUpdateClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestBoolTupleUpdate smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<AbiTestBoolTupleUpdateArgs['obj']['createApplication()void'] | AbiTestBoolTupleUpdateArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(AbiTestBoolTupleUpdateParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestBoolTupleUpdate smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<AbiTestBoolTupleUpdateArgs['obj']['createApplication()void'] | AbiTestBoolTupleUpdateArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(AbiTestBoolTupleUpdateParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestBoolTupleUpdate smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<AbiTestBoolTupleUpdateArgs['obj']['createApplication()void'] | AbiTestBoolTupleUpdateArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(AbiTestBoolTupleUpdateParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | AbiTestBoolTupleUpdateReturns['createApplication()void']) }, appClient: new AbiTestBoolTupleUpdateClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ABITestBoolTupleUpdate smart contract
  */

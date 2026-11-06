@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ContactsApp","desc":"","methods":[{"name":"setMyContact","args":[{"name":"name","type":"string"},{"name":"company","type":"string"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"addContact","args":[{"name":"name","type":"string"},{"name":"company","type":"string"},{"name":"address","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateContactField","args":[{"name":"field","type":"string"},{"name":"value","type":"string"},{"name":"address","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"verifyContactName","args":[{"name":"name","type":"string"},{"name":"address","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"Contact":[{"name":"name","type":"string"},{"name":"company","type":"string"}]},"state":{"schema":{"global":{"bytes":1,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{"myContact":{"key":"bXlDb250YWN0","keyType":"AVMBytes","valueType":"(string,string)"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"contacts":{"keyType":"address","valueType":"Contact"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[48],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[133],"errorMessage":"argument 0 (address) for addContact must be a address","teal":100},{"pc":[204],"errorMessage":"argument 0 (address) for updateContactField must be a address","teal":167},{"pc":[240],"errorMessage":"box value does not exist: this.contacts(address).value","teal":201},{"pc":[344],"errorMessage":"box value does not exist: this.contacts(address).value","teal":274},{"pc":[421],"errorMessage":"Invalid field","teal":329},{"pc":[430],"errorMessage":"argument 0 (address) for verifyContactName must be a address","teal":344},{"pc":[448],"errorMessage":"box value does not exist: this.contacts(address).value","teal":365},{"pc":[492],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":397},{"pc":[530],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":408}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ContactsApp","desc":"","methods":[{"name":"setMyContact","args":[{"name":"name","type":"string"},{"name":"company","type":"string"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"addContact","args":[{"name":"name","type":"string"},{"name":"company","type":"string"},{"name":"address","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"updateContactField","args":[{"name":"field","type":"string"},{"name":"value","type":"string"},{"name":"address","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"verifyContactName","args":[{"name":"name","type":"string"},{"name":"address","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"Contact":[{"name":"name","type":"string"},{"name":"company","type":"string"}]},"state":{"schema":{"global":{"bytes":1,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{"myContact":{"key":"bXlDb250YWN0","keyType":"AVMBytes","valueType":"(string,string)"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"contacts":{"keyType":"address","valueType":"Contact"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[48],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[133],"errorMessage":"argument 0 (address) for addContact must be a address","teal":100},{"pc":[204],"errorMessage":"argument 0 (address) for updateContactField must be a address","teal":167},{"pc":[240],"errorMessage":"box value does not exist: this.contacts(address).value","teal":201},{"pc":[344],"errorMessage":"box value does not exist: this.contacts(address).value","teal":274},{"pc":[421],"errorMessage":"Invalid field","teal":329},{"pc":[430],"errorMessage":"argument 0 (address) for verifyContactName must be a address","teal":344},{"pc":[448],"errorMessage":"box value does not exist: this.contacts(address).value","teal":365},{"pc":[492],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":397},{"pc":[530],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":408}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDAgMiAzMgpieXRlY2Jsb2NrIDB4IDB4MDAwNAoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDcuMgovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKcHVzaGludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIHNldE15Q29udGFjdChzdHJpbmcsc3RyaW5nKXZvaWQKKmFiaV9yb3V0ZV9zZXRNeUNvbnRhY3Q6CgkvLyBjb21wYW55OiBzdHJpbmcKCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWV4dHJhY3QgMiAwCgoJLy8gbmFtZTogc3RyaW5nCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglleHRyYWN0IDIgMAoKCS8vIGV4ZWN1dGUgc2V0TXlDb250YWN0KHN0cmluZyxzdHJpbmcpdm9pZAoJY2FsbHN1YiBzZXRNeUNvbnRhY3QKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHNldE15Q29udGFjdChuYW1lOiBzdHJpbmcsIGNvbXBhbnk6IHN0cmluZyk6IHZvaWQKc2V0TXlDb250YWN0OgoJcHJvdG8gMiAwCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCgkvLyBleGFtcGxlcy90dXBsZV9pbl9ib3gvYXBwLmFsZ28udHM6MTIKCS8vIGNvbnRhY3Q6IENvbnRhY3QgPSB7IG5hbWU6IG5hbWUsIGNvbXBhbnk6IGNvbXBhbnkgfQoJYnl0ZWMgMCAvLyAgaW5pdGlhbCBoZWFkCglieXRlYyAwIC8vICBpbml0aWFsIHRhaWwKCWJ5dGVjIDEgLy8gIGluaXRpYWwgaGVhZCBvZmZzZXQKCWZyYW1lX2RpZyAtMSAvLyBuYW1lOiBzdHJpbmcKCWR1cAoJbGVuCglpdG9iCglleHRyYWN0IDYgMgoJc3dhcAoJY29uY2F0CgljYWxsc3ViICpwcm9jZXNzX2R5bmFtaWNfdHVwbGVfZWxlbWVudAoJZnJhbWVfZGlnIC0yIC8vIGNvbXBhbnk6IHN0cmluZwoJZHVwCglsZW4KCWl0b2IKCWV4dHJhY3QgNiAyCglzd2FwCgljb25jYXQKCWNhbGxzdWIgKnByb2Nlc3NfZHluYW1pY190dXBsZV9lbGVtZW50Cglwb3AgLy8gcG9wIGhlYWQgb2Zmc2V0Cgljb25jYXQgLy8gY29uY2F0IGhlYWQgYW5kIHRhaWwKCWZyYW1lX2J1cnkgMCAvLyBjb250YWN0OiBDb250YWN0CgoJLy8gZXhhbXBsZXMvdHVwbGVfaW5fYm94L2FwcC5hbGdvLnRzOjE0CgkvLyB0aGlzLm15Q29udGFjdC52YWx1ZSA9IGNvbnRhY3QKCXB1c2hieXRlcyAweDZkNzk0MzZmNmU3NDYxNjM3NCAvLyAibXlDb250YWN0IgoJZnJhbWVfZGlnIDAgLy8gY29udGFjdDogQ29udGFjdAoJYXBwX2dsb2JhbF9wdXQKCgkvLyBleGFtcGxlcy90dXBsZV9pbl9ib3gvYXBwLmFsZ28udHM6MTUKCS8vIHRoaXMuY29udGFjdHModGhpcy50eG4uc2VuZGVyKS52YWx1ZSA9IGNvbnRhY3QKCXR4biBTZW5kZXIKCWR1cAoJYm94X2RlbAoJcG9wCglmcmFtZV9kaWcgMCAvLyBjb250YWN0OiBDb250YWN0Cglib3hfcHV0CglyZXRzdWIKCi8vIGFkZENvbnRhY3Qoc3RyaW5nLHN0cmluZyxhZGRyZXNzKXZvaWQKKmFiaV9yb3V0ZV9hZGRDb250YWN0OgoJLy8gYWRkcmVzczogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwoJZHVwCglsZW4KCWludGMgMyAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChhZGRyZXNzKSBmb3IgYWRkQ29udGFjdCBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gY29tcGFueTogc3RyaW5nCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglleHRyYWN0IDIgMAoKCS8vIG5hbWU6IHN0cmluZwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZXh0cmFjdCAyIDAKCgkvLyBleGVjdXRlIGFkZENvbnRhY3Qoc3RyaW5nLHN0cmluZyxhZGRyZXNzKXZvaWQKCWNhbGxzdWIgYWRkQ29udGFjdAoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gYWRkQ29udGFjdChuYW1lOiBzdHJpbmcsIGNvbXBhbnk6IHN0cmluZywgYWRkcmVzczogQWRkcmVzcyk6IHZvaWQKYWRkQ29udGFjdDoKCXByb3RvIDMgMAoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAwIC8vIDB4CgoJLy8gZXhhbXBsZXMvdHVwbGVfaW5fYm94L2FwcC5hbGdvLnRzOjE5CgkvLyBjb250YWN0OiBDb250YWN0ID0geyBuYW1lOiBuYW1lLCBjb21wYW55OiBjb21wYW55IH0KCWJ5dGVjIDAgLy8gIGluaXRpYWwgaGVhZAoJYnl0ZWMgMCAvLyAgaW5pdGlhbCB0YWlsCglieXRlYyAxIC8vICBpbml0aWFsIGhlYWQgb2Zmc2V0CglmcmFtZV9kaWcgLTEgLy8gbmFtZTogc3RyaW5nCglkdXAKCWxlbgoJaXRvYgoJZXh0cmFjdCA2IDIKCXN3YXAKCWNvbmNhdAoJY2FsbHN1YiAqcHJvY2Vzc19keW5hbWljX3R1cGxlX2VsZW1lbnQKCWZyYW1lX2RpZyAtMiAvLyBjb21wYW55OiBzdHJpbmcKCWR1cAoJbGVuCglpdG9iCglleHRyYWN0IDYgMgoJc3dhcAoJY29uY2F0CgljYWxsc3ViICpwcm9jZXNzX2R5bmFtaWNfdHVwbGVfZWxlbWVudAoJcG9wIC8vIHBvcCBoZWFkIG9mZnNldAoJY29uY2F0IC8vIGNvbmNhdCBoZWFkIGFuZCB0YWlsCglmcmFtZV9idXJ5IDAgLy8gY29udGFjdDogQ29udGFjdAoKCS8vIGV4YW1wbGVzL3R1cGxlX2luX2JveC9hcHAuYWxnby50czoyMAoJLy8gdGhpcy5jb250YWN0cyhhZGRyZXNzKS52YWx1ZSA9IGNvbnRhY3QKCWZyYW1lX2RpZyAtMyAvLyBhZGRyZXNzOiBBZGRyZXNzCglkdXAKCWJveF9kZWwKCXBvcAoJZnJhbWVfZGlnIDAgLy8gY29udGFjdDogQ29udGFjdAoJYm94X3B1dAoJcmV0c3ViCgovLyB1cGRhdGVDb250YWN0RmllbGQoc3RyaW5nLHN0cmluZyxhZGRyZXNzKXZvaWQKKmFiaV9yb3V0ZV91cGRhdGVDb250YWN0RmllbGQ6CgkvLyBhZGRyZXNzOiBhZGRyZXNzCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAzCglkdXAKCWxlbgoJaW50YyAzIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDAgKGFkZHJlc3MpIGZvciB1cGRhdGVDb250YWN0RmllbGQgbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIHZhbHVlOiBzdHJpbmcKCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWV4dHJhY3QgMiAwCgoJLy8gZmllbGQ6IHN0cmluZwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZXh0cmFjdCAyIDAKCgkvLyBleGVjdXRlIHVwZGF0ZUNvbnRhY3RGaWVsZChzdHJpbmcsc3RyaW5nLGFkZHJlc3Mpdm9pZAoJY2FsbHN1YiB1cGRhdGVDb250YWN0RmllbGQKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHVwZGF0ZUNvbnRhY3RGaWVsZChmaWVsZDogc3RyaW5nLCB2YWx1ZTogc3RyaW5nLCBhZGRyZXNzOiBBZGRyZXNzKTogdm9pZAp1cGRhdGVDb250YWN0RmllbGQ6Cglwcm90byAzIDAKCgkvLyAqaWYwX2NvbmRpdGlvbgoJLy8gZXhhbXBsZXMvdHVwbGVfaW5fYm94L2FwcC5hbGdvLnRzOjI0CgkvLyBmaWVsZCA9PT0gJ25hbWUnCglmcmFtZV9kaWcgLTEgLy8gZmllbGQ6IHN0cmluZwoJcHVzaGJ5dGVzIDB4NmU2MTZkNjUgLy8gIm5hbWUiCgk9PQoJYnogKmlmMF9lbHNlaWYxX2NvbmRpdGlvbgoKCS8vICppZjBfY29uc2VxdWVudAoJLy8gZXhhbXBsZXMvdHVwbGVfaW5fYm94L2FwcC5hbGdvLnRzOjI1CgkvLyB0aGlzLmNvbnRhY3RzKGFkZHJlc3MpLnZhbHVlLm5hbWUgPSB2YWx1ZQoJZnJhbWVfZGlnIC0zIC8vIGFkZHJlc3M6IEFkZHJlc3MKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMuY29udGFjdHMoYWRkcmVzcykudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWludGMgMSAvLyAwCglkdXAKCXN0b3JlIDI1MSAvLyBlbGVtZW50IGhlYWQgb2Zmc2V0Cglsb2FkIDI1NSAvLyBmdWxsIGFycmF5Cglsb2FkIDI1NSAvLyBmdWxsIGFycmF5Cgl1bmNvdmVyIDIKCWV4dHJhY3RfdWludDE2CglkdXAKCXN0b3JlIDI1NCAvLyBlbGVtZW50IHN0YXJ0CglkdXAgLy8gZHVwbGljYXRlIHN0YXJ0IG9mIGVsZW1lbnQKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCXN3YXAKCWV4dHJhY3RfdWludDE2IC8vIGdldCBudW1iZXIgb2YgZWxlbWVudHMKCWludGMgMCAvLyAgZ2V0IHR5cGUgbGVuZ3RoCgkqIC8vIG11bHRpcGx5IGJ5IHR5cGUgbGVuZ3RoCglpbnRjIDIgLy8gMgoJKyAvLyBhZGQgdHdvIGZvciBsZW5ndGgKCXN0b3JlIDI1MyAvLyBlbGVtZW50IGxlbmd0aAoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJaW50YyAxIC8vIDAKCWxvYWQgMjU0IC8vIGVsZW1lbnQgc3RhcnQKCXN1YnN0cmluZzMKCWZyYW1lX2RpZyAtMiAvLyB2YWx1ZTogc3RyaW5nCglkdXAKCWxlbgoJaXRvYgoJZXh0cmFjdCA2IDIKCXN3YXAKCWNvbmNhdAoJZHVwCglzdG9yZSAyNTIgLy8gbmV3IGVsZW1lbnQKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU0IC8vIGVsZW1lbnQgc3RhcnQKCWxvYWQgMjUzIC8vIGVsZW1lbnQgbGVuZ3RoCgkrIC8vIGdldCBlbmQgb2YgRWxlbWVudAoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJbGVuCglzdWJzdHJpbmczCgljb25jYXQKCWNvbmNhdAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWNhbGxzdWIgKmdldF9sZW5ndGhfZGlmZmVyZW5jZQoJbG9hZCAyNTAgLy8gbGVuZ3RoIGRpZmZlcmVuY2UKCWxvYWQgMjUxIC8vIGVsZW1lbnQgaGVhZCBvZmZzZXQKCWludGMgMiAvLyAyCgkrIC8vIGhlYWQgb2ZzZXQKCWNhbGxzdWIgKnVwZGF0ZV9keW5hbWljX2hlYWQKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWZyYW1lX2RpZyAtMyAvLyBhZGRyZXNzOiBBZGRyZXNzCglkdXAKCWJveF9kZWwKCXBvcAoJc3dhcAoJYm94X3B1dAoJYiAqaWYwX2VuZAoKKmlmMF9lbHNlaWYxX2NvbmRpdGlvbjoKCS8vIGV4YW1wbGVzL3R1cGxlX2luX2JveC9hcHAuYWxnby50czoyNgoJLy8gZmllbGQgPT09ICdjb21wYW55JwoJZnJhbWVfZGlnIC0xIC8vIGZpZWxkOiBzdHJpbmcKCXB1c2hieXRlcyAweDYzNmY2ZDcwNjE2ZTc5IC8vICJjb21wYW55IgoJPT0KCWJ6ICppZjBfZWxzZQoKCS8vICppZjBfZWxzZWlmMV9jb25zZXF1ZW50CgkvLyBleGFtcGxlcy90dXBsZV9pbl9ib3gvYXBwLmFsZ28udHM6MjcKCS8vIHRoaXMuY29udGFjdHMoYWRkcmVzcykudmFsdWUuY29tcGFueSA9IHZhbHVlCglmcmFtZV9kaWcgLTMgLy8gYWRkcmVzczogQWRkcmVzcwoJYm94X2dldAoKCS8vIGJveCB2YWx1ZSBkb2VzIG5vdCBleGlzdDogdGhpcy5jb250YWN0cyhhZGRyZXNzKS52YWx1ZQoJYXNzZXJ0CglzdG9yZSAyNTUgLy8gZnVsbCBhcnJheQoJaW50YyAyIC8vIDIKCWR1cAoJc3RvcmUgMjUxIC8vIGVsZW1lbnQgaGVhZCBvZmZzZXQKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCXVuY292ZXIgMgoJZXh0cmFjdF91aW50MTYKCWR1cAoJc3RvcmUgMjU0IC8vIGVsZW1lbnQgc3RhcnQKCWR1cCAvLyBkdXBsaWNhdGUgc3RhcnQgb2YgZWxlbWVudAoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJc3dhcAoJZXh0cmFjdF91aW50MTYgLy8gZ2V0IG51bWJlciBvZiBlbGVtZW50cwoJaW50YyAwIC8vICBnZXQgdHlwZSBsZW5ndGgKCSogLy8gbXVsdGlwbHkgYnkgdHlwZSBsZW5ndGgKCWludGMgMiAvLyAyCgkrIC8vIGFkZCB0d28gZm9yIGxlbmd0aAoJc3RvcmUgMjUzIC8vIGVsZW1lbnQgbGVuZ3RoCglsb2FkIDI1NSAvLyBmdWxsIGFycmF5CglpbnRjIDEgLy8gMAoJbG9hZCAyNTQgLy8gZWxlbWVudCBzdGFydAoJc3Vic3RyaW5nMwoJZnJhbWVfZGlnIC0yIC8vIHZhbHVlOiBzdHJpbmcKCWR1cAoJbGVuCglpdG9iCglleHRyYWN0IDYgMgoJc3dhcAoJY29uY2F0CglkdXAKCXN0b3JlIDI1MiAvLyBuZXcgZWxlbWVudAoJbG9hZCAyNTUgLy8gZnVsbCBhcnJheQoJbG9hZCAyNTQgLy8gZWxlbWVudCBzdGFydAoJbG9hZCAyNTMgLy8gZWxlbWVudCBsZW5ndGgKCSsgLy8gZ2V0IGVuZCBvZiBFbGVtZW50Cglsb2FkIDI1NSAvLyBmdWxsIGFycmF5CglsZW4KCXN1YnN0cmluZzMKCWNvbmNhdAoJY29uY2F0CglzdG9yZSAyNTUgLy8gZnVsbCBhcnJheQoJY2FsbHN1YiAqZ2V0X2xlbmd0aF9kaWZmZXJlbmNlCglsb2FkIDI1NSAvLyBmdWxsIGFycmF5CglmcmFtZV9kaWcgLTMgLy8gYWRkcmVzczogQWRkcmVzcwoJZHVwCglib3hfZGVsCglwb3AKCXN3YXAKCWJveF9wdXQKCWIgKmlmMF9lbmQKCippZjBfZWxzZToKCS8vIEludmFsaWQgZmllbGQKCWVycgoKKmlmMF9lbmQ6CglyZXRzdWIKCi8vIHZlcmlmeUNvbnRhY3ROYW1lKHN0cmluZyxhZGRyZXNzKXZvaWQKKmFiaV9yb3V0ZV92ZXJpZnlDb250YWN0TmFtZToKCS8vIGFkZHJlc3M6IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDIKCWR1cAoJbGVuCglpbnRjIDMgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMCAoYWRkcmVzcykgZm9yIHZlcmlmeUNvbnRhY3ROYW1lIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBuYW1lOiBzdHJpbmcKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWV4dHJhY3QgMiAwCgoJLy8gZXhlY3V0ZSB2ZXJpZnlDb250YWN0TmFtZShzdHJpbmcsYWRkcmVzcyl2b2lkCgljYWxsc3ViIHZlcmlmeUNvbnRhY3ROYW1lCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyB2ZXJpZnlDb250YWN0TmFtZShuYW1lOiBzdHJpbmcsIGFkZHJlc3M6IEFkZHJlc3MpOiB2b2lkCnZlcmlmeUNvbnRhY3ROYW1lOgoJcHJvdG8gMiAwCgoJLy8gZXhhbXBsZXMvdHVwbGVfaW5fYm94L2FwcC5hbGdvLnRzOjMyCgkvLyBhc3NlcnQodGhpcy5jb250YWN0cyhhZGRyZXNzKS52YWx1ZS5uYW1lID09PSBuYW1lKQoJZnJhbWVfZGlnIC0yIC8vIGFkZHJlc3M6IEFkZHJlc3MKCWJveF9nZXQKCgkvLyBib3ggdmFsdWUgZG9lcyBub3QgZXhpc3Q6IHRoaXMuY29udGFjdHMoYWRkcmVzcykudmFsdWUKCWFzc2VydAoJc3RvcmUgMjU1IC8vIGZ1bGwgYXJyYXkKCWludGMgMSAvLyAwCglsb2FkIDI1NSAvLyBmdWxsIGFycmF5Cglsb2FkIDI1NSAvLyBmdWxsIGFycmF5Cgl1bmNvdmVyIDIKCWV4dHJhY3RfdWludDE2CglkdXAgLy8gZHVwbGljYXRlIHN0YXJ0IG9mIGVsZW1lbnQKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCXN3YXAKCWV4dHJhY3RfdWludDE2IC8vIGdldCBudW1iZXIgb2YgZWxlbWVudHMKCWludGMgMCAvLyAgZ2V0IHR5cGUgbGVuZ3RoCgkqIC8vIG11bHRpcGx5IGJ5IHR5cGUgbGVuZ3RoCglpbnRjIDIgLy8gMgoJKyAvLyBhZGQgdHdvIGZvciBsZW5ndGgKCWV4dHJhY3QzCglleHRyYWN0IDIgMAoJZnJhbWVfZGlnIC0xIC8vIG5hbWU6IHN0cmluZwoJPT0KCWFzc2VydAoJcmV0c3ViCgoqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uOgoJaW50YyAwIC8vIDEKCXJldHVybgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweDkyY2NmOTliIC8vIG1ldGhvZCAic2V0TXlDb250YWN0KHN0cmluZyxzdHJpbmcpdm9pZCIKCXB1c2hieXRlcyAweDQ5NWFjYmY3IC8vIG1ldGhvZCAiYWRkQ29udGFjdChzdHJpbmcsc3RyaW5nLGFkZHJlc3Mpdm9pZCIKCXB1c2hieXRlcyAweGZhNGU4ZjkzIC8vIG1ldGhvZCAidXBkYXRlQ29udGFjdEZpZWxkKHN0cmluZyxzdHJpbmcsYWRkcmVzcyl2b2lkIgoJcHVzaGJ5dGVzIDB4OGEzMGI4N2UgLy8gbWV0aG9kICJ2ZXJpZnlDb250YWN0TmFtZShzdHJpbmcsYWRkcmVzcyl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9zZXRNeUNvbnRhY3QgKmFiaV9yb3V0ZV9hZGRDb250YWN0ICphYmlfcm91dGVfdXBkYXRlQ29udGFjdEZpZWxkICphYmlfcm91dGVfdmVyaWZ5Q29udGFjdE5hbWUKCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY2FsbCBOb09wCgllcnIKCipwcm9jZXNzX2R5bmFtaWNfdHVwbGVfZWxlbWVudDoKCXByb3RvIDQgMwoJZnJhbWVfZGlnIC00IC8vIHR1cGxlIGhlYWQKCWZyYW1lX2RpZyAtMiAvLyBoZWFkIG9mZnNldAoJY29uY2F0CglmcmFtZV9idXJ5IC00IC8vIHR1cGxlIGhlYWQKCWZyYW1lX2RpZyAtMSAvLyBlbGVtZW50CglkdXAKCWxlbgoJZnJhbWVfZGlnIC0yIC8vIGhlYWQgb2Zmc2V0CglidG9pCgkrCglpdG9iCglleHRyYWN0IDYgMgoJZnJhbWVfYnVyeSAtMiAvLyBoZWFkIG9mZnNldAoJZnJhbWVfZGlnIC0zIC8vIHR1cGxlIHRhaWwKCXN3YXAKCWNvbmNhdAoJZnJhbWVfYnVyeSAtMyAvLyB0dXBsZSB0YWlsCglmcmFtZV9kaWcgLTQgLy8gdHVwbGUgaGVhZAoJZnJhbWVfZGlnIC0zIC8vIHR1cGxlIHRhaWwKCWZyYW1lX2RpZyAtMiAvLyBoZWFkIG9mZnNldAoJcmV0c3ViCgoqdXBkYXRlX2R5bmFtaWNfaGVhZDoKCXByb3RvIDIgMAoJZnJhbWVfZGlnIC0yIC8vIGxlbmd0aCBkaWZmZXJlbmNlCglsb2FkIDI1NSAvLyBmdWxsIGFycmF5CglmcmFtZV9kaWcgLTEgLy8gZHluYW1pYyBhcnJheSBvZmZzZXQKCWV4dHJhY3RfdWludDE2IC8vIGV4dHJhY3QgZHluYW1pYyBhcnJheSBvZmZzZXQKCWxvYWQgMjQ5IC8vIHN1YnRyYWN0IGhlYWQgZGlmZmVyZW5jZQoJYnogKnN1YnRyYWN0X2hlYWRfZGlmZmVyZW5jZQoJKyAvLyBhZGQgZGlmZmVyZW5jZSB0byBvZmZzZXQKCWIgKmVuZF9jYWxjX25ld19oZWFkCgoqc3VidHJhY3RfaGVhZF9kaWZmZXJlbmNlOgoJc3dhcAoJLSAvLyBzdWJ0cmFjdCBkaWZmZXJlbmNlIGZyb20gb2ZmZXQKCiplbmRfY2FsY19uZXdfaGVhZDoKCWl0b2IgLy8gY29udmVydCB0byBieXRlcwoJZXh0cmFjdCA2IDIgLy8gY29udmVydCB0byB1aW50MTYKCWxvYWQgMjU1IC8vIGZ1bGwgYXJyYXkKCXN3YXAKCWZyYW1lX2RpZyAtMSAvLyBvZmZzZXQKCXN3YXAKCXJlcGxhY2UzIC8vIHVwZGF0ZSBvZmZzZXQKCXN0b3JlIDI1NSAvLyBmdWxsIGFycmF5CglyZXRzdWIKCipnZXRfbGVuZ3RoX2RpZmZlcmVuY2U6Cglsb2FkIDI1MiAvLyBuZXcgZWxlbWVudAoJbGVuIC8vIGxlbmd0aCBvZiBuZXcgZWxlbWVudAoJbG9hZCAyNTMgLy8gZWxlbWVudCBsZW5ndGgKCTwKCWJueiAqc3dhcHBlZF9kaWZmZXJlbmNlCglsb2FkIDI1MiAvLyBuZXcgZWxlbWVudAoJbGVuIC8vIGxlbmd0aCBvZiBuZXcgZWxlbWVudAoJbG9hZCAyNTMgLy8gZWxlbWVudCBsZW5ndGgKCWludGMgMCAvLyAxCglzdG9yZSAyNDkgLy8gc3VidHJhY3QgaGVhZCBkaWZmZXJlbmNlCgliICpnZXRfZGlmZmVyZW5jZQoKKnN3YXBwZWRfZGlmZmVyZW5jZToKCWxvYWQgMjUzIC8vIGVsZW1lbnQgbGVuZ3RoCglsb2FkIDI1MiAvLyBuZXcgZWxlbWVudAoJbGVuIC8vIGxlbmd0aCBvZiBuZXcgZWxlbWVudAoJaW50YyAxIC8vIDAKCXN0b3JlIDI0OSAvLyBzdWJ0cmFjdCBoZWFkIGRpZmZlcmVuY2UKCipnZXRfZGlmZmVyZW5jZToKCS0gLy8gZ2V0IGxlbmd0aCBkaWZmZXJlbmNlCglzdG9yZSAyNTAgLy8gbGVuZ3RoIGRpZmZlcmVuY2UKCXJldHN1Yg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiAEAQACICYCAAIABDEYFIEGCzEZCI0MAb0AAAAAAAAAAAAAAa8AAAAAAAAAAAAAADYaAlcCADYaAVcCAIgAAiJDigIAKCgoKYv/SRUWVwYCTFCIAb2L/kkVFlcGAkxQiAGwSFCMAIAJbXlDb250YWN0iwBnMQBJvEiLAL+JNhoDSRUlEkQ2GgJXAgA2GgFXAgCIAAIiQ4oDACgoKCmL/0kVFlcGAkxQiAFoi/5JFRZXBgJMUIgBW0hQjACL/Um8SIsAv4k2GgNJFSUSRDYaAlcCADYaAVcCAIgAAiJDigMAi/+ABG5hbWUSQQBZi/2+RDX/I0k1+zT/NP9PAllJNf5JNP9MWSILJAg1/TT/IzT+Uov+SRUWVwYCTFBJNfw0/zT+NP0INP8VUlBQNf+IASo0+jT7JAiIAP40/4v9SbxITL9CAGCL/4AHY29tcGFueRJBAFCL/b5ENf8kSTX7NP80/08CWUk1/kk0/0xZIgskCDX9NP8jNP5Si/5JFRZXBgJMUEk1/DT/NP40/Qg0/xVSUFA1/4gAwjT/i/1JvEhMv0IAAQCJNhoCSRUlEkQ2GgFXAgCIAAIiQ4oCAIv+vkQ1/yM0/zT/TwJZSTT/TFkiCyQIWFcCAIv/EkSJIkOABLhEezY2GgCOAf/xAIAEksz5m4AESVrL94AE+k6Pk4AEijC4fjYaAI4E/h/+bP6z/5UAigQDi/yL/lCM/Iv/SRWL/hcIFlcGAoz+i/1MUIz9i/yL/Yv+iYoCAIv+NP+L/1k0+UEABAhCAAJMCRZXBgI0/0yL/0xdNf+JNPwVNP0MQAALNPwVNP0iNflCAAg0/TT8FSM1+Qk1+ok=","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -214,11 +214,57 @@ export type GlobalKeysState = ContactsAppTypes['state']['global']['keys']
 export type BoxKeysState = ContactsAppTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ContactsAppCreateCallParams =
+  | Expand<CallParams<ContactsAppArgs['obj']['createApplication()void'] | ContactsAppArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<ContactsAppArgs['obj']['createApplication()void'] | ContactsAppArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ContactsAppDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ContactsAppCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ContactsApp smart contract
  */
 export abstract class ContactsAppParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends ContactsAppCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return ContactsAppParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the ContactsApp smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<ContactsAppArgs['obj']['createApplication()void'] | ContactsAppArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the setMyContact(string,string)void ABI method
    *
@@ -273,6 +319,148 @@ export abstract class ContactsAppParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ContactsApp smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ContactsAppFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ContactsAppFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ContactsAppClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ContactsAppClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ContactsApp smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ContactsAppDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? ContactsAppParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (ContactsAppCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new ContactsAppClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ContactsApp smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<ContactsAppArgs['obj']['createApplication()void'] | ContactsAppArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(ContactsAppParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ContactsApp smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<ContactsAppArgs['obj']['createApplication()void'] | ContactsAppArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(ContactsAppParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ContactsApp smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<ContactsAppArgs['obj']['createApplication()void'] | ContactsAppArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(ContactsAppParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | ContactsAppReturns['createApplication()void']) }, appClient: new ContactsAppClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ContactsApp smart contract
  */

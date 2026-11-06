@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ABITestStaticArrayInStorageMap","desc":"","methods":[{"name":"staticArrayInStorageMap","args":[],"returns":{"type":"uint64[3]"},"actions":{"create":[],"call":["OptIn"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":2,"ints":0},"local":{"bytes":2,"ints":0}},"keys":{"global":{"gRef":{"key":"Z1JlZg==","keyType":"AVMBytes","valueType":"uint64[3]"}},"local":{"lRef":{"key":"bFJlZg==","keyType":"AVMBytes","valueType":"uint64[3]"}},"box":{"bRef":{"key":"YlJlZg==","keyType":"AVMBytes","valueType":"uint64[3]"}}},"maps":{"global":{"gMap":{"keyType":"AVMBytes","valueType":"uint64[3]"}},"local":{"lMap":{"keyType":"AVMBytes","valueType":"uint64[3]"}},"box":{"bMap":{"keyType":"AVMBytes","valueType":"uint64[3]"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[58],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[167],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":119},{"pc":[181],"errorMessage":"this contract does not implement the given ABI method for call OptIn","teal":127}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ABITestStaticArrayInStorageMap","desc":"","methods":[{"name":"staticArrayInStorageMap","args":[],"returns":{"type":"uint64[3]"},"actions":{"create":[],"call":["OptIn"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":2,"ints":0},"local":{"bytes":2,"ints":0}},"keys":{"global":{"gRef":{"key":"Z1JlZg==","keyType":"AVMBytes","valueType":"uint64[3]"}},"local":{"lRef":{"key":"bFJlZg==","keyType":"AVMBytes","valueType":"uint64[3]"}},"box":{"bRef":{"key":"YlJlZg==","keyType":"AVMBytes","valueType":"uint64[3]"}}},"maps":{"global":{"gMap":{"keyType":"AVMBytes","valueType":"uint64[3]"}},"local":{"lMap":{"keyType":"AVMBytes","valueType":"uint64[3]"}},"box":{"bMap":{"keyType":"AVMBytes","valueType":"uint64[3]"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[58],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[167],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":119},{"pc":[181],"errorMessage":"this contract does not implement the given ABI method for call OptIn","teal":127}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDgKYnl0ZWNibG9jayAweDY3NGQ2MTcwIDB4NmM0ZDYxNzAgMHg2MjRkNjE3MCAweAoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDcuMgovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKcHVzaGludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqTk9UX0lNUExFTUVOVEVEICpjYWxsX09wdEluICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKmNyZWF0ZV9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRAoKKk5PVF9JTVBMRU1FTlRFRDoKCS8vIFRoZSByZXF1ZXN0ZWQgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGlzIGNvbnRyYWN0LiBBcmUgeW91IHVzaW5nIHRoZSBjb3JyZWN0IE9uQ29tcGxldGU/IERpZCB5b3Ugc2V0IHlvdXIgYXBwIElEPwoJZXJyCgovLyBzdGF0aWNBcnJheUluU3RvcmFnZU1hcCgpdWludDY0WzNdCiphYmlfcm91dGVfc3RhdGljQXJyYXlJblN0b3JhZ2VNYXA6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCXB1c2hieXRlcyAweDE1MWY3Yzc1CgoJLy8gZXhlY3V0ZSBzdGF0aWNBcnJheUluU3RvcmFnZU1hcCgpdWludDY0WzNdCgljYWxsc3ViIHN0YXRpY0FycmF5SW5TdG9yYWdlTWFwCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gc3RhdGljQXJyYXlJblN0b3JhZ2VNYXAoKTogU3RhdGljQXJyYXk8dWludDY0LCAzPgpzdGF0aWNBcnJheUluU3RvcmFnZU1hcDoKCXByb3RvIDAgMQoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAzIC8vIDB4CglkdXAKCgkvLyB0ZXN0cy9jb250cmFjdHMvYWJpLmFsZ28udHM6MTQ1CgkvLyBhOiBTdGF0aWNBcnJheTx1aW50NjQsIDM+ID0gWzExLCAyMiwgMzNdCglwdXNoYnl0ZXMgMHgwMDAwMDAwMDAwMDAwMDBiMDAwMDAwMDAwMDAwMDAxNjAwMDAwMDAwMDAwMDAwMjEKCWZyYW1lX2J1cnkgMCAvLyBhOiBTdGF0aWNBcnJheTx1aW50NjQsIDM+CgoJLy8gdGVzdHMvY29udHJhY3RzL2FiaS5hbGdvLnRzOjE0NwoJLy8gdGhpcy5nTWFwKCdnTWFwJykudmFsdWUgPSBhCglieXRlYyAwIC8vICAiZ01hcCIKCWZyYW1lX2RpZyAwIC8vIGE6IFN0YXRpY0FycmF5PHVpbnQ2NCwgMz4KCWFwcF9nbG9iYWxfcHV0CgoJLy8gdGVzdHMvY29udHJhY3RzL2FiaS5hbGdvLnRzOjE0OAoJLy8gdGhpcy5sTWFwKHRoaXMudHhuLnNlbmRlciwgJ2xNYXAnKS52YWx1ZSA9IGEKCXR4biBTZW5kZXIKCWJ5dGVjIDEgLy8gICJsTWFwIgoJZnJhbWVfZGlnIDAgLy8gYTogU3RhdGljQXJyYXk8dWludDY0LCAzPgoJYXBwX2xvY2FsX3B1dAoKCS8vIHRlc3RzL2NvbnRyYWN0cy9hYmkuYWxnby50czoxNDkKCS8vIHRoaXMuYk1hcCgnYk1hcCcpLnZhbHVlID0gYQoJYnl0ZWMgMiAvLyAgImJNYXAiCglmcmFtZV9kaWcgMCAvLyBhOiBTdGF0aWNBcnJheTx1aW50NjQsIDM+Cglib3hfcHV0CgoJLy8gdGVzdHMvY29udHJhY3RzL2FiaS5hbGdvLnRzOjE1MQoJLy8gcmV0OiBTdGF0aWNBcnJheTx1aW50NjQsIDM+ID0gWwoJLy8gICAgICAgdGhpcy5nTWFwKCdnTWFwJykudmFsdWVbMV0sCgkvLyAgICAgICB0aGlzLmxNYXAodGhpcy50eG4uc2VuZGVyLCAnbE1hcCcpLnZhbHVlWzFdLAoJLy8gICAgICAgdGhpcy5iTWFwKCdiTWFwJykudmFsdWVbMV0sCgkvLyAgICAgXQoJYnl0ZWMgMCAvLyAgImdNYXAiCglhcHBfZ2xvYmFsX2dldAoJZXh0cmFjdCA4IDgKCWJ0b2kKCWl0b2IKCXR4biBTZW5kZXIKCWJ5dGVjIDEgLy8gICJsTWFwIgoJYXBwX2xvY2FsX2dldAoJZXh0cmFjdCA4IDgKCWJ0b2kKCWl0b2IKCWNvbmNhdAoJYnl0ZWMgMiAvLyAgImJNYXAiCglpbnRjIDEgLy8gOAoJZHVwCglib3hfZXh0cmFjdAoJYnRvaQoJaXRvYgoJY29uY2F0CglmcmFtZV9idXJ5IDEgLy8gcmV0OiBTdGF0aWNBcnJheTx1aW50NjQsIDM+CgoJLy8gdGVzdHMvY29udHJhY3RzL2FiaS5hbGdvLnRzOjE1NwoJLy8gcmV0dXJuIHJldDsKCWZyYW1lX2RpZyAxIC8vIHJldDogU3RhdGljQXJyYXk8dWludDY0LCAzPgoKCS8vIHNldCB0aGUgc3Vicm91dGluZSByZXR1cm4gdmFsdWUKCWZyYW1lX2J1cnkgMAoKCS8vIHBvcCBhbGwgbG9jYWwgdmFyaWFibGVzIGZyb20gdGhlIHN0YWNrCglwb3BuIDEKCXJldHN1YgoKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCWludGMgMCAvLyAxCglyZXR1cm4KCipjcmVhdGVfTm9PcDoKCXB1c2hieXRlcyAweGI4NDQ3YjM2IC8vIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNyZWF0ZSBOb09wCgllcnIKCipjYWxsX09wdEluOgoJcHVzaGJ5dGVzIDB4NDZmMWE0YjEgLy8gbWV0aG9kICJzdGF0aWNBcnJheUluU3RvcmFnZU1hcCgpdWludDY0WzNdIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9zdGF0aWNBcnJheUluU3RvcmFnZU1hcAoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE9wdEluCgllcnI=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiACAQgmBARnTWFwBGxNYXAEYk1hcAAxGBSBBgsxGQiNDAAAAG4AAAAAAAAAAABgAAAAAAAAAAAAAACABBUffHWIAARQsCJDigABK0mAGAAAAAAAAAALAAAAAAAAABYAAAAAAAAAIYwAKIsAZzEAKYsAZiqLAL8oZFcICBcWMQApYlcICBcWUCojSboXFlCMAYsBjABGAYkiQ4AEuER7NjYaAI4B//EAgARG8aSxNhoAjgH/hgA=","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -182,11 +182,57 @@ export type LocalKeysState = AbiTestStaticArrayInStorageMapTypes['state']['local
 export type BoxKeysState = AbiTestStaticArrayInStorageMapTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AbiTestStaticArrayInStorageMapCreateCallParams =
+  | Expand<CallParams<AbiTestStaticArrayInStorageMapArgs['obj']['createApplication()void'] | AbiTestStaticArrayInStorageMapArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<AbiTestStaticArrayInStorageMapArgs['obj']['createApplication()void'] | AbiTestStaticArrayInStorageMapArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AbiTestStaticArrayInStorageMapDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AbiTestStaticArrayInStorageMapCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the AbiTestStaticArrayInStorageMap smart contract
  */
 export abstract class AbiTestStaticArrayInStorageMapParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends AbiTestStaticArrayInStorageMapCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return AbiTestStaticArrayInStorageMapParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the ABITestStaticArrayInStorageMap smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<AbiTestStaticArrayInStorageMapArgs['obj']['createApplication()void'] | AbiTestStaticArrayInStorageMapArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Gets available optIn ABI call param factories
    */
@@ -210,6 +256,148 @@ export abstract class AbiTestStaticArrayInStorageMapParamsFactory {
 
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ABITestStaticArrayInStorageMap smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AbiTestStaticArrayInStorageMapFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AbiTestStaticArrayInStorageMapFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AbiTestStaticArrayInStorageMapClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AbiTestStaticArrayInStorageMapClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ABITestStaticArrayInStorageMap smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AbiTestStaticArrayInStorageMapDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? AbiTestStaticArrayInStorageMapParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (AbiTestStaticArrayInStorageMapCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new AbiTestStaticArrayInStorageMapClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestStaticArrayInStorageMap smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<AbiTestStaticArrayInStorageMapArgs['obj']['createApplication()void'] | AbiTestStaticArrayInStorageMapArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(AbiTestStaticArrayInStorageMapParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestStaticArrayInStorageMap smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<AbiTestStaticArrayInStorageMapArgs['obj']['createApplication()void'] | AbiTestStaticArrayInStorageMapArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(AbiTestStaticArrayInStorageMapParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ABITestStaticArrayInStorageMap smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<AbiTestStaticArrayInStorageMapArgs['obj']['createApplication()void'] | AbiTestStaticArrayInStorageMapArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(AbiTestStaticArrayInStorageMapParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | AbiTestStaticArrayInStorageMapReturns['createApplication()void']) }, appClient: new AbiTestStaticArrayInStorageMapClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ABITestStaticArrayInStorageMap smart contract
  */

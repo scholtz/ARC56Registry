@@ -2,8 +2,8 @@
 
 - **Repo**: [algorandfoundation/TEALScript](https://github.com/algorandfoundation/TEALScript)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/TEALScript/HEAD/tests/contracts/artifacts/CblocksTest.arc56.json](https://raw.githubusercontent.com/algorandfoundation/TEALScript/HEAD/tests/contracts/artifacts/CblocksTest.arc56.json)
-- **Detected**: 2026-07-27T09:52:37.078516+00:00
-- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
+- **Detected**: 2026-11-06T14:02:38.243049+00:00
+- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.2`
 
 ## Reproduce
 

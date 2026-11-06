@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"FunctionsTest","desc":"","methods":[{"name":"callNonClassFunction","args":[{"name":"a","type":"uint64"},{"name":"b","type":"uint64"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"callExternalFunction","args":[{"name":"a","type":"uint64"},{"name":"b","type":"uint64"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"callPackageFunction","args":[{"name":"a","type":"uint64"},{"name":"b","type":"uint64"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[46],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[146],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":133},{"pc":[176],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":143}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"FunctionsTest","desc":"","methods":[{"name":"callNonClassFunction","args":[{"name":"a","type":"uint64"},{"name":"b","type":"uint64"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"callExternalFunction","args":[{"name":"a","type":"uint64"},{"name":"b","type":"uint64"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"callPackageFunction","args":[{"name":"a","type":"uint64"},{"name":"b","type":"uint64"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[46],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[146],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":133},{"pc":[176],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":143}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxCmJ5dGVjYmxvY2sgMHgxNTFmN2M3NQoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDcuMgovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKcHVzaGludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIGNhbGxOb25DbGFzc0Z1bmN0aW9uKHVpbnQ2NCx1aW50NjQpdWludDY0CiphYmlfcm91dGVfY2FsbE5vbkNsYXNzRnVuY3Rpb246CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDAgLy8gMHgxNTFmN2M3NQoKCS8vIGI6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJYnRvaQoKCS8vIGE6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGV4ZWN1dGUgY2FsbE5vbkNsYXNzRnVuY3Rpb24odWludDY0LHVpbnQ2NCl1aW50NjQKCWNhbGxzdWIgY2FsbE5vbkNsYXNzRnVuY3Rpb24KCWl0b2IKCWNvbmNhdAoJbG9nCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBjYWxsTm9uQ2xhc3NGdW5jdGlvbihhOiB1aW50NjQsIGI6IHVpbnQ2NCk6IHVpbnQ2NApjYWxsTm9uQ2xhc3NGdW5jdGlvbjoKCXByb3RvIDIgMQoKCS8vIHRlc3RzL2NvbnRyYWN0cy9mdW5jdGlvbnMuYWxnby50czoxMgoJLy8gcmV0dXJuIG5vbkNsYXNzRnVuY3Rpb24oYSwgYik7CglmcmFtZV9kaWcgLTIgLy8gYjogdWludDY0CglmcmFtZV9kaWcgLTEgLy8gYTogdWludDY0CgljYWxsc3ViIG5vbkNsYXNzRnVuY3Rpb24KCXJldHN1YgoKLy8gY2FsbEV4dGVybmFsRnVuY3Rpb24odWludDY0LHVpbnQ2NCl1aW50NjQKKmFiaV9yb3V0ZV9jYWxsRXh0ZXJuYWxGdW5jdGlvbjoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMCAvLyAweDE1MWY3Yzc1CgoJLy8gYjogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglidG9pCgoJLy8gYTogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBjYWxsRXh0ZXJuYWxGdW5jdGlvbih1aW50NjQsdWludDY0KXVpbnQ2NAoJY2FsbHN1YiBjYWxsRXh0ZXJuYWxGdW5jdGlvbgoJaXRvYgoJY29uY2F0Cglsb2cKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGNhbGxFeHRlcm5hbEZ1bmN0aW9uKGE6IHVpbnQ2NCwgYjogdWludDY0KTogdWludDY0CmNhbGxFeHRlcm5hbEZ1bmN0aW9uOgoJcHJvdG8gMiAxCgoJLy8gdGVzdHMvY29udHJhY3RzL2Z1bmN0aW9ucy5hbGdvLnRzOjE2CgkvLyByZXR1cm4gZXh0ZXJuYWxGdW5jdGlvbihhLCBiKTsKCWZyYW1lX2RpZyAtMiAvLyBiOiB1aW50NjQKCWZyYW1lX2RpZyAtMSAvLyBhOiB1aW50NjQKCWNhbGxzdWIgZXh0ZXJuYWxGdW5jdGlvbgoJcmV0c3ViCgovLyBjYWxsUGFja2FnZUZ1bmN0aW9uKHVpbnQ2NCx1aW50NjQpdWludDY0CiphYmlfcm91dGVfY2FsbFBhY2thZ2VGdW5jdGlvbjoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMCAvLyAweDE1MWY3Yzc1CgoJLy8gYjogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglidG9pCgoJLy8gYTogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBjYWxsUGFja2FnZUZ1bmN0aW9uKHVpbnQ2NCx1aW50NjQpdWludDY0CgljYWxsc3ViIGNhbGxQYWNrYWdlRnVuY3Rpb24KCWl0b2IKCWNvbmNhdAoJbG9nCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBjYWxsUGFja2FnZUZ1bmN0aW9uKGE6IHVpbnQ2NCwgYjogdWludDY0KTogdWludDY0CmNhbGxQYWNrYWdlRnVuY3Rpb246Cglwcm90byAyIDEKCgkvLyB0ZXN0cy9jb250cmFjdHMvZnVuY3Rpb25zLmFsZ28udHM6MjAKCS8vIHJldHVybiBwYWNrYWdlRnVuY3Rpb24oYSwgYik7CglmcmFtZV9kaWcgLTIgLy8gYjogdWludDY0CglmcmFtZV9kaWcgLTEgLy8gYTogdWludDY0CgljYWxsc3ViIHBhY2thZ2VGdW5jdGlvbgoJcmV0c3ViCgoqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uOgoJaW50YyAwIC8vIDEKCXJldHVybgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweDhmZDIzYjQ4IC8vIG1ldGhvZCAiY2FsbE5vbkNsYXNzRnVuY3Rpb24odWludDY0LHVpbnQ2NCl1aW50NjQiCglwdXNoYnl0ZXMgMHhmNWRiM2I0MSAvLyBtZXRob2QgImNhbGxFeHRlcm5hbEZ1bmN0aW9uKHVpbnQ2NCx1aW50NjQpdWludDY0IgoJcHVzaGJ5dGVzIDB4OGI3ODkxOTYgLy8gbWV0aG9kICJjYWxsUGFja2FnZUZ1bmN0aW9uKHVpbnQ2NCx1aW50NjQpdWludDY0IgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jYWxsTm9uQ2xhc3NGdW5jdGlvbiAqYWJpX3JvdXRlX2NhbGxFeHRlcm5hbEZ1bmN0aW9uICphYmlfcm91dGVfY2FsbFBhY2thZ2VGdW5jdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKLy8gcGFja2FnZUZ1bmN0aW9uKGE6IHVpbnQ2NCwgYjogdWludDY0KTogdWludDY0CnBhY2thZ2VGdW5jdGlvbjoKCXByb3RvIDIgMQoKCS8vIG5vZGVfbW9kdWxlcy90ZWFsc2NyaXB0X3Rlc3RfcGFja2FnZS9pbmRleC50czo0CgkvLyByZXR1cm4gYSArIGI7CglmcmFtZV9kaWcgLTEgLy8gYTogdWludDY0CglmcmFtZV9kaWcgLTIgLy8gYjogdWludDY0CgkrCglyZXRzdWIKCi8vIGV4dGVybmFsRnVuY3Rpb24oYTogdWludDY0LCBiOiB1aW50NjQpOiB1aW50NjQKZXh0ZXJuYWxGdW5jdGlvbjoKCXByb3RvIDIgMQoKCS8vIHRlc3RzL2NvbnRyYWN0cy9mdW5jdGlvbnMtZXh0ZXJuYWwuYWxnby50czoyCgkvLyByZXR1cm4gYSArIGI7CglmcmFtZV9kaWcgLTEgLy8gYTogdWludDY0CglmcmFtZV9kaWcgLTIgLy8gYjogdWludDY0CgkrCglyZXRzdWIKCi8vIG5vbkNsYXNzRnVuY3Rpb24oYTogdWludDY0LCBiOiB1aW50NjQpOiB1aW50NjQKbm9uQ2xhc3NGdW5jdGlvbjoKCXByb3RvIDIgMQoKCS8vIHRlc3RzL2NvbnRyYWN0cy9mdW5jdGlvbnMuYWxnby50czo3CgkvLyByZXR1cm4gYSArIGI7CglmcmFtZV9kaWcgLTEgLy8gYTogdWludDY0CglmcmFtZV9kaWcgLTIgLy8gYjogdWludDY0CgkrCglyZXRzdWI=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiABASYBBBUffHUxGBSBBgsxGQiNDABlAAAAAAAAAAAAAABXAAAAAAAAAAAAAAAoNhoCFzYaAReIAAUWULAiQ4oCAYv+i/+IAHmJKDYaAhc2GgEXiAAFFlCwIkOKAgGL/ov/iABUiSg2GgIXNhoBF4gABRZQsCJDigIBi/6L/4gAL4kiQ4AEuER7NjYaAI4B//EAgASP0jtIgAT12ztBgASLeJGWNhoAjgP/f/+b/7cAigIBi/+L/giJigIBi/+L/giJigIBi/+L/giJ","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -163,11 +163,57 @@ export type MethodArgs<TSignature extends FunctionsTestSignatures> = FunctionsTe
 export type MethodReturn<TSignature extends FunctionsTestSignatures> = FunctionsTestTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type FunctionsTestCreateCallParams =
+  | Expand<CallParams<FunctionsTestArgs['obj']['createApplication()void'] | FunctionsTestArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<FunctionsTestArgs['obj']['createApplication()void'] | FunctionsTestArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type FunctionsTestDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: FunctionsTestCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the FunctionsTest smart contract
  */
 export abstract class FunctionsTestParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends FunctionsTestCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return FunctionsTestParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the FunctionsTest smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<FunctionsTestArgs['obj']['createApplication()void'] | FunctionsTestArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the callNonClassFunction(uint64,uint64)uint64 ABI method
    *
@@ -209,6 +255,148 @@ export abstract class FunctionsTestParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the FunctionsTest smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class FunctionsTestFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `FunctionsTestFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new FunctionsTestClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new FunctionsTestClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the FunctionsTest smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: FunctionsTestDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? FunctionsTestParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (FunctionsTestCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new FunctionsTestClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the FunctionsTest smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<FunctionsTestArgs['obj']['createApplication()void'] | FunctionsTestArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(FunctionsTestParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the FunctionsTest smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<FunctionsTestArgs['obj']['createApplication()void'] | FunctionsTestArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(FunctionsTestParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the FunctionsTest smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<FunctionsTestArgs['obj']['createApplication()void'] | FunctionsTestArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(FunctionsTestParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | FunctionsTestReturns['createApplication()void']) }, appClient: new FunctionsTestClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the FunctionsTest smart contract
  */

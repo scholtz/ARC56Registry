@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"NFTFactory","desc":"","methods":[{"name":"createNFT","args":[{"name":"name","type":"string"},{"name":"unitName","type":"string"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"transferNFT","args":[{"name":"asset","type":"uint64"},{"name":"receiver","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[40],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":24},{"pc":[101],"errorMessage":"argument 0 (receiver) for transferNFT must be a address","teal":95},{"pc":[150],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":153},{"pc":[172],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":162}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"NFTFactory","desc":"","methods":[{"name":"createNFT","args":[{"name":"name","type":"string"},{"name":"unitName","type":"string"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"transferNFT","args":[{"name":"asset","type":"uint64"},{"name":"receiver","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[40],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":24},{"pc":[101],"errorMessage":"argument 0 (receiver) for transferNFT must be a address","teal":95},{"pc":[150],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":153},{"pc":[172],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":162}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDAKCi8vIFRoaXMgVEVBTCB3YXMgZ2VuZXJhdGVkIGJ5IFRFQUxTY3JpcHQgdjAuMTA3LjIKLy8gaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9URUFMU2NyaXB0CgovLyBUaGlzIGNvbnRyYWN0IGlzIGNvbXBsaWFudCB3aXRoIGFuZC9vciBpbXBsZW1lbnRzIHRoZSBmb2xsb3dpbmcgQVJDczogWyBBUkM0IF0KCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCnB1c2hpbnQgNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKmNyZWF0ZV9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRAoKKk5PVF9JTVBMRU1FTlRFRDoKCS8vIFRoZSByZXF1ZXN0ZWQgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGlzIGNvbnRyYWN0LiBBcmUgeW91IHVzaW5nIHRoZSBjb3JyZWN0IE9uQ29tcGxldGU/IERpZCB5b3Ugc2V0IHlvdXIgYXBwIElEPwoJZXJyCgovLyBjcmVhdGVORlQoc3RyaW5nLHN0cmluZyl1aW50NjQKKmFiaV9yb3V0ZV9jcmVhdGVORlQ6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCXB1c2hieXRlcyAweDE1MWY3Yzc1CgoJLy8gdW5pdE5hbWU6IHN0cmluZwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJZXh0cmFjdCAyIDAKCgkvLyBuYW1lOiBzdHJpbmcKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWV4dHJhY3QgMiAwCgoJLy8gZXhlY3V0ZSBjcmVhdGVORlQoc3RyaW5nLHN0cmluZyl1aW50NjQKCWNhbGxzdWIgY3JlYXRlTkZUCglpdG9iCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gY3JlYXRlTkZUKG5hbWU6IHN0cmluZywgdW5pdE5hbWU6IHN0cmluZyk6IEFzc2V0SUQKY3JlYXRlTkZUOgoJcHJvdG8gMiAxCgoJLy8gZXhhbXBsZXMvaXR4bnMvaXR4bnMuYWxnby50czo2CgkvLyByZXR1cm4gc2VuZEFzc2V0Q3JlYXRpb24oewoJLy8gICAgICAgY29uZmlnQXNzZXROYW1lOiBuYW1lLAoJLy8gICAgICAgY29uZmlnQXNzZXRVbml0TmFtZTogdW5pdE5hbWUsCgkvLyAgICAgICBjb25maWdBc3NldFRvdGFsOiAxLAoJLy8gICAgIH0pOwoJaXR4bl9iZWdpbgoJcHVzaGludCAzIC8vIGFjZmcKCWl0eG5fZmllbGQgVHlwZUVudW0KCgkvLyBleGFtcGxlcy9pdHhucy9pdHhucy5hbGdvLnRzOjcKCS8vIGNvbmZpZ0Fzc2V0TmFtZTogbmFtZQoJZnJhbWVfZGlnIC0xIC8vIG5hbWU6IHN0cmluZwoJaXR4bl9maWVsZCBDb25maWdBc3NldE5hbWUKCgkvLyBleGFtcGxlcy9pdHhucy9pdHhucy5hbGdvLnRzOjgKCS8vIGNvbmZpZ0Fzc2V0VW5pdE5hbWU6IHVuaXROYW1lCglmcmFtZV9kaWcgLTIgLy8gdW5pdE5hbWU6IHN0cmluZwoJaXR4bl9maWVsZCBDb25maWdBc3NldFVuaXROYW1lCgoJLy8gZXhhbXBsZXMvaXR4bnMvaXR4bnMuYWxnby50czo5CgkvLyBjb25maWdBc3NldFRvdGFsOiAxCglpbnRjIDAgLy8gMQoJaXR4bl9maWVsZCBDb25maWdBc3NldFRvdGFsCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoJaXR4biBDcmVhdGVkQXNzZXRJRAoJcmV0c3ViCgovLyB0cmFuc2Zlck5GVCh1aW50NjQsYWRkcmVzcyl2b2lkCiphYmlfcm91dGVfdHJhbnNmZXJORlQ6CgkvLyByZWNlaXZlcjogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJZHVwCglsZW4KCXB1c2hpbnQgMzIKCT09CgoJLy8gYXJndW1lbnQgMCAocmVjZWl2ZXIpIGZvciB0cmFuc2Zlck5GVCBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gYXNzZXQ6IHVpbnQ2NAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJYnRvaQoKCS8vIGV4ZWN1dGUgdHJhbnNmZXJORlQodWludDY0LGFkZHJlc3Mpdm9pZAoJY2FsbHN1YiB0cmFuc2Zlck5GVAoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gdHJhbnNmZXJORlQoYXNzZXQ6IEFzc2V0SUQsIHJlY2VpdmVyOiBBZGRyZXNzKTogdm9pZAp0cmFuc2Zlck5GVDoKCXByb3RvIDIgMAoKCS8vIGV4YW1wbGVzL2l0eG5zL2l0eG5zLmFsZ28udHM6MTQKCS8vIHNlbmRBc3NldFRyYW5zZmVyKHsKCS8vICAgICAgIGFzc2V0UmVjZWl2ZXI6IHJlY2VpdmVyLAoJLy8gICAgICAgYXNzZXRBbW91bnQ6IDEsCgkvLyAgICAgICB4ZmVyQXNzZXQ6IGFzc2V0LAoJLy8gICAgIH0pCglpdHhuX2JlZ2luCglwdXNoaW50IDQgLy8gYXhmZXIKCWl0eG5fZmllbGQgVHlwZUVudW0KCgkvLyBleGFtcGxlcy9pdHhucy9pdHhucy5hbGdvLnRzOjE1CgkvLyBhc3NldFJlY2VpdmVyOiByZWNlaXZlcgoJZnJhbWVfZGlnIC0yIC8vIHJlY2VpdmVyOiBBZGRyZXNzCglpdHhuX2ZpZWxkIEFzc2V0UmVjZWl2ZXIKCgkvLyBleGFtcGxlcy9pdHhucy9pdHhucy5hbGdvLnRzOjE2CgkvLyBhc3NldEFtb3VudDogMQoJaW50YyAwIC8vIDEKCWl0eG5fZmllbGQgQXNzZXRBbW91bnQKCgkvLyBleGFtcGxlcy9pdHhucy9pdHhucy5hbGdvLnRzOjE3CgkvLyB4ZmVyQXNzZXQ6IGFzc2V0CglmcmFtZV9kaWcgLTEgLy8gYXNzZXQ6IEFzc2V0SUQKCWl0eG5fZmllbGQgWGZlckFzc2V0CgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoJcmV0c3ViCgoqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uOgoJaW50YyAwIC8vIDEKCXJldHVybgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweGQyMDI0YzczIC8vIG1ldGhvZCAiY3JlYXRlTkZUKHN0cmluZyxzdHJpbmcpdWludDY0IgoJcHVzaGJ5dGVzIDB4YzdlMjYwYWYgLy8gbWV0aG9kICJ0cmFuc2Zlck5GVCh1aW50NjQsYWRkcmVzcyl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVORlQgKmFiaV9yb3V0ZV90cmFuc2Zlck5GVAoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiACAQAxGBSBBgsxGQiNDABvAAAAAAAAAAAAAABhAAAAAAAAAAAAAACABBUffHU2GgJXAgA2GgFXAgCIAAUWULAiQ4oCAbGBA7IQi/+yJov+siUisiIjsgGztDyJNhoCSRWBIBJENhoBF4gAAiJDigIAsYEEshCL/rIUIrISi/+yESOyAbOJIkOABLhEezY2GgCOAf/xAIAE0gJMc4AEx+JgrzYaAI4C/33/sQA=","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -152,11 +152,57 @@ export type MethodArgs<TSignature extends NftFactorySignatures> = NftFactoryType
 export type MethodReturn<TSignature extends NftFactorySignatures> = NftFactoryTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type NftFactoryCreateCallParams =
+  | Expand<CallParams<NftFactoryArgs['obj']['createApplication()void'] | NftFactoryArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<NftFactoryArgs['obj']['createApplication()void'] | NftFactoryArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type NftFactoryDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: NftFactoryCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the NftFactory smart contract
  */
 export abstract class NftFactoryParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends NftFactoryCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return NftFactoryParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the NFTFactory smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<NftFactoryArgs['obj']['createApplication()void'] | NftFactoryArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the createNFT(string,string)uint64 ABI method
    *
@@ -185,6 +231,148 @@ export abstract class NftFactoryParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the NFTFactory smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class NftFactoryFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `NftFactoryFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new NftFactoryClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new NftFactoryClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the NFTFactory smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: NftFactoryDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? NftFactoryParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (NftFactoryCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new NftFactoryClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NFTFactory smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<NftFactoryArgs['obj']['createApplication()void'] | NftFactoryArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(NftFactoryParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NFTFactory smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<NftFactoryArgs['obj']['createApplication()void'] | NftFactoryArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(NftFactoryParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the NFTFactory smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<NftFactoryArgs['obj']['createApplication()void'] | NftFactoryArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(NftFactoryParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | NftFactoryReturns['createApplication()void']) }, appClient: new NftFactoryClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the NFTFactory smart contract
  */

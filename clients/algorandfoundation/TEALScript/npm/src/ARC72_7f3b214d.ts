@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ARC72","desc":"","methods":[{"name":"arc72_ownerOf","desc":"Returns the address of the current owner of the NFT with the given tokenId","readonly":true,"args":[{"name":"tokenId","type":"uint256","desc":"The ID of the NFT"}],"returns":{"type":"address","desc":"The current owner of the NFT"},"actions":{"create":[],"call":["NoOp"]}},{"name":"arc72_tokenURI","desc":"Returns a URI pointing to the NFT metadata","readonly":true,"args":[{"name":"tokenId","type":"uint256","desc":"The ID of the NFT"}],"returns":{"type":"byte[256]","desc":"URI to token metadata"},"actions":{"create":[],"call":["NoOp"]}},{"name":"arc72_transferFrom","desc":"Transfers ownership of an NFT","args":[{"name":"_from","type":"address"},{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"arc72_approve","desc":"Approve a controller for a single NFT","args":[{"name":"approved","type":"address","desc":"Approved controller address"},{"name":"tokenId","type":"uint256","desc":"The ID of the NFT"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"arc72_setApprovalForAll","desc":"Approve an operator for all NFTs for a user","args":[{"name":"operator","type":"address","desc":"Approved operator address"},{"name":"approved","type":"bool","desc":"true to give approval, false to revoke"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"mint","args":[{"name":"to","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"arc72_totalSupply","desc":"Returns the number of NFTs currently defined by this contract","readonly":true,"args":[],"returns":{"type":"uint256"},"actions":{"create":[],"call":["NoOp"]}},{"name":"arc72_tokenByIndex","desc":"Returns the token ID of the token with the given index among all NFTs defined by the contract","readonly":true,"args":[{"name":"index","type":"uint256"}],"returns":{"type":"uint256"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"Token":[{"name":"owner","type":"address"},{"name":"uri","type":"byte[256]"},{"name":"controller","type":"address"}],"Control":[{"name":"owner","type":"address"},{"name":"controller","type":"address"}]},"state":{"schema":{"global":{"bytes":1,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{"index":{"key":"aW5kZXg=","keyType":"AVMBytes","valueType":"uint256"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"tokenBox":{"keyType":"uint256","valueType":"Token"},"controlBox":{"keyType":"Control","valueType":"AVMBytes"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[92],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[101],"errorMessage":"argument 0 (tokenId) for arc72_ownerOf must be a uint256","teal":40},{"pc":[126],"errorMessage":"argument 0 (tokenId) for arc72_tokenURI must be a uint256","teal":80},{"pc":[160],"errorMessage":"argument 0 (tokenId) for arc72_transferFrom must be a uint256","teal":129},{"pc":[168],"errorMessage":"argument 1 (to) for arc72_transferFrom must be a address","teal":139},{"pc":[176],"errorMessage":"argument 2 (_from) for arc72_transferFrom must be a address","teal":149},{"pc":[240],"errorMessage":"Transfer not authorized","teal":216},{"pc":[249],"errorMessage":"argument 0 (tokenId) for arc72_approve must be a uint256","teal":231},{"pc":[257],"errorMessage":"argument 1 (approved) for arc72_approve must be a address","teal":241},{"pc":[281],"errorMessage":"argument 0 (approved) for arc72_setApprovalForAll must be a bool","teal":276},{"pc":[291],"errorMessage":"argument 1 (operator) for arc72_setApprovalForAll must be a address","teal":288},{"pc":[342],"errorMessage":"argument 0 (to) for mint must be a address","teal":361},{"pc":[678],"errorMessage":"index + 1 overflowed 256 bits","teal":419},{"pc":[698],"errorMessage":"arc72_totalSupply return value overflowed 256 bits","teal":445},{"pc":[726],"errorMessage":"argument 0 (index) for arc72_tokenByIndex must be a uint256","teal":485},{"pc":[734],"errorMessage":"arc72_tokenByIndex return value overflowed 256 bits","teal":495},{"pc":[769],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":531},{"pc":[839],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":546}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ARC72","desc":"","methods":[{"name":"arc72_ownerOf","desc":"Returns the address of the current owner of the NFT with the given tokenId","readonly":true,"args":[{"name":"tokenId","type":"uint256","desc":"The ID of the NFT"}],"returns":{"type":"address","desc":"The current owner of the NFT"},"actions":{"create":[],"call":["NoOp"]}},{"name":"arc72_tokenURI","desc":"Returns a URI pointing to the NFT metadata","readonly":true,"args":[{"name":"tokenId","type":"uint256","desc":"The ID of the NFT"}],"returns":{"type":"byte[256]","desc":"URI to token metadata"},"actions":{"create":[],"call":["NoOp"]}},{"name":"arc72_transferFrom","desc":"Transfers ownership of an NFT","args":[{"name":"_from","type":"address"},{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"arc72_approve","desc":"Approve a controller for a single NFT","args":[{"name":"approved","type":"address","desc":"Approved controller address"},{"name":"tokenId","type":"uint256","desc":"The ID of the NFT"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"arc72_setApprovalForAll","desc":"Approve an operator for all NFTs for a user","args":[{"name":"operator","type":"address","desc":"Approved operator address"},{"name":"approved","type":"bool","desc":"true to give approval, false to revoke"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"mint","args":[{"name":"to","type":"address"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"arc72_totalSupply","desc":"Returns the number of NFTs currently defined by this contract","readonly":true,"args":[],"returns":{"type":"uint256"},"actions":{"create":[],"call":["NoOp"]}},{"name":"arc72_tokenByIndex","desc":"Returns the token ID of the token with the given index among all NFTs defined by the contract","readonly":true,"args":[{"name":"index","type":"uint256"}],"returns":{"type":"uint256"},"actions":{"create":[],"call":["NoOp"]}},{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}}],"arcs":[4,56],"structs":{"Token":[{"name":"owner","type":"address"},{"name":"uri","type":"byte[256]"},{"name":"controller","type":"address"}],"Control":[{"name":"owner","type":"address"},{"name":"controller","type":"address"}]},"state":{"schema":{"global":{"bytes":1,"ints":0},"local":{"bytes":0,"ints":0}},"keys":{"global":{"index":{"key":"aW5kZXg=","keyType":"AVMBytes","valueType":"uint256"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"tokenBox":{"keyType":"uint256","valueType":"Token"},"controlBox":{"keyType":"Control","valueType":"AVMBytes"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[92],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[101],"errorMessage":"argument 0 (tokenId) for arc72_ownerOf must be a uint256","teal":40},{"pc":[126],"errorMessage":"argument 0 (tokenId) for arc72_tokenURI must be a uint256","teal":80},{"pc":[160],"errorMessage":"argument 0 (tokenId) for arc72_transferFrom must be a uint256","teal":129},{"pc":[168],"errorMessage":"argument 1 (to) for arc72_transferFrom must be a address","teal":139},{"pc":[176],"errorMessage":"argument 2 (_from) for arc72_transferFrom must be a address","teal":149},{"pc":[240],"errorMessage":"Transfer not authorized","teal":216},{"pc":[249],"errorMessage":"argument 0 (tokenId) for arc72_approve must be a uint256","teal":231},{"pc":[257],"errorMessage":"argument 1 (approved) for arc72_approve must be a address","teal":241},{"pc":[281],"errorMessage":"argument 0 (approved) for arc72_setApprovalForAll must be a bool","teal":276},{"pc":[291],"errorMessage":"argument 1 (operator) for arc72_setApprovalForAll must be a address","teal":288},{"pc":[342],"errorMessage":"argument 0 (to) for mint must be a address","teal":361},{"pc":[678],"errorMessage":"index + 1 overflowed 256 bits","teal":419},{"pc":[698],"errorMessage":"arc72_totalSupply return value overflowed 256 bits","teal":445},{"pc":[726],"errorMessage":"argument 0 (index) for arc72_tokenByIndex must be a uint256","teal":485},{"pc":[734],"errorMessage":"arc72_tokenByIndex return value overflowed 256 bits","teal":495},{"pc":[769],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":531},{"pc":[839],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":546}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAzMiAxIDI1NiAwIDI4OApieXRlY2Jsb2NrIDB4IDB4MTUxZjdjNzUgMHhGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGIDB4Njk2ZTY0NjU3OAoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDcuMgovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKcHVzaGludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqY3JlYXRlX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVECgoqTk9UX0lNUExFTUVOVEVEOgoJLy8gVGhlIHJlcXVlc3RlZCBhY3Rpb24gaXMgbm90IGltcGxlbWVudGVkIGluIHRoaXMgY29udHJhY3QuIEFyZSB5b3UgdXNpbmcgdGhlIGNvcnJlY3QgT25Db21wbGV0ZT8gRGlkIHlvdSBzZXQgeW91ciBhcHAgSUQ/CgllcnIKCi8vIGFyYzcyX293bmVyT2YodWludDI1NilhZGRyZXNzCiphYmlfcm91dGVfYXJjNzJfb3duZXJPZjoKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMSAvLyAweDE1MWY3Yzc1CgoJLy8gdG9rZW5JZDogdWludDI1NgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMCAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwICh0b2tlbklkKSBmb3IgYXJjNzJfb3duZXJPZiBtdXN0IGJlIGEgdWludDI1NgoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBhcmM3Ml9vd25lck9mKHVpbnQyNTYpYWRkcmVzcwoJY2FsbHN1YiBhcmM3Ml9vd25lck9mCgljb25jYXQKCWxvZwoJaW50YyAxIC8vIDEKCXJldHVybgoKLy8gYXJjNzJfb3duZXJPZih0b2tlbklkOiB1aW50MjU2KTogQWRkcmVzcwovLwovLwovLyBSZXR1cm5zIHRoZSBhZGRyZXNzIG9mIHRoZSBjdXJyZW50IG93bmVyIG9mIHRoZSBORlQgd2l0aCB0aGUgZ2l2ZW4gdG9rZW5JZAovLwovLyBAcGFyYW0gdG9rZW5JZCBUaGUgSUQgb2YgdGhlIE5GVAovLyBAcmV0dXJucyBUaGUgY3VycmVudCBvd25lciBvZiB0aGUgTkZUCmFyYzcyX293bmVyT2Y6Cglwcm90byAxIDEKCgkvLyBleGFtcGxlcy9hcmM3Mi9hcmM3Mi5hbGdvLnRzOjI1CgkvLyByZXR1cm4gdGhpcy50b2tlbkJveCh0b2tlbklkKS52YWx1ZS5vd25lcjsKCWZyYW1lX2RpZyAtMSAvLyB0b2tlbklkOiB1aW50MjU2CglpbnRjIDMgLy8gMAoJaW50YyAwIC8vIDMyCglib3hfZXh0cmFjdAoJcmV0c3ViCgovLyBhcmM3Ml90b2tlblVSSSh1aW50MjU2KWJ5dGVbMjU2XQoqYWJpX3JvdXRlX2FyYzcyX3Rva2VuVVJJOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAxIC8vIDB4MTUxZjdjNzUKCgkvLyB0b2tlbklkOiB1aW50MjU2Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyAwIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDAgKHRva2VuSWQpIGZvciBhcmM3Ml90b2tlblVSSSBtdXN0IGJlIGEgdWludDI1NgoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBhcmM3Ml90b2tlblVSSSh1aW50MjU2KWJ5dGVbMjU2XQoJY2FsbHN1YiBhcmM3Ml90b2tlblVSSQoJY29uY2F0Cglsb2cKCWludGMgMSAvLyAxCglyZXR1cm4KCi8vIGFyYzcyX3Rva2VuVVJJKHRva2VuSWQ6IHVpbnQyNTYpOiBCeXRlczI1NgovLwovLwovLyBSZXR1cm5zIGEgVVJJIHBvaW50aW5nIHRvIHRoZSBORlQgbWV0YWRhdGEKLy8KLy8gQHBhcmFtIHRva2VuSWQgVGhlIElEIG9mIHRoZSBORlQKLy8gQHJldHVybnMgVVJJIHRvIHRva2VuIG1ldGFkYXRhCmFyYzcyX3Rva2VuVVJJOgoJcHJvdG8gMSAxCgoJLy8gZXhhbXBsZXMvYXJjNzIvYXJjNzIuYWxnby50czozNwoJLy8gcmV0dXJuIHRoaXMudG9rZW5Cb3godG9rZW5JZCkudmFsdWUudXJpOwoJZnJhbWVfZGlnIC0xIC8vIHRva2VuSWQ6IHVpbnQyNTYKCWludGMgMCAvLyAgaGVhZE9mZnNldAoJaW50YyAyIC8vIDI1NgoJYm94X2V4dHJhY3QKCXJldHN1YgoKLy8gdHJhbnNmZXJUbyh0bzogQWRkcmVzcywgdG9rZW5JZDogdWludDI1Nik6IHZvaWQKdHJhbnNmZXJUbzoKCXByb3RvIDIgMAoKCS8vIGV4YW1wbGVzL2FyYzcyL2FyYzcyLmFsZ28udHM6NDEKCS8vIHRoaXMudG9rZW5Cb3godG9rZW5JZCkudmFsdWUub3duZXIgPSB0bwoJZnJhbWVfZGlnIC0yIC8vIHRva2VuSWQ6IHVpbnQyNTYKCWludGMgMyAvLyAwCglmcmFtZV9kaWcgLTEgLy8gdG86IEFkZHJlc3MKCWJveF9yZXBsYWNlCglyZXRzdWIKCi8vIGFyYzcyX3RyYW5zZmVyRnJvbShhZGRyZXNzLGFkZHJlc3MsdWludDI1Nil2b2lkCiphYmlfcm91dGVfYXJjNzJfdHJhbnNmZXJGcm9tOgoJLy8gdG9rZW5JZDogdWludDI1NgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwoJZHVwCglsZW4KCWludGMgMCAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwICh0b2tlbklkKSBmb3IgYXJjNzJfdHJhbnNmZXJGcm9tIG11c3QgYmUgYSB1aW50MjU2Cglhc3NlcnQKCgkvLyB0bzogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJZHVwCglsZW4KCWludGMgMCAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAxICh0bykgZm9yIGFyYzcyX3RyYW5zZmVyRnJvbSBtdXN0IGJlIGEgYWRkcmVzcwoJYXNzZXJ0CgoJLy8gX2Zyb206IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDAgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMiAoX2Zyb20pIGZvciBhcmM3Ml90cmFuc2ZlckZyb20gbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIGV4ZWN1dGUgYXJjNzJfdHJhbnNmZXJGcm9tKGFkZHJlc3MsYWRkcmVzcyx1aW50MjU2KXZvaWQKCWNhbGxzdWIgYXJjNzJfdHJhbnNmZXJGcm9tCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBhcmM3Ml90cmFuc2ZlckZyb20oX2Zyb206IEFkZHJlc3MsIHRvOiBBZGRyZXNzLCB0b2tlbklkOiB1aW50MjU2KTogdm9pZAovLwovLyBUcmFuc2ZlcnMgb3duZXJzaGlwIG9mIGFuIE5GVAphcmM3Ml90cmFuc2ZlckZyb206Cglwcm90byAzIDAKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgMCAvLyAweAoJZHVwCgoJLy8gZXhhbXBsZXMvYXJjNzIvYXJjNzIuYWxnby50czo0OAoJLy8gdG9rZW4gPSB0aGlzLnRva2VuQm94KHRva2VuSWQpLnZhbHVlCglmcmFtZV9kaWcgLTMgLy8gdG9rZW5JZDogdWludDI1NgoJZnJhbWVfYnVyeSAwIC8vIHN0b3JhZ2Uga2V5Ly90b2tlbgoKCS8vIGV4YW1wbGVzL2FyYzcyL2FyYzcyLmFsZ28udHM6NTAKCS8vIGtleTogQ29udHJvbCA9IHsgb3duZXI6IHRoaXMudHhuLnNlbmRlciwgY29udHJvbGxlcjogX2Zyb20gfQoJdHhuIFNlbmRlcgoJZnJhbWVfZGlnIC0xIC8vIF9mcm9tOiBBZGRyZXNzCgljb25jYXQKCWZyYW1lX2J1cnkgMSAvLyBrZXk6IENvbnRyb2wKCgkvLyAqaWYwX2NvbmRpdGlvbgoJLy8gZXhhbXBsZXMvYXJjNzIvYXJjNzIuYWxnby50czo1MgoJLy8gdGhpcy50eG4uc2VuZGVyID09PSBfZnJvbSB8fCB0aGlzLnR4bi5zZW5kZXIgPT09IHRva2VuLmNvbnRyb2xsZXIgfHwgdGhpcy5jb250cm9sQm94KGtleSkuZXhpc3RzCgl0eG4gU2VuZGVyCglmcmFtZV9kaWcgLTEgLy8gX2Zyb206IEFkZHJlc3MKCT09CglkdXAKCWJueiAqc2tpcF9vcjAKCXR4biBTZW5kZXIKCWZyYW1lX2RpZyAtMyAvLyB0b2tlbklkOiB1aW50MjU2CglpbnRjIDQgLy8gIGhlYWRPZmZzZXQKCWludGMgMCAvLyAzMgoJYm94X2V4dHJhY3QKCT09Cgl8fAoKKnNraXBfb3IwOgoJZHVwCglibnogKnNraXBfb3IxCglmcmFtZV9kaWcgMSAvLyBrZXk6IENvbnRyb2wKCWJveF9sZW4KCXN3YXAKCXBvcAoJfHwKCipza2lwX29yMToKCWJ6ICppZjBfZWxzZQoKCS8vICppZjBfY29uc2VxdWVudAoJLy8gZXhhbXBsZXMvYXJjNzIvYXJjNzIuYWxnby50czo1MwoJLy8gdGhpcy50cmFuc2ZlclRvKHRvLCB0b2tlbklkKQoJZnJhbWVfZGlnIC0zIC8vIHRva2VuSWQ6IHVpbnQyNTYKCWZyYW1lX2RpZyAtMiAvLyB0bzogQWRkcmVzcwoJY2FsbHN1YiB0cmFuc2ZlclRvCgliICppZjBfZW5kCgoqaWYwX2Vsc2U6CgkvLyBUcmFuc2ZlciBub3QgYXV0aG9yaXplZAoJZXJyCgoqaWYwX2VuZDoKCXJldHN1YgoKLy8gYXJjNzJfYXBwcm92ZShhZGRyZXNzLHVpbnQyNTYpdm9pZAoqYWJpX3JvdXRlX2FyYzcyX2FwcHJvdmU6CgkvLyB0b2tlbklkOiB1aW50MjU2Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglkdXAKCWxlbgoJaW50YyAwIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDAgKHRva2VuSWQpIGZvciBhcmM3Ml9hcHByb3ZlIG11c3QgYmUgYSB1aW50MjU2Cglhc3NlcnQKCgkvLyBhcHByb3ZlZDogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMCAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAxIChhcHByb3ZlZCkgZm9yIGFyYzcyX2FwcHJvdmUgbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIGV4ZWN1dGUgYXJjNzJfYXBwcm92ZShhZGRyZXNzLHVpbnQyNTYpdm9pZAoJY2FsbHN1YiBhcmM3Ml9hcHByb3ZlCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBhcmM3Ml9hcHByb3ZlKGFwcHJvdmVkOiBBZGRyZXNzLCB0b2tlbklkOiB1aW50MjU2KTogdm9pZAovLwovLwovLyBBcHByb3ZlIGEgY29udHJvbGxlciBmb3IgYSBzaW5nbGUgTkZUCi8vCi8vIEBwYXJhbSBhcHByb3ZlZCBBcHByb3ZlZCBjb250cm9sbGVyIGFkZHJlc3MKLy8gQHBhcmFtIHRva2VuSWQgVGhlIElEIG9mIHRoZSBORlQKYXJjNzJfYXBwcm92ZToKCXByb3RvIDIgMAoKCS8vIGV4YW1wbGVzL2FyYzcyL2FyYzcyLmFsZ28udHM6NjUKCS8vIHRoaXMudG9rZW5Cb3godG9rZW5JZCkudmFsdWUuY29udHJvbGxlciA9IGFwcHJvdmVkCglmcmFtZV9kaWcgLTIgLy8gdG9rZW5JZDogdWludDI1NgoJaW50YyA0IC8vICBoZWFkT2Zmc2V0CglmcmFtZV9kaWcgLTEgLy8gYXBwcm92ZWQ6IEFkZHJlc3MKCWJveF9yZXBsYWNlCglyZXRzdWIKCi8vIGFyYzcyX3NldEFwcHJvdmFsRm9yQWxsKGFkZHJlc3MsYm9vbCl2b2lkCiphYmlfcm91dGVfYXJjNzJfc2V0QXBwcm92YWxGb3JBbGw6CgkvLyBhcHByb3ZlZDogYm9vbAoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgoJZHVwCglsZW4KCWludGMgMSAvLyAxCgk9PQoKCS8vIGFyZ3VtZW50IDAgKGFwcHJvdmVkKSBmb3IgYXJjNzJfc2V0QXBwcm92YWxGb3JBbGwgbXVzdCBiZSBhIGJvb2wKCWFzc2VydAoJaW50YyAzIC8vIDAKCWdldGJpdAoKCS8vIG9wZXJhdG9yOiBhZGRyZXNzCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglkdXAKCWxlbgoJaW50YyAwIC8vIDMyCgk9PQoKCS8vIGFyZ3VtZW50IDEgKG9wZXJhdG9yKSBmb3IgYXJjNzJfc2V0QXBwcm92YWxGb3JBbGwgbXVzdCBiZSBhIGFkZHJlc3MKCWFzc2VydAoKCS8vIGV4ZWN1dGUgYXJjNzJfc2V0QXBwcm92YWxGb3JBbGwoYWRkcmVzcyxib29sKXZvaWQKCWNhbGxzdWIgYXJjNzJfc2V0QXBwcm92YWxGb3JBbGwKCWludGMgMSAvLyAxCglyZXR1cm4KCi8vIGFyYzcyX3NldEFwcHJvdmFsRm9yQWxsKG9wZXJhdG9yOiBBZGRyZXNzLCBhcHByb3ZlZDogYm9vbGVhbik6IHZvaWQKLy8KLy8KLy8gQXBwcm92ZSBhbiBvcGVyYXRvciBmb3IgYWxsIE5GVHMgZm9yIGEgdXNlcgovLwovLyBAcGFyYW0gb3BlcmF0b3IgQXBwcm92ZWQgb3BlcmF0b3IgYWRkcmVzcwovLyBAcGFyYW0gYXBwcm92ZWQgdHJ1ZSB0byBnaXZlIGFwcHJvdmFsLCBmYWxzZSB0byByZXZva2UKLy8gQHJldHVybnMKYXJjNzJfc2V0QXBwcm92YWxGb3JBbGw6Cglwcm90byAyIDAKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgMCAvLyAweAoKCS8vIGV4YW1wbGVzL2FyYzcyL2FyYzcyLmFsZ28udHM6NzcKCS8vIGtleTogQ29udHJvbCA9IHsgb3duZXI6IHRoaXMudHhuLnNlbmRlciwgY29udHJvbGxlcjogb3BlcmF0b3IgfQoJdHhuIFNlbmRlcgoJZnJhbWVfZGlnIC0xIC8vIG9wZXJhdG9yOiBBZGRyZXNzCgljb25jYXQKCWZyYW1lX2J1cnkgMCAvLyBrZXk6IENvbnRyb2wKCgkvLyAqaWYxX2NvbmRpdGlvbgoJLy8gZXhhbXBsZXMvYXJjNzIvYXJjNzIuYWxnby50czo3OQoJLy8gYXBwcm92ZWQKCWZyYW1lX2RpZyAtMiAvLyBhcHByb3ZlZDogYm9vbGVhbgoJYnogKmlmMV9lbHNlaWYxX2NvbmRpdGlvbgoKCS8vICppZjFfY29uc2VxdWVudAoJLy8gZXhhbXBsZXMvYXJjNzIvYXJjNzIuYWxnby50czo3OQoJLy8gdGhpcy5jb250cm9sQm94KGtleSkudmFsdWUgPSAnJwoJZnJhbWVfZGlnIDAgLy8ga2V5OiBDb250cm9sCglkdXAKCWJveF9kZWwKCXBvcAoJYnl0ZWMgMCAvLyAgIiIKCWJveF9wdXQKCWIgKmlmMV9lbmQKCippZjFfZWxzZWlmMV9jb25kaXRpb246CgkvLyBleGFtcGxlcy9hcmM3Mi9hcmM3Mi5hbGdvLnRzOjgwCgkvLyB0aGlzLmNvbnRyb2xCb3goa2V5KS5leGlzdHMKCWZyYW1lX2RpZyAwIC8vIGtleTogQ29udHJvbAoJYm94X2xlbgoJc3dhcAoJcG9wCglieiAqaWYxX2VuZAoKCS8vICppZjFfZWxzZWlmMV9jb25zZXF1ZW50CgkvLyBleGFtcGxlcy9hcmM3Mi9hcmM3Mi5hbGdvLnRzOjgwCgkvLyB0aGlzLmNvbnRyb2xCb3goa2V5KS5kZWxldGUoKQoJZnJhbWVfZGlnIDAgLy8ga2V5OiBDb250cm9sCglib3hfZGVsCgoqaWYxX2VuZDoKCXJldHN1YgoKLy8gbWludChhZGRyZXNzKXZvaWQKKmFiaV9yb3V0ZV9taW50OgoJLy8gdG86IGFkZHJlc3MKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWR1cAoJbGVuCglpbnRjIDAgLy8gMzIKCT09CgoJLy8gYXJndW1lbnQgMCAodG8pIGZvciBtaW50IG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBleGVjdXRlIG1pbnQoYWRkcmVzcyl2b2lkCgljYWxsc3ViIG1pbnQKCWludGMgMSAvLyAxCglyZXR1cm4KCi8vIG1pbnQodG86IEFkZHJlc3MpOiB2b2lkCm1pbnQ6Cglwcm90byAxIDAKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgMCAvLyAweAoJZHVwCgoJLy8gZXhhbXBsZXMvYXJjNzIvYXJjNzIuYWxnby50czo4NAoJLy8gaW5kZXggPSB0aGlzLmluZGV4LnZhbHVlCglieXRlYyAzIC8vICAiaW5kZXgiCglhcHBfZ2xvYmFsX2dldAoJZnJhbWVfYnVyeSAwIC8vIGluZGV4OiB1aW50MjU2CgoJLy8gZXhhbXBsZXMvYXJjNzIvYXJjNzIuYWxnby50czo4NgoJLy8gdG9rZW46IFRva2VuID0gewoJLy8gICAgICAgb3duZXI6IHRvLAoJLy8gICAgICAgdXJpOiAnaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9BUkNzJyBhcyBCeXRlczI1NiwKCS8vICAgICAgIGNvbnRyb2xsZXI6IEFkZHJlc3MuemVyb0FkZHJlc3MsCgkvLyAgICAgfQoJZnJhbWVfZGlnIC0xIC8vIHRvOiBBZGRyZXNzCglwdXNoYnl0ZXMgMHg2ODc0NzQ3MDczM2EyZjJmNjc2OTc0Njg3NTYyMmU2MzZmNmQyZjYxNmM2NzZmNzI2MTZlNjQ2NjZmNzU2ZTY0NjE3NDY5NmY2ZTJmNDE1MjQzNzMwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMCAvLyAiaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9BUkNzIgoJY29uY2F0CglnbG9iYWwgWmVyb0FkZHJlc3MKCWNvbmNhdAoJZnJhbWVfYnVyeSAxIC8vIHRva2VuOiBUb2tlbgoKCS8vIGV4YW1wbGVzL2FyYzcyL2FyYzcyLmFsZ28udHM6OTIKCS8vIHRoaXMudG9rZW5Cb3goaW5kZXgpLnZhbHVlID0gdG9rZW4KCWZyYW1lX2RpZyAwIC8vIGluZGV4OiB1aW50MjU2CglmcmFtZV9kaWcgMSAvLyB0b2tlbjogVG9rZW4KCWJveF9wdXQKCgkvLyBleGFtcGxlcy9hcmM3Mi9hcmM3Mi5hbGdvLnRzOjkzCgkvLyB0aGlzLnRyYW5zZmVyVG8odG8sIGluZGV4KQoJZnJhbWVfZGlnIDAgLy8gaW5kZXg6IHVpbnQyNTYKCWZyYW1lX2RpZyAtMSAvLyB0bzogQWRkcmVzcwoJY2FsbHN1YiB0cmFuc2ZlclRvCgoJLy8gZXhhbXBsZXMvYXJjNzIvYXJjNzIuYWxnby50czo5NAoJLy8gdGhpcy5pbmRleC52YWx1ZSA9IGluZGV4ICsgMQoJYnl0ZWMgMyAvLyAgImluZGV4IgoJZnJhbWVfZGlnIDAgLy8gaW5kZXg6IHVpbnQyNTYKCXB1c2hieXRlcyAweDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEKCWIrCglkdXAKCWJpdGxlbgoJaW50YyAyIC8vIDI1NgoJPD0KCgkvLyBpbmRleCArIDEgb3ZlcmZsb3dlZCAyNTYgYml0cwoJYXNzZXJ0CglieXRlYyAyIC8vIDB4RkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRgoJYiYKCWR1cAoJbGVuCglkdXAKCWludGMgMCAvLyAzMgoJLQoJc3dhcAoJc3Vic3RyaW5nMwoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKLy8gYXJjNzJfdG90YWxTdXBwbHkoKXVpbnQyNTYKKmFiaV9yb3V0ZV9hcmM3Ml90b3RhbFN1cHBseToKCS8vIFRoZSBBQkkgcmV0dXJuIHByZWZpeAoJYnl0ZWMgMSAvLyAweDE1MWY3Yzc1CgoJLy8gZXhlY3V0ZSBhcmM3Ml90b3RhbFN1cHBseSgpdWludDI1NgoJY2FsbHN1YiBhcmM3Ml90b3RhbFN1cHBseQoJZHVwCgliaXRsZW4KCWludGMgMiAvLyAyNTYKCTw9CgoJLy8gYXJjNzJfdG90YWxTdXBwbHkgcmV0dXJuIHZhbHVlIG92ZXJmbG93ZWQgMjU2IGJpdHMKCWFzc2VydAoJYnl0ZWMgMiAvLyAweEZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkYKCWImCglkdXAKCWxlbgoJZHVwCglpbnRjIDAgLy8gMzIKCS0KCXN3YXAKCXN1YnN0cmluZzMKCWNvbmNhdAoJbG9nCglpbnRjIDEgLy8gMQoJcmV0dXJuCgovLyBhcmM3Ml90b3RhbFN1cHBseSgpOiB1aW50MjU2Ci8vCi8vIFJldHVybnMgdGhlIG51bWJlciBvZiBORlRzIGN1cnJlbnRseSBkZWZpbmVkIGJ5IHRoaXMgY29udHJhY3QKYXJjNzJfdG90YWxTdXBwbHk6Cglwcm90byAwIDEKCgkvLyBleGFtcGxlcy9hcmM3Mi9hcmM3Mi5hbGdvLnRzOjEwMgoJLy8gcmV0dXJuIHRoaXMuaW5kZXgudmFsdWU7CglieXRlYyAzIC8vICAiaW5kZXgiCglhcHBfZ2xvYmFsX2dldAoJcmV0c3ViCgovLyBhcmM3Ml90b2tlbkJ5SW5kZXgodWludDI1Nil1aW50MjU2CiphYmlfcm91dGVfYXJjNzJfdG9rZW5CeUluZGV4OgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAxIC8vIDB4MTUxZjdjNzUKCgkvLyBpbmRleDogdWludDI1NgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgMCAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChpbmRleCkgZm9yIGFyYzcyX3Rva2VuQnlJbmRleCBtdXN0IGJlIGEgdWludDI1NgoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBhcmM3Ml90b2tlbkJ5SW5kZXgodWludDI1Nil1aW50MjU2CgljYWxsc3ViIGFyYzcyX3Rva2VuQnlJbmRleAoJZHVwCgliaXRsZW4KCWludGMgMiAvLyAyNTYKCTw9CgoJLy8gYXJjNzJfdG9rZW5CeUluZGV4IHJldHVybiB2YWx1ZSBvdmVyZmxvd2VkIDI1NiBiaXRzCglhc3NlcnQKCWJ5dGVjIDIgLy8gMHhGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGCgliJgoJZHVwCglsZW4KCWR1cAoJaW50YyAwIC8vIDMyCgktCglzd2FwCglzdWJzdHJpbmczCgljb25jYXQKCWxvZwoJaW50YyAxIC8vIDEKCXJldHVybgoKLy8gYXJjNzJfdG9rZW5CeUluZGV4KGluZGV4OiB1aW50MjU2KTogdWludDI1NgovLwovLyBSZXR1cm5zIHRoZSB0b2tlbiBJRCBvZiB0aGUgdG9rZW4gd2l0aCB0aGUgZ2l2ZW4gaW5kZXggYW1vbmcgYWxsIE5GVHMgZGVmaW5lZCBieSB0aGUgY29udHJhY3QKYXJjNzJfdG9rZW5CeUluZGV4OgoJcHJvdG8gMSAxCgoJLy8gZXhhbXBsZXMvYXJjNzIvYXJjNzIuYWxnby50czoxMTAKCS8vIHJldHVybiBpbmRleDsKCWZyYW1lX2RpZyAtMSAvLyBpbmRleDogdWludDI1NgoJcmV0c3ViCgoqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uOgoJaW50YyAxIC8vIDEKCXJldHVybgoKKmNyZWF0ZV9Ob09wOgoJcHVzaGJ5dGVzIDB4Yjg0NDdiMzYgLy8gbWV0aG9kICJjcmVhdGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfY3JlYXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY3JlYXRlIE5vT3AKCWVycgoKKmNhbGxfTm9PcDoKCXB1c2hieXRlcyAweDc5MDk2YTE0IC8vIG1ldGhvZCAiYXJjNzJfb3duZXJPZih1aW50MjU2KWFkZHJlc3MiCglwdXNoYnl0ZXMgMHhjM2MxZmMwMCAvLyBtZXRob2QgImFyYzcyX3Rva2VuVVJJKHVpbnQyNTYpYnl0ZVsyNTZdIgoJcHVzaGJ5dGVzIDB4ZjJmMTk0YTAgLy8gbWV0aG9kICJhcmM3Ml90cmFuc2ZlckZyb20oYWRkcmVzcyxhZGRyZXNzLHVpbnQyNTYpdm9pZCIKCXB1c2hieXRlcyAweGI0ZWRiYTRlIC8vIG1ldGhvZCAiYXJjNzJfYXBwcm92ZShhZGRyZXNzLHVpbnQyNTYpdm9pZCIKCXB1c2hieXRlcyAweDcxMzQzOTVmIC8vIG1ldGhvZCAiYXJjNzJfc2V0QXBwcm92YWxGb3JBbGwoYWRkcmVzcyxib29sKXZvaWQiCglwdXNoYnl0ZXMgMHhhYzRjZmFkZiAvLyBtZXRob2QgIm1pbnQoYWRkcmVzcyl2b2lkIgoJcHVzaGJ5dGVzIDB4NjRkNzJhN2EgLy8gbWV0aG9kICJhcmM3Ml90b3RhbFN1cHBseSgpdWludDI1NiIKCXB1c2hieXRlcyAweDZkOWJmZDI3IC8vIG1ldGhvZCAiYXJjNzJfdG9rZW5CeUluZGV4KHVpbnQyNTYpdWludDI1NiIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfYXJjNzJfb3duZXJPZiAqYWJpX3JvdXRlX2FyYzcyX3Rva2VuVVJJICphYmlfcm91dGVfYXJjNzJfdHJhbnNmZXJGcm9tICphYmlfcm91dGVfYXJjNzJfYXBwcm92ZSAqYWJpX3JvdXRlX2FyYzcyX3NldEFwcHJvdmFsRm9yQWxsICphYmlfcm91dGVfbWludCAqYWJpX3JvdXRlX2FyYzcyX3RvdGFsU3VwcGx5ICphYmlfcm91dGVfYXJjNzJfdG9rZW5CeUluZGV4CgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgTm9PcAoJZXJy","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiAFIAGAAgCgAiYEAAQVH3x1IP//////////////////////////////////////////BWluZGV4MRgUgQYLMRkIjQwCpgAAAAAAAAAAAAACmAAAAAAAAAAAAAAAKTYaAUkVIhJEiAAEULAjQ4oBAYv/JSK6iSk2GgFJFSISRIgABFCwI0OKAQGL/yIkuomKAgCL/iWL/7uJNhoDSRUiEkQ2GgJJFSISRDYaAUkVIhJEiAACI0OKAwAoSYv9jAAxAIv/UIwBMQCL/xJJQAAKMQCL/SEEIroSEUlAAAaLAb1MSBFBAAqL/Yv+iP+iQgABAIk2GgJJFSISRDYaAUkVIhJEiAACI0OKAgCL/iEEi/+7iTYaAkkVIxJEJVM2GgFJFSISRIgAAiNDigIAKDEAi/9QjACL/kEACosASbxIKL9CAAuLAL1MSEEAA4sAvIk2GgFJFSISRIgAAiNDigEAKEkrZIwAi/+AgAJodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL0FSQ3MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUDIDUIwBiwCLAb+LAIv/iP4TK4sAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaBJkyQORCqsSRVJIglMUmeJKYgAEkmTJA5EKqxJFUkiCUxSULAjQ4oAAStkiSk2GgFJFSISRIgAEkmTJA5EKqxJFUkiCUxSULAjQ4oBAYv/iSNDgAS4RHs2NhoAjgH/8QCABHkJahSABMPB/ACABPLxlKCABLTtuk6ABHE0OV+ABKxM+t+ABGTXKnqABG2b/Sc2GgCOCP0W/S/9Uv2r/cv+CP9r/4cA","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -293,11 +293,57 @@ export type GlobalKeysState = Arc72Types['state']['global']['keys']
 export type BoxKeysState = Arc72Types['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type Arc72CreateCallParams =
+  | Expand<CallParams<Arc72Args['obj']['createApplication()void'] | Arc72Args['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<Arc72Args['obj']['createApplication()void'] | Arc72Args['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type Arc72DeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: Arc72CreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Arc72 smart contract
  */
 export abstract class Arc72ParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends Arc72CreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return Arc72ParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the ARC72 smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<Arc72Args['obj']['createApplication()void'] | Arc72Args['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the arc72_ownerOf(uint256)address ABI method
    *
@@ -418,6 +464,148 @@ export abstract class Arc72ParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the ARC72 smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class Arc72Factory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `Arc72Factory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new Arc72Client(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new Arc72Client(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ARC72 smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: Arc72DeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? Arc72ParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (Arc72CreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new Arc72Client(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ARC72 smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<Arc72Args['obj']['createApplication()void'] | Arc72Args['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(Arc72ParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ARC72 smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<Arc72Args['obj']['createApplication()void'] | Arc72Args['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(Arc72ParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ARC72 smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<Arc72Args['obj']['createApplication()void'] | Arc72Args['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(Arc72ParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | Arc72Returns['createApplication()void']) }, appClient: new Arc72Client(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the ARC72 smart contract
  */

@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Auction","desc":"","methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"optIntoAsset","args":[{"name":"asset","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"startAuction","args":[{"name":"startingPrice","type":"uint64"},{"name":"length","type":"uint64"},{"name":"axfer","type":"axfer"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"optInToApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["OptIn"]}},{"name":"bid","args":[{"name":"payment","type":"pay"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"claimBids","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"claim_asset","args":[{"name":"asset","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":1,"ints":4},"local":{"bytes":0,"ints":1}},"keys":{"global":{"previousBidder":{"key":"cHJldmlvdXNCaWRkZXI=","keyType":"AVMBytes","valueType":"address"},"auctionEnd":{"key":"YXVjdGlvbkVuZA==","keyType":"AVMBytes","valueType":"uint64"},"previousBid":{"key":"cHJldmlvdXNCaWQ=","keyType":"AVMBytes","valueType":"uint64"},"asaAmt":{"key":"YXNhQW10","keyType":"AVMBytes","valueType":"uint64"},"asa":{"key":"YXNh","keyType":"AVMBytes","valueType":"uint64"}},"local":{"claimableAmount":{"key":"Y2xhaW1hYmxlQW1vdW50","keyType":"AVMBytes","valueType":"uint64"}},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[109],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[154],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"globals.creatorAddress\"}","teal":93},{"pc":[195],"errorMessage":"argument 0 (axfer) for startAuction must be a axfer transaction","teal":157},{"pc":[217],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"globals.creatorAddress\"}","teal":184},{"pc":[230],"errorMessage":"transaction verification failed: {\"txn\":\"axfer\",\"field\":\"assetReceiver\",\"expected\":\"this.app.address\"}","teal":205},{"pc":[288],"errorMessage":"argument 0 (payment) for bid must be a pay transaction","teal":285},{"pc":[310],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":318},{"pc":[318],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"amount\",\"condition\":\"greaterThan\",\"expected\":\">this.previousBid.value\"}","teal":328},{"pc":[478],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":534},{"pc":[524],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":546},{"pc":[538],"errorMessage":"this contract does not implement the given ABI method for call OptIn","teal":554},{"pc":[552],"errorMessage":"this contract does not implement the given ABI method for call DeleteApplication","teal":562}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Auction","desc":"","methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"optIntoAsset","args":[{"name":"asset","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"startAuction","args":[{"name":"startingPrice","type":"uint64"},{"name":"length","type":"uint64"},{"name":"axfer","type":"axfer"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"optInToApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["OptIn"]}},{"name":"bid","args":[{"name":"payment","type":"pay"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"claimBids","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"claim_asset","args":[{"name":"asset","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}},{"name":"deleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":1,"ints":4},"local":{"bytes":0,"ints":1}},"keys":{"global":{"previousBidder":{"key":"cHJldmlvdXNCaWRkZXI=","keyType":"AVMBytes","valueType":"address"},"auctionEnd":{"key":"YXVjdGlvbkVuZA==","keyType":"AVMBytes","valueType":"uint64"},"previousBid":{"key":"cHJldmlvdXNCaWQ=","keyType":"AVMBytes","valueType":"uint64"},"asaAmt":{"key":"YXNhQW10","keyType":"AVMBytes","valueType":"uint64"},"asa":{"key":"YXNh","keyType":"AVMBytes","valueType":"uint64"}},"local":{"claimableAmount":{"key":"Y2xhaW1hYmxlQW1vdW50","keyType":"AVMBytes","valueType":"uint64"}},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[109],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[154],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"globals.creatorAddress\"}","teal":93},{"pc":[195],"errorMessage":"argument 0 (axfer) for startAuction must be a axfer transaction","teal":157},{"pc":[217],"errorMessage":"transaction verification failed: {\"txn\":\"this.txn\",\"field\":\"sender\",\"expected\":\"globals.creatorAddress\"}","teal":184},{"pc":[230],"errorMessage":"transaction verification failed: {\"txn\":\"axfer\",\"field\":\"assetReceiver\",\"expected\":\"this.app.address\"}","teal":205},{"pc":[288],"errorMessage":"argument 0 (payment) for bid must be a pay transaction","teal":285},{"pc":[310],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"sender\",\"expected\":\"this.txn.sender\"}","teal":318},{"pc":[318],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"amount\",\"condition\":\"greaterThan\",\"expected\":\">this.previousBid.value\"}","teal":328},{"pc":[478],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":534},{"pc":[524],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":546},{"pc":[538],"errorMessage":"this contract does not implement the given ABI method for call OptIn","teal":554},{"pc":[552],"errorMessage":"this contract does not implement the given ABI method for call DeleteApplication","teal":562}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCmludGNibG9jayAxIDAgNApieXRlY2Jsb2NrIDB4NzA3MjY1NzY2OTZmNzU3MzQyNjk2NDY0NjU3MiAweDcwNzI2NTc2Njk2Zjc1NzM0MjY5NjQgMHg2MTc1NjM3NDY5NmY2ZTQ1NmU2NCAweDYzNmM2MTY5NmQ2MTYyNmM2NTQxNmQ2Zjc1NmU3NCAweDYxNzM2MTQxNmQ3NCAweDYxNzM2MSAweAoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDcuMgovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKcHVzaGludCA2CioKdHhuIE9uQ29tcGxldGlvbgorCnN3aXRjaCAqY2FsbF9Ob09wICpjYWxsX09wdEluICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpjYWxsX0RlbGV0ZUFwcGxpY2F0aW9uICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCS8vIGV4ZWN1dGUgY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKCWNhbGxzdWIgY3JlYXRlQXBwbGljYXRpb24KCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKCk6IHZvaWQKY3JlYXRlQXBwbGljYXRpb246Cglwcm90byAwIDAKCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czoxOAoJLy8gdGhpcy5hdWN0aW9uRW5kLnZhbHVlID0gMAoJYnl0ZWMgMiAvLyAgImF1Y3Rpb25FbmQiCglpbnRjIDEgLy8gMAoJYXBwX2dsb2JhbF9wdXQKCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czoxOQoJLy8gdGhpcy5wcmV2aW91c0JpZC52YWx1ZSA9IDAKCWJ5dGVjIDEgLy8gICJwcmV2aW91c0JpZCIKCWludGMgMSAvLyAwCglhcHBfZ2xvYmFsX3B1dAoKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjIwCgkvLyB0aGlzLmFzYUFtdC52YWx1ZSA9IDAKCWJ5dGVjIDQgLy8gICJhc2FBbXQiCglpbnRjIDEgLy8gMAoJYXBwX2dsb2JhbF9wdXQKCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czoyMQoJLy8gdGhpcy5hc2EudmFsdWUgPSBBc3NldElELnplcm9JbmRleAoJYnl0ZWMgNSAvLyAgImFzYSIKCWludGMgMSAvLyAwCglhcHBfZ2xvYmFsX3B1dAoKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjI0CgkvLyB0aGlzLnByZXZpb3VzQmlkZGVyLnZhbHVlID0gZ2xvYmFscy56ZXJvQWRkcmVzcwoJYnl0ZWMgMCAvLyAgInByZXZpb3VzQmlkZGVyIgoJZ2xvYmFsIFplcm9BZGRyZXNzCglhcHBfZ2xvYmFsX3B1dAoJcmV0c3ViCgovLyBvcHRJbnRvQXNzZXQodWludDY0KXZvaWQKKmFiaV9yb3V0ZV9vcHRJbnRvQXNzZXQ6CgkvLyBhc3NldDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBvcHRJbnRvQXNzZXQodWludDY0KXZvaWQKCWNhbGxzdWIgb3B0SW50b0Fzc2V0CglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBvcHRJbnRvQXNzZXQoYXNzZXQ6IEFzc2V0SUQpOiB2b2lkCm9wdEludG9Bc3NldDoKCXByb3RvIDEgMAoKCS8vIE9ubHkgYWxsb3cgYXBwIGNyZWF0b3IgdG8gb3B0IHRoZSBhcHAgYWNjb3VudCBpbnRvIGEgQVNBCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czoyOQoJLy8gdmVyaWZ5QXBwQ2FsbFR4bih0aGlzLnR4biwgeyBzZW5kZXI6IGdsb2JhbHMuY3JlYXRvckFkZHJlc3MgfSkKCS8vIHZlcmlmeSBzZW5kZXIKCXR4biBTZW5kZXIKCWdsb2JhbCBDcmVhdG9yQWRkcmVzcwoJPT0KCgkvLyB0cmFuc2FjdGlvbiB2ZXJpZmljYXRpb24gZmFpbGVkOiB7InR4biI6InRoaXMudHhuIiwiZmllbGQiOiJzZW5kZXIiLCJleHBlY3RlZCI6Imdsb2JhbHMuY3JlYXRvckFkZHJlc3MifQoJYXNzZXJ0CgoJLy8gVmVyaWZ5IGEgQVNBIGhhc24ndCBhbHJlYWR5IGJlZW4gb3B0ZWQgaW50bwoJLy8gZXhhbXBsZXMvYXVjdGlvbi9hdWN0aW9uLmFsZ28udHM6MzIKCS8vIGFzc2VydCh0aGlzLmFzYS52YWx1ZSA9PT0gQXNzZXRJRC56ZXJvSW5kZXgpCglieXRlYyA1IC8vICAiYXNhIgoJYXBwX2dsb2JhbF9nZXQKCWludGMgMSAvLyAwCgk9PQoJYXNzZXJ0CgoJLy8gU2F2ZSBBU0EgSUQgaW4gZ2xvYmFsIHN0YXRlCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czozNQoJLy8gdGhpcy5hc2EudmFsdWUgPSBhc3NldAoJYnl0ZWMgNSAvLyAgImFzYSIKCWZyYW1lX2RpZyAtMSAvLyBhc3NldDogQXNzZXRJRAoJYXBwX2dsb2JhbF9wdXQKCgkvLyBTdWJtaXQgb3B0LWluIHRyYW5zYWN0aW9uOiAwIGFzc2V0IHRyYW5zZmVyIHRvIHNlbGYKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjM4CgkvLyBzZW5kQXNzZXRUcmFuc2Zlcih7CgkvLyAgICAgICBhc3NldFJlY2VpdmVyOiB0aGlzLmFwcC5hZGRyZXNzLAoJLy8gICAgICAgeGZlckFzc2V0OiBhc3NldCwKCS8vICAgICAgIGFzc2V0QW1vdW50OiAwLAoJLy8gICAgIH0pCglpdHhuX2JlZ2luCglpbnRjIDIgLy8gIGF4ZmVyCglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gZXhhbXBsZXMvYXVjdGlvbi9hdWN0aW9uLmFsZ28udHM6MzkKCS8vIGFzc2V0UmVjZWl2ZXI6IHRoaXMuYXBwLmFkZHJlc3MKCWdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCglpdHhuX2ZpZWxkIEFzc2V0UmVjZWl2ZXIKCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czo0MAoJLy8geGZlckFzc2V0OiBhc3NldAoJZnJhbWVfZGlnIC0xIC8vIGFzc2V0OiBBc3NldElECglpdHhuX2ZpZWxkIFhmZXJBc3NldAoKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjQxCgkvLyBhc3NldEFtb3VudDogMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgQXNzZXRBbW91bnQKCgkvLyBGZWUgZmllbGQgbm90IHNldCwgZGVmYXVsdGluZyB0byAwCglpbnRjIDEgLy8gMAoJaXR4bl9maWVsZCBGZWUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CglyZXRzdWIKCi8vIHN0YXJ0QXVjdGlvbih1aW50NjQsdWludDY0LGF4ZmVyKXZvaWQKKmFiaV9yb3V0ZV9zdGFydEF1Y3Rpb246CgkvLyBheGZlcjogYXhmZXIKCXR4biBHcm91cEluZGV4CglpbnRjIDAgLy8gMQoJLQoJZHVwCglndHhucyBUeXBlRW51bQoJaW50YyAyIC8vICBheGZlcgoJPT0KCgkvLyBhcmd1bWVudCAwIChheGZlcikgZm9yIHN0YXJ0QXVjdGlvbiBtdXN0IGJlIGEgYXhmZXIgdHJhbnNhY3Rpb24KCWFzc2VydAoKCS8vIGxlbmd0aDogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAyCglidG9pCgoJLy8gc3RhcnRpbmdQcmljZTogdWludDY0Cgl0eG5hIEFwcGxpY2F0aW9uQXJncyAxCglidG9pCgoJLy8gZXhlY3V0ZSBzdGFydEF1Y3Rpb24odWludDY0LHVpbnQ2NCxheGZlcil2b2lkCgljYWxsc3ViIHN0YXJ0QXVjdGlvbgoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gc3RhcnRBdWN0aW9uKHN0YXJ0aW5nUHJpY2U6IHVpbnQ2NCwgbGVuZ3RoOiB1aW50NjQsIGF4ZmVyOiBBc3NldFRyYW5zZmVyVHhuKTogdm9pZApzdGFydEF1Y3Rpb246Cglwcm90byAzIDAKCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czo0NgoJLy8gdmVyaWZ5QXBwQ2FsbFR4bih0aGlzLnR4biwgeyBzZW5kZXI6IGdsb2JhbHMuY3JlYXRvckFkZHJlc3MgfSkKCS8vIHZlcmlmeSBzZW5kZXIKCXR4biBTZW5kZXIKCWdsb2JhbCBDcmVhdG9yQWRkcmVzcwoJPT0KCgkvLyB0cmFuc2FjdGlvbiB2ZXJpZmljYXRpb24gZmFpbGVkOiB7InR4biI6InRoaXMudHhuIiwiZmllbGQiOiJzZW5kZXIiLCJleHBlY3RlZCI6Imdsb2JhbHMuY3JlYXRvckFkZHJlc3MifQoJYXNzZXJ0CgoJLy8gRW5zdXJlIHRoZSBhdWN0aW9uIGhhc24ndCBhbHJlYWR5IGJlZW4gc3RhcnRlZAoJLy8gZXhhbXBsZXMvYXVjdGlvbi9hdWN0aW9uLmFsZ28udHM6NDkKCS8vIGFzc2VydCh0aGlzLmF1Y3Rpb25FbmQudmFsdWUgPT09IDApCglieXRlYyAyIC8vICAiYXVjdGlvbkVuZCIKCWFwcF9nbG9iYWxfZ2V0CglpbnRjIDEgLy8gMAoJPT0KCWFzc2VydAoKCS8vIFZlcmlmeSBheGZlcgoJLy8gZXhhbXBsZXMvYXVjdGlvbi9hdWN0aW9uLmFsZ28udHM6NTIKCS8vIHZlcmlmeUFzc2V0VHJhbnNmZXJUeG4oYXhmZXIsIHsgYXNzZXRSZWNlaXZlcjogdGhpcy5hcHAuYWRkcmVzcyB9KQoJLy8gdmVyaWZ5IGFzc2V0UmVjZWl2ZXIKCWZyYW1lX2RpZyAtMyAvLyBheGZlcjogQXNzZXRUcmFuc2ZlclR4bgoJZ3R4bnMgQXNzZXRSZWNlaXZlcgoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCT09CgoJLy8gdHJhbnNhY3Rpb24gdmVyaWZpY2F0aW9uIGZhaWxlZDogeyJ0eG4iOiJheGZlciIsImZpZWxkIjoiYXNzZXRSZWNlaXZlciIsImV4cGVjdGVkIjoidGhpcy5hcHAuYWRkcmVzcyJ9Cglhc3NlcnQKCgkvLyBTZXQgZ2xvYmFsIHN0YXRlCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czo1NQoJLy8gdGhpcy5hc2FBbXQudmFsdWUgPSBheGZlci5hc3NldEFtb3VudAoJYnl0ZWMgNCAvLyAgImFzYUFtdCIKCWZyYW1lX2RpZyAtMyAvLyBheGZlcjogQXNzZXRUcmFuc2ZlclR4bgoJZ3R4bnMgQXNzZXRBbW91bnQKCWFwcF9nbG9iYWxfcHV0CgoJLy8gZXhhbXBsZXMvYXVjdGlvbi9hdWN0aW9uLmFsZ28udHM6NTYKCS8vIHRoaXMuYXVjdGlvbkVuZC52YWx1ZSA9IGdsb2JhbHMubGF0ZXN0VGltZXN0YW1wICsgbGVuZ3RoCglieXRlYyAyIC8vICAiYXVjdGlvbkVuZCIKCWdsb2JhbCBMYXRlc3RUaW1lc3RhbXAKCWZyYW1lX2RpZyAtMiAvLyBsZW5ndGg6IHVpbnQ2NAoJKwoJYXBwX2dsb2JhbF9wdXQKCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czo1NwoJLy8gdGhpcy5wcmV2aW91c0JpZC52YWx1ZSA9IHN0YXJ0aW5nUHJpY2UKCWJ5dGVjIDEgLy8gICJwcmV2aW91c0JpZCIKCWZyYW1lX2RpZyAtMSAvLyBzdGFydGluZ1ByaWNlOiB1aW50NjQKCWFwcF9nbG9iYWxfcHV0CglyZXRzdWIKCi8vIHBheShyZWNlaXZlcjogQWRkcmVzcywgYW1vdW50OiB1aW50NjQpOiB2b2lkCnBheToKCXByb3RvIDIgMAoKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjYxCgkvLyBzZW5kUGF5bWVudCh7CgkvLyAgICAgICByZWNlaXZlcjogcmVjZWl2ZXIsCgkvLyAgICAgICBhbW91bnQ6IGFtb3VudCwKCS8vICAgICB9KQoJaXR4bl9iZWdpbgoJaW50YyAwIC8vICBwYXkKCWl0eG5fZmllbGQgVHlwZUVudW0KCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czo2MgoJLy8gcmVjZWl2ZXI6IHJlY2VpdmVyCglmcmFtZV9kaWcgLTEgLy8gcmVjZWl2ZXI6IEFkZHJlc3MKCWl0eG5fZmllbGQgUmVjZWl2ZXIKCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czo2MwoJLy8gYW1vdW50OiBhbW91bnQKCWZyYW1lX2RpZyAtMiAvLyBhbW91bnQ6IHVpbnQ2NAoJaXR4bl9maWVsZCBBbW91bnQKCgkvLyBGZWUgZmllbGQgbm90IHNldCwgZGVmYXVsdGluZyB0byAwCglpbnRjIDEgLy8gMAoJaXR4bl9maWVsZCBGZWUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CglyZXRzdWIKCi8vIG9wdEluVG9BcHBsaWNhdGlvbigpdm9pZAoqYWJpX3JvdXRlX29wdEluVG9BcHBsaWNhdGlvbjoKCS8vIGV4ZWN1dGUgb3B0SW5Ub0FwcGxpY2F0aW9uKCl2b2lkCgljYWxsc3ViIG9wdEluVG9BcHBsaWNhdGlvbgoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gb3B0SW5Ub0FwcGxpY2F0aW9uKCk6IHZvaWQKb3B0SW5Ub0FwcGxpY2F0aW9uOgoJcHJvdG8gMCAwCglyZXRzdWIKCi8vIGJpZChwYXkpdm9pZAoqYWJpX3JvdXRlX2JpZDoKCS8vIHBheW1lbnQ6IHBheQoJdHhuIEdyb3VwSW5kZXgKCWludGMgMCAvLyAxCgktCglkdXAKCWd0eG5zIFR5cGVFbnVtCglpbnRjIDAgLy8gIHBheQoJPT0KCgkvLyBhcmd1bWVudCAwIChwYXltZW50KSBmb3IgYmlkIG11c3QgYmUgYSBwYXkgdHJhbnNhY3Rpb24KCWFzc2VydAoKCS8vIGV4ZWN1dGUgYmlkKHBheSl2b2lkCgljYWxsc3ViIGJpZAoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gYmlkKHBheW1lbnQ6IFBheVR4bik6IHZvaWQKYmlkOgoJcHJvdG8gMSAwCgoJLy8gRW5zdXJlIGF1Y3Rpb24gaGFzbid0IGVuZGVkCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czo3MgoJLy8gYXNzZXJ0KGdsb2JhbHMubGF0ZXN0VGltZXN0YW1wIDwgdGhpcy5hdWN0aW9uRW5kLnZhbHVlKQoJZ2xvYmFsIExhdGVzdFRpbWVzdGFtcAoJYnl0ZWMgMiAvLyAgImF1Y3Rpb25FbmQiCglhcHBfZ2xvYmFsX2dldAoJPAoJYXNzZXJ0CgoJLy8gVmVyaWZ5IHBheW1lbnQgdHJhbnNhY3Rpb24KCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjc1CgkvLyB2ZXJpZnlQYXlUeG4ocGF5bWVudCwgewoJLy8gICAgICAgc2VuZGVyOiB0aGlzLnR4bi5zZW5kZXIsCgkvLyAgICAgICBhbW91bnQ6IHsgZ3JlYXRlclRoYW46IHRoaXMucHJldmlvdXNCaWQudmFsdWUgfSwKCS8vICAgICB9KQoJLy8gdmVyaWZ5IHNlbmRlcgoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgU2VuZGVyCgl0eG4gU2VuZGVyCgk9PQoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoicGF5bWVudCIsImZpZWxkIjoic2VuZGVyIiwiZXhwZWN0ZWQiOiJ0aGlzLnR4bi5zZW5kZXIifQoJYXNzZXJ0CgoJLy8gdmVyaWZ5IGFtb3VudAoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CglieXRlYyAxIC8vICAicHJldmlvdXNCaWQiCglhcHBfZ2xvYmFsX2dldAoJPgoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoicGF5bWVudCIsImZpZWxkIjoiYW1vdW50IiwiY29uZGl0aW9uIjoiZ3JlYXRlclRoYW4iLCJleHBlY3RlZCI6Ij50aGlzLnByZXZpb3VzQmlkLnZhbHVlIn0KCWFzc2VydAoKCS8vIFNldCBnbG9iYWwgc3RhdGUKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjgxCgkvLyB0aGlzLnByZXZpb3VzQmlkLnZhbHVlID0gcGF5bWVudC5hbW91bnQKCWJ5dGVjIDEgLy8gICJwcmV2aW91c0JpZCIKCWZyYW1lX2RpZyAtMSAvLyBwYXltZW50OiBQYXlUeG4KCWd0eG5zIEFtb3VudAoJYXBwX2dsb2JhbF9wdXQKCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czo4MgoJLy8gdGhpcy5wcmV2aW91c0JpZGRlci52YWx1ZSA9IHBheW1lbnQuc2VuZGVyCglieXRlYyAwIC8vICAicHJldmlvdXNCaWRkZXIiCglmcmFtZV9kaWcgLTEgLy8gcGF5bWVudDogUGF5VHhuCglndHhucyBTZW5kZXIKCWFwcF9nbG9iYWxfcHV0CgoJLy8gVXBkYXRlIGNsYWltYWJsZSBhbW91bnQKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjg1CgkvLyB0aGlzLmNsYWltYWJsZUFtb3VudCh0aGlzLnR4bi5zZW5kZXIpLnZhbHVlID0gcGF5bWVudC5hbW91bnQKCXR4biBTZW5kZXIKCWJ5dGVjIDMgLy8gICJjbGFpbWFibGVBbW91bnQiCglmcmFtZV9kaWcgLTEgLy8gcGF5bWVudDogUGF5VHhuCglndHhucyBBbW91bnQKCWFwcF9sb2NhbF9wdXQKCXJldHN1YgoKLy8gY2xhaW1CaWRzKCl2b2lkCiphYmlfcm91dGVfY2xhaW1CaWRzOgoJLy8gZXhlY3V0ZSBjbGFpbUJpZHMoKXZvaWQKCWNhbGxzdWIgY2xhaW1CaWRzCglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBjbGFpbUJpZHMoKTogdm9pZApjbGFpbUJpZHM6Cglwcm90byAwIDAKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgNiAvLyAweAoJZHVwCgoJLy8gZXhhbXBsZXMvYXVjdGlvbi9hdWN0aW9uLmFsZ28udHM6ODkKCS8vIG9yaWdpbmFsQW1vdW50ID0gdGhpcy5jbGFpbWFibGVBbW91bnQodGhpcy50eG4uc2VuZGVyKS52YWx1ZQoJdHhuIFNlbmRlcgoJYnl0ZWMgMyAvLyAgImNsYWltYWJsZUFtb3VudCIKCWFwcF9sb2NhbF9nZXQKCWZyYW1lX2J1cnkgMCAvLyBvcmlnaW5hbEFtb3VudDogdWludDY0CgoJLy8gZXhhbXBsZXMvYXVjdGlvbi9hdWN0aW9uLmFsZ28udHM6OTAKCS8vIGFtb3VudCA9IG9yaWdpbmFsQW1vdW50CglmcmFtZV9kaWcgMCAvLyBvcmlnaW5hbEFtb3VudDogdWludDY0CglmcmFtZV9idXJ5IDEgLy8gYW1vdW50OiB1aW50NjQKCgkvLyBzdWJ0cmFjdCBwcmV2aW91cyBiaWQgaWYgc2VuZGVyIGlzIHByZXZpb3VzIGJpZGRlcgoJLy8gKmlmMF9jb25kaXRpb24KCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjkzCgkvLyB0aGlzLnR4bi5zZW5kZXIgPT09IHRoaXMucHJldmlvdXNCaWRkZXIudmFsdWUKCXR4biBTZW5kZXIKCWJ5dGVjIDAgLy8gICJwcmV2aW91c0JpZGRlciIKCWFwcF9nbG9iYWxfZ2V0Cgk9PQoJYnogKmlmMF9lbmQKCgkvLyAqaWYwX2NvbnNlcXVlbnQKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjkzCgkvLyBhbW91bnQgPSBhbW91bnQgLSB0aGlzLnByZXZpb3VzQmlkLnZhbHVlCglmcmFtZV9kaWcgMSAvLyBhbW91bnQ6IHVpbnQ2NAoJYnl0ZWMgMSAvLyAgInByZXZpb3VzQmlkIgoJYXBwX2dsb2JhbF9nZXQKCS0KCWZyYW1lX2J1cnkgMSAvLyBhbW91bnQ6IHVpbnQ2NAoKKmlmMF9lbmQ6CgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czo5NQoJLy8gdGhpcy5wYXkodGhpcy50eG4uc2VuZGVyLCBhbW91bnQpCglmcmFtZV9kaWcgMSAvLyBhbW91bnQ6IHVpbnQ2NAoJdHhuIFNlbmRlcgoJY2FsbHN1YiBwYXkKCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czo5NgoJLy8gdGhpcy5jbGFpbWFibGVBbW91bnQodGhpcy50eG4uc2VuZGVyKS52YWx1ZSA9IG9yaWdpbmFsQW1vdW50IC0gYW1vdW50Cgl0eG4gU2VuZGVyCglieXRlYyAzIC8vICAiY2xhaW1hYmxlQW1vdW50IgoJZnJhbWVfZGlnIDAgLy8gb3JpZ2luYWxBbW91bnQ6IHVpbnQ2NAoJZnJhbWVfZGlnIDEgLy8gYW1vdW50OiB1aW50NjQKCS0KCWFwcF9sb2NhbF9wdXQKCXJldHN1YgoKLy8gY2xhaW1fYXNzZXQodWludDY0KXZvaWQKKmFiaV9yb3V0ZV9jbGFpbV9hc3NldDoKCS8vIGFzc2V0OiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWJ0b2kKCgkvLyBleGVjdXRlIGNsYWltX2Fzc2V0KHVpbnQ2NCl2b2lkCgljYWxsc3ViIGNsYWltX2Fzc2V0CglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBjbGFpbV9hc3NldChhc3NldDogQXNzZXRJRCk6IHZvaWQKY2xhaW1fYXNzZXQ6Cglwcm90byAxIDAKCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czoxMDAKCS8vIGFzc2VydChnbG9iYWxzLmxhdGVzdFRpbWVzdGFtcCA+IHRoaXMuYXVjdGlvbkVuZC52YWx1ZSkKCWdsb2JhbCBMYXRlc3RUaW1lc3RhbXAKCWJ5dGVjIDIgLy8gICJhdWN0aW9uRW5kIgoJYXBwX2dsb2JhbF9nZXQKCT4KCWFzc2VydAoKCS8vIFNlbmQgQVNBIHRvIHByZXZpb3VzIGJpZGRlcgoJLy8gZXhhbXBsZXMvYXVjdGlvbi9hdWN0aW9uLmFsZ28udHM6MTAzCgkvLyBzZW5kQXNzZXRUcmFuc2Zlcih7CgkvLyAgICAgICBhc3NldFJlY2VpdmVyOiB0aGlzLnByZXZpb3VzQmlkZGVyLnZhbHVlLAoJLy8gICAgICAgeGZlckFzc2V0OiBhc3NldCwKCS8vICAgICAgIGFzc2V0QW1vdW50OiB0aGlzLmFzYUFtdC52YWx1ZSwKCS8vICAgICAgIGFzc2V0Q2xvc2VUbzogdGhpcy5wcmV2aW91c0JpZGRlci52YWx1ZSwKCS8vICAgICB9KQoJaXR4bl9iZWdpbgoJaW50YyAyIC8vICBheGZlcgoJaXR4bl9maWVsZCBUeXBlRW51bQoKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjEwNAoJLy8gYXNzZXRSZWNlaXZlcjogdGhpcy5wcmV2aW91c0JpZGRlci52YWx1ZQoJYnl0ZWMgMCAvLyAgInByZXZpb3VzQmlkZGVyIgoJYXBwX2dsb2JhbF9nZXQKCWl0eG5fZmllbGQgQXNzZXRSZWNlaXZlcgoKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjEwNQoJLy8geGZlckFzc2V0OiBhc3NldAoJZnJhbWVfZGlnIC0xIC8vIGFzc2V0OiBBc3NldElECglpdHhuX2ZpZWxkIFhmZXJBc3NldAoKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjEwNgoJLy8gYXNzZXRBbW91bnQ6IHRoaXMuYXNhQW10LnZhbHVlCglieXRlYyA0IC8vICAiYXNhQW10IgoJYXBwX2dsb2JhbF9nZXQKCWl0eG5fZmllbGQgQXNzZXRBbW91bnQKCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czoxMDcKCS8vIGFzc2V0Q2xvc2VUbzogdGhpcy5wcmV2aW91c0JpZGRlci52YWx1ZQoJYnl0ZWMgMCAvLyAgInByZXZpb3VzQmlkZGVyIgoJYXBwX2dsb2JhbF9nZXQKCWl0eG5fZmllbGQgQXNzZXRDbG9zZVRvCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoJcmV0c3ViCgovLyBkZWxldGVBcHBsaWNhdGlvbigpdm9pZAoqYWJpX3JvdXRlX2RlbGV0ZUFwcGxpY2F0aW9uOgoJLy8gZXhlY3V0ZSBkZWxldGVBcHBsaWNhdGlvbigpdm9pZAoJY2FsbHN1YiBkZWxldGVBcHBsaWNhdGlvbgoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gZGVsZXRlQXBwbGljYXRpb24oKTogdm9pZApkZWxldGVBcHBsaWNhdGlvbjoKCXByb3RvIDAgMAoKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjExMgoJLy8gc2VuZFBheW1lbnQoewoJLy8gICAgICAgcmVjZWl2ZXI6IGdsb2JhbHMuY3JlYXRvckFkZHJlc3MsCgkvLyAgICAgICBjbG9zZVJlbWFpbmRlclRvOiBnbG9iYWxzLmNyZWF0b3JBZGRyZXNzLAoJLy8gICAgICAgYW1vdW50OiAwLAoJLy8gICAgIH0pCglpdHhuX2JlZ2luCglpbnRjIDAgLy8gIHBheQoJaXR4bl9maWVsZCBUeXBlRW51bQoKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjExMwoJLy8gcmVjZWl2ZXI6IGdsb2JhbHMuY3JlYXRvckFkZHJlc3MKCWdsb2JhbCBDcmVhdG9yQWRkcmVzcwoJaXR4bl9maWVsZCBSZWNlaXZlcgoKCS8vIGV4YW1wbGVzL2F1Y3Rpb24vYXVjdGlvbi5hbGdvLnRzOjExNAoJLy8gY2xvc2VSZW1haW5kZXJUbzogZ2xvYmFscy5jcmVhdG9yQWRkcmVzcwoJZ2xvYmFsIENyZWF0b3JBZGRyZXNzCglpdHhuX2ZpZWxkIENsb3NlUmVtYWluZGVyVG8KCgkvLyBleGFtcGxlcy9hdWN0aW9uL2F1Y3Rpb24uYWxnby50czoxMTUKCS8vIGFtb3VudDogMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgQW1vdW50CgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoJcmV0c3ViCgoqY3JlYXRlX05vT3A6CglwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjcmVhdGUgTm9PcAoJZXJyCgoqY2FsbF9Ob09wOgoJcHVzaGJ5dGVzIDB4Mzk4N2YwYzEgLy8gbWV0aG9kICJvcHRJbnRvQXNzZXQodWludDY0KXZvaWQiCglwdXNoYnl0ZXMgMHhjMjcyNTkyMiAvLyBtZXRob2QgInN0YXJ0QXVjdGlvbih1aW50NjQsdWludDY0LGF4ZmVyKXZvaWQiCglwdXNoYnl0ZXMgMHhkYjdmZTg0MyAvLyBtZXRob2QgImJpZChwYXkpdm9pZCIKCXB1c2hieXRlcyAweDAzMmY2NTBkIC8vIG1ldGhvZCAiY2xhaW1CaWRzKCl2b2lkIgoJcHVzaGJ5dGVzIDB4NTliMmFiMjYgLy8gbWV0aG9kICJjbGFpbV9hc3NldCh1aW50NjQpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfb3B0SW50b0Fzc2V0ICphYmlfcm91dGVfc3RhcnRBdWN0aW9uICphYmlfcm91dGVfYmlkICphYmlfcm91dGVfY2xhaW1CaWRzICphYmlfcm91dGVfY2xhaW1fYXNzZXQKCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY2FsbCBOb09wCgllcnIKCipjYWxsX09wdEluOgoJcHVzaGJ5dGVzIDB4MDFhM2EzZmYgLy8gbWV0aG9kICJvcHRJblRvQXBwbGljYXRpb24oKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX29wdEluVG9BcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE9wdEluCgllcnIKCipjYWxsX0RlbGV0ZUFwcGxpY2F0aW9uOgoJcHVzaGJ5dGVzIDB4MjQ4N2MzMmMgLy8gbWV0aG9kICJkZWxldGVBcHBsaWNhdGlvbigpdm9pZCIKCXR4bmEgQXBwbGljYXRpb25BcmdzIDAKCW1hdGNoICphYmlfcm91dGVfZGVsZXRlQXBwbGljYXRpb24KCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY2FsbCBEZWxldGVBcHBsaWNhdGlvbgoJZXJy","clear":"I3ByYWdtYSB2ZXJzaW9uIDEw"},"byteCode":{"approval":"CiADAQAEJgcOcHJldmlvdXNCaWRkZXILcHJldmlvdXNCaWQKYXVjdGlvbkVuZA9jbGFpbWFibGVBbW91bnQGYXNhQW10A2FzYQAxGBSBBgsxGQiNDAFyAaAAAAAAAAABrgFkAAAAAAAAAAAAAACIAAIiQ4oAACojZykjZycEI2cnBSNnKDIDZ4k2GgEXiAACIkOKAQAxADIJEkQnBWQjEkQnBYv/Z7EkshAyCrIUi/+yESOyEiOyAbOJMRYiCUk4ECQSRDYaAhc2GgEXiAACIkOKAwAxADIJEkQqZCMSRIv9OBQyChJEJwSL/TgSZyoyB4v+CGcpi/9niYoCALEishCL/7IHi/6yCCOyAbOJiAACIkOKAACJMRYiCUk4ECISRIgAAiJDigEAMgcqZAxEi/84ADEAEkSL/zgIKWQNRCmL/zgIZyiL/zgAZzEAK4v/OAhmiYgAAiJDigAAJwZJMQArYowAiwCMATEAKGQSQQAHiwEpZAmMAYsBMQCI/3sxACuLAIsBCWaJNhoBF4gAAiJDigEAMgcqZA1EsSSyEChkshSL/7IRJwRkshIoZLIVI7IBs4mIAAIiQ4oAALEishAyCbIHMgmyCSOyCCOyAbOJgAS4RHs2NhoAjgH+kACABDmH8MGABMJyWSKABNt/6EOABAMvZQ2ABFmyqyY2GgCOBf59/q7/C/9I/30AgAQBo6P/NhoAjgH+9ACABCSHwyw2GgCOAf+NAA==","clear":"Cg=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -223,11 +223,97 @@ export type GlobalKeysState = AuctionTypes['state']['global']['keys']
 export type LocalKeysState = AuctionTypes['state']['local']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type AuctionCreateCallParams =
+  | Expand<CallParams<AuctionArgs['obj']['createApplication()void'] | AuctionArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<AuctionArgs['obj']['createApplication()void'] | AuctionArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type AuctionDeleteCallParams =
+  | Expand<CallParams<AuctionArgs['obj']['deleteApplication()void'] | AuctionArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication'}>
+  | Expand<CallParams<AuctionArgs['obj']['deleteApplication()void'] | AuctionArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type AuctionDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: AuctionCreateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: AuctionDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Auction smart contract
  */
 export abstract class AuctionParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends AuctionCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return AuctionParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the Auction smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<AuctionArgs['obj']['createApplication()void'] | AuctionArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends AuctionDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'deleteApplication':
+          case 'deleteApplication()void':
+            return AuctionParamsFactory.delete.deleteApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the Auction smart contract using the deleteApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      deleteApplication(params: CallParams<AuctionArgs['obj']['deleteApplication()void'] | AuctionArgs['tuple']['deleteApplication()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'deleteApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Gets available optIn ABI call param factories
    */
@@ -317,6 +403,164 @@ export abstract class AuctionParamsFactory {
 }
 
 /**
+ * A factory to create and deploy one or more instance of the Auction smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class AuctionFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `AuctionFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new AuctionClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new AuctionClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Auction smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: AuctionDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? AuctionParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (AuctionCreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? AuctionParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (AuctionDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new AuctionClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Auction smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<AuctionArgs['obj']['createApplication()void'] | AuctionArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(AuctionParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the Auction smart contract using the deleteApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      deleteApplication: (params: CallParams<AuctionArgs['obj']['deleteApplication()void'] | AuctionArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(AuctionParamsFactory.delete.deleteApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Auction smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<AuctionArgs['obj']['createApplication()void'] | AuctionArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(AuctionParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Auction smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<AuctionArgs['obj']['createApplication()void'] | AuctionArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(AuctionParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | AuctionReturns['createApplication()void']) }, appClient: new AuctionClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
+/**
  * A client to make calls to the Auction smart contract
  */
 export class AuctionClient {
@@ -395,6 +639,22 @@ export class AuctionClient {
    * Get parameters to create transactions for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
    */
   readonly params = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the Auction smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      deleteApplication: (params: CallParams<AuctionArgs['obj']['deleteApplication()void'] | AuctionArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.params.delete(AuctionParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
     /**
      * Gets available optIn methods
      */
@@ -478,6 +738,22 @@ export class AuctionClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the Auction smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      deleteApplication: (params: CallParams<AuctionArgs['obj']['deleteApplication()void'] | AuctionArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(AuctionParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Gets available optIn methods
      */
     optIn: {
@@ -559,6 +835,23 @@ export class AuctionClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the Auction smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      deleteApplication: async (params: CallParams<AuctionArgs['obj']['deleteApplication()void'] | AuctionArgs['tuple']['deleteApplication()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(AuctionParamsFactory.delete.deleteApplication(params))
+        return {...result, return: result.return as unknown as (undefined | AuctionReturns['deleteApplication()void'])}
+      },
+
+    },
+
     /**
      * Gets available optIn methods
      */
@@ -764,6 +1057,15 @@ export class AuctionClient {
         resultMappers.push(undefined)
         return this
       },
+      get delete() {
+        return {
+          deleteApplication: (params: CallParams<AuctionArgs['obj']['deleteApplication()void'] | AuctionArgs['tuple']['deleteApplication()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.deleteApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       get optIn() {
         return {
           optInToApplication: (params: CallParams<AuctionArgs['obj']['optInToApplication()void'] | AuctionArgs['tuple']['optInToApplication()void']>) => {
@@ -852,6 +1154,20 @@ export type AuctionComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   claimAsset(params?: CallParams<AuctionArgs['obj']['claim_asset(uint64)void'] | AuctionArgs['tuple']['claim_asset(uint64)void']>): AuctionComposer<[...TReturns, AuctionReturns['claim_asset(uint64)void'] | undefined]>
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the Auction smart contract using the deleteApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    deleteApplication(params?: CallParams<AuctionArgs['obj']['deleteApplication()void'] | AuctionArgs['tuple']['deleteApplication()void']>): AuctionComposer<[...TReturns, AuctionReturns['deleteApplication()void'] | undefined]>
+  }
 
   /**
    * Gets available optIn methods
