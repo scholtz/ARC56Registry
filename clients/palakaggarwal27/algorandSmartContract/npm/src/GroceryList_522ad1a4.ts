@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"GroceryList","structs":{},"methods":[{"name":"AddItem","args":[{"type":"string","name":"item"},{"type":"string","name":"quantity"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"ClearList","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"GetList","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"groceryList":{"keyType":"AVMString","valueType":"AVMString","key":"Z3JvY2VyeUxpc3Q="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[71,95,119],"errorMessage":"OnCompletion is not NoOp"},{"pc":[160],"errorMessage":"can only call when creating"},{"pc":[74,98,122],"errorMessage":"can only call when not creating"},{"pc":[169,215],"errorMessage":"check GlobalState exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"GroceryList","structs":{},"methods":[{"name":"AddItem","args":[{"type":"string","name":"item"},{"type":"string","name":"quantity"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"ClearList","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"GetList","args":[],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"groceryList":{"keyType":"AVMString","valueType":"AVMString","key":"Z3JvY2VyeUxpc3Q="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[71,95,119],"errorMessage":"OnCompletion is not NoOp"},{"pc":[160],"errorMessage":"can only call when creating"},{"pc":[74,98,122],"errorMessage":"can only call when not creating"},{"pc":[169,215],"errorMessage":"check GlobalState exists"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwCiAgICBieXRlY2Jsb2NrICJncm9jZXJ5TGlzdCIgMHgxNTFmN2M3NSAiIgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkL2NvbnRyYWN0LmFsZ28udHM6NwogICAgLy8ga2V5OiAiZ3JvY2VyeUxpc3QiLAogICAgYnl0ZWNfMCAvLyAiZ3JvY2VyeUxpc3QiCiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czo4CiAgICAvLyBpbml0aWFsVmFsdWU6ICIiCiAgICBieXRlY18yIC8vICIiCiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czo2LTkKICAgIC8vIGdyb2NlcnlMaXN0ID0gR2xvYmFsU3RhdGU8c3RyaW5nPih7CiAgICAvLyAgIGtleTogImdyb2NlcnlMaXN0IiwKICAgIC8vICAgaW5pdGlhbFZhbHVlOiAiIgogICAgLy8gfSkKICAgIGFwcF9nbG9iYWxfcHV0CgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjQKICAgIC8vIGV4cG9ydCBjbGFzcyBHcm9jZXJ5TGlzdCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX2JhcmVfcm91dGluZ0AxMAogICAgcHVzaGJ5dGVzcyAweDViOTlmM2VhIDB4ZGI0NTM5Y2YgMHgzODYyMjM4NiAvLyBtZXRob2QgIkFkZEl0ZW0oc3RyaW5nLHN0cmluZylzdHJpbmciLCBtZXRob2QgIkNsZWFyTGlzdCgpc3RyaW5nIiwgbWV0aG9kICJHZXRMaXN0KClzdHJpbmciCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX0FkZEl0ZW1fcm91dGVANSBtYWluX0NsZWFyTGlzdF9yb3V0ZUA2IG1haW5fR2V0TGlzdF9yb3V0ZUA3CgptYWluX2FmdGVyX2lmX2Vsc2VAMTQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czo0CiAgICAvLyBleHBvcnQgY2xhc3MgR3JvY2VyeUxpc3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBpbnRjXzEgLy8gMAogICAgcmV0dXJuCgptYWluX0dldExpc3Rfcm91dGVANzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjI4CiAgICAvLyBHZXRMaXN0KCk6IHN0cmluZyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgR2V0TGlzdAogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fQ2xlYXJMaXN0X3JvdXRlQDY6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czoyMgogICAgLy8gQ2xlYXJMaXN0KCk6IHN0cmluZyB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIGlzIG5vdCBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0IC8vIGNhbiBvbmx5IGNhbGwgd2hlbiBub3QgY3JlYXRpbmcKICAgIGNhbGxzdWIgQ2xlYXJMaXN0CiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYnl0ZWNfMSAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKbWFpbl9BZGRJdGVtX3JvdXRlQDU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czoxMgogICAgLy8gQWRkSXRlbShpdGVtOiBzdHJpbmcsIHF1YW50aXR5OiBzdHJpbmcpOiBzdHJpbmcgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czo0CiAgICAvLyBleHBvcnQgY2xhc3MgR3JvY2VyeUxpc3QgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjEyCiAgICAvLyBBZGRJdGVtKGl0ZW06IHN0cmluZywgcXVhbnRpdHk6IHN0cmluZyk6IHN0cmluZyB7CiAgICBjYWxsc3ViIEFkZEl0ZW0KICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICBieXRlY18xIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0AxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjQKICAgIC8vIGV4cG9ydCBjbGFzcyBHcm9jZXJ5TGlzdCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMTQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkL2NvbnRyYWN0LmFsZ28udHM6Okdyb2NlcnlMaXN0LkFkZEl0ZW0oaXRlbTogYnl0ZXMsIHF1YW50aXR5OiBieXRlcykgLT4gYnl0ZXM6CkFkZEl0ZW06CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czoxMgogICAgLy8gQWRkSXRlbShpdGVtOiBzdHJpbmcsIHF1YW50aXR5OiBzdHJpbmcpOiBzdHJpbmcgewogICAgcHJvdG8gMiAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czo3CiAgICAvLyBrZXk6ICJncm9jZXJ5TGlzdCIsCiAgICBpbnRjXzEgLy8gMAogICAgYnl0ZWNfMCAvLyAiZ3JvY2VyeUxpc3QiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkL2NvbnRyYWN0LmFsZ28udHM6MTUKICAgIC8vIGNvbnN0IG5ld0VudHJ5ID0gYCR7aXRlbX0gKCR7cXVhbnRpdHl9KSwgYAogICAgZnJhbWVfZGlnIC0yCiAgICBwdXNoYnl0ZXMgIiAoIgogICAgY29uY2F0CiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgcHVzaGJ5dGVzICIpLCAiCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjE2CiAgICAvLyB0aGlzLmdyb2NlcnlMaXN0LnZhbHVlID0gY3VycmVudExpc3QgKyBuZXdFbnRyeQogICAgY29uY2F0CiAgICAvLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czo3CiAgICAvLyBrZXk6ICJncm9jZXJ5TGlzdCIsCiAgICBieXRlY18wIC8vICJncm9jZXJ5TGlzdCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjE2CiAgICAvLyB0aGlzLmdyb2NlcnlMaXN0LnZhbHVlID0gY3VycmVudExpc3QgKyBuZXdFbnRyeQogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjE4CiAgICAvLyByZXR1cm4gaXRlbQogICAgZnJhbWVfZGlnIC0yCiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czo6R3JvY2VyeUxpc3QuQ2xlYXJMaXN0KCkgLT4gYnl0ZXM6CkNsZWFyTGlzdDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjcKICAgIC8vIGtleTogImdyb2NlcnlMaXN0IiwKICAgIGJ5dGVjXzAgLy8gImdyb2NlcnlMaXN0IgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkL2NvbnRyYWN0LmFsZ28udHM6MjMKICAgIC8vIHRoaXMuZ3JvY2VyeUxpc3QudmFsdWUgPSAiIgogICAgYnl0ZWNfMiAvLyAiIgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjI0CiAgICAvLyByZXR1cm4gIkxpc3QgY2xlYXJlZCEiCiAgICBwdXNoYnl0ZXMgIkxpc3QgY2xlYXJlZCEiCiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMvaGVsbG9fd29ybGQvY29udHJhY3QuYWxnby50czo6R3JvY2VyeUxpc3QuR2V0TGlzdCgpIC0+IGJ5dGVzOgpHZXRMaXN0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2hlbGxvX3dvcmxkL2NvbnRyYWN0LmFsZ28udHM6NwogICAgLy8ga2V5OiAiZ3JvY2VyeUxpc3QiLAogICAgaW50Y18xIC8vIDAKICAgIGJ5dGVjXzAgLy8gImdyb2NlcnlMaXN0IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9oZWxsb193b3JsZC9jb250cmFjdC5hbGdvLnRzOjI5CiAgICAvLyByZXR1cm4gdGhpcy5ncm9jZXJ5TGlzdC52YWx1ZQogICAgcmV0c3ViCg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CiACAQAmAwtncm9jZXJ5TGlzdAQVH3x1ADEYQAADKCpnMRtBAHKCAwRbmfPqBNtFOc8EOGIjhjYaAI4DADIAGgACI0MxGRREMRhEiACGSRUWVwYCTFApTFCwIkMxGRREMRhEiABbSRUWVwYCTFApTFCwIkMxGRREMRhENhoBVwIANhoCVwIAiAAZSRUWVwYCTFApTFCwIkMxGUD/pTEYFEQiQ4oCASMoZUSL/oACIChQi/9QgAMpLCBQUChMZ4v+iSgqZ4ANTGlzdCBjbGVhcmVkIYkjKGVEiQ==","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -165,6 +165,21 @@ export type MethodReturn<TSignature extends GroceryListSignatures> = GroceryList
 export type GlobalKeysState = GroceryListTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type GroceryListCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type GroceryListDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: GroceryListCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the GroceryList smart contract
@@ -211,6 +226,147 @@ export abstract class GroceryListParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the GroceryList smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class GroceryListFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `GroceryListFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new GroceryListClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new GroceryListClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the GroceryList smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: GroceryListDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new GroceryListClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the GroceryList smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the GroceryList smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the GroceryList smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new GroceryListClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the GroceryList smart contract
  */
