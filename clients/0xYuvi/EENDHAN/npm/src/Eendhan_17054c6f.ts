@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"Eendhan","structs":{},"methods":[{"name":"create","args":[{"type":"address","name":"treasury"},{"type":"address","name":"creator"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize contract with treasury and creator addresses.","events":[],"recommendations":{}},{"name":"opt_in_to_usdc","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Opt-in the application account to USDC.\nStrictly gated to creator address only.","events":[],"recommendations":{}},{"name":"process_payment_split","args":[{"type":"axfer","name":"payment"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Verify incoming USDC payment and split: 5% treasury, 95% creator.\nPayment must be sent to this contract's address in the same group.","events":[],"recommendations":{}},{"name":"update_treasury","args":[{"type":"address","name":"new_treasury"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Update the treasury address. Only creator can call.","events":[],"recommendations":{}},{"name":"get_treasury","args":[],"returns":{"type":"address"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Return the current treasury address.","events":[],"recommendations":{}},{"name":"get_creator","args":[],"returns":{"type":"address"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Return the current creator address.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    AlgoGate AI - x402-powered AI API Gateway Contract.\n    Handles USDC payment verification and payout splits.\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"treasury_address":{"keyType":"AVMString","valueType":"address","key":"dHJlYXN1cnlfYWRkcmVzcw=="},"creator_address":{"keyType":"AVMString","valueType":"address","key":"Y3JlYXRvcl9hZGRyZXNz"},"usdc_asset":{"keyType":"AVMString","valueType":"AVMUint64","key":"dXNkY19hc3NldA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[188],"errorMessage":"Creator not set"},{"pc":[228],"errorMessage":"Only USDC accepted"},{"pc":[183],"errorMessage":"Only creator can opt in to assets"},{"pc":[328],"errorMessage":"Only creator can update treasury"},{"pc":[239],"errorMessage":"Payment amount must be positive"},{"pc":[235],"errorMessage":"Payment must be sent to contract"},{"pc":[178,295,326,347],"errorMessage":"check self.creator_address exists"},{"pc":[267,337],"errorMessage":"check self.treasury_address exists"},{"pc":[193,263,291],"errorMessage":"check self.usdc_asset exists"},{"pc":[151,159,320],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[221],"errorMessage":"transaction type is axfer"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"Eendhan","structs":{},"methods":[{"name":"create","args":[{"type":"address","name":"treasury"},{"type":"address","name":"creator"}],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"desc":"Initialize contract with treasury and creator addresses.","events":[],"recommendations":{}},{"name":"opt_in_to_usdc","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Opt-in the application account to USDC.\nStrictly gated to creator address only.","events":[],"recommendations":{}},{"name":"process_payment_split","args":[{"type":"axfer","name":"payment"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Verify incoming USDC payment and split: 5% treasury, 95% creator.\nPayment must be sent to this contract's address in the same group.","events":[],"recommendations":{}},{"name":"update_treasury","args":[{"type":"address","name":"new_treasury"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Update the treasury address. Only creator can call.","events":[],"recommendations":{}},{"name":"get_treasury","args":[],"returns":{"type":"address"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Return the current treasury address.","events":[],"recommendations":{}},{"name":"get_creator","args":[],"returns":{"type":"address"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Return the current creator address.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    AlgoGate AI - x402-powered AI API Gateway Contract.\n    Handles USDC payment verification and payout splits.\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"treasury_address":{"keyType":"AVMString","valueType":"address","key":"dHJlYXN1cnlfYWRkcmVzcw=="},"creator_address":{"keyType":"AVMString","valueType":"address","key":"Y3JlYXRvcl9hZGRyZXNz"},"usdc_asset":{"keyType":"AVMString","valueType":"AVMUint64","key":"dXNkY19hc3NldA=="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[188],"errorMessage":"Creator not set"},{"pc":[228],"errorMessage":"Only USDC accepted"},{"pc":[183],"errorMessage":"Only creator can opt in to assets"},{"pc":[328],"errorMessage":"Only creator can update treasury"},{"pc":[239],"errorMessage":"Payment amount must be positive"},{"pc":[235],"errorMessage":"Payment must be sent to contract"},{"pc":[178,295,326,347],"errorMessage":"check self.creator_address exists"},{"pc":[267,337],"errorMessage":"check self.treasury_address exists"},{"pc":[193,263,291],"errorMessage":"check self.usdc_asset exists"},{"pc":[151,159,320],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"},{"pc":[221],"errorMessage":"transaction type is axfer"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgNCAzMiAxMDQ1ODk0MQogICAgYnl0ZWNibG9jayAiY3JlYXRvcl9hZGRyZXNzIiAidHJlYXN1cnlfYWRkcmVzcyIgInVzZGNfYXNzZXQiIDB4MTUxZjdjNzUKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBibnogbWFpbl9hZnRlcl9pZl9lbHNlQDIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5OjI0CiAgICAvLyBzZWxmLnRyZWFzdXJ5X2FkZHJlc3MgPSBBY2NvdW50KCkKICAgIGJ5dGVjXzEgLy8gInRyZWFzdXJ5X2FkZHJlc3MiCiAgICBnbG9iYWwgWmVyb0FkZHJlc3MKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weToyNQogICAgLy8gc2VsZi5jcmVhdG9yX2FkZHJlc3MgPSBBY2NvdW50KCkKICAgIGJ5dGVjXzAgLy8gImNyZWF0b3JfYWRkcmVzcyIKICAgIGdsb2JhbCBaZXJvQWRkcmVzcwogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5OjI2CiAgICAvLyBzZWxmLnVzZGNfYXNzZXQgPSBBc3NldCgpCiAgICBieXRlY18yIC8vICJ1c2RjX2Fzc2V0IgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5OjE3CiAgICAvLyBjbGFzcyBFZW5kaGFuKEFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDExCiAgICBwdXNoYnl0ZXNzIDB4ZGMxMDUxNzUgMHg4OWVjMjY1ZSAweGY0NWZkNGQ1IDB4ZGVlZjcwODQgMHgyMDJhMGUxOSAvLyBtZXRob2QgIm9wdF9pbl90b191c2RjKCl2b2lkIiwgbWV0aG9kICJwcm9jZXNzX3BheW1lbnRfc3BsaXQoYXhmZXIpdm9pZCIsIG1ldGhvZCAidXBkYXRlX3RyZWFzdXJ5KGFkZHJlc3Mpdm9pZCIsIG1ldGhvZCAiZ2V0X3RyZWFzdXJ5KClhZGRyZXNzIiwgbWV0aG9kICJnZXRfY3JlYXRvcigpYWRkcmVzcyIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG9wdF9pbl90b191c2RjIHByb2Nlc3NfcGF5bWVudF9zcGxpdCB1cGRhdGVfdHJlYXN1cnkgZ2V0X3RyZWFzdXJ5IGdldF9jcmVhdG9yCiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BAMTE6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weToxNwogICAgLy8gY2xhc3MgRWVuZGhhbihBUkM0Q29udHJhY3QpOgogICAgcHVzaGJ5dGVzIDB4OGE5Njk4MGUgLy8gbWV0aG9kICJjcmVhdGUoYWRkcmVzcyxhZGRyZXNzKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGUKICAgIGVycgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5lZW5kaGFuLmNvbnRyYWN0LkVlbmRoYW4uY3JlYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6MjgKICAgIC8vIEBhYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTozMwogICAgLy8gc2VsZi50cmVhc3VyeV9hZGRyZXNzID0gdHJlYXN1cnkKICAgIGJ5dGVjXzEgLy8gInRyZWFzdXJ5X2FkZHJlc3MiCiAgICB1bmNvdmVyIDIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTozNAogICAgLy8gc2VsZi5jcmVhdG9yX2FkZHJlc3MgPSBjcmVhdG9yCiAgICBieXRlY18wIC8vICJjcmVhdG9yX2FkZHJlc3MiCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6MzUKICAgIC8vIHNlbGYudXNkY19hc3NldCA9IEFzc2V0KFVTRENfQVNTRVRfSUQpCiAgICBieXRlY18yIC8vICJ1c2RjX2Fzc2V0IgogICAgaW50YyA0IC8vIDEwNDU4OTQxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6MjgKICAgIC8vIEBhYmltZXRob2QoY3JlYXRlPSJyZXF1aXJlIikKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuZWVuZGhhbi5jb250cmFjdC5FZW5kaGFuLm9wdF9pbl90b191c2RjW3JvdXRpbmddKCkgLT4gdm9pZDoKb3B0X2luX3RvX3VzZGM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTo0MwogICAgLy8gYXNzZXJ0IG9wLlR4bi5zZW5kZXIgPT0gc2VsZi5jcmVhdG9yX2FkZHJlc3MsICJPbmx5IGNyZWF0b3IgY2FuIG9wdCBpbiB0byBhc3NldHMiCiAgICB0eG4gU2VuZGVyCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMCAvLyAiY3JlYXRvcl9hZGRyZXNzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmNyZWF0b3JfYWRkcmVzcyBleGlzdHMKICAgIHN3YXAKICAgIGRpZyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIE9ubHkgY3JlYXRvciBjYW4gb3B0IGluIHRvIGFzc2V0cwogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6NDQKICAgIC8vIGFzc2VydCBub3Qgb3AuR2xvYmFsLnplcm9fYWRkcmVzcyA9PSBzZWxmLmNyZWF0b3JfYWRkcmVzcywgIkNyZWF0b3Igbm90IHNldCIKICAgIGdsb2JhbCBaZXJvQWRkcmVzcwogICAgPT0KICAgICEKICAgIGFzc2VydCAvLyBDcmVhdG9yIG5vdCBzZXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5OjQ2LTUxCiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICAvLyAgICAgeGZlcl9hc3NldD1zZWxmLnVzZGNfYXNzZXQsCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXI9R2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIC8vICAgICBhc3NldF9hbW91bnQ9VUludDY0KDApLAogICAgLy8gICAgIGZlZT1VSW50NjQoMCksCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTo0NwogICAgLy8geGZlcl9hc3NldD1zZWxmLnVzZGNfYXNzZXQsCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMiAvLyAidXNkY19hc3NldCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi51c2RjX2Fzc2V0IGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6NDgKICAgIC8vIGFzc2V0X3JlY2VpdmVyPUdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MsCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6NDkKICAgIC8vIGFzc2V0X2Ftb3VudD1VSW50NjQoMCksCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBBc3NldEFtb3VudAogICAgaXR4bl9maWVsZCBBc3NldFJlY2VpdmVyCiAgICBpdHhuX2ZpZWxkIFhmZXJBc3NldAogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6NDYKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIGludGNfMiAvLyBheGZlcgogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6NTAKICAgIC8vIGZlZT1VSW50NjQoMCksCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5OjQ2LTUxCiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICAvLyAgICAgeGZlcl9hc3NldD1zZWxmLnVzZGNfYXNzZXQsCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXI9R2xvYmFsLmN1cnJlbnRfYXBwbGljYXRpb25fYWRkcmVzcywKICAgIC8vICAgICBhc3NldF9hbW91bnQ9VUludDY0KDApLAogICAgLy8gICAgIGZlZT1VSW50NjQoMCksCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6MzcKICAgIC8vIEBhYmltZXRob2QoKQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5lZW5kaGFuLmNvbnRyYWN0LkVlbmRoYW4ucHJvY2Vzc19wYXltZW50X3NwbGl0W3JvdXRpbmddKCkgLT4gdm9pZDoKcHJvY2Vzc19wYXltZW50X3NwbGl0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6NTMKICAgIC8vIEBhYmltZXRob2QoKQogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMSAvLyAxCiAgICAtCiAgICBkdXAKICAgIGd0eG5zIFR5cGVFbnVtCiAgICBpbnRjXzIgLy8gYXhmZXIKICAgID09CiAgICBhc3NlcnQgLy8gdHJhbnNhY3Rpb24gdHlwZSBpcyBheGZlcgogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6NTkKICAgIC8vIGFzc2VydCBwYXltZW50LnhmZXJfYXNzZXQuaWQgPT0gVUludDY0KFVTRENfQVNTRVRfSUQpLCAiT25seSBVU0RDIGFjY2VwdGVkIgogICAgZHVwCiAgICBndHhucyBYZmVyQXNzZXQKICAgIGludGMgNCAvLyAxMDQ1ODk0MQogICAgPT0KICAgIGFzc2VydCAvLyBPbmx5IFVTREMgYWNjZXB0ZWQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5OjYwCiAgICAvLyBhc3NlcnQgcGF5bWVudC5hc3NldF9yZWNlaXZlciA9PSBHbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLCAiUGF5bWVudCBtdXN0IGJlIHNlbnQgdG8gY29udHJhY3QiCiAgICBkdXAKICAgIGd0eG5zIEFzc2V0UmVjZWl2ZXIKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICA9PQogICAgYXNzZXJ0IC8vIFBheW1lbnQgbXVzdCBiZSBzZW50IHRvIGNvbnRyYWN0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTo2MQogICAgLy8gYXNzZXJ0IHBheW1lbnQuYXNzZXRfYW1vdW50ID4gVUludDY0KDApLCAiUGF5bWVudCBhbW91bnQgbXVzdCBiZSBwb3NpdGl2ZSIKICAgIGd0eG5zIEFzc2V0QW1vdW50CiAgICBkdXAKICAgIGFzc2VydCAvLyBQYXltZW50IGFtb3VudCBtdXN0IGJlIHBvc2l0aXZlCiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTo2NAogICAgLy8gdHJlYXN1cnlfZmVlID0gKGFtb3VudCAqIFVJbnQ2NChQTEFURk9STV9GRUVfQkFTSVNfUE9JTlRTKSkgLy8gVUludDY0KDEwMDAwKQogICAgZHVwCiAgICBwdXNoaW50IDUwMAogICAgKgogICAgcHVzaGludCAxMDAwMAogICAgLwogICAgZHVwCiAgICB1bmNvdmVyIDIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5OjY1CiAgICAvLyBjcmVhdG9yX2Ftb3VudCA9IGFtb3VudCAtIHRyZWFzdXJ5X2ZlZQogICAgZGlnIDEKICAgIC0KICAgIHN3YXAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5OjY3CiAgICAvLyBpZiB0cmVhc3VyeV9mZWUgPiBVSW50NjQoMCk6CiAgICBieiBwcm9jZXNzX3BheW1lbnRfc3BsaXRfYWZ0ZXJfaWZfZWxzZUA0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTo2OC03MwogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgLy8gICAgIHhmZXJfYXNzZXQ9c2VsZi51c2RjX2Fzc2V0LAogICAgLy8gICAgIGFzc2V0X3JlY2VpdmVyPXNlbGYudHJlYXN1cnlfYWRkcmVzcywKICAgIC8vICAgICBhc3NldF9hbW91bnQ9dHJlYXN1cnlfZmVlLAogICAgLy8gICAgIGZlZT1VSW50NjQoMCksCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX2JlZ2luCiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTo2OQogICAgLy8geGZlcl9hc3NldD1zZWxmLnVzZGNfYXNzZXQsCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMiAvLyAidXNkY19hc3NldCIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi51c2RjX2Fzc2V0IGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6NzAKICAgIC8vIGFzc2V0X3JlY2VpdmVyPXNlbGYudHJlYXN1cnlfYWRkcmVzcywKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18xIC8vICJ0cmVhc3VyeV9hZGRyZXNzIgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLnRyZWFzdXJ5X2FkZHJlc3MgZXhpc3RzCiAgICBkaWcgMwogICAgaXR4bl9maWVsZCBBc3NldEFtb3VudAogICAgaXR4bl9maWVsZCBBc3NldFJlY2VpdmVyCiAgICBpdHhuX2ZpZWxkIFhmZXJBc3NldAogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6NjgKICAgIC8vIGl0eG4uQXNzZXRUcmFuc2ZlcigKICAgIGludGNfMiAvLyBheGZlcgogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6NzIKICAgIC8vIGZlZT1VSW50NjQoMCksCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5OjY4LTczCiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICAvLyAgICAgeGZlcl9hc3NldD1zZWxmLnVzZGNfYXNzZXQsCiAgICAvLyAgICAgYXNzZXRfcmVjZWl2ZXI9c2VsZi50cmVhc3VyeV9hZGRyZXNzLAogICAgLy8gICAgIGFzc2V0X2Ftb3VudD10cmVhc3VyeV9mZWUsCiAgICAvLyAgICAgZmVlPVVJbnQ2NCgwKSwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0Cgpwcm9jZXNzX3BheW1lbnRfc3BsaXRfYWZ0ZXJfaWZfZWxzZUA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6NzUKICAgIC8vIGlmIGNyZWF0b3JfYW1vdW50ID4gVUludDY0KDApOgogICAgZHVwCiAgICBieiBwcm9jZXNzX3BheW1lbnRfc3BsaXRfYWZ0ZXJfaWZfZWxzZUA3CiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTo3Ni04MQogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgLy8gICAgIHhmZXJfYXNzZXQ9c2VsZi51c2RjX2Fzc2V0LAogICAgLy8gICAgIGFzc2V0X3JlY2VpdmVyPXNlbGYuY3JlYXRvcl9hZGRyZXNzLAogICAgLy8gICAgIGFzc2V0X2Ftb3VudD1jcmVhdG9yX2Ftb3VudCwKICAgIC8vICAgICBmZWU9VUludDY0KDApLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6NzcKICAgIC8vIHhmZXJfYXNzZXQ9c2VsZi51c2RjX2Fzc2V0LAogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzIgLy8gInVzZGNfYXNzZXQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudXNkY19hc3NldCBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5Ojc4CiAgICAvLyBhc3NldF9yZWNlaXZlcj1zZWxmLmNyZWF0b3JfYWRkcmVzcywKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJjcmVhdG9yX2FkZHJlc3MiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuY3JlYXRvcl9hZGRyZXNzIGV4aXN0cwogICAgZGlnIDIKICAgIGl0eG5fZmllbGQgQXNzZXRBbW91bnQKICAgIGl0eG5fZmllbGQgQXNzZXRSZWNlaXZlcgogICAgaXR4bl9maWVsZCBYZmVyQXNzZXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5Ojc2CiAgICAvLyBpdHhuLkFzc2V0VHJhbnNmZXIoCiAgICBpbnRjXzIgLy8gYXhmZXIKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5OjgwCiAgICAvLyBmZWU9VUludDY0KDApLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTo3Ni04MQogICAgLy8gaXR4bi5Bc3NldFRyYW5zZmVyKAogICAgLy8gICAgIHhmZXJfYXNzZXQ9c2VsZi51c2RjX2Fzc2V0LAogICAgLy8gICAgIGFzc2V0X3JlY2VpdmVyPXNlbGYuY3JlYXRvcl9hZGRyZXNzLAogICAgLy8gICAgIGFzc2V0X2Ftb3VudD1jcmVhdG9yX2Ftb3VudCwKICAgIC8vICAgICBmZWU9VUludDY0KDApLAogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9zdWJtaXQKCnByb2Nlc3NfcGF5bWVudF9zcGxpdF9hZnRlcl9pZl9lbHNlQDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTo1MwogICAgLy8gQGFiaW1ldGhvZCgpCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLmVlbmRoYW4uY29udHJhY3QuRWVuZGhhbi51cGRhdGVfdHJlYXN1cnlbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGVfdHJlYXN1cnk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTo4MwogICAgLy8gQGFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18zIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5Ojg4CiAgICAvLyBhc3NlcnQgb3AuVHhuLnNlbmRlciA9PSBzZWxmLmNyZWF0b3JfYWRkcmVzcywgIk9ubHkgY3JlYXRvciBjYW4gdXBkYXRlIHRyZWFzdXJ5IgogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gImNyZWF0b3JfYWRkcmVzcyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5jcmVhdG9yX2FkZHJlc3MgZXhpc3RzCiAgICA9PQogICAgYXNzZXJ0IC8vIE9ubHkgY3JlYXRvciBjYW4gdXBkYXRlIHRyZWFzdXJ5CiAgICAvLyBzbWFydF9jb250cmFjdHMvZWVuZGhhbi9jb250cmFjdC5weTo4OQogICAgLy8gc2VsZi50cmVhc3VyeV9hZGRyZXNzID0gbmV3X3RyZWFzdXJ5CiAgICBieXRlY18xIC8vICJ0cmVhc3VyeV9hZGRyZXNzIgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5OjgzCiAgICAvLyBAYWJpbWV0aG9kKCkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMuZWVuZGhhbi5jb250cmFjdC5FZW5kaGFuLmdldF90cmVhc3VyeVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF90cmVhc3VyeToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5Ojk0CiAgICAvLyByZXR1cm4gc2VsZi50cmVhc3VyeV9hZGRyZXNzCiAgICBpbnRjXzAgLy8gMAogICAgYnl0ZWNfMSAvLyAidHJlYXN1cnlfYWRkcmVzcyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50cmVhc3VyeV9hZGRyZXNzIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6OTEKICAgIC8vIEBhYmltZXRob2QoKQogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy5lZW5kaGFuLmNvbnRyYWN0LkVlbmRoYW4uZ2V0X2NyZWF0b3Jbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfY3JlYXRvcjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9lZW5kaGFuL2NvbnRyYWN0LnB5Ojk5CiAgICAvLyByZXR1cm4gc2VsZi5jcmVhdG9yX2FkZHJlc3MKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJjcmVhdG9yX2FkZHJlc3MiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYuY3JlYXRvcl9hZGRyZXNzIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL2VlbmRoYW4vY29udHJhY3QucHk6OTYKICAgIC8vIEBhYmltZXRob2QoKQogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAFAAEEIL2u/gQmBA9jcmVhdG9yX2FkZHJlc3MQdHJlYXN1cnlfYWRkcmVzcwp1c2RjX2Fzc2V0BBUffHUxGEAACykyA2coMgNnKiJnMRkURDEYQQArggUE3BBRdQSJ7CZeBPRf1NUE3u9whAQgKg4ZNhoAjgUALABTALgAzQDXAIAEipaYDjYaAI4BAAEANhoBSRUlEkQ2GgJJFSUSRClPAmcoTGcqIQRnI0MxACIoZURMSwESRDIDEhREsSIqZUQyCiKyErIUshEkshAisgGzI0MxFiMJSTgQJBJESTgRIQQSREk4FDIKEkQ4EklESYH0AwuBkE4KSU8CSwEJTEEAGLEiKmVEIillREsDshKyFLIRJLIQIrIBs0lBABixIiplRCIoZURLArISshSyESSyECKyAbMjQzYaAUkVJRJEMQAiKGVEEkQpTGcjQyIpZUQrTFCwI0MiKGVEK0xQsCND","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -195,11 +195,57 @@ export type MethodReturn<TSignature extends EendhanSignatures> = EendhanTypes['m
 export type GlobalKeysState = EendhanTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type EendhanCreateCallParams =
+  | Expand<CallParams<EendhanArgs['obj']['create(address,address)void'] | EendhanArgs['tuple']['create(address,address)void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<EendhanArgs['obj']['create(address,address)void'] | EendhanArgs['tuple']['create(address,address)void']> & {method: 'create(address,address)void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type EendhanDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: EendhanCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the Eendhan smart contract
  */
 export abstract class EendhanParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends EendhanCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create(address,address)void':
+            return EendhanParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the Eendhan smart contract using the create(address,address)void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<EendhanArgs['obj']['create(address,address)void'] | EendhanArgs['tuple']['create(address,address)void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create(address,address)void' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.treasury, params.args.creator],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the opt_in_to_usdc()void ABI method
    *
@@ -281,6 +327,154 @@ export abstract class EendhanParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the Eendhan smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class EendhanFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `EendhanFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new EendhanClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new EendhanClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the Eendhan smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: EendhanDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? EendhanParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (EendhanCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new EendhanClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Eendhan smart contract using the create(address,address)void ABI method.
+       *
+       * Initialize contract with treasury and creator addresses.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<EendhanArgs['obj']['create(address,address)void'] | EendhanArgs['tuple']['create(address,address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.params.create(EendhanParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Eendhan smart contract using the create(address,address)void ABI method.
+       *
+       * Initialize contract with treasury and creator addresses.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<EendhanArgs['obj']['create(address,address)void'] | EendhanArgs['tuple']['create(address,address)void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        return this.appFactory.createTransaction.create(EendhanParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the Eendhan smart contract using an ABI method call using the create(address,address)void ABI method.
+       *
+       * Initialize contract with treasury and creator addresses.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<EendhanArgs['obj']['create(address,address)void'] | EendhanArgs['tuple']['create(address,address)void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}) => {
+        const result = await this.appFactory.send.create(EendhanParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | EendhanReturns['create(address,address)void']) }, appClient: new EendhanClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the Eendhan smart contract
  */
