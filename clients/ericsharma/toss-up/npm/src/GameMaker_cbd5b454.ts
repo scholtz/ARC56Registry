@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"GameMaker","desc":"","methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"register","args":[{"name":"payment","type":"pay"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"play","args":[{"name":"payment","type":"pay"},{"name":"appID","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":2},"local":{"bytes":0,"ints":0}},"keys":{"global":{"ownerWins":{"key":"b3duZXJXaW5z","keyType":"AVMBytes","valueType":"uint64"},"playerWins":{"key":"cGxheWVyV2lucw==","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[69],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[100],"errorMessage":"argument 0 (payment) for register must be a pay transaction","teal":66},{"pc":[121],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"amount\",\"condition\":\"greaterThan\",\"expected\":\">0\"}","teal":93},{"pc":[653],"errorMessage":"argument 1 (payment) for play must be a pay transaction","teal":253},{"pc":[674],"errorMessage":"global state value does not exist: appID.globalState('owner')","teal":275},{"pc":[792],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":409},{"pc":[814],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":418}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"GameMaker","desc":"","methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"register","args":[{"name":"payment","type":"pay"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]}},{"name":"play","args":[{"name":"payment","type":"pay"},{"name":"appID","type":"uint64"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":0,"ints":2},"local":{"bytes":0,"ints":0}},"keys":{"global":{"ownerWins":{"key":"b3duZXJXaW5z","keyType":"AVMBytes","valueType":"uint64"},"playerWins":{"key":"cGxheWVyV2lucw==","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[69],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[100],"errorMessage":"argument 0 (payment) for register must be a pay transaction","teal":66},{"pc":[121],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"amount\",\"condition\":\"greaterThan\",\"expected\":\">0\"}","teal":93},{"pc":[653],"errorMessage":"argument 1 (payment) for play must be a pay transaction","teal":253},{"pc":[674],"errorMessage":"global state value does not exist: appID.globalState('owner')","teal":275},{"pc":[792],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":409},{"pc":[814],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":418}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCmludGNibG9jayAxIDAgNgpieXRlY2Jsb2NrIDB4IDB4NzA2YzYxNzk2NTcyNTc2OTZlNzMgMHg2Zjc3NmU2NTcyNTc2OTZlNzMgMHhiODQ0N2IzNgoKLy8gVGhpcyBURUFMIHdhcyBnZW5lcmF0ZWQgYnkgVEVBTFNjcmlwdCB2MC4xMDYuMgovLyBodHRwczovL2dpdGh1Yi5jb20vYWxnb3JhbmRmb3VuZGF0aW9uL1RFQUxTY3JpcHQKCi8vIFRoaXMgY29udHJhY3QgaXMgY29tcGxpYW50IHdpdGggYW5kL29yIGltcGxlbWVudHMgdGhlIGZvbGxvd2luZyBBUkNzOiBbIEFSQzQgXQoKLy8gVGhlIGZvbGxvd2luZyB0ZW4gbGluZXMgb2YgVEVBTCBoYW5kbGUgaW5pdGlhbCBwcm9ncmFtIGZsb3cKLy8gVGhpcyBwYXR0ZXJuIGlzIHVzZWQgdG8gbWFrZSBpdCBlYXN5IGZvciBhbnlvbmUgdG8gcGFyc2UgdGhlIHN0YXJ0IG9mIHRoZSBwcm9ncmFtIGFuZCBkZXRlcm1pbmUgaWYgYSBzcGVjaWZpYyBhY3Rpb24gaXMgYWxsb3dlZAovLyBIZXJlLCBhY3Rpb24gcmVmZXJzIHRvIHRoZSBPbkNvbXBsZXRlIGluIGNvbWJpbmF0aW9uIHdpdGggd2hldGhlciB0aGUgYXBwIGlzIGJlaW5nIGNyZWF0ZWQgb3IgY2FsbGVkCi8vIEV2ZXJ5IHBvc3NpYmxlIGFjdGlvbiBmb3IgdGhpcyBjb250cmFjdCBpcyByZXByZXNlbnRlZCBpbiB0aGUgc3dpdGNoIHN0YXRlbWVudAovLyBJZiB0aGUgYWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZCBpbiB0aGUgY29udHJhY3QsIGl0cyByZXNwZWN0aXZlIGJyYW5jaCB3aWxsIGJlICIqTk9UX0lNUExFTUVOVEVEIiB3aGljaCBqdXN0IGNvbnRhaW5zICJlcnIiCnR4biBBcHBsaWNhdGlvbklECiEKaW50YyAyIC8vIDYKKgp0eG4gT25Db21wbGV0aW9uCisKc3dpdGNoICpjYWxsX05vT3AgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCS8vIGV4ZWN1dGUgY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKCWNhbGxzdWIgY3JlYXRlQXBwbGljYXRpb24KCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKCk6IHZvaWQKY3JlYXRlQXBwbGljYXRpb246Cglwcm90byAwIDAKCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6MTQKCS8vIHRoaXMub3duZXJXaW5zLnZhbHVlID0gMAoJYnl0ZWMgMiAvLyAgIm93bmVyV2lucyIKCWludGMgMSAvLyAwCglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0cy9HYW1lTWFrZXIuYWxnby50czoxNQoJLy8gdGhpcy5wbGF5ZXJXaW5zLnZhbHVlID0gMAoJYnl0ZWMgMSAvLyAgInBsYXllcldpbnMiCglpbnRjIDEgLy8gMAoJYXBwX2dsb2JhbF9wdXQKCXJldHN1YgoKLy8gcmVnaXN0ZXIocGF5KXVpbnQ2NAoqYWJpX3JvdXRlX3JlZ2lzdGVyOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglwdXNoYnl0ZXMgMHgxNTFmN2M3NQoKCS8vIHBheW1lbnQ6IHBheQoJdHhuIEdyb3VwSW5kZXgKCWludGMgMCAvLyAxCgktCglkdXAKCWd0eG5zIFR5cGVFbnVtCglpbnRjIDAgLy8gIHBheQoJPT0KCgkvLyBhcmd1bWVudCAwIChwYXltZW50KSBmb3IgcmVnaXN0ZXIgbXVzdCBiZSBhIHBheSB0cmFuc2FjdGlvbgoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSByZWdpc3RlcihwYXkpdWludDY0CgljYWxsc3ViIHJlZ2lzdGVyCglpdG9iCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gcmVnaXN0ZXIocGF5bWVudDogUGF5VHhuKTogQXBwSUQKcmVnaXN0ZXI6Cglwcm90byAxIDEKCgkvLyBQdXNoIGVtcHR5IGJ5dGVzIGFmdGVyIHRoZSBmcmFtZSBwb2ludGVyIHRvIHJlc2VydmUgc3BhY2UgZm9yIGxvY2FsIHZhcmlhYmxlcwoJYnl0ZWMgMCAvLyAweAoJZHVwbiAyCgoJLy8gY29udHJhY3RzL0dhbWVNYWtlci5hbGdvLnRzOjE5CgkvLyB2ZXJpZnlQYXlUeG4ocGF5bWVudCwgeyBhbW91bnQ6IHsgZ3JlYXRlclRoYW46IDAgfSB9KQoJLy8gdmVyaWZ5IGFtb3VudAoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CglpbnRjIDEgLy8gMAoJPgoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoicGF5bWVudCIsImZpZWxkIjoiYW1vdW50IiwiY29uZGl0aW9uIjoiZ3JlYXRlclRoYW4iLCJleHBlY3RlZCI6Ij4wIn0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9HYW1lTWFrZXIuYWxnby50czoyMQoJLy8gY3VycmVudE1CUiA9IHRoaXMuYXBwLmFkZHJlc3MubWluQmFsYW5jZQoJZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKCWFjY3RfcGFyYW1zX2dldCBBY2N0TWluQmFsYW5jZQoJcG9wCglmcmFtZV9idXJ5IDAgLy8gY3VycmVudE1CUjogdWludDY0CgoJLy8gY29udHJhY3RzL0dhbWVNYWtlci5hbGdvLnRzOjIzCgkvLyBzZW5kTWV0aG9kQ2FsbDx0eXBlb2YgVG9zc1VwLnByb3RvdHlwZS5jcmVhdGVBcHBsaWNhdGlvbj4oewoJLy8gICAgICAgY2xlYXJTdGF0ZVByb2dyYW06IFRvc3NVcC5jbGVhclByb2dyYW0oKSwKCS8vICAgICAgIGFwcHJvdmFsUHJvZ3JhbTogVG9zc1VwLmFwcHJvdmFsUHJvZ3JhbSgpLAoJLy8gICAgICAgbWV0aG9kQXJnczogW10sCgkvLyAgICAgICBnbG9iYWxOdW1CeXRlU2xpY2U6IFRvc3NVcC5zY2hlbWEuZ2xvYmFsLm51bUJ5dGVTbGljZSwKCS8vICAgICAgIGdsb2JhbE51bVVpbnQ6IFRvc3NVcC5zY2hlbWEuZ2xvYmFsLm51bVVpbnQsCgkvLyAgICAgICBsb2NhbE51bUJ5dGVTbGljZTogVG9zc1VwLnNjaGVtYS5sb2NhbC5udW1CeXRlU2xpY2UsCgkvLyAgICAgICBsb2NhbE51bVVpbnQ6IFRvc3NVcC5zY2hlbWEubG9jYWwubnVtVWludCwKCS8vICAgICB9KQoJaXR4bl9iZWdpbgoJaW50YyAyIC8vICBhcHBsCglpdHhuX2ZpZWxkIFR5cGVFbnVtCglieXRlYyAzIC8vICBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6MjQKCS8vIGNsZWFyU3RhdGVQcm9ncmFtOiBUb3NzVXAuY2xlYXJQcm9ncmFtKCkKCXB1c2hieXRlcyAweDBiCglpdHhuX2ZpZWxkIENsZWFyU3RhdGVQcm9ncmFtCgoJLy8gY29udHJhY3RzL0dhbWVNYWtlci5hbGdvLnRzOjI1CgkvLyBhcHByb3ZhbFByb2dyYW06IFRvc3NVcC5hcHByb3ZhbFByb2dyYW0oKQoJcHVzaGJ5dGVzIDB4MGIyMDA2MDEwMDE4ZmZmZmZmZmYwZjAyMjAyNjA0MDAwNTZmNzc2ZTY1NzIwNjYxNmQ2Zjc1NmU3NDA0MTUxZjdjNzUzMTE4MTQ4MTA2MGIzMTE5MDg4ZDBjMDEzMDAwMDAwMDAwMDAwMDAwMDAwMTNlMDEyMjAwMDAwMDAwMDAwMDAwMDAwMDAwMDA4ODAwMDIyMjQzOGEwMDAwODkyYjM2MWEwMTQ5MTUyMTA1MTI0NDMxMTYyMjA5NDkzODEwMjIxMjQ0ODgwMDA0NTBiMDIyNDM4YTAyMDE4YmZmMzgwODIzMGQ0NDI5OGJmZTY3MmE4YmZmMzgwODY3Mjk2NDg5OGEwMTAxMjg0NzA1MzEwMjIyMDlkMTAwMzEwMjIyMDlkMTAxMjQxODViMjQxODhjMDEzMTAyMjIwOWQxMDI4YzAyOGJmZjhiMDE1YjI1MTg4YzAzMjk2NDhiMDE1YjI1MTg4YzA0OGIwMzhiMDQwYjI0MTg4YzA1OGIwMjMyMDMxMjQxMDAwYThiZmY4YjA1NWI4YzAwNDIwMDA3OGIwMjhiMDU1YjhjMDA4YjAwOGMwMDQ2MDU4OTJiMzYxYTAxNDkxNTIxMDUxMjQ0MzExNjIyMDk0OTM4MTAyMjEyNDQ4ODAwMDUxNjUwYjAyMjQzOGEwMjAxMjg4YmZlMjk2NDEzNDQyYTY0OGJmZjM4MDgxMjQ0MzEwMDM2MzIwMDcyMDc0ODEyNDQ4YmZlODhmZjY3OGMwMDhiMDAyMTA0MTgyMzEyNDEwMDE4YjEyMmIyMTAyOTY0YjIwNzJhNjQ4YmZmMzgwODA4YjIwODIzYjIwMWIzNDIwMDE1YjEyMmIyMTA4YmZlYjIwNzJhNjQ4YmZmMzgwODA4YjIwODIzYjIwMWIzYjEyMmIyMTAyOTY0YjIwOTIzYjIwMWIzOGIwMDIxMDQxODhjMDA4OTgwMDRiODQ0N2IzNjM2MWEwMDhlMDFmZWQyMDA4MDA0ZTZkNmQ5ZTYzNjFhMDA4ZTAxZmVjZDAwODAwNDE1NWNlZmZhMzYxYTAwOGUwMWZmNGQwMAoJaXR4bl9maWVsZCBBcHByb3ZhbFByb2dyYW0KCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6MjYKCS8vIG1ldGhvZEFyZ3M6IFtdCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6MjcKCS8vIGdsb2JhbE51bUJ5dGVTbGljZTogVG9zc1VwLnNjaGVtYS5nbG9iYWwubnVtQnl0ZVNsaWNlCglpbnRjIDAgLy8gMQoJaXR4bl9maWVsZCBHbG9iYWxOdW1CeXRlU2xpY2UKCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6MjgKCS8vIGdsb2JhbE51bVVpbnQ6IFRvc3NVcC5zY2hlbWEuZ2xvYmFsLm51bVVpbnQKCWludGMgMCAvLyAxCglpdHhuX2ZpZWxkIEdsb2JhbE51bVVpbnQKCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6MjkKCS8vIGxvY2FsTnVtQnl0ZVNsaWNlOiBUb3NzVXAuc2NoZW1hLmxvY2FsLm51bUJ5dGVTbGljZQoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgTG9jYWxOdW1CeXRlU2xpY2UKCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6MzAKCS8vIGxvY2FsTnVtVWludDogVG9zc1VwLnNjaGVtYS5sb2NhbC5udW1VaW50CglpbnRjIDEgLy8gMAoJaXR4bl9maWVsZCBMb2NhbE51bVVpbnQKCgkvLyBGZWUgZmllbGQgbm90IHNldCwgZGVmYXVsdGluZyB0byAwCglpbnRjIDEgLy8gMAoJaXR4bl9maWVsZCBGZWUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CgoJLy8gY29udHJhY3RzL0dhbWVNYWtlci5hbGdvLnRzOjMyCgkvLyBtYnJEZWx0YSA9IHRoaXMuYXBwLmFkZHJlc3MubWluQmFsYW5jZSAtIGN1cnJlbnRNQlIKCWdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCglhY2N0X3BhcmFtc19nZXQgQWNjdE1pbkJhbGFuY2UKCXBvcAoJZnJhbWVfZGlnIDAgLy8gY3VycmVudE1CUjogdWludDY0CgktCglmcmFtZV9idXJ5IDEgLy8gbWJyRGVsdGE6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0cy9HYW1lTWFrZXIuYWxnby50czozNAoJLy8gZ2FtZUFwcCA9IHRoaXMuaXR4bi5jcmVhdGVkQXBwbGljYXRpb25JRAoJaXR4biBDcmVhdGVkQXBwbGljYXRpb25JRAoJZnJhbWVfYnVyeSAyIC8vIGdhbWVBcHA6IHVpbnQ2NAoKCS8vIGNvbnRyYWN0cy9HYW1lTWFrZXIuYWxnby50czozNQoJLy8gc2VuZE1ldGhvZENhbGw8dHlwZW9mIFRvc3NVcC5wcm90b3R5cGUucmVnaXN0ZXI+KHsKCS8vICAgICAgIGFwcGxpY2F0aW9uSUQ6IGdhbWVBcHAsCgkvLyAgICAgICBtZXRob2RBcmdzOiBbeyBhbW91bnQ6IHBheW1lbnQuYW1vdW50IC0gbWJyRGVsdGEsIHJlY2VpdmVyOiBnYW1lQXBwLmFkZHJlc3MgfSwgdGhpcy50eG4uc2VuZGVyXSwKCS8vICAgICB9KQoJaXR4bl9iZWdpbgoJaW50YyAwIC8vICBwYXkKCWl0eG5fZmllbGQgVHlwZUVudW0KCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6MzcKCS8vIGFtb3VudDogcGF5bWVudC5hbW91bnQgLSBtYnJEZWx0YQoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CglmcmFtZV9kaWcgMSAvLyBtYnJEZWx0YTogdWludDY0CgktCglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIGNvbnRyYWN0cy9HYW1lTWFrZXIuYWxnby50czozNwoJLy8gcmVjZWl2ZXI6IGdhbWVBcHAuYWRkcmVzcwoJZnJhbWVfZGlnIDIgLy8gZ2FtZUFwcDogdWludDY0CglhcHBfcGFyYW1zX2dldCBBcHBBZGRyZXNzCglwb3AKCWl0eG5fZmllbGQgUmVjZWl2ZXIKCgkvLyBGZWUgZmllbGQgbm90IHNldCwgZGVmYXVsdGluZyB0byAwCglpbnRjIDEgLy8gMAoJaXR4bl9maWVsZCBGZWUKCWl0eG5fbmV4dAoJaW50YyAyIC8vICBhcHBsCglpdHhuX2ZpZWxkIFR5cGVFbnVtCglwdXNoYnl0ZXMgMHhlNmQ2ZDllNiAvLyBtZXRob2QgInJlZ2lzdGVyKHBheSxhZGRyZXNzKWFkZHJlc3MiCglpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwoKCS8vIGNvbnRyYWN0cy9HYW1lTWFrZXIuYWxnby50czozNgoJLy8gYXBwbGljYXRpb25JRDogZ2FtZUFwcAoJZnJhbWVfZGlnIDIgLy8gZ2FtZUFwcDogdWludDY0CglpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6MzcKCS8vIG1ldGhvZEFyZ3M6IFt7IGFtb3VudDogcGF5bWVudC5hbW91bnQgLSBtYnJEZWx0YSwgcmVjZWl2ZXI6IGdhbWVBcHAuYWRkcmVzcyB9LCB0aGlzLnR4bi5zZW5kZXJdCgl0eG4gU2VuZGVyCglpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwoKCS8vIEZlZSBmaWVsZCBub3Qgc2V0LCBkZWZhdWx0aW5nIHRvIDAKCWludGMgMSAvLyAwCglpdHhuX2ZpZWxkIEZlZQoKCS8vIFN1Ym1pdCBpbm5lciB0cmFuc2FjdGlvbgoJaXR4bl9zdWJtaXQKCWl0eG4gTnVtTG9ncwoJaW50YyAwIC8vIDEKCS0KCWl0eG5hcyBMb2dzCglleHRyYWN0IDQgMAoKCS8vIGNvbnRyYWN0cy9HYW1lTWFrZXIuYWxnby50czo0MAoJLy8gcmV0dXJuIGdhbWVBcHA7CglmcmFtZV9kaWcgMiAvLyBnYW1lQXBwOiB1aW50NjQKCgkvLyBzZXQgdGhlIHN1YnJvdXRpbmUgcmV0dXJuIHZhbHVlCglmcmFtZV9idXJ5IDAKCgkvLyBwb3AgYWxsIGxvY2FsIHZhcmlhYmxlcyBmcm9tIHRoZSBzdGFjawoJcG9wbiAyCglyZXRzdWIKCi8vIHBsYXkocGF5LHVpbnQ2NCl2b2lkCiphYmlfcm91dGVfcGxheToKCS8vIGFwcElEOiB1aW50NjQKCXR4bmEgQXBwbGljYXRpb25BcmdzIDEKCWJ0b2kKCgkvLyBwYXltZW50OiBwYXkKCXR4biBHcm91cEluZGV4CglpbnRjIDAgLy8gMQoJLQoJZHVwCglndHhucyBUeXBlRW51bQoJaW50YyAwIC8vICBwYXkKCT09CgoJLy8gYXJndW1lbnQgMSAocGF5bWVudCkgZm9yIHBsYXkgbXVzdCBiZSBhIHBheSB0cmFuc2FjdGlvbgoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBwbGF5KHBheSx1aW50NjQpdm9pZAoJY2FsbHN1YiBwbGF5CglpbnRjIDAgLy8gMQoJcmV0dXJuCgovLyBwbGF5KHBheW1lbnQ6IFBheVR4biwgYXBwSUQ6IEFwcElEKTogdm9pZApwbGF5OgoJcHJvdG8gMiAwCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCWR1cAoKCS8vIGNvbnRyYWN0cy9HYW1lTWFrZXIuYWxnby50czo0NAoJLy8gb3duZXIgPSBhcHBJRC5nbG9iYWxTdGF0ZSgnb3duZXInKSBhcyBBZGRyZXNzCglmcmFtZV9kaWcgLTIgLy8gYXBwSUQ6IEFwcElECglwdXNoYnl0ZXMgMHg2Zjc3NmU2NTcyIC8vICJvd25lciIKCWFwcF9nbG9iYWxfZ2V0X2V4CgoJLy8gZ2xvYmFsIHN0YXRlIHZhbHVlIGRvZXMgbm90IGV4aXN0OiBhcHBJRC5nbG9iYWxTdGF0ZSgnb3duZXInKQoJYXNzZXJ0CglmcmFtZV9idXJ5IDAgLy8gb3duZXI6IGFkZHJlc3MKCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6NDUKCS8vIHJlc3VsdCA9IHNlbmRNZXRob2RDYWxsPHR5cGVvZiBUb3NzVXAucHJvdG90eXBlLnBsYXk+KHsKCS8vICAgICAgIGFwcGxpY2F0aW9uSUQ6IGFwcElELAoJLy8gICAgICAgbWV0aG9kQXJnczogW3sgYW1vdW50OiBwYXltZW50LmFtb3VudCwgcmVjZWl2ZXI6IGFwcElELmFkZHJlc3MgfSwgdGhpcy50eG4uc2VuZGVyXSwKCS8vICAgICAgIG9uQ29tcGxldGlvbjogT25Db21wbGV0aW9uLkRlbGV0ZUFwcGxpY2F0aW9uLAoJLy8gICAgIH0pCglpdHhuX2JlZ2luCglpbnRjIDAgLy8gIHBheQoJaXR4bl9maWVsZCBUeXBlRW51bQoKCS8vIGNvbnRyYWN0cy9HYW1lTWFrZXIuYWxnby50czo0NwoJLy8gYW1vdW50OiBwYXltZW50LmFtb3VudAoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIGNvbnRyYWN0cy9HYW1lTWFrZXIuYWxnby50czo0NwoJLy8gcmVjZWl2ZXI6IGFwcElELmFkZHJlc3MKCWZyYW1lX2RpZyAtMiAvLyBhcHBJRDogQXBwSUQKCWFwcF9wYXJhbXNfZ2V0IEFwcEFkZHJlc3MKCXBvcAoJaXR4bl9maWVsZCBSZWNlaXZlcgoKCS8vIEZlZSBmaWVsZCBub3Qgc2V0LCBkZWZhdWx0aW5nIHRvIDAKCWludGMgMSAvLyAwCglpdHhuX2ZpZWxkIEZlZQoJaXR4bl9uZXh0CglpbnRjIDIgLy8gIGFwcGwKCWl0eG5fZmllbGQgVHlwZUVudW0KCXB1c2hieXRlcyAweDE1NWNlZmZhIC8vIG1ldGhvZCAicGxheShwYXksYWRkcmVzcyl1aW50NjQiCglpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwoKCS8vIGNvbnRyYWN0cy9HYW1lTWFrZXIuYWxnby50czo0NgoJLy8gYXBwbGljYXRpb25JRDogYXBwSUQKCWZyYW1lX2RpZyAtMiAvLyBhcHBJRDogQXBwSUQKCWl0eG5fZmllbGQgQXBwbGljYXRpb25JRAoKCS8vIGNvbnRyYWN0cy9HYW1lTWFrZXIuYWxnby50czo0NwoJLy8gbWV0aG9kQXJnczogW3sgYW1vdW50OiBwYXltZW50LmFtb3VudCwgcmVjZWl2ZXI6IGFwcElELmFkZHJlc3MgfSwgdGhpcy50eG4uc2VuZGVyXQoJdHhuIFNlbmRlcgoJaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6NDgKCS8vIG9uQ29tcGxldGlvbjogT25Db21wbGV0aW9uLkRlbGV0ZUFwcGxpY2F0aW9uCglwdXNoaW50IDUgLy8gRGVsZXRlQXBwbGljYXRpb24KCWl0eG5fZmllbGQgT25Db21wbGV0aW9uCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoJaXR4biBOdW1Mb2dzCglpbnRjIDAgLy8gMQoJLQoJaXR4bmFzIExvZ3MKCWV4dHJhY3QgNCAwCglidG9pCglmcmFtZV9idXJ5IDEgLy8gcmVzdWx0OiB1aW50NjQKCgkvLyAqaWYwX2NvbmRpdGlvbgoJLy8gY29udHJhY3RzL0dhbWVNYWtlci5hbGdvLnRzOjUxCgkvLyByZXN1bHQgPT09IDAKCWZyYW1lX2RpZyAxIC8vIHJlc3VsdDogdWludDY0CglpbnRjIDEgLy8gMAoJPT0KCWJ6ICppZjBfZW5kCgoJLy8gKmlmMF9jb25zZXF1ZW50CgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6NTEKCS8vIHRoaXMub3duZXJXaW5zLnZhbHVlICs9IDEKCWJ5dGVjIDIgLy8gICJvd25lcldpbnMiCglhcHBfZ2xvYmFsX2dldAoJaW50YyAwIC8vIDEKCSsKCWJ5dGVjIDIgLy8gICJvd25lcldpbnMiCglzd2FwCglhcHBfZ2xvYmFsX3B1dAoKKmlmMF9lbmQ6CgkvLyAqaWYxX2NvbmRpdGlvbgoJLy8gY29udHJhY3RzL0dhbWVNYWtlci5hbGdvLnRzOjUyCgkvLyByZXN1bHQgPT09IDEKCWZyYW1lX2RpZyAxIC8vIHJlc3VsdDogdWludDY0CglpbnRjIDAgLy8gMQoJPT0KCWJ6ICppZjFfZW5kCgoJLy8gKmlmMV9jb25zZXF1ZW50CgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6NTIKCS8vIHRoaXMucGxheWVyV2lucy52YWx1ZSArPSAxCglieXRlYyAxIC8vICAicGxheWVyV2lucyIKCWFwcF9nbG9iYWxfZ2V0CglpbnRjIDAgLy8gMQoJKwoJYnl0ZWMgMSAvLyAgInBsYXllcldpbnMiCglzd2FwCglhcHBfZ2xvYmFsX3B1dAoKKmlmMV9lbmQ6CgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6NTQKCS8vIHNlbmRQYXltZW50KHsgcmVjZWl2ZXI6IG93bmVyLCBhbW91bnQ6IGNvbnRyYWN0TUJSQ29zdCB9KQoJaXR4bl9iZWdpbgoJaW50YyAwIC8vICBwYXkKCWl0eG5fZmllbGQgVHlwZUVudW0KCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6NTQKCS8vIHJlY2VpdmVyOiBvd25lcgoJZnJhbWVfZGlnIDAgLy8gb3duZXI6IGFkZHJlc3MKCWl0eG5fZmllbGQgUmVjZWl2ZXIKCgkvLyBjb250cmFjdHMvR2FtZU1ha2VyLmFsZ28udHM6NTQKCS8vIGFtb3VudDogY29udHJhY3RNQlJDb3N0CglwdXNoaW50IDE3ODUwMAoJaXR4bl9maWVsZCBBbW91bnQKCgkvLyBGZWUgZmllbGQgbm90IHNldCwgZGVmYXVsdGluZyB0byAwCglpbnRjIDEgLy8gMAoJaXR4bl9maWVsZCBGZWUKCgkvLyBTdWJtaXQgaW5uZXIgdHJhbnNhY3Rpb24KCWl0eG5fc3VibWl0CglyZXRzdWIKCipjcmVhdGVfTm9PcDoKCWJ5dGVjIDMgLy8gIG1ldGhvZCAiY3JlYXRlQXBwbGljYXRpb24oKXZvaWQiCgl0eG5hIEFwcGxpY2F0aW9uQXJncyAwCgltYXRjaCAqYWJpX3JvdXRlX2NyZWF0ZUFwcGxpY2F0aW9uCgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNyZWF0ZSBOb09wCgllcnIKCipjYWxsX05vT3A6CglwdXNoYnl0ZXMgMHhjYzVkMDQwOSAvLyBtZXRob2QgInJlZ2lzdGVyKHBheSl1aW50NjQiCglwdXNoYnl0ZXMgMHgxYmVjODhiZCAvLyBtZXRob2QgInBsYXkocGF5LHVpbnQ2NCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9yZWdpc3RlciAqYWJpX3JvdXRlX3BsYXkKCgkvLyB0aGlzIGNvbnRyYWN0IGRvZXMgbm90IGltcGxlbWVudCB0aGUgZ2l2ZW4gQUJJIG1ldGhvZCBmb3IgY2FsbCBOb09wCgllcnI=","clear":"I3ByYWdtYSB2ZXJzaW9uIDEx"},"byteCode":{"approval":"CyADAQAGJgQACnBsYXllcldpbnMJb3duZXJXaW5zBLhEezYxGBQkCzEZCI0MAtQAAAAAAAAAAAAAAssAAAAAAAAAAAAAAIgAAiJDigAAKiNnKSNniYAEFR98dTEWIglJOBAiEkSIAAUWULAiQ4oBAShHAov/OAgjDUQyCnMBSIwAsSSyECuyGoABC7IfgJEDCyAGAQAY/////w8CICYEAAVvd25lcgZhbW91bnQEFR98dTEYFIEGCzEZCI0MATAAAAAAAAAAAAE+ASIAAAAAAAAAAAAAAIgAAiJDigAAiSs2GgFJFSEFEkQxFiIJSTgQIhJEiAAEULAiQ4oCAYv/OAgjDUQpi/5nKov/OAhnKWSJigEBKEcFMQIiCdEAMQIiCdEBJBhbJBiMATECIgnRAowCi/+LAVslGIwDKWSLAVslGIwEiwOLBAskGIwFiwIyAxJBAAqL/4sFW4wAQgAHiwKLBVuMAIsAjABGBYkrNhoBSRUhBRJEMRYiCUk4ECISRIgABRZQsCJDigIBKIv+KWQTRCpki/84CBJEMQA2MgByB0gSRIv+iP9njACLACEEGCMSQQAYsSKyEClksgcqZIv/OAgIsggjsgGzQgAVsSKyEIv+sgcqZIv/OAgIsggjsgGzsSKyEClksgkjsgGziwAhBBiMAImABLhEezY2GgCOAf7SAIAE5tbZ5jYaAI4B/s0AgAQVXO/6NhoAjgH/TQCyHiKyNSKyNCOyNyOyNiOyAbMyCnMBSIsACYwBtD2MArEishCL/zgIiwEJsgiLAnIISLIHI7IBtiSyEIAE5tbZ5rIaiwKyGDEAshojsgGztDsiCcU6VwQAiwKMAEYCiTYaARcxFiIJSTgQIhJEiAACIkOKAgAoSYv+gAVvd25lcmVEjACxIrIQi/84CLIIi/5yCEiyByOyAbYkshCABBVc7/qyGov+shgxALIagQWyGSOyAbO0OyIJxTpXBAAXjAGLASMSQQAHKmQiCCpMZ4sBIhJBAAcpZCIIKUxnsSKyEIsAsgeBxPIKsggjsgGziSs2GgCOAf0uAIAEzF0ECYAEG+yIvTYaAI4C/Sf/UgA=","clear":"Cw=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -168,11 +168,57 @@ export type MethodReturn<TSignature extends GameMakerSignatures> = GameMakerType
 export type GlobalKeysState = GameMakerTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type GameMakerCreateCallParams =
+  | Expand<CallParams<GameMakerArgs['obj']['createApplication()void'] | GameMakerArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<GameMakerArgs['obj']['createApplication()void'] | GameMakerArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type GameMakerDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: GameMakerCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the GameMaker smart contract
  */
 export abstract class GameMakerParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends GameMakerCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return GameMakerParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the GameMaker smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<GameMakerArgs['obj']['createApplication()void'] | GameMakerArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the register(pay)uint64 ABI method
    *
@@ -201,6 +247,148 @@ export abstract class GameMakerParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the GameMaker smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class GameMakerFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `GameMakerFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new GameMakerClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new GameMakerClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the GameMaker smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: GameMakerDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? GameMakerParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (GameMakerCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new GameMakerClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the GameMaker smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<GameMakerArgs['obj']['createApplication()void'] | GameMakerArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(GameMakerParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the GameMaker smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<GameMakerArgs['obj']['createApplication()void'] | GameMakerArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(GameMakerParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the GameMaker smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<GameMakerArgs['obj']['createApplication()void'] | GameMakerArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(GameMakerParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | GameMakerReturns['createApplication()void']) }, appClient: new GameMakerClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the GameMaker smart contract
  */

@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"TossUp","desc":"","methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"register","args":[{"name":"payment","type":"pay"},{"name":"owner","type":"address"}],"returns":{"type":"address"},"actions":{"create":[],"call":["NoOp"]}},{"name":"play","args":[{"name":"payment","type":"pay"},{"name":"player","type":"address"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["DeleteApplication"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":1,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"owner":{"key":"b3duZXI=","keyType":"AVMBytes","valueType":"address"},"amount":{"key":"YW1vdW50","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[69],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[88],"errorMessage":"argument 0 (owner) for register must be a address","teal":52},{"pc":[98],"errorMessage":"argument 1 (payment) for register must be a pay transaction","teal":64},{"pc":[115],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"amount\",\"condition\":\"greaterThan\",\"expected\":\">0\"}","teal":86},{"pc":[230],"errorMessage":"argument 0 (player) for play must be a address","teal":219},{"pc":[240],"errorMessage":"argument 1 (payment) for play must be a pay transaction","teal":231},{"pc":[258],"errorMessage":"asserts failed: asserts(player !== this.owner.value, this.amount.value === payment.amount, this.txn.sender === this.app.creator)","teal":256},{"pc":[266],"errorMessage":"asserts failed: asserts(player !== this.owner.value, this.amount.value === payment.amount, this.txn.sender === this.app.creator)","teal":264},{"pc":[276],"errorMessage":"asserts failed: asserts(player !== this.owner.value, this.amount.value === payment.amount, this.txn.sender === this.app.creator)","teal":272},{"pc":[372],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":384},{"pc":[386],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":392},{"pc":[400],"errorMessage":"this contract does not implement the given ABI method for call DeleteApplication","teal":400}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}}} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"TossUp","desc":"","methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]}},{"name":"register","args":[{"name":"payment","type":"pay"},{"name":"owner","type":"address"}],"returns":{"type":"address"},"actions":{"create":[],"call":["NoOp"]}},{"name":"play","args":[{"name":"payment","type":"pay"},{"name":"player","type":"address"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["DeleteApplication"]}}],"arcs":[4,56],"structs":{},"state":{"schema":{"global":{"bytes":1,"ints":1},"local":{"bytes":0,"ints":0}},"keys":{"global":{"owner":{"key":"b3duZXI=","keyType":"AVMBytes","valueType":"address"},"amount":{"key":"YW1vdW50","keyType":"AVMBytes","valueType":"uint64"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[69],"errorMessage":"The requested action is not implemented in this contract. Are you using the correct OnComplete? Did you set your app ID?","teal":25},{"pc":[88],"errorMessage":"argument 0 (owner) for register must be a address","teal":52},{"pc":[98],"errorMessage":"argument 1 (payment) for register must be a pay transaction","teal":64},{"pc":[115],"errorMessage":"transaction verification failed: {\"txn\":\"payment\",\"field\":\"amount\",\"condition\":\"greaterThan\",\"expected\":\">0\"}","teal":86},{"pc":[230],"errorMessage":"argument 0 (player) for play must be a address","teal":219},{"pc":[240],"errorMessage":"argument 1 (payment) for play must be a pay transaction","teal":231},{"pc":[258],"errorMessage":"asserts failed: asserts(player !== this.owner.value, this.amount.value === payment.amount, this.txn.sender === this.app.creator)","teal":256},{"pc":[266],"errorMessage":"asserts failed: asserts(player !== this.owner.value, this.amount.value === payment.amount, this.txn.sender === this.app.creator)","teal":264},{"pc":[276],"errorMessage":"asserts failed: asserts(player !== this.owner.value, this.amount.value === payment.amount, this.txn.sender === this.app.creator)","teal":272},{"pc":[372],"errorMessage":"this contract does not implement the given ABI method for create NoOp","teal":384},{"pc":[386],"errorMessage":"this contract does not implement the given ABI method for call NoOp","teal":392},{"pc":[400],"errorMessage":"this contract does not implement the given ABI method for call DeleteApplication","teal":400}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCmludGNibG9jayAxIDAgMjQgNDI5NDk2NzI5NSAyIDMyCmJ5dGVjYmxvY2sgMHggMHg2Zjc3NmU2NTcyIDB4NjE2ZDZmNzU2ZTc0IDB4MTUxZjdjNzUKCi8vIFRoaXMgVEVBTCB3YXMgZ2VuZXJhdGVkIGJ5IFRFQUxTY3JpcHQgdjAuMTA2LjIKLy8gaHR0cHM6Ly9naXRodWIuY29tL2FsZ29yYW5kZm91bmRhdGlvbi9URUFMU2NyaXB0CgovLyBUaGlzIGNvbnRyYWN0IGlzIGNvbXBsaWFudCB3aXRoIGFuZC9vciBpbXBsZW1lbnRzIHRoZSBmb2xsb3dpbmcgQVJDczogWyBBUkM0IF0KCi8vIFRoZSBmb2xsb3dpbmcgdGVuIGxpbmVzIG9mIFRFQUwgaGFuZGxlIGluaXRpYWwgcHJvZ3JhbSBmbG93Ci8vIFRoaXMgcGF0dGVybiBpcyB1c2VkIHRvIG1ha2UgaXQgZWFzeSBmb3IgYW55b25lIHRvIHBhcnNlIHRoZSBzdGFydCBvZiB0aGUgcHJvZ3JhbSBhbmQgZGV0ZXJtaW5lIGlmIGEgc3BlY2lmaWMgYWN0aW9uIGlzIGFsbG93ZWQKLy8gSGVyZSwgYWN0aW9uIHJlZmVycyB0byB0aGUgT25Db21wbGV0ZSBpbiBjb21iaW5hdGlvbiB3aXRoIHdoZXRoZXIgdGhlIGFwcCBpcyBiZWluZyBjcmVhdGVkIG9yIGNhbGxlZAovLyBFdmVyeSBwb3NzaWJsZSBhY3Rpb24gZm9yIHRoaXMgY29udHJhY3QgaXMgcmVwcmVzZW50ZWQgaW4gdGhlIHN3aXRjaCBzdGF0ZW1lbnQKLy8gSWYgdGhlIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhlIGNvbnRyYWN0LCBpdHMgcmVzcGVjdGl2ZSBicmFuY2ggd2lsbCBiZSAiKk5PVF9JTVBMRU1FTlRFRCIgd2hpY2gganVzdCBjb250YWlucyAiZXJyIgp0eG4gQXBwbGljYXRpb25JRAohCnB1c2hpbnQgNgoqCnR4biBPbkNvbXBsZXRpb24KKwpzd2l0Y2ggKmNhbGxfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpjYWxsX0RlbGV0ZUFwcGxpY2F0aW9uICpjcmVhdGVfTm9PcCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQgKk5PVF9JTVBMRU1FTlRFRCAqTk9UX0lNUExFTUVOVEVEICpOT1RfSU1QTEVNRU5URUQKCipOT1RfSU1QTEVNRU5URUQ6CgkvLyBUaGUgcmVxdWVzdGVkIGFjdGlvbiBpcyBub3QgaW1wbGVtZW50ZWQgaW4gdGhpcyBjb250cmFjdC4gQXJlIHlvdSB1c2luZyB0aGUgY29ycmVjdCBPbkNvbXBsZXRlPyBEaWQgeW91IHNldCB5b3VyIGFwcCBJRD8KCWVycgoKLy8gY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbjoKCS8vIGV4ZWN1dGUgY3JlYXRlQXBwbGljYXRpb24oKXZvaWQKCWNhbGxzdWIgY3JlYXRlQXBwbGljYXRpb24KCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIGNyZWF0ZUFwcGxpY2F0aW9uKCk6IHZvaWQKY3JlYXRlQXBwbGljYXRpb246Cglwcm90byAwIDAKCXJldHN1YgoKLy8gcmVnaXN0ZXIocGF5LGFkZHJlc3MpYWRkcmVzcwoqYWJpX3JvdXRlX3JlZ2lzdGVyOgoJLy8gVGhlIEFCSSByZXR1cm4gcHJlZml4CglieXRlYyAzIC8vIDB4MTUxZjdjNzUKCgkvLyBvd25lcjogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgNSAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChvd25lcikgZm9yIHJlZ2lzdGVyIG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBwYXltZW50OiBwYXkKCXR4biBHcm91cEluZGV4CglpbnRjIDAgLy8gMQoJLQoJZHVwCglndHhucyBUeXBlRW51bQoJaW50YyAwIC8vICBwYXkKCT09CgoJLy8gYXJndW1lbnQgMSAocGF5bWVudCkgZm9yIHJlZ2lzdGVyIG11c3QgYmUgYSBwYXkgdHJhbnNhY3Rpb24KCWFzc2VydAoKCS8vIGV4ZWN1dGUgcmVnaXN0ZXIocGF5LGFkZHJlc3MpYWRkcmVzcwoJY2FsbHN1YiByZWdpc3RlcgoJY29uY2F0Cglsb2cKCWludGMgMCAvLyAxCglyZXR1cm4KCi8vIHJlZ2lzdGVyKHBheW1lbnQ6IFBheVR4biwgb3duZXI6IEFkZHJlc3MpOiBBZGRyZXNzCnJlZ2lzdGVyOgoJcHJvdG8gMiAxCgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjEzCgkvLyB2ZXJpZnlQYXlUeG4ocGF5bWVudCwgeyBhbW91bnQ6IHsgZ3JlYXRlclRoYW46IDAgfSB9KQoJLy8gdmVyaWZ5IGFtb3VudAoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CglpbnRjIDEgLy8gMAoJPgoKCS8vIHRyYW5zYWN0aW9uIHZlcmlmaWNhdGlvbiBmYWlsZWQ6IHsidHhuIjoicGF5bWVudCIsImZpZWxkIjoiYW1vdW50IiwiY29uZGl0aW9uIjoiZ3JlYXRlclRoYW4iLCJleHBlY3RlZCI6Ij4wIn0KCWFzc2VydAoKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czoxNAoJLy8gdGhpcy5vd25lci52YWx1ZSA9IG93bmVyCglieXRlYyAxIC8vICAib3duZXIiCglmcmFtZV9kaWcgLTIgLy8gb3duZXI6IEFkZHJlc3MKCWFwcF9nbG9iYWxfcHV0CgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjE1CgkvLyB0aGlzLmFtb3VudC52YWx1ZSA9IHBheW1lbnQuYW1vdW50CglieXRlYyAyIC8vICAiYW1vdW50IgoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CglhcHBfZ2xvYmFsX3B1dAoKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czoxNgoJLy8gcmV0dXJuIHRoaXMub3duZXIudmFsdWU7CglieXRlYyAxIC8vICAib3duZXIiCglhcHBfZ2xvYmFsX2dldAoJcmV0c3ViCgovLyBnZXRSYW5kb20ocGxheWVyOiBBZGRyZXNzKTogdWludDY0CmdldFJhbmRvbToKCXByb3RvIDEgMQoKCS8vIFB1c2ggZW1wdHkgYnl0ZXMgYWZ0ZXIgdGhlIGZyYW1lIHBvaW50ZXIgdG8gcmVzZXJ2ZSBzcGFjZSBmb3IgbG9jYWwgdmFyaWFibGVzCglieXRlYyAwIC8vIDB4CglkdXBuIDUKCgkvLyBjb250cmFjdHMvVG9zc1VwLmFsZ28udHM6MjIKCS8vIGJsb2NrU2VlZCA9CgkvLyAgICAgICBleHRyYWN0VWludDY0KGJsb2Nrc1t0aGlzLnR4bi5maXJzdFZhbGlkIC0gMV0uc2VlZCwgYmxvY2tzW3RoaXMudHhuLmZpcnN0VmFsaWQgLSAxXS50aW1lc3RhbXAgJSAyNCkgJSAyNAoJdHhuIEZpcnN0VmFsaWQKCWludGMgMCAvLyAxCgktCglibG9jayBCbGtTZWVkCgl0eG4gRmlyc3RWYWxpZAoJaW50YyAwIC8vIDEKCS0KCWJsb2NrIEJsa1RpbWVzdGFtcAoJaW50YyAyIC8vIDI0CgklCglleHRyYWN0X3VpbnQ2NAoJaW50YyAyIC8vIDI0CgklCglmcmFtZV9idXJ5IDEgLy8gYmxvY2tTZWVkOiB1aW50NjQKCgkvLyBjb250cmFjdHMvVG9zc1VwLmFsZ28udHM6MjUKCS8vIHByb3Bvc2VyID0gYmxvY2tzW3RoaXMudHhuLmZpcnN0VmFsaWQgLSAxXS5wcm9wb3NlcgoJdHhuIEZpcnN0VmFsaWQKCWludGMgMCAvLyAxCgktCglibG9jayBCbGtQcm9wb3NlcgoJZnJhbWVfYnVyeSAyIC8vIHByb3Bvc2VyOiBhZGRyZXNzCgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjMzCgkvLyBwbGF5ZXJTZWVkID0gZXh0cmFjdFVpbnQ2NChwbGF5ZXIsIGJsb2NrU2VlZCkgJSBtYXhTZWVkCglmcmFtZV9kaWcgLTEgLy8gcGxheWVyOiBBZGRyZXNzCglmcmFtZV9kaWcgMSAvLyBibG9ja1NlZWQ6IHVpbnQ2NAoJZXh0cmFjdF91aW50NjQKCWludGMgMyAvLyA0Mjk0OTY3Mjk1CgklCglmcmFtZV9idXJ5IDMgLy8gcGxheWVyU2VlZDogdWludDY0CgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjM1CgkvLyBvd25lclNlZWQgPSBleHRyYWN0VWludDY0KHRoaXMub3duZXIudmFsdWUsIGJsb2NrU2VlZCkgJSBtYXhTZWVkCglieXRlYyAxIC8vICAib3duZXIiCglhcHBfZ2xvYmFsX2dldAoJZnJhbWVfZGlnIDEgLy8gYmxvY2tTZWVkOiB1aW50NjQKCWV4dHJhY3RfdWludDY0CglpbnRjIDMgLy8gNDI5NDk2NzI5NQoJJQoJZnJhbWVfYnVyeSA0IC8vIG93bmVyU2VlZDogdWludDY0CgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjM3CgkvLyBpbnRyYVJvdW5kUmFuZG9tbmVzcyA9IChwbGF5ZXJTZWVkICogb3duZXJTZWVkKSAlIDI0CglmcmFtZV9kaWcgMyAvLyBwbGF5ZXJTZWVkOiB1aW50NjQKCWZyYW1lX2RpZyA0IC8vIG93bmVyU2VlZDogdWludDY0CgkqCglpbnRjIDIgLy8gMjQKCSUKCWZyYW1lX2J1cnkgNSAvLyBpbnRyYVJvdW5kUmFuZG9tbmVzczogdWludDY0CgoJLy8gKmlmMF9jb25kaXRpb24KCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czozOQoJLy8gcHJvcG9zZXIgPT09IGdsb2JhbHMuemVyb0FkZHJlc3MKCWZyYW1lX2RpZyAyIC8vIHByb3Bvc2VyOiBhZGRyZXNzCglnbG9iYWwgWmVyb0FkZHJlc3MKCT09CglieiAqaWYwX2Vsc2UKCgkvLyAqaWYwX2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czo0MQoJLy8gc2VlZCA9IGV4dHJhY3RVaW50NjQocGxheWVyLCBpbnRyYVJvdW5kUmFuZG9tbmVzcykKCWZyYW1lX2RpZyAtMSAvLyBwbGF5ZXI6IEFkZHJlc3MKCWZyYW1lX2RpZyA1IC8vIGludHJhUm91bmRSYW5kb21uZXNzOiB1aW50NjQKCWV4dHJhY3RfdWludDY0CglmcmFtZV9idXJ5IDAgLy8gc2VlZDogdWludDY0CgliICppZjBfZW5kCgoqaWYwX2Vsc2U6CgkvLyBjb250cmFjdHMvVG9zc1VwLmFsZ28udHM6NDMKCS8vIHNlZWQgPSBleHRyYWN0VWludDY0KHByb3Bvc2VyLCBpbnRyYVJvdW5kUmFuZG9tbmVzcykKCWZyYW1lX2RpZyAyIC8vIHByb3Bvc2VyOiBhZGRyZXNzCglmcmFtZV9kaWcgNSAvLyBpbnRyYVJvdW5kUmFuZG9tbmVzczogdWludDY0CglleHRyYWN0X3VpbnQ2NAoJZnJhbWVfYnVyeSAwIC8vIHNlZWQ6IHVpbnQ2NAoKKmlmMF9lbmQ6CgkvLyBjb250cmFjdHMvVG9zc1VwLmFsZ28udHM6NDYKCS8vIHJldHVybiBzZWVkOwoJZnJhbWVfZGlnIDAgLy8gc2VlZDogdWludDY0CgoJLy8gc2V0IHRoZSBzdWJyb3V0aW5lIHJldHVybiB2YWx1ZQoJZnJhbWVfYnVyeSAwCgoJLy8gcG9wIGFsbCBsb2NhbCB2YXJpYWJsZXMgZnJvbSB0aGUgc3RhY2sKCXBvcG4gNQoJcmV0c3ViCgovLyBwbGF5KHBheSxhZGRyZXNzKXVpbnQ2NAoqYWJpX3JvdXRlX3BsYXk6CgkvLyBUaGUgQUJJIHJldHVybiBwcmVmaXgKCWJ5dGVjIDMgLy8gMHgxNTFmN2M3NQoKCS8vIHBsYXllcjogYWRkcmVzcwoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQoJZHVwCglsZW4KCWludGMgNSAvLyAzMgoJPT0KCgkvLyBhcmd1bWVudCAwIChwbGF5ZXIpIGZvciBwbGF5IG11c3QgYmUgYSBhZGRyZXNzCglhc3NlcnQKCgkvLyBwYXltZW50OiBwYXkKCXR4biBHcm91cEluZGV4CglpbnRjIDAgLy8gMQoJLQoJZHVwCglndHhucyBUeXBlRW51bQoJaW50YyAwIC8vICBwYXkKCT09CgoJLy8gYXJndW1lbnQgMSAocGF5bWVudCkgZm9yIHBsYXkgbXVzdCBiZSBhIHBheSB0cmFuc2FjdGlvbgoJYXNzZXJ0CgoJLy8gZXhlY3V0ZSBwbGF5KHBheSxhZGRyZXNzKXVpbnQ2NAoJY2FsbHN1YiBwbGF5CglpdG9iCgljb25jYXQKCWxvZwoJaW50YyAwIC8vIDEKCXJldHVybgoKLy8gcGxheShwYXltZW50OiBQYXlUeG4sIHBsYXllcjogQWRkcmVzcyk6IHVpbnQ2NApwbGF5OgoJcHJvdG8gMiAxCgoJLy8gUHVzaCBlbXB0eSBieXRlcyBhZnRlciB0aGUgZnJhbWUgcG9pbnRlciB0byByZXNlcnZlIHNwYWNlIGZvciBsb2NhbCB2YXJpYWJsZXMKCWJ5dGVjIDAgLy8gMHgKCgkvLyBjb250cmFjdHMvVG9zc1VwLmFsZ28udHM6NTEKCS8vIGFzc2VydHMocGxheWVyICE9PSB0aGlzLm93bmVyLnZhbHVlLCB0aGlzLmFtb3VudC52YWx1ZSA9PT0gcGF5bWVudC5hbW91bnQsIHRoaXMudHhuLnNlbmRlciA9PT0gdGhpcy5hcHAuY3JlYXRvcikKCWZyYW1lX2RpZyAtMiAvLyBwbGF5ZXI6IEFkZHJlc3MKCWJ5dGVjIDEgLy8gICJvd25lciIKCWFwcF9nbG9iYWxfZ2V0CgkhPQoKCS8vIGFzc2VydHMgZmFpbGVkOiBhc3NlcnRzKHBsYXllciAhPT0gdGhpcy5vd25lci52YWx1ZSwgdGhpcy5hbW91bnQudmFsdWUgPT09IHBheW1lbnQuYW1vdW50LCB0aGlzLnR4bi5zZW5kZXIgPT09IHRoaXMuYXBwLmNyZWF0b3IpCglhc3NlcnQKCWJ5dGVjIDIgLy8gICJhbW91bnQiCglhcHBfZ2xvYmFsX2dldAoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50Cgk9PQoKCS8vIGFzc2VydHMgZmFpbGVkOiBhc3NlcnRzKHBsYXllciAhPT0gdGhpcy5vd25lci52YWx1ZSwgdGhpcy5hbW91bnQudmFsdWUgPT09IHBheW1lbnQuYW1vdW50LCB0aGlzLnR4bi5zZW5kZXIgPT09IHRoaXMuYXBwLmNyZWF0b3IpCglhc3NlcnQKCXR4biBTZW5kZXIKCXR4bmEgQXBwbGljYXRpb25zIDAKCWFwcF9wYXJhbXNfZ2V0IEFwcENyZWF0b3IKCXBvcAoJPT0KCgkvLyBhc3NlcnRzIGZhaWxlZDogYXNzZXJ0cyhwbGF5ZXIgIT09IHRoaXMub3duZXIudmFsdWUsIHRoaXMuYW1vdW50LnZhbHVlID09PSBwYXltZW50LmFtb3VudCwgdGhpcy50eG4uc2VuZGVyID09PSB0aGlzLmFwcC5jcmVhdG9yKQoJYXNzZXJ0CgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjUzCgkvLyBzZWVkID0gdGhpcy5nZXRSYW5kb20ocGxheWVyKQoJZnJhbWVfZGlnIC0yIC8vIHBsYXllcjogQWRkcmVzcwoJY2FsbHN1YiBnZXRSYW5kb20KCWZyYW1lX2J1cnkgMCAvLyBzZWVkOiB1aW50NjQKCgkvLyAqaWYxX2NvbmRpdGlvbgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjU1CgkvLyBzZWVkICUgMiA9PT0gMAoJZnJhbWVfZGlnIDAgLy8gc2VlZDogdWludDY0CglpbnRjIDQgLy8gMgoJJQoJaW50YyAxIC8vIDAKCT09CglieiAqaWYxX2Vsc2UKCgkvLyAqaWYxX2NvbnNlcXVlbnQKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czo1NgoJLy8gc2VuZFBheW1lbnQoeyByZWNlaXZlcjogdGhpcy5vd25lci52YWx1ZSwgYW1vdW50OiB0aGlzLmFtb3VudC52YWx1ZSArIHBheW1lbnQuYW1vdW50IH0pCglpdHhuX2JlZ2luCglpbnRjIDAgLy8gIHBheQoJaXR4bl9maWVsZCBUeXBlRW51bQoKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czo1NgoJLy8gcmVjZWl2ZXI6IHRoaXMub3duZXIudmFsdWUKCWJ5dGVjIDEgLy8gICJvd25lciIKCWFwcF9nbG9iYWxfZ2V0CglpdHhuX2ZpZWxkIFJlY2VpdmVyCgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjU2CgkvLyBhbW91bnQ6IHRoaXMuYW1vdW50LnZhbHVlICsgcGF5bWVudC5hbW91bnQKCWJ5dGVjIDIgLy8gICJhbW91bnQiCglhcHBfZ2xvYmFsX2dldAoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CgkrCglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIEZlZSBmaWVsZCBub3Qgc2V0LCBkZWZhdWx0aW5nIHRvIDAKCWludGMgMSAvLyAwCglpdHhuX2ZpZWxkIEZlZQoKCS8vIFN1Ym1pdCBpbm5lciB0cmFuc2FjdGlvbgoJaXR4bl9zdWJtaXQKCWIgKmlmMV9lbmQKCippZjFfZWxzZToKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czo1OAoJLy8gc2VuZFBheW1lbnQoeyByZWNlaXZlcjogcGxheWVyLCBhbW91bnQ6IHRoaXMuYW1vdW50LnZhbHVlICsgcGF5bWVudC5hbW91bnQgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjU4CgkvLyByZWNlaXZlcjogcGxheWVyCglmcmFtZV9kaWcgLTIgLy8gcGxheWVyOiBBZGRyZXNzCglpdHhuX2ZpZWxkIFJlY2VpdmVyCgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjU4CgkvLyBhbW91bnQ6IHRoaXMuYW1vdW50LnZhbHVlICsgcGF5bWVudC5hbW91bnQKCWJ5dGVjIDIgLy8gICJhbW91bnQiCglhcHBfZ2xvYmFsX2dldAoJZnJhbWVfZGlnIC0xIC8vIHBheW1lbnQ6IFBheVR4bgoJZ3R4bnMgQW1vdW50CgkrCglpdHhuX2ZpZWxkIEFtb3VudAoKCS8vIEZlZSBmaWVsZCBub3Qgc2V0LCBkZWZhdWx0aW5nIHRvIDAKCWludGMgMSAvLyAwCglpdHhuX2ZpZWxkIEZlZQoKCS8vIFN1Ym1pdCBpbm5lciB0cmFuc2FjdGlvbgoJaXR4bl9zdWJtaXQKCippZjFfZW5kOgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjYxCgkvLyBzZW5kUGF5bWVudCh7IGNsb3NlUmVtYWluZGVyVG86IHRoaXMub3duZXIudmFsdWUgfSkKCWl0eG5fYmVnaW4KCWludGMgMCAvLyAgcGF5CglpdHhuX2ZpZWxkIFR5cGVFbnVtCgoJLy8gY29udHJhY3RzL1Rvc3NVcC5hbGdvLnRzOjYxCgkvLyBjbG9zZVJlbWFpbmRlclRvOiB0aGlzLm93bmVyLnZhbHVlCglieXRlYyAxIC8vICAib3duZXIiCglhcHBfZ2xvYmFsX2dldAoJaXR4bl9maWVsZCBDbG9zZVJlbWFpbmRlclRvCgoJLy8gRmVlIGZpZWxkIG5vdCBzZXQsIGRlZmF1bHRpbmcgdG8gMAoJaW50YyAxIC8vIDAKCWl0eG5fZmllbGQgRmVlCgoJLy8gU3VibWl0IGlubmVyIHRyYW5zYWN0aW9uCglpdHhuX3N1Ym1pdAoKCS8vIGNvbnRyYWN0cy9Ub3NzVXAuYWxnby50czo2MgoJLy8gcmV0dXJuIHNlZWQgJSAyOwoJZnJhbWVfZGlnIDAgLy8gc2VlZDogdWludDY0CglpbnRjIDQgLy8gMgoJJQoKCS8vIHNldCB0aGUgc3Vicm91dGluZSByZXR1cm4gdmFsdWUKCWZyYW1lX2J1cnkgMAoJcmV0c3ViCgoqY3JlYXRlX05vT3A6CglwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9jcmVhdGVBcHBsaWNhdGlvbgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjcmVhdGUgTm9PcAoJZXJyCgoqY2FsbF9Ob09wOgoJcHVzaGJ5dGVzIDB4ZTZkNmQ5ZTYgLy8gbWV0aG9kICJyZWdpc3RlcihwYXksYWRkcmVzcylhZGRyZXNzIgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9yZWdpc3RlcgoKCS8vIHRoaXMgY29udHJhY3QgZG9lcyBub3QgaW1wbGVtZW50IHRoZSBnaXZlbiBBQkkgbWV0aG9kIGZvciBjYWxsIE5vT3AKCWVycgoKKmNhbGxfRGVsZXRlQXBwbGljYXRpb246CglwdXNoYnl0ZXMgMHgxNTVjZWZmYSAvLyBtZXRob2QgInBsYXkocGF5LGFkZHJlc3MpdWludDY0IgoJdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAoJbWF0Y2ggKmFiaV9yb3V0ZV9wbGF5CgoJLy8gdGhpcyBjb250cmFjdCBkb2VzIG5vdCBpbXBsZW1lbnQgdGhlIGdpdmVuIEFCSSBtZXRob2QgZm9yIGNhbGwgRGVsZXRlQXBwbGljYXRpb24KCWVycg==","clear":"I3ByYWdtYSB2ZXJzaW9uIDEx"},"byteCode":{"approval":"CyAGAQAY/////w8CICYEAAVvd25lcgZhbW91bnQEFR98dTEYFIEGCzEZCI0MATAAAAAAAAAAAAE+ASIAAAAAAAAAAAAAAIgAAiJDigAAiSs2GgFJFSEFEkQxFiIJSTgQIhJEiAAEULAiQ4oCAYv/OAgjDUQpi/5nKov/OAhnKWSJigEBKEcFMQIiCdEAMQIiCdEBJBhbJBiMATECIgnRAowCi/+LAVslGIwDKWSLAVslGIwEiwOLBAskGIwFiwIyAxJBAAqL/4sFW4wAQgAHiwKLBVuMAIsAjABGBYkrNhoBSRUhBRJEMRYiCUk4ECISRIgABRZQsCJDigIBKIv+KWQTRCpki/84CBJEMQA2MgByB0gSRIv+iP9njACLACEEGCMSQQAYsSKyEClksgcqZIv/OAgIsggjsgGzQgAVsSKyEIv+sgcqZIv/OAgIsggjsgGzsSKyEClksgkjsgGziwAhBBiMAImABLhEezY2GgCOAf7SAIAE5tbZ5jYaAI4B/s0AgAQVXO/6NhoAjgH/TQA=","clear":"Cw=="}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -169,11 +169,97 @@ export type MethodReturn<TSignature extends TossUpSignatures> = TossUpTypes['met
 export type GlobalKeysState = TossUpTypes['state']['global']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TossUpCreateCallParams =
+  | Expand<CallParams<TossUpArgs['obj']['createApplication()void'] | TossUpArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<TossUpArgs['obj']['createApplication()void'] | TossUpArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type TossUpDeleteCallParams =
+  | Expand<CallParams<TossUpArgs['obj']['play(pay,address)uint64'] | TossUpArgs['tuple']['play(pay,address)uint64']> & {method: 'play'}>
+  | Expand<CallParams<TossUpArgs['obj']['play(pay,address)uint64'] | TossUpArgs['tuple']['play(pay,address)uint64']> & {method: 'play(pay,address)uint64'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TossUpDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TossUpCreateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: TossUpDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TossUp smart contract
  */
 export abstract class TossUpParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends TossUpCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return TossUpParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the TossUp smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<TossUpArgs['obj']['createApplication()void'] | TossUpArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends TossUpDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'play':
+          case 'play(pay,address)uint64':
+            return TossUpParamsFactory.delete.play(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the TossUp smart contract using the play(pay,address)uint64 ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      play(params: CallParams<TossUpArgs['obj']['play(pay,address)uint64'] | TossUpArgs['tuple']['play(pay,address)uint64']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'play(pay,address)uint64' as const,
+          args: Array.isArray(params.args) ? params.args : [params.args.payment, params.args.player],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the register(pay,address)address ABI method
    *
@@ -189,6 +275,164 @@ export abstract class TossUpParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TossUp smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TossUpFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TossUpFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TossUpClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TossUpClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TossUp smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TossUpDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? TossUpParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (TossUpCreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? TossUpParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (TossUpDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new TossUpClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TossUp smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<TossUpArgs['obj']['createApplication()void'] | TossUpArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(TossUpParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the TossUp smart contract using the play(pay,address)uint64 ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      play: (params: CallParams<TossUpArgs['obj']['play(pay,address)uint64'] | TossUpArgs['tuple']['play(pay,address)uint64']>) => {
+        return this.appFactory.params.deployDelete(TossUpParamsFactory.delete.play(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TossUp smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<TossUpArgs['obj']['createApplication()void'] | TossUpArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(TossUpParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TossUp smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<TossUpArgs['obj']['createApplication()void'] | TossUpArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(TossUpParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | TossUpReturns['createApplication()void']) }, appClient: new TossUpClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TossUp smart contract
  */
@@ -277,6 +521,22 @@ export class TossUpClient {
    */
   readonly params = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TossUp smart contract using the `play(pay,address)uint64` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      play: (params: CallParams<TossUpArgs['obj']['play(pay,address)uint64'] | TossUpArgs['tuple']['play(pay,address)uint64']>) => {
+        return this.appClient.params.delete(TossUpParamsFactory.delete.play(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the TossUp smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -303,6 +563,22 @@ export class TossUpClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TossUp smart contract using the `play(pay,address)uint64` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      play: (params: CallParams<TossUpArgs['obj']['play(pay,address)uint64'] | TossUpArgs['tuple']['play(pay,address)uint64']>) => {
+        return this.appClient.createTransaction.delete(TossUpParamsFactory.delete.play(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the TossUp smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -328,6 +604,23 @@ export class TossUpClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the TossUp smart contract using the `play(pay,address)uint64` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      play: async (params: CallParams<TossUpArgs['obj']['play(pay,address)uint64'] | TossUpArgs['tuple']['play(pay,address)uint64']> & SendParams) => {
+        const result = await this.appClient.send.delete(TossUpParamsFactory.delete.play(params))
+        return {...result, return: result.return as unknown as (undefined | TossUpReturns['play(pay,address)uint64'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the TossUp smart contract.
      *
@@ -404,6 +697,15 @@ export class TossUpClient {
         resultMappers.push((v) => client.decodeReturnValue('register(pay,address)address', v))
         return this
       },
+      get delete() {
+        return {
+          play: (params: CallParams<TossUpArgs['obj']['play(pay,address)uint64'] | TossUpArgs['tuple']['play(pay,address)uint64']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.play(params)))
+            resultMappers.push((v) => client.decodeReturnValue('play(pay,address)uint64', v))
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the TossUp contract
        */
@@ -447,6 +749,20 @@ export type TossUpComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   register(params?: CallParams<TossUpArgs['obj']['register(pay,address)address'] | TossUpArgs['tuple']['register(pay,address)address']>): TossUpComposer<[...TReturns, TossUpReturns['register(pay,address)address'] | undefined]>
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the TossUp smart contract using the play(pay,address)uint64 ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    play(params?: CallParams<TossUpArgs['obj']['play(pay,address)uint64'] | TossUpArgs['tuple']['play(pay,address)uint64']>): TossUpComposer<[...TReturns, TossUpReturns['play(pay,address)uint64'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the TossUp smart contract.
