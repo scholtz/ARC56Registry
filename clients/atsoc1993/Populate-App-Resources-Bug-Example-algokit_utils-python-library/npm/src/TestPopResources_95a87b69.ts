@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"TestPopResources","structs":{},"methods":[{"name":"populateTest","args":[{"type":"pay","name":"mbr_payment"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"arbitrary_app_call","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[46,55],"errorMessage":"OnCompletion is not NoOp"},{"pc":[92,180],"errorMessage":"account funded"},{"pc":[82],"errorMessage":"can only call when creating"},{"pc":[49,58],"errorMessage":"can only call when not creating"},{"pc":[68],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"TestPopResources","structs":{},"methods":[{"name":"populateTest","args":[{"type":"pay","name":"mbr_payment"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}},{"name":"arbitrary_app_call","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":0,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[46,55],"errorMessage":"OnCompletion is not NoOp"},{"pc":[92,180],"errorMessage":"account funded"},{"pc":[82],"errorMessage":"can only call when creating"},{"pc":[49,58],"errorMessage":"can only call when not creating"},{"pc":[68],"errorMessage":"transaction type is pay"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBjb250cmFjdC5UZXN0UG9wUmVzb3VyY2VzLl9fYWxnb3B5X2VudHJ5cG9pbnRfd2l0aF9pbml0KCkgLT4gdWludDY0OgptYWluOgogICAgaW50Y2Jsb2NrIDEgMAogICAgYnl0ZWNibG9jayAweDMxICIyIiAiMyIgIjQiCiAgICAvLyBjb250cmFjdC5weToxNgogICAgLy8gY2xhc3MgVGVzdFBvcFJlc291cmNlcyhBUkM0Q29udHJhY3QpOgogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fYmFyZV9yb3V0aW5nQDcKICAgIHB1c2hieXRlc3MgMHg0YzQwOGFkMSAweDY5ZjNjNmU0IC8vIG1ldGhvZCAicG9wdWxhdGVUZXN0KHBheSl2b2lkIiwgbWV0aG9kICJhcmJpdHJhcnlfYXBwX2NhbGwoKXZvaWQiCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBtYWluX3BvcHVsYXRlVGVzdF9yb3V0ZUA1IG1haW5fYXJiaXRyYXJ5X2FwcF9jYWxsX3JvdXRlQDYKCm1haW5fYWZ0ZXJfaWZfZWxzZUA5OgogICAgLy8gY29udHJhY3QucHk6MTYKICAgIC8vIGNsYXNzIFRlc3RQb3BSZXNvdXJjZXMoQVJDNENvbnRyYWN0KToKICAgIGludGNfMSAvLyAwCiAgICByZXR1cm4KCm1haW5fYXJiaXRyYXJ5X2FwcF9jYWxsX3JvdXRlQDY6CiAgICAvLyBjb250cmFjdC5weTo2MAogICAgLy8gQGFiaW1ldGhvZAogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBpcyBub3QgTm9PcAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gbm90IGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3BvcHVsYXRlVGVzdF9yb3V0ZUA1OgogICAgLy8gY29udHJhY3QucHk6MjAKICAgIC8vIEBhYmltZXRob2QKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gaXMgbm90IE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQgLy8gY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgLy8gY29udHJhY3QucHk6MTYKICAgIC8vIGNsYXNzIFRlc3RQb3BSZXNvdXJjZXMoQVJDNENvbnRyYWN0KToKICAgIHR4biBHcm91cEluZGV4CiAgICBpbnRjXzAgLy8gMQogICAgLQogICAgZHVwCiAgICBndHhucyBUeXBlRW51bQogICAgaW50Y18wIC8vIHBheQogICAgPT0KICAgIGFzc2VydCAvLyB0cmFuc2FjdGlvbiB0eXBlIGlzIHBheQogICAgLy8gY29udHJhY3QucHk6MjAKICAgIC8vIEBhYmltZXRob2QKICAgIGNhbGxzdWIgcG9wdWxhdGVUZXN0CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX2JhcmVfcm91dGluZ0A3OgogICAgLy8gY29udHJhY3QucHk6MTYKICAgIC8vIGNsYXNzIFRlc3RQb3BSZXNvdXJjZXMoQVJDNENvbnRyYWN0KToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAOQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgIGFzc2VydCAvLyBjYW4gb25seSBjYWxsIHdoZW4gY3JlYXRpbmcKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBjb250cmFjdC5UZXN0UG9wUmVzb3VyY2VzLnBvcHVsYXRlVGVzdChtYnJfcGF5bWVudDogdWludDY0KSAtPiB2b2lkOgpwb3B1bGF0ZVRlc3Q6CiAgICAvLyBjb250cmFjdC5weToyMC0yMQogICAgLy8gQGFiaW1ldGhvZAogICAgLy8gZGVmIHBvcHVsYXRlVGVzdChzZWxmLCBtYnJfcGF5bWVudDogZ3R4bi5QYXltZW50VHJhbnNhY3Rpb24pIC0+IE5vbmU6CiAgICBwcm90byAxIDAKICAgIC8vIGNvbnRyYWN0LnB5OjcKICAgIC8vIHJldHVybiBHbG9iYWwuY3VycmVudF9hcHBsaWNhdGlvbl9hZGRyZXNzLm1pbl9iYWxhbmNlCiAgICBnbG9iYWwgQ3VycmVudEFwcGxpY2F0aW9uQWRkcmVzcwogICAgYWNjdF9wYXJhbXNfZ2V0IEFjY3RNaW5CYWxhbmNlCiAgICBhc3NlcnQgLy8gYWNjb3VudCBmdW5kZWQKICAgIC8vIGNvbnRyYWN0LnB5OjIzCiAgICAvLyBiMSA9IEJveFJlZihrZXk9JzEnKQogICAgYnl0ZWNfMCAvLyAiMSIKICAgIC8vIGNvbnRyYWN0LnB5OjM1CiAgICAvLyBiMS5jcmVhdGUoc2l6ZT0xKQogICAgaW50Y18wIC8vIDEKICAgIGJveF9jcmVhdGUKICAgIHBvcAogICAgLy8gY29udHJhY3QucHk6MjQKICAgIC8vIGIyID0gQm94UmVmKGtleT0nMicpCiAgICBieXRlY18xIC8vICIyIgogICAgLy8gY29udHJhY3QucHk6MzYKICAgIC8vIGIyLmNyZWF0ZShzaXplPTEpCiAgICBpbnRjXzAgLy8gMQogICAgYm94X2NyZWF0ZQogICAgcG9wCiAgICAvLyBjb250cmFjdC5weToyNQogICAgLy8gYjMgPSBCb3hSZWYoa2V5PSczJykKICAgIGJ5dGVjXzIgLy8gIjMiCiAgICAvLyBjb250cmFjdC5weTozNwogICAgLy8gYjMuY3JlYXRlKHNpemU9MSkKICAgIGludGNfMCAvLyAxCiAgICBib3hfY3JlYXRlCiAgICBwb3AKICAgIC8vIGNvbnRyYWN0LnB5OjI2CiAgICAvLyBiNCA9IEJveFJlZihrZXk9JzQnKQogICAgYnl0ZWNfMyAvLyAiNCIKICAgIC8vIGNvbnRyYWN0LnB5OjM4CiAgICAvLyBiNC5jcmVhdGUoc2l6ZT0xKQogICAgaW50Y18wIC8vIDEKICAgIGJveF9jcmVhdGUKICAgIHBvcAogICAgLy8gY29udHJhY3QucHk6MjcKICAgIC8vIGI1ID0gQm94UmVmKGtleT0nNScpCiAgICBwdXNoYnl0ZXMgIjUiCiAgICAvLyBjb250cmFjdC5weTozOQogICAgLy8gYjUuY3JlYXRlKHNpemU9MSkKICAgIGludGNfMCAvLyAxCiAgICBib3hfY3JlYXRlCiAgICBwb3AKICAgIC8vIGNvbnRyYWN0LnB5OjI4CiAgICAvLyBiNiA9IEJveFJlZihrZXk9JzYnKQogICAgcHVzaGJ5dGVzICI2IgogICAgLy8gY29udHJhY3QucHk6NDAKICAgIC8vIGI2LmNyZWF0ZShzaXplPTEpCiAgICBpbnRjXzAgLy8gMQogICAgYm94X2NyZWF0ZQogICAgcG9wCiAgICAvLyBjb250cmFjdC5weToyOQogICAgLy8gYjcgPSBCb3hSZWYoa2V5PSc3JykKICAgIHB1c2hieXRlcyAiNyIKICAgIC8vIGNvbnRyYWN0LnB5OjQxCiAgICAvLyBiNy5jcmVhdGUoc2l6ZT0xKQogICAgaW50Y18wIC8vIDEKICAgIGJveF9jcmVhdGUKICAgIHBvcAogICAgLy8gY29udHJhY3QucHk6MzAKICAgIC8vIGI4ID0gQm94UmVmKGtleT0nOCcpCiAgICBwdXNoYnl0ZXMgIjgiCiAgICAvLyBjb250cmFjdC5weTo0MgogICAgLy8gYjguY3JlYXRlKHNpemU9MSkKICAgIGludGNfMCAvLyAxCiAgICBib3hfY3JlYXRlCiAgICBwb3AKICAgIC8vIGNvbnRyYWN0LnB5OjMxCiAgICAvLyBiOSA9IEJveFJlZihrZXk9JzknKQogICAgcHVzaGJ5dGVzICI5IgogICAgLy8gY29udHJhY3QucHk6NDMKICAgIC8vIGI5LmNyZWF0ZShzaXplPTEpCiAgICBpbnRjXzAgLy8gMQogICAgYm94X2NyZWF0ZQogICAgcG9wCiAgICAvLyBjb250cmFjdC5weToyMwogICAgLy8gYjEgPSBCb3hSZWYoa2V5PScxJykKICAgIGJ5dGVjXzAgLy8gIjEiCiAgICAvLyBjb250cmFjdC5weTo0NQogICAgLy8gYjEucHV0KGInMScpCiAgICBkdXAKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0LnB5OjI0CiAgICAvLyBiMiA9IEJveFJlZihrZXk9JzInKQogICAgYnl0ZWNfMSAvLyAiMiIKICAgIC8vIGNvbnRyYWN0LnB5OjQ2CiAgICAvLyBiMi5wdXQoYicxJykKICAgIGJ5dGVjXzAgLy8gMHgzMQogICAgYm94X3B1dAogICAgLy8gY29udHJhY3QucHk6MjUKICAgIC8vIGIzID0gQm94UmVmKGtleT0nMycpCiAgICBieXRlY18yIC8vICIzIgogICAgLy8gY29udHJhY3QucHk6NDcKICAgIC8vIGIzLnB1dChiJzEnKQogICAgYnl0ZWNfMCAvLyAweDMxCiAgICBib3hfcHV0CiAgICAvLyBjb250cmFjdC5weToyNgogICAgLy8gYjQgPSBCb3hSZWYoa2V5PSc0JykKICAgIGJ5dGVjXzMgLy8gIjQiCiAgICAvLyBjb250cmFjdC5weTo0OAogICAgLy8gYjQucHV0KGInMScpCiAgICBieXRlY18wIC8vIDB4MzEKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0LnB5OjI3CiAgICAvLyBiNSA9IEJveFJlZihrZXk9JzUnKQogICAgcHVzaGJ5dGVzICI1IgogICAgLy8gY29udHJhY3QucHk6NDkKICAgIC8vIGI1LnB1dChiJzEnKQogICAgYnl0ZWNfMCAvLyAweDMxCiAgICBib3hfcHV0CiAgICAvLyBjb250cmFjdC5weToyOAogICAgLy8gYjYgPSBCb3hSZWYoa2V5PSc2JykKICAgIHB1c2hieXRlcyAiNiIKICAgIC8vIGNvbnRyYWN0LnB5OjUwCiAgICAvLyBiNi5wdXQoYicxJykKICAgIGJ5dGVjXzAgLy8gMHgzMQogICAgYm94X3B1dAogICAgLy8gY29udHJhY3QucHk6MjkKICAgIC8vIGI3ID0gQm94UmVmKGtleT0nNycpCiAgICBwdXNoYnl0ZXMgIjciCiAgICAvLyBjb250cmFjdC5weTo1MQogICAgLy8gYjcucHV0KGInMScpCiAgICBieXRlY18wIC8vIDB4MzEKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0LnB5OjMwCiAgICAvLyBiOCA9IEJveFJlZihrZXk9JzgnKQogICAgcHVzaGJ5dGVzICI4IgogICAgLy8gY29udHJhY3QucHk6NTIKICAgIC8vIGI4LnB1dChiJzEnKQogICAgYnl0ZWNfMCAvLyAweDMxCiAgICBib3hfcHV0CiAgICAvLyBjb250cmFjdC5weTozMQogICAgLy8gYjkgPSBCb3hSZWYoa2V5PSc5JykKICAgIHB1c2hieXRlcyAiOSIKICAgIC8vIGNvbnRyYWN0LnB5OjUzCiAgICAvLyBiOS5wdXQoYicxJykKICAgIGJ5dGVjXzAgLy8gMHgzMQogICAgYm94X3B1dAogICAgLy8gY29udHJhY3QucHk6NwogICAgLy8gcmV0dXJuIEdsb2JhbC5jdXJyZW50X2FwcGxpY2F0aW9uX2FkZHJlc3MubWluX2JhbGFuY2UKICAgIGdsb2JhbCBDdXJyZW50QXBwbGljYXRpb25BZGRyZXNzCiAgICBhY2N0X3BhcmFtc19nZXQgQWNjdE1pbkJhbGFuY2UKICAgIGFzc2VydCAvLyBhY2NvdW50IGZ1bmRlZAogICAgLy8gY29udHJhY3QucHk6NTYKICAgIC8vIG1icl9kaWZmID0gcG9zdF9tYnIgLSBwcmVfbWJyCiAgICBzd2FwCiAgICAtCiAgICAvLyBjb250cmFjdC5weTo1NwogICAgLy8gZXhjZXNzID0gbWJyX3BheW1lbnQuYW1vdW50IC0gbWJyX2RpZmYKICAgIGZyYW1lX2RpZyAtMQogICAgZ3R4bnMgQW1vdW50CiAgICBzd2FwCiAgICAtCiAgICAvLyBjb250cmFjdC5weToxMS0xNAogICAgLy8gaXR4bi5QYXltZW50KAogICAgLy8gICAgIHJlY2VpdmVyPVR4bi5zZW5kZXIsCiAgICAvLyAgICAgYW1vdW50PWV4Y2VzcwogICAgLy8gKS5zdWJtaXQoKQogICAgaXR4bl9iZWdpbgogICAgLy8gY29udHJhY3QucHk6MTIKICAgIC8vIHJlY2VpdmVyPVR4bi5zZW5kZXIsCiAgICB0eG4gU2VuZGVyCiAgICBpdHhuX2ZpZWxkIFJlY2VpdmVyCiAgICBpdHhuX2ZpZWxkIEFtb3VudAogICAgLy8gY29udHJhY3QucHk6MTEKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIGludGNfMCAvLyBwYXkKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIGludGNfMSAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgLy8gY29udHJhY3QucHk6MTEtMTQKICAgIC8vIGl0eG4uUGF5bWVudCgKICAgIC8vICAgICByZWNlaXZlcj1UeG4uc2VuZGVyLAogICAgLy8gICAgIGFtb3VudD1leGNlc3MKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fc3VibWl0CiAgICByZXRzdWIK","clear":"I3ByYWdtYSB2ZXJzaW9uIDEwCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CiACAQAmBAExATIBMwE0MRtBADaCAgRMQIrRBGnzxuQ2GgCOAgALAAIjQzEZFEQxGEQiQzEZFEQxGEQxFiIJSTgQIhJEiAANIkMxGUD/2jEYFEQiQ4oBADIKcwFEKCK5SCkiuUgqIrlIKyK5SIABNSK5SIABNiK5SIABNyK5SIABOCK5SIABOSK5SChJvykovyoovysov4ABNSi/gAE2KL+AATcov4ABOCi/gAE5KL8yCnMBREwJi/84CEwJsTEAsgeyCCKyECOyAbOJ","clear":"CoEBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -136,6 +136,21 @@ export type MethodArgs<TSignature extends TestPopResourcesSignatures> = TestPopR
 export type MethodReturn<TSignature extends TestPopResourcesSignatures> = TestPopResourcesTypes['methods'][TSignature]['returns']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TestPopResourcesCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TestPopResourcesDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TestPopResourcesCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TestPopResources smart contract
@@ -169,6 +184,147 @@ export abstract class TestPopResourcesParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TestPopResources smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TestPopResourcesFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TestPopResourcesFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TestPopResourcesClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TestPopResourcesClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TestPopResources smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TestPopResourcesDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new TestPopResourcesClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestPopResources smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestPopResources smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TestPopResources smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new TestPopResourcesClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TestPopResources smart contract
  */
