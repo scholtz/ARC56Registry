@@ -2,8 +2,8 @@
 
 - **Repo**: [joe-p/algosdk-future-ts](https://github.com/joe-p/algosdk-future-ts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/joe-p/algosdk-future-ts/HEAD/fixtures/ARC56Test.arc56.json](https://raw.githubusercontent.com/joe-p/algosdk-future-ts/HEAD/fixtures/ARC56Test.arc56.json)
-- **Detected**: 2026-10-16T10:45:53.572109+00:00
-- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.1`
+- **Detected**: 2026-11-06T13:51:14.221191+00:00
+- **Generator package**: `@algorandfoundation/algokit-client-generator@6.0.2`
 
 ## Reproduce
 
