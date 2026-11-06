@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"BlockdCertificate","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"issue_certificate","args":[{"type":"string","name":"scan_id"},{"type":"string","name":"ipfs_url"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Mint a Certificate NFT and record it on-chain.","events":[],"recommendations":{}},{"name":"get_certificate_asset","args":[{"type":"string","name":"scan_id"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Retrieve the minted Asset ID for a scan.","events":[],"recommendations":{}},{"name":"get_total_certificates","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Read total number of certificates issued.","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"total_certificates":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfY2VydGlmaWNhdGVz"},"version":{"keyType":"AVMString","valueType":"AVMString","key":"dmVyc2lvbg=="},"issuer":{"keyType":"AVMString","valueType":"address","key":"aXNzdWVy"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"certificates":{"keyType":"AVMString","valueType":"uint64","prefix":"Y2VydGlmaWNhdGVz"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[191],"errorMessage":"Certificate already issued for scan"},{"pc":[288],"errorMessage":"Certificate not found"},{"pc":[174],"errorMessage":"Only issuer can issue certificates"},{"pc":[172],"errorMessage":"check self.issuer exists"},{"pc":[253,302],"errorMessage":"check self.total_certificates exists"},{"pc":[140,156,270],"errorMessage":"invalid array length header"},{"pc":[147,163,277],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[181],"errorMessage":"ipfs_url required"},{"pc":[178],"errorMessage":"scan_id required"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"BlockdCertificate","structs":{},"methods":[{"name":"create","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"issue_certificate","args":[{"type":"string","name":"scan_id"},{"type":"string","name":"ipfs_url"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Mint a Certificate NFT and record it on-chain.","events":[],"recommendations":{}},{"name":"get_certificate_asset","args":[{"type":"string","name":"scan_id"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Retrieve the minted Asset ID for a scan.","events":[],"recommendations":{}},{"name":"get_total_certificates","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Read total number of certificates issued.","events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":1,"bytes":2},"local":{"ints":0,"bytes":0}},"keys":{"global":{"total_certificates":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG90YWxfY2VydGlmaWNhdGVz"},"version":{"keyType":"AVMString","valueType":"AVMString","key":"dmVyc2lvbg=="},"issuer":{"keyType":"AVMString","valueType":"address","key":"aXNzdWVy"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"certificates":{"keyType":"AVMString","valueType":"uint64","prefix":"Y2VydGlmaWNhdGVz"}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[191],"errorMessage":"Certificate already issued for scan"},{"pc":[288],"errorMessage":"Certificate not found"},{"pc":[174],"errorMessage":"Only issuer can issue certificates"},{"pc":[172],"errorMessage":"check self.issuer exists"},{"pc":[253,302],"errorMessage":"check self.total_certificates exists"},{"pc":[140,156,270],"errorMessage":"invalid array length header"},{"pc":[147,163,277],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[181],"errorMessage":"ipfs_url required"},{"pc":[178],"errorMessage":"scan_id required"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAwIDEgMgogICAgYnl0ZWNibG9jayAidG90YWxfY2VydGlmaWNhdGVzIiAweDE1MWY3Yzc1ICJpc3N1ZXIiICJjZXJ0aWZpY2F0ZXMiCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvYmxvY2tkX2NlcnRpZmljYXRlL2NvbnRyYWN0LnB5OjUKICAgIC8vIHNlbGYudG90YWxfY2VydGlmaWNhdGVzID0gVUludDY0KDApCiAgICBieXRlY18wIC8vICJ0b3RhbF9jZXJ0aWZpY2F0ZXMiCiAgICBpbnRjXzAgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ibG9ja2RfY2VydGlmaWNhdGUvY29udHJhY3QucHk6NwogICAgLy8gc2VsZi52ZXJzaW9uID0gU3RyaW5nKCIyLjAuMCIpCiAgICBwdXNoYnl0ZXNzICJ2ZXJzaW9uIiAiMi4wLjAiCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2Jsb2NrZF9jZXJ0aWZpY2F0ZS9jb250cmFjdC5weTo4CiAgICAvLyBzZWxmLmlzc3VlciA9IGFyYzQuQWRkcmVzcyhHbG9iYWwuY3JlYXRvcl9hZGRyZXNzKQogICAgYnl0ZWNfMiAvLyAiaXNzdWVyIgogICAgZ2xvYmFsIENyZWF0b3JBZGRyZXNzCiAgICBhcHBfZ2xvYmFsX3B1dAoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYmxvY2tkX2NlcnRpZmljYXRlL2NvbnRyYWN0LnB5OjMKICAgIC8vIGNsYXNzIEJsb2NrZENlcnRpZmljYXRlKEFSQzRDb250cmFjdCk6CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICBhc3NlcnQKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBieiBtYWluX2NyZWF0ZV9Ob09wQDkKICAgIHB1c2hieXRlc3MgMHg1NWFkZGFmMyAweDQ4N2Y5MzJjIDB4ODg3YjY2ZDggLy8gbWV0aG9kICJpc3N1ZV9jZXJ0aWZpY2F0ZShzdHJpbmcsc3RyaW5nKXVpbnQ2NCIsIG1ldGhvZCAiZ2V0X2NlcnRpZmljYXRlX2Fzc2V0KHN0cmluZyl1aW50NjQiLCBtZXRob2QgImdldF90b3RhbF9jZXJ0aWZpY2F0ZXMoKXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGlzc3VlX2NlcnRpZmljYXRlIGdldF9jZXJ0aWZpY2F0ZV9hc3NldCBnZXRfdG90YWxfY2VydGlmaWNhdGVzCiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BAOToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ibG9ja2RfY2VydGlmaWNhdGUvY29udHJhY3QucHk6MwogICAgLy8gY2xhc3MgQmxvY2tkQ2VydGlmaWNhdGUoQVJDNENvbnRyYWN0KToKICAgIHB1c2hieXRlcyAweDRjNWM2MWJhIC8vIG1ldGhvZCAiY3JlYXRlKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9jcmVhdGVfcm91dGVAMTAKICAgIGVycgoKbWFpbl9jcmVhdGVfcm91dGVAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYmxvY2tkX2NlcnRpZmljYXRlL2NvbnRyYWN0LnB5OjEwCiAgICAvLyBAYXJjNC5hYmltZXRob2QoYWxsb3dfYWN0aW9ucz1bIk5vT3AiXSwgY3JlYXRlPSJyZXF1aXJlIikKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBjb250cmFjdC5CbG9ja2RDZXJ0aWZpY2F0ZS5pc3N1ZV9jZXJ0aWZpY2F0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6Cmlzc3VlX2NlcnRpZmljYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL2Jsb2NrZF9jZXJ0aWZpY2F0ZS9jb250cmFjdC5weToxNAogICAgLy8gQGFyYzQuYWJpbWV0aG9kCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ibG9ja2RfY2VydGlmaWNhdGUvY29udHJhY3QucHk6MjEtMjIKICAgIC8vICMgQWNjZXNzIGNvbnRyb2w6IGNlcnRpZmljYXRlcyByZXByZXNlbnQgYW4gYXR0ZXN0YXRpb24gYW5kIG11c3QgYmUgaXNzdWVyLWNvbnRyb2xsZWQKICAgIC8vIGFzc2VydCBhcmM0LkFkZHJlc3MoVHhuLnNlbmRlcikgPT0gc2VsZi5pc3N1ZXIsICJPbmx5IGlzc3VlciBjYW4gaXNzdWUgY2VydGlmaWNhdGVzIgogICAgdHhuIFNlbmRlcgogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzIgLy8gImlzc3VlciIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi5pc3N1ZXIgZXhpc3RzCiAgICA9PQogICAgYXNzZXJ0IC8vIE9ubHkgaXNzdWVyIGNhbiBpc3N1ZSBjZXJ0aWZpY2F0ZXMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ibG9ja2RfY2VydGlmaWNhdGUvY29udHJhY3QucHk6MjMKICAgIC8vIGFzc2VydCBzY2FuX2lkLCAic2Nhbl9pZCByZXF1aXJlZCIKICAgIGRpZyAxCiAgICBsZW4KICAgIGFzc2VydCAvLyBzY2FuX2lkIHJlcXVpcmVkCiAgICAvLyBzbWFydF9jb250cmFjdHMvYmxvY2tkX2NlcnRpZmljYXRlL2NvbnRyYWN0LnB5OjI0CiAgICAvLyBhc3NlcnQgaXBmc191cmwsICJpcGZzX3VybCByZXF1aXJlZCIKICAgIGR1cAogICAgbGVuCiAgICBhc3NlcnQgLy8gaXBmc191cmwgcmVxdWlyZWQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ibG9ja2RfY2VydGlmaWNhdGUvY29udHJhY3QucHk6MjUKICAgIC8vIGFzc2VydCBzY2FuX2lkIG5vdCBpbiBzZWxmLmNlcnRpZmljYXRlcywgIkNlcnRpZmljYXRlIGFscmVhZHkgaXNzdWVkIGZvciBzY2FuIgogICAgYnl0ZWNfMyAvLyAiY2VydGlmaWNhdGVzIgogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAhCiAgICBhc3NlcnQgLy8gQ2VydGlmaWNhdGUgYWxyZWFkeSBpc3N1ZWQgZm9yIHNjYW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ibG9ja2RfY2VydGlmaWNhdGUvY29udHJhY3QucHk6MjctMzUKICAgIC8vICMgTm90ZTogTUJSIGZvciB0aGUgYm94IGFuZCB0aGUgYXNzZXQgbXVzdCBiZSBjb3ZlcmVkIGJ5IHRoZSBjYWxsZXIKICAgIC8vIGFzc2V0X21pbnQgPSBpdHhuLkFzc2V0Q29uZmlnKAogICAgLy8gICAgIGFzc2V0X25hbWU9U3RyaW5nKCJCbG9ja0QgQ2VydGlmaWNhdGUiKSwKICAgIC8vICAgICB1bml0X25hbWU9U3RyaW5nKCJCTEtEIiksCiAgICAvLyAgICAgdG90YWw9MSwKICAgIC8vICAgICBkZWNpbWFscz0wLAogICAgLy8gICAgIGRlZmF1bHRfZnJvemVuPUZhbHNlLAogICAgLy8gICAgIHVybD1pcGZzX3VybCwKICAgIC8vICkuc3VibWl0KCkKICAgIGl0eG5fYmVnaW4KICAgIHN3YXAKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXRVUkwKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ibG9ja2RfY2VydGlmaWNhdGUvY29udHJhY3QucHk6MzMKICAgIC8vIGRlZmF1bHRfZnJvemVuPUZhbHNlLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXREZWZhdWx0RnJvemVuCiAgICAvLyBzbWFydF9jb250cmFjdHMvYmxvY2tkX2NlcnRpZmljYXRlL2NvbnRyYWN0LnB5OjMyCiAgICAvLyBkZWNpbWFscz0wLAogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXREZWNpbWFscwogICAgLy8gc21hcnRfY29udHJhY3RzL2Jsb2NrZF9jZXJ0aWZpY2F0ZS9jb250cmFjdC5weTozMQogICAgLy8gdG90YWw9MSwKICAgIGludGNfMSAvLyAxCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0VG90YWwKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ibG9ja2RfY2VydGlmaWNhdGUvY29udHJhY3QucHk6MzAKICAgIC8vIHVuaXRfbmFtZT1TdHJpbmcoIkJMS0QiKSwKICAgIHB1c2hieXRlcyAiQkxLRCIKICAgIGl0eG5fZmllbGQgQ29uZmlnQXNzZXRVbml0TmFtZQogICAgLy8gc21hcnRfY29udHJhY3RzL2Jsb2NrZF9jZXJ0aWZpY2F0ZS9jb250cmFjdC5weToyOQogICAgLy8gYXNzZXRfbmFtZT1TdHJpbmcoIkJsb2NrRCBDZXJ0aWZpY2F0ZSIpLAogICAgcHVzaGJ5dGVzICJCbG9ja0QgQ2VydGlmaWNhdGUiCiAgICBpdHhuX2ZpZWxkIENvbmZpZ0Fzc2V0TmFtZQogICAgLy8gc21hcnRfY29udHJhY3RzL2Jsb2NrZF9jZXJ0aWZpY2F0ZS9jb250cmFjdC5weToyNy0yOAogICAgLy8gIyBOb3RlOiBNQlIgZm9yIHRoZSBib3ggYW5kIHRoZSBhc3NldCBtdXN0IGJlIGNvdmVyZWQgYnkgdGhlIGNhbGxlcgogICAgLy8gYXNzZXRfbWludCA9IGl0eG4uQXNzZXRDb25maWcoCiAgICBwdXNoaW50IDMgLy8gYWNmZwogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvYmxvY2tkX2NlcnRpZmljYXRlL2NvbnRyYWN0LnB5OjI3LTM1CiAgICAvLyAjIE5vdGU6IE1CUiBmb3IgdGhlIGJveCBhbmQgdGhlIGFzc2V0IG11c3QgYmUgY292ZXJlZCBieSB0aGUgY2FsbGVyCiAgICAvLyBhc3NldF9taW50ID0gaXR4bi5Bc3NldENvbmZpZygKICAgIC8vICAgICBhc3NldF9uYW1lPVN0cmluZygiQmxvY2tEIENlcnRpZmljYXRlIiksCiAgICAvLyAgICAgdW5pdF9uYW1lPVN0cmluZygiQkxLRCIpLAogICAgLy8gICAgIHRvdGFsPTEsCiAgICAvLyAgICAgZGVjaW1hbHM9MCwKICAgIC8vICAgICBkZWZhdWx0X2Zyb3plbj1GYWxzZSwKICAgIC8vICAgICB1cmw9aXBmc191cmwsCiAgICAvLyApLnN1Ym1pdCgpCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBDcmVhdGVkQXNzZXRJRAogICAgLy8gc21hcnRfY29udHJhY3RzL2Jsb2NrZF9jZXJ0aWZpY2F0ZS9jb250cmFjdC5weTozOS00MAogICAgLy8gIyBNYXAgdGhlIHNjYW5faWQgdG8gdGhlIGNyZWF0ZWQgYXNzZXQgaWQKICAgIC8vIHNlbGYuY2VydGlmaWNhdGVzW3NjYW5faWRdID0gY3JlYXRlZF9hc3NldF9pZAogICAgaXRvYgogICAgc3dhcAogICAgZGlnIDEKICAgIGJveF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ibG9ja2RfY2VydGlmaWNhdGUvY29udHJhY3QucHk6NDEKICAgIC8vIHNlbGYudG90YWxfY2VydGlmaWNhdGVzICs9IDEKICAgIGludGNfMCAvLyAwCiAgICBieXRlY18wIC8vICJ0b3RhbF9jZXJ0aWZpY2F0ZXMiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG90YWxfY2VydGlmaWNhdGVzIGV4aXN0cwogICAgaW50Y18xIC8vIDEKICAgICsKICAgIGJ5dGVjXzAgLy8gInRvdGFsX2NlcnRpZmljYXRlcyIKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvYmxvY2tkX2NlcnRpZmljYXRlL2NvbnRyYWN0LnB5OjE0CiAgICAvLyBAYXJjNC5hYmltZXRob2QKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBjb250cmFjdC5CbG9ja2RDZXJ0aWZpY2F0ZS5nZXRfY2VydGlmaWNhdGVfYXNzZXRbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfY2VydGlmaWNhdGVfYXNzZXQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYmxvY2tkX2NlcnRpZmljYXRlL2NvbnRyYWN0LnB5OjQ1CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIGV4dHJhY3QgMiAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvYmxvY2tkX2NlcnRpZmljYXRlL2NvbnRyYWN0LnB5OjQ4CiAgICAvLyBhc3NlcnQgc2Nhbl9pZCBpbiBzZWxmLmNlcnRpZmljYXRlcywgIkNlcnRpZmljYXRlIG5vdCBmb3VuZCIKICAgIGJ5dGVjXzMgLy8gImNlcnRpZmljYXRlcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBDZXJ0aWZpY2F0ZSBub3QgZm91bmQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ibG9ja2RfY2VydGlmaWNhdGUvY29udHJhY3QucHk6NDkKICAgIC8vIHJldHVybiBzZWxmLmNlcnRpZmljYXRlc1tzY2FuX2lkXQogICAgYm94X2dldAogICAgcG9wCiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvYmxvY2tkX2NlcnRpZmljYXRlL2NvbnRyYWN0LnB5OjQ1CiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGl0b2IKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBjb250cmFjdC5CbG9ja2RDZXJ0aWZpY2F0ZS5nZXRfdG90YWxfY2VydGlmaWNhdGVzW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X3RvdGFsX2NlcnRpZmljYXRlczoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9ibG9ja2RfY2VydGlmaWNhdGUvY29udHJhY3QucHk6NTQKICAgIC8vIHJldHVybiBzZWxmLnRvdGFsX2NlcnRpZmljYXRlcwogICAgaW50Y18wIC8vIDAKICAgIGJ5dGVjXzAgLy8gInRvdGFsX2NlcnRpZmljYXRlcyIKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgc2VsZi50b3RhbF9jZXJ0aWZpY2F0ZXMgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvYmxvY2tkX2NlcnRpZmljYXRlL2NvbnRyYWN0LnB5OjUxCiAgICAvLyBAYXJjNC5hYmltZXRob2QocmVhZG9ubHk9VHJ1ZSkKICAgIGl0b2IKICAgIGJ5dGVjXzEgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyADAAECJgQSdG90YWxfY2VydGlmaWNhdGVzBBUffHUGaXNzdWVyDGNlcnRpZmljYXRlczEYQAAYKCJnggIHdmVyc2lvbgUyLjAuMGcqMglnMRkURDEYQQAdggMEVa3a8wRIf5MsBIh7Ztg2GgCOAwARAJMAtQCABExcYbo2GgCOAQABACNDNhoBSSJZJAhLARUSRFcCADYaAkkiWSQISwEVEkRXAgAxACIqZUQSREsBFURJFUQrTwJQSb1FARREsUyyJyKyJCKyIyOyIoAEQkxLRLIlgBJCbG9ja0QgQ2VydGlmaWNhdGWyJoEDshAisgGztDwWTEsBvyIoZUQjCChMZylMULAjQzYaAUkiWSQISwEVEkRXAgArTFBJvUUBRL5IFxYpTFCwI0MiKGVEFilMULAjQw==","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -188,11 +188,57 @@ export type GlobalKeysState = BlockdCertificateTypes['state']['global']['keys']
 export type BoxKeysState = BlockdCertificateTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type BlockdCertificateCreateCallParams =
+  | Expand<CallParams<BlockdCertificateArgs['obj']['create()void'] | BlockdCertificateArgs['tuple']['create()void']> & {method: 'create'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<BlockdCertificateArgs['obj']['create()void'] | BlockdCertificateArgs['tuple']['create()void']> & {method: 'create()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type BlockdCertificateDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: BlockdCertificateCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the BlockdCertificate smart contract
  */
 export abstract class BlockdCertificateParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends BlockdCertificateCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'create':
+          case 'create()void':
+            return BlockdCertificateParamsFactory.create.create(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the BlockdCertificate smart contract using the create()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      create(params: CallParams<BlockdCertificateArgs['obj']['create()void'] | BlockdCertificateArgs['tuple']['create()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'create()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the issue_certificate(string,string)uint64 ABI method
    *
@@ -240,6 +286,148 @@ export abstract class BlockdCertificateParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the BlockdCertificate smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class BlockdCertificateFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `BlockdCertificateFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new BlockdCertificateClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new BlockdCertificateClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the BlockdCertificate smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: BlockdCertificateDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? BlockdCertificateParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (BlockdCertificateCreateCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new BlockdCertificateClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BlockdCertificate smart contract using the create()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      create: (params: CallParams<BlockdCertificateArgs['obj']['create()void'] | BlockdCertificateArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(BlockdCertificateParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BlockdCertificate smart contract using the create()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      create: (params: CallParams<BlockdCertificateArgs['obj']['create()void'] | BlockdCertificateArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(BlockdCertificateParamsFactory.create.create(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the BlockdCertificate smart contract using an ABI method call using the create()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      create: async (params: CallParams<BlockdCertificateArgs['obj']['create()void'] | BlockdCertificateArgs['tuple']['create()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(BlockdCertificateParamsFactory.create.create(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | BlockdCertificateReturns['create()void']) }, appClient: new BlockdCertificateClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the BlockdCertificate smart contract
  */
