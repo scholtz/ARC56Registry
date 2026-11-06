@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"TodoApp","structs":{},"methods":[{"name":"create_todo","args":[{"type":"string","name":"task"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create a new todo item.\nReturns the ID of the created todo.","events":[],"recommendations":{}},{"name":"complete_todo","args":[{"type":"uint64","name":"todo_id"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Mark a todo as completed.\nReturns a success message.","events":[],"recommendations":{}},{"name":"get_todo","args":[{"type":"uint64","name":"todo_id"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get a specific todo by its ID.\nReturns the todo text.","events":[],"recommendations":{}},{"name":"is_completed","args":[{"type":"uint64","name":"todo_id"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Check if a todo is completed.\nReturns True if completed, False otherwise.","events":[],"recommendations":{}},{"name":"get_total_todos","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get the total number of todos created.","events":[],"recommendations":{}},{"name":"delete_todo","args":[{"type":"uint64","name":"todo_id"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Delete a todo item.\nReturns a success message.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    A simple Todo application smart contract for Algorand.\n    Allows users to create, complete, and view their todos.\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"todo_counter":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG9kb19jb3VudGVy"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"todos":{"keyType":"uint64","valueType":"string","prefix":"dG9kb3M="},"completed":{"keyType":"uint64","valueType":"bool","prefix":"Y29tcGxldGVk"}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[75],"errorMessage":"OnCompletion must be NoOp"},{"pc":[136],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[315],"errorMessage":"check self.completed entry exists"},{"pc":[156,322],"errorMessage":"check self.todo_counter exists"},{"pc":[282],"errorMessage":"check self.todos entry exists"},{"pc":[144],"errorMessage":"invalid array length header"},{"pc":[152],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[196,261,293,338],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"TodoApp","structs":{},"methods":[{"name":"create_todo","args":[{"type":"string","name":"task"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Create a new todo item.\nReturns the ID of the created todo.","events":[],"recommendations":{}},{"name":"complete_todo","args":[{"type":"uint64","name":"todo_id"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Mark a todo as completed.\nReturns a success message.","events":[],"recommendations":{}},{"name":"get_todo","args":[{"type":"uint64","name":"todo_id"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get a specific todo by its ID.\nReturns the todo text.","events":[],"recommendations":{}},{"name":"is_completed","args":[{"type":"uint64","name":"todo_id"}],"returns":{"type":"bool"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Check if a todo is completed.\nReturns True if completed, False otherwise.","events":[],"recommendations":{}},{"name":"get_total_todos","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Get the total number of todos created.","events":[],"recommendations":{}},{"name":"delete_todo","args":[{"type":"uint64","name":"todo_id"}],"returns":{"type":"string"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Delete a todo item.\nReturns a success message.","events":[],"recommendations":{}}],"arcs":[22,28],"desc":"\n    A simple Todo application smart contract for Algorand.\n    Allows users to create, complete, and view their todos.\n    ","networks":{},"state":{"schema":{"global":{"ints":1,"bytes":0},"local":{"ints":0,"bytes":0}},"keys":{"global":{"todo_counter":{"keyType":"AVMString","valueType":"AVMUint64","key":"dG9kb19jb3VudGVy"}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"todos":{"keyType":"uint64","valueType":"string","prefix":"dG9kb3M="},"completed":{"keyType":"uint64","valueType":"bool","prefix":"Y29tcGxldGVk"}}}},"bareActions":{"create":["NoOp"],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[75],"errorMessage":"OnCompletion must be NoOp"},{"pc":[136],"errorMessage":"OnCompletion must be NoOp && can only call when creating"},{"pc":[315],"errorMessage":"check self.completed entry exists"},{"pc":[156,322],"errorMessage":"check self.todo_counter exists"},{"pc":[282],"errorMessage":"check self.todos entry exists"},{"pc":[144],"errorMessage":"invalid array length header"},{"pc":[152],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[196,261,293,338],"errorMessage":"invalid number of bytes for arc4.uint64"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuYXBwcm92YWxfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIGludGNibG9jayAxIDAgOAogICAgYnl0ZWNibG9jayAweDE1MWY3Yzc1ICJ0b2RvX2NvdW50ZXIiICJ0b2RvcyIgImNvbXBsZXRlZCIgMHgwMDBlNTQ2ZjY0NmYyMDZlNmY3NDIwNjY2Zjc1NmU2NAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gc21hcnRfY29udHJhY3RzL3RvZG9fYXBwL2NvbnRyYWN0LnB5OjExLTEyCiAgICAvLyAjIENvdW50ZXIgdG8gdHJhY2sgdG90YWwgbnVtYmVyIG9mIHRvZG9zIGNyZWF0ZWQKICAgIC8vIHNlbGYudG9kb19jb3VudGVyID0gR2xvYmFsU3RhdGUoVUludDY0KDApKQogICAgYnl0ZWNfMSAvLyAidG9kb19jb3VudGVyIgogICAgaW50Y18xIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo0CiAgICAvLyBjbGFzcyBUb2RvQXBwKEFSQzRDb250cmFjdCk6CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxNQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICBhc3NlcnQKICAgIHB1c2hieXRlc3MgMHgzODAxMTgxNSAweDQ0N2Y4MTk4IDB4YzQ1YjNhYjQgMHhjMjc0YWZjMiAweGZlNTgyNWU5IDB4NzczNjM4NTMgLy8gbWV0aG9kICJjcmVhdGVfdG9kbyhzdHJpbmcpdWludDY0IiwgbWV0aG9kICJjb21wbGV0ZV90b2RvKHVpbnQ2NClzdHJpbmciLCBtZXRob2QgImdldF90b2RvKHVpbnQ2NClzdHJpbmciLCBtZXRob2QgImlzX2NvbXBsZXRlZCh1aW50NjQpYm9vbCIsIG1ldGhvZCAiZ2V0X3RvdGFsX3RvZG9zKCl1aW50NjQiLCBtZXRob2QgImRlbGV0ZV90b2RvKHVpbnQ2NClzdHJpbmciCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBjcmVhdGVfdG9kbyBjb21wbGV0ZV90b2RvIGdldF90b2RvIGlzX2NvbXBsZXRlZCBnZXRfdG90YWxfdG9kb3MgZGVsZXRlX3RvZG8KICAgIGVycgoKbWFpbl9fX2FsZ29weV9kZWZhdWx0X2NyZWF0ZUAxNToKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AgJiYgY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnRvZG9fYXBwLmNvbnRyYWN0LlRvZG9BcHAuY3JlYXRlX3RvZG9bcm91dGluZ10oKSAtPiB2b2lkOgpjcmVhdGVfdG9kbzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weToxOAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgaW50Y18xIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMiAvLyAyCiAgICArCiAgICBkaWcgMQogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8YXJjNC51aW50OD4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weToyNC0yNQogICAgLy8gIyBJbmNyZW1lbnQgdGhlIGNvdW50ZXIgdG8gZ2V0IG5ldyB0b2RvIElECiAgICAvLyBjdXJyZW50X2lkID0gc2VsZi50b2RvX2NvdW50ZXIudmFsdWUKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18xIC8vICJ0b2RvX2NvdW50ZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG9kb19jb3VudGVyIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3RvZG9fYXBwL2NvbnRyYWN0LnB5OjI2CiAgICAvLyBuZXdfaWQgPSBjdXJyZW50X2lkICsgVUludDY0KDEpCiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgLy8gc21hcnRfY29udHJhY3RzL3RvZG9fYXBwL2NvbnRyYWN0LnB5OjI3CiAgICAvLyBzZWxmLnRvZG9fY291bnRlci52YWx1ZSA9IG5ld19pZAogICAgYnl0ZWNfMSAvLyAidG9kb19jb3VudGVyIgogICAgZGlnIDEKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6MjktMzAKICAgIC8vICMgU3RvcmUgdGhlIHRvZG8gdGFzawogICAgLy8gdG9kb19pZCA9IGFyYzQuVUludDY0KG5ld19pZCkKICAgIGl0b2IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTozMQogICAgLy8gc2VsZi50b2Rvc1t0b2RvX2lkXSA9IHRhc2sKICAgIGJ5dGVjXzIgLy8gInRvZG9zIgogICAgZGlnIDEKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfZGVsCiAgICBwb3AKICAgIHVuY292ZXIgMgogICAgYm94X3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3RvZG9fYXBwL2NvbnRyYWN0LnB5OjMyCiAgICAvLyBzZWxmLmNvbXBsZXRlZFt0b2RvX2lkXSA9IGFyYzQuQm9vbChGYWxzZSkKICAgIGJ5dGVjXzMgLy8gImNvbXBsZXRlZCIKICAgIGRpZyAxCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDAwCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6MTgKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzLnRvZG9fYXBwLmNvbnRyYWN0LlRvZG9BcHAuY29tcGxldGVfdG9kb1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmNvbXBsZXRlX3RvZG86CiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6MzYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXBuIDIKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6NDItNDMKICAgIC8vICMgQ2hlY2sgaWYgdG9kbyBleGlzdHMKICAgIC8vIGlmIHRvZG9faWQgbm90IGluIHNlbGYudG9kb3M6CiAgICBieXRlY18yIC8vICJ0b2RvcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBibnogY29tcGxldGVfdG9kb19hZnRlcl9pZl9lbHNlQDMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo0NAogICAgLy8gcmV0dXJuIGFyYzQuU3RyaW5nKCJUb2RvIG5vdCBmb3VuZCIpCiAgICBieXRlYyA0IC8vIDB4MDAwZTU0NmY2NDZmMjA2ZTZmNzQyMDY2NmY3NTZlNjQKCmNvbXBsZXRlX3RvZG9fYWZ0ZXJfaW5saW5lZF9zbWFydF9jb250cmFjdHMudG9kb19hcHAuY29udHJhY3QuVG9kb0FwcC5jb21wbGV0ZV90b2RvQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6MzYKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgpjb21wbGV0ZV90b2RvX2FmdGVyX2lmX2Vsc2VAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo0Ni00NwogICAgLy8gIyBNYXJrIGFzIGNvbXBsZXRlZAogICAgLy8gc2VsZi5jb21wbGV0ZWRbdG9kb19pZF0gPSBhcmM0LkJvb2woVHJ1ZSkKICAgIGJ5dGVjXzMgLy8gImNvbXBsZXRlZCIKICAgIGRpZyAxCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDgwCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6NDkKICAgIC8vIHJldHVybiBhcmM0LlN0cmluZygiVG9kbyBtYXJrZWQgYXMgY29tcGxldGVkISIpCiAgICBwdXNoYnl0ZXMgMHgwMDE5NTQ2ZjY0NmYyMDZkNjE3MjZiNjU2NDIwNjE3MzIwNjM2ZjZkNzA2YzY1NzQ2NTY0MjEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTozNgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGIgY29tcGxldGVfdG9kb19hZnRlcl9pbmxpbmVkX3NtYXJ0X2NvbnRyYWN0cy50b2RvX2FwcC5jb250cmFjdC5Ub2RvQXBwLmNvbXBsZXRlX3RvZG9ANAoKCi8vIHNtYXJ0X2NvbnRyYWN0cy50b2RvX2FwcC5jb250cmFjdC5Ub2RvQXBwLmdldF90b2RvW3JvdXRpbmddKCkgLT4gdm9pZDoKZ2V0X3RvZG86CiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6NTEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6NTcKICAgIC8vIGlmIHRvZG9faWQgbm90IGluIHNlbGYudG9kb3M6CiAgICBieXRlY18yIC8vICJ0b2RvcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGJueiBnZXRfdG9kb19hZnRlcl9pZl9lbHNlQDMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo1OAogICAgLy8gcmV0dXJuIGFyYzQuU3RyaW5nKCJUb2RvIG5vdCBmb3VuZCIpCiAgICBieXRlYyA0IC8vIDB4MDAwZTU0NmY2NDZmMjA2ZTZmNzQyMDY2NmY3NTZlNjQKCmdldF90b2RvX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzLnRvZG9fYXBwLmNvbnRyYWN0LlRvZG9BcHAuZ2V0X3RvZG9ANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo1MQogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCmdldF90b2RvX2FmdGVyX2lmX2Vsc2VAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo2MAogICAgLy8gcmV0dXJuIHNlbGYudG9kb3NbdG9kb19pZF0KICAgIGR1cAogICAgYm94X2dldAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG9kb3MgZW50cnkgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6NTEKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBiIGdldF90b2RvX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzLnRvZG9fYXBwLmNvbnRyYWN0LlRvZG9BcHAuZ2V0X3RvZG9ANAoKCi8vIHNtYXJ0X2NvbnRyYWN0cy50b2RvX2FwcC5jb250cmFjdC5Ub2RvQXBwLmlzX2NvbXBsZXRlZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmlzX2NvbXBsZXRlZDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo2MgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo2OAogICAgLy8gaWYgdG9kb19pZCBub3QgaW4gc2VsZi5jb21wbGV0ZWQ6CiAgICBieXRlY18zIC8vICJjb21wbGV0ZWQiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBibnogaXNfY29tcGxldGVkX2FmdGVyX2lmX2Vsc2VAMwogICAgLy8gc21hcnRfY29udHJhY3RzL3RvZG9fYXBwL2NvbnRyYWN0LnB5OjY5CiAgICAvLyByZXR1cm4gYXJjNC5Cb29sKEZhbHNlKQogICAgcHVzaGJ5dGVzIDB4MDAKCmlzX2NvbXBsZXRlZF9hZnRlcl9pbmxpbmVkX3NtYXJ0X2NvbnRyYWN0cy50b2RvX2FwcC5jb250cmFjdC5Ub2RvQXBwLmlzX2NvbXBsZXRlZEA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL3RvZG9fYXBwL2NvbnRyYWN0LnB5OjYyCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKaXNfY29tcGxldGVkX2FmdGVyX2lmX2Vsc2VAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo3MQogICAgLy8gcmV0dXJuIHNlbGYuY29tcGxldGVkW3RvZG9faWRdCiAgICBkdXAKICAgIGJveF9nZXQKICAgIGFzc2VydCAvLyBjaGVjayBzZWxmLmNvbXBsZXRlZCBlbnRyeSBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo2MgogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGIgaXNfY29tcGxldGVkX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzLnRvZG9fYXBwLmNvbnRyYWN0LlRvZG9BcHAuaXNfY29tcGxldGVkQDQKCgovLyBzbWFydF9jb250cmFjdHMudG9kb19hcHAuY29udHJhY3QuVG9kb0FwcC5nZXRfdG90YWxfdG9kb3Nbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRfdG90YWxfdG9kb3M6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6NzgKICAgIC8vIHJldHVybiBhcmM0LlVJbnQ2NChzZWxmLnRvZG9fY291bnRlci52YWx1ZSkKICAgIGludGNfMSAvLyAwCiAgICBieXRlY18xIC8vICJ0b2RvX2NvdW50ZXIiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIHNlbGYudG9kb19jb3VudGVyIGV4aXN0cwogICAgaXRvYgogICAgLy8gc21hcnRfY29udHJhY3RzL3RvZG9fYXBwL2NvbnRyYWN0LnB5OjczCiAgICAvLyBAYXJjNC5hYmltZXRob2QoKQogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy50b2RvX2FwcC5jb250cmFjdC5Ub2RvQXBwLmRlbGV0ZV90b2RvW3JvdXRpbmddKCkgLT4gdm9pZDoKZGVsZXRlX3RvZG86CiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6ODAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXBuIDIKICAgIGxlbgogICAgaW50Y18yIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6ODYKICAgIC8vIGlmIHRvZG9faWQgbm90IGluIHNlbGYudG9kb3M6CiAgICBieXRlY18yIC8vICJ0b2RvcyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGJueiBkZWxldGVfdG9kb19hZnRlcl9pZl9lbHNlQDMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo4NwogICAgLy8gcmV0dXJuIGFyYzQuU3RyaW5nKCJUb2RvIG5vdCBmb3VuZCIpCiAgICBieXRlYyA0IC8vIDB4MDAwZTU0NmY2NDZmMjA2ZTZmNzQyMDY2NmY3NTZlNjQKCmRlbGV0ZV90b2RvX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzLnRvZG9fYXBwLmNvbnRyYWN0LlRvZG9BcHAuZGVsZXRlX3RvZG9ANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo4MAogICAgLy8gQGFyYzQuYWJpbWV0aG9kKCkKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCmRlbGV0ZV90b2RvX2FmdGVyX2lmX2Vsc2VAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy90b2RvX2FwcC9jb250cmFjdC5weTo4OS05MAogICAgLy8gIyBEZWxldGUgZnJvbSBib3RoIHN0b3JhZ2UgYm94ZXMKICAgIC8vIGRlbCBzZWxmLnRvZG9zW3RvZG9faWRdCiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL3RvZG9fYXBwL2NvbnRyYWN0LnB5OjkxCiAgICAvLyBkZWwgc2VsZi5jb21wbGV0ZWRbdG9kb19pZF0KICAgIGJ5dGVjXzMgLy8gImNvbXBsZXRlZCIKICAgIGRpZyAyCiAgICBjb25jYXQKICAgIGJveF9kZWwKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL3RvZG9fYXBwL2NvbnRyYWN0LnB5OjkzCiAgICAvLyByZXR1cm4gYXJjNC5TdHJpbmcoIlRvZG8gZGVsZXRlZCBzdWNjZXNzZnVsbHkhIikKICAgIHB1c2hieXRlcyAweDAwMWE1NDZmNjQ2ZjIwNjQ2NTZjNjU3NDY1NjQyMDczNzU2MzYzNjU3MzczNjY3NTZjNmM3OTIxCiAgICAvLyBzbWFydF9jb250cmFjdHMvdG9kb19hcHAvY29udHJhY3QucHk6ODAKICAgIC8vIEBhcmM0LmFiaW1ldGhvZCgpCiAgICBiIGRlbGV0ZV90b2RvX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzLnRvZG9fYXBwLmNvbnRyYWN0LlRvZG9BcHAuZGVsZXRlX3RvZG9ANAo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBhbGdvcHkuYXJjNC5BUkM0Q29udHJhY3QuY2xlYXJfc3RhdGVfcHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMSAvLyAxCiAgICByZXR1cm4K"},"byteCode":{"approval":"CyADAQAIJgUEFR98dQx0b2RvX2NvdW50ZXIFdG9kb3MJY29tcGxldGVkEAAOVG9kbyBub3QgZm91bmQxGEAAAykjZzEbQQA5MRkURDEYRIIGBDgBGBUERH+BmATEWzq0BMJ0r8IE/lgl6QR3NjhTNhoAjgYACwA8AH4AngC/AMoAMRkUMRgUEEQiQzYaAUkjWYECCEsBFRJEIyllRCIIKUsBZxYqSwFQSbxITwK/K0sBUIABAL8oTFCwIkM2GgFHAhUkEkQqTFC9RQFAAAgnBChMULAiQytLAVCAAYC/gBsAGVRvZG8gbWFya2VkIGFzIGNvbXBsZXRlZCFC/9I2GgFJFSQSRCpMUEm9RQFAAAgnBChMULAiQ0m+REL/9DYaAUkVJBJEK0xQSb1FAUAACYABAChMULAiQ0m+REL/9CMpZUQWKExQsCJDNhoBRwIVJBJEKkxQSb1FAUAACCcEKExQsCJDSbxIK0sCULxIgBwAGlRvZG8gZGVsZXRlZCBzdWNjZXNzZnVsbHkhQv/Q","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -208,6 +208,21 @@ export type GlobalKeysState = TodoAppTypes['state']['global']['keys']
 export type BoxKeysState = TodoAppTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type TodoAppCreateCallParams =
+  | Expand<AppClientBareCallParams & {method?: never} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type TodoAppDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: TodoAppCreateCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the TodoApp smart contract
@@ -315,6 +330,147 @@ export abstract class TodoAppParamsFactory {
   }
 }
 
+/**
+ * A factory to create and deploy one or more instance of the TodoApp smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class TodoAppFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `TodoAppFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new TodoAppClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new TodoAppClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the TodoApp smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: TodoAppDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+    })
+    return { result: result.result, appClient: new TodoAppClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TodoApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The params for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.params.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TodoApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The transaction for a create call
+       */
+      bare: (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        return this.appFactory.createTransaction.bare.create(params)
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the TodoApp smart contract using a bare call.
+       *
+       * @param params The params for the bare (raw) call
+       * @returns The create result
+       */
+      bare: async (params?: Expand<AppClientBareCallParams & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC}>) => {
+        const result = await this.appFactory.send.bare.create(params)
+        return { result: result.result, appClient: new TodoAppClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
 /**
  * A client to make calls to the TodoApp smart contract
  */
