@@ -18,12 +18,12 @@ import {
   ResolveAppClientByNetwork,
   CloneAppClientParams,
 } from '@algorandfoundation/algokit-utils/types/app-client'
-
+import { AppFactory as _AppFactory, AppFactoryAppClientParams, AppFactoryResolveAppClientByCreatorAndNameParams, AppFactoryDeployParams, AppFactoryParams, CreateSchema } from '@algorandfoundation/algokit-utils/types/app-factory'
 import { TransactionComposer, AppCallMethodCall, AppMethodCallTransactionArgument, SimulateOptions, RawSimulateOptions, SkipSignaturesSimulateOptions } from '@algorandfoundation/algokit-utils/types/composer'
 import { SendParams, SendSingleTransactionResult, SendAtomicTransactionComposerResults } from '@algorandfoundation/algokit-utils/types/transaction'
 import { Address, encodeAddress, modelsv2, OnApplicationComplete, Transaction, TransactionSigner } from 'algosdk'
 
-export const APP_SPEC: Arc56Contract = {"name":"ZKCommitment","structs":{"CommitmentRecord":[{"name":"committer","type":"address"},{"name":"createdRound","type":"uint64"},{"name":"isRevealed","type":"uint64"}]},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"commit","args":[{"type":"byte[32]","name":"commitmentHash"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Store a commitment hash on-chain.\nThe commitment is SHA-256(secret|seller|price|desc) computed off-chain.\nThe seller sends the 32-byte hash; the contract stores it.","events":[],"recommendations":{}},{"name":"reveal","args":[{"type":"byte[32]","name":"commitmentHash"},{"type":"byte[]","name":"preimage"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Reveal and verify a commitment on-chain.\nThe caller provides the preimage; the contract computes SHA-256 on-chain\nand asserts it matches the stored commitment hash.","events":[],"recommendations":{}},{"name":"getStatus","args":[{"type":"byte[32]","name":"commitmentHash"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Check if a commitment exists and whether it has been revealed.\nReturns: 0 = not found, 1 = committed but not revealed, 2 = revealed & verified","events":[],"recommendations":{}},{"name":"getCommitter","args":[{"type":"byte[32]","name":"commitmentHash"}],"returns":{"type":"address"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getCommitCount","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getRevealCount","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"deleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":2,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"admin":{"keyType":"AVMString","valueType":"address","key":"YWRtaW4="},"commitCount":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y29tbWl0Q291bnQ="},"revealCount":{"keyType":"AVMString","valueType":"AVMUint64","key":"cmV2ZWFsQ291bnQ="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"commitments":{"keyType":"AVMBytes","valueType":"CommitmentRecord","prefix":"Yw=="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[241],"errorMessage":"Already revealed"},{"pc":[292],"errorMessage":"Box must have value"},{"pc":[178],"errorMessage":"Commitment already exists"},{"pc":[234,324],"errorMessage":"Commitment not found"},{"pc":[151],"errorMessage":"OnCompletion must be DeleteApplication && can only call when not creating"},{"pc":[73],"errorMessage":"OnCompletion must be NoOp"},{"pc":[247],"errorMessage":"SHA-256 mismatch: preimage does not match commitment"},{"pc":[366],"errorMessage":"assert target is match for conditions"},{"pc":[193,256,339,350,364],"errorMessage":"check GlobalState exists"},{"pc":[214],"errorMessage":"invalid array length header"},{"pc":[222],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[169,208,271,316],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"events":[]} as unknown as Arc56Contract
+export const APP_SPEC: Arc56Contract = {"name":"ZKCommitment","structs":{"CommitmentRecord":[{"name":"committer","type":"address"},{"name":"createdRound","type":"uint64"},{"name":"isRevealed","type":"uint64"}]},"methods":[{"name":"createApplication","args":[],"returns":{"type":"void"},"actions":{"create":["NoOp"],"call":[]},"readonly":false,"events":[],"recommendations":{}},{"name":"commit","args":[{"type":"byte[32]","name":"commitmentHash"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Store a commitment hash on-chain.\nThe commitment is SHA-256(secret|seller|price|desc) computed off-chain.\nThe seller sends the 32-byte hash; the contract stores it.","events":[],"recommendations":{}},{"name":"reveal","args":[{"type":"byte[32]","name":"commitmentHash"},{"type":"byte[]","name":"preimage"}],"returns":{"type":"void"},"actions":{"create":[],"call":["NoOp"]},"readonly":false,"desc":"Reveal and verify a commitment on-chain.\nThe caller provides the preimage; the contract computes SHA-256 on-chain\nand asserts it matches the stored commitment hash.","events":[],"recommendations":{}},{"name":"getStatus","args":[{"type":"byte[32]","name":"commitmentHash"}],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"desc":"Check if a commitment exists and whether it has been revealed.\nReturns: 0 = not found, 1 = committed but not revealed, 2 = revealed & verified","events":[],"recommendations":{}},{"name":"getCommitter","args":[{"type":"byte[32]","name":"commitmentHash"}],"returns":{"type":"address"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getCommitCount","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"getRevealCount","args":[],"returns":{"type":"uint64"},"actions":{"create":[],"call":["NoOp"]},"readonly":true,"events":[],"recommendations":{}},{"name":"deleteApplication","args":[],"returns":{"type":"void"},"actions":{"create":[],"call":["DeleteApplication"]},"readonly":false,"events":[],"recommendations":{}}],"arcs":[22,28],"networks":{},"state":{"schema":{"global":{"ints":2,"bytes":1},"local":{"ints":0,"bytes":0}},"keys":{"global":{"admin":{"keyType":"AVMString","valueType":"address","key":"YWRtaW4="},"commitCount":{"keyType":"AVMString","valueType":"AVMUint64","key":"Y29tbWl0Q291bnQ="},"revealCount":{"keyType":"AVMString","valueType":"AVMUint64","key":"cmV2ZWFsQ291bnQ="}},"local":{},"box":{}},"maps":{"global":{},"local":{},"box":{"commitments":{"keyType":"AVMBytes","valueType":"CommitmentRecord","prefix":"Yw=="}}}},"bareActions":{"create":[],"call":[]},"sourceInfo":{"approval":{"sourceInfo":[{"pc":[241],"errorMessage":"Already revealed"},{"pc":[292],"errorMessage":"Box must have value"},{"pc":[178],"errorMessage":"Commitment already exists"},{"pc":[234,324],"errorMessage":"Commitment not found"},{"pc":[151],"errorMessage":"OnCompletion must be DeleteApplication && can only call when not creating"},{"pc":[73],"errorMessage":"OnCompletion must be NoOp"},{"pc":[247],"errorMessage":"SHA-256 mismatch: preimage does not match commitment"},{"pc":[366],"errorMessage":"assert target is match for conditions"},{"pc":[193,256,339,350,364],"errorMessage":"check GlobalState exists"},{"pc":[214],"errorMessage":"invalid array length header"},{"pc":[222],"errorMessage":"invalid number of bytes for arc4.dynamic_array<arc4.uint8>"},{"pc":[169,208,271,316],"errorMessage":"invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}],"pcOffsetMethod":"none"},"clear":{"sourceInfo":[],"pcOffsetMethod":"none"}},"source":{"approval":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDMyIDQwCiAgICBieXRlY2Jsb2NrICJjb21taXRDb3VudCIgInJldmVhbENvdW50IiAiYyIgMHgxNTFmN2M3NSAiYWRtaW4iCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYm56IG1haW5fYWZ0ZXJfaWZfZWxzZUAyCiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6MzUKICAgIC8vIGNvbW1pdENvdW50ID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGluaXRpYWxWYWx1ZTogVWludDY0KDApIH0pOwogICAgYnl0ZWNfMCAvLyAiY29tbWl0Q291bnQiCiAgICBpbnRjXzEgLy8gMAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czozNgogICAgLy8gcmV2ZWFsQ291bnQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsgaW5pdGlhbFZhbHVlOiBVaW50NjQoMCkgfSk7CiAgICBieXRlY18xIC8vICJyZXZlYWxDb3VudCIKICAgIGludGNfMSAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAoKbWFpbl9hZnRlcl9pZl9lbHNlQDI6CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6MzMKICAgIC8vIGV4cG9ydCBjbGFzcyBaS0NvbW1pdG1lbnQgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoYnl0ZXMgMHgyNDg3YzMyYyAvLyBtZXRob2QgImRlbGV0ZUFwcGxpY2F0aW9uKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl9kZWxldGVBcHBsaWNhdGlvbl9yb3V0ZUA0CgptYWluX3N3aXRjaF9jYXNlX25leHRANToKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czozMwogICAgLy8gZXhwb3J0IGNsYXNzIFpLQ29tbWl0bWVudCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYnogbWFpbl9jcmVhdGVfTm9PcEAxNAogICAgcHVzaGJ5dGVzcyAweDgwNDkyNTczIDB4NzM4NzA0OTIgMHg5NGVkNzA4NiAweDBkZGJjYjZkIDB4MzE1NWU1NTMgMHhjMTcyM2UwYiAvLyBtZXRob2QgImNvbW1pdChieXRlWzMyXSl2b2lkIiwgbWV0aG9kICJyZXZlYWwoYnl0ZVszMl0sYnl0ZVtdKXZvaWQiLCBtZXRob2QgImdldFN0YXR1cyhieXRlWzMyXSl1aW50NjQiLCBtZXRob2QgImdldENvbW1pdHRlcihieXRlWzMyXSlhZGRyZXNzIiwgbWV0aG9kICJnZXRDb21taXRDb3VudCgpdWludDY0IiwgbWV0aG9kICJnZXRSZXZlYWxDb3VudCgpdWludDY0IgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY29tbWl0IHJldmVhbCBnZXRTdGF0dXMgZ2V0Q29tbWl0dGVyIGdldENvbW1pdENvdW50IGdldFJldmVhbENvdW50CiAgICBlcnIKCm1haW5fY3JlYXRlX05vT3BAMTQ6CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6MzMKICAgIC8vIGV4cG9ydCBjbGFzcyBaS0NvbW1pdG1lbnQgZXh0ZW5kcyBDb250cmFjdCB7CiAgICBwdXNoYnl0ZXMgMHhiODQ0N2IzNiAvLyBtZXRob2QgImNyZWF0ZUFwcGxpY2F0aW9uKCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggY3JlYXRlQXBwbGljYXRpb24KICAgIGVycgoKbWFpbl9kZWxldGVBcHBsaWNhdGlvbl9yb3V0ZUA0OgogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjExNAogICAgLy8gQGFiaW1ldGhvZCh7IGFsbG93QWN0aW9uczogIkRlbGV0ZUFwcGxpY2F0aW9uIiB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgcHVzaGludCA1IC8vIERlbGV0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQgLy8gT25Db21wbGV0aW9uIG11c3QgYmUgRGVsZXRlQXBwbGljYXRpb24gJiYgY2FuIG9ubHkgY2FsbCB3aGVuIG5vdCBjcmVhdGluZwogICAgYiBkZWxldGVBcHBsaWNhdGlvbgoKCi8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo6WktDb21taXRtZW50LmNyZWF0ZUFwcGxpY2F0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKY3JlYXRlQXBwbGljYXRpb246CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6MzQKICAgIC8vIGFkbWluID0gR2xvYmFsU3RhdGU8QWNjb3VudD4oKTsKICAgIGJ5dGVjIDQgLy8gImFkbWluIgogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjQyCiAgICAvLyB0aGlzLmFkbWluLnZhbHVlID0gVHhuLnNlbmRlcjsKICAgIHR4biBTZW5kZXIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6NDAKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6ICJOb09wIiwgb25DcmVhdGU6ICJyZXF1aXJlIiB9KQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo6WktDb21taXRtZW50LmNvbW1pdFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNvbW1pdDoKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo1MAogICAgLy8gcHVibGljIGNvbW1pdChjb21taXRtZW50SGFzaDogYnl0ZXM8MzI+KTogdm9pZCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czozOAogICAgLy8gY29tbWl0bWVudHMgPSBCb3hNYXA8Ynl0ZXM8MzI+LCBDb21taXRtZW50UmVjb3JkPih7IGtleVByZWZpeDogImMiIH0pOwogICAgYnl0ZWNfMiAvLyAiYyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjUxCiAgICAvLyBhc3NlcnQoIXRoaXMuY29tbWl0bWVudHMoY29tbWl0bWVudEhhc2gpLmV4aXN0cywgIkNvbW1pdG1lbnQgYWxyZWFkeSBleGlzdHMiKTsKICAgIGR1cAogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICAhCiAgICBhc3NlcnQgLy8gQ29tbWl0bWVudCBhbHJlYWR5IGV4aXN0cwogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjU0CiAgICAvLyBjb21taXR0ZXI6IFR4bi5zZW5kZXIsCiAgICB0eG4gU2VuZGVyCiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6NTUKICAgIC8vIGNyZWF0ZWRSb3VuZDogVWludDY0KDApLAogICAgaW50Y18xIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo1My01NwogICAgLy8gY29uc3QgcmVjb3JkOiBDb21taXRtZW50UmVjb3JkID0gewogICAgLy8gICBjb21taXR0ZXI6IFR4bi5zZW5kZXIsCiAgICAvLyAgIGNyZWF0ZWRSb3VuZDogVWludDY0KDApLAogICAgLy8gICBpc1JldmVhbGVkOiBVaW50NjQoMCksCiAgICAvLyB9OwogICAgaXRvYgogICAgc3dhcAogICAgZGlnIDEKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6NTgKICAgIC8vIHRoaXMuY29tbWl0bWVudHMoY29tbWl0bWVudEhhc2gpLnZhbHVlID0gY2xvbmUocmVjb3JkKTsKICAgIGJveF9wdXQKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo1OQogICAgLy8gdGhpcy5jb21taXRDb3VudC52YWx1ZSA9IHRoaXMuY29tbWl0Q291bnQudmFsdWUgKyBVaW50NjQoMSk7CiAgICBpbnRjXzEgLy8gMAogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjM1CiAgICAvLyBjb21taXRDb3VudCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBpbml0aWFsVmFsdWU6IFVpbnQ2NCgwKSB9KTsKICAgIGJ5dGVjXzAgLy8gImNvbW1pdENvdW50IgogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjU5CiAgICAvLyB0aGlzLmNvbW1pdENvdW50LnZhbHVlID0gdGhpcy5jb21taXRDb3VudC52YWx1ZSArIFVpbnQ2NCgxKTsKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjM1CiAgICAvLyBjb21taXRDb3VudCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBpbml0aWFsVmFsdWU6IFVpbnQ2NCgwKSB9KTsKICAgIGJ5dGVjXzAgLy8gImNvbW1pdENvdW50IgogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjU5CiAgICAvLyB0aGlzLmNvbW1pdENvdW50LnZhbHVlID0gdGhpcy5jb21taXRDb3VudC52YWx1ZSArIFVpbnQ2NCgxKTsKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6NTAKICAgIC8vIHB1YmxpYyBjb21taXQoY29tbWl0bWVudEhhc2g6IGJ5dGVzPDMyPik6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo6WktDb21taXRtZW50LnJldmVhbFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnJldmVhbDoKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo2NwogICAgLy8gcHVibGljIHJldmVhbChjb21taXRtZW50SGFzaDogYnl0ZXM8MzI+LCBwcmVpbWFnZTogYnl0ZXMpOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzIgLy8gMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAyIC8vIDIKICAgICsKICAgIGRpZyAxCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxhcmM0LnVpbnQ4PgogICAgZXh0cmFjdCAyIDAKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czozOAogICAgLy8gY29tbWl0bWVudHMgPSBCb3hNYXA8Ynl0ZXM8MzI+LCBDb21taXRtZW50UmVjb3JkPih7IGtleVByZWZpeDogImMiIH0pOwogICAgYnl0ZWNfMiAvLyAiYyIKICAgIGRpZyAyCiAgICBjb25jYXQKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo2OAogICAgLy8gYXNzZXJ0KHRoaXMuY29tbWl0bWVudHMoY29tbWl0bWVudEhhc2gpLmV4aXN0cywgIkNvbW1pdG1lbnQgbm90IGZvdW5kIik7CiAgICBkdXAKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgYXNzZXJ0IC8vIENvbW1pdG1lbnQgbm90IGZvdW5kCiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6NzAKICAgIC8vIGNvbnN0IHJlY29yZCA9IGNsb25lKHRoaXMuY29tbWl0bWVudHMoY29tbWl0bWVudEhhc2gpLnZhbHVlKTsKICAgIGR1cAogICAgYm94X2dldAogICAgcG9wCiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6NzEKICAgIC8vIGFzc2VydChyZWNvcmQuaXNSZXZlYWxlZCA9PT0gVWludDY0KDApLCAiQWxyZWFkeSByZXZlYWxlZCIpOwogICAgaW50Y18zIC8vIDQwCiAgICBleHRyYWN0X3VpbnQ2NAogICAgIQogICAgYXNzZXJ0IC8vIEFscmVhZHkgcmV2ZWFsZWQKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo3MwogICAgLy8gY29uc3QgY29tcHV0ZWQ6IGJ5dGVzPDMyPiA9IG9wLnNoYTI1NihwcmVpbWFnZSk7CiAgICBzd2FwCiAgICBzaGEyNTYKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo3NAogICAgLy8gYXNzZXJ0KGNvbXB1dGVkID09PSBjb21taXRtZW50SGFzaCwgIlNIQS0yNTYgbWlzbWF0Y2g6IHByZWltYWdlIGRvZXMgbm90IG1hdGNoIGNvbW1pdG1lbnQiKTsKICAgIHVuY292ZXIgMgogICAgPT0KICAgIGFzc2VydCAvLyBTSEEtMjU2IG1pc21hdGNoOiBwcmVpbWFnZSBkb2VzIG5vdCBtYXRjaCBjb21taXRtZW50CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6NzcKICAgIC8vIHVwZGF0ZWQuaXNSZXZlYWxlZCA9IFVpbnQ2NCgxKTsKICAgIGludGNfMCAvLyAxCiAgICBpdG9iCiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6NzctNzgKICAgIC8vIHVwZGF0ZWQuaXNSZXZlYWxlZCA9IFVpbnQ2NCgxKTsKICAgIC8vIHRoaXMuY29tbWl0bWVudHMoY29tbWl0bWVudEhhc2gpLnZhbHVlID0gY2xvbmUodXBkYXRlZCk7CiAgICBpbnRjXzMgLy8gNDAKICAgIHN3YXAKICAgIGJveF9yZXBsYWNlCiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6NzkKICAgIC8vIHRoaXMucmV2ZWFsQ291bnQudmFsdWUgPSB0aGlzLnJldmVhbENvdW50LnZhbHVlICsgVWludDY0KDEpOwogICAgaW50Y18xIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czozNgogICAgLy8gcmV2ZWFsQ291bnQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsgaW5pdGlhbFZhbHVlOiBVaW50NjQoMCkgfSk7CiAgICBieXRlY18xIC8vICJyZXZlYWxDb3VudCIKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo3OQogICAgLy8gdGhpcy5yZXZlYWxDb3VudC52YWx1ZSA9IHRoaXMucmV2ZWFsQ291bnQudmFsdWUgKyBVaW50NjQoMSk7CiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgaW50Y18wIC8vIDEKICAgICsKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czozNgogICAgLy8gcmV2ZWFsQ291bnQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsgaW5pdGlhbFZhbHVlOiBVaW50NjQoMCkgfSk7CiAgICBieXRlY18xIC8vICJyZXZlYWxDb3VudCIKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo3OQogICAgLy8gdGhpcy5yZXZlYWxDb3VudC52YWx1ZSA9IHRoaXMucmV2ZWFsQ291bnQudmFsdWUgKyBVaW50NjQoMSk7CiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjY3CiAgICAvLyBwdWJsaWMgcmV2ZWFsKGNvbW1pdG1lbnRIYXNoOiBieXRlczwzMj4sIHByZWltYWdlOiBieXRlcyk6IHZvaWQgewogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo6WktDb21taXRtZW50LmdldFN0YXR1c1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldFN0YXR1czoKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo4NgogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18yIC8vIDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czozOAogICAgLy8gY29tbWl0bWVudHMgPSBCb3hNYXA8Ynl0ZXM8MzI+LCBDb21taXRtZW50UmVjb3JkPih7IGtleVByZWZpeDogImMiIH0pOwogICAgYnl0ZWNfMiAvLyAiYyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6ODgKICAgIC8vIGlmICghdGhpcy5jb21taXRtZW50cyhjb21taXRtZW50SGFzaCkuZXhpc3RzKSB7CiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGJueiBnZXRTdGF0dXNfYWZ0ZXJfaWZfZWxzZUAzCiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6ODkKICAgIC8vIHJldHVybiBVaW50NjQoMCk7CiAgICBpbnRjXzEgLy8gMAoKZ2V0U3RhdHVzX2FmdGVyX2lubGluZWRfY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjpaS0NvbW1pdG1lbnQuZ2V0U3RhdHVzQDY6CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6ODYKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgaXRvYgogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKZ2V0U3RhdHVzX2FmdGVyX2lmX2Vsc2VAMzoKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo5MQogICAgLy8gY29uc3QgcmVjb3JkID0gY2xvbmUodGhpcy5jb21taXRtZW50cyhjb21taXRtZW50SGFzaCkudmFsdWUpOwogICAgZHVwCiAgICBib3hfZ2V0CiAgICBhc3NlcnQgLy8gQm94IG11c3QgaGF2ZSB2YWx1ZQogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjkyCiAgICAvLyBpZiAocmVjb3JkLmlzUmV2ZWFsZWQgPT09IFVpbnQ2NCgxKSkgewogICAgaW50Y18zIC8vIDQwCiAgICBleHRyYWN0X3VpbnQ2NAogICAgaW50Y18wIC8vIDEKICAgID09CiAgICBieiBnZXRTdGF0dXNfYWZ0ZXJfaWZfZWxzZUA1CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6OTMKICAgIC8vIHJldHVybiBVaW50NjQoMik7CiAgICBwdXNoaW50IDIgLy8gMgogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjg2CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGIgZ2V0U3RhdHVzX2FmdGVyX2lubGluZWRfY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjpaS0NvbW1pdG1lbnQuZ2V0U3RhdHVzQDYKCmdldFN0YXR1c19hZnRlcl9pZl9lbHNlQDU6CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6OTUKICAgIC8vIHJldHVybiBVaW50NjQoMSk7CiAgICBpbnRjXzAgLy8gMQogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjg2CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGIgZ2V0U3RhdHVzX2FmdGVyX2lubGluZWRfY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjpaS0NvbW1pdG1lbnQuZ2V0U3RhdHVzQDYKCgovLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6OlpLQ29tbWl0bWVudC5nZXRDb21taXR0ZXJbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRDb21taXR0ZXI6CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6OTgKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyAzMgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5zdGF0aWNfYXJyYXk8YXJjNC51aW50OCwgMzI+CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6MzgKICAgIC8vIGNvbW1pdG1lbnRzID0gQm94TWFwPGJ5dGVzPDMyPiwgQ29tbWl0bWVudFJlY29yZD4oeyBrZXlQcmVmaXg6ICJjIiB9KTsKICAgIGJ5dGVjXzIgLy8gImMiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czoxMDAKICAgIC8vIGFzc2VydCh0aGlzLmNvbW1pdG1lbnRzKGNvbW1pdG1lbnRIYXNoKS5leGlzdHMsICJDb21taXRtZW50IG5vdCBmb3VuZCIpOwogICAgZHVwCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGFzc2VydCAvLyBDb21taXRtZW50IG5vdCBmb3VuZAogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjEwMQogICAgLy8gcmV0dXJuIGNsb25lKHRoaXMuY29tbWl0bWVudHMoY29tbWl0bWVudEhhc2gpLnZhbHVlKS5jb21taXR0ZXI7CiAgICBib3hfZ2V0CiAgICBwb3AKICAgIGV4dHJhY3QgMCAzMgogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjk4CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGJ5dGVjXzMgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCgovLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6OlpLQ29tbWl0bWVudC5nZXRDb21taXRDb3VudFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldENvbW1pdENvdW50OgogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjEwNgogICAgLy8gcmV0dXJuIHRoaXMuY29tbWl0Q291bnQudmFsdWU7CiAgICBpbnRjXzEgLy8gMAogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjM1CiAgICAvLyBjb21taXRDb3VudCA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBpbml0aWFsVmFsdWU6IFVpbnQ2NCgwKSB9KTsKICAgIGJ5dGVjXzAgLy8gImNvbW1pdENvdW50IgogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjEwNgogICAgLy8gcmV0dXJuIHRoaXMuY29tbWl0Q291bnQudmFsdWU7CiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjEwNAogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICBpdG9iCiAgICBieXRlY18zIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjpaS0NvbW1pdG1lbnQuZ2V0UmV2ZWFsQ291bnRbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRSZXZlYWxDb3VudDoKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czoxMTEKICAgIC8vIHJldHVybiB0aGlzLnJldmVhbENvdW50LnZhbHVlOwogICAgaW50Y18xIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czozNgogICAgLy8gcmV2ZWFsQ291bnQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsgaW5pdGlhbFZhbHVlOiBVaW50NjQoMCkgfSk7CiAgICBieXRlY18xIC8vICJyZXZlYWxDb3VudCIKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czoxMTEKICAgIC8vIHJldHVybiB0aGlzLnJldmVhbENvdW50LnZhbHVlOwogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czoxMDkKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgaXRvYgogICAgYnl0ZWNfMyAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgoKCi8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czo6WktDb21taXRtZW50LmRlbGV0ZUFwcGxpY2F0aW9uW3JvdXRpbmddKCkgLT4gdm9pZDoKZGVsZXRlQXBwbGljYXRpb246CiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6MTE2CiAgICAvLyBhc3NlcnRNYXRjaChUeG4sIHsgc2VuZGVyOiB0aGlzLmFkbWluLnZhbHVlIH0pOwogICAgdHhuIFNlbmRlcgogICAgaW50Y18xIC8vIDAKICAgIC8vIGNvbnRyYWN0cy9aS0NvbW1pdG1lbnQuYWxnby50czozNAogICAgLy8gYWRtaW4gPSBHbG9iYWxTdGF0ZTxBY2NvdW50PigpOwogICAgYnl0ZWMgNCAvLyAiYWRtaW4iCiAgICAvLyBjb250cmFjdHMvWktDb21taXRtZW50LmFsZ28udHM6MTE2CiAgICAvLyBhc3NlcnRNYXRjaChUeG4sIHsgc2VuZGVyOiB0aGlzLmFkbWluLnZhbHVlIH0pOwogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgID09CiAgICBhc3NlcnQgLy8gYXNzZXJ0IHRhcmdldCBpcyBtYXRjaCBmb3IgY29uZGl0aW9ucwogICAgLy8gY29udHJhY3RzL1pLQ29tbWl0bWVudC5hbGdvLnRzOjExNAogICAgLy8gQGFiaW1ldGhvZCh7IGFsbG93QWN0aW9uczogIkRlbGV0ZUFwcGxpY2F0aW9uIiB9KQogICAgaW50Y18wIC8vIDEKICAgIHJldHVybgo=","clear":"I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="},"byteCode":{"approval":"CyAEAQAgKCYFC2NvbW1pdENvdW50C3JldmVhbENvdW50AWMEFR98dQVhZG1pbjEYQAAGKCNnKSNngAQkh8MsNhoAjgEASTEZFEQxGEEAMoIGBIBJJXMEc4cEkgSU7XCGBA3by20EMVXlUwTBcj4LNhoAjgYAIgBJAIgAtQDQANsAgAS4RHs2NhoAjgEADQAxGYEFEjEYEERCAMsnBDEAZyJDNhoBSRUkEkQqTFBJvUUBFEQxACMWTEsBUExQvyMoZUQiCChMZyJDNhoBSRUkEkQ2GgJJI1mBAghLARUSRFcCACpLAlBJvUUBREm+SCVbFERMAU8CEkQiFiVMuyMpZUQiCClMZyJDNhoBSRUkEkQqTFBJvUUBQAAIIxYrTFCwIkNJvkQlWyISQQAFgQJC/+oiQv/mNhoBSRUkEkQqTFBJvUUBRL5IVwAgK0xQsCJDIyhlRBYrTFCwIkMjKWVEFitMULAiQzEAIycEZUQSRCJD","clear":"C4EBQw=="},"events":[],"templateVariables":{}} as unknown as Arc56Contract
 
 /**
  * A state record containing binary data
@@ -240,11 +240,97 @@ export type GlobalKeysState = ZkCommitmentTypes['state']['global']['keys']
 export type BoxKeysState = ZkCommitmentTypes['state']['box']['keys']
 
 
+/**
+ * Defines supported create method params for this smart contract
+ */
+export type ZkCommitmentCreateCallParams =
+  | Expand<CallParams<ZkCommitmentArgs['obj']['createApplication()void'] | ZkCommitmentArgs['tuple']['createApplication()void']> & {method: 'createApplication'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+  | Expand<CallParams<ZkCommitmentArgs['obj']['createApplication()void'] | ZkCommitmentArgs['tuple']['createApplication()void']> & {method: 'createApplication()void'} & {onComplete?: OnApplicationComplete.NoOpOC} & CreateSchema>
+/**
+ * Defines supported delete method params for this smart contract
+ */
+export type ZkCommitmentDeleteCallParams =
+  | Expand<CallParams<ZkCommitmentArgs['obj']['deleteApplication()void'] | ZkCommitmentArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication'}>
+  | Expand<CallParams<ZkCommitmentArgs['obj']['deleteApplication()void'] | ZkCommitmentArgs['tuple']['deleteApplication()void']> & {method: 'deleteApplication()void'}>
+/**
+ * Defines arguments required for the deploy method.
+ */
+export type ZkCommitmentDeployParams = Expand<Omit<AppFactoryDeployParams, 'createParams' | 'updateParams' | 'deleteParams'> & {
+  /**
+   * Create transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  createParams?: ZkCommitmentCreateCallParams
+  /**
+   * Delete transaction parameters to use if a create needs to be issued as part of deployment; use `method` to define ABI call (if available) or leave out for a bare call (if available)
+   */
+  deleteParams?: ZkCommitmentDeleteCallParams
+}>
+
 
 /**
  * Exposes methods for constructing `AppClient` params objects for ABI calls to the ZkCommitment smart contract
  */
 export abstract class ZkCommitmentParamsFactory {
+  /**
+   * Gets available create ABI call param factories
+   */
+  static get create() {
+    return {
+      _resolveByMethod<TParams extends ZkCommitmentCreateCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'createApplication':
+          case 'createApplication()void':
+            return ZkCommitmentParamsFactory.create.createApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs create ABI call params for the ZKCommitment smart contract using the createApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      createApplication(params: CallParams<ZkCommitmentArgs['obj']['createApplication()void'] | ZkCommitmentArgs['tuple']['createApplication()void']> & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC}): AppClientMethodCallParams & AppClientCompilationParams & {onComplete?: OnApplicationComplete.NoOpOC} {
+        return {
+          ...params,
+          method: 'createApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
+  /**
+   * Gets available delete ABI call param factories
+   */
+  static get delete() {
+    return {
+      _resolveByMethod<TParams extends ZkCommitmentDeleteCallParams & {method: string}>(params: TParams) {
+        switch(params.method) {
+          case 'deleteApplication':
+          case 'deleteApplication()void':
+            return ZkCommitmentParamsFactory.delete.deleteApplication(params)
+        }
+        throw new Error(`Unknown ' + verb + ' method`)
+      },
+
+      /**
+       * Constructs delete ABI call params for the ZKCommitment smart contract using the deleteApplication()void ABI method
+       *
+       * @param params Parameters for the call
+       * @returns An `AppClientMethodCallParams` object for the call
+       */
+      deleteApplication(params: CallParams<ZkCommitmentArgs['obj']['deleteApplication()void'] | ZkCommitmentArgs['tuple']['deleteApplication()void']>): AppClientMethodCallParams {
+        return {
+          ...params,
+          method: 'deleteApplication()void' as const,
+          args: Array.isArray(params.args) ? params.args : [],
+        }
+      },
+    }
+  }
+
   /**
    * Constructs a no op call for the commit(byte[32])void ABI method
    *
@@ -340,6 +426,164 @@ export abstract class ZkCommitmentParamsFactory {
 }
 
 /**
+ * A factory to create and deploy one or more instance of the ZKCommitment smart contract and to create one or more app clients to interact with those (or other) app instances
+ */
+export class ZkCommitmentFactory {
+  /**
+   * The underlying `AppFactory` for when you want to have more flexibility
+   */
+  public readonly appFactory: _AppFactory
+
+  /**
+   * Creates a new instance of `ZkCommitmentFactory`
+   *
+   * @param params The parameters to initialise the app factory with
+   */
+  constructor(params: Omit<AppFactoryParams, 'appSpec'>) {
+    this.appFactory = new _AppFactory({
+      ...params,
+      appSpec: APP_SPEC,
+    })
+  }
+  
+  /** The name of the app (from the ARC-32 / ARC-56 app spec or override). */
+  public get appName() {
+    return this.appFactory.appName
+  }
+  
+  /** The ARC-56 app spec being used */
+  get appSpec() {
+    return APP_SPEC
+  }
+  
+  /** A reference to the underlying `AlgorandClient` this app factory is using. */
+  public get algorand(): AlgorandClient {
+    return this.appFactory.algorand
+  }
+  
+  /**
+   * Returns a new `AppClient` client for an app instance of the given ID.
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public getAppClientById(params: AppFactoryAppClientParams) {
+    return new ZkCommitmentClient(this.appFactory.getAppClientById(params))
+  }
+  
+  /**
+   * Returns a new `AppClient` client, resolving the app by creator address and name
+   * using AlgoKit app deployment semantics (i.e. looking for the app creation transaction note).
+   *
+   * Automatically populates appName, defaultSender and source maps from the factory
+   * if not specified in the params.
+   * @param params The parameters to create the app client
+   * @returns The `AppClient`
+   */
+  public async getAppClientByCreatorAndName(
+    params: AppFactoryResolveAppClientByCreatorAndNameParams,
+  ) {
+    return new ZkCommitmentClient(await this.appFactory.getAppClientByCreatorAndName(params))
+  }
+
+  /**
+   * Idempotently deploys the ZKCommitment smart contract.
+   *
+   * @param params The arguments for the contract calls and any additional parameters for the call
+   * @returns The deployment result
+   */
+  public async deploy(params: ZkCommitmentDeployParams = {}) {
+    const result = await this.appFactory.deploy({
+      ...params,
+      createParams: params.createParams?.method ? ZkCommitmentParamsFactory.create._resolveByMethod(params.createParams) : params.createParams ? params.createParams as (ZkCommitmentCreateCallParams & { args: Uint8Array[] }) : undefined,
+      deleteParams: params.deleteParams?.method ? ZkCommitmentParamsFactory.delete._resolveByMethod(params.deleteParams) : params.deleteParams ? params.deleteParams as (ZkCommitmentDeleteCallParams & { args: Uint8Array[] }) : undefined,
+    })
+    return { result: result.result, appClient: new ZkCommitmentClient(result.appClient) }
+  }
+
+  /**
+   * Get parameters to create transactions (create and deploy related calls) for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
+   */
+  readonly params = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ZKCommitment smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create params
+       */
+      createApplication: (params: CallParams<ZkCommitmentArgs['obj']['createApplication()void'] | ZkCommitmentArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.params.create(ZkCommitmentParamsFactory.create.createApplication(params))
+      },
+    },
+
+    /**
+     * Gets available deployDelete methods
+     */
+    deployDelete: {
+      /**
+       * Deletes an existing instance of the ZKCommitment smart contract using the deleteApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The deployDelete params
+       */
+      deleteApplication: (params: CallParams<ZkCommitmentArgs['obj']['deleteApplication()void'] | ZkCommitmentArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appFactory.params.deployDelete(ZkCommitmentParamsFactory.delete.deleteApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Create transactions for the current app
+   */
+  readonly createTransaction = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ZKCommitment smart contract using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create transaction
+       */
+      createApplication: (params: CallParams<ZkCommitmentArgs['obj']['createApplication()void'] | ZkCommitmentArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        return this.appFactory.createTransaction.create(ZkCommitmentParamsFactory.create.createApplication(params))
+      },
+    },
+
+  }
+
+  /**
+   * Send calls to the current app
+   */
+  readonly send = {
+    /**
+     * Gets available create methods
+     */
+    create: {
+      /**
+       * Creates a new instance of the ZKCommitment smart contract using an ABI method call using the createApplication()void ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The create result
+       */
+      createApplication: async (params: CallParams<ZkCommitmentArgs['obj']['createApplication()void'] | ZkCommitmentArgs['tuple']['createApplication()void']> & AppClientCompilationParams & CreateSchema & SendParams & {onComplete?: OnApplicationComplete.NoOpOC} = {args: []}) => {
+        const result = await this.appFactory.send.create(ZkCommitmentParamsFactory.create.createApplication(params))
+        return { result: { ...result.result, return: result.result.return as unknown as (undefined | ZkCommitmentReturns['createApplication()void']) }, appClient: new ZkCommitmentClient(result.appClient) }
+      },
+    },
+
+  }
+
+}
+/**
  * A client to make calls to the ZKCommitment smart contract
  */
 export class ZkCommitmentClient {
@@ -426,6 +670,22 @@ export class ZkCommitmentClient {
    * Get parameters to create transactions for the current app. A good mental model for this is that these parameters represent a deferred transaction creation.
    */
   readonly params = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the ZKCommitment smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete params
+       */
+      deleteApplication: (params: CallParams<ZkCommitmentArgs['obj']['deleteApplication()void'] | ZkCommitmentArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.params.delete(ZkCommitmentParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the ZKCommitment smart contract.
      *
@@ -525,6 +785,22 @@ export class ZkCommitmentClient {
    */
   readonly createTransaction = {
     /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the ZKCommitment smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete transaction
+       */
+      deleteApplication: (params: CallParams<ZkCommitmentArgs['obj']['deleteApplication()void'] | ZkCommitmentArgs['tuple']['deleteApplication()void']> = {args: []}) => {
+        return this.appClient.createTransaction.delete(ZkCommitmentParamsFactory.delete.deleteApplication(params))
+      },
+
+    },
+
+    /**
      * Makes a clear_state call to an existing instance of the ZKCommitment smart contract.
      *
      * @param params The params for the bare (raw) call
@@ -622,6 +898,23 @@ export class ZkCommitmentClient {
    * Send calls to the current app
    */
   readonly send = {
+    /**
+     * Gets available delete methods
+     */
+    delete: {
+      /**
+       * Deletes an existing instance of the ZKCommitment smart contract using the `deleteApplication()void` ABI method.
+       *
+       * @param params The params for the smart contract call
+       * @returns The delete result
+       */
+      deleteApplication: async (params: CallParams<ZkCommitmentArgs['obj']['deleteApplication()void'] | ZkCommitmentArgs['tuple']['deleteApplication()void']> & SendParams = {args: []}) => {
+        const result = await this.appClient.send.delete(ZkCommitmentParamsFactory.delete.deleteApplication(params))
+        return {...result, return: result.return as unknown as (undefined | ZkCommitmentReturns['deleteApplication()void'])}
+      },
+
+    },
+
     /**
      * Makes a clear_state call to an existing instance of the ZKCommitment smart contract.
      *
@@ -902,6 +1195,15 @@ export class ZkCommitmentClient {
         resultMappers.push((v) => client.decodeReturnValue('getRevealCount()uint64', v))
         return this
       },
+      get delete() {
+        return {
+          deleteApplication: (params: CallParams<ZkCommitmentArgs['obj']['deleteApplication()void'] | ZkCommitmentArgs['tuple']['deleteApplication()void']>) => {
+            promiseChain = promiseChain.then(async () => composer.addAppDeleteMethodCall(await client.params.delete.deleteApplication(params)))
+            resultMappers.push(undefined)
+            return this
+          },
+        }
+      },
       /**
        * Add a clear state call to the ZKCommitment contract
        */
@@ -1004,6 +1306,20 @@ export type ZkCommitmentComposer<TReturns extends [...any[]] = []> = {
    * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
    */
   getRevealCount(params?: CallParams<ZkCommitmentArgs['obj']['getRevealCount()uint64'] | ZkCommitmentArgs['tuple']['getRevealCount()uint64']>): ZkCommitmentComposer<[...TReturns, ZkCommitmentReturns['getRevealCount()uint64'] | undefined]>
+
+  /**
+   * Gets available delete methods
+   */
+  readonly delete: {
+    /**
+     * Deletes an existing instance of the ZKCommitment smart contract using the deleteApplication()void ABI method.
+     *
+     * @param args The arguments for the smart contract call
+     * @param params Any additional parameters for the call
+     * @returns The typed transaction composer so you can fluently chain multiple calls or call execute to execute all queued up transactions
+     */
+    deleteApplication(params?: CallParams<ZkCommitmentArgs['obj']['deleteApplication()void'] | ZkCommitmentArgs['tuple']['deleteApplication()void']>): ZkCommitmentComposer<[...TReturns, ZkCommitmentReturns['deleteApplication()void'] | undefined]>
+  }
 
   /**
    * Makes a clear_state call to an existing instance of the ZKCommitment smart contract.
