@@ -41,6 +41,7 @@ var client = new LeakSwapProxy(algod, appId: 123456789);
 | Namespace | Class | Source ARC-56 spec |
 | --- | --- | --- |
 | `Arc56.Generated.HashMapsData2Value.leakswap_protocol.LeakSwap_542de581` | `LeakSwapProxy` | [https://raw.githubusercontent.com/HashMapsData2Value/leakswap-protocol/HEAD/algorand/projects/algorand/smart_contracts/artifacts/leak_swap/LeakSwap.arc56.json](https://raw.githubusercontent.com/HashMapsData2Value/leakswap-protocol/HEAD/algorand/projects/algorand/smart_contracts/artifacts/leak_swap/LeakSwap.arc56.json) |
+| `Arc56.Generated.HashMapsData2Value.leakswap_protocol.AsaLeakSwap_4b36ee7e` | `AsaLeakSwapProxy` | [https://raw.githubusercontent.com/HashMapsData2Value/leakswap-protocol/HEAD/algorand/projects/algorand/smart_contracts/artifacts/leak_swap_asa/AsaLeakSwap.arc56.json](https://raw.githubusercontent.com/HashMapsData2Value/leakswap-protocol/HEAD/algorand/projects/algorand/smart_contracts/artifacts/leak_swap_asa/AsaLeakSwap.arc56.json) |
 
 ## Versioning
 
