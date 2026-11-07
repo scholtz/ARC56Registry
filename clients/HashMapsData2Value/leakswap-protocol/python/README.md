@@ -51,6 +51,7 @@ every other contract includes a working `Factory`.
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
 | `LeakSwap_542de581` | `LeakSwapClient` | [https://raw.githubusercontent.com/HashMapsData2Value/leakswap-protocol/HEAD/algorand/projects/algorand/smart_contracts/artifacts/leak_swap/LeakSwap.arc56.json](https://raw.githubusercontent.com/HashMapsData2Value/leakswap-protocol/HEAD/algorand/projects/algorand/smart_contracts/artifacts/leak_swap/LeakSwap.arc56.json) |
+| `AsaLeakSwap_4b36ee7e` | `AsaLeakSwapClient` | [https://raw.githubusercontent.com/HashMapsData2Value/leakswap-protocol/HEAD/algorand/projects/algorand/smart_contracts/artifacts/leak_swap_asa/AsaLeakSwap.arc56.json](https://raw.githubusercontent.com/HashMapsData2Value/leakswap-protocol/HEAD/algorand/projects/algorand/smart_contracts/artifacts/leak_swap_asa/AsaLeakSwap.arc56.json) |
 
 ## Versioning
 
