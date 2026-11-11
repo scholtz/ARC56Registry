@@ -1,0 +1,152 @@
+{
+    "name": "AbelStub",
+    "structs": {},
+    "methods": [
+        {
+            "name": "has_asset_label",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "_asset_id"
+                },
+                {
+                    "type": "string",
+                    "name": "_label"
+                }
+            ],
+            "returns": {
+                "type": "uint64"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        },
+        {
+            "name": "get_asset_labels",
+            "args": [
+                {
+                    "type": "uint64",
+                    "name": "_asset_id"
+                }
+            ],
+            "returns": {
+                "type": "string[]"
+            },
+            "actions": {
+                "create": [],
+                "call": [
+                    "NoOp"
+                ]
+            },
+            "readonly": false,
+            "events": [],
+            "recommendations": {}
+        }
+    ],
+    "arcs": [
+        22,
+        28
+    ],
+    "networks": {},
+    "state": {
+        "schema": {
+            "global": {
+                "ints": 0,
+                "bytes": 0
+            },
+            "local": {
+                "ints": 0,
+                "bytes": 0
+            }
+        },
+        "keys": {
+            "global": {},
+            "local": {},
+            "box": {}
+        },
+        "maps": {
+            "global": {},
+            "local": {},
+            "box": {}
+        }
+    },
+    "bareActions": {
+        "create": [
+            "NoOp"
+        ],
+        "call": []
+    },
+    "sourceInfo": {
+        "approval": {
+            "sourceInfo": [
+                {
+                    "pc": [
+                        9
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp"
+                },
+                {
+                    "pc": [
+                        42
+                    ],
+                    "errorMessage": "OnCompletion must be NoOp && can only call when creating"
+                },
+                {
+                    "pc": [
+                        60
+                    ],
+                    "errorMessage": "invalid array length header"
+                },
+                {
+                    "pc": [
+                        67
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"
+                },
+                {
+                    "pc": [
+                        53,
+                        76
+                    ],
+                    "errorMessage": "invalid number of bytes for arc4.uint64"
+                },
+                {
+                    "pc": [
+                        68,
+                        77
+                    ],
+                    "errorMessage": "stub"
+                }
+            ],
+            "pcOffsetMethod": "none"
+        },
+        "clear": {
+            "sourceInfo": [],
+            "pcOffsetMethod": "none"
+        }
+    },
+    "source": {
+        "approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWJlbF9zdHViL2NvbnRyYWN0LmFsZ28udHM6MwogICAgLy8gZXhwb3J0IGNsYXNzIEFiZWxTdHViIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE51bUFwcEFyZ3MKICAgIGJ6IG1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDkKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydCAvLyBPbkNvbXBsZXRpb24gbXVzdCBiZSBOb09wCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4OTdmNDBhOGEgMHhkY2JhMThlYiAvLyBtZXRob2QgImhhc19hc3NldF9sYWJlbCh1aW50NjQsc3RyaW5nKXVpbnQ2NCIsIG1ldGhvZCAiZ2V0X2Fzc2V0X2xhYmVscyh1aW50NjQpc3RyaW5nW10iCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAwCiAgICBtYXRjaCBoYXNfYXNzZXRfbGFiZWwgZ2V0X2Fzc2V0X2xhYmVscwogICAgZXJyCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA5OgogICAgLy8gc21hcnRfY29udHJhY3RzL2FiZWxfc3R1Yi9jb250cmFjdC5hbGdvLnRzOjMKICAgIC8vIGV4cG9ydCBjbGFzcyBBYmVsU3R1YiBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgYXNzZXJ0IC8vIE9uQ29tcGxldGlvbiBtdXN0IGJlIE5vT3AgJiYgY2FuIG9ubHkgY2FsbCB3aGVuIGNyZWF0aW5nCiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL2FiZWxfc3R1Yi9jb250cmFjdC5hbGdvLnRzOjpBYmVsU3R1Yi5oYXNfYXNzZXRfbGFiZWxbcm91dGluZ10oKSAtPiB2b2lkOgpoYXNfYXNzZXRfbGFiZWw6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWJlbF9zdHViL2NvbnRyYWN0LmFsZ28udHM6NAogICAgLy8gaGFzX2Fzc2V0X2xhYmVsKF9hc3NldF9pZDogdWludDY0LCBfbGFiZWw6IHN0cmluZyk6IHVpbnQ2NCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBsZW4KICAgIHB1c2hpbnQgOCAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBwdXNoaW50IDAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAyIC8vIDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWJlbF9zdHViL2NvbnRyYWN0LmFsZ28udHM6NQogICAgLy8gZXJyKCJzdHViIik7CiAgICBlcnIgLy8gc3R1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9hYmVsX3N0dWIvY29udHJhY3QuYWxnby50czo6QWJlbFN0dWIuZ2V0X2Fzc2V0X2xhYmVsc1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmdldF9hc3NldF9sYWJlbHM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvYWJlbF9zdHViL2NvbnRyYWN0LmFsZ28udHM6OAogICAgLy8gZ2V0X2Fzc2V0X2xhYmVscyhfYXNzZXRfaWQ6IEFzc2V0KTogc3RyaW5nW10gewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgbGVuCiAgICBwdXNoaW50IDggLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9hYmVsX3N0dWIvY29udHJhY3QuYWxnby50czo5CiAgICAvLyBlcnIoInN0dWIiKTsKICAgIGVyciAvLyBzdHViCg==",
+        "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEgLy8gMQogICAgcmV0dXJuCg=="
+    },
+    "byteCode": {
+        "approval": "CzEbQQAdMRkURDEYRIICBJf0CooE3LoY6zYaAI4CAAwAIwAxGRQxGBQQRIEBQzYaARWBCBJENhoCSYEAWYECCEwVEkQANhoBFYEIEkQA",
+        "clear": "C4EBQw=="
+    },
+    "compilerInfo": {
+        "compiler": "puya",
+        "compilerVersion": {
+            "major": 5,
+            "minor": 3,
+            "patch": 2
+        }
+    },
+    "events": [],
+    "templateVariables": {}
+}
