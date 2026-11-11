@@ -1852,7 +1852,10 @@ Rebuilt automatically by `scripts/generate_dotnet_clients.py` on every run. Each
 | [joe-p/algokit-monorepo-ts](https://github.com/joe-p/algokit-monorepo-ts) | `NestedStruct_c2399c95` | Generator crash | [joe-p/algokit-monorepo-ts/NestedStruct_c2399c95.md](joe-p/algokit-monorepo-ts/NestedStruct_c2399c95.md) |
 | [joe-p/algokit-monorepo-ts](https://github.com/joe-p/algokit-monorepo-ts) | `Reti_cf77e550` | Generator crash | [joe-p/algokit-monorepo-ts/Reti_cf77e550.md](joe-p/algokit-monorepo-ts/Reti_cf77e550.md) |
 | [joe-p/algokit-monorepo-ts](https://github.com/joe-p/algokit-monorepo-ts) | `State_77bbdb76` | Generated code fails to compile | [joe-p/algokit-monorepo-ts/State_77bbdb76.md](joe-p/algokit-monorepo-ts/State_77bbdb76.md) |
+| [joe-p/algokit-py](https://github.com/joe-p/algokit-py) | `Arc56Test_48f3911b` | Generator crash | [joe-p/algokit-py/Arc56Test_48f3911b.md](joe-p/algokit-py/Arc56Test_48f3911b.md) |
 | [joe-p/algokit-py](https://github.com/joe-p/algokit-py) | `nested_struct_e99df44f` | Generator crash | [joe-p/algokit-py/nested_struct_e99df44f.md](joe-p/algokit-py/nested_struct_e99df44f.md) |
+| [joe-p/algokit-py](https://github.com/joe-p/algokit-py) | `Reti_63b4fece` | Generator crash | [joe-p/algokit-py/Reti_63b4fece.md](joe-p/algokit-py/Reti_63b4fece.md) |
+| [joe-p/algokit-py](https://github.com/joe-p/algokit-py) | `State_32c67110` | Generated code fails to compile | [joe-p/algokit-py/State_32c67110.md](joe-p/algokit-py/State_32c67110.md) |
 | [joe-p/algokit-py](https://github.com/joe-p/algokit-py) | `State_330b6e2b` | Generated code fails to compile | [joe-p/algokit-py/State_330b6e2b.md](joe-p/algokit-py/State_330b6e2b.md) |
 | [joe-p/algosdk-future-ts](https://github.com/joe-p/algosdk-future-ts) | `ARC56Test_2d6e823c` | Generator crash | [joe-p/algosdk-future-ts/ARC56Test_2d6e823c.md](joe-p/algosdk-future-ts/ARC56Test_2d6e823c.md) |
 | [joe-p/arc56-client-generator](https://github.com/joe-p/arc56-client-generator) | `ARC56Test_918f5396` | Generator crash | [joe-p/arc56-client-generator/ARC56Test_918f5396.md](joe-p/arc56-client-generator/ARC56Test_918f5396.md) |
