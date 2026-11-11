@@ -24,10 +24,10 @@ instance of that contract, plus a `<Name>Factory` for deploying new instances.
 
 ```python
 from algokit_utils import AlgorandClient
-from arc56_generated_joe_p_a79a53f6 import Nested_a0cad485
+from arc56_generated_joe_p_a79a53f6 import Arc56Test_48f3911b
 
 algorand = AlgorandClient.mainnet()
-client = Nested_a0cad485.NestedClient(
+client = Arc56Test_48f3911b.Arc56TestClient(
     algorand=algorand,
     app_id=123456789,
 )
@@ -50,8 +50,14 @@ every other contract includes a working `Factory`.
 
 | Module | Client class | Source ARC-56 spec |
 | --- | --- | --- |
+| `Arc56Test_48f3911b` | `Arc56TestClient` | [https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/arc56_test/Arc56Test.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/arc56_test/Arc56Test.arc56.json) |
 | `Nested_a0cad485` | `NestedClient` | [https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/nested/Nested.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/nested/Nested.arc56.json) |
+| `Nfd_cdef430f` | `NfdInstanceClient` | [https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/nfd/Nfd.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/nfd/Nfd.arc56.json) |
+| `Reti_63b4fece` | `ValidatorRegistryClient` | [https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/reti/Reti.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/reti/Reti.arc56.json) |
+| `State_32c67110` | `StateClient` | [https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/state/State.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/state/State.arc56.json) |
 | `Structs_a42f3aed` | `StructsClient` | [https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/structs/Structs.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/structs/Structs.arc56.json) |
+| `ZeroCouponBond_a4af2b5a` | `ZeroCouponBondClient` | [https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/zero_coupon_bond/ZeroCouponBond.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-client-generator-py/examples/smart_contracts/artifacts/zero_coupon_bond/ZeroCouponBond.arc56.json) |
+| `amm_fcba86c0` | `ConstantProductAmmClient` | [https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-utils-py/tests/artifacts/amm_arc56_example/amm.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-utils-py/tests/artifacts/amm_arc56_example/amm.arc56.json) |
 | `app_spec_ea7e5006` | `DeleteAbiWithInnerClient` | [https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-utils-py/tests/artifacts/bare_create_abi_delete/app_spec.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-utils-py/tests/artifacts/bare_create_abi_delete/app_spec.arc56.json) |
 | `large_c79629f5` | `HelloWorldClient` | [https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-utils-py/tests/artifacts/extra_pages_test/large.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-utils-py/tests/artifacts/extra_pages_test/large.arc56.json) |
 | `small_bd6e7f6e` | `HelloWorldClient` | [https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-utils-py/tests/artifacts/extra_pages_test/small.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-utils-py/tests/artifacts/extra_pages_test/small.arc56.json) |
