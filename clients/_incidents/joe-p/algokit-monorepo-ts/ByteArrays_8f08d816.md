@@ -3,8 +3,8 @@
 - **Repo**: [joe-p/algokit-monorepo-ts](https://github.com/joe-p/algokit-monorepo-ts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/joe-p/algokit-monorepo-ts/HEAD/algokit-utils-ts/tests/example-contracts/byte_arrays/artifacts/ByteArrays.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-monorepo-ts/HEAD/algokit-utils-ts/tests/example-contracts/byte_arrays/artifacts/ByteArrays.arc56.json)
 - **Namespace used**: `Arc56.Generated.joe_p.algokit_monorepo_ts.ByteArrays_8f08d816`
-- **Detected**: 2026-10-23T10:48:10.524064+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:4c7f0b02126c7a2565338efea6e3a214b086d319bc88c43d227a9fc55b907289`
+- **Detected**: 2026-11-13T13:52:09.957220+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:23f962c15728699da4c86c52c95d65d4bca48d37e1e21665a2d9d2d181121ddf`
 
 ## Reproduce
 
