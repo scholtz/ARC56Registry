@@ -3,8 +3,8 @@
 - **Repo**: [algorandfoundation/algokit-ts](https://github.com/algorandfoundation/algokit-ts)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/algorandfoundation/algokit-ts/HEAD/algokit-client-generator-ts/examples/smart_contracts/artifacts/arc56_test/Arc56Test.arc56.json](https://raw.githubusercontent.com/algorandfoundation/algokit-ts/HEAD/algokit-client-generator-ts/examples/smart_contracts/artifacts/arc56_test/Arc56Test.arc56.json)
 - **Namespace used**: `Arc56.Generated.algorandfoundation.algokit_ts.Arc56Test_9d89aae1`
-- **Detected**: 2026-10-30T11:54:56.147203+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:4c7f0b02126c7a2565338efea6e3a214b086d319bc88c43d227a9fc55b907289`
+- **Detected**: 2026-11-13T13:44:05.336771+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:23f962c15728699da4c86c52c95d65d4bca48d37e1e21665a2d9d2d181121ddf`
 
 ## Reproduce
 
