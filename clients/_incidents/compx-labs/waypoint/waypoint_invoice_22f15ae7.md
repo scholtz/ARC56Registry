@@ -3,8 +3,8 @@
 - **Repo**: [compx-labs/waypoint](https://github.com/compx-labs/waypoint)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/compx-labs/waypoint/HEAD/contracts/algorand/projects/algorand/smart_contracts/artifacts/waypoint_invoice/waypoint-invoice.arc56.json](https://raw.githubusercontent.com/compx-labs/waypoint/HEAD/contracts/algorand/projects/algorand/smart_contracts/artifacts/waypoint_invoice/waypoint-invoice.arc56.json)
 - **Namespace used**: `Arc56.Generated.compx_labs.waypoint.waypoint_invoice_22f15ae7`
-- **Detected**: 2026-10-23T11:22:51.960481+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:4c7f0b02126c7a2565338efea6e3a214b086d319bc88c43d227a9fc55b907289`
+- **Detected**: 2026-11-13T14:14:26.005583+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:23f962c15728699da4c86c52c95d65d4bca48d37e1e21665a2d9d2d181121ddf`
 
 ## Reproduce
 
