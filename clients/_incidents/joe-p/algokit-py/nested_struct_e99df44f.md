@@ -3,8 +3,8 @@
 - **Repo**: [joe-p/algokit-py](https://github.com/joe-p/algokit-py)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-utils-py/tests/artifacts/nested_struct/nested_struct.arc56.json](https://raw.githubusercontent.com/joe-p/algokit-py/HEAD/algokit-utils-py/tests/artifacts/nested_struct/nested_struct.arc56.json)
 - **Namespace used**: `Arc56.Generated.joe_p.algokit_py.nested_struct_e99df44f`
-- **Detected**: 2026-11-10T14:00:24.677594+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:4c7f0b02126c7a2565338efea6e3a214b086d319bc88c43d227a9fc55b907289`
+- **Detected**: 2026-11-13T13:42:50.499057+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:23f962c15728699da4c86c52c95d65d4bca48d37e1e21665a2d9d2d181121ddf`
 
 ## Reproduce
 
