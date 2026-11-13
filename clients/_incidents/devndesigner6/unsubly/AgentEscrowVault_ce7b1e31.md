@@ -3,8 +3,8 @@
 - **Repo**: [devndesigner6/unsubly](https://github.com/devndesigner6/unsubly)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/devndesigner6/unsubly/HEAD/smart_contracts/artifacts/AgentEscrowVault/AgentEscrowVault.arc56.json](https://raw.githubusercontent.com/devndesigner6/unsubly/HEAD/smart_contracts/artifacts/AgentEscrowVault/AgentEscrowVault.arc56.json)
 - **Namespace used**: `Arc56.Generated.devndesigner6.unsubly.AgentEscrowVault_ce7b1e31`
-- **Detected**: 2026-10-23T11:24:28.247066+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:4c7f0b02126c7a2565338efea6e3a214b086d319bc88c43d227a9fc55b907289`
+- **Detected**: 2026-11-13T14:15:44.981186+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:23f962c15728699da4c86c52c95d65d4bca48d37e1e21665a2d9d2d181121ddf`
 
 ## Reproduce
 
