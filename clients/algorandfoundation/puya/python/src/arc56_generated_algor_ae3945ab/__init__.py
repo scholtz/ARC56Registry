@@ -98,6 +98,7 @@ from . import BoolOnly_bf157fa6 as BoolOnly_bf157fa6
 from . import BoxBoolArrayAppendRead_bedf85d7 as BoxBoolArrayAppendRead_bedf85d7
 from . import BoxReadBoxLenExistenceCheck_e742147d as BoxReadBoxLenExistenceCheck_e742147d
 from . import BoxReadCache_02012c7b as BoxReadCache_02012c7b
+from . import BoxReadForwarding_6afbae3e as BoxReadForwarding_6afbae3e
 from . import BranchElimination_481297ca as BranchElimination_481297ca
 from . import Child_3611f681 as Child_3611f681
 from . import ConstBigIntToIntOverflow_c7f90ec6 as ConstBigIntToIntOverflow_c7f90ec6
