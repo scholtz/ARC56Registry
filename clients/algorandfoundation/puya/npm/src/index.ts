@@ -95,6 +95,7 @@ export * as BoolOnly_bf157fa6 from './BoolOnly_bf157fa6';
 export * as BoxBoolArrayAppendRead_bedf85d7 from './BoxBoolArrayAppendRead_bedf85d7';
 export * as BoxReadBoxLenExistenceCheck_e742147d from './BoxReadBoxLenExistenceCheck_e742147d';
 export * as BoxReadCache_02012c7b from './BoxReadCache_02012c7b';
+export * as BoxReadForwarding_6afbae3e from './BoxReadForwarding_6afbae3e';
 export * as BranchElimination_481297ca from './BranchElimination_481297ca';
 export * as Child_3611f681 from './Child_3611f681';
 export * as ConstBigIntToIntOverflow_c7f90ec6 from './ConstBigIntToIntOverflow_c7f90ec6';
