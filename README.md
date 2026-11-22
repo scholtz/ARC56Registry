@@ -27,7 +27,7 @@ Need help integrating with the registry or its generated clients? Join us on
 | npm packages published | 562 |
 | PyPI packages published | 373 |
 
-_Last updated 2026-11-21 12:07 UTC by `scripts/update_arc56_links.py`. Historical snapshots (for charting growth over time): [arc56_stats_history.csv](arc56_stats_history.csv)._
+_Last updated 2026-11-22 12:10 UTC by `scripts/update_arc56_links.py`. Historical snapshots (for charting growth over time): [arc56_stats_history.csv](arc56_stats_history.csv)._
 <!-- LIVE-STATS:END -->
 
 Regenerated daily as the last step of [`scripts/update_arc56_links.py`](scripts/update_arc56_links.py)
