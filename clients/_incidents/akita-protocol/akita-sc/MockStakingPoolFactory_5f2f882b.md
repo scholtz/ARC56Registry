@@ -3,8 +3,8 @@
 - **Repo**: [akita-protocol/akita-sc](https://github.com/akita-protocol/akita-sc)
 - **Source ARC-56 spec**: [https://raw.githubusercontent.com/akita-protocol/akita-sc/HEAD/projects/akita-sc/smart_contracts/artifacts/mocks/staking-pool-factory/MockStakingPoolFactory.arc56.json](https://raw.githubusercontent.com/akita-protocol/akita-sc/HEAD/projects/akita-sc/smart_contracts/artifacts/mocks/staking-pool-factory/MockStakingPoolFactory.arc56.json)
 - **Namespace used**: `Arc56.Generated.akita_protocol.akita_sc.MockStakingPoolFactory_5f2f882b`
-- **Detected**: 2026-07-21T08:15:11.385341+00:00
-- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:0093cb1562e2d8125477e45e9b2045a81c983a91f38f1a2f9b738be110520613`
+- **Detected**: 2026-11-26T16:07:42.787537+00:00
+- **Generator image**: `scholtz2/dotnet-avm-generated-client@sha256:23f962c15728699da4c86c52c95d65d4bca48d37e1e21665a2d9d2d181121ddf`
 
 ## Reproduce
 
