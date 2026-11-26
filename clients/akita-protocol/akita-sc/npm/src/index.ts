@@ -63,9 +63,11 @@ export * as MockRandomnessBeacon_25f875b2 from './MockRandomnessBeacon_25f875b2'
 export * as MockAuctionFactory_e21b1d7b from './MockAuctionFactory_e21b1d7b';
 export * as MockAkitaDAO_f90ad822 from './MockAkitaDAO_f90ad822';
 export * as MockMarketplace_c6aedb21 from './MockMarketplace_c6aedb21';
+export * as MockMetaReader_3308b948 from './MockMetaReader_3308b948';
 export * as MockPollFactory_d5c174ef from './MockPollFactory_d5c174ef';
 export * as MockPrizeBoxFactory_884f8fdd from './MockPrizeBoxFactory_884f8fdd';
 export * as MockRaffleFactory_dd35a61e from './MockRaffleFactory_dd35a61e';
+export * as MockReapableChild_1146cc39 from './MockReapableChild_1146cc39';
 export * as MockAkitaSocial_7d21d07f from './MockAkitaSocial_7d21d07f';
 export * as MockStakingPoolFactory_5f2f882b from './MockStakingPoolFactory_5f2f882b';
 export * as MockSubscriptions_fcab6f10 from './MockSubscriptions_fcab6f10';
