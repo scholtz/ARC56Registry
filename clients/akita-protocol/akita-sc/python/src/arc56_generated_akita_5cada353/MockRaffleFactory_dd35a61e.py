@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "ping", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "MockRaffleFactory", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "ping", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "MockRaffleFactory", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CzEbQQAngAQdXFYbNhoAjgEAAQAxGRQxGBBEgAwVH3x1AAAAAAAAA+uwgQFDMRkUMRgUEEM=", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICAvLyBzbWFydF9jb250cmFjdHMvbW9ja3MvcmFmZmxlLWZhY3RvcnkvbW9jay5hbGdvLnRzOjMKICAgIC8vIGV4cG9ydCBjbGFzcyBNb2NrUmFmZmxlRmFjdG9yeSBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1CiAgICBwdXNoYnl0ZXMgMHgxZDVjNTYxYiAvLyBtZXRob2QgInBpbmcoKXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fcGluZ19yb3V0ZUAzCiAgICBlcnIKCm1haW5fcGluZ19yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL3JhZmZsZS1mYWN0b3J5L21vY2suYWxnby50czo1CiAgICAvLyBwaW5nKCk6IHVpbnQ2NCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgJiYKICAgIGFzc2VydAogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUwMDAwMDAwMDAwMDAwM2ViCiAgICBsb2cKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL3JhZmZsZS1mYWN0b3J5L21vY2suYWxnby50czozCiAgICAvLyBleHBvcnQgY2xhc3MgTW9ja1JhZmZsZUZhY3RvcnkgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": []}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -328,6 +328,270 @@ class MockRaffleFactoryClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class MockRaffleFactoryBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating MockRaffleFactory contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class MockRaffleFactoryFactory(algokit_utils.TypedAppFactoryProtocol[MockRaffleFactoryBareCallCreateParams, None, None]):
+    """Factory for deploying and managing MockRaffleFactoryClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = MockRaffleFactoryFactoryParams(self.app_factory)
+        self.create_transaction = MockRaffleFactoryFactoryCreateTransaction(self.app_factory)
+        self.send = MockRaffleFactoryFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: MockRaffleFactoryBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[MockRaffleFactoryClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return MockRaffleFactoryClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> MockRaffleFactoryClient:
+        """Get an app client by creator address and name"""
+        return MockRaffleFactoryClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> MockRaffleFactoryClient:
+        """Get an app client by app ID"""
+        return MockRaffleFactoryClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class MockRaffleFactoryFactoryParams:
+    """Parameters for creating transactions for MockRaffleFactory contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MockRaffleFactoryFactoryCreateParams(app_factory)
+        self.update = MockRaffleFactoryFactoryUpdateParams(app_factory)
+        self.delete = MockRaffleFactoryFactoryDeleteParams(app_factory)
+
+class MockRaffleFactoryFactoryCreateParams:
+    """Parameters for 'create' operations of MockRaffleFactory contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def ping(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the ping()uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "ping()uint64",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class MockRaffleFactoryFactoryUpdateParams:
+    """Parameters for 'update' operations of MockRaffleFactory contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class MockRaffleFactoryFactoryDeleteParams:
+    """Parameters for 'delete' operations of MockRaffleFactory contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class MockRaffleFactoryFactoryCreateTransaction:
+    """Create transactions for MockRaffleFactory contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MockRaffleFactoryFactoryCreateTransactionCreate(app_factory)
+
+
+class MockRaffleFactoryFactoryCreateTransactionCreate:
+    """Create new instances of MockRaffleFactory contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class MockRaffleFactoryFactorySend:
+    """Send calls to MockRaffleFactory contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MockRaffleFactoryFactorySendCreate(app_factory)
+
+
+class MockRaffleFactoryFactorySendCreate:
+    """Send create calls to MockRaffleFactory contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[MockRaffleFactoryClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return MockRaffleFactoryClient(result[0]), result[1]
 
 
 class MockRaffleFactoryComposer:

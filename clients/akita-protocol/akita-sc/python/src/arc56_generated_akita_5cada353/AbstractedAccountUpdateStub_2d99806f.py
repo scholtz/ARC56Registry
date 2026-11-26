@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "version"}], "name": "update", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "AbstractedAccountUpdateStub", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [44], "errorMessage": "invalid array length header"}, {"pc": [51], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "string", "name": "version"}], "name": "update", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "AbstractedAccountUpdateStub", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "DTEbQS6ABOqRgN02GgCOAQABADEZFDEYEERCEDEZFDEYFBBDNhoBSYEAWYECCEwVEkSBAUM=", "clear": "DYEBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDEzCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCiNwcmFnbWEgYXV0b3NhbHQgZmFsc2UKCi8vIEBhbGdvcmFuZGZvdW5kYXRpb24vYWxnb3JhbmQtdHlwZXNjcmlwdC9hcmM0L2luZGV4LmQudHM6OkNvbnRyYWN0LmFwcHJvdmFsUHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdW5zZXQvd2FsbGV0LWZhY3RvcnkuYWxnby50czozMy0zNAogICAgLy8gQGNvbnRyYWN0KHsgYXZtVmVyc2lvbjogMTMgfSkKICAgIC8vIGNsYXNzIEFic3RyYWN0ZWRBY2NvdW50VXBkYXRlU3R1YiBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1CiAgICBwdXNoYnl0ZXMgMHhlYTkxODBkZCAvLyBtZXRob2QgInVwZGF0ZShzdHJpbmcpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdXBkYXRlX3JvdXRlQDMKICAgIGVycgoKbWFpbl91cGRhdGVfcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9zdW5zZXQvd2FsbGV0LWZhY3RvcnkuYWxnby50czozNQogICAgLy8gdXBkYXRlKHZlcnNpb246IHN0cmluZyk6IHZvaWQgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgdXBkYXRlCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA1OgogICAgLy8gc21hcnRfY29udHJhY3RzL3N1bnNldC93YWxsZXQtZmFjdG9yeS5hbGdvLnRzOjMzLTM0CiAgICAvLyBAY29udHJhY3QoeyBhdm1WZXJzaW9uOiAxMyB9KQogICAgLy8gY2xhc3MgQWJzdHJhY3RlZEFjY291bnRVcGRhdGVTdHViIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvc3Vuc2V0L3dhbGxldC1mYWN0b3J5LmFsZ28udHM6OkFic3RyYWN0ZWRBY2NvdW50VXBkYXRlU3R1Yi51cGRhdGVbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvc3Vuc2V0L3dhbGxldC1mYWN0b3J5LmFsZ28udHM6MzUKICAgIC8vIHVwZGF0ZSh2ZXJzaW9uOiBzdHJpbmcpOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgcHVzaGludCAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDEzCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCiNwcmFnbWEgYXV0b3NhbHQgZmFsc2UKCi8vIEBhbGdvcmFuZGZvdW5kYXRpb24vYWxnb3JhbmQtdHlwZXNjcmlwdC9iYXNlLWNvbnRyYWN0LmQudHM6OkJhc2VDb250cmFjdC5jbGVhclN0YXRlUHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [42], "errorMessage": "invalid array length header"}, {"pc": [49], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -344,6 +344,271 @@ class AbstractedAccountUpdateStubClient:
             if struct_class:
                 return struct_class(**typing.cast(dict, decoded))
         return decoded
+
+
+@dataclasses.dataclass(frozen=True)
+class AbstractedAccountUpdateStubBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating AbstractedAccountUpdateStub contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class AbstractedAccountUpdateStubFactory(algokit_utils.TypedAppFactoryProtocol[AbstractedAccountUpdateStubBareCallCreateParams, None, None]):
+    """Factory for deploying and managing AbstractedAccountUpdateStubClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = AbstractedAccountUpdateStubFactoryParams(self.app_factory)
+        self.create_transaction = AbstractedAccountUpdateStubFactoryCreateTransaction(self.app_factory)
+        self.send = AbstractedAccountUpdateStubFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: AbstractedAccountUpdateStubBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[AbstractedAccountUpdateStubClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return AbstractedAccountUpdateStubClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AbstractedAccountUpdateStubClient:
+        """Get an app client by creator address and name"""
+        return AbstractedAccountUpdateStubClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> AbstractedAccountUpdateStubClient:
+        """Get an app client by app ID"""
+        return AbstractedAccountUpdateStubClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class AbstractedAccountUpdateStubFactoryParams:
+    """Parameters for creating transactions for AbstractedAccountUpdateStub contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbstractedAccountUpdateStubFactoryCreateParams(app_factory)
+        self.update = AbstractedAccountUpdateStubFactoryUpdateParams(app_factory)
+        self.delete = AbstractedAccountUpdateStubFactoryDeleteParams(app_factory)
+
+class AbstractedAccountUpdateStubFactoryCreateParams:
+    """Parameters for 'create' operations of AbstractedAccountUpdateStub contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the update(string)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "update(string)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class AbstractedAccountUpdateStubFactoryUpdateParams:
+    """Parameters for 'update' operations of AbstractedAccountUpdateStub contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class AbstractedAccountUpdateStubFactoryDeleteParams:
+    """Parameters for 'delete' operations of AbstractedAccountUpdateStub contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class AbstractedAccountUpdateStubFactoryCreateTransaction:
+    """Create transactions for AbstractedAccountUpdateStub contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbstractedAccountUpdateStubFactoryCreateTransactionCreate(app_factory)
+
+
+class AbstractedAccountUpdateStubFactoryCreateTransactionCreate:
+    """Create new instances of AbstractedAccountUpdateStub contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class AbstractedAccountUpdateStubFactorySend:
+    """Send calls to AbstractedAccountUpdateStub contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = AbstractedAccountUpdateStubFactorySendCreate(app_factory)
+
+
+class AbstractedAccountUpdateStubFactorySendCreate:
+    """Send create calls to AbstractedAccountUpdateStub contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[AbstractedAccountUpdateStubClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return AbstractedAccountUpdateStubClient(result[0]), result[1]
 
 
 class AbstractedAccountUpdateStubComposer:

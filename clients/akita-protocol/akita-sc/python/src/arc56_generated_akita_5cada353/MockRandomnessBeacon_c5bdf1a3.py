@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "round"}, {"type": "byte[]", "name": "userData"}], "name": "get", "returns": {"type": "byte[]"}, "desc": "Returns mock random bytes for testing.\nGenerates deterministic bytes based on round number for reproducible tests.", "events": [], "readonly": false, "recommendations": {}}], "name": "MockRandomnessBeacon", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "desc": "Mock VRF beacon for testing purposes.\nReturns a predictable seed value based on the round number.", "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [52], "errorMessage": "invalid array length header"}, {"pc": [59], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [45], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "round"}, {"type": "byte[]", "name": "userData"}], "name": "get", "returns": {"type": "byte[]"}, "desc": "Returns mock random bytes for testing.", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "byte[]", "name": "seed"}], "name": "setSeed", "returns": {"type": "void"}, "desc": "test helper: use `seed` for every subsequent read (empty bytes restores the default)", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "bool", "name": "empty"}], "name": "setEmpty", "returns": {"type": "void"}, "desc": "test helper: make every subsequent read return empty bytes", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "lag"}], "name": "setSubmitLag", "returns": {"type": "void"}, "desc": "test helper: model the MainNet beacon's ceil-to-8 storage and submission lag (0 disables)", "events": [], "readonly": false, "recommendations": {}}], "name": "MockRandomnessBeacon", "state": {"keys": {"box": {}, "global": {"seed": {"key": "c2VlZA==", "keyType": "AVMString", "valueType": "AVMBytes", "desc": "override seed; empty means \"use the default seed\""}, "empty": {"key": "ZW1wdHk=", "keyType": "AVMString", "valueType": "AVMUint64", "desc": "when true, `get` returns empty bytes (beacon value unavailable)"}, "submitLag": {"key": "c3VibWl0TGFn", "keyType": "AVMString", "valueType": "AVMUint64", "desc": "0 = every round is available at once. Otherwise mirrors MainNet beacon 1615566206: it stores\none value per multiple of 8, answers round r from ceil8(r), and that value lands `submitLag`\nrounds after ceil8(r)"}}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 2}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyAEAAEIAiYEBHNlZWQJc3VibWl0TGFnAAVlbXB0eTEYQAAJKCpnKyJnKSJnMRtBACsxGRREMRhEggQEGJOSxQRdJLIaBOoEoEwElPkQOzYaAI4EAAkAjQCiALEAMRkUMRgUEEM2GgFJFSQSRBc2GgJJIlklCEwVEkQiK2VEQQAUKkkVFlcGAkxQgAQVH3x1TFCwI0MiKWVEQQAZSYEHCCQKJAsyBiIpZURPAggMQQAEKkL/zSIoZUQVQQAHIihlREL/voAgAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyBC/5k2GgFJIlklCEsBFRJEVwIAKExnI0M2GgFJFSMSRCJTK0xnI0M2GgFJFSQSRBcpTGcjQw==", "clear": "C4EBQw=="}, "desc": "Mock VRF beacon for testing purposes (test-only, never deployed to a live network).\n\nBy default it returns a fixed 32-byte seed for every round. Tests can override\nthe seed (`setSeed`) to steer the drawn ticket, make every read come back\nempty (`setEmpty`) to exercise the beacon-failure path, or model the MainNet\nbeacon's timing (`setSubmitLag`).", "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDggMgogICAgYnl0ZWNibG9jayAic2VlZCIgInN1Ym1pdExhZyIgIiIgImVtcHR5IgogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJueiBtYWluX2FmdGVyX2lmX2Vsc2VAMgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoxMwogICAgLy8gc2VlZCA9IEdsb2JhbFN0YXRlPGJ5dGVzPih7IGluaXRpYWxWYWx1ZTogQnl0ZXMoJycpLCBrZXk6ICdzZWVkJyB9KQogICAgYnl0ZWNfMCAvLyAic2VlZCIKICAgIGJ5dGVjXzIgLy8gIiIKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjE1CiAgICAvLyBlbXB0eSA9IEdsb2JhbFN0YXRlPGJvb2xlYW4+KHsgaW5pdGlhbFZhbHVlOiBmYWxzZSwga2V5OiAnZW1wdHknIH0pCiAgICBieXRlY18zIC8vICJlbXB0eSIKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoyMQogICAgLy8gc3VibWl0TGFnID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGluaXRpYWxWYWx1ZTogMCwga2V5OiAnc3VibWl0TGFnJyB9KQogICAgYnl0ZWNfMSAvLyAic3VibWl0TGFnIgogICAgaW50Y18wIC8vIDAKICAgIGFwcF9nbG9iYWxfcHV0CgptYWluX2FmdGVyX2lmX2Vsc2VAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy90eXBlcy9tb2NrLXJhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6MTEKICAgIC8vIGV4cG9ydCBjbGFzcyBNb2NrUmFuZG9tbmVzc0JlYWNvbiBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBOdW1BcHBBcmdzCiAgICBieiBtYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUAxMwogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4MTg5MzkyYzUgMHg1ZDI0YjIxYSAweGVhMDRhMDRjIDB4OTRmOTEwM2IgLy8gbWV0aG9kICJnZXQodWludDY0LGJ5dGVbXSlieXRlW10iLCBtZXRob2QgInNldFNlZWQoYnl0ZVtdKXZvaWQiLCBtZXRob2QgInNldEVtcHR5KGJvb2wpdm9pZCIsIG1ldGhvZCAic2V0U3VibWl0TGFnKHVpbnQ2NCl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggZ2V0IHNldFNlZWQgc2V0RW1wdHkgc2V0U3VibWl0TGFnCiAgICBlcnIKCm1haW5fX19hbGdvdHNfXy5kZWZhdWx0Q3JlYXRlQDEzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoxMQogICAgLy8gZXhwb3J0IGNsYXNzIE1vY2tSYW5kb21uZXNzQmVhY29uIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICEKICAgICYmCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjpNb2NrUmFuZG9tbmVzc0JlYWNvbi5nZXRbcm91dGluZ10oKSAtPiB2b2lkOgpnZXQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjI2CiAgICAvLyBnZXQocm91bmQ6IHVpbnQ2NCwgdXNlckRhdGE6IGJ5dGVzKTogYnl0ZXMgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18zIC8vIDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjI3CiAgICAvLyBpZiAodGhpcy5lbXB0eS52YWx1ZSkgewogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy90eXBlcy9tb2NrLXJhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6MTUKICAgIC8vIGVtcHR5ID0gR2xvYmFsU3RhdGU8Ym9vbGVhbj4oeyBpbml0aWFsVmFsdWU6IGZhbHNlLCBrZXk6ICdlbXB0eScgfSkKICAgIGJ5dGVjXzMgLy8gImVtcHR5IgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoyNwogICAgLy8gaWYgKHRoaXMuZW1wdHkudmFsdWUpIHsKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBieiBnZXRfYWZ0ZXJfaWZfZWxzZUAzCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjI4CiAgICAvLyByZXR1cm4gQnl0ZXMoJycpCiAgICBieXRlY18yIC8vICIiCgpnZXRfYWZ0ZXJfaW5saW5lZF9zbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjpNb2NrUmFuZG9tbmVzc0JlYWNvbi5nZXRAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjI2CiAgICAvLyBnZXQocm91bmQ6IHVpbnQ2NCwgdXNlckRhdGE6IGJ5dGVzKTogYnl0ZXMgewogICAgZHVwCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKZ2V0X2FmdGVyX2lmX2Vsc2VAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy90eXBlcy9tb2NrLXJhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6MzEKICAgIC8vIGlmICh0aGlzLnN1Ym1pdExhZy52YWx1ZSA+IDApIHsKICAgIGludGNfMCAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjIxCiAgICAvLyBzdWJtaXRMYWcgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsgaW5pdGlhbFZhbHVlOiAwLCBrZXk6ICdzdWJtaXRMYWcnIH0pCiAgICBieXRlY18xIC8vICJzdWJtaXRMYWciCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjMxCiAgICAvLyBpZiAodGhpcy5zdWJtaXRMYWcudmFsdWUgPiAwKSB7CiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgYnogZ2V0X2FmdGVyX2lmX2Vsc2VANwogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czozMgogICAgLy8gY29uc3Qgc3RvcmVkOiB1aW50NjQgPSAocm91bmQgKyA3KSAvIDggKiA4CiAgICBkdXAKICAgIHB1c2hpbnQgNwogICAgKwogICAgaW50Y18yIC8vIDgKICAgIC8KICAgIGludGNfMiAvLyA4CiAgICAqCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjMzCiAgICAvLyBpZiAoR2xvYmFsLnJvdW5kIDwgc3RvcmVkICsgdGhpcy5zdWJtaXRMYWcudmFsdWUpIHsKICAgIGdsb2JhbCBSb3VuZAogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy90eXBlcy9tb2NrLXJhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6MjEKICAgIC8vIHN1Ym1pdExhZyA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBpbml0aWFsVmFsdWU6IDAsIGtleTogJ3N1Ym1pdExhZycgfSkKICAgIGJ5dGVjXzEgLy8gInN1Ym1pdExhZyIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy90eXBlcy9tb2NrLXJhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6MzMKICAgIC8vIGlmIChHbG9iYWwucm91bmQgPCBzdG9yZWQgKyB0aGlzLnN1Ym1pdExhZy52YWx1ZSkgewogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIHVuY292ZXIgMgogICAgKwogICAgPAogICAgYnogZ2V0X2FmdGVyX2lmX2Vsc2VANwogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czozNAogICAgLy8gcmV0dXJuIEJ5dGVzKCcnKQogICAgYnl0ZWNfMiAvLyAiIgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoyNgogICAgLy8gZ2V0KHJvdW5kOiB1aW50NjQsIHVzZXJEYXRhOiBieXRlcyk6IGJ5dGVzIHsKICAgIGIgZ2V0X2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czo6TW9ja1JhbmRvbW5lc3NCZWFjb24uZ2V0QDEwCgpnZXRfYWZ0ZXJfaWZfZWxzZUA3OgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czozOAogICAgLy8gaWYgKHRoaXMuc2VlZC52YWx1ZS5sZW5ndGggPiAwKSB7CiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoxMwogICAgLy8gc2VlZCA9IEdsb2JhbFN0YXRlPGJ5dGVzPih7IGluaXRpYWxWYWx1ZTogQnl0ZXMoJycpLCBrZXk6ICdzZWVkJyB9KQogICAgYnl0ZWNfMCAvLyAic2VlZCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy90eXBlcy9tb2NrLXJhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6MzgKICAgIC8vIGlmICh0aGlzLnNlZWQudmFsdWUubGVuZ3RoID4gMCkgewogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIGxlbgogICAgYnogZ2V0X2FmdGVyX2lmX2Vsc2VAOQogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czozOQogICAgLy8gcmV0dXJuIHRoaXMuc2VlZC52YWx1ZQogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy90eXBlcy9tb2NrLXJhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6MTMKICAgIC8vIHNlZWQgPSBHbG9iYWxTdGF0ZTxieXRlcz4oeyBpbml0aWFsVmFsdWU6IEJ5dGVzKCcnKSwga2V5OiAnc2VlZCcgfSkKICAgIGJ5dGVjXzAgLy8gInNlZWQiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjM5CiAgICAvLyByZXR1cm4gdGhpcy5zZWVkLnZhbHVlCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoyNgogICAgLy8gZ2V0KHJvdW5kOiB1aW50NjQsIHVzZXJEYXRhOiBieXRlcyk6IGJ5dGVzIHsKICAgIGIgZ2V0X2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czo6TW9ja1JhbmRvbW5lc3NCZWFjb24uZ2V0QDEwCgpnZXRfYWZ0ZXJfaWZfZWxzZUA5OgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czo0MwogICAgLy8gcmV0dXJuIEJ5dGVzLmZyb21IZXgoJzAxMDIwMzA0MDUwNjA3MDgwOTBhMGIwYzBkMGUwZjEwMTExMjEzMTQxNTE2MTcxODE5MWExYjFjMWQxZTFmMjAnKQogICAgcHVzaGJ5dGVzIDB4MDEwMjAzMDQwNTA2MDcwODA5MGEwYjBjMGQwZTBmMTAxMTEyMTMxNDE1MTYxNzE4MTkxYTFiMWMxZDFlMWYyMAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoyNgogICAgLy8gZ2V0KHJvdW5kOiB1aW50NjQsIHVzZXJEYXRhOiBieXRlcyk6IGJ5dGVzIHsKICAgIGIgZ2V0X2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czo6TW9ja1JhbmRvbW5lc3NCZWFjb24uZ2V0QDEwCgoKLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czo6TW9ja1JhbmRvbW5lc3NCZWFjb24uc2V0U2VlZFtyb3V0aW5nXSgpIC0+IHZvaWQ6CnNldFNlZWQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjQ3CiAgICAvLyBzZXRTZWVkKHNlZWQ6IGJ5dGVzKTogdm9pZCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzMgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoxMwogICAgLy8gc2VlZCA9IEdsb2JhbFN0YXRlPGJ5dGVzPih7IGluaXRpYWxWYWx1ZTogQnl0ZXMoJycpLCBrZXk6ICdzZWVkJyB9KQogICAgYnl0ZWNfMCAvLyAic2VlZCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy90eXBlcy9tb2NrLXJhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6NDgKICAgIC8vIHRoaXMuc2VlZC52YWx1ZSA9IHNlZWQKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjQ3CiAgICAvLyBzZXRTZWVkKHNlZWQ6IGJ5dGVzKTogdm9pZCB7CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czo6TW9ja1JhbmRvbW5lc3NCZWFjb24uc2V0RW1wdHlbcm91dGluZ10oKSAtPiB2b2lkOgpzZXRFbXB0eToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy90eXBlcy9tb2NrLXJhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6NTIKICAgIC8vIHNldEVtcHR5KGVtcHR5OiBib29sZWFuKTogdm9pZCB7CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDEKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuYm9vbAogICAgaW50Y18wIC8vIDAKICAgIGdldGJpdAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoxNQogICAgLy8gZW1wdHkgPSBHbG9iYWxTdGF0ZTxib29sZWFuPih7IGluaXRpYWxWYWx1ZTogZmFsc2UsIGtleTogJ2VtcHR5JyB9KQogICAgYnl0ZWNfMyAvLyAiZW1wdHkiCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjUzCiAgICAvLyB0aGlzLmVtcHR5LnZhbHVlID0gZW1wdHkKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjUyCiAgICAvLyBzZXRFbXB0eShlbXB0eTogYm9vbGVhbik6IHZvaWQgewogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy90eXBlcy9tb2NrLXJhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6Ok1vY2tSYW5kb21uZXNzQmVhY29uLnNldFN1Ym1pdExhZ1tyb3V0aW5nXSgpIC0+IHZvaWQ6CnNldFN1Ym1pdExhZzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy90eXBlcy9tb2NrLXJhbmRvbW5lc3MtYmVhY29uLmFsZ28udHM6NTcKICAgIC8vIHNldFN1Ym1pdExhZyhsYWc6IHVpbnQ2NCk6IHZvaWQgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMiAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czoyMQogICAgLy8gc3VibWl0TGFnID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGluaXRpYWxWYWx1ZTogMCwga2V5OiAnc3VibWl0TGFnJyB9KQogICAgYnl0ZWNfMSAvLyAic3VibWl0TGFnIgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL3R5cGVzL21vY2stcmFuZG9tbmVzcy1iZWFjb24uYWxnby50czo1OAogICAgLy8gdGhpcy5zdWJtaXRMYWcudmFsdWUgPSBsYWcKICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvdHlwZXMvbW9jay1yYW5kb21uZXNzLWJlYWNvbi5hbGdvLnRzOjU3CiAgICAvLyBzZXRTdWJtaXRMYWcobGFnOiB1aW50NjQpOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4K", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [125, 152, 169, 184, 192], "errorMessage": "check GlobalState exists"}, {"pc": [115, 238], "errorMessage": "invalid array length header"}, {"pc": [261], "errorMessage": "invalid number of bytes for arc4.bool"}, {"pc": [121, 245], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [108, 276], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -74,6 +74,33 @@ class GetArgs:
     def abi_method_signature(self) -> str:
         return "get(uint64,byte[])byte[]"
 
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class SetSeedArgs:
+    """Dataclass for set_seed arguments"""
+    seed: bytes | str
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "setSeed(byte[])void"
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class SetEmptyArgs:
+    """Dataclass for set_empty arguments"""
+    empty: bool
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "setEmpty(bool)void"
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class SetSubmitLagArgs:
+    """Dataclass for set_submit_lag arguments"""
+    lag: int
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "setSubmitLag(uint64)void"
+
 
 class MockRandomnessBeaconParams:
     def __init__(self, app_client: algokit_utils.AppClient):
@@ -89,6 +116,45 @@ class MockRandomnessBeaconParams:
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
             "method": "get(uint64,byte[])byte[]",
+            "args": method_args,
+        }))
+
+    def set_seed(
+        self,
+        args: tuple[bytes | str] | SetSeedArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "setSeed(byte[])void",
+            "args": method_args,
+        }))
+
+    def set_empty(
+        self,
+        args: tuple[bool] | SetEmptyArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "setEmpty(bool)void",
+            "args": method_args,
+        }))
+
+    def set_submit_lag(
+        self,
+        args: tuple[int] | SetSubmitLagArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "setSubmitLag(uint64)void",
             "args": method_args,
         }))
 
@@ -117,6 +183,45 @@ class MockRandomnessBeaconCreateTransactionParams:
         return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
             "method": "get(uint64,byte[])byte[]",
+            "args": method_args,
+        }))
+
+    def set_seed(
+        self,
+        args: tuple[bytes | str] | SetSeedArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "setSeed(byte[])void",
+            "args": method_args,
+        }))
+
+    def set_empty(
+        self,
+        args: tuple[bool] | SetEmptyArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "setEmpty(bool)void",
+            "args": method_args,
+        }))
+
+    def set_submit_lag(
+        self,
+        args: tuple[int] | SetSubmitLagArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "setSubmitLag(uint64)void",
             "args": method_args,
         }))
 
@@ -151,6 +256,54 @@ class MockRandomnessBeaconSend:
         parsed_response = response
         return typing.cast(algokit_utils.SendAppTransactionResult[bytes], parsed_response)
 
+    def set_seed(
+        self,
+        args: tuple[bytes | str] | SetSeedArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "setSeed(byte[])void",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
+
+    def set_empty(
+        self,
+        args: tuple[bool] | SetEmptyArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "setEmpty(bool)void",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
+
+    def set_submit_lag(
+        self,
+        args: tuple[int] | SetSubmitLagArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "setSubmitLag(uint64)void",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
+
     def clear_state(
         self,
         params: algokit_utils.AppClientBareCallParams | None = None,
@@ -162,11 +315,71 @@ class MockRandomnessBeaconSend:
         )
 
 
+class GlobalStateValue(typing.TypedDict):
+    """Shape of global_state state key values"""
+    seed: bytes
+    empty: int
+    submitLag: int
+
 class MockRandomnessBeaconState:
     """Methods to access state for the current MockRandomnessBeacon app"""
 
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def global_state(
+        self
+    ) -> "_GlobalState":
+            """Methods to access global_state for the current app"""
+            return _GlobalState(self.app_client)
+
+class _GlobalState:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+        
+        # Pre-generated mapping of value types to their struct classes
+        self._struct_classes: dict[str, typing.Type[typing.Any]] = {}
+
+    def get_all(self) -> GlobalStateValue:
+        """Get all current keyed values from global_state state"""
+        result = self.app_client.state.global_state.get_all()
+        if not result:
+            return typing.cast(GlobalStateValue, {})
+
+        converted = {}
+        for key, value in result.items():
+            key_info = self.app_client.app_spec.state.keys.global_state.get(key)
+            struct_class = self._struct_classes.get(key_info.value_type) if key_info else None
+            converted[key] = (
+                _init_dataclass(struct_class, value) if struct_class and isinstance(value, dict)
+                else value
+            )
+        return typing.cast(GlobalStateValue, converted)
+
+    @property
+    def seed(self) -> bytes:
+        """Get the current value of the seed key in global_state state"""
+        value = self.app_client.state.global_state.get_value("seed")
+        if isinstance(value, dict) and "AVMBytes" in self._struct_classes:
+            return _init_dataclass(self._struct_classes["AVMBytes"], value)  # type: ignore
+        return typing.cast(bytes, value)
+
+    @property
+    def empty(self) -> int:
+        """Get the current value of the empty key in global_state state"""
+        value = self.app_client.state.global_state.get_value("empty")
+        if isinstance(value, dict) and "AVMUint64" in self._struct_classes:
+            return _init_dataclass(self._struct_classes["AVMUint64"], value)  # type: ignore
+        return typing.cast(int, value)
+
+    @property
+    def submit_lag(self) -> int:
+        """Get the current value of the submitLag key in global_state state"""
+        value = self.app_client.state.global_state.get_value("submitLag")
+        if isinstance(value, dict) and "AVMUint64" in self._struct_classes:
+            return _init_dataclass(self._struct_classes["AVMUint64"], value)  # type: ignore
+        return typing.cast(int, value)
 
 class MockRandomnessBeaconClient:
     """Client for interacting with MockRandomnessBeacon smart contract"""
@@ -320,6 +533,24 @@ class MockRandomnessBeaconClient:
     @typing.overload
     def decode_return_value(
         self,
+        method: typing.Literal["setSeed(byte[])void"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
+        method: typing.Literal["setEmpty(bool)void"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
+        method: typing.Literal["setSubmitLag(uint64)void"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
         method: str,
         return_value: algokit_utils.ABIReturn | None
     ) -> algokit_utils.ABIValue | algokit_utils.ABIStruct | None: ...
@@ -347,6 +578,331 @@ class MockRandomnessBeaconClient:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class MockRandomnessBeaconBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating MockRandomnessBeacon contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+class MockRandomnessBeaconFactory(algokit_utils.TypedAppFactoryProtocol[MockRandomnessBeaconBareCallCreateParams, None, None]):
+    """Factory for deploying and managing MockRandomnessBeaconClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = MockRandomnessBeaconFactoryParams(self.app_factory)
+        self.create_transaction = MockRandomnessBeaconFactoryCreateTransaction(self.app_factory)
+        self.send = MockRandomnessBeaconFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: MockRandomnessBeaconBareCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[MockRandomnessBeaconClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return MockRandomnessBeaconClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> MockRandomnessBeaconClient:
+        """Get an app client by creator address and name"""
+        return MockRandomnessBeaconClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> MockRandomnessBeaconClient:
+        """Get an app client by app ID"""
+        return MockRandomnessBeaconClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class MockRandomnessBeaconFactoryParams:
+    """Parameters for creating transactions for MockRandomnessBeacon contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MockRandomnessBeaconFactoryCreateParams(app_factory)
+        self.update = MockRandomnessBeaconFactoryUpdateParams(app_factory)
+        self.delete = MockRandomnessBeaconFactoryDeleteParams(app_factory)
+
+class MockRandomnessBeaconFactoryCreateParams:
+    """Parameters for 'create' operations of MockRandomnessBeacon contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def get(
+        self,
+        args: tuple[int, bytes | str] | GetArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the get(uint64,byte[])byte[] ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "get(uint64,byte[])byte[]",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def set_seed(
+        self,
+        args: tuple[bytes | str] | SetSeedArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the setSeed(byte[])void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "setSeed(byte[])void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def set_empty(
+        self,
+        args: tuple[bool] | SetEmptyArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the setEmpty(bool)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "setEmpty(bool)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def set_submit_lag(
+        self,
+        args: tuple[int] | SetSubmitLagArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the setSubmitLag(uint64)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "setSubmitLag(uint64)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class MockRandomnessBeaconFactoryUpdateParams:
+    """Parameters for 'update' operations of MockRandomnessBeacon contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class MockRandomnessBeaconFactoryDeleteParams:
+    """Parameters for 'delete' operations of MockRandomnessBeacon contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class MockRandomnessBeaconFactoryCreateTransaction:
+    """Create transactions for MockRandomnessBeacon contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MockRandomnessBeaconFactoryCreateTransactionCreate(app_factory)
+
+
+class MockRandomnessBeaconFactoryCreateTransactionCreate:
+    """Create new instances of MockRandomnessBeacon contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class MockRandomnessBeaconFactorySend:
+    """Send calls to MockRandomnessBeacon contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MockRandomnessBeaconFactorySendCreate(app_factory)
+
+
+class MockRandomnessBeaconFactorySendCreate:
+    """Send create calls to MockRandomnessBeacon contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[MockRandomnessBeaconClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return MockRandomnessBeaconClient(result[0]), result[1]
+
+
 class MockRandomnessBeaconComposer:
     """Composer for creating transaction groups for MockRandomnessBeacon contract calls"""
 
@@ -369,6 +925,60 @@ class MockRandomnessBeaconComposer:
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
                 "get(uint64,byte[])byte[]", v
+            )
+        )
+        return self
+
+    def set_seed(
+        self,
+        args: tuple[bytes | str] | SetSeedArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "MockRandomnessBeaconComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.set_seed(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "setSeed(byte[])void", v
+            )
+        )
+        return self
+
+    def set_empty(
+        self,
+        args: tuple[bool] | SetEmptyArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "MockRandomnessBeaconComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.set_empty(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "setEmpty(bool)void", v
+            )
+        )
+        return self
+
+    def set_submit_lag(
+        self,
+        args: tuple[int] | SetSubmitLagArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "MockRandomnessBeaconComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.set_submit_lag(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "setSubmitLag(uint64)void", v
             )
         )
         return self

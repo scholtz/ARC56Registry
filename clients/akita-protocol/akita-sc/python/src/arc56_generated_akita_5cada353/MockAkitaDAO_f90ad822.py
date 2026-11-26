@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["UpdateApplication"], "create": []}, "args": [{"type": "string", "name": "newVersion"}], "name": "update", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "ping", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "MockAkitaDAO", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [79], "errorMessage": "invalid array length header"}, {"pc": [86], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["UpdateApplication"], "create": []}, "args": [{"type": "string", "name": "newVersion"}], "name": "update", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "ping", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "app"}, {"type": "byte[32]", "name": "lease"}], "name": "isUpgradeLease", "returns": {"type": "bool"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "opUp", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "MockAkitaDAO", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {"upgradeLeases": {"keyType": "uint64", "valueType": "(byte[32],uint64)[]", "desc": "Same box map as AkitaDAO.upgradeLeases: boxes survive the code swap, so the mock can still\nauthorize the governed restore through the Update plugin.", "prefix": "dQ=="}}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "CyAEAQACKDEbQQBQgATqkYDdNhoAjgEANzEZFEQxGESCAwQdXFYbBOFyWNwEhU3t4DYaAI4DAAMANgABACJDgAwVH3x1AAAAAAAABTmwIkMxGYEEEjEYEERCAAgxGRQxGBQQQzYaAUkjWSQITBUSRCJDNhoBSRWBCBJEFzYaAklOAhWBIBJEFoABdUxQSb1FAUAAFEgjgAEAI08CVIAEFR98dUxQsCJDI0sBIyS6F0sBDUEAHkklCyQISwJMJbpXACBLAxJBAAZGAiJC/8giCEL/1kYCI0L/vQ==", "clear": "C4EBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMSAwIDIgNDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tb2Nrcy9kYW8vbW9jay5hbGdvLnRzOjUKICAgIC8vIGV4cG9ydCBjbGFzcyBNb2NrQWtpdGFEQU8gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVAMTIKICAgIHB1c2hieXRlcyAweGVhOTE4MGRkIC8vIG1ldGhvZCAidXBkYXRlKHN0cmluZyl2b2lkIgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMAogICAgbWF0Y2ggbWFpbl91cGRhdGVfcm91dGVAMwoKbWFpbl9zd2l0Y2hfY2FzZV9uZXh0QDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbW9ja3MvZGFvL21vY2suYWxnby50czo1CiAgICAvLyBleHBvcnQgY2xhc3MgTW9ja0FraXRhREFPIGV4dGVuZHMgQ29udHJhY3QgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgYXNzZXJ0CiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgYXNzZXJ0CiAgICBwdXNoYnl0ZXNzIDB4MWQ1YzU2MWIgMHhlMTcyNThkYyAweDg1NGRlZGUwIC8vIG1ldGhvZCAicGluZygpdWludDY0IiwgbWV0aG9kICJpc1VwZ3JhZGVMZWFzZSh1aW50NjQsYnl0ZVszMl0pYm9vbCIsIG1ldGhvZCAib3BVcCgpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fcGluZ19yb3V0ZUA2IGlzVXBncmFkZUxlYXNlIG1haW5fb3BVcF9yb3V0ZUA4CiAgICBlcnIKCm1haW5fb3BVcF9yb3V0ZUA4OgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6MzIKICAgIC8vIG9wVXAoKTogdm9pZCB7IH0KICAgIGludGNfMCAvLyAxCiAgICByZXR1cm4KCm1haW5fcGluZ19yb3V0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6MTQKICAgIC8vIHBpbmcoKTogdWludDY0IHsKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMDUzOQogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgptYWluX3VwZGF0ZV9yb3V0ZUAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6MTEKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6IFsnVXBkYXRlQXBwbGljYXRpb24nXSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgcHVzaGludCA0IC8vIFVwZGF0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgdXBkYXRlCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUAxMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tb2Nrcy9kYW8vbW9jay5hbGdvLnRzOjUKICAgIC8vIGV4cG9ydCBjbGFzcyBNb2NrQWtpdGFEQU8gZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gT25Db21wbGV0aW9uCiAgICAhCiAgICB0eG4gQXBwbGljYXRpb25JRAogICAgIQogICAgJiYKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9tb2Nrcy9kYW8vbW9jay5hbGdvLnRzOjpNb2NrQWtpdGFEQU8udXBkYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKdXBkYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6MTEKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6IFsnVXBkYXRlQXBwbGljYXRpb24nXSB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBpbnRjXzEgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6Ok1vY2tBa2l0YURBTy5pc1VwZ3JhZGVMZWFzZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmlzVXBncmFkZUxlYXNlOgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6MTgKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgY292ZXIgMgogICAgbGVuCiAgICBwdXNoaW50IDMyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnN0YXRpY19hcnJheTxhcmM0LnVpbnQ4LCAzMj4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tb2Nrcy9kYW8vbW9jay5hbGdvLnRzOjIwCiAgICAvLyBpZiAoIXRoaXMudXBncmFkZUxlYXNlcyhhcHApLmV4aXN0cykgewogICAgaXRvYgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6OQogICAgLy8gdXBncmFkZUxlYXNlcyA9IEJveE1hcDx1aW50NjQsIFVwZ3JhZGVMZWFzZVtdPih7IGtleVByZWZpeDogJ3UnIH0pCiAgICBwdXNoYnl0ZXMgInUiCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6MjAKICAgIC8vIGlmICghdGhpcy51cGdyYWRlTGVhc2VzKGFwcCkuZXhpc3RzKSB7CiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGJueiBpc1VwZ3JhZGVMZWFzZV9hZnRlcl9pZl9lbHNlQDMKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6MjEKICAgIC8vIHJldHVybiBmYWxzZQogICAgaW50Y18xIC8vIDAKCmlzVXBncmFkZUxlYXNlX2FmdGVyX2lubGluZWRfc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6Ok1vY2tBa2l0YURBTy5pc1VwZ3JhZGVMZWFzZUA5OgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6MTgKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgcHVzaGJ5dGVzIDB4MDAKICAgIGludGNfMSAvLyAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgcHVzaGJ5dGVzIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzAgLy8gMQogICAgcmV0dXJuCgppc1VwZ3JhZGVMZWFzZV9hZnRlcl9pZl9lbHNlQDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbW9ja3MvZGFvL21vY2suYWxnby50czoyNAogICAgLy8gZm9yIChsZXQgaTogdWludDY0ID0gMDsgaSA8IGVudHJpZXMubGVuZ3RoOyBpKyspIHsKICAgIGludGNfMSAvLyAwCgppc1VwZ3JhZGVMZWFzZV93aGlsZV90b3BANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tb2Nrcy9kYW8vbW9jay5hbGdvLnRzOjIzLTI0CiAgICAvLyBjb25zdCBlbnRyaWVzID0gY2xvbmUodGhpcy51cGdyYWRlTGVhc2VzKGFwcCkudmFsdWUpCiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgZW50cmllcy5sZW5ndGg7IGkrKykgewogICAgZGlnIDEKICAgIGludGNfMSAvLyAwCiAgICBpbnRjXzIgLy8gMgogICAgYm94X2V4dHJhY3QKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tb2Nrcy9kYW8vbW9jay5hbGdvLnRzOjI0CiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgZW50cmllcy5sZW5ndGg7IGkrKykgewogICAgZGlnIDEKICAgID4KICAgIGJ6IGlzVXBncmFkZUxlYXNlX2FmdGVyX3doaWxlQDgKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tb2Nrcy9kYW8vbW9jay5hbGdvLnRzOjI1CiAgICAvLyBpZiAoZW50cmllc1tpXS5sZWFzZSA9PT0gbGVhc2UpIHsKICAgIGR1cAogICAgaW50Y18zIC8vIDQwCiAgICAqCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDIKICAgIHN3YXAKICAgIGludGNfMyAvLyA0MAogICAgYm94X2V4dHJhY3QgLy8gb24gZXJyb3I6IGluZGV4IG91dCBvZiBib3VuZHMKICAgIGV4dHJhY3QgMCAzMgogICAgZGlnIDMKICAgID09CiAgICBieiBpc1VwZ3JhZGVMZWFzZV9hZnRlcl9pZl9lbHNlQDcKICAgIHBvcG4gMgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6MjYKICAgIC8vIHJldHVybiB0cnVlCiAgICBpbnRjXzAgLy8gMQogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6MTgKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgYiBpc1VwZ3JhZGVMZWFzZV9hZnRlcl9pbmxpbmVkX3NtYXJ0X2NvbnRyYWN0cy9tb2Nrcy9kYW8vbW9jay5hbGdvLnRzOjpNb2NrQWtpdGFEQU8uaXNVcGdyYWRlTGVhc2VAOQoKaXNVcGdyYWRlTGVhc2VfYWZ0ZXJfaWZfZWxzZUA3OgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6MjQKICAgIC8vIGZvciAobGV0IGk6IHVpbnQ2NCA9IDA7IGkgPCBlbnRyaWVzLmxlbmd0aDsgaSsrKSB7CiAgICBpbnRjXzAgLy8gMQogICAgKwogICAgYiBpc1VwZ3JhZGVMZWFzZV93aGlsZV90b3BANAoKaXNVcGdyYWRlTGVhc2VfYWZ0ZXJfd2hpbGVAODoKICAgIHBvcG4gMgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL2Rhby9tb2NrLmFsZ28udHM6MjkKICAgIC8vIHJldHVybiBmYWxzZQogICAgaW50Y18xIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tb2Nrcy9kYW8vbW9jay5hbGdvLnRzOjE4CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGIgaXNVcGdyYWRlTGVhc2VfYWZ0ZXJfaW5saW5lZF9zbWFydF9jb250cmFjdHMvbW9ja3MvZGFvL21vY2suYWxnby50czo6TW9ja0FraXRhREFPLmlzVXBncmFkZUxlYXNlQDkK", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [190], "errorMessage": "index out of bounds"}, {"pc": [105], "errorMessage": "invalid array length header"}, {"pc": [111], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [134], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}, {"pc": [122], "errorMessage": "invalid number of bytes for arc4.uint64"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -65,6 +65,16 @@ def _init_dataclass(cls: type, data: dict) -> object:
     return cls(**field_values)
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
+class IsUpgradeLeaseArgs:
+    """Dataclass for is_upgrade_lease arguments"""
+    app: int
+    lease: bytes | str | tuple[int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int]
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "isUpgradeLease(uint64,byte[32])bool"
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
 class UpdateArgs:
     """Dataclass for update arguments"""
     newVersion: str
@@ -74,9 +84,33 @@ class UpdateArgs:
         return "update(string)void"
 
 
+class _MockAkitaDaoUpdate:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppUpdateMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.params.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update(string)void",
+            "args": method_args,
+        }))
+
+
 class MockAkitaDaoParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_MockAkitaDaoUpdate":
+        return _MockAkitaDaoUpdate(self.app_client)
 
     def ping(
         self,
@@ -87,6 +121,30 @@ class MockAkitaDaoParams:
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
             "method": "ping()uint64",
+        }))
+
+    def is_upgrade_lease(
+        self,
+        args: tuple[int, bytes | str | tuple[int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int]] | IsUpgradeLeaseArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "isUpgradeLease(uint64,byte[32])bool",
+            "args": method_args,
+        }))
+
+    def op_up(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "opUp()void",
         }))
 
     def clear_state(
@@ -100,9 +158,33 @@ class MockAkitaDaoParams:
         )
 
 
+class _MockAkitaDaoUpdateTransaction:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.create_transaction.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update(string)void",
+            "args": method_args,
+        }))
+
+
 class MockAkitaDaoCreateTransactionParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_MockAkitaDaoUpdateTransaction":
+        return _MockAkitaDaoUpdateTransaction(self.app_client)
 
     def ping(
         self,
@@ -113,6 +195,30 @@ class MockAkitaDaoCreateTransactionParams:
         return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
             "method": "ping()uint64",
+        }))
+
+    def is_upgrade_lease(
+        self,
+        args: tuple[int, bytes | str | tuple[int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int]] | IsUpgradeLeaseArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "isUpgradeLease(uint64,byte[32])bool",
+            "args": method_args,
+        }))
+
+    def op_up(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "opUp()void",
         }))
 
     def clear_state(
@@ -126,9 +232,36 @@ class MockAkitaDaoCreateTransactionParams:
         )
 
 
+class _MockAkitaDaoUpdateSend:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        response = self.app_client.send.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update(string)void",
+            "args": method_args,
+        }), send_params=send_params, compilation_params=compilation_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppUpdateTransactionResult[None], parsed_response)
+
+
 class MockAkitaDaoSend:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_MockAkitaDaoUpdateSend":
+        return _MockAkitaDaoUpdateSend(self.app_client)
 
     def ping(
         self,
@@ -143,6 +276,36 @@ class MockAkitaDaoSend:
         }), send_params=send_params)
         parsed_response = response
         return typing.cast(algokit_utils.SendAppTransactionResult[int], parsed_response)
+
+    def is_upgrade_lease(
+        self,
+        args: tuple[int, bytes | str | tuple[int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int]] | IsUpgradeLeaseArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[bool]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "isUpgradeLease(uint64,byte[32])bool",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[bool], parsed_response)
+
+    def op_up(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "opUp()void",
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
 
     def clear_state(
         self,
@@ -160,6 +323,80 @@ class MockAkitaDaoState:
 
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def box(
+        self
+    ) -> "_BoxState":
+            """Methods to access box for the current app"""
+            return _BoxState(self.app_client)
+
+class _BoxState:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+        
+        # Pre-generated mapping of value types to their struct classes
+        self._struct_classes: dict[str, typing.Type[typing.Any]] = {}
+
+    def get_all(self) -> dict[str, typing.Any]:
+        """Get all current keyed values from box state"""
+        result = self.app_client.state.box.get_all()
+        if not result:
+            return {}
+
+        converted = {}
+        for key, value in result.items():
+            key_info = self.app_client.app_spec.state.keys.box.get(key)
+            struct_class = self._struct_classes.get(key_info.value_type) if key_info else None
+            converted[key] = (
+                _init_dataclass(struct_class, value) if struct_class and isinstance(value, dict)
+                else value
+            )
+        return converted
+
+    @property
+    def upgrade_leases(self) -> "_MapState[int, list[tuple[bytes, int]]]":
+        """Get values from the upgradeLeases map in box state"""
+        return _MapState(
+            self.app_client.state.box,
+            "upgradeLeases",
+            None
+        )
+
+_KeyType = typing.TypeVar("_KeyType")
+_ValueType = typing.TypeVar("_ValueType")
+
+class _AppClientStateMethodsProtocol(typing.Protocol):
+    def get_map(self, map_name: str) -> dict[typing.Any, typing.Any]:
+        ...
+    def get_map_value(self, map_name: str, key: typing.Any) -> typing.Any | None:
+        ...
+
+class _MapState(typing.Generic[_KeyType, _ValueType]):
+    """Generic class for accessing state maps with strongly typed keys and values"""
+
+    def __init__(self, state_accessor: _AppClientStateMethodsProtocol, map_name: str,
+                struct_class: typing.Type[_ValueType] | None = None):
+        self._state_accessor = state_accessor
+        self._map_name = map_name
+        self._struct_class = struct_class
+
+    def get_map(self) -> dict[_KeyType, _ValueType]:
+        """Get all current values in the map"""
+        result = self._state_accessor.get_map(self._map_name)
+        if self._struct_class and result:
+            return {k: _init_dataclass(self._struct_class, v) if isinstance(v, dict) else v
+                    for k, v in result.items()}  # type: ignore
+        return typing.cast(dict[_KeyType, _ValueType], result or {})
+
+    def get_value(self, key: _KeyType) -> _ValueType | None:
+        """Get a value from the map by key"""
+        key_value = dataclasses.asdict(key) if dataclasses.is_dataclass(key) else key  # type: ignore
+        value = self._state_accessor.get_map_value(self._map_name, key_value)
+        if value is not None and self._struct_class and isinstance(value, dict):
+            return _init_dataclass(self._struct_class, value)  # type: ignore
+        return typing.cast(_ValueType | None, value)
+
 
 class MockAkitaDaoClient:
     """Client for interacting with MockAkitaDAO smart contract"""
@@ -313,6 +550,18 @@ class MockAkitaDaoClient:
     @typing.overload
     def decode_return_value(
         self,
+        method: typing.Literal["isUpgradeLease(uint64,byte[32])bool"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> bool | None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
+        method: typing.Literal["opUp()void"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
         method: typing.Literal["update(string)void"],
         return_value: algokit_utils.ABIReturn | None
     ) -> None: ...
@@ -327,7 +576,7 @@ class MockAkitaDaoClient:
         self,
         method: str,
         return_value: algokit_utils.ABIReturn | None
-    ) -> algokit_utils.ABIValue | algokit_utils.ABIStruct | None | int:
+    ) -> algokit_utils.ABIValue | algokit_utils.ABIStruct | None | bool | int:
         """Decode ABI return value for the given method."""
         if return_value is None:
             return None
@@ -346,6 +595,374 @@ class MockAkitaDaoClient:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class MockAkitaDaoBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating MockAkitaDao contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+@dataclasses.dataclass(frozen=True)
+class MockAkitaDaoMethodCallUpdateParams(
+    algokit_utils.BaseAppClientMethodCallParams[
+        UpdateArgs,
+        str | None,
+    ]
+):
+    """Parameters for calling MockAkitaDao contract using ABI"""
+    on_complete: typing.Literal[OnComplete.UpdateApplicationOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+class MockAkitaDaoFactory(algokit_utils.TypedAppFactoryProtocol[MockAkitaDaoBareCallCreateParams, MockAkitaDaoMethodCallUpdateParams, None]):
+    """Factory for deploying and managing MockAkitaDaoClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = MockAkitaDaoFactoryParams(self.app_factory)
+        self.create_transaction = MockAkitaDaoFactoryCreateTransaction(self.app_factory)
+        self.send = MockAkitaDaoFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: MockAkitaDaoBareCallCreateParams | None = None,
+        update_params: MockAkitaDaoMethodCallUpdateParams | None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[MockAkitaDaoClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params.to_algokit_utils_params() if update_params else None,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return MockAkitaDaoClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> MockAkitaDaoClient:
+        """Get an app client by creator address and name"""
+        return MockAkitaDaoClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> MockAkitaDaoClient:
+        """Get an app client by app ID"""
+        return MockAkitaDaoClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class MockAkitaDaoFactoryParams:
+    """Parameters for creating transactions for MockAkitaDao contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MockAkitaDaoFactoryCreateParams(app_factory)
+        self.update = MockAkitaDaoFactoryUpdateParams(app_factory)
+        self.delete = MockAkitaDaoFactoryDeleteParams(app_factory)
+
+class MockAkitaDaoFactoryCreateParams:
+    """Parameters for 'create' operations of MockAkitaDao contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def ping(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the ping()uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "ping()uint64",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def is_upgrade_lease(
+        self,
+        args: tuple[int, bytes | str | tuple[int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int]] | IsUpgradeLeaseArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the isUpgradeLease(uint64,byte[32])bool ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "isUpgradeLease(uint64,byte[32])bool",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def op_up(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the opUp()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "opUp()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the update(string)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "update(string)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class MockAkitaDaoFactoryUpdateParams:
+    """Parameters for 'update' operations of MockAkitaDao contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class MockAkitaDaoFactoryDeleteParams:
+    """Parameters for 'delete' operations of MockAkitaDao contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class MockAkitaDaoFactoryCreateTransaction:
+    """Create transactions for MockAkitaDao contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MockAkitaDaoFactoryCreateTransactionCreate(app_factory)
+
+
+class MockAkitaDaoFactoryCreateTransactionCreate:
+    """Create new instances of MockAkitaDao contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class MockAkitaDaoFactorySend:
+    """Send calls to MockAkitaDao contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MockAkitaDaoFactorySendCreate(app_factory)
+
+
+class MockAkitaDaoFactorySendCreate:
+    """Send create calls to MockAkitaDao contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[MockAkitaDaoClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return MockAkitaDaoClient(result[0]), result[1]
+
+
+class _MockAkitaDaoUpdateComposer:
+    def __init__(self, composer: "MockAkitaDaoComposer"):
+        self.composer = composer
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "MockAkitaDaoComposer":
+        self.composer._composer.add_app_update_method_call(
+            self.composer.client.params.update.update(
+                args=args,
+                params=params,
+                compilation_params=compilation_params
+            )
+        )
+        self.composer._result_mappers.append(
+            lambda v: self.composer.client.decode_return_value(
+                "update(string)void", v
+            )
+        )
+        return self.composer
+
+
 class MockAkitaDaoComposer:
     """Composer for creating transaction groups for MockAkitaDao contract calls"""
 
@@ -354,9 +971,14 @@ class MockAkitaDaoComposer:
         self._composer = client.algorand.new_group()
         self._result_mappers: list[typing.Callable[[algokit_utils.ABIReturn | None], object] | None] = []
 
+    @property
+    def update(self) -> "_MockAkitaDaoUpdateComposer":
+        return _MockAkitaDaoUpdateComposer(self)
+
     def ping(
         self,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "MockAkitaDaoComposer":
         self._composer.add_app_call_method_call(
             self.client.params.ping(
@@ -367,6 +989,43 @@ class MockAkitaDaoComposer:
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
                 "ping()uint64", v
+            )
+        )
+        return self
+
+    def is_upgrade_lease(
+        self,
+        args: tuple[int, bytes | str | tuple[int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int]] | IsUpgradeLeaseArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "MockAkitaDaoComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.is_upgrade_lease(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "isUpgradeLease(uint64,byte[32])bool", v
+            )
+        )
+        return self
+
+    def op_up(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "MockAkitaDaoComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.op_up(
+                
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "opUp()void", v
             )
         )
         return self

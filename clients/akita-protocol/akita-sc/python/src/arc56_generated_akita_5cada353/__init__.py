@@ -61,9 +61,11 @@ from . import MockRandomnessBeacon_25f875b2 as MockRandomnessBeacon_25f875b2
 from . import MockAuctionFactory_e21b1d7b as MockAuctionFactory_e21b1d7b
 from . import MockAkitaDAO_f90ad822 as MockAkitaDAO_f90ad822
 from . import MockMarketplace_c6aedb21 as MockMarketplace_c6aedb21
+from . import MockMetaReader_3308b948 as MockMetaReader_3308b948
 from . import MockPollFactory_d5c174ef as MockPollFactory_d5c174ef
 from . import MockPrizeBoxFactory_884f8fdd as MockPrizeBoxFactory_884f8fdd
 from . import MockRaffleFactory_dd35a61e as MockRaffleFactory_dd35a61e
+from . import MockReapableChild_1146cc39 as MockReapableChild_1146cc39
 from . import MockAkitaSocial_7d21d07f as MockAkitaSocial_7d21d07f
 from . import MockStakingPoolFactory_5f2f882b as MockStakingPoolFactory_5f2f882b
 from . import MockSubscriptions_fcab6f10 as MockSubscriptions_fcab6f10

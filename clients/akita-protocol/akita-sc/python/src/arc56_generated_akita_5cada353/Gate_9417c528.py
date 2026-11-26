@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": [], "create": ["NoOp"]}, "args": [{"type": "string", "name": "version"}, {"type": "uint64", "name": "akitaDAO"}], "name": "create", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "pay", "name": "payment"}, {"type": "(uint64,uint64,uint8)[]", "name": "filters"}, {"type": "byte[][]", "name": "args"}], "name": "register", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "caller"}, {"type": "uint64", "name": "gateID"}, {"type": "byte[][]", "name": "args"}], "name": "check", "returns": {"type": "bool"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "caller"}, {"type": "uint64", "name": "gateID"}, {"type": "byte[][]", "name": "args"}], "name": "mustCheck", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(uint64,uint64,uint8)[]", "name": "filters"}, {"type": "byte[][]", "name": "args"}], "name": "cost", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "gateID"}], "name": "size", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "gateID"}], "name": "getGate", "returns": {"type": "(uint64,uint64,uint64,uint8,byte[])[]"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(uint64,uint64,uint64,uint8,byte[])", "name": "shape", "struct": "GateFilterEntryWithArgs"}], "name": "gateFilterEntryWithArgsShape", "returns": {"type": "(uint64,uint64,uint64,uint8,byte[])", "struct": "GateFilterEntryWithArgs"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "opUp", "returns": {"type": "void"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "akitaDAO"}], "name": "updateAkitaDAO", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "Gate", "state": {"keys": {"box": {}, "global": {"gateCursor": {"key": "Z2F0ZV9jdXJzb3I=", "keyType": "AVMString", "valueType": "AVMUint64", "desc": "the id cursor for gates"}, "version": {"key": "dmVyc2lvbg==", "keyType": "AVMString", "valueType": "AVMString", "desc": "the current version of the contract"}, "akitaDAO": {"key": "YWtpdGFfZGFv", "keyType": "AVMString", "valueType": "AVMUint64", "desc": "the app ID of the Akita DAO"}}, "local": {}}, "maps": {"box": {"gateRegistry": {"keyType": "uint64", "valueType": "(uint64,uint64,uint64,uint8)[]", "prefix": "Zw=="}}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 2}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"GateFilterEntryWithArgs": [{"name": "layer", "type": "uint64"}, {"name": "app", "type": "uint64"}, {"name": "registryEntry", "type": "uint64"}, {"name": "logicalOperator", "type": "uint8"}, {"name": "args", "type": "byte[]"}]}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [1986], "errorMessage": "Box must have value"}, {"pc": [457, 522, 1032, 1202, 1951], "errorMessage": "Bytes has valid prefix"}, {"pc": [859], "errorMessage": "ERR:FGTE"}, {"pc": [403], "errorMessage": "ERR:ILYR"}, {"pc": [590, 604], "errorMessage": "ERR:IPAY"}, {"pc": [1480], "errorMessage": "ERR:NDAO"}, {"pc": [1083, 1125, 1981], "errorMessage": "ERR:NGAT"}, {"pc": [475, 1464], "errorMessage": "application exists"}, {"pc": [609, 1451], "errorMessage": "check GlobalState exists"}, {"pc": [377, 1001, 1528, 1635, 1659, 1732, 1773], "errorMessage": "index access is out of bounds"}, {"pc": [411, 981, 1157, 1536, 1672], "errorMessage": "index out of bounds"}, {"pc": [303, 688, 800, 919], "errorMessage": "invalid array encoding"}, {"pc": [192, 254, 273, 317, 658, 702, 770, 814, 870, 889, 933, 1205, 1425, 1756], "errorMessage": "invalid array length header"}, {"pc": [199], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [337, 722, 834, 953], "errorMessage": "invalid number of bytes for arc4.dynamic_array<bytes>"}, {"pc": [266, 882], "errorMessage": "invalid number of bytes for arc4.dynamic_array<smart_contracts/gates/types.ts::GateFilter>"}, {"pc": [642, 754], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}, {"pc": [210, 650, 762, 1067, 1109, 1444], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [1956], "errorMessage": "invalid number of bytes for bool"}, {"pc": [1211], "errorMessage": "invalid number of bytes for bytes"}, {"pc": [1430], "errorMessage": "invalid number of bytes for smart_contracts/gates/types.ts::GateFilterEntryWithArgs"}, {"pc": [462, 527, 1037], "errorMessage": "invalid number of bytes for uint64"}, {"pc": [1417], "errorMessage": "invalid tail pointer at index 4 of (uint64,uint64,uint64,uint8,(len+uint8[]))"}, {"pc": [311, 696, 808, 927], "errorMessage": "invalid tail pointer for (len+(len+uint8[])[])"}, {"pc": [1412], "errorMessage": "invalid tuple encoding"}, {"pc": [247], "errorMessage": "transaction type is pay"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": []}, "methods": [{"actions": {"call": [], "create": ["NoOp"]}, "args": [{"type": "string", "name": "version"}, {"type": "uint64", "name": "akitaDAO"}, {"type": "uint64", "desc": "v1 `gate_cursor` at migration time (0 / 1 on a fresh network: no imports)", "name": "legacyCutoff"}], "name": "create", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "app"}, {"type": "bool", "name": "allowed"}, {"type": "bool", "name": "ctxAware"}], "name": "setSubGate", "returns": {"type": "void"}, "desc": "Add or remove a sub-gate app from the allowlist. The allowlist box MBR comes from\nthis app's balance (6_100 plain, 6_500 context-aware). Creator-only until imports are\nsealed, DAO-wallet-only afterwards.\n\n`ctxAware` marks a sub-gate that implements `checkFor(ctx, registryID, args)`: under\n`checkFor` / `mustCheckFor` the Gate forwards the verified context to it. Calling again with\n`allowed = true` re-flags an allowlisted sub-gate in place. Flagging an app that lacks\n`checkFor` makes every context evaluation of a gate that uses it fail (admin error).", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "id"}, {"type": "(uint64,uint64,uint64,uint8)[]", "name": "entries"}], "name": "importGate", "returns": {"type": "void"}, "desc": "One-shot migration of a Gate v1 registration under its original id. Entries must\nalready point at (allowlisted) sub-gate apps and registry entries; MBR comes from\nthis app's balance.", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "sealImports", "returns": {"type": "void"}, "desc": "Ends the migration window: no more imports; allowlist control moves to the DAO wallet.", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "pay", "name": "payment"}, {"type": "(uint64,uint64,uint8)[]", "name": "filters"}, {"type": "byte[][]", "name": "args"}], "name": "register", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "caller"}, {"type": "uint64", "name": "gateID"}, {"type": "byte[][]", "name": "args"}], "name": "check", "returns": {"type": "bool"}, "desc": "Legacy evaluation: every sub-gate receives the plain `check(caller, ...)`.", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "address", "name": "caller"}, {"type": "uint64", "name": "gateID"}, {"type": "byte[][]", "name": "args"}], "name": "mustCheck", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(address,uint64,address)", "name": "ctx", "struct": "GateCtx"}, {"type": "uint64", "name": "gateID"}, {"type": "byte[][]", "name": "args"}], "name": "checkFor", "returns": {"type": "bool"}, "desc": "Context evaluation (spec \u00a73.5, \u00a76.9). `ctx` must be the first hop's verified context\n`gateCtx(principalOf(dao, wallet))`: the target pins it with `gateCheckCtx`, so this method\nitself trusts no one and is a pure predicate. Context-aware sub-gates receive\n`checkFor(ctx, ...)`, all others `check(ctx.principal, ...)`.\nResources: as `check`, plus the allowlist box B(gate, 's' + itob(app)) of every filter app.", "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(address,uint64,address)", "name": "ctx", "struct": "GateCtx"}, {"type": "uint64", "name": "gateID"}, {"type": "byte[][]", "name": "args"}], "name": "mustCheckFor", "returns": {"type": "void"}, "desc": "`checkFor`, asserted (errFgte). Targets assert this call with `gateCheckCtx`.", "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(uint64,uint64,uint8)[]", "name": "filters"}, {"type": "byte[][]", "name": "args"}], "name": "cost", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "app"}], "name": "isSubGate", "returns": {"type": "bool"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "app"}], "name": "isCtxSubGate", "returns": {"type": "bool"}, "desc": "True if `app` is allowlisted as a context-aware sub-gate.", "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "gateID"}], "name": "size", "returns": {"type": "uint64"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "gateID"}], "name": "getGate", "returns": {"type": "(uint64,uint64,uint64,uint8,byte[])[]"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "(uint64,uint64,uint64,uint8,byte[])", "name": "shape", "struct": "GateFilterEntryWithArgs"}], "name": "gateFilterEntryWithArgsShape", "returns": {"type": "(uint64,uint64,uint64,uint8,byte[])", "struct": "GateFilterEntryWithArgs"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "opUp", "returns": {"type": "void"}, "events": [], "readonly": true, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [{"type": "uint64", "name": "akitaDAO"}], "name": "updateAkitaDAO", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}], "name": "Gate", "state": {"keys": {"box": {}, "global": {"gateCursor": {"key": "Z2F0ZV9jdXJzb3I=", "keyType": "AVMString", "valueType": "AVMUint64", "desc": "the id cursor for gates"}, "legacyCutoff": {"key": "bGVnYWN5X2N1dG9mZg==", "keyType": "AVMString", "valueType": "AVMUint64", "desc": "v1 gate ids `< legacyCutoff` may be imported until imports are sealed"}, "importsSealed": {"key": "aW1wb3J0c19zZWFsZWQ=", "keyType": "AVMString", "valueType": "AVMUint64", "desc": "1 once the creator sealed legacy imports and handed allowlist control to the DAO"}, "version": {"key": "dmVyc2lvbg==", "keyType": "AVMString", "valueType": "AVMString", "desc": "the current version of the contract"}, "akitaDAO": {"key": "YWtpdGFfZGFv", "keyType": "AVMString", "valueType": "AVMUint64", "desc": "the app ID of the Akita DAO"}}, "local": {}}, "maps": {"box": {"gateRegistry": {"keyType": "uint64", "valueType": "(uint64,uint64,uint64,uint8)[]", "prefix": "Zw=="}, "subGates": {"keyType": "uint64", "valueType": "AVMBytes", "desc": "allowlisted sub-gate app ids. Value: empty = plain sub-gate; `0x01` = context-aware\n(implements `checkFor(ctx, registryID, args)`). Any non-zero value means context-aware.", "prefix": "cw=="}}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 1, "ints": 4}, "local": {"bytes": 0, "ints": 0}}}, "structs": {"GateFilterEntryWithArgs": [{"name": "layer", "type": "uint64"}, {"name": "app", "type": "uint64"}, {"name": "registryEntry", "type": "uint64"}, {"name": "logicalOperator", "type": "uint8"}, {"name": "args", "type": "byte[]"}], "GateCtx": [{"name": "principal", "type": "address"}, {"name": "wallet", "type": "uint64"}, {"name": "spender", "type": "address"}]}, "byteCode": {"approval": "CyAGAAECCICAgIAQwIQ9JhUEFR98dQFnAgAACWFraXRhX2Rhbw5pbXBvcnRzX3NlYWxlZAFzAQALRVJSOmVycklnaWQLZ2F0ZV9jdXJzb3ILRVJSOmVyck5nYXQLRVJSOmVycklseXINbGVnYWN5X2N1dG9mZgtFUlI6ZXJyTmRhbwtFUlI6ZXJySXNndAZ3YWxsZXQEMp8E7gtFUlI6ZXJyU2NzdAtFUlI6ZXJySXBheQtFUlI6ZXJyRmd0ZQtFUlI6ZXJySWFyZwMGgQExGRREMRhBAHqCEASwvimWBEiUrQoEEQR9HgTCHHugBCAPdCEEQ5ImVQQnZGIiBJsUfSwExckfjwQoJfv4BKYxWoAE31awHgRh3cFlBNps3vQEhU3t4AQz6SyUNhoAjhAAzwFSAhcCIAOpBCEElgUGBXMGPgZbBnMGlgfAAAEH4gAjQ4AEiMlA+DYaAI4BAHMAigIBi/5XAgCL/yQLSwFMWUpZJAhYiYoDAYv9IllJJAskCIv9JEsCUov/JAuvUIv9FYv9TwNPAlKL/lBQTIv/CEkWVwYATCQLSSJJSwMMQQAcTEkWVwYATwVLA08CXUlOBUsBWSQICEwkCEL/3UYDTFCJNhoBSSJZJAhLARUSRFcCADYaAkkVJRJEFzYaA0kVJRJEF0khBA5AAAQnB7AAgAd2ZXJzaW9uTwNnK08CZycIIQRnJwtMZycEImcjQyI2GgFJFSUSRBc2GgJJFSMSRCJTNhoDSRUjEkQiU0wiJwRlREAASzEAMgkSQAAEJwywAEsCFicFTFBJRQW8SEEAIksBQQAnSwEyCBNBAB8jQAAEJw2wAElBAAtLAkm8SIABAb8jQ0sCIrlIQv/2IkL/3jEAIitlRCcOZUhyCEQSQv+pIjYaAUkVJRJEF0k2GgJJTgNJIllJTgSBGQskCEwVEkSIBpBBAJsiJwtlREsBDUEAkCNAAAQnB7AAFilMUElFBL1FAUEABCcHsAAqSU4CKk4EIkxOAklLAgxBAFBLBFcCAEsBgRkLgRlYSVcACE8FSSJZIwgWVwYAXABMUE4ESVcICE8ESSJZIwgWVwYAXABMUE4DVxgBSRUWVwYCTFBPBkwjiP4wTgUjCEL/qUhOAk8ETwOIBiVGA0sBSbxITL8jQyJC/22IBesnBCNnI0MxFiMJSTgQIxJENhoBSU4CSSJZgRELJAhMFRJENhoCSU4DSSJZSU4CJAtMSRVOAlcCACJJSwUMQQAhSSQLSwJJTwJZSU8FSU4EEkRLARVSIlkkCAhOAiMIQv/YRgIkCBJETwJLAYgGlUlOAyJZSYgJBCVbKkwiTEsBSwQMQQDIsUsBSUsGDERLCEsBiP1jSU4CTghLCVcCAEyBEQuBEVhJTgglW0lOBLIYJw+yGrIagQayECKyAbO0PklXBABMVwAEKBJESRUlEkQXSSEFDkAABCcQsABJTgIITE8DSU4CcghEsbIHsggjshAisgG2SbIYgAR3u3m5shpPCLIagQayECKyAbO0PklXBABMVwAEKBJESRUlEkQXTwhJVwAITFcQAU8DFk8CTFBPAhZQTFBPA0kiWSMIFlcGAFwATFBOAkwjCExC/zBFAU8CSE8CSE8DSEsCOAcyChJAAAQnEbAATwI4CBJAAAQnEbAAIicIZURJIwgnCExnFilLAVBJvEhPAr8oTFCwI0M2GgFJFYEgEkQ2GgJJFSUSRBc2GgNHAiJZSU4CJAtMSRVOAlcCACJJSwUMQQAhSSQLSwJJTwJZSU8FSU4EEkRLARVSIlkkCAhOAiMIQv/YRgJPAkgkCBJEIhZPA0lPAlBMUCJPA08DiAcWRgInBiJPAlQoTFCwI0M2GgFJFYEgEkQ2GgJJFSUSRBc2GgNHAiJZSU4CJAtMSRVOAlcCACJJSwUMQQAhSSQLSwJJTwJZSU8FSU4EEkRLARVSIlkkCAhOAiMIQv/YRgJPAkgkCBJEIhZPA0lPAlBMUCJPA08DiAaeRgJAAAQnErAAI0M2GgFJFYFIEkQ2GgJJFSUSRBc2GgNHAiJZSU4CJAtMSRVOAlcCACJJSwUMQQAhSSQLSwJJTwJZSU8FSU4EEkRLARVSIlkkCAhOAiMIQv/YRgJPAkgkCBJETwIjTwNPA4gGMUYCJwYiTwJUKExQsCNDNhoBSRWBSBJENhoCSRUlEkQXNhoDRwIiWUlOAiQLTEkVTgJXAgAiSUsFDEEAIUkkC0sCSU8CWUlPBUlOBBJESwEVUiJZJAgITgIjCEL/2EYCTwJIJAgSRE8CI08DTwOIBcFGAkAABCcSsAAjQzYaAUcCIlmBEQskCEwVEkQ2GgJJTgJJIllJTgIkC0xJFU4CVwIAIklLBQxBACFJJAtLAklPAllJTwVJTgQSREsBFVIiWSQICE4CIwhC/9hGAiQIEkRMSwGIA09JTgIiWUmIBb4lWyJMSwFLAwxBAFSxSwFJSwUMREsGSwGI+h9LBlcCAE8CgRELgRFYJVuyGCcPshqyGoEGshAisgGztD5JVwQATFcABCgSREkVJRJEF0khBQ5AAAQnELAACEwjCExC/6QWKExQsCNDNhoBSRUlEkQXFicFTFC9RQEnBiJPAlQoTFCwI0M2GgFJFSUSRBeIAyQnBiJPAlQoTFCwI0M2GgFJFSUSRBcWKUxQSb1FAUAABCcJsAAiJLoXFihMULAjQ4AANhoBSRUlEkQXFilMUEm9RQFAAAQnCbAAKkwiTgJJIiS6F0sDDUEA+bFLAoEZCyQISwFMgRm6SVcQCEsBJVtJshiABJDU+l2yGksBshqBBrIQIrIBs7Q+SVcEAEsBVwAEKBJESSJZJAhMFRJEVwYASwNXAAhPBFcYAU8DFk8CTFBPA1BMUEsBFRZXBgJPAlBMgAIAG1BMUIACAAJMUE4DTEkiWUkjCBZXBgBOBExXAgBOAiQLTgIiRQdLBksDDEEAG0sBSwdJTgJZJAgWVwYATwZMUE4FJAhFB0L/3UsBFU4EIkUISwckDEEAHEsGSwhJTgJZSwYIFlcGAE8HTFBOBiQIRQhC/91MTwJPBFJPA0xQTwNXAgBQTE8CIwhOAkL+/EgoTFCwI0M2GgFJFUsBgRlZSYEbEkRLAkxLAlIiWYEdCBJEKExQsCNDNhoBSRUlEkQXMQAiK2VEJw5lSHIIRBJAAAQnDLAAK0xnI0MxADIJEkEAHCInBGVEQAAUI0AAD4ALRVJSOmVyckljbHOwAIkiQv/pigQDIkmAAEmL/CJZSUEA3EklDkEA1iNAAAQnCrAAi/9LARJAAAQnE7AAi/xXAgCMAIv8JFtBAAQnCrAAIklLAgxBAJtJQQAuRwIlC4sASU4DTFtJTgOMAyMJJQtbSYwCD0EAd4sCIwiLAw9BAG0jQAAEJwqwAEkjCElOAksDDEEAOov+IllLAUlPAgxEi/5MiPdRVwIASYwBgAEKEkAACYsBgAEUEkEALiNAAA+AC0VSUjplcnJCb3BysACL/VcCAEwlCyVYJwVMUL1FAUAABCcNsABC/2YiQv/PIkL/kIv8i/2L/owCjAGMAIkiQv8nigIBKkcCIov+IllLAQ1BAFCL/lcCAEsBgRELgRFYSVcACE8ESSJZIwgWVwYAXABMUE4DSVcICE8DSSJZIwgWVwYAXABMUE4CVxABSRUWVwYCTFBPBEwjiPawTgMjCEL/pkhPAov/iP6nRgOL/omKAQGL/xYnBUxQvkEACYsAF0EAAyNMiSJC//qKBQSL/VcCAEmL/4EZC4EZWIv+IllJTgKL/w1Ei/6L/4j2SFcCAIv7i/xPA08DiACkSIz7i/9JIwhJTgOL/SJZDEEAg4EZC0sESU8CgRlYSVcYAYABChJOBUsDgRkLTwJMgRlYSU4CIltMIlsNQQArSE8CSE8DSIv7i/yL/Yv+TwWI/3yM/oz9jPtPAkEACBCL+4v9i/6JEUL/9UsCSUsFDESL/kyI9cNXAgCL+4v8TwNPA4gAH0iM+08EQQAFEExC/3MRQv/4SIv7i/2L/k8GTwZPBomKBAOAAIv9QQBVi/4lW0mMAIj+/EEASLGL/lcQCIv/FRZXBgKL/1CLALIYgAS5NKrcshqL/LIaTLIashqBBrIQIrIBs7Q+SVcEAExXAAQoEkRJFSMSRCJTi/yL/k8DibGL/FcAIIv+VxAIi/8VFlcGAov/UIv+JVuyGIAEbgP1CrIaTwKyGkyyGrIagQayECKyAbO0PklXBABMVwAEKBJESRUjEkQiU4v8i/5PA4mKBAOL/hYpTFBJvUUBQAAEJwmwAEcCvkxOAkSL/yJZTCIkuhcSQAAEJxOwAEwiJLoXgWQLgQoISTIMDUEAGLGBBrIQgQWyGScUsh4nFLIfIrIBs0L/4UiL/Iv9TwKL/yKI/hqM/0hJjPyL/4mKAQGL/4GAZAuB1C8IgdQvFkwWUIk=", "clear": "C4EBQw=="}, "desc": "Gate v2.\n\nA gate is a list of `(layer, subGate, registryEntry, logicalOperator)` filters.\n\nEvaluation semantics (audit SG-06):\n- Layers start at 0 and never decrease; each step increases the layer by at most 1.\n- Within a layer, filters combine left to right with the operator stored on the\n  left-hand filter (`AND` / `OR`, no precedence).\n- A filter followed by a deeper layer applies its operator to the whole deeper\n  group, which (because layers never decrease) runs to the end of the list.\n  Example: `[A{0,AND}, B{1,OR}, C{1}]` is `A AND (B OR C)`.\n- The operator on the last filter is ignored.\n\nSub-gates must be on an allowlist (audit SG-16): managed by the creator until imports\nare sealed, by the DAO wallet afterwards.\n\nGate ids issued by `register` start at 2^32. Ids below `legacyCutoff` are reserved for\na one-shot import of Gate v1 registrations (audit decision SG-A) so resources that\nstored v1 ids keep resolving to the same policy.\n\nContext forwarding (principal-resolution spec \u00a73.5, \u00a76.9, Q12): `mustCheckFor` / `checkFor`\ntake the first hop's verified `GateCtx = (principal, wallet, spender)`. The target asserts the\ngate txn with `gateCheckCtx`, so the ctx is the one it verified. Context-aware sub-gates (flagged\non the allowlist) receive `checkFor(ctx, ...)`; every other sub-gate receives\n`check(ctx.principal, ...)`. The legacy `mustCheck` / `check(caller)` call the plain `check` of\nevery sub-gate, exactly as before.", "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYXJjNC9pbmRleC5kLnRzOjpDb250cmFjdC5hcHByb3ZhbFByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBpbnRjYmxvY2sgMCAxIDIgOCA0Mjk0OTY3Mjk2IDEwMDAwMDAKICAgIGJ5dGVjYmxvY2sgMHgxNTFmN2M3NSAiZyIgMHgwMDAwICJha2l0YV9kYW8iICJpbXBvcnRzX3NlYWxlZCIgInMiIDB4MDAgIkVSUjplcnJJZ2lkIiAiZ2F0ZV9jdXJzb3IiICJFUlI6ZXJyTmdhdCIgIkVSUjplcnJJbHlyIiAibGVnYWN5X2N1dG9mZiIgIkVSUjplcnJOZGFvIiAiRVJSOmVycklzZ3QiICJ3YWxsZXQiIDB4MzI5ZjA0ZWUgIkVSUjplcnJTY3N0IiAiRVJSOmVycklwYXkiICJFUlI6ZXJyRmd0ZSIgIkVSUjplcnJJYXJnIiAweDA2ODEwMQogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6ODAKICAgIC8vIGV4cG9ydCBjbGFzcyBHYXRlIGV4dGVuZHMgY2xhc3NlcyhCYXNlR2F0ZSwgQWtpdGFCYXNlQ29udHJhY3QpIHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIGFzc2VydAogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgIGJ6IG1haW5fY3JlYXRlX05vT3BAMjIKICAgIHB1c2hieXRlc3MgMHhiMGJlMjk5NiAweDQ4OTRhZDBhIDB4MTEwNDdkMWUgMHhjMjFjN2JhMCAweDIwMGY3NDIxIDB4NDM5MjI2NTUgMHgyNzY0NjIyMiAweDliMTQ3ZDJjIDB4YzVjOTFmOGYgMHgyODI1ZmJmOCAweGE2MzE1YTgwIDB4ZGY1NmIwMWUgMHg2MWRkYzE2NSAweGRhNmNkZWY0IDB4ODU0ZGVkZTAgMHgzM2U5MmM5NCAvLyBtZXRob2QgInNldFN1YkdhdGUodWludDY0LGJvb2wsYm9vbCl2b2lkIiwgbWV0aG9kICJpbXBvcnRHYXRlKHVpbnQ2NCwodWludDY0LHVpbnQ2NCx1aW50NjQsdWludDgpW10pdm9pZCIsIG1ldGhvZCAic2VhbEltcG9ydHMoKXZvaWQiLCBtZXRob2QgInJlZ2lzdGVyKHBheSwodWludDY0LHVpbnQ2NCx1aW50OClbXSxieXRlW11bXSl1aW50NjQiLCBtZXRob2QgImNoZWNrKGFkZHJlc3MsdWludDY0LGJ5dGVbXVtdKWJvb2wiLCBtZXRob2QgIm11c3RDaGVjayhhZGRyZXNzLHVpbnQ2NCxieXRlW11bXSl2b2lkIiwgbWV0aG9kICJjaGVja0ZvcigoYWRkcmVzcyx1aW50NjQsYWRkcmVzcyksdWludDY0LGJ5dGVbXVtdKWJvb2wiLCBtZXRob2QgIm11c3RDaGVja0ZvcigoYWRkcmVzcyx1aW50NjQsYWRkcmVzcyksdWludDY0LGJ5dGVbXVtdKXZvaWQiLCBtZXRob2QgImNvc3QoKHVpbnQ2NCx1aW50NjQsdWludDgpW10sYnl0ZVtdW10pdWludDY0IiwgbWV0aG9kICJpc1N1YkdhdGUodWludDY0KWJvb2wiLCBtZXRob2QgImlzQ3R4U3ViR2F0ZSh1aW50NjQpYm9vbCIsIG1ldGhvZCAic2l6ZSh1aW50NjQpdWludDY0IiwgbWV0aG9kICJnZXRHYXRlKHVpbnQ2NCkodWludDY0LHVpbnQ2NCx1aW50NjQsdWludDgsYnl0ZVtdKVtdIiwgbWV0aG9kICJnYXRlRmlsdGVyRW50cnlXaXRoQXJnc1NoYXBlKCh1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50OCxieXRlW10pKSh1aW50NjQsdWludDY0LHVpbnQ2NCx1aW50OCxieXRlW10pIiwgbWV0aG9kICJvcFVwKCl2b2lkIiwgbWV0aG9kICJ1cGRhdGVBa2l0YURBTyh1aW50NjQpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIHNldFN1YkdhdGUgaW1wb3J0R2F0ZSBzZWFsSW1wb3J0cyByZWdpc3RlciBjaGVjayBtdXN0Q2hlY2sgY2hlY2tGb3IgbXVzdENoZWNrRm9yIGNvc3QgaXNTdWJHYXRlIGlzQ3R4U3ViR2F0ZSBzaXplIGdldEdhdGUgZ2F0ZUZpbHRlckVudHJ5V2l0aEFyZ3NTaGFwZSBtYWluX29wVXBfcm91dGVAMTkgdXBkYXRlQWtpdGFEQU8KICAgIGVycgoKbWFpbl9vcFVwX3JvdXRlQDE5OgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6Mzk3CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCm1haW5fY3JlYXRlX05vT3BAMjI6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo4MAogICAgLy8gZXhwb3J0IGNsYXNzIEdhdGUgZXh0ZW5kcyBjbGFzc2VzKEJhc2VHYXRlLCBBa2l0YUJhc2VDb250cmFjdCkgewogICAgcHVzaGJ5dGVzIDB4ODhjOTQwZjggLy8gbWV0aG9kICJjcmVhdGUoc3RyaW5nLHVpbnQ2NCx1aW50NjQpdm9pZCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIGNyZWF0ZQogICAgZXJyCgoKLy8gX3B1eWFfbGliLmFyYzQuZHluYW1pY19hcnJheV9yZWFkX2J5dGVfbGVuZ3RoX2VsZW1lbnQoYXJyYXk6IGJ5dGVzLCBpbmRleDogdWludDY0KSAtPiBieXRlczoKZHluYW1pY19hcnJheV9yZWFkX2J5dGVfbGVuZ3RoX2VsZW1lbnQ6CiAgICBwcm90byAyIDEKICAgIGZyYW1lX2RpZyAtMgogICAgZXh0cmFjdCAyIDAKICAgIGZyYW1lX2RpZyAtMQogICAgaW50Y18yIC8vIDIKICAgICoKICAgIGRpZyAxCiAgICBzd2FwCiAgICBleHRyYWN0X3VpbnQxNgogICAgZHVwMgogICAgZXh0cmFjdF91aW50MTYKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBleHRyYWN0MwogICAgcmV0c3ViCgoKLy8gX3B1eWFfbGliLmFyYzQuZHluYW1pY19hcnJheV9jb25jYXRfYnl0ZV9sZW5ndGhfaGVhZChhcnJheTogYnl0ZXMsIG5ld19pdGVtc19ieXRlczogYnl0ZXMsIG5ld19pdGVtc19jb3VudDogdWludDY0KSAtPiBieXRlczoKZHluYW1pY19hcnJheV9jb25jYXRfYnl0ZV9sZW5ndGhfaGVhZDoKICAgIHByb3RvIDMgMQogICAgZnJhbWVfZGlnIC0zCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgIGR1cAogICAgaW50Y18yIC8vIDIKICAgICoKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBmcmFtZV9kaWcgLTMKICAgIGludGNfMiAvLyAyCiAgICBkaWcgMgogICAgc3Vic3RyaW5nMwogICAgZnJhbWVfZGlnIC0xCiAgICBpbnRjXzIgLy8gMgogICAgKgogICAgYnplcm8KICAgIGNvbmNhdAogICAgZnJhbWVfZGlnIC0zCiAgICBsZW4KICAgIGZyYW1lX2RpZyAtMwogICAgdW5jb3ZlciAzCiAgICB1bmNvdmVyIDIKICAgIHN1YnN0cmluZzMKICAgIGZyYW1lX2RpZyAtMgogICAgY29uY2F0CiAgICBjb25jYXQKICAgIHN3YXAKICAgIGZyYW1lX2RpZyAtMQogICAgKwogICAgZHVwCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMAogICAgc3dhcAogICAgaW50Y18yIC8vIDIKICAgICoKICAgIGR1cAogICAgaW50Y18wIC8vIDAKCmR5bmFtaWNfYXJyYXlfY29uY2F0X2J5dGVfbGVuZ3RoX2hlYWRfZm9yX2hlYWRlckA0OgogICAgZHVwCiAgICBkaWcgMwogICAgPAogICAgYnogZHluYW1pY19hcnJheV9jb25jYXRfYnl0ZV9sZW5ndGhfaGVhZF9hZnRlcl9mb3JANwogICAgc3dhcAogICAgZHVwCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMAogICAgdW5jb3ZlciA1CiAgICBkaWcgMwogICAgdW5jb3ZlciAyCiAgICByZXBsYWNlMwogICAgZHVwCiAgICBjb3ZlciA1CiAgICBkaWcgMQogICAgZXh0cmFjdF91aW50MTYKICAgIGludGNfMiAvLyAyCiAgICArCiAgICArCiAgICBzd2FwCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgYiBkeW5hbWljX2FycmF5X2NvbmNhdF9ieXRlX2xlbmd0aF9oZWFkX2Zvcl9oZWFkZXJANAoKZHluYW1pY19hcnJheV9jb25jYXRfYnl0ZV9sZW5ndGhfaGVhZF9hZnRlcl9mb3JANzoKICAgIHBvcG4gMwogICAgc3dhcAogICAgY29uY2F0CiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo6R2F0ZS5jcmVhdGVbcm91dGluZ10oKSAtPiB2b2lkOgpjcmVhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyMTcKICAgIC8vIEBhYmltZXRob2QoeyBvbkNyZWF0ZTogJ3JlcXVpcmUnIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBleHRyYWN0IDIgMAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgZHVwCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyMTkKICAgIC8vIGxvZ2dlZEFzc2VydChsZWdhY3lDdXRvZmYgPD0gRmlyc3RHYXRlVjJJRCwgZXJySW52YWxpZEdhdGVJRCkKICAgIGludGMgNCAvLyA0Mjk0OTY3Mjk2CiAgICA8PQogICAgYm56IGNyZWF0ZV9hZnRlcl9hc3NlcnRAMwogICAgYnl0ZWMgNyAvLyAiRVJSOmVycklnaWQiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6ZXJySWdpZAoKY3JlYXRlX2FmdGVyX2Fzc2VydEAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL3VwZ3JhZGVhYmxlLnRzOjE0CiAgICAvLyB2ZXJzaW9uID0gR2xvYmFsU3RhdGU8c3RyaW5nPih7IGtleTogR2xvYmFsU3RhdGVLZXlWZXJzaW9uIH0pCiAgICBwdXNoYnl0ZXMgInZlcnNpb24iCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyMjAKICAgIC8vIHRoaXMudmVyc2lvbi52YWx1ZSA9IHZlcnNpb24KICAgIHVuY292ZXIgMwogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy91cGdyYWRlYWJsZS50czoxNgogICAgLy8gYWtpdGFEQU8gPSBHbG9iYWxTdGF0ZTxBcHBsaWNhdGlvbj4oeyBrZXk6IEdsb2JhbFN0YXRlS2V5QWtpdGFEQU8gfSkKICAgIGJ5dGVjXzMgLy8gImFraXRhX2RhbyIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjIyMQogICAgLy8gdGhpcy5ha2l0YURBTy52YWx1ZSA9IEFwcGxpY2F0aW9uKGFraXRhREFPKQogICAgdW5jb3ZlciAyCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6ODUKICAgIC8vIGdhdGVDdXJzb3IgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiBHYXRlR2xvYmFsU3RhdGVLZXlDdXJzb3IgfSkKICAgIGJ5dGVjIDggLy8gImdhdGVfY3Vyc29yIgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MjIyCiAgICAvLyB0aGlzLmdhdGVDdXJzb3IudmFsdWUgPSBGaXJzdEdhdGVWMklECiAgICBpbnRjIDQgLy8gNDI5NDk2NzI5NgogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjg3CiAgICAvLyBsZWdhY3lDdXRvZmYgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiBHYXRlR2xvYmFsU3RhdGVLZXlMZWdhY3lDdXRvZmYgfSkKICAgIGJ5dGVjIDExIC8vICJsZWdhY3lfY3V0b2ZmIgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MjIzCiAgICAvLyB0aGlzLmxlZ2FjeUN1dG9mZi52YWx1ZSA9IGxlZ2FjeUN1dG9mZgogICAgc3dhcAogICAgYXBwX2dsb2JhbF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjg5CiAgICAvLyBpbXBvcnRzU2VhbGVkID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGtleTogR2F0ZUdsb2JhbFN0YXRlS2V5SW1wb3J0c1NlYWxlZCB9KQogICAgYnl0ZWMgNCAvLyAiaW1wb3J0c19zZWFsZWQiCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyMjQKICAgIC8vIHRoaXMuaW1wb3J0c1NlYWxlZC52YWx1ZSA9IDAKICAgIGludGNfMCAvLyAwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MjE3CiAgICAvLyBAYWJpbWV0aG9kKHsgb25DcmVhdGU6ICdyZXF1aXJlJyB9KQogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjpHYXRlLnNldFN1YkdhdGVbcm91dGluZ10oKSAtPiB2b2lkOgpzZXRTdWJHYXRlOgogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjIzOQogICAgLy8gc2V0U3ViR2F0ZShhcHA6IHVpbnQ2NCwgYWxsb3dlZDogYm9vbGVhbiwgY3R4QXdhcmU6IGJvb2xlYW4pOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5ib29sCiAgICBpbnRjXzAgLy8gMAogICAgZ2V0Yml0CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18xIC8vIDEKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuYm9vbAogICAgaW50Y18wIC8vIDAKICAgIGdldGJpdAogICAgc3dhcAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTE0CiAgICAvLyBpZiAodGhpcy5pbXBvcnRzU2VhbGVkLnZhbHVlID09PSAwKSB7CiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6ODkKICAgIC8vIGltcG9ydHNTZWFsZWQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiBHYXRlR2xvYmFsU3RhdGVLZXlJbXBvcnRzU2VhbGVkIH0pCiAgICBieXRlYyA0IC8vICJpbXBvcnRzX3NlYWxlZCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjExNAogICAgLy8gaWYgKHRoaXMuaW1wb3J0c1NlYWxlZC52YWx1ZSA9PT0gMCkgewogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIGJueiBzZXRTdWJHYXRlX2FmdGVyX2lmX2Vsc2VAMTcKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjExNQogICAgLy8gcmV0dXJuIFR4bi5zZW5kZXIgPT09IEdsb2JhbC5jcmVhdG9yQWRkcmVzcwogICAgdHhuIFNlbmRlcgogICAgZ2xvYmFsIENyZWF0b3JBZGRyZXNzCiAgICA9PQoKc2V0U3ViR2F0ZV9hZnRlcl9pbmxpbmVkX3NtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjpHYXRlLmlzQWxsb3dsaXN0QWRtaW5AMTg6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyNDAKICAgIC8vIGxvZ2dlZEFzc2VydCh0aGlzLmlzQWxsb3dsaXN0QWRtaW4oKSwgZXJyTm90QWtpdGFEYW8pCiAgICBibnogc2V0U3ViR2F0ZV9hZnRlcl9hc3NlcnRAMwogICAgYnl0ZWMgMTIgLy8gIkVSUjplcnJOZGFvIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOmVyck5kYW8KCnNldFN1YkdhdGVfYWZ0ZXJfYXNzZXJ0QDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyNDIKICAgIC8vIHRoaXMuc3ViR2F0ZXMoYXBwKS5kZWxldGUoKQogICAgZGlnIDIKICAgIGl0b2IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjk5CiAgICAvLyBzdWJHYXRlcyA9IEJveE1hcDx1aW50NjQsIGJ5dGVzPih7IGtleVByZWZpeDogR2F0ZUJveFByZWZpeFN1YkdhdGVzIH0pCiAgICBieXRlYyA1IC8vICJzIgogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIGJ1cnkgNQogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MjQyCiAgICAvLyB0aGlzLnN1YkdhdGVzKGFwcCkuZGVsZXRlKCkKICAgIGJveF9kZWwKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MjQzCiAgICAvLyBpZiAoYWxsb3dlZCkgewogICAgYnogc2V0U3ViR2F0ZV9hZnRlcl9pZl9lbHNlQDE0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyNDQKICAgIC8vIGxvZ2dlZEFzc2VydChhcHAgIT09IDAgJiYgYXBwICE9PSBHbG9iYWwuY3VycmVudEFwcGxpY2F0aW9uSWQuaWQsIGVyckludmFsaWRTdWJHYXRlKQogICAgZGlnIDEKICAgIGJ6IHNldFN1YkdhdGVfYm9vbF9mYWxzZUA3CiAgICBkaWcgMQogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbklECiAgICAhPQogICAgYnogc2V0U3ViR2F0ZV9ib29sX2ZhbHNlQDcKICAgIGludGNfMSAvLyAxCgpzZXRTdWJHYXRlX2Jvb2xfbWVyZ2VAODoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI0NAogICAgLy8gbG9nZ2VkQXNzZXJ0KGFwcCAhPT0gMCAmJiBhcHAgIT09IEdsb2JhbC5jdXJyZW50QXBwbGljYXRpb25JZC5pZCwgZXJySW52YWxpZFN1YkdhdGUpCiAgICBibnogc2V0U3ViR2F0ZV9hZnRlcl9hc3NlcnRAMTAKICAgIGJ5dGVjIDEzIC8vICJFUlI6ZXJySXNndCIKICAgIGxvZwogICAgZXJyIC8vIEVSUjplcnJJc2d0CgpzZXRTdWJHYXRlX2FmdGVyX2Fzc2VydEAxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI0NQogICAgLy8gaWYgKGN0eEF3YXJlKSB7CiAgICBkdXAKICAgIGJ6IHNldFN1YkdhdGVfZWxzZV9ib2R5QDEyCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyNDYKICAgIC8vIHRoaXMuc3ViR2F0ZXMoYXBwKS52YWx1ZSA9IEJ5dGVzLmZyb21IZXgoJzAxJykKICAgIGRpZyAyCiAgICBkdXAKICAgIGJveF9kZWwKICAgIHBvcAogICAgcHVzaGJ5dGVzIDB4MDEKICAgIGJveF9wdXQKCnNldFN1YkdhdGVfYWZ0ZXJfaWZfZWxzZUAxNDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjIzOQogICAgLy8gc2V0U3ViR2F0ZShhcHA6IHVpbnQ2NCwgYWxsb3dlZDogYm9vbGVhbiwgY3R4QXdhcmU6IGJvb2xlYW4pOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCnNldFN1YkdhdGVfZWxzZV9ib2R5QDEyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MjQ4CiAgICAvLyB0aGlzLnN1YkdhdGVzKGFwcCkuY3JlYXRlKHsgc2l6ZTogMCB9KQogICAgZGlnIDIKICAgIGludGNfMCAvLyAwCiAgICBib3hfY3JlYXRlCiAgICBwb3AKICAgIGIgc2V0U3ViR2F0ZV9hZnRlcl9pZl9lbHNlQDE0CgpzZXRTdWJHYXRlX2Jvb2xfZmFsc2VANzoKICAgIGludGNfMCAvLyAwCiAgICBiIHNldFN1YkdhdGVfYm9vbF9tZXJnZUA4CgpzZXRTdWJHYXRlX2FmdGVyX2lmX2Vsc2VAMTc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxMTcKICAgIC8vIHJldHVybiBUeG4uc2VuZGVyID09PSB0aGlzLmdldEFraXRhREFPV2FsbGV0KCkuYWRkcmVzcwogICAgdHhuIFNlbmRlcgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL3VwZ3JhZGVhYmxlLnRzOjE5CiAgICAvLyBjb25zdCBbd2FsbGV0SURdID0gb3AuQXBwR2xvYmFsLmdldEV4VWludDY0KHRoaXMuYWtpdGFEQU8udmFsdWUsIEJ5dGVzKEFraXRhREFPR2xvYmFsU3RhdGVLZXlzV2FsbGV0KSkKICAgIGludGNfMCAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvYmFzZS1jb250cmFjdHMvdXBncmFkZWFibGUudHM6MTYKICAgIC8vIGFraXRhREFPID0gR2xvYmFsU3RhdGU8QXBwbGljYXRpb24+KHsga2V5OiBHbG9iYWxTdGF0ZUtleUFraXRhREFPIH0pCiAgICBieXRlY18zIC8vICJha2l0YV9kYW8iCiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvYmFzZS1jb250cmFjdHMvdXBncmFkZWFibGUudHM6MTkKICAgIC8vIGNvbnN0IFt3YWxsZXRJRF0gPSBvcC5BcHBHbG9iYWwuZ2V0RXhVaW50NjQodGhpcy5ha2l0YURBTy52YWx1ZSwgQnl0ZXMoQWtpdGFEQU9HbG9iYWxTdGF0ZUtleXNXYWxsZXQpKQogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIGFzc2VydCAvLyBjaGVjayBHbG9iYWxTdGF0ZSBleGlzdHMKICAgIGJ5dGVjIDE0IC8vICJ3YWxsZXQiCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxMTcKICAgIC8vIHJldHVybiBUeG4uc2VuZGVyID09PSB0aGlzLmdldEFraXRhREFPV2FsbGV0KCkuYWRkcmVzcwogICAgYXBwX3BhcmFtc19nZXQgQXBwQWRkcmVzcwogICAgYXNzZXJ0IC8vIGFwcGxpY2F0aW9uIGV4aXN0cwogICAgPT0KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI0MAogICAgLy8gbG9nZ2VkQXNzZXJ0KHRoaXMuaXNBbGxvd2xpc3RBZG1pbigpLCBlcnJOb3RBa2l0YURhbykKICAgIGIgc2V0U3ViR2F0ZV9hZnRlcl9pbmxpbmVkX3NtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjpHYXRlLmlzQWxsb3dsaXN0QWRtaW5AMTgKCgovLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo6R2F0ZS5pbXBvcnRHYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKaW1wb3J0R2F0ZToKICAgIGludGNfMCAvLyAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyNTgKICAgIC8vIGltcG9ydEdhdGUoaWQ6IHVpbnQ2NCwgZW50cmllczogR2F0ZUZpbHRlckVudHJ5W10pOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIGR1cAogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBjb3ZlciAzCiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBkdXAKICAgIGNvdmVyIDQKICAgIHB1c2hpbnQgMjUKICAgICoKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBzd2FwCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxzbWFydF9jb250cmFjdHMvZ2F0ZXMvdHlwZXMudHM6OkdhdGVGaWx0ZXJFbnRyeT4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI1OQogICAgLy8gdGhpcy5hc3NlcnRNaWdyYXRvcigpCiAgICBjYWxsc3ViIGFzc2VydE1pZ3JhdG9yCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyNjAKICAgIC8vIGxvZ2dlZEFzc2VydChpZCA+IDAgJiYgaWQgPCB0aGlzLmxlZ2FjeUN1dG9mZi52YWx1ZSwgZXJySW52YWxpZEdhdGVJRCkKICAgIGJ6IGltcG9ydEdhdGVfYm9vbF9mYWxzZUA0CiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6ODcKICAgIC8vIGxlZ2FjeUN1dG9mZiA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6IEdhdGVHbG9iYWxTdGF0ZUtleUxlZ2FjeUN1dG9mZiB9KQogICAgYnl0ZWMgMTEgLy8gImxlZ2FjeV9jdXRvZmYiCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyNjAKICAgIC8vIGxvZ2dlZEFzc2VydChpZCA+IDAgJiYgaWQgPCB0aGlzLmxlZ2FjeUN1dG9mZi52YWx1ZSwgZXJySW52YWxpZEdhdGVJRCkKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBkaWcgMQogICAgPgogICAgYnogaW1wb3J0R2F0ZV9ib29sX2ZhbHNlQDQKICAgIGludGNfMSAvLyAxCgppbXBvcnRHYXRlX2Jvb2xfbWVyZ2VANToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI2MAogICAgLy8gbG9nZ2VkQXNzZXJ0KGlkID4gMCAmJiBpZCA8IHRoaXMubGVnYWN5Q3V0b2ZmLnZhbHVlLCBlcnJJbnZhbGlkR2F0ZUlEKQogICAgYm56IGltcG9ydEdhdGVfYWZ0ZXJfYXNzZXJ0QDcKICAgIGJ5dGVjIDcgLy8gIkVSUjplcnJJZ2lkIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOmVycklnaWQKCmltcG9ydEdhdGVfYWZ0ZXJfYXNzZXJ0QDc6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyNjEKICAgIC8vIGxvZ2dlZEFzc2VydCghdGhpcy5nYXRlUmVnaXN0cnkoaWQpLmV4aXN0cywgZXJySW52YWxpZEdhdGVJRCkKICAgIGl0b2IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjkzCiAgICAvLyBnYXRlUmVnaXN0cnkgPSBCb3hNYXA8dWludDY0LCBHYXRlRmlsdGVyRW50cnlbXT4oeyBrZXlQcmVmaXg6IEdhdGVCb3hQcmVmaXhHYXRlUmVnaXN0cnkgfSkKICAgIGJ5dGVjXzEgLy8gImciCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgYnVyeSA0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyNjEKICAgIC8vIGxvZ2dlZEFzc2VydCghdGhpcy5nYXRlUmVnaXN0cnkoaWQpLmV4aXN0cywgZXJySW52YWxpZEdhdGVJRCkKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgYnogaW1wb3J0R2F0ZV9hZnRlcl9hc3NlcnRAOQogICAgYnl0ZWMgNyAvLyAiRVJSOmVycklnaWQiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6ZXJySWdpZAoKaW1wb3J0R2F0ZV9hZnRlcl9hc3NlcnRAOToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE1MQogICAgLy8gY29uc3QgbGF5ZXJzOiB1aW50NjRbXSA9IFtdCiAgICBieXRlY18yIC8vIDB4MDAwMAogICAgZHVwCiAgICBjb3ZlciAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNTMKICAgIC8vIGNvbnN0IG9wZXJhdG9yczogYnl0ZXNbXSA9IFtdCiAgICBieXRlY18yIC8vIDB4MDAwMAogICAgY292ZXIgNAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTU0CiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgZW50cmllcy5sZW5ndGg7IGkgKz0gMSkgewogICAgaW50Y18wIC8vIDAKICAgIHN3YXAKICAgIGNvdmVyIDIKCmltcG9ydEdhdGVfd2hpbGVfdG9wQDExOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTU0CiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgZW50cmllcy5sZW5ndGg7IGkgKz0gMSkgewogICAgZHVwCiAgICBkaWcgMgogICAgPAogICAgYnogaW1wb3J0R2F0ZV9hZnRlcl93aGlsZUAxMwogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTU1CiAgICAvLyBsYXllcnMucHVzaChlbnRyaWVzW2ldLmxheWVyKQogICAgZGlnIDQKICAgIGV4dHJhY3QgMiAwCiAgICBkaWcgMQogICAgcHVzaGludCAyNQogICAgKgogICAgcHVzaGludCAyNQogICAgZXh0cmFjdDMgLy8gb24gZXJyb3I6IGluZGV4IGFjY2VzcyBpcyBvdXQgb2YgYm91bmRzCiAgICBkdXAKICAgIGV4dHJhY3QgMCA4CiAgICB1bmNvdmVyIDUKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNTUKICAgIC8vIGxheWVycy5wdXNoKGVudHJpZXNbaV0ubGF5ZXIpCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgaXRvYgogICAgZXh0cmFjdCA2IDAKICAgIHJlcGxhY2UyIDAKICAgIHN3YXAKICAgIGNvbmNhdAogICAgY292ZXIgNAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTU1LTE1NgogICAgLy8gbGF5ZXJzLnB1c2goZW50cmllc1tpXS5sYXllcikKICAgIC8vIGFwcHMucHVzaChlbnRyaWVzW2ldLmFwcCkKICAgIGR1cAogICAgZXh0cmFjdCA4IDgKICAgIHVuY292ZXIgNAogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE1NgogICAgLy8gYXBwcy5wdXNoKGVudHJpZXNbaV0uYXBwKQogICAgaW50Y18xIC8vIDEKICAgICsKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAwCiAgICByZXBsYWNlMiAwCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGNvdmVyIDMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE1NwogICAgLy8gb3BlcmF0b3JzLnB1c2goZW50cmllc1tpXS5sb2dpY2FsT3BlcmF0b3IuYnl0ZXMpCiAgICBleHRyYWN0IDI0IDEKICAgIGR1cAogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgc3dhcAogICAgY29uY2F0CiAgICB1bmNvdmVyIDYKICAgIHN3YXAKICAgIGludGNfMSAvLyAxCiAgICBjYWxsc3ViIGR5bmFtaWNfYXJyYXlfY29uY2F0X2J5dGVfbGVuZ3RoX2hlYWQKICAgIGNvdmVyIDUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE1NAogICAgLy8gZm9yIChsZXQgaTogdWludDY0ID0gMDsgaSA8IGVudHJpZXMubGVuZ3RoOyBpICs9IDEpIHsKICAgIGludGNfMSAvLyAxCiAgICArCiAgICBiIGltcG9ydEdhdGVfd2hpbGVfdG9wQDExCgppbXBvcnRHYXRlX2FmdGVyX3doaWxlQDEzOgogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNTkKICAgIC8vIHRoaXMudmFsaWRhdGVTdHJ1Y3R1cmUobGF5ZXJzLCBhcHBzLCBvcGVyYXRvcnMsIGVudHJpZXMubGVuZ3RoKQogICAgY292ZXIgMgogICAgdW5jb3ZlciA0CiAgICB1bmNvdmVyIDMKICAgIGNhbGxzdWIgdmFsaWRhdGVTdHJ1Y3R1cmUKICAgIHBvcG4gMwogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MjYzCiAgICAvLyB0aGlzLmdhdGVSZWdpc3RyeShpZCkudmFsdWUgPSBjbG9uZShlbnRyaWVzKQogICAgZGlnIDEKICAgIGR1cAogICAgYm94X2RlbAogICAgcG9wCiAgICBzd2FwCiAgICBib3hfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyNTgKICAgIC8vIGltcG9ydEdhdGUoaWQ6IHVpbnQ2NCwgZW50cmllczogR2F0ZUZpbHRlckVudHJ5W10pOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCmltcG9ydEdhdGVfYm9vbF9mYWxzZUA0OgogICAgaW50Y18wIC8vIDAKICAgIGIgaW1wb3J0R2F0ZV9ib29sX21lcmdlQDUKCgovLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo6R2F0ZS5zZWFsSW1wb3J0c1tyb3V0aW5nXSgpIC0+IHZvaWQ6CnNlYWxJbXBvcnRzOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MjY4CiAgICAvLyB0aGlzLmFzc2VydE1pZ3JhdG9yKCkKICAgIGNhbGxzdWIgYXNzZXJ0TWlncmF0b3IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjg5CiAgICAvLyBpbXBvcnRzU2VhbGVkID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGtleTogR2F0ZUdsb2JhbFN0YXRlS2V5SW1wb3J0c1NlYWxlZCB9KQogICAgYnl0ZWMgNCAvLyAiaW1wb3J0c19zZWFsZWQiCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyNjkKICAgIC8vIHRoaXMuaW1wb3J0c1NlYWxlZC52YWx1ZSA9IDEKICAgIGludGNfMSAvLyAxCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MjY3CiAgICAvLyBzZWFsSW1wb3J0cygpOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo6R2F0ZS5yZWdpc3Rlcltyb3V0aW5nXSgpIC0+IHZvaWQ6CnJlZ2lzdGVyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6Mjc0CiAgICAvLyByZWdpc3RlcihwYXltZW50OiBndHhuLlBheW1lbnRUeG4sIGZpbHRlcnM6IEdhdGVGaWx0ZXJbXSwgYXJnczogR2F0ZUFyZ3MpOiB1aW50NjQgewogICAgdHhuIEdyb3VwSW5kZXgKICAgIGludGNfMSAvLyAxCiAgICAtCiAgICBkdXAKICAgIGd0eG5zIFR5cGVFbnVtCiAgICBpbnRjXzEgLy8gcGF5CiAgICA9PQogICAgYXNzZXJ0IC8vIHRyYW5zYWN0aW9uIHR5cGUgaXMgcGF5CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIHB1c2hpbnQgMTcKICAgICoKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBzd2FwCiAgICBsZW4KICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxzbWFydF9jb250cmFjdHMvZ2F0ZXMvdHlwZXMudHM6OkdhdGVGaWx0ZXI+CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGNvdmVyIDMKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGR1cAogICAgY292ZXIgMgogICAgaW50Y18yIC8vIDIKICAgICoKICAgIHN3YXAKICAgIGR1cAogICAgbGVuCiAgICBjb3ZlciAyCiAgICBleHRyYWN0IDIgMAogICAgaW50Y18wIC8vIDAKCnJlZ2lzdGVyX2Zvcl9oZWFkZXJAMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI3NAogICAgLy8gcmVnaXN0ZXIocGF5bWVudDogZ3R4bi5QYXltZW50VHhuLCBmaWx0ZXJzOiBHYXRlRmlsdGVyW10sIGFyZ3M6IEdhdGVBcmdzKTogdWludDY0IHsKICAgIGR1cAogICAgZGlnIDUKICAgIDwKICAgIGJ6IHJlZ2lzdGVyX2FmdGVyX2ZvckA0CiAgICBkdXAKICAgIGludGNfMiAvLyAyCiAgICAqCiAgICBkaWcgMgogICAgZHVwCiAgICB1bmNvdmVyIDIKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGVuY29kaW5nCiAgICBkdXAKICAgIHVuY292ZXIgNQogICAgZHVwCiAgICBjb3ZlciA0CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgdGFpbCBwb2ludGVyIGZvciAobGVuKyhsZW4rdWludDhbXSlbXSkKICAgIGRpZyAxCiAgICBsZW4KICAgIHN1YnN0cmluZzMKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgKwogICAgY292ZXIgMgogICAgaW50Y18xIC8vIDEKICAgICsKICAgIGIgcmVnaXN0ZXJfZm9yX2hlYWRlckAxCgpyZWdpc3Rlcl9hZnRlcl9mb3JANDoKICAgIHBvcG4gMgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6Mjc0CiAgICAvLyByZWdpc3RlcihwYXltZW50OiBndHhuLlBheW1lbnRUeG4sIGZpbHRlcnM6IEdhdGVGaWx0ZXJbXSwgYXJnczogR2F0ZUFyZ3MpOiB1aW50NjQgewogICAgaW50Y18yIC8vIDIKICAgICsKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxieXRlcz4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI3NQogICAgLy8gdGhpcy52YWxpZGF0ZUZpbHRlcnMoZmlsdGVycywgYXJncy5sZW5ndGgpCiAgICB1bmNvdmVyIDIKICAgIGRpZyAxCiAgICBjYWxsc3ViIHZhbGlkYXRlRmlsdGVycwogICAgZHVwCiAgICBjb3ZlciAzCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyNzcKICAgIC8vIGNvbnN0IG1ickNvc3RzID0gdGhpcy5tYnIoZmlsdGVycy5sZW5ndGgpLmdhdGVSZWdpc3RyeQogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGR1cAogICAgY2FsbHN1YiBtYnIKICAgIGludGNfMyAvLyA4CiAgICBleHRyYWN0X3VpbnQ2NAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6Mjc5CiAgICAvLyBsZXQgZW50cmllczogR2F0ZUZpbHRlckVudHJ5W10gPSBbXQogICAgYnl0ZWNfMiAvLyAweDAwMDAKICAgIHN3YXAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI4MQogICAgLy8gZm9yIChsZXQgaTogdWludDY0ID0gMDsgaSA8IGZpbHRlcnMubGVuZ3RoOyBpICs9IDEpIHsKICAgIGludGNfMCAvLyAwCiAgICBzd2FwCgpyZWdpc3Rlcl93aGlsZV90b3BANjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI4MQogICAgLy8gZm9yIChsZXQgaTogdWludDY0ID0gMDsgaSA8IGZpbHRlcnMubGVuZ3RoOyBpICs9IDEpIHsKICAgIGRpZyAxCiAgICBkaWcgNAogICAgPAogICAgYnogcmVnaXN0ZXJfYWZ0ZXJfd2hpbGVAMTMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI4Mi0yODUKICAgIC8vIGNvbnN0IGNvc3QgPSBhYmlDYWxsPHR5cGVvZiBNb2NrR2F0ZS5wcm90b3R5cGUuY29zdD4oewogICAgLy8gICBhcHBJZDogZmlsdGVyc1tpXS5hcHAsCiAgICAvLyAgIGFyZ3M6IFthcmdzW2ldXSwKICAgIC8vIH0pLnJldHVyblZhbHVlCiAgICBpdHhuX2JlZ2luCiAgICBkaWcgMQogICAgZHVwCiAgICBkaWcgNgogICAgPAogICAgYXNzZXJ0IC8vIGluZGV4IG91dCBvZiBib3VuZHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI4NAogICAgLy8gYXJnczogW2FyZ3NbaV1dLAogICAgZGlnIDgKICAgIGRpZyAxCiAgICBjYWxsc3ViIGR5bmFtaWNfYXJyYXlfcmVhZF9ieXRlX2xlbmd0aF9lbGVtZW50CiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGNvdmVyIDgKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI4MwogICAgLy8gYXBwSWQ6IGZpbHRlcnNbaV0uYXBwLAogICAgZGlnIDkKICAgIGV4dHJhY3QgMiAwCiAgICBzd2FwCiAgICBwdXNoaW50IDE3CiAgICAqCiAgICBwdXNoaW50IDE3CiAgICBleHRyYWN0MyAvLyBvbiBlcnJvcjogaW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIGR1cAogICAgY292ZXIgOAogICAgaW50Y18zIC8vIDgKICAgIGV4dHJhY3RfdWludDY0CiAgICBkdXAKICAgIGNvdmVyIDQKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25JRAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MjgyLTI4NQogICAgLy8gY29uc3QgY29zdCA9IGFiaUNhbGw8dHlwZW9mIE1vY2tHYXRlLnByb3RvdHlwZS5jb3N0Pih7CiAgICAvLyAgIGFwcElkOiBmaWx0ZXJzW2ldLmFwcCwKICAgIC8vICAgYXJnczogW2FyZ3NbaV1dLAogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIGJ5dGVjIDE1IC8vIG1ldGhvZCAiY29zdChieXRlW10pdWludDY0IgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBwdXNoaW50IDYgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBMYXN0TG9nCiAgICBkdXAKICAgIGV4dHJhY3QgNCAwCiAgICBzd2FwCiAgICBleHRyYWN0IDAgNAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICA9PQogICAgYXNzZXJ0IC8vIEJ5dGVzIGhhcyB2YWxpZCBwcmVmaXgKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgdWludDY0CiAgICBidG9pCiAgICBkdXAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI4NwogICAgLy8gbG9nZ2VkQXNzZXJ0KGNvc3QgPD0gTWF4U3ViR2F0ZUNvc3QsIGVyclN1YkdhdGVDb3N0VG9vSGlnaCkKICAgIGludGMgNSAvLyAxMDAwMDAwCiAgICA8PQogICAgYm56IHJlZ2lzdGVyX2FmdGVyX2Fzc2VydEAxMAogICAgYnl0ZWMgMTYgLy8gIkVSUjplcnJTY3N0IgogICAgbG9nCiAgICBlcnIgLy8gRVJSOmVyclNjc3QKCnJlZ2lzdGVyX2FmdGVyX2Fzc2VydEAxMDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI4OAogICAgLy8gcmVxdWlyZWRDb3N0cyArPSBjb3N0CiAgICBkdXAKICAgIGNvdmVyIDIKICAgICsKICAgIHN3YXAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI5MQogICAgLy8gcmVjZWl2ZXI6IEFwcGxpY2F0aW9uKGZpbHRlcnNbaV0uYXBwKS5hZGRyZXNzLAogICAgdW5jb3ZlciAzCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGFwcF9wYXJhbXNfZ2V0IEFwcEFkZHJlc3MKICAgIGFzc2VydCAvLyBhcHBsaWNhdGlvbiBleGlzdHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI5NS0yOTgKICAgIC8vIGNvbnN0IHJlZ2lzdHJ5RW50cnkgPSBhYmlDYWxsPHR5cGVvZiBNb2NrR2F0ZS5wcm90b3R5cGUucmVnaXN0ZXI+KHsKICAgIC8vICAgYXBwSWQ6IGZpbHRlcnNbaV0uYXBwLAogICAgLy8gICBhcmdzOiBbcGF5bWVudCwgYXJnc1tpXV0sCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgaXR4bl9iZWdpbgogICAgaXR4bl9maWVsZCBSZWNlaXZlcgogICAgaXR4bl9maWVsZCBBbW91bnQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI5MC0yOTMKICAgIC8vIGNvbnN0IHBheW1lbnQgPSBpdHhuLnBheW1lbnQoewogICAgLy8gICByZWNlaXZlcjogQXBwbGljYXRpb24oZmlsdGVyc1tpXS5hcHApLmFkZHJlc3MsCiAgICAvLyAgIGFtb3VudDogY29zdAogICAgLy8gfSkKICAgIGludGNfMSAvLyAxCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI5NS0yOTgKICAgIC8vIGNvbnN0IHJlZ2lzdHJ5RW50cnkgPSBhYmlDYWxsPHR5cGVvZiBNb2NrR2F0ZS5wcm90b3R5cGUucmVnaXN0ZXI+KHsKICAgIC8vICAgYXBwSWQ6IGZpbHRlcnNbaV0uYXBwLAogICAgLy8gICBhcmdzOiBbcGF5bWVudCwgYXJnc1tpXV0sCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgaXR4bl9uZXh0CiAgICBkdXAKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25JRAogICAgcHVzaGJ5dGVzIDB4NzdiYjc5YjkgLy8gbWV0aG9kICJyZWdpc3RlcihwYXksYnl0ZVtdKXVpbnQ2NCIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICB1bmNvdmVyIDgKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBwdXNoaW50IDYgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBMYXN0TG9nCiAgICBkdXAKICAgIGV4dHJhY3QgNCAwCiAgICBzd2FwCiAgICBleHRyYWN0IDAgNAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICA9PQogICAgYXNzZXJ0IC8vIEJ5dGVzIGhhcyB2YWxpZCBwcmVmaXgKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgdWludDY0CiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMDAKICAgIC8vIGVudHJpZXMucHVzaCh7IC4uLmZpbHRlcnNbaV0sIHJlZ2lzdHJ5RW50cnkgfSkKICAgIHVuY292ZXIgOAogICAgZHVwCiAgICBleHRyYWN0IDAgOAogICAgc3dhcAogICAgZXh0cmFjdCAxNiAxCiAgICB1bmNvdmVyIDMKICAgIGl0b2IKICAgIHVuY292ZXIgMgogICAgc3dhcAogICAgY29uY2F0CiAgICB1bmNvdmVyIDIKICAgIGl0b2IKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICB1bmNvdmVyIDMKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMDAKICAgIC8vIGVudHJpZXMucHVzaCh7IC4uLmZpbHRlcnNbaV0sIHJlZ2lzdHJ5RW50cnkgfSkKICAgIGludGNfMSAvLyAxCiAgICArCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMAogICAgcmVwbGFjZTIgMAogICAgc3dhcAogICAgY29uY2F0CiAgICBjb3ZlciAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyODEKICAgIC8vIGZvciAobGV0IGk6IHVpbnQ2NCA9IDA7IGkgPCBmaWx0ZXJzLmxlbmd0aDsgaSArPSAxKSB7CiAgICBzd2FwCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgc3dhcAogICAgYiByZWdpc3Rlcl93aGlsZV90b3BANgoKcmVnaXN0ZXJfYWZ0ZXJfd2hpbGVAMTM6CiAgICBidXJ5IDEKICAgIHVuY292ZXIgMgogICAgcG9wCiAgICB1bmNvdmVyIDIKICAgIHBvcAogICAgdW5jb3ZlciAzCiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjMwMwogICAgLy8gbG9nZ2VkQXNzZXJ0KHBheW1lbnQucmVjZWl2ZXIgPT09IEdsb2JhbC5jdXJyZW50QXBwbGljYXRpb25BZGRyZXNzLCBlcnJJbnZhbGlkUGF5bWVudCkKICAgIGRpZyAyCiAgICBndHhucyBSZWNlaXZlcgogICAgZ2xvYmFsIEN1cnJlbnRBcHBsaWNhdGlvbkFkZHJlc3MKICAgID09CiAgICBibnogcmVnaXN0ZXJfYWZ0ZXJfYXNzZXJ0QDE1CiAgICBieXRlYyAxNyAvLyAiRVJSOmVycklwYXkiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6ZXJySXBheQoKcmVnaXN0ZXJfYWZ0ZXJfYXNzZXJ0QDE1OgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzA0CiAgICAvLyBsb2dnZWRBc3NlcnQocGF5bWVudC5hbW91bnQgPT09IHJlcXVpcmVkQ29zdHMsIGVyckludmFsaWRQYXltZW50KQogICAgdW5jb3ZlciAyCiAgICBndHhucyBBbW91bnQKICAgID09CiAgICBibnogcmVnaXN0ZXJfYWZ0ZXJfYXNzZXJ0QDE3CiAgICBieXRlYyAxNyAvLyAiRVJSOmVycklwYXkiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6ZXJySXBheQoKcmVnaXN0ZXJfYWZ0ZXJfYXNzZXJ0QDE3OgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTA0CiAgICAvLyBjb25zdCBpZCA9IHRoaXMuZ2F0ZUN1cnNvci52YWx1ZQogICAgaW50Y18wIC8vIDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjg1CiAgICAvLyBnYXRlQ3Vyc29yID0gR2xvYmFsU3RhdGU8dWludDY0Pih7IGtleTogR2F0ZUdsb2JhbFN0YXRlS2V5Q3Vyc29yIH0pCiAgICBieXRlYyA4IC8vICJnYXRlX2N1cnNvciIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjEwNAogICAgLy8gY29uc3QgaWQgPSB0aGlzLmdhdGVDdXJzb3IudmFsdWUKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxMDUKICAgIC8vIHRoaXMuZ2F0ZUN1cnNvci52YWx1ZSArPSAxCiAgICBkdXAKICAgIGludGNfMSAvLyAxCiAgICArCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo4NQogICAgLy8gZ2F0ZUN1cnNvciA9IEdsb2JhbFN0YXRlPHVpbnQ2ND4oeyBrZXk6IEdhdGVHbG9iYWxTdGF0ZUtleUN1cnNvciB9KQogICAgYnl0ZWMgOCAvLyAiZ2F0ZV9jdXJzb3IiCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxMDUKICAgIC8vIHRoaXMuZ2F0ZUN1cnNvci52YWx1ZSArPSAxCiAgICBzd2FwCiAgICBhcHBfZ2xvYmFsX3B1dAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzA3CiAgICAvLyB0aGlzLmdhdGVSZWdpc3RyeShpZCkudmFsdWUgPSBjbG9uZShlbnRyaWVzKQogICAgaXRvYgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6OTMKICAgIC8vIGdhdGVSZWdpc3RyeSA9IEJveE1hcDx1aW50NjQsIEdhdGVGaWx0ZXJFbnRyeVtdPih7IGtleVByZWZpeDogR2F0ZUJveFByZWZpeEdhdGVSZWdpc3RyeSB9KQogICAgYnl0ZWNfMSAvLyAiZyIKICAgIGRpZyAxCiAgICBjb25jYXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjMwNwogICAgLy8gdGhpcy5nYXRlUmVnaXN0cnkoaWQpLnZhbHVlID0gY2xvbmUoZW50cmllcykKICAgIGR1cAogICAgYm94X2RlbAogICAgcG9wCiAgICB1bmNvdmVyIDIKICAgIGJveF9wdXQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjI3NAogICAgLy8gcmVnaXN0ZXIocGF5bWVudDogZ3R4bi5QYXltZW50VHhuLCBmaWx0ZXJzOiBHYXRlRmlsdGVyW10sIGFyZ3M6IEdhdGVBcmdzKTogdWludDY0IHsKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo6R2F0ZS5jaGVja1tyb3V0aW5nXSgpIC0+IHZvaWQ6CmNoZWNrOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzEyCiAgICAvLyBjaGVjayhjYWxsZXI6IEFjY291bnQsIGdhdGVJRDogdWludDY0LCBhcmdzOiBHYXRlQXJncyk6IGJvb2xlYW4gewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwbiAyCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgZHVwCiAgICBjb3ZlciAyCiAgICBpbnRjXzIgLy8gMgogICAgKgogICAgc3dhcAogICAgZHVwCiAgICBsZW4KICAgIGNvdmVyIDIKICAgIGV4dHJhY3QgMiAwCiAgICBpbnRjXzAgLy8gMAoKY2hlY2tfZm9yX2hlYWRlckAxOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzEyCiAgICAvLyBjaGVjayhjYWxsZXI6IEFjY291bnQsIGdhdGVJRDogdWludDY0LCBhcmdzOiBHYXRlQXJncyk6IGJvb2xlYW4gewogICAgZHVwCiAgICBkaWcgNQogICAgPAogICAgYnogY2hlY2tfYWZ0ZXJfZm9yQDQKICAgIGR1cAogICAgaW50Y18yIC8vIDIKICAgICoKICAgIGRpZyAyCiAgICBkdXAKICAgIHVuY292ZXIgMgogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgZW5jb2RpbmcKICAgIGR1cAogICAgdW5jb3ZlciA1CiAgICBkdXAKICAgIGNvdmVyIDQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCB0YWlsIHBvaW50ZXIgZm9yIChsZW4rKGxlbit1aW50OFtdKVtdKQogICAgZGlnIDEKICAgIGxlbgogICAgc3Vic3RyaW5nMwogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICArCiAgICBjb3ZlciAyCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYiBjaGVja19mb3JfaGVhZGVyQDEKCmNoZWNrX2FmdGVyX2ZvckA0OgogICAgcG9wbiAyCiAgICB1bmNvdmVyIDIKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzEyCiAgICAvLyBjaGVjayhjYWxsZXI6IEFjY291bnQsIGdhdGVJRDogdWludDY0LCBhcmdzOiBHYXRlQXJncyk6IGJvb2xlYW4gewogICAgaW50Y18yIC8vIDIKICAgICsKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxieXRlcz4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjMxMwogICAgLy8gcmV0dXJuIHRoaXMucnVuKHsgcHJpbmNpcGFsOiBjYWxsZXIsIHdhbGxldDogMCwgc3BlbmRlcjogY2FsbGVyIH0sIGZhbHNlLCBnYXRlSUQsIGFyZ3MpCiAgICBpbnRjXzAgLy8gMAogICAgaXRvYgogICAgdW5jb3ZlciAzCiAgICBkdXAKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGludGNfMCAvLyAwCiAgICB1bmNvdmVyIDMKICAgIHVuY292ZXIgMwogICAgY2FsbHN1YiBydW4KICAgIHBvcG4gMgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzEyCiAgICAvLyBjaGVjayhjYWxsZXI6IEFjY291bnQsIGdhdGVJRDogdWludDY0LCBhcmdzOiBHYXRlQXJncyk6IGJvb2xlYW4gewogICAgYnl0ZWMgNiAvLyAweDAwCiAgICBpbnRjXzAgLy8gMAogICAgdW5jb3ZlciAyCiAgICBzZXRiaXQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo6R2F0ZS5tdXN0Q2hlY2tbcm91dGluZ10oKSAtPiB2b2lkOgptdXN0Q2hlY2s6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMTYKICAgIC8vIG11c3RDaGVjayhjYWxsZXI6IEFjY291bnQsIGdhdGVJRDogdWludDY0LCBhcmdzOiBHYXRlQXJncyk6IHZvaWQgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgMzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuc3RhdGljX2FycmF5PGFyYzQudWludDgsIDMyPgogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMgogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMwogICAgZHVwbiAyCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgZHVwCiAgICBjb3ZlciAyCiAgICBpbnRjXzIgLy8gMgogICAgKgogICAgc3dhcAogICAgZHVwCiAgICBsZW4KICAgIGNvdmVyIDIKICAgIGV4dHJhY3QgMiAwCiAgICBpbnRjXzAgLy8gMAoKbXVzdENoZWNrX2Zvcl9oZWFkZXJAMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjMxNgogICAgLy8gbXVzdENoZWNrKGNhbGxlcjogQWNjb3VudCwgZ2F0ZUlEOiB1aW50NjQsIGFyZ3M6IEdhdGVBcmdzKTogdm9pZCB7CiAgICBkdXAKICAgIGRpZyA1CiAgICA8CiAgICBieiBtdXN0Q2hlY2tfYWZ0ZXJfZm9yQDQKICAgIGR1cAogICAgaW50Y18yIC8vIDIKICAgICoKICAgIGRpZyAyCiAgICBkdXAKICAgIHVuY292ZXIgMgogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgZW5jb2RpbmcKICAgIGR1cAogICAgdW5jb3ZlciA1CiAgICBkdXAKICAgIGNvdmVyIDQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCB0YWlsIHBvaW50ZXIgZm9yIChsZW4rKGxlbit1aW50OFtdKVtdKQogICAgZGlnIDEKICAgIGxlbgogICAgc3Vic3RyaW5nMwogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICArCiAgICBjb3ZlciAyCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYiBtdXN0Q2hlY2tfZm9yX2hlYWRlckAxCgptdXN0Q2hlY2tfYWZ0ZXJfZm9yQDQ6CiAgICBwb3BuIDIKICAgIHVuY292ZXIgMgogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMTYKICAgIC8vIG11c3RDaGVjayhjYWxsZXI6IEFjY291bnQsIGdhdGVJRDogdWludDY0LCBhcmdzOiBHYXRlQXJncyk6IHZvaWQgewogICAgaW50Y18yIC8vIDIKICAgICsKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxieXRlcz4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjMxMwogICAgLy8gcmV0dXJuIHRoaXMucnVuKHsgcHJpbmNpcGFsOiBjYWxsZXIsIHdhbGxldDogMCwgc3BlbmRlcjogY2FsbGVyIH0sIGZhbHNlLCBnYXRlSUQsIGFyZ3MpCiAgICBpbnRjXzAgLy8gMAogICAgaXRvYgogICAgdW5jb3ZlciAzCiAgICBkdXAKICAgIHVuY292ZXIgMgogICAgY29uY2F0CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGludGNfMCAvLyAwCiAgICB1bmNvdmVyIDMKICAgIHVuY292ZXIgMwogICAgY2FsbHN1YiBydW4KICAgIHBvcG4gMgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzE3CiAgICAvLyBsb2dnZWRBc3NlcnQodGhpcy5jaGVjayhjYWxsZXIsIGdhdGVJRCwgYXJncyksIGVyckdhdGVGYWlsZWQpCiAgICBibnogbXVzdENoZWNrX2FmdGVyX2Fzc2VydEA3CiAgICBieXRlYyAxOCAvLyAiRVJSOmVyckZndGUiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6ZXJyRmd0ZQoKbXVzdENoZWNrX2FmdGVyX2Fzc2VydEA3OgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzE2CiAgICAvLyBtdXN0Q2hlY2soY2FsbGVyOiBBY2NvdW50LCBnYXRlSUQ6IHVpbnQ2NCwgYXJnczogR2F0ZUFyZ3MpOiB2b2lkIHsKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo6R2F0ZS5jaGVja0Zvcltyb3V0aW5nXSgpIC0+IHZvaWQ6CmNoZWNrRm9yOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzI3CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBwdXNoaW50IDcyCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBzbWFydF9jb250cmFjdHMvdXRpbHMvcHJpbmNpcGFsLnRzOjpHYXRlQ3R4CiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAyCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18zIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAzCiAgICBkdXBuIDIKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGludGNfMiAvLyAyCiAgICAqCiAgICBzd2FwCiAgICBkdXAKICAgIGxlbgogICAgY292ZXIgMgogICAgZXh0cmFjdCAyIDAKICAgIGludGNfMCAvLyAwCgpjaGVja0Zvcl9mb3JfaGVhZGVyQDE6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMjcKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgZHVwCiAgICBkaWcgNQogICAgPAogICAgYnogY2hlY2tGb3JfYWZ0ZXJfZm9yQDQKICAgIGR1cAogICAgaW50Y18yIC8vIDIKICAgICoKICAgIGRpZyAyCiAgICBkdXAKICAgIHVuY292ZXIgMgogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgZW5jb2RpbmcKICAgIGR1cAogICAgdW5jb3ZlciA1CiAgICBkdXAKICAgIGNvdmVyIDQKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCB0YWlsIHBvaW50ZXIgZm9yIChsZW4rKGxlbit1aW50OFtdKVtdKQogICAgZGlnIDEKICAgIGxlbgogICAgc3Vic3RyaW5nMwogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGludGNfMiAvLyAyCiAgICArCiAgICArCiAgICBjb3ZlciAyCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYiBjaGVja0Zvcl9mb3JfaGVhZGVyQDEKCmNoZWNrRm9yX2FmdGVyX2ZvckA0OgogICAgcG9wbiAyCiAgICB1bmNvdmVyIDIKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzI3CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIGludGNfMiAvLyAyCiAgICArCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8Ynl0ZXM+CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMjkKICAgIC8vIHJldHVybiB0aGlzLnJ1bihjdHgsIHRydWUsIGdhdGVJRCwgYXJncykKICAgIHVuY292ZXIgMgogICAgaW50Y18xIC8vIDEKICAgIHVuY292ZXIgMwogICAgdW5jb3ZlciAzCiAgICBjYWxsc3ViIHJ1bgogICAgcG9wbiAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMjcKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgYnl0ZWMgNiAvLyAweDAwCiAgICBpbnRjXzAgLy8gMAogICAgdW5jb3ZlciAyCiAgICBzZXRiaXQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo6R2F0ZS5tdXN0Q2hlY2tGb3Jbcm91dGluZ10oKSAtPiB2b2lkOgptdXN0Q2hlY2tGb3I6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMzMKICAgIC8vIG11c3RDaGVja0ZvcihjdHg6IEdhdGVDdHgsIGdhdGVJRDogdWludDY0LCBhcmdzOiBHYXRlQXJncyk6IHZvaWQgewogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIHB1c2hpbnQgNzIKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9wcmluY2lwYWwudHM6OkdhdGVDdHgKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDMKICAgIGR1cG4gMgogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGR1cAogICAgY292ZXIgMgogICAgaW50Y18yIC8vIDIKICAgICoKICAgIHN3YXAKICAgIGR1cAogICAgbGVuCiAgICBjb3ZlciAyCiAgICBleHRyYWN0IDIgMAogICAgaW50Y18wIC8vIDAKCm11c3RDaGVja0Zvcl9mb3JfaGVhZGVyQDE6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMzMKICAgIC8vIG11c3RDaGVja0ZvcihjdHg6IEdhdGVDdHgsIGdhdGVJRDogdWludDY0LCBhcmdzOiBHYXRlQXJncyk6IHZvaWQgewogICAgZHVwCiAgICBkaWcgNQogICAgPAogICAgYnogbXVzdENoZWNrRm9yX2FmdGVyX2ZvckA0CiAgICBkdXAKICAgIGludGNfMiAvLyAyCiAgICAqCiAgICBkaWcgMgogICAgZHVwCiAgICB1bmNvdmVyIDIKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGVuY29kaW5nCiAgICBkdXAKICAgIHVuY292ZXIgNQogICAgZHVwCiAgICBjb3ZlciA0CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgdGFpbCBwb2ludGVyIGZvciAobGVuKyhsZW4rdWludDhbXSlbXSkKICAgIGRpZyAxCiAgICBsZW4KICAgIHN1YnN0cmluZzMKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgKwogICAgY292ZXIgMgogICAgaW50Y18xIC8vIDEKICAgICsKICAgIGIgbXVzdENoZWNrRm9yX2Zvcl9oZWFkZXJAMQoKbXVzdENoZWNrRm9yX2FmdGVyX2ZvckA0OgogICAgcG9wbiAyCiAgICB1bmNvdmVyIDIKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzMzCiAgICAvLyBtdXN0Q2hlY2tGb3IoY3R4OiBHYXRlQ3R4LCBnYXRlSUQ6IHVpbnQ2NCwgYXJnczogR2F0ZUFyZ3MpOiB2b2lkIHsKICAgIGludGNfMiAvLyAyCiAgICArCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LmR5bmFtaWNfYXJyYXk8Ynl0ZXM+CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMzQKICAgIC8vIGxvZ2dlZEFzc2VydCh0aGlzLnJ1bihjdHgsIHRydWUsIGdhdGVJRCwgYXJncyksIGVyckdhdGVGYWlsZWQpCiAgICB1bmNvdmVyIDIKICAgIGludGNfMSAvLyAxCiAgICB1bmNvdmVyIDMKICAgIHVuY292ZXIgMwogICAgY2FsbHN1YiBydW4KICAgIHBvcG4gMgogICAgYm56IG11c3RDaGVja0Zvcl9hZnRlcl9hc3NlcnRANwogICAgYnl0ZWMgMTggLy8gIkVSUjplcnJGZ3RlIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOmVyckZndGUKCm11c3RDaGVja0Zvcl9hZnRlcl9hc3NlcnRANzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjMzMwogICAgLy8gbXVzdENoZWNrRm9yKGN0eDogR2F0ZUN0eCwgZ2F0ZUlEOiB1aW50NjQsIGFyZ3M6IEdhdGVBcmdzKTogdm9pZCB7CiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6OkdhdGUuY29zdFtyb3V0aW5nXSgpIC0+IHZvaWQ6CmNvc3Q6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMzkKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwbiAyCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgcHVzaGludCAxNwogICAgKgogICAgaW50Y18yIC8vIDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy90eXBlcy50czo6R2F0ZUZpbHRlcj4KICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDIKICAgIGR1cAogICAgY292ZXIgMgogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgZHVwCiAgICBjb3ZlciAyCiAgICBpbnRjXzIgLy8gMgogICAgKgogICAgc3dhcAogICAgZHVwCiAgICBsZW4KICAgIGNvdmVyIDIKICAgIGV4dHJhY3QgMiAwCiAgICBpbnRjXzAgLy8gMAoKY29zdF9mb3JfaGVhZGVyQDE6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMzkKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgZHVwCiAgICBkaWcgNQogICAgPAogICAgYnogY29zdF9hZnRlcl9mb3JANAogICAgZHVwCiAgICBpbnRjXzIgLy8gMgogICAgKgogICAgZGlnIDIKICAgIGR1cAogICAgdW5jb3ZlciAyCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBlbmNvZGluZwogICAgZHVwCiAgICB1bmNvdmVyIDUKICAgIGR1cAogICAgY292ZXIgNAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIHRhaWwgcG9pbnRlciBmb3IgKGxlbisobGVuK3VpbnQ4W10pW10pCiAgICBkaWcgMQogICAgbGVuCiAgICBzdWJzdHJpbmczCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgaW50Y18yIC8vIDIKICAgICsKICAgICsKICAgIGNvdmVyIDIKICAgIGludGNfMSAvLyAxCiAgICArCiAgICBiIGNvc3RfZm9yX2hlYWRlckAxCgpjb3N0X2FmdGVyX2ZvckA0OgogICAgcG9wbiAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozMzkKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgaW50Y18yIC8vIDIKICAgICsKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQuZHluYW1pY19hcnJheTxieXRlcz4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM0MQogICAgLy8gdGhpcy52YWxpZGF0ZUZpbHRlcnMoZmlsdGVycywgYXJncy5sZW5ndGgpCiAgICBzd2FwCiAgICBkaWcgMQogICAgY2FsbHN1YiB2YWxpZGF0ZUZpbHRlcnMKICAgIGR1cAogICAgY292ZXIgMgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzQyCiAgICAvLyBjb25zdCBtYnJDb3N0cyA9IHRoaXMubWJyKGZpbHRlcnMubGVuZ3RoKS5nYXRlUmVnaXN0cnkKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBkdXAKICAgIGNhbGxzdWIgbWJyCiAgICBpbnRjXzMgLy8gOAogICAgZXh0cmFjdF91aW50NjQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM0NAogICAgLy8gZm9yIChsZXQgaTogdWludDY0ID0gMDsgaSA8IGZpbHRlcnMubGVuZ3RoOyBpICs9IDEpIHsKICAgIGludGNfMCAvLyAwCiAgICBzd2FwCgpjb3N0X3doaWxlX3RvcEA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzQ0CiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgZmlsdGVycy5sZW5ndGg7IGkgKz0gMSkgewogICAgZGlnIDEKICAgIGRpZyAzCiAgICA8CiAgICBieiBjb3N0X2FmdGVyX3doaWxlQDExCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozNDUtMzQ4CiAgICAvLyBjb25zdCBjb3N0ID0gYWJpQ2FsbDx0eXBlb2YgTW9ja0dhdGUucHJvdG90eXBlLmNvc3Q+KHsKICAgIC8vICAgYXBwSWQ6IGZpbHRlcnNbaV0uYXBwLAogICAgLy8gICBhcmdzOiBbYXJnc1tpXV0sCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgaXR4bl9iZWdpbgogICAgZGlnIDEKICAgIGR1cAogICAgZGlnIDUKICAgIDwKICAgIGFzc2VydCAvLyBpbmRleCBvdXQgb2YgYm91bmRzCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozNDcKICAgIC8vIGFyZ3M6IFthcmdzW2ldXSwKICAgIGRpZyA2CiAgICBkaWcgMQogICAgY2FsbHN1YiBkeW5hbWljX2FycmF5X3JlYWRfYnl0ZV9sZW5ndGhfZWxlbWVudAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzQ2CiAgICAvLyBhcHBJZDogZmlsdGVyc1tpXS5hcHAsCiAgICBkaWcgNgogICAgZXh0cmFjdCAyIDAKICAgIHVuY292ZXIgMgogICAgcHVzaGludCAxNwogICAgKgogICAgcHVzaGludCAxNwogICAgZXh0cmFjdDMgLy8gb24gZXJyb3I6IGluZGV4IGFjY2VzcyBpcyBvdXQgb2YgYm91bmRzCiAgICBpbnRjXzMgLy8gOAogICAgZXh0cmFjdF91aW50NjQKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25JRAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzQ1LTM0OAogICAgLy8gY29uc3QgY29zdCA9IGFiaUNhbGw8dHlwZW9mIE1vY2tHYXRlLnByb3RvdHlwZS5jb3N0Pih7CiAgICAvLyAgIGFwcElkOiBmaWx0ZXJzW2ldLmFwcCwKICAgIC8vICAgYXJnczogW2FyZ3NbaV1dLAogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIGJ5dGVjIDE1IC8vIG1ldGhvZCAiY29zdChieXRlW10pdWludDY0IgogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBwdXNoaW50IDYgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBMYXN0TG9nCiAgICBkdXAKICAgIGV4dHJhY3QgNCAwCiAgICBzd2FwCiAgICBleHRyYWN0IDAgNAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICA9PQogICAgYXNzZXJ0IC8vIEJ5dGVzIGhhcyB2YWxpZCBwcmVmaXgKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgdWludDY0CiAgICBidG9pCiAgICBkdXAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM1MAogICAgLy8gbG9nZ2VkQXNzZXJ0KGNvc3QgPD0gTWF4U3ViR2F0ZUNvc3QsIGVyclN1YkdhdGVDb3N0VG9vSGlnaCkKICAgIGludGMgNSAvLyAxMDAwMDAwCiAgICA8PQogICAgYm56IGNvc3RfYWZ0ZXJfYXNzZXJ0QDEwCiAgICBieXRlYyAxNiAvLyAiRVJSOmVyclNjc3QiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6ZXJyU2NzdAoKY29zdF9hZnRlcl9hc3NlcnRAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozNTEKICAgIC8vIHJlcXVpcmVkQ29zdHMgKz0gY29zdAogICAgKwogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzQ0CiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgZmlsdGVycy5sZW5ndGg7IGkgKz0gMSkgewogICAgc3dhcAogICAgaW50Y18xIC8vIDEKICAgICsKICAgIHN3YXAKICAgIGIgY29zdF93aGlsZV90b3BANgoKY29zdF9hZnRlcl93aGlsZUAxMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjMzOQogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICBpdG9iCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6OkdhdGUuaXNTdWJHYXRlW3JvdXRpbmddKCkgLT4gdm9pZDoKaXNTdWJHYXRlOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzU2CiAgICAvLyBAYWJpbWV0aG9kKHsgcmVhZG9ubHk6IHRydWUgfSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM1OAogICAgLy8gcmV0dXJuIHRoaXMuc3ViR2F0ZXMoYXBwKS5leGlzdHMKICAgIGl0b2IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjk5CiAgICAvLyBzdWJHYXRlcyA9IEJveE1hcDx1aW50NjQsIGJ5dGVzPih7IGtleVByZWZpeDogR2F0ZUJveFByZWZpeFN1YkdhdGVzIH0pCiAgICBieXRlYyA1IC8vICJzIgogICAgc3dhcAogICAgY29uY2F0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozNTgKICAgIC8vIHJldHVybiB0aGlzLnN1YkdhdGVzKGFwcCkuZXhpc3RzCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM1NgogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICBieXRlYyA2IC8vIDB4MDAKICAgIGludGNfMCAvLyAwCiAgICB1bmNvdmVyIDIKICAgIHNldGJpdAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjpHYXRlLmlzQ3R4U3ViR2F0ZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmlzQ3R4U3ViR2F0ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM2MgogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18zIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozNjQKICAgIC8vIHJldHVybiB0aGlzLmlzQ3R4QXdhcmUoYXBwKQogICAgY2FsbHN1YiBpc0N0eEF3YXJlCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozNjIKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgYnl0ZWMgNiAvLyAweDAwCiAgICBpbnRjXzAgLy8gMAogICAgdW5jb3ZlciAyCiAgICBzZXRiaXQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgc3dhcAogICAgY29uY2F0CiAgICBsb2cKICAgIGludGNfMSAvLyAxCiAgICByZXR1cm4KCgovLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo6R2F0ZS5zaXplW3JvdXRpbmddKCkgLT4gdm9pZDoKc2l6ZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM2NwogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICB0eG5hIEFwcGxpY2F0aW9uQXJncyAxCiAgICBkdXAKICAgIGxlbgogICAgaW50Y18zIC8vIDgKICAgID09CiAgICBhc3NlcnQgLy8gaW52YWxpZCBudW1iZXIgb2YgYnl0ZXMgZm9yIGFyYzQudWludDY0CiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozNjkKICAgIC8vIGxvZ2dlZEFzc2VydCh0aGlzLmdhdGVSZWdpc3RyeShnYXRlSUQpLmV4aXN0cywgZXJyR2F0ZU5vdEZvdW5kKQogICAgaXRvYgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6OTMKICAgIC8vIGdhdGVSZWdpc3RyeSA9IEJveE1hcDx1aW50NjQsIEdhdGVGaWx0ZXJFbnRyeVtdPih7IGtleVByZWZpeDogR2F0ZUJveFByZWZpeEdhdGVSZWdpc3RyeSB9KQogICAgYnl0ZWNfMSAvLyAiZyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgZHVwCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozNjkKICAgIC8vIGxvZ2dlZEFzc2VydCh0aGlzLmdhdGVSZWdpc3RyeShnYXRlSUQpLmV4aXN0cywgZXJyR2F0ZU5vdEZvdW5kKQogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBibnogc2l6ZV9hZnRlcl9hc3NlcnRAMwogICAgYnl0ZWMgOSAvLyAiRVJSOmVyck5nYXQiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6ZXJyTmdhdAoKc2l6ZV9hZnRlcl9hc3NlcnRAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM3MAogICAgLy8gcmV0dXJuIHRoaXMuZ2F0ZVJlZ2lzdHJ5KGdhdGVJRCkudmFsdWUubGVuZ3RoCiAgICBpbnRjXzAgLy8gMAogICAgaW50Y18yIC8vIDIKICAgIGJveF9leHRyYWN0CiAgICBidG9pCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozNjcKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgaXRvYgogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGxvZwogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjpHYXRlLmdldEdhdGVbcm91dGluZ10oKSAtPiB2b2lkOgpnZXRHYXRlOgogICAgcHVzaGJ5dGVzICIiCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozNzMKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGludGNfMyAvLyA4CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBhcmM0LnVpbnQ2NAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6Mzc1CiAgICAvLyBsb2dnZWRBc3NlcnQodGhpcy5nYXRlUmVnaXN0cnkoZ2F0ZUlEKS5leGlzdHMsIGVyckdhdGVOb3RGb3VuZCkKICAgIGl0b2IKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjkzCiAgICAvLyBnYXRlUmVnaXN0cnkgPSBCb3hNYXA8dWludDY0LCBHYXRlRmlsdGVyRW50cnlbXT4oeyBrZXlQcmVmaXg6IEdhdGVCb3hQcmVmaXhHYXRlUmVnaXN0cnkgfSkKICAgIGJ5dGVjXzEgLy8gImciCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGR1cAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6Mzc1CiAgICAvLyBsb2dnZWRBc3NlcnQodGhpcy5nYXRlUmVnaXN0cnkoZ2F0ZUlEKS5leGlzdHMsIGVyckdhdGVOb3RGb3VuZCkKICAgIGJveF9sZW4KICAgIGJ1cnkgMQogICAgYm56IGdldEdhdGVfYWZ0ZXJfYXNzZXJ0QDMKICAgIGJ5dGVjIDkgLy8gIkVSUjplcnJOZ2F0IgogICAgbG9nCiAgICBlcnIgLy8gRVJSOmVyck5nYXQKCmdldEdhdGVfYWZ0ZXJfYXNzZXJ0QDM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozNzkKICAgIC8vIGxldCBlbnRyaWVzV2l0aEFyZ3M6IEdhdGVGaWx0ZXJFbnRyeVdpdGhBcmdzW10gPSBbXQogICAgYnl0ZWNfMiAvLyAweDAwMDAKICAgIHN3YXAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM4MAogICAgLy8gZm9yIChsZXQgaTogdWludDY0ID0gMDsgaSA8IGVudHJpZXMubGVuZ3RoOyBpICs9IDEpIHsKICAgIGludGNfMCAvLyAwCiAgICBjb3ZlciAyCgpnZXRHYXRlX3doaWxlX3RvcEA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzgwCiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgZW50cmllcy5sZW5ndGg7IGkgKz0gMSkgewogICAgZHVwCiAgICBpbnRjXzAgLy8gMAogICAgaW50Y18yIC8vIDIKICAgIGJveF9leHRyYWN0CiAgICBidG9pCiAgICBkaWcgMwogICAgPgogICAgYnogZ2V0R2F0ZV9hZnRlcl93aGlsZUA3CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozODEtMzg0CiAgICAvLyBjb25zdCBhcmdzID0gYWJpQ2FsbDx0eXBlb2YgTW9ja0dhdGUucHJvdG90eXBlLmdldEVudHJ5Pih7CiAgICAvLyAgIGFwcElkOiBlbnRyaWVzW2ldLmFwcCwKICAgIC8vICAgYXJnczogW2VudHJpZXNbaV0ucmVnaXN0cnlFbnRyeV0sCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgaXR4bl9iZWdpbgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzgzCiAgICAvLyBhcmdzOiBbZW50cmllc1tpXS5yZWdpc3RyeUVudHJ5XSwKICAgIGRpZyAyCiAgICBwdXNoaW50IDI1CiAgICAqCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgZGlnIDEKICAgIHN3YXAKICAgIHB1c2hpbnQgMjUKICAgIGJveF9leHRyYWN0IC8vIG9uIGVycm9yOiBpbmRleCBvdXQgb2YgYm91bmRzCiAgICBkdXAKICAgIGV4dHJhY3QgMTYgOAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzgyCiAgICAvLyBhcHBJZDogZW50cmllc1tpXS5hcHAsCiAgICBkaWcgMQogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzgyLTM4MwogICAgLy8gYXBwSWQ6IGVudHJpZXNbaV0uYXBwLAogICAgLy8gYXJnczogW2VudHJpZXNbaV0ucmVnaXN0cnlFbnRyeV0sCiAgICBpbnRjXzMgLy8gOAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzgyCiAgICAvLyBhcHBJZDogZW50cmllc1tpXS5hcHAsCiAgICBleHRyYWN0X3VpbnQ2NAogICAgZHVwCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM4MS0zODQKICAgIC8vIGNvbnN0IGFyZ3MgPSBhYmlDYWxsPHR5cGVvZiBNb2NrR2F0ZS5wcm90b3R5cGUuZ2V0RW50cnk+KHsKICAgIC8vICAgYXBwSWQ6IGVudHJpZXNbaV0uYXBwLAogICAgLy8gICBhcmdzOiBbZW50cmllc1tpXS5yZWdpc3RyeUVudHJ5XSwKICAgIC8vIH0pLnJldHVyblZhbHVlCiAgICBwdXNoYnl0ZXMgMHg5MGQ0ZmE1ZCAvLyBtZXRob2QgImdldEVudHJ5KHVpbnQ2NClieXRlW10iCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgZGlnIDEKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBwdXNoaW50IDYgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBMYXN0TG9nCiAgICBkdXAKICAgIGV4dHJhY3QgNCAwCiAgICBkaWcgMQogICAgZXh0cmFjdCAwIDQKICAgIGJ5dGVjXzAgLy8gMHgxNTFmN2M3NQogICAgPT0KICAgIGFzc2VydCAvLyBCeXRlcyBoYXMgdmFsaWQgcHJlZml4CiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgc3dhcAogICAgbGVuCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBieXRlcwogICAgZXh0cmFjdCA2IDAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM4NgogICAgLy8gZW50cmllc1dpdGhBcmdzLnB1c2goeyAuLi5lbnRyaWVzW2ldLCBhcmdzIH0pCiAgICBkaWcgMwogICAgZXh0cmFjdCAwIDgKICAgIHVuY292ZXIgNAogICAgZXh0cmFjdCAyNCAxCiAgICB1bmNvdmVyIDMKICAgIGl0b2IKICAgIHVuY292ZXIgMgogICAgc3dhcAogICAgY29uY2F0CiAgICB1bmNvdmVyIDMKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBkaWcgMQogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgdW5jb3ZlciAyCiAgICBjb25jYXQKICAgIHN3YXAKICAgIHB1c2hieXRlcyAweDAwMWIKICAgIGNvbmNhdAogICAgc3dhcAogICAgY29uY2F0CiAgICBwdXNoYnl0ZXMgMHgwMDAyCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGNvdmVyIDMKICAgIHN3YXAKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICBkdXAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM4NgogICAgLy8gZW50cmllc1dpdGhBcmdzLnB1c2goeyAuLi5lbnRyaWVzW2ldLCBhcmdzIH0pCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgaXRvYgogICAgZXh0cmFjdCA2IDAKICAgIGNvdmVyIDQKICAgIHN3YXAKICAgIGV4dHJhY3QgMiAwCiAgICBjb3ZlciAyCiAgICBpbnRjXzIgLy8gMgogICAgKgogICAgY292ZXIgMgogICAgaW50Y18wIC8vIDAKICAgIGJ1cnkgNwoKZ2V0R2F0ZV9mb3JfaGVhZGVyQDk6CiAgICBkaWcgNgogICAgZGlnIDMKICAgIDwKICAgIGJ6IGdldEdhdGVfYWZ0ZXJfZm9yQDExCiAgICBkaWcgMQogICAgZGlnIDcKICAgIGR1cAogICAgY292ZXIgMgogICAgZXh0cmFjdF91aW50MTYKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMAogICAgdW5jb3ZlciA2CiAgICBzd2FwCiAgICBjb25jYXQKICAgIGNvdmVyIDUKICAgIGludGNfMiAvLyAyCiAgICArCiAgICBidXJ5IDcKICAgIGIgZ2V0R2F0ZV9mb3JfaGVhZGVyQDkKCmdldEdhdGVfYWZ0ZXJfZm9yQDExOgogICAgZGlnIDEKICAgIGxlbgogICAgY292ZXIgNAogICAgaW50Y18wIC8vIDAKICAgIGJ1cnkgOAoKZ2V0R2F0ZV9mb3JfaGVhZGVyQDEyOgogICAgZGlnIDcKICAgIGludGNfMiAvLyAyCiAgICA8CiAgICBieiBnZXRHYXRlX2FmdGVyX2ZvckAxNAogICAgZGlnIDYKICAgIGRpZyA4CiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGV4dHJhY3RfdWludDE2CiAgICBkaWcgNgogICAgKwogICAgaXRvYgogICAgZXh0cmFjdCA2IDAKICAgIHVuY292ZXIgNwogICAgc3dhcAogICAgY29uY2F0CiAgICBjb3ZlciA2CiAgICBpbnRjXzIgLy8gMgogICAgKwogICAgYnVyeSA4CiAgICBiIGdldEdhdGVfZm9yX2hlYWRlckAxMgoKZ2V0R2F0ZV9hZnRlcl9mb3JAMTQ6CiAgICBzd2FwCiAgICB1bmNvdmVyIDIKICAgIHVuY292ZXIgNAogICAgc3Vic3RyaW5nMwogICAgdW5jb3ZlciAzCiAgICBzd2FwCiAgICBjb25jYXQKICAgIHVuY292ZXIgMwogICAgZXh0cmFjdCAyIDAKICAgIGNvbmNhdAogICAgc3dhcAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MzgwCiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgZW50cmllcy5sZW5ndGg7IGkgKz0gMSkgewogICAgdW5jb3ZlciAyCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgY292ZXIgMgogICAgYiBnZXRHYXRlX3doaWxlX3RvcEA0CgpnZXRHYXRlX2FmdGVyX3doaWxlQDc6CiAgICBwb3AKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjM3MwogICAgLy8gQGFiaW1ldGhvZCh7IHJlYWRvbmx5OiB0cnVlIH0pCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6OkdhdGUuZ2F0ZUZpbHRlckVudHJ5V2l0aEFyZ3NTaGFwZVtyb3V0aW5nXSgpIC0+IHZvaWQ6CmdhdGVGaWx0ZXJFbnRyeVdpdGhBcmdzU2hhcGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czozOTIKICAgIC8vIEBhYmltZXRob2QoeyByZWFkb25seTogdHJ1ZSB9KQogICAgdHhuYSBBcHBsaWNhdGlvbkFyZ3MgMQogICAgZHVwCiAgICBsZW4KICAgIGRpZyAxCiAgICBwdXNoaW50IDI1CiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCB0dXBsZSBlbmNvZGluZwogICAgZHVwCiAgICBwdXNoaW50IDI3CiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgdGFpbCBwb2ludGVyIGF0IGluZGV4IDQgb2YgKHVpbnQ2NCx1aW50NjQsdWludDY0LHVpbnQ4LChsZW4rdWludDhbXSkpCiAgICBkaWcgMgogICAgc3dhcAogICAgZGlnIDIKICAgIHN1YnN0cmluZzMKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDI5CiAgICArCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBzbWFydF9jb250cmFjdHMvZ2F0ZXMvdHlwZXMudHM6OkdhdGVGaWx0ZXJFbnRyeVdpdGhBcmdzCiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgIHN3YXAKICAgIGNvbmNhdAogICAgbG9nCiAgICBpbnRjXzEgLy8gMQogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL3VwZ3JhZGVhYmxlLnRzOjpBa2l0YUJhc2VDb250cmFjdC51cGRhdGVBa2l0YURBT1tyb3V0aW5nXSgpIC0+IHZvaWQ6CnVwZGF0ZUFraXRhREFPOgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL3VwZ3JhZGVhYmxlLnRzOjI1CiAgICAvLyB1cGRhdGVBa2l0YURBTyhha2l0YURBTzogQXBwbGljYXRpb24pOiB2b2lkIHsKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzMgLy8gOAogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC51aW50NjQKICAgIGJ0b2kKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy91cGdyYWRlYWJsZS50czoyNgogICAgLy8gbG9nZ2VkQXNzZXJ0KFR4bi5zZW5kZXIgPT09IHRoaXMuZ2V0QWtpdGFEQU9XYWxsZXQoKS5hZGRyZXNzLCBlcnJOb3RBa2l0YURhbykKICAgIHR4biBTZW5kZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy91dGlscy9iYXNlLWNvbnRyYWN0cy91cGdyYWRlYWJsZS50czoxOQogICAgLy8gY29uc3QgW3dhbGxldElEXSA9IG9wLkFwcEdsb2JhbC5nZXRFeFVpbnQ2NCh0aGlzLmFraXRhREFPLnZhbHVlLCBCeXRlcyhBa2l0YURBT0dsb2JhbFN0YXRlS2V5c1dhbGxldCkpCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL3VwZ3JhZGVhYmxlLnRzOjE2CiAgICAvLyBha2l0YURBTyA9IEdsb2JhbFN0YXRlPEFwcGxpY2F0aW9uPih7IGtleTogR2xvYmFsU3RhdGVLZXlBa2l0YURBTyB9KQogICAgYnl0ZWNfMyAvLyAiYWtpdGFfZGFvIgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL3VwZ3JhZGVhYmxlLnRzOjE5CiAgICAvLyBjb25zdCBbd2FsbGV0SURdID0gb3AuQXBwR2xvYmFsLmdldEV4VWludDY0KHRoaXMuYWtpdGFEQU8udmFsdWUsIEJ5dGVzKEFraXRhREFPR2xvYmFsU3RhdGVLZXlzV2FsbGV0KSkKICAgIGFwcF9nbG9iYWxfZ2V0X2V4CiAgICBhc3NlcnQgLy8gY2hlY2sgR2xvYmFsU3RhdGUgZXhpc3RzCiAgICBieXRlYyAxNCAvLyAid2FsbGV0IgogICAgYXBwX2dsb2JhbF9nZXRfZXgKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL3VwZ3JhZGVhYmxlLnRzOjI2CiAgICAvLyBsb2dnZWRBc3NlcnQoVHhuLnNlbmRlciA9PT0gdGhpcy5nZXRBa2l0YURBT1dhbGxldCgpLmFkZHJlc3MsIGVyck5vdEFraXRhRGFvKQogICAgYXBwX3BhcmFtc19nZXQgQXBwQWRkcmVzcwogICAgYXNzZXJ0IC8vIGFwcGxpY2F0aW9uIGV4aXN0cwogICAgPT0KICAgIGJueiB1cGRhdGVBa2l0YURBT19hZnRlcl9hc3NlcnRAMwogICAgYnl0ZWMgMTIgLy8gIkVSUjplcnJOZGFvIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOmVyck5kYW8KCnVwZGF0ZUFraXRhREFPX2FmdGVyX2Fzc2VydEAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL3VwZ3JhZGVhYmxlLnRzOjE2CiAgICAvLyBha2l0YURBTyA9IEdsb2JhbFN0YXRlPEFwcGxpY2F0aW9uPih7IGtleTogR2xvYmFsU3RhdGVLZXlBa2l0YURBTyB9KQogICAgYnl0ZWNfMyAvLyAiYWtpdGFfZGFvIgogICAgLy8gc21hcnRfY29udHJhY3RzL3V0aWxzL2Jhc2UtY29udHJhY3RzL3VwZ3JhZGVhYmxlLnRzOjI3CiAgICAvLyB0aGlzLmFraXRhREFPLnZhbHVlID0gYWtpdGFEQU8KICAgIHN3YXAKICAgIGFwcF9nbG9iYWxfcHV0CiAgICAvLyBzbWFydF9jb250cmFjdHMvdXRpbHMvYmFzZS1jb250cmFjdHMvdXBncmFkZWFibGUudHM6MjUKICAgIC8vIHVwZGF0ZUFraXRhREFPKGFraXRhREFPOiBBcHBsaWNhdGlvbik6IHZvaWQgewogICAgaW50Y18xIC8vIDEKICAgIHJldHVybgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjpHYXRlLmFzc2VydE1pZ3JhdG9yKCkgLT4gdm9pZDoKYXNzZXJ0TWlncmF0b3I6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxMTAKICAgIC8vIGxvZ2dlZEFzc2VydChUeG4uc2VuZGVyID09PSBHbG9iYWwuY3JlYXRvckFkZHJlc3MgJiYgdGhpcy5pbXBvcnRzU2VhbGVkLnZhbHVlID09PSAwLCBlcnJJbXBvcnRzQ2xvc2VkKQogICAgdHhuIFNlbmRlcgogICAgZ2xvYmFsIENyZWF0b3JBZGRyZXNzCiAgICA9PQogICAgYnogYXNzZXJ0TWlncmF0b3JfYm9vbF9mYWxzZUAzCiAgICBpbnRjXzAgLy8gMAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6ODkKICAgIC8vIGltcG9ydHNTZWFsZWQgPSBHbG9iYWxTdGF0ZTx1aW50NjQ+KHsga2V5OiBHYXRlR2xvYmFsU3RhdGVLZXlJbXBvcnRzU2VhbGVkIH0pCiAgICBieXRlYyA0IC8vICJpbXBvcnRzX3NlYWxlZCIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjExMAogICAgLy8gbG9nZ2VkQXNzZXJ0KFR4bi5zZW5kZXIgPT09IEdsb2JhbC5jcmVhdG9yQWRkcmVzcyAmJiB0aGlzLmltcG9ydHNTZWFsZWQudmFsdWUgPT09IDAsIGVyckltcG9ydHNDbG9zZWQpCiAgICBhcHBfZ2xvYmFsX2dldF9leAogICAgYXNzZXJ0IC8vIGNoZWNrIEdsb2JhbFN0YXRlIGV4aXN0cwogICAgYm56IGFzc2VydE1pZ3JhdG9yX2Jvb2xfZmFsc2VAMwogICAgaW50Y18xIC8vIDEKCmFzc2VydE1pZ3JhdG9yX2Jvb2xfbWVyZ2VANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjExMAogICAgLy8gbG9nZ2VkQXNzZXJ0KFR4bi5zZW5kZXIgPT09IEdsb2JhbC5jcmVhdG9yQWRkcmVzcyAmJiB0aGlzLmltcG9ydHNTZWFsZWQudmFsdWUgPT09IDAsIGVyckltcG9ydHNDbG9zZWQpCiAgICBibnogYXNzZXJ0TWlncmF0b3JfYWZ0ZXJfYXNzZXJ0QDYKICAgIHB1c2hieXRlcyAiRVJSOmVyckljbHMiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6ZXJySWNscwoKYXNzZXJ0TWlncmF0b3JfYWZ0ZXJfYXNzZXJ0QDY6CiAgICByZXRzdWIKCmFzc2VydE1pZ3JhdG9yX2Jvb2xfZmFsc2VAMzoKICAgIGludGNfMCAvLyAwCiAgICBiIGFzc2VydE1pZ3JhdG9yX2Jvb2xfbWVyZ2VANAoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjpHYXRlLnZhbGlkYXRlU3RydWN0dXJlKGxheWVyczogYnl0ZXMsIGFwcHM6IGJ5dGVzLCBvcGVyYXRvcnM6IGJ5dGVzLCBhcmdzTGVuZ3RoOiB1aW50NjQpIC0+IGJ5dGVzLCBieXRlcywgYnl0ZXM6CnZhbGlkYXRlU3RydWN0dXJlOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTIxCiAgICAvLyBwcml2YXRlIHZhbGlkYXRlU3RydWN0dXJlKGxheWVyczogdWludDY0W10sIGFwcHM6IHVpbnQ2NFtdLCBvcGVyYXRvcnM6IGJ5dGVzW10sIGFyZ3NMZW5ndGg6IHVpbnQ2NCk6IHZvaWQgewogICAgcHJvdG8gNCAzCiAgICBpbnRjXzAgLy8gMAogICAgZHVwCiAgICBwdXNoYnl0ZXMgIiIKICAgIGR1cAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTIyCiAgICAvLyBjb25zdCBjb3VudDogdWludDY0ID0gbGF5ZXJzLmxlbmd0aAogICAgZnJhbWVfZGlnIC00CiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYgLy8gb24gZXJyb3I6IGludmFsaWQgYXJyYXkgbGVuZ3RoIGhlYWRlcgogICAgZHVwCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxMjMKICAgIC8vIGxvZ2dlZEFzc2VydChjb3VudCA+IDAgJiYgY291bnQgPD0gTWF4R2F0ZUZpbHRlcnMsIGVyckludmFsaWRMYXllcikKICAgIGJ6IHZhbGlkYXRlU3RydWN0dXJlX2Jvb2xfZmFsc2VAMwogICAgZHVwCiAgICBpbnRjXzMgLy8gOAogICAgPD0KICAgIGJ6IHZhbGlkYXRlU3RydWN0dXJlX2Jvb2xfZmFsc2VAMwogICAgaW50Y18xIC8vIDEKCnZhbGlkYXRlU3RydWN0dXJlX2Jvb2xfbWVyZ2VANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjEyMwogICAgLy8gbG9nZ2VkQXNzZXJ0KGNvdW50ID4gMCAmJiBjb3VudCA8PSBNYXhHYXRlRmlsdGVycywgZXJySW52YWxpZExheWVyKQogICAgYm56IHZhbGlkYXRlU3RydWN0dXJlX2FmdGVyX2Fzc2VydEA2CiAgICBieXRlYyAxMCAvLyAiRVJSOmVycklseXIiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6ZXJySWx5cgoKdmFsaWRhdGVTdHJ1Y3R1cmVfYWZ0ZXJfYXNzZXJ0QDY6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxMjQKICAgIC8vIGxvZ2dlZEFzc2VydChhcmdzTGVuZ3RoID09PSBjb3VudCwgZXJySW52YWxpZEFyZ0NvdW50KQogICAgZnJhbWVfZGlnIC0xCiAgICBkaWcgMQogICAgPT0KICAgIGJueiB2YWxpZGF0ZVN0cnVjdHVyZV9hZnRlcl9hc3NlcnRAOAogICAgYnl0ZWMgMTkgLy8gIkVSUjplcnJJYXJnIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOmVycklhcmcKCnZhbGlkYXRlU3RydWN0dXJlX2FmdGVyX2Fzc2VydEA4OgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTI1CiAgICAvLyBsb2dnZWRBc3NlcnQobGF5ZXJzWzBdID09PSAwLCBlcnJJbnZhbGlkTGF5ZXIpCiAgICBmcmFtZV9kaWcgLTQKICAgIGV4dHJhY3QgMiAwCiAgICBmcmFtZV9idXJ5IDAKICAgIGZyYW1lX2RpZyAtNAogICAgaW50Y18yIC8vIDIKICAgIGV4dHJhY3RfdWludDY0CiAgICBieiB2YWxpZGF0ZVN0cnVjdHVyZV9hZnRlcl9hc3NlcnRAMTAKICAgIGJ5dGVjIDEwIC8vICJFUlI6ZXJySWx5ciIKICAgIGxvZwogICAgZXJyIC8vIEVSUjplcnJJbHlyCgp2YWxpZGF0ZVN0cnVjdHVyZV9hZnRlcl9hc3NlcnRAMTA6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxMjcKICAgIC8vIGZvciAobGV0IGk6IHVpbnQ2NCA9IDA7IGkgPCBjb3VudDsgaSArPSAxKSB7CiAgICBpbnRjXzAgLy8gMAoKdmFsaWRhdGVTdHJ1Y3R1cmVfd2hpbGVfdG9wQDExOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTI3CiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgY291bnQ7IGkgKz0gMSkgewogICAgZHVwCiAgICBkaWcgMgogICAgPAogICAgYnogdmFsaWRhdGVTdHJ1Y3R1cmVfYWZ0ZXJfd2hpbGVAMzEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjEyOAogICAgLy8gaWYgKGkgPiAwKSB7CiAgICBkdXAKICAgIGJ6IHZhbGlkYXRlU3RydWN0dXJlX2FmdGVyX2lmX2Vsc2VAMjAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjEyOQogICAgLy8gbG9nZ2VkQXNzZXJ0KGxheWVyc1tpXSA+PSBsYXllcnNbaSAtIDFdICYmIGxheWVyc1tpXSA8PSBsYXllcnNbaSAtIDFdICsgMSwgZXJySW52YWxpZExheWVyKQogICAgZHVwbiAyCiAgICBpbnRjXzMgLy8gOAogICAgKgogICAgZnJhbWVfZGlnIDAKICAgIGR1cAogICAgY292ZXIgMwogICAgc3dhcAogICAgZXh0cmFjdF91aW50NjQKICAgIGR1cAogICAgY292ZXIgMwogICAgZnJhbWVfYnVyeSAzCiAgICBpbnRjXzEgLy8gMQogICAgLQogICAgaW50Y18zIC8vIDgKICAgICoKICAgIGV4dHJhY3RfdWludDY0CiAgICBkdXAKICAgIGZyYW1lX2J1cnkgMgogICAgPj0KICAgIGJ6IHZhbGlkYXRlU3RydWN0dXJlX2Jvb2xfZmFsc2VAMTYKICAgIGZyYW1lX2RpZyAyCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgZnJhbWVfZGlnIDMKICAgID49CiAgICBieiB2YWxpZGF0ZVN0cnVjdHVyZV9ib29sX2ZhbHNlQDE2CiAgICBpbnRjXzEgLy8gMQoKdmFsaWRhdGVTdHJ1Y3R1cmVfYm9vbF9tZXJnZUAxNzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjEyOQogICAgLy8gbG9nZ2VkQXNzZXJ0KGxheWVyc1tpXSA+PSBsYXllcnNbaSAtIDFdICYmIGxheWVyc1tpXSA8PSBsYXllcnNbaSAtIDFdICsgMSwgZXJySW52YWxpZExheWVyKQogICAgYm56IHZhbGlkYXRlU3RydWN0dXJlX2FmdGVyX2lmX2Vsc2VAMjAKICAgIGJ5dGVjIDEwIC8vICJFUlI6ZXJySWx5ciIKICAgIGxvZwogICAgZXJyIC8vIEVSUjplcnJJbHlyCgp2YWxpZGF0ZVN0cnVjdHVyZV9hZnRlcl9pZl9lbHNlQDIwOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTMxCiAgICAvLyBpZiAoaSArIDEgPCBjb3VudCkgewogICAgZHVwCiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgZHVwCiAgICBjb3ZlciAyCiAgICBkaWcgMwogICAgPAogICAgYnogdmFsaWRhdGVTdHJ1Y3R1cmVfYWZ0ZXJfaWZfZWxzZUAyOAogICAgZnJhbWVfZGlnIC0yCiAgICBpbnRjXzAgLy8gMAogICAgZXh0cmFjdF91aW50MTYKICAgIGRpZyAxCiAgICBkdXAKICAgIHVuY292ZXIgMgogICAgPAogICAgYXNzZXJ0IC8vIGluZGV4IG91dCBvZiBib3VuZHMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjEzMgogICAgLy8gbG9nZ2VkQXNzZXJ0KG9wZXJhdG9yc1tpXSA9PT0gQU5ELmJ5dGVzIHx8IG9wZXJhdG9yc1tpXSA9PT0gT1IuYnl0ZXMsIGVyckJhZE9wZXJhdGlvbikKICAgIGZyYW1lX2RpZyAtMgogICAgc3dhcAogICAgY2FsbHN1YiBkeW5hbWljX2FycmF5X3JlYWRfYnl0ZV9sZW5ndGhfZWxlbWVudAogICAgZXh0cmFjdCAyIDAKICAgIGR1cAogICAgZnJhbWVfYnVyeSAxCiAgICBwdXNoYnl0ZXMgMHgwYQogICAgPT0KICAgIGJueiB2YWxpZGF0ZVN0cnVjdHVyZV9ib29sX3RydWVAMjMKICAgIGZyYW1lX2RpZyAxCiAgICBwdXNoYnl0ZXMgMHgxNAogICAgPT0KICAgIGJ6IHZhbGlkYXRlU3RydWN0dXJlX2Jvb2xfZmFsc2VAMjQKCnZhbGlkYXRlU3RydWN0dXJlX2Jvb2xfdHJ1ZUAyMzoKICAgIGludGNfMSAvLyAxCgp2YWxpZGF0ZVN0cnVjdHVyZV9ib29sX21lcmdlQDI1OgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTMyCiAgICAvLyBsb2dnZWRBc3NlcnQob3BlcmF0b3JzW2ldID09PSBBTkQuYnl0ZXMgfHwgb3BlcmF0b3JzW2ldID09PSBPUi5ieXRlcywgZXJyQmFkT3BlcmF0aW9uKQogICAgYm56IHZhbGlkYXRlU3RydWN0dXJlX2FmdGVyX2lmX2Vsc2VAMjgKICAgIHB1c2hieXRlcyAiRVJSOmVyckJvcHIiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6ZXJyQm9wcgoKdmFsaWRhdGVTdHJ1Y3R1cmVfYWZ0ZXJfaWZfZWxzZUAyODoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjEzNAogICAgLy8gbG9nZ2VkQXNzZXJ0KHRoaXMuc3ViR2F0ZXMoYXBwc1tpXSkuZXhpc3RzLCBlcnJJbnZhbGlkU3ViR2F0ZSkKICAgIGZyYW1lX2RpZyAtMwogICAgZXh0cmFjdCAyIDAKICAgIHN3YXAKICAgIGludGNfMyAvLyA4CiAgICAqCiAgICBpbnRjXzMgLy8gOAogICAgZXh0cmFjdDMgLy8gb24gZXJyb3I6IGluZGV4IGFjY2VzcyBpcyBvdXQgb2YgYm91bmRzCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo5OQogICAgLy8gc3ViR2F0ZXMgPSBCb3hNYXA8dWludDY0LCBieXRlcz4oeyBrZXlQcmVmaXg6IEdhdGVCb3hQcmVmaXhTdWJHYXRlcyB9KQogICAgYnl0ZWMgNSAvLyAicyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTM0CiAgICAvLyBsb2dnZWRBc3NlcnQodGhpcy5zdWJHYXRlcyhhcHBzW2ldKS5leGlzdHMsIGVyckludmFsaWRTdWJHYXRlKQogICAgYm94X2xlbgogICAgYnVyeSAxCiAgICBibnogdmFsaWRhdGVTdHJ1Y3R1cmVfYWZ0ZXJfYXNzZXJ0QDMwCiAgICBieXRlYyAxMyAvLyAiRVJSOmVycklzZ3QiCiAgICBsb2cKICAgIGVyciAvLyBFUlI6ZXJySXNndAoKdmFsaWRhdGVTdHJ1Y3R1cmVfYWZ0ZXJfYXNzZXJ0QDMwOgogICAgYiB2YWxpZGF0ZVN0cnVjdHVyZV93aGlsZV90b3BAMTEKCnZhbGlkYXRlU3RydWN0dXJlX2Jvb2xfZmFsc2VAMjQ6CiAgICBpbnRjXzAgLy8gMAogICAgYiB2YWxpZGF0ZVN0cnVjdHVyZV9ib29sX21lcmdlQDI1Cgp2YWxpZGF0ZVN0cnVjdHVyZV9ib29sX2ZhbHNlQDE2OgogICAgaW50Y18wIC8vIDAKICAgIGIgdmFsaWRhdGVTdHJ1Y3R1cmVfYm9vbF9tZXJnZUAxNwoKdmFsaWRhdGVTdHJ1Y3R1cmVfYWZ0ZXJfd2hpbGVAMzE6CiAgICBmcmFtZV9kaWcgLTQKICAgIGZyYW1lX2RpZyAtMwogICAgZnJhbWVfZGlnIC0yCiAgICBmcmFtZV9idXJ5IDIKICAgIGZyYW1lX2J1cnkgMQogICAgZnJhbWVfYnVyeSAwCiAgICByZXRzdWIKCnZhbGlkYXRlU3RydWN0dXJlX2Jvb2xfZmFsc2VAMzoKICAgIGludGNfMCAvLyAwCiAgICBiIHZhbGlkYXRlU3RydWN0dXJlX2Jvb2xfbWVyZ2VANAoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjpHYXRlLnZhbGlkYXRlRmlsdGVycyhmaWx0ZXJzOiBieXRlcywgYXJnc0xlbmd0aDogdWludDY0KSAtPiBieXRlczoKdmFsaWRhdGVGaWx0ZXJzOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTM4CiAgICAvLyBwcml2YXRlIHZhbGlkYXRlRmlsdGVycyhmaWx0ZXJzOiBHYXRlRmlsdGVyW10sIGFyZ3NMZW5ndGg6IHVpbnQ2NCk6IHZvaWQgewogICAgcHJvdG8gMiAxCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNDEKICAgIC8vIGNvbnN0IG9wZXJhdG9yczogYnl0ZXNbXSA9IFtdCiAgICBieXRlY18yIC8vIDB4MDAwMAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTM5CiAgICAvLyBjb25zdCBsYXllcnM6IHVpbnQ2NFtdID0gW10KICAgIGR1cG4gMgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTQyCiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSAwOyBpIDwgZmlsdGVycy5sZW5ndGg7IGkgKz0gMSkgewogICAgaW50Y18wIC8vIDAKCnZhbGlkYXRlRmlsdGVyc193aGlsZV90b3BAMToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE0MgogICAgLy8gZm9yIChsZXQgaTogdWludDY0ID0gMDsgaSA8IGZpbHRlcnMubGVuZ3RoOyBpICs9IDEpIHsKICAgIGZyYW1lX2RpZyAtMgogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIGRpZyAxCiAgICA+CiAgICBieiB2YWxpZGF0ZUZpbHRlcnNfYWZ0ZXJfd2hpbGVAMwogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTQzCiAgICAvLyBsYXllcnMucHVzaChmaWx0ZXJzW2ldLmxheWVyKQogICAgZnJhbWVfZGlnIC0yCiAgICBleHRyYWN0IDIgMAogICAgZGlnIDEKICAgIHB1c2hpbnQgMTcKICAgICoKICAgIHB1c2hpbnQgMTcKICAgIGV4dHJhY3QzIC8vIG9uIGVycm9yOiBpbmRleCBhY2Nlc3MgaXMgb3V0IG9mIGJvdW5kcwogICAgZHVwCiAgICBleHRyYWN0IDAgOAogICAgdW5jb3ZlciA0CiAgICBkdXAKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTQzCiAgICAvLyBsYXllcnMucHVzaChmaWx0ZXJzW2ldLmxheWVyKQogICAgaW50Y18xIC8vIDEKICAgICsKICAgIGl0b2IKICAgIGV4dHJhY3QgNiAwCiAgICByZXBsYWNlMiAwCiAgICBzd2FwCiAgICBjb25jYXQKICAgIGNvdmVyIDMKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE0My0xNDQKICAgIC8vIGxheWVycy5wdXNoKGZpbHRlcnNbaV0ubGF5ZXIpCiAgICAvLyBhcHBzLnB1c2goZmlsdGVyc1tpXS5hcHApCiAgICBkdXAKICAgIGV4dHJhY3QgOCA4CiAgICB1bmNvdmVyIDMKICAgIGR1cAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNDQKICAgIC8vIGFwcHMucHVzaChmaWx0ZXJzW2ldLmFwcCkKICAgIGludGNfMSAvLyAxCiAgICArCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMAogICAgcmVwbGFjZTIgMAogICAgc3dhcAogICAgY29uY2F0CiAgICBjb3ZlciAyCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNDUKICAgIC8vIG9wZXJhdG9ycy5wdXNoKGZpbHRlcnNbaV0ubG9naWNhbE9wZXJhdG9yLmJ5dGVzKQogICAgZXh0cmFjdCAxNiAxCiAgICBkdXAKICAgIGxlbgogICAgaXRvYgogICAgZXh0cmFjdCA2IDIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgdW5jb3ZlciA0CiAgICBzd2FwCiAgICBpbnRjXzEgLy8gMQogICAgY2FsbHN1YiBkeW5hbWljX2FycmF5X2NvbmNhdF9ieXRlX2xlbmd0aF9oZWFkCiAgICBjb3ZlciAzCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNDIKICAgIC8vIGZvciAobGV0IGk6IHVpbnQ2NCA9IDA7IGkgPCBmaWx0ZXJzLmxlbmd0aDsgaSArPSAxKSB7CiAgICBpbnRjXzEgLy8gMQogICAgKwogICAgYiB2YWxpZGF0ZUZpbHRlcnNfd2hpbGVfdG9wQDEKCnZhbGlkYXRlRmlsdGVyc19hZnRlcl93aGlsZUAzOgogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNDcKICAgIC8vIHRoaXMudmFsaWRhdGVTdHJ1Y3R1cmUobGF5ZXJzLCBhcHBzLCBvcGVyYXRvcnMsIGFyZ3NMZW5ndGgpCiAgICB1bmNvdmVyIDIKICAgIGZyYW1lX2RpZyAtMQogICAgY2FsbHN1YiB2YWxpZGF0ZVN0cnVjdHVyZQogICAgcG9wbiAzCiAgICBmcmFtZV9kaWcgLTIKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjpHYXRlLmlzQ3R4QXdhcmUoYXBwOiB1aW50NjQpIC0+IHVpbnQ2NDoKaXNDdHhBd2FyZToKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE2MwogICAgLy8gcHJpdmF0ZSBpc0N0eEF3YXJlKGFwcDogdWludDY0KTogYm9vbGVhbiB7CiAgICBwcm90byAxIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE2NAogICAgLy8gY29uc3QgW2ZsYWcsIGV4aXN0c10gPSB0aGlzLnN1YkdhdGVzKGFwcCkubWF5YmUoKQogICAgZnJhbWVfZGlnIC0xCiAgICBpdG9iCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo5OQogICAgLy8gc3ViR2F0ZXMgPSBCb3hNYXA8dWludDY0LCBieXRlcz4oeyBrZXlQcmVmaXg6IEdhdGVCb3hQcmVmaXhTdWJHYXRlcyB9KQogICAgYnl0ZWMgNSAvLyAicyIKICAgIHN3YXAKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTY0CiAgICAvLyBjb25zdCBbZmxhZywgZXhpc3RzXSA9IHRoaXMuc3ViR2F0ZXMoYXBwKS5tYXliZSgpCiAgICBib3hfZ2V0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNjUKICAgIC8vIHJldHVybiBleGlzdHMgJiYgYnRvaShmbGFnKSAhPT0gMAogICAgYnogaXNDdHhBd2FyZV9ib29sX2ZhbHNlQDMKICAgIGZyYW1lX2RpZyAwCiAgICBidG9pCiAgICBieiBpc0N0eEF3YXJlX2Jvb2xfZmFsc2VAMwogICAgaW50Y18xIC8vIDEKCmlzQ3R4QXdhcmVfYm9vbF9tZXJnZUA0OgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTY1CiAgICAvLyByZXR1cm4gZXhpc3RzICYmIGJ0b2koZmxhZykgIT09IDAKICAgIHN3YXAKICAgIHJldHN1YgoKaXNDdHhBd2FyZV9ib29sX2ZhbHNlQDM6CiAgICBpbnRjXzAgLy8gMAogICAgYiBpc0N0eEF3YXJlX2Jvb2xfbWVyZ2VANAoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjpHYXRlLmV2YWx1YXRlKGN0eDogYnl0ZXMsIHVzZUN0eDogdWludDY0LCBmaWx0ZXJzOiBieXRlcywgYXJnczogYnl0ZXMsIHN0YXJ0OiB1aW50NjQpIC0+IHVpbnQ2NCwgYnl0ZXMsIGJ5dGVzLCBieXRlczoKZXZhbHVhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNzIKICAgIC8vIHByaXZhdGUgZXZhbHVhdGUoY3R4OiBHYXRlQ3R4LCB1c2VDdHg6IGJvb2xlYW4sIGZpbHRlcnM6IEdhdGVGaWx0ZXJFbnRyeVtdLCBhcmdzOiBHYXRlQXJncywgc3RhcnQ6IHVpbnQ2NCk6IGJvb2xlYW4gewogICAgcHJvdG8gNSA0CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNzMKICAgIC8vIGxldCByZXN1bHQgPSB0aGlzLmV2YWx1YXRlRmlsdGVyKGN0eCwgdXNlQ3R4LCBmaWx0ZXJzW3N0YXJ0XSwgYXJnc1tzdGFydF0pCiAgICBmcmFtZV9kaWcgLTMKICAgIGV4dHJhY3QgMiAwCiAgICBkdXAKICAgIGZyYW1lX2RpZyAtMQogICAgcHVzaGludCAyNQogICAgKgogICAgcHVzaGludCAyNQogICAgZXh0cmFjdDMgLy8gb24gZXJyb3I6IGluZGV4IGFjY2VzcyBpcyBvdXQgb2YgYm91bmRzCiAgICBmcmFtZV9kaWcgLTIKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQxNgogICAgZHVwCiAgICBjb3ZlciAyCiAgICBmcmFtZV9kaWcgLTEKICAgID4KICAgIGFzc2VydCAvLyBpbmRleCBvdXQgb2YgYm91bmRzCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNzMKICAgIC8vIGxldCByZXN1bHQgPSB0aGlzLmV2YWx1YXRlRmlsdGVyKGN0eCwgdXNlQ3R4LCBmaWx0ZXJzW3N0YXJ0XSwgYXJnc1tzdGFydF0pCiAgICBmcmFtZV9kaWcgLTIKICAgIGZyYW1lX2RpZyAtMQogICAgY2FsbHN1YiBkeW5hbWljX2FycmF5X3JlYWRfYnl0ZV9sZW5ndGhfZWxlbWVudAogICAgZXh0cmFjdCAyIDAKICAgIGZyYW1lX2RpZyAtNQogICAgZnJhbWVfZGlnIC00CiAgICB1bmNvdmVyIDMKICAgIHVuY292ZXIgMwogICAgY2FsbHN1YiBldmFsdWF0ZUZpbHRlcgogICAgcG9wCiAgICBmcmFtZV9idXJ5IC01CiAgICBmcmFtZV9kaWcgLTEKCmV2YWx1YXRlX3doaWxlX3RvcEAzOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTc1CiAgICAvLyBmb3IgKGxldCBpOiB1aW50NjQgPSBzdGFydDsgaSArIDEgPCBmaWx0ZXJzLmxlbmd0aDsgaSArPSAxKSB7CiAgICBkdXAKICAgIGludGNfMSAvLyAxCiAgICArCiAgICBkdXAKICAgIGNvdmVyIDMKICAgIGZyYW1lX2RpZyAtMwogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIDwKICAgIGJ6IGV2YWx1YXRlX2FmdGVyX3doaWxlQDIxCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxNzYKICAgIC8vIGNvbnN0IGlzQW5kID0gZmlsdGVyc1tpXS5sb2dpY2FsT3BlcmF0b3IgPT09IEFORAogICAgcHVzaGludCAyNQogICAgKgogICAgZGlnIDQKICAgIGR1cAogICAgdW5jb3ZlciAyCiAgICBwdXNoaW50IDI1CiAgICBleHRyYWN0MyAvLyBvbiBlcnJvcjogaW5kZXggYWNjZXNzIGlzIG91dCBvZiBib3VuZHMKICAgIGR1cAogICAgZXh0cmFjdCAyNCAxCiAgICBwdXNoYnl0ZXMgMHgwYQogICAgPT0KICAgIGNvdmVyIDUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE3OAogICAgLy8gaWYgKGZpbHRlcnNbaSArIDFdLmxheWVyID4gZmlsdGVyc1tpXS5sYXllcikgewogICAgZGlnIDMKICAgIHB1c2hpbnQgMjUKICAgICoKICAgIHVuY292ZXIgMgogICAgc3dhcAogICAgcHVzaGludCAyNQogICAgZXh0cmFjdDMgLy8gb24gZXJyb3I6IGluZGV4IGFjY2VzcyBpcyBvdXQgb2YgYm91bmRzCiAgICBkdXAKICAgIGNvdmVyIDIKICAgIGludGNfMCAvLyAwCiAgICBleHRyYWN0X3VpbnQ2NAogICAgc3dhcAogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDY0CiAgICA+CiAgICBieiBldmFsdWF0ZV9hZnRlcl9pZl9lbHNlQDE1CiAgICBwb3AKICAgIHVuY292ZXIgMgogICAgcG9wCiAgICB1bmNvdmVyIDMKICAgIHBvcAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTgwCiAgICAvLyBjb25zdCBuZXN0ZWQgPSB0aGlzLmV2YWx1YXRlKGN0eCwgdXNlQ3R4LCBmaWx0ZXJzLCBhcmdzLCBpICsgMSkKICAgIGZyYW1lX2RpZyAtNQogICAgZnJhbWVfZGlnIC00CiAgICBmcmFtZV9kaWcgLTMKICAgIGZyYW1lX2RpZyAtMgogICAgdW5jb3ZlciA1CiAgICBjYWxsc3ViIGV2YWx1YXRlCiAgICBmcmFtZV9idXJ5IC0yCiAgICBmcmFtZV9idXJ5IC0zCiAgICBmcmFtZV9idXJ5IC01CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxODEKICAgIC8vIHJldHVybiBpc0FuZCA/IChyZXN1bHQgJiYgbmVzdGVkKSA6IChyZXN1bHQgfHwgbmVzdGVkKQogICAgdW5jb3ZlciAyCiAgICBieiBldmFsdWF0ZV90ZXJuYXJ5X2ZhbHNlQDEzCiAgICAmJgoKZXZhbHVhdGVfdGVybmFyeV9tZXJnZUAxNDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE4MQogICAgLy8gcmV0dXJuIGlzQW5kID8gKHJlc3VsdCAmJiBuZXN0ZWQpIDogKHJlc3VsdCB8fCBuZXN0ZWQpCiAgICBmcmFtZV9kaWcgLTUKICAgIGZyYW1lX2RpZyAtMwogICAgZnJhbWVfZGlnIC0yCiAgICByZXRzdWIKCmV2YWx1YXRlX3Rlcm5hcnlfZmFsc2VAMTM6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxODEKICAgIC8vIHJldHVybiBpc0FuZCA/IChyZXN1bHQgJiYgbmVzdGVkKSA6IChyZXN1bHQgfHwgbmVzdGVkKQogICAgfHwKICAgIGIgZXZhbHVhdGVfdGVybmFyeV9tZXJnZUAxNAoKZXZhbHVhdGVfYWZ0ZXJfaWZfZWxzZUAxNToKICAgIGRpZyAyCiAgICBkdXAKICAgIGRpZyA1CiAgICA8CiAgICBhc3NlcnQgLy8gaW5kZXggb3V0IG9mIGJvdW5kcwogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTg0CiAgICAvLyBjb25zdCBuZXh0ID0gdGhpcy5ldmFsdWF0ZUZpbHRlcihjdHgsIHVzZUN0eCwgZmlsdGVyc1tpICsgMV0sIGFyZ3NbaSArIDFdKQogICAgZnJhbWVfZGlnIC0yCiAgICBzd2FwCiAgICBjYWxsc3ViIGR5bmFtaWNfYXJyYXlfcmVhZF9ieXRlX2xlbmd0aF9lbGVtZW50CiAgICBleHRyYWN0IDIgMAogICAgZnJhbWVfZGlnIC01CiAgICBmcmFtZV9kaWcgLTQKICAgIHVuY292ZXIgMwogICAgdW5jb3ZlciAzCiAgICBjYWxsc3ViIGV2YWx1YXRlRmlsdGVyCiAgICBwb3AKICAgIGZyYW1lX2J1cnkgLTUKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE4NQogICAgLy8gcmVzdWx0ID0gaXNBbmQgPyAocmVzdWx0ICYmIG5leHQpIDogKHJlc3VsdCB8fCBuZXh0KQogICAgdW5jb3ZlciA0CiAgICBieiBldmFsdWF0ZV90ZXJuYXJ5X2ZhbHNlQDE5CiAgICAmJgoKZXZhbHVhdGVfdGVybmFyeV9tZXJnZUAyMDoKICAgIHN3YXAKICAgIGIgZXZhbHVhdGVfd2hpbGVfdG9wQDMKCmV2YWx1YXRlX3Rlcm5hcnlfZmFsc2VAMTk6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxODUKICAgIC8vIHJlc3VsdCA9IGlzQW5kID8gKHJlc3VsdCAmJiBuZXh0KSA6IChyZXN1bHQgfHwgbmV4dCkKICAgIHx8CiAgICBiIGV2YWx1YXRlX3Rlcm5hcnlfbWVyZ2VAMjAKCmV2YWx1YXRlX2FmdGVyX3doaWxlQDIxOgogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxODgKICAgIC8vIHJldHVybiByZXN1bHQKICAgIGZyYW1lX2RpZyAtNQogICAgZnJhbWVfZGlnIC0zCiAgICBmcmFtZV9kaWcgLTIKICAgIHVuY292ZXIgNgogICAgdW5jb3ZlciA2CiAgICB1bmNvdmVyIDYKICAgIHJldHN1YgoKCi8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjpHYXRlLmV2YWx1YXRlRmlsdGVyKGN0eDogYnl0ZXMsIHVzZUN0eDogdWludDY0LCBmaWx0ZXI6IGJ5dGVzLCBhcmdzOiBieXRlcykgLT4gdWludDY0LCBieXRlcywgYnl0ZXM6CmV2YWx1YXRlRmlsdGVyOgogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTkxCiAgICAvLyBwcml2YXRlIGV2YWx1YXRlRmlsdGVyKGN0eDogR2F0ZUN0eCwgdXNlQ3R4OiBib29sZWFuLCBmaWx0ZXI6IEdhdGVGaWx0ZXJFbnRyeSwgYXJnczogYnl0ZXMpOiBib29sZWFuIHsKICAgIHByb3RvIDQgMwogICAgcHVzaGJ5dGVzICIiCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxOTIKICAgIC8vIGlmICh1c2VDdHggJiYgdGhpcy5pc0N0eEF3YXJlKGZpbHRlci5hcHApKSB7CiAgICBmcmFtZV9kaWcgLTMKICAgIGJ6IGV2YWx1YXRlRmlsdGVyX2FmdGVyX2lmX2Vsc2VANAogICAgZnJhbWVfZGlnIC0yCiAgICBpbnRjXzMgLy8gOAogICAgZXh0cmFjdF91aW50NjQKICAgIGR1cAogICAgZnJhbWVfYnVyeSAwCiAgICBjYWxsc3ViIGlzQ3R4QXdhcmUKICAgIGJ6IGV2YWx1YXRlRmlsdGVyX2FmdGVyX2lmX2Vsc2VANAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTkzLTE5NgogICAgLy8gcmV0dXJuIGFiaUNhbGw8dHlwZW9mIE1vY2tHYXRlLnByb3RvdHlwZS5jaGVja0Zvcj4oewogICAgLy8gICBhcHBJZDogZmlsdGVyLmFwcCwKICAgIC8vICAgYXJnczogW2N0eCwgZmlsdGVyLnJlZ2lzdHJ5RW50cnksIGFyZ3NdLAogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE5NQogICAgLy8gYXJnczogW2N0eCwgZmlsdGVyLnJlZ2lzdHJ5RW50cnksIGFyZ3NdLAogICAgZnJhbWVfZGlnIC0yCiAgICBleHRyYWN0IDE2IDgKICAgIGZyYW1lX2RpZyAtMQogICAgbGVuCiAgICBpdG9iCiAgICBleHRyYWN0IDYgMgogICAgZnJhbWVfZGlnIC0xCiAgICBjb25jYXQKICAgIGZyYW1lX2RpZyAwCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE5My0xOTYKICAgIC8vIHJldHVybiBhYmlDYWxsPHR5cGVvZiBNb2NrR2F0ZS5wcm90b3R5cGUuY2hlY2tGb3I+KHsKICAgIC8vICAgYXBwSWQ6IGZpbHRlci5hcHAsCiAgICAvLyAgIGFyZ3M6IFtjdHgsIGZpbHRlci5yZWdpc3RyeUVudHJ5LCBhcmdzXSwKICAgIC8vIH0pLnJldHVyblZhbHVlCiAgICBwdXNoYnl0ZXMgMHhiOTM0YWFkYyAvLyBtZXRob2QgImNoZWNrRm9yKChhZGRyZXNzLHVpbnQ2NCxhZGRyZXNzKSx1aW50NjQsYnl0ZVtdKWJvb2wiCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgZnJhbWVfZGlnIC00CiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgc3dhcAogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBwdXNoaW50IDYgLy8gYXBwbAogICAgaXR4bl9maWVsZCBUeXBlRW51bQogICAgaW50Y18wIC8vIDAKICAgIGl0eG5fZmllbGQgRmVlCiAgICBpdHhuX3N1Ym1pdAogICAgaXR4biBMYXN0TG9nCiAgICBkdXAKICAgIGV4dHJhY3QgNCAwCiAgICBzd2FwCiAgICBleHRyYWN0IDAgNAogICAgYnl0ZWNfMCAvLyAweDE1MWY3Yzc1CiAgICA9PQogICAgYXNzZXJ0IC8vIEJ5dGVzIGhhcyB2YWxpZCBwcmVmaXgKICAgIGR1cAogICAgbGVuCiAgICBpbnRjXzEgLy8gMQogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYm9vbAogICAgaW50Y18wIC8vIDAKICAgIGdldGJpdAogICAgZnJhbWVfZGlnIC00CiAgICBmcmFtZV9kaWcgLTIKICAgIHVuY292ZXIgMwogICAgcmV0c3ViCgpldmFsdWF0ZUZpbHRlcl9hZnRlcl9pZl9lbHNlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoxOTgtMjAxCiAgICAvLyByZXR1cm4gYWJpQ2FsbDx0eXBlb2YgTW9ja0dhdGUucHJvdG90eXBlLmNoZWNrPih7CiAgICAvLyAgIGFwcElkOiBmaWx0ZXIuYXBwLAogICAgLy8gICBhcmdzOiBbY3R4LnByaW5jaXBhbCwgZmlsdGVyLnJlZ2lzdHJ5RW50cnksIGFyZ3NdLAogICAgLy8gfSkucmV0dXJuVmFsdWUKICAgIGl0eG5fYmVnaW4KICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjIwMAogICAgLy8gYXJnczogW2N0eC5wcmluY2lwYWwsIGZpbHRlci5yZWdpc3RyeUVudHJ5LCBhcmdzXSwKICAgIGZyYW1lX2RpZyAtNAogICAgZXh0cmFjdCAwIDMyCiAgICBmcmFtZV9kaWcgLTIKICAgIGV4dHJhY3QgMTYgOAogICAgZnJhbWVfZGlnIC0xCiAgICBsZW4KICAgIGl0b2IKICAgIGV4dHJhY3QgNiAyCiAgICBmcmFtZV9kaWcgLTEKICAgIGNvbmNhdAogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MTk5CiAgICAvLyBhcHBJZDogZmlsdGVyLmFwcCwKICAgIGZyYW1lX2RpZyAtMgogICAgaW50Y18zIC8vIDgKICAgIGV4dHJhY3RfdWludDY0CiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uSUQKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjE5OC0yMDEKICAgIC8vIHJldHVybiBhYmlDYWxsPHR5cGVvZiBNb2NrR2F0ZS5wcm90b3R5cGUuY2hlY2s+KHsKICAgIC8vICAgYXBwSWQ6IGZpbHRlci5hcHAsCiAgICAvLyAgIGFyZ3M6IFtjdHgucHJpbmNpcGFsLCBmaWx0ZXIucmVnaXN0cnlFbnRyeSwgYXJnc10sCiAgICAvLyB9KS5yZXR1cm5WYWx1ZQogICAgcHVzaGJ5dGVzIDB4NmUwM2Y1MGEgLy8gbWV0aG9kICJjaGVjayhhZGRyZXNzLHVpbnQ2NCxieXRlW10pYm9vbCIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICB1bmNvdmVyIDIKICAgIGl0eG5fZmllbGQgQXBwbGljYXRpb25BcmdzCiAgICBzd2FwCiAgICBpdHhuX2ZpZWxkIEFwcGxpY2F0aW9uQXJncwogICAgaXR4bl9maWVsZCBBcHBsaWNhdGlvbkFyZ3MKICAgIHB1c2hpbnQgNiAvLyBhcHBsCiAgICBpdHhuX2ZpZWxkIFR5cGVFbnVtCiAgICBpbnRjXzAgLy8gMAogICAgaXR4bl9maWVsZCBGZWUKICAgIGl0eG5fc3VibWl0CiAgICBpdHhuIExhc3RMb2cKICAgIGR1cAogICAgZXh0cmFjdCA0IDAKICAgIHN3YXAKICAgIGV4dHJhY3QgMCA0CiAgICBieXRlY18wIC8vIDB4MTUxZjdjNzUKICAgID09CiAgICBhc3NlcnQgLy8gQnl0ZXMgaGFzIHZhbGlkIHByZWZpeAogICAgZHVwCiAgICBsZW4KICAgIGludGNfMSAvLyAxCiAgICA9PQogICAgYXNzZXJ0IC8vIGludmFsaWQgbnVtYmVyIG9mIGJ5dGVzIGZvciBib29sCiAgICBpbnRjXzAgLy8gMAogICAgZ2V0Yml0CiAgICBmcmFtZV9kaWcgLTQKICAgIGZyYW1lX2RpZyAtMgogICAgdW5jb3ZlciAzCiAgICByZXRzdWIKCgovLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo6R2F0ZS5ydW4oY3R4OiBieXRlcywgdXNlQ3R4OiB1aW50NjQsIGdhdGVJRDogdWludDY0LCBhcmdzOiBieXRlcykgLT4gdWludDY0LCBieXRlcywgYnl0ZXM6CnJ1bjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjIwNAogICAgLy8gcHJpdmF0ZSBydW4oY3R4OiBHYXRlQ3R4LCB1c2VDdHg6IGJvb2xlYW4sIGdhdGVJRDogdWludDY0LCBhcmdzOiBHYXRlQXJncyk6IGJvb2xlYW4gewogICAgcHJvdG8gNCAzCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyMDUKICAgIC8vIGxvZ2dlZEFzc2VydCh0aGlzLmdhdGVSZWdpc3RyeShnYXRlSUQpLmV4aXN0cywgZXJyR2F0ZU5vdEZvdW5kKQogICAgZnJhbWVfZGlnIC0yCiAgICBpdG9iCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czo5MwogICAgLy8gZ2F0ZVJlZ2lzdHJ5ID0gQm94TWFwPHVpbnQ2NCwgR2F0ZUZpbHRlckVudHJ5W10+KHsga2V5UHJlZml4OiBHYXRlQm94UHJlZml4R2F0ZVJlZ2lzdHJ5IH0pCiAgICBieXRlY18xIC8vICJnIgogICAgc3dhcAogICAgY29uY2F0CiAgICBkdXAKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjIwNQogICAgLy8gbG9nZ2VkQXNzZXJ0KHRoaXMuZ2F0ZVJlZ2lzdHJ5KGdhdGVJRCkuZXhpc3RzLCBlcnJHYXRlTm90Rm91bmQpCiAgICBib3hfbGVuCiAgICBidXJ5IDEKICAgIGJueiBydW5fYWZ0ZXJfYXNzZXJ0QDIKICAgIGJ5dGVjIDkgLy8gIkVSUjplcnJOZ2F0IgogICAgbG9nCiAgICBlcnIgLy8gRVJSOmVyck5nYXQKCnJ1bl9hZnRlcl9hc3NlcnRAMjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjIwNgogICAgLy8gY29uc3QgZmlsdGVycyA9IGNsb25lKHRoaXMuZ2F0ZVJlZ2lzdHJ5KGdhdGVJRCkudmFsdWUpCiAgICBkdXBuIDIKICAgIGJveF9nZXQKICAgIHN3YXAKICAgIGNvdmVyIDIKICAgIGFzc2VydCAvLyBCb3ggbXVzdCBoYXZlIHZhbHVlCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyMDcKICAgIC8vIGxvZ2dlZEFzc2VydChhcmdzLmxlbmd0aCA9PT0gZmlsdGVycy5sZW5ndGgsIGVyckludmFsaWRBcmdDb3VudCkKICAgIGZyYW1lX2RpZyAtMQogICAgaW50Y18wIC8vIDAKICAgIGV4dHJhY3RfdWludDE2IC8vIG9uIGVycm9yOiBpbnZhbGlkIGFycmF5IGxlbmd0aCBoZWFkZXIKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjIwNi0yMDcKICAgIC8vIGNvbnN0IGZpbHRlcnMgPSBjbG9uZSh0aGlzLmdhdGVSZWdpc3RyeShnYXRlSUQpLnZhbHVlKQogICAgLy8gbG9nZ2VkQXNzZXJ0KGFyZ3MubGVuZ3RoID09PSBmaWx0ZXJzLmxlbmd0aCwgZXJySW52YWxpZEFyZ0NvdW50KQogICAgc3dhcAogICAgaW50Y18wIC8vIDAKICAgIGludGNfMiAvLyAyCiAgICBib3hfZXh0cmFjdAogICAgYnRvaQogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2NvbnRyYWN0LmFsZ28udHM6MjA3CiAgICAvLyBsb2dnZWRBc3NlcnQoYXJncy5sZW5ndGggPT09IGZpbHRlcnMubGVuZ3RoLCBlcnJJbnZhbGlkQXJnQ291bnQpCiAgICA9PQogICAgYm56IHJ1bl9hZnRlcl9hc3NlcnRANAogICAgYnl0ZWMgMTkgLy8gIkVSUjplcnJJYXJnIgogICAgbG9nCiAgICBlcnIgLy8gRVJSOmVycklhcmcKCnJ1bl9hZnRlcl9hc3NlcnRANDoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9jb250cmFjdC5hbGdvLnRzOjIwOAogICAgLy8gZW5zdXJlQnVkZ2V0KDEwMCAqIGZpbHRlcnMubGVuZ3RoKQogICAgc3dhcAogICAgaW50Y18wIC8vIDAKICAgIGludGNfMiAvLyAyCiAgICBib3hfZXh0cmFjdAogICAgYnRvaQogICAgcHVzaGludCAxMDAKICAgICoKICAgIHB1c2hpbnQgMTAKICAgICsKCnJ1bl93aGlsZV90b3BAMTA6CiAgICBkdXAKICAgIGdsb2JhbCBPcGNvZGVCdWRnZXQKICAgID4KICAgIGJ6IHJ1bl9hZnRlcl93aGlsZUAxNQogICAgaXR4bl9iZWdpbgogICAgcHVzaGludCA2IC8vIGFwcGwKICAgIGl0eG5fZmllbGQgVHlwZUVudW0KICAgIHB1c2hpbnQgNSAvLyBEZWxldGVBcHBsaWNhdGlvbgogICAgaXR4bl9maWVsZCBPbkNvbXBsZXRpb24KICAgIGJ5dGVjIDIwIC8vIDB4MDY4MTAxCiAgICBpdHhuX2ZpZWxkIEFwcHJvdmFsUHJvZ3JhbQogICAgYnl0ZWMgMjAgLy8gMHgwNjgxMDEKICAgIGl0eG5fZmllbGQgQ2xlYXJTdGF0ZVByb2dyYW0KICAgIGludGNfMCAvLyAwCiAgICBpdHhuX2ZpZWxkIEZlZQogICAgaXR4bl9zdWJtaXQKICAgIGIgcnVuX3doaWxlX3RvcEAxMAoKcnVuX2FmdGVyX3doaWxlQDE1OgogICAgcG9wCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvY29udHJhY3QuYWxnby50czoyMDkKICAgIC8vIHJldHVybiB0aGlzLmV2YWx1YXRlKGN0eCwgdXNlQ3R4LCBmaWx0ZXJzLCBhcmdzLCAwKQogICAgZnJhbWVfZGlnIC00CiAgICBmcmFtZV9kaWcgLTMKICAgIHVuY292ZXIgMgogICAgZnJhbWVfZGlnIC0xCiAgICBpbnRjXzAgLy8gMAogICAgY2FsbHN1YiBldmFsdWF0ZQogICAgZnJhbWVfYnVyeSAtMQogICAgcG9wCiAgICBkdXAKICAgIGZyYW1lX2J1cnkgLTQKICAgIGZyYW1lX2RpZyAtMQogICAgcmV0c3ViCgoKLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2Jhc2UudHM6OkJhc2VHYXRlLm1icihsZW5ndGg6IHVpbnQ2NCkgLT4gYnl0ZXM6Cm1icjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9iYXNlLnRzOjUKICAgIC8vIHByb3RlY3RlZCBtYnIobGVuZ3RoOiB1aW50NjQpOiBHYXRlTUJSRGF0YSB7CiAgICBwcm90byAxIDEKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9nYXRlcy9iYXNlLnRzOjgKICAgIC8vIGdhdGVSZWdpc3RyeTogNl8xMDAgKyAoNDAwICogKDMyICogbGVuZ3RoKSksCiAgICBmcmFtZV9kaWcgLTEKICAgIHB1c2hpbnQgMTI4MDAKICAgICoKICAgIHB1c2hpbnQgNjEwMAogICAgKwogICAgLy8gc21hcnRfY29udHJhY3RzL2dhdGVzL2Jhc2UudHM6NwogICAgLy8gYXBwUmVnaXN0cnk6IDZfMTAwLAogICAgcHVzaGludCA2MTAwCiAgICAvLyBzbWFydF9jb250cmFjdHMvZ2F0ZXMvYmFzZS50czo2LTkKICAgIC8vIHJldHVybiB7CiAgICAvLyAgIGFwcFJlZ2lzdHJ5OiA2XzEwMCwKICAgIC8vICAgZ2F0ZVJlZ2lzdHJ5OiA2XzEwMCArICg0MDAgKiAoMzIgKiBsZW5ndGgpKSwKICAgIC8vIH0KICAgIGl0b2IKICAgIHN3YXAKICAgIGl0b2IKICAgIGNvbmNhdAogICAgcmV0c3ViCg==", "clear": "I3ByYWdtYSB2ZXJzaW9uIDExCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCgovLyBAYWxnb3JhbmRmb3VuZGF0aW9uL2FsZ29yYW5kLXR5cGVzY3JpcHQvYmFzZS1jb250cmFjdC5kLnRzOjpCYXNlQ29udHJhY3QuY2xlYXJTdGF0ZVByb2dyYW0oKSAtPiB1aW50NjQ6Cm1haW46CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [3217], "errorMessage": "Box must have value"}, {"pc": [1073, 1151, 1899, 2120, 3097, 3176], "errorMessage": "Bytes has valid prefix"}, {"pc": [2614], "errorMessage": "ERR:errBopr"}, {"pc": [1505, 1726], "errorMessage": "ERR:errFgte"}, {"pc": [2468, 3234], "errorMessage": "ERR:errIarg"}, {"pc": [2421], "errorMessage": "ERR:errIcls"}, {"pc": [509, 728, 745], "errorMessage": "ERR:errIgid"}, {"pc": [2456, 2486, 2544], "errorMessage": "ERR:errIlyr"}, {"pc": [1229, 1241], "errorMessage": "ERR:errIpay"}, {"pc": [627, 2638], "errorMessage": "ERR:errIsgt"}, {"pc": [591, 2381], "errorMessage": "ERR:errNdao"}, {"pc": [2008, 2045, 3210], "errorMessage": "ERR:errNgat"}, {"pc": [1090, 1916], "errorMessage": "ERR:errScst"}, {"pc": [667, 1103, 2373], "errorMessage": "application exists"}, {"pc": [576, 660, 714, 1246, 2366, 2399], "errorMessage": "check GlobalState exists"}, {"pc": [776, 1036, 1868, 2624, 2696, 2820, 2882, 2903], "errorMessage": "index access is out of bounds"}, {"pc": [1012, 1848, 2075, 2567, 2831, 2965], "errorMessage": "index out of bounds"}, {"pc": [944, 1325, 1445, 1562, 1674, 1783], "errorMessage": "invalid array encoding"}, {"pc": [470, 691, 896, 914, 958, 986, 1295, 1339, 1415, 1459, 1532, 1576, 1644, 1688, 1735, 1753, 1797, 1824, 2123, 2340, 2438, 2677, 2867, 3221], "errorMessage": "invalid array length header"}, {"pc": [558, 568], "errorMessage": "invalid number of bytes for arc4.bool"}, {"pc": [477], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}, {"pc": [974, 1358, 1478, 1595, 1707, 1813], "errorMessage": "invalid number of bytes for arc4.dynamic_array<bytes>"}, {"pc": [905, 1744], "errorMessage": "invalid number of bytes for arc4.dynamic_array<smart_contracts/gates/types.ts::GateFilter>"}, {"pc": [703], "errorMessage": "invalid number of bytes for arc4.dynamic_array<smart_contracts/gates/types.ts::GateFilterEntry>"}, {"pc": [1279, 1399], "errorMessage": "invalid number of bytes for arc4.static_array<arc4.uint8, 32>"}, {"pc": [488, 497, 549, 680, 1287, 1407, 1524, 1636, 1939, 1968, 1992, 2029, 2359], "errorMessage": "invalid number of bytes for arc4.uint64"}, {"pc": [3102, 3181], "errorMessage": "invalid number of bytes for bool"}, {"pc": [2129], "errorMessage": "invalid number of bytes for bytes"}, {"pc": [2345], "errorMessage": "invalid number of bytes for smart_contracts/gates/types.ts::GateFilterEntryWithArgs"}, {"pc": [1516, 1628], "errorMessage": "invalid number of bytes for smart_contracts/utils/principal.ts::GateCtx"}, {"pc": [1078, 1156, 1904], "errorMessage": "invalid number of bytes for uint64"}, {"pc": [2332], "errorMessage": "invalid tail pointer at index 4 of (uint64,uint64,uint64,uint8,(len+uint8[]))"}, {"pc": [952, 1333, 1453, 1570, 1682, 1791], "errorMessage": "invalid tail pointer for (len+(len+uint8[])[])"}, {"pc": [2327], "errorMessage": "invalid tuple encoding"}, {"pc": [887], "errorMessage": "transaction type is pay"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -65,6 +65,13 @@ def _init_dataclass(cls: type, data: dict) -> object:
     return cls(**field_values)
 
 @dataclasses.dataclass(frozen=True)
+class GateCtx:
+    """Struct for GateCtx"""
+    principal: str
+    wallet: int
+    spender: str
+
+@dataclasses.dataclass(frozen=True)
 class GateFilterEntryWithArgs:
     """Struct for GateFilterEntryWithArgs"""
     layer: int
@@ -73,6 +80,27 @@ class GateFilterEntryWithArgs:
     logicalOperator: int
     args: bytes
 
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class SetSubGateArgs:
+    """Dataclass for set_sub_gate arguments"""
+    app: int
+    allowed: bool
+    ctxAware: bool
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "setSubGate(uint64,bool,bool)void"
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class ImportGateArgs:
+    """Dataclass for import_gate arguments"""
+    id: int
+    entries: list[tuple[int, int, int, int]]
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "importGate(uint64,(uint64,uint64,uint64,uint8)[])void"
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
 class RegisterArgs:
@@ -108,6 +136,28 @@ class MustCheckArgs:
         return "mustCheck(address,uint64,byte[][])void"
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
+class CheckForArgs:
+    """Dataclass for check_for arguments"""
+    ctx: GateCtx
+    gateID: int
+    args: list[bytes | str]
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "checkFor((address,uint64,address),uint64,byte[][])bool"
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class MustCheckForArgs:
+    """Dataclass for must_check_for arguments"""
+    ctx: GateCtx
+    gateID: int
+    args: list[bytes | str]
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "mustCheckFor((address,uint64,address),uint64,byte[][])void"
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
 class CostArgs:
     """Dataclass for cost arguments"""
     filters: list[tuple[int, int, int]]
@@ -116,6 +166,24 @@ class CostArgs:
     @property
     def abi_method_signature(self) -> str:
         return "cost((uint64,uint64,uint8)[],byte[][])uint64"
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class IsSubGateArgs:
+    """Dataclass for is_sub_gate arguments"""
+    app: int
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "isSubGate(uint64)bool"
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class IsCtxSubGateArgs:
+    """Dataclass for is_ctx_sub_gate arguments"""
+    app: int
+
+    @property
+    def abi_method_signature(self) -> str:
+        return "isCtxSubGate(uint64)bool"
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
 class SizeArgs:
@@ -158,15 +226,53 @@ class CreateArgs:
     """Dataclass for create arguments"""
     version: str
     akitaDAO: int
+    legacyCutoff: int
 
     @property
     def abi_method_signature(self) -> str:
-        return "create(string,uint64)void"
+        return "create(string,uint64,uint64)void"
 
 
 class GateParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    def set_sub_gate(
+        self,
+        args: tuple[int, bool, bool] | SetSubGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "setSubGate(uint64,bool,bool)void",
+            "args": method_args,
+        }))
+
+    def import_gate(
+        self,
+        args: tuple[int, list[tuple[int, int, int, int]]] | ImportGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "importGate(uint64,(uint64,uint64,uint64,uint8)[])void",
+            "args": method_args,
+        }))
+
+    def seal_imports(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "sealImports()void",
+        }))
 
     def register(
         self,
@@ -207,6 +313,32 @@ class GateParams:
             "args": method_args,
         }))
 
+    def check_for(
+        self,
+        args: tuple[GateCtx, int, list[bytes | str]] | CheckForArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "checkFor((address,uint64,address),uint64,byte[][])bool",
+            "args": method_args,
+        }))
+
+    def must_check_for(
+        self,
+        args: tuple[GateCtx, int, list[bytes | str]] | MustCheckForArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "mustCheckFor((address,uint64,address),uint64,byte[][])void",
+            "args": method_args,
+        }))
+
     def cost(
         self,
         args: tuple[list[tuple[int, int, int]], list[bytes | str]] | CostArgs,
@@ -217,6 +349,32 @@ class GateParams:
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
             "method": "cost((uint64,uint64,uint8)[],byte[][])uint64",
+            "args": method_args,
+        }))
+
+    def is_sub_gate(
+        self,
+        args: tuple[int] | IsSubGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "isSubGate(uint64)bool",
+            "args": method_args,
+        }))
+
+    def is_ctx_sub_gate(
+        self,
+        args: tuple[int] | IsCtxSubGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "isCtxSubGate(uint64)bool",
             "args": method_args,
         }))
 
@@ -280,6 +438,19 @@ class GateParams:
         return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
             "method": "updateAkitaDAO(uint64)void",
+            "args": method_args,
+        }))
+
+    def create(
+        self,
+        args: tuple[str, int, int] | CreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.AppCallMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.params.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "create(string,uint64,uint64)void",
             "args": method_args,
         }))
 
@@ -298,6 +469,43 @@ class GateCreateTransactionParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
 
+    def set_sub_gate(
+        self,
+        args: tuple[int, bool, bool] | SetSubGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "setSubGate(uint64,bool,bool)void",
+            "args": method_args,
+        }))
+
+    def import_gate(
+        self,
+        args: tuple[int, list[tuple[int, int, int, int]]] | ImportGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "importGate(uint64,(uint64,uint64,uint64,uint8)[])void",
+            "args": method_args,
+        }))
+
+    def seal_imports(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "sealImports()void",
+        }))
+
     def register(
         self,
         args: tuple[algokit_utils.AppMethodCallTransactionArgument, list[tuple[int, int, int]], list[bytes | str]] | RegisterArgs,
@@ -337,6 +545,32 @@ class GateCreateTransactionParams:
             "args": method_args,
         }))
 
+    def check_for(
+        self,
+        args: tuple[GateCtx, int, list[bytes | str]] | CheckForArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "checkFor((address,uint64,address),uint64,byte[][])bool",
+            "args": method_args,
+        }))
+
+    def must_check_for(
+        self,
+        args: tuple[GateCtx, int, list[bytes | str]] | MustCheckForArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "mustCheckFor((address,uint64,address),uint64,byte[][])void",
+            "args": method_args,
+        }))
+
     def cost(
         self,
         args: tuple[list[tuple[int, int, int]], list[bytes | str]] | CostArgs,
@@ -347,6 +581,32 @@ class GateCreateTransactionParams:
         return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
             **dataclasses.asdict(params),
             "method": "cost((uint64,uint64,uint8)[],byte[][])uint64",
+            "args": method_args,
+        }))
+
+    def is_sub_gate(
+        self,
+        args: tuple[int] | IsSubGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "isSubGate(uint64)bool",
+            "args": method_args,
+        }))
+
+    def is_ctx_sub_gate(
+        self,
+        args: tuple[int] | IsCtxSubGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "isCtxSubGate(uint64)bool",
             "args": method_args,
         }))
 
@@ -413,6 +673,19 @@ class GateCreateTransactionParams:
             "args": method_args,
         }))
 
+    def create(
+        self,
+        args: tuple[str, int, int] | CreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        return self.app_client.create_transaction.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "create(string,uint64,uint64)void",
+            "args": method_args,
+        }))
+
     def clear_state(
         self,
         params: algokit_utils.AppClientBareCallParams | None = None,
@@ -427,6 +700,52 @@ class GateCreateTransactionParams:
 class GateSend:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    def set_sub_gate(
+        self,
+        args: tuple[int, bool, bool] | SetSubGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "setSubGate(uint64,bool,bool)void",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
+
+    def import_gate(
+        self,
+        args: tuple[int, list[tuple[int, int, int, int]]] | ImportGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "importGate(uint64,(uint64,uint64,uint64,uint8)[])void",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
+
+    def seal_imports(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+    
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "sealImports()void",
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
 
     def register(
         self,
@@ -476,6 +795,38 @@ class GateSend:
         parsed_response = response
         return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
 
+    def check_for(
+        self,
+        args: tuple[GateCtx, int, list[bytes | str]] | CheckForArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[bool]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "checkFor((address,uint64,address),uint64,byte[][])bool",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[bool], parsed_response)
+
+    def must_check_for(
+        self,
+        args: tuple[GateCtx, int, list[bytes | str]] | MustCheckForArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "mustCheckFor((address,uint64,address),uint64,byte[][])void",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
+
     def cost(
         self,
         args: tuple[list[tuple[int, int, int]], list[bytes | str]] | CostArgs,
@@ -491,6 +842,38 @@ class GateSend:
         }), send_params=send_params)
         parsed_response = response
         return typing.cast(algokit_utils.SendAppTransactionResult[int], parsed_response)
+
+    def is_sub_gate(
+        self,
+        args: tuple[int] | IsSubGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[bool]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "isSubGate(uint64)bool",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[bool], parsed_response)
+
+    def is_ctx_sub_gate(
+        self,
+        args: tuple[int] | IsCtxSubGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[bool]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "isCtxSubGate(uint64)bool",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[bool], parsed_response)
 
     def size(
         self,
@@ -570,6 +953,22 @@ class GateSend:
         parsed_response = response
         return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
 
+    def create(
+        self,
+        args: tuple[str, int, int] | CreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        response = self.app_client.send.call(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "create(string,uint64,uint64)void",
+            "args": method_args,
+        }), send_params=send_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppTransactionResult[None], parsed_response)
+
     def clear_state(
         self,
         params: algokit_utils.AppClientBareCallParams | None = None,
@@ -584,6 +983,8 @@ class GateSend:
 class GlobalStateValue(typing.TypedDict):
     """Shape of global_state state key values"""
     gateCursor: int
+    legacyCutoff: int
+    importsSealed: int
     version: str
     akitaDAO: int
 
@@ -639,6 +1040,22 @@ class _GlobalState:
         return typing.cast(int, value)
 
     @property
+    def legacy_cutoff(self) -> int:
+        """Get the current value of the legacyCutoff key in global_state state"""
+        value = self.app_client.state.global_state.get_value("legacyCutoff")
+        if isinstance(value, dict) and "AVMUint64" in self._struct_classes:
+            return _init_dataclass(self._struct_classes["AVMUint64"], value)  # type: ignore
+        return typing.cast(int, value)
+
+    @property
+    def imports_sealed(self) -> int:
+        """Get the current value of the importsSealed key in global_state state"""
+        value = self.app_client.state.global_state.get_value("importsSealed")
+        if isinstance(value, dict) and "AVMUint64" in self._struct_classes:
+            return _init_dataclass(self._struct_classes["AVMUint64"], value)  # type: ignore
+        return typing.cast(int, value)
+
+    @property
     def version(self) -> str:
         """Get the current value of the version key in global_state state"""
         value = self.app_client.state.global_state.get_value("version")
@@ -683,6 +1100,15 @@ class _BoxState:
         return _MapState(
             self.app_client.state.box,
             "gateRegistry",
+            None
+        )
+
+    @property
+    def sub_gates(self) -> "_MapState[int, bytes]":
+        """Get values from the subGates map in box state"""
+        return _MapState(
+            self.app_client.state.box,
+            "subGates",
             None
         )
 
@@ -867,6 +1293,24 @@ class GateClient:
     @typing.overload
     def decode_return_value(
         self,
+        method: typing.Literal["setSubGate(uint64,bool,bool)void"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
+        method: typing.Literal["importGate(uint64,(uint64,uint64,uint64,uint8)[])void"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
+        method: typing.Literal["sealImports()void"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
         method: typing.Literal["register(pay,(uint64,uint64,uint8)[],byte[][])uint64"],
         return_value: algokit_utils.ABIReturn | None
     ) -> int | None: ...
@@ -885,9 +1329,33 @@ class GateClient:
     @typing.overload
     def decode_return_value(
         self,
+        method: typing.Literal["checkFor((address,uint64,address),uint64,byte[][])bool"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> bool | None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
+        method: typing.Literal["mustCheckFor((address,uint64,address),uint64,byte[][])void"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
         method: typing.Literal["cost((uint64,uint64,uint8)[],byte[][])uint64"],
         return_value: algokit_utils.ABIReturn | None
     ) -> int | None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
+        method: typing.Literal["isSubGate(uint64)bool"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> bool | None: ...
+    @typing.overload
+    def decode_return_value(
+        self,
+        method: typing.Literal["isCtxSubGate(uint64)bool"],
+        return_value: algokit_utils.ABIReturn | None
+    ) -> bool | None: ...
     @typing.overload
     def decode_return_value(
         self,
@@ -921,7 +1389,7 @@ class GateClient:
     @typing.overload
     def decode_return_value(
         self,
-        method: typing.Literal["create(string,uint64)void"],
+        method: typing.Literal["create(string,uint64,uint64)void"],
         return_value: algokit_utils.ABIReturn | None
     ) -> None: ...
     @typing.overload
@@ -954,6 +1422,640 @@ class GateClient:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class GateMethodCallCreateParams(
+    algokit_utils.AppClientCreateSchema, algokit_utils.BaseAppClientMethodCallParams[
+        CreateArgs,
+        str | None,
+    ]
+):
+    """Parameters for creating Gate contract using ABI"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallCreateParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallCreateParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+class GateFactory(algokit_utils.TypedAppFactoryProtocol[GateMethodCallCreateParams, None, None]):
+    """Factory for deploying and managing GateClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = GateFactoryParams(self.app_factory)
+        self.create_transaction = GateFactoryCreateTransaction(self.app_factory)
+        self.send = GateFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: GateMethodCallCreateParams | None = None,
+        update_params: None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[GateClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return GateClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> GateClient:
+        """Get an app client by creator address and name"""
+        return GateClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> GateClient:
+        """Get an app client by app ID"""
+        return GateClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class GateFactoryParams:
+    """Parameters for creating transactions for Gate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = GateFactoryCreateParams(app_factory)
+        self.update = GateFactoryUpdateParams(app_factory)
+        self.delete = GateFactoryDeleteParams(app_factory)
+
+class GateFactoryCreateParams:
+    """Parameters for 'create' operations of Gate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def set_sub_gate(
+        self,
+        args: tuple[int, bool, bool] | SetSubGateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the setSubGate(uint64,bool,bool)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "setSubGate(uint64,bool,bool)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def import_gate(
+        self,
+        args: tuple[int, list[tuple[int, int, int, int]]] | ImportGateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the importGate(uint64,(uint64,uint64,uint64,uint8)[])void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "importGate(uint64,(uint64,uint64,uint64,uint8)[])void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def seal_imports(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the sealImports()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "sealImports()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def register(
+        self,
+        args: tuple[algokit_utils.AppMethodCallTransactionArgument, list[tuple[int, int, int]], list[bytes | str]] | RegisterArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the register(pay,(uint64,uint64,uint8)[],byte[][])uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "register(pay,(uint64,uint64,uint8)[],byte[][])uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def check(
+        self,
+        args: tuple[str, int, list[bytes | str]] | CheckArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the check(address,uint64,byte[][])bool ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "check(address,uint64,byte[][])bool",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def must_check(
+        self,
+        args: tuple[str, int, list[bytes | str]] | MustCheckArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the mustCheck(address,uint64,byte[][])void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "mustCheck(address,uint64,byte[][])void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def check_for(
+        self,
+        args: tuple[GateCtx, int, list[bytes | str]] | CheckForArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the checkFor((address,uint64,address),uint64,byte[][])bool ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "checkFor((address,uint64,address),uint64,byte[][])bool",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def must_check_for(
+        self,
+        args: tuple[GateCtx, int, list[bytes | str]] | MustCheckForArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the mustCheckFor((address,uint64,address),uint64,byte[][])void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "mustCheckFor((address,uint64,address),uint64,byte[][])void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def cost(
+        self,
+        args: tuple[list[tuple[int, int, int]], list[bytes | str]] | CostArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the cost((uint64,uint64,uint8)[],byte[][])uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "cost((uint64,uint64,uint8)[],byte[][])uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def is_sub_gate(
+        self,
+        args: tuple[int] | IsSubGateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the isSubGate(uint64)bool ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "isSubGate(uint64)bool",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def is_ctx_sub_gate(
+        self,
+        args: tuple[int] | IsCtxSubGateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the isCtxSubGate(uint64)bool ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "isCtxSubGate(uint64)bool",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def size(
+        self,
+        args: tuple[int] | SizeArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the size(uint64)uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "size(uint64)uint64",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def get_gate(
+        self,
+        args: tuple[int] | GetGateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the getGate(uint64)(uint64,uint64,uint64,uint8,byte[])[] ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "getGate(uint64)(uint64,uint64,uint64,uint8,byte[])[]",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def gate_filter_entry_with_args_shape(
+        self,
+        args: tuple[GateFilterEntryWithArgs] | GateFilterEntryWithArgsShapeArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the gateFilterEntryWithArgsShape((uint64,uint64,uint64,uint8,byte[]))(uint64,uint64,uint64,uint8,byte[]) ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "gateFilterEntryWithArgsShape((uint64,uint64,uint64,uint8,byte[]))(uint64,uint64,uint64,uint8,byte[])",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def op_up(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the opUp()void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "opUp()void",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def update_akita_dao(
+        self,
+        args: tuple[int] | UpdateAkitaDaoArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the updateAkitaDAO(uint64)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "updateAkitaDAO(uint64)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def create(
+        self,
+        args: tuple[str, int, int] | CreateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the create(string,uint64,uint64)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "create(string,uint64,uint64)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class GateFactoryUpdateParams:
+    """Parameters for 'update' operations of Gate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class GateFactoryDeleteParams:
+    """Parameters for 'delete' operations of Gate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class GateFactoryCreateTransaction:
+    """Create transactions for Gate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = GateFactoryCreateTransactionCreate(app_factory)
+
+
+class GateFactoryCreateTransactionCreate:
+    """Create new instances of Gate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class GateFactorySend:
+    """Send calls to Gate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = GateFactorySendCreate(app_factory)
+
+
+class GateFactorySendCreate:
+    """Send create calls to Gate contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[GateClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return GateClient(result[0]), result[1]
+
+    def create(
+        self,
+        args: tuple[str, int, int] | CreateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> tuple[GateClient, algokit_utils.AppFactoryCreateMethodCallResult[None]]:
+            """Creates and sends a transaction using the create(string,uint64,uint64)void ABI method"""
+            params = params or algokit_utils.CommonAppCallCreateParams()
+            client, result = self.app_factory.send.create(
+                algokit_utils.AppFactoryCreateMethodCallParams(
+                    **{
+                    **dataclasses.asdict(params),
+                    "method": "create(string,uint64,uint64)void",
+                    "args": _parse_abi_args(args),
+                    }
+                ),
+                send_params=send_params,
+                compilation_params=compilation_params
+            )
+            return_value = None if result.abi_return is None else typing.cast(None, result.abi_return)
+    
+            return GateClient(client), algokit_utils.AppFactoryCreateMethodCallResult[None](
+                **{
+                    **result.__dict__,
+                    "app_id": result.app_id,
+                    "abi_return": return_value,
+                    "transaction": result.transaction,
+                    "confirmation": result.confirmation,
+                    "group_id": result.group_id,
+                    "tx_ids": result.tx_ids,
+                    "transactions": result.transactions,
+                    "confirmations": result.confirmations,
+                    "app_address": result.app_address,
+                }
+            )
+
+
 class GateComposer:
     """Composer for creating transaction groups for Gate contract calls"""
 
@@ -961,6 +2063,59 @@ class GateComposer:
         self.client = client
         self._composer = client.algorand.new_group()
         self._result_mappers: list[typing.Callable[[algokit_utils.ABIReturn | None], object] | None] = []
+
+    def set_sub_gate(
+        self,
+        args: tuple[int, bool, bool] | SetSubGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "GateComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.set_sub_gate(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "setSubGate(uint64,bool,bool)void", v
+            )
+        )
+        return self
+
+    def import_gate(
+        self,
+        args: tuple[int, list[tuple[int, int, int, int]]] | ImportGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "GateComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.import_gate(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "importGate(uint64,(uint64,uint64,uint64,uint8)[])void", v
+            )
+        )
+        return self
+
+    def seal_imports(
+        self,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "GateComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.seal_imports(
+                
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "sealImports()void", v
+            )
+        )
+        return self
 
     def register(
         self,
@@ -1016,6 +2171,42 @@ class GateComposer:
         )
         return self
 
+    def check_for(
+        self,
+        args: tuple[GateCtx, int, list[bytes | str]] | CheckForArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "GateComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.check_for(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "checkFor((address,uint64,address),uint64,byte[][])bool", v
+            )
+        )
+        return self
+
+    def must_check_for(
+        self,
+        args: tuple[GateCtx, int, list[bytes | str]] | MustCheckForArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "GateComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.must_check_for(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "mustCheckFor((address,uint64,address),uint64,byte[][])void", v
+            )
+        )
+        return self
+
     def cost(
         self,
         args: tuple[list[tuple[int, int, int]], list[bytes | str]] | CostArgs,
@@ -1030,6 +2221,42 @@ class GateComposer:
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
                 "cost((uint64,uint64,uint8)[],byte[][])uint64", v
+            )
+        )
+        return self
+
+    def is_sub_gate(
+        self,
+        args: tuple[int] | IsSubGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "GateComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.is_sub_gate(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "isSubGate(uint64)bool", v
+            )
+        )
+        return self
+
+    def is_ctx_sub_gate(
+        self,
+        args: tuple[int] | IsCtxSubGateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "GateComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.is_ctx_sub_gate(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "isCtxSubGate(uint64)bool", v
             )
         )
         return self
@@ -1119,6 +2346,24 @@ class GateComposer:
         self._result_mappers.append(
             lambda v: self.client.decode_return_value(
                 "updateAkitaDAO(uint64)void", v
+            )
+        )
+        return self
+
+    def create(
+        self,
+        args: tuple[str, int, int] | CreateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None
+    ) -> "GateComposer":
+        self._composer.add_app_call_method_call(
+            self.client.params.create(
+                args=args,
+                params=params,
+            )
+        )
+        self._result_mappers.append(
+            lambda v: self.client.decode_return_value(
+                "create(string,uint64,uint64)void", v
             )
         )
         return self

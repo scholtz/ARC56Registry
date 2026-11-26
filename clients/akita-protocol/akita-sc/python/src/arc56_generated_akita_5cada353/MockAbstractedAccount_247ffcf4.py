@@ -19,7 +19,7 @@ from algosdk.v2client.models import SimulateTraceConfig
 import algokit_utils
 from algokit_utils import AlgorandClient as _AlgoKitAlgorandClient
 
-_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["UpdateApplication"], "create": []}, "args": [{"type": "string", "name": "newVersion"}], "name": "update", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "ping", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "MockAbstractedAccount", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "events": [], "networks": {}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [79], "errorMessage": "invalid array length header"}, {"pc": [86], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}}"""
+_APP_SPEC_JSON = r"""{"arcs": [22, 28], "bareActions": {"call": [], "create": ["NoOp"]}, "methods": [{"actions": {"call": ["UpdateApplication"], "create": []}, "args": [{"type": "string", "name": "newVersion"}], "name": "update", "returns": {"type": "void"}, "events": [], "readonly": false, "recommendations": {}}, {"actions": {"call": ["NoOp"], "create": []}, "args": [], "name": "ping", "returns": {"type": "uint64"}, "events": [], "readonly": false, "recommendations": {}}], "name": "MockAbstractedAccount", "state": {"keys": {"box": {}, "global": {}, "local": {}}, "maps": {"box": {}, "global": {}, "local": {}}, "schema": {"global": {"bytes": 0, "ints": 0}, "local": {"bytes": 0, "ints": 0}}}, "structs": {}, "byteCode": {"approval": "DTEbQXSCAgTqkYDdBB1cVhs2GgCOAgAaAAEAMRkUMRgQRIAMFR98dQAAAAAAABCTsIEBQzEZgQQSMRgQREIQMRkUMRgUEEM2GgFJgQBZgQIITBUSRIEBQw==", "clear": "DYEBQw=="}, "events": [], "networks": {}, "source": {"approval": "I3ByYWdtYSB2ZXJzaW9uIDEzCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCiNwcmFnbWEgYXV0b3NhbHQgZmFsc2UKCi8vIEBhbGdvcmFuZGZvdW5kYXRpb24vYWxnb3JhbmQtdHlwZXNjcmlwdC9hcmM0L2luZGV4LmQudHM6OkNvbnRyYWN0LmFwcHJvdmFsUHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tb2Nrcy93YWxsZXQvbW9jay5hbGdvLnRzOjQtNQogICAgLy8gQGNvbnRyYWN0KHsgYXZtVmVyc2lvbjogMTMgfSkKICAgIC8vIGV4cG9ydCBjbGFzcyBNb2NrQWJzdHJhY3RlZEFjY291bnQgZXh0ZW5kcyBDb250cmFjdCB7CiAgICB0eG4gTnVtQXBwQXJncwogICAgYnogbWFpbl9fX2FsZ290c19fLmRlZmF1bHRDcmVhdGVANgogICAgcHVzaGJ5dGVzcyAweGVhOTE4MGRkIDB4MWQ1YzU2MWIgLy8gbWV0aG9kICJ1cGRhdGUoc3RyaW5nKXZvaWQiLCBtZXRob2QgInBpbmcoKXVpbnQ2NCIKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDAKICAgIG1hdGNoIG1haW5fdXBkYXRlX3JvdXRlQDMgbWFpbl9waW5nX3JvdXRlQDQKICAgIGVycgoKbWFpbl9waW5nX3JvdXRlQDQ6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbW9ja3Mvd2FsbGV0L21vY2suYWxnby50czoxMAogICAgLy8gcGluZygpOiB1aW50NjQgewogICAgdHhuIE9uQ29tcGxldGlvbgogICAgIQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIHB1c2hieXRlcyAweDE1MWY3Yzc1MDAwMDAwMDAwMDAwMTA5MwogICAgbG9nCiAgICBwdXNoaW50IDEKICAgIHJldHVybgoKbWFpbl91cGRhdGVfcm91dGVAMzoKICAgIC8vIHNtYXJ0X2NvbnRyYWN0cy9tb2Nrcy93YWxsZXQvbW9jay5hbGdvLnRzOjcKICAgIC8vIEBhYmltZXRob2QoeyBhbGxvd0FjdGlvbnM6IFsnVXBkYXRlQXBwbGljYXRpb24nXSB9KQogICAgdHhuIE9uQ29tcGxldGlvbgogICAgcHVzaGludCA0IC8vIFVwZGF0ZUFwcGxpY2F0aW9uCiAgICA9PQogICAgdHhuIEFwcGxpY2F0aW9uSUQKICAgICYmCiAgICBhc3NlcnQKICAgIGIgdXBkYXRlCgptYWluX19fYWxnb3RzX18uZGVmYXVsdENyZWF0ZUA2OgogICAgLy8gc21hcnRfY29udHJhY3RzL21vY2tzL3dhbGxldC9tb2NrLmFsZ28udHM6NC01CiAgICAvLyBAY29udHJhY3QoeyBhdm1WZXJzaW9uOiAxMyB9KQogICAgLy8gZXhwb3J0IGNsYXNzIE1vY2tBYnN0cmFjdGVkQWNjb3VudCBleHRlbmRzIENvbnRyYWN0IHsKICAgIHR4biBPbkNvbXBsZXRpb24KICAgICEKICAgIHR4biBBcHBsaWNhdGlvbklECiAgICAhCiAgICAmJgogICAgcmV0dXJuCgoKLy8gc21hcnRfY29udHJhY3RzL21vY2tzL3dhbGxldC9tb2NrLmFsZ28udHM6Ok1vY2tBYnN0cmFjdGVkQWNjb3VudC51cGRhdGVbcm91dGluZ10oKSAtPiB2b2lkOgp1cGRhdGU6CiAgICAvLyBzbWFydF9jb250cmFjdHMvbW9ja3Mvd2FsbGV0L21vY2suYWxnby50czo3CiAgICAvLyBAYWJpbWV0aG9kKHsgYWxsb3dBY3Rpb25zOiBbJ1VwZGF0ZUFwcGxpY2F0aW9uJ10gfSkKICAgIHR4bmEgQXBwbGljYXRpb25BcmdzIDEKICAgIGR1cAogICAgcHVzaGludCAwCiAgICBleHRyYWN0X3VpbnQxNiAvLyBvbiBlcnJvcjogaW52YWxpZCBhcnJheSBsZW5ndGggaGVhZGVyCiAgICBwdXNoaW50IDIKICAgICsKICAgIHN3YXAKICAgIGxlbgogICAgPT0KICAgIGFzc2VydCAvLyBpbnZhbGlkIG51bWJlciBvZiBieXRlcyBmb3IgYXJjNC5keW5hbWljX2FycmF5PGFyYzQudWludDg+CiAgICBwdXNoaW50IDEKICAgIHJldHVybgo=", "clear": "I3ByYWdtYSB2ZXJzaW9uIDEzCiNwcmFnbWEgdHlwZXRyYWNrIGZhbHNlCiNwcmFnbWEgYXV0b3NhbHQgZmFsc2UKCi8vIEBhbGdvcmFuZGZvdW5kYXRpb24vYWxnb3JhbmQtdHlwZXNjcmlwdC9iYXNlLWNvbnRyYWN0LmQudHM6OkJhc2VDb250cmFjdC5jbGVhclN0YXRlUHJvZ3JhbSgpIC0+IHVpbnQ2NDoKbWFpbjoKICAgIHB1c2hpbnQgMQogICAgcmV0dXJuCg=="}, "sourceInfo": {"approval": {"pcOffsetMethod": "none", "sourceInfo": [{"pc": [77], "errorMessage": "invalid array length header"}, {"pc": [84], "errorMessage": "invalid number of bytes for arc4.dynamic_array<arc4.uint8>"}]}, "clear": {"pcOffsetMethod": "none", "sourceInfo": []}}, "templateVariables": {}}"""
 APP_SPEC = algokit_utils.Arc56Contract.from_json(_APP_SPEC_JSON)
 
 def _parse_abi_args(args: object | None = None) -> list[object] | None:
@@ -74,9 +74,33 @@ class UpdateArgs:
         return "update(string)void"
 
 
+class _MockAbstractedAccountUpdate:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppUpdateMethodCallParams:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.params.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update(string)void",
+            "args": method_args,
+        }))
+
+
 class MockAbstractedAccountParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_MockAbstractedAccountUpdate":
+        return _MockAbstractedAccountUpdate(self.app_client)
 
     def ping(
         self,
@@ -100,9 +124,33 @@ class MockAbstractedAccountParams:
         )
 
 
+class _MockAbstractedAccountUpdateTransaction:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.BuiltTransactions:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        return self.app_client.create_transaction.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update(string)void",
+            "args": method_args,
+        }))
+
+
 class MockAbstractedAccountCreateTransactionParams:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_MockAbstractedAccountUpdateTransaction":
+        return _MockAbstractedAccountUpdateTransaction(self.app_client)
 
     def ping(
         self,
@@ -126,9 +174,36 @@ class MockAbstractedAccountCreateTransactionParams:
         )
 
 
+class _MockAbstractedAccountUpdateSend:
+    def __init__(self, app_client: algokit_utils.AppClient):
+        self.app_client = app_client
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.SendAppTransactionResult[None]:
+        method_args = _parse_abi_args(args)
+        params = params or algokit_utils.CommonAppCallParams()
+        compilation_params = compilation_params or algokit_utils.AppClientCompilationParams()
+        response = self.app_client.send.update(algokit_utils.AppClientMethodCallParams(**{
+            **dataclasses.asdict(params),
+            "method": "update(string)void",
+            "args": method_args,
+        }), send_params=send_params, compilation_params=compilation_params)
+        parsed_response = response
+        return typing.cast(algokit_utils.SendAppUpdateTransactionResult[None], parsed_response)
+
+
 class MockAbstractedAccountSend:
     def __init__(self, app_client: algokit_utils.AppClient):
         self.app_client = app_client
+
+    @property
+    def update(self) -> "_MockAbstractedAccountUpdateSend":
+        return _MockAbstractedAccountUpdateSend(self.app_client)
 
     def ping(
         self,
@@ -346,6 +421,335 @@ class MockAbstractedAccountClient:
         return decoded
 
 
+@dataclasses.dataclass(frozen=True)
+class MockAbstractedAccountBareCallCreateParams(algokit_utils.AppClientBareCallCreateParams):
+    """Parameters for creating MockAbstractedAccount contract with bare calls"""
+    on_complete: typing.Literal[OnComplete.NoOpOC] | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientBareCallCreateParams:
+        return algokit_utils.AppClientBareCallCreateParams(**self.__dict__)
+
+@dataclasses.dataclass(frozen=True)
+class MockAbstractedAccountMethodCallUpdateParams(
+    algokit_utils.BaseAppClientMethodCallParams[
+        UpdateArgs,
+        str | None,
+    ]
+):
+    """Parameters for calling MockAbstractedAccount contract using ABI"""
+    on_complete: typing.Literal[OnComplete.UpdateApplicationOC] | None = None
+    method: str | None = None
+
+    def to_algokit_utils_params(self) -> algokit_utils.AppClientMethodCallParams:
+        method_args = _parse_abi_args(self.args)
+        return algokit_utils.AppClientMethodCallParams(
+            **{
+                **self.__dict__,
+                "method": self.method or getattr(self.args, "abi_method_signature", None),
+                "args": method_args,
+            }
+        )
+
+class MockAbstractedAccountFactory(algokit_utils.TypedAppFactoryProtocol[MockAbstractedAccountBareCallCreateParams, MockAbstractedAccountMethodCallUpdateParams, None]):
+    """Factory for deploying and managing MockAbstractedAccountClient smart contracts"""
+
+    def __init__(
+        self,
+        algorand: _AlgoKitAlgorandClient,
+        *,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        version: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ):
+        self.app_factory = algokit_utils.AppFactory(
+            params=algokit_utils.AppFactoryParams(
+                algorand=algorand,
+                app_spec=APP_SPEC,
+                app_name=app_name,
+                default_sender=default_sender,
+                default_signer=default_signer,
+                version=version,
+                compilation_params=compilation_params,
+            )
+        )
+        self.params = MockAbstractedAccountFactoryParams(self.app_factory)
+        self.create_transaction = MockAbstractedAccountFactoryCreateTransaction(self.app_factory)
+        self.send = MockAbstractedAccountFactorySend(self.app_factory)
+
+    @property
+    def app_name(self) -> str:
+        return self.app_factory.app_name
+    
+    @property
+    def app_spec(self) -> algokit_utils.Arc56Contract:
+        return self.app_factory.app_spec
+    
+    @property
+    def algorand(self) -> _AlgoKitAlgorandClient:
+        return self.app_factory.algorand
+
+    def deploy(
+        self,
+        *,
+        on_update: algokit_utils.OnUpdate | None = None,
+        on_schema_break: algokit_utils.OnSchemaBreak | None = None,
+        create_params: MockAbstractedAccountBareCallCreateParams | None = None,
+        update_params: MockAbstractedAccountMethodCallUpdateParams | None = None,
+        delete_params: None = None,
+        existing_deployments: algokit_utils.ApplicationLookup | None = None,
+        ignore_cache: bool = False,
+        app_name: str | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+    ) -> tuple[MockAbstractedAccountClient, algokit_utils.AppFactoryDeployResult]:
+        """Deploy the application"""
+        deploy_response = self.app_factory.deploy(
+            on_update=on_update,
+            on_schema_break=on_schema_break,
+            create_params=create_params.to_algokit_utils_params() if create_params else None,
+            update_params=update_params.to_algokit_utils_params() if update_params else None,
+            delete_params=delete_params,
+            existing_deployments=existing_deployments,
+            ignore_cache=ignore_cache,
+            app_name=app_name,
+            compilation_params=compilation_params,
+            send_params=send_params,
+        )
+
+        return MockAbstractedAccountClient(deploy_response[0]), deploy_response[1]
+
+    def get_app_client_by_creator_and_name(
+        self,
+        creator_address: str,
+        app_name: str,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        ignore_cache: bool | None = None,
+        app_lookup_cache: algokit_utils.ApplicationLookup | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> MockAbstractedAccountClient:
+        """Get an app client by creator address and name"""
+        return MockAbstractedAccountClient(
+            self.app_factory.get_app_client_by_creator_and_name(
+                creator_address,
+                app_name,
+                default_sender,
+                default_signer,
+                ignore_cache,
+                app_lookup_cache,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+    def get_app_client_by_id(
+        self,
+        app_id: int,
+        app_name: str | None = None,
+        default_sender: str | None = None,
+        default_signer: TransactionSigner | None = None,
+        approval_source_map: SourceMap | None = None,
+        clear_source_map: SourceMap | None = None,
+    ) -> MockAbstractedAccountClient:
+        """Get an app client by app ID"""
+        return MockAbstractedAccountClient(
+            self.app_factory.get_app_client_by_id(
+                app_id,
+                app_name,
+                default_sender,
+                default_signer,
+                approval_source_map,
+                clear_source_map,
+            )
+        )
+
+
+class MockAbstractedAccountFactoryParams:
+    """Parameters for creating transactions for MockAbstractedAccount contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MockAbstractedAccountFactoryCreateParams(app_factory)
+        self.update = MockAbstractedAccountFactoryUpdateParams(app_factory)
+        self.delete = MockAbstractedAccountFactoryDeleteParams(app_factory)
+
+class MockAbstractedAccountFactoryCreateParams:
+    """Parameters for 'create' operations of MockAbstractedAccount contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateParams:
+        """Creates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            compilation_params=compilation_params)
+
+    def ping(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the ping()uint64 ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "ping()uint64",
+                "args": None,
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> algokit_utils.AppCreateMethodCallParams:
+        """Creates a new instance using the update(string)void ABI method"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.create(
+            algokit_utils.AppFactoryCreateMethodCallParams(
+                **{
+                **dataclasses.asdict(params),
+                "method": "update(string)void",
+                "args": _parse_abi_args(args),
+                }
+            ),
+            compilation_params=compilation_params
+        )
+
+class MockAbstractedAccountFactoryUpdateParams:
+    """Parameters for 'update' operations of MockAbstractedAccount contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppUpdateParams:
+        """Updates an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_update(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+class MockAbstractedAccountFactoryDeleteParams:
+    """Parameters for 'delete' operations of MockAbstractedAccount contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        
+    ) -> algokit_utils.AppDeleteParams:
+        """Deletes an instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.params.bare.deploy_delete(
+            algokit_utils.AppClientBareCallParams(**dataclasses.asdict(params)),
+            )
+
+
+class MockAbstractedAccountFactoryCreateTransaction:
+    """Create transactions for MockAbstractedAccount contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MockAbstractedAccountFactoryCreateTransactionCreate(app_factory)
+
+
+class MockAbstractedAccountFactoryCreateTransactionCreate:
+    """Create new instances of MockAbstractedAccount contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+    ) -> Transaction:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        return self.app_factory.create_transaction.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+        )
+
+
+class MockAbstractedAccountFactorySend:
+    """Send calls to MockAbstractedAccount contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+        self.create = MockAbstractedAccountFactorySendCreate(app_factory)
+
+
+class MockAbstractedAccountFactorySendCreate:
+    """Send create calls to MockAbstractedAccount contract"""
+
+    def __init__(self, app_factory: algokit_utils.AppFactory):
+        self.app_factory = app_factory
+
+    def bare(
+        self,
+        *,
+        params: algokit_utils.CommonAppCallCreateParams | None = None,
+        send_params: algokit_utils.SendParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None,
+    ) -> tuple[MockAbstractedAccountClient, algokit_utils.SendAppCreateTransactionResult]:
+        """Creates a new instance using a bare call"""
+        params = params or algokit_utils.CommonAppCallCreateParams()
+        result = self.app_factory.send.bare.create(
+            algokit_utils.AppFactoryCreateParams(**dataclasses.asdict(params)),
+            send_params=send_params,
+            compilation_params=compilation_params
+        )
+        return MockAbstractedAccountClient(result[0]), result[1]
+
+
+class _MockAbstractedAccountUpdateComposer:
+    def __init__(self, composer: "MockAbstractedAccountComposer"):
+        self.composer = composer
+    def update(
+        self,
+        args: tuple[str] | UpdateArgs,
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
+    ) -> "MockAbstractedAccountComposer":
+        self.composer._composer.add_app_update_method_call(
+            self.composer.client.params.update.update(
+                args=args,
+                params=params,
+                compilation_params=compilation_params
+            )
+        )
+        self.composer._result_mappers.append(
+            lambda v: self.composer.client.decode_return_value(
+                "update(string)void", v
+            )
+        )
+        return self.composer
+
+
 class MockAbstractedAccountComposer:
     """Composer for creating transaction groups for MockAbstractedAccount contract calls"""
 
@@ -354,9 +758,14 @@ class MockAbstractedAccountComposer:
         self._composer = client.algorand.new_group()
         self._result_mappers: list[typing.Callable[[algokit_utils.ABIReturn | None], object] | None] = []
 
+    @property
+    def update(self) -> "_MockAbstractedAccountUpdateComposer":
+        return _MockAbstractedAccountUpdateComposer(self)
+
     def ping(
         self,
-        params: algokit_utils.CommonAppCallParams | None = None
+        params: algokit_utils.CommonAppCallParams | None = None,
+        compilation_params: algokit_utils.AppClientCompilationParams | None = None
     ) -> "MockAbstractedAccountComposer":
         self._composer.add_app_call_method_call(
             self.client.params.ping(
