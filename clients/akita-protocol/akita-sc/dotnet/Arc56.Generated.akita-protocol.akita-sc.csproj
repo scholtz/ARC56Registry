@@ -6,13 +6,13 @@
     <Nullable>disable</Nullable>
 
     <PackageId>Arc56.Generated.akita-protocol.akita-sc</PackageId>
-    <Version>1.0.7.2026112616</Version>
+    <Version>1.0.7.2026112715</Version>
     <!-- AssemblyVersion/FileVersion each component must fit in 16 bits (max 65535), which
          our yyyyMMddHH-based package Version does not; pin them separately and keep the
          full, precise version only in the NuGet package Version and InformationalVersion. -->
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <InformationalVersion>1.0.7.2026112616</InformationalVersion>
+    <InformationalVersion>1.0.7.2026112715</InformationalVersion>
     <Authors>akita-protocol</Authors>
     <Description>Generated ARC-56 Algorand smart-contract clients for akita-protocol/akita-sc.</Description>
     <PackageProjectUrl>https://github.com/scholtz/Arc56Registry</PackageProjectUrl>
@@ -38,25 +38,115 @@
        rather than blocking every other contract in this package - see state.json and
        docs/dotnet-client-pipeline.md. -->
   <ItemGroup>
+    <Compile Remove="src/FixedSignerGuildConsensus_5d4ebb31.cs" />
+    <Compile Remove="src/GuildPlugin_adac59ab.cs" />
+    <Compile Remove="src/HyperSwapPlugin_3d59d6bd.cs" />
+    <Compile Remove="src/LockedTokenGuildConsensus_59bec6ba.cs" />
+    <Compile Remove="src/MarketplacePlugin_4fdad816.cs" />
+    <Compile Remove="src/Marketplace_3bf71229.cs" />
+    <Compile Remove="src/MerkleAddressGate_5f9c6d3d.cs" />
+    <Compile Remove="src/MerkleAssetGate_1b3dd45d.cs" />
+    <Compile Remove="src/MetaMerkles_71d741e4.cs" />
+    <Compile Remove="src/MetaMerkles_b144cec0.cs" />
+    <Compile Remove="src/MetaPlugin_dd22f43f.cs" />
+    <Compile Remove="src/Meta_c9310fba.cs" />
+    <Compile Remove="src/MockAbstractedAccountFactory_57652c38.cs" />
+    <Compile Remove="src/MockAbstractedAccount_247ffcf4.cs" />
+    <Compile Remove="src/MockAdminPlugin_c4e870ce.cs" />
+    <Compile Remove="src/MockAdmitDelegate_431bca3f.cs" />
+    <Compile Remove="src/MockAkitaDAO_f90ad822.cs" />
+    <Compile Remove="src/MockAkitaSocial_7d21d07f.cs" />
+    <Compile Remove="src/MockArc59Router_bd0a73b1.cs" />
+    <Compile Remove="src/MockAuctionFactory_e21b1d7b.cs" />
+    <Compile Remove="src/MockBigUpgradeTarget_625e4b77.cs" />
+    <Compile Remove="src/MockBigWallet_c949483a.cs" />
+    <Compile Remove="src/MockCompliantProxy_5b454eee.cs" />
+    <Compile Remove="src/MockCustodyPlugin_bbb87905.cs" />
+    <Compile Remove="src/MockEchoSubGate_494f1b18.cs" />
+    <Compile Remove="src/MockEscrowOwner_90cc0e19.cs" />
+    <Compile Remove="src/MockFakeDAO_eccfe804.cs" />
+    <Compile Remove="src/MockFakeUpdatableWallet_5ea78f79.cs" />
+    <Compile Remove="src/MockFakeWallet_16ab4d90.cs" />
+    <Compile Remove="src/MockForgedWallet_cef5219f.cs" />
+    <Compile Remove="src/MockGateNFDRegistry_232a652a.cs" />
+    <Compile Remove="src/MockGateNFD_988c28bd.cs" />
+    <Compile Remove="src/MockGovernanceStaking_eac25113.cs" />
+    <Compile Remove="src/MockGuildAccountFactory_1bd7aea4.cs" />
+    <Compile Remove="src/MockGuildAkitaDAO_488ad59c.cs" />
+    <Compile Remove="src/MockGuildConsensusHost_57b7818f.cs" />
+    <Compile Remove="src/MockGuildStaking_d51d9493.cs" />
+    <Compile Remove="src/MockGuildSubscriptions_e1c3b3d1.cs" />
+    <Compile Remove="src/MockGuildUpdateReplacement_03dd5474.cs" />
+    <Compile Remove="src/MockGuildWallet_39f38611.cs" />
+    <Compile Remove="src/MockHaystackRouter_d140259c.cs" />
+    <Compile Remove="src/MockHyperSwap_fd98ced2.cs" />
+    <Compile Remove="src/MockImpactNFD_5ffdb2b0.cs" />
+    <Compile Remove="src/MockInnerWalletCaller_32afb025.cs" />
+    <Compile Remove="src/MockLegacyNftCaller_5503fa20.cs" />
+    <Compile Remove="src/MockLegacySocialPoster_60cdfdfa.cs" />
+    <Compile Remove="src/MockLegacyVoteDAO_c9f4b87f.cs" />
     <Compile Remove="src/MockMarketplace_c6aedb21.cs" />
     <Compile Remove="src/MockMetaReader_3308b948.cs" />
+    <Compile Remove="src/MockNfdPairRegistry_5e9e0842.cs" />
+    <Compile Remove="src/MockNfdRegistry_b008c1e1.cs" />
+    <Compile Remove="src/MockNfdRenewalProbe_2315309c.cs" />
+    <Compile Remove="src/MockNfd_0a97a040.cs" />
+    <Compile Remove="src/MockPolicyForger_7137e44a.cs" />
     <Compile Remove="src/MockPollFactory_d5c174ef.cs" />
+    <Compile Remove="src/MockPrincipalComposer_e6e25817.cs" />
+    <Compile Remove="src/MockPrincipalOverload_63bd52e4.cs" />
+    <Compile Remove="src/MockPrincipalProbe_b4b6c7b2.cs" />
+    <Compile Remove="src/MockPrincipalProxy_dbeb0437.cs" />
+    <Compile Remove="src/MockPrincipalReenter_30305113.cs" />
     <Compile Remove="src/MockPrizeBoxFactory_884f8fdd.cs" />
     <Compile Remove="src/MockRaffleFactory_dd35a61e.cs" />
     <Compile Remove="src/MockRandomnessBeacon_25f875b2.cs" />
     <Compile Remove="src/MockRandomnessBeacon_c5bdf1a3.cs" />
     <Compile Remove="src/MockReapableChild_1146cc39.cs" />
+    <Compile Remove="src/MockReferralProbe_f6037d0c.cs" />
+    <Compile Remove="src/MockRegistryCaller_f55d5fee.cs" />
+    <Compile Remove="src/MockSchemaBigTarget_ed13bc1c.cs" />
+    <Compile Remove="src/MockSchemaSmallTarget_a734de5d.cs" />
+    <Compile Remove="src/MockSharedHelpers_915352be.cs" />
+    <Compile Remove="src/MockSmallUpgradeTarget_16842e88.cs" />
+    <Compile Remove="src/MockSmartAsa_eb679860.cs" />
     <Compile Remove="src/MockStakingPoolFactory_5f2f882b.cs" />
+    <Compile Remove="src/MockStatefulBigTarget_32219b12.cs" />
+    <Compile Remove="src/MockStatefulSmallTarget_6e5e5dde.cs" />
+    <Compile Remove="src/MockSubGate_7ed48ae8.cs" />
     <Compile Remove="src/MockSubscriptions_fcab6f10.cs" />
+    <Compile Remove="src/MockUnlimitedPayPlugin_d5e4832a.cs" />
+    <Compile Remove="src/MockUpdatablePayPlugin_660f6164.cs" />
+    <Compile Remove="src/MockWindowReclaim_c239ffda.cs" />
+    <Compile Remove="src/MockY_fd2edce2.cs" />
+    <Compile Remove="src/ModeratorActivityGate_8992e6ff.cs" />
     <Compile Remove="src/NFDGate_26cb628b.cs" />
     <Compile Remove="src/NFDGate_f6603ad0.cs" />
+    <Compile Remove="src/NFDPlugin_daba0e71.cs" />
+    <Compile Remove="src/NFDRootGate_a450a63b.cs" />
+    <Compile Remove="src/OptInPlugin_2751711b.cs" />
+    <Compile Remove="src/PayPlugin_ef74fecb.cs" />
     <Compile Remove="src/PaySiloFactoryPlugin_528c461c.cs" />
     <Compile Remove="src/PaySiloPlugin_e4b660ef.cs" />
     <Compile Remove="src/PluginDex_235232e5.cs" />
+    <Compile Remove="src/PollFactory_bf3060b6.cs" />
+    <Compile Remove="src/PollGate_44ff365e.cs" />
+    <Compile Remove="src/PollPluginContract_edbc6d02.cs" />
+    <Compile Remove="src/Poll_5fec6ae3.cs" />
+    <Compile Remove="src/PrizeBoxFactory_96d2dcd6.cs" />
+    <Compile Remove="src/PrizeBox_d9aac2be.cs" />
+    <Compile Remove="src/RaffleFactory_8a2b5860.cs" />
+    <Compile Remove="src/RaffleFactory_e42aa33f.cs" />
+    <Compile Remove="src/RafflePlugin_2c93cfba.cs" />
+    <Compile Remove="src/RafflePlugin_d0a2f3e7.cs" />
+    <Compile Remove="src/Raffle_89ed6f93.cs" />
     <Compile Remove="src/Raffle_f8ffa72f.cs" />
+    <Compile Remove="src/RevenueManagerPlugin_a12c9766.cs" />
+    <Compile Remove="src/RewardsPlugin_f312bec7.cs" />
     <Compile Remove="src/Rewards_57216f16.cs" />
     <Compile Remove="src/SelfOptInPlugin_bf632cbe.cs" />
     <Compile Remove="src/SocialActivityGate_26bf9c5d.cs" />
+    <Compile Remove="src/SocialClaim_6d4c5ea3.cs" />
     <Compile Remove="src/SocialFollowerCountGate_04d3a6b2.cs" />
     <Compile Remove="src/SocialFollowerIndexGate_a3f060c1.cs" />
     <Compile Remove="src/SocialImpactGate_1f50dfbc.cs" />
@@ -69,13 +159,16 @@
     <Compile Remove="src/StakingPowerGate_8c715896.cs" />
     <Compile Remove="src/Staking_d95ec311.cs" />
     <Compile Remove="src/SubscriptionGate_38113c9f.cs" />
+    <Compile Remove="src/SubscriptionGuildConsensus_ded57d98.cs" />
     <Compile Remove="src/SubscriptionStreakGate_4e7588d1.cs" />
     <Compile Remove="src/SubscriptionsPlugin_be0c484b.cs" />
     <Compile Remove="src/Subscriptions_774dcfb2.cs" />
     <Compile Remove="src/SunsetContract_f250607f.cs" />
     <Compile Remove="src/SunsetPlugin_77b5dce7.cs" />
     <Compile Remove="src/TestCloseOutPlugin_90ef9764.cs" />
+    <Compile Remove="src/TestPrincipalPlugin_6b6bace5.cs" />
     <Compile Remove="src/TestProxyRekeyPlugin_1142c363.cs" />
+    <Compile Remove="src/UpdateAkitaDAOPlugin_27d1d26a.cs" />
   </ItemGroup>
 
 </Project>
